@@ -75,7 +75,10 @@ namespace Area
             }
             if (e.type != EventType.KeyUp || !e.shift || e.control)
             {
-                bb.propEditCommand = PropEditCommand.None;
+                return false;
+            }
+            if (bb.propEditInfo.PlacementHandled == null)
+            {
                 return false;
             }
 
@@ -83,20 +86,22 @@ namespace Area
             {
                 case KeyCode.F:
                     bb.propEditCommand = PropEditCommand.RotateLeft;
-                    return true;
+                    break;
                 case KeyCode.G:
                     bb.propEditCommand = PropEditCommand.Flip;
-                    return true;
+                    break;
                 case KeyCode.Z:
                     bb.propEditCommand = PropEditCommand.CopyColor;
-                    return true;
+                    break;
                 case KeyCode.X:
                     bb.propEditCommand = PropEditCommand.PasteColor;
-                    return true;
+                    break;
                 default:
                     bb.propEditCommand = PropEditCommand.None;
                     return false;
             }
+            bb.propEditFunctions = new SelectedPropFunctions (bb, bb.propEditInfo.PlacementHandled);
+            return true;
         }
 
         public void DrawSceneMarkup (Event e, System.Action repaint)
@@ -110,6 +115,8 @@ namespace Area
 
             var am = bb.am;
             var propEditInfo = bb.propEditInfo;
+
+            ApplyEditCommand ();
 
             if (!AreaSceneCamera.Prepare ())
             {
@@ -234,6 +241,85 @@ namespace Area
             AreaAssetHelper.CheckResources ();
             propEditInfo.Index = propEditInfo.Index.OffsetAndWrap (forward, 0, AreaAssetHelper.propsPrototypesList.Count - 1);
             propEditInfo.SelectionID = AreaAssetHelper.propsPrototypesList[propEditInfo.Index].id;
+        }
+
+        void ApplyEditCommand ()
+        {
+            if (bb.propEditCommand == PropEditCommand.None)
+            {
+                return;
+            }
+            if (bb.propEditFunctions == null)
+            {
+                return;
+            }
+
+            var pf = bb.propEditFunctions;
+            switch (bb.propEditCommand)
+            {
+                case PropEditCommand.Snap:
+                    pf.ChangeOrientation (PropOrientationChange.Snap);
+                    break;
+                case PropEditCommand.RotateLeft:
+                    pf.ChangeOrientation (PropOrientationChange.RotateClockwise);
+                    break;
+                case PropEditCommand.RotateRight:
+                    pf.ChangeOrientation (PropOrientationChange.RotateAnticlockwise);
+                    break;
+                case PropEditCommand.Flip:
+                    pf.ChangeOrientation (PropOrientationChange.Flip);
+                    break;
+                case PropEditCommand.ResetRotation:
+                    pf.ChangeOrientation (PropOrientationChange.Reset);
+                    break;
+                case PropEditCommand.Offset:
+                    pf.ChangeOffset (bb.propOffset.X, bb.propOffset.Z);
+                    break;
+                case PropEditCommand.CopyPosition:
+                    pf.CopyPastePosition(PropCopyPasteReset.Copy);
+                    break;
+                case PropEditCommand.PastePosition:
+                    pf.CopyPastePosition(PropCopyPasteReset.Paste);
+                    break;
+                case PropEditCommand.ResetPosition:
+                    pf.CopyPastePosition(PropCopyPasteReset.Reset);
+                    break;
+                case PropEditCommand.ChangeColor:
+                    pf.ChangeColor (bb.propColor.Primary, bb.propColor.Secondary);
+                    break;
+                case PropEditCommand.CopyColor:
+                    pf.CopyPasteColor(PropCopyPasteReset.Copy);
+                    break;
+                case PropEditCommand.PasteColor:
+                    pf.CopyPasteColor(PropCopyPasteReset.Paste);
+                    break;
+                case PropEditCommand.ResetColor:
+                    pf.CopyPasteColor(PropCopyPasteReset.Reset);
+                    break;
+                case PropEditCommand.ChangeSelected:
+                    if (bb.propEditFunctions is SelectedPropFunctions spf && bb.propEditInfo.PlacementHandled != spf.placement)
+                    {
+                        bb.propEditInfo.PlacementHandled = spf.placement;
+                    }
+                    else if (bb.propEditInfo.PlacementHandled != null)
+                    {
+                        bb.propEditInfo.PlacementHandled = null;
+                        bb.propEditInfo.PlacementListIndex = -1;
+                    }
+                    break;
+                case PropEditCommand.DeleteSelected:
+                    if (bb.propEditInfo.PlacementHandled != null
+                        && bb.am.indexesOccupiedByProps.TryGetValue (bb.propEditInfo.PlacementListIndex, out var placements)
+                        && placements.Remove (bb.propEditInfo.PlacementHandled))
+                    {
+                        bb.am.RemovePropPlacement (bb.propEditInfo.PlacementHandled);
+                        bb.propEditInfo.PlacementHandled = null;
+                        bb.propEditInfo.PlacementListIndex = -1;
+                    }
+                    break;
+            }
+
+            bb.propEditCommand = PropEditCommand.None;
         }
 
         void Edit (int spotIndex, KeyCode mouseButton, bool shift)
