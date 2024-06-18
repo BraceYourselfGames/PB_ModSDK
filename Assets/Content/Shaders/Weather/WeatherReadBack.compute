@@ -1,0 +1,25 @@
+#pragma kernel SampleTexture
+
+//The CPU perspective is backwards compared to that of the GPU
+//We will read from the gpuWriteBuffer, and we will write to the cpu's Read Buffer
+StructuredBuffer<float2> gpuWriteBuffer; // sampling positions
+RWStructuredBuffer<float4> cpuReadBuffer; // results of color sampling
+Texture2D<float4> weatherTexture; // texture to sample from
+SamplerState samplerweatherTexture;
+
+[numthreads(1,1,1)]
+void SampleTexture (uint3 id : SV_DispatchThreadID)
+{
+    //Crawler position index 0
+    float2 crawlerPos = gpuWriteBuffer[0];
+
+    //Camera position index 1
+    float2 cameraPos = gpuWriteBuffer[1];
+
+    //Samples are done in normalized 0-1 UV, and space for some reason the y co-ordinate is flipped on an RT in dx11? What the heck
+    crawlerPos = float2(crawlerPos.x / 512, 1.0 - (crawlerPos.y / 512));
+    cameraPos = float2(cameraPos.x / 512, 1.0 - (cameraPos.y / 512));
+
+    cpuReadBuffer[0] = weatherTexture.SampleLevel(samplerweatherTexture, crawlerPos, 0);
+    cpuReadBuffer[1] = weatherTexture.SampleLevel(samplerweatherTexture, cameraPos, 0);
+}
