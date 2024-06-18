@@ -13,4 +13,4 @@
 - [x] By submitting this pull request, I confirm that my contribution is made under the terms of the MIT license. 
 - [x] My commit description includes <Signed-off-by> line confirming my agreement to the Developer Certificate of Origin.
 
-*For more information on signing off your commits, please check [here](https://github.com/artyom-zuev/PB_ModSDK/blob/main/CONTRIBUTING.md#contributing-code).*
+*For more information on signing off your commits, please check [here](https://github.com/BraceYourselfGames/PB_ModSDK/blob/main/CONTRIBUTING.md#contributing-code).*
