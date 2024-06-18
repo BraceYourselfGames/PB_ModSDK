@@ -52,6 +52,8 @@ Tutorials:
 - [Creating mech armor](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-mech-armor-modding)
 - [Creating weapons](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-custom-weapon-assets)
 
+If you get stuck or experience a bug, please don't hesitate to ask questions in the #phantom-modding channel of [the official Discord server](https://discord.com/invite/braceyourselfgames).
+
 ## Dependencies
 
 - [Odin Inspector](https://odininspector.com): Used for all custom inspectors and drawers. This dependency is licensed for redistribution only as a part of the Phantom Brigade modding SDK and can not be used in other Unity projects. A standalone version of this library can be acquired [here](https://odininspector.com/pricing).
