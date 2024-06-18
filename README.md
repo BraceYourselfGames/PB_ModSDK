@@ -13,7 +13,7 @@ We can't wait to see what you create!
 
 # Installation
 
-Please proceed to the [GitHub repository](https://github.com/BraceYourselfGames/PhantomBrigade_ModSDK) for the most up to date download and setup instructions. Here's a quick setup overview:
+Quick setup overview:
 - Download & install [Unity Hub](https://unity.com/download)
 - Open the download page for [Unity 2020.3.48 LTS](https://unity.com/releases/editor/whats-new/2020.3.48). Click **Install** on top of the page to begin installation through Unity Hub. If this doesn't work, try downloading a Windows installer through links at the bottom of that page.
 - Download the project from this repository. We strongly recommend downloading (cloning) through Git to facilitate easy updating.
@@ -32,9 +32,9 @@ The Getting Started window can guide you through subsequent steps such as:
 
 # Optional assets
 
-We separated some assets into an optional download to keep the repository light and easy to update. These include 3D models of mech items, levels, textures and some other art assets. These files are not required for most of the tools included in the SDK, but we recommend downloading and installing the optional asset package to unlock every feature. This includes ability to edit levels and ability to display items in the 3D viewport.
+We separated some assets into an optional download to keep the repository lightweight and easy to update. These include 3D models of mech items, levels, textures and some other art assets. These files are not required for most of the tools included in the SDK, but we recommend downloading and installing the optional asset package to unlock every feature. This includes ability to edit levels and ability to display items in the 3D viewport.
 
-Follow the instructions in the Getting Started window to install this optional asset package.
+Follow the instructions in the Getting Started window to install this optional asset package. To save time, we recommend [downloading the file](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_v4.unitypackage) in the background while you set up the main project and follow the initial tutorials.
 
 ## Dependencies
 
