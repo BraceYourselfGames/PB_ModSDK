@@ -498,7 +498,7 @@ namespace PhantomBrigade.ModTools
             }
             if (ToolbarButton (ref rect, SdfIconType.Github, "GitHub", false, null))
             {
-                Application.OpenURL ("https://github.com/artyom-zuev/PB_ModSDK");
+                Application.OpenURL ("https://github.com/BraceYourselfGames/PB_ModSDK");
             }
 
             // var versionName = $"{ModToolsVersion.name} {ModToolsVersion.version}";
