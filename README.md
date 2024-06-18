@@ -42,6 +42,7 @@ Outside of this repository and the embedded tutorials, we recommend checking a f
 - [Modding intro](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding)
 - [Detailed modding overview](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystem)
 - [Modding guidelines](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModGuidelines)
+- [SDK overview mirror](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSDK)
 
 Change logs:
 - [Mod system changelog](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystemChanges)
