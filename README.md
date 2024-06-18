@@ -1,6 +1,6 @@
 ![pb_modtools_splash_composite.png](/ModWindowImages/t0_splash.png)
 
-# Overview
+## Overview
 Phantom Brigade Mod SDK is a mod development suite created in collaboration with our valued community. Based on the tools we used to develop the game, it is a free Unity project that includes:
 - Mod project manager: simplifies mod metadata setup, manages mod source files and helps you manage different mod tools. Facilitates export of completed mods to the local user folder, to a distributable archive or to Steam Workshop.
 - Config editors: powerful inspectors putting every database underpinning the game at your fingertips. Modify everything from game balance to enemy squad compositions and from mission logic to combat abilities. Take advantage of data validation, reactive inspectors, value dropdowns and specialized editors for complex data types like curves to create what would take hours to set up through manual text editing in minutes. Preview kitbashed weapons, put together bosses with complex behaviors, create new status effects and more.
@@ -11,7 +11,7 @@ While Phantom Brigade supported mods for a while and is underpinned by easily ed
 
 We can't wait to see what you create!
 
-# Installation
+## Installation
 
 Quick setup overview:
 - Download & install [Unity Hub](https://unity.com/download)
@@ -30,11 +30,26 @@ The Getting Started window can guide you through subsequent steps such as:
 - Creating your first mod
 - Installing the optional asset package
 
-# Optional assets
+## Optional assets
 
 We separated some assets into an optional download to keep the repository lightweight and easy to update. These include 3D models of mech items, levels, textures and some other art assets. These files are not required for most of the tools included in the SDK, but we recommend downloading and installing the optional asset package to unlock every feature. This includes ability to edit levels and ability to display items in the 3D viewport.
 
 Follow the instructions in the Getting Started window to install this optional asset package. To save time, we recommend [downloading the file](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_v4.unitypackage) in the background while you set up the main project and follow the initial tutorials.
+
+## Documentation
+
+Outside of this repository and the embedded tutorials, we recommend checking a few additional pages. General info:
+- [Modding intro](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding)
+- [Detailed modding overview](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystem)
+- [Modding guidelines](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModGuidelines)
+
+Change logs:
+- [Mod system changelog](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystemChanges)
+- [Game changelog](https://braceyourselfgames.com/phantom-brigade/updates/)
+
+Tutorials:
+- [Creating mech armor](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-mech-armor-modding)
+- [Creating weapons](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-custom-weapon-assets)
 
 ## Dependencies
 
