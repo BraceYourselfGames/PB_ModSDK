@@ -2,7 +2,7 @@
 
 We're glad to hear you're interested in helping the project! Before we talk about the different ways you could do that, let's cover the basics:
 
-1. **When in doubt, open an issue** - For almost every kind of contribution, the first step is opening an issue. Even if you think you already know what the solution is, writing down a description of the problem you're trying to solve will help everyone get context when they review your pull request. If it's truly a trivial change (e.g. spelling error), you can skip this step -- but as the subject says, when in doubt, [open an issue](https://github.com/artyom-zuev/PB_ModSDK/issues/new/choose).
+1. **When in doubt, open an issue** - For almost every kind of contribution, the first step is opening an issue. Even if you think you already know what the solution is, writing down a description of the problem you're trying to solve will help everyone get context when they review your pull request. If it's truly a trivial change (e.g. spelling error), you can skip this step -- but as the subject says, when in doubt, [open an issue](https://github.com/BraceYourselfGames/PB_ModSDK/issues/new/choose).
 2. **Only submit your own work**  (or work you have sufficient rights to submit) - Please make sure that any code or documentation you submit is your work or you have the rights to submit. We respect the intellectual property rights of others, and as part of contributing, we'll ask you to sign your contribution with a "Developer Certificate of Origin" (DCO) that states you have the rights to submit this work and you understand we'll use your contribution. There's more information about this topic in the [DCO section](#developer-certificate-of-origin).
 
 # Ways to Contribute
@@ -11,7 +11,7 @@ We're glad to hear you're interested in helping the project! Before we talk abou
 
 To help us understand what's going on with a potential bug, we first want to make sure you're working from the latest version. Please make sure you're testing against the latest version. Verify that you're on the latest commit of the main branch.
 
-Once you've confirmed that the bug still exists in the latest version, you'll want to check the bug is not something we already know about. A good way to figure this out is to search for your bug on the [open issues GitHub page](https://github.com/artyom-zuev/PB_ModSDK/issues).
+Once you've confirmed that the bug still exists in the latest version, you'll want to check the bug is not something we already know about. A good way to figure this out is to search for your bug on the [open issues GitHub page](https://github.com/BraceYourselfGames/PB_ModSDK/issues).
 
 If you've upgraded to the latest version and you can't find it in our open issues list, then you'll need to tell us how to reproduce it. Please provide as much information as you can: your mod configuration, steps you made since session startup etc.
 
@@ -28,7 +28,7 @@ The project relies on two kinds of documentation.
 
 ## Contributing Code
 
-As with other types of contributions, the first step is to [open an issue](https://github.com/artyom-zuev/PB_ModSDK/issues/new/choose). Opening an issue before you make changes makes sure that someone else isn't already working on that particular problem. It also lets us all work together to find the right approach before you spend a bunch of time on a PR.
+As with other types of contributions, the first step is to [open an issue](https://github.com/BraceYourselfGames/PB_ModSDK/issues/new/choose). Opening an issue before you make changes makes sure that someone else isn't already working on that particular problem. It also lets us all work together to find the right approach before you spend a bunch of time on a PR.
 
 
 
