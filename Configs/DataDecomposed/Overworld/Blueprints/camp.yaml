@@ -1,0 +1,47 @@
+hidden: false
+parents:
+- key: site_military_base
+tags:
+- size_tiny
+- fortification
+textName: {}
+textDesc: {}
+textIdentifierGroup: site_base_mid
+image: t_world_crop_base3
+icon: s_icon_overlay_type_site10
+core: 
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_Base
+movement: 
+ranges:
+  vision: 35
+  observerData: 
+detection: 
+intel: 
+units: 
+scenarios: 
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    size_small: true
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards: 
+interactionEffects: 
+salvageBudget:
+  f: 60
+escalation:
+  escalationGain: 40
+  escalationGainWarMultiplier: 0.5
+  warScoreDealt: 15
+  warScoreRestored: 0
+  warObjectiveCandidate: true
+threatLevel:
+  baseThreatLevel: 42
+battleSite: 

@@ -1,0 +1,1312 @@
+parents:
+- key: walker_base
+- key: walker_block_core_shockwave
+- key: walker_block_enrage_cas
+- key: walker_block_enrage_top_beam
+hidden: true
+core:
+  unitRoot: a_core
+  speedTranslation: 6
+  speedRotationPrimary: 0.2
+  speedRotationSecondary: 30
+ui:
+  textName: 
+  textType: {}
+tags:
+- walker_frigate
+layout:
+  units:
+    a_core:
+      comment: 
+      preset: vhc_system_core_frigate_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_core
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats:
+          healthCurrent: 200
+          healthLimit: 200
+          concussionOffset: 100
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers:
+          barrier: 1
+          hp: 1.25
+        hitDirectionModifiers:
+          front: 0.25
+        functions: 
+        combatTags:
+        - flag_no_concussion_in
+        - purpose_boss_core
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform: 
+      linksConditional:
+      - comment: 
+        unitKeys:
+        - w1_generator
+        check:
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags: 
+          name: 
+          faction: 
+          state:
+            unitActive:
+              present: false
+            unitMobile: 
+            unitHidden: 
+            unitWrecked: 
+            unitDisabled: 
+            pilotMissing: 
+            pilotDead: 
+            pilotConcussed: 
+            pilotActive: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform: 
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions: 
+        triggerLimit: 1
+        functions:
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_layout_frigate_generator_destroyed
+        functionsTargetedSelf:
+        - !CombatUnitSetSpeed
+          mode: Set
+          speed: 0.5
+        functionsTargetedPerLink: 
+      - comment: 
+        unitKeys:
+        - a_core
+        check:
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags: 
+          name: 
+          faction: 
+          state:
+            unitActive:
+              present: false
+            unitMobile: 
+            unitHidden: 
+            unitWrecked: 
+            unitDisabled: 
+            pilotMissing: 
+            pilotDead: 
+            pilotConcussed: 
+            pilotActive: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform: 
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions: 
+        triggerLimit: 1
+        functions:
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_outro_core_destroyed
+        functionsTargetedSelf:
+        - !CombatUnitEffectSpawnSequence
+          position:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          asset:
+            key: fx_impact_general_caliber_01
+            scale:
+              x: 5
+              y: 5
+              z: 5
+          sequence:
+          - delay: 0.1
+            position:
+              x: 9.149997
+              y: -3.547497
+              z: 15.51
+            rotation:
+              x: 0
+              y: 35.57943
+              z: 0
+          - delay: 0.2
+            position:
+              x: 15.39001
+              y: -3.547497
+              z: -15.66001
+            rotation:
+              x: 0
+              y: 104.7394
+              z: 0
+          - delay: 0.3
+            position:
+              x: -6.829989
+              y: -2.339887
+              z: -21.51001
+            rotation:
+              x: 0
+              y: 119.7838
+              z: 0
+          - delay: 0.4
+            position:
+              x: -16.35001
+              y: -2.339887
+              z: -7.729994
+            rotation:
+              x: 0
+              y: 254.2866
+              z: 0
+        - !CombatUnitEffectSpawnSequence
+          position:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          asset:
+            key: fx_mech_destruction_full
+            scale:
+              x: 1
+              y: 1
+              z: 1
+          sequence:
+          - delay: 0
+            position:
+              x: 7.13
+              y: 1.88198
+              z: -2.92
+            rotation:
+              x: 0
+              y: 90
+              z: 0
+          - delay: 0.15
+            position:
+              x: -2.79
+              y: 5.708
+              z: -1.38
+            rotation:
+              x: 0
+              y: 90
+              z: 0
+          - delay: 0.3
+            position:
+              x: -6.86
+              y: 1.619
+              z: -13.48
+            rotation:
+              x: 0
+              y: 90
+              z: 0
+        - !CombatUnitEffectSpawnSequence
+          position:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          asset:
+            key: fx_mech_destruction_socket_debris
+            scale:
+              x: 1
+              y: 1
+              z: 1
+          sequence:
+          - delay: 0.15
+            position:
+              x: 6.029998
+              y: -1.659887
+              z: -20.25
+            rotation:
+              x: 0
+              y: 309.2045
+              z: 0
+          - delay: 0.2
+            position:
+              x: -16.51
+              y: -1.659887
+              z: -7.49
+            rotation:
+              x: 0
+              y: 1.093598
+              z: 0
+          - delay: 0.25
+            position:
+              x: -4.97
+              y: -1.659887
+              z: 17.51
+            rotation:
+              x: 0
+              y: 47.03492
+              z: 0
+          - delay: 0.3
+            position:
+              x: 15.36
+              y: -1.659887
+              z: 7.12
+            rotation:
+              x: 0
+              y: 178.5121
+              z: 0
+          - delay: 0.35
+            position:
+              x: 3.94
+              y: 4.96
+              z: -0.02
+            rotation:
+              x: 0
+              y: 164.4901
+              z: 0
+          - delay: 0.4
+            position:
+              x: -4.84
+              y: 4.96
+              z: -10.38
+            rotation:
+              x: 0
+              y: 350.3122
+              z: 0
+        - !CombatUnitEffectSpawnSequence
+          position:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          asset:
+            key: fx_prop_destruction_vehicle_large
+            scale:
+              x: 1
+              y: 1
+              z: 1
+          sequence:
+          - delay: 0.2
+            position:
+              x: -8.16
+              y: 2.22
+              z: 3.9
+            rotation:
+              x: 0
+              y: 0
+              z: 0
+          - delay: 0.6
+            position:
+              x: 11.74
+              y: 1.18
+              z: -7.45
+            rotation:
+              x: 0
+              y: 0
+              z: 0
+        - !CombatUnitEffectSpawnSequence
+          position:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          asset:
+            key: fx_thruster_shockwave_directional
+            scale:
+              x: 1
+              y: 1
+              z: 1
+          sequence:
+          - delay: 0.05
+            position:
+              x: -8.139983
+              y: -5.899887
+              z: 16.88
+            rotation:
+              x: 0
+              y: 162.8963
+              z: 0
+          - delay: 0.1333333
+            position:
+              x: 16.47
+              y: -5.899887
+              z: 0.87
+            rotation:
+              x: 0
+              y: 266.2942
+              z: 0
+          - delay: 0.2166667
+            position:
+              x: 6.75
+              y: -5.899887
+              z: -24.34
+            rotation:
+              x: 0
+              y: 0.008773377
+              z: 0
+          - delay: 0.3
+            position:
+              x: -14.3
+              y: -5.899887
+              z: -11.31
+            rotation:
+              x: 0
+              y: 69.11496
+              z: 0
+        functionsTargetedPerLink: 
+      legStepBlocklist: 
+    b1_leg_front_left:
+      comment: 
+      preset: vhc_system_walker_leg
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: 
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_reduced_damage_in
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -3
+          y: 10.75
+          z: 4.9
+        rotation:
+          x: 0
+          y: 300
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist:
+      - b2_leg_front_right
+      - b3_leg_back_left
+    b2_leg_front_right:
+      comment: 
+      preset: vhc_system_walker_leg
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: 
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_reduced_damage_in
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 3
+          y: 10.75
+          z: 5.25
+        rotation:
+          x: 0
+          y: 60
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist:
+      - b1_leg_front_left
+      - b4_leg_back_right
+    b3_leg_back_left:
+      comment: 
+      preset: vhc_system_walker_leg
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: 
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_reduced_damage_in
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -3
+          y: 10.75
+          z: -4.75
+        rotation:
+          x: 0
+          y: 240
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist:
+      - b1_leg_front_left
+      - b4_leg_back_right
+    b4_leg_back_right:
+      comment: 
+      preset: vhc_system_walker_leg
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: 
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_reduced_damage_in
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 3
+          y: 10.75
+          z: -4.75
+        rotation:
+          x: 0
+          y: 120
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist:
+      - b2_leg_front_right
+      - b3_leg_back_left
+    c1_wpn_main_front:
+      comment: 
+      preset: vhc_system_wpn_main_beam_01_ud
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_main
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 7.6
+          z: 12.7
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    e1_wpn_main_embedded_top:
+      comment: 
+      preset: vhc_system_wpn_comp_beam_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 18
+          z: -1
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    l1_wpn_launcher_back:
+      comment: 
+      preset: vhc_system_wpn_launcher_vertical_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_launcher
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 17
+          z: -9.05
+        rotation:
+          x: 0
+          y: 180
+          z: 0
+        secondary:
+          startMode: Animate
+          startAnimTimings:
+            x: 0
+            y: 1
+          position:
+            x: 0
+            y: 16
+            z: -9.05
+          rotation:
+            x: 0
+            y: 180
+            z: 0
+      linksConditional: 
+      legStepBlocklist: 
+    t1_wpn_turret_front:
+      comment: 
+      preset: vhc_system_wpn_turret_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 14.55
+          z: 11.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    t2_wpn_turret_left:
+      comment: 
+      preset: vhc_system_wpn_turret_01_sr
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -10.1
+          y: 15
+          z: -4.15
+        rotation:
+          x: 0
+          y: 240
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    t3_wpn_turret_right:
+      comment: 
+      preset: vhc_system_wpn_turret_01_sl
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 10.1
+          y: 15
+          z: -4.15
+        rotation:
+          x: 0
+          y: 120
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    w1_generator:
+      comment: 
+      preset: vhc_system_module_02_side
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_generator
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 9.9
+          z: -11.75
+        rotation:
+          x: 90
+          y: 90
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+director:
+  booting:
+    evaluateFacing: true
+    evaluateNavigation: false
+    evaluateNodes: false
+    functions: 
+    functionsPerChild:
+    - unitKey: a_core
+      functions:
+      - !CombatUnitActionsCreate
+        discardExisting: true
+        actions:
+        - key: system_equipment_core
+          startTime: 0.75
+          startTimeIsLocal: true
+          locked: false
+          durationVariable:
+            f: 1
+          targetLocal: 
+          target: 
+          targetSecondary: 
+          targetUnitFiltered: 
+          targetUnitLocalOffsets: 
+          movementCustom: 
+          functionsTimed:
+          - timeNormalized: 0.1
+            repeat: 
+            functions:
+            - !CombatAreaOfEffect
+              offset:
+                x: 0
+                y: -10
+                z: 0
+              radius: 60
+              exponent: 2
+              dispersed: true
+              integrity:
+                normalized: true
+                leveled: false
+                f: 0.05
+              concussion: 
+              heat: 
+              stagger: 
+              statusBuildup: 
+              crash:
+                f: 50000
+              targetCheck: 
+              functionsOnHit: 
+              impactUnitSelf: false
+              impactUnitAllies: false
+              impactUnitHostiles: true
+              impactUnitComposites: true
+              impactProjectiles: false
+              impactProps: true
+              fxDetonation: fx_boss_shockwave
+              fxDetonationScale: 5
+              fxArea: 
+              fxHit: fx_mech_melee_impact
+              audioDetonation: boss_spider_phase_change_1
+          functionsOnAction: 
+    - unitKey: l1_wpn_launcher_back
+      functions:
+      - !CombatUnitActionsCreate
+        discardExisting: true
+        actions:
+        - key: attack_system
+          startTime: 0.5
+          startTimeIsLocal: true
+          locked: false
+          durationVariable: 
+          targetLocal:
+            grounded: true
+            groundOffset: 0
+          target:
+            type: None
+            name: sensor_target
+            center: true
+            modifiersDirectional: false
+            modifiers:
+            - !TargetModifierRotateDirection
+              rotationRange:
+                x: -90
+                y: -90
+            - !TargetModifierOffsetLocal
+              offset:
+                x: 0
+                y: 0
+                z: 90
+            - !TargetModifierGround
+              groundOffset: 0
+          targetSecondary:
+            eased: false
+            mode: ArcAroundOrigin
+            midpointOffsetLocal:
+              x: 0
+              y: 0
+              z: 0
+            type: None
+            name: sensor_target
+            center: true
+            modifiersDirectional: false
+            modifiers:
+            - !TargetModifierRotateDirection
+              rotationRange:
+                x: 90
+                y: 90
+            - !TargetModifierOffsetLocal
+              offset:
+                x: 0
+                y: 0
+                z: 90
+            - !TargetModifierGround
+              groundOffset: 0
+          targetUnitFiltered: 
+          targetUnitLocalOffsets: 
+          movementCustom: 
+          functionsTimed: 
+          functionsOnAction: 
+  facing:
+    enabled: true
+    options:
+    - target: 
+      targetUnitFiltered:
+        average: true
+        directional: true
+        relative: false
+        filter:
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags: 
+          name: 
+          faction:
+            key: Phantoms
+          state: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform: 
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck: 
+      unitFilterCount: 
+      memoryBase: 
+  navigation:
+    enabled: true
+    actionKey: move_system
+    speed: 1
+    distanceThreshold: 10
+    options:
+    - pointGroupFromArea: boss_path_01
+      points:
+      - point:
+          x: 139.5
+          y: -16.5
+          z: 175.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+      - point:
+          x: 108.6313
+          y: -16.5
+          z: 200.6488
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+      - point:
+          x: 79.5
+          y: -16.5
+          z: 184.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+      - point:
+          x: 79.5
+          y: -16.5
+          z: 118.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+      - point:
+          x: 139.5
+          y: -16.5
+          z: 118.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck: 
+      unitFilterCount: 
+      memoryBase: 
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 200
+    name: EnrageStart-FromIntegrity
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted: 
+      functionsGlobal:
+      - !CombatCreateCommsMessage
+        time: 0
+        key: boss_bt_enrage_start_ehp
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_boss_state_enrage_started: true
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_boss_state_enrage_started: false
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized:
+        ehp:
+          check: Less
+          value: 0.5
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+  - looping: true
+    durationInTurns: 1
+    priority: 200
+    name: EnrageStart-FromFrontWeapons
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted: 
+      functionsGlobal:
+      - !CombatCreateCommsMessage
+        time: 0
+        key: boss_bt_enrage_start_wpn
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_boss_state_enrage_started: true
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_boss_state_enrage_started: false
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck:
+      unitKeys:
+      - c1_wpn_main_front
+      - t1_wpn_turret_front
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+  - looping: true
+    durationInTurns: 1
+    priority: 250
+    name: Enrage-Intro
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_boss_state_enrage_active: true
+      - !CombatUnitTargetCompositeConnected
+        unitKey: e1_wpn_main_embedded_top
+        functionsTargeted:
+        - !CombatUnitAnimateCompositeTransform
+          startTime: 0.25
+          duration: 1
+          position:
+            x: 0
+            y: 3
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          applyInverseImmediately: false
+      - !CombatUnitActionsCreate
+        discardExisting: true
+        actions:
+        - key: system_equipment_core
+          startTime: 0.75
+          startTimeIsLocal: true
+          locked: false
+          durationVariable:
+            f: 1
+          targetLocal: 
+          target: 
+          targetSecondary: 
+          targetUnitFiltered: 
+          targetUnitLocalOffsets: 
+          movementCustom: 
+          functionsTimed:
+          - timeNormalized: 0.1
+            repeat: 
+            functions:
+            - !CombatAreaOfEffect
+              offset:
+                x: 0
+                y: -10
+                z: 0
+              radius: 35
+              exponent: 2
+              dispersed: true
+              integrity:
+                normalized: true
+                leveled: false
+                f: 0.05
+              concussion: 
+              heat: 
+              stagger: 
+              statusBuildup: 
+              crash:
+                f: 50000
+              targetCheck: 
+              functionsOnHit: 
+              impactUnitSelf: false
+              impactUnitAllies: false
+              impactUnitHostiles: true
+              impactUnitComposites: true
+              impactProjectiles: false
+              impactProps: true
+              fxDetonation: fx_boss_shockwave
+              fxDetonationScale: 5
+              fxArea: 
+              fxHit: fx_mech_melee_impact
+              audioDetonation: boss_spider_phase_change_2
+          functionsOnAction: 
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_boss_state_enrage_active: false
+        flag_boss_state_enrage_started: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable:
+    weakpoint_core:
+      unitCount:
+        i: 1
+      ui: 
+      functions: 
+      functionsTargeted: 

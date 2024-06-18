@@ -1,0 +1,112 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: start
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  start:
+    reviewed: true
+    image: event_intel
+    textVariants: 
+    options:
+    - shared: false
+      key: acknowledge
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Restorative
+    priority: 0
+    check:
+      self: 
+      target: 
+      province: 
+      action: 
+      actors:
+        actorsWorldPresent:
+          world_0: true
+        actorsUnitsPresent: 
+        actorsPilotsPresent: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  acknowledge:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Restorative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange:
+      offset: 1
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !DeleteOverworldActor
+      actorKey: world_0
+    steps: 
+actions: 
+actorsSites:
+  world_0:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags:
+      - tag: event_blackmarket
+        not: false
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_blackmarket_reported
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

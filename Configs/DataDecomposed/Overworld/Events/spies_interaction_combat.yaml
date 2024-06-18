@@ -1,0 +1,122 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: combat
+priority: 0
+group: 10
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  combat:
+    reviewed: true
+    image: event_liberation
+    textVariants: 
+    options:
+    - shared: false
+      key: combat
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireAll
+        tags: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_spies
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+          - key: world_spies_killed
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: world_spies_escaped
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: world_spies_captured
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction: 
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions:
+    - !CompleteAction
+      actionKey: spies_target
+options:
+  combat:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat:
+      optional: false
+      scenarioTagsFromTarget: false
+      scenarioTags:
+        event_spies: true
+    memoryChanges: 
+    functions: 
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

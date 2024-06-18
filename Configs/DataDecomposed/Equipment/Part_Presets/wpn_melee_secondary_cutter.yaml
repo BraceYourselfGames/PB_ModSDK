@@ -1,0 +1,31 @@
+hidden: false
+parents:
+- key: wpn_root_secondary
+- key: wpn_perk_filter_melee
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: false
+textDesc:
+  split: false
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- difficulty_medium
+- equipment_left
+- part_cutter
+- range_close
+- weight_light
+- part_melee
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_melee_secondary_cutter
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

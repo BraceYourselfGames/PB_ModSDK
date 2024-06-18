@@ -1,0 +1,105 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1019608
+  center: 
+  hint:
+    color:
+      r: 0.2392157
+      g: 0.3568627
+      b: 0.4156863
+      a: 1
+    frameLocation: Center
+    frameGradientMode: Bottom
+    framePositionX: 41
+    framePositionY: 0
+    frameSizeX: 256
+    frameSizeY: 256
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1019608
+  center: 
+  hint:
+    color:
+      r: 0.2392157
+      g: 0.3568627
+      b: 0.4156863
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 384
+    frameSizeX: 256
+    frameSizeY: 256
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewCombatTimeControl
+      methodName: OnSpeedSlowExternal
+      argument: ''
+      frameDelay: 1
+  effectsCombat: 

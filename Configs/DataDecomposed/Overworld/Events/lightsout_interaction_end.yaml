@@ -1,0 +1,72 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 1
+group: 5
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 0
+  completionOnTarget: 0
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnPostCombat
+evaluationInterval: Long
+steps:
+  main:
+    reviewed: true
+    image: event_civilian_meeting
+    textVariants: 
+    options:
+    - shared: true
+      key: continue
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Restorative
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireAll
+        tags: 
+        eventMemory: 
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction:
+          hostileCheck: false
+          hostile: false
+          factions:
+          - Phantoms
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options: {}
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

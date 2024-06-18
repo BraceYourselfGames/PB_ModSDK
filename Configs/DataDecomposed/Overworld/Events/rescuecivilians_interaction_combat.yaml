@@ -1,0 +1,164 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 10
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 1
+  completionOnTarget: 1
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Long
+steps:
+  main:
+    reviewed: true
+    image: event_military_base
+    textVariants: 
+    options:
+    - shared: false
+      key: resque
+    - shared: false
+      key: disengage
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_civilians
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        combatReady:
+          ready: true
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target:
+        tagsMethod: RequireAll
+        tags:
+        - tag: base
+          not: false
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_rescuecivilians_target
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 1
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction:
+          hostileCheck: false
+          hostile: true
+          factions:
+          - Invaders
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  disengage:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions: 
+    steps: 
+  resque:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat:
+      optional: true
+      scenarioTagsFromTarget: true
+      scenarioTags: 
+    memoryChanges: 
+    functions: []
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

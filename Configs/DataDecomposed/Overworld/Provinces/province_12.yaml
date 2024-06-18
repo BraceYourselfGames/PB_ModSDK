@@ -1,0 +1,247 @@
+used: true
+warVFXContainerIndex: 12
+alwaysVulnerable: false
+minLevelOffset: 0
+maxLevelOffset: 2
+escalationDisabled: false
+warDisabled: false
+warAutomated: true
+warDefeatScoreDecay: true
+factionBranch: branch_army
+position:
+  x: 123.3688
+  y: 12.07182
+  z: 909.1132
+warObjectivesOld: false
+warObjectivesDecisiveRequired: 1
+warObjectivesDecisive:
+- tagsUsed: false
+  tags: 
+  blueprintKey: squad_boss_frigate_artillery
+  nameInternalSuffix: obj_boss
+neighbourData:
+  province_11:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+  province_13:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+  province_23:
+    allowActorSearch: false
+    allowConvoys: true
+    allowCounterAttacks: false
+    allowWar: true
+  province_24:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+border:
+- x: -25.10199
+  y: 0.4710388
+  z: 689.5447
+- x: -98.78729
+  y: 0
+  z: 723.9866
+- x: -144.407
+  y: 0
+  z: 803.7994
+- x: -428.5762
+  y: 1.907349E-06
+  z: 1228.276
+- x: -98.2771
+  y: 1.907349E-06
+  z: 1447.776
+- x: 126.9029
+  y: 0
+  z: 1181.801
+- x: 251.475
+  y: 0
+  z: 1143.845
+- x: 248.4063
+  y: 0
+  z: 1099.312
+- x: 367.9556
+  y: 0.6685486
+  z: 1023.091
+- x: 367.7582
+  y: 32.21084
+  z: 870.0062
+- x: 342.8592
+  y: 40.65746
+  z: 821.3609
+- x: 317.9198
+  y: 29.92797
+  z: 778.1794
+- x: 288.4481
+  y: 24.74046
+  z: 768.1511
+- x: 141.3768
+  y: 8.9048
+  z: 663.3319
+- x: 76.11734
+  y: 0
+  z: 604.6749
+- x: 65.90657
+  y: 0
+  z: 587.8022
+spawns:
+  core_military:
+  - position:
+      x: 186.003
+      y: 3.709885
+      z: 987.8163
+  core_mine:
+  - position:
+      x: 149.5671
+      y: 5.060783
+      z: 833.2323
+  core_observatory:
+  - position:
+      x: 230.4417
+      y: 25.87186
+      z: 840.0944
+  core_civilian:
+  - position:
+      x: -60.73688
+      y: 2.750587
+      z: 881.2759
+  core_bridge:
+  - position:
+      x: -50.07166
+      y: 5.803444
+      z: 738.9905
+  - position:
+      x: 79.30881
+      y: 3.672119
+      z: 1116.344
+  fortification:
+  - position:
+      x: 142.4365
+      y: 14.46854
+      z: 719.4039
+  - position:
+      x: 332.3647
+      y: 3.757622
+      z: 978.6642
+  general_dynamic:
+  - position:
+      x: 187.8489
+      y: 2.969894
+      z: 1053.862
+  - position:
+      x: 10.45345
+      y: 4.337547
+      z: 802.7753
+  - position:
+      x: 80.69577
+      y: 4.920944
+      z: 1034.366
+  - position:
+      x: 142.0678
+      y: 4.679024
+      z: 918.4016
+  - position:
+      x: 223.051
+      y: 8.057991
+      z: 936.0623
+  - position:
+      x: 209.9471
+      y: 21.85742
+      z: 757.7081
+  - position:
+      x: 67.40009
+      y: 4.553673
+      z: 878.1957
+  - position:
+      x: 263.773
+      y: 3.31884
+      z: 997.1031
+  - position:
+      x: 112.1716
+      y: 4.949837
+      z: 978.4868
+  - position:
+      x: 57.16153
+      y: 6.72171
+      z: 739.2783
+  battlesite:
+  - position:
+      x: 16.71704
+      y: 4.085342
+      z: 851.8218
+  - position:
+      x: 101.3329
+      y: 10.94766
+      z: 708.0577
+  - position:
+      x: 119.1786
+      y: 3.634743
+      z: 872.2733
+  - position:
+      x: 266.2972
+      y: 16.4089
+      z: 890.1624
+  - position:
+      x: 138.1475
+      y: 2.685127
+      z: 1017.11
+  - position:
+      x: 275.2565
+      y: 7.151985
+      z: 952.1351
+  - position:
+      x: -26.22852
+      y: 2.943642
+      z: 780.3212
+  obj_decisive:
+  - position:
+      x: 63.50121
+      y: 9.470474
+      z: 832.0383
+entities:
+- spawnGroup: core_military
+  profile: base
+  countMin: 1
+  countMax: 2
+  countRandom: false
+- spawnGroup: core_civilian
+  profile: settlement_city
+  countMin: 1
+  countMax: 1
+  countRandom: false
+- spawnGroup: core_mine
+  profile: facility_mine
+  countMin: 1
+  countMax: 1
+  countRandom: false
+- spawnGroup: general_dynamic
+  profile: cache_generic
+  countMin: 0
+  countMax: 1
+  countRandom: true
+- spawnGroup: fortification
+  profile: fort
+  countMin: 1
+  countMax: 2
+  countRandom: true
+- spawnGroup: general_dynamic
+  profile: outpost
+  countMin: 0
+  countMax: 1
+  countRandom: true
+- spawnGroup: general_dynamic
+  profile: facility
+  countMin: 0
+  countMax: 1
+  countRandom: true
+startingMemory: 
+biomeFilter:
+  tags:
+    default: true
+scenarioChanges: 
+tagFilterPatrol: 

@@ -1,0 +1,340 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: notification
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.02777778
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 1
+  completionOnTarget: 1
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  investigate:
+    reviewed: true
+    image: event_recruit
+    textVariants: 
+    options:
+    - shared: false
+      key: report
+    - shared: false
+      key: requisition
+    - shared: false
+      key: deal
+    resourceDisplay: false
+    colorCustom: false
+    colorKey: warning_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Warning
+    priority: 0
+    check:
+      self: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: 'province_auto_war '
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+  notification:
+    reviewed: true
+    image: event_salvage
+    textVariants: 
+    options:
+    - shared: false
+      key: investigate
+    - shared: false
+      key: leave
+    resourceDisplay: false
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_auto_combat_victory_streak
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: GreaterEqual
+            value: 2
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  deal:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_crime
+        value: 2
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Add
+        key: world_favour_criminal
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+  investigate:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: ResearchInvestigating
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions: 
+    steps:
+    - investigate
+  leave:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_looters_ignored
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+  report:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_crime
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_reputation_guard
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+  requisition:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_crime
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: components_r2
+        check: true
+        checkStrict: true
+        offset: true
+        value: 10
+      - key: components_r3
+        check: true
+        checkStrict: true
+        offset: true
+        value: 3
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

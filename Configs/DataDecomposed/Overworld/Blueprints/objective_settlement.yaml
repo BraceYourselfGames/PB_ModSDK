@@ -1,0 +1,113 @@
+hidden: false
+parents: []
+tags:
+- structure
+- site
+textName: {}
+textDesc: {}
+textIdentifierGroup: 
+image: t_world_crop_city1
+icon: s_icon_overlay_type_site4
+core:
+  inventory: true
+  selectable: true
+  capturable: true
+  recapturable: false
+  interactable: true
+  interactionRange: 5
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: false
+  generated: true
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: true
+  faction: Independents
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_Settlement_Small
+movement: 
+ranges: 
+detection:
+  pingInterval: 0.35
+  detectionIncrementMin: 0.1
+  detectionIncrementMax: 0.51
+  detectionDecayTime: 0.8333333
+intel:
+  detected: false
+  recognized: false
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    unique_tutorial_liberation: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_settlement: false
+    type_main: true
+production:
+  limit: 1
+  duration: 48
+  controllingFactions:
+  - Phantoms
+  eventsOnCompletion:
+  - create_pilot
+ai:
+  isAggressive: false
+  activeWhenUntracked: false
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat:
+  - outcomeVictory: true
+    outcomeDefeat: false
+    caseEarly: true
+    caseTotal: true
+    rewards:
+      battery: 1
+  blocks:
+    ftue:
+    - resources: 
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r0_training
+        preset: wpn_rifle_marksman_02
+        tagsUsed: false
+        tags:
+          '': false
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r0_training
+        preset: wpn_shield_05
+        tagsUsed: false
+        tags: {}
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      subsystems: 
+interactionEffects: 
+salvageBudget:
+  f: 70
+escalation:
+  escalationGain: 25
+  escalationGainWarMultiplier: 1
+  warScoreDealt: 12
+  warScoreRestored: 0
+  warObjectiveCandidate: true
+threatLevel:
+  baseThreatLevel: 50
+battleSite: 

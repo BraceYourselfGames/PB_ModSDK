@@ -1,0 +1,181 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: start
+priority: 1
+group: 0
+groupConflicts: 
+chance: 0.1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  start:
+    reviewed: true
+    image: event_civilian_meeting
+    textVariants: 
+    options:
+    - shared: false
+      key: acknowledge
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Positive
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_captive
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+          - key: captive_transfer_active
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target:
+        tagsMethod: RequireOne
+        tags:
+        - tag: base
+          not: false
+        - tag: outpost
+          not: false
+        - tag: camp
+          not: false
+        eventMemory: 
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction:
+          hostileCheck: false
+          hostile: false
+          factions:
+          - Phantoms
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  acknowledge:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_captive
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_reputation_guard
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+  decline:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

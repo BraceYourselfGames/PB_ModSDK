@@ -1,0 +1,153 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: combat
+priority: 0
+group: 10
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 0
+  completionOnTarget: 0
+trackCompletionOnSelf: true
+trackCompletionOnTarget: true
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  combat:
+    reviewed: true
+    image: event_liberation
+    textVariants: 
+    options:
+    - shared: false
+      key: combat
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 0.3921569
+      b: 0.3254902
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory: 
+        combatReady:
+          ready: true
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target:
+        tagsMethod: RequireAll
+        tags:
+        - tag: objective_settlement
+          not: false
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_core_settlement_target
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        ai: 
+        resources: 
+        pilots: 
+        units:
+          present: true
+        faction:
+          hostileCheck: true
+          hostile: true
+          factions: []
+        resupplyPoint: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  combat:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 0.8235295
+      g: 0.3176471
+      b: 0.2588235
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: true
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat:
+      optional: false
+      scenarioTagsFromTarget: true
+      scenarioTags: 
+    memoryChanges:
+    - visible: false
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_core_settlement_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StopBase {}
+    - !CompleteAction
+      actionKey: core_settlement_target
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

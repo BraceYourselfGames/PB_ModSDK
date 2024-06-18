@@ -1,0 +1,187 @@
+used: true
+warVFXContainerIndex: 0
+alwaysVulnerable: true
+minLevelOffset: 0
+maxLevelOffset: 0
+escalationDisabled: true
+warDisabled: false
+warAutomated: false
+warDefeatScoreDecay: false
+factionBranch: branch_trainingreserves
+position:
+  x: -753.6614
+  y: 45.45013
+  z: -578.1121
+warObjectivesOld: false
+warObjectivesDecisiveRequired: 0
+warObjectivesDecisive: 
+neighbourData:
+  province_01:
+    allowActorSearch: false
+    allowConvoys: false
+    allowCounterAttacks: false
+    allowWar: true
+border:
+- x: -876.3088
+  y: 56.96012
+  z: -608.5609
+- x: -868.847
+  y: 57.19194
+  z: -596.4157
+- x: -862.9756
+  y: 61.16076
+  z: -584.2586
+- x: -857.8332
+  y: 63.17053
+  z: -572.2357
+- x: -843.1116
+  y: 59.88305
+  z: -560.8593
+- x: -828.3901
+  y: 58.47404
+  z: -549.4827
+- x: -817.4645
+  y: 60.30964
+  z: -533.0728
+- x: -806.5389
+  y: 59.98283
+  z: -516.6628
+- x: -800.5651
+  y: 59.09756
+  z: -501.4471
+- x: -794.5912
+  y: 59.68449
+  z: -486.2316
+- x: -784.5436
+  y: 55.76942
+  z: -462.9598
+- x: -776.5006
+  y: 54.71287
+  z: -455.4974
+- x: -766.6698
+  y: 53.47941
+  z: -459.6653
+- x: -755.6422
+  y: 52.19798
+  z: -459.3689
+- x: -728.6408
+  y: 50.17892
+  z: -462.9374
+- x: -680.442
+  y: 42.98285
+  z: -483.1254
+- x: -620.8331
+  y: 38.43068
+  z: -518.1552
+- x: -637.1063
+  y: 39.14989
+  z: -534.23
+- x: -659.1674
+  y: 40.26669
+  z: -548.5536
+- x: -672.4063
+  y: 41.32001
+  z: -568.4783
+- x: -685.9907
+  y: 43.08598
+  z: -592.5966
+- x: -697.6825
+  y: 47.27657
+  z: -628.1825
+- x: -722.129
+  y: 46.22639
+  z: -639.3316
+- x: -736.8008
+  y: 45.67343
+  z: -635.6827
+- x: -764.4227
+  y: 47.39743
+  z: -646.4833
+- x: -792.0445
+  y: 46.35748
+  z: -638.8926
+- x: -814.3492
+  y: 47.96929
+  z: -642.4338
+- x: -833.3595
+  y: 49.00718
+  z: -649.8968
+- x: -859.8722
+  y: 50.42588
+  z: -656.3417
+- x: -874.9365
+  y: 50.83569
+  z: -663.3014
+- x: -894.9716
+  y: 51.77843
+  z: -666.4462
+- x: -916.3947
+  y: 53.34752
+  z: -671.3633
+- x: -921.8063
+  y: 54.23074
+  z: -658.0679
+- x: -928.1263
+  y: 55.74586
+  z: -644.5942
+- x: -906.2644
+  y: 59.22325
+  z: -631.7587
+- x: -887.8719
+  y: 59.27583
+  z: -618.9586
+spawns:
+  mountainbase:
+  - position:
+      x: -853.6008
+      y: 52.50369
+      z: -625.8311
+  base:
+  - position:
+      x: -697.2519
+      y: 46.69518
+      z: -524.5299
+  patrol:
+  - position:
+      x: -724.5745
+      y: 44.14752
+      z: -610.9953
+  mobilebase:
+  - position:
+      x: -904.0396
+      y: 54.05275
+      z: -649.241
+  site:
+  - position:
+      x: -767.6251
+      y: 50.92892
+      z: -546.0056
+  settlement:
+  - position:
+      x: -803.8848
+      y: 51.51976
+      z: -587.4225
+entities:
+- spawnGroup: mountainbase
+  profile: unique_mountainbase
+  countMin: 1
+  countMax: 1
+  countRandom: true
+- spawnGroup: base
+  profile: objective_base
+  countMin: 1
+  countMax: 1
+  countRandom: true
+- spawnGroup: settlement
+  profile: objective_settlement
+  countMin: 1
+  countMax: 1
+  countRandom: false
+startingMemory:
+  province_tutorial: 1
+  province_tutorial_first: 0
+biomeFilter:
+  tags:
+    primary: true
+scenarioChanges: 
+tagFilterPatrol: 

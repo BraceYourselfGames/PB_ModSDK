@@ -1,0 +1,200 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: interaction
+priority: 200
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  interaction:
+    reviewed: true
+    image: event_factory
+    textVariants: 
+    options:
+    - shared: false
+      key: agree
+    - shared: false
+      key: decline
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory: 
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots:
+          present: true
+          factionChecked: false
+          faction: 
+          factionInverted: false
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target:
+        tagsMethod: RequireAll
+        tags: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_purranormal_target
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 1
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction:
+          hostileCheck: false
+          hostile: false
+          factions:
+          - Phantoms
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges:
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_purranormal_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !CompleteAction
+      actionKey: purranormal_target
+options:
+  agree:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: ResearchInvestigating
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: 30
+      actorKey: ''
+      allowDeath: false
+    - !StartAction
+      data:
+        key: purranormal_investigating
+        owner: Base
+        ownerKey: 
+        target: None
+        targetKey: 
+        visible: true
+        durationOverride: 
+        durationMultiplier: 
+    steps: 
+  decline:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_purranormal_active
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_purranormal_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: -10
+      actorKey: ''
+      allowDeath: false
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

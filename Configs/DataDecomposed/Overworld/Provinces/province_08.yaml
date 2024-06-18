@@ -1,0 +1,225 @@
+used: true
+warVFXContainerIndex: 8
+alwaysVulnerable: false
+minLevelOffset: 0
+maxLevelOffset: 1
+escalationDisabled: false
+warDisabled: false
+warAutomated: true
+warDefeatScoreDecay: true
+factionBranch: branch_specops
+position:
+  x: 125.2428
+  y: 23.86085
+  z: -715.6374
+warObjectivesOld: false
+warObjectivesDecisiveRequired: 1
+warObjectivesDecisive:
+- tagsUsed: false
+  tags: 
+  blueprintKey: squad_boss_frigate_striker
+  nameInternalSuffix: obj_boss
+neighbourData:
+  province_07:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+  province_09:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+  province_17:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+border:
+- x: -110.2908
+  y: 25.43549
+  z: -736.2057
+- x: -34.81055
+  y: 26.64605
+  z: -628.871
+- x: 55.00047
+  y: 30.2352
+  z: -518.8903
+- x: 207.0926
+  y: 28.20577
+  z: -448.7166
+- x: 297.491
+  y: 30.03046
+  z: -478.2759
+- x: 323.9382
+  y: 27.6419
+  z: -614.1176
+- x: 317.8549
+  y: 28.56897
+  z: -742.4172
+- x: 307.0696
+  y: 40.29339
+  z: -837.2113
+- x: 294.0515
+  y: 57.86312
+  z: -909.272
+- x: 191.2756
+  y: 35.01092
+  z: -891.0483
+- x: -60.55261
+  y: 25.51012
+  z: -838.639
+spawns:
+  core_military:
+  - position:
+      x: 188.7205
+      y: 28.48871
+      z: -593.1553
+  - position:
+      x: 28.06874
+      y: 25.83023
+      z: -739.2404
+  core_forest:
+  - position:
+      x: 76.90613
+      y: 26.33365
+      z: -652.5917
+  - position:
+      x: 207.6745
+      y: 29.15501
+      z: -728.3074
+  core_civilian:
+  - position:
+      x: 120.8686
+      y: 27.5485
+      z: -796.4816
+  fortification:
+  - position:
+      x: 173.132
+      y: 27.72796
+      z: -514.8117
+  - position:
+      x: 252.0643
+      y: 28.01033
+      z: -676.4058
+  - position:
+      x: 5.75141
+      y: 26.01333
+      z: -663.5812
+  general_dynamic:
+  - position:
+      x: 109.3729
+      y: 27.2069
+      z: -544.4393
+  - position:
+      x: -40.86353
+      y: 25.59097
+      z: -775.4018
+  - position:
+      x: 244.2659
+      y: 29.28304
+      z: -534.6921
+  - position:
+      x: 246.0562
+      y: 38.33321
+      z: -841.3892
+  - position:
+      x: 137.6108
+      y: 27.96883
+      z: -714.527
+  - position:
+      x: 291.5303
+      y: 28.43781
+      z: -590.299
+  - position:
+      x: 49.09981
+      y: 27.01291
+      z: -808.7426
+  - position:
+      x: 194.4426
+      y: 31.04637
+      z: -788.293
+  - position:
+      x: 164.7234
+      y: 28.21117
+      z: -657.6041
+  battlesite:
+  - position:
+      x: 271.1774
+      y: 29.3996
+      z: -758.6688
+  - position:
+      x: 104.8657
+      y: 27.12655
+      z: -743.248
+  - position:
+      x: 40.94625
+      y: 26.99765
+      z: -590.7112
+  - position:
+      x: 177.8808
+      y: 31.71115
+      z: -837.4086
+  - position:
+      x: -36.36768
+      y: 25.33358
+      z: -712.9609
+  - position:
+      x: 241.4252
+      y: 28.27786
+      z: -615.0308
+  - position:
+      x: 224.8203
+      y: 29.0072
+      z: -488.1272
+  - position:
+      x: 131.5062
+      y: 26.95727
+      z: -600.3251
+  obj_decisive:
+  - position:
+      x: 135.6281
+      y: 27.75326
+      z: -690.3746
+entities:
+- spawnGroup: core_military
+  profile: base
+  countMin: 1
+  countMax: 2
+  countRandom: false
+- spawnGroup: core_civilian
+  profile: settlement_town
+  countMin: 1
+  countMax: 2
+  countRandom: false
+- spawnGroup: core_forest
+  profile: facility_forest
+  countMin: 1
+  countMax: 3
+  countRandom: false
+- spawnGroup: general_dynamic
+  profile: cache_generic
+  countMin: 0
+  countMax: 1
+  countRandom: true
+- spawnGroup: fortification
+  profile: fort
+  countMin: 1
+  countMax: 2
+  countRandom: true
+- spawnGroup: general_dynamic
+  profile: outpost
+  countMin: 0
+  countMax: 1
+  countRandom: true
+- spawnGroup: general_dynamic
+  profile: facility
+  countMin: 0
+  countMax: 1
+  countRandom: true
+startingMemory: 
+biomeFilter:
+  tags:
+    default: true
+scenarioChanges: 
+tagFilterPatrol: 

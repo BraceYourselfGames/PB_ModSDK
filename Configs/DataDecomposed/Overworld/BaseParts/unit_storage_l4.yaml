@@ -1,0 +1,45 @@
+parents:
+- key: unit_storage_l3
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 4
+  positionY: -5
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_units5
+unlock: 
+cost:
+  resources:
+    components_r2: 60
+    components_r3: 20
+    supplies: 3000
+effect:
+  calls: 
+  stats:
+  - key: unit_slots
+    modifier: Offset
+    value: 3
+  - key: unit_repair_jobs
+    modifier: Offset
+    value: 1
+  - key: mm_normal_speed
+    modifier: Offset
+    value: -0.25
+  - key: mm_stealth_speed
+    modifier: Offset
+    value: -0.25
+  - key: mm_fast_speed
+    modifier: Offset
+    value: -0.25
+  functions: []
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

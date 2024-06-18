@@ -1,0 +1,73 @@
+textName: World / Terrain test
+instantiated: false
+path: ''
+postprocessing:
+  startWithoutFade: false
+  endWithoutFade: true
+  fogSpeedCustom: true
+  fogSpeed: 0.2
+  pathNormal: ''
+  pathFogLight: Content/Profiles/overworld_profile_fog_light
+  pathFogMedium: Content/Profiles/overworld_profile_fog_medium
+  pathFogHeavy: Content/Profiles/overworld_profile_fog_heavy
+world: {}
+environment: 
+area: 
+units:
+  unitsBuilt:
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: pb_arctic_sky
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_helgeold: true
+        parts:
+          equipment_right:
+            livery: 
+            preset: !PartResolverKeys
+              keys:
+              - wpn_rifle_assault_v01_set02_r1
+            rating: 
+            systems: 
+    key: hero_custom
+camera: 
+subtitles:
+- time: 2
+  duration: 4
+- time: 8
+  duration: 5
+- time: 14
+  duration: 4
+- time: 20
+  duration: 2
+- time: 23
+  duration: 3
+- time: 27
+  duration: 3
+- time: 35
+  duration: 9
+- time: 50
+  duration: 2.5
+- time: 55
+  duration: 1
+callbacksOnSkip:
+- callbackName: audio_event
+  callbackData: tableau_stop
+audioEventsOnStart: 
+audioStatesOnStart: 
+audioSyncsOnStart: 
+audioEventsOnPlay: 
+audioStatesOnPlay: 
+audioSyncsOnPlay: 
+audioEventsOnEnd: 
+audioStatesOnEnd: 
+audioSyncsOnEnd: 

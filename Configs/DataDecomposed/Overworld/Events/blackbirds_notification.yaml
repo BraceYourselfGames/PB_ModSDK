@@ -1,0 +1,145 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: start
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.77
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  start:
+    reviewed: true
+    image: event_empty_base
+    textVariants: 
+    options:
+    - shared: false
+      key: join
+    - shared: false
+      key: continue
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory: 
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots:
+          present: true
+          factionChecked: false
+          faction: 
+          factionInverted: false
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial_first
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  continue:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions: 
+    steps: 
+  join:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Restorative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: 10
+      actorKey: 
+      allowDeath: false
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

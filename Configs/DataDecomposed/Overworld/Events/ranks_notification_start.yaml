@@ -1,0 +1,245 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.78
+chanceModifier:
+  entryOnBase: 0
+  entryOnTarget: 1
+  completionOnBase: 0
+  completionOnTarget: 0
+trackCompletionOnSelf: true
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  main:
+    reviewed: true
+    image: event_hologram_default
+    textVariants: 
+    options:
+    - shared: false
+      key: train
+    - shared: false
+      key: send
+    - shared: false
+      key: leave
+    resourceDisplay: true
+    colorCustom: true
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Positive
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_reputation_guard
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: GreaterEqual
+            value: 2
+          - key: world_auto_hope
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 2
+          - key: ranks_training_started
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources:
+          supplies:
+            check: GreaterEqual
+            value: 200
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory: 
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  leave:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+  send:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange:
+      offset: 1
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: true
+        checkStrict: false
+        offset: true
+        value: -500
+    steps: 
+  train:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange:
+      offset: 1
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: 2
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Add
+        key: ranks_training_started
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartAction
+      data:
+        key: ranks_training
+        owner: Base
+        ownerKey: 
+        target: None
+        targetKey: 
+        visible: true
+        durationOverride: 
+        durationMultiplier: 
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: true
+        checkStrict: false
+        offset: true
+        value: -200
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

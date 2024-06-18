@@ -1,0 +1,410 @@
+id:
+  nameSerial: -1
+  nameIndex: -1
+  nameOverride: Longbow
+  role: 
+identifiable: 
+preset: 
+blueprint: unit_mech
+pilotName: 
+faction: Phantoms
+parentEntityName: squad_mobilebase
+livery: pb_arctic_sky
+salvageable: false
+wrecked: false
+combatStatus: 
+repairStatus: 
+eventMemory: 
+customMemory: 
+parts:
+  core:
+    version: 3
+    serial: 10
+    rating: 1
+    level: 2
+    levelOriginal: 2
+    preset: body_set_knox_medium_top
+    livery: 
+    integrity: 1
+    barrier: 1
+    charges: 0
+    salvageable: false
+    inventoryAdded: false
+    favorite: false
+    sockets:
+    - core
+    hardpoints:
+    - internal_aux_top_core
+    - internal_aux_top_thrusters
+    - external_top_head
+    - external_top_pelvis
+    - external_top_torso
+    - rarity
+    - perk_1
+    systems:
+      internal_aux_top_core:
+        serial: 290
+        blueprint: internal_aux_core_standard
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      internal_aux_top_thrusters:
+        serial: 291
+        blueprint: internal_aux_thruster_standard
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_top_head:
+        serial: 292
+        blueprint: armor_knox_m_head
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_top_pelvis:
+        serial: 293
+        blueprint: armor_knox_m_pelvis
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_top_torso:
+        serial: 294
+        blueprint: armor_knox_m_torso
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      rarity:
+        serial: 295
+        blueprint: rarity_1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      perk_1:
+        serial: 296
+        blueprint: perk_mass_pos_r1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+  secondary:
+    version: 3
+    serial: 11
+    rating: 1
+    level: 2
+    levelOriginal: 2
+    preset: body_set_knox_medium_bottom
+    livery: 
+    integrity: 1
+    barrier: 1
+    charges: 0
+    salvageable: false
+    inventoryAdded: false
+    favorite: false
+    sockets:
+    - secondary
+    hardpoints:
+    - external_bottom_left_lower
+    - external_bottom_left_upper
+    - external_bottom_right_lower
+    - external_bottom_right_upper
+    - rarity
+    - perk_1
+    systems:
+      external_bottom_left_lower:
+        serial: 297
+        blueprint: armor_knox_m_leg
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_bottom_left_upper:
+        serial: 298
+        blueprint: armor_knox_m_thigh
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_bottom_right_lower:
+        serial: 299
+        blueprint: armor_knox_m_leg
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_bottom_right_upper:
+        serial: 300
+        blueprint: armor_knox_m_thigh
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      rarity:
+        serial: 301
+        blueprint: rarity_1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      perk_1:
+        serial: 302
+        blueprint: perk_integrity_pos_r1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+  optional_left:
+    version: 3
+    serial: 12
+    rating: 1
+    level: 2
+    levelOriginal: 2
+    preset: body_set_knox_medium_arm
+    livery: 
+    integrity: 1
+    barrier: 1
+    charges: 0
+    salvageable: false
+    inventoryAdded: false
+    favorite: false
+    sockets:
+    - optional_left
+    - optional_right
+    hardpoints:
+    - external_arm_lower
+    - external_arm_upper
+    - rarity
+    - perk_1
+    systems:
+      external_arm_lower:
+        serial: 303
+        blueprint: armor_knox_m_forearm
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_arm_upper:
+        serial: 304
+        blueprint: armor_knox_m_shoulder
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      rarity:
+        serial: 305
+        blueprint: rarity_1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      perk_1:
+        serial: 306
+        blueprint: perk_dissipation_pos_r1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+  optional_right:
+    version: 3
+    serial: 13
+    rating: 1
+    level: 2
+    levelOriginal: 2
+    preset: body_set_knox_medium_arm
+    livery: 
+    integrity: 1
+    barrier: 1
+    charges: 0
+    salvageable: false
+    inventoryAdded: false
+    favorite: false
+    sockets:
+    - optional_left
+    - optional_right
+    hardpoints:
+    - external_arm_lower
+    - external_arm_upper
+    - rarity
+    - perk_1
+    systems:
+      external_arm_lower:
+        serial: 307
+        blueprint: armor_knox_m_forearm
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      external_arm_upper:
+        serial: 308
+        blueprint: armor_knox_m_shoulder
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      rarity:
+        serial: 309
+        blueprint: rarity_1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      perk_1:
+        serial: 310
+        blueprint: perk_dissipation_pos_r1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+  equipment_right:
+    version: 3
+    serial: 14
+    rating: 2
+    level: 2
+    levelOriginal: 2
+    preset: wpn_rifle_marksman_01
+    livery: 
+    integrity: 1
+    barrier: 1
+    charges: 0
+    salvageable: false
+    inventoryAdded: false
+    favorite: false
+    sockets:
+    - equipment_right
+    hardpoints:
+    - internal_main_equipment
+    - rarity
+    - perk_1
+    - internal_aux_weapon
+    systems:
+      internal_main_equipment:
+        serial: 311
+        blueprint: wpn_main_marksman_01
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      rarity:
+        serial: 312
+        blueprint: rarity_2
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      perk_1:
+        serial: 313
+        blueprint: perk_scatter_idle_pos_r2
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      internal_aux_weapon:
+        serial: 314
+        blueprint: internal_aux_count_r2
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+  equipment_left:
+    version: 3
+    serial: 15
+    rating: 1
+    level: 2
+    levelOriginal: 2
+    preset: wpn_handgun_heavy_02
+    livery: 
+    integrity: 1
+    barrier: 1
+    charges: 0
+    salvageable: false
+    inventoryAdded: false
+    favorite: false
+    sockets:
+    - equipment_right
+    - equipment_left
+    hardpoints:
+    - internal_main_equipment
+    - rarity
+    - perk_1
+    systems:
+      internal_main_equipment:
+        serial: 315
+        blueprint: wpn_main_handgun_03
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      rarity:
+        serial: 316
+        blueprint: rarity_1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
+      perk_1:
+        serial: 317
+        blueprint: perk_duration_pos_r1
+        livery: 
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+        favorite: false

@@ -1,0 +1,156 @@
+hidden: true
+forced: false
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: contact
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.02777778
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  contact:
+    reviewed: false
+    image: event_civilian_meeting
+    textVariants: 
+    options:
+    - shared: false
+      key: codes
+    - shared: false
+      key: location
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_agent
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  codes:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_codes
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+  location:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: ResearchInvestigating
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !CreateOverworldEntity
+      spawnData:
+        spawnLookupKey: secret
+        locationProvider: SourceProvince
+        provinceKey: 
+        spawnGroupKey: general_dynamic
+        generationProfileCustom: false
+        generationProfileKey: secret
+        generationProfile: 
+        faction: Invaders
+        memoryChanges: 
+        intel: 
+        flags: 
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

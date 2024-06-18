@@ -1,0 +1,99 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: liberated
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  liberated:
+    reviewed: true
+    image: event_celebration
+    textVariants: 
+    options:
+    - shared: false
+      key: reward
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Positive
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireAll
+        tags:
+        - tag: capital
+          not: false
+        eventMemory: 
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction: 
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions:
+    - !PlayCutscene
+      key: ending
+      instant: true
+options:
+  reward:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !TransferBlueprintRewards
+      blueprintKey: capital
+      rewardKey: reward
+      rewardCount: 1
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

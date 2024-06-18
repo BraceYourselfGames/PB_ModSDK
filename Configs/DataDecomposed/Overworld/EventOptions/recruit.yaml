@@ -1,0 +1,66 @@
+priority: 0
+colorFromStep: false
+colorCustom: false
+colorKey: restorative_primary
+color:
+  r: 0.3333333
+  g: 0.5
+  b: 0.2418301
+  a: 1
+optionMood: Restorative
+textVariants: 
+completing: true
+checkPreventsUnlock: false
+resourceChangePreventsUnlock: true
+stepByPriority: false
+stepFallbackMode: None
+stepFallbackKey: 
+injection: 
+check:
+  self:
+    tagsMethod: RequireAll
+    tags: 
+    baseParts: 
+    eventMemory: 
+    combatReady: 
+    movement: 
+    movementMode: 
+    deployment: 
+    resources: 
+    pilotsAvailable:
+      check: Less
+      value: 8
+    unitsAvailable: 
+    pilots: 
+    units: 
+    levelDeltaTarget: 
+    levelDeltaProvince: 
+    weather: 
+  target: 
+  province: 
+  action: 
+  actors: 
+hopeChange: 
+warScoreChange: 
+combat: 
+memoryChanges:
+- visible: true
+  context: Source
+  actorKey: 
+  provinceKey: 
+  changes:
+  - change: Add
+    key: world_recruit_pilot_new_pilot_onboard
+    value: 1
+    valueFromMemory: false
+    valueFromMemoryKey: 
+functions:
+- !TransferPilotsFromTarget {}
+- !ModifyResources
+  resourceChanges:
+  - key: supplies
+    check: true
+    checkStrict: true
+    offset: true
+    value: -200
+steps: 

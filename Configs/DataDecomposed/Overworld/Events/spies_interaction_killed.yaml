@@ -1,0 +1,131 @@
+hidden: true
+forced: true
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: start
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.25
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  start:
+    reviewed: false
+    image: event_civilian_meeting
+    textVariants: 
+    options:
+    - shared: false
+      key: intel
+    - shared: false
+      key: leave
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireAll
+        tags: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_spies
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+          - key: world_spies_killed
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction: 
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges:
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_spies_killed
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: world_spies
+        value: 0
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+options:
+  acknowledge:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

@@ -1,0 +1,155 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 1
+  completionOnTarget: 1
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  main:
+    reviewed: true
+    image: event_patrol
+    textVariants: 
+    options:
+    - shared: false
+      key: start_salvage
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: construction_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ConstructionSalvage
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireAll
+        tags:
+        - tag: event_defector_station
+          not: false
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_site_visited
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 1
+          - key: world_defector
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction:
+          hostileCheck: false
+          hostile: false
+          factions:
+          - Invaders
+        resupplyPoint: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  start_salvage:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: construction_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: ConstructionSalvage
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_defector_active
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_defector_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ChangeTargetFaction
+      faction: Phantom
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: true
+        checkStrict: false
+        offset: true
+        value: 20
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

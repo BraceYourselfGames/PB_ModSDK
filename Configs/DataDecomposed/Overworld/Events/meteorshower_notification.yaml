@@ -1,0 +1,116 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.76
+chanceModifier:
+  entryOnBase: 0
+  entryOnTarget: 0
+  completionOnBase: 0
+  completionOnTarget: 0
+trackCompletionOnSelf: true
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  main:
+    reviewed: true
+    image: event_intel
+    textVariants: 
+    options:
+    - shared: false
+      key: beautiful
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action:
+        actionMethod: RequireAll
+        actions:
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: satelliteshower
+          tags: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  beautiful:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: ResearchInvestigating
+    textVariants: 
+    completing: true
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !StartAction
+      data:
+        key: satelliteshower
+        owner: Base
+        ownerKey: 
+        target: None
+        targetKey: 
+        visible: true
+        durationOverride: 
+        durationMultiplier: 
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

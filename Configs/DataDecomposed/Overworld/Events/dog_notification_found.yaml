@@ -1,0 +1,214 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.78
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  main:
+    reviewed: true
+    image: event_dog
+    textVariants: 
+    options:
+    - shared: false
+      key: Yes
+    - shared: false
+      key: Leave
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Restorative
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_dog
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots:
+          present: true
+          factionChecked: false
+          faction: 
+          factionInverted: false
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors:
+        actorsWorldPresent:
+          world_0: true
+        actorsUnitsPresent: 
+        actorsPilotsPresent: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  Leave:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: Exit
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: -15
+      actorKey: ''
+      allowDeath: false
+    steps: 
+  Yes:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 0.4805606
+      g: 0.6235294
+      b: 0.1686274
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: Exit
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_dog
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: world_dog_bond
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: ActorWorld
+      actorKey: world_0
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_dog_owner
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: 30
+      actorKey: ''
+      allowDeath: false
+    - !StartAction
+      data:
+        key: dog_owner_location
+        owner: Base
+        ownerKey: 
+        target: ActorSite
+        targetKey: world_0
+        visible: true
+        durationOverride: 
+        durationMultiplier: 
+    steps: 
+actions: 
+actorsSites:
+  world_0:
+    hidden: false
+    check:
+      provinceDistance:
+        check: LessEqual
+        value: 2
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags:
+      - tag: settlement
+        not: false
+      eventMemory: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

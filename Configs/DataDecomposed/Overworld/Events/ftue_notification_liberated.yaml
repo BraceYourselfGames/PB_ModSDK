@@ -1,0 +1,123 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: start
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.25
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  start:
+    reviewed: true
+    image: event_celebration
+    textVariants: 
+    options:
+    - shared: false
+      key: continue
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Positive
+    priority: 0
+    check:
+      self: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  continue:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_auto_war_victory
+        value: 0
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartTutorial
+      key: overworld_open
+    - !RevealOverworldActor
+      actorKey: capital
+    steps: 
+actions: 
+actorsSites:
+  capital:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: province_14
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags:
+      - tag: capital
+        not: false
+      eventMemory: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

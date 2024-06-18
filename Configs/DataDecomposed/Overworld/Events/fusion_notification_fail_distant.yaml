@@ -1,0 +1,188 @@
+hidden: true
+forced: false
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: false
+stepOnStart: fail
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.5
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  fail:
+    reviewed: false
+    image: event_capital_assault
+    textVariants: 
+    options:
+    - shared: false
+      key: acknowledge
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self: 
+      target: 
+      province: 
+      action: 
+      actors:
+        actorsWorldPresent:
+          world_0: true
+        actorsUnitsPresent: 
+        actorsPilotsPresent: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges:
+    - visible: true
+      context: ActorWorld
+      actorKey: world_0
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_fusion_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: world_fusion_late
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Add
+        key: world_fusion_exploded
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_fusion_active
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !CancelAction
+      actionKey: fusion_timer
+    - !CancelAction
+      actionKey: fusion_melt
+options:
+  acknowledge:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange:
+      offset: -4
+    warScoreChange:
+      faction: Player
+      offset: -60
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_fusion_exploded
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: -3
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: repair_juice
+        check: true
+        checkStrict: true
+        offset: true
+        value: -50
+      - key: battery
+        check: true
+        checkStrict: true
+        offset: true
+        value: -50
+    steps: 
+actions: 
+actorsSites:
+  world_0:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction:
+        hostileCheck: false
+        hostile: false
+        factions:
+        - Invaders
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags:
+      - tag: facility_energy
+        not: false
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_fusion_target
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+        - key: world_fusion_late
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

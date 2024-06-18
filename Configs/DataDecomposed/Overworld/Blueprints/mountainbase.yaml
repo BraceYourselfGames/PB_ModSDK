@@ -1,0 +1,89 @@
+hidden: false
+parents: []
+tags:
+- structure
+- site
+- homebase
+textName: {}
+textDesc: {}
+textIdentifierGroup: ''
+image: t_world_crop_mt1
+icon: s_icon_overlay_type_site5
+core:
+  inventory: true
+  selectable: true
+  capturable: true
+  recapturable: false
+  interactable: true
+  interactionRange: 25
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: true
+  generated: false
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Independents
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_MountainBase
+movement: 
+ranges: 
+detection: 
+intel:
+  detected: true
+  recognized: true
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    unique_mountainbase: true
+scenarioUnits: 
+scenarioChanges: 
+areas: 
+production:
+  limit: 1
+  duration: 48
+  controllingFactions:
+  - Phantoms
+  eventsOnCompletion:
+  - create_pilot
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat: 
+  blocks:
+    obj_capture_loot:
+    - resources:
+        supplies:
+          amountMin: 100
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_shotgun_heavy_01
+        tagsUsed: false
+        tags:
+          rating_1: true
+          wpn_primary: true
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      subsystems: 
+interactionEffects: 
+salvageBudget:
+  f: 25
+escalation: 
+threatLevel:
+  baseThreatLevel: 30
+battleSite: 

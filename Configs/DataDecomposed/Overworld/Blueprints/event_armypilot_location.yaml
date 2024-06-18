@@ -1,0 +1,73 @@
+hidden: false
+parents: []
+tags:
+- structure
+- site
+textName: {}
+textDesc: {}
+textIdentifierGroup: 
+image: 
+icon: 
+core:
+  inventory: true
+  selectable: true
+  capturable: false
+  recapturable: false
+  interactable: true
+  interactionRange: 5
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: true
+  generated: true
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Phantoms
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_Cache
+movement: 
+ranges: 
+detection: 
+intel:
+  detected: true
+  recognized: true
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    context_generic: true
+    entity_patrol: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_wilderness: true
+    type_main: true
+production:
+  limit: 1
+  duration: 0
+  controllingFactions:
+  - Phantoms
+  eventsOnCompletion:
+  - create_pilot
+ai: 
+spawning: 
+reinforcements: 
+rewards: 
+interactionEffects: 
+salvageBudget: 
+escalation:
+  escalationGain: 25
+  escalationGainWarMultiplier: 1
+  warScoreDealt: 10
+  warScoreRestored: 0
+  warObjectiveCandidate: true
+threatLevel:
+  baseThreatLevel: 60
+battleSite: 

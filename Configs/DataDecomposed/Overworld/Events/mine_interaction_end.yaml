@@ -1,0 +1,203 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: resolution
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  resolution:
+    reviewed: true
+    image: event_celebration
+    textVariants: 
+    options:
+    - shared: false
+      key: finish
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Restorative
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory: 
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources:
+          supplies:
+            check: GreaterEqual
+            value: 500
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots:
+          present: true
+          factionChecked: false
+          faction: 
+          factionInverted: false
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target:
+        tagsMethod: RequireAll
+        tags: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_cache_source
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        ai: 
+        resources: 
+        pilots: 
+        units: 
+        faction:
+          hostileCheck: false
+          hostile: false
+          factions:
+          - Phantoms
+        resupplyPoint: 
+      province: 
+      action: 
+      actors:
+        actorsWorldPresent:
+          world_0: true
+        actorsUnitsPresent: 
+        actorsPilotsPresent: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  finish:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Restorative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange:
+      offset: 2
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_cache_active
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_cache_source
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: ActorWorld
+      actorKey: world_0
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_cache_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: 50
+      actorKey: ''
+      allowDeath: false
+    - !CompleteAction
+      actionKey: cache_target_return
+    - !CompleteAction
+      actionKey: cache_target_combat
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: true
+        checkStrict: false
+        offset: true
+        value: -500
+    steps: 
+actions: 
+actorsSites:
+  world_0:
+    hidden: false
+    check:
+      provinceDistance:
+        check: LessEqual
+        value: 1
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius:
+        check: Less
+        value: 1000
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags:
+      - tag: cache_defended
+        not: false
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_cache_target
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 1
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

@@ -1,0 +1,113 @@
+info:
+  isAggressive: true
+  isSummoningHelp: false
+stateMachine:
+  states:
+  - name: wander
+    transitions:
+    - Item1: player_detected
+      Item2: pursuit
+    - Item1: call_for_help
+      Item2: investigate_call_for_help
+    - Item1: undefended_site
+      Item2: recapture
+    linkedData:
+      order: simple_patrol
+      speedMultiplierTarget: 1
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1.333334
+      entryCommands:
+      - !CopyBlackboardValue_Vector
+        fromVal: spawn_origin
+        toVal: patrol_origin
+      aiState: Calm
+  - name: pursuit
+    transitions:
+    - Item1: player_lost
+      Item2: search
+    - Item1: timer_done
+      Item2: pursuit_cooldown
+    linkedData:
+      order: attack_player
+      speedMultiplierTarget: 1.5
+      speedMultiplierHoldTime: 0.5000001
+      speedMultiplierRampTime: 1.333334
+      entryCommands:
+      - !CopyBlackboardValue_Vector
+        fromVal: player_position
+        toVal: patrol_origin
+      - !TimedMessage
+        timerDone: timer_done
+        aiPursuitTimeLimit: 24
+      aiState: Alerted
+  - name: search
+    transitions:
+    - Item1: timer_done
+      Item2: wander
+    - Item1: player_detected
+      Item2: pursuit
+    - Item1: call_for_help
+      Item2: investigate_call_for_help
+    linkedData:
+      order: simple_patrol
+      speedMultiplierTarget: 1.5
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1.666667
+      entryCommands:
+      - !CopyBlackboardValue_Vector
+        fromVal: player_position
+        toVal: patrol_origin
+      - !TimedMessage
+        timerDone: timer_done
+        aiPursuitTimeLimit: 3.333334
+      aiState: Investigating
+  - name: investigate_call_for_help
+    transitions:
+    - Item1: on_finish
+      Item2: search
+    - Item1: player_detected
+      Item2: pursuit
+    - Item1: undefended_site
+      Item2: recapture
+    linkedData:
+      order: respond_to_call_for_help
+      speedMultiplierTarget: 1.5
+      speedMultiplierHoldTime: 0.5000001
+      speedMultiplierRampTime: 1.333334
+      entryCommands:
+      - !CopyBlackboardValue_Vector
+        fromVal: player_position
+        toVal: patrol_origin
+      aiState: Investigating
+  - name: pursuit_cooldown
+    transitions:
+    - Item1: timer_done
+      Item2: wander
+    - Item1: undefended_site
+      Item2: recapture
+    linkedData:
+      order: simple_patrol
+      speedMultiplierTarget: 1
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1.333334
+      entryCommands:
+      - !TimedMessage
+        timerDone: timer_done
+        aiPursuitTimeLimit: 0.8333335
+      aiState: Calm
+  - name: recapture
+    transitions:
+    - Item1: on_finish
+      Item2: wander
+    - Item1: player_detected
+      Item2: pursuit
+    - Item1: player_lost
+      Item2: wander
+    linkedData:
+      order: assault_site
+      speedMultiplierTarget: 1
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1
+      entryCommands: []
+      aiState: Alerted
+  initialState: wander

@@ -1,0 +1,38 @@
+depthBackground: 90
+depthForeground: 90
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.2509804
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: world_internal_cta_upgrades
+        value: 3
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CallMethodStatic
+      typeName: CIViewOverworldNav
+      methodName: RefreshFromTutorial
+      argument: ''
+      frameDelay: 1
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld: 
+  effectsCombat: 

@@ -1,0 +1,826 @@
+timeLastSync: 63817552353
+entries:
+  actions_button_cancel_tooltip_header:
+    text: 取消
+    textEng: Cancel
+  actions_button_cancel_tooltip_text:
+    text: 放棄清單中的這個行動。
+    textEng: Discard this action from the list.
+  actions_button_locate_tooltip_header:
+    text: 定位
+    textEng: Locate
+  actions_button_locate_tooltip_text:
+    text: 這個動作可以移動到相關的位置。
+    textEng: Move to location associated with this action.
+  actions_description_duration:
+    text: 持續時間：
+    textEng: 'Duration:'
+  actions_description_unknown_project:
+    text: 沒有可顯示的計畫敘述。
+    textEng: No project description available.
+  actions_description_variant:
+    text: 數值差異：
+    textEng: 'Variant:'
+  actions_header:
+    text: 行動
+    textEng: Actions
+  actions_name_unknown:
+    text: 未知實體
+    textEng: Unknown Entity
+  actions_name_workshop:
+    text: 工作坊
+    textEng: Workshop
+  actions_time_paused:
+    text: 已暫停
+    textEng: Paused
+  description_effects_available:
+    text: 靠近這個設施的效果
+    textEng: Effects available when near this facility
+  description_effects_battery_replenish:
+    text: 電池電力會隨著時間補充
+    textEng: Battery charge is replenished over time
+  description_effects_repair_cost:
+    text: 維修會消耗較少量的修復液體
+    textEng: Repairs consume less Liquid Fix
+  description_effects_repair_replenish:
+    text: 修復液體會隨著時間補充
+    textEng: Liquid Fix is replenished over time
+  description_effects_repair_speed:
+    text: 維修進度加快
+    textEng: Repairs progress faster
+  description_effects_unlock:
+    text: 收復這個設施來解鎖當地效果
+    textEng: Liberate this facility to unlock local effects
+  description_effects_workshop_speed:
+    text: 工作坊速度已增加
+    textEng: Workshop speed increased
+  description_recovering:
+    text: 恢復中
+    textEng: Recovering
+  dialog_enter_combat_fail_desc:
+    text: 進入戰鬥所需的資源載入失敗。可能是因為有遺失的檔案造成：確保使用Alt+B回報遊戲錯誤並且檢查安裝檔案的完整性
+    textEng: 'Failed to load resources required for entering combat. This could be caused by missing files: make sure to send the bug report using Alt+B and verify integrity of your installation'
+  dialog_enter_combat_fail_header:
+    text: 進入戰鬥失敗
+    textEng: Failed to enter combat
+  dialog_resupply_desc:
+    text: 你想要立即重新補給嗎？這個程序將會花費時間，並且基地無法移動。
+    textEng: Would you like to resupply immediately? The process will take time and the base will not be able to move.
+  dialog_resupply_header:
+    text: 抵達重新補給點
+    textEng: Arrived to resupply point
+  event_added:
+    text: 已添加
+    textEng: Added
+  event_all_pilots_injured:
+    text: 所有駕駛員已受傷
+    textEng: All pilots injured
+  event_all_pilots_recover:
+    text: 所有駕駛員已復原
+    textEng: All pilots recover
+  event_current_escalation:
+    text: 當前逐步提升警戒
+    textEng: Current escalation
+  event_depleted:
+    text: 已耗盡
+    textEng: Depleted
+  event_duration:
+    text: 持續時間
+    textEng: Duration
+  event_faction_enemy:
+    text: 敵方
+    textEng: Enemy
+  event_faction_home_guard:
+    text: 國軍部隊
+    textEng: Home Guard
+  event_friendly_province_bonus:
+    text: 友方省份加成
+    textEng: Friendly province bonus
+  event_hope:
+    text: 希望值
+    textEng: Hope
+  event_hostiles_approaching:
+    text: 敵方正在接近
+    textEng: Hostiles approaching
+  event_insufficient:
+    text: 不足
+    textEng: Insufficient
+  event_our_reputation:
+    text: 我們的聲望
+    textEng: Our reputation
+  event_pilot_deceased:
+    text: 損失駕駛員
+    textEng: Pilot lost
+  event_pilot_deceased_desc:
+    text: 考量到最近的情勢，這位駕駛員離開了基地。
+    textEng: In light of recent circumstances, this pilot has left the base.
+  event_pilot_injured:
+    text: 受傷的駕駛員
+    textEng: Pilot affected
+  event_pilot_recovers:
+    text: 駕駛員已復原
+    textEng: Pilot recovers
+  event_postfix_hour:
+    text: 小時
+    textEng: Hr
+  event_removed:
+    text: 已移除
+    textEng: Removed
+  event_threat_jamming:
+    text: 干擾威脅判定
+    textEng: Threat with jamming
+  event_tooltip_blocked_desc:
+    text: 這個選項現在無法使用。查看要求條件說明來解鎖。
+    textEng: This option can't be used right now. Check the description for the requirements to unlock it.
+  event_tooltip_blocked_header:
+    text: 未解鎖
+    textEng: Blocked
+  event_unit:
+    text: 單位
+    textEng: Unit
+  event_war_score:
+    text: 戰爭分數
+    textEng: War score
+  hotbar_ability_header_effect:
+    text: 效果
+    textEng: Effect
+  hotbar_ability_header_hotkey:
+    text: 快捷鍵
+    textEng: Hotkey
+  hotbar_ability_header_resource:
+    text: 需要的資源
+    textEng: Required resource
+  hotbar_power_tooltip_header:
+    text: 動力
+    textEng: Power
+  hotbar_power_tooltip_text:
+    text: 移動基地可使用的電池動力值。可以用來提升速度或是掩護基地。當基地以一般速度移動，或是停留在原地時動力即可再生。
+    textEng: The amount of battery power available to mobile base. Can be spent to boost speed or cloak the base. Regenerated when the base is at normal speed or stationary.
+  log_ability_drone_stun:
+    text: 被我們的無人機擊中，暫時無法移動！
+    textEng: Hit by our drone, temporarily immobilized!
+  log_ability_hidden_spotted:
+    text: 發現躲藏的實體！
+    textEng: Hidden entity spotted!
+  log_ai_command_loss_controlled:
+    text: 與控制區內的一個小隊失去聯繫。派出巡邏隊進行調查。
+    textEng: Lost contact with a squad in the controlled territory. Dispatching a patrol to investigate.
+  log_ai_command_loss_liberated:
+    text: 與叛軍領地上的一個小隊失去聯繫。
+    textEng: Lost contact with a squad in the rebel territory.
+  log_ai_command_prefix:
+    text: 最高指揮官
+    textEng: High Command
+  log_ai_investigation:
+    text: 敵方小隊已出動調查！
+    textEng: Enemy squad has been dispatched to investigate!
+  log_ai_recapture_end:
+    text: 敵方奪回地點
+    textEng: Enemy recaptured site
+  log_ai_recapture_start:
+    text: 敵方開始奪回地點
+    textEng: Enemy started recapturing site
+  log_ai_recaptured:
+    text: 敵方奪回地點
+    textEng: Enemy recaptured site
+  log_combat_contacts_friendly:
+    text: 戰場上新的盟友接觸：{0}
+    textEng: 'New allied contacts on the field: {0}'
+  log_combat_contacts_hostile:
+    text: 戰場上新的敵軍接觸：{0}
+    textEng: 'New hostile contacts on the field: {0}'
+  log_combat_contacts_mixed:
+    text: 戰場上新的接觸：{0}友好，{1}敵對
+    textEng: 'New contacts on the field: {0} friendly, {1} hostile'
+  log_combat_retreat_failed:
+    text: 撤除單位失敗，不在有效撤退區域中
+    textEng: Unit failed to extract, not in active retreat zone
+  log_combat_retreat_success:
+    text: 已撤除單位
+    textEng: Unit extracted
+  log_equipment_blocked_left_arm:
+    text: 機甲在沒有左臂的情況下，無法接上左邊的裝備。
+    textEng: Unable to attach left equipment if left arm doesn't exist.
+  log_equipment_blocked_right_arm:
+    text: 機甲在沒有右臂的情況下，無法接上右邊的裝備。
+    textEng: Unable to attach right equipment if right arm doesn't exist.
+  log_equipment_blocked_shield_ultraheavy:
+    text: 由於目前裝備的武器重量極重，盾牌已被拆卸。
+    textEng: Detached shield due to currently equipped weapon being ultra-heavy.
+  log_equipment_blocked_ultraheavy_shield:
+    text: 由於目前裝備的是盾牌，重量極重的武器已被拆卸。
+    textEng: Detached ultraheavy weapon due to currently equipped item being a shield.
+  log_header:
+    text: 更新
+    textEng: Updates
+  log_id_site:
+    text: 地點
+    textEng: Site
+  log_id_squad:
+    text: 小隊
+    textEng: Squad
+  log_id_unknown:
+    text: 未知
+    textEng: Unknown
+  log_inventory_part_received:
+    text: 已獲得的零件
+    textEng: Received part
+  log_inventory_resource_changed:
+    text: 已改變儲存的資源
+    textEng: Stored resource changed
+  log_inventory_resource_received:
+    text: 已獲得的資源
+    textEng: Received resource
+  log_inventory_resource_spent:
+    text: 已消耗的資源
+    textEng: Spent resource
+  log_inventory_subsystem_received:
+    text: 已獲得的子系統
+    textEng: Received subsystem
+  log_inventory_unit_received:
+    text: 已獲得的機甲架
+    textEng: Received mech frame
+  log_inventory_workshop_received:
+    text: 已獲得的工作坊計畫
+    textEng: Received workshop project
+  log_inventory_workshop_spent:
+    text: 已使用的工作坊計畫
+    textEng: Used workshop project
+  log_outcome_ejection_detected:
+    text: 已偵測到彈射逃生的駕駛員降落地點
+    textEng: Detected landing site of an ejected pilot
+  log_outcome_site_capture:
+    text: 已捕獲
+    textEng: Captured
+  log_outcome_site_defeat:
+    text: 已戰勝
+    textEng: Defeated
+  log_power_depleted:
+    text: 基地動力已耗盡！
+    textEng: Base power depleted!
+  log_power_recharged:
+    text: 基地動力已充滿
+    textEng: Base power fully recharged
+  log_upgrade_installed:
+    text: 已安裝基地升級
+    textEng: Base upgrade installed
+  log_upgrade_removed:
+    text: 已移除基地升級
+    textEng: Base upgrade removed
+  log_war_battlesite_defeat:
+    text: 你在戰鬥地點上分裂敵軍失敗；國軍部隊正在撤退。
+    textEng: Your failed to disrupt the enemy at the battle site; Home Guard forces are in retreat.
+  log_war_battlesite_loss:
+    text: 失去戰鬥地點；國軍部隊失去戰力。
+    textEng: Battle site lost; Home Guard loses forces.
+  log_war_battlesite_spawn:
+    text: 已回報新的戰鬥地點！
+    textEng: New battle site reported!
+  log_war_battlesite_victory:
+    text: 敵方逃出戰鬥地點；國軍部隊保住戰力。
+    textEng: Enemy flees the battle site; Home Guard forces preserved.
+  log_war_escalation_down:
+    text: 已減少逐步提升層級
+    textEng: Escalation level decreased
+  log_war_escalation_up:
+    text: 已增加逐步提升層級！
+    textEng: Escalation level increased!
+  log_war_fob_added:
+    text: 敵方設立暫時性的基地來彌補他們所有失去的站點
+    textEng: The enemy sets up temporary bases to compensate for all their lost sites
+  log_war_fob_removal:
+    text: 敵方收拾好他們的暫時性基地。
+    textEng: The enemy packs up their temporary bases.
+  log_war_hope_decrease:
+    text: 希望已減少
+    textEng: Hope lost
+  log_war_hope_increase:
+    text: 希望已增加
+    textEng: Hope increased
+  log_war_lost:
+    text: 收復省份失敗！
+    textEng: Province liberation failed!
+  log_war_objective_new:
+    text: 新選定的目標！
+    textEng: New designated objective!
+  log_war_objective_victory:
+    text: 戰爭目標中立；敵方軍力弱化
+    textEng: War objective neutralized; enemy forces weakened
+  log_war_start:
+    text: 現在省份由國軍部隊守衛！
+    textEng: Province now being contested by the Home Guard!
+  log_war_takeover_friendly:
+    text: 已收復省份
+    textEng: Liberated with the province
+  log_war_takeover_hostile:
+    text: 已被奪走省份
+    textEng: Taken with the province
+  log_war_victory:
+    text: 收復省份成功！
+    textEng: Province liberated!
+  nav_button_base:
+    text: 基地
+    textEng: Base
+  nav_button_base_header:
+    text: 基地
+    textEng: Base
+  nav_button_briefing:
+    text: 簡報
+    textEng: Briefing
+  nav_button_briefing_header:
+    text: 簡報
+    textEng: Briefing
+  nav_button_inventory:
+    text: 物品清單
+    textEng: Inventory
+  nav_button_inventory_header:
+    text: 物品清單
+    textEng: Inventory
+  nav_button_pause_header:
+    text: 暫停
+    textEng: Pause
+  nav_button_pause_menu:
+    text: 暫停
+    textEng: Pause
+  nav_button_pilots:
+    text: 駕駛員
+    textEng: Pilots
+  nav_button_pilots_header:
+    text: 駕駛員
+    textEng: Pilots
+  nav_button_units:
+    text: 單位
+    textEng: Units
+  nav_button_units_header:
+    text: 單位
+    textEng: Units
+  nav_button_upgrades:
+    text: 升級
+    textEng: Upgrades
+  nav_button_upgrades_header:
+    text: 升級
+    textEng: Upgrades
+  nav_button_workshop:
+    text: 工作坊
+    textEng: Workshop
+  nav_button_workshop_header:
+    text: 工作坊
+    textEng: Workshop
+  nav_button_world:
+    text: 世界
+    textEng: World
+  nav_button_world_header:
+    text: 世界
+    textEng: World
+  overlay_name_resupply_point:
+    text: 重新補給點
+    textEng: Resupply point
+  province_hover_suggested_level:
+    text: 建議等級
+    textEng: Suggested level
+  province_liberated_header:
+    text: 收復省份成功
+    textEng: Province liberated
+  province_liberated_text:
+    text: 多虧你的努力，敵軍從爭奪中的省份被驅逐。反抗部隊將會從現在起接手控制。
+    textEng: Thanks to your efforts, the enemy was driven out of the contested province. Resistance forces will hold it from here on out.
+  province_lost_header:
+    text: 收復省份失敗
+    textEng: Province lost
+  province_lost_text:
+    text: 儘管你努力了，敵軍還是控制住爭奪中的省份。反抗部隊將會準備下一次嘗試。
+    textEng: Despite your efforts, the enemy managed to hold onto the contested province. Resistance forces will be preparing for another attempt.
+  province_state_battle_site_header:
+    text: 戰場
+    textEng: Battle site
+  province_state_battle_site_text:
+    text: 國軍部隊正在這個地區對抗入侵者。在戰場時間用完之前加入戰鬥，否則國軍部隊的戰爭分數將會減少。
+    textEng: Home Guard is fighting the invaders at this location. Join the fight before the battle site runs out of time, or the Home Guard's war score will be reduced.
+  province_state_contested:
+    text: － 爭奪中的省份 －
+    textEng: —  Contested Province  —
+  province_state_neutral_war_score_header:
+    text: 國軍部隊兵力
+    textEng: Home Guard Strength
+  province_state_neutral_war_score_text:
+    text: >-
+      這個國家僅存的最後一支常規防禦軍隊的兵力。幻影軍團的小隊規模太小，以至於無法獨自維護省份的安全，而國軍部隊的戰鬥力有限，但聯合起來，你們可以拿下領土。
+
+
+      在100%的兵力下，你可以爭奪逐步提升警戒的省份。支援國軍部隊打擊關鍵目標，並在爭奪中的省份戰場上幫助他們，將帶領我們走向勝利。
+    textEng: >-
+      The strength of the country’s last remaining conventional defense force. Phantom Brigade’s squad is too small to hold provinces on our own, and the Home Guard has limited forces to fight, but together, you can take territory.
+
+
+      At 100% strength, you can contest escalated provinces. Supporting the Home Guard with strikes against key objectives and helping them at battle sites in contested provinces will lead us to victory.
+  province_state_objective_header:
+    text: 目標
+    textEng: Objective
+  province_state_objective_text:
+    text: 目標是國軍部隊指派的優先對象。打倒他們將會使敵軍變弱。
+    textEng: Objectives are priority targets designated by the Home Guard. Taking them out will weaken the enemy.
+  province_state_recovering:
+    text: 國軍部隊恢復中……
+    textEng: Home Guard recovering...
+  province_state_showdown_header:
+    text: 主要目標
+    textEng: Key objective
+  province_state_showdown_text:
+    text: 一旦省內的敵軍被削弱，關鍵目標就會出現。消滅這些目標是解放省份的必要手段。
+    textEng: Key objectives appear once the enemy forces in the province are worn down. Eliminating these objectives is necessary to liberate the province.
+  province_state_war_score_enemy_header:
+    text: 敵方兵力
+    textEng: Enemy Strength
+  province_state_war_score_enemy_text:
+    text: 在這爭奪中的省份入侵部隊的兵力。打擊關鍵目標來讓這個數值下降。當數值歸零，敵軍將會撤退而這個省份會被收復。
+    textEng: The strength of the invasion forces in this contested province. Strike key objectives to make this value drop. When this value reaches 0, the enemy will retreat and the province will be liberated.
+  province_state_war_score_player_header:
+    text: 國軍部隊兵力
+    textEng: Home Guard Strength
+  province_state_war_score_player_text:
+    text: 國軍部隊的兵力，常規防禦軍隊的殘留部分在這個爭奪中的省份與敵人交戰。支援國軍部隊打擊關鍵目標並在戰場上幫助他們，將帶領我們走向勝利。當這個數值歸零便會撤退，則敵人將守住這個省份。
+    textEng: The strength of the Home Guard, remnants of the conventional defense forces engaging the enemy all over this contested province. Supporting the Home Guard with strikes against key objectives and helping them at battle sites will lead us to victory. Letting this value fall to 0 will trigger a retreat, letting the enemy hold the province.
+  retreat_header:
+    text: 撤退中……
+    textEng: Retreating...
+  retreat_text:
+    text: 返回最近的重新補給點
+    textEng: Returning to nearest resupply point
+  root_button_contest_province:
+    text: >-
+      爭奪
+
+      省份
+    textEng: >-
+      Contest
+
+      province
+  root_button_contest_province_tooltip_text:
+    text: 你可以召集國軍部隊為這個省份而戰。你的旅團無法獨自維護一個省份的安全，但打擊關鍵目標並在戰場上扭轉局勢，即有助於國軍部隊實現這個成就。
+    textEng: You can call in the Home Guard to fight for this province. Your brigade can't hold a province all on its own, but striking key objectives and turning the tide at battle sites will help the Home Guard accomplish this.
+  root_button_contested_province_tooltip_header:
+    text: 收復省份成功
+    textEng: Province contested
+  root_button_contested_province_tooltip_text:
+    text: 國軍部隊正在試圖奪回這個省份。打擊關鍵目標並且在關鍵戰場幫助我們的軍隊將會導向勝利！
+    textEng: The Home Guard is attempting to retake this province. Striking key objectives and helping our forces at key battle sites will lead to victory!
+  root_button_time_1x:
+    text: 1倍速
+    textEng: Time 1x
+  root_button_time_2x:
+    text: 2倍速
+    textEng: Time 2x
+  root_button_time_3x:
+    text: 3倍速
+    textEng: Time 3x
+  root_button_time_pause:
+    text: 0倍速
+    textEng: Time 0x
+  root_province_contested:
+    text: 敵對
+    textEng: Contested
+  root_province_friendly_tooltip_header:
+    text: 友方省份
+    textEng: Friendly province
+  root_province_friendly_tooltip_text:
+    text: 友方省份受到國軍部隊的保護。移動基地可以在這樣的省份中重新補給。
+    textEng: Friendly provinces are protected by the Home Guard. The mobile base can resupply at bases in provinces like these.
+  root_province_hostile:
+    text: 敵方
+    textEng: Hostile
+  root_province_hostile_tooltip_header:
+    text: 敵方省份
+    textEng: Hostile province
+  root_province_hostile_tooltip_text:
+    text: 敵方省份有不同程度的敵人活動，也稱為逐步提升警戒。當移動基地位於這個省份時，逐步提升警戒會增加，如果移動基地離開則會下降。每一個新的逐步提升層級都會使戰鬥難度變得更高。
+    textEng: Hostile provinces can have varying levels of enemy activity, otherwise known as escalation. Escalation grows when the mobile base is present in the province and drops if it leaves. Each new escalation level makes combat harder.
+  root_province_liberated:
+    text: 已收復
+    textEng: Liberated
+  root_province_stage_contest_header:
+    text: 敵對
+    textEng: Contested
+  root_province_stage_contest_text:
+    text: 國軍部隊抵抗軍正在全省各地與敵人交戰。攻擊顯眼的目標可以突破他們的控制。
+    textEng: The Home Guard resistance forces are engaging the enemy all across the province. Strike the highlighted objectives to break their grip.
+  root_province_stage_final_header:
+    text: 緊要關頭
+    textEng: Critical
+  root_province_stage_final_text:
+    text: 敵軍快撐不下去了。快攻擊關鍵目標，結束這場戰役。
+    textEng: The enemy forces are barely holding on. Strike the key objective to finish the fight.
+  root_province_stage_liberated_header:
+    text: 已收復
+    textEng: Liberated
+  root_province_stage_liberated_text:
+    text: 在你的努力之下，這個省分收復了。你可以善加利用重新補給點。
+    textEng: This province has been liberated through your efforts. You can take advantage of the resupply points.
+  root_province_stage_raid_header:
+    text: 襲擊
+    textEng: Raiding
+  root_province_stage_raid_text:
+    text: 敵人沒有發現你。拉高逐步提升警戒等級，吸引他們出來，爭奪這個省。
+    textEng: The enemy is not alerted to your presence. Increase the escalation level to draw them out, contesting the province.
+  root_province_status_liberated:
+    text: 已收復
+    textEng: Liberated
+  root_province_status_prefix:
+    text: 狀態：
+    textEng: 'Status:'
+  root_province_status_protected:
+    text: 受到保護
+    textEng: Protected
+  root_province_status_surrounded:
+    text: 受到包圍
+    textEng: Surrounded
+  root_province_status_vulnerable:
+    text: 難防守的
+    textEng: Vulnerable
+  roster_button_recruit_pilot:
+    text: >-
+      招募
+
+      駕駛員
+    textEng: >-
+      Recruit
+
+      pilot
+  roster_button_resupply:
+    text: 休息＆重新補給
+    textEng: Rest & resupply
+  roster_dialog_resupply_main_header:
+    text: 正在開始重新補給
+    textEng: Starting Resupply
+  roster_dialog_resupply_main_text:
+    text: 重新補給時基地將無法移動。要繼續嗎？
+    textEng: The base will be unable to move while resupplying. Continue?
+  roster_dialog_resupply_recruit_header:
+    text: 正在開始招募
+    textEng: Starting Recruitment
+  roster_dialog_resupply_recruit_text:
+    text: 招募時基地將無法移動。要繼續嗎？
+    textEng: The base will be unable to move while recruitment is underway. Continue?
+  roster_label_no_pilots:
+    text: 沒有駕駛員
+    textEng: No Pilots
+  roster_label_no_squad_header:
+    text: 沒有小隊
+    textEng: No Squad
+  roster_label_no_squad_text:
+    text: 請考慮撤退到補給點
+    textEng: Consider retreating to resupply point
+  roster_label_unit_level:
+    text: 等級
+    textEng: Level
+  roster_label_unit_threat:
+    text: 威脅
+    textEng: Threat
+  roster_pilot_stats_header:
+    text: 駕駛員人數
+    textEng: Pilot Count
+  roster_pilot_stats_text:
+    text: 當前可用的駕駛員，以及移動基地可容納最大的駕駛員人數。
+    textEng: Currently available pilots and the maximum pilot count allowed in the mobile base.
+  roster_repair_bar_header:
+    text: 修復液體
+    textEng: Liquid Fix
+  roster_repair_bar_text:
+    text: 一種修復資源，在主世界使用，或是讓裝有屏障裝甲的機甲單位帶入戰鬥中。
+    textEng: Repair resource used in the overworld or taken into combat by units with barrier armor.
+  roster_resupply_main_header:
+    text: 免費
+    textEng: Free
+  roster_resupply_main_text:
+    text: >-
+      當基地停下來進行重新補給時，組員將獲得應有的休息。
+
+
+      －基地將會忙碌10小時
+
+      －基地不能受派至任何任務
+
+      －修復液體和能量儲備將得到充分補充
+
+      －駕駛員疲勞重置
+
+      －所有損壞的機甲單位都會得到修復
+
+      －如果基地擁有不到2台機甲單位和2個駕駛員的話，將從儲備中轉移過來
+    textEng: >-
+      While the base stops to resupply, the crew will get some well-deserved rest.
+
+
+      - The base will be busy for 10 hours
+
+      - The base can't be occupied with another task
+
+      - Liquid Fix and energy reserves will be fully replenished
+
+      - Pilot fatigue resets
+
+      - All damaged units are repaired
+
+      - If the base doesn't have at least 2 units and pilots, they will be transferred from reserves
+  roster_resupply_options:
+    text: 重新補給選項
+    textEng: Resupply Options
+  roster_resupply_recruit_header:
+    text: -200物資
+    textEng: -200 supplies
+  roster_resupply_recruit_text:
+    text: >-
+      招募一名新駕駛員。隨著你的良好聲譽傳播開，更多的新兵會要求加入你的行列。有些人參加了上一場戰爭。其他人未曾受訓但受到入侵的刺激而決定行動。
+
+
+      －基地將部署5小時
+
+      －一次只能招募一名駕駛員
+
+      －基地不能受領另一項重新補給任務
+    textEng: >-
+      Recruit a new pilot. As your good reputation spreads, more recruits request to join your ranks. Some fought in the last war. Others are untested but spurred to action by the invasion.
+
+
+      - The base will be deployed for 5 hours
+
+      - Only one pilot can be recruited at a time
+
+      - The base can't be busy with another resupply task
+  roster_unit_damaged_header:
+    text: 已受損
+    textEng: Damaged
+  roster_unit_damaged_text:
+    text: 此單位將消耗修復液體物資，並花費時間自我維修。點選該單位可以暫停維修，以節省物資。
+    textEng: This unit will be repaired over time at the cost of Liquid Fix supplies. You can pause repairs to conserve supply by clicking the unit.
+  roster_unit_stats_header:
+    text: 值勤名單狀態數值
+    textEng: Roster stats
+  roster_unit_stats_text:
+    text: 將你單位前四名的平均等級和威脅等級，與敵方駐軍的等級進行比較，以便在戰鬥前做出明智的決定。
+    textEng: Compare the average level and threat rating of your top four units against the ratings of enemy garrisons to make an informed decision before combat.
+  roster_unit_tooltip1_level:
+    text: 平均等級
+    textEng: Avg. level
+  roster_unit_tooltip2_threat:
+    text: 威脅度
+    textEng: Threat
+  roster_unit_tooltip3_ready:
+    text: 戰鬥準備完成
+    textEng: Combat ready
+  roster_unit_tooltip3_ready_no:
+    text: 戰鬥準備完成：否
+    textEng: 'Combat ready: No'
+  roster_unit_tooltip3_ready_yes:
+    text: 戰鬥準備完成：是
+    textEng: 'Combat ready: Yes'
+  roster_unit_tooltip4_issues_critical:
+    text: 重大問題
+    textEng: Critical issues
+  roster_unit_tooltip4_issues_warning:
+    text: 警告
+    textEng: Warnings
+  roster_unit_tooltip5_equipment:
+    text: 裝備
+    textEng: Equipment
+  roster_unit_tooltip6_join:
+    text: ＆
+    textEng: '&'
+  selection_branch_tooltip_prefix:
+    text: 入侵部隊的軍種。不同的軍種使用不同的裝備與單位組成。
+    textEng: Branch of invasion forces. Different branches use different equipment and unit compositions.
+  selection_branch_unknown_description:
+    text: 沒有關於這個派系的資訊
+    textEng: No information available about this faction
+  selection_branch_unknown_name:
+    text: 未知軍種
+    textEng: Unknown branch
+  selection_contact_count_prefix:
+    text: 鄰近接觸：
+    textEng: 'Nearby contacts:'
+  selection_description_fallback:
+    text: 沒有這個目標的描述
+    textEng: No description available for this target
+  selection_description_objective:
+    text: 目標
+    textEng: Objective
+  selection_description_recaptured:
+    text: 再次捕獲
+    textEng: Recaptured
+  selection_difficulty_level_0:
+    text: 非常簡單
+    textEng: Very Easy
+  selection_difficulty_level_1:
+    text: 簡單
+    textEng: Easy
+  selection_difficulty_level_2:
+    text: 適中
+    textEng: Medium
+  selection_difficulty_level_3:
+    text: 困難
+    textEng: Hard
+  selection_difficulty_level_4:
+    text: 非常困難
+    textEng: Very Hard
+  selection_difficulty_level_5:
+    text: 終極難度
+    textEng: Impossible
+  selection_difficulty_tooltip_text:
+    text: 大致上的敵軍難度。
+    textEng: Approximate difficulty of the enemy.
+  selection_early_description:
+    text: 旅團派出的偵查小隊。因長程旅途而耗損需要維修。
+    textEng: The scout squad dispatched by the Brigade. Worn down by a long journey and in need of maintenance.
+  selection_early_mech_count:
+    text: 2台運作的機甲
+    textEng: 2 active mechs
+  selection_early_squad:
+    text: 小隊
+    textEng: Squad
+  selection_garrison_combat_capable:
+    text: 可戰鬥
+    textEng: Combat capable
+  selection_garrison_description_empty:
+    text: 沒有軍事活動
+    textEng: No military activity
+  selection_garrison_description_occupied:
+    text: 在場敵軍
+    textEng: Hostile units on site
+  selection_garrison_description_protected:
+    text: 在場盟軍
+    textEng: Allies on site
+  selection_garrison_status_empty:
+    text: 空無一人
+    textEng: Empty
+  selection_garrison_status_occupied:
+    text: 已被佔據
+    textEng: Occupied
+  selection_garrison_status_protected:
+    text: 已受保護
+    textEng: Protected
+  selection_header_hovered:
+    text: 已停留
+    textEng: Hovered
+  selection_header_selected:
+    text: 已選擇
+    textEng: Selected
+  selection_inspect:
+    text: 檢查
+    textEng: Inspect
+  selection_location_unknown_description:
+    text: 未知接觸
+    textEng: Unknown contact
+  selection_location_unknown_name:
+    text: ？？？
+    textEng: ???
+  selection_outdated:
+    text: 逾時
+    textEng: Outdated
+  selection_resupply_header:
+    text: 國軍基地
+    textEng: Home base
+  selection_resupply_hint:
+    text: 可進行重新補給
+    textEng: Resupply available
+  selection_threat_prefix_level:
+    text: 等級：
+    textEng: 'Level:'
+  selection_threat_prefix_rating:
+    text: 威脅度
+    textEng: TR
+  text_description_scan:
+    text: 讓接觸者保持在一定範圍內一段時間，取得更詳細的掃瞄。
+    textEng: Keep contact in range for a time to acquire detailed scan.
+  tutorial_button_continue:
+    text: 繼續
+    textEng: Continue
+  weather_l025_name:
+    text: 晴朗
+    textEng: Clear
+  weather_l025_name_neg:
+    text: 晴朗
+    textEng: Clear
+  weather_l050_name:
+    text: 多雲
+    textEng: Cloudy
+  weather_l050_name_neg:
+    text: 多雲
+    textEng: Cloudy
+  weather_l066_name:
+    text: 毛毛雨
+    textEng: Light Rain
+  weather_l066_name_neg:
+    text: 小雪
+    textEng: Light Snowfall
+  weather_l083_name:
+    text: 陣雨
+    textEng: Medium Rain
+  weather_l083_name_neg:
+    text: 降雪
+    textEng: Snowfall
+  weather_l100_name:
+    text: 大雨
+    textEng: Heavy Rain
+  weather_l100_name_neg:
+    text: 暴風雪
+    textEng: Snow Storm
+collection: 

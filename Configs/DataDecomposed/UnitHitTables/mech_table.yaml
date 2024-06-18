@@ -1,0 +1,30 @@
+socketScaling:
+  back: 25
+  core: 35
+  optional_left: 20
+  optional_right: 20
+  secondary: 25
+directions:
+  front:
+    socketScaling:
+      core: 10
+      optional_left: 2
+      optional_right: 2
+      secondary: 6
+  back:
+    socketScaling:
+      back: 10
+      core: 5
+      secondary: 15
+  left:
+    socketScaling:
+      back: 2
+      core: 1
+      optional_left: 17
+      secondary: 2
+  right:
+    socketScaling:
+      back: 2
+      core: 1
+      optional_right: 17
+      secondary: 2

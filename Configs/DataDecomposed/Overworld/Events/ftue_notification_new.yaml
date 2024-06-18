@@ -1,0 +1,132 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 0
+  completionOnTarget: 0
+trackCompletionOnSelf: true
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Short
+steps:
+  main:
+    reviewed: true
+    image: event_start
+    textVariants: 
+    options:
+    - shared: false
+      key: acknowledge
+    resourceDisplay: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Positive
+    priority: 0
+    check:
+      self: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors:
+        actorsWorldPresent:
+          world_0: true
+        actorsUnitsPresent: 
+        actorsPilotsPresent: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  acknowledge:
+    priority: 100
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: true
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !StartAction
+      data:
+        key: core_mountainbase_target
+        owner: Source
+        ownerKey: 
+        target: ActorSite
+        targetKey: world_0
+        visible: true
+        durationOverride: 
+        durationMultiplier: 
+    - !StartTutorial
+      key: overworld_intro
+    steps: 
+actions: 
+actorsSites:
+  world_0:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: province_00
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction:
+        hostileCheck: true
+        hostile: true
+        factions: []
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags:
+      - tag: mountainbase
+        not: false
+      eventMemory: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

@@ -1,0 +1,42 @@
+priority: 0
+colorFromStep: false
+colorCustom: false
+colorKey: construction_primary
+color:
+  r: 1
+  g: 1
+  b: 1
+  a: 1
+optionMood: ConstructionSalvage
+textVariants: 
+completing: false
+checkPreventsUnlock: false
+resourceChangePreventsUnlock: true
+stepByPriority: false
+stepFallbackMode: None
+stepFallbackKey: 
+injection: 
+check: 
+hopeChange: 
+warScoreChange: 
+combat: 
+memoryChanges: 
+functions:
+- !StartAction
+  data:
+    key: breakin_3h
+    owner: Base
+    ownerKey: 
+    target: None
+    targetKey: 
+    visible: true
+    durationOverride: 
+    durationMultiplier: 
+- !ModifyResources
+  resourceChanges:
+  - key: supplies
+    check: true
+    checkStrict: true
+    offset: true
+    value: -30
+steps: 

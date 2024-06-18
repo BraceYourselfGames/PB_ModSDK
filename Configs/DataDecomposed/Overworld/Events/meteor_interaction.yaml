@@ -1,0 +1,105 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 50
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 1
+  completionOnTarget: 1
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Long
+steps:
+  main:
+    reviewed: true
+    image: event_salvage
+    textVariants: 
+    options:
+    - shared: false
+      key: salvage
+    - shared: true
+      key: leave
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: construction_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ConstructionSalvage
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireOne
+        tags:
+        - tag: unique_crashedsatellite
+          not: false
+        eventMemory: 
+        ai: 
+        resources: 
+        pilots: 
+        units:
+          present: false
+        faction: 
+        resupplyPoint: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions:
+    - !CompleteAction
+      actionKey: satellite_objective
+options:
+  salvage:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: construction_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: ConstructionSalvage
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !TransferTargetRewards
+      rewardKey: event_crashedsatellite_reward
+      rewardCount: 1
+    - !DestroyTarget {}
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

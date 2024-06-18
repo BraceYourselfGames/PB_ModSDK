@@ -1,0 +1,72 @@
+hidden: false
+parents: []
+tags:
+- site
+- size_huge
+- structure
+textName: {}
+textDesc: {}
+textIdentifierGroup: site_base_large
+image: t_world_crop_base2
+icon: s_icon_overlay_type_site1
+core:
+  inventory: true
+  selectable: true
+  capturable: true
+  recapturable: true
+  interactable: true
+  interactionRange: 5
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: false
+  generated: true
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Invaders
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_Base_ExtraLarge
+movement: 
+ranges:
+  vision: 35
+  observerData: 
+detection: 
+intel:
+  detected: true
+  recognized: true
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    unique_stronghold: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_military: true
+    size_large: true
+    type_main: true
+production: 
+ai: 
+spawning:
+  patrolLimit: 4
+  reenforcementDelay: 24
+reinforcements: 
+rewards: 
+interactionEffects: 
+salvageBudget: 
+escalation:
+  escalationGain: 60
+  escalationGainWarMultiplier: 1
+  warScoreDealt: 20
+  warScoreRestored: 0
+  warObjectiveCandidate: true
+threatLevel:
+  baseThreatLevel: 300
+battleSite: 

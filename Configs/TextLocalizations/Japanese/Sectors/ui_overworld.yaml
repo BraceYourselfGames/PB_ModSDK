@@ -1,0 +1,826 @@
+timeLastSync: 63822305293
+entries:
+  actions_button_cancel_tooltip_header:
+    text: キャンセル
+    textEng: Cancel
+  actions_button_cancel_tooltip_text:
+    text: このアクションをリストから削除する。
+    textEng: Discard this action from the list.
+  actions_button_locate_tooltip_header:
+    text: 位置付ける
+    textEng: Locate
+  actions_button_locate_tooltip_text:
+    text: このアクションに関連する場所に移動する。
+    textEng: Move to location associated with this action.
+  actions_description_duration:
+    text: 時間：
+    textEng: 'Duration:'
+  actions_description_unknown_project:
+    text: プロジェクトの説明なし。
+    textEng: No project description available.
+  actions_description_variant:
+    text: バリエーション：
+    textEng: 'Variant:'
+  actions_header:
+    text: アクション
+    textEng: Actions
+  actions_name_unknown:
+    text: 不明なエンティティ
+    textEng: Unknown Entity
+  actions_name_workshop:
+    text: ワークショップ
+    textEng: Workshop
+  actions_time_paused:
+    text: 一時停止
+    textEng: Paused
+  description_effects_available:
+    text: 近づくと受ける効果
+    textEng: Effects available when near this facility
+  description_effects_battery_replenish:
+    text: バッテリーは時間の経過とともに補充される
+    textEng: Battery charge is replenished over time
+  description_effects_repair_cost:
+    text: 修理で、液状リペアの消費量が少ない
+    textEng: Repairs consume less Liquid Fix
+  description_effects_repair_replenish:
+    text: 液状リペアは時間の経過とともに補充される
+    textEng: Liquid Fix is replenished over time
+  description_effects_repair_speed:
+    text: 修理が早くなる
+    textEng: Repairs progress faster
+  description_effects_unlock:
+    text: この施設を解放して、ローカル効果を開放する
+    textEng: Liberate this facility to unlock local effects
+  description_effects_workshop_speed:
+    text: ワークショップ速度が上がった
+    textEng: Workshop speed increased
+  description_recovering:
+    text: 復活させる
+    textEng: Recovering
+  dialog_enter_combat_fail_desc:
+    text: 戦闘に必要な資源のロードに失敗しました。これは、ファイルが見つからないことが原因かもしれません。Alt+Bでバグレポートを送信し、インストールの整合性を確認してください
+    textEng: 'Failed to load resources required for entering combat. This could be caused by missing files: make sure to send the bug report using Alt+B and verify integrity of your installation'
+  dialog_enter_combat_fail_header:
+    text: 戦闘に参加できなかった
+    textEng: Failed to enter combat
+  dialog_resupply_desc:
+    text: すぐに補給しますか？プロセスには時間がかかり、基地は移動できなくなります。
+    textEng: Would you like to resupply immediately? The process will take time and the base will not be able to move.
+  dialog_resupply_header:
+    text: 補給地点へ到着した
+    textEng: Arrived to resupply point
+  event_added:
+    text: 追加した
+    textEng: Added
+  event_all_pilots_injured:
+    text: すべてのパイロットが負傷した
+    textEng: All pilots injured
+  event_all_pilots_recover:
+    text: すべてのパイロットが回復した
+    textEng: All pilots recover
+  event_current_escalation:
+    text: 現在のエスカレーション
+    textEng: Current escalation
+  event_depleted:
+    text: 枯渇した
+    textEng: Depleted
+  event_duration:
+    text: 時間
+    textEng: Duration
+  event_faction_enemy:
+    text: 敵
+    textEng: Enemy
+  event_faction_home_guard:
+    text: ホーム・ガード
+    textEng: Home Guard
+  event_friendly_province_bonus:
+    text: 友好的な県ボーナス
+    textEng: Friendly province bonus
+  event_hope:
+    text: 希望
+    textEng: Hope
+  event_hostiles_approaching:
+    text: 敵の接近
+    textEng: Hostiles approaching
+  event_insufficient:
+    text: 不十分
+    textEng: Insufficient
+  event_our_reputation:
+    text: 私たちの評判
+    textEng: Our reputation
+  event_pilot_deceased:
+    text: パイロットが消える
+    textEng: Pilot lost
+  event_pilot_deceased_desc:
+    text: 最近の状況ににより、このパイロットは基地を去った。
+    textEng: In light of recent circumstances, this pilot has left the base.
+  event_pilot_injured:
+    text: パイロットは不利な影響を受けた
+    textEng: Pilot affected
+  event_pilot_recovers:
+    text: パイロットが回復する
+    textEng: Pilot recovers
+  event_postfix_hour:
+    text: 時間
+    textEng: Hr
+  event_removed:
+    text: 排除済み
+    textEng: Removed
+  event_threat_jamming:
+    text: 妨害による脅威
+    textEng: Threat with jamming
+  event_tooltip_blocked_desc:
+    text: このオプションは現在使用できません。開放の要件については、説明を確認してください。
+    textEng: This option can't be used right now. Check the description for the requirements to unlock it.
+  event_tooltip_blocked_header:
+    text: ブロックされた
+    textEng: Blocked
+  event_unit:
+    text: ユニット
+    textEng: Unit
+  event_war_score:
+    text: 戦争スコア
+    textEng: War score
+  hotbar_ability_header_effect:
+    text: 効果
+    textEng: Effect
+  hotbar_ability_header_hotkey:
+    text: ホットキー
+    textEng: Hotkey
+  hotbar_ability_header_resource:
+    text: 必須の資源
+    textEng: Required resource
+  hotbar_power_tooltip_header:
+    text: パワー
+    textEng: Power
+  hotbar_power_tooltip_text:
+    text: モビルベースで利用可能なバッテリー電力量。 速度を上げたり、基地を覆い隠すために使うことができる。基地が通常の速度、または静止しているときに再生される。
+    textEng: The amount of battery power available to mobile base. Can be spent to boost speed or cloak the base. Regenerated when the base is at normal speed or stationary.
+  log_ability_drone_stun:
+    text: 自軍のドローンにやられ、一時的に動けなくなった。
+    textEng: Hit by our drone, temporarily immobilized!
+  log_ability_hidden_spotted:
+    text: 潜伏するものを発見した。
+    textEng: Hidden entity spotted!
+  log_ai_command_loss_controlled:
+    text: 解放地域内の部隊と連絡が取れなくなった。調査のためパトロールを出撃させる。
+    textEng: Lost contact with a squad in the controlled territory. Dispatching a patrol to investigate.
+  log_ai_command_loss_liberated:
+    text: 解放地域内の部隊と連絡が取れなくなった。
+    textEng: Lost contact with a squad in the rebel territory.
+  log_ai_command_prefix:
+    text: 最高司令部
+    textEng: High Command
+  log_ai_investigation:
+    text: 侵攻軍の部隊が調査のため出撃した。
+    textEng: Enemy squad has been dispatched to investigate!
+  log_ai_recapture_end:
+    text: 侵攻軍が再び占領した
+    textEng: Enemy recaptured site
+  log_ai_recapture_start:
+    text: 侵攻軍が再び占領を開始した
+    textEng: Enemy started recapturing site
+  log_ai_recaptured:
+    text: 侵攻軍が再び占領した
+    textEng: Enemy recaptured site
+  log_combat_contacts_friendly:
+    text: 新たな同盟ユニットが戦場に登場：{0}
+    textEng: 'New allied contacts on the field: {0}'
+  log_combat_contacts_hostile:
+    text: 新たな侵攻軍ユニットが戦場に登場：{0}
+    textEng: 'New hostile contacts on the field: {0}'
+  log_combat_contacts_mixed:
+    text: 新たなユニットが戦場に登場：{0}同盟、{1}侵攻軍
+    textEng: 'New contacts on the field: {0} friendly, {1} hostile'
+  log_combat_retreat_failed:
+    text: ユニットの撤退に失敗、有効な撤退区域内ではない
+    textEng: Unit failed to extract, not in active retreat zone
+  log_combat_retreat_success:
+    text: ユニットの撤退に成功
+    textEng: Unit extracted
+  log_equipment_blocked_left_arm:
+    text: 左腕がなければ、左の装備を取り付けることはできない。
+    textEng: Unable to attach left equipment if left arm doesn't exist.
+  log_equipment_blocked_right_arm:
+    text: 右腕がなければ、右の装備を取り付けることはできない。
+    textEng: Unable to attach right equipment if right arm doesn't exist.
+  log_equipment_blocked_shield_ultraheavy:
+    text: 現在装備している武器が超重量であるため、シールドが取り外されました。
+    textEng: Detached shield due to currently equipped weapon being ultra-heavy.
+  log_equipment_blocked_ultraheavy_shield:
+    text: 現在装備しているアイテムはシールドなので、超重量の武器を取り外しました。
+    textEng: Detached ultraheavy weapon due to currently equipped item being a shield.
+  log_header:
+    text: アップデート
+    textEng: Updates
+  log_id_site:
+    text: 現場
+    textEng: Site
+  log_id_squad:
+    text: 部隊
+    textEng: Squad
+  log_id_unknown:
+    text: 不明
+    textEng: Unknown
+  log_inventory_part_received:
+    text: パーツを受け取った
+    textEng: Received part
+  log_inventory_resource_changed:
+    text: 保管されている資源が変わった
+    textEng: Stored resource changed
+  log_inventory_resource_received:
+    text: 資源を受け取った
+    textEng: Received resource
+  log_inventory_resource_spent:
+    text: 資源を消費した
+    textEng: Spent resource
+  log_inventory_subsystem_received:
+    text: サブシステムを受け取った
+    textEng: Received subsystem
+  log_inventory_unit_received:
+    text: メカフレームを受け取った
+    textEng: Received mech frame
+  log_inventory_workshop_received:
+    text: ワークショップのプロジェクトを受け取った
+    textEng: Received workshop project
+  log_inventory_workshop_spent:
+    text: ワークショップのプロジェクトを消費した
+    textEng: Used workshop project
+  log_outcome_ejection_detected:
+    text: 射出されたパイロットの着地点を検出
+    textEng: Detected landing site of an ejected pilot
+  log_outcome_site_capture:
+    text: 解放
+    textEng: Captured
+  log_outcome_site_defeat:
+    text: 敗北
+    textEng: Defeated
+  log_power_depleted:
+    text: ベースのエネルギーが枯渇した！
+    textEng: Base power depleted!
+  log_power_recharged:
+    text: ベースのエネルギー全回復
+    textEng: Base power fully recharged
+  log_upgrade_installed:
+    text: 基地のアップグレードをインストールした
+    textEng: Base upgrade installed
+  log_upgrade_removed:
+    text: 基地アップグレードの削除完了
+    textEng: Base upgrade removed
+  log_war_battlesite_defeat:
+    text: 戦場で敵を妨害することができず、ホーム・ガードは撤退した。
+    textEng: Your failed to disrupt the enemy at the battle site; Home Guard forces are in retreat.
+  log_war_battlesite_loss:
+    text: 戦場を失い、ホーム・ガードは戦力を失った。
+    textEng: Battle site lost; Home Guard loses forces.
+  log_war_battlesite_spawn:
+    text: 新たな戦場の報告。
+    textEng: New battle site reported!
+  log_war_battlesite_victory:
+    text: 侵攻軍が戦場から撤退し、ホーム・ガードの戦力は温存された。
+    textEng: Enemy flees the battle site; Home Guard forces preserved.
+  log_war_escalation_down:
+    text: エスカレーションレベルが低下した
+    textEng: Escalation level decreased
+  log_war_escalation_up:
+    text: エスカレーションレベルが上昇した
+    textEng: Escalation level increased!
+  log_war_fob_added:
+    text: 侵攻軍は失われたすべての拠点を補うために仮設基地を設置した
+    textEng: The enemy sets up temporary bases to compensate for all their lost sites
+  log_war_fob_removal:
+    text: 侵攻軍は仮設基地を撤収した。
+    textEng: The enemy packs up their temporary bases.
+  log_war_hope_decrease:
+    text: 希望が減った
+    textEng: Hope lost
+  log_war_hope_increase:
+    text: 希望が増えた
+    textEng: Hope increased
+  log_war_lost:
+    text: 県の解放に失敗した
+    textEng: Province liberation failed!
+  log_war_objective_new:
+    text: 新たな指定目標
+    textEng: New designated objective!
+  log_war_objective_victory:
+    text: 軍事目標を無力化し、侵攻軍が弱体した
+    textEng: War objective neutralized; enemy forces weakened
+  log_war_start:
+    text: ホーム・ガードが県の解放をかけて紛争中
+    textEng: Province now being contested by the Home Guard!
+  log_war_takeover_friendly:
+    text: 県を解放した
+    textEng: Liberated with the province
+  log_war_takeover_hostile:
+    text: 県が占領された
+    textEng: Taken with the province
+  log_war_victory:
+    text: 県が解放された
+    textEng: Province liberated!
+  nav_button_base:
+    text: 基地
+    textEng: Base
+  nav_button_base_header:
+    text: 基地
+    textEng: Base
+  nav_button_briefing:
+    text: ブリーフィング
+    textEng: Briefing
+  nav_button_briefing_header:
+    text: ブリーフィング
+    textEng: Briefing
+  nav_button_inventory:
+    text: インベントリ
+    textEng: Inventory
+  nav_button_inventory_header:
+    text: インベントリ
+    textEng: Inventory
+  nav_button_pause_header:
+    text: 一時停止
+    textEng: Pause
+  nav_button_pause_menu:
+    text: 一時停止
+    textEng: Pause
+  nav_button_pilots:
+    text: パイロット
+    textEng: Pilots
+  nav_button_pilots_header:
+    text: パイロット
+    textEng: Pilots
+  nav_button_units:
+    text: ユニット
+    textEng: Units
+  nav_button_units_header:
+    text: ユニット
+    textEng: Units
+  nav_button_upgrades:
+    text: アップグレード
+    textEng: Upgrades
+  nav_button_upgrades_header:
+    text: アップグレード
+    textEng: Upgrades
+  nav_button_workshop:
+    text: ワークショップ
+    textEng: Workshop
+  nav_button_workshop_header:
+    text: ワークショップ
+    textEng: Workshop
+  nav_button_world:
+    text: 世界
+    textEng: World
+  nav_button_world_header:
+    text: 世界
+    textEng: World
+  overlay_name_resupply_point:
+    text: 補給地点
+    textEng: Resupply point
+  province_hover_suggested_level:
+    text: 推奨レベル
+    textEng: Suggested level
+  province_liberated_header:
+    text: 県が解放されました
+    textEng: Province liberated
+  province_liberated_text:
+    text: ご協力、ご尽力のおかげで、敵は県から追い出されました。ここからは、レジスタンス軍が県を保持します。
+    textEng: Thanks to your efforts, the enemy was driven out of the contested province. Resistance forces will hold it from here on out.
+  province_lost_header:
+    text: 県が失われました
+    textEng: Province lost
+  province_lost_text:
+    text: 努力したものの、敵は争っている県を保持することに成功しました。レジスタンス軍は別の試みの準備をします。
+    textEng: Despite your efforts, the enemy managed to hold onto the contested province. Resistance forces will be preparing for another attempt.
+  province_state_battle_site_header:
+    text: 戦場
+    textEng: Battle site
+  province_state_battle_site_text:
+    text: ホーム・ガードはこの場所で侵攻軍と戦っています。戦場が時間切れになる前に参戦しよう。参戦しないとホーム・ガードのスコアが減少してしまいます。
+    textEng: Home Guard is fighting the invaders at this location. Join the fight before the battle site runs out of time, or the Home Guard's war score will be reduced.
+  province_state_contested:
+    text: —  争いの県  —
+    textEng: —  Contested Province  —
+  province_state_neutral_war_score_header:
+    text: ホーム・ガードの強さ
+    textEng: Home Guard Strength
+  province_state_neutral_war_score_text:
+    text: >-
+      国に最後に残った通常戦力の強さ。ファントム・ブリゲードの分隊は小さすぎて自分達だけで県を保持することはできず、ホーム・ガードの戦力は限られていまる。だが一緒になれば、領土を支配することができる。
+
+
+      100%の強さで、エスカレートした県と争うことができる。主な目標に対する攻撃でホーム・ガードを応援し、争いの県の戦場で応援することで、勝利につながる。
+    textEng: >-
+      The strength of the country’s last remaining conventional defense force. Phantom Brigade’s squad is too small to hold provinces on our own, and the Home Guard has limited forces to fight, but together, you can take territory.
+
+
+      At 100% strength, you can contest escalated provinces. Supporting the Home Guard with strikes against key objectives and helping them at battle sites in contested provinces will lead us to victory.
+  province_state_objective_header:
+    text: 目標
+    textEng: Objective
+  province_state_objective_text:
+    text: 目標は、ホーム・ガードによって指定された最優先ターゲットで、これを取り除くと、敵が弱体化します。
+    textEng: Objectives are priority targets designated by the Home Guard. Taking them out will weaken the enemy.
+  province_state_recovering:
+    text: ホーム・ガード復活中…
+    textEng: Home Guard recovering...
+  province_state_showdown_header:
+    text: 主な目的
+    textEng: Key objective
+  province_state_showdown_text:
+    text: 州内の敵軍が消耗すると、重要目標が出現します。州を解放するためには、これらの目標を排除する必要があります。
+    textEng: Key objectives appear once the enemy forces in the province are worn down. Eliminating these objectives is necessary to liberate the province.
+  province_state_war_score_enemy_header:
+    text: 敵の強さ
+    textEng: Enemy Strength
+  province_state_war_score_enemy_text:
+    text: この抗争中の県にいる侵攻軍の強さ。この値を下げるために重要な目標を攻撃する。この値が0になると、敵は撤退し、県は解放される。
+    textEng: The strength of the invasion forces in this contested province. Strike key objectives to make this value drop. When this value reaches 0, the enemy will retreat and the province will be liberated.
+  province_state_war_score_player_header:
+    text: ホーム・ガードの強さ
+    textEng: Home Guard Strength
+  province_state_war_score_player_text:
+    text: ホーム・ガードの強さ。ホーム・ガードとは、紛争ぼっ発県全体で敵と戦っている通常の防衛軍の残存メンバーを指す。主な目標に対する攻撃でホーム・ガードを支援し、戦場で協力することで、勝利につながる。この値が0になると撤退が開始され、敵が県を保持できる。
+    textEng: The strength of the Home Guard, remnants of the conventional defense forces engaging the enemy all over this contested province. Supporting the Home Guard with strikes against key objectives and helping them at battle sites will lead us to victory. Letting this value fall to 0 will trigger a retreat, letting the enemy hold the province.
+  retreat_header:
+    text: 撤退中...
+    textEng: Retreating...
+  retreat_text:
+    text: 最寄りの補給地点へ戻る
+    textEng: Returning to nearest resupply point
+  root_button_contest_province:
+    text: >-
+      県を
+
+      争う
+    textEng: >-
+      Contest
+
+      province
+  root_button_contest_province_tooltip_text:
+    text: この県を守る戦いに、ホーム・ガードを呼ぶことができる。ブリゲードだけで県を保持することはできないが、主な目標を攻撃し、戦場の流れを変えることで、ホーム・ガードが任務を遂行しやすくなる。
+    textEng: You can call in the Home Guard to fight for this province. Your brigade can't hold a province all on its own, but striking key objectives and turning the tide at battle sites will help the Home Guard accomplish this.
+  root_button_contested_province_tooltip_header:
+    text: 争われた県
+    textEng: Province contested
+  root_button_contested_province_tooltip_text:
+    text: ホーム・ガードがこの県を奪還しようとしている。主な目標を攻撃し、重要な戦場で軍を応援することが勝利につながる！
+    textEng: The Home Guard is attempting to retake this province. Striking key objectives and helping our forces at key battle sites will lead to victory!
+  root_button_time_1x:
+    text: 時間1倍
+    textEng: Time 1x
+  root_button_time_2x:
+    text: 時間2倍
+    textEng: Time 2x
+  root_button_time_3x:
+    text: 時間3倍
+    textEng: Time 3x
+  root_button_time_pause:
+    text: 時間0倍
+    textEng: Time 0x
+  root_province_contested:
+    text: 紛争中
+    textEng: Contested
+  root_province_friendly_tooltip_header:
+    text: 友好的な県
+    textEng: Friendly province
+  root_province_friendly_tooltip_text:
+    text: 友好的な県はホーム・ガードが守っている。モビルベースは、このような県の基地で補給できる。
+    textEng: Friendly provinces are protected by the Home Guard. The mobile base can resupply at bases in provinces like these.
+  root_province_hostile:
+    text: 敵
+    textEng: Hostile
+  root_province_hostile_tooltip_header:
+    text: 敵対的な県
+    textEng: Hostile province
+  root_province_hostile_tooltip_text:
+    text: 敵対的な県は、さまざまなレベルのアクティビティ（エスカレーション）を行うことができる。エスカレーションは、モビルベースが県にあるときに上がり、モビルベースが県にないときは下がる。新しいエスカレーションレベルごとに、戦闘は高度になる。
+    textEng: Hostile provinces can have varying levels of enemy activity, otherwise known as escalation. Escalation grows when the mobile base is present in the province and drops if it leaves. Each new escalation level makes combat harder.
+  root_province_liberated:
+    text: 解放された
+    textEng: Liberated
+  root_province_stage_contest_header:
+    text: 紛争中
+    textEng: Contested
+  root_province_stage_contest_text:
+    text: ホーム・ガードの抵抗勢力は州全域で敵と交戦しています。強調表示された目標を攻撃し、敵の支配を打ち破りましょう。
+    textEng: The Home Guard resistance forces are engaging the enemy all across the province. Strike the highlighted objectives to break their grip.
+  root_province_stage_final_header:
+    text: 危機的状況
+    textEng: Critical
+  root_province_stage_final_text:
+    text: 敵軍は辛うじて持ち堪えている状態です。重要な目標を攻撃し、戦いを終わらせましょう。
+    textEng: The enemy forces are barely holding on. Strike the key objective to finish the fight.
+  root_province_stage_liberated_header:
+    text: 解放済み
+    textEng: Liberated
+  root_province_stage_liberated_text:
+    text: この州はあなたの努力によって解放されました。補給地点を利用できるようになりました。
+    textEng: This province has been liberated through your efforts. You can take advantage of the resupply points.
+  root_province_stage_raid_header:
+    text: レイド
+    textEng: Raiding
+  root_province_stage_raid_text:
+    text: 敵はあなたの存在に気づいていません。エスカレーションレベルを上げて敵をおびき出し、州をめぐって争いましょう。
+    textEng: The enemy is not alerted to your presence. Increase the escalation level to draw them out, contesting the province.
+  root_province_status_liberated:
+    text: 解放された
+    textEng: Liberated
+  root_province_status_prefix:
+    text: ステータス：
+    textEng: 'Status:'
+  root_province_status_protected:
+    text: 保護された
+    textEng: Protected
+  root_province_status_surrounded:
+    text: 包囲された
+    textEng: Surrounded
+  root_province_status_vulnerable:
+    text: 脆い
+    textEng: Vulnerable
+  roster_button_recruit_pilot:
+    text: >-
+      パイロットを
+
+      採用する
+    textEng: >-
+      Recruit
+
+      pilot
+  roster_button_resupply:
+    text: 休息と補給
+    textEng: Rest & resupply
+  roster_dialog_resupply_main_header:
+    text: 補給開始
+    textEng: Starting Resupply
+  roster_dialog_resupply_main_text:
+    text: 補給中はベースを移動できません。開始しますか？
+    textEng: The base will be unable to move while resupplying. Continue?
+  roster_dialog_resupply_recruit_header:
+    text: 採用開始
+    textEng: Starting Recruitment
+  roster_dialog_resupply_recruit_text:
+    text: 採用中はベースを移動できません。開始しますか？
+    textEng: The base will be unable to move while recruitment is underway. Continue?
+  roster_label_no_pilots:
+    text: パイロットがいません
+    textEng: No Pilots
+  roster_label_no_squad_header:
+    text: 部隊がありません
+    textEng: No Squad
+  roster_label_no_squad_text:
+    text: 補給地点へ退避することを推奨します
+    textEng: Consider retreating to resupply point
+  roster_label_unit_level:
+    text: レベル
+    textEng: Level
+  roster_label_unit_threat:
+    text: 脅威
+    textEng: Threat
+  roster_pilot_stats_header:
+    text: パイロット数
+    textEng: Pilot Count
+  roster_pilot_stats_text:
+    text: 現在のパイロット数とモビルベースに収容可能な最大パイロット数
+    textEng: Currently available pilots and the maximum pilot count allowed in the mobile base.
+  roster_repair_bar_header:
+    text: 液状リペア
+    textEng: Liquid Fix
+  roster_repair_bar_text:
+    text: オーバーワールドで使用したり、バリアアーマーを持つユニットが戦闘に持ち込んだりする修理用リソース。
+    textEng: Repair resource used in the overworld or taken into combat by units with barrier armor.
+  roster_resupply_main_header:
+    text: 無料
+    textEng: Free
+  roster_resupply_main_text:
+    text: >-
+      ベースが補給のため停止し、クルーはひと時の休息が取れる。
+
+
+      ベースは補給に10時間とられる
+
+      ベースは他のタスクを実行できない
+
+      液状リペアとエネルギー値が満タンになる
+
+      パイロットの疲弊度が回復する
+
+      ダメージを受けたすべてのユニットは回復する
+
+      ベースに最低でも二機のユニットと二人のパイロットが配備されていない場合、控えから補充される
+    textEng: >-
+      While the base stops to resupply, the crew will get some well-deserved rest.
+
+
+      - The base will be busy for 10 hours
+
+      - The base can't be occupied with another task
+
+      - Liquid Fix and energy reserves will be fully replenished
+
+      - Pilot fatigue resets
+
+      - All damaged units are repaired
+
+      - If the base doesn't have at least 2 units and pilots, they will be transferred from reserves
+  roster_resupply_options:
+    text: 補給オプション
+    textEng: Resupply Options
+  roster_resupply_recruit_header:
+    text: 物資-200
+    textEng: -200 supplies
+  roster_resupply_recruit_text:
+    text: >-
+      新しいパイロットを採用する。あなたの評判が広まれば、より多くの人が仲間になりたいと申し出てくる。中には先の大戦を戦い抜いた者もいる。他は未経験者だが、侵攻をきっかけに行動を起こす者もいる。
+
+
+      基地は5時間展開される。
+
+      パイロットは一度に一人しか採用できない。
+
+      基地は他の補給タスクを実行できない。
+    textEng: >-
+      Recruit a new pilot. As your good reputation spreads, more recruits request to join your ranks. Some fought in the last war. Others are untested but spurred to action by the invasion.
+
+
+      - The base will be deployed for 5 hours
+
+      - Only one pilot can be recruited at a time
+
+      - The base can't be busy with another resupply task
+  roster_unit_damaged_header:
+    text: 破損
+    textEng: Damaged
+  roster_unit_damaged_text:
+    text: このユニットは液状リペアを消費して修理する。物資を節約するためにユニットをクリックして修理を中止できる。
+    textEng: This unit will be repaired over time at the cost of Liquid Fix supplies. You can pause repairs to conserve supply by clicking the unit.
+  roster_unit_stats_header:
+    text: 隊のステータス
+    textEng: Roster stats
+  roster_unit_stats_text:
+    text: 自軍のユニットのトップ4の平均レベルと脅威レベルを敵部隊のレベルと比較し、戦闘前に十分な情報を得ることができます。
+    textEng: Compare the average level and threat rating of your top four units against the ratings of enemy garrisons to make an informed decision before combat.
+  roster_unit_tooltip1_level:
+    text: 平均レベル
+    textEng: Avg. level
+  roster_unit_tooltip2_threat:
+    text: 脅威
+    textEng: Threat
+  roster_unit_tooltip3_ready:
+    text: 戦闘態勢
+    textEng: Combat ready
+  roster_unit_tooltip3_ready_no:
+    text: 戦闘態勢：出撃不可
+    textEng: 'Combat ready: No'
+  roster_unit_tooltip3_ready_yes:
+    text: 戦闘態勢：出撃可
+    textEng: 'Combat ready: Yes'
+  roster_unit_tooltip4_issues_critical:
+    text: 重要事項
+    textEng: Critical issues
+  roster_unit_tooltip4_issues_warning:
+    text: 警告
+    textEng: Warnings
+  roster_unit_tooltip5_equipment:
+    text: 装備
+    textEng: Equipment
+  roster_unit_tooltip6_join:
+    text: および
+    textEng: '&'
+  selection_branch_tooltip_prefix:
+    text: 侵攻軍の支部。異なる支部が、異なる装備とユニット構成を使用する。
+    textEng: Branch of invasion forces. Different branches use different equipment and unit compositions.
+  selection_branch_unknown_description:
+    text: この軍閥に関する情報はない
+    textEng: No information available about this faction
+  selection_branch_unknown_name:
+    text: 未知の支部
+    textEng: Unknown branch
+  selection_contact_count_prefix:
+    text: 近くの接触先：
+    textEng: 'Nearby contacts:'
+  selection_description_fallback:
+    text: この目標に関する記述はない
+    textEng: No description available for this target
+  selection_description_objective:
+    text: 目標
+    textEng: Objective
+  selection_description_recaptured:
+    text: 奪還した
+    textEng: Recaptured
+  selection_difficulty_level_0:
+    text: ベリーイージー
+    textEng: Very Easy
+  selection_difficulty_level_1:
+    text: イージー
+    textEng: Easy
+  selection_difficulty_level_2:
+    text: ノーマル
+    textEng: Medium
+  selection_difficulty_level_3:
+    text: ハード
+    textEng: Hard
+  selection_difficulty_level_4:
+    text: ベリーハード
+    textEng: Very Hard
+  selection_difficulty_level_5:
+    text: インポッシブル
+    textEng: Impossible
+  selection_difficulty_tooltip_text:
+    text: 敵のおおよその難易度。
+    textEng: Approximate difficulty of the enemy.
+  selection_early_description:
+    text: ブリゲードが派遣する偵察隊。長い移動でボロボロになり、メンテナンスが必要。
+    textEng: The scout squad dispatched by the Brigade. Worn down by a long journey and in need of maintenance.
+  selection_early_mech_count:
+    text: 有効なメカ2体
+    textEng: 2 active mechs
+  selection_early_squad:
+    text: 部隊
+    textEng: Squad
+  selection_garrison_combat_capable:
+    text: 戦闘可
+    textEng: Combat capable
+  selection_garrison_description_empty:
+    text: 軍事活動なし
+    textEng: No military activity
+  selection_garrison_description_occupied:
+    text: 現場の敵ユニット
+    textEng: Hostile units on site
+  selection_garrison_description_protected:
+    text: 現場の味方
+    textEng: Allies on site
+  selection_garrison_status_empty:
+    text: 空
+    textEng: Empty
+  selection_garrison_status_occupied:
+    text: 占領された
+    textEng: Occupied
+  selection_garrison_status_protected:
+    text: 保護された
+    textEng: Protected
+  selection_header_hovered:
+    text: 浮動された
+    textEng: Hovered
+  selection_header_selected:
+    text: 選択された
+    textEng: Selected
+  selection_inspect:
+    text: 点検
+    textEng: Inspect
+  selection_location_unknown_description:
+    text: 未知の接触先
+    textEng: Unknown contact
+  selection_location_unknown_name:
+    text: ???
+    textEng: ???
+  selection_outdated:
+    text: 旧式
+    textEng: Outdated
+  selection_resupply_header:
+    text: 基地
+    textEng: Home base
+  selection_resupply_hint:
+    text: 補給利用可能
+    textEng: Resupply available
+  selection_threat_prefix_level:
+    text: レベル：
+    textEng: 'Level:'
+  selection_threat_prefix_rating:
+    text: TR
+    textEng: TR
+  text_description_scan:
+    text: 詳細なスキャンを取得するために、しばらくの間、接触先を範囲内に保ちます。
+    textEng: Keep contact in range for a time to acquire detailed scan.
+  tutorial_button_continue:
+    text: 次へ
+    textEng: Continue
+  weather_l025_name:
+    text: 晴れ
+    textEng: Clear
+  weather_l025_name_neg:
+    text: 晴れ
+    textEng: Clear
+  weather_l050_name:
+    text: 曇り
+    textEng: Cloudy
+  weather_l050_name_neg:
+    text: 曇り
+    textEng: Cloudy
+  weather_l066_name:
+    text: 小雨
+    textEng: Light Rain
+  weather_l066_name_neg:
+    text: 軽い降雪
+    textEng: Light Snowfall
+  weather_l083_name:
+    text: 雨
+    textEng: Medium Rain
+  weather_l083_name_neg:
+    text: 降雪
+    textEng: Snowfall
+  weather_l100_name:
+    text: 大雨
+    textEng: Heavy Rain
+  weather_l100_name_neg:
+    text: 吹雪
+    textEng: Snow Storm
+collection: 

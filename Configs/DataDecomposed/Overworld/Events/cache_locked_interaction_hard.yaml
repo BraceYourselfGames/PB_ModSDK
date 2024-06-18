@@ -1,0 +1,215 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 5
+groupConflicts: 
+chance: 1
+chanceModifier:
+  entryOnBase: 1
+  entryOnTarget: 1
+  completionOnBase: 1
+  completionOnTarget: 1
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  main:
+    reviewed: true
+    image: event_locked_door
+    textVariants: 
+    options:
+    - shared: false
+      key: force
+    - shared: false
+      key: tools
+    - shared: true
+      key: locked_alarm
+    - shared: true
+      key: locked_bomb
+    - shared: true
+      key: leave
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self: 
+      target:
+        tagsMethod: RequireAll
+        tags:
+        - tag: cache
+          not: false
+        - tag: unique_training_hiddenchache_workshop
+          not: true
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_locked
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: world_easy
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: world_medium
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        ai: 
+        resources: 
+        pilots: 
+        units:
+          present: false
+        faction: 
+        resupplyPoint: 
+      province: 
+      action:
+        actionMethod: RequireAll
+        actions:
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: breakin
+          tags: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges:
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_hard
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+options:
+  force:
+    priority: 1
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !StartAction
+      data:
+        key: breakin
+        owner: Source
+        ownerKey: 
+        target: Target
+        targetKey: 
+        visible: true
+        durationOverride:
+          f: 11
+        durationMultiplier: 
+    steps: 
+  tools:
+    priority: 2
+    colorFromStep: false
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Positive
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check:
+      self: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_locked
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Add
+        key: world_unlocked
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartOverworldEvent
+      eventKeys:
+      - cache_interaction_unlocked
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: true
+        checkStrict: false
+        offset: true
+        value: -110
+    steps: 
+actions:
+  resetCompletionOnOwner: []
+  resetCompletionOnTarget: []
+actorsSites: 
+actorsUnits: {}
+actorsPilots: {}
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

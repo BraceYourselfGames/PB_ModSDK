@@ -1,0 +1,63 @@
+hidden: false
+parents:
+- key: facility
+tags: []
+textName: {}
+textDesc: {}
+textIdentifierGroup: 
+image: t_world_crop_base3
+icon: 
+core: 
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_RadioTower
+movement: 
+ranges:
+  vision: 100
+  observerData: 
+detection:
+  pingInterval: 0.35
+  detectionIncrementMin: 0.1
+  detectionIncrementMax: 0.51
+  detectionDecayTime: 0.8333333
+intel:
+  detected: false
+  recognized: false
+  inVisibleRange: false
+units: 
+scenarios: 
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_facility: false
+    outpost_02: true
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat:
+  - outcomeVictory: true
+    outcomeDefeat: false
+    caseEarly: true
+    caseTotal: true
+    rewards:
+      liberation_reward: 1
+  blocks:
+    liberation_reward:
+    - resources:
+        supplies:
+          amountMin: 100
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts: 
+      subsystems: 
+interactionEffects: 
+salvageBudget: 
+escalation: 
+threatLevel: 
+battleSite: 

@@ -1,0 +1,64 @@
+hidden: false
+parents:
+- key: facility
+tags: []
+textName: {}
+textDesc: 
+textIdentifierGroup: site_settlement_city
+image: t_world_crop_factory2
+icon: 
+core: 
+factionBranch: 
+visual: 
+movement: 
+ranges: 
+detection: 
+intel: 
+units: 
+scenarios:
+  tags: {}
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_facility: false
+    context_facility_powerplant: true
+    type_main: true
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat:
+  - outcomeVictory: true
+    outcomeDefeat: false
+    caseEarly: true
+    caseTotal: true
+    rewards:
+      liberation_reward: 1
+  blocks:
+    liberation_reward:
+    - resources:
+        components_r2:
+          amountMin: 8
+          amountMax: 1
+          amountRandom: false
+        components_r3:
+          amountMin: 4
+          amountMax: 5
+          amountRandom: false
+        supplies:
+          amountMin: 100
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts: 
+      subsystems: 
+interactionEffects:
+  effectsOnEntry: 
+  effectsOverTime:
+  - Battery
+salvageBudget: 
+escalation: 
+threatLevel: 
+battleSite: 

@@ -1,0 +1,36 @@
+hidden: false
+rewarded: true
+textSourceName:
+  source: Hardpoint
+  key: internal_aux_top_core
+textSourceSubtitle:
+  source: Shared
+  key: subsystem_sub
+textSourceDesc:
+  source: Hardpoint
+  key: internal_aux_top_core
+icon: s_icon_l32_system_internal_reactor
+tags:
+- group_utility
+- type_subsystem
+duration:
+  f: 2
+basePartRequirements: 
+baseStatRequirements: 
+inputCharges: 
+inputResources:
+- key: supplies
+  amount: 40
+outputParts: 
+outputSubsystems:
+- count: 1
+  tagsUsed: true
+  key: 
+  tags:
+    internal_aux_core: true
+outputUnits: 
+outputResources: 
+outputFunctions: 
+variantLinkPrimary:
+  key: sub_spc_core
+variantLinkSecondary: 

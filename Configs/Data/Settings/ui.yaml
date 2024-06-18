@@ -1,0 +1,1424 @@
+textures:
+  pilot_int_fallback_friendly:
+    path: Content/UI/Textures/t_pilot_portrait_03_commander
+  pilot_int_fallback_enemy:
+    path: Content/UI/Textures/t_pilot_portrait_03
+  pilot_missing:
+    path: Content/UI/Textures/t_pilot_portrait_04
+  pilot_deceased:
+    path: Content/UI/Textures/t_pilot_portrait_05
+  pilot_int_tutorial_commander:
+    path: Content/UI/Textures/t_pilot_portrait_03_commander
+  pilot_int_tutorial_cadet:
+    path: Content/UI/Textures/t_pilot_portrait_02_cadet
+  pilot_int_tutorial_lt:
+    path: Content/UI/Textures/t_pilot_portrait_02
+  portrait_dropship:
+    path: Content/UI/Textures/t_portrait_dropship
+  portrait_mobilebase:
+    path: Content/UI/Textures/t_portrait_mobilebase
+  portrait_ally:
+    path: Content/UI/Textures/t_portrait_ally
+  save_state_combat:
+    path: Content/UI/Textures/save_preview_combat2
+  save_state_overworld:
+    path: Content/UI/Textures/save_preview_overworld2
+  save_state_basecrawler:
+    path: Content/UI/Textures/save_preview_base
+  pilot_concussed:
+    path: Content/UI/Textures/t_pilot_portrait_07_conc
+  portrait_hq:
+    path: Content/UI/Textures/t_portrait_hq
+  pilot_int_enemy_elite:
+    path: Content/UI/Textures/t_pilot_portrait_03_elite
+  pilot_int_enemy_commander:
+    path: Content/UI/Textures/t_pilot_portrait_03_commander_enemy
+unitPatterns: 
+projectionCollision:
+  scanColorMin:
+    r: 1
+    g: 0.8288236
+    b: 0.6196079
+    a: 1
+  scanColorMax:
+    r: 0.6431373
+    g: 0.4172549
+    b: 0.1411765
+    a: 1
+  rimColorMin:
+    r: 1
+    g: 0.9082353
+    b: 0.7960784
+    a: 1
+  rimColorMax:
+    r: 1
+    g: 0.6364706
+    b: 0.1921569
+    a: 1
+projectionFriendly:
+  scanColorMin:
+    r: 0.2039215
+    g: 0.7030364
+    b: 0.7254902
+    a: 1
+  scanColorMax:
+    r: 0
+    g: 0.3137347
+    b: 0.5568628
+    a: 1
+  rimColorMin:
+    r: 0
+    g: 0.7121754
+    b: 1
+    a: 1
+  rimColorMax:
+    r: 0
+    g: 1
+    b: 0.8998492
+    a: 1
+projectionFriendlySelected:
+  scanColorMin:
+    r: 0.2039215
+    g: 0.7030364
+    b: 0.7254902
+    a: 1
+  scanColorMax:
+    r: 0.4103774
+    g: 0.7425591
+    b: 1
+    a: 1
+  rimColorMin:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  rimColorMax:
+    r: 0.9103774
+    g: 1
+    b: 0.990862
+    a: 1
+projectionEnemy:
+  scanColorMin:
+    r: 1
+    g: 0.6432961
+    b: 0.6179245
+    a: 1
+  scanColorMax:
+    r: 0.6415094
+    g: 0.1994468
+    b: 0.1422214
+    a: 1
+  rimColorMin:
+    r: 1
+    g: 0.8642125
+    b: 0.7971699
+    a: 1
+  rimColorMax:
+    r: 1
+    g: 0.2905672
+    b: 0.1933962
+    a: 1
+projectionEnemySelected:
+  scanColorMin:
+    r: 1
+    g: 0.63091
+    b: 0.2862746
+    a: 1
+  scanColorMax:
+    r: 1
+    g: 0.3129053
+    b: 0.2216981
+    a: 1
+  rimColorMin:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  rimColorMax:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+colors:
+  unitInfo_AccentFriendly:
+    r: 0.2745098
+    g: 0.6431373
+    b: 0.8313726
+    a: 1
+  unitInfo_AccentEnemy:
+    r: 0.8235295
+    g: 0.3176471
+    b: 0.2588235
+    a: 1
+  unitInfo_BlueprintIntact:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  unitInfo_BlueprintBroken:
+    r: 1
+    g: 0.3254717
+    b: 0.3254717
+    a: 1
+  unitInfo_IntegrityColorIdle:
+    r: 0.5019608
+    g: 0.5019608
+    b: 0.5019608
+    a: 1
+  unitInfo_IntegrityColorRepair:
+    r: 0.7882734
+    g: 0.8867924
+    b: 0.3388216
+    a: 1
+  unitInfo_IntegrityColorDamage:
+    r: 1
+    g: 0.3254717
+    b: 0.3254717
+    a: 1
+  unitInfo_BarrierColorIdle:
+    r: 0.4538537
+    g: 0.5849056
+    b: 0.4055714
+    a: 1
+  unitInfo_BarrierColorRepair:
+    r: 0.5065816
+    g: 0.8584906
+    b: 0.360404
+    a: 1
+  unitInfo_BarrierColorDamage:
+    r: 1
+    g: 0.7189543
+    b: 0.3254902
+    a: 1
+  checkSeverity_ErrorIcon:
+    r: 1
+    g: 0.3921569
+    b: 0.3921569
+    a: 1
+  checkSeverity_ErrorBackground:
+    r: 0.5843138
+    g: 0.2313726
+    b: 0.2313726
+    a: 1
+  checkSeverity_WarningBackground:
+    r: 0.5843138
+    g: 0.4078431
+    b: 0.2313725
+    a: 1
+  checkSeverity_WarningIcon:
+    r: 1
+    g: 0.6960784
+    b: 0.3921568
+    a: 1
+  checkSeverity_InfoIcon:
+    r: 0.699
+    g: 0.699
+    b: 0.699
+    a: 1
+  checkSeverity_InfoBackground:
+    r: 0.2352941
+    g: 0.2352941
+    b: 0.2352941
+    a: 1
+  unitView_OutlineSelected:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  unitView_OutlinePainted:
+    r: 1
+    g: 0.4009434
+    b: 0.4009434
+    a: 1
+  rating_1_fill:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.5019608
+  rating_1_highlight:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.5019608
+  rating_2_highlight:
+    r: 0.8238557
+    g: 1
+    b: 0.4858491
+    a: 1
+  rating_3_highlight:
+    r: 0.504717
+    g: 0.8278804
+    b: 1
+    a: 1
+  rating_4_highlight:
+    r: 0.7868131
+    g: 0.5330188
+    b: 1
+    a: 1
+  rating_2_fill:
+    r: 0.602382
+    g: 0.6980392
+    b: 0.4188235
+    a: 0.8
+  rating_3_fill:
+    r: 0.264774
+    g: 0.4892297
+    b: 0.6603774
+    a: 1
+  rating_4_fill:
+    r: 0.5680142
+    g: 0.2671324
+    b: 0.8207547
+    a: 1
+  rating_5_highlight:
+    r: 1
+    g: 0.7106774
+    b: 0.4292453
+    a: 1
+  rating_5_fill:
+    r: 0.9245283
+    g: 0.5553521
+    b: 0.1962442
+    a: 1
+  unitInfo_AccentFriendlyLocked:
+    r: 0.745283
+    g: 0.745283
+    b: 0.745283
+    a: 1
+  unitInfo_AccentFriendlyDisposable:
+    r: 0.378916
+    g: 0.6132076
+    b: 0.4535804
+    a: 1
+  loadout_r1_v1:
+    r: 0.8584906
+    g: 0.8584906
+    b: 0.8584906
+    a: 1
+  loadout_r1_v2:
+    r: 0.3962264
+    g: 0.3962264
+    b: 0.3962264
+    a: 1
+  loadout_r2_v2:
+    r: 0.3333333
+    g: 0.4039216
+    b: 0.2980392
+    a: 1
+  loadout_r3_v2:
+    r: 0.2011392
+    g: 0.3167239
+    b: 0.3773585
+    a: 1
+  loadout_r2_v1:
+    r: 0.7660131
+    g: 0.8862745
+    b: 0.7058824
+    a: 1
+  loadout_r3_v1:
+    r: 0.6367924
+    g: 0.8727816
+    b: 1
+    a: 1
+  loadout_r1_v0:
+    r: 0.688
+    g: 0.688
+    b: 0.688
+    a: 1
+  loadout_r2_v0:
+    r: 0.5582258
+    g: 1
+    b: 0.34
+    a: 1
+  loadout_r3_v0:
+    r: 0
+    g: 0.6559141
+    b: 1
+    a: 1
+  loadout_empty_hardpoint:
+    r: 0.4
+    g: 0.4
+    b: 0.4
+    a: 1
+  unitOverlayTintEnemy:
+    r: 1
+    g: 0.5176471
+    b: 0.5176471
+    a: 1
+  unitOverlayTintFriendly:
+    r: 0.4858491
+    g: 0.8286163
+    b: 1
+    a: 1
+  unitOverlayTintAllied:
+    r: 0.4292453
+    g: 1
+    b: 0.6194969
+    a: 1
+  unitOverlayTintLocked:
+    r: 0.6345674
+    g: 0.7901389
+    b: 0.8679245
+    a: 1
+  loadout_r0_v0:
+    r: 0.688
+    g: 0.688
+    b: 0.688
+    a: 1
+  loadout_r0_v1:
+    r: 0.8584906
+    g: 0.8584906
+    b: 0.8584906
+    a: 1
+  loadout_r0_v2:
+    r: 0.3962264
+    g: 0.3962264
+    b: 0.3962264
+    a: 1
+  rating_0_fill:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.5019608
+  rating_0_highlight:
+    r: 1
+    g: 1
+    b: 1
+    a: 0.5019608
+  unitOverlayTintObjective:
+    r: 0.9647059
+    g: 0.6924837
+    b: 0.4980392
+    a: 1
+  scenario_mood_positive:
+    r: 0.4470588
+    g: 0.8156862
+    b: 1
+    a: 1
+  scenario_mood_negative:
+    r: 1
+    g: 0.6498039
+    b: 0.4470588
+    a: 1
+  scenario_mood_neutral:
+    r: 0.4470588
+    g: 1
+    b: 0.6221568
+    a: 1
+factionColors:
+  Default:
+    friendly:
+      r: 0.1607843
+      g: 0.4588236
+      b: 0.6117647
+      a: 1
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 1
+    enemy:
+      r: 0.7254902
+      g: 0.2745098
+      b: 0.2235294
+      a: 1
+    enemySelected:
+      r: 1
+      g: 0.3254902
+      b: 0.2313726
+      a: 1
+  DetectionRange:
+    friendly:
+      r: 0.2766109
+      g: 0.4429458
+      b: 0.5283019
+      a: 1
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 1
+    enemy:
+      r: 0.4823529
+      g: 0.2662745
+      b: 0.254902
+      a: 1
+    enemySelected:
+      r: 0.603
+      g: 0.1762268
+      b: 0.153765
+      a: 1
+  DetectionRangePatrol:
+    friendly:
+      r: 0.2766109
+      g: 0.4429458
+      b: 0.5283019
+      a: 1
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 1
+    enemy:
+      r: 0.4823529
+      g: 0.3117647
+      b: 0.254902
+      a: 1
+    enemySelected:
+      r: 1
+      g: 0.375
+      b: 0.25
+      a: 1
+  Flag:
+    friendly:
+      r: 0.1607843
+      g: 0.4588236
+      b: 0.6117647
+      a: 1
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 1
+    enemy:
+      r: 0.7254902
+      g: 0.2745098
+      b: 0.2235294
+      a: 1
+    enemySelected:
+      r: 0.8588236
+      g: 0.2941177
+      b: 0.2941177
+      a: 1
+  Line_Path_Highlight_Future:
+    friendly:
+      r: 0.3294118
+      g: 0.5147059
+      b: 0.5764706
+      a: 0.5803922
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 0.5754717
+      g: 0.4630561
+      b: 0.3284532
+      a: 0.5803922
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Path_Highlight_Present:
+    friendly:
+      r: 0.2028747
+      g: 0.664114
+      b: 0.9150943
+      a: 1
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 0.4832662
+      b: 0.345098
+      a: 1
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Path_Highlight_TimePlanning:
+    friendly:
+      r: 0.1145426
+      g: 0.4956168
+      b: 0.6226415
+      a: 0.6156863
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 0.1404496
+      b: 0
+      a: 0.572549
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Path_Painted:
+    friendly:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Path_Planned_Future:
+    friendly:
+      r: 0.4705882
+      g: 0.5705882
+      b: 0.6039216
+      a: 0.3764706
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2588235
+    enemy:
+      r: 0.6039216
+      g: 0.4861438
+      b: 0.4705882
+      a: 0.3764706
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.2588235
+  Line_Path_Planned_Present:
+    friendly:
+      r: 0.323015
+      g: 0.592957
+      b: 0.839
+      a: 0.427451
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 0.2905672
+      b: 0.1933962
+      a: 0.4352941
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Target_Painted:
+    friendly:
+      r: 0.2313725
+      g: 0.8078431
+      b: 1
+      a: 1
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 0.3265193
+      b: 0.2311321
+      a: 1
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Target_Planned:
+    friendly:
+      r: 0.2313725
+      g: 0.8078431
+      b: 1
+      a: 1
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 0.3265193
+      b: 0.2311321
+      a: 0.5019608
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Line_Wait_Painted:
+    friendly:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    friendlySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    enemySelected:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+  Outline:
+    friendly:
+      r: 0.3215686
+      g: 0.5921569
+      b: 0.8392158
+      a: 1
+    friendlySelected:
+      r: 0.495283
+      g: 0.7591125
+      b: 1
+      a: 1
+    enemy:
+      r: 1
+      g: 0.2901961
+      b: 0.1921569
+      a: 1
+    enemySelected:
+      r: 1
+      g: 0.4985116
+      b: 0.4292453
+      a: 1
+  OverworldHologram:
+    friendly:
+      r: 0.2633054
+      g: 0.4116026
+      b: 0.5754716
+      a: 1
+    friendlySelected:
+      r: 0
+      g: 0.6144983
+      b: 0.9811321
+      a: 1
+    enemy:
+      r: 0.5754716
+      g: 0.06544577
+      b: 0
+      a: 1
+    enemySelected:
+      r: 0.6698113
+      g: 0.3001513
+      b: 0.3001513
+      a: 1
+  OverworldHologramEmpty:
+    friendly:
+      r: 0.5076095
+      g: 0.539844
+      b: 0.5754717
+      a: 1
+    friendlySelected:
+      r: 0.495283
+      g: 0.5987156
+      b: 0.6603774
+      a: 1
+    enemy:
+      r: 0.5943396
+      g: 0.426691
+      b: 0.4008989
+      a: 1
+    enemySelected:
+      r: 0.6698113
+      g: 0.5845051
+      b: 0.5845051
+      a: 1
+  OverworldOverlay:
+    friendly:
+      r: 0.5351104
+      g: 0.5871752
+      b: 0.6132076
+      a: 1
+    friendlySelected:
+      r: 0.4103774
+      g: 0.8006911
+      b: 1
+      a: 1
+    enemy:
+      r: 0.5566038
+      g: 0.52592
+      b: 0.5224724
+      a: 1
+    enemySelected:
+      r: 1
+      g: 0.4335692
+      b: 0.3820755
+      a: 1
+  OverworldSelection:
+    friendly:
+      r: 0.5640353
+      g: 0.5965317
+      b: 0.6132076
+      a: 1
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 1
+    enemy:
+      r: 0.7169812
+      g: 0.6288646
+      b: 0.6189036
+      a: 1
+    enemySelected:
+      r: 0.8588236
+      g: 0.2941177
+      b: 0.2941177
+      a: 1
+  ProvinceBorder:
+    friendly:
+      r: 0.1607843
+      g: 0.4588236
+      b: 0.6117647
+      a: 1
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 1
+    enemy:
+      r: 0.7254902
+      g: 0.2745098
+      b: 0.2235294
+      a: 1
+    enemySelected:
+      r: 1
+      g: 0.3254902
+      b: 0.2313726
+      a: 1
+  Range:
+    friendly:
+      r: 0.5242079
+      g: 0.6249758
+      b: 0.7169812
+      a: 0.2509804
+    friendlySelected:
+      r: 0.2745098
+      g: 0.6431373
+      b: 0.8313726
+      a: 0.5019608
+    enemy:
+      r: 0.7924528
+      g: 0.5464324
+      b: 0.5121039
+      a: 0.2509804
+    enemySelected:
+      r: 1
+      g: 0.3254902
+      b: 0.2313726
+      a: 0.5019608
+workshopDisplayed: true
+combatIsolinesDisplayed: true
+combatMultiTargetSupport: false
+minifiedStatsVisible: false
+overlayThresholdHeat: 0.05
+overlayThresholdPilotHealth: 0.05
+overlayThresholdStagger: 0.05
+overlayOverworldSwitchHeight: 300
+overlayOverworldSwitchHeights:
+  x: 125
+  y: 300
+overlayOverworldFadeDistancesClose:
+  x: 500
+  y: 800
+overlayOverworldFadeDistancesFar:
+  x: 1200
+  y: 1800
+overlayOverworldSwitchDistanceProvince:
+  x: 1250
+  y: 2000
+overlayOverworldSwitchDistanceEntity:
+  x: 800
+  y: 1800
+tooltipPivotOffsets:
+  BottomLeft:
+    x: 24
+    y: 12
+  TopLeft:
+    x: 24
+    y: -40
+  BottomRight:
+    x: -24
+    y: 12
+  TopRight:
+    x: -24
+    y: -40
+modeConfigs:
+  Path_Drawing:
+    color:
+      r: 0.28
+      g: 0.5589063
+      b: 0.7
+      a: 1
+    icon: s_icon_sm_attack
+    overlayUsed: true
+    inWorld: true
+    inTimeline: false
+  Wait_Drawing:
+    color:
+      r: 0.2792157
+      g: 0.5572582
+      b: 0.6980392
+      a: 1
+    icon: s_icon_sm_attack
+    overlayUsed: false
+    inWorld: true
+    inTimeline: false
+  Time_Placement:
+    color:
+      r: 0.4247285
+      g: 0.5943396
+      b: 0.2551175
+      a: 1
+    icon: s_icon_m_time_unlock
+    overlayUsed: true
+    inWorld: false
+    inTimeline: true
+  Targeting_Units:
+    color:
+      r: 0.8
+      g: 0.32
+      b: 0.32
+      a: 1
+    icon: s_icon_sm_attack
+    overlayUsed: true
+    inWorld: true
+    inTimeline: false
+  Targeting_Locations:
+    color:
+      r: 0.8018868
+      g: 0.5748289
+      b: 0.2382965
+      a: 1
+    icon: s_icon_sm_attack
+    overlayUsed: true
+    inWorld: true
+    inTimeline: false
+  Simulating:
+    color:
+      r: 0.3867925
+      g: 0.3867925
+      b: 0.3867925
+      a: 1
+    icon: s_icon_m_time_unlock
+    overlayUsed: false
+    inWorld: false
+    inTimeline: false
+  AI_Planning:
+    color:
+      r: 0.8313726
+      g: 0.2745098
+      b: 0.2745098
+      a: 1
+    icon: s_icon_m_time_unlock
+    overlayUsed: false
+    inWorld: false
+    inTimeline: false
+  Replay:
+    color:
+      r: 0.2863564
+      g: 0.6132076
+      b: 0.3804499
+      a: 1
+    icon: s_icon_sm_reload2
+    overlayUsed: false
+    inWorld: false
+    inTimeline: false
+fallbackColor:
+  r: 1
+  g: 1
+  b: 1
+  a: 1
+colorBase:
+  basisMain:
+    r: 1
+    g: 0
+    b: 0.25
+    a: 1
+  hueMain: 26.7
+  basisHover:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  factorHover: 0.25
+  basisPress:
+    r: 0
+    g: 0
+    b: 0
+    a: 1
+  factorPress: 0.25
+  basisLock:
+    r: 0.25
+    g: 0.25
+    b: 0.25
+    a: 1
+  factorLock: 0.85
+mainMenuTracks:
+  mus_menu_maintitle_1:
+    trackBPM: 0
+    cues:
+    - bar: 5
+      time: 7.869
+      duration: 7.869
+    - bar: 9
+      time: 15.738
+      duration: 9.836
+    - bar: 14
+      time: 25.574
+      duration: 7.869
+    - bar: 18
+      time: 33.443
+      duration: 7.868
+    - bar: 22
+      time: 41.311
+      duration: 7.869
+    - bar: 26
+      time: 49.18
+      duration: 5.902
+    - bar: 29
+      time: 55.082
+      duration: 7.869
+    - bar: 33
+      time: 62.951
+      duration: 7.869
+    - bar: 37
+      time: 70.82
+      duration: 7.869
+    - bar: 41
+      time: 78.689
+      duration: 7.868
+    - bar: 45
+      time: 86.557
+      duration: 7.869
+    - bar: 49
+      time: 94.426
+      duration: 7.869
+    - bar: 53
+      time: 102.295
+      duration: 7.869
+    - bar: 57
+      time: 110.164
+      duration: 7.869
+    - bar: 61
+      time: 118.033
+      duration: 7.869
+    - bar: 65
+      time: 125.902
+      duration: 14
+  mus_menu_maintitle_2:
+    trackBPM: 86
+    cues:
+    - bar: 5
+      time: 11.163
+      duration: 11.163
+    - bar: 9
+      time: 22.326
+      duration: 8.372
+    - bar: 12
+      time: 30.698
+      duration: 13.953
+    - bar: 17
+      time: 44.651
+      duration: 11.163
+    - bar: 21
+      time: 55.814
+      duration: 11.163
+    - bar: 25
+      time: 66.977
+      duration: 5.581
+    - bar: 27
+      time: 72.558
+      duration: 5.582
+    - bar: 29
+      time: 78.14
+      duration: 5.581
+    - bar: 31
+      time: 83.721
+      duration: 5.581
+    - bar: 33
+      time: 89.302
+      duration: 5.582
+    - bar: 35
+      time: 94.884
+      duration: 5.581
+    - bar: 37
+      time: 100.465
+      duration: 5.582
+    - bar: 39
+      time: 106.047
+      duration: 5.581
+    - bar: 41
+      time: 111.628
+      duration: 5.581
+    - bar: 43
+      time: 117.209
+      duration: 5.582
+    - bar: 45
+      time: 122.791
+      duration: 5.581
+    - bar: 47
+      time: 128.372
+      duration: 8.372
+    - bar: 50
+      time: 136.744
+      duration: 5.582
+    - bar: 52
+      time: 142.326
+      duration: 5.581
+    - bar: 54
+      time: 147.907
+      duration: 5.581
+    - bar: 56
+      time: 153.488
+      duration: 5.582
+    - bar: 58
+      time: 159.07
+      duration: 5.581
+    - bar: 60
+      time: 164.651
+      duration: 5.582
+    - bar: 62
+      time: 170.233
+      duration: 5.581
+    - bar: 64
+      time: 175.814
+      duration: 5.581
+    - bar: 66
+      time: 181.395
+      duration: 5.582
+    - bar: 68
+      time: 186.977
+      duration: 5.581
+    - bar: 70
+      time: 192.558
+      duration: 5.582
+    - bar: 72
+      time: 198.14
+      duration: 5.581
+    - bar: 74
+      time: 203.721
+      duration: 5.581
+    - bar: 76
+      time: 209.302
+      duration: 14
+  mus_menu_maintitle_3:
+    trackBPM: 86
+    cues:
+    - bar: 3
+      time: 4.8
+      duration: 4.8
+    - bar: 5
+      time: 9.6
+      duration: 4.8
+    - bar: 7
+      time: 14.4
+      duration: 4.8
+    - bar: 9
+      time: 19.2
+      duration: 4.8
+    - bar: 11
+      time: 24
+      duration: 4.8
+    - bar: 13
+      time: 28.8
+      duration: 4.8
+    - bar: 15
+      time: 33.6
+      duration: 4.8
+    - bar: 17
+      time: 38.4
+      duration: 4.8
+    - bar: 19
+      time: 43.2
+      duration: 4.8
+    - bar: 21
+      time: 48
+      duration: 4.8
+    - bar: 23
+      time: 52.8
+      duration: 4.8
+    - bar: 25
+      time: 57.6
+      duration: 4.8
+    - bar: 27
+      time: 62.4
+      duration: 4.8
+    - bar: 29
+      time: 67.2
+      duration: 4.8
+    - bar: 31
+      time: 72
+      duration: 4.8
+    - bar: 33
+      time: 76.8
+      duration: 4.8
+    - bar: 35
+      time: 81.6
+      duration: 4.8
+    - bar: 37
+      time: 86.4
+      duration: 4.8
+    - bar: 39
+      time: 91.2
+      duration: 4.8
+    - bar: 41
+      time: 96
+      duration: 4.8
+    - bar: 43
+      time: 100.8
+      duration: 4.8
+    - bar: 45
+      time: 105.6
+      duration: 4.8
+    - bar: 47
+      time: 110.4
+      duration: 4.8
+    - bar: 49
+      time: 115.2
+      duration: 4.8
+    - bar: 51
+      time: 120
+      duration: 4.8
+    - bar: 53
+      time: 124.8
+      duration: 4.8
+    - bar: 55
+      time: 129.6
+      duration: 4.8
+    - bar: 57
+      time: 134.4
+      duration: 4.8
+    - bar: 59
+      time: 139.2
+      duration: 4.8
+    - bar: 61
+      time: 144
+      duration: 4.8
+    - bar: 63
+      time: 148.8
+      duration: 4.8
+    - bar: 65
+      time: 153.6
+      duration: 4.8
+    - bar: 67
+      time: 158.4
+      duration: 4.8
+    - bar: 69
+      time: 163.2
+      duration: 4.8
+    - bar: 71
+      time: 168
+      duration: 4.8
+    - bar: 73
+      time: 172.8
+      duration: 4.8
+    - bar: 75
+      time: 177.6
+      duration: 4.8
+    - bar: 77
+      time: 182.4
+      duration: 4.8
+    - bar: 79
+      time: 187.2
+      duration: 7.2
+    - bar: 82
+      time: 194.4
+      duration: 14
+  mus_menu_maintitle_4:
+    trackBPM: 86
+    cues:
+    - bar: 5
+      time: 7.5
+      duration: 7.5
+    - bar: 9
+      time: 15
+      duration: 7.5
+    - bar: 13
+      time: 22.5
+      duration: 7.5
+    - bar: 17
+      time: 30
+      duration: 7.5
+    - bar: 21
+      time: 37.5
+      duration: 7.5
+    - bar: 25
+      time: 45
+      duration: 7.5
+    - bar: 29
+      time: 52.5
+      duration: 7.5
+    - bar: 33
+      time: 60
+      duration: 7.5
+    - bar: 37
+      time: 67.5
+      duration: 7.5
+    - bar: 41
+      time: 75
+      duration: 7.5
+    - bar: 45
+      time: 82.5
+      duration: 7.5
+    - bar: 49
+      time: 90
+      duration: 7.5
+    - bar: 53
+      time: 97.5
+      duration: 7.5
+    - bar: 57
+      time: 105
+      duration: 7.5
+    - bar: 61
+      time: 112.5
+      duration: 7.5
+    - bar: 65
+      time: 120
+      duration: 7.5
+    - bar: 69
+      time: 127.5
+      duration: 7.5
+    - bar: 73
+      time: 135
+      duration: 7.5
+    - bar: 77
+      time: 142.5
+      duration: 7.5
+    - bar: 81
+      time: 150
+      duration: 9.375
+    - bar: 86
+      time: 159.375
+      duration: 7.5
+    - bar: 90
+      time: 166.875
+      duration: 7.5
+    - bar: 94
+      time: 174.375
+      duration: 5.625
+    - bar: 97
+      time: 180
+      duration: 14
+efficiencyPrediction:
+  slices: 300
+  distanceLimit: 300
+  boundaryThreshold: 0.2
+  optimumThreshold: 0.8
+  normalization: true
+  coverageUsed: true
+  coverageInv: true
+  coverageWeightOffset: true
+  decalFade: true
+debugDrawing:
+  guidanceDelay: 0.5
+  fontSize: 10
+  lineThicknessDefault: 0.1
+  lineHighlightThicknessMul: 0.75
+  lineHighlightIntensity: 4
+  lineHighlightInterpolant: 0.3
+  lineSizeProjectile: 0.35
+  timePersistent: 5
+  lineLengthTargetPoint: 1
+  showGuidanceData: false
+  showProjectileCollisions: false
+  showBeamReflections: false
+  showTargetingDirectional: false
+  showTargetingInterpolation: false
+  showTargetingScatter: false
+  showTargetingAim: false
+  colorDefaultBackground:
+    r: 0.5019608
+    g: 0.5019608
+    b: 0.5019608
+    a: 0.1058824
+  colorDefaultFront:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+  colorDefaultRed:
+    r: 1
+    g: 0.3
+    b: 0.3
+    a: 1
+  colorDefaultGreen:
+    r: 0.4715687
+    g: 1
+    b: 0.3
+    a: 1
+  colorDefaultBlue:
+    r: 0.3
+    g: 0.5755908
+    b: 1
+    a: 1
+  colorInputYaw:
+    r: 0.4
+    g: 0.9
+    b: 0.55
+    a: 1
+  colorInputPitch:
+    r: 0.9
+    g: 0.2
+    b: 0.4
+    a: 1
+  colorInputThrottle:
+    r: 0.4
+    g: 0.7
+    b: 0.9
+    a: 0.5019608
+  colorInputVelocityComp:
+    r: 0.3749999
+    g: 0.25
+    b: 1
+    a: 0.5019608
+  colorInputFuseProximity:
+    r: 0.9
+    g: 0.7
+    b: 0.3
+    a: 1
+  colorProjectileCollision:
+    r: 0.9
+    g: 0.2
+    b: 0.4
+    a: 1
+  colorProjFiring:
+    r: 2
+    g: 2
+    b: 2
+    a: 1
+  colorProjProjectileFriendly:
+    r: 1.333333
+    g: 2.321569
+    b: 2.996078
+    a: 1
+  colorProjProjectileEnemy:
+    r: 2.996078
+    g: 0.6745098
+    b: 0.6745098
+    a: 1
+equipmentRatingSuffixes:
+  0: ' [99]-[ff]'
+  2: ' [ceffb9][99]+[ff]'
+  3: ' [99ddff][99]++[ff]'
+iconStateProgressTime: s_icon_l16_context_time4
+iconStateProgressDestruction: s_icon_l16_context_point2

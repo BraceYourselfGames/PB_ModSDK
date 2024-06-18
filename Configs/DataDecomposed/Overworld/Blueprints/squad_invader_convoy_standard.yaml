@@ -1,0 +1,177 @@
+hidden: false
+parents:
+- key: squad_invader_convoy
+tags: []
+textName: {}
+textDesc: {}
+textIdentifierGroup: squad_invader_convoy
+image: t_world_crop_squad2
+icon: s_icon_overlay_type_squad0
+core: 
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Squad_Convoy_Normal
+movement: 
+ranges: 
+detection: 
+intel: 
+units: {}
+scenarios:
+  tags:
+    type_entity_convoy_cargo: true
+scenarioUnits: 
+scenarioChanges: 
+areas: 
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat:
+  - outcomeVictory: true
+    outcomeDefeat: false
+    caseEarly: true
+    caseTotal: true
+    rewards:
+      battery: 1
+  blocks:
+    battery:
+    - resources:
+        battery:
+          amountMin: 150
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts: 
+      subsystems: 
+    obj_capture_loot:
+    - resources: 
+      projects:
+      - countMin: 1
+        countMax: 2
+        countRandom: true
+        tagsUsed: true
+        key: 
+        tags:
+          type_frame: false
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_random
+        preset: 
+        tagsUsed: true
+        tags:
+          part_melee: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q3
+        preset: 
+        tagsUsed: true
+        tags:
+          body_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems: 
+    - resources: 
+      projects:
+      - countMin: 1
+        countMax: 2
+        countRandom: true
+        tagsUsed: true
+        key: 
+        tags:
+          type_frame: false
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_random
+        preset: 
+        tagsUsed: true
+        tags:
+          part_melee: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q3
+        preset: 
+        tagsUsed: true
+        tags:
+          item_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems: 
+    - resources: 
+      projects:
+      - countMin: 1
+        countMax: 2
+        countRandom: true
+        tagsUsed: true
+        key: 
+        tags:
+          type_frame: false
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q3
+        preset: 
+        tagsUsed: true
+        tags:
+          item_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q3
+        preset: 
+        tagsUsed: true
+        tags:
+          body_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems: 
+    - resources: 
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q3
+        preset: 
+        tagsUsed: true
+        tags:
+          body_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems:
+      - ratingRange: 
+        blueprint: 
+        tagsUsed: true
+        tags:
+          internal_aux: true
+        countMin: 2
+        countMax: 1
+        countRandom: false
+interactionEffects: 
+salvageBudget: 
+escalation: 
+threatLevel:
+  baseThreatLevel: 55
+battleSite: 

@@ -1,0 +1,49 @@
+priority: 1
+colorFromStep: false
+colorCustom: false
+colorKey: positive_primary
+color:
+  r: 1
+  g: 1
+  b: 1
+  a: 1
+optionMood: Positive
+textVariants: 
+completing: true
+checkPreventsUnlock: false
+resourceChangePreventsUnlock: false
+stepByPriority: false
+stepFallbackMode: None
+stepFallbackKey: 
+injection: 
+check: 
+hopeChange: 
+warScoreChange: 
+combat: 
+memoryChanges:
+- visible: true
+  context: SourceProvince
+  actorKey: 
+  provinceKey: 
+  changes:
+  - change: Add
+    key: province_liberation_acknowledged
+    value: 1
+    valueFromMemory: false
+    valueFromMemoryKey: 
+functions:
+- !ModifyPlayerPilotsHealth
+  offset: 70
+  actorKey: ''
+  allowDeath: false
+- !StartAction
+  data:
+    key: parade
+    owner: Source
+    ownerKey: 
+    target: None
+    targetKey: 
+    visible: true
+    durationOverride: 
+    durationMultiplier: 
+steps: 

@@ -1,0 +1,20 @@
+!BehaviorTree
+m_treeRoot: !BTComposite_Sequence
+  m_dynamic: true
+  m_children:
+  - !BTCondition_CheckRangeTo
+    m_targetSource: !VariableSource_BlackboardTarget {}
+    m_checkType: LessOrEqualTo
+    m_checkThreshold: 40
+    Comment: ''
+  - !BTCondition_CheckUtilityCounter
+    m_checkType: LessOrEqualTo
+    m_checkThreshold: 3
+    Comment: ''
+  - !BTAction_RetreatFromTarget
+    m_targetSource: !VariableSource_BlackboardTarget {}
+    m_searchNSteps: 5
+    m_threshold: !VariableSource_IndividualTimeOffset
+      m_actionTypeTimeBuffer: AttackMain
+    Comment: ''
+  Comment: ''

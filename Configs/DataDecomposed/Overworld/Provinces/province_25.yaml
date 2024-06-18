@@ -1,0 +1,206 @@
+used: true
+warVFXContainerIndex: 25
+alwaysVulnerable: false
+minLevelOffset: 0
+maxLevelOffset: 2
+escalationDisabled: false
+warDisabled: false
+warAutomated: true
+warDefeatScoreDecay: true
+factionBranch: branch_specops
+position:
+  x: 310.9824
+  y: 9.337349
+  z: 1428.66
+warObjectivesOld: false
+warObjectivesDecisiveRequired: 1
+warObjectivesDecisive:
+- tagsUsed: false
+  tags: 
+  blueprintKey: squad_boss_cruiser_executor
+  nameInternalSuffix: obj_boss
+neighbourData:
+  province_26:
+    allowActorSearch: true
+    allowConvoys: true
+    allowCounterAttacks: true
+    allowWar: true
+border:
+- x: 189.1841
+  y: 0
+  z: 1672.302
+- x: 453.2509
+  y: 0.00994873
+  z: 1679.295
+- x: 519.5921
+  y: 1.564941
+  z: 1654.394
+- x: 499.7536
+  y: 2.037872
+  z: 1382.427
+- x: 495.2599
+  y: 0
+  z: 1348.882
+- x: 422.132
+  y: 0
+  z: 1182.936
+- x: 251.475
+  y: 0
+  z: 1143.845
+- x: 126.9029
+  y: 0
+  z: 1181.801
+- x: -98.2771
+  y: 1.907349E-06
+  z: 1447.776
+spawns:
+  core_military:
+  - position:
+      x: 294.944
+      y: 3.272827
+      z: 1505.275
+  core_logistic:
+  - position:
+      x: 409.9198
+      y: 3.500214
+      z: 1484.383
+  core_civilian:
+  - position:
+      x: 217.6205
+      y: 2.997452
+      z: 1340.233
+  core_bridge:
+  - position:
+      x: 188.3374
+      y: 3.145248
+      z: 1232.586
+  fortification:
+  - position:
+      x: 446.1215
+      y: 3.164841
+      z: 1550.571
+  general_dynamic:
+  - position:
+      x: 345.0797
+      y: 3.500214
+      z: 1424.043
+  - position:
+      x: 319.1286
+      y: 3.000183
+      z: 1349.415
+  - position:
+      x: 256.4495
+      y: 3.000183
+      z: 1282.239
+  - position:
+      x: 235.7804
+      y: 2.954758
+      z: 1451.904
+  - position:
+      x: 433.4745
+      y: 3.000183
+      z: 1406.39
+  - position:
+      x: 302.2961
+      y: 3.261368
+      z: 1594.015
+  - position:
+      x: 222.3543
+      y: 3.000183
+      z: 1526.529
+  - position:
+      x: 381.9384
+      y: 3.000183
+      z: 1362.402
+  - position:
+      x: 263.0822
+      y: 3.000183
+      z: 1385.489
+  - position:
+      x: 369.4212
+      y: 3.110748
+      z: 1533.275
+  - position:
+      x: 177.2615
+      y: 3.367203
+      z: 1293.385
+  battlesite:
+  - position:
+      x: 213.8096
+      y: 3.500229
+      z: 1278.691
+  - position:
+      x: 343.4335
+      y: 3.000198
+      z: 1392.046
+  - position:
+      x: 269.9662
+      y: 3.000198
+      z: 1561.64
+  - position:
+      x: 357.9525
+      y: 3.500214
+      z: 1477.011
+  - position:
+      x: 291.7703
+      y: 3.500214
+      z: 1449.823
+  - position:
+      x: 463.0675
+      y: 3.000183
+      z: 1451.513
+  - position:
+      x: 473.2636
+      y: 3.500214
+      z: 1519.1
+  - position:
+      x: 266.8529
+      y: 3.000183
+      z: 1333.844
+  obj_decisive:
+  - position:
+      x: 338.1019
+      y: 3.500214
+      z: 1510.873
+entities:
+- spawnGroup: core_military
+  profile: base
+  countMin: 1
+  countMax: 2
+  countRandom: false
+- spawnGroup: core_civilian
+  profile: settlement_city
+  countMin: 1
+  countMax: 1
+  countRandom: false
+- spawnGroup: core_logistic
+  profile: facility_logistics
+  countMin: 1
+  countMax: 1
+  countRandom: false
+- spawnGroup: general_dynamic
+  profile: cache_generic
+  countMin: 0
+  countMax: 1
+  countRandom: true
+- spawnGroup: fortification
+  profile: fort
+  countMin: 1
+  countMax: 1
+  countRandom: false
+- spawnGroup: general_dynamic
+  profile: outpost
+  countMin: 0
+  countMax: 1
+  countRandom: true
+- spawnGroup: general_dynamic
+  profile: facility
+  countMin: 0
+  countMax: 1
+  countRandom: true
+startingMemory: 
+biomeFilter:
+  tags:
+    sand: true
+scenarioChanges: 
+tagFilterPatrol: 

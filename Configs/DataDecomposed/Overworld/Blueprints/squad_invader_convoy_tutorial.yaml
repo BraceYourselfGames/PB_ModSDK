@@ -1,0 +1,136 @@
+hidden: false
+parents: []
+tags:
+- size_tiny
+- training
+- squad
+- squad_invader
+textName: {}
+textDesc: {}
+textIdentifierGroup: 
+image: t_world_crop_squad2
+icon: s_icon_overlay_type_squad0
+core:
+  inventory: true
+  selectable: true
+  capturable: false
+  recapturable: true
+  interactable: true
+  interactionRange: 2.5
+  destroyOnDefeat: true
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: false
+  generated: true
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Invaders
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Squad_Convoy
+movement: 
+ranges:
+  vision: 32
+  observerData: 
+detection:
+  pingInterval: 0.3083333
+  detectionIncrementMin: 0.2
+  detectionIncrementMax: 0.51
+  detectionDecayTime: 0.8333333
+intel:
+  detected: false
+  recognized: false
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    context_tutorial: true
+    type_raid: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_infrastructure: true
+    type_main: true
+production: 
+ai:
+  isAggressive: false
+  activeWhenUntracked: false
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat:
+  - outcomeVictory: true
+    outcomeDefeat: false
+    caseEarly: true
+    caseTotal: true
+    rewards:
+      battery: 1
+  blocks:
+    battery:
+    - resources:
+        battery:
+          amountMin: 150
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts: 
+      subsystems: 
+    obj_capture_loot:
+    - resources: 
+      projects: []
+      parts:
+      - levelMin: 0
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r0_training
+        preset: body_set_knox_heavy_arm
+        tagsUsed: false
+        tags:
+          rating_1: true
+          wpn_primary: true
+        countMin: 2
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r0_training
+        preset: body_set_knox_heavy_top
+        tagsUsed: false
+        tags:
+          rating_1: true
+          wpn_primary: true
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r0_training
+        preset: body_set_knox_heavy_bottom
+        tagsUsed: false
+        tags:
+          rating_1: true
+          wpn_primary: true
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      subsystems: 
+interactionEffects: 
+salvageBudget:
+  f: 40
+escalation:
+  escalationGain: 15
+  escalationGainWarMultiplier: 1
+  warScoreDealt: 20
+  warScoreRestored: 0
+  warObjectiveCandidate: false
+threatLevel:
+  baseThreatLevel: 30
+battleSite: 

@@ -1,0 +1,245 @@
+id:
+  nameSerial: -1
+  nameIndex: -1
+  nameOverride: Protector
+  role: 
+identifiable: 
+blueprint: unit_mech
+pilotName: pb_pilot_04
+faction: Phantoms
+parentEntityName: squad_mobilebase
+livery: civ_industrial_a
+salvageable: false
+combatStatus: 
+eventMemory: 
+eventMemoryInt: 
+eventMemoryFloat: 
+parts:
+  core:
+    version: -1
+    rating: 0
+    serial: 7
+    preset: body_set_elbrus_medium_top_r1
+    livery: 
+    integrity: 1
+    barrier: 1
+    salvageable: false
+    inventoryAdded: false
+    sockets:
+    - core
+    hardpoints:
+    - external_top_head
+    - external_top_pelvis
+    - external_top_torso
+    - internal_aux_top_core
+    systems:
+      external_top_head:
+        serial: 15
+        blueprint: armor_elbrus_m_head
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_top_pelvis:
+        serial: 16
+        blueprint: armor_elbrus_m_pelvis
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_top_torso:
+        serial: 17
+        blueprint: armor_elbrus_m_torso
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      internal_aux_top_core:
+        serial: 18
+        blueprint: internal_aux_core_standard
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+  secondary:
+    version: -1
+    rating: 0
+    serial: 8
+    preset: body_set_elbrus_medium_bottom_r1
+    livery: 
+    integrity: 1
+    barrier: 1
+    salvageable: false
+    inventoryAdded: false
+    sockets:
+    - secondary
+    hardpoints:
+    - external_bottom_left_lower
+    - external_bottom_left_upper
+    - external_bottom_right_lower
+    - external_bottom_right_upper
+    systems:
+      external_bottom_left_lower:
+        serial: 19
+        blueprint: armor_elbrus_m_leg
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_bottom_left_upper:
+        serial: 20
+        blueprint: armor_elbrus_m_thigh
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_bottom_right_lower:
+        serial: 21
+        blueprint: armor_elbrus_m_leg
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_bottom_right_upper:
+        serial: 22
+        blueprint: armor_elbrus_m_thigh
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+  optional_left:
+    version: -1
+    rating: 0
+    serial: 9
+    preset: body_set_elbrus_medium_arm_r1
+    livery: 
+    integrity: 1
+    barrier: 1
+    salvageable: false
+    inventoryAdded: false
+    sockets:
+    - optional_left
+    - optional_right
+    hardpoints:
+    - external_arm_lower
+    - external_arm_upper
+    systems:
+      external_arm_lower:
+        serial: 23
+        blueprint: armor_elbrus_m_forearm
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_arm_upper:
+        serial: 24
+        blueprint: armor_elbrus_m_shoulder
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+  optional_right:
+    version: -1
+    rating: 0
+    serial: 10
+    preset: body_set_elbrus_medium_arm_r1
+    livery: 
+    integrity: 1
+    barrier: 1
+    salvageable: false
+    inventoryAdded: false
+    sockets:
+    - optional_left
+    - optional_right
+    hardpoints:
+    - external_arm_lower
+    - external_arm_upper
+    systems:
+      external_arm_lower:
+        serial: 25
+        blueprint: armor_elbrus_m_forearm
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+      external_arm_upper:
+        serial: 26
+        blueprint: armor_elbrus_m_shoulder
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+  equipment_right:
+    version: -1
+    rating: 0
+    serial: 11
+    preset: wpn_shotgun_heavy_01_r1
+    livery: 
+    integrity: 1
+    barrier: 1
+    salvageable: false
+    inventoryAdded: false
+    sockets:
+    - equipment_right
+    hardpoints:
+    - internal_main_equipment
+    - perk_1
+    systems:
+      internal_main_equipment:
+        serial: 27
+        blueprint: wpn_main_shotgun_02
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false
+  equipment_left:
+    version: -1
+    rating: 0
+    serial: 12
+    preset: wpn_shield_05_r1
+    livery: 
+    integrity: 1
+    barrier: 1
+    salvageable: false
+    inventoryAdded: false
+    sockets:
+    - equipment_left
+    hardpoints:
+    - internal_main_equipment
+    - perk_1
+    systems:
+      internal_main_equipment:
+        serial: 28
+        blueprint: wpn_main_shield_05
+        livery: 
+        level: 1
+        destroyed: false
+        fused: true
+        salvageable: false
+        inventoryAdded: false

@@ -1,0 +1,476 @@
+timeLastSync: 63811495874
+localized: true
+exportMode: LinePerKeySplit
+name: Combat (Stats)
+description: This text is used in debriefing, when the player is presented with the details of the last combat encounter. The game tracks a bunch of metrics (stats) and presents them in blocks with a big header and a clarification in a subtitle (hence the text split in two).
+splits: []
+entries:
+  actions_planned__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Actions Planned
+  actions_planned__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  actions_planned__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  damage_inflicted_per_second__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Damage Inflicted
+  damage_inflicted_per_second__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side (average per second)
+  damage_inflicted_per_second__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  damage_inflicted_total__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Damage Inflicted
+  damage_inflicted_total__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  damage_inflicted_total__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: A sum of every successful hit on enemy units.
+  damage_taken_total__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Damage Taken
+  damage_taken_total__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  damage_taken_total__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: A sum of all damage sustained by friendly units.
+  duration__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Duration
+  duration__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: In real time
+  duration__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_intended_hit_rate__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Hit Rate
+  enemy_intended_hit_rate__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  enemy_intended_hit_rate__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_unintended_hit_rate__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Friendly Fire Rate
+  enemy_unintended_hit_rate__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  enemy_unintended_hit_rate__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_units_avoided__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Units Avoided
+  enemy_units_avoided__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Total enemies avoided
+  enemy_units_avoided__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_units_count__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Units Count
+  enemy_units_count__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  enemy_units_count__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_units_level__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Units Level
+  enemy_units_level__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  enemy_units_level__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_units_lost__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Units Lost
+  enemy_units_lost__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  enemy_units_lost__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  enemy_units_threat__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Enemy Units Threat
+  enemy_units_threat__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  enemy_units_threat__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  friendly_intended_hit_rate__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Hit Rate
+  friendly_intended_hit_rate__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  friendly_intended_hit_rate__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  friendly_unintended_hit_rate__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Friendly Fire Rate
+  friendly_unintended_hit_rate__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  friendly_unintended_hit_rate__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  friendly_units_count__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Friendly Unit Count
+  friendly_units_count__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  friendly_units_count__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  friendly_units_level__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Friendly Units Level
+  friendly_units_level__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  friendly_units_level__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  friendly_units_lost__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Units Lost
+  friendly_units_lost__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  friendly_units_lost__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  friendly_units_threat__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Friendly Units Threat
+  friendly_units_threat__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  friendly_units_threat__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  hit_rate__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Hit Rate
+  hit_rate__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On our side
+  hit_rate__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  level_points_destroyed__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Level Points Destroyed
+  level_points_destroyed__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Total points destroyed
+  level_points_destroyed__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  loot_parts__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Parts
+  loot_parts__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Detected on site
+  loot_parts__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  loot_subsystems__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Subsystems
+  loot_subsystems__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Detected on site
+  loot_subsystems__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  loot_supplies__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Supplies
+  loot_supplies__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Detected on site
+  loot_supplies__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  move_distance__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Distance
+  move_distance__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Total traveled
+  move_distance__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  thruster_power__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  thruster_power__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  thruster_power__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+  units_destroyed__header:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: Units Destroyed
+  units_destroyed__subtitle:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: On enemy side
+  units_destroyed__tooltip:
+    color: 
+    noteDev: 
+    noteWriter: 
+    temp: false
+    text: ''
+collection: 

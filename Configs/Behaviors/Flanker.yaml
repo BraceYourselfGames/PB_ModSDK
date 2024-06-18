@@ -1,0 +1,431 @@
+!BehaviorTree
+m_treeRoot: !BTComposite_Parallel
+  m_policy: RequireOne
+  m_children:
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Selector
+      m_dynamic: true
+      m_children:
+      - !BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTCondition_CheckIsUsingEquipment
+          m_value: false
+          Comment: ''
+        - !BTComposite_Selector
+          m_dynamic: false
+          m_children:
+          - !BTCondition_CheckCriticalHealth
+            m_checkType: LessOrEqualTo
+            m_checkThreshold: 0.2
+            Comment: ''
+          - !BTCondition_CheckCanUseWeapon
+            m_value: false
+            Comment: ''
+          Comment: ''
+        - !BTAction_IdleRandom
+          m_durationMin: 0
+          m_durationMax: 4
+          Comment: ''
+        - !BTComposite_Sequence
+          m_dynamic: true
+          m_children:
+          - !BTComposite_Selector
+            m_dynamic: false
+            m_children:
+            - !BTCondition_CheckCriticalHealth
+              m_checkType: LessOrEqualTo
+              m_checkThreshold: 0.2
+              Comment: ''
+            - !BTCondition_CheckCanUseWeapon
+              m_value: false
+              Comment: ''
+            Comment: ''
+          - !BTAction_UseEquipment
+            m_actionType: Eject
+            m_targetIDSource: 
+            Comment: ''
+          Comment: ''
+        Comment: Subtree_EjectCheck
+      - !BTComposite_Sequence
+        m_dynamic: true
+        m_children:
+        - !BTCondition_CheckIsUsingEquipment
+          m_value: false
+          Comment: ''
+        - !BTCondition_CheckHeat
+          m_checkType: GreaterThan
+          m_checkThreshold: 0
+          Comment: ''
+        - !BTCondition_CheckActionHeat
+          m_actionType: AttackMain
+          m_checkType: GreaterOrEqualTo
+          m_thresholdType: HeatMax
+          Comment: ''
+        - !BTAction_Idle
+          m_duration: 1
+          Comment: ''
+        Comment: Overheated check
+      - !BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTComposite_Selector
+          m_dynamic: false
+          m_children:
+          - !BTCondition_CheckIsRaining
+            Comment: ''
+          - !BTAction_Idle
+            m_duration: 1
+            Comment: ''
+          Comment: ''
+        - !BTAction_Idle
+          m_duration: 0.5
+          Comment: ''
+        - !BTDecorator_Repeat
+          m_repeatMode: RepeatUntil
+          m_repeatUntilCondition: Success
+          m_timesToRun: 0
+          m_taskChild: !BTComposite_Sequence
+            m_dynamic: false
+            m_children:
+            - !Condition_CheckFriendlyFireLOS
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: GreaterThan
+              m_checkThreshold: 15
+              Comment: ''
+            - !BTCondition_CheckLOSRangeToTarget
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: GreaterThan
+              m_checkThreshold: 15
+              Comment: ''
+            Comment: ''
+          Comment: LOS check
+        - !BTComposite_Selector
+          m_dynamic: false
+          m_children:
+          - !Condition_CheckMaxEngagementRange
+            m_targetSource: !VariableSource_BlackboardTarget {}
+            m_checkType: GreaterThan
+            m_multiplier: 1.5
+            m_addend: 90
+            Comment: ''
+          - !BTComposite_Sequence
+            m_dynamic: false
+            m_children:
+            - !BTCondition_CheckActionEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: LessOrEqualTo
+              m_rangeType: Max
+              m_actionType: AttackMain
+              Comment: ''
+            - !BTCondition_CheckActionEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: GreaterOrEqualTo
+              m_rangeType: Min
+              m_actionType: AttackMain
+              Comment: ''
+            - !BTComposite_Sequence
+              m_dynamic: false
+              m_children:
+              - !BTComposite_Selector
+                m_dynamic: false
+                m_children:
+                - !BTCondition_CheckActionAllowsMovement
+                  m_actionType: AttackMain
+                  m_value: true
+                  Comment: ''
+                - !BTDecorator_Repeat
+                  m_repeatMode: RepeatUntil
+                  m_repeatUntilCondition: Success
+                  m_timesToRun: 0
+                  m_taskChild: !BTCondition_CheckIsMoving
+                    m_value: false
+                    Comment: ''
+                  Comment: ''
+                Comment: ''
+              - !BTAction_UseEquipment
+                m_actionType: AttackMain
+                m_targetIDSource: !VariableSource_BlackboardTargetID {}
+                Comment: ''
+              Comment: Subtree_DoAttack
+            Comment: Subtree_AttackCheckActionSequence
+          - !BTComposite_Sequence
+            m_dynamic: false
+            m_children:
+            - !BTCondition_CheckActionEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: LessOrEqualTo
+              m_rangeType: Max
+              m_actionType: AttackSecondary
+              Comment: ''
+            - !BTCondition_CheckActionEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: GreaterOrEqualTo
+              m_rangeType: Min
+              m_actionType: AttackSecondary
+              Comment: ''
+            - !BTComposite_Sequence
+              m_dynamic: false
+              m_children:
+              - !BTComposite_Selector
+                m_dynamic: false
+                m_children:
+                - !BTCondition_CheckActionAllowsMovement
+                  m_actionType: AttackSecondary
+                  m_value: true
+                  Comment: ''
+                - !BTDecorator_Repeat
+                  m_repeatMode: RepeatUntil
+                  m_repeatUntilCondition: Success
+                  m_timesToRun: 0
+                  m_taskChild: !BTCondition_CheckIsMoving
+                    m_value: false
+                    Comment: ''
+                  Comment: ''
+                Comment: ''
+              - !BTAction_UseEquipment
+                m_actionType: AttackSecondary
+                m_targetIDSource: !VariableSource_BlackboardTargetID {}
+                Comment: ''
+              Comment: Subtree_DoAttack
+            Comment: Subtree_AttackCheckActionSequence
+          - !BTComposite_Sequence
+            m_dynamic: false
+            m_children:
+            - !BTCondition_CheckLastActionType
+              m_actionType: Guard
+              m_checkValue: false
+              Comment: ''
+            - !BTCondition_CheckActionEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: LessThan
+              m_rangeType: Min
+              m_actionType: AttackMain
+              Comment: ''
+            - !BTCondition_CheckActionEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: LessThan
+              m_rangeType: Min
+              m_actionType: AttackSecondary
+              Comment: ''
+            - !BTAction_UseEquipment
+              m_actionType: Guard
+              m_targetIDSource: !VariableSource_BlackboardTargetID {}
+              Comment: ''
+            Comment: Subtree_GuardCheckActionSequence
+          - !BTComposite_Sequence
+            m_dynamic: false
+            m_children:
+            - !BTComposite_Selector
+              m_dynamic: false
+              m_children:
+              - !BTCondition_CheckActionAllowsMovement
+                m_actionType: AttackMain
+                m_value: true
+                Comment: ''
+              - !BTDecorator_Repeat
+                m_repeatMode: RepeatUntil
+                m_repeatUntilCondition: Success
+                m_timesToRun: 0
+                m_taskChild: !BTCondition_CheckIsMoving
+                  m_value: false
+                  Comment: ''
+                Comment: ''
+              Comment: ''
+            - !BTAction_UseEquipment
+              m_actionType: AttackMain
+              m_targetIDSource: !VariableSource_BlackboardTargetID {}
+              Comment: ''
+            Comment: Subtree_DoAttack
+          Comment: Attacks
+        Comment: ''
+      Comment: ''
+    Comment: Fire control
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Sequence
+      m_dynamic: false
+      m_children:
+      - !Action_SetMovementRanges
+        m_rangeTypeMin: Min
+        m_rangeTypeMax: Avg
+        m_actionType: AttackMain
+        Comment: ''
+      - !Action_ClampMovementRanges
+        m_min: 15
+        m_max: 3.402823E+38
+        Comment: ''
+      Comment: ''
+    Comment: Movement Ranges
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Sequence
+      m_dynamic: false
+      m_children:
+      - !BTCondition_CheckActionAvailable
+        m_actionType: Dash
+        m_value: true
+        Comment: ''
+      - !BTComposite_Parallel
+        m_policy: RequireOne
+        m_children:
+        - !BTDecorator_Repeat
+          m_repeatMode: RepeatUntil
+          m_repeatUntilCondition: Success
+          m_timesToRun: 0
+          m_taskChild: !BTComposite_Sequence
+            m_dynamic: true
+            m_children:
+            - !BTCondition_CheckHeat
+              m_checkType: LessOrEqualTo
+              m_checkThreshold: 0
+              Comment: ''
+            - !Condition_CheckMaxEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: GreaterThan
+              m_multiplier: 1.5
+              m_addend: 90
+              Comment: ''
+            Comment: ''
+          Comment: ''
+        - !BTDecorator_Repeat
+          m_repeatMode: RepeatUntil
+          m_repeatUntilCondition: Success
+          m_timesToRun: 0
+          m_taskChild: !BTComposite_Sequence
+            m_dynamic: true
+            m_children:
+            - !BTCondition_CheckHeat
+              m_checkType: LessOrEqualTo
+              m_checkThreshold: 0
+              Comment: ''
+            - !Condition_CheckMaxEngagementRange
+              m_targetSource: !VariableSource_BlackboardTarget {}
+              m_checkType: GreaterThan
+              m_multiplier: 1
+              m_addend: 90
+              Comment: ''
+            - !BTAction_Idle
+              m_duration: 1
+              Comment: ''
+            Comment: ''
+          Comment: ''
+        - !BTAction_IdleRandom
+          m_durationMin: 5
+          m_durationMax: 15
+          Comment: ''
+        Comment: ''
+      - !BTDecorator_Repeat
+        m_repeatMode: RepeatUntil
+        m_repeatUntilCondition: Success
+        m_timesToRun: 0
+        m_taskChild: !Action_DashToTarget
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          Comment: ''
+        Comment: ''
+      Comment: ''
+    Comment: Dash control
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Selector
+      m_dynamic: true
+      m_children:
+      - !BTCondition_CheckCurrentActionAllowsMovement
+        m_value: false
+        Comment: ''
+      - !BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTCondition_CheckIsStrafing
+          m_value: false
+          Comment: ''
+        - !BTCondition_CheckMovementRange
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_checkType: LessOrEqualTo
+          m_rangeType: Min
+          Comment: ''
+        - !BTCondition_CheckUtilityCounter
+          m_checkType: LessOrEqualTo
+          m_checkThreshold: 3
+          Comment: ''
+        - !BTAction_RetreatFromTarget
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_searchNSteps: 15
+          m_threshold: !VariableSource_IndividualTimeOffset
+            m_actionTypeTimeBuffer: AttackMain
+          Comment: ''
+        Comment: ''
+      - !BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTCondition_CheckIsStrafing
+          m_value: false
+          Comment: ''
+        - !BTCondition_CheckRangeTo
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_checkType: GreaterThan
+          m_checkThreshold: 15
+          Comment: ''
+        - !BTCondition_CheckActionEngagementRange
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_checkType: GreaterThan
+          m_rangeType: Avg
+          m_actionType: AttackMain
+          Comment: ''
+        - !BTCondition_CheckUtilityCounter
+          m_checkType: LessOrEqualTo
+          m_checkThreshold: 3
+          Comment: ''
+        - !BTAction_MoveApproach
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_blockerSearchNSteps: 10
+          m_threshold: !VariableSource_IndividualTimeOffset
+            m_actionTypeTimeBuffer: AttackMain
+          Comment: ''
+        Comment: ''
+      - !BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTCondition_CheckRangeTo
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_checkType: GreaterThan
+          m_checkThreshold: 15
+          Comment: ''
+        - !BTCondition_CheckUtilityCounter
+          m_checkType: LessOrEqualTo
+          m_checkThreshold: 3
+          Comment: ''
+        - !BTAction_MoveStrafe
+          m_targetSource: !VariableSource_BlackboardTarget {}
+          m_blockerSearchNSteps: 10
+          m_threshold: !VariableSource_IndividualTimeOffset
+            m_actionTypeTimeBuffer: AttackMain
+          Comment: ''
+        Comment: ''
+      - !BTCondition_CheckRangeTo
+        m_targetSource: !VariableSource_BlackboardTarget {}
+        m_checkType: LessOrEqualTo
+        m_checkThreshold: 15
+        Comment: ''
+      - !BTCondition_CheckUtilityCounter
+        m_checkType: LessOrEqualTo
+        m_checkThreshold: 3
+        Comment: ''
+      - !BTAction_MoveApproach
+        m_targetSource: !VariableSource_BlackboardTarget {}
+        m_blockerSearchNSteps: 10
+        m_threshold: !VariableSource_IndividualTimeOffset
+          m_actionTypeTimeBuffer: AttackMain
+        Comment: ''
+      Comment: ''
+    Comment: Movement control
+  Comment: ''

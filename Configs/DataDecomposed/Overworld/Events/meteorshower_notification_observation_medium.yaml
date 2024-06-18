@@ -1,0 +1,191 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.8
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  main:
+    reviewed: true
+    image: event_intel
+    textVariants: 
+    options:
+    - shared: false
+      key: approve
+    - shared: false
+      key: dismiss
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: inquisitive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: ResearchInvestigating
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireOne
+          checks:
+          - key: world_auto_time_of_day
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 19.5
+          - key: world_auto_time_of_day
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Less
+            value: 22
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots:
+          present: true
+          factionChecked: false
+          faction: 
+          factionInverted: false
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action:
+        actionMethod: RequireAll
+        actions:
+        - actionDesired: true
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: satelliteshower
+          tags: 
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: observing_2h
+          tags: 
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: observing_4h
+          tags: 
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: observing_6h
+          tags: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  approve:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: restorative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Restorative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: 20
+      actorKey: ''
+      allowDeath: false
+    - !StartAction
+      data:
+        key: observing_4h
+        owner: Source
+        ownerKey: 
+        target: None
+        targetKey: 
+        visible: true
+        durationOverride: 
+        durationMultiplier: 
+    steps: 
+  dismiss:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: false
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges: 
+    functions:
+    - !ModifyPlayerPilotsHealth
+      offset: -10
+      actorKey: ''
+      allowDeath: false
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

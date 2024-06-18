@@ -1,0 +1,117 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: main
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnContact
+evaluationInterval: Short
+steps:
+  main:
+    reviewed: true
+    image: event_celebration
+    textVariants: 
+    options:
+    - shared: true
+      key: liberate_join
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: positive_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Positive
+    priority: 0
+    check:
+      self: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_liberation_acknowledged
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: province_foreign_territory
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: province_tutorial
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 1
+          - key: province_core_tutorial1
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 1
+        faction:
+          hostileCheck: false
+          hostile: false
+          factions:
+          - Phantoms
+        access: 
+      action:
+        actionMethod: RequireAll
+        actions:
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: parade
+          tags: 
+        - actionDesired: false
+          owner: EventSelf
+          actionTargetComparison: EventTarget
+          actionTargetChecked: false
+          tagsUsed: false
+          key: celebrate
+          tags: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges:
+    - visible: true
+      context: SourceProvince
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: province_liberation_acknowledged
+        value: 0
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !CompleteAction
+      actionKey: core_province1_liberate
+options: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

@@ -1,0 +1,139 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: true
+factionBranchDefault: ''
+tags: []
+unitsPerGrade:
+- liveryPreset: misc_arctic
+  units:
+  - keyExternal: false
+    key: tank_a
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: Default
+    liveryPreset: 
+    custom:
+      name: 
+      id: 
+      idReused: 
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags:
+        controlByPlayer: true
+        controlledByAI: true
+        uncrewed: false
+      faction:
+        faction: Phantoms
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags: 
+  - keyExternal: false
+    key: tank_b
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: Default
+    liveryPreset: 
+    custom:
+      name: 
+      id: 
+      idReused: 
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags:
+        controlByPlayer: true
+        controlledByAI: true
+        uncrewed: false
+      faction:
+        faction: Phantoms
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags: 
+  - keyExternal: false
+    key: tank_c
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: Default
+    liveryPreset: 
+    custom:
+      name: 
+      id: 
+      idReused: 
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags:
+        controlByPlayer: true
+        controlledByAI: true
+        uncrewed: false
+      faction:
+        faction: Phantoms
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags: 
+unitPresets:
+  tank_a: !UnitFilter
+    tagsFromOverworld: false
+    tags:
+      filter_hybrid: false
+      role_sharpshooter: true
+      type_tank_standard: true
+  tank_b: !UnitFilter
+    tagsFromOverworld: false
+    tags:
+      filter_hybrid: false
+      role_striker: true
+      type_tank_standard: true
+  tank_c: !UnitFilter
+    tagsFromOverworld: false
+    tags:
+      filter_energy: false
+      filter_hybrid: true
+      range_close: false
+      range_far: false
+      range_long: false
+      type_tank_standard: true

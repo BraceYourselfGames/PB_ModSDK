@@ -1,0 +1,503 @@
+hidden: false
+forced: true
+optional: false
+refreshEventsOnExit: false
+restartTimeOnExit: false
+textVariantsForPronouns: true
+stepOnStart: start
+priority: 0
+group: 0
+groupConflicts: 
+chance: 0.1111111
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnTime
+evaluationInterval: Medium
+steps:
+  start:
+    reviewed: true
+    image: event_hologram_default
+    textVariants: 
+    options:
+    - shared: false
+      key: civilian
+    - shared: false
+      key: defector
+    - shared: false
+      key: pilot
+    - shared: false
+      key: supplies
+    - shared: false
+      key: throw
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_box_open
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province:
+        positionProvider: Self
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: province_tutorial
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        faction: 
+        access: 
+      action: 
+      actors:
+        actorsWorldPresent: 
+        actorsUnitsPresent: 
+        actorsPilotsPresent:
+          pilot_0: true
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_bomb_primed
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_box_open
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions: 
+options:
+  civilian:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_civilians
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_bomb_defusing_civilians
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_bomb_primed
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartAction
+      data:
+        key: bomb_timer_base
+        owner: Source
+        ownerKey: 
+        target: Source
+        targetKey: 
+        visible: true
+        durationOverride:
+          f: 5
+        durationMultiplier: 
+    steps: 
+  defector:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_defector
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Greater
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_bomb_defusing_defector
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_bomb_primed
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartAction
+      data:
+        key: bomb_timer_base
+        owner: Source
+        ownerKey: 
+        target: Source
+        targetKey: 
+        visible: true
+        durationOverride:
+          f: 5
+        durationMultiplier: 
+    steps: 
+  pilot:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory: 
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable:
+          check: Greater
+          value: 0
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: ActorPilot
+      actorKey: pilot_0
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_bomb_defusing
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_bomb_defusing_pilot
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_bomb_primed
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartAction
+      data:
+        key: bomb_timer_base
+        owner: Source
+        ownerKey: 
+        target: Source
+        targetKey: 
+        visible: true
+        durationOverride:
+          f: 5
+        durationMultiplier: 
+    steps: 
+  supplies:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: neutral_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Neutral
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory: 
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources:
+          supplies:
+            check: GreaterEqual
+            value: 100
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Add
+        key: world_bomb_defusing_supplies
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: false
+        checkStrict: false
+        offset: true
+        value: -100
+    - !StartOverworldEvent
+      eventKeys:
+      - bomb_notification_success
+    steps: 
+  throw:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: false
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange: 
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Target
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_bomb
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_bomb_dropped
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: world_bomb_primed
+        value: -1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !StartAction
+      data:
+        key: bomb_timer_location
+        owner: Source
+        ownerKey: 
+        target: Target
+        targetKey: 
+        visible: true
+        durationOverride:
+          f: 5
+        durationMultiplier: 
+    steps: 
+actions: 
+actorsSites: 
+actorsUnits: 
+actorsPilots:
+  pilot_0:
+    hidden: false
+    source: Self
+    sort: Name
+    pick: Random
+    check: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

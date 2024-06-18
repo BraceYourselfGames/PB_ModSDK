@@ -1,0 +1,700 @@
+hidden: false
+parents: []
+tags: []
+textName: 
+textDesc: 
+textIdentifierGroup: 
+image: t_world_vqg_mine_01
+icon: s_icon_overlay_type_site5
+core:
+  inventory: true
+  selectable: true
+  capturable: true
+  recapturable: false
+  interactable: true
+  interactionRange: 10
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: true
+  generated: false
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Independents
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_MountainBase
+movement: 
+ranges: 
+detection: 
+intel:
+  detected: true
+  recognized: true
+  inVisibleRange: true
+units: {}
+scenarios:
+  tags:
+    debug_all_loot: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_military: true
+    size_large: true
+    type_main: true
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat:
+  - outcomeVictory: true
+    outcomeDefeat: true
+    caseEarly: true
+    caseTotal: true
+    rewards:
+      debug_loot_all: 1
+  blocks:
+    debug_loot_all:
+    - resources:
+        battery:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        components_r2:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        components_r3:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        item_block_combat:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        item_block_escalation:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        item_block_reinforcements:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        item_drone_decoy:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        item_rain_sensor:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        repair_juice:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+        supplies:
+          amountMin: 1
+          amountMax: 1
+          amountRandom: false
+      projects:
+      - countMin: 1
+        countMax: 1
+        countRandom: false
+        tagsUsed: false
+        key: prt_body_arrow_h
+        tags: 
+      - countMin: 1
+        countMax: 1
+        countRandom: false
+        tagsUsed: false
+        key: prt_body_arrow_l
+        tags: 
+      parts:
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: body_set_helge_heavy_arm
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_helge_heavy_arm
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: body_set_helge_heavy_arm
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: body_set_helge_heavy_bottom
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_helge_heavy_bottom
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: body_set_helge_heavy_bottom
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: body_set_helge_heavy_top
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_helge_heavy_top
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: body_set_helge_heavy_top
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: body_set_tsubasa_light_arm
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_tsubasa_light_arm
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: body_set_tsubasa_light_arm
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: body_set_tsubasa_light_bottom
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_tsubasa_light_bottom
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: body_set_tsubasa_light_bottom
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: body_set_tsubasa_light_top
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_tsubasa_light_top
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: body_set_tsubasa_light_top
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_beam_03
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_beam_03
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_beam_03
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_melee_primary_axe_heavy
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_melee_primary_axe_heavy
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_melee_primary_axe_heavy
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_melee_primary_axe_medium
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_melee_primary_axe_medium
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_melee_primary_axe_medium
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_melee_secondary_axe
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_melee_secondary_axe
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_melee_secondary_axe
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_plasma_seeker_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_plasma_seeker_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_plasma_seeker_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_rifle_assault_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_rifle_assault_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_rifle_assault_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_shield_05
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_shield_05
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_shield_05
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: 
+        preset: wpn_ultraheavy_beam_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: wpn_ultraheavy_beam_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 0
+        levelMax: 0
+        levelRandom: false
+        qualityTableKey: default_r3_rare
+        preset: wpn_ultraheavy_beam_01
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      subsystems:
+      - ratingRange: 
+        blueprint: internal_aux_capacitor_r1
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_capacitor_r2
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_capacitor_r3
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_core_overdrive
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_gyro_r1
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_gyro_r2
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_gyro_r3
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_heatsink_r1
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_heatsink_r2
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_heatsink_r3
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_hydraulics_1
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_hydraulics_2
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_hydraulics_3
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_plating_basic
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_plating_composite
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_plating_empty
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_plating_heavy
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_plating_hollowed
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_sensor_left_scatter
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_sensor_right_hybrid
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_thruster_sidestep
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - ratingRange: 
+        blueprint: internal_aux_thruster_standard
+        tagsUsed: false
+        tags: 
+        countMin: 1
+        countMax: 1
+        countRandom: false
+interactionEffects: 
+salvageBudget:
+  f: 100000
+escalation: 
+threatLevel:
+  baseThreatLevel: 30
+battleSite: 

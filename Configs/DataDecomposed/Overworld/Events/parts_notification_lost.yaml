@@ -1,0 +1,275 @@
+hidden: false
+forced: false
+optional: false
+refreshEventsOnExit: true
+restartTimeOnExit: true
+textVariantsForPronouns: false
+stepOnStart: start
+priority: 0
+group: 0
+groupConflicts: 
+chance: 1
+chanceModifier: 
+trackCompletionOnSelf: false
+trackCompletionOnTarget: false
+evaluationGroup: OnPostCombat
+evaluationInterval: Short
+steps:
+  start:
+    reviewed: true
+    image: event_workshop
+    textVariants: 
+    options:
+    - shared: false
+      key: acknowledge
+    resourceDisplay: true
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    eventMood: Negative
+    priority: 0
+    check:
+      self:
+        tagsMethod: RequireAll
+        tags: 
+        baseParts: 
+        eventMemory:
+          method: RequireAll
+          checks:
+          - key: world_parts
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: world_parts_active
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+        combatReady: 
+        movement: 
+        movementMode: 
+        deployment: 
+        resources: 
+        pilotsAvailable: 
+        unitsAvailable: 
+        pilots: 
+        units: 
+        levelDeltaTarget: 
+        levelDeltaProvince: 
+        weather: 
+      target: 
+      province: 
+      action: 
+      actors: 
+    actorRefresh: 
+    hopeChange: 
+    warScoreChange: 
+    memoryChanges: 
+    functions: 
+options:
+  acknowledge:
+    priority: 0
+    colorFromStep: false
+    colorCustom: false
+    colorKey: negative_primary
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    optionMood: Negative
+    textVariants: 
+    completing: false
+    checkPreventsUnlock: true
+    resourceChangePreventsUnlock: true
+    stepByPriority: false
+    stepFallbackMode: None
+    stepFallbackKey: 
+    injection: 
+    check: 
+    hopeChange: 
+    warScoreChange:
+      faction: Player
+      offset: -50
+    combat: 
+    memoryChanges:
+    - visible: true
+      context: Source
+      actorKey: 
+      provinceKey: 
+      changes:
+      - change: Offset
+        key: world_reputation_guard
+        value: -2
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: world_parts_active
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: false
+      context: ActorWorld
+      actorKey: factory_weapon
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_weaponparts_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: world_weapon
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: false
+      context: ActorWorld
+      actorKey: factory_target
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_weaponparts_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: false
+      context: ActorWorld
+      actorKey: base
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_weapon_target
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - visible: false
+      context: ActorWorld
+      actorKey: factory_producing
+      provinceKey: 
+      changes:
+      - change: Remove
+        key: world_weapon_producing
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    functions:
+    - !TerminateAction
+      actionKey: parts_working
+    - !TerminateAction
+      actionKey: parts_delivery
+    - !TerminateAction
+      actionKey: weapon_delivery
+    - !TerminateAction
+      actionKey: weapon_target
+    steps: 
+actions: 
+actorsSites:
+  factory_producing:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags: 
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_weapon_producing
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+  base:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags: 
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_weapon_target
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+  factory_target:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags: 
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_weaponparts_target
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+  factory_weapon:
+    hidden: false
+    check:
+      provinceDistance: 
+      provinceKey: 
+      provinceMemory: 
+      provinceHostile: 
+      radius: 
+      faction: 
+      resupplyPoint: 
+      ai: 
+      tagsMethod: RequireAll
+      tags: 
+      eventMemory:
+        method: RequireAll
+        checks:
+        - key: world_weaponparts_target
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+        - key: world_weapon
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+actorsUnits: 
+actorsPilots: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 
+customTagFilters: 

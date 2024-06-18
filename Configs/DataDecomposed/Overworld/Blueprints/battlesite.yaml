@@ -1,0 +1,114 @@
+hidden: false
+parents: []
+tags:
+- war_battlesite
+textName: {}
+textDesc: {}
+textIdentifierGroup: site_base_large
+image: t_world_vqg_battlefield_03
+icon: s_icon_overlay_type_war_battlesite
+core:
+  inventory: true
+  selectable: true
+  capturable: true
+  recapturable: true
+  interactable: true
+  interactionRange: 5
+  destroyOnDefeat: true
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: false
+  generated: true
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Invaders
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_Battlefield
+movement: 
+ranges: 
+detection: 
+intel:
+  detected: false
+  recognized: false
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    context_generic: true
+    type_assisted: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_patrol: true
+    type_main: true
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat: 
+  blocks:
+    ftue:
+    - resources: 
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_elbrus_medium_top
+        tagsUsed: false
+        tags: {}
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r2_uncommon
+        preset: body_set_knox_heavy_top
+        tagsUsed: false
+        tags: {}
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      - levelMin: 2
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: default_r0_training
+        preset: wpn_shield_04
+        tagsUsed: false
+        tags: {}
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      subsystems:
+      - ratingRange: 
+        blueprint: internal_aux_thruster_distance
+        tagsUsed: false
+        tags: {}
+        countMin: 2
+        countMax: 1
+        countRandom: false
+interactionEffects: 
+salvageBudget:
+  f: 50
+escalation:
+  escalationGain: 15
+  escalationGainWarMultiplier: 1
+  warScoreDealt: 12
+  warScoreRestored: 20
+  warObjectiveCandidate: true
+threatLevel:
+  baseThreatLevel: 80
+battleSite:
+  timeLimit: 30
+  warScoreLostMin: 20
+  warScoreLostMax: 20

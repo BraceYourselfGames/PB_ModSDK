@@ -1,0 +1,56 @@
+textName: Tutorial / Mid
+instantiated: false
+path: Content/PrefabsCutscenes/cutscene_tutorial_mid
+postprocessing:
+  startWithoutFade: false
+  endWithoutFade: true
+  fogSpeedCustom: false
+  fogSpeed: 1
+  pathNormal: ''
+  pathFogLight: ''
+  pathFogMedium: ''
+  pathFogHeavy: ''
+world: 
+environment: 
+area:
+  area: dev_demo
+units:
+  unitsBuilt:
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_commander
+    key: commander
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_pc
+    key: player
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_cadet
+    key: cadet
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_enemy
+    key: enemy
+camera:
+  custom: 
+subtitles:
+- time: 2
+  duration: 2.6
+- time: 9.4
+  duration: 1
+- time: 10.5
+  duration: 3
+- time: 14.3
+  duration: 2
+- time: 24.5
+  duration: 7
+callbacksOnSkip: 
+audioEventsOnStart: []
+audioStatesOnStart: 
+audioSyncsOnStart: 
+audioEventsOnPlay:
+- key: cut_tutorial_mid
+audioStatesOnPlay:
+- key: music_cinematic_state
+  state: tutorial_cutscene_02
+audioSyncsOnPlay: 
+audioEventsOnEnd: []
+audioStatesOnEnd: 
+audioSyncsOnEnd: 

@@ -1,0 +1,54 @@
+variants:
+  rating_1:
+    icon: s_icon_l32_star1
+    ratingOverride:
+      i: 1
+    durationMultiplier:
+      f: 2
+    basePartRequirements: 
+    baseStatRequirements: 
+    inputChargeMultiplier: 
+    inputResourceMultipliers:
+      components_r2: 0
+      components_r3: 0
+      supplies: 60
+    outputPartTags: 
+    outputSubsystemTags:
+      rating_1: true
+    outputUnitTags: 
+  rating_2:
+    icon: s_icon_l32_star2
+    ratingOverride:
+      i: 2
+    durationMultiplier:
+      f: 4
+    basePartRequirements:
+      workshop_tech_r2: 1
+    baseStatRequirements: 
+    inputChargeMultiplier: 
+    inputResourceMultipliers:
+      components_r2: 7
+      components_r3: 0
+      supplies: 120
+    outputPartTags: 
+    outputSubsystemTags:
+      rating_2: true
+    outputUnitTags: 
+  rating_3:
+    icon: s_icon_l32_star3
+    ratingOverride:
+      i: 3
+    durationMultiplier:
+      f: 6
+    basePartRequirements:
+      workshop_tech_r3: 1
+    baseStatRequirements: 
+    inputChargeMultiplier: 
+    inputResourceMultipliers:
+      components_r2: 0
+      components_r3: 2
+      supplies: 180
+    outputPartTags: 
+    outputSubsystemTags:
+      rating_3: true
+    outputUnitTags: 

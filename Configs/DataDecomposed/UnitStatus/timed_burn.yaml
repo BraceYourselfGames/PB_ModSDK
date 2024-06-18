@@ -1,0 +1,130 @@
+icon: s_icon_l32_spec_heat
+color:
+  r: 0.75
+  g: 0.3
+  b: 0.3
+  a: 1
+hidden: false
+debug: false
+restartOnRefresh: false
+fxAttached:
+  key: fx_status_burning_loop
+  scale:
+    x: 1
+    y: 1
+    z: 1
+durationFull:
+  f: 4
+durationUpdate:
+  f: 0.1
+buildupDecayRate:
+  f: 0.5
+  compMultiplier: 2
+buildupThreshold:
+  f: 1
+  compMultiplier: 2
+buildupOverflow:
+  f: 0.25
+  compMultiplier: 0
+stackable: 
+audio:
+  audioOnStart: status_burning_loop
+  audioOnStop: status_burning_loop_stop
+effectsOnStart:
+- enabled: true
+  triggerCheckUnit:
+  - !CombatValidateUnitMemory
+    context: MobileBase
+    memory:
+      method: RequireAll
+      checks:
+      - key: world_auto_weather_rain
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: Greater
+        value: 0.5
+  comment:
+    comment: On start, check for weather. If weather is rainy, cut the duration in half.
+  functionsOnHost:
+  - !CombatUnitStatusDuration
+    key: timed_burn
+    operation: Set
+    value: 1
+  functionsOnBlackboard: 
+effectsOnUpdate:
+- triggerRemoval: false
+  triggerInStack: false
+  applyMissedUpdates: true
+  enabled: true
+  triggerCheckUnit: 
+  comment:
+    comment: Each update, apply damage.
+  functionsOnHost:
+  - !CombatUnitDamageEvent
+    delay: 0
+    splash: true
+    dispersed: true
+    sourceInternal: true
+    integrity:
+      normalized: false
+      leveled: true
+      f: 4
+    concussion: 
+    heat: 
+    stagger: 
+    statusBuildup: 
+  functionsOnBlackboard: 
+- triggerRemoval: true
+  triggerInStack: false
+  applyMissedUpdates: false
+  enabled: true
+  triggerCheckUnit:
+  - !CombatValidateUnitCheck
+    check:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_field_water: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+  comment:
+    comment: Each update, check if the unit is in water. If yes, remove this status.
+  functionsOnHost:
+  - !CombatUnitEffectSpawn
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    asset:
+      key: fx_emergency_vent
+      scale:
+        x: 1
+        y: 1
+        z: 1
+  - !CombatAudioEvent
+    offset:
+      x: 0
+      y: 0
+      z: 0
+    audio: status_burning_water_cool
+    delayScaled: 0
+  functionsOnBlackboard: 
+effectsOnEnd: 
+statOffsets:
+  heat_dissipation: -0.1

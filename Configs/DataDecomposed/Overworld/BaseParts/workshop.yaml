@@ -1,0 +1,36 @@
+parents:
+- key: mobilebase
+  priority: 4
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+removable: false
+preinstalled: true
+limit: 1
+ui:
+  positionX: 0
+  positionY: 7
+  endpoint: false
+  group:
+    positionX: 0
+    positionY: 0
+    sizeX: 0
+    sizeY: 0
+  icon: s_icon_l32_upgrade_workshop1
+unlock: 
+cost: 
+effect:
+  calls: 
+  stats:
+  - key: workshop_jobs
+    modifier: Offset
+    value: 1
+  - key: workshop_speed
+    modifier: Offset
+    value: 1
+  functions: []
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_workshop

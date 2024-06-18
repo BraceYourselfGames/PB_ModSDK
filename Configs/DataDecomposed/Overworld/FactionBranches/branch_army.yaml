@@ -1,0 +1,27 @@
+liveryPrefix: inv_army
+training: false
+unitGroupTags:
+  branch_army: true
+unitPresetTags:
+  branch_army: true
+unitPartFilters:
+  mech:
+    filters:
+      body:
+      - tags:
+          branch_army: true
+      - tags:
+          branch_reserves: true
+      equipment:
+      - tags:
+          branch_army: true
+      - tags:
+          branch_reserves: true
+  tank:
+    filters:
+      body:
+      - tags:
+          branch_army: true
+      equipment_right:
+      - tags:
+          branch_army: true

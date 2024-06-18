@@ -1,0 +1,124 @@
+depthBackground: 80
+depthForeground: 80
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.6980392
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0.3490566
+    g: 0.3490566
+    b: 0.3490566
+    a: 1
+  center: 
+  hint:
+    color:
+      r: 0.2156863
+      g: 0.2666667
+      b: 0.3019608
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 802
+    frameSizeY: 366
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 282
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.2156863
+      g: 0.2666667
+      b: 0.3019608
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 128
+    frameSizeX: 800
+    frameSizeY: 512
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 282
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.2
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseBriefingV2
+      methodName: TryEntryToSquad
+      argument: ''
+      frameDelay: 1
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld: 
+  effectsCombat: 

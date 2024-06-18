@@ -1,0 +1,162 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: false
+factionBranchDefault: ''
+tags: []
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: false
+    key: mech_vip
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 3
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: Flanker
+    aiTargeting: juggernaut
+    liveryPreset: misc_hvt_01
+    custom:
+      name: 
+      id: 
+      idReused:
+        textSector: scenario_embedded
+        textKey: unique_tutorial_elimination__step_wave_01_g0_u0_unit
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags: 
+      faction: 
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags:
+      - purpose_vip
+  - keyExternal: false
+    key: mech_vip_guard_a
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: scout
+    liveryPreset: misc_hvt_02
+    custom:
+      name: 
+      id: 
+      idReused:
+        textSector: scenario_embedded
+        textKey: unique_tutorial_elimination__step_wave_01_g0_u1_pilot_callsign
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags: 
+      faction: 
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags: 
+  - keyExternal: false
+    key: mech_vip_guard_b
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: scout
+    liveryPreset: misc_hvt_02
+    custom:
+      name: 
+      id: 
+      idReused:
+        textSector: scenario_embedded
+        textKey: unique_tutorial_elimination__step_wave_01_g0_u1_pilot_callsign
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags: 
+      faction: 
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags: 
+unitPresets:
+  mech_kill_a: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_ultraheavy: false
+      role_striker: true
+      type_mech: true
+  mech_kill_b: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      role_artillery: true
+      type_mech: true
+  mech_kill_c: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_ultraheavy: false
+      role_sharpshooter: true
+      type_mech: true
+  mech_recon: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      role_sharpshooter: true
+      type_mech: true
+  mech_vip: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      role_juggernaut: true
+      type_mech: true
+  mech_vip_guard_a: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      role_scout: true
+      type_mech: true
+  mech_vip_guard_b: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      role_striker: true
+      type_mech: true
+  tank_recon_a: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_hybrid: false
+      role_sharpshooter: true
+      type_tank_standard: true
+  tank_recon_b: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_hybrid: false
+      role_striker: true
+      type_tank_standard: true

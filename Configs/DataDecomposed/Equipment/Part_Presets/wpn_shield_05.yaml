@@ -1,0 +1,28 @@
+hidden: false
+parents:
+- key: wpn_shield
+- key: wpn_shield_barrierless
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- difficulty_easy
+- weight_heavy
+- weight_medium
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_shield_05
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

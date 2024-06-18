@@ -1,0 +1,40 @@
+hidden: false
+rewarded: true
+textSourceName:
+  source: Part
+  key: body_set_bein_medium
+textSourceSubtitle:
+  source: Shared
+  key: body_sub
+textSourceDesc:
+  source: Part
+  key: body_set_bein_medium_top
+icon: s_icon_l32_set_m_barrier
+tags:
+- group_body
+duration:
+  f: 1
+basePartRequirements: 
+baseStatRequirements: 
+inputCharges: 
+inputResources:
+- key: supplies
+  amount: 1
+- key: components_r2
+  amount: 1
+- key: components_r3
+  amount: 1
+outputParts:
+- count: 1
+  key: 
+  tags:
+    armor_bein: true
+    weight_medium: true
+outputSubsystems: 
+outputUnits: 
+outputResources: 
+outputFunctions: 
+variantLinkPrimary:
+  key: prt_body_sockets
+variantLinkSecondary:
+  key: prt_body_ratings_01

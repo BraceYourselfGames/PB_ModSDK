@@ -1,0 +1,62 @@
+ui:
+  color:
+    r: 0.5607843
+    g: 0.2509804
+    b: 0.2470588
+    a: 1
+  minified: false
+  locationFromTarget: true
+audio: 
+time:
+  duration: 60
+cost: 0
+limitPerOwner: 0
+progressGroup: 0
+progressJobsStat: 
+progressSpeedStat: 
+requireCombatParticipation: false
+completeOnCombatVictory: false
+terminateOnCombatDefeat: false
+discardOnWorldChange: true
+requiresDeployment: false
+cancellationAllowed: false
+refundOnCancellation: true
+refundOnTermination: true
+refreshTargetOnTermination: false
+haltedByMovementModes: false
+haltedByLock: true
+changesOnStart: 
+changesOnCancellation: 
+changesOnTermination: 
+changesOnCompletion:
+  functions:
+  - !StartOverworldEvent
+    eventKeys:
+    - raid_notification_failed
+  memoryChanges:
+  - context: Target
+    provinceKey: 
+    changes:
+    - change: Set
+      key: world_raid_past_target_fail
+      value: 0
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Remove
+      key: world_raid_target
+      value: 0
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - context: Source
+    provinceKey: 
+    changes:
+    - change: Remove
+      key: world_raid_active
+      value: 0
+      valueFromMemory: false
+      valueFromMemoryKey: 
+tags: 
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 

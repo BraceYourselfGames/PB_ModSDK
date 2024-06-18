@@ -1,0 +1,282 @@
+navGraphAssetPath: Content/Overworld/OverworldTerrainGraph
+navRestrictionOrigin:
+  x: -835
+  y: -630
+navRestrictionRadius: 72.5
+simulationStartTime: 6
+minEjectionRange: 50
+maxEjectionRange: 100
+retreatDurationBase: 24
+retreatDurationFromDistance: 72
+retreatDurationDistances:
+  x: 300
+  y: 1500
+createEnemyEjectionSites: false
+destroyInRangeOnLiberation: true
+entityTagResupplyPoint: homebase
+entityTagMilitarySpawn: designation_military
+entityTagWarBase: war_base
+entityTagsSquad:
+- tag: squad
+  not: false
+- tag: role_convoy
+  not: true
+defaultScenarioTags: {}
+evaluateEventsOverTime: true
+logEventEvaluationOverTimeShort: false
+logEventEvaluationOverTimeMedium: false
+logEventEvaluationOverTimeLong: false
+logEventCulling: false
+logEventEvaluationOnContact: false
+logAgentDestinations: false
+eventOptionDetailsUpdated: true
+eventOptionDetailsCompact: false
+eventChanceShort: 0
+eventChanceMedium: 0.75
+eventChanceLong: 0
+eventEvaluationCooldownDelta:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+eventEvaluationCooldownShortBase: 0.01
+eventEvaluationCooldownShortDelta: 0
+eventEvaluationCooldownMediumBase: 15
+eventEvaluationCooldownMediumDelta: 5
+eventEvaluationCooldownLongBase: 40
+eventEvaluationCooldownLongDelta: 10
+eventHistorySize: 200
+eventRuleChanceOverride:
+- capital_interaction_victory
+- capital_notification_liberated
+- capital_interaction_center_combat
+- capital_interaction_center_defeat
+- capital_interaction_outskirts_combat
+- capital_interaction_outskirts_defeat
+- precombat_interaction_generic_02
+- precombat_interaction_generic_01
+entityEffectsOverTime: true
+entityEffectsOnEntry: true
+skyRenderTimeThreshold: 0.1
+DebugCanOrderEnemyUnits: false
+DebugEnableLMBScroll: false
+cameraMovementSpeed: 0.0014
+zoomDefault: 0.15
+zoomDistanceDefault: 385
+cameraRotationYDefault: 57
+cameraRotationXDefault: 26
+cameraMovementDelay: 0.1
+deltaTimeProtection: true
+deltaTimeMin: 0.008333334
+deltaTimeMax: 0.06666667
+overworldTimeProgression: 0.1666667
+weatherChangeMultiplier: 0.25
+weatherLevels:
+  l025:
+    threshold: 0.25
+    visionMultiplierEnemy: 1
+    visionMultiplierPlayer: 1
+    icon: s_icon_l32_weather_clear
+  l050:
+    threshold: 0.5
+    visionMultiplierEnemy: 1
+    visionMultiplierPlayer: 1
+    icon: s_icon_l32_weather_cloud1
+  l066:
+    threshold: 0.66
+    visionMultiplierEnemy: 1
+    visionMultiplierPlayer: 1
+    icon: s_icon_l32_weather_rain1
+  l083:
+    threshold: 0.83
+    visionMultiplierEnemy: 0.725
+    visionMultiplierPlayer: 0.6
+    icon: s_icon_l32_weather_rain2
+  l100:
+    threshold: 1
+    visionMultiplierEnemy: 0.45
+    visionMultiplierPlayer: 0.2
+    icon: s_icon_l32_weather_rain3
+viewBlipAnimationCurve:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 22.74195
+      w: 22.74195
+    w:
+      x: 0
+      y: 0.2743833
+    m: {}
+  - tv_tg:
+      x: 0.1248592
+      y: 1.624451
+      z: 7.12113
+      w: 7.12113
+    w:
+      x: 0.5458801
+      y: 0.2637175
+    m: {}
+  - tv_tg:
+      x: 0.3479117
+      y: 1.769457
+      z: -3.326046
+      w: -3.326046
+    w:
+      x: 0.3333333
+      y: 0.3046832
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+viewBlipAnimationDuration: 0.35
+viewFlareAnimationCurve:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 6.117429
+      w: 6.117429
+    w:
+      x: 0
+      y: 0.2521912
+    m: {}
+  - tv_tg:
+      x: 0.09393135
+      y: 0.6580182
+      z: 5.551433
+      w: 5.551433
+    w:
+      x: 0.26144
+      y: 0.2637175
+    m: {}
+  - tv_tg:
+      x: 0.3479117
+      y: 0.7216691
+      z: -3.326046
+      w: -3.326046
+    w:
+      x: 0.3333333
+      y: 0.3046832
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0.00116998
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+viewFlareAnimationDuration: 0.35
+pingDuration: 0.25
+visionAnimationDuration: 0.2
+movementSpeedMultiplier: 6
+directionDampSmoothTime: 0.02
+directionDampMaxSpeed: 500
+pathMovementWaypointApproachDistance: 1
+pathMovementLookaheadTime: 1
+pathVisualEnemy: false
+playerRecognitionDelay: 1
+visionTweenRate: 2.25
+snowAltitudeBaseline: 55
+snowAltitudeCamera: 55
+snowAltitudeBiomeFilter:
+  tags:
+    alpine: true
+visionRainEffect: true
+saveBeforeCombat: true
+saveAfterCombat: true
+autoSaveAtInterval: true
+autoSaveTimerSeconds: 600
+autoSaveSlotCount: 3
+aiMaxUnitResponseRange: 300
+aiReinforcementCooldown: 10
+overworldDistancePerReinforcementTurn: 7
+reinforcementsFromChasingLimit: 3
+provinceWakeUpdateInterval: 5
+provinceWakeRadius: 400
+provinceLevelPerDistance: 1
+aiRecoveryDuration: 4
+aiRecoveryDurationStatic: 1
+aiPatrolRework: true
+aiPatrolReworkOriginTags:
+  designation_military: true
+aiPatrolReworkFallbackTags:
+  patrol_standard: true
+aiPatrolUpdateInterval: 5
+aiSpawnDistanceMin: 40
+aiPatrolQuotasPerEscalation:
+- 1
+- 2
+- 2
+- 3
+aiSearchMinRadius: 20
+aiSearchMaxRadius: 70
+aiInvestigationEnabled: true
+aiConvoyRedirect: false
+aiConvoyRework: true
+aiConvoyReworkSharedTags:
+  squad_invader_convoy: true
+aiConvoyUpdateInterval: 7
+aiConvoyTargetPopulation: 3
+aiConvoyExternalJourneyChance: 30
+aiConvoyReassignmentDestinationTags:
+- designation_civilian
+- designation_military
+aiCounterAttackUpdateInterval: 24
+aiCounterAttackQuota: 2
+provinceCounterAttackChance: 7
+seed: 1524376141
+createNewSeed: true
+startingProvinceName: province_00
+emptyProvinceName: empty
+effectRepairJuiceRecoveryRate: 5
+effectBatteryRecoveryRate: 35
+abilityRainSensorDuration: 5
+threatComparisonLevels:
+- threshold: -35
+  textName: selection_difficulty_level_0
+  icon: s_icon_l32_star1
+- threshold: 0
+  textName: selection_difficulty_level_1
+  icon: s_icon_l32_star2
+- threshold: 35
+  textName: selection_difficulty_level_2
+  icon: s_icon_l32_star3
+- threshold: 75
+  textName: selection_difficulty_level_3
+  icon: s_icon_l32_star4
+- threshold: 150
+  textName: selection_difficulty_level_4
+  icon: s_icon_l32_star5
+- threshold: 5000
+  textName: selection_difficulty_level_5
+  icon: s_icon_l32_pilot_death

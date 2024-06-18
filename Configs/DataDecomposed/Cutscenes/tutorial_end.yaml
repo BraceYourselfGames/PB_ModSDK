@@ -1,0 +1,32 @@
+textName: Tutorial / End
+instantiated: false
+path: Content/PrefabsCutscenes/cutscene_tutorial_end
+postprocessing: 
+world: 
+environment: 
+area:
+  area: dev_demo
+units:
+  unitsBuilt:
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_pc
+    key: player
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_cadet
+    key: cadet
+camera:
+  custom: 
+subtitles: 
+callbacksOnSkip: 
+audioEventsOnStart: []
+audioStatesOnStart: 
+audioSyncsOnStart: 
+audioEventsOnPlay:
+- key: cut_tutorial_end
+audioStatesOnPlay:
+- key: music_cinematic_state
+  state: tutorial_cutscene_03
+audioSyncsOnPlay: 
+audioEventsOnEnd: []
+audioStatesOnEnd: 
+audioSyncsOnEnd: 

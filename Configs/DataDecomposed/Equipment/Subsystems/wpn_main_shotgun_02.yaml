@@ -1,0 +1,215 @@
+hidden: false
+parent: wpn_main_shotgun
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_06
+- spec_stabilized
+- stat_concussive
+statDistribution: ''
+stats:
+  act_count:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1.1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 110
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0.3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 8.3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 35
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 180
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_modular_stock_03
+- wpn_modular_grip_01
+- wpn_modular_front_05
+- wpn_modular_body_05
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_shotgun_blue
+      keyEnemy: fx_muzzle_shotgun_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_shotgun_heavy
+    onActivationMid: weapon_shotgun_heavy
+    onActivationLast: weapon_shotgun_heavy
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_shotgun
+    custom: 
+  recoil:
+    key: recoil_shotgun
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_flak_blue
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact: 
+    deactivation: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation:
+    count: 24
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.5
+          z: 0.009852102
+          w: 0.009852102
+        w:
+          x: 0.3333333
+          y: 0.5794392
+        m: {}
+      - tv_tg:
+          x: 0.3
+          y: 0.5
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.69
+          y: 1
+          z: 1.282051
+          w: 0
+        w:
+          x: 1
+          y: 1
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 1
+          z: 0
+          w: 0.002351897
+        w:
+          x: 1
+          y: 0.3333333
+        m: {}
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: 0
+    gradientSize: 50
+    exponent: 3
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact:
+    exponent: 2
+    triggerOnDamage: false
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiCoverageWeight:
+    f: 1
+  uiOptimumThreshold:
+    f: 0.8
+beam: 
+custom: 
+functions: 

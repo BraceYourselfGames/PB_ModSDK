@@ -1,0 +1,226 @@
+depthBackground: 80
+depthForeground: 81
+pages:
+- depthForeground: 1
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.9843137
+  center:
+    textImage: event_salvage
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.5372549
+      g: 0.4431373
+      b: 0.2745098
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: -134
+    frameSizeX: 400
+    frameSizeY: 178
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewDebriefingSalvage
+      methodName: OnRootSelectionFirst
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.7490196
+      g: 0.3411765
+      b: 0.3176471
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: -310
+    frameSizeX: 400
+    frameSizeY: 340
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewDebriefingSalvage
+      methodName: OnUnitSelectionExternalFirst
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.7490196
+      g: 0.3411765
+      b: 0.3176471
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: Right
+    framePositionX: -88
+    framePositionY: -424
+    frameSizeX: 30
+    frameSizeY: 30
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomRight
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.7490196
+      g: 0.3411765
+      b: 0.3176471
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: Left
+    framePositionX: -424
+    framePositionY: -24
+    frameSizeX: 304
+    frameSizeY: 72
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.6980392
+  center: 
+  hint:
+    color:
+      r: 0.3411765
+      g: 0.4901961
+      b: 0.2862745
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: 16
+    frameSizeX: 400
+    frameSizeY: 80
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftBottom
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !StartOverworldEvent
+      eventKeys:
+      - ftue_interaction_mobilebase
+  effectsCombat: 

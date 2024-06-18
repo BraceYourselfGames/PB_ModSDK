@@ -1,0 +1,150 @@
+hidden: false
+parents: []
+tags:
+- event_draft_point
+textName: {}
+textDesc: {}
+textIdentifierGroup: ''
+image: ''
+icon: 
+core:
+  inventory: true
+  selectable: true
+  capturable: false
+  recapturable: false
+  interactable: true
+  interactionRange: 5
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: true
+  generated: true
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Independents
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_HomeArmy
+movement: 
+ranges: 
+detection: 
+intel:
+  detected: true
+  recognized: true
+  inVisibleRange: false
+units: 
+scenarios:
+  tags:
+    context_generic: true
+    entity_patrol: true
+scenarioUnits: 
+scenarioChanges: 
+areas:
+  tags:
+    context_wilderness: true
+    type_main: true
+production: 
+ai: 
+spawning: 
+reinforcements: 
+rewards:
+  triggersAfterCombat: 
+  blocks:
+    event_draft_reward_frontal:
+    - resources:
+        supplies:
+          amountMin: 30
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q2
+        preset: 
+        tagsUsed: true
+        tags:
+          body_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q2
+        preset: 
+        tagsUsed: true
+        tags:
+          item_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems: 
+    event_draft_reward_retry:
+    - resources:
+        supplies:
+          amountMin: 20
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q2
+        preset: 
+        tagsUsed: true
+        tags:
+          body_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q2
+        preset: 
+        tagsUsed: true
+        tags:
+          item_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems: 
+    event_draft_reward_stealth:
+    - resources:
+        supplies:
+          amountMin: 40
+          amountMax: 1
+          amountRandom: false
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: true
+        qualityTableKey: reward_generic_q3
+        preset: 
+        tagsUsed: true
+        tags:
+          body_part: true
+        countMin: 1
+        countMax: 1
+        countRandom: true
+      subsystems: 
+interactionEffects: 
+salvageBudget: 
+escalation:
+  escalationGain: 25
+  escalationGainWarMultiplier: 1
+  warScoreDealt: 10
+  warScoreRestored: 0
+  warObjectiveCandidate: true
+threatLevel:
+  baseThreatLevel: 60
+battleSite: 

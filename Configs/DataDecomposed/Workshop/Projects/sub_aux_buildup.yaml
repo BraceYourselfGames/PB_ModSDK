@@ -1,0 +1,40 @@
+hidden: false
+rewarded: true
+textSourceName:
+  source: Subsystem
+  key: internal_aux_buildup
+textSourceSubtitle:
+  source: Hardpoint
+  key: internal_aux_weapon
+textSourceDesc:
+  source: Hardpoint
+  key: internal_aux_weapon
+icon: s_icon_l32_system_internal_reactor
+tags:
+- group_utility
+- type_subsystem
+duration:
+  f: 1
+basePartRequirements: 
+baseStatRequirements: 
+inputCharges: 
+inputResources:
+- key: supplies
+  amount: 1
+- key: components_r2
+  amount: 1
+- key: components_r3
+  amount: 1
+outputParts: 
+outputSubsystems:
+- count: 1
+  tagsUsed: true
+  key: 
+  tags:
+    internal_aux_buildup: true
+outputUnits: 
+outputResources: 
+outputFunctions: 
+variantLinkPrimary: 
+variantLinkSecondary:
+  key: sub_aux_ratings_01

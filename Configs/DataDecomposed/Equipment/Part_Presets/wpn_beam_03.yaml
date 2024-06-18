@@ -1,0 +1,25 @@
+hidden: false
+parents:
+- key: wpn_beam
+livery: ''
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- range_medium
+- range_short
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_beam_03
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

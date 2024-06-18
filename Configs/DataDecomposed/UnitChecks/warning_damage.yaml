@@ -1,0 +1,40 @@
+hidden: false
+icon: s_icon_l32_stat_wpn_damage
+severity: Warning
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireOne
+  subsystemsMethod: RequireAll
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts:
+  - socket: core
+    not: false
+    requirement: Damaged
+    tags: 
+  - socket: secondary
+    not: false
+    requirement: Damaged
+    tags: 
+  - socket: optional_left
+    not: false
+    requirement: Damaged
+    tags: 
+  - socket: optional_right
+    not: false
+    requirement: Damaged
+    tags: 
+  - socket: equipment_left
+    not: false
+    requirement: Damaged
+    tags: 
+  - socket: equipment_right
+    not: false
+    requirement: Damaged
+    tags: 
+  subsystems: []
+  stats: []
+  pilot: []

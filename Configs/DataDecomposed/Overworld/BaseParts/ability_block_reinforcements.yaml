@@ -1,0 +1,48 @@
+parents:
+- key: workshop_tech_r2
+  priority: 1
+  offsetStart: 30
+  offsetEnd: -10
+hidden: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 2
+  positionY: 6
+  endpoint: false
+  group: 
+  icon: s_icon_l32_nav_world2
+unlock: 
+cost:
+  resources:
+    components_r2: 15
+    supplies: 700
+effect: 
+effectPerInstance:
+  1:
+    calls:
+    - OnAbilityBlockReinforcements
+    stats:
+    - key: item_block_reinforcements_limit
+      modifier: Offset
+      value: 1
+    functions: []
+  2:
+    calls: 
+    stats:
+    - key: item_block_reinforcements_limit
+      modifier: Offset
+      value: 1
+    functions: []
+  3:
+    calls: 
+    stats:
+    - key: item_block_reinforcements_limit
+      modifier: Offset
+      value: 1
+    functions: []
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

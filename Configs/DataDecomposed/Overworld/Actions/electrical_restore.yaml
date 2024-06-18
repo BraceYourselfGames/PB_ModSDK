@@ -1,0 +1,41 @@
+ui:
+  color:
+    r: 0.2313726
+    g: 0.3843138
+    b: 0.1647059
+    a: 1
+  minified: false
+  locationFromTarget: false
+audio: 
+time:
+  duration: 1
+cost: 0
+limitPerOwner: 0
+progressGroup: 0
+progressJobsStat: 
+progressSpeedStat: 
+requireCombatParticipation: false
+completeOnCombatVictory: false
+terminateOnCombatDefeat: false
+discardOnWorldChange: true
+requiresDeployment: true
+cancellationAllowed: false
+refundOnCancellation: true
+refundOnTermination: true
+refreshTargetOnTermination: false
+haltedByMovementModes: false
+haltedByLock: true
+changesOnStart: 
+changesOnCancellation: 
+changesOnTermination: 
+changesOnCompletion:
+  functions:
+  - !StartOverworldEvent
+    eventKeys:
+    - electrical_notification_recovered
+  memoryChanges: 
+tags: []
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 

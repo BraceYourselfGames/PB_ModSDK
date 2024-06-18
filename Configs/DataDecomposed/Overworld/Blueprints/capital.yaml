@@ -1,0 +1,95 @@
+hidden: false
+parents: []
+tags:
+- structure
+- site
+- designation_military
+- branch_specops
+- branch_reserves
+- branch_experimental
+- branch_army
+- homebase
+- feature_no_reinforcements
+textName: {}
+textDesc: {}
+textIdentifierGroup: ''
+image: t_world_crop_capital1
+icon: s_icon_overlay_type_site4
+core:
+  inventory: true
+  selectable: true
+  capturable: false
+  recapturable: false
+  interactable: true
+  interactionRange: 25
+  destroyOnDefeat: false
+  intelLocked: false
+  detectable: true
+  recognizable: true
+  observable: true
+  permanent: false
+  generated: false
+  refreshEventsOnExit: true
+  refreshEventsOnEntry: true
+  factionChangesWithProvince: false
+  faction: Independents
+factionBranch: 
+visual:
+  colorKeyOverrideVision: 
+  visualPrefabs:
+  - path: Content/Overworld/Site_Settlement_Capital
+movement: 
+ranges:
+  vision: 65
+  observerData: 
+detection:
+  pingInterval: 0.35
+  detectionIncrementMin: 0.1
+  detectionIncrementMax: 0.51
+  detectionDecayTime: 0.8333333
+intel:
+  detected: false
+  recognized: false
+  inVisibleRange: false
+units: {}
+scenarios:
+  tags:
+    unique_capital: true
+scenarioUnits: 
+scenarioChanges: 
+areas: 
+production: 
+ai:
+  isAggressive: false
+  activeWhenUntracked: false
+spawning: 
+reinforcements:
+  destroyOnDefeat: false
+  threatMultiplier: 0.4
+  reinforcementKeys:
+  - military_structure
+rewards:
+  triggersAfterCombat: []
+  blocks:
+    reward:
+    - resources: 
+      projects: 
+      parts:
+      - levelMin: 1
+        levelMax: 1
+        levelRandom: false
+        qualityTableKey: 
+        preset: 
+        tagsUsed: true
+        tags: {}
+        countMin: 1
+        countMax: 1
+        countRandom: false
+      subsystems: 
+interactionEffects: 
+salvageBudget:
+  f: 200
+escalation: 
+threatLevel:
+  baseThreatLevel: 300
+battleSite: 
