@@ -1,0 +1,822 @@
+buttonLabel: Tutorials
+titleIcon: Book
+titleHeader: Tutorials
+titleDesc: Learn how create your first mod, unlock additional tools and implement advanced changes through the following tutorials. If you have any questions or suggestions, send us a message on Discord (link to the server in the top right).
+sections:
+- icon: Images
+  image: 
+  hint: External download
+  header: Optional Assets
+  description: Downloading optional assets will unlock tools for editing levels. Additionally, the part preset, subsystem and unit composite database editors will unlock item previews.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Archive
+    titleHeader: Installing optional assets
+    titleDesc: Downloading optional assets will unlock tools for editing levels. Additionally, the part preset, subsystem and unit composite database editors will unlock item previews.
+    sections:
+    - icon: CloudDownload
+      image: 
+      hint: 1
+      header: Download the archive
+      description: The archive contains level tilesets, props, equipment 3D models and other assets necessary to support the functinoality above. These assets are not included in the core SDK to reduce its size and allow lightweight code updates.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Download (3.4Gb)
+        actionsOnClick:
+        - !ModToolsFunctionOpenLinkAssets {}
+      childPage: 
+    - icon: FileZip
+      image: t4_01_import
+      hint: 2
+      header: Open the archive
+      description: Click "Assets/Import Package/Custom Package" in the top toolbar and select the .unitypackage file you have downloaded. Click "Open" and wait for the Editor to process the package contents.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: ClockHistory
+      image: 
+      hint: 3
+      header: Import the archive
+      description: You should see the "Import Unity Package" window pop up. Click the "Import" button in the bottom right corner and wait for the process to finish.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: BootstrapReboot
+      image: t4_02_refresh
+      hint: 4
+      header: Rebuild the resource database
+      description: Once the import is done, click "PB Mod Tools/Rebuild Resource DB" in the top toolbar (or click the button below). Once the process is complete, close the Editor and restart it. Alternatively, force refresh of all asset services with "PB Mod Tools/Refresh Asset Managers".
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Rebuild DB
+        actionsOnClick:
+        - !ModToolsFunctionCallMethodStatic
+          typeName: ResourceDatabaseManager
+          methodName: RebuildDatabase
+          argument: ''
+      - label: Refresh managers
+        actionsOnClick:
+        - !ModToolsFunctionRefreshAssetManagers {}
+      childPage: 
+    - icon: XCircle
+      image: 
+      hint: 5
+      header: Restart the Editor
+      description: Some of the imported assets might need a restart to start working. To ensure everything is loaded properly, it's best to restart the Unity Editor.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PinMap
+      image: 
+      hint: 6
+      header: Check the scene
+      description: Open the ContentOptional/Scenes/game_extended_sdk scene file in the "Project" tab. Alternatively, press "Open main scene" in the Getting Started window.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete:
+      - !ModToolsCheckSceneName
+        expected: true
+        name: game_extended_sdk
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: CheckCircle
+      image: 
+      hint: 7
+      header: All done!
+      description: The optional assets are ready for use. You have access to the level editor and item preview features.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+- icon: ClipboardCheck
+  image: 
+  hint: ''
+  header: Mod Projects
+  description: Learn the foundations of creating a mod with our tools.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: Mod projects
+    titleDesc: "Mods can be created without any tools, through manual edits to YAML files and careful file management. However, we recommend using the tools provided in this SDK to make the process easier. If you have questions not addressed here, don't hesitate to ask for help in the #phantom-modding channel on Discord."
+    sections:
+    - icon: Stack
+      image: 
+      hint: ''
+      header: Mod project manager
+      description: The mod project manager is your first stop. It can store information about the mods you make, unlock a variety of tools and help you prepare your mod for distribution. Try opening it in the Hierarchy tab or click the button below if you're unsure how to find it.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Select
+        actionsOnClick:
+        - !ModToolsFunctionSelectComponent
+          typeName: PhantomBrigade.SDK.ModTools.DataManagerMod
+      childPage: 
+    - icon: InputCursorText
+      image: t1_01_create
+      hint: ''
+      header: Mod ID
+      description: >-
+        Start by opening the "New mod" foldout in the project manager. You will see the grayed out button reading "Create" and an empty field asking for a "Unique ID". Let's choose that ID and it is used as a project folder name and a unique identifier helping the game track your mod. The name is subject to a few rules, but it's fairly straightforward: try typing something and the field will tell you if there's anything wrong.
+
+
+        A few examples:
+
+        - <b>MyName_PaintMod</b>
+
+        - <b>MyName.Balance.ArmorPlateRework</b>
+
+
+        Your players will not see this name, so there's no need to add spaces and make it overly descriptive - just make sure it's unique. You'll have an opportunity to enter a player facing name and description in a bit.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: 
+      hint: ''
+      header: Create the mod
+      description: With the ID filled, you'll the "Create" button unlocked. Press it, and you'll see your ID appear further down, under the "Selected mod" header.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Folder2Open
+      image: t1_02_header
+      hint: ''
+      header: Project folder
+      description: "Don't worry about all the buttons that appear further down for now. You don't need to save just yet: your project was automatically saved to the default folder under <b>AppData/Local/PhantomBrigade/ModsSource</b>. \n\nIf you'd like to see the contents of that folder, click the folder icon to the right of the grayed out project path. The top level information about your mod project is saved into the <b>project.yaml</b> file."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalRichtext
+      image: t1_03_metadata
+      hint: ''
+      header: Metadata
+      description: >-
+        The first thing you'll need to edit as a mod developer is the metadata. This is a set of fields that helps the game make sense of the mod and present it to the player. It contains everything from player facing name, description and version to compatibility restrictions, flags telling the game about the included changes and even an accent color displayed in the mod menu.
+
+
+        Try filling in a name, adjust the description to your liking, link to your page if you'd like. Once you're happy with the metadata, click Save on top of the project.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Folder2Open
+      image: 
+      hint: '* with an exception of Steam Workshop subscriptions'
+      header: User folder & Mods folder
+      description: >-
+        Phantom Brigade stores all user data (including installed mods) in <b>AppData/Local/PhantomBrigade</b>. This user folder is where you'll find saves, settings & screenshots. Mods can be installed into the <b>PhantomBrigade/Mods</b> folder*. This folder is automatically created when you start the game.
+
+
+        You can check out the contents of the User folder and the User mods folder by clicking the respective button below.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Open User folder
+        actionsOnClick:
+        - !ModToolsFunctionOpenFolder
+          parent: User
+          path: ''
+      - label: Open Mods folder
+        actionsOnClick:
+        - !ModToolsFunctionOpenFolder
+          parent: User
+          path: Mods
+      childPage: 
+    - icon: Boxes
+      image: t1_04_export
+      hint: ''
+      header: Export to user folder
+      description: "For now, your mod exists as only a project folder and doesn't make any changes to the game. Still, it might be good to give it a spin to check whether the mod is recognized by the game and see how your metadata looks in the ingame mod menu. \n\nTo do that, you'll need to export your mod project into the user Mods folder.\n\nYou can copy the files and folders manually, but it's much more convenient to click the \"Export to user\" button in project inspector. The SDK will scan your mod project, create a new folder under the user Mods folder based on your ID and will copy all the necessary files over. Give it a try."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: t1_05_ingame
+      hint: ''
+      header: Playing
+      description: >-
+        With your mod now installed, it should be discovered and automatically enabled the next time you start the game. You can verify this by opening the Mods screen in the main menu. You should see the Mod ID as well as the name and description you've entered into metadata on that screen.
+
+
+        Now that you know the basics, it's time to make your mod do something. For now, it's just a metadata file, which has no effects on its own. To change the game, you'll need to include some content. Mods support quite a lot of different content types so check out the rest of the tutorials to learn how to add some of these content types to your mod.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+- icon: TextLeft
+  image: 
+  hint: 
+  header: Config Overrides
+  description: Learn how to make a simple mod overriding some existing configs and adding some new ones. Make sure to check the "Mod projects" tutorial first.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: Config overrides
+    titleDesc: Learn how to make a simple mod overriding some existing configs and adding some new ones. Make sure to check the "Mod projects" tutorial first.
+    sections:
+    - icon: Stack
+      image: t2_01_start
+      hint: ''
+      header: Mod project
+      description: "As in the last tutorial, we'll start by using the mod project manager. Let's assume we're starting where we left off in the last tutorial: you already have a mod project with a chosen ID. \n\nLet's try to make a mod that turns some existing liveries red and adds a new livery option on top of that. After filling in the metadata, your project editor should look like the image above."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Select mod manager
+        actionsOnClick:
+        - !ModToolsFunctionSelectComponent
+          typeName: PhantomBrigade.SDK.ModTools.DataManagerMod
+      childPage: 
+    - icon: FileEarmarkLock2
+      image: t2_02_config_setup
+      hint: ''
+      header: Unlocking configs
+      description: >-
+        Most mods involve modifying game data. Anything from balance tweaks and color changes to entire scenarios and combat abilities is defined in files we call configs.
+
+
+
+        The SDK you download includes the configs from the game and dedicated tools for every single database. To unlock config editing, we first need to create a copy of game data in the mod project folder. To do this, click the "Setup config editing" button.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: FileEarmarkCheck
+      image: t2_03_config_enable
+      hint: ''
+      header: Entering config editing
+      description: >-
+        After a few moments, the operation will complete and config editing would be unlocked for this project going forward.
+
+
+
+        Click the newly available "Enter config editing" button to tell the SDK to start reading files from your mod.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: FileEarmarkCheck
+      image: t2_04_config_ready
+      hint: ''
+      header: Ready to edit
+      description: "You'll see the mod name turn green. With this, you've unlocked all database tools: any config can now be freely modified. Let's try opening one of these databases and changing something."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: TextLeft
+      image: t2_05_hierarchy
+      hint: ''
+      header: Opening a database
+      description: "Every database in the game is available through the same scene hierarchy as the mod project manager, under the DataModel object.\r\n\r\nSince we planned to make a modification to mech liveries, let's select DataModel/Collections/Equipment/Liveries. "
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Stack
+      image: t2_06_db_open
+      hint: ''
+      header: Collection databases
+      description: "Like every other database under Collections, the Livery database contains multiple configs: every YAML file in the associated folder.\r\n\r\nMany databases can contain hundreds of entries, so we strongly recommend enabling the \"filter\" option and entering a query to display a subset of configs that you're after. \n\nLet's choose one of the livery groups and enter part of their name. The rest of this tutorial will assume you enabled the filter and entered \"sunset\" as your query. This should leave us with 4 displayed configs."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: FileText
+      image: t2_07_db_entry
+      hint: ''
+      header: Opening a config
+      description: Unfolding one of the results will show you the config editor. Let's try making use of it and turn all the colors in this livery red.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PencilSquare
+      image: t2_08_db_modified
+      hint: ''
+      header: Modifying the config
+      description: >-
+        Editing data through the editors can be much faster than directly editing YAML files. Instead of typing channel values, here we could click a color field, switch the color picker to HSV mode and drag the hue all the way to the left.
+
+
+        Other editors offer more advanced functionality such as dropdowns, data validation, multi-type fields with custom editors for each possible payload, curve editors and more.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Download
+      image: t2_09_db_save
+      hint: ''
+      header: Saving your changes
+      description: "Once you're happy with your changes, scroll to the top of the database inspector and click Save Data. Well done! Your project now contains the first modification. "
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: FileEarmarkPlus
+      image: t2_10_db_duplicate
+      hint: ''
+      header: Adding a new entry
+      description: >-
+        Let's learn one more thing before we try to export this mod: adding a new config instead of modifying an existing one.
+
+
+
+        We strongly recommend doing this by duplicating an existing config. While liveries are fairly straightforward, many configs in the game are highly complex and might require a precise setup to work. It's usually more effective to duplicate and modify rather than enter everything from scratch.
+
+
+
+        Try this by clicking "Duplicate" next to one of the filtered entries, like on the image above.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: InputCursorText
+      image: t2_11_db_rename
+      hint: ''
+      header: Renaming
+      description: "The duplicated entry will have an autogenerated file name you will probably want to change. This brings us to another option: renaming configs. \r\n\r\nType a new name in the editable field under the name, and you should see the \"Rename\" button appear to the right. Click it to complete the renaming. "
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalCheck
+      image: t2_12_db_new_final
+      hint: ''
+      header: Finalizing
+      description: "With the renaming done, you'll see the header of the config reflect the new name, confirming the change. Configure the new livery as you see fit and hit \"Save data\" on top of the inspector once you're done. This should do for our first config mod: time to export it!"
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Boxes
+      image: t2_13_export
+      hint: ''
+      header: Export
+      description: "Time to return to the mod project manager. Use the PB Mod SDK menu on top of the screen or select it in the Hierarchy. \n\nMake sure you have \"Includes config overrides\" in the metadata: this will tell the game to look for config changes, and will tell the export process to scan for config changes and will tell the game to load them. If you make any changes to the mod project, hit \"Save\".\n\nTime to press \"Export to user\"! This might take a little longer than your first more, but once the process is done, you should see Windows Explorer open the exported folder."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Folder2Open
+      image: t2_14_files
+      hint: ''
+      header: Exported files
+      description: You can confirm whether the changes you expect were detected and included into the mod by browsing through the files. For example, or livery changes would be in Mods/ModName/ConfigOverrides/DataDecomposed/Equipment/Liveries, like on the screenshot above.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: t2_16_ingame_livery
+      hint: ''
+      header: Testing in game
+      description: >-
+        Time to launch the game and see if your mod works! We already know how to check the metadata in the Mods tab of the main menu, so let's jump straight into mech customization and see if we can see our red liveries. Looks like they were loaded!
+
+
+        Congratulations, you've created your first playable mod! Try packaging it into an archive using the "Export to archive" option to the right of "Export to user" and share it with other players!
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+- icon: TextIndentRight
+  image: 
+  hint: 
+  header: Config Edits
+  description: Learn how to define advanced config edits. These modifications can change the same file at the same time, seamlessly support game updates, and more.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: Config edits
+    titleDesc: Learn how to define advanced config edits. These modifications can change the same file at the same time, seamlessly support game updates, and more.
+    sections:
+    - icon: JournalPlus
+      image: t6_01_adding
+      hint: ''
+      header: Mod project
+      description: >-
+        If you have completed the Config Overrides tutorial and are familiar with the databases you'd like to modify, let's begin.
+
+
+        Start by adding a new section to your mod project config. Click "configEdits" in the bottom right component dropdown.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: ViewStacked
+      image: t6_02_layout
+      hint: ''
+      header: Top level
+      description: 'The new section contains two collections: edits to global databases and edits to collection databases. To decide which one you need, explore the Hierarchy tab under the DataModel object.'
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: LayoutTextSidebarReverse
+      image: t6_03_hierarchy
+      hint: ''
+      header: Exploring the hierarchy
+      description: Every database under Collections will be a collection based (multi file) database, while everything under Global will typically be a unique database (single file). When you're ready, click the dropdown in the mod manager and select the DB you want to edit.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: TextIndentRight
+      image: t6_04_edit_global
+      hint: ''
+      header: Creating an edit
+      description: "For each database config, you can create a list of edits. These edits consist of a path to the field as well as a value or operation you need to perform. \n\nFor example, here, after studying what Simulation settings database holds, we decided to edit the stat increases that occur per level. We know the field is called \"partLevelIncrease\", so we enter that to the \"Path\" field and enter a new value below.\n\nRefer to the link below for detailed overview of possible operations, accessing collections and more."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Open reference page
+        actionsOnClick:
+        - !ModToolsFunctionOpenLink
+          url: https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystem
+      childPage: 
+    - icon: Stack
+      image: t6_05_edit_collection
+      hint: ''
+      header: Collections
+      description: "Edits to multi-linker databases include another layer (selecting the config key you're modifying) and include removing a config entirely. "
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Open reference page
+        actionsOnClick:
+        - !ModToolsFunctionOpenLink
+          url: https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystem
+      childPage: 
+    - icon: Stars
+      image: 
+      hint: ''
+      header: Payoff
+      description: While these edits are more time consuming to create, they enable the users to easily combine your mod with other mods and remove the need to redo the mod on every official update. Consider making a mod using config edits, especially if you need to modify a config that could be of interest to many different modifications.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+- icon: PersonPlus
+  image: 
+  hint: ''
+  header: Custom Models
+  description: Learn how to use the Asset Bundles feature to include custom 3D models into your mods.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: Custom models
+    titleDesc: Learn how to use the Asset Bundles feature to include custom 3D models into your mods.
+    sections:
+    - icon: PencilSquare
+      image: t5_00_guide
+      hint: ''
+      header: Creating custom models
+      description: >-
+        You can learn how to create 3D models of mech items in the attached wiki article. Creating suitable assets is a complex process, but we hope that this detailed reference guide will help you along the way!
+
+
+        The rest of this tutorial will cover how to use a completed ItemVisual prefab you get from following that guide. You'll link it to a mod and export it into the game.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Open armor tutorial
+        actionsOnClick:
+        - !ModToolsFunctionOpenLink
+          url: https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-mech-armor-modding
+      - label: Open weapon tutorial
+        actionsOnClick:
+        - !ModToolsFunctionOpenLink
+          url: https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-custom-weapon-assets
+      childPage: 
+    - icon: JournalPlus
+      image: t5_01_adding
+      hint: ''
+      header: Adding the section
+      description: To start using your custom assets, first add the Asset Bundle block to your mod project. Click the "assetBundles" option in the bottom right component dropdown.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_02_list
+      hint: ''
+      header: Adding a bundle
+      description: After adding the new section, you'll see a list. Let's add a new bundle entry to it.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_03_name
+      hint: ''
+      header: Naming a bundle
+      description: In short, a bundle is an archive with some assets that the game can access by name. In the new entry you have added, enter a name. Try to pick one that will not cause collisions with existing asset names and will be convenient to use.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_04_prefab
+      hint: ''
+      header: Choosing an asset
+      description: After completing the item modeling tutorial, you should have one or more prefabs with a top level ItemVisual component. Make sure these prefabs and all of their dependencies (models, materials, textures) are in the same folder and in the SDK project.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_05_file
+      hint: ''
+      header: Linking a file
+      description: Add an entry to the file list of your bundle and select one or more ItemVisual prefabs. You're all done! The next export of your build will include custom 3D assets.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_06_ingame
+      hint: ''
+      header: Testing in the game
+      description: >-
+        As always, keep an eye on the warnings when loading your mods: they will tell you if anything went wrong. If there are no issues, proceed to next step: validate whether your asset has been loaded.
+
+
+        To do that, navigate to the mech customization screen and enter the test console command "<b>mods.asset-preview-prefab MyModName MyBundleName MyAssetName</b>". You should see the asset floating in front of the player mech, like on the screenshot above.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_07_attachment
+      hint: ''
+      header: Testing in the game
+      description: >-
+        With general purpose loading confirmed, you can try using your asset alongside other visuals, in subsystem configs. Modify the "attachments" fields in Subsystem database, entering names of your custom visuals as keys (check out Config Override tutorial). If your custom prefabs are valid item visuals, they'll be registered as "MyBundleName.MyAssetName". You should even be able to use ingame editing commands to add them and experiment with their placement, such as `cr.edit-vis-key`. Check the link below for a list of `cr.edit` console commands facilitating ingame visual editing.
+
+
+        Side note: While only prefabs with ItemVisuals components qualify to be registered as subsystem visuals, AssetBundles can contain any objects at all. With a code mod handling asset use, you might be able to exploit the asset bundle system to add custom visual effects, scene elements or something else entirely.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Open command reference
+        actionsOnClick:
+        - !ModToolsFunctionOpenLink
+          url: https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystemChanges
+      childPage: 
+- icon: Steam
+  image: 
+  hint: ''
+  header: Steam Workshop
+  description: Learn the how to upload your mod to the Steam Workshop.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: Steam Workshop
+    titleDesc: 'Steam Workshop is a convenient way to share your mods with every Steam player. Uploading a mod to that platform allows players to enable it with a single-click subscription through the Steam client: no need to manually download anything.'
+    sections:
+    - icon: JournalPlus
+      image: t3_01_adding
+      hint: ''
+      header: Adding Workshop data
+      description: To start, add the Workshop data to your mod project. Click the "workshop" option in the bottom right component dropdown.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalText
+      image: t3_02_config
+      hint: ''
+      header: Configuring for upload
+      description: The new block has everything Steam needs to process your upload. The two important fields to set for now are "Changes" (where you must enter something to describe your upload for the changelog) and "Tags" (to allow the upload to be categorized). You can also optionally customize name, description and version, but we recommend keeping the default toggles that pull them from parent metadata.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Images
+      image: t3_03_preview
+      hint: ''
+      header: Preview image
+      description: To make your mod easy to find in the Workshop, we recommend providing a preview image. This must be a 512x512 PNG called workshop_preview.png, placed into your mod project folder. Click the folder icon next to the project path on top of your mod to navigate to that folder. Click "Refresh" under the Workshop preview field to refresh the loaded texture if you recently modified it.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: CloudArrowUp
+      image: t3_04_upload
+      hint: ''
+      header: Uploading
+      description: Once you're ready to upload, confirm the visibility of your mod and press "Export to Steam Workshop".
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: XOctagon
+      image: t3_05_steam_init_error
+      hint: ''
+      header: Upload errors
+      description: >-
+        The upload is facilitated by Steam client API. You must have Steam running on your PC, logged into an account with Phantom Brigade. If the SDK fails to connect to Steam, you'll see the message above in the Console tab of Unity Editor.
+
+
+        Once you fix the issue (e.g. start Steam), restart the SDK or force a code reimport and try exporting again.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Check2Square
+      image: t3_05_steam_init_success
+      hint: ''
+      header: Upload success
+      description: If the initialization is successful, you should see a popup asking you to confirm the export followed by a progress bar for upload progress. The first upload might take longer.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: ColumnsGap
+      image: t3_05_steam_upload_done
+      hint: ''
+      header: Checking the portal
+      description: Give Steam a few minutes to process your upload and you should see the mod on the Phantom Brigade portal and/or in your private Workshop file list.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PencilSquare
+      image: t3_06_steam_controls
+      hint: ''
+      header: Editing through Steam
+      description: Once the mod is published through the SDK, you can make a number of changes directly through the Workshop browser. From there, you can delete your mod, change visibility, upload additional screenshots etc.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: BookmarkStar
+      image: t3_06_steam_id
+      hint: ''
+      header: Published ID
+      description: After a successul upload, your mod config should gain a published ID. You'll notice the same number in the URL of your Workshop Steam page. The SDK should auto-save your mod project to preserve it, but we recommend manually saving this number just in case. If you lose it, your upload will create a new, separate mod with a newly generated ID.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: 
+      hint: ''
+      header: Playing
+      description: >-
+        You're done! You and other players (assuming the mod is set to Public) can now subscribe through the Workshop portal and enjoy the mod the next time they launch Phantom Brigade!
+
+
+        Important note: Steam might not always immediately download your Workshop subscriptions. Check Steam Downloads page and verify a download has occurred if you can't see your new subscription in game.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
