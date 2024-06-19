@@ -59,6 +59,7 @@ If you get stuck or experience a bug, please don't hesitate to ask questions in 
 
 - [Odin Inspector](https://odininspector.com): Used for all custom inspectors and drawers. This dependency is licensed for redistribution only as a part of the Phantom Brigade modding SDK and can not be used in other Unity projects. A standalone version of this library can be acquired [here](https://odininspector.com/pricing).
 - YAML serialization used in this project depends on heavily modified old release of YAML.NET. The original project is available [here](https://github.com/aaubry/YamlDotNet). We do not recommend upgrading this dependency.
+- [Steamworks.NET]([https://steamworks.github.io/](https://github.com/rlabrecque/Steamworks.NET)): Used for Steam Workshop uploads. Important: This is an external package downloaded through Git and your project might not import if you do not have Git installed. If you're using a GUI client, you might not have standalone Git installed or might not have a PATH variable set up. [Download Git here](https://www.git-scm.com/download).
 
 ## Contributions
 
