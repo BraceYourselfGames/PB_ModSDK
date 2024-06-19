@@ -84,7 +84,7 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     var idOther = kvp.Key;
                     var modOther = kvp.Value;
- 
+
                     // If this request originates from a registered mod, skip comparison to that mod
                     if (modSource != null && modSource == modOther)
                         continue;
@@ -96,7 +96,7 @@ namespace PhantomBrigade.SDK.ModTools
                     }
                 }
             }
-            
+
             errorDesc = "";
             return true;
         }
@@ -664,10 +664,11 @@ namespace PhantomBrigade.SDK.ModTools
                 Debug.Log ($"Can't generate mod files: mod data is null");
                 return;
             }
-            
+
             modData.DeleteOutputDirectories ();
 
             GenerateAssetBundles (modData);
+            GenerateLibraries (modData);
             var (ok, uds) = CanGenerateConfigOverrides (modData);
             if (!ok)
             {
@@ -687,7 +688,7 @@ namespace PhantomBrigade.SDK.ModTools
         {
             if (modData?.configEdits == null)
                 return;
-            
+
             modData.configEdits.SaveToMod (modData);
         }
 
@@ -713,6 +714,51 @@ namespace PhantomBrigade.SDK.ModTools
 
             Debug.Log ($"Building asset bundles:\n- Temp folder:{buildPathTemp}\n- Final folder: {buildPathFinal}");
             ModToolsAssetBundles.BuildAllAssetBundlesFromList (buildPathTemp, modData.assetBundles.bundleDefinitions, buildPathFinal);
+        }
+
+        static void GenerateLibraries (DataContainerModData modData)
+        {
+            if (modData == null)
+            {
+                return;
+            }
+
+            if (modData.metadata == null)
+            {
+                return;
+            }
+            if (!modData.metadata.includesLibraries)
+            {
+                return;
+            }
+            if (modData.libraryDLLs == null)
+            {
+                return;
+            }
+            if (modData.libraryDLLs.files.Count == 0)
+            {
+                return;
+            }
+
+            var pathLibraries = DataPathHelper.GetCombinedCleanPath (modData.GetModPathProject (), DataContainerModData.librariesFolderName);
+            if (!Directory.Exists (pathLibraries))
+            {
+                Directory.CreateDirectory (pathLibraries);
+            }
+            foreach (var dll in modData.libraryDLLs.files)
+            {
+                if (!dll.enabled)
+                {
+                    continue;
+                }
+                if (!File.Exists (dll.path))
+                {
+                    continue;
+                }
+
+                var pathDest = DataPathHelper.GetCombinedCleanPath (pathLibraries, Path.GetFileName (dll.path));
+                File.Copy (dll.path, pathDest, true);
+            }
         }
 
         static (bool, UtilityDatabaseSerialization) CanGenerateConfigOverrides (DataContainerModData modData)

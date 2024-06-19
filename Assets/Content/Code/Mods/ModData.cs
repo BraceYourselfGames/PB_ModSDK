@@ -37,7 +37,7 @@ namespace PhantomBrigade.Mods
 
         [LabelText ("Copy version text")]
         public bool textFromMetadataVersion = true;
-        
+
         [LabelText ("Copy main text")]
         public bool textFromMetadataMain = true;
 
@@ -53,17 +53,17 @@ namespace PhantomBrigade.Mods
         // [FoldoutGroup ("Internal data", false)]
         // [HideLabel, TextArea (1, 10)]
         public string internalData;
-        
+
         [TextArea (1, 10)]
         public string changes;
-        
+
         #if PB_MODSDK && UNITY_EDITOR
         List<string> workshopTags => SteamWorkshopHelper.tags;
         [ValueDropdown ("@" + nameof(workshopTags))]
         #endif
 
         public HashSet<string> tags = new HashSet<string> ();
-        
+
         // Optional texture preview. Automatically generated texture based on a PNG file
         // placed next to the mod folder under ModFiles/. Not hosted within mod folders
         // because this image should not be included into Steam Workshop mod content uploads
@@ -76,10 +76,10 @@ namespace PhantomBrigade.Mods
         // each redraw doesn't retrigger creation of a new texture
         [YamlIgnore]
         private bool texLoadAttempt;
-        
+
         [YamlIgnore]
         public const string texFilename = "workshop_preview.png";
-        
+
         #if UNITY_EDITOR
 
         [YamlIgnore, HideInInspector]
@@ -140,12 +140,12 @@ namespace PhantomBrigade.Mods
                 }
             }
         }
-        
+
         void RefreshTexturePreview ()
         {
             texLoadAttempt = true;
             texPreview = null;
-            
+
             if (parent == null)
                 return;
 
@@ -166,7 +166,7 @@ namespace PhantomBrigade.Mods
                 filterMode = FilterMode.Bilinear,
                 anisoLevel = 2,
             };
-            
+
             texPreview.LoadImage (pngBytes);
         }
 
@@ -189,11 +189,11 @@ namespace PhantomBrigade.Mods
 
         [PropertyOrder (-2)]
         public int priority;
-        
+
         [ShowInInspector, HorizontalGroup]
         [PropertyRange (0f, 1f)]
         public float colorHue = 0.5f;
-        
+
         [ShowInInspector, HorizontalGroup (50f), HideLabel]
         public Color color => Color.HSVToRGB (colorHue, 1f, 1f);
 
@@ -205,7 +205,7 @@ namespace PhantomBrigade.Mods
 
         [LabelText ("Version")]
         public string ver;
-        
+
         [LabelText ("Web page URL")]
         public string url;
 
@@ -213,18 +213,20 @@ namespace PhantomBrigade.Mods
         [EnableIf (nameof(isConfigEnabled))]
         #endif
         public bool includesConfigOverrides;
-        
+
         [ReadOnly, PropertyTooltip ("Add config edits via the bottom right component menu to enable this flag")]
         public bool includesConfigEdits;
 
         [HideInInspector] // Currently unused
         public bool includesConfigTrees;
 
+        [ReadOnly, PropertyTooltip ("Add library DLLs via the bottom right component menu to enable this flag")]
         public bool includesLibraries;
+
         public bool includesTextures;
         public bool includesLocalizationEdits;
         public bool includesLocalizations;
-        
+
         [ReadOnly, PropertyTooltip ("Add asset bundles via the bottom right component menu to enable this flag")]
         public bool includesAssetBundles;
 
