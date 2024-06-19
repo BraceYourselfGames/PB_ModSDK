@@ -416,6 +416,23 @@ namespace PhantomBrigade.Data
 
         private static StringBuilder sbDesc = new StringBuilder ();
         private static string fallbackString = string.Empty;
+        
+        public static bool IsSubsystemUsed (DataContainerSubsystem subsystem)
+        {
+            if (subsystem == null)
+                return false;
+
+            if (subsystemFixedUsageMap == null || string.IsNullOrEmpty (subsystem.key))
+                return false;
+
+            if (subsystemFixedUsageMap.TryGetValue (subsystem.key, out var partKey))
+            {
+                var preset = GetEntry (partKey, false);
+                return preset != null;
+            }
+            
+            return false;
+        }
 
         public static string TryGetFixedUsageDescription (DataContainerSubsystem subsystem)
         {

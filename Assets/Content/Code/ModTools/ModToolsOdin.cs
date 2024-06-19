@@ -363,7 +363,7 @@ namespace PhantomBrigade.SDK.ModTools
             [typeof(DataContainerSubsystem)] = new HashSet<string> ()
             {
                 nameof(DataContainerSubsystem.Visualize),
-                nameof(DataContainerSubsystem.VisualizeIsolaved),
+                nameof(DataContainerSubsystem.VisualizeIsolated),
             },
             [typeof(DataContainerUnitComposite)] = new HashSet<string> ()
             {
@@ -434,6 +434,11 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 nameof(DataBlockAreaWaypointGroup.Remove),
                 nameof(DataBlockAreaWaypointGroup.RenameDuplicate),
+            },
+            [typeof(DataContainerSubsystem)] = new HashSet<string> ()
+            {
+                nameof(DataContainerSubsystem.FillFromScene),
+                nameof(DataContainerSubsystem.InsertTag),
             },
         };
     }

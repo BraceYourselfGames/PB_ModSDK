@@ -57,13 +57,19 @@ namespace PhantomBrigade.Data
             
             [ShowInInspector]
             public static bool showHardpointCollection = false;
+            
+            [ShowInInspector]
+            public static bool showWorkshop = false;
 
             [ShowInInspector]
             public static bool logUpdates = false;
             
             [ShowInInspector]
             public static bool showPartText = true;
-
+            
+            [ShowInInspector]
+            public static bool showProjectileRelocation = false;
+            
             [ShowInInspector]
             public static int debugGenerationLevel
             {
@@ -118,13 +124,19 @@ namespace PhantomBrigade.Data
                     continue;
                 
                 var key = kvp1.Key;
-                subsystem.children.Clear ();
+                
+                if (subsystem.children != null)
+                    subsystem.children.Clear ();
                 
                 foreach (var kvp2 in data)
                 {
                     var blueprint = kvp2.Value;
                     if (blueprint.parent == key)
+                    {
+                        if (subsystem.children == null)
+                            subsystem.children = new List<string> ();
                         subsystem.children.Add (blueprint.key);
+                    }
                 }
 
                 if (!subsystem.hidden)
@@ -144,6 +156,8 @@ namespace PhantomBrigade.Data
             
             foreach (var kvp1 in data)
                 Postprocess (kvp1.Value);
+            
+            DataHelperUnitEquipment.InvalidateLookups ();
         }
 
 

@@ -9,6 +9,12 @@ namespace PhantomBrigade.Data
 
         private static bool initialized = false;
         
+        public static void InvalidateLookups ()
+        {
+            initialized = false;
+            CheckSetup ();
+        }
+        
         public static void CheckSetup ()
         {
             if (!initialized)

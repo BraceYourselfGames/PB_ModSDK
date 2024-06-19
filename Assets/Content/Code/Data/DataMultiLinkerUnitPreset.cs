@@ -101,10 +101,8 @@ namespace PhantomBrigade.Data
             
             foreach (var kvp1 in data)
                 Postprocess (kvp1.Value);
-
-            #if !PB_MODSDK
+            
             DataHelperUnitEquipment.InvalidateLookups ();
-            #endif
         }
         
         private static StringBuilder sb = new StringBuilder ();
