@@ -395,8 +395,8 @@ namespace PhantomBrigade.ModTools
             {
                 switch (editSource.operation)
                 {
-                    case ModUtilities.EditOperation.Null:
-                    case ModUtilities.EditOperation.Default:
+                    case ModUtilities.EditOperation.NullValue:
+                    case ModUtilities.EditOperation.DefaultValue:
                     case ModUtilities.EditOperation.Remove:
                         valueFinal = op;
                         break;
@@ -425,8 +425,8 @@ namespace PhantomBrigade.ModTools
             {
                 switch (editSource.operation)
                 {
-                    case ModUtilities.EditOperation.Null:
-                    case ModUtilities.EditOperation.Default:
+                    case ModUtilities.EditOperation.NullValue:
+                    case ModUtilities.EditOperation.DefaultValue:
                     case ModUtilities.EditOperation.Remove:
                         valueFinal = op;
                         break;
@@ -441,8 +441,8 @@ namespace PhantomBrigade.ModTools
 
         static readonly Dictionary<int, string> operationMap = new Dictionary<int, string> ()
         {
-            [(int)ModUtilities.EditOperation.Null] = ModUtilities.Constants.Operator.NullValue,
-            [(int)ModUtilities.EditOperation.Default] = ModUtilities.Constants.Operator.DefaultValue,
+            [(int)ModUtilities.EditOperation.NullValue] = ModUtilities.Constants.Operator.NullValue,
+            [(int)ModUtilities.EditOperation.DefaultValue] = ModUtilities.Constants.Operator.DefaultValue,
             [(int)ModUtilities.EditOperation.Add] = ModUtilities.Constants.Operator.Insert,
             [(int)ModUtilities.EditOperation.Remove] = ModUtilities.Constants.Operator.Remove,
         };

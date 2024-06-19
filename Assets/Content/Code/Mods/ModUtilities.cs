@@ -50,8 +50,8 @@ namespace PhantomBrigade.Mods
             Override = 0,
             Add,
             Remove,
-            Default,
-            Null,
+            DefaultValue,
+            NullValue,
         }
 
         public static class Constants
@@ -87,7 +87,7 @@ namespace PhantomBrigade.Mods
             {
 	            if (source == null)
 		            return;
-	            
+
 	            dataTypeName = source.dataTypeName;
 	            root = source.root;
 	            filename = source.filename;
@@ -108,7 +108,7 @@ namespace PhantomBrigade.Mods
 
             public override string ToString ()
             {
-	            return string.Format 
+	            return string.Format
 		        (
 			        "- Data type: {0}\n- Root: {1}\n- Filename: {2}\n- Field path: {3}\n- Raw value: {4}\n- Mod index & ID: {5} / {6}",
 			        dataTypeName,
@@ -135,14 +135,14 @@ namespace PhantomBrigade.Mods
             public object targetKey;
             public FieldInfo fieldInfo;
             public Type targetType;
-            
+
             public EditState () { }
 
             public EditState (EditState source)
             {
 	            CopyFrom (source);
             }
-            
+
             public void CopyFrom (EditState source)
             {
 	            if (source == null)
@@ -163,11 +163,11 @@ namespace PhantomBrigade.Mods
 	            fieldInfo = source.fieldInfo;
 	            targetType = source.targetType;
             }
-            
+
             public void Clear ()
             {
 	            target = null;
-	            op = EditOperation.Default;
+	            op = EditOperation.DefaultValue;
 	            pathSegmentCount = 0;
 	            pathSegmentIndex = 0;
 	            pathSegment = null;
@@ -184,7 +184,7 @@ namespace PhantomBrigade.Mods
 	            var copy = this.MemberwiseClone ();
 	            return copy as EditState;
             }
-            
+
             public override string ToString ()
             {
 	            return string.Format
@@ -203,7 +203,7 @@ namespace PhantomBrigade.Mods
 	            );
             }
         }
-        
+
         private static Type typeString;
 		private static Type typeBool;
 		private static Type typeInt;
@@ -245,17 +245,17 @@ namespace PhantomBrigade.Mods
 			{
 				[Constants.Operator.Insert] = EditOperation.Add,
 				[Constants.Operator.Remove] = EditOperation.Remove,
-				[Constants.Operator.DefaultValue] = EditOperation.Default,
-				[Constants.Operator.NullValue] = EditOperation.Null,
+				[Constants.Operator.DefaultValue] = EditOperation.DefaultValue,
+				[Constants.Operator.NullValue] = EditOperation.NullValue,
 			};
 
 			allowedHashSetOperations = new HashSet<EditOperation>()
 			{
 				EditOperation.Add,
 				EditOperation.Remove,
-				EditOperation.Default,
+				EditOperation.DefaultValue,
 			};
-			
+
 			allowedKeyTypes = new HashSet<Type>()
 			{
 				typeof(string),
@@ -298,7 +298,7 @@ namespace PhantomBrigade.Mods
 		}
 
 		private static List<Type> typesInheritingMultilinker = null;
-		
+
 		/*
 		internal static string FindConfigKeyIfEmpty
 		(
@@ -336,7 +336,7 @@ namespace PhantomBrigade.Mods
 					break;
 				}
 			}
-			
+
 			var fi = AccessTools.DeclaredField (typeMatched, "dataInternal");
 			var d = (IDictionary)fi.GetValue(null);
 			foreach (var k in d.Keys)
@@ -350,7 +350,7 @@ namespace PhantomBrigade.Mods
 			return key;
 		}
 		*/
-		
+
 		internal static string FindConfigKeyIfEmpty
 		(
 			object target,
@@ -452,7 +452,7 @@ namespace PhantomBrigade.Mods
 				return;
 			}
 
-			if (spec.state.op == EditOperation.Null)
+			if (spec.state.op == EditOperation.NullValue)
 			{
 				if (spec.state.targetType.IsValueType)
 				{
@@ -477,7 +477,7 @@ namespace PhantomBrigade.Mods
 				return;
 			}
 
-			if (spec.state.op != EditOperation.Default)
+			if (spec.state.op != EditOperation.DefaultValue)
 			{
 				ReportWarning(
 					spec,
@@ -499,7 +499,7 @@ namespace PhantomBrigade.Mods
 						$"There is no type associated with tag {valueRaw}");
 					return;
 				}
-				
+
 				if (!spec.state.targetType.IsAssignableFrom (instanceType))
 				{
 					ReportWarning(
@@ -560,7 +560,7 @@ namespace PhantomBrigade.Mods
 				"edits",
 				$"Assigning new default object of type {instanceType.Name} to target field");
 		}
-		
+
 		private static (EditOperation, string) ParseOperation(string valueRaw)
 		{
 			foreach (var kvp in operationMap)
@@ -591,7 +591,7 @@ namespace PhantomBrigade.Mods
 		{
 			if (shortcutEditSpec == null)
 				shortcutEditSpec = new EditSpec ();
-			
+
 			if (shortcutEditState == null)
 				shortcutEditState = new EditState ();
 
@@ -606,7 +606,7 @@ namespace PhantomBrigade.Mods
 
 				bool endOfPath = i >= (pathSegmentCount - 1);
 				spec.state.atEndOfPath = endOfPath;
-				
+
 				/*
 				if (spec.state.pathSegmentCount != pathSegmentCount)
 				{
@@ -625,7 +625,7 @@ namespace PhantomBrigade.Mods
 						$"I{i} | Can't proceed past {spec.state.pathSegment} (step {spec.state.pathSegmentIndex}), current target reference is null");
 					return false;
 				}
-				
+
 				// Grab last target
 				if (spec.state.pathSegment == editShorthandLastTarget)
 				{
@@ -637,7 +637,7 @@ namespace PhantomBrigade.Mods
 							"attempts to edit",
 							$"I{i} | Using last edit state {s.pathSegment} (S{s.pathSegmentIndex}/{s.pathSegmentCount}, {(s.atEndOfPath ? "end" : "mid")}), {s.op})\n- Target: ({s.target}) (I{s.targetIndex}, {s.targetKey}, {s.targetType?.Name})\n- Field: {s.fieldInfo?.Name}\n- Parent: {s.parent} ({s.parent?.GetType ()?.Name})");
 					}
-					
+
 					spec.state.CopyFrom (shortcutEditState);
 					continue;
 				}
@@ -645,7 +645,7 @@ namespace PhantomBrigade.Mods
 				spec.state.targetType = spec.state.target.GetType();
 				var child = i > 0;
 				bool recordLastState = !endOfPath;
-				
+
 				if (child && typeIList.IsAssignableFrom(spec.state.targetType))
 				{
 					if (!ProduceListElement(spec))
@@ -660,7 +660,7 @@ namespace PhantomBrigade.Mods
 				{
 					return false;
 				}
-				
+
 				// Save the edit state targeting second-to-last object for later use in shortcuts
 				if (!endOfPath)
 				{
@@ -672,14 +672,14 @@ namespace PhantomBrigade.Mods
 							"attempts to edit",
 							$"Setting last edit target to field {s.pathSegment} (S{s.pathSegmentIndex}/{s.pathSegmentCount}, {(s.atEndOfPath ? "end" : "mid")}), {s.op})\n- Target: ({s.target}) (I{s.targetIndex}, {s.targetKey}, {s.targetType?.Name})\n- Field: {s.fieldInfo?.Name}\n- Parent: {s.parent} ({s.parent?.GetType ()?.Name})");
 					}
-					
+
 					shortcutEditState.CopyFrom (spec.state);
 				}
 			}
 
 			return true;
 		}
-		
+
 		private static bool ProduceListElement(EditSpec spec, bool editPermitted = true)
 		{
 			var list = spec.state.target as IList;
@@ -751,19 +751,19 @@ namespace PhantomBrigade.Mods
 				var isTag = nonEmptyValue && elementType != typeString && spec.valueRaw.StartsWith("!");
 				if (isTag)
 				{
-					spec.state.op = EditOperation.Default;
+					spec.state.op = EditOperation.DefaultValue;
 				}
-				
+
 				// Just in case, prepare another spec to avoid modifying main spec in a way not expected by the rest of the system
 				shortcutEditSpec.CopyFrom (spec);
-				
+
 				// The spec is at collection level right now - to be useful for shortcuts, we need to reattempt this call
 				// We block repeated edits just in case, to avoid an infinite loop
 				ProduceListElement (shortcutEditSpec, false);
-				
+
 				// Fill the reference spec used with a ^ shortcut
 				shortcutEditState.CopyFrom (shortcutEditSpec.state);
-				
+
 				if (logReferenceSetup)
 				{
 					var s = shortcutEditState;
@@ -809,14 +809,14 @@ namespace PhantomBrigade.Mods
 					$"Unable to edit map - casting to IDictionary returns null");
 				return false;
 			}
-			
+
 			// var key = spec.state.pathSegment;
 			// var entryExists = map.Contains(key);
 
 			var entryTypes = map.GetType().GetGenericArguments();
 			var keyType = entryTypes[0];
 			var valueType = entryTypes[1];
-			
+
 			if (!allowedKeyTypes.Contains(keyType))
 			{
 				var permittedTypes = string.Join(", ", allowedKeyTypes.Select(t => t.Name));
@@ -837,12 +837,12 @@ namespace PhantomBrigade.Mods
 					$"Checking map for key {key} (step {spec.state.pathSegmentIndex}) - unable to cast key to the correct type");
 				return false;
 			}
-			
+
 			var entryExists = map.Contains(resolvedKey);
-			
-			
-			
-			
+
+
+
+
 
 			if (spec.state.atEndOfPath && editPermitted)
 			{
@@ -892,14 +892,14 @@ namespace PhantomBrigade.Mods
 						spec,
 						"edits",
 						$"Adding key {key} (step {spec.state.pathSegmentIndex}) to target dictionary | Value: {spec.valueRaw} | Non empty: {!string.IsNullOrWhiteSpace(spec.valueRaw)}");
-					
+
 					// Just in case, prepare another spec to avoid modifying main spec in a way not expected by the rest of the system
 					shortcutEditSpec.CopyFrom (spec);
-				
+
 					// The spec is at collection level right now - to be useful for shortcuts, we need to reattempt this call
 					// We block repeated edits just in case, to avoid an infinite loop
 					ProduceMapEntry (shortcutEditSpec, false);
-				
+
 					// Fill the reference spec used with a ^ shortcut
 					shortcutEditState.CopyFrom (shortcutEditSpec.state);
 
@@ -924,7 +924,7 @@ namespace PhantomBrigade.Mods
 				var isTag = nonEmptyValue && valueType != typeString && spec.valueRaw.StartsWith("!");
 				if (isTag)
 				{
-					spec.state.op = EditOperation.Default;
+					spec.state.op = EditOperation.DefaultValue;
 				}
 
 				return nonEmptyValue;
@@ -973,7 +973,7 @@ namespace PhantomBrigade.Mods
 
 			return true;
 		}
-		
+
 		private static (bool, Action<object>) ValidateEditState(EditSpec spec)
 		{
 			if (spec == null || spec.state == null || spec.state.parent == null)
@@ -984,7 +984,7 @@ namespace PhantomBrigade.Mods
 					$"Current spec doesn't allow validation of edit state due missing spec data | Spec: {spec.ToStringNullCheck ()} | State: {spec?.state.ToStringNullCheck ()} | Parent: {spec?.state?.parent.ToStringNullCheck ()}");
 				return (false, null);
 			}
-			
+
 			var parentType = spec.state.parent.GetType();
 			var parentIsList = typeIList.IsAssignableFrom(parentType);
 			if (parentIsList)
@@ -1039,7 +1039,7 @@ namespace PhantomBrigade.Mods
 			var fieldInfo = spec.state.fieldInfo;
 			return (true, v => fieldInfo.SetValue(parent, v));
 		}
-		
+
 		private static (bool, object) ResolveTargetKey(Type parentType, string targetKey)
 		{
 			if (!parentType.IsGenericType)
@@ -1073,7 +1073,7 @@ namespace PhantomBrigade.Mods
 
 		private static void UpdateStringField(EditSpec spec, Action<object> update)
 		{
-			var v = spec.state.op != EditOperation.Default ? spec.valueRaw : null;
+			var v = spec.state.op != EditOperation.DefaultValue ? spec.valueRaw : null;
 			update(v);
 			Report(
 				spec,
@@ -1083,7 +1083,7 @@ namespace PhantomBrigade.Mods
 
 		private static void UpdateBoolField(EditSpec spec, Action<object> update)
 		{
-			var v = spec.state.op != EditOperation.Default
+			var v = spec.state.op != EditOperation.DefaultValue
 				&& string.Equals(spec.valueRaw, "true", StringComparison.OrdinalIgnoreCase);
 			update(v);
 			Report(
@@ -1095,7 +1095,7 @@ namespace PhantomBrigade.Mods
 		private static void UpdateIntField(EditSpec spec, Action<object> update)
 		{
 			var v = 0;
-			if (spec.state.op != EditOperation.Default)
+			if (spec.state.op != EditOperation.DefaultValue)
 			{
 				if (!int.TryParse(spec.valueRaw, NumberStyles.Integer, CultureInfo.InvariantCulture, out v))
 				{
@@ -1117,7 +1117,7 @@ namespace PhantomBrigade.Mods
 		private static void UpdateFloatField(EditSpec spec, Action<object> update)
 		{
 			var v = 0.0f;
-			if (spec.state.op != EditOperation.Default)
+			if (spec.state.op != EditOperation.DefaultValue)
 			{
 				if (!float.TryParse(spec.valueRaw, NumberStyles.Float, CultureInfo.InvariantCulture, out v))
 				{
@@ -1174,7 +1174,7 @@ namespace PhantomBrigade.Mods
 			object zero)
 		{
 			var v = zero;
-			if (spec.state.op != EditOperation.Default)
+			if (spec.state.op != EditOperation.DefaultValue)
 			{
 				var (ok, parsed) = ParseVectorValue(spec, vectorLength, ctor);
 				if (!ok)
@@ -1236,7 +1236,7 @@ namespace PhantomBrigade.Mods
 		private static void UpdateColorField(EditSpec spec, Action<object> update)
 		{
 			object v = Color.black;
-			if (spec.state.op != EditOperation.Default)
+			if (spec.state.op != EditOperation.DefaultValue)
 			{
 				if (!spec.valueRaw.StartsWith("(") || !spec.valueRaw.EndsWith(")"))
 				{
@@ -1285,7 +1285,7 @@ namespace PhantomBrigade.Mods
 				return;
 			}
 
-			if (spec.state.op == EditOperation.Default)
+			if (spec.state.op == EditOperation.DefaultValue)
 			{
 				if (spec.state.target != null)
 				{
@@ -1350,7 +1350,7 @@ namespace PhantomBrigade.Mods
 			// unsigned integer value.
 			var v = values.GetValue(0);
 
-			if (spec.state.op != EditOperation.Default)
+			if (spec.state.op != EditOperation.DefaultValue)
 			{
 				var names = Enum.GetNames(targetType);
 				var idx = Array.FindIndex(names, name => string.CompareOrdinal(name, spec.valueRaw) == 0);
@@ -1371,7 +1371,7 @@ namespace PhantomBrigade.Mods
 				"edits",
 				$"Enum field modified with value {v}");
 		}
-		
+
 		private static object DefaultValue(Type elementType)
 		{
 			if (defaultValueMap.TryGetValue(elementType, out var value))
