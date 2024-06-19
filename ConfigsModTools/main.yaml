@@ -796,11 +796,7 @@ sections:
       conditionsEnabled: 
       conditionsComplete: 
       actionsOnClick: 
-      buttons:
-      - label: Open command reference
-        actionsOnClick:
-        - !ModToolsFunctionOpenLink
-          url: https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystemChanges
+      buttons: 
       childPage: 
 - icon: Steam
   image: 
@@ -818,6 +814,25 @@ sections:
     titleHeader: Steam Workshop
     titleDesc: 'Steam Workshop is a convenient way to share your mods with every Steam player. Uploading a mod to that platform allows players to enable it with a single-click subscription through the Steam client: no need to manually download anything.'
     sections:
+    - icon: Git
+      image: 
+      hint: ''
+      header: Steamworks.NET & Git
+      description: >-
+        Before you start, make sure your computer has Git installed: without it, this Unity project would not be able to download the Steamworks.NET library. You will see Package Manager errors in your Console and won't be able to upload your mods to the Steam Workshop if this dependency fails to install.
+
+
+        If you used a GUI client to download this project, you might not have a globally available Git executable installed, leading to failed package download. Please download and install Git from the link below and restart the editor if you experience this issue.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons:
+      - label: Download Git
+        actionsOnClick:
+        - !ModToolsFunctionOpenLink
+          url: https://git-scm.com/downloads
+      childPage: 
     - icon: JournalPlus
       image: t3_01_adding
       hint: ''
