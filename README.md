@@ -16,7 +16,7 @@ We can't wait to see what you create!
 Quick setup overview:
 - Download & install [Unity Hub](https://unity.com/download)
 - Open the download page for [Unity 2020.3.34 LTS](https://unity.com/releases/editor/whats-new/2020.3.34). Click **Install** on top of the page to begin installation through Unity Hub. If this doesn't work, try downloading a Windows installer through links at the bottom of that page.
-- Install git and make sure it is in your `PATH`.
+- Install git and make sure it is in your `PATH`. If you're using a GUI client, you might not have standalone git.exe installed or might not have `PATH` set up. [Download Git here](https://www.git-scm.com/download).
 - Download the project from this repository. We strongly recommend downloading (cloning) through Git to facilitate easy updating.
 - In Unity Hub, navigate to the **Projects** tab and choose **Open**, selecting the folder with the project. Wait for the project to import.
 - Once the project is open, click **PB Mod SDK/Getting Started** in the top menu of the Unity Editor
@@ -59,7 +59,7 @@ If you get stuck or experience a bug, please don't hesitate to ask questions in 
 
 - [Odin Inspector](https://odininspector.com): Used for all custom inspectors and drawers. This dependency is licensed for redistribution only as a part of the Phantom Brigade modding SDK and can not be used in other Unity projects. A standalone version of this library can be acquired [here](https://odininspector.com/pricing).
 - YAML serialization used in this project depends on heavily modified old release of YAML.NET. The original project is available [here](https://github.com/aaubry/YamlDotNet). We do not recommend upgrading this dependency.
-- [Steamworks.NET]([https://steamworks.github.io/](https://github.com/rlabrecque/Steamworks.NET)): Used for Steam Workshop uploads. Important: This is an external package downloaded through Git and your project might not import if you do not have Git installed. If you're using a GUI client, you might not have standalone Git installed or might not have a PATH variable set up. [Download Git here](https://www.git-scm.com/download).
+- [Steamworks.NET]([https://steamworks.github.io/](https://github.com/rlabrecque/Steamworks.NET)): Used for Steam Workshop uploads. Important: This is an external package downloaded through Git and your project might not import if you do not have Git installed.
 
 ## Contributions
 
