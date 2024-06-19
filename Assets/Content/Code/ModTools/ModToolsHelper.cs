@@ -43,14 +43,14 @@ namespace PhantomBrigade.SDK.ModTools
         public static bool IsUnityVersionSupported (bool strict = true)
         {
             var unityVersion = Application.unityVersion;
-            bool match = 
-                strict ? 
-                string.Equals (unityVersion, unityVersionExpected, StringComparison.Ordinal) : 
+            bool match =
+                strict ?
+                string.Equals (unityVersion, unityVersionExpected, StringComparison.Ordinal) :
                 unityVersion.Contains (unityVersionExpectedMajor, StringComparison.Ordinal);
 
             return match;
         }
-        
+
         public static bool ValidateModID (string id, DataContainerModData modSource, IDictionary<string, DataContainerModData> mods, out string errorDesc)
         {
             if (string.IsNullOrWhiteSpace (id))
@@ -668,7 +668,9 @@ namespace PhantomBrigade.SDK.ModTools
             modData.DeleteOutputDirectories ();
 
             GenerateAssetBundles (modData);
+            #if UNITY_EDITOR
             GenerateLibraries (modData);
+            #endif
             var (ok, uds) = CanGenerateConfigOverrides (modData);
             if (!ok)
             {
@@ -716,6 +718,7 @@ namespace PhantomBrigade.SDK.ModTools
             ModToolsAssetBundles.BuildAllAssetBundlesFromList (buildPathTemp, modData.assetBundles.bundleDefinitions, buildPathFinal);
         }
 
+        #if UNITY_EDITOR
         static void GenerateLibraries (DataContainerModData modData)
         {
             if (modData == null)
@@ -760,6 +763,7 @@ namespace PhantomBrigade.SDK.ModTools
                 File.Copy (dll.path, pathDest, true);
             }
         }
+        #endif
 
         static (bool, UtilityDatabaseSerialization) CanGenerateConfigOverrides (DataContainerModData modData)
         {
