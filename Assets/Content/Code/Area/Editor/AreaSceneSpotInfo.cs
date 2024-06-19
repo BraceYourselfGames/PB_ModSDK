@@ -228,7 +228,7 @@ namespace Area
 
         public static readonly Dictionary<int, HashSet<int>> UnfinishedTiles = new Dictionary<int, HashSet<int>> ()
         {
-            [10] = new HashSet<int> ()
+            [AreaTilesetHelper.idOfFallback] = new HashSet<int> ()
             {
                 TilesetUtility.configurationFloor << 8 | 1,
             },
