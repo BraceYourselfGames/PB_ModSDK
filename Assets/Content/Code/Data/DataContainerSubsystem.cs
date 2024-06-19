@@ -1039,15 +1039,37 @@ namespace PhantomBrigade.Data
             #endif
         }
 
+        private static string keyVisualizedLast = null;
+
         [EnableIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
         [Button ("Visualize (processed)"), ButtonGroup, PropertyOrder (-3)]
         [ShowIf ("AreVisualsVisible")]
-        public void Visualize () => DataMultiLinkerSubsystem.VisualizeObject (this, true);
+        public void Visualize ()
+        {
+            bool focus = false;
+            if (!string.Equals (keyVisualizedLast, key))
+            {
+                keyVisualizedLast = key;
+                focus = true;
+            }
+            
+            DataMultiLinkerSubsystem.VisualizeObject (this, true, focus: focus);
+        }
 
         [EnableIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
         [Button ("Visualize (isolated)"), ButtonGroup, PropertyOrder (-3)]
         [ShowIf ("AreVisualsVisible")]
-        public void VisualizeIsolaved () => DataMultiLinkerSubsystem.VisualizeObject (this, false);
+        public void VisualizeIsolaved ()
+        {
+            bool focus = false;
+            if (!string.Equals (keyVisualizedLast, key))
+            {
+                keyVisualizedLast = key;
+                focus = true;
+            }
+            
+            DataMultiLinkerSubsystem.VisualizeObject (this, false, focus: focus);
+        }
 
         #if !PB_MODSDK
 
