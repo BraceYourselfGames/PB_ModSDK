@@ -165,8 +165,8 @@ namespace Area
                 var style = k == firstButton
                     ? SirenixGUIStyles.MiniButtonLeft
                     : k == lastButton
-                            ? SirenixGUIStyles.MiniButtonRight
-                            : SirenixGUIStyles.MiniButtonMid;
+                        ? SirenixGUIStyles.MiniButtonRight
+                        : SirenixGUIStyles.MiniButtonMid;
                 var bg = GUI.backgroundColor;
                 if (k == value)
                 {
@@ -188,8 +188,8 @@ namespace Area
             [(int)AreaManager.EditingVolumeBrush.Square3x3] = "3x3R",
             [(int)AreaManager.EditingVolumeBrush.Circle] = "3x3C",
         };
-        static readonly List<int> labelMapKeys = labelMap.Keys.OrderBy (k => k).ToList();
-        static readonly int firstButton = labelMapKeys.First();
+        static readonly List<int> labelMapKeys = labelMap.Keys.OrderBy (k => k).ToList ();
+        static readonly int firstButton = labelMapKeys.First ();
         static readonly int lastButton = labelMapKeys.Last ();
     }
 
@@ -230,8 +230,8 @@ namespace Area
             [(int)AreaManager.RoadSubtype.ConcreteCurb] = "C+C",
             [(int)AreaManager.RoadSubtype.TileCurb] = "T+C",
         };
-        static readonly List<int> labelMapKeys = labelMap.Keys.OrderBy (k => k).ToList();
-        static readonly int firstButton = labelMapKeys.First();
+        static readonly List<int> labelMapKeys = labelMap.Keys.OrderBy (k => k).ToList ();
+        static readonly int firstButton = labelMapKeys.First ();
         static readonly int lastButton = labelMapKeys.Last ();
     }
 
@@ -410,9 +410,9 @@ namespace Area
 
             var v = ValueEntry.SmartValue;
             var rects = CalcRects (rectControl);
-            var x = DrawIntField(rects[0], rects[1], fieldLabels[0], v.x, enabledX);
-            var z = DrawIntField(rects[2], rects[3], fieldLabels[1], v.z, enabledZ);
-            var y = DrawIntField(rects[4], rects[5], fieldLabels[2], v.y, enabledY);
+            var x = DrawIntField (rects[0], rects[1], fieldLabels[0], v.x, enabledX);
+            var z = DrawIntField (rects[2], rects[3], fieldLabels[1], v.z, enabledZ);
+            var y = DrawIntField (rects[4], rects[5], fieldLabels[2], v.y, enabledY);
             if (x == v.x && z == v.z && y == v.y)
             {
                 return;
@@ -711,6 +711,51 @@ namespace Area
             {
                 Property.Children[i].Draw ();
             }
+            GUILayout.EndVertical ();
+        }
+    }
+
+    sealed class PropModeSelectedPropsDrawer : OdinValueDrawer<PropModeSelectedProps>
+    {
+        protected override void DrawPropertyLayout (GUIContent label)
+        {
+            var child = Property.Children[0];
+            for (var i = 0; i < child.Children.Count; i += 1)
+            {
+                var grandchild = child.Children[i];
+                if (grandchild.ValueEntry.WeakSmartValue == null)
+                {
+                    continue;
+                }
+                var entry = (PropModePanelEntry)grandchild.ValueEntry.WeakSmartValue;
+                if (!entry.isSelected)
+                {
+                    grandchild.Draw ();
+                    continue;
+                }
+                var colorPrevious = GUI.backgroundColor;
+                GUI.backgroundColor = Color.Lerp (GUI.backgroundColor, Color.cyan, 0.35f);
+                grandchild.Draw ();
+                GUI.backgroundColor = colorPrevious;
+            }
+        }
+    }
+
+    sealed class RightFoldoutGroupAttributeDrawer : OdinGroupDrawer<RightFoldoutGroupAttribute>
+    {
+        protected override void DrawPropertyLayout (GUIContent label)
+        {
+            GUILayout.BeginVertical ("Box");
+            var width = label != null ? SirenixGUIStyles.RightAlignedWhiteMiniLabel.CalcSize (label).x + 20f : 100f;
+            Property.State.Expanded = UtilityCustomInspector.DrawFoldout (Attribute.Title, Property.State.Expanded, GUILayoutOptions.MinWidth (width).ExpandWidth ());
+            if (SirenixEditorGUI.BeginFadeGroup (this, Property.State.Expanded))
+            {
+                for (var i = 0; i < Property.Children.Count; i += 1)
+                {
+                    Property.Children[i].Draw ();
+                }
+            }
+            SirenixEditorGUI.EndFadeGroup ();
             GUILayout.EndVertical ();
         }
     }

@@ -4,16 +4,26 @@ namespace Area
 {
     using Scene;
 
+    enum PropOrientationChange
+    {
+        None = 0,
+        Snap,
+        RotateClockwise,
+        RotateAnticlockwise,
+        Flip,
+        Reset,
+    }
+
     interface PropEditFunctions
     {
         (byte, bool) GetOrientation ();
         Vector3 GetOffset ();
-        ref Vector4 PrimaryColor { get; }
-        ref Vector4 SecondaryColor { get; }
-        void ChangeOrientation (bool snap, bool rotateLeft, bool rotateRight, bool flip, bool reset);
+        Vector4 GetPrimaryColor ();
+        Vector4 GetSecondaryColor ();
+        void ChangeOrientation (PropOrientationChange change);
         void ChangeOffset (float x, float z);
+        void ChangeColor (Vector4 primary, Vector4 secondary);
         void CopyPastePosition (PropCopyPasteReset cpr);
-        void OnColorGUIChanged ();
         void CopyPasteColor (PropCopyPasteReset cpr);
     }
 
@@ -21,27 +31,26 @@ namespace Area
     {
         public (byte, bool) GetOrientation () => (propEditInfo.Rotation, propEditInfo.Flipped);
         public Vector3 GetOffset () => new Vector3 (propEditInfo.OffsetX, 0, propEditInfo.OffsetZ);
-        public ref Vector4 PrimaryColor => ref propEditInfo.HSBPrimary;
-        public ref Vector4 SecondaryColor => ref propEditInfo.HSBSecondary;
+        public Vector4 GetPrimaryColor () => propEditInfo.HSBPrimary;
+        public Vector4 GetSecondaryColor () => propEditInfo.HSBSecondary;
 
-        public void ChangeOrientation (bool snap, bool rotateLeft, bool rotateRight, bool flip, bool reset)
+        public void ChangeOrientation (PropOrientationChange change)
         {
-            if (rotateLeft)
+            switch (change)
             {
-                propEditInfo.Rotation = propEditInfo.Rotation.OffsetAndWrap (false, 3);
-            }
-            if (rotateRight)
-            {
-                propEditInfo.Rotation = propEditInfo.Rotation.OffsetAndWrap (true, 3);
-            }
-            if (flip)
-            {
-                propEditInfo.Flipped = !propEditInfo.Flipped;
-            }
-            if (reset)
-            {
-                propEditInfo.Rotation = 0;
-                propEditInfo.Flipped = false;
+                case PropOrientationChange.RotateClockwise:
+                    propEditInfo.Rotation = propEditInfo.Rotation.OffsetAndWrap (false, 3);
+                    break;
+                case PropOrientationChange.RotateAnticlockwise:
+                    propEditInfo.Rotation = propEditInfo.Rotation.OffsetAndWrap (true, 3);
+                    break;
+                case PropOrientationChange.Flip:
+                    propEditInfo.Flipped = !propEditInfo.Flipped;
+                    break;
+                case PropOrientationChange.Reset:
+                    propEditInfo.Rotation = 0;
+                    propEditInfo.Flipped = false;
+                    break;
             }
         }
 
@@ -49,6 +58,12 @@ namespace Area
         {
             propEditInfo.OffsetX = x;
             propEditInfo.OffsetZ = z;
+        }
+
+        public void ChangeColor (Vector4 primary, Vector4 secondary)
+        {
+            propEditInfo.HSBPrimary = primary;
+            propEditInfo.HSBSecondary = secondary;
         }
 
         public void CopyPastePosition (PropCopyPasteReset cpr)
@@ -69,8 +84,6 @@ namespace Area
                     break;
             }
         }
-
-        public void OnColorGUIChanged () { }
 
         public void CopyPasteColor (PropCopyPasteReset cpr)
         {
@@ -105,54 +118,53 @@ namespace Area
     {
         public (byte, bool) GetOrientation () => (placement.rotation, placement.flipped);
         public Vector3 GetOffset () => new Vector3 (placement.offsetX, 0f, placement.offsetZ);
-        public ref Vector4 PrimaryColor => ref placement.hsbPrimary;
-        public ref Vector4 SecondaryColor => ref placement.hsbSecondary;
+        public Vector4 GetPrimaryColor () => placement.hsbPrimary;
+        public Vector4 GetSecondaryColor () => placement.hsbSecondary;
 
-        public void ChangeOrientation (bool snap, bool rotateLeft, bool rotateRight, bool flip, bool reset)
+        public void ChangeOrientation (PropOrientationChange change)
         {
-            if (snap)
+            switch (change)
             {
-                am.SnapPropRotation (placement);
+                case PropOrientationChange.Snap:
+                    am.SnapPropRotation (placement);
+                    return;
+                case PropOrientationChange.RotateClockwise:
+                    placement.rotation = placement.rotation.OffsetAndWrap (false, 3);
+                    break;
+                case PropOrientationChange.Flip:
+                    placement.flipped = !placement.flipped;
+                    break;
+                case PropOrientationChange.RotateAnticlockwise:
+                    placement.rotation = placement.rotation.OffsetAndWrap (true, 3);
+                    break;
+                case PropOrientationChange.Reset:
+                    placement.rotation = 0;
+                    placement.flipped = false;
+                    break;
+                default:
+                    return;
             }
 
-            if (placement == propEditInfo.PlacementHandled && command == PropEditCommand.RotateLeft)
+            if (!placement.pivotIndex.IsValidIndex (am.points))
             {
-                rotateLeft = true;
-            }
-            if (rotateLeft)
-            {
-                placement.rotation = placement.rotation.OffsetAndWrap (false, 3);
-                am.ExecutePropPlacement (placement);
+                return;
             }
 
-            if (placement == propEditInfo.PlacementHandled && command == PropEditCommand.Flip)
-            {
-                flip = true;
-            }
-            if (flip)
-            {
-                placement.flipped = !placement.flipped;
-                am.ExecutePropPlacement (placement);
-            }
-
-            if (rotateRight)
-            {
-                placement.rotation = placement.rotation.OffsetAndWrap (true, 3);
-                am.ExecutePropPlacement (placement);
-            }
-
-            if (reset)
-            {
-                placement.rotation = 0;
-                placement.flipped = false;
-                am.ExecutePropPlacement (placement);
-            }
+            var point = am.points[placement.pivotIndex];
+            placement.Setup (am, point);
         }
 
         public void ChangeOffset (float x, float z)
         {
             placement.offsetX = x;
             placement.offsetZ = z;
+        }
+
+        public void ChangeColor (Vector4 primary, Vector4 secondary)
+        {
+            placement.hsbPrimary = primary;
+            placement.hsbSecondary = secondary;
+            placement.UpdateMaterial_HSBOffsets (placement.hsbPrimary, placement.hsbSecondary);
         }
 
         public void CopyPastePosition (PropCopyPasteReset cpr)
@@ -176,55 +188,40 @@ namespace Area
             }
         }
 
-        public void OnColorGUIChanged () => placement.UpdateMaterial_HSBOffsets (placement.hsbPrimary, placement.hsbSecondary);
-
         public void CopyPasteColor (PropCopyPasteReset cpr)
         {
-            var copy = cpr == PropCopyPasteReset.Copy;
-            if (placement == propEditInfo.PlacementHandled && command == PropEditCommand.CopyColor)
+            switch (cpr)
             {
-                copy = true;
-            }
-            if (copy)
-            {
-                clipboardPropColor.HSBPrimary = placement.hsbPrimary;
-                clipboardPropColor.HSBSecondary = placement.hsbSecondary;
-                Debug.Log ("AM | Prop HSV copied");
-                return;
-            }
-
-            var paste = cpr == PropCopyPasteReset.Paste;
-            if (placement == propEditInfo.PlacementHandled && command == PropEditCommand.PasteColor)
-            {
-                paste = true;
-            }
-            if (paste)
-            {
-                placement.hsbPrimary = clipboardPropColor.HSBPrimary;
-                placement.hsbSecondary = clipboardPropColor.HSBSecondary;
-                placement.UpdateMaterial_HSBOffsets (placement.hsbPrimary, placement.hsbSecondary);
-                Debug.Log ("AM | Prop HSV pasted");
-                return;
-            }
-
-            if (cpr == PropCopyPasteReset.Reset)
-            {
-                placement.hsbPrimary = Constants.defaultHSBOffset;
-                placement.hsbSecondary = Constants.defaultHSBOffset;
-                placement.UpdateMaterial_HSBOffsets (placement.hsbPrimary, placement.hsbSecondary);
+                case PropCopyPasteReset.Copy:
+                    clipboardPropColor.HSBPrimary = placement.hsbPrimary;
+                    clipboardPropColor.HSBSecondary = placement.hsbSecondary;
+                    Debug.Log ("AM | Prop HSV copied");
+                    break;
+                case PropCopyPasteReset.Paste:
+                    placement.hsbPrimary = clipboardPropColor.HSBPrimary;
+                    placement.hsbSecondary = clipboardPropColor.HSBSecondary;
+                    placement.UpdateMaterial_HSBOffsets (placement.hsbPrimary, placement.hsbSecondary);
+                    Debug.Log ("AM | Prop HSV pasted");
+                    break;
+                case PropCopyPasteReset.Reset:
+                    placement.hsbPrimary = Constants.defaultHSBOffset;
+                    placement.hsbSecondary = Constants.defaultHSBOffset;
+                    placement.UpdateMaterial_HSBOffsets (placement.hsbPrimary, placement.hsbSecondary);
+                    break;
             }
         }
 
-        public SelectedPropFunctions (AreaSceneBlackboard bb)
+        public readonly AreaPlacementProp placement;
+
+        public SelectedPropFunctions (AreaSceneBlackboard bb, AreaPlacementProp placement)
         {
+            this.placement = placement;
+            am = bb.am;
             propEditInfo = bb.propEditInfo;
             clipboardPropColor = bb.clipboardPropColor;
         }
 
-        public AreaManager am;
-        public PropEditCommand command;
-        public AreaPlacementProp placement;
-
+        readonly AreaManager am;
         readonly PropEditInfo propEditInfo;
         readonly ClipboardPropColor clipboardPropColor;
     }

@@ -33,10 +33,20 @@ namespace Area.Scene
     enum PropEditCommand
     {
         None = 0,
+        Snap,
         RotateLeft,
+        RotateRight,
         Flip,
+        ResetRotation,
+        Offset,
+        CopyPosition,
+        PastePosition,
+        ResetPosition,
+        ChangeColor,
         CopyColor,
         PasteColor,
+        ResetColor,
+        ChangeSelected,
         DeleteSelected,
     }
 

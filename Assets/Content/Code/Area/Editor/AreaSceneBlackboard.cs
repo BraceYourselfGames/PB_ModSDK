@@ -65,7 +65,10 @@ namespace Area
         public readonly PropEditInfo propEditInfo = new PropEditInfo ();
         public PropEditingMode propEditingMode = PropEditingMode.Place;
         public readonly ClipboardPropColor clipboardPropColor = new ClipboardPropColor();
+        public (float X, float Z) propOffset;
+        public (Vector4 Primary, Vector4 Secondary) propColor;
         public PropEditCommand propEditCommand;
+        public PropEditFunctions propEditFunctions;
 
         public bool hoverActive;
         public AreaVolumePoint lastPointHovered;

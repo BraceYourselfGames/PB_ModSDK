@@ -442,6 +442,7 @@ namespace Area
         public string Z;
     }
 
+    [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property)]
     public sealed class MiniSliderAttribute : Attribute
     {
         public readonly string MinGetter;
@@ -478,5 +479,17 @@ namespace Area
     public sealed class BoxWithBackgroundGroupAttribute : PropertyGroupAttribute
     {
         public BoxWithBackgroundGroupAttribute(string path) : base(path) { }
+    }
+
+    [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method)]
+    public sealed class RightFoldoutGroupAttribute : PropertyGroupAttribute
+    {
+        public readonly string Title;
+
+        public RightFoldoutGroupAttribute (string path, string title)
+            : base (path)
+        {
+            Title = title;
+        }
     }
 }
