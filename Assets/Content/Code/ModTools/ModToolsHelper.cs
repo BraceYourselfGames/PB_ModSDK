@@ -37,6 +37,20 @@ namespace PhantomBrigade.SDK.ModTools
 
     public static class ModToolsHelper
     {
+        public const string unityVersionExpectedMajor = "2020.3";
+        public const string unityVersionExpected = "2020.3.34f1";
+
+        public static bool IsUnityVersionSupported (bool strict = true)
+        {
+            var unityVersion = Application.unityVersion;
+            bool match = 
+                strict ? 
+                string.Equals (unityVersion, unityVersionExpected, StringComparison.Ordinal) : 
+                unityVersion.Contains (unityVersionExpectedMajor, StringComparison.Ordinal);
+
+            return match;
+        }
+        
         public static bool ValidateModID (string id, DataContainerModData modSource, IDictionary<string, DataContainerModData> mods, out string errorDesc)
         {
             if (string.IsNullOrWhiteSpace (id))
@@ -690,6 +704,12 @@ namespace PhantomBrigade.SDK.ModTools
 
             var buildPathFinal = Path.Combine (modData.GetModPathProject (), DataContainerModData.assetBundlesFolderName);
             var buildPathTemp = "Temp/AssetBundleBuilds";
+
+            if (IsUnityVersionSupported (true))
+            {
+                Debug.LogError ($"Warning! Exported assets will only be loaded by the game if your Editor version exactly matches the engine version of the game. Game engine version: {unityVersionExpected}. Editor engine version: {Application.unityVersion}");
+                // return; // Probably best not to return on this so that folks can catch additional errors and learn how the whole process executes
+            }
 
             Debug.Log ($"Building asset bundles:\n- Temp folder:{buildPathTemp}\n- Final folder: {buildPathFinal}");
             ModToolsAssetBundles.BuildAllAssetBundlesFromList (buildPathTemp, modData.assetBundles.bundleDefinitions, buildPathFinal);

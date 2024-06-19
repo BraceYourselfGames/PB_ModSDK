@@ -24,9 +24,17 @@ namespace PhantomBrigade.SDK.ModTools
     [Serializable, HideDuplicateReferenceBox]
     public class ModAssetBundles
     {
+        [InfoBox ("@" + nameof (GetVersionWarningText), InfoMessageType.Error, VisibleIf = nameof (IsVersionWarningVisible))]
         [ShowInInspector]
         [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = "@new AssetBundleDesc ()")]
         public List<AssetBundleDesc> bundleDefinitions = new List<AssetBundleDesc> ();
+        
+        #if UNITY_EDITOR
+        
+        private bool IsVersionWarningVisible => !ModToolsHelper.IsUnityVersionSupported ();
+        private string GetVersionWarningText => $"Warning! Exported assets will only be loaded by the game if your Editor version exactly matches the engine version of the game.\n\n- Game engine version: {ModToolsHelper.unityVersionExpected}\n- Editor engine version: {Application.unityVersion}";
+
+        #endif
     }
 
     [LabelWidth (100f)]
