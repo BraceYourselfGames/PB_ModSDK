@@ -10,7 +10,6 @@ using UnityEngine;
 using YamlDotNet.Serialization;
 
 #if UNITY_EDITOR
-using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
@@ -37,6 +36,32 @@ namespace PhantomBrigade.SDK.ModTools
         #endif
     }
 
+    #if UNITY_EDITOR
+    [Serializable, HideReferenceObjectPicker, HideDuplicateReferenceBox]
+    public sealed class LibraryDLLs
+    {
+        [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = nameof(CreateEntry))]
+        public List<LibraryDLL> files = new List<LibraryDLL> ();
+
+        LibraryDLL CreateEntry () => new LibraryDLL ();
+    }
+
+    [Serializable, HideReferenceObjectPicker, HideDuplicateReferenceBox]
+    public sealed class LibraryDLL
+    {
+        [HorizontalGroup (20f)]
+        [PropertySpace (2f)]
+        [HideLabel]
+        public bool enabled = true;
+
+        [HorizontalGroup]
+        [EnableIf (nameof(enabled))]
+        [Sirenix.OdinInspector.FilePath (AbsolutePath = true, IncludeFileExtension = true, RequireExistingPath = true, UseBackslashes = false)]
+        [HideLabel]
+        public string path;
+    }
+    #endif
+
     [LabelWidth (100f)]
     public class ModConfigStatus
     {
@@ -61,21 +86,21 @@ namespace PhantomBrigade.SDK.ModTools
         [PropertyTooltip ("$" + nameof (configsPath))]
         [HideLabel, ElidedPath]
         [GUIColor (nameof(colorSelected))]
-        public static string configsPath 
-        { 
+        public static string configsPath
+        {
             get => DataContainerModData.selectedMod?.GetModPathConfigs ();
             set
             {
 
             }
         }
-        
+
         [ShowIf (nameof(hasSelectedMod)), HorizontalGroup (groupHr, 100)]
         [Button ("Open mod", ButtonHeight = 24)]
         [GUIColor (nameof(colorSelected))]
         [PropertySpace (0f, 12f)]
         private static void OpenModManagerInline () => DataManagerMod.SelectObject ();
-        
+
         [HideIf (nameof(hasSelectedMod))]
         [InfoBox ("You are viewing the original game data. It is a backup that can not be modified. Select a mod and enter config editing to unlock this inspector.", InfoMessageType.None)]
         [Button (SdfIconType.FileLock2Fill, "Open mod manager", ButtonHeight = 32)]
@@ -90,7 +115,7 @@ namespace PhantomBrigade.SDK.ModTools
 
         private static Color colorWarning => ModToolsColors.HighlightNeonSepia;
         private static Color colorSelected => DataContainerModData.colorSelected;
-        
+
         #endif
     }
 
@@ -148,7 +173,7 @@ namespace PhantomBrigade.SDK.ModTools
         [EnableGUI, ElidedPath]
         [InlineButton ("DeleteUserModFolder", "Delete", ShowIf = nameof(showDeleteUserModFolder))]
         public string userModFolder => GetModPathUser ();
-        
+
         public void EnableConfigs ()
         {
             EditorCoroutineUtility.StartCoroutineOwnerless (EnableConfigsIE (GUIHelper.CurrentWindow));
@@ -194,7 +219,7 @@ namespace PhantomBrigade.SDK.ModTools
                 Debug.LogWarning ($"Can't export the mod ID {id} to {targetDesc}, local project folder doesn't exist. Make sure to save this DB. Expected path: " + projectPath);
                 return false;
             }
-            
+
             if (string.IsNullOrEmpty (dirPathTarget))
             {
                 Debug.LogWarning ($"Can't export the mod ID {id}, {targetDesc} folder not provided. Make sure to check the ID and project folder of this mod.");
@@ -219,7 +244,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             return success;
         }
-        
+
         public void ExportToArchive ()
         {
             ModToolsHelper.GenerateModFiles (this, ExportToArchiveFinalize);
@@ -263,7 +288,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             Directory.Delete (dirPathPkg, true);
         }
-        
+
         public void DeleteUserModFolder ()
         {
             var dirPathUser = GetModPathUser ();
@@ -302,7 +327,7 @@ namespace PhantomBrigade.SDK.ModTools
         public ModWorkshopData workshop;
 
         public bool HasWorkshop => workshop != null && metadata != null;
-        
+
         [BoxGroup (OdinGroup.Name.Workshop), PropertyOrder (OdinGroup.Order.Workshop)]
         [EnableIf (nameof(isWorkshopUploadable))]
         [ShowIf (nameof(isWorkshopUsable))]
@@ -332,10 +357,17 @@ namespace PhantomBrigade.SDK.ModTools
         [PropertyOrder (OdinGroup.Order.AssetBundles)]
         public ModAssetBundles assetBundles;
 
+        #if UNITY_EDITOR
+        [DropdownReference (true)]
+        [PropertyOrder (OdinGroup.Order.LibraryDLLs)]
+        [LabelText ("Library DLLs")]
+        public LibraryDLLs libraryDLLs;
+        #endif
+
         public override void OnAfterDeserialization (string key)
         {
             base.OnAfterDeserialization (key);
-            
+
             var projectPath = GetModPathProject ();
             if (!string.IsNullOrEmpty (projectPath))
             {
@@ -351,7 +383,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             var pathConfigs = GetModPathConfigs ();
             // Debug.Log ($"Loaded mod {key}\n- Project path: {GetModPathProject ()}\n- Configs path: {pathConfigs}");
-            
+
             metadata.isConfigEnabled = Directory.Exists (GetModPathConfigs ());
 
             if (workshop != null)
@@ -397,7 +429,7 @@ namespace PhantomBrigade.SDK.ModTools
                     return;
                 }
             }
-            
+
             UtilitiesYAML.SaveToFile (projectPath, "metadata.yaml", metadata);
         }
 
@@ -407,6 +439,9 @@ namespace PhantomBrigade.SDK.ModTools
             metadata.id = id;
             metadata.includesConfigEdits = configEdits != null;
             metadata.includesAssetBundles = assetBundles != null;
+            #if UNITY_EDITOR
+            metadata.includesLibraries = libraryDLLs != null && libraryDLLs.files.Count (f => f.enabled) != 0;
+            #endif
         }
 
         public static readonly string defaultWorkingPathParent = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetUserFolder (), "ModsSource");
@@ -420,17 +455,17 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 return workingPath;
             }
-            
+
             return defaultWorkingPath;
         }
-        
+
         public string GetModPathWorkshopTemp ()
         {
             if (!useDefaultWorkingPath && !string.IsNullOrEmpty (workingPath))
             {
                 return workingPath + dirWorkshopTemp;
             }
-            
+
             return defaultWorkingPath + dirWorkshopTemp;
         }
 
@@ -557,7 +592,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 return;
             }
-            
+
             workingPath = defaultWorkingPath;
             Debug.Log ($"Set working path to {workingPath}");
         }
@@ -656,6 +691,7 @@ namespace PhantomBrigade.SDK.ModTools
         public const string assetBundlesFolderName = "AssetBundles";
         public const string overridesFolderName = "ConfigOverrides";
         public const string editsFolderName = "ConfigEdits";
+        public const string librariesFolderName = "Libraries";
 
         static class OdinGroup
         {
@@ -674,21 +710,18 @@ namespace PhantomBrigade.SDK.ModTools
             public static class Order
             {
                 public const float Project = 0f;
-                public const float Configs = 1f;
-                public const float Packaging = 2f;
-                public const float UserMod = 3f;
-                public const float Metadata = 4f;
-                public const float Workshop = 5f;
-                public const float Core = 6f;
-                public const float ConfigEdits = 9;
-                public const float AssetBundles = 10;
+                public const float Metadata = 1f;
+                public const float Workshop = 2f;
+                public const float ConfigEdits = 3f;
+                public const float AssetBundles = 4f;
+                public const float LibraryDLLs = 5f;
             }
         }
 
         [HorizontalGroup ("Dropdown")]
         [ShowInInspector, PropertyOrder (100), DisplayAsString, HideLabel, ReadOnly]
         private const string helperTip = " Click the button to the right to add more features";
-        
+
         [HorizontalGroup ("Dropdown")]
         [ShowInInspector, PropertyOrder (100)]
         private DataEditor.DropdownReferenceHelper helper;
