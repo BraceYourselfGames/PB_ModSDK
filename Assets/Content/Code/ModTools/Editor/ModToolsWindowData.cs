@@ -140,19 +140,19 @@ namespace PhantomBrigade.ModTools
                     var completed = IsSectionCompleted (section);
                     var prevEnabled = GUI.enabled;
                     GUI.enabled = enabled;
-                    
+
                     Texture2D image = null;
                     if (!string.IsNullOrEmpty (section.image))
                         image = ModToolsTextureHelper.GetTexture (section.image);
-                    
+
                     var hasActionBtns = section.buttons != null;
                     var actionBtnsHeight = hasActionBtns ? 25 : 0;
                     var difficultyRectWidth = 30;
                     var predicted = prevWidth - textPadding - textPadding - iconWidth - difficultyRectWidth;
                     var descriptionSize = string.IsNullOrEmpty (section.description) ? 0 : multiline.CalcHeight (GUIHelper.TempContent (section.description), predicted);
-                    
+
                     var imageHeightLimit = 512; // Take from field
-                    
+
                     float imageWidth = 0f;
                     float imageHeight = 0f;
 
@@ -162,23 +162,23 @@ namespace PhantomBrigade.ModTools
                         // imageWidth = Mathf.Min (image.width, Mathf.Min (contentWidth, imageHeight));
                         // var shrink = imageWidth / Mathf.Max (2f, image.width);
                         // imageHeight = Mathf.Max (2f,  image.height) * shrink;
-                        
+
                         imageHeightLimit = Mathf.Clamp (imageHeightLimit, 16, 512);
                         imageWidth = Mathf.Min (GUIHelper.ContextWidth - 100f, image.width);
                         var shrink = imageWidth / (float) image.width;
                         imageHeight = image.height * shrink;
                     }
-                    
+
                     var rectHeight = 50 + descriptionSize + actionBtnsHeight + imageHeight;
                     var rect = GUILayoutUtility.GetRect (0, rectHeight * this.VerticalSlideT);
-                    
+
                     var bgRect = rect;
                     var iconRect = rect.TakeFromLeft (iconWidth).AlignCenterY (25 * this.VerticalSlideT);
                     var contentRect = rect.Padding (textPadding);
-        
+
                     var imageRect = contentRect.TakeFromTop (imageHeight);
                     imageRect = imageRect.TakeFromLeft (imageWidth);
-                    
+
                     var titleRect = contentRect.TakeFromTop (20);
                     var difficultyRect = contentRect.TakeFromRight (difficultyRectWidth).AlignBottom (EditorGUIUtility.singleLineHeight);
                     var descriptionRect = contentRect;
@@ -272,7 +272,7 @@ namespace PhantomBrigade.ModTools
                             }
                         }
                     }
-                    
+
 
                     if (i != this.sections.Count - 1)
                     {
@@ -525,9 +525,13 @@ namespace PhantomBrigade.ModTools
                         funcCheck = AssetsInstalled,
                         buttons = new List<DataBlockModToolsButton> ()
                         {
-                            new DataBlockModToolsButton
+                            new DataBlockModToolsButtonConditional
                             {
                                 label = "Open tutorial",
+                                conditions = new List<IModToolsCheck>
+                                {
+                                    new ModToolsCheckAssetPackage { required = false, },
+                                },
                                 actionsOnClick = new List<IModToolsFunction>
                                 {
                                     new ModToolsFunctionOpenTutorial (),
