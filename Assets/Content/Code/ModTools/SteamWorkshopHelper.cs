@@ -4,11 +4,11 @@ using System.IO;
 
 using UnityEngine;
 using Steamworks;
-using File = UnityEngine.Windows.File;
 
-#if UNITY_EDITOR
 using PhantomBrigade.Data;
 using PhantomBrigade.Mods;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using Unity.EditorCoroutines.Editor;
 #endif
