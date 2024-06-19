@@ -145,6 +145,10 @@ namespace Area
             var identifiersPresent = tileset.groupIdentifiers != null;
             foreach (var kvp in definition.subtypeGroups)
             {
+                if (UnfinishedTiles.TryGetValue (tileset.id, out var matches) && matches.Contains (configuration << 8 | kvp.Key))
+                {
+                    continue;
+                }
                 BuildGroupSubtypeInfo (tileset, identifiersPresent, kvp.Key, kvp.Value);
             }
 
@@ -221,5 +225,21 @@ namespace Area
         readonly StringBuilder lastSpotInfoBuilder = new StringBuilder ();
         int lastSpotGroup;
         int lastSpotSubtype;
+
+        public static readonly Dictionary<int, HashSet<int>> UnfinishedTiles = new Dictionary<int, HashSet<int>> ()
+        {
+            [AreaTilesetHelper.idOfFallback] = new HashSet<int> ()
+            {
+                TilesetUtility.configurationFloor << 8 | 1,
+            },
+            [30] = new HashSet<int> ()
+            {
+                TilesetUtility.configurationFloor << 8 | 1,
+            },
+            [50] = new HashSet<int> ()
+            {
+                TilesetUtility.configurationFloor << 8 | 1,
+            },
+        };
     }
 }

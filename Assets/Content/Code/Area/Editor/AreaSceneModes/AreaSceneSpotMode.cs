@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -43,7 +44,6 @@ namespace Area
         {
             AreaSceneModeHelper.TryRebuildTerrain (bb);
         }
-
 
         void Edit (KeyCode button, bool shift)
         {
@@ -170,7 +170,7 @@ namespace Area
             if (button == KeyCode.LeftBracket || button == KeyCode.RightBracket)
             {
                 var forward = button == KeyCode.LeftBracket;
-                var groupKeyNew = AreaTilesetHelper.OffsetBlockGroup (definition, startingSpot.blockGroup, forward);
+                var groupKeyNew = OffsetBlockGroup (startingSpot, definition, startingSpot.blockGroup, forward);
                 if (groupKeyNew != startingSpot.blockGroup)
                 {
                     startingSpot.blockGroup = groupKeyNew;
@@ -190,6 +190,28 @@ namespace Area
                     am.RebuildBlock (startingSpot, false);
                 }
             }
+        }
+
+        static byte OffsetBlockGroup (AreaVolumePoint spot, AreaBlockDefinition definition, byte groupKeyCurrent, bool forward)
+        {
+            if (definition.subtypeGroups.Count == 1)
+            {
+                return 0;
+            }
+            if (!definition.subtypeGroups.ContainsKey (groupKeyCurrent))
+            {
+                groupKeyCurrent = 0;
+            }
+            var groups = definition.subtypeGroups.Keys
+                .Where (key => !AreaSceneSpotInfo.UnfinishedTiles.TryGetValue (spot.blockTileset, out var matches) || !matches.Contains (spot.spotConfiguration << 8 | key))
+                .ToList ();
+            var index = groups.IndexOf (groupKeyCurrent);
+            if (index == -1)
+            {
+                return forward ? (byte)0 : groups.Last ();
+            }
+            index = index.OffsetAndWrap (forward, 0, groups.Count - 1);
+            return groups[index];
         }
 
         void PasteTileset (AreaVolumePoint startingSpot, bool shift, AreaSceneSearch search, SpotSearchType searchType)
