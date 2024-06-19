@@ -41,9 +41,9 @@
                 float4 color : COLOR;
                 UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
-                float3 worldPos1 : TEXCOORD1;
-                float4 screenPos : TEXCOORD2;
-                float eyeDepth : TEXCOORD3;
+                float3 worldPos1 : TEXCOORD2;
+                float4 screenPos : TEXCOORD3;
+                float eyeDepth : TEXCOORD4;
             };
 
             float4 _FogColor;

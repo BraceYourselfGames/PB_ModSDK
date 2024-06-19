@@ -53,6 +53,9 @@ public class SkyManagerSimple : MonoBehaviour
 
 	[BoxGroup ("References")]
 	public TOD_SkyOverlayControl overlay;
+
+	[OnValueChanged ("ApplyHourCurrent")]
+	public bool fog;
 	
 	[BoxGroup ("Presets")]
 	[OnValueChanged ("ApplyHourCurrent")]
@@ -134,7 +137,8 @@ public class SkyManagerSimple : MonoBehaviour
 		RenderSettings.ambientLight = preset.ambientColor;
 		RenderSettings.ambientProbe = sh;
 
-		RenderSettings.fog = false;
+		RenderSettings.fog = fog;
+		RenderSettings.fogDensity = 0.001f;
 		RenderSettings.fogColor = preset.renderFogColor;
 
 		Shader.SetGlobalColor (ID_FogColor, preset.shaderFogColor);
