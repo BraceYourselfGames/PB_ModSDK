@@ -352,6 +352,10 @@ namespace PhantomBrigade.SDK.ModTools
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.ConfigEdits)]
         public ModConfigEditSource configEdits;
+        
+        [DropdownReference (true)]
+        [PropertyOrder (OdinGroup.Order.TextEdits)]
+        public ModConfigLocEdit textEdits;
 
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.AssetBundles)]

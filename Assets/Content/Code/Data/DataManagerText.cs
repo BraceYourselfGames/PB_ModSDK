@@ -6,6 +6,10 @@ using PhantomBrigade.Mods;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+#if PB_MODSDK
+using PhantomBrigade.SDK.ModTools;
+#endif
+
 namespace PhantomBrigade.Data
 {
     [ExecuteInEditMode]
@@ -29,9 +33,6 @@ namespace PhantomBrigade.Data
         public static bool showProcessedText = false;
 
         private static bool libraryLoadedOnce = false;
-
-        // [PropertySpace (8f), PropertyOrder (-5)]
-        // [TabGroup (tgLib), ShowInInspector, OnValueChanged ("OnLibraryModified", true)]
         private static DataContainerTextLibrary libraryDataInternal;
         
         [PropertySpace (8f), PropertyOrder (-5)]
@@ -52,6 +53,25 @@ namespace PhantomBrigade.Data
         
         private static bool libraryUnsaved = false;
         private static string libraryPath = "Configs/TextLibrary";
+        
+        #if PB_MODSDK
+        
+        private static bool librarySourceLoadedOnce = false;
+        private static DataContainerTextLibrary librarySourceDataInternal;
+        
+        [PropertySpace (8f), PropertyOrder (-5)]
+        [TabGroup (tgLib), ShowInInspector]
+        public static DataContainerTextLibrary librarySourceData
+        {
+            get
+            {
+                if (librarySourceDataInternal == null && !librarySourceLoadedOnce)
+                    LoadLibrarySource ();
+                return librarySourceDataInternal;
+            }
+        }
+        
+        #endif
         
         
 
@@ -106,15 +126,74 @@ namespace PhantomBrigade.Data
         {
             libraryLoadedOnce = true;
             libraryDataInternal = new DataContainerTextLibrary ();
+
+            var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
+            
+            #if PB_MODSDK
+            
+            if (IsModOverrideUsed ())
+            {
+                var modPath = DataContainerModData.selectedMod.GetModPathProject ();
+                pathFull = DataPathHelper.GetCombinedCleanPath (modPath, libraryPath);
+                Debug.Log ($"Loading text library from config enabled mod | Path: {pathFull}");
+            }
+            
+            #endif
             
             libraryDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> 
-                (libraryPath, "core.yaml", appendApplicationPath: true);
+            (
+                pathFull, 
+                "core.yaml", 
+                appendApplicationPath: false
+            );
 
             libraryDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain> 
-                ($"{libraryPath}/Sectors", appendApplicationPath: true);
+            (
+                pathFull + "/Sectors", 
+                appendApplicationPath: false
+            );
             
             libraryDataInternal.OnAfterDeserialization ();
         }
+        
+        #if PB_MODSDK
+
+        public static void LoadLibrarySource ()
+        {
+            librarySourceLoadedOnce = true;
+            librarySourceDataInternal = new DataContainerTextLibrary ();
+            
+            var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
+            
+            librarySourceDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> 
+            (
+                pathFull, 
+                "core.yaml", 
+                appendApplicationPath: false
+            );
+
+            librarySourceDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain> 
+            (
+                pathFull + "/Sectors", 
+                appendApplicationPath: false
+            );
+            
+            librarySourceDataInternal.OnAfterDeserialization ();
+        }
+        
+        public static void ResetLoadedOnce ()
+        {
+            libraryLoadedOnce = false;
+        }
+
+        private static bool IsModOverrideUsed ()
+        {
+            return DataContainerModData.selectedMod != null && 
+                   DataContainerModData.selectedMod.hasProjectFolder && 
+                   Directory.Exists (DataContainerModData.selectedMod.GetModPathConfigs ());
+        }
+        
+        #endif
         
         [PropertyOrder (-10)]
         [TabGroup (tgLib)]
@@ -128,16 +207,45 @@ namespace PhantomBrigade.Data
                 return;
             }
             
+            #if PB_MODSDK
+            
+            var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
+            
+            if (IsModOverrideUsed ())
+            {
+                var modPath = DataContainerModData.selectedMod.GetModPathProject ();
+                pathFull = DataPathHelper.GetCombinedCleanPath (modPath, libraryPath);
+                Debug.Log ($"Saving text library to config enabled mod | Path: {pathFull}");
+            }
+            
+            #endif
+            
             if (log)
-                Debug.Log ($"Writing main text library to path {libraryPath}");
+                Debug.Log ($"Writing main text library to path {pathFull}");
 
             libraryDataInternal.OnBeforeSerialization ();
 
             if (libraryDataInternal.core != null)
-                UtilitiesYAML.SaveDataToFile (libraryPath, "core.yaml", libraryDataInternal.core);
+            {
+                UtilitiesYAML.SaveDataToFile
+                (
+                    pathFull,
+                    "core.yaml",
+                    libraryDataInternal.core,
+                    appendApplicationPath: false
+                );
+            }
 
             if (libraryDataInternal.sectors != null)
-                UtilitiesYAML.SaveDecomposedDictionary ($"{libraryPath}/Sectors", libraryDataInternal.sectors, false);
+            {
+                UtilitiesYAML.SaveDecomposedDictionary
+                (
+                    pathFull + "/Sectors",
+                    libraryDataInternal.sectors,
+                    false,
+                    appendApplicationPath: false
+                );
+            }
 
             libraryUnsaved = false;
         }
@@ -461,6 +569,53 @@ namespace PhantomBrigade.Data
 
             return entry.textProcessed;
         }
+
+        #if PB_MODSDK
+        
+        public static string GetRawTextFromLibrary (bool forceSource, string sectorKey, string textKey, bool suppressWarning = true)
+        {
+            if (string.IsNullOrEmpty (sectorKey))
+            {
+                if (!suppressWarning)
+                    Debug.LogWarning ($"Text not found in library: Null or empty sector key");
+                return string.Empty;
+            }
+            
+            if (string.IsNullOrEmpty (textKey))
+            {
+                if (!suppressWarning)
+                    Debug.LogWarning ($"Text not found in library: Null or empty text key");
+                return string.Empty;
+            }
+
+            var libraryDataSelected = forceSource ? librarySourceData : libraryData;
+            if (libraryDataSelected == null)
+            {
+                if (!suppressWarning)
+                    Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Library not loaded");
+                return string.Empty;
+            }
+            
+            var sector = libraryData.GetSector (sectorKey);
+            if (sector == null)
+            {
+                if (!suppressWarning)
+                    Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Sector not present");
+                return string.Empty;
+            }
+            
+            if (sector.entries == null || !sector.entries.ContainsKey (textKey))
+            {
+                if (!suppressWarning)
+                    Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Sector doesn't contain this key");
+                return string.Empty;
+            }
+
+            var entry = sector.entries[textKey];
+            return entry.text;
+        }
+        
+        #endif
         
         private static string GetTextFromLibrary (string sectorKey, string textKey, bool suppressWarning = false)
         {
