@@ -184,6 +184,7 @@ namespace PhantomBrigade.Data
         public static void ResetLoadedOnce ()
         {
             libraryLoadedOnce = false;
+            libraryDataInternal = null;
         }
 
         private static bool IsModOverrideUsed ()

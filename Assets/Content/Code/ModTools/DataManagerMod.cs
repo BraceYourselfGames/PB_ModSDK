@@ -249,7 +249,8 @@ namespace PhantomBrigade.SDK.ModTools
                         Debug.LogWarning ($"Can't save project: \"{id}\" {idError}");
                     return;
                 }
-
+                
+                Debug.Log ($"Saving mod {id}: {modData.GetModPathProject ()}");
                 modData.OnBeforeSerialization ();
 
                 var projectPath = modData.GetModPathProject ();

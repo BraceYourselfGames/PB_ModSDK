@@ -395,6 +395,9 @@ namespace PhantomBrigade.SDK.ModTools
 
             if (configEdits != null)
                 configEdits.OnAfterDeserialization ();
+            
+            if (textEdits != null)
+                textEdits.OnAfterDeserialization ();
         }
 
         private void OnWorkshopChange ()
@@ -717,8 +720,9 @@ namespace PhantomBrigade.SDK.ModTools
                 public const float Metadata = 1f;
                 public const float Workshop = 2f;
                 public const float ConfigEdits = 3f;
-                public const float AssetBundles = 4f;
-                public const float LibraryDLLs = 5f;
+                public const float TextEdits = 4f;
+                public const float AssetBundles = 5f;
+                public const float LibraryDLLs = 6f;
             }
         }
 

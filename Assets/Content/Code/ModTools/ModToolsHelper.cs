@@ -668,6 +668,8 @@ namespace PhantomBrigade.SDK.ModTools
             modData.DeleteOutputDirectories ();
 
             GenerateAssetBundles (modData);
+            GenerateTextEdits (modData);
+            
             #if UNITY_EDITOR
             GenerateLibraries (modData);
             #endif
@@ -692,6 +694,14 @@ namespace PhantomBrigade.SDK.ModTools
                 return;
 
             modData.configEdits.SaveToMod (modData);
+        }
+        
+        static void GenerateTextEdits (DataContainerModData modData)
+        {
+            if (modData?.textEdits == null)
+                return;
+
+            modData.textEdits.SaveToMod (modData);
         }
 
         static void GenerateAssetBundles (DataContainerModData modData)

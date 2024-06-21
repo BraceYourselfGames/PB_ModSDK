@@ -53,12 +53,69 @@ namespace PhantomBrigade.ModTools
 
             return DataManagerText.GetLocalizationLanguageKeysBuiltin ();
         }
+        
+        public void SaveToMod (DataContainerModData modData)
+        {
+            if (languages == null || languages.Count == 0)
+                return;
+            
+            if (modData == null)
+            {
+                Debug.LogWarning ("Can't save text edits, parent mod not provided");
+                return;
+            }
+
+            var rootPath = modData.GetModPathProject ();
+            if (!Directory.Exists (rootPath))
+            {
+                Debug.LogWarning ($"Can't save text edits, mod {modData.id} directory doesn't exist: {rootPath}");
+                return;
+            }
+
+            var editPath = DataPathHelper.GetCombinedCleanPath (rootPath, "LocalizationEdits");
+            UtilitiesYAML.PrepareClearDirectory (editPath, false, false);
+            Debug.Log ($"Exporting text edits for mod {modData.id} to {editPath}");
+
+            int e = -1;
+            foreach (var kvp in languages)
+            {
+                var languageKey = kvp.Key;
+                var language = kvp.Value;
+                if (language == null || language.sectors == null)
+                    continue;
+
+                var languagePath = DataPathHelper.GetCombinedCleanPath (editPath, languageKey);
+                foreach (var kvp2 in language.sectors)
+                {
+                    var sectorKey = kvp2.Key;
+                    var sector = kvp2.Value;
+                    if (sector == null || sector.text == null)
+                        continue;
+
+                    e += 1;
+                    var sectorPath = DataPathHelper.GetCombinedCleanPath (languagePath, sectorKey) + ".yaml";
+                    var editsSaved = new SortedDictionary<string, string> ();
+                    var config = new ModLocalizationEdit { edits = editsSaved };
+
+                    foreach (var kvp3 in sector.text)
+                    {
+                        var textKey = kvp3.Key;
+                        var textOverride = kvp3.Value?.text;
+                        if (!string.IsNullOrEmpty (textKey) && !string.IsNullOrEmpty (textOverride))
+                            editsSaved.Add (textKey, textOverride);
+                    }
+
+                    UtilitiesYAML.SaveToFile (sectorPath, config);
+                    Debug.Log ($"Text edit {e} {languageKey}/{sectorKey}: \n- {sectorPath}");
+                }
+            }
+        }
 
         #endif
         #endregion
     }
     
-    [HideReferenceObjectPicker, HideDuplicateReferenceBox]
+    [HideDuplicateReferenceBox]
     public class ModConfigLocEditLanguage
     {
         [InfoBox ("$hintLocked", VisibleIf = nameof(IsEntryLocked))]
@@ -83,8 +140,20 @@ namespace PhantomBrigade.ModTools
     [HideReferenceObjectPicker, HideDuplicateReferenceBox]
     public class ModConfigLocText
     {
-        [TextArea (1, 10), HideLabel]
+        [TextArea (1, 10)]
+        [SuffixLabel ("$GetSuffix", true)]
+        [HideLabel]
         public string text;
+
+        [TextArea (1, 10), GUIColor (nameof(textSourceColor))]
+        [SuffixLabel ("Original", true)]
+        [ShowIf (nameof (IsOverride))]
+        [HideLabel, ReadOnly]
+        public string textSource;
+
+        private Color textSourceColor = new Color (0.8f, 0.75f, 0.7f, 1f);
+        private bool IsOverride => !string.IsNullOrEmpty (textSource);
+        private string GetSuffix => IsOverride ? "Override" : "New";
     }
 
     public static class ModTextHelper
@@ -106,10 +175,6 @@ namespace PhantomBrigade.ModTools
                 return;
             }
             
-            Debug.Log ($"Saving text changes for sectors {textSectorKeys.ToStringFormatted ()}");
-            int textEditsCount = 0;
-            SortedDictionary<string, ModConfigLocText> textEditsCollection = null;
-            
             var mod = DataManagerMod.modSelected;
             var languageKey = "English";
             
@@ -128,6 +193,10 @@ namespace PhantomBrigade.ModTools
                     Debug.LogWarning ($"Skipping comparison of sector {sectorKey}, it couldn't be found in the source text library");
                     continue;
                 }
+                
+                Debug.Log ($"Saving text changes for sectors {textSectorKeys.ToStringFormatted ()}");
+                int textEditsCount = 0;
+                SortedDictionary<string, ModConfigLocText> textEditsCollection = null;
 
                 foreach (var kvp in sectorWorking.entries)
                 {
@@ -173,18 +242,28 @@ namespace PhantomBrigade.ModTools
                             mod.textEdits.UpdateChildren ();
                         }
 
-                        textEditsCollection[textKey] = new ModConfigLocText { text = textWorking };
+                        textEditsCollection[textKey] = new ModConfigLocText
+                        {
+                            text = textWorking,
+                            textSource = textSource
+                        };
                     }
                 }
-            }
-
-            if (textEditsCount == 0 && mod.textEdits?.languages != null && mod.textEdits.languages.ContainsKey (languageKey))
-            {
-                Debug.Log ("No text edits found, deleting the English library overrides from the mod config");
-                mod.textEdits.languages.Remove (languageKey);
+                
+                if 
+                (
+                    textEditsCount == 0 && 
+                    mod.textEdits?.languages != null && 
+                    mod.textEdits.languages.TryGetValue (languageKey, out var l) && 
+                    l?.sectors != null &&
+                    l.sectors.ContainsKey (sectorKey)
+                )
+                {
+                    Debug.Log ($"No text edits found for sector {sectorKey}, deleting the override from the mod config");
+                    l.sectors.Remove (sectorKey);
+                }
             }
             
-            Debug.Log ($"Saving mod {mod.id} in {mod.GetModPathProject ()}");
             DataManagerMod.SaveMod (mod);
         }
     }
