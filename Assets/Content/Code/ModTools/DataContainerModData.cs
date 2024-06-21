@@ -447,6 +447,10 @@ namespace PhantomBrigade.SDK.ModTools
             metadata.includesConfigEdits = configEdits != null;
             metadata.includesAssetBundles = assetBundles != null;
             metadata.includesLocalizationEdits = textEdits != null;
+
+            var pathProject = GetModPathProject ();
+            metadata.includesTextures = !string.IsNullOrEmpty (pathProject) && Directory.Exists (GetModPathProject () + "/Textures");
+            
             #if UNITY_EDITOR
             metadata.includesLibraries = libraryDLLs != null && libraryDLLs.files.Count (f => f.enabled) != 0;
             #endif

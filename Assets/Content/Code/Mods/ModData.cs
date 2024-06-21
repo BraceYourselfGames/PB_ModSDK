@@ -223,6 +223,7 @@ namespace PhantomBrigade.Mods
         [ReadOnly, PropertyTooltip ("Add library DLLs via the bottom right component menu to enable this flag")]
         public bool includesLibraries;
 
+        [ReadOnly, PropertyTooltip ("Add textures into the local Textures folder under the mod project folder to enable this flag")]
         public bool includesTextures;
         
         [ReadOnly, PropertyTooltip ("Add text edits via the bottom right component menu to enable this flag")]
