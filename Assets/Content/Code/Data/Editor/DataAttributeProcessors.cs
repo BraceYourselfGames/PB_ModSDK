@@ -11,6 +11,10 @@ using Sirenix.Utilities;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
 
+using System.Linq;
+using PhantomBrigade.Functions;
+using PhantomBrigade.Functions.Equipment;
+
 public static class AttributeExpressionUtility
 {
     private static Dictionary<Type, Dictionary<string, MethodInfo>> methodCaches = new Dictionary<Type, Dictionary<string, MethodInfo>> ();
@@ -779,6 +783,165 @@ sealed class DataFilterKeyValueDrawer<T, U> : OdinValueDrawer<T>
         SirenixEditorGUI.EndBox();
     }
 }
+
+#if PB_MODSDK
+sealed class FunctionSelector : OdinSelector<Type>
+{
+    public static void Draw<T> (List<T> items)
+    {
+        if (SirenixEditorGUI.ToolbarButton (SdfIconType.Plus))
+        {
+            var selector = new FunctionSelector (typeof(T));
+            selector.EnableSingleClickToSelect ();
+            selector.SelectionConfirmed += col => selector.AddSelectedFunction (items, col.FirstOrDefault ());
+
+            // We have to use a fixed height flyout because of how autosize and single click
+            // don't play well together.
+            var size = selector.CalcSize ();
+            var rect = GUIHelper.GetCurrentLayoutRect ();
+            var pos = new Vector2 (rect.x + rect.width - size.x, rect.y);
+            var rectSelector = new Rect (pos, size);
+            var sr = GUIUtility.GUIToScreenRect (rectSelector);
+            var y = SirenixEditorGUI.currentDrawingToolbarHeight;
+            if (sr.yMax > Screen.height)
+            {
+                pos.y = rect.y - y - size.y;
+            }
+            sr = new Rect (pos, new Vector2 (y, y));
+
+            selector.ShowInPopup (sr, size);
+        }
+    }
+
+    protected override void BuildSelectionTree (OdinMenuTree tree)
+    {
+        tree.Config.UseCachedExpandedStates = false;
+        tree.Config.SelectMenuItemsOnMouseDown = true;
+        tree.DefaultMenuStyle = OdinMenuStyle.TreeViewStyle;
+        tree.Selection.SupportsMultiSelect = false;
+        if (functions.Count == 0)
+        {
+            return;
+        }
+
+        Func<Type, string> pf = NameOnly;
+        if (isNamespaced)
+        {
+            pf = UseNamespace;
+        }
+        tree.AddRange (functions, pf);
+    }
+
+    static string NameOnly (Type t) => t.Name;
+    static string UseNamespace (Type t) => t.Namespace + "/" + t.Name;
+
+    void AddSelectedFunction<T> (List<T> items, Type selected)
+    {
+        if (selected == null)
+        {
+            return;
+        }
+
+        var ctor = selected.GetConstructor (new Type[] { });
+        if (ctor == null)
+        {
+            Debug.LogWarning ("No default constructor for function | name: " + selected.FullName);
+            return;
+        }
+
+        var f = (T)ctor.Invoke (new object[] { });
+        items.Add (f);
+    }
+
+    Vector2 CalcSize ()
+    {
+        var s = isNamespaced && longestNamespace.Length > longestName.Length ? longestNamespace : longestName;
+        var size = SirenixGUIStyles.ListItem.CalcSize (GUIHelper.TempContent (s));
+        var x = size.x + (isNamespaced ? paddingListItemNamespace : paddingListItemName);
+        var y = Mathf.Max (size.y, EditorGUIUtility.singleLineHeight) * Mathf.Min (functions.Count + 1.5f, lineCount);
+        return new Vector2 (x, y);
+    }
+
+    static bool FilterInterface (Type t, object o) => t == (Type)o;
+
+    FunctionSelector (Type functionInterfaceType)
+    {
+        functions = AppDomain.CurrentDomain
+            .GetAssemblies ()
+            .SelectMany (assy => assy.GetTypes ())
+            .Where (t => t.IsClass)
+            .Where (t => t.FindInterfaces (FilterInterface, functionInterfaceType).Length != 0)
+            .ToList ();
+
+        longestNamespace = "";
+        longestName = functions.Count == 0 ? "" : functions[0].Name;
+        if (functions.Count > 1)
+        {
+            var ns = functions[0].Namespace;
+            isNamespaced = functions.Any (t => t.Namespace != ns);
+            foreach (var t in functions)
+            {
+                if ((t.Namespace?.Length ?? 0) > longestNamespace.Length)
+                {
+                    longestNamespace = t.Namespace;
+                }
+                if (t.Name.Length > longestName.Length)
+                {
+                    longestName = t.Name;
+                }
+            }
+        }
+    }
+
+    readonly List<Type> functions;
+    readonly bool isNamespaced;
+    readonly string longestNamespace;
+    readonly string longestName;
+
+    const float paddingListItemNamespace = 60f;
+    const float paddingListItemName = 45;
+    const float lineCount = 15f;
+}
+
+abstract class FunctionListAttributeProcessor<T> : OdinAttributeProcessor<List<T>>
+{
+    public override void ProcessSelfAttributes (InspectorProperty property, List<Attribute> attributes)
+    {
+        var hasAttr = attributes.HasAttribute<ListDrawerSettingsAttribute> ();
+        var attr = hasAttr
+            ? attributes.GetAttribute<ListDrawerSettingsAttribute> ()
+            : new ListDrawerSettingsAttribute ();
+        if (!hasAttr)
+        {
+            attributes.Add (attr);
+        }
+        attr.HideAddButton = true;
+        var call = string.Format ("@{0}.{1}<{2}> ($value)", nameof(FunctionSelector), nameof(FunctionSelector.Draw), property.Info.TypeOfValue.GetGenericArguments()[0].Name);
+        attr.OnTitleBarGUI = call;
+    }
+}
+
+// TypeHinted interfaces
+sealed class FunctionListAttributeProcessor01 : FunctionListAttributeProcessor<IOverworldEventFunction> { }
+sealed class FunctionListAttributeProcessor02 : FunctionListAttributeProcessor<IOverworldActionFunction> { }
+sealed class FunctionListAttributeProcessor03 : FunctionListAttributeProcessor<ICombatFunctionTargeted> { }
+sealed class FunctionListAttributeProcessor04 : FunctionListAttributeProcessor<ICombatFunctionSpatial> { }
+sealed class FunctionListAttributeProcessor05 : FunctionListAttributeProcessor<ICombatFunction> { }
+sealed class FunctionListAttributeProcessor06 : FunctionListAttributeProcessor<IOverworldFunction> { }
+sealed class FunctionListAttributeProcessor07 : FunctionListAttributeProcessor<ISubsystemFunctionGeneral> { }
+sealed class FunctionListAttributeProcessor08 : FunctionListAttributeProcessor<ISubsystemFunctionTargeted> { }
+sealed class FunctionListAttributeProcessor09 : FunctionListAttributeProcessor<ISubsystemFunctionAction> { }
+sealed class FunctionListAttributeProcessor10 : FunctionListAttributeProcessor<ITargetModifierFunction> { }
+sealed class FunctionListAttributeProcessor11 : FunctionListAttributeProcessor<ICombatActionExecutionFunction> { }
+sealed class FunctionListAttributeProcessor12 : FunctionListAttributeProcessor<ICombatActionValidationFunction> { }
+sealed class FunctionListAttributeProcessor13 : FunctionListAttributeProcessor<ICombatStateValidationFunction> { }
+sealed class FunctionListAttributeProcessor14 : FunctionListAttributeProcessor<IOverworldValidationFunction> { }
+sealed class FunctionListAttributeProcessor15 : FunctionListAttributeProcessor<ICombatPositionValidationFunction> { }
+sealed class FunctionListAttributeProcessor16 : FunctionListAttributeProcessor<ICombatUnitValidationFunction> { }
+sealed class FunctionListAttributeProcessor17 : FunctionListAttributeProcessor<ICombatUnitValueResolver> { }
+sealed class FunctionListAttributeProcessor18 : FunctionListAttributeProcessor<IPartGenStep> { }
+sealed class FunctionListAttributeProcessor19 : FunctionListAttributeProcessor<IPartGenCheck> { }
+#endif
 
 // Looks like TempKeyValuePair is severed from parent dictionary property so parentProperty.Parent is null
 // This makes current processor setup break, so temp resolver is commented out for now
