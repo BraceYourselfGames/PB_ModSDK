@@ -254,7 +254,6 @@ namespace PhantomBrigade.Data
             keysEvaluatedOnProvinceLiberation = eventsEvaluatedOnLiberation.Select(f => f.key).ToList();
         }
         
-        [Button]
         public void DebugOutputAllEventsWithInterval(OverworldEventEvaluationInterval intervalKey)
         {
             var s = string.Empty;
@@ -269,7 +268,6 @@ namespace PhantomBrigade.Data
             Debug.Log(s);
         }
         
-        [Button]
         public void MigrateEvents(OverworldEventEvaluationInterval intervalKey)
         {
             var s = string.Empty;
@@ -285,8 +283,7 @@ namespace PhantomBrigade.Data
             }
             Debug.Log(s);
         }
-
-        [Button]
+        
         public void CheckPriority()
         {
             var s = string.Empty;
@@ -302,8 +299,7 @@ namespace PhantomBrigade.Data
             }
             Debug.Log(s);
         }
-
-        [GUIColor ("@GetSaveButtonColor (UnsavedChangesPossibleInRelatedDatabases)"), PropertyOrder (-10)]
+        
         private void SaveAllDatabases ()
         {
             SaveData ();

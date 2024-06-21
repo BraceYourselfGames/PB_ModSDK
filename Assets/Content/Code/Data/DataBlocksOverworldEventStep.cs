@@ -277,23 +277,19 @@ namespace PhantomBrigade.Data
                 parentStep = null
             }
         };
-
-        [HideInInspector]
+        
         [ShowIf ("@IsTabWriting || IsCoreVisible")]
         public bool resourceDisplay = true;
-
-        [HideInInspector]
-        [HorizontalGroup ("Color", 180f)]
+        
+        [ShowIf ("@IsTabWriting || IsCoreVisible")]
         public bool colorCustom = false;
 
-        [ShowIf ("@IsTabWriting && IsCoreVisible")]
+        [ShowIf ("@IsTabWriting || IsCoreVisible")]
         [ValueDropdown ("GetColorKeys"), GUIColor ("GetColorPreview")]
-        [HorizontalGroup ("Color"), HideLabel]
         public string colorKey = DataKeysEventColor.Negative;
 
         [ShowIf ("@(IsTabWriting || IsCoreVisible) && colorCustom")]
         [ColorUsage (showAlpha: false)]
-        [HorizontalGroup ("Color"), HideLabel]
         public Color color = Color.white;
 
         [ShowIf ("@IsTabWriting && IsCoreVisible")]
