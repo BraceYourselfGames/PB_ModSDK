@@ -224,7 +224,10 @@ namespace PhantomBrigade.Mods
         public bool includesLibraries;
 
         public bool includesTextures;
+        
+        [ReadOnly, PropertyTooltip ("Add text edits via the bottom right component menu to enable this flag")]
         public bool includesLocalizationEdits;
+        
         public bool includesLocalizations;
 
         [ReadOnly, PropertyTooltip ("Add asset bundles via the bottom right component menu to enable this flag")]

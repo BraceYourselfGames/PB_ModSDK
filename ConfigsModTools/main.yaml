@@ -558,6 +558,133 @@ sections:
       actionsOnClick: 
       buttons: 
       childPage: 
+- icon: TextareaT
+  image: 
+  hint: 
+  header: Text edits
+  description: Learn how to add new text or modify existing text. Change how the game labels certain items, add text for your new weapon or translate an existing mod.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: Text edits
+    titleDesc: Learn how to add new text or modify existing text. Change how the game labels certain items, add text for your new weapon or translate an existing mod.
+    sections:
+    - icon: Grid
+      image: t7_01_overview
+      hint: ''
+      header: Text options
+      description: By now you have probably noticed how every collection database has separate buttons for loading and saving text.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: LayersHalf
+      image: t7_02_storage
+      hint: ''
+      header: Text separation
+      description: >-
+        Looking at the configs directly, we can see how they never contain the text you see in the database inspectors and in the game. So, where is that text coming from, and how do you modify it?
+
+
+        To facilitate localization, we store text separately from data. Based on the name of the config and its database (as well as selected language), the game automatically resolves text to display to the player. If you're interested in inspecting the source files involved in this, check Configs/TextLibrary. The data hierarchy goes like this:
+
+
+        Language (e.g. English)
+
+        └ Sector (e.g. subsystems)
+           └ Text entry (e.g. name of the heavy MG)
+
+        With this in mind, let's learn how to modify this text.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: ClipboardCheck
+      image: t7_03_entry
+      hint: ''
+      header: Config editing mode
+      description: Since this tutorial involves editing the config databases, this tutorial assumes you have set up the mod project for config editing. Select a mod and enter the config editing mode before taking the next steps.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PencilSquare
+      image: t7_04_editing
+      hint: ''
+      header: Modifying text
+      description: "Modifying text is as simple as modifying other data: just input a new value in the database inspector. The key part is that your changes need to be saved in a different place: the text library. Press \"Save Text\" after you're done with your changes."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: ArrowLeftRight
+      image: t7_05_generated
+      hint: ''
+      header: Change detection
+      description: 'When you save text, the SDK will check the library text sectors associated with a given database and compare them to the canonical versions in the SDK folder. The changes are detected and automatically added to a new part of the mod config: text edits.'
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PencilSquare
+      image: t7_06_new_empty
+      hint: ''
+      header: New content
+      description: 'Many mods will involve adding new configs, such as new weapons. These configs will not have any associated preexisting text in the library and will start out with empty text fields. The process is the same for these cases: enter your preferred text and press "Save Text" in addition to "Save Data".'
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: FilePlus
+      image: t7_07_new_detected
+      hint: ''
+      header: Addition detection
+      description: As with changes, your additions will be detected and automatically brought into the list of edits.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: FileText
+      image: t7_08_result
+      hint: 
+      header: Export
+      description: When you export your mod, these edits are saved into per-sector YAML files under the LocalizationEdits folder. Upon loading your mod, the game will use these files to modify the text library.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Globe2
+      image: 
+      hint: 
+      header: Additional languages
+      description: The editor tools are locked to using the English text library. However, you can still use the config editing system to translate your mod into additional languages. To do that, add a new entry to the "Languages" dictionary and fill it in the same way as the autogenerated English section. You can right-click on the "ModConfigLocEdit" header of the English section and paste it into an additional language entry to speed up the setup. Fill the fields and your mod will now patch more than just English text!
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
 - icon: PersonPlus
   image: 
   hint: ''

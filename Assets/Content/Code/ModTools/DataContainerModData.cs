@@ -446,6 +446,7 @@ namespace PhantomBrigade.SDK.ModTools
             metadata.id = id;
             metadata.includesConfigEdits = configEdits != null;
             metadata.includesAssetBundles = assetBundles != null;
+            metadata.includesLocalizationEdits = textEdits != null;
             #if UNITY_EDITOR
             metadata.includesLibraries = libraryDLLs != null && libraryDLLs.files.Count (f => f.enabled) != 0;
             #endif
