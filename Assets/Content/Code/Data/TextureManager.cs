@@ -367,7 +367,7 @@ namespace PhantomBrigade.Data
             return group.textureKeysExposed;
         }
 
-        public static Texture2D GetTexture (string groupKey, string textureKey)
+        public static Texture2D GetTexture (string groupKey, string textureKey, bool warnIfMissing = false)
         {
             if (!loaded)
                 Load ();
@@ -383,13 +383,17 @@ namespace PhantomBrigade.Data
             var group = !string.IsNullOrEmpty (groupKey) && groups.ContainsKey (groupKey) ? groups[groupKey] : null;
             if (group == null || group.textures == null)
             {
-                Debug.LogWarning ($"Texture manager failed to find group {groupKey} or it had no textures to return");
+                if (warnIfMissing)
+                    Debug.LogWarning ($"Texture manager failed to find group {groupKey} or it had no textures to return");
                 return null;
             }
 
             var texture = !string.IsNullOrEmpty (textureKey) && group.textures.ContainsKey (textureKey) ? group.textures[textureKey] : null;
             if (texture == null)
-                Debug.LogWarning ($"Texture manager failed to find texture {textureKey} in group {groupKey}");
+            {
+                if (warnIfMissing)
+                    Debug.LogWarning ($"Texture manager failed to find texture {textureKey} in group {groupKey}");
+            }
 
             return texture;
         }
