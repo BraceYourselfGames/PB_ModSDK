@@ -30,7 +30,28 @@ The project relies on two kinds of documentation.
 
 As with other types of contributions, the first step is to [open an issue](https://github.com/BraceYourselfGames/PB_ModSDK/issues/new/choose). Opening an issue before you make changes makes sure that someone else isn't already working on that particular problem. It also lets us all work together to find the right approach before you spend a bunch of time on a PR.
 
+When opening a pull request, follow the template and make sure you complete all the required steps from the template:
+- Test the SDK with the changes in place: confirm there are no regressions.*
+- Check that your contribution is made under the terms of the MIT license.
+- Check that your commit description includes a line confirming agreement to the Developer Certificate of Origin.
 
+When testing for regressions, pay attention to the following:
+- Confirm that standard Editor compilation succeeds without errors or new warnings. Press Ctrl+R if you're unsure if the Editor has been recompiled after your last change.
+- If you have modified any expressions or functions used by Odin Inspector attributes, make sure to test the inspectors. Select a mod with config editing support, enter the config editing mode and try to make use of the affected properties and methods. Some errors might not become apparrent until you do so: for example, `ValueDropdown` functions only evaluate once you click a dropdown, and drawing expressions only evaluate when a connected property is first seen by a user.
+- Export a mod containing Asset Bundles and confirm there were no compilation errors. Exporting Asset Bundles requires the project to be recompiled in play mode (to make generated assets compatible with the game), which can trigger compilation errors invisible in Editor mode.
+  - The most common kind of an error relates to usage of Unity Editor APIs or Editor-only properties in code not wrapped with the Editor preprocessor directive.
+  - This includes Unity Editor APIs, any Editor specific namespaces of Odin Inspector and most of the properties under `DataContainerModData` and `DataManagerMod`
+  - To fix this issue, wrap the offending code in a `#if UNITY_EDITOR` directive. This will omit it from play mode compilation.
+  - Always make sure that conditional compilation directives don't cause new compile errors: for example, a bool-returning method with the wrapped body must still return something in Play mode and should contain an `#else` block.
+  - Make sure Odin Inspector arguments do not rely on Editor-only constants. If you use `ShowIf (nameof(myProperty))` instead of `ShowIf ("myProperty")`, make sure `myProperty` is not located in a UNITY_EDITOR block or use the string argument.
+ 
+List of namespaces that must never be used without the `#if UNITY_EDITOR` directive:
+```
+Sirenix.OdinInspector.Editor;
+Sirenix.Utilities.Editor;
+Unity.EditorCoroutines.Editor;
+UnityEditor;
+```
 
 ## Developer Certificate of Origin
 
