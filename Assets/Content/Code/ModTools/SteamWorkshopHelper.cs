@@ -297,25 +297,28 @@ namespace PhantomBrigade.SDK.ModTools
             SteamUGC.SetItemVisibility (handle, (ERemoteStoragePublishedFileVisibility)((int)mod.workshop.visibility));
             SteamUGC.SetItemContent (handle, dirPathWorkshopTemp);
 
-            var texPath = DataPathHelper.GetCombinedCleanPath (mod.GetModPathProject (), ModWorkshopData.texFilename);
-            if (File.Exists (texPath))
+            if (mod.workshop.texPreviewUpload)
             {
-                if (mod.workshop.texPreview != null)
+                var texPath = DataPathHelper.GetCombinedCleanPath (mod.GetModPathProject (), ModWorkshopData.texFilename);
+                if (File.Exists (texPath))
                 {
-                    var tex = mod.workshop.texPreview;
-                    if (tex.width <= 1024 && tex.height <= 1024)
-                        SteamUGC.SetItemPreview (handle, texPath);
-                    else
-                        Debug.LogWarning ($"Steam Workshop | Preview file resolution doesn't match the requirements (1024x1024): {tex.width}x{tex.height}");
+                    if (mod.workshop.texPreview != null)
+                    {
+                        var tex = mod.workshop.texPreview;
+                        if (tex.width <= 1024 && tex.height <= 1024)
+                            SteamUGC.SetItemPreview (handle, texPath);
+                        else
+                            Debug.LogWarning ($"Steam Workshop | Preview file resolution doesn't match the requirements (1024x1024): {tex.width}x{tex.height}");
+                    }
                 }
-            }
-            else
-            {
-                var texPathFallbackLocal = "ModWindowImages/t0_preview_fallback.png";
-                var texPathFallback = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), texPathFallbackLocal);
-                if (File.Exists (texPathFallback))
+                else
                 {
-                    SteamUGC.SetItemPreview (handle, texPathFallback);
+                    var texPathFallbackLocal = "ModWindowImages/t0_preview_fallback.png";
+                    var texPathFallback = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), texPathFallbackLocal);
+                    if (File.Exists (texPathFallback))
+                    {
+                        SteamUGC.SetItemPreview (handle, texPathFallback);
+                    }
                 }
             }
 

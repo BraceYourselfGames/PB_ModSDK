@@ -64,10 +64,13 @@ namespace PhantomBrigade.Mods
 
         public HashSet<string> tags = new HashSet<string> ();
 
+        [LabelText ("Upload preview")]
+        public bool texPreviewUpload = true;
+
         // Optional texture preview. Automatically generated texture based on a PNG file
         // placed next to the mod folder under ModFiles/. Not hosted within mod folders
         // because this image should not be included into Steam Workshop mod content uploads
-        [YamlIgnore]
+        [YamlIgnore, ShowIf (nameof(texPreviewUpload))]
         [OnInspectorGUI (Append = "@DrawTexturePreview (128)")] // Useful attr. for GUI injection
         [LabelText ("Preview")]
         public Texture2D texPreview;
