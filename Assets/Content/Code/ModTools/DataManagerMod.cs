@@ -389,6 +389,7 @@ namespace PhantomBrigade.SDK.ModTools
                 modSelectedID = idNew;
                 
                 SaveProject (modData);
+                LoadProject (modData.id);
             }
             
             [PropertyOrder (-1)]
@@ -420,24 +421,35 @@ namespace PhantomBrigade.SDK.ModTools
 
                 var idOld = modData.key;
                 var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idOld);
+                var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idNew);
                 
-                if (Directory.Exists (sourcePath))
+                if (!Directory.Exists (sourcePath))
                 {
-                    var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idNew);
-                    if (Directory.Exists (targetPath))
-                    {
-                        Debug.LogWarning ($"Can't duplicate project from ID \"{idOld}\" to \"{idNew}\": directory with the same name discovered on disk | Full path: {sourcePath}");
-                        return;
-                    }
+                    Debug.LogWarning ($"Can't duplicate project from ID \"{idOld}\" to \"{idNew}\": source directory not found on disk | Full path: {sourcePath}");
+                    return;
                 }
+                
+                if (Directory.Exists (targetPath))
+                {
+                    Debug.LogWarning ($"Can't duplicate project from ID \"{idOld}\" to \"{idNew}\": target directory with the same name discovered on disk | Full path: {targetPath}");
+                    return;
+                }
+                
+                UtilitiesYAML.CopyDirectory (sourcePath, targetPath, true);
 
                 var modDataCopy = UtilitiesYAML.CloneThroughYaml (modData);
                 modDataCopy.key = idNew;
                 modDataCopy.metadata = UtilitiesYAML.CloneThroughYaml (modData.metadata);
                 modDataCopy.SyncMetadata ();
 
+                if (modDataCopy.workshop != null)
+                    modDataCopy.workshop.publishedID = string.Empty;
+
                 mods.Add (idNew, modDataCopy);
                 modSelectedID = idNew;
+                
+                SaveProject (modDataCopy);
+                LoadProject (modDataCopy.id);
             }
             
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonBlue))]
