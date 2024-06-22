@@ -23,7 +23,7 @@ namespace PhantomBrigade.SDK.ModTools
     [Serializable, HideDuplicateReferenceBox]
     public class ModAssetBundles
     {
-        [InfoBox ("@" + nameof (GetVersionWarningText), InfoMessageType.Error, VisibleIf = nameof (IsVersionWarningVisible))]
+        [InfoBox ("@GetVersionWarningText", InfoMessageType.Error, VisibleIf = "IsVersionWarningVisible")]
         [ShowInInspector]
         [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = "@new AssetBundleDesc ()")]
         public List<AssetBundleDesc> bundleDefinitions = new List<AssetBundleDesc> ();

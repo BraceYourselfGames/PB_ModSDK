@@ -129,7 +129,7 @@ namespace PhantomBrigade.Data
 
             var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
             
-            #if PB_MODSDK
+            #if PB_MODSDK && UNITY_EDITOR
             
             if (IsModOverrideUsed ())
             {
@@ -189,9 +189,13 @@ namespace PhantomBrigade.Data
 
         private static bool IsModOverrideUsed ()
         {
+            #if UNITY_EDITOR
             return DataContainerModData.selectedMod != null && 
                    DataContainerModData.selectedMod.hasProjectFolder && 
                    Directory.Exists (DataContainerModData.selectedMod.GetModPathConfigs ());
+            #else
+            return false;
+            #endif
         }
         
         #endif
@@ -208,9 +212,9 @@ namespace PhantomBrigade.Data
                 return;
             }
             
-            #if PB_MODSDK
-            
             var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
+            
+            #if PB_MODSDK && UNITY_EDITOR
             
             if (IsModOverrideUsed ())
             {
