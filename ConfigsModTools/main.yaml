@@ -821,6 +821,17 @@ sections:
       actionsOnClick: 
       buttons: 
       childPage: 
+    - icon: CheckSquareFill
+      image: t5_08_import
+      hint: 8
+      header: 'Asset check: Mesh import settings'
+      description: Make sure all .fbx objects in the Project view have "Read/Write Enabled" flag checked in the import settings. This is very important for allowing these meshes to be accessed by the game.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
     - icon: JournalPlus
       image: t5_01_adding
       hint: ''
@@ -858,7 +869,11 @@ sections:
       image: t5_04_prefab
       hint: ''
       header: Choosing an asset
-      description: After completing the item modeling tutorial, you should have one or more prefabs with a top level ItemVisual component. Make sure these prefabs and all of their dependencies (models, materials, textures) are in the same folder and in the SDK project.
+      description: >-
+        After completing the item modeling tutorial, you should have one or more prefabs with a top level ItemVisual component. Make sure these prefabs and all of their dependencies (models, materials, textures) are in the same folder and in the SDK project.
+
+
+        Side note: we recommend storing your models under Assets/User/YourModName. The User folder is ignored by Git and won't be accidentally detected as an SDK modification by version control.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
@@ -870,6 +885,17 @@ sections:
       hint: ''
       header: Linking a file
       description: Add an entry to the file list of your bundle and select one or more ItemVisual prefabs. You're all done! The next export of your build will include custom 3D assets.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: JournalPlus
+      image: t5_09_links_finalized
+      hint: ''
+      header: Finalized config
+      description: 'Your asset bundle config should look like this now: linking to one or more .prefab files.'
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
