@@ -235,6 +235,28 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         return null;
     }
 
+    private static Type dataTypeCollection = typeof (DataContainer);
+    private static Type dataTypeGlobal = typeof (DataContainerUnique);
+    
+    public static Component GetComponentForDataType (Type dataType)
+    {
+        if (!initialized || dataType == null)
+            return null;
+
+        if (dataTypeCollection.IsAssignableFrom (dataType))
+        {
+            if (dataTypeToMultiLinkerComponentLookup.TryGetValue (dataType, out var component))
+                return component;
+        }
+        else if (dataTypeGlobal.IsAssignableFrom (dataType))
+        {
+            if (dataTypeToLinkerComponentLookup.TryGetValue (dataType, out var component))
+                return component;
+        }
+
+        return null;
+    }
+
     public static Component GetComponentForMultiLinker (string typeName)
     {
         if (!initialized || string.IsNullOrEmpty (typeName))
@@ -435,6 +457,10 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         {
             var type = component.GetType ();
             linkerComponentLookup[type.Name] = component;
+            
+            var dataTypeArgument = type.BaseType?.GenericTypeArguments.FirstOrDefault ();
+            if (dataTypeArgument != null)
+                dataTypeToLinkerComponentLookup[dataTypeArgument] = component;
         }
 
         var multilinkerType = typeof (DataMultiLinker<>);
@@ -443,6 +469,11 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         {
             var type = component.GetType ();
             multiLinkerComponentLookup[type.Name] = component;
+
+            var dataTypeArgument = type.BaseType?.GenericTypeArguments.FirstOrDefault ();
+            if (dataTypeArgument != null)
+                dataTypeToMultiLinkerComponentLookup[dataTypeArgument] = component;
+            
             var dml = component as IDataMultiLinker;
             multiLinkerInterfaceLookup[type.Name] = dml;
             if (dml == null)
@@ -503,9 +534,13 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         }
     }
     bool enableConfigUpdates => IsUtilityOperationAvailable && checksumsLoaded;
+    
+    static readonly Dictionary<Type, Component> dataTypeToLinkerComponentLookup = new Dictionary<Type, Component> ();
+    static readonly Dictionary<Type, Component> dataTypeToMultiLinkerComponentLookup = new Dictionary<Type, Component> ();
 
     static readonly Dictionary<string, Component> linkerComponentLookup = new Dictionary<string, Component> ();
     static readonly Dictionary<string, Component> multiLinkerComponentLookup = new Dictionary<string, Component> ();
+    
     static readonly Dictionary<string, IDataMultiLinker> multiLinkerInterfaceLookup = new Dictionary<string, IDataMultiLinker> ();
     static readonly Dictionary<Type, IDataMultiLinker> containerLookup = new Dictionary<Type, IDataMultiLinker> ();
 

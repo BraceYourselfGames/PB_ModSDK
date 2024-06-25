@@ -226,7 +226,7 @@ namespace PhantomBrigade.Mods
 
 		private static bool logReferenceSetup = false;
 
-		public static void Initialize ()
+		public static void Initialize (bool full = true)
 		{
 			typeString = typeof(string);
 			typeBool = typeof(bool);
@@ -276,17 +276,20 @@ namespace PhantomBrigade.Mods
 				[typeEnum] = UpdateEnum,
 			};
 
-			UtilitiesYAML.RebuildTagMappings ();
-			var tagMappings = UtilitiesYAML.GetTagMappings ();
+			if (full)
+			{
+				UtilitiesYAML.RebuildTagMappings ();
+				var tagMappings = UtilitiesYAML.GetTagMappings ();
 
-			Debug.LogFormat
-			(
-				"Mod {0} ({1}) YAML tags ({2}):\n{3}",
-				ModLink.modIndex,
-				ModLink.modID,
-				tagMappings.Count,
-				tagMappings.ToStringFormattedKeyValuePairs (true, multilinePrefix: "- ")
-			);
+				Debug.LogFormat
+				(
+					"Mod {0} ({1}) YAML tags ({2}):\n{3}",
+					ModLink.modIndex,
+					ModLink.modID,
+					tagMappings.Count,
+					tagMappings.ToStringFormattedKeyValuePairs (true, multilinePrefix: "- ")
+				);
+			}
 
 			defaultValueMap = new Dictionary<Type, object>()
 			{
@@ -561,7 +564,7 @@ namespace PhantomBrigade.Mods
 				$"Assigning new default object of type {instanceType.Name} to target field");
 		}
 
-		private static (EditOperation, string) ParseOperation(string valueRaw)
+		public static (EditOperation, string) ParseOperation(string valueRaw)
 		{
 			foreach (var kvp in operationMap)
 			{

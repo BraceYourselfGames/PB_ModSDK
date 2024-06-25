@@ -10,6 +10,7 @@ using UnityEngine;
 using YamlDotNet.Serialization;
 
 #if UNITY_EDITOR
+using System.Reflection;
 using UnityEditor;
 #endif
 
@@ -446,6 +447,246 @@ namespace PhantomBrigade.ModTools
             [(int)ModUtilities.EditOperation.Add] = ModUtilities.Constants.Operator.Insert,
             [(int)ModUtilities.EditOperation.Remove] = ModUtilities.Constants.Operator.Remove,
         };
+        
+        [PropertyOrder (-1)]
+        [Button ("Load from files")]
+        private void LoadFromModSelected ()
+        {
+            if (DataManagerMod.modSelected != null)
+                LoadFromMod (DataManagerMod.modSelected);
+        }
+        
+        private const char editSeparator = ':';
+
+        // [Button ("Load from folder")]
+        public void LoadFromMod (DataContainerModData mod)
+        {
+            if (mod == null)
+            {
+                Debug.LogWarning ("Can't load config edits, parent mod not provided");
+                return;
+            }
+
+            if (UtilityDatabaseSerialization.ins == null)
+            {
+                Debug.LogWarning ("Database serialization utility unavailable, can't proceed");
+                return;
+            }
+
+            var rootPath = mod.GetModPathProject ();
+            var editPath = DataPathHelper.GetCombinedCleanPath (rootPath, "ConfigEdits");
+
+            if (!EditorUtility.DisplayDialog ("Load config edits", $"Are you sure you'd like to load config edits for mod {mod.id}? They might overwrite or replace the config edits you have already entered through the inspector or databases, so only use this option if you are trying to import data from an old non-SDK mod. Path: {editPath}", "Confirm", "Cancel"))
+                return;
+
+            if (!Directory.Exists (editPath))
+            {
+                Debug.LogWarning ($"Can't load text edits, mod {mod.id} doesn't have a config edit folder: {editPath}");
+                return;
+            }
+            
+            var dataTypeGlobal = typeof (DataContainerUnique);
+            var dataTypeCollection = typeof (DataContainer);
+            ModUtilities.Initialize (false);
+            
+            string[] filePaths = Directory.GetFiles (editPath, "*.yaml", SearchOption.AllDirectories);
+            if (filePaths.Length == 0)
+            {
+                Debug.LogWarning ($"Can't load text edits, mod {mod.id} doesn't contain any YAML files under the path: {editPath}");
+                return;
+            }
+            
+            if (mod.configEdits == null)
+                mod.configEdits = new ModConfigEditSource ();
+
+            mod.configEdits.dataLinkers = null;
+            mod.configEdits.dataMultiLinkers = null;
+
+
+            for (int i = 0; i < filePaths.Length; ++i)
+            {
+                var filePath = DataPathHelper.GetCleanPath (filePaths[i]);
+                var filePathTrimmed = filePath.Replace (editPath, string.Empty);
+
+                if (filePathTrimmed.StartsWith ("/"))
+                    filePathTrimmed = filePathTrimmed.Substring (1, filePathTrimmed.Length - 1);
+
+                if (filePathTrimmed.EndsWith (".yaml"))
+                    filePathTrimmed = filePathTrimmed.Replace (".yaml", string.Empty);
+
+                var fileName = Path.GetFileNameWithoutExtension (filePath);
+                
+                var typeName = DataPathUtility.GetDataTypeFromPath (filePathTrimmed);
+                if (typeName == null)
+                {
+                    filePathTrimmed = filePathTrimmed.Replace (fileName, string.Empty);
+                    typeName = DataPathUtility.GetDataTypeFromPath (filePathTrimmed);
+                }
+
+                var dataType = FieldReflectionUtility.GetTypeByName (typeName);
+                if (dataType == null)
+                {
+                    Debug.LogWarning ($"Edit {i} | Located config edit of unknown target type {typeName} at path {filePathTrimmed}");
+                    continue;
+                }
+
+                var dataSerialized = UtilitiesYAML.ReadFromFile<ModConfigEditSerialized> (filePath, false);
+                if (dataSerialized == null)
+                {
+                    Debug.LogWarning ($"Edit {i} | Failed to deserialize file at path {filePathTrimmed}");
+                    continue;
+                }
+                
+                bool isCollection = dataTypeCollection.IsAssignableFrom (dataType);
+                bool isGlobal = dataTypeGlobal.IsAssignableFrom (dataType);
+                
+                if (!isCollection && !isGlobal)
+                    continue;
+                
+                var component = UtilityDatabaseSerialization.GetComponentForDataType (dataType);
+                if (component == null)
+                {
+                    Debug.LogWarning ($"Edit {i} | Failed to find a data component for data type {dataType.Name}");
+                    continue;
+                }
+
+                var componentTypeName = component.GetType ().Name;
+                
+                if (dataTypeCollection.IsAssignableFrom (dataType))
+                {
+                    Debug.Log ($"Collection edit {i} | File name: {fileName}\n- Path trimmed: {filePathTrimmed}\n- Path full: {filePath}\n- Data component: {componentTypeName}\n- Data type ({dataTypeCollection.Name}): {dataType.Name}\n- Edits: {dataSerialized.edits.ToStringFormatted ()}");
+
+                    ModConfigEditMultiLinker multiLinkerEdits = null;
+                    if (mod.configEdits.dataMultiLinkers == null)
+                        mod.configEdits.dataMultiLinkers = new List<ModConfigEditMultiLinker> ();
+                    else
+                    {
+                        foreach (var multiLinkerEditsCandidate in dataMultiLinkers)
+                        {
+                            if (multiLinkerEditsCandidate == null)
+                                continue;
+
+                            if (string.Equals (multiLinkerEditsCandidate.type, componentTypeName))
+                                multiLinkerEdits = multiLinkerEditsCandidate;
+                        }
+                    }
+
+                    if (multiLinkerEdits == null)
+                    {
+                        multiLinkerEdits = new ModConfigEditMultiLinker { type = component.GetType ().Name };
+                        mod.configEdits.dataMultiLinkers.Add (multiLinkerEdits);
+                    }
+
+                    ModConfigEditSourceFileMultiLinker fileEdits = null;
+                    if (multiLinkerEdits.edits == null)
+                        multiLinkerEdits.edits = new List<ModConfigEditSourceFileMultiLinker> ();
+                    else
+                    {
+                        foreach (var fileEditsCandidate in multiLinkerEdits.edits)
+                        {
+                            if (fileEditsCandidate == null)
+                                continue;
+
+                            if (string.Equals (fileEditsCandidate.key, fileName))
+                                fileEdits = fileEditsCandidate;
+                        }
+                    }
+                    
+                    if (fileEdits == null)
+                    {
+                        fileEdits = new ModConfigEditSourceFileMultiLinker { key = fileName };
+                        multiLinkerEdits.edits.Add (fileEdits);
+                    }
+
+                    if (dataSerialized.removed)
+                    {
+                        fileEdits.removed = true;
+                        fileEdits.edits = null;
+                    }
+                    else
+                    {
+                        fileEdits.removed = false;
+                        fileEdits.edits = new List<ModConfigEditSourceLine> ();
+                        
+                        for (int e = 0; e < dataSerialized.edits.Count; ++e)
+                        {
+                            var editString = dataSerialized.edits[e];
+                            if (editString == null)
+                                continue;
+
+                            var split = editString.Split (editSeparator);
+                            if (split.Length != 2)
+                                continue;
+                        
+                            var path = split[0];
+                            var value = split[1];
+                            if (value.StartsWith (" "))
+                                value = value.Substring (1, value.Length - 1);
+                        
+                            var (eop, valueRaw) = ModUtilities.ParseOperation (value);
+                            fileEdits.edits.Add (new ModConfigEditSourceLine
+                            {
+                                path = path,
+                                value = valueRaw,
+                                operation = eop
+                            });
+                        }
+                    }
+                }
+                else if (dataTypeGlobal.IsAssignableFrom (dataType))
+                {
+                    Debug.Log ($"Global edit {i} | File name: {fileName}\n- Path trimmed: {filePathTrimmed}\n- Path full: {filePath}\n- Data component: {componentTypeName}\n- Data type ({dataTypeGlobal.Name}): {dataType.Name}\n- Edits: {dataSerialized.edits.ToStringFormatted ()}");
+
+                    ModConfigEditLinker linkerEdits = null;
+                    if (mod.configEdits.dataLinkers == null)
+                        mod.configEdits.dataLinkers = new List<ModConfigEditLinker> ();
+                    else
+                    {
+                        foreach (var linkerEditsCandidate in mod.configEdits.dataLinkers)
+                        {
+                            if (linkerEditsCandidate == null)
+                                continue;
+
+                            if (string.Equals (linkerEditsCandidate.type, componentTypeName))
+                                linkerEdits = linkerEditsCandidate;
+                        }
+                    }
+
+                    if (linkerEdits == null)
+                    {
+                        linkerEdits = new ModConfigEditLinker { type = component.GetType ().Name, file = new ModConfigEditSourceFile { edits = new List<ModConfigEditSourceLine> () } };
+                        mod.configEdits.dataLinkers.Add (linkerEdits);
+                    }
+
+                    for (int e = 0; e < dataSerialized.edits.Count; ++e)
+                    {
+                        var editString = dataSerialized.edits[e];
+                        if (editString == null)
+                            continue;
+                        
+                        var split = editString.Split (editSeparator);
+                        if (split.Length != 2)
+                            continue;
+                        
+                        var path = split[0];
+                        var value = split[1];
+                        if (value.StartsWith (" "))
+                            value = value.Substring (1, value.Length - 1);
+                        
+                        var (eop, valueRaw) = ModUtilities.ParseOperation (value);
+                        linkerEdits.file.edits.Add (new ModConfigEditSourceLine
+                        {
+                            path = path,
+                            value = valueRaw,
+                            operation = eop
+                        });
+                    }
+                }
+            }
+            
+            mod.configEdits.OnAfterDeserialization ();
+        }
+        
         #endif
         #endregion
     }
