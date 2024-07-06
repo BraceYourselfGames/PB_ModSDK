@@ -27,9 +27,9 @@ namespace PhantomBrigade.SDK.ModTools
         [ShowInInspector]
         [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = "@new AssetBundleDesc ()")]
         public List<AssetBundleDesc> bundleDefinitions = new List<AssetBundleDesc> ();
-        
+
         #if UNITY_EDITOR
-        
+
         private bool IsVersionWarningVisible => !ModToolsHelper.IsUnityVersionSupported ();
         private string GetVersionWarningText => $"Warning! Exported assets will only be loaded by the game if your Editor version exactly matches the engine version of the game.\n\n- Game engine version: {ModToolsHelper.unityVersionExpected}\n- Editor engine version: {Application.unityVersion}";
 
@@ -38,16 +38,16 @@ namespace PhantomBrigade.SDK.ModTools
 
     #if UNITY_EDITOR
     [Serializable, HideReferenceObjectPicker, HideDuplicateReferenceBox]
-    public sealed class LibraryDLLs
+    public sealed class FileReferences
     {
         [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = nameof(CreateEntry))]
-        public List<LibraryDLL> files = new List<LibraryDLL> ();
+        public List<FileReference> files = new List<FileReference> ();
 
-        LibraryDLL CreateEntry () => new LibraryDLL ();
+        FileReference CreateEntry () => new FileReference ();
     }
 
     [Serializable, HideReferenceObjectPicker, HideDuplicateReferenceBox]
-    public sealed class LibraryDLL
+    public sealed class FileReference
     {
         [HorizontalGroup (20f)]
         [PropertySpace (2f)]
@@ -171,7 +171,7 @@ namespace PhantomBrigade.SDK.ModTools
         [ConditionalSpace (0f, 4f, nameof(spaceAfterUserModFolder))]
         [PropertyTooltip ("$" + nameof(userModFolder))]
         [EnableGUI, ElidedPath]
-        [InlineButton ("DeleteUserModFolder", "Delete", ShowIf = nameof(showDeleteUserModFolder))]
+        [InlineButton (nameof(DeleteUserModFolder), "Delete", ShowIf = nameof(showDeleteUserModFolder))]
         public string userModFolder => GetModPathUser ();
 
         public void EnableConfigs ()
@@ -352,7 +352,7 @@ namespace PhantomBrigade.SDK.ModTools
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.ConfigEdits)]
         public ModConfigEditSource configEdits;
-        
+
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.TextEdits)]
         public ModConfigLocEdit textEdits;
@@ -361,12 +361,15 @@ namespace PhantomBrigade.SDK.ModTools
         [PropertyOrder (OdinGroup.Order.AssetBundles)]
         public ModAssetBundles assetBundles;
 
-        #if UNITY_EDITOR
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.LibraryDLLs)]
         [LabelText ("Library DLLs")]
-        public LibraryDLLs libraryDLLs;
-        #endif
+        public FileReferences libraryDLLs;
+
+        [DropdownReference (true)]
+        [PropertyOrder (OdinGroup.Order.ExtraFiles)]
+        [LabelText ("Extra Files")]
+        public FileReferences extraFiles;
 
         public override void OnAfterDeserialization (string key)
         {
@@ -395,7 +398,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             if (configEdits != null)
                 configEdits.OnAfterDeserialization ();
-            
+
             if (textEdits != null)
                 textEdits.OnAfterDeserialization ();
         }
@@ -450,10 +453,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             var pathProject = GetModPathProject ();
             metadata.includesTextures = !string.IsNullOrEmpty (pathProject) && Directory.Exists (GetModPathProject () + "/Textures");
-            
-            #if UNITY_EDITOR
             metadata.includesLibraries = libraryDLLs != null && libraryDLLs.files.Count (f => f.enabled) != 0;
-            #endif
         }
 
         public static readonly string defaultWorkingPathParent = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetUserFolder (), "ModsSource");
@@ -621,6 +621,30 @@ namespace PhantomBrigade.SDK.ModTools
             CopyFolder (metadata.includesTextures, projectPath, destPath, "Textures");
             CopyFolder (metadata.includesAssetBundles, projectPath, destPath, "AssetBundles");
             CopyFolder (metadata.includesLibraries, projectPath, destPath, "Libraries");
+            CopyExtraFiles (destPath);
+        }
+
+        void CopyExtraFiles (string destPath)
+        {
+            if (extraFiles == null || extraFiles.files.Count == 0)
+            {
+                return;
+            }
+            foreach (var fr in extraFiles.files)
+            {
+                if (!fr.enabled)
+                {
+                    continue;
+                }
+                if (!File.Exists (fr.path))
+                {
+                    continue;
+                }
+
+                var pathDest = DataPathHelper.GetCombinedCleanPath (destPath, Path.GetFileName (fr.path));
+                // Do not overwrite existing files. This is to prevent accidentally overwriting metadata.yaml.
+                File.Copy (fr.path, pathDest);
+            }
         }
 
         static void CopyFolder (bool includes, string dirPathProject, string dirPathUser, string folderName)
@@ -709,12 +733,8 @@ namespace PhantomBrigade.SDK.ModTools
         {
             public static class Name
             {
-                public const string Configs = nameof(Configs);
-                public const string Core = nameof(Core);
                 public const string Metadata = nameof(Metadata);
-                public const string Packaging = nameof(Packaging);
                 public const string Project = nameof(Project);
-                public const string UserMod = nameof(UserMod);
                 public const string Workshop = "workshop";
                 public const string WorkshopButtons = Workshop + "/Buttons";
             }
@@ -728,6 +748,7 @@ namespace PhantomBrigade.SDK.ModTools
                 public const float TextEdits = 4f;
                 public const float AssetBundles = 5f;
                 public const float LibraryDLLs = 6f;
+                public const float ExtraFiles = 7f;
             }
         }
 
