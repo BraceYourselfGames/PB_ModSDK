@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PhantomBrigade.Functions;
 using PhantomBrigade.Functions.Equipment;
+using PhantomBrigade.SDK.ModTools;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -1241,7 +1242,13 @@ namespace PhantomBrigade.Data
                 return;
             }
 
-            Debug.Log ($"Found {visuals.Length} visuals");
+            if (this.visuals != null && this.visuals.Count > 0)
+            {
+                Debug.Log ($"Subsystem {key} has legacy {this.visuals.Count} visuals, deleting them");
+                this.visuals = null;
+            }
+
+            Debug.Log ($"Found {visuals.Length} visual objects under DataPreviewHolder");
             attachments = new Dictionary<string, DataBlockSubsystemAttachment> ();
             int i = 0;
 
@@ -1264,6 +1271,74 @@ namespace PhantomBrigade.Data
                     visualKey = path;
                 }
 
+                var visualKeyValid = ItemHelper.IsVisualValid (visualKey);
+                if (!visualKeyValid)
+                {                    
+                    Debug.Log ($"Object {t.name} (key {visualKey}) can't be found in the built-in ItemVisual prefab library. ");
+
+                    #if UNITY_EDITOR
+        
+                    if (DataContainerModData.selectedMod != null)
+                    {
+                        var prefabExtension = ".prefab";
+                        var mod = DataContainerModData.selectedMod;
+                        if (mod.assetBundles != null && mod.assetBundles.bundleDefinitions != null)
+                        {
+                            bool match = false;
+                            foreach (var assetBundleDefinition in mod.assetBundles.bundleDefinitions)
+                            {
+                                if (assetBundleDefinition == null)
+                                    continue;
+
+                                if (!assetBundleDefinition.enabled)
+                                    continue;
+
+                                if (string.IsNullOrEmpty (assetBundleDefinition.name))
+                                {
+                                    Debug.LogWarning ($"Mod {mod.id} | Asset bundle has no name");
+                                    continue;
+                                }
+                                
+                                if (assetBundleDefinition.files == null || assetBundleDefinition.files.Count == 0)
+                                    continue;
+
+                                foreach (var file in assetBundleDefinition.files)
+                                {
+                                    if (file == null)
+                                        continue;
+                                    
+                                    if (string.IsNullOrEmpty (file.path))
+                                        continue;
+
+                                    if (!file.path.EndsWith (prefabExtension))
+                                        continue;
+
+                                    var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject> (file.path);
+                                    if (prefab == null)
+                                        continue;
+                                    
+                                    var component = prefab.GetComponent<ItemVisual> ();
+                                    if (component == null)
+                                        continue;
+                                    
+                                    if (!visualKey.Contains (prefab.name))
+                                        continue;
+                                    
+                                    visualKey = $"{assetBundleDefinition.name}/{prefab.name}";
+                                    Debug.Log ($"Object {t.name} assumed to be ItemVisual from mod {mod.id} AssetBundle: {visualKey}");
+                                    match = true;
+                                    break;
+                                }
+                                
+                                if (match)
+                                    break;
+                            }
+                        }
+                    }
+                    
+                    #endif
+                }
+
                 attachments[lookupKey] = new DataBlockSubsystemAttachment
                 {
                     key = visualKey,
@@ -1275,6 +1350,8 @@ namespace PhantomBrigade.Data
                 Debug.Log ($"{key} attachment {visualKey}: {visual.name}, pos. {pos}, rot. {rot}, scale {scale}\nPath: {path}");
                 i += 1;
             }
+
+            DataMultiLinkerSubsystem.unsavedChangesPossible = true;
         }
 
         #if !PB_MODSDK

@@ -148,6 +148,15 @@ public static class ItemHelper
             return null;
         }
     }
+    
+    public static bool IsVisualValid (string visualName)
+    {
+        CheckDatabase ();
+
+        if (itemVisualPrefabs.ContainsKey (visualName))
+            return true;
+        return false;
+    }
 
     public static Dictionary<string, ItemVisual> GetAllVisuals ()
     {
