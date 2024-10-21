@@ -625,6 +625,7 @@ namespace PhantomBrigade.SDK.ModTools
             obj.ResetLoadedOnce ();
 
             DataManagerText.ResetLoadedOnce ();
+            ItemHelper.LoadVisuals ();
         }
 
         static IEnumerator DeleteProjectFolderIE (string projectPath)
