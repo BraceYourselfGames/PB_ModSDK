@@ -7,6 +7,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using YamlDotNet.Serialization;
 
+#if PB_MODSDK
+using System.Linq;
+#endif
+
 namespace PhantomBrigade.Data
 {
     public class DataBlockCombatBiomeFilter
@@ -155,7 +159,11 @@ namespace PhantomBrigade.Data
         [ValueDropdown ("GetTags")]
         public HashSet<string> tags = new HashSet<string> ();
 
+        #if !PB_MODSDK
         [ListDrawerSettings (DefaultExpandedState = false, AlwaysAddDefaultValue = true)]
+        #else
+        [ListDrawerSettings (DefaultExpandedState = false, CustomAddFunction = nameof(CreateSpawnPoint))]
+        #endif
         public List<DataBlockAreaPoint> points = new List<DataBlockAreaPoint> ();
 
         [YamlIgnore, ReadOnly]
@@ -305,7 +313,23 @@ namespace PhantomBrigade.Data
                 tags.Add (tagDir);
         }
 
+        #if PB_MODSDK
+        DataBlockAreaPoint CreateSpawnPoint ()
+        {
+            var point = new DataBlockAreaPoint ();
+            if (points.Count != 0)
+            {
+                var lastPoint = points.Last ();
+                point.point = lastPoint.point + Vector3.up * TilesetUtility.blockAssetSize;
+                point.rotation = lastPoint.rotation;
+                point.index = lastPoint.index;
+            }
+            return point;
+        }
         #endif
+
+        #endif
+
         #endregion
     }
 
@@ -315,7 +339,11 @@ namespace PhantomBrigade.Data
         [YamlIgnore, HideInInspector, NonSerialized]
         public string key;
 
+        #if !PB_MODSDK
         [ListDrawerSettings (DefaultExpandedState = false, AlwaysAddDefaultValue = true)]
+        #else
+        [ListDrawerSettings (DefaultExpandedState = false, CustomAddFunction = nameof(CreateWaypoint))]
+        #endif
         public List<DataBlockAreaPoint> points = new List<DataBlockAreaPoint> ();
 
         #region Editor
@@ -387,6 +415,21 @@ namespace PhantomBrigade.Data
 
             UnityEditor.SceneView.RepaintAll ();
         }
+
+        #if PB_MODSDK
+        DataBlockAreaPoint CreateWaypoint ()
+        {
+            var point = new DataBlockAreaPoint ();
+            if (points.Count != 0)
+            {
+                var lastPoint = points.Last ();
+                point.point = lastPoint.point + Vector3.up * TilesetUtility.blockAssetSize;
+                point.rotation = lastPoint.rotation;
+                point.index = lastPoint.index;
+            }
+            return point;
+        }
+        #endif
 
         #endif
         #endregion
@@ -1110,7 +1153,7 @@ namespace PhantomBrigade.Data
         public bool backgroundTerrainUsed = true;
         public bool altitudeChecked = true;
         public bool sliceShadingUsed = false;
-        
+
         [ShowIf ("sliceShadingUsed")]
         public Vector4 sliceShadingInputs = new Vector4 (0f, 0f, 0f, 0f);
     }
@@ -1504,13 +1547,13 @@ namespace PhantomBrigade.Data
             sceneHelper.boundary.gameObject.SetActive (backgroundTerrainUsed);
             if (backgroundTerrainUsed)
                 sceneHelper.LoadBoundary (boundaryProc);
-            
+
             if (sceneHelper.materialHelper != null)
                 sceneHelper.materialHelper.ApplyAll ();
 
             sceneHelper.segmentHelper.LoadSegments (segments);
             sceneHelper.fieldHelper.LoadFields (fields);
-            
+
             var materialHelper = sceneHelper.materialHelper;
             if (coreProc != null && coreProc.sliceShadingUsed)
             {

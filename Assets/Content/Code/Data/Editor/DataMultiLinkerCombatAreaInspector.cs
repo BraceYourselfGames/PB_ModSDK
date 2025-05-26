@@ -1442,6 +1442,17 @@ abstract class PointGroupDrawer
         for (var i = 0; i < points.Count; ++i)
         {
             var point = points[i];
+            #if !PB_MODSDK
+            if (point == null)
+            {
+                // It is possible the points collection has a null point. This is because the default value for DataBlockAreaPoint is null and
+                // the ListDrawerSettings attribute on a points collection has AlwaysAddDefaultValue = true. So if the user adds a new point to
+                // the collection through the inspector, the null will be seen on every update until the user selects DataBlockAreaPoint from
+                // the object picker for the new entry in the points collection.
+                continue;
+            }
+            #endif
+
             var position = point.point;
             var rotation = Quaternion.Euler (point.rotation);
             var forward = rotation * Vector3.forward;
