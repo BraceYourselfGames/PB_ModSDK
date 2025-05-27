@@ -15,7 +15,7 @@ We can't wait to see what you create!
 
 Quick setup overview:
 - Download & install [Unity Hub](https://unity.com/download)
-- Open the download page for [Unity 2020.3.34 LTS](https://unity.com/releases/editor/whats-new/2020.3.34). Click **Install** on top of the page to begin installation through Unity Hub. If this doesn't work, try downloading a Windows installer through links at the bottom of that page.
+- Open the download page for [Unity 2020.3.34f1 LTS](https://unity.com/releases/editor/whats-new/2020.3.34). Click **Install** on top of the page to begin installation through Unity Hub. If this doesn't work, try downloading a Windows installer through links at the bottom of that page. It is very important to download the exact version of Unity Editor to avoid problems in the SDK.
 - Install git and make sure it is in your `PATH`. If you're using a GUI client, you might not have standalone git.exe installed or might not have `PATH` set up. [Download Git here](https://www.git-scm.com/download).
 - Download the project from this repository. We strongly recommend downloading (cloning) through Git to facilitate easy updating.
 - In Unity Hub, navigate to the **Projects** tab and choose **Open**, selecting the folder with the project. Wait for the project to import.
