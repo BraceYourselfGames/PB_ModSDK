@@ -1,17 +1,9 @@
-namespace PhantomBrigade
-{
-    public class PersistentEntity { }
-    
-    public class OverworldEntity { }
-    
-    public class OverworldActionEntity { }
-    
-    public class CombatEntity { }
-
-    public class ActionEntity { }
-
-    public class EquipmentEntity { }
-}
+public class PersistentEntity { }
+public class OverworldEntity { }
+public class OverworldActionEntity { }
+public class CombatEntity { }
+public class ActionEntity { }
+public class EquipmentEntity { }
 
 namespace PhantomBrigade.Game
 {
@@ -76,14 +68,14 @@ public enum CombatUIModes
 
 public class StartEndModifier
 {
-    public enum Exactness 
+    public enum Exactness
     {
-		SnapToNode,
-		Original,
-		Interpolate,
-		ClosestOnNode,
-		NodeConnection
-	}
+        SnapToNode,
+        Original,
+        Interpolate,
+        ClosestOnNode,
+        NodeConnection
+    }
 }
 
 public enum UnitStatusSource
@@ -107,7 +99,7 @@ public class PilotIdentification
 {
     public int callsignIndex;
     public string callsignOverride;
-        
+
     public int nameIndexPrimary;
     public int nameIndexSecondary;
     public string nameOverride;
