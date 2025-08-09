@@ -300,10 +300,12 @@ namespace Area
         public AreaDataContainerSerialized (AreaDataContainer dataUnpacked)
         {
             if (dataUnpacked == null || dataUnpacked.points == null || dataUnpacked.points.Length == 0)
+            {
                 return;
+            }
 
-            int pointCount = dataUnpacked.points.Length;
-            byte flipShift = (byte)4;
+            var pointCount = dataUnpacked.points.Length;
+            var flipShift = (byte)4;
 
             points = new bool[pointCount];
 
@@ -320,19 +322,19 @@ namespace Area
             var damageIndexesList = new List<int> ();
             var damageValuesList = new List<float> ();
 
-            for (int i = 0; i < dataUnpacked.points.Length; ++i)
+            for (var i = 0; i < dataUnpacked.points.Length; i += 1)
             {
-                bool pointFull = dataUnpacked.points[i] == true;
-                points[i] = pointFull;
+                points[i] = dataUnpacked.points[i];
             }
 
-            for (int i = 0; i < dataUnpacked.spots.Count; ++i)
+            for (var i = 0; i < dataUnpacked.spots.Count; i += 1)
             {
                 var spotSource = dataUnpacked.spots[i];
-
-                byte transformByte = spotSource.rotation;
+                var transformByte = spotSource.rotation;
                 if (spotSource.flip)
+                {
                     transformByte += flipShift;
+                }
 
                 spotIndexesList.Add (spotSource.index);
                 spotTilesetsList.Add (spotSource.tileset);
@@ -342,12 +344,9 @@ namespace Area
                 spotOffsetsList.Add (spotSource.offset);
             }
 
-            if (dataUnpacked.indestructibleIndexes != null)
-                indestructibleIndexes = dataUnpacked.indestructibleIndexes.ToArray ();
-            else
-                indestructibleIndexes = Array.Empty<int> ();
+            indestructibleIndexes = dataUnpacked.indestructibleIndexes != null ? dataUnpacked.indestructibleIndexes.ToArray () : Array.Empty<int> ();
 
-            for (int i = 0; i < dataUnpacked.customizations.Count; ++i)
+            for (var i = 0; i < dataUnpacked.customizations.Count; i += 1)
             {
                 var materialSource = dataUnpacked.customizations[i];
 
@@ -367,7 +366,7 @@ namespace Area
                 ));
             }
 
-            for (int i = 0; i < dataUnpacked.integrities.Count; ++i)
+            for (var i = 0; i < dataUnpacked.integrities.Count; i += 1)
             {
                 var integritySource = dataUnpacked.integrities[i];
 
@@ -395,13 +394,14 @@ namespace Area
             var propMaterialsPrimaryList = new List<float3> ();
             var propMaterialsSecondaryList = new List<float3> ();
 
-            for (int i = 0; i < dataUnpacked.props.Count; ++i)
+            for (var i = 0; i < dataUnpacked.props.Count; i += 1)
             {
                 var propSource = dataUnpacked.props[i];
-
-                byte transformByte = propSource.rotation;
+                var transformByte = propSource.rotation;
                 if (propSource.flip)
+                {
                     transformByte += flipShift;
+                }
 
                 propIndexesList.Add (propSource.pivotIndex);
                 propIDsList.Add (propSource.id);
@@ -423,14 +423,23 @@ namespace Area
                 ));
             }
 
+            var navOverrideIndexList = new List<int> ();
+            var navOverrideOffsetList = new List<float> ();
+            for (var i = 0; i < dataUnpacked.navOverrides.Count; i += 1)
+            {
+                var navOverrideSource = dataUnpacked.navOverrides[i];
+                navOverrideIndexList.Add (navOverrideSource.pivotIndex);
+                navOverrideOffsetList.Add (navOverrideSource.offsetY);
+            }
+
             propIndexes = propIndexesList.ToArray ();
             propIDs = propIDsList.ToArray ();
             propTransforms = propTransformsList.ToArray ();
             propOffsets = propOffsetsList.ToArray ();
             propMaterialsPrimary = propMaterialsPrimaryList.ToArray ();
             propMaterialsSecondary = propMaterialsSecondaryList.ToArray ();
-            navOverrideIndexes = null;
-            navOverrideOffsets = null;
+            navOverrideIndexes = navOverrideIndexList.ToArray ();
+            navOverrideOffsets = navOverrideOffsetList.ToArray ();
         }
     }
 }
