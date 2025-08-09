@@ -128,7 +128,11 @@ public static class UtilitiesYAML
         AddTagMappingsHintedInAssembly (assemblyBuiltin);
     }
 
+    #if PB_MODSDK
+    public static void AddTagMappingsHintedInAssembly (Assembly assembly, bool useNamespaceAsPrefix = false)
+    #else
     public static void AddTagMappingsHintedInAssembly (Assembly assembly)
+    #endif
     {
         if (assembly == null)
             return;
@@ -157,9 +161,17 @@ public static class UtilitiesYAML
             var typeHintedPrefix = type.GetCustomAttribute<TypeHintedPrefixAttribute> (true);
             if (typeHintedPrefix != null && !string.IsNullOrEmpty (typeHintedPrefix.prefix))
                 alias = $"!{typeHintedPrefix.prefix}.{alias.TrimStart ('!')}";
+            #if PB_MODSDK
+            else if (useNamespaceAsPrefix)
+                alias = $"!{type.Namespace}.{alias.TrimStart ('!')}";
+            #endif
 
             if (tagMappings.TryGetValue (alias, out var typeConflicting))
             {
+                #if PB_MODSDK
+                Debug.LogWarning ($"YAML alias conflict unresolved:\n- {typeConflicting.Namespace}.{typeConflicting.GetNiceTypeName ()} already using alias: {alias}\n- {type.Namespace}.{type.GetNiceTypeName ()} can't be registered as fully clarified alias is also already in use: {alias}");
+                continue;
+                #else
                 string aliasExtended = $"!{type.Namespace}.{alias.TrimStart ('!')}";
                 if (!tagMappings.ContainsKey (aliasExtended))
                 {
@@ -172,6 +184,7 @@ public static class UtilitiesYAML
                     Debug.LogWarning ($"YAML alias conflict unresolved:\n- {typeConflicting.Namespace}.{typeConflicting.GetNiceTypeName ()} already using alias: {alias}\n- {type.Namespace}.{type.GetNiceTypeName ()} can't be registered as fully clarified alias is also already in use: {aliasExtended}");
                     continue;
                 }
+                #endif
             }
 
             tagMappings.Add (alias, type);
@@ -347,7 +360,7 @@ public static class UtilitiesYAML
                 var key = kvp.Key;
                 if (forceLowerCase)
                     key = key.ToLowerInvariant ();
-                
+
                 for (int i = dirsListModifiable.Count - 1; i >= 0; --i)
                 {
                     // If there is a name match, eliminate the matched dir from the list and break
@@ -422,7 +435,7 @@ public static class UtilitiesYAML
                 var key = kvp.Key;
                 if (forceLowerCase)
                     key = key.ToLowerInvariant ();
-                
+
                 if (directoryMode)
                 {
                     var folderPathPerKey = Path.Combine (folderPath, key);
@@ -483,7 +496,7 @@ public static class UtilitiesYAML
 
         if (forceLowerCase)
             key = key.ToLowerInvariant ();
-        
+
         if (directoryMode)
         {
             var folderPathPerKey = Path.Combine (folderPath, key);
@@ -907,7 +920,7 @@ public static class UtilitiesYAML
                 var filenameMain = filenameDirectoryModeMain;
                 if (!string.IsNullOrEmpty (directoryModeFilename))
                     filenameMain = directoryModeFilename + yamlExtension;
-                
+
                 var dirs = Directory.GetDirectories (folderPath);
                 for (int i = 0; i < dirs.Length; ++i)
                 {
@@ -915,7 +928,7 @@ public static class UtilitiesYAML
                     var key = Path.GetFileName (dirPath);
                     if (forceLowerCase)
                         key = key.ToLowerInvariant ();
-                    
+
                     if (string.IsNullOrEmpty (key) || result.ContainsKey (key))
                         continue;
 
@@ -949,7 +962,7 @@ public static class UtilitiesYAML
                         var key = Path.GetFileNameWithoutExtension (filePath);
                         if (forceLowerCase)
                             key = key.ToLowerInvariant ();
-                        
+
                         if (!string.IsNullOrEmpty (key) && !result.ContainsKey (key) && dataObject != null)
                             result.Add (key, dataObject);
                     }

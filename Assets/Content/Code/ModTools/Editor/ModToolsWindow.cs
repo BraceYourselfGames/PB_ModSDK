@@ -257,6 +257,7 @@ namespace PhantomBrigade.ModTools
                 EditorApplication.delayCall += () => ShowWindow ();
             }
             #if PB_MODSDK
+            ModToolsHelper.LoadUserDLLTypeHints ();
             ModToolsHelper.EnsureSDKChecksums ();
             #endif
         }
@@ -622,7 +623,7 @@ namespace PhantomBrigade.ModTools
                                     if (!available && !buttonCond.visibleUnavailable)
                                         continue;
                                 }
-                                
+
                                 var w = GUI.skin.button.CalcSize (GUIHelper.TempContent (button.label)).x + 20;
                                 btnWidth += w + 10;
 
@@ -650,7 +651,7 @@ namespace PhantomBrigade.ModTools
                             if (!string.IsNullOrEmpty (textSecondary))
                                 GUI.Label (r, textSecondary, SirenixGUIStyles.RightAlignedGreyMiniLabel);
                         }
-                        
+
                     }
                 }
 
