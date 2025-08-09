@@ -974,6 +974,15 @@ public class DataMultiLinkerCombatAreaInspector : OdinEditor
         if (distMax <= 0f || distMax - distMin <= 0f)
             fadeUsed = false;
 
+        #if PB_MODSDK
+        if (list.Count < 3)
+        {
+            // No sense in fading a 2-block structure. One of the blocks will be at max dist and
+            // therefore be invisible (alpha = 0).
+            fadeUsed = false;
+        }
+        #endif
+
         var distSpan = distMax - distMin;
 
         list.Sort ((a, b) => b.dist.CompareTo (a.dist));
@@ -990,7 +999,12 @@ public class DataMultiLinkerCombatAreaInspector : OdinEditor
             if (fadeUsed)
             {
                 var interpolant = Mathf.Clamp01 ((cubeDesc.dist - distMin) / distSpan);
+                #if PB_MODSDK
+                // Don't fade out the farthest block completely. Otherwise, for some structures it will look like the farthest block is missing.
+                var fade = Mathf.Lerp (1f, 0.125f, interpolant);
+                #else
                 var fade = Mathf.Lerp (1f, 0f, interpolant);
+                #endif
                 Handles.color = cubeDesc.color.WithAlpha (fade);
             }
             else
