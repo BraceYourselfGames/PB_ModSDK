@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine;
 
 #if UNITY_EDITOR
+using System.Reflection;
 using PhantomBrigade.ModTools;
 using UnityEditor;
 using Unity.EditorCoroutines.Editor;
@@ -102,6 +103,45 @@ namespace PhantomBrigade.SDK.ModTools
         }
 
         public static void SaveMod (DataContainerModData modData) => DataManagerMod.SaveMod (modData);
+
+        public static void LoadUserDLLTypeHints ()
+        {
+            // !!! Only run this once on Editor startup.
+
+            var tagMappings = UtilitiesYAML.GetTagMappings ();
+            var tagCountCurrent = tagMappings.Count;
+            var currentTags = new HashSet<string> (tagMappings.Keys);
+
+            var sdkDirectory = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
+            var userDLLDirectory = new DirectoryInfo (Path.Combine (sdkDirectory.FullName, "Assets\\User"));
+            if (!userDLLDirectory.Exists)
+            {
+                return;
+            }
+            var assemblies = userDLLDirectory.GetFiles ("*.dll")
+                .Select (p => Assembly.LoadFrom (p.FullName))
+                .ToList ();
+            foreach (var assembly in assemblies)
+            {
+                Debug.LogFormat ("Loading type hints for YAML from user DLL | path: {0} | assembly: {1}", assembly.Location, assembly.FullName);
+                UtilitiesYAML.AddTagMappingsHintedInAssembly (assembly, useNamespaceAsPrefix: true);
+                var tags = new HashSet<string> (tagMappings.Keys);
+                tags.ExceptWith (currentTags);
+                if (tags.Count == 0)
+                {
+                    continue;
+                }
+                Debug.LogFormat ("Tags added from type hints\n   {0}", tags.ToStringFormatted (multiline: true, appendBrackets: false, multilinePrefix: "   "));
+                currentTags.UnionWith (tags);
+            }
+
+            if (tagCountCurrent == tagMappings.Count)
+            {
+                return;
+            }
+            UtilitiesYAML.RebuildDeserializer ();
+            UtilitiesYAML.RebuildSerializer ();
+        }
 
         public static void EnsureSDKChecksums ()
         {
@@ -669,7 +709,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             GenerateAssetBundles (modData);
             GenerateTextEdits (modData);
-            
+
             #if UNITY_EDITOR
             GenerateLibraries (modData);
             #endif
@@ -695,7 +735,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             modData.configEdits.SaveToMod (modData);
         }
-        
+
         static void GenerateTextEdits (DataContainerModData modData)
         {
             if (modData?.textEdits == null)
