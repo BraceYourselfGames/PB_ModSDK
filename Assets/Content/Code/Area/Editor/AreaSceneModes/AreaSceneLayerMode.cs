@@ -257,6 +257,10 @@ namespace Area
             var am = bb.am;
             foreach (var point in am.points)
             {
+                if (point.pointState == AreaVolumePointState.Empty)
+                {
+                    continue;
+                }
                 if (point.instanceCollider == null)
                 {
                     continue;
