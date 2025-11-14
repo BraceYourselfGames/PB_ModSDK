@@ -59,6 +59,7 @@ namespace Area
 
             // Start at bottom layer
             var startIndex = bounds.x * bounds.z * (bounds.y - 1);
+            var stopIndex = bounds.x * bounds.z * bounds.y;
             var points = am.points;
             var damageRestrictionDepth = am.damageRestrictionDepth;
             var damagePenetrationDepth = am.damagePenetrationDepth;
@@ -73,14 +74,9 @@ namespace Area
                 return;
             }
 
-            // Progress for size of one layer
-            var offsetLimit = bounds.x * bounds.z;
-
-            for (var i = 0; i < offsetLimit; ++i)
+            for (var i = startIndex; i < stopIndex; i += 1)
             {
-                var index = i + startIndex;
-                var point = points[index];
-
+                var point = points[i];
                 if (point == null)
                 {
                     continue;
