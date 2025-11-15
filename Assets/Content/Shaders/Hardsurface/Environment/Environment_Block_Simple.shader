@@ -2,7 +2,7 @@
 
 Shader "Hardsurface/Environment/Block (standard)"
 {
-	Properties 
+	Properties
 	{
 		_HSBOffsetsPrimary ("HSB offsets (primary) + Emission", Vector) = (0.5, 0.5, 0.5, 1)
 		_HSBOffsetsSecondary ("HSB offsets (secondary) + Damage", Vector) = (0.5, 0.5, 0.5, 1)
@@ -25,21 +25,21 @@ Shader "Hardsurface/Environment/Block (standard)"
 		_IntegrityBottom ("Integrities (4-7)", Vector) = (1, 1, 1, 1)
 	}
 
-	SubShader 
+	SubShader
 	{
-		Tags 
-		{ 
+		Tags
+		{
 			"RenderType" = "Opaque"
-		}	
-		
+		}
+
 		Cull Off
 		LOD 200
 
 		CGPROGRAM
 
-		#pragma surface surf Standard fullforwardshadows vertex:SharedVertexFunction addshadow  
+		#pragma surface surf Standard fullforwardshadows vertex:SharedVertexFunction addshadow
 		#pragma target 5.0
-		#pragma only_renderers d3d11
+		#pragma only_renderers d3d11 vulkan
 		#include "UnityCG.cginc"
 		#include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
 		#include "Environment_Shared.cginc"
@@ -62,7 +62,7 @@ Shader "Hardsurface/Environment/Block (standard)"
 		float _EmissionIntensity;
         half _WorldSpaceUVOverride;
 
-		void surf (Input IN, inout SurfaceOutputStandard output) 
+		void surf (Input IN, inout SurfaceOutputStandard output)
 		{
 			float destructionAnimation = 0;
 			float4 hsbPrimary = float4(0,0.5,0.5,0);
@@ -73,9 +73,9 @@ Shader "Hardsurface/Environment/Block (standard)"
 				hsbPrimary = cachedHSB.UnpackPrimary();
 				hsbSecondary = cachedHSB.UnpackSecondary();
 				destructionAnimation = hsbSecondary.w;//cachedHSBSecondary = float4(0,0,0,1);.w; // UNITY_ACCESS_INSTANCED_PROP (_DestructionAnimation_arr, _DestructionAnimation);
-				
+
 			#endif
-			
+
 			if (destructionAnimation > 0.99)
 			{
 				clip (-1);
@@ -135,7 +135,7 @@ Shader "Hardsurface/Environment/Block (standard)"
 						float rampAlphaMultiplier = saturate ((1 - subtractionTestNoise) * IN.damageIntegrityCriticality.x * 5); // IN.damage * 5;
 						ramp.w *= rampAlphaMultiplier;
 
-						// Time to add this 
+						// Time to add this
 						albedoFinal = lerp (albedoFinal, albedoFinal * ramp.x, ramp.w * _GlobalEnvironmentRampInfluence);
 						albedoFinal = lerp (albedoFinal, _StructureColor * structureMaskShadow, structureMask);
 						smoothnessFinal = lerp (smoothnessFinal, smoothnessFinal * ramp.x, ramp.w);
@@ -178,7 +178,7 @@ Shader "Hardsurface/Environment/Block (standard)"
 				output.Occlusion = occlusionFinal;
 				output.Normal = normalFinal;
 				output.Alpha = 1 - IN.damageIntegrityCriticality.x;
-				
+
 				output.Albedo = 0;
 			}
 		}

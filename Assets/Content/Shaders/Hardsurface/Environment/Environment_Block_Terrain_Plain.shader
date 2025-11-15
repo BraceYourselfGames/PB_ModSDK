@@ -43,7 +43,7 @@
 
 		#pragma surface surf Standard addshadow vertex:vert
 		#pragma target 5.0
-		#pragma only_renderers d3d11 d3d11_9x
+		#pragma only_renderers d3d11 d3d11_9x vulkan
         #include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
 		#include "Environment_Shared.cginc"
         #pragma multi_compile_instancing
@@ -127,7 +127,7 @@
 			verticalFactor *= lerp (normalTerrain.a, 1, pow (verticalFactor, 4));
 
 			float4 albedoFinal = lerp (albedoVertical, albedoHorizontal, verticalFactor);
-			
+
 			#if _USE_GLOBAL_MAP
                 float4 albedoGlobalOverride = tex2D (_GlobalAlbedoTex, IN.texcoord_uv2) * _GlobalMapTint;
                 float maskGlobalOverride = IN.color.r; // albedoGlobalOverride.a * IN.color.r;
@@ -138,10 +138,10 @@
 
 			fixed3 normalHorizontal = float3 (normalTerrain.x * 2 - 1, normalTerrain.y * 2 - 1, normalTerrain.z * 2 - 1);
 			normalHorizontal = normalize (normalHorizontal);
-			
+
 			fixed3 normalVertical = UnpackNormal (tex2D (_Bump, IN.texcoord_uv1));
 			normalVertical = lerp (fixed3 (0, 0, 1), normalVertical, _NormalIntensity);
-			
+
 			#if _USE_GLOBAL_MAP
                 smoothnessFinal = lerp (smoothnessFinal, _GlobalSmoothness, maskGlobalOverride);
 			#endif
@@ -169,7 +169,7 @@
 
 			float3 emissionFinal = float3 (0, 0, 0);
             ApplyIsolines (albedoFinal.xyz, emissionFinal, IN.worldPos1, IN.worldNormal1);
-			
+
 			o.Albedo = albedoFinal;
 			o.Metallic = metalnessFinal;
 			o.Smoothness = smoothnessFinal;

@@ -1,6 +1,6 @@
 #include "Instancing_Shared.cginc"
 #pragma exclude_renderers gles
-#pragma only_renderers d3d11 d3d11_9x 
+#pragma only_renderers d3d11 d3d11_9x vulkan
 
 struct Input
 {
@@ -12,7 +12,7 @@ struct Input
 	float3 worldNormal;
 
 	float3 damageIntegrityCriticality;
-	
+
     float4 color : COLOR;
 	float3 viewDir;
     float2 triplanarUV;
@@ -92,19 +92,19 @@ void ColorFunctionSliceShading
 	fade = lerp (1, fade, saturate ((_GlobalEnvironmentSliceInputs.y - 0.01) * 100));
 	glow *= saturate (max (0, _GlobalEnvironmentSliceInputs.z - 0.01) * 100);
 	glow = pow (glow, 2);
- 
+
 	outDiffuse *= fade;
 	outEmission *= fade;
 	outSpecSmoothness *= fade;
 	outEmission.xyz += _GlobalEnvironmentSliceColor.xyz * (glow * _GlobalEnvironmentSliceColor.w);
-			
+
 	#endif
 }
 
 inline void ApplySliceCutoff (Input IN)
 {
 	#ifdef _USE_SLICE_CUTOFF
-	        
+
 	float fadeHeight = _GlobalEnvironmentSliceInputs.x;
 	float y = IN.worldPos1.y;
 
@@ -142,7 +142,7 @@ float4 _CombatTerrainSlopeParams;
 sampler2D _CombatTerrainTexDistant;
 sampler2D _CombatTerrainTexSlope;
 
-#if defined(SHADER_API_D3D11)
+#if defined(SHADER_API_D3D11) || defined(SHADER_API_VULKAN)
 
 // Terrain texturing properties
 float4 _CombatTerrainPresetMapping;
@@ -222,16 +222,16 @@ DECLARE_TEX2D_NOSAMPLER(_CombatTerrainTexDetail2NH);
 /*
 // properties
 _MyTexArray ("My Texture Array", 2DArray) = "white" {}
- 
+
 // unform definition
 UNITY_DECLARE_TEX2DARRAY(_MyTexArray);
- 
+
 // custom function to sample texture
 half4 MyFunction(UNITY_ARGS_TEX2DARRAY(_MyTexArray, float2 uv, float index)
 {
 return UNITY_SAMPLE_TEX2DARRAY(_MyTexArray, float3(uv, index));
 }
- 
+
 // calling function
 half4 col = MyFunction(UNITY_PASS_TEX2DARRAY(_MyTexArray), uv, index);
 */
@@ -322,9 +322,9 @@ void SharedShadowVertexFunction(inout appdata_full v, out Input o)
 	float4 integrityTopScaled = topCorners * integrityTop;
 	float4 integrityBottomScaled = bottomCorners * integrityBottom;
 
-	float damageVectorDifference = 
+	float damageVectorDifference =
 	(
-		1 - 
+		1 -
 		damageTopScaled.x -
 		damageTopScaled.y -
 		damageTopScaled.z -
@@ -353,13 +353,13 @@ void SharedShadowVertexFunction(inout appdata_full v, out Input o)
 	float integrity = saturate (integrityVectorDifference);
 
     o.damageIntegrityCriticality = float3 (damage, integrity, 0);
-	
+
 
 	// Distort the shape a bit
 	v.vertex.xyz = lerp (v.vertex.xyz, v.vertex.xyz - v.normal * 2, damage * damage);
 }
 
-void SharedVertexFunction (inout appdata_full v, out Input o) 
+void SharedVertexFunction (inout appdata_full v, out Input o)
 {
     UNITY_SETUP_INSTANCE_ID (v);
 	UNITY_INITIALIZE_OUTPUT (Input, o);
@@ -432,9 +432,9 @@ void SharedVertexFunction (inout appdata_full v, out Input o)
 	float4 integrityTopScaled = topCorners * integrityTop;
 	float4 integrityBottomScaled = bottomCorners * integrityBottom;
 
-	float damageVectorDifference = 
+	float damageVectorDifference =
 	(
-		1 - 
+		1 -
 		damageTopScaled.x -
 		damageTopScaled.y -
 		damageTopScaled.z -
@@ -487,7 +487,7 @@ void SharedVertexFunction (inout appdata_full v, out Input o)
 	v.vertex.xyz = lerp (v.vertex.xyz, v.vertex.xyz - v.normal * 2, damage * damage);
 }
 
-void SharedVertexFunctionLight (inout appdata_full v, out Input o) 
+void SharedVertexFunctionLight (inout appdata_full v, out Input o)
 {
     UNITY_SETUP_INSTANCE_ID (v);
 	UNITY_INITIALIZE_OUTPUT (Input, o);
@@ -587,7 +587,7 @@ float GetOcclusion (float worldPos1Y, float worldNormal1Y, float occlusionFromTe
 }
 
 float4 GetDetailSample (float3 worldPos1, float3 worldNormal1)
-{   
+{
     // Triplanar projection of shared detail texture - should ideally be replaced by a single 3d noise sample
 	float3 projNormal = saturate (pow (worldNormal1 * 1.4, 4));
 	float4 detailX = tex2D (_GlobalDetailTex, worldPos1.zy / _GlobalEnvironmentDetailScale + float2 (0.25, 0.125)) * abs (worldNormal1.x);
@@ -612,7 +612,7 @@ float GetIntegrityMultiplier (float integrity, float4 detail)
 
 #if defined(SHADER_API_D3D11)
 //stochastic sampling
-float4 tex2DStochastic(ARGS_TEX2D_SAMPLER(tex, samplertex), float2 uv) 
+float4 tex2DStochastic(ARGS_TEX2D_SAMPLER(tex, samplertex), float2 uv)
 {
 	//triangle vertices and blend weights
 	//BW_vx[0...2].xyz = triangle verts
@@ -627,7 +627,7 @@ float4 tex2DStochastic(ARGS_TEX2D_SAMPLER(tex, samplertex), float2 uv)
 	float3 barry = float3 (frac(skewUV), 0);
 	barry.z = 1.0-barry.x-barry.y;
 
-	BW_vx = ((barry.z>0) ? 
+	BW_vx = ((barry.z>0) ?
 		float4x3(float3(vxID, 0), float3(vxID + float2(0, 1), 0), float3(vxID + float2(1, 0), 0), barry.zyx) :
 		float4x3(float3(vxID + float2 (1, 1), 0), float3(vxID + float2 (1, 0), 0), float3(vxID + float2 (0, 1), 0), float3(-barry.z, 1.0-barry.y, 1.0-barry.x)));
 
@@ -653,10 +653,10 @@ void SampleTerrainFallbackSimple (inout float4 ah, inout float4 mseo, float3 wor
 {
 	ah = float4 (1,1,1,0);
 	mseo = float4 (0,0,0,1);
-	
+
 	float2 uvMain = worldPos.xz / _CombatTerrainParams.y;
 	float4 result = tex2D (_CombatTerrainTexFallbackAS, uvMain);
-	
+
 	ah = result;
 }
 */
@@ -666,9 +666,9 @@ void SampleTerrainFallbackStohastic (inout float4 ah, inout float4 mseo, float3 
 {
 	ah = float4 (1,1,1,0);
 	mseo = float4 (0,0,0,1);
-	
-	float2 uvMain = worldPos.xz / _CombatTerrainParams.y; 
-	
+
+	float2 uvMain = worldPos.xz / _CombatTerrainParams.y;
+
 	//triangle vertices and blend weights
 	//BW_vx[0...2].xyz = triangle verts
 	//BW_vx[3].xy = blend weights (z is unused)
@@ -682,7 +682,7 @@ void SampleTerrainFallbackStohastic (inout float4 ah, inout float4 mseo, float3 
 	float3 barry = float3 (frac(skewUV), 0);
 	barry.z = 1.0-barry.x-barry.y;
 
-	BW_vx = ((barry.z>0) ? 
+	BW_vx = ((barry.z>0) ?
 		float4x3(float3(vxID, 0), float3(vxID + float2(0, 1), 0), float3(vxID + float2(1, 0), 0), barry.zyx) :
 		float4x3(float3(vxID + float2 (1, 1), 0), float3(vxID + float2 (1, 0), 0), float3(vxID + float2 (0, 1), 0), float3(-barry.z, 1.0-barry.y, 1.0-barry.x)));
 
@@ -699,7 +699,7 @@ void SampleTerrainFallbackStohastic (inout float4 ah, inout float4 mseo, float3 
 	// float4 sample3 = SAMPLE_TEX2D_GRAD(tex, samplertex, uvMain + hash2D2D(BW_vx[2].xy), dx, dy);
 
 	float4 result = mul (sample1, BW_vx[3].x) + mul (sample2, BW_vx[3].y) + mul (sample3, BW_vx[3].z);
-	
+
 	ah = result;
 }
 */
@@ -720,7 +720,7 @@ half BH1 (half texture1height,  half texture2height,  half control1height,  half
 	half height1 = texture1heightPrefilter + control1height;
 	half height2 = texture2heightPrefilter + control2height;
 	half blendFactor = (clamp(((height1 - height2) / overlapDepth), -1, 1) + 1) / 2;
-	// Substract positive differences of the other control height to not make one texture height benefit too much from the other.
+	// Subtract positive differences of the other control height to not make one texture height benefit too much from the other.
 	textureHeightOut = max(0, texture1heightPrefilter - max(0, control2height-control1height)) * blendFactor + max(0, texture2heightPrefilter - max(0, control1height-control2height)) * (1 - blendFactor);
 	// Propagate sum of control heights to not loose height.
 	controlHeightOut = control1height + control2height;
@@ -733,14 +733,14 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 	mseo = float4 (0,0,0,1);
 	nh = float4 (0,0,1,0.5);
 
-	#if defined(SHADER_API_D3D11)
+	#if defined(SHADER_API_D3D11) || defined(SHADER_API_VULKAN)
 
 	float gradientSize = _CombatTerrainParamsScale.w - _CombatTerrainParamsScale.z;
 	float gradientUVBase = saturate ((worldPos.y - _CombatTerrainParamsScale.z) / max (0.01, gradientSize));
 
 	float2 gradientUV = float2 (gradientUVBase, 0);
 	float4 gradientSample = UNITY_SAMPLE_TEX2D(_CombatTerrainTexGradient, gradientUV);
-	
+
 	float2 splatUV = float2 (worldPos.x, -worldPos.z) / _CombatTerrainParamsScale.x;
 	float4 splatSample = UNITY_SAMPLE_TEX2D(_CombatTerrainTexSplat, splatUV);
 
@@ -808,7 +808,7 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 
 	/*
 	float lambda = 0.0001;
-	
+
 	//if(splatSample.x >= lambda)
 	{
 		as1 = tex2DStochastic (PASS_TEX2D (_CombatTerrainTexDetail1AH), mainUV);
@@ -823,7 +823,7 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 	{
 		as2 = tex2DStochastic (PASS_TEX2D_SAMPLER (_CombatTerrainTexDetail2AH, _CombatTerrainTexDetail1AH), mainUV);
 		nh2 = tex2DStochastic (PASS_TEX2D_SAMPLER (_CombatTerrainTexDetail2NH, _CombatTerrainTexDetail1AH), mainUV);
-	
+
 		float4 hsb2 = _CombatTerrainDetail2HSB;
 		as2.xyz = lerp (as2.xyz, RGBAdjustWithHSV (as2, hsb2.x, hsb2.y, hsb2.z), hsb2.w);
 	}
@@ -832,7 +832,7 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 	{
 		as3 = tex2DStochastic (PASS_TEX2D_SAMPLER (_CombatTerrainTexDetail3AH, _CombatTerrainTexDetail1AH), mainUV);
 		nh3 = tex2DStochastic (PASS_TEX2D_SAMPLER (_CombatTerrainTexDetail3NH, _CombatTerrainTexDetail1AH), mainUV);
-	
+
 		float4 hsb3 = _CombatTerrainDetail3HSB;
 		as3.xyz = lerp (as3.xyz, RGBAdjustWithHSV (as3, hsb3.x, hsb3.y, hsb3.z), hsb3.w);
 	}
@@ -841,15 +841,15 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 	{
 		as4 = tex2DStochastic (PASS_TEX2D_SAMPLER (_CombatTerrainTexDetail4AH, _CombatTerrainTexDetail1AH), mainUV);
 		nh4 = tex2DStochastic (PASS_TEX2D_SAMPLER (_CombatTerrainTexDetail4NH, _CombatTerrainTexDetail1AH), mainUV);
-	
+
 		float4 hsb4 = _CombatTerrainDetail4HSB;
 		as4.xyz = lerp (as4.xyz, RGBAdjustWithHSV (as4, hsb4.x, hsb4.y, hsb4.z), hsb4.w);
-	} 
+	}
 
-	float weight1 = splatSample.x;	
+	float weight1 = splatSample.x;
 	float weight2 = splatSample.y;
 	float weight3 = splatSample.z;
-	
+
 
 	// final height per detail type (offset this later, if needed, e.g. with a float4 property that shifts each channel up or down)
 	half h1o = saturate (nh1.w + _CombatTerrainParamsBlendOffset.x);
@@ -864,7 +864,7 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 	fixed h2 = lerp (h1, h2o, b1);
 	half b3 = HeightBlend (h2, h4o, weight3, _CombatTerrainParamsBlendContrast.z);
 
-	
+
 	float4 combinedAlbedoSmoothness = lerp (lerp (lerp (as1, as2, b1), as3, b2), as4, b3);
 	float4 combinedNormalHeight = lerp (lerp (lerp (nh1, nh2, b1), nh3, b2), nh4, b3);
 	*/
@@ -873,12 +873,12 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 	float height1 = saturate (splatSample.x);
 	float height2 = saturate (splatSample.y);
 	float height3 = saturate (splatSample.z);
-	
+
 	half h1o = saturate (nh1.w + _CombatTerrainParamsBlendOffset.x);
 	half h2o = saturate (nh2.w + _CombatTerrainParamsBlendOffset.y);
 	half h3o = saturate (nh3.w + _CombatTerrainParamsBlendOffset.z);
 	half h4o = saturate (nh4.w + _CombatTerrainParamsBlendOffset.w);
-	
+
 	half b1 = HeightBlend (h1o, h2o, height1, _CombatTerrainParamsBlendContrast.x);
 	half h1 = lerp (h1o, h2o, b1);
 	half b2 = HeightBlend (h1, h3o, height2, _CombatTerrainParamsBlendContrast.y);
@@ -921,7 +921,7 @@ void SampleTerrain (inout float4 as, inout float4 mseo, inout float4 nh, float3 
 
 	// Allowing textures to use full range while ensuring smoothness never peaks too high for what terrain depicts
 	float smoothness = combinedAlbedoSmoothness.w * 0.25;
-	
+
 	mseo = float4 (0, smoothness, 0, 1);
 	nh = combinedNormalHeight;
 	#endif
@@ -988,7 +988,7 @@ void ApplyWeather
 
 	// Weather-specific masks (snow mask, snow glint, rain mask, etc.)
 	float4 weatherMasksSample = UNITY_SAMPLE_TEX2D (_CombatTerrainTexWeather, splatUV * 10);
-	
+
 	float rainIntensity = saturate (_WeatherParameters.x);
 	float snowSurfaceIntensity = saturate (_WeatherParameters.y);
 	// snowFallIntensity is not used here (i.e. not combined into precipitationIntensity as it has no direct effect on any surfaces)
@@ -1004,7 +1004,7 @@ void ApplyWeather
 
 	// Shrink proportionally to intensity
 	rainMask *= saturate ((rainIntensity + 0.5) * 0.7);
-	
+
 	float rainMaskAccent = ContrastGrayscale (weatherMasksSample.b, lerp (0.9, 0.01, rainIntensity)) * 0.5;
 
 	// Overlay, preserving overall shape of original mask
@@ -1085,8 +1085,8 @@ void ApplyWeather
 	smoothnessFinal = lerp (smoothnessFinal, snowSmoothness, snowMask);
 
 	// Normals should fade at greater (inv. exp.) rate
-	normalFinal = lerp (normalFinal, float3 (0,0,1), 1 - pow (1 - snowMask, 2));	
-				
+	normalFinal = lerp (normalFinal, float3 (0,0,1), 1 - pow (1 - snowMask, 2));
+
 	#endif
 }
 
@@ -1140,57 +1140,3 @@ void ApplyWeatherLightweight
 	smoothnessFinal = lerp (smoothnessFinal, 0.2, snowMask);
 	#endif
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -47,7 +47,7 @@
         CGPROGRAM
         #pragma surface surf Standard vertex:SharedVertexFunction exclude_path:forward exclude_path:prepass finalgbuffer:ColorFunctionSliceShading
         #pragma target 5.0
-        #pragma only_renderers d3d11 d3d11_9x
+        #pragma only_renderers d3d11 d3d11_9x vulkan
         #include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
         #include "Environment_Shared.cginc"
         #pragma multi_compile_instancing
@@ -62,7 +62,7 @@
         float _BorderFactorB;
         float _BrightnessMultiplier;
         float4 _BorderFactors;
-        
+
         float _BorderMaskScale;
         float _DistBlendMin;
         float _DistBlendMax;
@@ -74,11 +74,11 @@
         void surf(Input IN, inout SurfaceOutputStandard o)
         {
             ApplySliceCutoff (IN);
-            
+
             float2 origin = float2 (150, 150);
             float distanceFromCenter = distance (origin, IN.worldPos1.xz);
             float distanceInterpolant = saturate ((distanceFromCenter - _DistBlendMin) / max (1, _DistBlendMax - _DistBlendMin));
-            
+
             if (distanceInterpolant > 0.99)
             {
                 float2 distanceUV = float2 (IN.worldPos1.x, -IN.worldPos1.z) * 0.001;
@@ -111,7 +111,7 @@
                 float3 normalFlat = normalize(float3(IN.worldNormal1.x, 0.01f, IN.worldNormal1.z));
                 float3 albedoVerticalSediment = albedoVerticalSedimentXY * abs(normalFlat.z) + albedoVerticalSedimentZY * abs(normalFlat.x);
                 albedoVerticalSediment *= _TintSide;
-                
+
                 float borderMaskInterpolant = pow (abs (borderMask - 0.5) * 2, 4);
                 float borderFactorA = lerp (_BorderFactors.x, _BorderFactors.y, borderMaskInterpolant);
                 float borderFactorB = lerp (_BorderFactors.z, _BorderFactors.w, borderMaskInterpolant);
@@ -160,7 +160,7 @@
                 float curvaturePowerCavity = _CurvatureSettings.z;
                 float curvatureBlendCavity = _CurvatureSettings.w;
                 float cv = IN.color.a * 2 - 1; // 0, 0.25, 0.5, 0.75, 1 -> 0, 0.5, 1, 1.5, 2 -> -1, -0.5, 0, 0.5, 1
-                
+
                 if (cv > 0)
                 {
                     cv = pow (cv, curvaturePowerRidge); //   0,  0.5,  1  ->   0,  0.25, 1
@@ -171,7 +171,7 @@
                     factor = pow (factor, 8);
                     factor = 1 - factor;
                     factor *= borderMask;
-                    
+
                     albedoFinal.xyz = saturate (albedoFinal.xyz + albedoFinal.xyz * factor * curvatureBlendRidge);
                 }
                 else
@@ -185,7 +185,7 @@
 
                     albedoFinal.xyz = lerp(albedoFinal.xyz, saturate(albedoFinal.xyz * lerp (cv, 1, borderMask)), curvatureBlendCavity);
                 }
-                
+
                 if (distanceInterpolant > 0.01)
                 {
                     float2 distanceUV = float2 (IN.worldPos1.x, -IN.worldPos1.z) * 0.001;
@@ -198,8 +198,8 @@
                 }
 
                 float3 emissionFinal = float3 (0, 0, 0);
-                ApplyIsolines (albedoFinal, emissionFinal, IN.worldPos1, IN.worldNormal1);                
-                
+                ApplyIsolines (albedoFinal, emissionFinal, IN.worldPos1, IN.worldNormal1);
+
                 o.Albedo = albedoFinal;
                 o.Metallic = metalnessFinal;
                 o.Smoothness = smoothnessFinal;
@@ -208,7 +208,7 @@
                 o.Normal = normalFinal;
                 o.Alpha = 1 - IN.damageIntegrityCriticality.x;
             }
-            
+
         }
         ENDCG
     }

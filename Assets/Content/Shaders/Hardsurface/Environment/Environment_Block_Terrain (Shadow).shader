@@ -15,7 +15,7 @@
 		_BorderFactors ("Border factors", Vector) = (15, 15, -0.8, -0.8)
 		_TexScaleSediment ("Texture scale (sediment)", Float) = 1
 		_BrightnessMultiplier ("Brightness multiplier", Range (1, 1.3)) = 1
-		
+
 		_BorderMaskTex ("BorderMask", 2D) = "white" {}
 		_BorderMaskScale ("Texture Scale", Float) = 1
 
@@ -46,25 +46,25 @@
 
 	SubShader
 	{
-		Tags 
-		{ 
-			"RenderType" = "Opaque" 
+		Tags
+		{
+			"RenderType" = "Opaque"
 			"Queue" = "Geometry+1"
 		}
         Cull Back
         ZTest Less
-	
+
 
 		CGPROGRAM
 
 		#pragma surface surf Standard vertex:SharedShadowVertexFunctionNoDamage addshadow
 		#pragma target 5.0
-		#pragma only_renderers d3d11 d3d11_9x
+		#pragma only_renderers d3d11 d3d11_9x vulkan
 		#include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
 		#include "Environment_Shared.cginc"
         #pragma multi_compile_instancing
         #pragma instancing_options procedural:setup
-		
+
 
 		void surf (Input IN, inout SurfaceOutputStandard o)
 		{
