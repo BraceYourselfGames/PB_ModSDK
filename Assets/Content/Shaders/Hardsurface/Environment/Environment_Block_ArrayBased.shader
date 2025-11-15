@@ -43,7 +43,7 @@ Shader "Hardsurface/Environment/Block (array-based)"
 
         CGPROGRAM
         #pragma target 5.0
-        #pragma only_renderers d3d11
+        #pragma only_renderers d3d11 vulkan
         #pragma multi_compile_instancing
         #pragma instancing_options procedural:setup
         //#pragma surface surf Standard fullforwardshadows vertex:SharedVertexFunction addshadow
@@ -95,7 +95,7 @@ Shader "Hardsurface/Environment/Block (array-based)"
             else
             {
                 ApplySliceCutoff (IN);
-                
+
                 float arrayIndexFromUV2 = lerp(IN.texcoord_uv2.x, _ArrayIndex, _ArrayTestMode);
                 float arrayIndexOffset = arrayIndexFromUV2 + _ArrayIndexShift;
                 float3 arrayUVNormal = float3(IN.texcoord_uv1.x, IN.texcoord_uv1.y, arrayIndexOffset);
@@ -225,7 +225,7 @@ Shader "Hardsurface/Environment/Block (array-based)"
                         // IN.damage * 5;
                         ramp.w *= rampAlphaMultiplier;
 
-                        // Time to add this 
+                        // Time to add this
                         albedoFinal = lerp(albedoFinal, albedoFinal * ramp.x, ramp.w * _GlobalEnvironmentRampInfluence);
                         albedoFinal = lerp(albedoFinal, _StructureColor * structureMaskShadow, structureMask);
                         smoothnessFinal = lerp(smoothnessFinal, smoothnessFinal * ramp.x, ramp.w);
@@ -240,7 +240,7 @@ Shader "Hardsurface/Environment/Block (array-based)"
                 // Rain
                 /*
                 float verticalFactor = saturate (dot (IN.worldNormal1, float3 (0, 1, 0)));
-                
+
                 float distanceFadeRain = 1 - saturate ((distance (_WorldSpaceCameraPos, IN.worldPos1) / 200) - 0.1);
                 float puddleIntensity = (_RainIntensity + 0.5) * .7;
                 float puddles = distanceFadeRain * saturate ((normalFinal.r - (1 - puddleIntensity)) * 5) * puddleIntensity * (verticalFactor * verticalFactor) * saturate((1 - normalDoubleScale.g) * 10);
@@ -249,15 +249,15 @@ Shader "Hardsurface/Environment/Block (array-based)"
                 */
 
                 float metalnessFinal = metalnessFromTexture;
-                
+
                 _WeatherMultiplier = 1.0f;
                 float verticalFactor = saturate(dot(IN.worldNormal1, float3(0, 1, 0)));
                 verticalFactor = saturate(pow(verticalFactor, 16));
 				float weatherOcclusionMask = 1.0f;
 				ApplyWeather (_WeatherMultiplier, albedoFinal.xyz, smoothnessFinal, metalnessFinal, normalFinal, IN.worldPos1, 1, verticalFactor, verticalFactor, weatherOcclusionMask);
-                
+
                 ApplyIsolines (albedoFinal, emissionFinal, IN.worldPos1, IN.worldNormal1);
-                
+
                 o.Albedo = albedoFinal;
                 o.Metallic = metalnessFinal;
                 o.Smoothness = smoothnessFinal;
@@ -267,26 +267,26 @@ Shader "Hardsurface/Environment/Block (array-based)"
 
                 /*
                 // 3D texture AO test
-                
+
                 float gridSize = 3;
                 float3 aoNormal = IN.worldNormal1;
                 float3 areaSize = float3 (100, 9, 100) * gridSize;
                 float3 aoOffset = float3 (1.5, -1.5, 1.5);
-                
-                float3 aoUVUnscaledMain = aoOffset + IN.worldPos1.xyz + aoNormal * gridSize; 
+
+                float3 aoUVUnscaledMain = aoOffset + IN.worldPos1.xyz + aoNormal * gridSize;
                 float3 aoUVMain = float3 (aoUVUnscaledMain.x / areaSize.x, (aoUVUnscaledMain.y + areaSize.y) / areaSize.y, aoUVUnscaledMain.z / areaSize.z);
                 float aoSampleMain = tex3D (_GlobalEnvironmentAOTex, aoUVMain).a;
-                
-                float3 aoUVUnscaledSecondary = aoOffset + IN.worldPos1.xyz + aoNormal * gridSize * 3; 
+
+                float3 aoUVUnscaledSecondary = aoOffset + IN.worldPos1.xyz + aoNormal * gridSize * 3;
                 float3 aoUVSecondary = float3 (aoUVUnscaledSecondary.x / areaSize.x, (aoUVUnscaledSecondary.y + areaSize.y) / areaSize.y, aoUVUnscaledSecondary.z / areaSize.z);
                 float aoSampleSecondary = tex3D (_GlobalEnvironmentAOTex, aoUVSecondary).a;
-                
+
                 float aoSkydome = saturate ((dot (float3 (0, 1, 0), aoNormal) + 1) * 0.5);
                 float aoFinal = aoSampleMain * lerp (aoSampleSecondary, 1, 0.5);
 
                 o.Albedo *= aoFinal;
                 o.Occlusion *= aoFinal;
-                
+
                 // o.Albedo = 0;
                 // o.Occlusion = 1;
                 // o.Emission = aoFinal;
@@ -295,6 +295,6 @@ Shader "Hardsurface/Environment/Block (array-based)"
         }
         ENDCG
     }
-            
+
     Fallback "Hardsurface/Environment/Block (Shadow)"
 }

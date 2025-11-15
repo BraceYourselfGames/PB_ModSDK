@@ -18,7 +18,7 @@ Shader "Hardsurface/Environment/Block (Shadow)"
 
         CGPROGRAM
         #pragma target 5.0
-        #pragma only_renderers d3d11
+        #pragma only_renderers d3d11 vulkan
         #pragma multi_compile_instancing
         #pragma instancing_options procedural:setup
         #pragma surface surf Standard vertex:SharedShadowVertexFunction exclude_path:forward exclude_path:prepass noforwardadd nolppv noshadowmask novertexlights addshadow
@@ -26,11 +26,11 @@ Shader "Hardsurface/Environment/Block (Shadow)"
         #include "UnityCG.cginc"
         #include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
         #include "Environment_Shared.cginc"
-        
+
         void surf(Input IN, inout SurfaceOutputStandard o)
         {
             float destructionAnimation = 0;
-            
+
             if (destructionAnimation > 0.99)
             {
                 clip(-1);

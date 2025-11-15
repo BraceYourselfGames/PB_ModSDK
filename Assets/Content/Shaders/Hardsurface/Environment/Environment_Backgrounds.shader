@@ -54,7 +54,7 @@
 
         #pragma surface surf Standard vertex:vert finalgbuffer:ColorFunctionSliceShading
         #pragma target 5.0
-        #pragma only_renderers d3d11 d3d11_9x
+        #pragma only_renderers d3d11 d3d11_9x vulkan
         #include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
         #include "Environment_Shared.cginc"
 
@@ -97,7 +97,7 @@
             return lerp (1 - 2 * (1 - src) * (1 - dst), 2 * src * dst, step (src, 0.5));
         }
 
-        void vert (inout appdata_full v, out Input o) 
+        void vert (inout appdata_full v, out Input o)
         {
             UNITY_SETUP_INSTANCE_ID (v);
             UNITY_INITIALIZE_OUTPUT (Input, o);
@@ -111,7 +111,7 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             ApplySliceCutoff (IN);
-            
+
             fixed4 ah = tex2D (_MainTex, IN.texcoord_uv1);
 
 			#ifdef _USE_ALPHATEST
@@ -122,7 +122,7 @@
             fixed4 detail = tex2D (_GlobalBackgroundDetailTex, IN.texcoord_uv1 * _DetailScale);
 
             float3 albedoFinal = lerp (ah.rgb, Overlay3 (ah.rgb, detail.rgb), _DetailIntensityOnAlbedo) * _AlbedoTint.rgb;
-            
+
 			// Darken backside faces option
 			albedoFinal *= saturate (saturate (IN.facingSign) + (1 - _DarkenBacksideFaces));
 
@@ -161,7 +161,7 @@
             // Normal map
             half3 normal = UnpackNormal (tex2D (_NormalTex, IN.texcoord_uv1));
             fixed3 normalFinal = lerp (fixed3 (0, 0, 1), normal, _NormalIntensity);
-            
+
             // Other parameters
             float metalnessFinal = mseo.r;
             float3 emissionFinal = mseo.b * _EmissionColor * _EmissionIntensity;
