@@ -1,5 +1,10 @@
 ![pb_modtools_splash_composite.png](/ModWindowImages/t0_splash.png)
 
+## Warning!
+This is a legacy version of the SDK intended for use with Phantom Brigade 1.3. Switch to the `main` branch if you'd like to get the latest version of the SDK compatible with Phantom Brigade 2.0.
+
+All the file formats, code and config files in this branch match the 1.3 release.  Mods created with this SDK branch will only be compatible with game version 1.3.4 (preserved on Steam under `1_3_4_release` branch). [Check our FAQ](https://braceyourselfgames.com/phantom-brigade/faq/) to get more details about accessing the older version of Phantom Brigade.
+
 ## Overview
 Phantom Brigade Mod SDK is a mod development suite created in collaboration with our valued community. Based on the tools we used to develop the game, it is a free Unity project that includes:
 - Mod project manager: simplifies mod metadata setup, manages mod source files and helps you manage different mod tools. Facilitates export of completed mods to the local user folder, to a distributable archive or to Steam Workshop.
