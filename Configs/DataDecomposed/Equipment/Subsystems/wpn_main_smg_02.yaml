@@ -9,11 +9,11 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_05
-- spec_stabilized
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
-    value: 10
+    value: 15
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -23,12 +23,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 80
+    value: 70
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 1.8
+    value: 1.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -53,7 +53,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 8
+    value: 12
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -63,12 +63,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 60
+    value: 50
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 10
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -78,12 +78,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 8
+    value: 7
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_speed:
-    value: 300
+    value: 250
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -122,7 +122,36 @@ activation:
     key: recoil_smg
   timing: 
   hitReaction: 
-projectile: 
+projectile:
+  debugIndexRange: {}
+  visual: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff: 
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: -10
+    gradientSize: 10
+    exponent: 1
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

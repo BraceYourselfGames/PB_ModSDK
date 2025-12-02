@@ -1,0 +1,19 @@
+extended: false
+lines:
+- mode: All
+  text: Select group
+  actions:
+  - action: global_direction_up
+    newline: false
+  - action: global_direction_down
+    newline: false
+- mode: All
+  text: Enter group
+  actions:
+  - action: global_confirm
+    newline: false
+- mode: All
+  text: Exit options
+  actions:
+  - action: global_cancel
+    newline: false

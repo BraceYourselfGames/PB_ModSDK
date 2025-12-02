@@ -377,4 +377,15 @@ namespace PhantomBrigade.Data
             BoldLabel = boldLabel;
         }
     }
+    
+    [AttributeUsage (AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
+    public class InterfaceInfoAttribute : Attribute
+    {
+        public readonly string info;
+
+        public InterfaceInfoAttribute (string info)
+        {
+            this.info = info;
+        }
+    }
 }

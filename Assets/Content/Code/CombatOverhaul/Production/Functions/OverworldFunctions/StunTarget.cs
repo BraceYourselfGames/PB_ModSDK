@@ -6,17 +6,8 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class StunTarget : IOverworldEventFunction, IOverworldActionFunction
+    public class StunTarget : IOverworldActionFunction
     {
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            #if !PB_MODSDK
-
-            Run (target);
-            
-            #endif
-        }
-        
         public void Run (OverworldActionEntity source)
         {
             #if !PB_MODSDK

@@ -1,183 +1,50 @@
 timeLastSync: 63822798494
 entries:
-  energy_limit__name:
-    text: Capacidade de armazenamento
-    textEng: Storage capacity
-  energy_limit__text:
-    text: Quantidade de energia de reserva que pode ser guardada. A energia se reabastece até esse ponto quando a base estiver consumindo menos do que gera.
-    textEng: The amount of reserve power that can be stored. Energy will regenerate up to this point when the base is not actively consuming power.
-  energy_recharge_delay__name:
-    text: Intervalo de recarga
-    textEng: Recharge delay
-  energy_recharge_delay__text:
-    text: Tempo entre o gasto de energia e a geração de energia em horas. O intervalo pode ser reduzido com melhorias.
-    textEng: The time between energy drainage and energy generation, in hours. Delay time can be improved by upgrading.
-  item_block_combat_limit__name:
-    text: Capacidade de bombas de fumaça
-    textEng: Smoke Charge capacity
-  item_block_combat_limit__text:
-    text: Quantidade de bombas de fumaça que podem ser armazenadas na base.
-    textEng: How many Smoke Charges can be stored at the base.
-  item_block_escalation_limit__name:
-    text: Capacidade de bloqueadores de leitura
-    textEng: Scan Jammer capacity
-  item_block_escalation_limit__text:
-    text: Quantidade de bloqueadores de leitura que podem ser armazenados na base.
-    textEng: How many Scan Jammers can be stored at the base.
-  item_block_reinforcements_limit__name:
-    text: Capacidade de bloqueadores de comunicação
-    textEng: Comms Jammer capacity
-  item_block_reinforcements_limit__text:
-    text: Quantidade de bloqueadores de comunicação que podem ser armazenados na base.
-    textEng: How many Comms Jammers can be stored at the base.
-  item_drone_decoy_limit__name:
-    text: Capacidade de drones iscas
-    textEng: Decoy Drone capacity
-  item_drone_decoy_limit__text:
-    text: Quantidade de drones iscas que podem ser armazenados na base.
-    textEng: How many Decoy Drones can be stored at the base.
-  item_rain_sensor_limit__name:
-    text: Capacidade de sensores de chuva
-    textEng: Rain Sensor capacity
-  item_rain_sensor_limit__text:
-    text: Quantidade de sensores de chuva que podem ser armazenados na base.
-    textEng: How many Rain Sensors can be stored at the base.
-  mm_fast_energy_change__name:
-    text: Consumo de energia
-    textEng: Energy drain
-  mm_fast_energy_change__text:
-    text: Quantidade de energia consumida no modo turbo em unidades por hora.
-    textEng: Rate of energy drainage in overdrive mode, in units per hour.
-  mm_fast_speed__name:
-    text: Velocidade
-    textEng: Speed
-  mm_fast_speed__text:
-    text: Velocidade de movimentação da base no modo turbo em quilômetros por hora.
-    textEng: Base movement speed in overdrive mode, in kilometers per hour.
-  mm_fast_vision_enemy__name:
-    text: Visão inimiga
-    textEng: Enemy vision
-  mm_fast_vision_enemy__text:
-    text: Distância para que os leitores inimigos detectem a base móvel durante o modo turbo.
-    textEng: Distance for enemy scanners to detect the mobile base when running in overdrive mode.
-  mm_fast_vision_own__name:
-    text: Visão da base
-    textEng: Base vision
-  mm_fast_vision_own__text:
-    text: Distância para que os leitores detectem inimigos quando a base móvel estiver no modo turbo.
-    textEng: Distance for scanners to detect enemy contacts when the base is running in overdrive mode.
-  mm_normal_energy_change__name:
-    text: Regeneração de energia
-    textEng: Energy regeneration
-  mm_normal_energy_change__text:
-    text: Quantidade de energia regenerada no modo turbo em unidades por hora.
-    textEng: Rate of energy regeneration in overdrive mode, in units per hour.
-  mm_normal_speed__name:
-    text: Velocidade
-    textEng: Speed
-  mm_normal_speed__text:
-    text: Velocidade de movimentação da base no modo passeio em quilômetros por hora.
-    textEng: Base movement speed in cruise mode, in kilometers per hour.
-  mm_normal_vision_enemy__name:
-    text: Visão inimiga
-    textEng: Enemy vision
-  mm_normal_vision_enemy__text:
-    text: Distância para que os leitores inimigos detectem a base móvel durante o modo passeio.
-    textEng: Detection distance by enemy scanners when the base is running in cruise mode.
-  mm_normal_vision_own__name:
-    text: Visão da base
-    textEng: Base vision
-  mm_normal_vision_own__text:
-    text: Distância para que os leitores detectem inimigos quando a base móvel estiver no modo passeio.
-    textEng: Distance for enemy scanners to detect the mobile base when running in cruise mode.
-  mm_stealth_energy_change__name:
-    text: Consumo de energia
-    textEng: Energy drain
-  mm_stealth_energy_change__text:
-    text: Quantidade de energia consumida no modo furtivo em unidades por hora.
-    textEng: Rate of energy drainage in stealth mode, in units per hour.
-  mm_stealth_speed__name:
-    text: Velocidade
-    textEng: Speed
-  mm_stealth_speed__text:
-    text: Velocidade de movimento da base no modo furtivo em quilômetros por hora.
-    textEng: Base movement speed in stealth mode, in kilometers per hour.
-  mm_stealth_vision_enemy__name:
-    text: Visão inimiga
-    textEng: Enemy vision
-  mm_stealth_vision_enemy__text:
-    text: Distância para que os leitores inimigos detectem a base móvel durante o modo furtivo.
-    textEng: Detection distance by enemy scanners when the base is running in stealth mode.
-  mm_stealth_vision_own__name:
-    text: Visão da base
-    textEng: Base vision
-  mm_stealth_vision_own__text:
-    text: Distância para que os leitores detectem inimigos quando a base móvel estiver no modo furtivo.
-    textEng: Distance for enemy scanners to detect the mobile base when running in stealth mode.
+  camp_supply_limit__name:
+    id: 1
+    text: Limite de suprimentos de acampamento
+    textEng: Camp supply limit
+  camp_supply_limit__text:
+    id: 1
+    text: Quantidade de suprimentos de acampamento que podem ser armazenados na base.
+    textEng: The amount of camp supplies that can be stored at the base.
   pilot_slots__name:
+    id: 1
     text: Limite de mekanautas
     textEng: Pilot limit
   pilot_slots__text:
+    id: 1
     text: Número de mekanautas que a base pode comportar.
     textEng: Number of pilots the base can support.
-  sensor_rain_effect__name:
-    text: Compensação pluvial
-    textEng: Rain compensation
-  sensor_rain_effect__text:
-    text: Chuvas pesadas reduzem a visibilidade. Com melhorias, a base pode aumentar a visibilidade em climas inclementes.
-    textEng: Heavy rain reduces visibility. With upgrades, the base can increase visibility in inclement weather.
-  sensor_scan_time_enemy__name:
-    text: Tempo de leitura do inimigo
-    textEng: Enemy scan time
-  sensor_scan_time_enemy__text:
-    text: Tempo necessário, em horas, para que os leitores inimigos detectem a base móvel.
-    textEng: Time needed for enemy scanners to detect the mobile base, in hours.
-  sensor_scan_time_own__name:
-    text: Tempo de leitura da base
-    textEng: Base scan time
-  sensor_scan_time_own__text:
-    text: Tempo necessário, em horas, para fazer a leitura e obter informações detalhadas de novos contatos. Com melhorias, o tempo de leitura pode ser reduzido.
-    textEng: Time needed to scan and retrieve detailed information from new contacts, in hours. With upgrades, scan time can be reduced.
+  unit_repair_amount__name:
+    id: 1
+    text: Capacidade de reparos de mekas
+    textEng: Mech repair capability
+  unit_repair_amount__text:
+    id: 1
+    text: 'Porção da integridade estrutural dos mekas que podem ser consertada em uma parada para acampar. Por exemplo: se a capacidade de reparos for de 50%, um meka com 40% de integridade será consertado até 90% depois de uma parada para acampar. Pode ser aprimorada com melhorias da base.'
+    textEng: 'How much mech frame integrity can be repaired at one camp stop. For example: if the repair capability is 50%, a mech with 40% integrity will be repaired to 90% after one camp stop. Can be improved with base upgrades.'
   unit_repair_jobs__name:
-    text: Reparos paralelos
-    textEng: Parallel repairs
+    id: 1
+    text: Espaços de recuperação
+    textEng: Recovery slots
   unit_repair_jobs__text:
-    text: Número de unidades que podem ser consertadas simultaneamente. Recomenda-se uma alta capacidade para reparos paralelos para evitar interrupções em campo.
-    textEng: Number of units that can be repaired simultaneously. High capacity for parallel repairs is strongly recommended to avoid interruptions on the field.
-  unit_repair_resource_drain__name:
-    text: Consumo de fluido reparador
-    textEng: Liquid Fix drain
-  unit_repair_resource_drain__text:
-    text: Ritmo em que o fluido reparador é gasto durante os reparos das unidades.
-    textEng: Rate at which Liquid Fix is depleted during unit repairs.
-  unit_repair_resource_limit__name:
-    text: Capacidade de fluido reparador
-    textEng: Liquid Fix limit
-  unit_repair_resource_limit__text:
-    text: Quantidade de fluido reparador que pode ser armazenada na base.
-    textEng: Amount of Liquid Fix that can be stored on base.
-  unit_repair_speed__name:
-    text: Velocidade de reparos
-    textEng: Repair speed
-  unit_repair_speed__text:
-    text: Velocidade de reparos das unidades relativa ao tempo de reparo básico.
-    textEng: Speed at which units are repaired, relative to baseline repair time.
+    id: 1
+    text: Número de unidades e mekanautas que podem ser atendidos durante uma parada para acampar. Depende da ala médica e dos equipamentos de reparos.
+    textEng: Number of units and pilots that that can be attended to during a camp stop. Depends on the medical bay and repair equipment.
   unit_slots__name:
+    id: 1
     text: Vagas de armazenamento
     textEng: Storage slots
   unit_slots__text:
+    id: 1
     text: Número de unidades que podem ser armazenadas na base. Determina se novas unidades podem ser construídas.
     textEng: Number of units that can be stored on base. Determines whether new units can be built.
   workshop_jobs__name:
-    text: Construções paralelas
-    textEng: Parallel builds
+    id: 1
+    text: Limite de projetos
+    textEng: Project limit
   workshop_jobs__text:
+    id: 1
     text: Número de projetos que a oficina pode construir simultaneamente.
     textEng: Number of projects the workshop is capable of building simultaneously.
-  workshop_speed__name:
-    text: Velocidade de construção
-    textEng: Build speed
-  workshop_speed__text:
-    text: Velocidade em que a oficina constrói equipamentos relativa ao tempo de reparos básico.
-    textEng: Speed at which the workshop builds equipment, relative to baseline repair time.
-collection: 

@@ -40,7 +40,7 @@ namespace Area
         // [8]: -XYZ, -YZ, -XY, -Y, -XZ, -Z, -X, this
         public AreaVolumePoint[] pointsWithSurroundingSpots;
 
-        public AreaVolumePointState pointState = AreaVolumePointState.Empty;
+        public AreaVolumePointState pointState = AreaVolumePointState.Empty; 
         public Vector3Int pointPositionIndex = new Vector3Int (-1, -1, -1);
         public Vector3 pointPositionLocal = Vector3.zero;
 
@@ -58,6 +58,8 @@ namespace Area
 
         public bool destructible = true;
         public bool indestructibleIndirect = false;
+        public bool indestructibleAny => indestructibleIndirect | !destructible;
+        
         public bool destructionUntracked = false;
         
         public float integrity = 1f;

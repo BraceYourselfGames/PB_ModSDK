@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -54,11 +59,13 @@ entry:
     spawnRegistration: 
 generationInjection: 
 tags:
-- unique_tutorial_elimination
 - difficulty_normal
 - entity_patrol
+- tutorial_pilot_progression
 - listed
-- type_elimination
+- type_assassination
+- unique_tutorial_elimination
+- block_exit_on_defeat
 states:
   comms_pb_lost:
     comment: 
@@ -134,14 +141,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   comms_vip_ejecting:
     comment: 
     textNameKey: generic_retreat_condition_header
@@ -213,14 +217,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   outcome_effects:
     comment: 
     textNameKey: generic_unknown_header
@@ -268,14 +269,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             ftue: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
         2:
           tags: 
           executionOnOutcome:
@@ -299,14 +297,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
         3:
           tags: 
           executionOnOutcome:
@@ -330,14 +325,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -444,14 +436,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   transition_vip_killed:
     comment: 
     textNameKey: generic_assassination_target_header
@@ -527,14 +516,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   retreat_fail:
     comment: 
@@ -555,6 +541,7 @@ steps:
       visible: true
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -599,6 +586,7 @@ steps:
       visible: true
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -646,8 +634,8 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: inv_vip
+      - keyExternal: true
+        key: ftue_patrol_inv_vip
         countMin: 1
         countMax: 1
         countRandom: false
@@ -684,8 +672,8 @@ steps:
           functions: 
           combatTags:
           - purpose_vip
-      - keyExternal: false
-        key: inv_guard
+      - keyExternal: true
+        key: ftue_patrol_inv_guard1
         countMin: 1
         countMax: 1
         countRandom: false
@@ -773,10 +761,12 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
-    unitTagDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_vip: true
     unitChanges:
     - nameInternal: vip
       check: 
@@ -858,12 +848,10 @@ steps:
     functions:
     - !StartTutorial
       key: combat_patrol
+      allowRepeat: true
     outcome: 
     transitions: 
 unitPresets:
-  inv_guard: !UnitPresetLink
-    preset: ftue_patrol_inv_guard1
-  inv_vip: !UnitPresetLink
-    preset: ftue_patrol_inv_vip
   pb_rail: !UnitPresetLink
     preset: ftue_patrol_pb_rail
+unitGenerators: 

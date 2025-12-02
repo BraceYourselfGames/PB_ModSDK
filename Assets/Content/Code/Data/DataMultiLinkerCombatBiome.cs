@@ -35,6 +35,12 @@ namespace PhantomBrigade.Data
             DataTagUtility.RegisterTags (data, ref tags, ref tagsMap);
         }
         
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
+        
         /*
         [Button, PropertyOrder (-1)]
         public void FixHeight ()

@@ -9,8 +9,7 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_04
-- spec_stabilized
-- stat_concussive
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
@@ -24,7 +23,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 95
+    value: 135
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -44,7 +43,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 25
+    value: 31
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -55,11 +54,6 @@ stats:
     targetHardpoint: ''
   wpn_impact:
     value: 0
-    targetMode: 0
-    targetSocket: ''
-    targetHardpoint: ''
-  wpn_impact_radius:
-    value: 1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -89,22 +83,22 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 90
+    value: 55
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 25
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 10
+    value: 11
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 10
+    value: 11
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -192,45 +186,48 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
       keys:
       - tv_tg:
           x: 0
-          y: 0.125
-          z: 0.009852102
-          w: 0.009852102
+          y: 0.5019684
+          z: 0
+          w: 0
         w:
-          x: 0.3333333
-          y: 0.5794392
+          x: 0
+          y: 0
         m: {}
       - tv_tg:
-          x: 0.3499756
-          y: 1
-          z: 0.07233013
-          w: 0.07233013
-        w:
-          x: 0.246902
-          y: 1
-        m: {}
-      - tv_tg:
-          x: 0.7831705
+          x: 0.4134381
           y: 1
           z: 0
           w: 0
         w:
-          x: 0.3333333
-          y: 0.8828962
+          x: 0.4706122
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.9117324
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.7370253
+          y: 0.3333333
         m: {}
       - tv_tg:
           x: 1
-          y: 0.03749847
-          z: 0.002351897
-          w: 0.002351897
+          y: 0
+          z: 0
+          w: 0
         w:
-          x: 1
-          y: 0.3333333
+          x: 0
+          y: 0
         m: {}
   falloffGlobal: 
   animationFade: 
@@ -238,16 +235,16 @@ projectile:
   fuseProximity: 
   hitResponse: 
   splashDamage: 
-  splashImpact:
-    exponent: 2
-    triggerOnDamage: true
+  splashImpact: 
   guidanceData: 
   guidanceAudio: 
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

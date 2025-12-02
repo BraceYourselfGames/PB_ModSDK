@@ -24,14 +24,19 @@ dataCore:
   durationType: Data
   duration: 3
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation:
   - !CombatActionCreateAirlift
@@ -67,6 +72,7 @@ dataCore:
   functionsOnDispose: 
   check: 
   unitCheck: 
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 
@@ -119,6 +125,7 @@ functionsTimed:
       x: 0
       y: 0
       z: 0
+    centered: true
     asset:
       key: fx_boss_shockwave
       scale:

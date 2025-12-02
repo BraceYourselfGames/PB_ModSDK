@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -59,6 +64,7 @@ tags:
 - context_generic
 - entity_patrol
 - listed
+- flag_escalation_squads
 states:
   retreat_default:
     comment: 
@@ -115,6 +121,8 @@ steps:
     tags:
     - start
     unitGroups: 
+    unitGeneratorKeys:
+    - patrol_main
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -141,3 +149,412 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators:
+  patrol_main:
+    context: All possibilities
+    checksGlobal: 
+    checksBase: 
+    checksTarget: 
+    children:
+    - context: Low escalation
+      checksGlobal: 
+      checksBase: 
+      checksTarget:
+      - !OverworldValidateEscalationLevel
+        required: true
+        min: 0
+        max: 1
+      children:
+      - context: Arrow
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        children: 
+        unitGroups:
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: false
+          check: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 0
+          maxGrade: 1
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: true
+          check:
+            log: false
+            stateRequirements: 
+            checksGlobal:
+            - !OverworldValidateModifier
+              key: sp_liberation_easy
+              present: false
+            checksBase: 
+            checksTarget: 
+            checksProvince: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 0
+          maxGrade: 1
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+      - context: Standard
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        children: 
+        unitGroups:
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: false
+          check: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 1
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: true
+          check:
+            log: false
+            stateRequirements: 
+            checksGlobal:
+            - !OverworldValidateModifier
+              key: sp_liberation_easy
+              present: false
+            checksBase: 
+            checksTarget: 
+            checksProvince: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 0
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+      - context: Swarm
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        children: 
+        unitGroups:
+        - !UnitGroupLink
+          key: custom_patrol_swarm
+          check: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 0
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 100
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+        - !UnitGroupLink
+          key: custom_patrol_swarm
+          check:
+            log: false
+            stateRequirements: 
+            checksGlobal:
+            - !OverworldValidateModifier
+              key: sp_liberation_easy
+              present: false
+            checksBase: 
+            checksTarget: 
+            checksProvince: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 0
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 100
+          filterDistanceEnemy:
+            check: Less
+            value: 100
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+      unitGroups: 
+    - context: High escalation
+      checksGlobal: 
+      checksBase: 
+      checksTarget:
+      - !OverworldValidateEscalationLevel
+        required: true
+        min: 2
+        max: 3
+      children:
+      - context: Elite
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        children: 
+        unitGroups:
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: false
+          check: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 1
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: true
+          check:
+            log: false
+            stateRequirements: 
+            checksGlobal:
+            - !OverworldValidateModifier
+              key: sp_liberation_easy
+              present: false
+            checksBase: 
+            checksTarget: 
+            checksProvince: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 2
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+      - context: Hunter
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        children: 
+        unitGroups:
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: false
+          check: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 1
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+        - !UnitGroupFilter
+          tagsFromFactionBranch: true
+          tags:
+            type_main: true
+            weight_heavy: true
+          check:
+            log: false
+            stateRequirements: 
+            checksGlobal:
+            - !OverworldValidateModifier
+              key: sp_liberation_easy
+              present: false
+            checksBase: 
+            checksTarget: 
+            checksProvince: 
+          combatTags: 
+          spawnGroupOccupied: true
+          spawnCountStrict: true
+          spawnOrderRandom: true
+          factionBranchOverride: false
+          factionBranchKey: 
+          baseGrade: 1
+          maxGrade: 2
+          cloneable: true
+          functions: 
+          spawnTagsUsed: true
+          spawnTags:
+            perimeter_outer: true
+          spawnGroupKey: 
+          filterDistancePlayer:
+            check: Greater
+            value: 135
+          filterDistanceEnemy: 
+          filterDistanceSpawn: 
+          filterDistanceLocation: 
+          filterDistanceVolume: 
+          filterDistanceState: 
+          filterDistanceRetreat: 
+          sorting: 
+          spawnRegistration: 
+      unitGroups: 
+    unitGroups: 

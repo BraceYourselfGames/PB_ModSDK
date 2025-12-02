@@ -33,54 +33,6 @@ namespace PhantomBrigade.Overworld
             if (action == null)
                 return;
 
-            if (typeof (IOverworldEventFunction).IsAssignableFrom (functionType))
-            {
-                void ReplaceInOverworldEventFunctions (List<IOverworldEventFunction> functions, string context)
-                {
-                    if (functions == null)
-                        return;
-                    
-                    foreach (var function in functions)
-                    {
-                        if (function != null && function.GetType () == functionType)
-                            action.Invoke (function, context);
-                    }
-                }
-                
-                var dataEvents = DataMultiLinkerOverworldEvent.data;
-                foreach (var kvp in dataEvents)
-                {
-                    var eventData = kvp.Value;
-                    if (eventData == null)
-                        continue;
-
-                    if (eventData.steps != null)
-                    {
-                        foreach (var kvp2 in eventData.steps)
-                        {
-                            var step = kvp2.Value;
-                            ReplaceInOverworldEventFunctions (step?.functions, $"Event {kvp.Key}, step {kvp2.Key}");
-                        }
-                    }
-
-                    if (eventData.options != null)
-                    {
-                        foreach (var kvp2 in eventData.options)
-                        {
-                            var option = kvp2.Value;
-                            ReplaceInOverworldEventFunctions (option?.functions, $"Event {kvp.Key}, embedded option {kvp2.Key}");
-                        }
-                    }
-                }
-                
-                var dataOptions = DataMultiLinkerOverworldEventOption.data;
-                foreach (var kvp in dataOptions)
-                {
-                    var optionData = kvp.Value;
-                    ReplaceInOverworldEventFunctions (optionData?.functions, $"Shared option {kvp.Key}");
-                }
-            }
-
             if (typeof (IOverworldActionFunction).IsAssignableFrom (functionType))
             {
                 void ReplaceInOverworldActionFunctions (DataBlockOverworldActionChange change, string context)
@@ -207,20 +159,6 @@ namespace PhantomBrigade.Overworld
                             }
                         }
                     }
-
-                    /*
-                    if (scenario.customOutcomeReactions != null && scenario.customOutcomeReactions.reactions != null)
-                    {
-                        for (int i = 0; i < scenario.customOutcomeReactions.reactions.Count; ++i)
-                        {
-                            var effect = scenario.customOutcomeReactions.reactions[i];
-                            if (effect.reaction == null)
-                                continue;
-                            
-                            ReplaceInCombatFunctions (effect?.reaction.functions, $"Scenario {kvp.Key}, outcome reaction {i}");
-                        }
-                    }
-                    */
                 }
             }
         }

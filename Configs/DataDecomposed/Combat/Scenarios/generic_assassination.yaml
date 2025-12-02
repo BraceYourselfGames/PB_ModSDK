@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: false
   tagFilterUsed: true
@@ -58,6 +63,8 @@ tags:
 - listed
 - type_assassination
 - type_entity_convoy_elite
+- flag_escalation_squads
+- block_persistent_pilots
 states:
   01_elite_damage_reaction:
     comment: 
@@ -128,8 +135,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions: 
@@ -140,9 +145,8 @@ states:
               tagChanges:
                 flag_boss_state_enrage_active: true
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   02_elite_ejecting:
     comment: 
     textNameKey: ''
@@ -212,14 +216,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   03_elite_escaped:
     comment: 
     textNameKey: generic_unknown_header
@@ -295,17 +296,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Defeat
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   04_elite_eliminated:
     comment: 
     textNameKey: ''
@@ -383,14 +381,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_elimination: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   05_elite_reinforcements:
     comment:
       comment: This state has priority of -1 to ensure it only evaluates next turn after the damage reaction.
@@ -437,8 +432,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
@@ -446,7 +439,13 @@ states:
             tagsFromFactionBranch: true
             tags:
               weight_heavy: false
-            check: 
+            check:
+              log: false
+              stateRequirements: 
+              checksGlobal: 
+              checksBase: 
+              checksTarget: 
+              checksProvince: 
             combatTags: 
             spawnGroupOccupied: false
             spawnCountStrict: true
@@ -473,9 +472,8 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   elite_spawn_reference:
     comment: 
     textNameKey: generic_unknown_header
@@ -506,7 +504,7 @@ states:
           stateKey: retreat_default
           checkDistance:
             check: Greater
-            value: 150
+            value: 200
       visual: 
     locationRetreat: 
     volume: 
@@ -589,7 +587,9 @@ steps:
         perimeter_outer: false
         utility_turret: false
       spawnGroupKey: 
-      filterDistancePlayer: 
+      filterDistancePlayer:
+        check: Greater
+        value: 150
       filterDistanceEnemy: 
       filterDistanceSpawn: 
       filterDistanceLocation: 
@@ -606,8 +606,9 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_short: true
+        range_long: false
         type_main: true
+        weight_heavy: false
       check: 
       combatTags: 
       spawnGroupOccupied: true
@@ -624,7 +625,9 @@ steps:
         perimeter_outer: false
         utility_turret: false
       spawnGroupKey: 
-      filterDistancePlayer: 
+      filterDistancePlayer:
+        check: Greater
+        value: 150
       filterDistanceEnemy: 
       filterDistanceSpawn: 
       filterDistanceLocation: 
@@ -641,9 +644,19 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_medium: true
+        range_long: true
         type_main: true
-      check: 
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -659,7 +672,9 @@ steps:
         perimeter_outer: false
         utility_turret: false
       spawnGroupKey: 
-      filterDistancePlayer: 
+      filterDistancePlayer:
+        check: Greater
+        value: 150
       filterDistanceEnemy: 
       filterDistanceSpawn: 
       filterDistanceLocation: 
@@ -673,6 +688,7 @@ steps:
         key: elite_spawn_reference
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -704,3 +720,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

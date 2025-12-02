@@ -1,0 +1,317 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit: 
+tags:
+- ev_general
+check:
+  repeat: UniquePerProvince
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_mine_03
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      route_long:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4573113
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !OffsetTime
+            time: 2
+            holdCountdown: true
+          functionsLocal:
+          - !InteractionOptionEnterStepRandom
+            steps:
+            - outcome_hazard
+            - outcome_loot
+            - outcome_empty
+      route_short:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: 100
+          functionsLocal: 
+    optionsReused: 
+  outcome_empty:
+    comment: 
+    image: event_empty_base
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused:
+          textSector: ui_overworld
+          textKey: int_sh_effect_pilots_fatigue_reduced
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyPilots
+            pilots: 0
+            deployed: false
+            checks:
+            - !PilotValidateStatValue
+              key: fatigue
+              normalized: false
+              check: Greater
+              value: 0
+            functions:
+            - !PilotStatOffset
+              key: fatigue
+              normalized: false
+              value: -1
+          functionsLocal: 
+    optionsReused: 
+  outcome_hazard:
+    comment: 
+    image: event_camp_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: true
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused:
+          textSector: ui_overworld
+          textKey: int_sh_effect_pilot_hp_lost
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: true
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys:
+              - sub_thruster
+              - sub_reactor_r2
+              - sub_reactor_r1
+              tags:
+                subsystem: true
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_res_rare: true
+          - !ModifyPilots
+            pilots: 1
+            deployed: false
+            checks:
+            - !PilotValidateStatValue
+              key: hp
+              normalized: true
+              check: Greater
+              value: 0.3
+            functions:
+            - !PilotStatOffset
+              key: hp
+              normalized: true
+              value: -0.2
+          functionsLocal: 
+    optionsReused: 
+  outcome_loot:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: true
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys:
+              - sub_thruster
+              - sub_reactor_r2
+              - sub_reactor_r1
+              tags:
+                subsystem: true
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys:
+              - res_r2
+              - res_r3
+              - res_camp
+              tags:
+                part_armor: true
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys:
+              - res_r2
+              - res_r3
+              - res_camp
+              tags:
+                part_weapon: true
+          - !CreateRewardsFiltered
+            randomSingleEntry: true
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_res: true
+                part_res_rare: false
+          functionsLocal: 
+    optionsReused: 

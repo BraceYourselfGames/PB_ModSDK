@@ -39,7 +39,7 @@ namespace PhantomBrigade.SDK.ModTools
     public static class ModToolsHelper
     {
         public const string unityVersionExpectedMajor = "2020.3";
-        public const string unityVersionExpected = "2020.3.34f1";
+        public const string unityVersionExpected = "2020.3.49f1";
 
         public static bool IsUnityVersionSupported (bool strict = true)
         {
@@ -180,10 +180,14 @@ namespace PhantomBrigade.SDK.ModTools
             try
             {
                 var result = checksumsDeserializer.Load ();
-                if (!result.OK)
+                switch (result.Code)
                 {
-                    Debug.LogError (result.ErrorMessage);
-                    return (false, default);
+                    case ConfigChecksums.Deserializer.ResultCode.Upgrade:
+                        Debug.Log ("SDK checksums: " + result.ErrorMessage);
+                        break;
+                    case ConfigChecksums.Deserializer.ResultCode.Error:
+                        Debug.LogError (result.ErrorMessage);
+                        return (false, default);
                 }
                 DataManagerMod.sdkChecksumData = new SDKChecksumData ()
                 {
@@ -201,73 +205,87 @@ namespace PhantomBrigade.SDK.ModTools
             }
         }
 
-        public static EnsureResult EnsureModChecksums (DataContainerModData modData, bool showDialogs = false)
+        public static (EnsureResult, Func<IEnumerator>) EnsureModChecksums (DataContainerModData modData)
         {
             if (DataManagerMod.sdkChecksumData == null || DataManagerMod.sdkChecksumData.ChecksumsRoot == null)
             {
                 Debug.LogWarning ("Missing checksums for SDK configs. Go to the DataModel game object and click the button to create the SDK checksums.");
-                return EnsureResult.Error;
-            }
-            if (modData.checksumsRoot != null)
-            {
-                return EnsureResult.Continue;
+                return (EnsureResult.Error, null);
             }
 
             var dirSDK = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
             var dirProject = new DirectoryInfo (modData.GetModPathProject ());
-            if (ConfigChecksums.ChecksumsExist (dirProject))
+            if (modData.checksumsRoot != null)
             {
-                if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData))
-                {
-                    return EnsureResult.Error;
-                }
                 if (ConfigChecksums.ChecksumEqual (modData.originChecksum, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum))
                 {
-                    return EnsureResult.Continue;
+                    return (EnsureResult.Continue, null);
                 }
 
-                if (showDialogs
-                    && !EditorUtility.DisplayDialog
+                if (!EditorUtility.DisplayDialog
                     (
                         "Config editing", "The config DBs in this mod are outdated and should be refreshed from the SDK configs. This may take a while. Proceed?"
-                        + "\n\nProject: " + modData.id
-                        + "\nFolder: " + dirProject.FullName,
+                              + "\n\nProject: " + modData.id
+                              + "\nFolder: " + dirProject.FullName,
                         "Proceed",
                         "Cancel"
                     ))
                 {
                     modData.UnloadChecksums ();
-                    return EnsureResult.Break;
+                    return (EnsureResult.Break, null);
                 }
-                EditorCoroutineUtility.StartCoroutineOwnerless (UpdateModConfigsIE (dirSDK, modData));
-                return EnsureResult.Continue;
+                return (EnsureResult.Continue, () => UpdateModConfigsIE (dirSDK, modData));
             }
 
-            if (showDialogs
-                && !EditorUtility.DisplayDialog
+            if (ConfigChecksums.ChecksumsExist (dirProject))
+            {
+                if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData, errorOnUpgrade: false))
+                {
+                    return (EnsureResult.Error, null);
+                }
+                if (ConfigChecksums.ChecksumEqual (modData.originChecksum, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum))
+                {
+                    return (EnsureResult.Continue, null);
+                }
+
+                if (!EditorUtility.DisplayDialog
+                    (
+                        "Config editing", "The config DBs in this mod are outdated and should be refreshed from the SDK configs. This may take a while. Proceed?"
+                            + "\n\nProject: " + modData.id
+                            + "\nFolder: " + dirProject.FullName,
+                        "Proceed",
+                        "Cancel"
+                    ))
+                {
+                    modData.UnloadChecksums ();
+                    return (EnsureResult.Break, null);
+                }
+                return (EnsureResult.Continue, () => UpdateModConfigsIE (dirSDK, modData));
+            }
+
+            if (!EditorUtility.DisplayDialog
                 (
                     "Config editing", "This mod project does not appear to have any checksums. Checksums allow the SDK to detect the changes you make to the config DBs and correctly export those changes. It may take a while to build the checksums. Proceed?"
-                    + "\n\nProject: " + modData.id
-                    + "\nFolder: " + dirProject.FullName,
+                        + "\n\nProject: " + modData.id
+                        + "\nFolder: " + dirProject.FullName,
                     "Proceed",
                     "Cancel"
                 ))
             {
-                return EnsureResult.Break;
+                return (EnsureResult.Break, null);
             }
 
             if (!ConfigChecksums.CopyChecksumsFile (dirSDK, dirProject))
             {
                 Debug.LogWarning ("Checksums for mod " + modData.id + " do not exist.");
-                return EnsureResult.Error;
+                return (EnsureResult.Error, null);
             }
 
             if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData))
             {
-                return EnsureResult.Error;
+                return (EnsureResult.Error, null);
             }
-            EditorCoroutineUtility.StartCoroutineOwnerless (UpdateModConfigsIE (dirSDK, modData));
-            return EnsureResult.Continue;
+            return (EnsureResult.Continue, () => UpdateModConfigsIE (dirSDK, modData));
         }
 
         public static bool HasChanges (DataContainerModData modData)
@@ -280,7 +298,7 @@ namespace PhantomBrigade.SDK.ModTools
                 }
                 return false;
             }
-            if (EnsureModChecksums (modData) != EnsureResult.Continue)
+            if (!IsModCurrentWithSDK (modData))
             {
                 return false;
             }
@@ -407,14 +425,6 @@ namespace PhantomBrigade.SDK.ModTools
             EditorUtility.ClearProgressBar ();
         }
 
-        public static IEnumerator UpdateModConfigsIE (DirectoryInfo sdkRoot, DataContainerModData modData)
-        {
-            var dirSDKConfigs = new DirectoryInfo (Path.Combine (sdkRoot.FullName, dirNameConfigs));
-            var dirModConfigs = new DirectoryInfo (modData.GetModPathConfigs ());
-            yield return UpdateModConfigsLinkerIE (dirSDKConfigs, dirModConfigs, modData);
-            yield return UpdateModConfigsMultilinkerIE (dirSDKConfigs, dirModConfigs, modData);
-            yield return SyncModChecksums (modData, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum);
-        }
 
         public static IEnumerator DeleteModConfigsIE (string configsPath)
         {
@@ -505,7 +515,7 @@ namespace PhantomBrigade.SDK.ModTools
                 var dirProject = new DirectoryInfo (modData.GetModPathProject ());
                 if (ConfigChecksums.ChecksumsExist (dirProject))
                 {
-                    if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData))
+                    if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData, errorOnUpgrade: false))
                     {
                         continue;
                     }
@@ -529,6 +539,46 @@ namespace PhantomBrigade.SDK.ModTools
                 }
                 yield return UpdateModConfigsIE (dirSDK, modData);
             }
+        }
+
+        static bool IsModCurrentWithSDK (DataContainerModData modData)
+        {
+            if (DataManagerMod.sdkChecksumData == null || DataManagerMod.sdkChecksumData.ChecksumsRoot == null)
+            {
+                Debug.LogWarning ("Missing checksums for SDK configs. Go to the DataModel game object and click the button to create the SDK checksums.");
+                return false;
+            }
+            if (modData.checksumsRoot != null)
+            {
+                return ConfigChecksums.ChecksumEqual (modData.originChecksum, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum);
+            }
+
+            var dirSDK = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
+            var dirProject = new DirectoryInfo (modData.GetModPathProject ());
+            if (ConfigChecksums.ChecksumsExist (dirProject))
+            {
+                if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData))
+                {
+                    return false;
+                }
+                return ConfigChecksums.ChecksumEqual (modData.originChecksum, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum);
+            }
+
+            if (!ConfigChecksums.CopyChecksumsFile (dirSDK, dirProject))
+            {
+                Debug.LogWarning ("Checksums for mod do not exist: " + modData.id);
+                return false;
+            }
+            return modData.LoadChecksums (DataManagerMod.sdkChecksumData);
+        }
+
+        static IEnumerator UpdateModConfigsIE (DirectoryInfo sdkRoot, DataContainerModData modData)
+        {
+            var dirSDKConfigs = new DirectoryInfo (Path.Combine (sdkRoot.FullName, dirNameConfigs));
+            var dirModConfigs = new DirectoryInfo (modData.GetModPathConfigs ());
+            yield return UpdateModConfigsLinkerIE (dirSDKConfigs, dirModConfigs, modData);
+            yield return UpdateModConfigsMultilinkerIE (dirSDKConfigs, dirModConfigs, modData);
+            yield return SyncModChecksums (modData, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum);
         }
 
         static (bool, (ConfigChecksums.ConfigEntry SDK, ConfigChecksums.ConfigEntry Mod)) GetChecksumEntryForContainer (DataContainerModData modData, Type containerType) =>
@@ -619,13 +669,14 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 var destPath = Path.Combine (dest, f.Name);
                 f.CopyTo (destPath, true);
-                yield return null;
             }
+            yield return null;
             foreach (var d in source.EnumerateDirectories ())
             {
                 var destPath = Path.Combine (dest, d.Name);
                 Directory.CreateDirectory (destPath);
                 CopyConfigDB (d, destPath);
+                yield return null;
             }
         }
 
@@ -819,20 +870,20 @@ namespace PhantomBrigade.SDK.ModTools
         {
             if (!modData.metadata.includesConfigOverrides)
             {
-                return (false, default);
+                return (false, null);
             }
 
             var uds = UnityEngine.Object.FindObjectOfType<UtilityDatabaseSerialization> ();
             if (uds == null)
             {
                 Debug.LogWarning ("Failed to get gameobject for type " + nameof(UtilityDatabaseSerialization));
-                return (false, default);
+                return (false, null);
             }
 
             if (!modData.LoadChecksums (DataManagerMod.sdkChecksumData))
             {
                 Debug.LogWarning ("Failed to load checksums for mod " + modData.id);
-                return (false, default);
+                return (false, null);
             }
 
             return (true, uds);
@@ -904,16 +955,11 @@ namespace PhantomBrigade.SDK.ModTools
                 Directory.CreateDirectory (Path.GetDirectoryName (destPath));
                 if (pair.SDK == null)
                 {
-                    // XXX remove debug lines
-                    Debug.Log ("New: " + pair.Mod.RelativePath);
                     File.Copy (sourcePath, destPath, true);
                 }
                 else if (!ConfigChecksums.ChecksumEqual(pair.SDK, pair.Mod))
                 {
                     // XXX generate ConfigEdit when that's implemented
-                    // XXX remove debug lines
-                    Debug.LogFormat ("SDK {0} | {1:x16}{2:x16}", pair.SDK.RelativePath, pair.SDK.Checksum.HalfSum2, pair.SDK.Checksum.HalfSum1);
-                    Debug.LogFormat ("Mod {0} | {1:x16}{2:x16} | {3}", pair.Mod.RelativePath, pair.Mod.Checksum.HalfSum2, pair.Mod.Checksum.HalfSum1, pair.Mod.Source);
                     File.Copy (sourcePath, destPath, true);
                 }
                 yield return null;
@@ -958,16 +1004,11 @@ namespace PhantomBrigade.SDK.ModTools
                 if (sourceFiles.TryGetValue (Path.GetFileName (entry.RelativePath), out var sdk) && !ConfigChecksums.ChecksumEqual (sdk, entry))
                 {
                     // XXX generate ConfigEdit when that's implemented
-                    // XXX remove debug lines
-                    Debug.LogFormat ("SDK {0} | {1:x16}{2:x16}", sdk.RelativePath, sdk.Checksum.HalfSum2, sdk.Checksum.HalfSum1);
-                    Debug.LogFormat ("Mod {0} | {1:x16}{2:x16} | {3}", entry.RelativePath, entry.Checksum.HalfSum2, entry.Checksum.HalfSum1, entry.Source);
                     File.Copy (sourcePath, destPath, true);
                     yield return null;
                 }
                 else if (sdk == null)
                 {
-                    // XXX remove debug lines
-                    Debug.Log ("New: " + pair.Mod.RelativePath);
                     File.Copy (sourcePath, destPath, true);
                     yield return null;
                 }
@@ -1115,12 +1156,17 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     var source = new DirectoryInfo (Path.Combine (dirSDKConfigs.FullName, kvp.Value.RelativePath));
                     var pathDest = Path.Combine (dirModConfigs.FullName, kvp.Value.RelativePath);
+                    Directory.CreateDirectory (pathDest);
                     yield return CopyConfigIE (source, pathDest);
                     continue;
                 }
 
-                // Make sure we're working with current checksums.
-                dml.LoadDataLocal ();
+                if (ConfigChecksums.configDatabaseVersion == modData.dataVersion)
+                {
+                    // Make sure we're working with current checksums.
+                    // We can't read older config databases because their shapes may have changed and that will cause a lot of spurious log messages.
+                    dml.LoadDataLocal ();
+                }
 
                 var directoryMode = dml.IsUsingDirectories ();
                 var entriesSDK = GetEntriesByKey (kvp.Value, directoryMode);
@@ -1133,6 +1179,7 @@ namespace PhantomBrigade.SDK.ModTools
                         {
                             var source = new DirectoryInfo (Path.Combine (dirSDKConfigs.FullName, entrySDK.Value.RelativePath));
                             var pathDest = Path.Combine (dirModConfigs.FullName, entrySDK.Value.RelativePath);
+                            Directory.CreateDirectory (pathDest);
                             yield return CopyConfigIE (source, pathDest);
                         }
                         else
@@ -1274,6 +1321,8 @@ namespace PhantomBrigade.SDK.ModTools
                     RelativePath = Path.Combine (configDirectory.RelativePath, kvp.Key),
                 };
                 yield return SyncConfigDirectory (source, entry, progress);
+                entry.ComputeChecksum ();
+                configDirectory.Entries.Add (entry);
             }
 
             foreach (var n in files)

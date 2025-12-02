@@ -1,0 +1,45 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- type_special
+- prestige_unpickable
+- type_ability
+- level_3
+- type_defender
+group: 
+existingTraitTagsFilter:
+  defender_health: true
+prestigeRank: 
+actionLink:
+  key: ability_pilot_defense_ricochet
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatSet
+    key: ability_defense_ricochet
+    normalized: false
+    value: 2
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

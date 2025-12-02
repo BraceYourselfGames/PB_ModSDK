@@ -3,7 +3,8 @@ parents:
   priority: -5
   offsetStart: -7
   offsetEnd: 26
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 1
@@ -20,10 +21,9 @@ cost:
     components_r3: 10
     supplies: 1000
 effect:
-  calls:
-  - OnAbilityCallHomeGuard
   stats: 
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

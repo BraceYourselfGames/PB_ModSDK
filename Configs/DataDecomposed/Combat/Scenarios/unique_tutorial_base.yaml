@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -58,6 +63,7 @@ tags:
 - listed
 - type_assault
 - unique_tutorial_base
+- block_exit_on_defeat
 states:
   comms_hg_lost:
     comment: 
@@ -134,18 +140,15 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-  comms_inv_reinforcement2turnsaway:
+  comms_intro_delayed:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: ''
     textOnCompletion: 
     evaluated: true
     visible: false
@@ -156,14 +159,13 @@ states:
     mood: 0
     ui: 
     evaluationContext: OnExecutionEnd
-    evaluationOnOutcome:
-      present: false
+    evaluationOnOutcome: 
     turn:
       relative: false
       check: GreaterEqual
-      value: 5
+      value: 1
     turnModulus: 
-    unitChecks: []
+    unitChecks: 
     unitCheckLinked: 
     location: 
     locationRetreat: 
@@ -182,120 +184,20 @@ states:
           executionOnOutcome: 
           stepTransition: 
           commsOnStart:
-          - time: 2
+          - time: 0.1
             hidden: false
-            key: ftue_base_inv_reinforcement2turnsaway_00
-          - time: 12
-            hidden: false
-            key: ftue_base_inv_reinforcement2turnsaway_01
+            key: ftue_base_inv_intro_02
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-  outcome_effects:
-    comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
-    evaluated: false
-    visible: false
-    startInScope: false
-    priorityGeneration: 0
-    priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
-    evaluationContext: OnExecutionEnd
-    evaluationOnOutcome: 
-    turn: 
-    turnModulus: 
-    unitChecks: 
-    unitCheckLinked: 
-    location: 
-    locationRetreat: 
-    volume: 
-    stateValues: 
-    memoryBase: 
-    functions: 
-    reactions:
-      expectedValue: true
-      scopeRemovalOnLimit: true
-      triggerLimit: 2
-      triggerIncrement: true
-      effectsPerIncrement:
-        1:
-          tags: 
-          executionOnOutcome:
-            outcomeVictory: true
-            outcomeDefeat: false
-            caseEarly: true
-            caseTotal: true
-          stepTransition: 
-          commsOnStart: 
-          memoryChanges:
-          - context: Target
-            provinceKey: 
-            changes:
-            - change: Add
-              key: world_core_base_victory
-              value: 0
-              valueFromMemory: false
-              valueFromMemoryKey: 
-          stateScopeChanges: 
-          stateValueChanges: 
-          memoryDisplayChanges: 
-          unitTagDisplayChanges: 
-          rewards:
-            rew_locked: 1
-          callsImmediate: 
-          callsDelayed: 
-          functions: 
-          functionsPerUnit: 
-          unitGroups: 
-          outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-        2:
-          tags: 
-          executionOnOutcome:
-            outcomeVictory: false
-            outcomeDefeat: true
-            caseEarly: true
-            caseTotal: true
-          stepTransition: 
-          commsOnStart: 
-          memoryChanges:
-          - context: Target
-            provinceKey: 
-            changes:
-            - change: Add
-              key: world_core_base_defeat
-              value: 0
-              valueFromMemory: false
-              valueFromMemoryKey: 
-          stateScopeChanges: 
-          stateValueChanges: 
-          memoryDisplayChanges: 
-          unitTagDisplayChanges: 
-          rewards: 
-          callsImmediate: 
-          callsDelayed: 
-          functions: 
-          functionsPerUnit: 
-          unitGroups: 
-          outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   power:
     comment: 
     textNameKey: generic_turret_power_header
@@ -324,7 +226,7 @@ states:
           obj_power: true
       integrity:
         check: Less
-        value: 0.75
+        value: 0.85
       destructions: 
     stateValues: 
     memoryBase: 
@@ -349,8 +251,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatUnitsApplyChanges
             unitFilter:
@@ -385,46 +285,82 @@ states:
               - !CombatUnitDestroy {}
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-  retreat_default:
+  wave_02_completed:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
+    textNameKey: generic_breakin_objective_hostiles_header
+    textDescKey: ''
     textOnCompletion: 
-    evaluated: false
-    visible: true
+    evaluated: true
+    visible: false
     startInScope: false
-    priorityGeneration: 100
-    priority: 100
-    priorityDisplay: 100
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
     mood: 0
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
     turnModulus: 
-    unitChecks: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes:
+        turret: false
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
     unitCheckLinked: 
-    location:
-      visibleInWorld: true
-      locationProvider: !AreaLocationFilter
-        includeOverlaps: false
-        tagRequirements:
-          obj_retreat: true
-        filters: 
-      visual: 
-    locationRetreat:
-      commsUsed: false
+    location: 
+    locationRetreat: 
     volume: 
     stateValues: 
     memoryBase: 
     functions: 
-    reactions: 
-  wave2:
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: ftue_base_inv_outro_01
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  wave_02_trigger:
     comment: 
-    textNameKey: generic_enemy_reinforcements_header
+    textNameKey: generic_breakin_objective_hostiles_header
     textDescKey: ''
     textOnCompletion: 
     evaluated: true
@@ -436,13 +372,32 @@ states:
     mood: 0
     ui: 
     evaluationContext: OnExecutionEnd
-    evaluationOnOutcome: 
-    turn:
-      relative: false
-      check: GreaterEqual
-      value: 7
+    evaluationOnOutcome:
+      present: false
+    turn: 
     turnModulus: 
-    unitChecks: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes:
+        turret: false
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
     unitCheckLinked: 
     location: 
     locationRetreat: 
@@ -450,7 +405,30 @@ states:
     stateValues: 
     memoryBase: 
     functions: 
-    reactions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: wave_02
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            wave_02_completed: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
 steps:
   wave_01:
     comment: 
@@ -474,8 +452,8 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: pb_uhb
+      - keyExternal: true
+        key: ftue_base_pb_uhb
         countMin: 1
         countMax: 1
         countRandom: false
@@ -513,8 +491,8 @@ steps:
           functions: 
           combatTags:
           - custom_homeguard
-      - keyExternal: false
-        key: pb_melee
+      - keyExternal: true
+        key: ftue_base_pb_ml
         countMin: 1
         countMax: 1
         countRandom: false
@@ -578,8 +556,8 @@ steps:
       spawnRegistration: 
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: inv_guard
+      - keyExternal: true
+        key: ftue_base_inv_guard_a
         countMin: 1
         countMax: 1
         countRandom: false
@@ -591,8 +569,8 @@ steps:
         aiTargeting: vanguard
         liveryPreset: inv_army_g1
         custom: 
-      - keyExternal: false
-        key: inv_guard
+      - keyExternal: true
+        key: ftue_base_inv_guard_a
         countMin: 1
         countMax: 1
         countRandom: false
@@ -604,8 +582,8 @@ steps:
         aiTargeting: vanguard
         liveryPreset: inv_army_g1
         custom: 
-      - keyExternal: false
-        key: inv_leader
+      - keyExternal: true
+        key: ftue_base_inv_leader
         countMin: 1
         countMax: 1
         countRandom: false
@@ -617,8 +595,8 @@ steps:
         aiTargeting: leader
         liveryPreset: inv_army_g1
         custom: 
-      - keyExternal: false
-        key: tank_long
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
         countMin: 2
         countMax: 1
         countRandom: false
@@ -630,8 +608,8 @@ steps:
         aiTargeting: sharpshooter
         liveryPreset: 
         custom: 
-      - keyExternal: false
-        key: tank_short
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -669,8 +647,8 @@ steps:
       spawnRegistration: 
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: turret_ml
+      - keyExternal: true
+        key: vhc_sentry_ml
         countMin: 1
         countMax: 1
         countRandom: false
@@ -702,8 +680,8 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
-        key: turret_mg
+      - keyExternal: true
+        key: vhc_sentry_mg
         countMin: 1
         countMax: 1
         countRandom: false
@@ -735,8 +713,8 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
-        key: turret_ml
+      - keyExternal: true
+        key: vhc_sentry_ml
         countMin: 1
         countMax: 1
         countRandom: false
@@ -768,8 +746,8 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
-        key: turret_mg
+      - keyExternal: true
+        key: vhc_sentry_mg
         countMin: 1
         countMax: 1
         countRandom: false
@@ -801,8 +779,8 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
-        key: turret_mg
+      - keyExternal: true
+        key: vhc_sentry_mg
         countMin: 1
         countMax: 1
         countRandom: false
@@ -858,6 +836,7 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -888,18 +867,9 @@ steps:
     functions:
     - !StartTutorial
       key: combat_base
+      allowRepeat: true
     outcome: 
-    transitions:
-      transitionMode: OnExecutionStart
-      transitionBasedScope: true
-      transitionLocksExecution: false
-      transitionsStateBased:
-      - priority: 0
-        stateCleanupOnUse: true
-        stateRequirements:
-          wave2: true
-        stepKey: wave_02
-      transitionTimeBased: 
+    transitions: 
   wave_02:
     comment: 
     core:
@@ -921,8 +891,8 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: inv_guard
+      - keyExternal: true
+        key: ftue_base_inv_guard_a
         countMin: 2
         countMax: 1
         countRandom: false
@@ -933,31 +903,9 @@ steps:
         aiBehavior: Flanker
         aiTargeting: artillery
         liveryPreset: inv_army_g1
-        custom:
-          name:
-            name: 
-          id: 
-          idReused: 
-          idPilot: {}
-          role: 
-          spawn: 
-          landing: 
-          flags: 
-          faction:
-            faction: 
-          speed: 
-          uncrewed: 
-          pilotAppearance: 
-          pilotStats: 
-          predictionLimit: 
-          animationOverrides: 
-          statMultipliers: 
-          hitDirectionModifiers: 
-          functions: 
-          combatTags:
-          - custom_homeguard
-      - keyExternal: false
-        key: tank_long
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -969,8 +917,8 @@ steps:
         aiTargeting: sharpshooter
         liveryPreset: 
         custom: 
-      - keyExternal: false
-        key: tank_short
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -995,8 +943,9 @@ steps:
       functions: 
       spawnTagsUsed: false
       spawnTags:
-        custom_ftue_reinforcement: true
-      spawnGroupKey: custom_ftue_inv_w2
+        perimeter_center: false
+        perimeter_outer: false
+      spawnGroupKey: custom_ftue_landing
       filterDistancePlayer: 
       filterDistanceEnemy: 
       filterDistanceSpawn: 
@@ -1006,15 +955,13 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
     unitTagDisplayChanges: 
     unitChanges: 
-    retreat:
-      stateKey: retreat_default
-      stateValueModified: true
-      stateValue: false
+    retreat: 
     actionRestrictions: 
     cutsceneVideoOnStart: 
     atmosphereOnStart: 
@@ -1025,12 +972,9 @@ steps:
     musicIntensity: 
     musicReactive: 
     commsOnStart:
-    - time: 2
+    - time: 1
       hidden: false
       key: ftue_base_inv_reinforcements_00
-    - time: 12
-      hidden: false
-      key: ftue_base_inv_reinforcements_01
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -1038,21 +982,6 @@ steps:
     outcome: 
     transitions: 
 unitPresets:
-  inv_guard: !UnitPresetLink
-    preset: ftue_base_inv_guard_a
-  inv_leader: !UnitPresetLink
-    preset: ftue_base_inv_leader
   inv_ml: !UnitPresetLink
     preset: ftue_base_inv_guard_long
-  pb_melee: !UnitPresetLink
-    preset: ftue_base_pb_melee
-  pb_uhb: !UnitPresetLink
-    preset: ftue_base_pb_uhb
-  tank_long: !UnitPresetLink
-    preset: vhc_tank_training_cannon_0
-  tank_short: !UnitPresetLink
-    preset: vhc_tank_training_aa_0
-  turret_mg: !UnitPresetLink
-    preset: vhc_sentry_mg
-  turret_ml: !UnitPresetLink
-    preset: vhc_sentry_ml
+unitGenerators: 

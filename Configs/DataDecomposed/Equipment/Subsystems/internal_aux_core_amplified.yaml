@@ -19,7 +19,7 @@ tags:
 statDistribution: ''
 stats:
   barrier_regeneration:
-    value: 0.5
+    value: 0.364
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -29,32 +29,32 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   comp3_value:
-    value: 1
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   heat_dissipation:
-    value: 0.8
+    value: 0.935
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_buffer:
+    value: 1.25
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   overheat_limit:
-    value: 1
+    value: 0.825
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   power:
-    value: 1.05
+    value: 1.2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   scrap_value:
-    value: 1
-    targetMode: 0
-    targetSocket: ''
-    targetHardpoint: ''
-  wpn_damage_offset:
-    value: 0.15
+    value: 20
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -66,3 +66,16 @@ projectile:
 beam: 
 custom: 
 functions: 
+workshopInfo:
+  progressLimit:
+    i: 2
+  inputResourcesViaStats:
+    f: 1
+  inputResources:
+  - key: supplies
+    amount: 400
+  - key: components_r2
+    amount: 6
+  - key: components_r3
+    amount: 4
+  basePartRequirements: 

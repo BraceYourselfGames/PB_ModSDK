@@ -24,14 +24,19 @@ dataCore:
   durationType: UnitStat
   duration: 1
   durationUnitStat: act_duration_vent
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation: 
   functionsOnModification: 
@@ -67,6 +72,7 @@ dataCore:
       - !CombatUnitStatusAdd
         key: timed_burn
         durationOverride: -1
+        source: Function
       - !CombatUnitEffectSpawn
         position:
           x: 0
@@ -76,6 +82,7 @@ dataCore:
           x: 0
           y: 0
           z: 0
+        centered: true
         asset:
           key: fx_status_venting_ignition
           scale:
@@ -149,6 +156,7 @@ dataCore:
       tags:
         ability_vent: true
       present: true
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

@@ -1,0 +1,182 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit:
+- functionsBase: 
+  functionsTarget: 
+  functionsGlobal:
+  - !UnlockCodex
+    key: overworld_poi_events
+  functionsLocal: 
+tags:
+- ev_unique_ftue_01
+check:
+  repeat: UniquePerCampaign
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_empty_base
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      quick:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: outcome_quick
+      search:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4103774
+            b: 0.4169288
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !OffsetTime
+            time: 0.5
+            holdCountdown: true
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: outcome_search
+    optionsReused: 
+  outcome_quick:
+    comment: 
+    image: event_underground_market
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core: 
+        dataReused:
+          interaction: sh_option_main_leave_destroy_unconditional
+          step: main
+          option: leave
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: true
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: false
+              keys:
+              - ftue_poi_01
+              tags: 
+          functionsLocal: 
+    optionsReused: 
+  outcome_search:
+    comment: 
+    image: event_underground_market
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core: 
+        dataReused:
+          interaction: sh_option_main_leave_destroy_unconditional
+          step: main
+          option: leave
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: true
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: false
+              keys:
+              - ftue_poi_01_expanded
+              tags: 
+          functionsLocal: 
+    optionsReused: 

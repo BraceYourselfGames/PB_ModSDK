@@ -6,19 +6,30 @@ color:
   a: 1
 hidden: false
 debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: false
 restartOnRefresh: false
-fxAttached:
-  key: fx_status_venting_loop
+turnLinked: true
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.9
+  velocityDecayTime: 1
+  key: fx_status_ricochet_oneshot
   scale:
     x: 1
     y: 1
     z: 1
 durationFull:
-  f: 4
+  f: 1
 durationUpdate: 
 buildupDecayRate: 
 buildupThreshold: 
 buildupOverflow: 
+buildupShieldMultiplier: 
 stackable: 
 audio: 
 effectsOnStart: 

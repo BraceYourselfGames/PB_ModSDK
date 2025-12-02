@@ -24,14 +24,19 @@ dataCore:
   durationType: Data
   duration: 2
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation:
   - !CombatActionValidationDependency
     dependencyActionKey: attack_primary
@@ -51,6 +56,7 @@ dataCore:
   functionsOnDispose: 
   check: 
   unitCheck: 
+  pilotLink: 
 dataFactionCheck:
   requireFaction: Invaders
 dataMovement: 

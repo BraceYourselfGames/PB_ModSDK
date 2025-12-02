@@ -1,0 +1,163 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.4470589
+      g: 1
+      b: 0.6235294
+      a: 1
+    frameLocation: Center
+    frameGradientMode: Bottom
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 600
+    frameSizeY: 360
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: 
+      stateName: 
+      position:
+        x: 47.5
+        y: -19.5
+        z: 268.5
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: ''
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 50
+        y: -10.45
+        z: 230
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 35
+      rotationYOverride: true
+      rotationY: 45
+      zoomOverride: true
+      zoom: 0.8
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.3131482
+      g: 0.4150943
+      b: 0.2760769
+      a: 0
+    frameLocation: BottomLeft
+    frameGradientMode: Right
+    framePositionX: 238
+    framePositionY: 186
+    frameSizeX: 384
+    frameSizeY: 96
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.3803922
+      g: 0.6
+      b: 0.2980392
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: Right
+    framePositionX: 706
+    framePositionY: 56
+    frameSizeX: 192
+    frameSizeY: 48
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: TopLeft
+    buttonLocation: Top
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0
+effectsOnEnd:
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0

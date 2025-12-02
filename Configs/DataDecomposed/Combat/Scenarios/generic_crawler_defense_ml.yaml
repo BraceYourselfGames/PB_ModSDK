@@ -82,8 +82,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions: 
@@ -115,9 +113,8 @@ states:
                 functionsTimed: 
                 functionsOnAction: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   drone_spawn:
     comment: 
     textNameKey: ''
@@ -160,8 +157,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -209,9 +204,8 @@ states:
             sorting: 
             spawnRegistration:
               skipRegistration: true
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   drone_spawn_callout:
     comment: 
     textNameKey: generic_unknown_header
@@ -257,20 +251,18 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   main:
     comment: 
     core: 
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -337,3 +329,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

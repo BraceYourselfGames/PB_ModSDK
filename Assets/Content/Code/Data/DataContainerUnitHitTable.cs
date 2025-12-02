@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entitas;
+using Entitas.VisualDebugging.Unity;
 using Sirenix.OdinInspector;
 using YamlDotNet.Serialization;
 
@@ -19,7 +21,11 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (KeyLabel = "Socket")]
         public Dictionary<string, float> socketProportions; 
     }
-
+    
+    [Persistent][DontDrawComponent]
+    public sealed class DataLinkUnitHitTable : IComponent 
+    { public DataContainerUnitHitTable data; }
+    
     [Serializable]
     public class DataContainerUnitHitTable : DataContainer
     {

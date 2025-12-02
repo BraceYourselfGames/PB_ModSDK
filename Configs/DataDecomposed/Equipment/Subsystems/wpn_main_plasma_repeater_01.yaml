@@ -9,8 +9,10 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_06
-- spec_stabilized
-- stat_concussive
+- spec_concussion
+- spec_charge
+- category_wpn_rifle_assault
+- wpn_main_assault
 statDistribution: ''
 stats:
   act_count:
@@ -39,12 +41,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 0.5591374
+    value: 0.8
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 10
+    value: 23
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -54,7 +56,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 16
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -79,12 +81,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 6
+    value: 5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 6
+    value: 7
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -171,6 +173,9 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
@@ -230,8 +235,10 @@ projectile:
     amount: 0.5
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

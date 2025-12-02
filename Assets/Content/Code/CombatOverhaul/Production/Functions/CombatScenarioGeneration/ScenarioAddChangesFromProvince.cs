@@ -6,44 +6,75 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioAddChangesFromProvince : ICombatScenarioGenStep
     {
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
+            
+            bool provinceActiveFound = DataHelperProvince.TryGetProvinceDependenciesActive 
+            (
+                out var provinceActiveBlueprint, 
+                out var provinceActivePersistent, 
+                out var provinceActiveOverworld
+            );
 
-            var targetPersistent = ScenarioUtility.GetCombatSite ();
-            var targetOverworld = IDUtility.GetLinkedOverworldEntity (targetPersistent);
-            if (targetOverworld == null || !targetOverworld.hasDataLinkOverworldEntityBlueprint)
+            if (!provinceActiveFound)
             {
                 // Debug.LogWarning ($"Skipping scenario changes from site: {targetOverworld.ToLog ()} has no blueprint");
                 return;
             }
 
-            var provinceBlueprint = DataHelperProvince.GetProvinceBlueprintAtEntity (targetOverworld);
-            if (provinceBlueprint == null || provinceBlueprint.scenarioChanges == null)
+            var targetPersistent = IDUtility.GetLinkedPersistentEntity (targetOverworld);
+            if (targetPersistent == null)
                 return;
 
-            var changes = provinceBlueprint.scenarioChanges;
-            foreach (var change in changes)
+            if (provinceActiveBlueprint.scenarioChanges != null)
             {
-                if (change == null || !change.IsChangeApplicable (scenario))
-                    continue;
+                var context = $"province BP {provinceActiveBlueprint.key}";
+                foreach (var change in provinceActiveBlueprint.scenarioChanges)
+                {
+                    if (change == null || !change.IsChangeApplicable (scenario, targetPersistent))
+                        continue;
 
-                ApplyChange (scenario, seed, provinceBlueprint, change);
+                    ApplyChange (scenario, seed, context, change);
+                }
+            }
+
+            if (provinceActiveOverworld.hasProvinceModifiers)
+            {
+                var modifiers = provinceActiveOverworld.provinceModifiers.keys;
+                foreach (var modifierKey in modifiers)
+                {
+                    var modifierData = DataMultiLinkerOverworldProvinceModifier.GetEntry (modifierKey, false);
+                    if (modifierData == null)
+                        continue;
+                    
+                    if (modifierData.scenarioChanges != null)
+                    {
+                        var context = $"province modifier {modifierKey}";
+                        foreach (var change in modifierData.scenarioChanges)
+                        {
+                            if (change == null || !change.IsChangeApplicable (scenario, targetPersistent))
+                                continue;
+
+                            ApplyChange (scenario, seed, context, change);
+                        }
+                    }
+                    
+                    if (!string.IsNullOrEmpty (modifierData.pilotPersistentInjected))
+                        ScenarioUtilityGeneration.InsertPersistentPilot (scenario, targetPersistent, modifierData.pilotPersistentInjected);
+                }
             }
             
             #endif
         }
         
-        private void ApplyChange (DataContainerScenario scenario, int seed, DataContainerOverworldProvinceBlueprint provinceBlueprint, DataBlockProvinceScenarioChange change)
+        private void ApplyChange (DataContainerScenario scenario, int seed, string context, DataBlockProvinceScenarioChange change)
         {
             #if !PB_MODSDK
 
-            if (string.IsNullOrEmpty (change.parentKey))
-                return;
-                
             bool log = DataShortcuts.sim.logScenarioGeneration;
             if (log)
-                Debug.Log ($"Applying changes to generated scenario {scenario.key} from province {provinceBlueprint.key}");
+                Debug.Log ($"Applying changes to generated scenario {scenario.key} from {context}");
 
             DataBlockScenarioStep stepOnStart = null;
             if (!string.IsNullOrEmpty (scenario.coreProc.stepOnStart) && scenario.stepsProc != null && scenario.stepsProc.TryGetValue (scenario.coreProc.stepOnStart, out var value))
@@ -68,10 +99,7 @@ namespace PhantomBrigade.Data
             }
 
             if (change.units != null && change.units.Count > 0)
-            {
-                var context = $"province {provinceBlueprint.key}";
                 ScenarioUtilityGeneration.InsertUnitBlocks (scenario, change.units, context);
-            }
             
             #endif
         }

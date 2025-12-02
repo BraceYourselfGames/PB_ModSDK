@@ -1,4 +1,5 @@
 ﻿using System;
+using Entitas;
 using System.Collections.Generic;
 using System.Reflection;
 using PhantomBrigade.Data;
@@ -6,10 +7,6 @@ using PhantomBrigade.Functions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
-
-#if !PB_MODSDK
-using DesperateDevs.Utils;
-#endif
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -82,13 +79,11 @@ namespace PhantomBrigade.Data
         public const string tagPrefix = "rating_";
     }
 
-    #if !PB_MODSDK
     [Persistent]
     public sealed class DataKeyUnitGroup : IComponent
     {
         public string s;
     }
-    #endif
 
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockUnitGroupGrade
@@ -235,8 +230,12 @@ namespace PhantomBrigade.Data
         public bool listed = false;
         
         [ShowIf ("IsTextVisible")]
-        [LabelText ("Localized Name")][YamlIgnore]
+        [LabelText ("Name / Desc"), YamlIgnore]
         public string textName;
+        
+        [ShowIf ("IsTextVisible")]
+        [HideLabel, TextArea (1, 10), YamlIgnore]
+        public string textDesc;
         
         public bool factionAllied = false;
 
@@ -383,6 +382,7 @@ namespace PhantomBrigade.Data
         public override void ResolveText ()
         {
             textName = DataManagerText.GetText (TextLibs.unitGroups, $"{key}__name", suppressWarning: true);
+            textDesc = DataManagerText.GetText (TextLibs.unitGroups, $"{key}__text", suppressWarning: true);
 
             if (unitsPerGrade != null)
             {
@@ -432,6 +432,9 @@ namespace PhantomBrigade.Data
 
             if (!string.IsNullOrEmpty (textName))
                 DataManagerText.TryAddingTextToLibrary (TextLibs.unitGroups, $"{key}__name", textName);
+            
+            if (!string.IsNullOrEmpty (textDesc))
+                DataManagerText.TryAddingTextToLibrary (TextLibs.unitGroups, $"{key}__text", textDesc);
             
             if (unitsPerGrade != null)
             {
@@ -583,11 +586,8 @@ namespace PhantomBrigade.Data
                         unitsPerGrade[index] = null;
                     else
                     {
-                        if (unitsPerGrade[index] == null)
-                            unitsPerGrade[index] = new DataBlockUnitGroupGrade ();
-                        
-                        var entry = unitsPerGrade[index];
-                        entry.units = UtilitiesYAML.CloneThroughYaml (entryPrev.units);
+                        var entry = UtilitiesYAML.CloneThroughYaml (entryPrev);
+                        unitsPerGrade[index] = entry;
                     }
                 }
             }
@@ -639,9 +639,19 @@ public struct DataContainerLink<T> where T : DataContainer
     [InlineButton ("TryOpeningLinker", "Open")]
     public string key;
 
+    public override string ToString ()
+    {
+        return key;
+    }
+
     public DataContainerLink (T input)
     {
         key = input != null ? input.key : null;
+    }
+    
+    public DataContainerLink (string key)
+    {
+        this.key = key;
     }
 
     private static Dictionary<Type, Type> containerToLinkerLookup = new Dictionary<Type, Type> ();

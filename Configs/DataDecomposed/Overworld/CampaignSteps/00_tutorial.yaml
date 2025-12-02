@@ -1,0 +1,58 @@
+comment: 
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: 
+  textNavDesc: 
+  iconNav: 
+  textFromQuest: 
+travelInteraction: 
+entry:
+  functionsGlobal: 
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Remove
+      key: feature_check
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Set
+      key: campaign_progress_breakthrough
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsBase: 
+progressDisplay: 
+effects: 
+branches:
+- comment: 
+  preferences: 
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 01_open
+    direction: 245
+    levelOffset: 
+    branchKey: branch_army
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_01: true
+    modifiers:
+    - tagsUsed: false
+      keys:
+      - sp_liberation_easy
+      tags: 
+    - tagsUsed: false
+      keys:
+      - sp_weakened_heavy
+      tags: 
+tags: 

@@ -37,7 +37,7 @@ namespace PhantomBrigade.Data
 
         static void LoadOverride ()
         {
-            CheckPathResolved (isUser: true);
+            CheckPathResolved ();
             if (string.IsNullOrEmpty (path))
             {
                 Debug.LogError ($"Failed to load global data container of type {nameof (DataContainerSettingsDebug)} due to missing path");

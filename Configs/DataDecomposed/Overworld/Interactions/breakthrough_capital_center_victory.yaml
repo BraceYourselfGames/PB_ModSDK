@@ -1,0 +1,290 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: ResearchInvestigating
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 1
+        g: 0.8287582
+        b: 0.4862745
+        a: 0
+      image: event_settlement_razed
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/ending_01
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !UnlockAchievement
+        key: capital_liberated
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.6282895
+            b: 0.4669811
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 1
+        g: 0.806536
+        b: 0.4196079
+        a: 0
+      image: event_settlement_razed
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/ending_02
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.6592628
+            b: 0.4196079
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_03
+    optionsReused: 
+  step_03:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 1
+        g: 0.5529412
+        b: 0.5529412
+        a: 0
+      image: event_celebration
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/ending_03
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.6687288
+            b: 0.5529412
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_04
+    optionsReused: 
+  step_04:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 1
+        g: 0.5529412
+        b: 0.5529412
+        a: 0
+      image: event_celebration
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/ending_04
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.5518868
+            b: 0.5518868
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !QuestUnlinkPoints
+            onlyCombat: false
+            onlyHostile: false
+            checks: 
+            questMain: true
+            questKey: province_breakthrough_01
+          - !DeletePoints
+            mode: DeleteUntilTarget
+            target: 0
+            onlyCombat: false
+            onlyHostile: false
+            checks:
+            - !OverworldValidatePointTags
+              tagsMethod: RequireAll
+              tags:
+              - tag: role_patrol
+                not: false
+          - !QuestProvinceCapture
+            questMain: true
+            questKey: 
+          - !QuestProgress
+            stepRequired: 
+            stepNext: 
+            effectOnExit: true
+            effectOnEntry: true
+            questMain: true
+            questKey: 
+          - !QuestStart
+            questKey: province_selection
+          - !CallMethodStatic
+            typeName: CIViewCredits
+            methodName: TryEntryFromEnding
+            argument: ''
+            frameDelay: 0
+          functionsLocal: 
+    optionsReused: 

@@ -4,70 +4,56 @@ using Area;
 using PhantomBrigade.Functions;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 using YamlDotNet.Serialization;
-
-#if PB_MODSDK
-using System.Linq;
-#endif
 
 namespace PhantomBrigade.Data
 {
-    public class DataBlockCombatBiomeFilter
-    {
-        [DictionaryKeyDropdown ("@DataMultiLinkerCombatBiome.tags")]
-        public SortedDictionary<string, bool> tags = new SortedDictionary<string, bool>
-        {
-            { "default", true }
-        };
-    }
-
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockEnvironmentBoundary
     {
         public float groundHeight;
 
         public float innerSkirtSize = 60f;
-
+        
         public float curveBoundsOffset = 100f;
 
         public float curveBoundsHeight = 50f;
-
+        
         [LabelText("North (Z+)")][YamlIgnore, HideReferenceObjectPicker]
         public AnimationCurveContainer north;
-
-        [YamlMember (Alias = "north"), HideInInspector]
+        
+        [YamlMember (Alias = "north"), HideInInspector] 
         public AnimationCurveSerialized northSerialized;
-
+        
         [LabelText("South (Z-)")][YamlIgnore, HideReferenceObjectPicker]
         public AnimationCurveContainer south;
-
-        [YamlMember (Alias = "south"), HideInInspector]
+        
+        [YamlMember (Alias = "south"), HideInInspector] 
         public AnimationCurveSerialized southSerialized;
-
+        
         [LabelText("East (X+)")][YamlIgnore, HideReferenceObjectPicker]
         public AnimationCurveContainer east;
-
-        [YamlMember (Alias = "east"), HideInInspector]
+        
+        [YamlMember (Alias = "east"), HideInInspector] 
         public AnimationCurveSerialized eastSerialized;
-
+        
         [LabelText("West (X-)")][YamlIgnore, HideReferenceObjectPicker]
         public AnimationCurveContainer west;
-
-        [YamlMember (Alias = "west"), HideInInspector]
+        
+        [YamlMember (Alias = "west"), HideInInspector] 
         public AnimationCurveSerialized westSerialized;
-
+        
         public void OnBeforeSerialization ()
         {
             if (north != null)
                 northSerialized = (AnimationCurveSerialized) north.curve;
-
+          
             if (south != null)
                 southSerialized = (AnimationCurveSerialized) south.curve;
-
+                
             if (east != null)
                 eastSerialized = (AnimationCurveSerialized) east.curve;
-
+            
             if (west != null)
                 westSerialized = (AnimationCurveSerialized) west.curve;
         }
@@ -76,13 +62,13 @@ namespace PhantomBrigade.Data
         {
             if (northSerialized != null)
                 north = new AnimationCurveContainer ((AnimationCurve) northSerialized);
-
+                
             if (southSerialized != null)
                 south = new AnimationCurveContainer ((AnimationCurve) southSerialized);
-
+            
             if (eastSerialized != null)
                 east = new AnimationCurveContainer ((AnimationCurve) eastSerialized);
-
+            
             if (westSerialized != null)
                 west = new AnimationCurveContainer ((AnimationCurve) westSerialized);
         }
@@ -93,17 +79,17 @@ namespace PhantomBrigade.Data
             var sceneHelper = CombatSceneHelper.ins;
             if (sceneHelper == null)
                 return;
-
+        
             if (sceneHelper.boundary != null)
                 sceneHelper.LoadBoundary (this);
         }
     }
-
+    
     public static class SpawnGroupKeys
     {
         public const string Player = "player";
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaPoint
     {
@@ -113,7 +99,7 @@ namespace PhantomBrigade.Data
 
         [YamlIgnore, HideInInspector]
         public int index = -1;
-
+        
         #if UNITY_EDITOR
 
         public void SnapToGrid ()
@@ -121,7 +107,7 @@ namespace PhantomBrigade.Data
             point = AreaUtility.SnapPointToGrid (point);
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         public void SnapRotation ()
         {
             rotation = new Vector3
@@ -132,12 +118,12 @@ namespace PhantomBrigade.Data
             );
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         private float RoundToStep (float input, float step)
         {
             if (step.RoughlyEqual (0f))
                 return input;
-
+            
             return Mathf.Round (input / step) * step;
         }
 
@@ -146,27 +132,23 @@ namespace PhantomBrigade.Data
             point = AreaUtility.GroundPoint (point);
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         #endif
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaSpawnGroup
     {
         [YamlIgnore, HideInInspector, NonSerialized]
         public string key;
-
+        
         [ValueDropdown ("GetTags")]
         public HashSet<string> tags = new HashSet<string> ();
-
-        #if !PB_MODSDK
+        
         [ListDrawerSettings (DefaultExpandedState = false, AlwaysAddDefaultValue = true)]
-        #else
-        [ListDrawerSettings (DefaultExpandedState = false, CustomAddFunction = nameof(CreateSpawnPoint))]
-        #endif
         public List<DataBlockAreaPoint> points = new List<DataBlockAreaPoint> ();
-
-        [YamlIgnore, ReadOnly]
+        
+        [YamlIgnore, ReadOnly] 
         public Vector3 averagePosition;
 
         public void RefreshAveragePosition ()
@@ -174,7 +156,7 @@ namespace PhantomBrigade.Data
             averagePosition = Vector3.zero;
             if (points == null || points.Count == 0)
                 return;
-
+                
             foreach (var pointGroup in points)
                 averagePosition += pointGroup.point;
             averagePosition /= points.Count;
@@ -182,10 +164,10 @@ namespace PhantomBrigade.Data
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         private IEnumerable<string> GetTags =>
             DataShortcuts.sim.combatSpawnTags;
-
+        
         [Button ("@GetSelectLabel"), PropertyOrder (-2), ButtonGroup ("T")]
         public void SelectForEditing ()
         {
@@ -240,16 +222,16 @@ namespace PhantomBrigade.Data
                 p.point = Vector3.Lerp (p1.point, p2.point, factor);
                 p.rotation = Vector3.Lerp (p1.rotation, p2.rotation, factor);
             }
-
+            
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         [Button ("Remove"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Remove ()
         {
-            if
+            if 
             (
-                string.IsNullOrEmpty (key) ||
+                string.IsNullOrEmpty (key) || 
                 DataMultiLinkerCombatArea.selectedArea?.spawnGroups == null ||
                 !DataMultiLinkerCombatArea.selectedArea.spawnGroups.ContainsValue (this)
             )
@@ -259,7 +241,7 @@ namespace PhantomBrigade.Data
 
             DataMultiLinkerCombatArea.selectedArea.spawnGroups.Remove (key);
         }
-
+        
         [ShowIf ("@DataMultiLinkerCombatArea.selectedArea != null")]
         [Button ("Rename/Duplicate"), PropertyOrder (-2)]
         public void RenameDuplicate (bool duplicate, string keyNew)
@@ -273,7 +255,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Key {keyNew} is already taken, can't duplicate");
                 return;
             }
-
+            
             if (duplicate)
             {
                 var copy = UtilitiesYAML.CloneThroughYaml (this);
@@ -289,10 +271,10 @@ namespace PhantomBrigade.Data
                 DataMultiLinkerCombatArea.selectedArea.spawnGroups.Add (keyNew, this);
                 key = keyNew;
             }
-
+            
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         [Button ("Tag as road"), PropertyOrder (-1), ButtonGroup ("A")]
         public void TagAsRoad ()
         {
@@ -305,7 +287,7 @@ namespace PhantomBrigade.Data
                     break;
                 }
             }
-
+            
             tags = new HashSet<string> ();
             tags.Add ("context_road");
 
@@ -313,42 +295,22 @@ namespace PhantomBrigade.Data
                 tags.Add (tagDir);
         }
 
-        #if PB_MODSDK
-        DataBlockAreaPoint CreateSpawnPoint ()
-        {
-            var point = new DataBlockAreaPoint ();
-            if (points.Count != 0)
-            {
-                var lastPoint = points.Last ();
-                point.point = lastPoint.point + Vector3.up * TilesetUtility.blockAssetSize;
-                point.rotation = lastPoint.rotation;
-                point.index = lastPoint.index;
-            }
-            return point;
-        }
         #endif
-
-        #endif
-
         #endregion
     }
-
+    
      [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaWaypointGroup
     {
         [YamlIgnore, HideInInspector, NonSerialized]
         public string key;
 
-        #if !PB_MODSDK
         [ListDrawerSettings (DefaultExpandedState = false, AlwaysAddDefaultValue = true)]
-        #else
-        [ListDrawerSettings (DefaultExpandedState = false, CustomAddFunction = nameof(CreateWaypoint))]
-        #endif
         public List<DataBlockAreaPoint> points = new List<DataBlockAreaPoint> ();
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         [Button ("@GetSelectLabel"), PropertyOrder (-2), ButtonGroup ("T")]
         public void SelectForEditing ()
         {
@@ -366,13 +328,13 @@ namespace PhantomBrigade.Data
         }
 
         private string GetSelectLabel => DataMultiLinkerCombatArea.selectedWaypointGroup == this ? "Deselect" : "Select";
-
+        
         [Button ("Remove"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Remove ()
         {
-            if
+            if 
             (
-                string.IsNullOrEmpty (key) ||
+                string.IsNullOrEmpty (key) || 
                 DataMultiLinkerCombatArea.selectedArea?.waypointGroups == null ||
                 !DataMultiLinkerCombatArea.selectedArea.waypointGroups.ContainsValue (this)
             )
@@ -382,7 +344,7 @@ namespace PhantomBrigade.Data
 
             DataMultiLinkerCombatArea.selectedArea.waypointGroups.Remove (key);
         }
-
+        
         [ShowIf ("@DataMultiLinkerCombatArea.selectedArea != null")]
         [Button ("Rename/Duplicate"), PropertyOrder (-2)]
         public void RenameDuplicate (bool duplicate, string keyNew)
@@ -396,7 +358,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Key {keyNew} is already taken, can't duplicate");
                 return;
             }
-
+            
             if (duplicate)
             {
                 var copy = UtilitiesYAML.CloneThroughYaml (this);
@@ -412,43 +374,42 @@ namespace PhantomBrigade.Data
                 DataMultiLinkerCombatArea.selectedArea.waypointGroups.Add (keyNew, this);
                 key = keyNew;
             }
-
+            
             UnityEditor.SceneView.RepaintAll ();
         }
-
-        #if PB_MODSDK
-        DataBlockAreaPoint CreateWaypoint ()
-        {
-            var point = new DataBlockAreaPoint ();
-            if (points.Count != 0)
-            {
-                var lastPoint = points.Last ();
-                point.point = lastPoint.point + Vector3.up * TilesetUtility.blockAssetSize;
-                point.rotation = lastPoint.rotation;
-                point.index = lastPoint.index;
-            }
-            return point;
-        }
-        #endif
 
         #endif
         #endregion
     }
-
-
-
+    
+    
+    
     public interface IDataBlockAreaLocationProvider
     {
-        bool TryGetLocationData (string stateKeyResolved, HashSet<string> keysOccupied, SortedDictionary<string, string> stateLocations, out string locationKey);
+        bool TryGetLocationData
+        (
+            CombatDescription cd,
+            DataContainerCombatArea area,
+            string stateKeyResolved,
+            HashSet<string> keysOccupied,
+            out string locationKey
+        );
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaLocationFromState : IDataBlockAreaLocationProvider
     {
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerScenario\", \"GetStateKeys\")")]
         public string stateKey;
 
-        public bool TryGetLocationData (string stateKeyResolved, HashSet<string> keysOccupied, SortedDictionary<string, string> stateLocations, out string locationKey)
+        public bool TryGetLocationData 
+        (
+            CombatDescription cd, 
+            DataContainerCombatArea area, 
+            string stateKeyResolved, 
+            HashSet<string> keysOccupied, 
+            out string locationKey
+        )
         {
             locationKey = null;
 
@@ -457,41 +418,48 @@ namespace PhantomBrigade.Data
             if (!Application.isPlaying)
                 return false;
 
-            if (string.IsNullOrEmpty (stateKey) || !stateLocations.ContainsKey (stateKey))
+            if (string.IsNullOrEmpty (stateKey) || cd?.stateLocations == null || !cd.stateLocations.ContainsKey (stateKey))
             {
                 Debug.LogWarning ($"State {stateKeyResolved} resolving location | Failed to copy existing location: nothing registered for state [{stateKey}]");
                 return false;
             }
 
-            locationKey = stateLocations[stateKey];
+            locationKey = cd.stateLocations[stateKey];
 
             #endif
             return true;
         }
-
+        
         public override string ToString ()
         {
             return $"Volume search from state: {stateKey}";
         }
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaLocationTagFilter : IDataBlockAreaLocationProvider
     {
         [PropertyOrder (-1)]
         public bool includeOverlaps = false;
-
+        
         [PropertyOrder (-1)]
         [DictionaryKeyDropdown ("@DataShortcuts.sim.combatLocationTags")]
         public SortedDictionary<string, bool> tagRequirements = new SortedDictionary<string, bool> { { "example", true } };
 
         [DropdownReference]
         public List<ICombatPositionValidationFunction> filters;
-
+        
         private static List<DataBlockAreaLocationTagged> locationsFoundIntermediate = new List<DataBlockAreaLocationTagged> ();
         private static List<DataBlockAreaLocationTagged> locationsFound = new List<DataBlockAreaLocationTagged> ();
 
-        public bool TryGetLocationData (string stateKeyResolved, HashSet<string> keysOccupied, SortedDictionary<string, string> stateLocations, out string locationKey)
+        public bool TryGetLocationData 
+        (
+            CombatDescription cd, 
+            DataContainerCombatArea area, 
+            string stateKeyResolved, 
+            HashSet<string> keysOccupied, 
+            out string locationKey
+        )
         {
             locationKey = null;
 
@@ -499,19 +467,12 @@ namespace PhantomBrigade.Data
 
             if (!Application.isPlaying)
                 return false;
-
+            
             string context = $"State {stateKeyResolved} resolving location";
-
+ 
             if (tagRequirements == null || tagRequirements.Count == 0)
             {
                 Debug.LogWarning ($"{context} | Failed tag search: no tag filter provided");
-                return false;
-            }
-
-            var area = ScenarioUtility.GetCurrentArea ();
-            if (area == null)
-            {
-                Debug.LogWarning ($"{context} | Failed tag search: no current area found");
                 return false;
             }
 
@@ -520,11 +481,11 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"{context} | Failed tag search: area {area.key} has no locations");
                 return false;
             }
-
+            
             var keysOccupiedPresent = keysOccupied != null && keysOccupied.Count > 0;
             locationsFound.Clear ();
             locationsFoundIntermediate.Clear ();
-
+            
             bool log = DataShortcuts.sim.logScenarioGeneration;
             if (log)
                 Debug.Log ($"{context} | Tag search: {tagRequirements.ToStringFormattedKeyValuePairs ()} | Locations: {area.locationsProc.Count}");
@@ -543,7 +504,7 @@ namespace PhantomBrigade.Data
                 var locationCandidate = kvp.Value;
                 if (locationCandidate == null || locationCandidate.data == null)
                     continue;
-
+                
                 bool invalid = false;
                 var tagsInLocation = locationCandidate.tags;
                 bool tagsInLocationPresent = tagsInLocation != null;
@@ -568,7 +529,7 @@ namespace PhantomBrigade.Data
 
                 locationsFoundIntermediate.Add (locationCandidate);
             }
-
+            
             if (log)
                 Debug.Log ($"{context} | Tag search found {locationsFoundIntermediate.Count} intermediate candidates: {locationsFoundIntermediate.ToStringFormatted (toStringOverride: (x) => x.key)}");
 
@@ -576,19 +537,19 @@ namespace PhantomBrigade.Data
             {
                 var locationCandidateKey = locationCandidate.key;
                 var locationPoint = locationCandidate.data.point;
-
+                
                 // Scan for overlaps with already allocated locations
                 if (keysOccupiedPresent && !includeOverlaps)
                 {
                     bool overlap = false;
                     var radiusCandidate = locationCandidate.data.GetRadius ();
-
+                    
                     foreach (var keyOccupied in keysOccupied)
                     {
                         var locationOccupiedFound = area.locationsProc.TryGetValue (keyOccupied, out var locationOccupied);
                         if (!locationOccupiedFound || locationOccupied == null || locationOccupied.data == null)
                             continue;
-
+                        
                         var radiusOccupied = locationOccupied.data.GetRadius ();
                         var threshold = radiusCandidate + radiusOccupied;
                         var dist = Vector3.Distance (locationOccupied.data.point, locationPoint);
@@ -613,7 +574,7 @@ namespace PhantomBrigade.Data
                         if (function == null)
                             continue;
 
-                        bool valid = function.IsPositionValid (locationPoint, context);
+                        bool valid = function.IsPositionValid (cd, locationPoint, context);
                         if (!valid)
                         {
                             filtersPassed = false;
@@ -628,7 +589,7 @@ namespace PhantomBrigade.Data
                         continue;
                     }
                 }
-
+                
                 locationsFound.Add (locationCandidate);
             }
 
@@ -638,7 +599,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"{context} | All {locationsFoundIntermediate.Count} tag-compatible locations were discarded based on additional filtering.");
                 return false;
             }
-
+            
             var location = locationsFound.GetRandomEntry ();
             var data = location.data;
             if (data == null || string.IsNullOrEmpty (location.key))
@@ -646,38 +607,45 @@ namespace PhantomBrigade.Data
 
             if (log)
                 Debug.Log ($"{context} | Final selection: {location.key} | Candidates: {locationsFound.ToStringFormatted (toStringOverride: (x) => x.key)}");
-
+                    
             locationKey = location.key;
 
             #endif
             return true;
         }
-
+        
         public override string ToString ()
         {
             return $"Location search by tag filter: {tagRequirements.ToStringFormattedKeyValuePairs ()}";
         }
-
+        
         #region Editor
         #if UNITY_EDITOR
 
         [ShowInInspector, PropertyOrder (100)]
         private DataEditor.DropdownReferenceHelper helper;
-
-        public DataBlockAreaLocationTagFilter () =>
+        
+        public DataBlockAreaLocationTagFilter () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
-
+        
         #endif
         #endregion
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaLocationKey : IDataBlockAreaLocationProvider
     {
         [PropertyOrder (-1)]
         public string key;
 
-        public bool TryGetLocationData (string stateKeyResolved, HashSet<string> keysOccupied, SortedDictionary<string, string> stateLocations, out string locationKey)
+        public bool TryGetLocationData 
+        (
+            CombatDescription cd, 
+            DataContainerCombatArea area, 
+            string stateKeyResolved, 
+            HashSet<string> keysOccupied, 
+            out string locationKey
+        )
         {
             locationKey = null;
 
@@ -686,18 +654,11 @@ namespace PhantomBrigade.Data
             if (!Application.isPlaying || string.IsNullOrEmpty (key))
                 return false;
 
-            var area = ScenarioUtility.GetCurrentArea ();
-            if (area == null)
-            {
-                Debug.LogWarning ($"State {stateKeyResolved} resolving location | Failed to get location {key}: no current area found");
-                return false;
-            }
-
-            var locationFound =
-                area.locationsProc != null &&
-                !string.IsNullOrEmpty (key) &&
-                area.locationsProc.TryGetValue (key, out var location) &&
-                location != null &&
+            var locationFound = 
+                area.locationsProc != null && 
+                !string.IsNullOrEmpty (key) && 
+                area.locationsProc.TryGetValue (key, out var location) && 
+                location != null && 
                 location.data != null;
 
             if (!locationFound)
@@ -705,7 +666,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"State {stateKeyResolved} resolving location | Failed to get location {key}: no such location is registered in area {area.key}");
                 return false;
             }
-
+            
             var keysOccupiedPresent = keysOccupied != null && keysOccupied.Count > 0;
             if (keysOccupiedPresent && keysOccupied.Contains (key))
             {
@@ -718,13 +679,13 @@ namespace PhantomBrigade.Data
             #endif
             return true;
         }
-
+        
         public override string ToString ()
         {
             return $"Location search by key: {key}";
         }
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockAreaLocation
     {
@@ -734,12 +695,12 @@ namespace PhantomBrigade.Data
         // [HideLabel]
         [PropertyRange (-180f, 180f)]
         public float rotation;
-
+        
         // [HideLabel]
         [PropertyRange (1f, 300f)]
         [LabelText ("@rect ? \"Size (X)\" : \"Radius\"")]
         public float sizeX = 9f;
-
+        
         // [HideLabel]
         [ShowIf ("rect")]
         [PropertyRange (1f, 300f)]
@@ -774,18 +735,18 @@ namespace PhantomBrigade.Data
         [Button ("Grab from camera"), ButtonGroup]
         private void GrabFromCamera ()
         {
-            if (UnityEditor.SceneView.lastActiveSceneView == null || UnityEditor.SceneView.lastActiveSceneView.camera == null)
+            if (UnityEditor.SceneView.lastActiveSceneView == null || UnityEditor.SceneView.lastActiveSceneView.camera == null) 
                 return;
 
             var c = UnityEditor.SceneView.lastActiveSceneView.camera;
             var t = c.transform;
-
+            
             position = t.position;
             position = new Vector3 ((float)Math.Round (position.x, 2), (float)Math.Round (position.y, 2), (float)Math.Round (position.z, 2));
-
+            
             rotation = t.rotation.eulerAngles;
             rotation = new Vector3 ((float)Math.Round (rotation.x, 2), (float)Math.Round (rotation.y, 2), (float)Math.Round (rotation.z, 2));
-
+            
             fov = c.fieldOfView;
         }
 
@@ -793,23 +754,23 @@ namespace PhantomBrigade.Data
         private void ApplyToCamera ()
         {
             var scene = UnityEditor.SceneView.lastActiveSceneView;
-            if (scene == null || scene.camera == null)
+            if (scene == null || scene.camera == null) 
                 return;
-
+            
             var c = scene.camera;
             var t = c.transform;
-
+            
             // Debug.Log ($"Scene info before application\nSize: {scene.size} | Pivot / camera position: {scene.pivot} / {t.position} | Rotation / camera rotation: {scene.rotation.eulerAngles} / {t.rotation.eulerAngles}");
-
+            
             t.position = position;
             t.rotation = Quaternion.Euler (rotation);
-
+            
             scene.cameraSettings.fieldOfView = c.fieldOfView;
             scene.AlignViewToObject (t);
-
+            
             // Debug.Log ($"Scene info after application\nSize: {scene.size} | Pivot / camera position: {scene.pivot} / {t.position} | Rotation / camera rotation: {scene.rotation.eulerAngles} / {t.rotation.eulerAngles}");
         }
-
+        
         #endif
         #endregion
     }
@@ -818,7 +779,7 @@ namespace PhantomBrigade.Data
     {
         public float duration;
     }
-
+    
     public class DataBlockIntroCameraFinal
     {
         public TargetFromSource target = new TargetFromSource ();
@@ -829,25 +790,25 @@ namespace PhantomBrigade.Data
 
     public class DataBlockAreaIntro
     {
-        [YamlIgnore, ShowInInspector, ToggleGroup ("preview", "Preview")]
+        [YamlIgnore, ShowInInspector, ToggleGroup ("preview", "Preview")] 
         [OnValueChanged ("UpdatePreview")]
         private bool preview = false;
-
-        [YamlIgnore, ShowInInspector, ToggleGroup ("preview"), PropertyRange (0, "GetShotIndexLimit")]
+        
+        [YamlIgnore, ShowInInspector, ToggleGroup ("preview"), PropertyRange (0, "GetShotIndexLimit")] 
         [OnValueChanged ("UpdatePreview")]
         private int previewShot = 0;
-
-        [YamlIgnore, ShowInInspector, ToggleGroup ("preview"), PropertyRange (0f, 1f)]
+        
+        [YamlIgnore, ShowInInspector, ToggleGroup ("preview"), PropertyRange (0f, 1f)] 
         [OnValueChanged ("UpdatePreview")]
         private float previewProgress = 0f;
-
-
+        
+        
         public DataBlockIntroCameraFinal cameraInputsFinal;
-
+        
         [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = "@new DataBlockAreaShot ()")]
         [OnValueChanged ("UpdatePreview", true)]
         public List<DataBlockAreaShot> shots = new List<DataBlockAreaShot> ();
-
+        
         #region Editor
         #if UNITY_EDITOR
 
@@ -861,21 +822,21 @@ namespace PhantomBrigade.Data
             var shot = shots[previewShot];
             if (shot == null || shot.from == null || shot.to == null)
                 return;
-
+            
             var scene = UnityEditor.SceneView.lastActiveSceneView;
-            if (scene == null || scene.camera == null)
+            if (scene == null || scene.camera == null) 
                 return;
 
             var progress = Mathf.Clamp01 (previewProgress);
             var position = Vector3.Lerp (shot.from.position, shot.to.position, progress);
             var rotation = Quaternion.Lerp (Quaternion.Euler (shot.from.rotation), Quaternion.Euler (shot.to.rotation), progress);
-
+            
             var c = scene.camera;
             var t = c.transform;
-
+            
             t.position = position;
             t.rotation = rotation;
-
+            
             scene.cameraSettings.fieldOfView = c.fieldOfView;
             scene.AlignViewToObject (t);
         }
@@ -884,19 +845,19 @@ namespace PhantomBrigade.Data
 
         #endregion
     }
-
+    
     public class DataBlockAreaShot
     {
         [PropertyRange (0.1f, 10f)]
         public float duration = 2f;
         public LeanTweenType easing = LeanTweenType.linear;
-
+        
         [HorizontalGroup]
         public bool fadeOnEnd;
-
+        
         [HorizontalGroup, ShowIf ("fadeOnEnd"), HideLabel]
         public float fadeDuration = 0.5f;
-
+        
         public DataBlockAreaShotKeyframe from = new DataBlockAreaShotKeyframe ();
         public DataBlockAreaShotKeyframe to = new DataBlockAreaShotKeyframe ();
 
@@ -906,13 +867,13 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
-
+    
     [Serializable]
     public class DataBlockAreaLocationTagged
     {
         [YamlIgnore, HideInInspector, NonSerialized]
         public string key;
-
+        
         [ValueDropdown ("GetTags")]
         public HashSet<string> tags = new HashSet<string> ();
 
@@ -924,7 +885,7 @@ namespace PhantomBrigade.Data
 
         private IEnumerable<string> GetTags =>
             DataShortcuts.sim.combatLocationTags;
-
+        
         [Button ("@GetSelectLabel"), PropertyOrder (-2), ButtonGroup ("T")]
         public void SelectForEditing ()
         {
@@ -941,7 +902,7 @@ namespace PhantomBrigade.Data
         {
             if (data == null)
                 return;
-
+        
             data.point = AreaUtility.SnapPointToGrid (data.point);
             UnityEditor.SceneView.RepaintAll ();
         }
@@ -951,17 +912,17 @@ namespace PhantomBrigade.Data
         {
             if (data == null)
                 return;
-
+            
             data.point = AreaUtility.GroundPoint (data.point);
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         [Button ("Remove"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Remove ()
         {
-            if
+            if 
             (
-                string.IsNullOrEmpty (key) ||
+                string.IsNullOrEmpty (key) || 
                 DataMultiLinkerCombatArea.selectedArea?.locations == null ||
                 !DataMultiLinkerCombatArea.selectedArea.locations.ContainsValue (this)
             )
@@ -971,7 +932,7 @@ namespace PhantomBrigade.Data
 
             DataMultiLinkerCombatArea.selectedArea.locations.Remove (key);
         }
-
+        
         [ShowIf ("@DataMultiLinkerCombatArea.selectedArea != null")]
         [Button ("Rename/Duplicate"), PropertyOrder (-2)]
         public void Duplicate (bool duplicate, string keyNew)
@@ -985,7 +946,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Key {keyNew} is already taken, can't duplicate");
                 return;
             }
-
+            
             if (duplicate)
             {
                 var copy = UtilitiesYAML.CloneThroughYaml (this);
@@ -999,10 +960,10 @@ namespace PhantomBrigade.Data
                 DataMultiLinkerCombatArea.selectedArea.locations.Add (keyNew, this);
                 key = keyNew;
             }
-
+            
             UnityEditor.SceneView.RepaintAll ();
         }
-
+        
         [Button ("Tag as escape"), PropertyOrder (-1), ButtonGroup ("A")]
         public void TagAsEscape ()
         {
@@ -1015,21 +976,21 @@ namespace PhantomBrigade.Data
                     break;
                 }
             }
-
+            
             tags = new HashSet<string> ();
             tags.Add ("obj_escape");
 
             if (tagDir != null)
                 tags.Add (tagDir);
         }
-
+        
         [Button ("Tag as def. trigger"), PropertyOrder (-1), ButtonGroup ("A")]
         public void TagAsDefenseTrigger ()
         {
             tags = new HashSet<string> ();
             tags.Add ("obj_defense_navigable");
         }
-
+        
         [Button ("Tag as def. origin"), PropertyOrder (-1), ButtonGroup ("A")]
         public void TagAsDefenseOrigin ()
         {
@@ -1048,28 +1009,38 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
-
+    
     [Serializable]
     public class DataBlockAreaField
     {
         [YamlIgnore, HideInInspector, NonSerialized]
         public string key;
-
+        
         public string type;
 
         public bool visible = true;
-
+        
         public Vector3 origin;
 
         public Vector3 size;
 
+        public Vector4 force;
+
         // [HideLabel]
         [PropertyRange (-180f, 180f)]
         public float rotation;
+        
+        public bool IsIntersectingPoint (Vector3 point)
+        {
+            Vector3 half = size * 0.5f;
+            return point.x >= origin.x - half.x && point.x <= origin.x + half.x &&
+                   point.y >= origin.y - size.y && point.y <= origin.y &&
+                   point.z >= origin.z - half.z && point.z <= origin.z + half.z;
+        }
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         [Button ("@GetSelectLabel"), PropertyOrder (-2), ButtonGroup ("T")]
         public void SelectForEditing ()
         {
@@ -1080,13 +1051,13 @@ namespace PhantomBrigade.Data
         }
 
         private string GetSelectLabel => DataMultiLinkerCombatArea.selectedField == this ? "Deselect" : "Select";
-
+        
         [Button ("Remove"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Remove ()
         {
-            if
+            if 
             (
-                string.IsNullOrEmpty (key) ||
+                string.IsNullOrEmpty (key) || 
                 DataMultiLinkerCombatArea.selectedArea?.fields == null ||
                 !DataMultiLinkerCombatArea.selectedArea.fields.Contains (this)
             )
@@ -1096,14 +1067,14 @@ namespace PhantomBrigade.Data
 
             DataMultiLinkerCombatArea.selectedArea.fields.Remove (this);
         }
-
+        
         [ShowIf ("@DataMultiLinkerCombatArea.selectedArea != null")]
         [Button ("Duplicate"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Duplicate ()
         {
             if (DataMultiLinkerCombatArea.selectedField == null)
                 return;
-
+            
             var copy = UtilitiesYAML.CloneThroughYaml (this);
             DataMultiLinkerCombatArea.selectedArea.fields.Add (copy);
             DataMultiLinkerCombatArea.selectedField = copy;
@@ -1113,29 +1084,29 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
-
+    
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockEnvironmentSegment
     {
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         [AssetsOnly]
         public GameObject prefab;
-
+        
         [ReadOnly]
         public string path;
 
         public void OnBeforeSerialization ()
         {
-            #if UNITY_EDITOR
+            #if UNITY_EDITOR && !PB_MODSDK
             if (prefab == null)
             {
-                // path = string.Empty;
+                path = string.Empty;
                 return;
             };
 
             var fullPath = UnityEditor.AssetDatabase.GetAssetPath (prefab);
             string extension = System.IO.Path.GetExtension (fullPath);
-
+            
             fullPath = fullPath.ReplaceFirst ("Assets/Resources/", string.Empty);
             fullPath = fullPath.Substring(0, fullPath.Length - extension.Length);
             path = fullPath;
@@ -1144,48 +1115,141 @@ namespace PhantomBrigade.Data
 
         public void OnAfterDeserialization ()
         {
+            #if !PB_MODSDK
             prefab = !string.IsNullOrEmpty (path) ? Resources.Load<GameObject> (path) : null;
+            #endif
         }
+    }
+
+    public class DataBlockAreaForce
+    {
+        
+    }
+
+    public class DataBlockAreaProjectileCeiling
+    {
+        public bool guidedOnly;
+        
+        public float height;
+
+        [ValueDropdown("@DataMultiLinkerAssetPools.data.Keys"), InlineButtonClear]
+        public string fxKey;
+        
+        public bool fxRotationCustom = false;
+        
+        [ShowIf ("fxRotationCustom")]
+        public Vector3 fxRotation;
     }
 
     public class DataBlockAreaCore
     {
         public bool backgroundTerrainUsed = true;
-        public bool altitudeChecked = true;
         public bool sliceShadingUsed = false;
 
+        [NonSerialized, YamlIgnore, ShowInInspector, ShowIf ("sliceShadingUsed")]
+        private bool sliceLiveRefresh = false;
+        
+        [OnValueChanged ("RefreshSliceShading", true)]
         [ShowIf ("sliceShadingUsed")]
+        [PropertyTooltip ("X: height, Y: shadow size, Z: glow size, W: inversion")]
         public Vector4 sliceShadingInputs = new Vector4 (0f, 0f, 0f, 0f);
-    }
 
+        [OnValueChanged ("RefreshSliceShading", true)]
+        [ShowIf ("sliceShadingUsed")]
+        public Color sliceColor = new Color (0f, 0f, 0f, 0f);
+
+        [DropdownReference (true)]
+        public DataBlockVector2 cameraHeightRange;
+        
+        [DropdownReference (true)]
+        public DataBlockFloat timeCustom;
+        
+        [DropdownReference (true)]
+        public CombatChangeFogCustom fogCustom;
+        
+        [DropdownReference (true)]
+        public DataBlockAreaProjectileCeiling projectileCeiling;
+
+        private void RefreshSliceShading ()
+        {
+            if (!sliceLiveRefresh)
+                return;
+            
+            var sceneHelper = CombatSceneHelper.ins;
+            if (sceneHelper == null)
+                return;
+            
+            var materialHelper = sceneHelper.materialHelper;
+            if (materialHelper == null)
+                return;
+            
+            if (sliceShadingUsed)
+            {
+                materialHelper.sliceInputs = sliceShadingInputs;
+                materialHelper.sliceColor = sliceColor;
+                materialHelper.sliceShadingEnabled = true;
+            }
+            else
+                materialHelper.sliceShadingEnabled = false;
+            materialHelper.ApplyGlobals ();
+        }
+        
+        #region Editor
+        #if UNITY_EDITOR
+
+        [ShowInInspector, PropertyOrder (100)]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockAreaCore () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        #endif
+        #endregion
+    }
+    
     public class DataBlockAreaAtmosphereSettings
     {
         public float groundHeight = 0f;
-        public Vector4 destructionMapping = new Vector4 (10, 20, 0, 1);
-    }
+        
+        [PropertyTooltip ("X-Y (amount of destroyed blocks) mapped to a 0-1 factor that is used to interpolate between Z-W (atmospheric smoke intensity)")]
+        public Vector4 destructionMapping = new Vector4(10, 20, 0, 1);
 
+        [ShowInInspector, ReadOnly, PropertyTooltip ("Number of destructible points reported by the AreaManager for the currently loaded level")]
+        private int destructiblePoints
+        {
+            get
+            {
+                var sceneHelper = CombatSceneHelper.ins;
+                if (sceneHelper == null || sceneHelper.areaManager == null)
+                    return -1;
+
+                var am = sceneHelper.areaManager;
+                return am.destructiblePointCount;
+            }
+        }
+    }
+    
     public class DataBlockAreaContent
     {
         [LabelText ("Path")]
-        [PropertyTooltip ("$" + nameof(pathLast))]
         [YamlIgnore, ShowInInspector, DisplayAsString]
         public string pathLast = null;
 
         [LabelText ("Size")]
         [YamlIgnore, ShowInInspector, DisplayAsString]
         public string memoryLoaded = null;
-
+        
         [BoxGroup]
         [YamlIgnore, ShowInInspector]
         public AreaDataCore core;
 
         [YamlIgnore, ShowInInspector]
         public Dictionary<string, ILevelDataChannel> channels;
-
+        
         [YamlIgnore, HideInInspector]
         public DataContainerCombatArea parent;
     }
-
+    
     [HideReferenceObjectPicker]
     public class DataContainerCombatAreaParent
     {
@@ -1195,8 +1259,8 @@ namespace PhantomBrigade.Data
         public string key;
 
         [YamlIgnore, ReadOnly, HideInInspector]
-        private string hierarchyProperty => DataMultiLinkerCombatArea.presentation.showHierarchy ? hierarchy : string.Empty;
-
+        private string hierarchyProperty => DataMultiLinkerCombatArea.Presentation.showHierarchy ? hierarchy : string.Empty;
+        
         [YamlIgnore, ReadOnly, HideInInspector]
         public string hierarchy;
 
@@ -1205,7 +1269,7 @@ namespace PhantomBrigade.Data
 
         private static Color colorError = Color.Lerp (Color.red, Color.white, 0.5f);
         private static Color colorNormal = Color.white;
-
+        
         private Color GetKeyColor ()
         {
             if (string.IsNullOrEmpty (key))
@@ -1214,11 +1278,11 @@ namespace PhantomBrigade.Data
             bool present = DataMultiLinkerCombatArea.data.ContainsKey (key);
             return present ? colorNormal : colorError;
         }
-
+        
         #endif
         #endregion
     }
-
+    
     [Serializable][LabelWidth (180f)]
     public class DataContainerCombatArea : DataContainer, IDataContainerTagged
     {
@@ -1226,159 +1290,161 @@ namespace PhantomBrigade.Data
         [ToggleLeft]
         public bool hidden = false;
 
-
+        
         [GUIColor ("GetSelectedColor")]
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false, CustomAddFunction = "@new DataContainerCombatAreaParent ()")]
         [DropdownReference]
         public List<DataContainerCombatAreaParent> parents = new List<DataContainerCombatAreaParent> ();
-
+        
         [GUIColor ("GetSelectedColor")]
         [YamlIgnore, LabelText ("Children"), ReadOnly]
         [ShowIf ("@children != null && children.Count > 0")]
         [ListDrawerSettings (DefaultExpandedState = false)]
         public List<string> children = new List<string> ();
-
-
+        
+        
         [DropdownReference (true)]
         [ValueDropdown ("@TextureManager.GetExposedTextureKeys (TextureGroupKeys.CombatAreas)"), HideLabel]
         [OnInspectorGUI ("@DropdownUtils.DrawTexturePreview ($value, TextureGroupKeys.CombatAreas, 128)", false)]
         public string image;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible"), HideLabel]
         [OnInspectorGUI ("@DropdownUtils.DrawTexturePreview ($value, TextureGroupKeys.CombatAreas, 128)", false)]
         public string imageProc;
-
-
+        
+        
         [GUIColor ("GetSelectedColor")]
         [DropdownReference (true)]
         public DataBlockAreaCore core;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
-        public DataBlockAreaCore coreProc;
-
-
+        public DataBlockAreaCore coreProc; 
+        
+        
         [GUIColor ("GetSelectedColor")]
         [DropdownReference (true)]
         public DataBlockAreaContent content;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public DataBlockAreaContent contentProc;
-
-
+        
+        
         [DropdownReference (true)]
         public DataBlockAreaAtmosphereSettings atmosphere;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public DataBlockAreaAtmosphereSettings atmosphereProc;
-
-
+        
+        
         [DropdownReference]
         [GUIColor (0.85f, 0.9f, 0.8f, 1.0f)]
         [ValueDropdown ("GetAreaTags")]
         public HashSet<string> tags = new HashSet<string> ();
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public HashSet<string> tagsProc = new HashSet<string> ();
-
-
+        
+        
         [DropdownReference]
         [ShowIf ("AreSpawnsVisible")]
         [GUIColor (0.98f, 1f, 0.91f)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         [OnValueChanged ("RefreshParentsInSpawnGroups", true)]
         public SortedDictionary<string, DataBlockAreaSpawnGroup> spawnGroups;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("@IsInheritanceVisible && AreSpawnsVisible")]
         public SortedDictionary<string, DataBlockAreaSpawnGroup> spawnGroupsProc;
-
-
+        
+        
         [DropdownReference]
         [ShowIf ("AreLocationsVisible")]
         [GUIColor (1f, 0.98f, 0.9f)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         [OnValueChanged ("RefreshParentsInLocations", true)]
         public SortedDictionary<string, DataBlockAreaLocationTagged> locations;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("@IsInheritanceVisible && AreLocationsVisible")]
         public SortedDictionary<string, DataBlockAreaLocationTagged> locationsProc;
-
-
+        
+        
         [DropdownReference]
         [ShowIf ("AreVolumesVisible")]
         [GUIColor (1f, 0.945f, 0.929f)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         [OnValueChanged ("RefreshParentsInVolumes", true)]
         public SortedDictionary<string, DataBlockAreaVolumeTagged> volumes;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("@IsInheritanceVisible && AreVolumesVisible")]
         public SortedDictionary<string, DataBlockAreaVolumeTagged> volumesProc;
-
-
+        
+        
         [DropdownReference]
         [ShowIf ("AreFieldsVisible")]
         [GUIColor (0.95f, 0.95f, 1.0f, 1.0f)]
         [ListDrawerSettings (DefaultExpandedState = false)]
         public List<DataBlockAreaField> fields;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("@IsInheritanceVisible && AreFieldsVisible")]
         public List<DataBlockAreaField> fieldsProc;
-
-
+        
+        
         [DropdownReference]
         [ShowIf ("AreWaypointsVisible")]
         [GUIColor (1f, 0.95f, 1.0f, 1.0f)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         [OnValueChanged ("RefreshParentsInSpawnGroups", true)]
         public SortedDictionary<string, DataBlockAreaWaypointGroup> waypointGroups;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("@IsInheritanceVisible && AreWaypointsVisible")]
         public SortedDictionary<string, DataBlockAreaWaypointGroup> waypointGroupsProc;
-
-
+        
+        
         [DropdownReference]
         public List<DataBlockScenarioBriefingGroup> briefingGroupsInjected;
 
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public List<DataBlockScenarioBriefingGroup> briefingGroupsInjectedProc;
-
-
+        
+        
         [DropdownReference (true)]
         public DataBlockAreaIntro intro;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public DataBlockAreaIntro introProc;
-
-
+        
+        
         [DropdownReference (true)]
         public DataBlockEnvironmentBoundary boundary;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public DataBlockEnvironmentBoundary boundaryProc;
-
-
+        
+        
         [DropdownReference]
         public List<DataBlockEnvironmentSegment> segments;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public List<DataBlockEnvironmentSegment> segmentsProc;
 
-
+        
         [DropdownReference (true)]
-        public DataBlockCombatBiomeFilter biomeFilter;
-
+        public DataBlockOverworldLandscapeBiome biomeFilter;
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
-        public DataBlockCombatBiomeFilter biomeFilterProc;
-
-
+        public DataBlockOverworldLandscapeBiome biomeFilterProc;
+        
+        
         [DropdownReference (true)]
         public List<DataBlockProvinceScenarioChange> scenarioChanges;
-
+        
         [YamlIgnore, ReadOnly, HideDuplicateReferenceBox, ShowIf ("IsInheritanceVisible")]
         public List<DataBlockProvinceScenarioChange> scenarioChangesProc;
 
+        [YamlIgnore, ReadOnly]
+        public Vector3 positionCenter = new Vector3 (150f, 0f, 150f);
+        
 
-
-        public HashSet<string> GetTags (bool processed) =>
+        public HashSet<string> GetTags (bool processed) => 
             processed ? tagsProc : tags;
 
         public bool IsHidden () => hidden;
@@ -1386,12 +1452,12 @@ namespace PhantomBrigade.Data
         public override void OnBeforeSerialization ()
         {
             base.OnBeforeSerialization ();
-
+            
             SaveLevelContent ();
-
+            
             if (boundary != null)
                 boundary.OnBeforeSerialization ();
-
+            
             if (segments != null)
             {
                 foreach (var segment in segments)
@@ -1404,7 +1470,7 @@ namespace PhantomBrigade.Data
 
         public void OnBeforeProcessing ()
         {
-
+            
         }
 
         public override void OnAfterDeserialization (string key)
@@ -1425,10 +1491,13 @@ namespace PhantomBrigade.Data
                 {
                     if (segment == null)
                         continue;
-
+                    
                     segment.OnAfterDeserialization ();
-                    // if (segment.prefab == null)
-                    //     Debug.LogWarning ($"Area {key} | Failed to load environment prefab from path {segment.path}");
+                    
+                    #if !PB_MODSDK
+                    if (segment.prefab == null)
+                        Debug.LogWarning ($"Area {key} | Failed to load environment prefab from path {segment.path}");
+                    #endif
                 }
             }
 
@@ -1442,27 +1511,27 @@ namespace PhantomBrigade.Data
         {
             if (content == null)
                 return;
-
+            
             content.pathLast = null;
             content.memoryLoaded = null;
-
+            
             content.core = null;
             content.channels = null;
 
             // Load root config. To support cases where a config override mod overrides that config, try DataContainer.path first
             var contentPath = $"{path}{key}/";
             var contentCore = UtilitiesYAML.LoadDataFromFile<AreaDataCore> (contentPath, "core.yaml", false);
-
+            
             // If root config failed to load and DB path we used wasn't coming from the main DB, attempt a fallback from another path
             if (contentCore == null && !contentPath.Contains (DataMultiLinkerCombatArea.path))
             {
                 var contentPathFallback = $"{DataMultiLinkerCombatArea.path}{key}/";
                 Debug.Log ($"Area {key} | Switched to loading content to source folder\n- Failed path: {contentPath}\n- Fallback path: {contentPathFallback}");
-
+                
                 contentPath = contentPathFallback;
                 contentCore = UtilitiesYAML.LoadDataFromFile<AreaDataCore> (contentPath, "core.yaml", false);
             }
-
+            
             if (contentCore == null)
             {
                 Debug.LogWarning ($"Area {key} | Failed to load core level data from {contentPath}");
@@ -1473,10 +1542,10 @@ namespace PhantomBrigade.Data
             content.pathLast = contentPath;
             content.core = contentCore;
 
-            long m1 = GC.GetTotalMemory (true);
+            long m1 = GC.GetTotalMemory (false);
 
             LevelContentHelper.LoadDataFromDisk (content, contentPath);
-
+            
             long m2 = GC.GetTotalMemory (false);
             content.memoryLoaded = UtilityString.FormatByteCount (m2 - m1);
 
@@ -1490,7 +1559,7 @@ namespace PhantomBrigade.Data
 
             content.core = null;
             content.channels = null;
-
+            
             var sceneHelper = CombatSceneHelper.ins;
             if (sceneHelper == null || sceneHelper.areaManager == null)
                 return;
@@ -1502,16 +1571,16 @@ namespace PhantomBrigade.Data
                 damageRestrictionDepth = am.damageRestrictionDepth,
                 damagePenetrationDepth = am.damagePenetrationDepth,
             };
-
+            
             LevelContentHelper.LoadDataFromScene (content);
         }
-
+        
 
         private void OnAfterLevelContentLoad ()
         {
-
+            
         }
-
+        
         private void SaveLevelContent ()
         {
             if (content == null || content.channels == null || content.core == null)
@@ -1519,9 +1588,9 @@ namespace PhantomBrigade.Data
 
             // Save root config
             var databasePath = DataMultiLinkerCombatArea.path;
-            var contentPath = DataPathHelper.GetCombinedCleanPath (databasePath, key) + "/";
+            var contentPath = $"{databasePath}{key}/";
             UtilitiesYAML.SaveDataToFile (contentPath, "core.yaml", content.core);
-
+            
             // Save channels
             LevelContentHelper.SaveData (content, contentPath);
         }
@@ -1530,40 +1599,58 @@ namespace PhantomBrigade.Data
         {
             if (string.IsNullOrEmpty (key))
                 return false;
-
+            
             var sceneHelper = CombatSceneHelper.ins;
             if (sceneHelper == null)
                 return false;
-
+            
             if (contentProc == null || contentProc.channels == null || contentProc.core == null)
             {
                 Debug.LogWarning ($"Area {key} has no level content and can't be applied to scene");
                 return false;
             }
-
+            
             LevelContentHelper.ApplyDataToScene (contentProc);
 
             bool backgroundTerrainUsed = coreProc != null && coreProc.backgroundTerrainUsed;
             sceneHelper.boundary.gameObject.SetActive (backgroundTerrainUsed);
             if (backgroundTerrainUsed)
                 sceneHelper.LoadBoundary (boundaryProc);
-
+                            
             if (sceneHelper.materialHelper != null)
                 sceneHelper.materialHelper.ApplyAll ();
-
-            sceneHelper.segmentHelper.LoadSegments (segments);
-            sceneHelper.fieldHelper.LoadFields (fields);
+            
+            sceneHelper.segmentHelper.LoadSegments (segmentsProc);
+            sceneHelper.fieldHelper.LoadFields (fieldsProc);
+            
+            if (sceneHelper.background != null)
+            {
+                if (backgroundTerrainUsed)
+                    sceneHelper.background.Rebuild ("default");
+                else
+                    sceneHelper.background.RebuildOnlyBoundaryDecal ();
+            }
 
             var materialHelper = sceneHelper.materialHelper;
             if (coreProc != null && coreProc.sliceShadingUsed)
             {
                 materialHelper.sliceInputs = coreProc.sliceShadingInputs;
+                materialHelper.sliceColor = coreProc.sliceColor;
                 materialHelper.sliceShadingEnabled = true;
             }
             else
                 materialHelper.sliceShadingEnabled = false;
             materialHelper.ApplyGlobals ();
-
+            
+            #if !PB_MODSDK
+            var ambientLight = sceneHelper.ambientLight;
+            if (ambientLight != null)
+            {
+                ambientLight.gameObject.SetActive (true);
+                ambientLight.OnLevelLoad ();
+            }
+            #endif
+            
             bool additionalChangesSuccessful = OnAfterLevelContentApplication ();
             if (!additionalChangesSuccessful)
                 return false;
@@ -1575,8 +1662,8 @@ namespace PhantomBrigade.Data
         {
             return true;
         }
-
-
+        
+        
         private void RefreshParentsInSpawnGroups ()
         {
             if (spawnGroups == null)
@@ -1603,7 +1690,7 @@ namespace PhantomBrigade.Data
                 }
             }
         }
-
+        
         private void RefreshParentsInLocations ()
         {
             if (locations == null)
@@ -1640,7 +1727,7 @@ namespace PhantomBrigade.Data
         {
             if (spawnGroups == null)
                 return;
-
+            
             foreach (var kvp in spawnGroups)
             {
                 var group = kvp.Value;
@@ -1648,8 +1735,33 @@ namespace PhantomBrigade.Data
                     continue;
 
                 group.RefreshAveragePosition ();
-
             }
+        }
+        
+        public DataBlockAreaSpawnGroup GetSpawnGroup (string spawnKey, bool logIfMissing)
+        {
+            if (spawnGroupsProc == null || spawnGroupsProc.Count == 0)
+            {
+                if (logIfMissing)
+                    Debug.LogWarning ($"Failed to get spawn from area {key}: area has no spawn collection");
+                return null;
+            }
+
+            if (string.IsNullOrEmpty (spawnKey) || !spawnGroupsProc.ContainsKey (spawnKey))
+            {
+                if (logIfMissing)
+                    Debug.LogWarning ($"Failed to get spawn from area {key}: key {spawnKey} returned nothing");
+                return null;
+            }
+
+            var spawnGroup = spawnGroupsProc[spawnKey];
+            return spawnGroup;
+        }
+        
+        public Vector3 GetSpawnGroupCenter (string spawnKey, bool logIfMissing)
+        {
+            var spawnGroup = GetSpawnGroup (spawnKey, logIfMissing);
+            return spawnGroup != null ? spawnGroup.averagePosition : new Vector3 (150f, 0f, 150f);
         }
 
         public DataBlockAreaVolume GetVolume (string volumeKey)
@@ -1687,7 +1799,7 @@ namespace PhantomBrigade.Data
             var location = locationsProc[locationKey];
             return location?.data;
         }
-
+        
         public DataBlockAreaWaypointGroup GetWaypointGroup (string waypointGroupKey)
         {
             if (waypointGroupsProc == null || waypointGroupsProc.Count == 0)
@@ -1705,15 +1817,20 @@ namespace PhantomBrigade.Data
             var waypointGroup = waypointGroupsProc[waypointGroupKey];
             return waypointGroup;
         }
-
+        
+        
+        
         private void DeselectAll ()
         {
             DataMultiLinkerCombatArea.selectedArea = null;
-            #if UNITY_EDITOR
-            DataMultiLinkerCombatArea.DeselectSelections ();
-            #endif
+            DataMultiLinkerCombatArea.selectedWaypointGroup = null;
+            DataMultiLinkerCombatArea.selectedWaypoint = null;
+            DataMultiLinkerCombatArea.selectedSpawnGroup = null;
+            DataMultiLinkerCombatArea.selectedSpawnPoint = null;
+            DataMultiLinkerCombatArea.selectedLocation = null;
+            DataMultiLinkerCombatArea.selectedVolume = null;
         }
-
+        
         [HideInPlayMode]
         [GUIColor ("GetSelectedColor")]
         [Button ("@GetSelectLabel ()", ButtonSizes.Large), PropertyOrder (-3), ButtonGroup ("S")]
@@ -1721,7 +1838,7 @@ namespace PhantomBrigade.Data
         {
             if (Application.isPlaying)
                 return;
-
+            
             if (IsSelected)
                 UnloadFromScene ();
             else
@@ -1745,7 +1862,7 @@ namespace PhantomBrigade.Data
                 if (!success)
                     return false;
             }
-
+            
             DataMultiLinkerCombatArea.selectedArea = this;
             return true;
         }
@@ -1754,10 +1871,9 @@ namespace PhantomBrigade.Data
         {
             if (!IsSelected)
                 return;
-
-            Debug.Log ("Unloading selected area from scene");
+            
             DeselectAll ();
-
+            
             var sceneHelper = CombatSceneHelper.ins;
             if (sceneHelper != null)
                 sceneHelper.areaManager.UnloadArea (false);
@@ -1769,38 +1885,42 @@ namespace PhantomBrigade.Data
 
             #endif
 
-            if (CombatSceneHelper.ins != null)
+            if (sceneHelper != null)
             {
-                CombatSceneHelper.ins.DestroyTerrainMeshes ();
-                CombatSceneHelper.ins.segmentHelper.ClearSegments ();
-                CombatSceneHelper.ins.fieldHelper.ClearFields ();
+                sceneHelper.DestroyTerrainMeshes ();
+                sceneHelper.segmentHelper.ClearSegments ();
+                sceneHelper.fieldHelper.ClearFields ();
+                
+                #if !PB_MODSDK
+                sceneHelper.ambientLight.OnLevelUnload ();
+                #endif
             }
         }
-
+        
         private bool IsSelected => DataMultiLinkerCombatArea.selectedArea == this;
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
-
-        public DataContainerCombatArea () =>
+        
+        public DataContainerCombatArea () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
-        private static bool IsInheritanceVisible => DataMultiLinkerCombatArea.presentation.showInheritance;
-        private static bool AreSpawnsVisible => DataMultiLinkerCombatArea.presentation.showSpawns;
-        private static bool AreLocationsVisible => DataMultiLinkerCombatArea.presentation.showLocations;
-        private static bool AreVolumesVisible => DataMultiLinkerCombatArea.presentation.showVolumes;
-        private static bool AreFieldsVisible => DataMultiLinkerCombatArea.presentation.showFields;
-        private static bool AreWaypointsVisible => DataMultiLinkerCombatArea.presentation.showWaypoints;
-        private bool AreSelectionUtilsVisible => DataMultiLinkerCombatArea.presentation.showSelectionUtils && IsSelected;
+        private static bool IsInheritanceVisible => DataMultiLinkerCombatArea.Presentation.showInheritance;
+        private static bool AreSpawnsVisible => DataMultiLinkerCombatArea.Presentation.showSpawns;
+        private static bool AreLocationsVisible => DataMultiLinkerCombatArea.Presentation.showLocations;
+        private static bool AreVolumesVisible => DataMultiLinkerCombatArea.Presentation.showVolumes;
+        private static bool AreFieldsVisible => DataMultiLinkerCombatArea.Presentation.showFields;
+        private static bool AreWaypointsVisible => DataMultiLinkerCombatArea.Presentation.showWaypoints;
+        private bool AreSelectionUtilsVisible => DataMultiLinkerCombatArea.Presentation.showSelectionUtils && IsSelected;
 
         private static Color colorNeutral = Color.white.WithAlpha (1f);
         private static Color colorSelected = Color.HSVToRGB (0.55f, 0.3f, 1f).WithAlpha (1f);
-
+        
         private Color GetSelectedColor => IsSelected ? colorSelected : colorNeutral;
-
+        
         private string GetSelectLabel ()
         {
             if (content != null)
@@ -1818,8 +1938,8 @@ namespace PhantomBrigade.Data
                     return "Select";
             }
         }
-
-        [ShowIf (nameof(IsSelected))]
+        
+        [ShowIf ("IsSelected")]
         [Button ("Open level editor", ButtonSizes.Large), PropertyOrder (-3), ButtonGroup ("S")]
         public void OpenLevelEditor ()
         {
@@ -1827,7 +1947,7 @@ namespace PhantomBrigade.Data
             if (sceneHelper != null && sceneHelper.areaManager.gameObject != null)
                 UnityEditor.Selection.activeGameObject = sceneHelper.areaManager.gameObject;
         }
-
+        
         [ShowIf ("AreSelectionUtilsVisible")]
         [Button ("Snap all"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Snap ()
@@ -1850,7 +1970,7 @@ namespace PhantomBrigade.Data
                 }
             }
         }
-
+        
         [ShowIf ("AreSelectionUtilsVisible")]
         [Button ("Ground all"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Ground ()
@@ -1900,7 +2020,7 @@ namespace PhantomBrigade.Data
         {
             if (source == null)
                 return null;
-
+            
             var result = new AnimationCurve (source.keys);
             result.preWrapMode = source.preWrapMode;
             result.postWrapMode = source.postWrapMode;
@@ -1912,7 +2032,7 @@ namespace PhantomBrigade.Data
 
         #endif
         #endregion
-
+        
         #if PB_MODSDK
         [YamlIgnore]
         [NonSerialized]
@@ -1922,7 +2042,7 @@ namespace PhantomBrigade.Data
 
     public interface IDataBlockAreaVolumeProvider
     {
-        bool TryGetVolumeData (HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey);
+        bool TryGetVolumeData (DataContainerCombatArea area, HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey);
     }
 
     [Serializable]
@@ -1942,7 +2062,7 @@ namespace PhantomBrigade.Data
 
         private IEnumerable<string> GetTags =>
             DataShortcuts.sim.combatVolumeTags;
-
+        
         [Button ("@GetSelectLabel"), PropertyOrder (-2), ButtonGroup ("T")]
         public void SelectForEditing ()
         {
@@ -1951,13 +2071,13 @@ namespace PhantomBrigade.Data
             else
                 DataMultiLinkerCombatArea.selectedVolume = this;
         }
-
+        
         [Button ("Remove"), PropertyOrder (-2), ButtonGroup ("T")]
         public void Remove ()
         {
-            if
+            if 
             (
-                string.IsNullOrEmpty (key) ||
+                string.IsNullOrEmpty (key) || 
                 DataMultiLinkerCombatArea.selectedArea?.volumes == null ||
                 !DataMultiLinkerCombatArea.selectedArea.volumes.ContainsValue (this)
             )
@@ -1983,7 +2103,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Key {keyNew} is already taken, can't duplicate");
                 return;
             }
-
+            
             if (duplicate)
             {
                 var copy = UtilitiesYAML.CloneThroughYaml (this);
@@ -1997,7 +2117,7 @@ namespace PhantomBrigade.Data
                 DataMultiLinkerCombatArea.selectedArea.volumes.Add (keyNew, this);
                 key = keyNew;
             }
-
+            
             UnityEditor.SceneView.RepaintAll ();
         }
 
@@ -2043,7 +2163,7 @@ namespace PhantomBrigade.Data
                 Mathf.Max (1, size.z)
             );
         }
-
+        
         public void ValidateOrigin ()
         {
             origin = new Vector3Int
@@ -2058,16 +2178,16 @@ namespace PhantomBrigade.Data
         private void ValidatePoints ()
         {
             /*
-            ScenarioUtility.GetVolumeState
+            ScenarioUtility.GetVolumeState 
             (
-                this,
-                out float volumeIntegrity,
+                this, 
+                out float volumeIntegrity, 
                 out int volumePointsFull,
-                out int volumePointsDestructible,
+                out int volumePointsDestructible, 
                 out int volumePointsDestroyed
             );
             */
-
+            
             float integrity = 0f;
             int pointsFull = 0;
             int pointsDestructible = 0;
@@ -2088,7 +2208,7 @@ namespace PhantomBrigade.Data
             {
                 Vector3Int internalPositionLocal = AreaUtility.GetVolumePositionFromIndex (i, boundsLocal);
                 Vector3Int internalPositionFull = internalPositionLocal + origin;
-                int sourcePointIndex = AreaUtility.GetIndexFromInternalPosition (internalPositionFull.x, internalPositionFull.z, boundsFull.x, boundsFull.z);
+                int sourcePointIndex = AreaUtility.GetIndexFromInternalPosition (internalPositionFull, boundsFull);
 
                 // Skip if index is invalid
                 if (sourcePointIndex < 0 || sourcePointIndex >= pointsTotal)
@@ -2097,16 +2217,16 @@ namespace PhantomBrigade.Data
                 // Fetch the point, skip if it's empty
                 var sourcePoint = points[sourcePointIndex];
                 Debug.Log ($"P{i} | Local: {internalPositionLocal} | Full: {internalPositionFull} | Index: {sourcePointIndex} | State: {sourcePoint.pointState}");
-
+                
                 if (sourcePoint.pointState == AreaVolumePointState.Empty)
                     continue;
 
                 // Increment count of all non-empty points
                 pointsFull++;
-
+                
                 // Skip all points that designers specified as indestructible,
                 // or points that are indestructible due to factors like height or tileset
-                if (!sourcePoint.destructible || sourcePoint.indestructibleIndirect)
+                if (sourcePoint.indestructibleAny)
                     continue;
 
                 // Increment count of destroyed points
@@ -2139,7 +2259,7 @@ namespace PhantomBrigade.Data
     {
         public string stateKey;
 
-        public bool TryGetVolumeData (HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey)
+        public bool TryGetVolumeData (DataContainerCombatArea area, HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey)
         {
             volumeKey = null;
 
@@ -2152,7 +2272,7 @@ namespace PhantomBrigade.Data
             volumeKey = stateVolumes[stateKey];
             return true;
         }
-
+        
         public override string ToString ()
         {
             return $"Volume search from state: {stateKey}";
@@ -2164,14 +2284,14 @@ namespace PhantomBrigade.Data
     {
         // [PropertyOrder (-1)]
         // public bool ignoreConflicts;
-
+        
         [PropertyOrder (-1)]
         //[DictionaryKeyDropdown("@DataShortcuts.sim.combatVolumeTags")]
         public SortedDictionary<string, bool> tagRequirements = new SortedDictionary<string, bool> { { "example", true } };
 
         private static List<DataBlockAreaVolumeTagged> volumesFound = new List<DataBlockAreaVolumeTagged> ();
 
-        public bool TryGetVolumeData (HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey)
+        public bool TryGetVolumeData (DataContainerCombatArea area, HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey)
         {
             volumeKey = null;
 
@@ -2180,15 +2300,10 @@ namespace PhantomBrigade.Data
             if (!Application.isPlaying || tagRequirements == null || tagRequirements.Count == 0)
                 return false;
 
-            var persistent = Contexts.sharedInstance.persistent;
-            if (!persistent.hasCombatAreaKey)
-                return false;
-
-            var area = DataMultiLinkerCombatArea.GetEntry (persistent.combatAreaKey.s);
             if (area == null || area.volumesProc == null)
                 return false;
-
-            var keysOccupiedChecked = keysOccupied != null && keysOccupied.Count > 0; // !ignoreConflicts &&
+            
+            var keysOccupiedChecked = keysOccupied != null && keysOccupied.Count > 0; // !ignoreConflicts && 
             volumesFound.Clear ();
 
             foreach (var kvp in area.volumesProc)
@@ -2236,7 +2351,7 @@ namespace PhantomBrigade.Data
             #endif
             return true;
         }
-
+        
         public override string ToString ()
         {
             return $"Volume search by tag filter: {tagRequirements.ToStringFormattedKeyValuePairs ()}";
@@ -2248,11 +2363,11 @@ namespace PhantomBrigade.Data
     {
         // [PropertyOrder (-1)]
         // public bool ignoreConflicts;
-
+        
         [PropertyOrder (-1)]
         public string key;
 
-        public bool TryGetVolumeData (HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey)
+        public bool TryGetVolumeData (DataContainerCombatArea area, HashSet<string> keysOccupied, SortedDictionary<string, string> stateVolumes, out string volumeKey)
         {
             volumeKey = null;
             #if !PB_MODSDK
@@ -2260,11 +2375,6 @@ namespace PhantomBrigade.Data
             if (!Application.isPlaying || string.IsNullOrEmpty (key))
                 return false;
 
-            var persistent = Contexts.sharedInstance.persistent;
-            if (!persistent.hasCombatAreaKey)
-                return false;
-
-            var area = DataMultiLinkerCombatArea.GetEntry (persistent.combatAreaKey.s);
             if (area == null || area.volumesProc == null || !area.volumesProc.ContainsKey (key))
                 return false;
 
@@ -2272,8 +2382,8 @@ namespace PhantomBrigade.Data
             var data = volume.data;
             if (data == null)
                 return false;
-
-            var keysOccupiedChecked = keysOccupied != null && keysOccupied.Count > 0; // !ignoreConflicts &&
+            
+            var keysOccupiedChecked = keysOccupied != null && keysOccupied.Count > 0; // !ignoreConflicts && 
             if (keysOccupiedChecked && keysOccupied.Contains (key))
                 return false;
 
@@ -2289,3 +2399,4 @@ namespace PhantomBrigade.Data
         }
     }
 }
+

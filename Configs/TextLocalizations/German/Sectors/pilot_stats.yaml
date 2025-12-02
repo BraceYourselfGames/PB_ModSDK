@@ -1,0 +1,246 @@
+timeLastSync: 0
+entries:
+  crit_chance_offset__header:
+    id: 1
+    text: „Krit. Trefferchance“-Bonus
+    textEng: Crit chance bonus
+  crit_chance_offset__text:
+    id: 1
+    text: Erhöhung der Basischance für kritische Treffer. Ermöglicht es Piloten, kritische Treffer zu landen, selbst wenn sie eine Waffe benutzen, die nicht zu ihren Vorlieben passt.
+    textEng: An increase to the base critical hit chance. Can allow the pilot to make critical hits even when using a weapon not matching their preference.
+  crit_multiplier_offset__header:
+    id: 1
+    text: „Krit. Multiplikator“-Abweichung
+    textEng: Crit multiplier offset
+  crit_multiplier_offset__text:
+    id: 1
+    text: Erhöhung des Multiplikators für kritischen Basisschaden. Erhöht den Schaden jedes kritischen Treffers.
+    textEng: An increase to the base critical damage multiplier. Allows each critical hit to be more damaging.
+  fatigue__header:
+    id: 1
+    text: Erschöpfung
+    textEng: Fatigue
+  fatigue__header_max:
+    id: 2
+    text: Erschöpfungslimit
+    textEng: Fatigue limit
+  fatigue__hint:
+    id: 1
+    text: Erschöpft vom Kampf. Löst beim Maximum negative Effekte aus.
+    textEng: Exhaustion from combat. Triggers adverse effects if maxed.
+  fatigue__max_effect:
+    id: 1
+    text: Dieses Mitglied der Pilotencrew ist am Limit. Beim Einsatz im Kampf verliert es jede Runde Gesundheit und kann vielleicht Befehle nicht mehr ausführen.
+    textEng: This pilot is at their limit. If deployed into combat, they will lose health every turn and could randomly fail to perform their orders.
+  fatigue__text:
+    id: 1
+    text: Erschöpfung vom Kampf. Löst beim Maximum negative Effekte aus. Wird jedes Mal wenn das Mitglied der Crew nicht am Kampf teilnimmt um 1 verringert bis zu einem Minimum von 1. Wird nur komplett geleert wenn das Mitglied der Crew bei einer Rast der Krankenstation zugewiesen wird.
+    textEng: Exhaustion from combat. Triggers adverse effects if maxed. Reduced towards neutral every time a pilot is not deployed into combat. Can only be fully cleared by assigning the pilot to the medbay during a camp stop.
+  hp__header:
+    id: 1
+    text: Gesundheit
+    textEng: Health
+  hp__header_max:
+    id: 2
+    text: Max. Gesundheit
+    textEng: Max health
+  hp__text:
+    id: 1
+    text: Seelische und körperliche Gesundheit. Sinkt die Gesundheit im Kampf auf null, wird das Mitglied der Pilotencrew bewusstlos und ein Trauma ausgelöst. Gesundheit wird wiederhergestellt, wenn das Mitglied während eines Lager-Stopps der Medizinbucht zugewiesen wird.
+    textEng: Mental and physical health of the pilot. Running out of health in combat will knock out the pilot and trigger trauma. Health can be restored by assigning the pilot to the medbay during a camp stop.
+  hp_recovery__header:
+    id: 1
+    text: Gesundheitswiederherstellung
+    textEng: Health recovery
+  hp_recovery__text:
+    id: 1
+    text: Bestimmt, wie viel Gesundheit regeneriert wird, wenn ein Mitglied der Pilotencrew in der Medizinbucht behandelt wird. Standardmäßig sind es 100 %, das kann aber aufgrund von Merkmalen abweichen.
+    textEng: How much health is restored when a pilot is treated in the medbay. Defaults to 100% but can differ as an effect of some traits.
+  score__header:
+    id: 1
+    text: Kampflauf
+    textEng: Combat streak
+  score__text:
+    id: 1
+    text: Erhöht die kritische Chance und den Erfahrungsgewinn. Steigt mit jeder Kampfmission, fällt mit jedem Lager. Wird auf 0 zurückgesetzt, wenn das Mitglied der Pilotencrew im Kampf alle Gesundheit verliert oder sich in einem Lager ausruht.
+    textEng: Increases critical chance and experience gain. Incremented with every combat mission, reduced with each camp. Will completely reset to 0 if pilot loses all health in combat, or is selected to rest during camp.
+  self_offset_exp__header:
+    id: 1
+    text: Erfahrungsabweichung
+    textEng: Experience offset
+  self_offset_exp__text:
+    id: 1
+    text: Abweichung für erhaltene Erfahrung. Kann positiv oder negativ sein.
+    textEng: Offset to acquired experience. Can be positive or negative.
+  support_salvage_budget__header:
+    id: 1
+    text: Bergungsbonus
+    textEng: Salvage bonus
+  support_salvage_budget__text:
+    id: 1
+    text: Erhöht das Bergungsbudget.
+    textEng: Increase to the salvage budget.
+  support_scramble_range__header:
+    id: 1
+    text: Stör-Reichweite
+    textEng: Scramble range
+  support_scramble_range__text:
+    id: 1
+    text: Erhöht die Reichweite, in der Lenkgeschosse bei einem Ansturm geblendet werden.
+    textEng: Increase to the range in which guided munitions are blinded on dash.
+  trauma__header:
+    id: 1
+    text: Trauma
+    textEng: Trauma
+  trauma__header_max:
+    id: 2
+    text: Trauma-Limit
+    textEng: Trauma limit
+  trauma__hint:
+    id: 1
+    text: Dauerhaftes Trauma durch K. o. im Kampf.
+    textEng: Permanent trauma from knockouts combat.
+  trauma__max_effect:
+    id: 1
+    text: Dieses Mitglied der Pilotencrew hält keine weiteren kritischen Verletzungen aus. Wird es im Kampf bewusstlos, stirbt es.
+    textEng: This pilot can not tolerate more critical injuries. They will die if they are knocked out in combat.
+  trauma__text:
+    id: 1
+    text: Dauerhaftes Trauma durch K. o. im Kampf. Jedes Mitglied deiner Pilotencrew hält nur eine bestimmte Anzahl von Traumata aus, bevor es stirbt. Jedes neue Trauma beschert dem Mitglied ein neues Merkmal.
+    textEng: Permanent trauma from getting knocked out in combat. Each pilot can only tolerate a set number of traumas before death. Each acquired trauma adds a new trait to the pilot.
+  unit_barrier_body__header:
+    id: 1
+    text: Körperbarriere
+    textEng: Body Barrier
+  unit_barrier_shield__header:
+    id: 1
+    text: Schildbarriere
+    textEng: Shield Barrier
+  unit_charges_back__header:
+    id: 1
+    text: Rucksack
+    textEng: Backpack
+  unit_charges_back__text:
+    id: 1
+    text: Beeinflusst die für Rucksackwaffen verfügbaren Ladungen.
+    textEng: Modifies the charges available to backpack weapons.
+  unit_damage__header:
+    id: 1
+    text: Waffenschaden
+    textEng: Weapon damage
+  unit_damage__text:
+    id: 1
+    text: Veränderte Schadenswirkung der gesteuerten Mech-Waffe.
+    textEng: Modified damage output of the piloted mech weapons.
+  unit_damage_backpack__header:
+    id: 1
+    text: Rucksackschaden
+    textEng: Backpack damage
+  unit_damage_backpack__text:
+    id: 1
+    text: Beeinflusst den von Rucksackwaffen verursachten Schaden.
+    textEng: Modifies the damage dealt by backpack based weapons.
+  unit_damage_lr__header:
+    id: 1
+    text: Langdistanzschaden
+    textEng: Long range damage
+  unit_damage_lr__text:
+    id: 1
+    text: Veränderte Schadenswirkung der kinetischen Langstreckenwaffen beim gesteuerten Mech.
+    textEng: Modified damage output of long range ballistic weapons on the piloted mech.
+  unit_damage_ml__header:
+    id: 2
+    text: Raketenwerferschaden
+    textEng: Missile launcher damage
+  unit_damage_ml__text:
+    id: 2
+    text: Veränderte Schadenswirkung der Raketenwerferwaffen beim gesteuerten Mech.
+    textEng: Modified damage output of the missile launcher weapons on the piloted mech.
+  unit_damage_sr__header:
+    id: 1
+    text: Kurzdistanzschaden
+    textEng: Short range damage
+  unit_damage_sr__text:
+    id: 1
+    text: Veränderte Schadenswirkung der Kurzstreckenwaffen beim gesteuerten Mech.
+    textEng: Modified damage output of the short range weapons on the piloted mech.
+  unit_duration_shield_act__header:
+    id: 1
+    text: Schild
+    textEng: Shield
+  unit_duration_shield_act__text:
+    id: 1
+    text: Veränderte Dauer von Schildaktionen im Kampf.
+    textEng: Modifies duration of shield actions in combat.
+  unit_hp_body__header:
+    id: 1
+    text: Körperrüstung
+    textEng: Body armor
+  unit_hp_body__text:
+    id: 1
+    text: Dieses Mitglied der Pilotencrew kontrolliert sorgfältig seine Mech-Körperrüstung, sodass diese mehr Schaden absorbieren kann.
+    textEng: This pilot carefully controls mech body armor, allowing it to absorb more damage.
+  unit_hp_shield__header:
+    id: 1
+    text: Schildrüstung
+    textEng: Shield armor
+  unit_hp_shield__text:
+    id: 1
+    text: Dieses Mitglied der Pilotencrew kann den Schild effizienter nutzen, sodass es mit Barriere mehr Schaden absorbiert.
+    textEng: This pilot can use the shield more effectively, allowing it to absorb more damage with barrier.
+  unit_mass__header:
+    id: 1
+    text: Einheitenmasse
+    textEng: Unit mass
+  unit_mass__text:
+    id: 1
+    text: Veränderung der Einheitenmasse, verursacht von Pilotenmerkmalen.
+    textEng: A change in unit mass caused by the pilot traits.
+  unit_mass_back__header:
+    id: 1
+    text: Rucksack
+    textEng: Backpack
+  unit_mass_back__text:
+    id: 1
+    text: Verändert die Masse des am Mech ausgerüsteten Rucksacks.
+    textEng: Modifies the mass of the backpack equipped on the mech.
+  unit_mass_shield__header:
+    id: 1
+    text: Schild
+    textEng: Shield
+  unit_mass_shield__text:
+    id: 1
+    text: Verändert die Masse des am Mech ausgerüsteten Schildes.
+    textEng: Modifies the mass of the shield equipped on the mech.
+  unit_offset_damage__header:
+    id: 1
+    text: Waffenschub
+    textEng: Weapon boost
+  unit_offset_damage__text:
+    id: 1
+    text: Erhöht den Waffenschaden im Moment des Abfeuerns.
+    textEng: Increases weapon damage at the moment of firing.
+  unit_offset_overheat_damage__header:
+    id: 1
+    text: Einheiten-Überhitzungsschaden
+    textEng: Unit overheat damage
+  unit_offset_overheat_damage__text:
+    id: 1
+    text: Anpassung des Überhitzungsschadens der gesteuerten Einheit.
+    textEng: Adjustment to the overheat damage taken by the piloted unit.
+  unit_offset_speed__header:
+    id: 1
+    text: Einheitengeschwindigkeit
+    textEng: Unit speed
+  unit_offset_speed__text:
+    id: 1
+    text: Anpassung der Geschwindigkeit der gesteuerten Einheit in Metern pro Sekunde.
+    textEng: Adjustment to the speed of the piloted unit, in meters per second.
+  unit_shield_resist_buildup__header:
+    id: 1
+    text: Schildstatus-Widerstand
+    textEng: Shield status resistance
+  unit_shield_resist_buildup__text:
+    id: 1
+    text: Bestimmt den Widerstand gegenüber Statuseffekt-Aufbau, wenn der Mech-Schild Schaden absorbiert. Ein Wert von 100 % negiert den Statuseffekt-Aufbau bei Schild-Treffern vollständig.
+    textEng: Determines the resistance to status effect buildup when the mech takes a hit to its shield. A value of 100% entirely negates status effect buildup on shield hits.

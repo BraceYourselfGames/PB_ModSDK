@@ -1,183 +1,50 @@
 timeLastSync: 63817551979
 entries:
-  energy_limit__name:
-    text: 儲存容量
-    textEng: Storage capacity
-  energy_limit__text:
-    text: 可以儲存的備用動力多寡。在基地沒有主動消耗動力時，能量再生達到的上限。
-    textEng: The amount of reserve power that can be stored. Energy will regenerate up to this point when the base is not actively consuming power.
-  energy_recharge_delay__name:
-    text: 充電延遲
-    textEng: Recharge delay
-  energy_recharge_delay__text:
-    text: 能量消耗與再生之間的差距時間，以小時為單位。延遲時間可以藉由升級來改善。
-    textEng: The time between energy drainage and energy generation, in hours. Delay time can be improved by upgrading.
-  item_block_combat_limit__name:
-    text: 煙霧彈容納數量
-    textEng: Smoke Charge capacity
-  item_block_combat_limit__text:
-    text: 基地可存放的煙霧彈數量。
-    textEng: How many Smoke Charges can be stored at the base.
-  item_block_escalation_limit__name:
-    text: 掃描干擾器容納數量
-    textEng: Scan Jammer capacity
-  item_block_escalation_limit__text:
-    text: 基地可存放的掃描干擾器數量。
-    textEng: How many Scan Jammers can be stored at the base.
-  item_block_reinforcements_limit__name:
-    text: 訊號干擾器容納數量
-    textEng: Comms Jammer capacity
-  item_block_reinforcements_limit__text:
-    text: 基地可存放的訊號干擾器數量。
-    textEng: How many Comms Jammers can be stored at the base.
-  item_drone_decoy_limit__name:
-    text: 誘餌無人機容納數量
-    textEng: Decoy Drone capacity
-  item_drone_decoy_limit__text:
-    text: 基地可存放的誘餌無人機數量。
-    textEng: How many Decoy Drones can be stored at the base.
-  item_rain_sensor_limit__name:
-    text: 雨水感應器容納數量
-    textEng: Rain Sensor capacity
-  item_rain_sensor_limit__text:
-    text: 基地可存放的雨水感應器數量。
-    textEng: How many Rain Sensors can be stored at the base.
-  mm_fast_energy_change__name:
-    text: 能量消耗
-    textEng: Energy drain
-  mm_fast_energy_change__text:
-    text: 每個單位每小時超速驅動模式下的能量消耗率。
-    textEng: Rate of energy drainage in overdrive mode, in units per hour.
-  mm_fast_speed__name:
-    text: 速度
-    textEng: Speed
-  mm_fast_speed__text:
-    text: 超速驅動模式下的基地移動速度，單位為每小時公里。
-    textEng: Base movement speed in overdrive mode, in kilometers per hour.
-  mm_fast_vision_enemy__name:
-    text: 敵方視野
-    textEng: Enemy vision
-  mm_fast_vision_enemy__text:
-    text: 當移動基地以超速驅動模式行駛時，敵方掃描器的偵測範圍。
-    textEng: Distance for enemy scanners to detect the mobile base when running in overdrive mode.
-  mm_fast_vision_own__name:
-    text: 基地視野
-    textEng: Base vision
-  mm_fast_vision_own__text:
-    text: 當移動基地以超速驅動模式行駛時，掃描器對於敵方接觸的偵測範圍。
-    textEng: Distance for scanners to detect enemy contacts when the base is running in overdrive mode.
-  mm_normal_energy_change__name:
-    text: 能量再生
-    textEng: Energy regeneration
-  mm_normal_energy_change__text:
-    text: 每個單位每小時超速驅動模式下的能量再生率。
-    textEng: Rate of energy regeneration in overdrive mode, in units per hour.
-  mm_normal_speed__name:
-    text: 速度
-    textEng: Speed
-  mm_normal_speed__text:
-    text: 巡航模式下的基地移動速度，單位為每小時公里。
-    textEng: Base movement speed in cruise mode, in kilometers per hour.
-  mm_normal_vision_enemy__name:
-    text: 敵方視野
-    textEng: Enemy vision
-  mm_normal_vision_enemy__text:
-    text: 當移動基地以巡航模式行駛時，敵方掃描器的偵測範圍。
-    textEng: Detection distance by enemy scanners when the base is running in cruise mode.
-  mm_normal_vision_own__name:
-    text: 基地視野
-    textEng: Base vision
-  mm_normal_vision_own__text:
-    text: 當移動基地以巡航模式行駛時，掃描器對於敵方接觸的偵測範圍。
-    textEng: Distance for enemy scanners to detect the mobile base when running in cruise mode.
-  mm_stealth_energy_change__name:
-    text: 能量消耗
-    textEng: Energy drain
-  mm_stealth_energy_change__text:
-    text: 每個單位每小時巡航模式下的能量消耗率。
-    textEng: Rate of energy drainage in stealth mode, in units per hour.
-  mm_stealth_speed__name:
-    text: 速度
-    textEng: Speed
-  mm_stealth_speed__text:
-    text: 潛行模式下的基地移動速度，單位為每小時公里。
-    textEng: Base movement speed in stealth mode, in kilometers per hour.
-  mm_stealth_vision_enemy__name:
-    text: 敵方視野
-    textEng: Enemy vision
-  mm_stealth_vision_enemy__text:
-    text: 當移動基地以潛行模式行駛時，敵方掃描器的偵測範圍。
-    textEng: Detection distance by enemy scanners when the base is running in stealth mode.
-  mm_stealth_vision_own__name:
-    text: 基地視野
-    textEng: Base vision
-  mm_stealth_vision_own__text:
-    text: 當移動基地以潛行模式行駛時，掃描器對於敵方接觸的偵測範圍。
-    textEng: Distance for enemy scanners to detect the mobile base when running in stealth mode.
+  camp_supply_limit__name:
+    id: 1
+    text: 營地補給上限
+    textEng: Camp supply limit
+  camp_supply_limit__text:
+    id: 1
+    text: 基地可存放的營地物資數量。
+    textEng: The amount of camp supplies that can be stored at the base.
   pilot_slots__name:
+    id: 1
     text: 駕駛員限制
     textEng: Pilot limit
   pilot_slots__text:
+    id: 1
     text: 基地可支援的駕駛員人數。
     textEng: Number of pilots the base can support.
-  sensor_rain_effect__name:
-    text: 雨天視野補正
-    textEng: Rain compensation
-  sensor_rain_effect__text:
-    text: 大雨降低視線能力。升級後，基地可以增加在惡劣天氣中的視線能力。
-    textEng: Heavy rain reduces visibility. With upgrades, the base can increase visibility in inclement weather.
-  sensor_scan_time_enemy__name:
-    text: 敵方偵測時間
-    textEng: Enemy scan time
-  sensor_scan_time_enemy__text:
-    text: 敵方掃描器偵測到移動基地所需時間，以小時為單位。
-    textEng: Time needed for enemy scanners to detect the mobile base, in hours.
-  sensor_scan_time_own__name:
-    text: 基地偵測時間
-    textEng: Base scan time
-  sensor_scan_time_own__text:
-    text: 掃描新的接觸者與獲得詳細資訊所需時間，以小時為單位。升級後可以減少掃描時間。
-    textEng: Time needed to scan and retrieve detailed information from new contacts, in hours. With upgrades, scan time can be reduced.
+  unit_repair_amount__name:
+    id: 1
+    text: 機甲修復能力
+    textEng: Mech repair capability
+  unit_repair_amount__text:
+    id: 1
+    text: 每次紮營可修復的機甲結構完整性上限。例如：若修復能力為50%，一台完整性為40%的機甲，在一次紮營後會回復至90%。升級基地設施即可提升修復能力。
+    textEng: 'How much mech frame integrity can be repaired at one camp stop. For example: if the repair capability is 50%, a mech with 40% integrity will be repaired to 90% after one camp stop. Can be improved with base upgrades.'
   unit_repair_jobs__name:
-    text: 並行維修
-    textEng: Parallel repairs
+    id: 1
+    text: 回復槽位
+    textEng: Recovery slots
   unit_repair_jobs__text:
-    text: 可同時進行維修的單位數量。強烈建議提高數量限制，避免戰場進行中斷。
-    textEng: Number of units that can be repaired simultaneously. High capacity for parallel repairs is strongly recommended to avoid interruptions on the field.
-  unit_repair_resource_drain__name:
-    text: 修復液體消耗
-    textEng: Liquid Fix drain
-  unit_repair_resource_drain__text:
-    text: 單位維修時所需的修復液體消耗率。
-    textEng: Rate at which Liquid Fix is depleted during unit repairs.
-  unit_repair_resource_limit__name:
-    text: 修復液體容量限制
-    textEng: Liquid Fix limit
-  unit_repair_resource_limit__text:
-    text: 基地可存放的修復液體容量。
-    textEng: Amount of Liquid Fix that can be stored on base.
-  unit_repair_speed__name:
-    text: 維修速度
-    textEng: Repair speed
-  unit_repair_speed__text:
-    text: 單位維修的速度，與維修時間的基礎線相關。
-    textEng: Speed at which units are repaired, relative to baseline repair time.
+    id: 1
+    text: 在一次紮營中可同時進行治療或維修的駕駛員與機甲數量。取決於醫療艙與維修設備的等級。
+    textEng: Number of units and pilots that that can be attended to during a camp stop. Depends on the medical bay and repair equipment.
   unit_slots__name:
+    id: 1
     text: 儲存槽位
     textEng: Storage slots
   unit_slots__text:
+    id: 1
     text: 基地可存放的單位數量。決定能否建造新單位的關鍵。
     textEng: Number of units that can be stored on base. Determines whether new units can be built.
   workshop_jobs__name:
-    text: 並行建造
-    textEng: Parallel builds
+    id: 1
+    text: 專案上限
+    textEng: Project limit
   workshop_jobs__text:
+    id: 1
     text: 工作坊可同時進行建造的計畫數量。
     textEng: Number of projects the workshop is capable of building simultaneously.
-  workshop_speed__name:
-    text: 建造速度
-    textEng: Build speed
-  workshop_speed__text:
-    text: 工作坊建造設備的速度，與維修時間的基礎線相關。
-    textEng: Speed at which the workshop builds equipment, relative to baseline repair time.
-collection: 

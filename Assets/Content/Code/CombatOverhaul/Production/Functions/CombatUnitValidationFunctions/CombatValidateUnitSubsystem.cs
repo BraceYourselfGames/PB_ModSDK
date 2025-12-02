@@ -11,7 +11,7 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class CombatValidateUnitSubsystem : DataBlockSubcheckBoolSubsystem, ICombatUnitValidationFunction
+    public class CombatValidateUnitSubsystem : DataBlockSubcheckBoolSubsystem, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
     {
         [ValueDropdown ("@DataHelperUnitEquipment.GetSockets ()")]
         public string socket;

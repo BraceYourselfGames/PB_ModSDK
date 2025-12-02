@@ -24,8 +24,12 @@ dataCore:
   durationType: Data
   duration: 1
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
@@ -34,7 +38,9 @@ dataCore:
   - Crash_Unit
   eventsOnEnd: 
   eventsOnDispose: 
-  functionsOnValidation: 
+  functionsOnTargetCheck: 
+  functionsOnValidation:
+  - !CombatActionValidationEject {}
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart: 
@@ -57,6 +63,7 @@ dataCore:
     stats: 
     pilot: 
   unitCheck: 
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

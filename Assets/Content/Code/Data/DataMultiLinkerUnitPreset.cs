@@ -18,6 +18,7 @@ namespace PhantomBrigade.Data
         public DataMultiLinkerUnitPreset ()
         {
             DataMultiLinkerUtility.RegisterOnAfterDeserialization (dataType, OnAfterDeserialization);
+            DataMultiLinkerUtility.RegisterStandardTextHandling (dataType, ref textSectorKeys, TextLibs.unitPresets); 
         }
 
         [HideReferenceObjectPicker]
@@ -64,6 +65,12 @@ namespace PhantomBrigade.Data
         [ShowInInspector][ReadOnly]
         [DictionaryKeyDropdown ("@DataMultiLinkerUnitPreset.tags")]
         public static Dictionary<string, HashSet<string>> tagsMap = new Dictionary<string, HashSet<string>> ();
+        
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
 
         public static void OnAfterDeserialization ()
         {
@@ -80,8 +87,6 @@ namespace PhantomBrigade.Data
                 
                 var key = kvp1.Key;
                 presetA.children.Clear ();
-                
-                
                 
                 foreach (var kvp2 in data)
                 {
@@ -101,7 +106,7 @@ namespace PhantomBrigade.Data
             
             foreach (var kvp1 in data)
                 Postprocess (kvp1.Value);
-            
+
             DataHelperUnitEquipment.InvalidateLookups ();
         }
         
@@ -153,9 +158,7 @@ namespace PhantomBrigade.Data
             origin.aiBehaviorProcessed = null;
             origin.aiTargetingProcessed = null;
             origin.animationOverridesProcessed = null;
-
-            if (origin.functionsProcessed != null)
-                origin.functionsProcessed.Clear ();
+            origin.effectsProc = null;
             
             if (origin.tagsProcessed != null)
                 origin.tagsProcessed.Clear ();
@@ -274,16 +277,28 @@ namespace PhantomBrigade.Data
                 }
             }
 
-            if (current.functions != null && current.functions.Count > 0)
+            if (current.effects != null)
             {
-                if (root.functionsProcessed == null)
-                    root.functionsProcessed = new List<ICombatFunctionTargeted> ();
+                if (root.effectsProc == null)
+                    root.effectsProc = new DataBlockUnitPresetEffects ();
+                
+                if (current.effects.effectsOnDestruction != null && root.effectsProc.effectsOnDestruction == null)
+                    root.effectsProc.effectsOnDestruction = current.effects.effectsOnDestruction;
 
-                foreach (var function in current.functions)
-                {
-                    if (function != null)
-                        root.functionsProcessed.Add (function);
-                }
+                if (current.effects.effectsOnSpawn != null && root.effectsProc.effectsOnSpawn == null)
+                    root.effectsProc.effectsOnSpawn = current.effects.effectsOnSpawn;
+
+                if (current.effects.effectsOnArrival != null && root.effectsProc.effectsOnArrival == null)
+                    root.effectsProc.effectsOnArrival = current.effects.effectsOnArrival;
+                
+                if (current.effects.effectProximity != null && root.effectsProc.effectProximity == null)
+                    root.effectsProc.effectProximity = current.effects.effectProximity;
+                
+                if (current.effects.effectsOnEjection != null && root.effectsProc.effectsOnEjection == null)
+                    root.effectsProc.effectsOnEjection = current.effects.effectsOnEjection;
+                
+                if (current.effects.effectsOnDestruction != null && root.effectsProc.effectsOnDestruction == null)
+                    root.effectsProc.effectsOnDestruction = current.effects.effectsOnDestruction;
             }
 
             if (current.parts != null && current.parts.Count > 0)
@@ -520,13 +535,22 @@ namespace PhantomBrigade.Data
         
         [FoldoutGroup ("Utilities", false)]
         [Button, PropertyOrder (-2)]
-        public void SetListedFlag ()
+        public void SetListedFlag (string keyFilter, bool listed)
         {
-            var prefix = "generic_";
+            if (string.IsNullOrEmpty (keyFilter))
+                return;
+            
             foreach (var kvp in data)
             {
                 var preset = kvp.Value;
-                preset.listed = preset.key.StartsWith (prefix);
+                if (!kvp.Key.Contains (keyFilter))
+                    continue;
+
+                if (preset.listed != listed)
+                {
+                    Debug.Log ($"Preset {kvp.Key} is now {(listed ? "listed" : "unlisted")}");
+                    preset.listed = listed;
+                }
             }
         }
 

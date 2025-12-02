@@ -25,7 +25,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   comp2_value:
-    value: 2
+    value: 1.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -40,12 +40,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   overheat_buffer:
-    value: 2.5
+    value: 1.75
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   overheat_limit:
-    value: 1
+    value: 0.87
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -55,13 +55,8 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   scrap_value:
-    value: 20
+    value: 35
     targetMode: 0
-    targetSocket: ''
-    targetHardpoint: ''
-  thruster_power:
-    value: 0.2
-    targetMode: 1
     targetSocket: ''
     targetHardpoint: ''
 visuals:
@@ -81,6 +76,7 @@ functions:
       - !CombatUnitStatusAdd
         key: timed_meltdown
         durationOverride: -1
+        source: Function
   - context: on_collision
     checks:
     - !CombatValidateUnitStateActive
@@ -91,6 +87,7 @@ functions:
       - !CombatUnitStatusAdd
         key: timed_meltdown
         durationOverride: -1
+        source: Function
   - context: on_part_destruction
     checks: 
     functions:
@@ -187,3 +184,16 @@ functions:
         key: timed_meltdown
         limit: 1
         fxAudio: 
+workshopInfo:
+  progressLimit:
+    i: 3
+  inputResourcesViaStats:
+    f: 1
+  inputResources:
+  - key: supplies
+    amount: 700
+  - key: components_r2
+    amount: 8
+  - key: components_r3
+    amount: 6
+  basePartRequirements: 

@@ -12,12 +12,13 @@ namespace PhantomBrigade.Data
         public bool hidden;
         public int priority;
         public int priorityBriefing;
+        public bool tinted = false;
         
         [PropertyRange (0, 360), HorizontalGroup]
         public int hue = 0;
 
         [YamlIgnore, ShowInInspector, HorizontalGroup (32f), HideLabel]
-        private Color color => Color.HSVToRGB (Mathf.Clamp01 (hue / 360f), 0.75f, 1f);
+        private Color color => Color.HSVToRGB (Mathf.Clamp01 (hue / 360f), tinted ? 0.75f : 0.25f, tinted ? 1f : 0.5f);
 
         [YamlIgnore, HideLabel]
         public string textName;

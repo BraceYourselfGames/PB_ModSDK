@@ -13,34 +13,61 @@ namespace PhantomBrigade.Functions
 
         public DataBlockOverworldEventSubcheckFloat checkDistance = new DataBlockOverworldEventSubcheckFloat ();
         
-        public bool IsPositionValid (Vector3 position, string context)
+        public bool IsPositionValid (CombatDescription cd, Vector3 position, string context)
         {
             #if !PB_MODSDK
+
+            bool log = DataShortcuts.sim.logScenarioGeneration;
             
             if (checkDistance == null)
             {
-                Debug.LogWarning ($"{context} | Can't validate position from state [{stateKey}]: no distance check provided");
+                if (log)
+                    Debug.LogWarning ($"{context} | Can't validate position from state [{stateKey}]: no distance check provided");
                 return true;
             }
             
-            var combat = Contexts.sharedInstance.combat;
-            if (!combat.hasScenarioStateLocations || string.IsNullOrEmpty (stateKey) || !combat.scenarioStateLocations.s.TryGetValue (stateKey, out var locationKey))
+            // This caused PB-15450 [Combat] Mission generation - Mobile base can spawn in incorrect position during base defense missions
+            // This function and other operatons like it run during scenario generation for an entire batch of POIs where "combat site" doesn't exist
+            // var targetOverworld = ScenarioUtility.GetCombatSite ();
+            // var cd = ScenarioUtilityGeneration.GetCombatDescriptionFromEntity (targetOverworld);
+            
+            // Instead, CD is now passed in explicitly
+            var stateLocations = cd?.stateLocations;
+            
+            if (string.IsNullOrEmpty (stateKey))
             {
-                Debug.LogWarning ($"{context} | Can't validate position from state [{stateKey}]: no registered location found");
+                if (log)
+                    Debug.LogWarning ($"{context} | Can't validate position from state [{stateKey}]: null or empty key");
                 return true;
             }
             
-            var area = ScenarioUtility.GetCurrentArea ();
+            if (stateLocations == null)
+            {
+                if (log)
+                    Debug.LogWarning ($"{context} | Can't validate position from state [{stateKey}]: state location collection is null");
+                return true;
+            }
+            
+            if (!stateLocations.TryGetValue (stateKey, out var locationKey))
+            {
+                if (log)
+                    Debug.LogWarning ($"{context} | Can't validate position from state [{stateKey}]: state location collection has no such entry | Existing entries: {stateLocations.ToStringFormattedKeyValuePairs ()}");
+                return true;
+            }
+
+            var area = DataMultiLinkerCombatArea.GetEntry (cd.areaKey, false);
             if (area == null || area.locationsProc == null)
             {
-                Debug.LogWarning ($"{context} | Can't validate position from state {stateKey} location {locationKey}: no current area");
+                if (log)
+                    Debug.LogWarning ($"{context} | Can't validate position from state {stateKey} location {locationKey}: no current area");
                 return true;
             }
 
             var locationReferenced = area.GetLocation (locationKey);
             if (locationReferenced == null)
             {
-                Debug.LogWarning ($"{context} | Can't validate position from state {stateKey} location {locationKey}: no location data found");
+                if (log)
+                    Debug.LogWarning ($"{context} | Can't validate position from state {stateKey} location {locationKey}: no location data found");
                 return true;
             }
             

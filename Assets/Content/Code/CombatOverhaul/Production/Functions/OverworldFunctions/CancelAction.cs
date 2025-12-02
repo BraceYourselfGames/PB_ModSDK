@@ -6,15 +6,10 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class CancelAction : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunctionLog
+    public class CancelAction : IOverworldActionFunction, IOverworldFunctionLog
     {
         [ValueDropdown ("@DataMultiLinkerOverworldAction.data.Keys")]
         public string actionKey;
-
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            Run ();
-        }
 
         public void Run (OverworldActionEntity source)
         {

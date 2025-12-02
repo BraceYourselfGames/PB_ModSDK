@@ -5,26 +5,16 @@ using PhantomBrigade.Overworld;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class ChangeSelfView : IOverworldEventFunction, IOverworldActionFunction
+    public class ChangeSelfView : IOverworldFunction
     {
         public string assetKey;
-
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            #if !PB_MODSDK
-
-            var self = IDUtility.playerBaseOverworld;
-            OverworldIndirectFunctions.ChangeTargetView (self, assetKey);
-            
-            #endif
-        }
         
-        public void Run (OverworldActionEntity source)
+        public void Run ()
         {
             #if !PB_MODSDK
 
-            var self = IDUtility.GetOverworldActionOwner (source);
-            OverworldIndirectFunctions.ChangeTargetView (self, assetKey);
+            var baseOverworld = IDUtility.playerBaseOverworld;
+            OverworldUtility.ChangeTargetView (baseOverworld, assetKey);
             
             #endif
         }

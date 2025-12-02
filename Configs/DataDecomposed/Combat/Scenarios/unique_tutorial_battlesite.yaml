@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -54,10 +59,12 @@ entry:
     spawnRegistration: 
 generationInjection: 
 tags:
-- unique_tutorial_battlesite
 - difficulty_normal
+- tutorial_pilot_progression
 - listed
-- type_elimination
+- type_assisted
+- unique_tutorial_battlesite
+- block_exit_on_defeat
 states:
   comms_hg_lost:
     comment: 
@@ -133,14 +140,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   comms_inv_beamunitlost:
     comment: 
     textNameKey: generic_unknown_header
@@ -218,14 +222,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   comms_pb_lost:
     comment: 
     textNameKey: generic_unknown_header
@@ -301,14 +302,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   homeguard:
     comment: 
     textNameKey: ''
@@ -320,7 +318,7 @@ states:
     priorityGeneration: 0
     priority: 0
     priorityDisplay: 0
-    mood: 0
+    mood: -2
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -375,17 +373,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Defeat
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   outcome_effects:
     comment: 
     textNameKey: generic_unknown_header
@@ -433,14 +428,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             ftue: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
         2:
           tags: 
           executionOnOutcome:
@@ -464,14 +456,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
         3:
           tags: 
           executionOnOutcome:
@@ -495,14 +484,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -538,50 +524,6 @@ states:
     functions: 
     reactions: 
 steps:
-  homeguard_lost:
-    comment: 
-    core:
-      color:
-        r: 1
-        g: 1
-        b: 1
-        a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
-      threatRatingPercentage: 1
-      allowOutcomeVictory: false
-      allowOutcomeDefeat: true
-      unitsRevealed: false
-      executionAllowed: false
-      visible: true
-    tags: 
-    unitGroups: 
-    stateScopeChanges: 
-    stateValueChanges: 
-    memoryDisplayChanges: 
-    unitTagDisplayChanges: 
-    unitChanges: 
-    retreat:
-      stateKey: retreat_default
-      stateValueModified: true
-      stateValue: false
-    actionRestrictions: 
-    cutsceneVideoOnStart: 
-    atmosphereOnStart: 
-    hintsConditional: 
-    unitSelection: 
-    camera: 
-    musicMood: 
-    musicIntensity: 
-    musicReactive: 
-    commsOnStart: 
-    audioEventsOnStart: 
-    audioStatesOnStart: 
-    audioSyncsOnStart: 
-    functions: 
-    outcome: 
-    transitions: 
   wave_01:
     comment: 
     core:
@@ -604,8 +546,8 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: pb_heavy
+      - keyExternal: true
+        key: ftue_battlesite_pb_a
         countMin: 1
         countMax: 1
         countRandom: false
@@ -640,10 +582,24 @@ steps:
           animationOverrides: 
           statMultipliers: 
           hitDirectionModifiers: 
-          functions: 
+          functions:
+          - !CombatUnitStatusAdd
+            key: pilot_fatigue_damage
+            durationOverride: -1
+            source: Fatigue
+          - !CombatUnitPilotEffect
+            functions:
+            - !PilotStatSet
+              key: fatigue
+              normalized: true
+              value: 1
+            - !PilotStatModifierReplace
+              statKey: hp
+              modifierKey: test
+              value: 15
           combatTags: 
-      - keyExternal: false
-        key: pb_heavy
+      - keyExternal: true
+        key: ftue_battlesite_pb_a
         countMin: 1
         countMax: 1
         countRandom: false
@@ -678,7 +634,17 @@ steps:
           animationOverrides: 
           statMultipliers: 
           hitDirectionModifiers: 
-          functions: 
+          functions:
+          - !CombatUnitPilotEffect
+            functions:
+            - !PilotStatSet
+              key: fatigue
+              normalized: true
+              value: 0.5
+            - !PilotStatModifierReplace
+              statKey: hp
+              modifierKey: test
+              value: 15
           combatTags: 
       check: 
       combatTags:
@@ -707,8 +673,8 @@ steps:
       spawnRegistration: 
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: inv_guard_long
+      - keyExternal: true
+        key: ftue_battlesite_inv_long
         countMin: 1
         countMax: 1
         countRandom: false
@@ -740,8 +706,8 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
-        key: inv_guard_heavy
+      - keyExternal: true
+        key: ftue_battlesite_inv_guard_a
         countMin: 1
         countMax: 1
         countRandom: false
@@ -752,30 +718,9 @@ steps:
         aiBehavior: Flanker
         aiTargeting: striker
         liveryPreset: inv_army_g1
-        custom:
-          name:
-            name: inv_beam
-          id: {}
-          idReused: 
-          idPilot: 
-          role: 
-          spawn: 
-          landing: 
-          flags: 
-          faction: 
-          speed: 
-          uncrewed: 
-          pilotAppearance: 
-          pilotStats: 
-          predictionLimit: 
-          animationOverrides: 
-          statMultipliers: 
-          hitDirectionModifiers: 
-          functions: 
-          combatTags:
-          - purpose_beam
-      - keyExternal: false
-        key: tank_long
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -787,8 +732,8 @@ steps:
         aiTargeting: sharpshooter
         liveryPreset: 
         custom: 
-      - keyExternal: false
-        key: tank_long
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -824,6 +769,7 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -855,26 +801,10 @@ steps:
     functions:
     - !StartTutorial
       key: combat_battlesite
+      allowRepeat: true
     outcome: 
-    transitions:
-      transitionMode: OnExecutionEnd
-      transitionBasedScope: true
-      transitionLocksExecution: false
-      transitionsStateBased:
-      - priority: 0
-        stateCleanupOnUse: true
-        stateRequirements:
-          homeguard: true
-        stepKey: homeguard_lost
-      transitionTimeBased: 
+    transitions: 
 unitPresets:
-  inv_guard_heavy: !UnitPresetLink
-    preset: ftue_battlesite_inv_guard_a
-  inv_guard_long: !UnitPresetLink
-    preset: ftue_battlesite_inv_long
-  pb_heavy: !UnitPresetLink
-    preset: ftue_battlesite_pb_a
-  tank_long: !UnitPresetLink
-    preset: vhc_tank_training_aa_0
   tank_short: !UnitPresetLink
     preset: vhc_tank_training_cannon_0
+unitGenerators: 

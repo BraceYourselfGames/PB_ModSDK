@@ -396,11 +396,6 @@ namespace PhantomBrigade.SDK.ModTools
         // If even one is missing that attribute, it doesn't get applied to any.
         static readonly Dictionary<Type, HashSet<string>> disabledButtonMap = new Dictionary<Type, HashSet<string>> ()
         {
-            [typeof(DataContainerOverworldProvinceBlueprint)] = new HashSet<string> ()
-            {
-                nameof(DataContainerOverworldProvinceBlueprint.ReverseBorderPoints),
-                nameof(DataContainerOverworldProvinceBlueprint.AddObjectiveSpawn),
-            },
             [typeof(DataBlockAreaSpawnGroup)] = new HashSet<string> ()
             {
                 nameof(DataBlockAreaSpawnGroup.SnapToGrid),

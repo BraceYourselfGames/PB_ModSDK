@@ -13,6 +13,39 @@ sockets:
 tags:
 - body_part
 - part_arm
+workshopInfo:
+  1:
+    progressLimit:
+      i: 4
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 200
+    basePartRequirements: 
+  2:
+    progressLimit:
+      i: 4
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 250
+    - key: components_r2
+      amount: 12
+    basePartRequirements:
+      workshop_tech_r2: 1
+  3:
+    progressLimit:
+      i: 4
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 350
+    - key: components_r2
+      amount: 12
+    - key: components_r3
+      amount: 6
+    basePartRequirements:
+      workshop_tech_r3: 1
 genSteps:
 - !AddHardpoints
   subsystemsInitial: 

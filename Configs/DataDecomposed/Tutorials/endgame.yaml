@@ -1,0 +1,43 @@
+depthBackground: 100
+depthForeground: 100
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0.04267532
+    g: 0.05799904
+    b: 0.06603771
+    a: 1
+  center:
+    textImage: event_celebration
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !SelectEntity
+      nameInternal: internal_mobilebase
+      delay: 0
+      select: true
+      focus: true
+    - !SetScreenFade
+      active: true
+      instant: true
+    - !SetScreenFade
+      active: true
+      instant: true
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !SetScreenFade
+      active: false
+      instant: false
+    - !SetGameplayUIActive
+      active: true
+  effectsCombat: 

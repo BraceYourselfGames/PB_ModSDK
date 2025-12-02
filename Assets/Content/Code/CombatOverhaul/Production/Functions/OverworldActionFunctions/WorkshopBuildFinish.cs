@@ -1,4 +1,5 @@
 using System;
+using PhantomBrigade.Data;
 using UnityEngine;
 
 namespace PhantomBrigade.Functions
@@ -21,7 +22,7 @@ namespace PhantomBrigade.Functions
             }
 
             var p = source.payloadWorkshopProject;
-            WorkshopUtility.FinishProjectBuild (p.projectKey, p.variantPrimaryKey, p.variantSecondaryKey);
+            WorkshopUtility.FinishProjectBuild ((WorkshopProjectType)p.type, p.key, p.variantPrimaryKey, p.variantSecondaryKey, p.rating);
             
             #endif
         }

@@ -227,6 +227,14 @@ namespace PhantomBrigade.Data
         [PropertyOrder (1)]
         [DropdownReference]
         public List<ICombatFunctionTargeted> functionsOnHost;
+        
+        [PropertyOrder (1)]
+        [DropdownReference]
+        public List<IPilotTargetedFunction> functionsOnPilot;
+        
+        [PropertyOrder (1)]
+        [DropdownReference]
+        public List<ICombatFunction> functionsGlobal;
 
         [PropertyOrder (1)]
         [DropdownReference]
@@ -250,10 +258,15 @@ namespace PhantomBrigade.Data
         [ToggleLeft, PropertyOrder (-20)]
         public bool enabled = true;
 
-        [LabelText ("Trigger Conditions"), PropertyOrder (-1)]
+        [LabelText ("Unit Check"), PropertyOrder (-1)]
         [DropdownReference]
         [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
         public List<ICombatUnitValidationFunction> triggerCheckUnit;
+        
+        [LabelText ("Pilot Check"), PropertyOrder (-1)]
+        [DropdownReference]
+        [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
+        public List<IPilotValidationFunction> triggerCheckPilot;
         
         #region Editor
         #if UNITY_EDITOR
@@ -311,6 +324,22 @@ namespace PhantomBrigade.Data
         [PropertyRange (0f, 10f)]
         public float compMultiplier = 1f;
     }
+
+    public static class UnitStatusTags
+    {
+        public const string PilotAbility = "ability";
+    }
+
+    public class DataBlockAssetStatusRepeat : DataBlockAsset
+    {
+        public bool parented = true;
+        
+        [PropertyOrder (-1)]
+        public float interval = 0.5f;
+        
+        [PropertyOrder (-1)]
+        public float velocityDecayTime = 1f;
+    }
     
     [LabelWidth (180f)]
     public class DataContainerUnitStatus : DataContainerWithText
@@ -355,10 +384,23 @@ namespace PhantomBrigade.Data
 
         public bool hidden = false;
         public bool debug = false;
+        public bool showOverlay = true;
+        public bool showNotifications = true;
+        public bool showTutorial = true;
         public bool restartOnRefresh = false;
+        public bool turnLinked = false;
+
+        [DropdownReference (true)]
+        public DataBlockCombatActionLink actionLink;
+        
+        [DropdownReference (false)]
+        public HashSet<string> tags;
 
         [DropdownReference (true)]
         public DataBlockAsset fxAttached;
+        
+        [DropdownReference (true)]
+        public DataBlockAssetStatusRepeat fxRepeated;
 
         [DropdownReference (true)]
         public DataBlockFloat durationFull;
@@ -374,6 +416,9 @@ namespace PhantomBrigade.Data
         
         [DropdownReference (true)]
         public DataBlockFloatComposite buildupOverflow;
+        
+        [DropdownReference (true)]
+        public DataBlockFloat buildupShieldMultiplier;
 
         [DropdownReference (true)]
         public DataBlockUnitStatusStackable stackable;
@@ -396,6 +441,17 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (KeyColumnWidth = DataEditor.dictionaryKeyWidth)]
         public SortedDictionary<string, float> statOffsets;
 
+        public bool IsTagPresent (string tag)
+        {
+            if (tags == null)
+                return false;
+
+            if (string.IsNullOrEmpty (tag))
+                return false;
+            
+            return tags.Contains (tag);
+        }
+        
         public override void OnAfterDeserialization (string key)
         {
             base.OnAfterDeserialization (key);
@@ -408,11 +464,39 @@ namespace PhantomBrigade.Data
             base.OnKeyReplacement (keyOld, keyNew);
             keyHash = key.GetHashCode ();
         }
+        
+
+        public void GetUIData (out string icon, out string textName, out string textDesc)
+        {
+            icon = this.icon;
+            textName = this.textName;
+            textDesc = this.textDesc;
+
+            if (actionLink != null && !string.IsNullOrEmpty (actionLink.key))
+            {
+                var actionData = DataMultiLinkerAction.GetEntry (actionLink.key, false);
+                if (actionData != null && actionData.dataUI != null)
+                {
+                    if (string.IsNullOrEmpty (icon))
+                        icon = actionData.dataUI.icon;
+                    
+                    if (string.IsNullOrEmpty (textName))
+                        textName = actionData.dataUI.textName;
+                    
+                    if (string.IsNullOrEmpty (textDesc))
+                        textDesc = actionData.dataUI.textDesc;
+                }
+            }
+        }
+        
+        
+        
+        
 
         public override void ResolveText ()
         {
-            textName = DataManagerText.GetText (TextLibs.unitStatus, $"{key}__header");
-            textDesc = DataManagerText.GetText (TextLibs.unitStatus, $"{key}__text");
+            textName = DataManagerText.GetText (TextLibs.unitStatus, $"{key}__header", true);
+            textDesc = DataManagerText.GetText (TextLibs.unitStatus, $"{key}__text", true);
         }
 
         private void OnColorChange ()
@@ -438,9 +522,41 @@ namespace PhantomBrigade.Data
             if (!IsTextSavingPossible ())
                 return;
 
-            DataManagerText.TryAddingTextToLibrary (TextLibs.unitStatus, $"{key}__header", textName);
-            DataManagerText.TryAddingTextToLibrary (TextLibs.unitStatus, $"{key}__text", textDesc);
+            if (!string.IsNullOrEmpty (textName))
+                DataManagerText.TryAddingTextToLibrary (TextLibs.unitStatus, $"{key}__header", textName);
+            
+            if (!string.IsNullOrEmpty (textDesc))
+                DataManagerText.TryAddingTextToLibrary (TextLibs.unitStatus, $"{key}__text", textDesc);
         }
+
+        #if !PB_MODSDK
+        [HideInEditorMode]
+        [Button ("Build on selected"), ButtonGroup, PropertyOrder (-1)]
+        private void BuildOnSelectedUnit ()
+        {
+            var unitSelected = IDUtility.GetSelectedCombatEntity ();
+            if (unitSelected != null)
+                UnitStatusUtility.OffsetBuildup (unitSelected, key, 0.25f, UnitStatusSource.Function);
+        }
+        
+        [HideInEditorMode]
+        [Button ("Add to selected"), ButtonGroup, PropertyOrder (-1)]
+        private void AddToSelectedUnit ()
+        {
+            var unitSelected = IDUtility.GetSelectedCombatEntity ();
+            if (unitSelected != null)
+                UnitStatusUtility.AddStatus (unitSelected, key, UnitStatusSource.Function);
+        }
+        
+        [HideInEditorMode]
+        [Button ("Remove from selected"), ButtonGroup, PropertyOrder (-1)]
+        private void RemoveFromToSelectedUnit ()
+        {
+            var unitSelected = IDUtility.GetSelectedCombatEntity ();
+            if (unitSelected != null)
+                UnitStatusUtility.RemoveStatus (unitSelected, key);
+        }
+        #endif
         
         private Color GetEffectsOnUpdateElementColor (int index, Color defaultColor)
         {

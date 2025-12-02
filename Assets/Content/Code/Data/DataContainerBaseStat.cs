@@ -8,6 +8,7 @@ namespace PhantomBrigade.Data
     [LabelWidth (120f)]
     public class DataContainerBaseStat : DataContainerWithText
     {
+        public bool hidden;
         [ValueDropdown ("GetGroupKeys")]
         public string group;
         

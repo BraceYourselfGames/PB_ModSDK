@@ -7,7 +7,7 @@ namespace PhantomBrigade.Functions
     [Serializable]
     public class CombatValidateOverworldBase : ICombatStateValidationFunction
     {
-        public List<IOverworldValidationFunction> functions = new List<IOverworldValidationFunction> ();
+        public List<IOverworldEntityValidationFunction> functions = new List<IOverworldEntityValidationFunction> ();
         
         public bool IsValid (string stateKey, DataBlockScenarioState stateDefinition)
         {
@@ -41,7 +41,7 @@ namespace PhantomBrigade.Functions
     [Serializable]
     public class CombatValidateOverworldSite : ICombatStateValidationFunction
     {
-        public List<IOverworldValidationFunction> functions = new List<IOverworldValidationFunction> ();
+        public List<IOverworldEntityValidationFunction> functions = new List<IOverworldEntityValidationFunction> ();
         
         public bool IsValid (string stateKey, DataBlockScenarioState stateDefinition)
         {

@@ -23,10 +23,16 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
   tagFilter:
+    context_military: true
     type_main: true
   keys: 
 entry:
@@ -174,14 +180,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             rew_project: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   wave_2:
     comment: 
     textNameKey: ''
@@ -231,6 +234,7 @@ steps:
       visible: true
     tags: 
     unitGroups: []
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -319,7 +323,16 @@ steps:
       tags:
         type_main: true
         weight_heavy: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -350,6 +363,7 @@ steps:
         key: default
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -459,6 +473,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges:
       alarm: true
     stateValueChanges: 
@@ -505,3 +520,4 @@ steps:
         stepKey: cleanup
       transitionTimeBased: 
 unitPresets: 
+unitGenerators: 

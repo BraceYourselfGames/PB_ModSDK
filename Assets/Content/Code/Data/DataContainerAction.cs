@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
+using Entitas.VisualDebugging.Unity;
+using PhantomBrigade.AI.Components;
 using PhantomBrigade.Functions;
+using PhantomBrigade.Input.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -85,9 +90,67 @@ namespace PhantomBrigade.Data
             return keys;
         }
     }
-    
-    
 
+    [Serializable]
+    public class DataBlockActionStatusFromPilot
+    {
+        [ValueDropdown ("@DataMultiLinkerUnitStatus.data.Keys")]
+        public string statusKey;
+        
+        [DropdownReference (true)]
+        [ValueDropdown ("@DataMultiLinkerPilotStat.data.Keys")]
+        public string durationFullStatKey;
+
+        [DropdownReference (true)]
+        public DataBlockFloat durationFullMultiplier;
+        
+        [DropdownReference (true)]
+        public DataBlockFloat durationFullOverride;
+        
+        [DropdownReference (true)]
+        [ValueDropdown ("@DataMultiLinkerPilotStat.data.Keys")]
+        public string updateCountStatKey;
+
+        #region Editor
+        #if UNITY_EDITOR
+        
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockActionStatusFromPilot () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+
+        #endif
+        #endregion
+    }
+
+    [Serializable]
+    public class DataBlockActionPilotLink
+    {
+        [DropdownReference (true)]
+        [ValueDropdown ("@DataMultiLinkerPilotStat.data.Keys")]
+        public string chargeStatKey;
+        
+        [DropdownReference (true)]
+        public DataBlockActionStatusFromPilot status;
+        
+        #region Editor
+        #if UNITY_EDITOR
+        
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockActionPilotLink () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+
+        #endif
+        #endregion
+    }
+    
+    [Action][DontDrawComponent]
+    public sealed class DataLinkActionCore : IComponent 
+    { public DataBlockActionCore data; }
+    
     [Serializable]
     public class DataBlockActionCore
     {
@@ -101,9 +164,19 @@ namespace PhantomBrigade.Data
         
         [DropdownReference (true)]
         [ValueDropdown ("@DataMultiLinkerUnitStats.data.Keys")]
+        [ShowIf ("@durationType == DurationType.UnitStat")]
         public string durationUnitStat;
+        
+        [DropdownReference (true)]
+        [ValueDropdown ("@DataMultiLinkerPilotStat.data.Keys")]
+        [ShowIf ("@durationType == DurationType.PilotStat")]
+        public string durationPilotStat;
+        
         public float heatChange;
         public bool secondaryDirection;
+        public bool instantEffect;
+        public bool targetWithoutStandardChecks;
+        public bool targetWithoutPart;
         
         [DropdownReference]
         [ListDrawerSettings (ShowPaging = false)] 
@@ -128,6 +201,10 @@ namespace PhantomBrigade.Data
         [DropdownReference]
         [ListDrawerSettings (ShowPaging = false)] 
         public List<string> eventsOnDispose;
+        
+        [DropdownReference]
+        [ListDrawerSettings (ShowPaging = false)] 
+        public List<ICombatUnitValidationFunction> functionsOnTargetCheck;
         
         [DropdownReference]
         [ListDrawerSettings (ShowPaging = false)] 
@@ -166,6 +243,9 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         public DataBlockScenarioSubcheckUnit unitCheck;
         
+        [DropdownReference (true)]
+        public DataBlockActionPilotLink pilotLink;
+        
         #region Editor
         #if UNITY_EDITOR
         
@@ -180,7 +260,12 @@ namespace PhantomBrigade.Data
     }
     
     
-
+    
+    
+    [Action][DontDrawComponent]
+    public sealed class DataLinkActionUI : IComponent 
+    { public DataBlockActionUI data; }
+    
     [Serializable]
     public class DataBlockActionUI
     {
@@ -227,14 +312,20 @@ namespace PhantomBrigade.Data
         public string key;
     }
 
-
+    [Action][DontDrawComponent]
+    public sealed class DataLinkActionMovement : IComponent 
+    { public DataBlockActionMovement data; }
+    
     [Serializable]
     public class DataBlockActionMovement
     {
         public float movementSpeedScalar = 1f;
     }
-    
 
+    [Action][DontDrawComponent]
+    public sealed class DataLinkActionEquipment : IComponent 
+    { public DataBlockActionEquipment data; }
+    
     [Serializable]
     public class DataBlockActionEquipment
     {
@@ -333,6 +424,10 @@ namespace PhantomBrigade.Data
     }
     
     
+    
+    [Action][DontDrawComponent]
+    public sealed class DataLinkActionCustom : IComponent 
+    { public DataBlockActionCustom data; }
 
     [Serializable] 
     public class DataBlockActionCustom
@@ -427,7 +522,8 @@ public void ValidateFlags ()
         Variable,
         Data,
         Equipment,
-        UnitStat
+        UnitStat,
+        PilotStat
     }
     
     public static class CinematicType
@@ -440,7 +536,6 @@ public void ValidateFlags ()
     public enum HeatType
     {
 		DataConstant,
-		DataPercentOfMax,
 		DataConstantRate
     }
 
@@ -450,21 +545,16 @@ public void ValidateFlags ()
         Equipment       //weight comes from an equipment stat
     }
     
-    public enum AIActionType
+    [Action]
+    public sealed class DataKeyAction : IComponent
     {
-        None,			//Used to block out plans - do not turn plans with this type into actions!
-        AttackMain,
-        AttackSecondary,
-        ReactiveAttackMain,
-        ReactiveAttackSecondary,
-        Eject,
-        Move,
-        Wait,
-        VentHeat,
-        Guard,
-        Dash,
-        ReactiveGuard
+        [EntityIndex] 
+        public string s;
     }
+    
+    [Action][DontDrawComponent]
+    public sealed class DataLinkAction : IComponent 
+    { public DataContainerAction data; }
 
     [Serializable]
     public class DataContainerAction : DataContainerWithText
@@ -552,8 +642,8 @@ public void ValidateFlags ()
             if (dataUI == null)
                 return;
         
-            dataUI.textName = DataManagerText.GetText (TextLibs.combatActions, $"{key}_name");
-            dataUI.textDesc = DataManagerText.GetText (TextLibs.combatActions, $"{key}_text");
+            dataUI.textName = DataManagerText.GetText (TextLibs.combatActions, $"{key}_name", true);
+            dataUI.textDesc = DataManagerText.GetText (TextLibs.combatActions, $"{key}_text", true);
 
             if (dataUI.modes != null)
             {

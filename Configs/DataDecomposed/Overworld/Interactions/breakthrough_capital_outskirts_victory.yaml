@@ -1,0 +1,188 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: ResearchInvestigating
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: event_mech_forest
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.4858491
+        g: 0.7409003
+        b: 1
+        a: 0
+      image: event_mech_forest
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.4862745
+            g: 0.7411765
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: event_behemoth1
+    background:
+      immersive: false
+      focus: false
+      brightness: 0.768
+      color:
+        r: 1
+        g: 0.6667001
+        b: 0.4198113
+        a: 0
+      image: event_behemoth1
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.6666667
+            b: 0.4196079
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_03
+    optionsReused: 
+  step_03:
+    comment: 
+    image: event_breakthrough_capital_outskirts_victory_mobilebase
+    background:
+      immersive: false
+      focus: false
+      brightness: 0.823
+      color:
+        r: 0.5518868
+        g: 1
+        b: 1
+        a: 0
+      image: event_breakthrough_capital_outskirts_victory_mobilebase
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5529412
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !QuestProgress
+            stepRequired: 
+            stepNext: 
+            effectOnExit: true
+            effectOnEntry: true
+            questMain: true
+            questKey: 
+          functionsLocal: 
+    optionsReused: 

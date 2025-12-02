@@ -682,7 +682,7 @@ namespace PhantomBrigade.ModTools
 
                 r = r.Padding (10, 8 * this.verticalSlideT);
 
-                var versionText = $"{ModToolsVersion.version} — {ModToolsVersion.attrByg}\n{ModToolsVersion.attrOdin}";
+                var versionText = $"{ModToolsVersion.version} — {ModToolsVersion.attrVersionSuffix}\n{ModToolsVersion.attrByg} — {ModToolsVersion.attrOdin}";
                 GUI.Label (r, versionText, SirenixGUIStyles.RightAlignedGreyMiniLabel);
             }
         }

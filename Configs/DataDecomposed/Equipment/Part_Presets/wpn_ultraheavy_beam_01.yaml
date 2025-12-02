@@ -1,7 +1,7 @@
 hidden: false
 parents:
 - key: wpn_root_primary
-- key: wpn_perk_filter_gun
+- key: wpn_perk_filter_beam
 livery: ''
 ratingRange: 
 comment: 
@@ -13,18 +13,13 @@ textNameFromRating:
 textDescFromRating: 
 sockets: 
 tags:
-- branch_army
-- branch_experimental
-- branch_reserves
-- branch_specops
 - difficulty_hard
-- part_ultraheavy
-- range_far
-- range_long
-- range_medium
-- range_short
 - part_beam
 - part_energy
+- part_ultraheavy
+- range_long
+- reward_special
+workshopInfo: 
 genSteps:
 - !AddHardpoints
   subsystemsInitial:

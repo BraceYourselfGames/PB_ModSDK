@@ -48,7 +48,12 @@ namespace PhantomBrigade.Data
         [ShowIf ("@DataMultiLinkerWorkshopProject.Presentation.showTagCollections")]
         [ShowInInspector, ReadOnly]
         public static Dictionary<string, HashSet<string>> tagsMap = new Dictionary<string, HashSet<string>> ();
-
+        
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
         
         public static void OnAfterDeserialization ()
         {
@@ -85,12 +90,172 @@ namespace PhantomBrigade.Data
         public static List<string> textKeysSharedSubtitles = new List<string> ();
         public static List<string> textKeysSharedDescriptions = new List<string> ();
         
-        #if UNITY_EDITOR
-
-        [HideInEditorMode]
+        #if UNITY_EDITOR && !PB_MODSDK
+        
         [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
         [LabelText ("Project")]
         public string utilityFilterProjects = string.Empty;
+
+        [HideInEditorMode]
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button]
+        public void IssueResources ()
+        {
+            var playerBase = IDUtility.playerBasePersistent;
+            if (playerBase == null || !playerBase.hasInventoryWorkshopCharges)
+                return;
+            
+            var resources = playerBase.inventoryResources.s;
+            bool filterProjects = !string.IsNullOrEmpty (utilityFilterProjects);
+
+            foreach (var kvp in data)
+            {
+                if (filterProjects && !kvp.Key.Contains (filter))
+                    continue;
+
+                var c = kvp.Value;
+                if (c == null || c.inputResources == null || c.inputResources.Count == 0)
+                    continue;
+
+                foreach (var block in c.inputResources)
+                {
+                    if (resources.ContainsKey (block.key))
+                        resources[block.key] += block.amount;
+                    else
+                        resources.Add (block.key, block.amount);
+                }
+            }
+            
+            if (CIViewBaseWorkshopV2.ins != null && CIViewBaseWorkshopV2.ins.IsEntered ())
+                CIViewBaseWorkshopV2.ins.RefreshList ();
+        }
+        
+        [HideInEditorMode]
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button]
+        public void IssueCharges ()
+        {
+            var playerBase = IDUtility.playerBasePersistent;
+            if (playerBase == null || !playerBase.hasInventoryWorkshopCharges)
+                return;
+            
+            var playerCharges = playerBase.inventoryWorkshopCharges.s;
+            bool filterProjects = !string.IsNullOrEmpty (utilityFilterProjects);
+            
+            foreach (var kvp in data)
+            {
+                if (filterProjects && !kvp.Key.Contains (filter))
+                    continue;
+                
+                var c = kvp.Value;
+                if (c == null)
+                    continue;
+
+                var key = kvp.Key;
+                if (playerCharges.ContainsKey (key))
+                    playerCharges[key] += 1;
+                else
+                    playerCharges.Add (key, 1);
+            }
+            
+            if (CIViewBaseWorkshopV2.ins != null && CIViewBaseWorkshopV2.ins.IsEntered ())
+                CIViewBaseWorkshopV2.ins.RefreshList ();
+        }
+        
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button]
+        public void AddChargeRequirementToFiltered (int count)
+        {
+            foreach (var kvp in data)
+            {
+                if (!string.IsNullOrEmpty (filter) && !kvp.Key.Contains (filter))
+                    continue;
+                
+                var c = kvp.Value;
+                if (c == null)
+                    continue;
+
+                c.unlockCharges = new DataBlockInt { i = Mathf.Max (1, count) };
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button]
+        public void AddWeightTags ()
+        {
+            foreach (var kvp in data)
+            {
+                if (!string.IsNullOrEmpty (filter) && !kvp.Key.Contains (filter))
+                    continue;
+                
+                var c = kvp.Value;
+                if (c == null)
+                    continue;
+
+                if (!c.key.StartsWith ("prt_body_"))
+                    continue;
+
+                if (c.key.EndsWith ("_h"))
+                    c.tags.Add ("weight_heavy");
+                else if (c.key.EndsWith ("_m"))
+                    c.tags.Add ("weight_medium");
+                else if (c.key.EndsWith ("_l"))
+                    c.tags.Add ("weight_light");
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button]
+        public void AddFactionTagToFiltered ([ValueDropdown ("@DataMultiLinkerOverworldFactionBranch.GetKeys ()")] string branchKey)
+        {
+            foreach (var kvp in data)
+            {
+                if (!string.IsNullOrEmpty (filter) && !kvp.Key.Contains (filter))
+                    continue;
+                
+                var c = kvp.Value;
+                if (c == null)
+                    continue;
+
+                if (c.tags == null)
+                    c.tags = new HashSet<string> ();
+
+                if (!c.tags.Contains (EquipmentUtility.workshopTagFactionExclusive))
+                {
+                    c.tags.Add (EquipmentUtility.workshopTagFactionExclusive);
+                }
+
+                if (!c.tags.Contains (branchKey))
+                {
+                    Debug.Log ($"{c.key}: added tag {branchKey}");
+                    c.tags.Add (branchKey);
+                }
+            }
+        }
+
+        /*
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-2)]
+        [Button]
+        public void CheckOutputDoubling ()
+        {
+            foreach (var kvp in data)
+            {
+                var c = kvp.Value;
+                if (c.outputParts != null)
+                {
+                    foreach (var block in c.outputParts)
+                    {
+                        bool keyPresent = !string.IsNullOrEmpty (block.key);
+                        var tagsPresent = block.tagsUsed || block.tags != null;
+                        if (keyPresent && tagsPresent)
+                        {
+                            Debug.LogWarning ($"{kvp.Key} | Double output data | Key: {block.key} | Tags used: {block.tagsUsed} | Tags:\n{block.tags.ToStringFormattedKeyValuePairs (true, multilinePrefix: "-")}");
+                        }
+                    }
+                }
+            }
+        }
+        */
 
         [FoldoutGroup ("Utilities", false), PropertyOrder (-2)]
         [Button]

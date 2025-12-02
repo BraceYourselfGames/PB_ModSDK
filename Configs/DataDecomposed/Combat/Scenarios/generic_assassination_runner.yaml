@@ -76,8 +76,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions:
@@ -100,9 +98,8 @@ states:
             - !CombatUnitBehaviorChange
               behaviourName: DefensiveDestination
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   elite_escape:
     comment: 
     textNameKey: ''
@@ -195,8 +192,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions: 
@@ -221,9 +216,8 @@ states:
                 functionsTimed: 
                 functionsOnAction: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   main:
     comment: 
@@ -302,7 +296,16 @@ steps:
       tags:
         range_medium: true
         type_main: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -332,6 +335,7 @@ steps:
         key: elite_spawn_reference
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -356,3 +360,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

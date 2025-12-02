@@ -6,9 +6,19 @@ color:
   a: 1
 hidden: false
 debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
 restartOnRefresh: false
-fxAttached:
-  key: fx_status_venting_loop
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.9
+  velocityDecayTime: 1
+  key: fx_status_venting_oneshot
   scale:
     x: 1
     y: 1
@@ -20,6 +30,7 @@ durationUpdate:
 buildupDecayRate: 
 buildupThreshold: 
 buildupOverflow: 
+buildupShieldMultiplier: 
 stackable: 
 audio:
   audioOnStart: status_venting_loop
@@ -34,6 +45,7 @@ effectsOnUpdate:
   - !CombatValidateUnitStatus
     key: timed_burn
     present: true
+  triggerCheckPilot: 
   comment:
     comment: If a unit is burning, reset the duration of the burning status effect and apply damage and build burning status effect up on neighboring units.
   functionsOnHost:
@@ -48,6 +60,7 @@ effectsOnUpdate:
       x: 0
       y: 0
       z: 0
+    centered: true
     asset:
       key: fx_status_venting_ignition
       scale:
@@ -93,6 +106,8 @@ effectsOnUpdate:
       z: 0
     audio: status_venting_burning
     delayScaled: 0
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 effectsOnEnd: 
 statOffsets: 

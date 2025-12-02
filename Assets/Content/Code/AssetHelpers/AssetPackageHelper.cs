@@ -6,7 +6,7 @@ using Area;
 
 public static class AssetPackageHelper
 {
-    public static string levelAssetURL = "https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_v4.unitypackage";
+    public static string levelAssetURL = "https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_V20A.unitypackage";
     public static string levelAssetURLCaption = "Download asset package";
         
     public static string levelAssetWarning = "Level previews are not available: assets (tilesets and/or props) not found. Ensure you have the asset package installed.";

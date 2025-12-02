@@ -10,8 +10,9 @@ hardpoints:
 tags:
 - mnf_05
 - spec_stabilized
-- stat_concussive
+- spec_concussion
 - type_level_locked
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -40,7 +41,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 3
+    value: 1.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -70,22 +71,22 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 72
+    value: 80
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 15
+    value: 10
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 7
+    value: 6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 7
+    value: 6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -94,12 +95,72 @@ stats:
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
-visuals:
-- basuto_rifle_set_03_stock
-- shared_grip_set_03_grip
-- basuto_rifle_set_03_front
-- basuto_rifle_set_03_body_b
-attachments: 
+visuals: 
+attachments:
+  vis_00:
+    key: basuto_rifle_set_01_stock
+    centered: false
+    activated: false
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  vis_01:
+    key: shared_grip_set_01_grip
+    centered: false
+    activated: false
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  vis_02:
+    key: basuto_rifle_set_01_front
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  vis_03:
+    key: basuto_rifle_set_01_body_b
+    centered: false
+    activated: false
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
 activation:
   visual:
     local:
@@ -154,7 +215,11 @@ projectile:
     rotationToTarget:
       rotationLimit: 15
   falloff: 
-  falloffGlobal: 
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: -10
+    gradientSize: 20
+    exponent: 1
   animationFade: 
   ballistics: 
   fuseProximity: 
@@ -166,8 +231,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

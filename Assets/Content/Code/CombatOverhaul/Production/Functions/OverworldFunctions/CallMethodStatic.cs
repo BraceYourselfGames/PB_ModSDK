@@ -79,4 +79,52 @@ namespace PhantomBrigade.Functions
 			#endif
 		}
 	}
+
+	[Serializable]
+	public class SetGameplayUIActive : IOverworldFunction
+	{
+		public bool active = false;
+		
+		public void Run ()
+		{
+			#if !PB_MODSDK
+
+			CIViewLoader.SetGameplayUIVisible (active);
+			
+			#endif
+		}
+	}
+	
+	[Serializable]
+	public class SetCameraStable : ICombatFunction
+	{
+		public bool stable = true;
+		public float offset = 0f;
+		
+		public void Run ()
+		{
+			#if !PB_MODSDK
+
+			GameCameraSystem.SetStableMode (stable);
+			GameCameraSystem.SetOffsetOverride (offset);
+			
+			#endif
+		}
+	}
+	
+	[Serializable]
+	public class SetScreenFade : IOverworldFunction
+	{
+		public bool active = true;
+		public bool instant = false;
+		
+		public void Run ()
+		{
+			#if !PB_MODSDK
+
+			PostprocessingHelper.SetFadeAndBlackoutActive (active, instant);
+			
+			#endif
+		}
+	}
 }

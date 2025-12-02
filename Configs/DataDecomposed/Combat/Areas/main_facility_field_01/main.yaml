@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.4
@@ -1109,10 +1117,10 @@ locations:
     - obj_boss_origin
     data: !AreaLocation
       point:
-        x: 130
+        x: 129.6581
         y: -22.5
-        z: 130
-      rotation: 90
+        z: 131.8492
+      rotation: 75
       sizeX: 9
       sizeY: 9
       rect: false
@@ -1286,6 +1294,11 @@ fields:
     x: 55
     y: 5
     z: 55
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 - type: water
   visible: true
@@ -1297,6 +1310,11 @@ fields:
     x: 10
     y: 5
     z: 25
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 - type: water
   visible: true
@@ -1308,6 +1326,11 @@ fields:
     x: 10
     y: 5
     z: 25
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 waypointGroups:
   boss_path_01:

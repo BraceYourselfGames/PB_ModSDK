@@ -74,6 +74,26 @@ public static class UtilityCollections
         return dict.ElementAt (Random.Range (0, dict.Count)).Key;
     }
 
+    private static List<string> keysFiltered = new List<string> ();
+    
+    public static string GetRandomKeyChecked<T> (this IDictionary<string, T> dict, Func<T, bool> valueCheck)
+    {
+        if (dict == null || dict.Count == 0 || valueCheck == null)
+            return default;
+        
+        keysFiltered.Clear ();
+        foreach (var kvp in dict)
+        {
+            if (valueCheck.Invoke (kvp.Value))
+                keysFiltered.Add (kvp.Key);
+        }
+
+        if (keysFiltered.Count == 0)
+            return default;
+
+        return keysFiltered.GetRandomEntry ();
+    }
+
     public static TValue GetRandomValue<TKey, TValue> (this IDictionary<TKey, TValue> dict)
     {
         return dict.ElementAt (Random.Range (0, dict.Count)).Value;
@@ -90,7 +110,20 @@ public static class UtilityCollections
     {
         if (list == null || list.Count == 0)
             return default;
+        if (list.Count == 1)
+            return list[0];
         return list[Random.Range (0, list.Count)];
+    }
+    
+    public static T GetAndRemoveRandomEntry <T> (this List<T> list)
+    {
+        if (list == null || list.Count == 0)
+            return default;
+        
+        var index = Random.Range (0, list.Count);
+        var entry = list[index];
+        list.RemoveAt (index);
+        return entry;
     }
     
     public static void RemoveRandomEntry <T> (this List<T> list)

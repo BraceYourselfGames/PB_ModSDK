@@ -9,6 +9,7 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_05
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -22,7 +23,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 120
+    value: 160
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -42,7 +43,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 70
+    value: 50
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -52,22 +53,22 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 25
+    value: 67
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact_radius:
-    value: 3
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 140
+    value: 130
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 55
+    value: 35
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -123,7 +124,35 @@ activation:
     key: recoil_rifle_sniper
   timing: 
   hitReaction: 
-projectile: 
+projectile:
+  debugIndexRange: {}
+  visual: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff: 
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup:
+    key: timed_unstable
+    statMultiplier: 
+    amount: 0.7
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

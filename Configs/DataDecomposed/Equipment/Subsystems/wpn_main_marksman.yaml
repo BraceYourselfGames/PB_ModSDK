@@ -103,86 +103,8 @@ stats:
 visuals: 
 attachments: 
 activation: 
-projectile:
-  debugIndexRange: {}
-  visual:
-    body:
-      key: fx_projectile_standard_blue
-      keyEnemy: fx_projectile_standard_red
-      scale:
-        x: 0.9
-        y: 0.9
-        z: 4
-      colorOverride: 
-      colorOverrideEnemy: 
-    impact: 
-    deactivation: 
-  audio:
-    onImpact: impact_bullet_mech_small
-    onDeactivation: 
-  damageDelay: 
-  distribution: 
-  range: 
-  fragmentation: 
-  fragmentationDelayed: 
-  falloff:
-    animated: true
-    damageFalloff:
-      modePostWrap: ClampForever
-      modePreWrap: ClampForever
-      keys:
-      - tv_tg:
-          x: 0
-          y: 0.25
-          z: 0
-          w: 1.875
-        w:
-          x: 0.3333333
-          y: 0.3872665
-        m: {}
-      - tv_tg:
-          x: 0.4
-          y: 1
-          z: 1.875
-          w: 0
-        w:
-          x: 0.1507785
-          y: 0.5644016
-        m: {}
-      - tv_tg:
-          x: 0.6
-          y: 1
-          z: 0
-          w: -1.75
-        w:
-          x: 0.9979232
-          y: 0.2294297
-        m: {}
-      - tv_tg:
-          x: 1
-          y: 0.3
-          z: -1.75
-          w: -1.75
-        w:
-          x: 0.3288348
-          y: 0.3333333
-        m: {}
-  falloffGlobal: 
-  animationFade: 
-  ballistics: 
-  fuseProximity: 
-  hitResponse: 
-  splashDamage: 
-  splashImpact:
-    exponent: 2
-    triggerOnDamage: false
-  guidanceData: 
-  guidanceAudio: 
-  statusBuildup: 
-  uiTrajectory: 
-  uiSpeedAverage: 
-  uiCoverageWeight: 
-  uiOptimumThreshold: 
+projectile: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

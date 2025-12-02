@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
+
+#if UNITY_EDITOR
+using UnityEditor;
+using Unity.EditorCoroutines.Editor;
+#endif
 
 namespace PhantomBrigade.Data
 {
@@ -102,8 +108,16 @@ namespace PhantomBrigade.Data
         
         [HideInInspector, ReadOnly]
         public static Dictionary<string, List<DataContainerSubsystem>> hardpointsDataMap = new Dictionary<string, List<DataContainerSubsystem>> ();
+        
+        [ShowIf ("@DataMultiLinkerPartPreset.Presentation.showTagCollections")]
+        [ShowInInspector, ReadOnly]
+        public static HashSet<string> keysWorkshopUnlockable = new HashSet<string> ();
 
-
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
         
         public static void OnAfterDeserialization ()
         {
@@ -115,6 +129,7 @@ namespace PhantomBrigade.Data
             
             hardpointsKeyMap.Clear ();
             hardpointsDataMap.Clear ();
+            keysWorkshopUnlockable.Clear ();
 
             // Fill parents after recursive processing is done on all subsystems, ensuring lack of cyclical refs etc
             foreach (var kvp1 in data)
@@ -221,6 +236,7 @@ namespace PhantomBrigade.Data
             origin.beamProcessed = null;
             origin.customProcessed = null;
             origin.functionsProcessed = null;
+            origin.workshopInfoProc = null;
                 
             ProcessRecursive (origin, origin, 0);
         }
@@ -257,9 +273,14 @@ namespace PhantomBrigade.Data
             }
             
             subsystem.UpdateGroups ();
+            
+            if (!subsystem.hidden && subsystem.workshopInfoProc != null)
+            {
+                if (subsystem.tagsProcessed == null || !subsystem.tagsProcessed.Contains (EquipmentTags.incompatible))
+                    keysWorkshopUnlockable.Add (subsystem.key);
+            }
 
             #if !PB_MODSDK
-
             if (Application.isPlaying && IDUtility.IsGameLoaded ())
             {
                 var equipment = Contexts.sharedInstance.equipment;
@@ -271,7 +292,6 @@ namespace PhantomBrigade.Data
                         entity.ReplaceDataLinkSubsystem (subsystem);
                 }
             }
-
             #endif
         }
 
@@ -457,6 +477,9 @@ namespace PhantomBrigade.Data
                 
                 if (current.activation.timing != null && root.activationProcessed.timing == null)
                     root.activationProcessed.timing = current.activation.timing;
+                
+                if (current.activation.hitReaction != null && root.activationProcessed.hitReaction == null)
+                    root.activationProcessed.hitReaction = current.activation.hitReaction;
             }
 
             // Replace block whole
@@ -532,6 +555,9 @@ namespace PhantomBrigade.Data
                 if (current.projectile.uiSpeedAverage != null && root.projectileProcessed.uiSpeedAverage == null)
                     root.projectileProcessed.uiSpeedAverage = current.projectile.uiSpeedAverage;
                 
+                if (current.projectile.uiEffectivenessMultiplier != null && root.projectileProcessed.uiEffectivenessMultiplier == null)
+                    root.projectileProcessed.uiEffectivenessMultiplier = current.projectile.uiEffectivenessMultiplier;
+                
                 if (current.projectile.uiCoverageWeight != null && root.projectileProcessed.uiCoverageWeight == null)
                     root.projectileProcessed.uiCoverageWeight = current.projectile.uiCoverageWeight;
                 
@@ -542,6 +568,29 @@ namespace PhantomBrigade.Data
             // Replace block whole
             if (current.beam != null && root.beamProcessed == null)
                 root.beamProcessed = current.beam;
+            
+            if (current.workshopInfo != null && root.workshopInfoProc == null)
+                root.workshopInfoProc = current.workshopInfo;
+            
+            if (current.workshopInfo != null)
+            {
+                var workshopInfoCurrent = current.workshopInfo;
+                var workshopInfoRoot = root.workshopInfoProc;
+                if (workshopInfoRoot == null)
+                {
+                    workshopInfoRoot = new WorkshopItemData ();
+                    root.workshopInfoProc = workshopInfoRoot;
+                }
+                
+                if (workshopInfoCurrent.progressLimit != null && workshopInfoRoot.progressLimit == null)
+                    workshopInfoRoot.progressLimit = workshopInfoCurrent.progressLimit;
+                    
+                if (workshopInfoCurrent.inputResourcesViaStats != null && workshopInfoRoot.inputResourcesViaStats == null)
+                    workshopInfoRoot.inputResourcesViaStats = workshopInfoCurrent.inputResourcesViaStats;
+                    
+                if (workshopInfoCurrent.inputResources != null && workshopInfoRoot.inputResources == null)
+                    workshopInfoRoot.inputResources = workshopInfoCurrent.inputResources;
+            }
             
             // Replace custom block whole
             // if (current.custom != null && root.customProcessed == null)
@@ -621,6 +670,8 @@ namespace PhantomBrigade.Data
                     }
                 }
             }
+            
+            
             
             // Just in case we somehow missed a cyclical dependency
             if (depth > 20)
@@ -704,15 +755,6 @@ namespace PhantomBrigade.Data
         
         #if UNITY_EDITOR
         
-        [BoxGroup ("Assets", false), GUIColor (1f, 0.9f, 0.8f)]
-        [HideIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
-        [InfoBox ("@AssetPackageHelper.unitAssetWarning", InfoMessageType.Warning)]
-        [Button (SdfIconType.Download, "Download package"), PropertyOrder (-3)]
-        public void DownloadAssets ()
-        {
-            Application.OpenURL (AssetPackageHelper.levelAssetURL);
-        }
-        
         private static GameObject visualHolder;
         
         [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
@@ -731,14 +773,92 @@ namespace PhantomBrigade.Data
             }
         }
         
-        public static GameObject VisualizeObject (DataContainerSubsystem subsystem, bool processed, bool clearHolder = true, bool focus = true)
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button (ButtonSizes.Large)]
+        public void AddCostStatsToSubsystems  ()
         {
-            if (!AssetPackageHelper.AreUnitAssetsInstalled ())
+            foreach (var d in data)
             {
-                Debug.LogWarning (AssetPackageHelper.unitAssetWarning);
-                return null;
+                if (d.Key.Contains("aux") || d.Key.Contains("perk"))
+                {
+                   if( d.Value.stats!=null)
+                    {
+                        if (d.Value.stats.ContainsKey("scrap_value"))
+                        {
+                            d.Value.stats["scrap_value"] = new DataBlockSubsystemStat();
+                        }
+                        if (d.Value.stats.ContainsKey("comp2_value"))
+                        {
+                            d.Value.stats["comp2_value"] = new DataBlockSubsystemStat();
+                        }
+                        if (d.Value.stats.ContainsKey("comp3_value"))
+                        {
+                            d.Value.stats["comp3_value"] = new DataBlockSubsystemStat();
+                        }
+                        if (!d.Value.stats.ContainsKey("scrap_value"))
+                        {
+                            d.Value.stats.Add("scrap_value", new DataBlockSubsystemStat()); 
+                        }
+                        if (!d.Value.stats.ContainsKey("comp2_value"))
+                        {
+                            d.Value.stats.Add("comp2_value", new DataBlockSubsystemStat()); 
+                        }
+                        if (!d.Value.stats.ContainsKey("comp3_value"))
+                        {
+                            d.Value.stats.Add("comp3_value", new DataBlockSubsystemStat()); 
+                        }
+                       
+                        if (!d.Key.Contains("1")&&!d.Key.Contains("2")&&!d.Key.Contains("3"))
+                        {
+                            d.Value.stats["scrap_value"].value = 1;
+                            d.Value.stats["comp2_value"].value = 1;
+                            d.Value.stats["comp3_value"].value = 1;
+                        }
+                        if (d.Key.Contains("1"))
+                        {
+                            d.Value.stats["scrap_value"].value = 1;
+                            d.Value.stats["comp2_value"].value = 0;
+                            d.Value.stats["comp3_value"].value = 0;
+                        }
+                        if (d.Key.Contains("2"))
+                        {
+                            d.Value.stats["scrap_value"].value = 2;
+                            d.Value.stats["comp2_value"].value = 1;
+                            d.Value.stats["comp3_value"].value = 0;
+                        }
+                        if (d.Key.Contains("3"))
+                        {
+                            d.Value.stats["scrap_value"].value = 3;
+                            d.Value.stats["comp2_value"].value = 0;
+                            d.Value.stats["comp3_value"].value = 1;
+                        }
+                        
+                     
+                    }
+                }
             }
-            
+        }
+        
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button (ButtonSizes.Large)]
+        private void AddTagToSystemWithStat ([ValueDropdown("@DataMultiLinkerUnitStats.data.Keys")] string stat, string tag)
+        {
+            foreach (var kvp in data)
+            {
+                if (kvp.Value == null ||
+                    kvp.Value.stats == null ||
+                    !kvp.Value.stats.ContainsKey(stat) ||
+                    !(kvp.Value.stats[stat].value > 0)||
+                    kvp.Value.tags.Contains(tag))
+                {
+                    continue;
+                }
+                kvp.Value.tags.Add(tag);
+            }
+        }
+
+        public static GameObject VisualizeObject (DataContainerSubsystem subsystem, bool processed, bool clearHolder = true, bool focus = true, bool logMaterialWarnings = false)
+        {
             if (subsystem == null)
                 return null;
             
@@ -765,7 +885,7 @@ namespace PhantomBrigade.Data
             {
                 visualHolder = new GameObject ("DataPreviewHolder");
                 // visualHolder.hideFlags = HideFlags.HideAndDontSave;
-                visualHolder.transform.position = new Vector3 (0f, 50f, 0f);
+                visualHolder.transform.position = new Vector3 (0f, 200f, 0f);
             }
 
             if (clearHolder)
@@ -778,11 +898,13 @@ namespace PhantomBrigade.Data
             var visuals = processed ? subsystem.visualsProcessed : subsystem.visuals;
             if (visuals != null && visuals.Count > 0)
             {
+                int i = -1;
                 foreach (var key in visuals)
                 {
                     if (string.IsNullOrEmpty (key))
                         continue;
                     
+                    i += 1;
                     var visualPrefab = ItemHelper.GetVisual (key, false);
                     if (visualPrefab == null)
                     {
@@ -792,11 +914,33 @@ namespace PhantomBrigade.Data
 
                     var visualInstance = Instantiate (visualPrefab.gameObject).GetComponent<ItemVisual> ();
                     var t = visualInstance.transform;
-                    t.name = visualPrefab.name;
+                    t.name = $"_vis_{i:00} | {visualPrefab.name}";
                     t.parent = subholder;
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero);
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity);
                     t.localScale = Vector3.one;
+                    
+                    if (logMaterialWarnings)
+                    {
+                        var renderers = visualInstance.GetComponentsInChildren<Renderer> (true);
+                        if (renderers != null && renderers.Length > 0)
+                        {
+                            for (int r = 0; r < renderers.Length; r++)
+                            {
+                                var renderer = renderers[r];
+                                var sm = renderer.sharedMaterials;
+                                if (sm == null || sm.Length == 0)
+                                    continue;
+
+                                for (int m = 0; m < sm.Length; m++)
+                                {
+                                    var mat = sm[m];
+                                    if (mat == null)
+                                        Debug.LogWarning ($"Subsystem {subsystem.key} | Material {m} on renderer {renderer.name} under visual {key} is null");
+                                }
+                            }
+                        }
+                    }
                 }
             }
             
@@ -818,24 +962,33 @@ namespace PhantomBrigade.Data
 
                     var visualInstance = Instantiate (visualPrefab.gameObject).GetComponent<ItemVisual> ();
                     var t = visualInstance.transform;
-                    var rotationQt = Quaternion.Euler (block.rotation);
-
-                    var position = block.position;
-                    if (block.centered)
-                    {
-                        if (visualInstance.renderers != null && visualInstance.renderers.Count > 0)
-                        {
-                            var bounds = visualInstance.GetRendererBounds ();
-                            var centerScaled = new Vector3 (bounds.center.x * block.scale.x, bounds.center.y * block.scale.y, bounds.center.z * block.scale.z);
-                            position -= rotationQt * centerScaled;
-                        }
-                    }
-                    
-                    t.name = visualPrefab.name;
+                    t.name = $"{kvp.Key} | {visualPrefab.name}";
                     t.parent = subholder;
-                    t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero) + position;
+                    t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero) + block.position;
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity) * Quaternion.Euler (block.rotation);
                     t.localScale = block.scale;
+                    
+                    if (logMaterialWarnings)
+                    {
+                        var renderers = visualInstance.GetComponentsInChildren<Renderer> (true);
+                        if (renderers != null && renderers.Length > 0)
+                        {
+                            for (int r = 0; r < renderers.Length; r++)
+                            {
+                                var renderer = renderers[r];
+                                var sm = renderer.sharedMaterials;
+                                if (sm == null || sm.Length == 0)
+                                    continue;
+
+                                for (int m = 0; m < sm.Length; m++)
+                                {
+                                    var mat = sm[m];
+                                    if (mat == null)
+                                        Debug.LogWarning ($"Subsystem {subsystem.key} | Material {m} on renderer {renderer.name} under visual {block.key} is null");
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -857,11 +1010,51 @@ namespace PhantomBrigade.Data
 
             return subholder.gameObject;
         }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button, PropertyOrder (-20)]
+        public void LogStatPresence ([ValueDropdown("@DataMultiLinkerUnitStats.data.Keys")] string statKey, bool processed)
+        {
+            if (string.IsNullOrEmpty (statKey))
+                return;
 
+            if (processed)
+            {
+                foreach (var kvp in data)
+                {
+                    var subsystemKey = kvp.Key;
+                    var subsystem = kvp.Value;
+
+                    if (subsystem.hidden || subsystem.statsProcessed == null)
+                        continue;
+
+                    if (!subsystem.statsProcessed.TryGetValue (statKey, out var statData))
+                        continue;
+                
+                    Debug.Log ($"{subsystemKey} | {statKey} (proc.): {statData.value:0.###} ({statData.report})");
+                }
+            }
+            else
+            {
+                foreach (var kvp in data)
+                {
+                    var subsystemKey = kvp.Key;
+                    var subsystem = kvp.Value;
+
+                    if (subsystem.stats == null)
+                        continue;
+
+                    if (!subsystem.stats.TryGetValue (statKey, out var statData))
+                        continue;
+                
+                    Debug.Log ($"{subsystemKey} | {statKey} (editable): {statData.value:0.###} ({statData.report})");
+                }
+            }
+        }
 
         [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
         [Button]
-        public void MultiplyStat (string statKey, float multiplier)
+        public void MultiplyStat ([ValueDropdown("@DataMultiLinkerUnitStats.data.Keys")] string statKey, float multiplier)
         {
             if (statKey == null)
                 return;
@@ -888,6 +1081,24 @@ namespace PhantomBrigade.Data
                     var totalNew = block.value * count;
                     Debug.Log ($"{statKey} on {config.key}: {valueOld:0.##} → {block.value:0.##} | Shots: {count} | Full volley: {totalOld:0.##} → {totalNew:0.##}");
                 }
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
+        [Button]
+        public void DeleteStat ([ValueDropdown("@DataMultiLinkerUnitStats.data.Keys")] string statKey)
+        {
+            if (statKey == null)
+                return;
+            
+            foreach (var kvp in dataFiltered)
+            {
+                var config = kvp.value;
+                if (config == null || config.stats == null || !config.stats.ContainsKey (statKey))
+                    continue;
+                
+                config.stats.Remove (statKey);
+                Debug.Log ($"Deleted stat {statKey} on {config.key}");
             }
         }
 
@@ -951,6 +1162,63 @@ namespace PhantomBrigade.Data
                 }
             }
         }
+        
+        private EditorCoroutine utilityCoroutine = null;
+        private bool IsUtilityOperationAvailable => utilityCoroutine == null;
+        private const string utilityCheck = "IsUtilityOperationAvailable";
+        
+        [HideIf (utilityCheck)]
+        [FoldoutGroup ("Utilities", false), GUIColor ("red")]
+        [Button ("Stop coroutine", ButtonSizes.Large), PropertyOrder (-30)]
+        public void CancelCoroutine ()
+        {
+            EditorCoroutineUtility.StopCoroutine (utilityCoroutine);
+            OnUtilityCoroutineEnd ();
+        }
+
+        private void OnUtilityCoroutineEnd ()
+        {
+            utilityCoroutine = null;
+            EditorUtility.ClearProgressBar ();
+        }
+        
+        [ShowIf (nameof (IsUtilityOperationAvailable))]
+        [FoldoutGroup ("Utilities", false)]
+        [Button ("Validate visuals", ButtonSizes.Large), PropertyOrder (-30)]
+        public void ValidateVisuals ()
+        {
+            if (EditorUtility.DisplayDialog ("Start test", "Are you sure you'd like to validate visuals of all subsystems? This will iterate over every single subsystem in the game and instantiate their visual prefabs to identify missing assets. The process can take a long time.", "Confirm", "Cancel"))
+                utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (ValidateVisualsIE ());
+        }
+
+        public IEnumerator ValidateVisualsIE ()
+        {
+            yield return null;
+
+            var list = GetDataList ();
+            if (list == null || list.Count == 0)
+            {
+                Debug.Log ($"No subsystems to validate");
+                yield break;
+            }
+
+            int i = 0;
+            foreach (var bp in list)
+            {
+                if (bp == null)
+                    continue;
+                
+                if (bp.visuals == null && bp.attachments == null)
+                    continue;
+
+                i += 1;
+                VisualizeObject (bp, false, focus: true, logMaterialWarnings: true);
+                yield return new EditorWaitForSeconds (0.2f);
+            }
+            
+            Debug.Log ($"Finished validating visuals | {i}/{list.Count} subsystems with visuals");
+            OnUtilityCoroutineEnd ();
+        }
 
         /*
         [FoldoutGroup ("Utilities", false), PropertyOrder (-20)]
@@ -958,7 +1226,7 @@ namespace PhantomBrigade.Data
         public void Migrate ()
         {
             data.Clear ();
-            
+
             // Migrate lowest level subsystems
             foreach (var kvp in DataMultiLinkerSubsystemBlueprint.data)
             {
@@ -968,7 +1236,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Can't migrate key {key} from blueprint DB");
                     continue;
                 }
-                
+
                 var sb = kvp.Value;
                 if (sb == null)
                     continue;
@@ -1006,7 +1274,7 @@ namespace PhantomBrigade.Data
                     }
                 }
             }
-            
+
             // Migrate archetypes
             foreach (var kvp in DataMultiLinkerSubsystemArchetype.data)
             {
@@ -1016,7 +1284,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Can't migrate key {key} from archetype DB");
                     continue;
                 }
-                
+
                 var sa = kvp.Value;
                 if (sa == null)
                     continue;
@@ -1311,31 +1579,6 @@ namespace PhantomBrigade.Data
                     var f = subsystem.projectile.falloffGlobal;
                     Debug.Log ($"{subsystemKey} | Has global falloff | Start from stat: {f.rangeStartFromStat} | {f.rangeStart}+{f.gradientSize}");
                 }
-            }
-        }
-        
-        [FoldoutGroup ("Utilities", false)]
-        [Button, PropertyOrder (-2)]
-        public void LogStatPresence (string statKey)
-        {
-            if (string.IsNullOrEmpty (statKey))
-                return;
-            
-            foreach (var kvp in data)
-            {
-                var subsystemKey = kvp.Key;
-                var subsystem = kvp.Value;
-
-                if (subsystem.hidden || subsystem.statsProcessed == null)
-                    continue;
-
-                if (!subsystem.statsProcessed.TryGetValue (statKey, out var statData))
-                    continue;
-
-                if (statData.value <= 0f)
-                    continue;
-                
-                Debug.Log ($"{subsystemKey} | {statKey}: {statData.value:0.###} ({statData.report})");
             }
         }
         

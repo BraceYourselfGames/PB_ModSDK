@@ -1,0 +1,277 @@
+timeLastSync: 0
+localized: true
+exportMode: LinePerKeySplit
+name: Base (Effects)
+description: Game state changes that can occur when a base performs certain actions (e.g. stops for a camp).
+splits: []
+tags: 
+groups: 
+entries:
+  camp_general_base__effect:
+    noteDev: 
+    temp: false
+    text: Multiple effects
+  camp_general_base__name:
+    noteDev: 
+    temp: false
+    text: Rest stop
+  camp_general_base__source:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of stopping for a camp.
+  camp_general_base__text:
+    noteDev: 
+    temp: false
+    text: All pilots lose some fatigue.
+  camp_general_hope_loss__name:
+    noteDev: 
+    temp: false
+    text: Slowing momentum
+  camp_general_hope_loss__text:
+    noteDev: 
+    temp: false
+    text: The enemy forces continue to oppress the province in your absence. Stopping to rest is a necessity and shouldn't be an issue once in a while, but the local population might start losing hope if this is done too frequently.
+  camp_pilot_base__name:
+    noteDev: 
+    temp: false
+    text: Medical bay
+  camp_pilot_base__source:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of assigning a pilot to the medical bay.
+  camp_pilot_bespoke__source:
+    noteDev: 
+    temp: false
+    text: This is event depends on pilot behaviour in combat.
+  camp_pilot_bespoke_benchwarmer__effect:
+    noteDev: 
+    temp: false
+    text: Bench warmer
+  camp_pilot_bespoke_benchwarmer__text:
+    noteDev: 
+    temp: false
+    text: Worried about not participating in combat.
+  camp_pilot_bespoke_concussions__name:
+    noteDev: 
+    temp: false
+    text: Doctor sleep
+  camp_pilot_bespoke_concussions__text:
+    noteDev: 
+    temp: false
+    text: Satisfied with knocking out multiple enemies in the last fight.
+  camp_pilot_bespoke_crash__name:
+    noteDev: 
+    temp: false
+    text: Rattled
+  camp_pilot_bespoke_crash__text:
+    noteDev: 
+    temp: false
+    text: Remembering the crash in the last fight.
+  camp_pilot_bespoke_damage_dealer__name:
+    noteDev: 
+    temp: false
+    text: Did my part
+  camp_pilot_bespoke_damage_dealer__text:
+    noteDev: 
+    temp: false
+    text: Satisfied with their actions in the last fight.
+  camp_pilot_bespoke_eject__name:
+    noteDev: 
+    temp: false
+    text: Safe ejection
+  camp_pilot_bespoke_exhausted__name:
+    noteDev: 
+    temp: false
+    text: Essential rest
+  camp_pilot_bespoke_exhausted__text:
+    noteDev: 
+    temp: false
+    text: Was deployed with maximum fatigue.
+  camp_pilot_bespoke_friendly_fire__name:
+    noteDev: 
+    temp: false
+    text: Regret
+  camp_pilot_bespoke_friendly_fire__text:
+    noteDev: 
+    temp: false
+    text: Regrets the friendly fire incident in the last fight.
+  camp_pilot_bespoke_kills__name:
+    noteDev: 
+    temp: false
+    text: Reaper
+  camp_pilot_bespoke_kills__text:
+    noteDev: 
+    temp: false
+    text: Satisfied with taking down multiple enemies.
+  camp_pilot_bespoke_nonparticipation__name:
+    noteDev: 
+    temp: false
+    text: Dead weight
+  camp_pilot_bespoke_nonparticipation__text:
+    noteDev: 
+    temp: false
+    text: This pilot is worried about not contributing to the last fight they were deployed on.
+  camp_pilot_bespoke_part_destruction__name:
+    noteDev: 
+    temp: false
+    text: Dismemberer
+  camp_pilot_bespoke_part_destruction__text:
+    noteDev: 
+    temp: false
+    text: Fondly remembers ripping off part of an enemy mech.
+  camp_pilot_hope_l1__name:
+    noteDev: 
+    temp: false
+    text: Hope I
+  camp_pilot_hope_l2__name:
+    noteDev: 
+    temp: false
+    text: Hope II
+  camp_pilot_hope_l3__name:
+    noteDev: 
+    temp: false
+    text: Hope 3
+  camp_pilot_rnd__source:
+    noteDev: 
+    temp: false
+    text: This is a random event that could depend on pilot environment or chance.
+  camp_pilot_rnd_health_pos1__name:
+    noteDev: 
+    temp: false
+    text: Favorite bed
+  camp_pilot_rnd_health_pos2__name:
+    noteDev: 
+    temp: false
+    text: Deep sleep
+  camp_pilot_rnd_sleepless__name:
+    noteDev: 
+    temp: false
+    text: Sleepless
+  camp_pilot_rnd_workshop_noise__name:
+    noteDev: 
+    temp: false
+    text: Noisy workshop
+  camp_unit_base_l1__name:
+    noteDev: 
+    temp: false
+    text: Repair bay
+  camp_unit_base_l1__source:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of assigning a mech to the repair bay.
+  camp_unit_base_l2__name:
+    noteDev: 
+    temp: false
+    text: Repair bay MK2
+  camp_unit_base_l3__name:
+    noteDev: 
+    temp: false
+    text: Repair bay MK3
+  camp_unit_hope_l1__name:
+    noteDev: 
+    temp: false
+    text: Hope I
+  camp_unit_hope_l1__source:
+    noteDev: 
+    temp: false
+    text: This effect is based on the Hope level. Hope is gained when you progress the campaign and lost when the enemy gains an upper hand.
+  camp_unit_hope_l2__name:
+    noteDev: 
+    temp: false
+    text: Hope II
+  camp_unit_hope_l3__name:
+    noteDev: 
+    temp: false
+    text: Hope III
+  camp_unit_rnd__source:
+    noteDev: 
+    temp: false
+    text: This is a random event that could be based on mech equipment, condition or chance.
+  camp_unit_rnd_repair_damage_pos1__name:
+    noteDev: 
+    temp: false
+    text: Breathable
+  camp_unit_rnd_repair_damage_pos1__text:
+    noteDev: 
+    temp: false
+    text: This mech is missing entire sections and is riddled with bullet holes. The mechanics appreciated the gentle breeze while working on the overheating reactor.
+  camp_unit_rnd_repair_damage_pos2__name:
+    noteDev: 
+    temp: false
+    text: Full rebuild
+  camp_unit_rnd_repair_damage_pos2__text:
+    noteDev: 
+    temp: false
+    text: The terrible condition of this unit was an opportunity to start from scratch. Mechanics used some supplies to quickly replace totaled systems.
+  camp_unit_rnd_repair_defect_pos1__name:
+    noteDev: 
+    temp: false
+    text: Easy access
+  camp_unit_rnd_repair_defect_pos1__text:
+    noteDev: 
+    temp: false
+    text: 'This heavily damaged mech is a favorite of the mechanics: all the broken metal and missing panels make it easy to see and fix the internals.'
+  camp_unit_rnd_repair_neg1__name:
+    noteDev: 
+    temp: false
+    text: Wrench slip
+  camp_unit_rnd_repair_neg2__name:
+    noteDev: 
+    temp: false
+    text: Reactor overheat
+  camp_unit_rnd_repair_neg3__name:
+    noteDev: 
+    temp: false
+    text: Typical Tsubasa
+  camp_unit_rnd_repair_pos1__name:
+    noteDev: 
+    temp: false
+    text: Lucky weld
+  camp_unit_rnd_repair_pos2__name:
+    noteDev: 
+    temp: false
+    text: Perfect fit
+  camp_unit_rnd_repair_pos3__name:
+    noteDev: 
+    temp: false
+    text: Easy Elbrus
+  resupply_general_base__name:
+    noteDev: 
+    temp: false
+    text: Resupply complete
+  resupply_general_base__source:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of resupplying at a frontline base.
+  resupply_general_base__text:
+    noteDev: 
+    temp: false
+    text: All pilots recovered health and lost some fatigue. All mechs have been repaired. The mobile base was restocked with camp supplies.
+  shared_general_workshop_complete__effect:
+    noteDev: 
+    temp: false
+    text: Projects completed
+  shared_general_workshop_complete__name:
+    noteDev: 
+    temp: false
+    text: Workshop
+  travel_general_base__name:
+    noteDev: 
+    temp: false
+    text: Travel complete
+  travel_general_base__source:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of travel between provinces.
+  travel_general_base__text:
+    noteDev: 
+    temp: false
+    text: All pilots recovered health and lost some fatigue. All mechs have been repaired. The mobile base was restocked with camp supplies.
+  travel_general_hope_loss__name:
+    noteDev: 
+    temp: false
+    text: New territory
+  travel_general_hope_loss__text:
+    noteDev: 
+    temp: false
+    text: New province, new beginning. Hope level reset to 0.

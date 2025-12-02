@@ -1,0 +1,34 @@
+depthBackground: 90
+depthForeground: 90
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !SelectEntity
+      nameInternal: special_breakthrough_train
+      delay: 1
+      select: true
+      focus: true
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: overworld_movement_overdrive
+  effectsCombat: 

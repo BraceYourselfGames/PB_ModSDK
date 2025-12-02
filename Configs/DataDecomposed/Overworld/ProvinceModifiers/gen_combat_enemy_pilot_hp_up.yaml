@@ -1,0 +1,36 @@
+hidden: false
+positive: false
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: true
+hue: 0
+icon: s_icon_l32_socket_upperbody
+tags:
+- type_negative
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit:
+  - !CombatValidateUnitAllied
+    present: false
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit: 
+  functionsPilot:
+  - !PilotTraitInject
+    traitKey: enemy_pilot_increased_hp
+    slotKey: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

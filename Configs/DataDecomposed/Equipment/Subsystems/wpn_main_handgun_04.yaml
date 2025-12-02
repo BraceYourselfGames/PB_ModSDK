@@ -11,21 +11,21 @@ hardpoints:
 tags:
 - mnf_06
 - spec_stabilized
-- stat_concussive
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
-    value: 6
+    value: 1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 1.8
+    value: 0.7
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 95
+    value: 45
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -40,12 +40,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 1.6
+    value: 2.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 25
+    value: 95
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -60,7 +60,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 55
+    value: 35
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -80,7 +80,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_speed:
-    value: 400
+    value: 370
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -141,49 +141,12 @@ projectile:
   range: 
   fragmentation: 
   fragmentationDelayed: 
-  falloff:
-    animated: true
-    damageFalloff:
-      modePostWrap: ClampForever
-      modePreWrap: ClampForever
-      keys:
-      - tv_tg:
-          x: 0
-          y: 0.4962264
-          z: 2.356377
-          w: 2.356377
-        w:
-          x: 0.3333333
-          y: 0.1946475
-        m: {}
-      - tv_tg:
-          x: 0.2756166
-          y: 1
-          z: 0
-          w: 0
-        w:
-          x: 0.3333333
-          y: 0.3333333
-        m: {}
-      - tv_tg:
-          x: 0.6034884
-          y: 1
-          z: 0.007910742
-          w: 0.007910742
-        w:
-          x: 0.9979232
-          y: 0.9973046
-        m: {}
-      - tv_tg:
-          x: 1
-          y: 0.125113
-          z: -0.008274017
-          w: -0.008274017
-        w:
-          x: 0.3288348
-          y: 0.3333333
-        m: {}
-  falloffGlobal: 
+  falloff: 
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: -10
+    gradientSize: 45
+    exponent: 1
   animationFade: 
   ballistics: 
   fuseProximity: 
@@ -195,8 +158,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

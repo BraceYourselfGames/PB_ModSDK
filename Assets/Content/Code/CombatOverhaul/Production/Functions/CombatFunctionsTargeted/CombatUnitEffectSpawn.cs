@@ -9,6 +9,7 @@ namespace PhantomBrigade.Functions
     {
         public Vector3 position;
         public Vector3 rotation;
+        public bool centered = true;
         public DataBlockAsset asset = new DataBlockAsset ();
 
         public void Run (PersistentEntity unitPersistent)
@@ -22,7 +23,8 @@ namespace PhantomBrigade.Functions
             if (unitCombat == null || !unitCombat.hasPosition || !unitCombat.hasRotation)
                 return;
 
-            var positionFinal = unitCombat.GetCenterPoint () + (unitCombat.rotation.q * position);
+            var positionStart = centered ? unitCombat.GetCenterPoint () : unitCombat.position.v;
+            var positionFinal = positionStart + (unitCombat.rotation.q * position);
             var directionFinal = (unitCombat.rotation.q * Quaternion.Euler (rotation)) * Vector3.forward;
             
             AssetPoolUtility.ActivateInstance (asset.key, positionFinal, directionFinal, asset.scale);

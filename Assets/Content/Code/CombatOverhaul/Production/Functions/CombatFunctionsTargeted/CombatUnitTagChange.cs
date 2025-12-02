@@ -22,4 +22,24 @@ namespace PhantomBrigade.Functions
             #endif
         }
     }
+    
+    [Serializable]
+    public class CombatUnitRoleChange : ICombatFunctionTargeted
+    {
+        [ValueDropdown ("@DataMultiLinkerUnitRole.data.Keys")]
+        public string role;
+
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+
+            if (unitPersistent == null || !unitPersistent.hasUnitIdentification)
+                return;
+
+            var id = unitPersistent.unitIdentification;
+            unitPersistent.ReplaceUnitIdentification (role, id.nameSerial, id.nameLoc, id.nameOverride);
+            
+            #endif
+        }
+    }
 }

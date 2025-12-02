@@ -1,9 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace PhantomBrigade.Data
 {
+    [HideInInspector]
+    public class DataBlockMechCamera
+    {
+        public enum MechCameraFollowMode
+        {
+            Locked,
+            Orbital
+        }
+
+        public enum MechCameraTargetMode
+        {
+            Torso,
+            WeaponLeft,
+            WeaponRight
+        }
+
+        public MechCameraTargetMode target;
+        public MechCameraFollowMode followMode;
+        public float FOV;
+        public Vector3 offset;
+        public float movementDamping;
+        public float aimDamping;
+
+        [ShowIf ("@followMode == MechCameraFollowMode.Orbital")]
+        public float orbitalAngle;
+    }
+
     [Serializable]
     public class DataContainerSettingsCamera : DataContainerUnique
     {
@@ -22,5 +50,8 @@ namespace PhantomBrigade.Data
         public int shadowOffsetOverworld = -60;
         public int shadowOffsetCombat = -60;
         public int shadowOffsetBase = -10;
+
+        [Header ("Mech-Mounted Camera Presets")]
+        public SortedDictionary<string, DataBlockMechCamera> mechMountedCameraPresets = new SortedDictionary<string, DataBlockMechCamera> ();
     }
 }

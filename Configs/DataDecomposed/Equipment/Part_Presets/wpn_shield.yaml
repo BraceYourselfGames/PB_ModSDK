@@ -10,10 +10,6 @@ textDescFromRating:
 sockets:
 - equipment_left
 tags:
-- branch_army
-- branch_experimental
-- branch_reserves
-- branch_specops
 - branch_trainingarmy
 - branch_trainingreserves
 - difficulty_hard
@@ -23,6 +19,39 @@ tags:
 - equipment_left
 - item_part
 - wpn_secondary
+workshopInfo:
+  1:
+    progressLimit:
+      i: 2
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 250
+    basePartRequirements: 
+  2:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 400
+    - key: components_r2
+      amount: 12
+    basePartRequirements:
+      workshop_tech_r2: 1
+  3:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 500
+    - key: components_r2
+      amount: 12
+    - key: components_r3
+      amount: 8
+    basePartRequirements:
+      workshop_tech_r3: 1
 genSteps:
 - !AddHardpoints
   subsystemsInitial: 

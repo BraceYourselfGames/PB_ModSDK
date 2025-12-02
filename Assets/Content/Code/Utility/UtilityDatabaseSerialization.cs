@@ -22,7 +22,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
 {
     #if UNITY_EDITOR
     #if PB_MODSDK
-    
+
     public static UtilityDatabaseSerialization ins;
     private static bool initialized = false;
 
@@ -100,7 +100,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         var multilinkerText = multilinkerComponents.ToStringFormatted (multiline: true, toStringOverride: (x) => x.GetType ().Name);
         Debug.Log ($"Multilinkers ({multilinkerComponents.Count}):\n{multilinkerText}");
     }
-    
+
     [VerticalGroup (OdinGroup.Name.Standard)]
     [Button ("Load all linkers", ButtonSizes.Large)]
     public void LoadAllLinkers ()
@@ -237,7 +237,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
 
     private static Type dataTypeCollection = typeof (DataContainer);
     private static Type dataTypeGlobal = typeof (DataContainerUnique);
-    
+
     public static Component GetComponentForDataType (Type dataType)
     {
         if (!initialized || dataType == null)
@@ -387,7 +387,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
 
     [VerticalGroup (OdinGroup.Name.Mod)]
     [EnableIf (nameof(enableConfigUpdates))]
-    [PropertyTooltip ("Update config DBs in all mods. New or change config entries from the SDK will be copied to the mod. This may take a while.")]
+    [PropertyTooltip ("Update config DBs in all mods. New or changed config entries from the SDK will be copied to the mod. This may take a while.")]
     [Button (ButtonSizes.Large)]
     public void UpdateAllFromSDK ()
     {
@@ -415,7 +415,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         var modData = DataContainerModData.selectedMod;
         if (modData == null)
             return;
-        
+
         var projectPath = modData.GetModPathProject ();
         if (!EditorUtility.DisplayDialog ("Restore Configs from SDK", $"Are you sure you'd like to restore all the config DBs in this project (ID {modData.id}) from the SDK? This will delete any ConfigOverrides you have created.\n\nProject folder: \n{projectPath}", "Confirm", "Cancel"))
         {
@@ -423,12 +423,12 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         }
         utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (RestoreAllIE ());
     }
-    
+
     void OnEnable ()
     {
         if (!initialized)
         {
-            initialized = true; 
+            initialized = true;
             Initialize ();
         }
     }
@@ -457,7 +457,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         {
             var type = component.GetType ();
             linkerComponentLookup[type.Name] = component;
-            
+
             var dataTypeArgument = type.BaseType?.GenericTypeArguments.FirstOrDefault ();
             if (dataTypeArgument != null)
                 dataTypeToLinkerComponentLookup[dataTypeArgument] = component;
@@ -473,7 +473,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
             var dataTypeArgument = type.BaseType?.GenericTypeArguments.FirstOrDefault ();
             if (dataTypeArgument != null)
                 dataTypeToMultiLinkerComponentLookup[dataTypeArgument] = component;
-            
+
             var dml = component as IDataMultiLinker;
             multiLinkerInterfaceLookup[type.Name] = dml;
             if (dml == null)
@@ -534,13 +534,13 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         }
     }
     bool enableConfigUpdates => IsUtilityOperationAvailable && checksumsLoaded;
-    
+
     static readonly Dictionary<Type, Component> dataTypeToLinkerComponentLookup = new Dictionary<Type, Component> ();
     static readonly Dictionary<Type, Component> dataTypeToMultiLinkerComponentLookup = new Dictionary<Type, Component> ();
 
     static readonly Dictionary<string, Component> linkerComponentLookup = new Dictionary<string, Component> ();
     static readonly Dictionary<string, Component> multiLinkerComponentLookup = new Dictionary<string, Component> ();
-    
+
     static readonly Dictionary<string, IDataMultiLinker> multiLinkerInterfaceLookup = new Dictionary<string, IDataMultiLinker> ();
     static readonly Dictionary<Type, IDataMultiLinker> containerLookup = new Dictionary<Type, IDataMultiLinker> ();
 

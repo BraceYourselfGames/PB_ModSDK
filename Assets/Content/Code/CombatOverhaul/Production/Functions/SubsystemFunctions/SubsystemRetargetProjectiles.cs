@@ -103,7 +103,7 @@ namespace PhantomBrigade.Functions
 
             unitTargetsAll.Clear ();
 
-            var unitParticipants = ScenarioUtility.GetCombatParticipantUnits ();
+            var unitParticipants = ScenarioUtility.GetParticipantUnitsPersistent ();
             foreach (var unitPersistent in unitParticipants)
             {
                 if (unitPersistent.isHidden || !unitPersistent.isUnitDeployed || unitPersistent.isDestroyed || unitPersistent.isWrecked)

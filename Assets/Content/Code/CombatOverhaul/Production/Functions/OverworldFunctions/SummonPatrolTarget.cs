@@ -1,4 +1,5 @@
 using System;
+using Content.Code.CombatOverhaul.Production.Features.AI.Overworld.Commanders;
 using PhantomBrigade.Data;
 using PhantomBrigade.Overworld.Systems;
 using UnityEngine;
@@ -6,17 +7,8 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class SummonPatrolTarget : IOverworldEventFunction, IOverworldActionFunction
+    public class SummonPatrolTarget : IOverworldActionFunction
     {
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            #if !PB_MODSDK
-
-            Run (target);
-            
-            #endif
-        }
-        
         public void Run (OverworldActionEntity source)
         {
             #if !PB_MODSDK

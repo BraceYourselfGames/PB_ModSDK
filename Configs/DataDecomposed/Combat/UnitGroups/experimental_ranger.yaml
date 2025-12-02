@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_experimental
 tags:
@@ -12,78 +12,52 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_sharpshooter
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: 0
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: sharpshooter
-    liveryPreset: inv_exp_g1_ranger
-    custom: 
-  - keyExternal: false
-    key: tank_support_e_long_standard_hybrid
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: 0
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: support
-    liveryPreset: inv_exp_g1_ranger
-    custom: 
-- liveryPreset: ''
-  units:
-  - keyExternal: false
-    key: mech_sharpshooter
-    countMin: 1
+  - keyExternal: true
+    key: vhc_mech_w1_lr_harasser_ew
+    countMin: 2
     countMax: 1
     countRandom: false
     levelOffsetMin: 1
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q2_uncommon
-    aiBehavior: Flanker
+    aiBehavior: StandoffAttack
     aiTargeting: sharpshooter
-    liveryPreset: inv_exp_g2_ranger
-    custom: 
-  - keyExternal: false
-    key: tank_support_e_long_standard_hybrid
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: 0
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: support
     liveryPreset: inv_exp_g1_ranger
     custom: 
-  - keyExternal: false
-    key: tank_scout_eleavted
-    countMin: 1
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w1_lr_harasser_ew
+    countMin: 2
     countMax: 1
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
+    aiTargeting: sharpshooter
+    liveryPreset: inv_exp_g2_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w1_lr_ew
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
     aiBehavior: Flanker
-    aiTargeting: scout
+    aiTargeting: support
     liveryPreset: inv_exp_g1_ranger
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_sharpshooter
-    countMin: 2
+  - keyExternal: true
+    key: vhc_mech_w1_lr_harasser_ew
+    countMin: 1
     countMax: 1
     countRandom: false
     levelOffsetMin: 1
@@ -94,9 +68,9 @@ unitsPerGrade:
     aiTargeting: sharpshooter
     liveryPreset: inv_exp_g3_ranger
     custom: 
-  - keyExternal: false
-    key: tank_support_e_long_standard_hybrid
-    countMin: 1
+  - keyExternal: true
+    key: vhc_mech_w1_lr_ew
+    countMin: 2
     countMax: 2
     countRandom: false
     levelOffsetMin: 0
@@ -107,18 +81,31 @@ unitsPerGrade:
     aiTargeting: support
     liveryPreset: inv_exp_g2_ranger
     custom: 
-  - keyExternal: false
-    key: tank_scout_eleavted
+  - keyExternal: true
+    key: vhc_mech_w1_uh_ew
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: 0
+    levelOffsetMin: 1
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: scout
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
+    aiTargeting: juggernaut
     liveryPreset: inv_exp_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_ml_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
+    aiTargeting: artillery
+    liveryPreset: 
     custom: 
 unitPresets:
   mech_sharpshooter: !UnitFilter

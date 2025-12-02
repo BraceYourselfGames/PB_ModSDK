@@ -24,14 +24,19 @@ dataCore:
   durationType: Equipment
   duration: 1
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation: 
   functionsOnModification: 
@@ -63,6 +68,7 @@ dataCore:
       tags:
         ability_defense: true
       present: true
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment:

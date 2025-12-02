@@ -190,6 +190,7 @@ namespace PhantomBrigade.Data
     {
         [PropertyOrder (-10)]
         [LabelText ("Name")]
+        [InlineButton("ApplyToUnitInHangar", "Apply in hangar →", ShowIf = "@!Application.isPlaying")]
         public string name;
         
         [PropertyOrder (-9)]
@@ -305,6 +306,72 @@ namespace PhantomBrigade.Data
             preview.Refresh (livery);
         }
 
+        #if !PB_MODSDK
+        public void ApplyToUnit (PersistentEntity unit)
+        {
+            if (unit == null || !unit.isUnitTag)
+                return;
+            
+            var liveryDataForUnit = nodeProcessed != null && !string.IsNullOrEmpty (nodeProcessed.livery) ? DataMultiLinkerEquipmentLivery.GetEntry (nodeProcessed.livery) : null;
+            bool liveryUsedOnUnit = liveryDataForUnit != null;
+            if (liveryUsedOnUnit)
+                unit.ReplaceDataKeyEquipmentLivery (nodeProcessed.livery);
+            else if (unit.hasDataKeyEquipmentLivery)
+                unit.RemoveDataKeyEquipmentLivery ();
+
+            var parts = EquipmentUtility.GetPartsInUnit (unit);
+            bool socketsUsed = 
+                socketsProcessed != null &&
+                socketsProcessed.Count > 0;
+            
+            foreach (var part in parts)
+            {
+                var socket = part.partParentUnit.socket;
+                var socketData = 
+                    socketsUsed && socketsProcessed.ContainsKey (socket) ? 
+                    socketsProcessed[socket] : 
+                    null;
+                
+                var liveryDataForPart = 
+                    socketData != null && socketData.node != null && !string.IsNullOrEmpty (socketData.node.livery) ? 
+                    DataMultiLinkerEquipmentLivery.GetEntry (socketData.node.livery) : 
+                    null;
+                
+                bool liveryUsedOnPart = liveryDataForPart != null;
+                if (liveryUsedOnPart)
+                    part.ReplaceDataKeyEquipmentLivery (socketData.node.livery);
+                else if (part.hasDataKeyEquipmentLivery)
+                    part.RemoveDataKeyEquipmentLivery ();
+
+                var subsystems = EquipmentUtility.GetSubsystemsInPart (part);
+                bool overridesPerSubsystemUsed = 
+                    socketData != null && 
+                    socketData.hardpoints != null && 
+                    socketData.hardpoints.Count > 0;
+                
+                foreach (var subsystem in subsystems)
+                {
+                    var hardpoint = subsystem.subsystemParentPart.hardpoint;
+                    var hardpointData = 
+                        overridesPerSubsystemUsed && socketData.hardpoints.ContainsKey (hardpoint) ? 
+                        socketData.hardpoints[hardpoint] : 
+                        null;
+                    
+                    var liveryDataForSubsystem = 
+                        hardpointData != null && !string.IsNullOrEmpty (hardpointData.livery) ? 
+                        DataMultiLinkerEquipmentLivery.GetEntry (hardpointData.livery) : 
+                        null;
+                    
+                    bool liveryUsedOnSubsystem = liveryDataForSubsystem != null;
+                    if (liveryUsedOnSubsystem)
+                        subsystem.ReplaceDataKeyEquipmentLivery (hardpointData.livery);
+                    else if (subsystem.hasDataKeyEquipmentLivery)
+                        subsystem.RemoveDataKeyEquipmentLivery ();
+                }
+            }
+        }
+        #endif
+
         #if UNITY_EDITOR
 
         private void TrySelectParent ()
@@ -342,6 +409,32 @@ namespace PhantomBrigade.Data
         {
             if (sockets == null)
                 sockets = new Dictionary<string, DataBlockUnitLiveryPresetSocket> ();
+        }
+
+        private void ApplyToUnitInHangar ()
+        {
+            #if !PB_MODSDK
+            if (!Application.isPlaying)
+                return;
+            
+            if (!IDUtility.IsGameLoaded () || !IDUtility.IsGameState (GameStates.basecrawler) || !CIViewBaseCustomizationRoot.ins.IsEntered ())
+            {
+                Debug.LogWarning ($"Failed to apply preset: the game isn't loaded or player isn't in customization view");
+                return;
+            }
+
+            var unit = IDUtility.GetPersistentEntity (CIViewBaseLoadout.selectedUnitName);
+            if (unit == null)
+            {
+                Debug.LogWarning ($"Failed to apply preset: currently customized unit wasn't found");
+                return;
+            }
+
+            ApplyToUnit (unit);
+            
+            CIViewBaseCustomizationRoot.ins.UpdateUnitLivery ();
+            // CIViewBaseCustomizationSelector.ins.RebuildForLivery (unit, null, IDUtility.playerBasePersistent);
+            #endif
         }
         
         #endif

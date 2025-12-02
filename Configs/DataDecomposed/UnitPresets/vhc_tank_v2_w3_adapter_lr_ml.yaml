@@ -23,6 +23,20 @@ parts:
     rating: 
     systems: 
 animationOverrides: 
-functions:
-- !CombatUnitSetAnimOverridePitch
-  angle: -60
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetAnimOverridePitch
+      angle: -60
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

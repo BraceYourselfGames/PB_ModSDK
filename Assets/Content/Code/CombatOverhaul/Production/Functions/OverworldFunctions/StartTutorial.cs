@@ -5,25 +5,17 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
 	[Serializable]
-	public class StartTutorial : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunction, ICombatFunction, ICombatFunctionDelayed
+	public class StartTutorial : IOverworldActionFunction, IOverworldFunction, ICombatFunction, ICombatFunctionDelayed
 	{
 		[ValueDropdown("@DataMultiLinkerTutorial.data.Keys")]
 		public string key;
-
-		public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-		{
-			#if !PB_MODSDK
-
-			CIViewTutorial.ins.OnTutorialStartFromKey (key, true);
-			
-			#endif
-		}
+		public bool allowRepeat = true;
 		
 		public void Run (OverworldActionEntity source)
 		{
 			#if !PB_MODSDK
 
-			CIViewTutorial.ins.OnTutorialStartFromKey (key, true);
+			CIViewTutorial.ins.OnTutorialStartFromKey (key, allowRepeat);
 			
 			#endif
 		}
@@ -32,7 +24,7 @@ namespace PhantomBrigade.Functions
 		{
 			#if !PB_MODSDK
 
-			CIViewTutorial.ins.OnTutorialStartFromKey (key, true);
+			CIViewTutorial.ins.OnTutorialStartFromKey (key, allowRepeat);
 			
 			#endif
 		}

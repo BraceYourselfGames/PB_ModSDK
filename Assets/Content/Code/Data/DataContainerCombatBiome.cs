@@ -18,10 +18,10 @@ namespace PhantomBrigade.Data
 
         public void OnBeforeSerialization ()
         {
-            #if UNITY_EDITOR
+            #if UNITY_EDITOR && !PB_MODSDK
             if (texture == null)
             {
-                // path = string.Empty;
+                path = string.Empty;
                 return;
             };
 
@@ -36,15 +36,10 @@ namespace PhantomBrigade.Data
 
         public void OnAfterDeserialization ()
         {
-            if (!ResourceDatabaseManager.IsDatabaseAvailable ())
-                return;
-            
-            texture = !string.IsNullOrEmpty (path) ? Resources.Load<Texture2D> (path) : null;
             #if !PB_MODSDK
-
+            texture = !string.IsNullOrEmpty (path) ? Resources.Load<Texture2D> (path) : null;
             if (texture == null)
                 Debug.LogWarning ($"Failed to load texture from path {path}");
-
             #endif
         }
     }

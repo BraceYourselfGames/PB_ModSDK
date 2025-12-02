@@ -14,6 +14,7 @@ steps:
     core: 
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -44,6 +45,7 @@ steps:
       tagsUsed: true
       tags:
         walker_frigate: true
+        walker_frigate_tutorial: false
       blueprintKeys:
       - walker_shieldbearer_beam
       - walker_shieldbearer_cannon
@@ -64,15 +66,16 @@ steps:
       delay: 0
       densityGlobal: 0.2
       densityDistance: 0.5
-      densityHeight: 0.5
+      densityHeight: 0.2
       heightOffset: 10
     - !CombatChangeFogCustom
       time: 10
       delay: 6
       densityGlobal: 0.2
       densityDistance: 0.5
-      densityHeight: 0.2
+      densityHeight: 0.1
       heightOffset: 5
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

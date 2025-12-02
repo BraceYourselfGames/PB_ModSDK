@@ -24,4 +24,41 @@ namespace PhantomBrigade.Functions
             #endif
         }
     }
+    
+    [Serializable]
+    public class CombatUnitHiddenDetectable : ICombatFunctionTargeted
+    {
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            if (unitCombat == null)
+                return;
+
+            unitCombat.isHidden = true;
+            unitCombat.isHiddenDetectable = true;
+
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class CombatUnitHidden : ICombatFunctionTargeted
+    {
+        public bool hidden = true;
+        
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            if (unitCombat == null)
+                return;
+
+            unitCombat.isHidden = hidden;
+
+            #endif
+        }
+    }
 }

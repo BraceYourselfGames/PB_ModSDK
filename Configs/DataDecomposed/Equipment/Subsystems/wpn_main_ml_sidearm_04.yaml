@@ -9,8 +9,11 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_01
+- spec_guided
+- spec_guided_precise
 - spec_stabilized
-- stat_concussive
+- spec_concussion
+- type_sightline_recommended
 statDistribution: ''
 stats:
   act_count:
@@ -19,12 +22,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 1.75
+    value: 1.45
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 100
+    value: 120
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -39,7 +42,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 2
+    value: 1.55
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -54,7 +57,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 20
+    value: 18
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -64,7 +67,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_proj_lifetime:
-    value: 6
+    value: 3.9
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -174,6 +177,7 @@ projectile:
     distance: 3
     targetExclusive: false
     inertBeforeHit: false
+    inertPrimingDelay: 1
     triggerWithoutEntity: false
   hitResponse: 
   splashDamage:
@@ -373,8 +377,10 @@ projectile:
         m: {}
   uiSpeedAverage:
     f: 25
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

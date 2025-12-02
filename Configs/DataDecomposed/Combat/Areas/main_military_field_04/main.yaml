@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.4
@@ -653,9 +661,9 @@ locations:
     - obj_boss_origin
     data: !AreaLocation
       point:
-        x: 158.2386
+        x: 146.4
         y: -19.5
-        z: 157.2001
+        z: 145.4
       rotation: 45
       sizeX: 9
       sizeY: 9

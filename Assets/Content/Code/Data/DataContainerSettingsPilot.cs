@@ -13,27 +13,37 @@ namespace PhantomBrigade.Data
         public Vector3 hsvSecondary = new Vector3(0.0f, 0.5f, 0.5f);
         public float glassOpacityOverride = 0.0f;
     }
-    
-    public class DataContainerPilotAppearancePreset : DataContainer
-    {
-        [ToggleGroup ("portraitTextureUsed", groupTitle: "Related portrait")]
-        public bool portraitTextureUsed = false;
-    
-        [ToggleGroup ("portraitTextureUsed")]
-        [ValueDropdown ("@TextureManager.GetExposedTextureKeys (TextureGroupKeys.PilotPortraits)")]
-        [OnInspectorGUI ("@DropdownUtils.DrawTexturePreview ($value, TextureGroupKeys.PilotPortraits, 128)", false)]
-        public string portraitTextureName = string.Empty;
 
-        [HideInInspector]
-        public bool usableByFriendly = true;
-        
-        [HideInInspector]
-        public bool usableByHostile = true;
-        
-        [BoxGroup, HideReferenceObjectPicker, HideLabel]
-        public DataBlockPilotAppearance appearance = new DataBlockPilotAppearance ();
+    [HideReferenceObjectPicker]
+    public class DataBlockPilotSuitVariant
+    {
+        public Vector3 hsvPrimary = new Vector3(0.0f, 0.5f, 0.5f);
+        public bool generated = true;
+
+        public Color backgroundFog = new Color (0.0f, 0.0f, 0.0f, 1.0f);
+
+        public Color reflectionTint = new Color (0.0f, 0.0f, 0.0f, 1.0f);
     }
 
+    [HideReferenceObjectPicker]
+    public class DataBlockpilotMakeupPreset
+    {
+        [HorizontalGroup ("makeupColors", Title = "Colors")]
+        [HideLabel, ColorUsage (showAlpha: true)]
+        public Color colorPrimary = new Color (1.0f, 1.0f, 1.0f, 1.0f);
+
+        [HorizontalGroup ("makeupColors")]
+        [HideLabel, ColorUsage (showAlpha: true)]
+        public Color colorSecondary = new Color (1.0f, 1.0f, 1.0f, 1.0f);
+
+        [HorizontalGroup ("makeupMisc", Title = "Misc")]
+        public bool generated = true;
+        
+        [HorizontalGroup ("makeupMisc")]
+        public bool selectable = true;
+                        
+    }    
+    
     public class DataContainerPilotAccessoryHeadTop : DataContainerResourcePrefabPilot
     {
         public string holderOverride;
@@ -63,12 +73,13 @@ namespace PhantomBrigade.Data
         public bool usableByHostile = true;
     }
     
-    public class DataContainerResourceScriptablePilot<T> : DataContainerResourceScriptable<T> where T : ScriptableObject
+    public class DataContainerResourceAssetPilot<T> : DataContainerResourceAsset<T> where T : UnityEngine.Object
     {
         public int priority;
         public bool usableByFriendly = true;
         public bool usableByHostile = true;
         
+        [PropertyRange (0f, 1f)]
         public Vector2 interpolantRange = new Vector2 (0f, 1f);
         public List<string> modelCompatibility = new List<string> { "model_f", "model_m" };
     }
@@ -87,10 +98,10 @@ namespace PhantomBrigade.Data
         {
             base.OnBeforeSerialization ();
             
-            #if UNITY_EDITOR
+            #if UNITY_EDITOR && !PB_MODSDK
             if (asset == null)
             {
-                // path = string.Empty;
+                path = string.Empty;
                 return;
             };
 
@@ -107,15 +118,14 @@ namespace PhantomBrigade.Data
         {
             base.OnAfterDeserialization (key);
             
-            if (!ResourceDatabaseManager.IsDatabaseAvailable ())
-                return;
-            
+            #if !PB_MODSDK
             asset = !string.IsNullOrEmpty (path) ? Resources.Load<GameObject> (path) : null;
             if (asset == null)
             {
-                // Debug.LogWarning ($"Failed to load asset GameObject from path [{path}]");
+                Debug.LogWarning ($"Failed to load asset GameObject from path [{path}]");
                 return;
             }
+            #endif
         }
         
         #if UNITY_EDITOR
@@ -126,24 +136,27 @@ namespace PhantomBrigade.Data
         #endif
     }
 
-    public class DataContainerResourceScriptable<T> : DataContainer where T : ScriptableObject
+    public class DataContainerResourceAsset<T> : DataContainer where T : UnityEngine.Object // Changed from ScriptableObject to generic Object to support more asset types
     {
+        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         [InlineButton ("OnBeforeSerialization", "Update path")]
         // [GUIColor ("GetPrefabColor")]
         public T asset;
+        #endif
         
         [ReadOnly][GUIColor ("GetPathColor")]
         public string path;
         
         public override void OnBeforeSerialization ()
         {
+            #if !PB_MODSDK
             base.OnBeforeSerialization ();
         
             #if UNITY_EDITOR
             if (asset == null)
             {
-                // path = string.Empty;
+                path = string.Empty;
                 return;
             };
 
@@ -154,21 +167,21 @@ namespace PhantomBrigade.Data
             fullPath = fullPath.Substring(0, fullPath.Length - extension.Length);
             path = fullPath;
             #endif
+            #endif
         }
 
         public override void OnAfterDeserialization (string key)
         {
+            #if !PB_MODSDK
             base.OnAfterDeserialization (key);
-            
-            if (!ResourceDatabaseManager.IsDatabaseAvailable ())
-                return;
             
             asset = !string.IsNullOrEmpty (path) ? Resources.Load<T> (path) : null;
             if (asset == null)
             {
-                // Debug.LogWarning ($"Failed to load asset {typeof (T).Name} from path [{path}]");
+                Debug.LogWarning ($"Failed to load asset {typeof (T).Name} from path [{path}]");
                 return;
             }
+            #endif
         }
         
         #if UNITY_EDITOR
@@ -211,6 +224,61 @@ namespace PhantomBrigade.Data
         
         private void SnapValue () => value = Mathf.RoundToInt (value / 10f) * 10;
     }
+
+    // Struct to contain references to a mesh blendshape with user defined min and max influence range, used to populate the list of character customization options
+    public struct DataBlockPilotBlendShapeClamped
+    {
+        [ValueDropdown ("GetBlendShapeKeys")]
+        public string blendShape;
+
+        [PropertyRange (-100, 0), OnValueChanged ("SnapInfluenceMin")]
+        public int influenceMin;
+        
+        [PropertyRange (0, 100), OnValueChanged ("SnapInfluenceMax")]
+        public int influenceMax;
+
+        private void SnapInfluenceMin () => influenceMin = Mathf.RoundToInt (influenceMin / 10f) * 10;
+        private void SnapInfluenceMax () => influenceMax = Mathf.RoundToInt (influenceMax / 10f) * 10;
+
+        private IEnumerable<string> GetBlendShapeKeys ()
+        {
+            var db = DataLinkerSettingsPilot.data;
+            DataContainerPilotModel modelLink = null;
+            bool modelFound = !string.IsNullOrEmpty ("model_f") && db.models.TryGetValue ("model_f", out modelLink);
+            return modelFound && modelLink != null && modelLink.blendShapeKeys != null ? modelLink.blendShapeKeys : null;
+        }
+    }
+
+    // Class to contain a key-influence pair for a customization option, used to populate a list of customizations to apply in the pilot appearance data block
+    [HideReferenceObjectPicker]
+    public class DataBlockPilotBlendAppearanceCustomization
+    {
+        // References a key from the list of possible customization options
+        [ValueDropdown ("@DataLinkerSettingsPilot.data?.blendshapesForCustomization.Keys")]
+        public string key;
+        
+        [PropertyRange ("@InfluenceRange (false)", "@InfluenceRange (true)")]
+        public int influence;
+        
+        #if UNITY_EDITOR
+        
+        private int InfluenceRange (bool clampMaxInfluence)
+        {
+            int outInfluence = clampMaxInfluence ? 100 : -100;            
+
+            if (key != null)
+            {
+                bool blendshapeClampedFound = DataLinkerSettingsPilot.data.blendshapesForCustomization.TryGetValue (key, out var blendshapeClamped);
+                if (blendshapeClampedFound)
+                    outInfluence = clampMaxInfluence ? blendshapeClamped.influenceMax : blendshapeClamped.influenceMin;      
+            }
+
+            return outInfluence;
+        }
+
+        #endif
+    }
+
     
     [HideReferenceObjectPicker]
     public class DataBlockPilotBlendPresetUnified
@@ -271,6 +339,9 @@ namespace PhantomBrigade.Data
     {
         public const int versionExpected = 1;
         
+        [YamlIgnore]
+        public int persistentIDLinked = IDUtility.invalidID;
+        
         [HideInInspector]
         public int version = 0;
         
@@ -279,9 +350,15 @@ namespace PhantomBrigade.Data
         
         [ValueDropdown ("GetSkinMainKeys")]
         public string skinMain;
+
+        [Range (-0.01f, 0.015f)]
+        public float heightOffset = 0.0f;
         
         [ValueDropdown ("GetSkinOverlayKeys")]
         public string skinOverlay;
+
+        [ValueDropdown ("GetPilotSuitColorVariantKeys")]
+        public string pilotSuitColorVariant;
         
         [ValueDropdown ("GetSkinTintKeys")]
         public string skinTintPreset;
@@ -306,6 +383,19 @@ namespace PhantomBrigade.Data
 
         [ValueDropdown ("GetEyesTintKeys")]
         public string eyesTintPreset;
+        
+        [ValueDropdown ("GetEyesIrisPresetsKeys")]
+        public string eyesIrisPreset;
+
+        [ValueDropdown ("GetLipsTintKeys")]
+        public string lipsTintPreset;
+
+        [ValueDropdown ("GetMakeupPatternsKeys")]
+        public string makeupPatternKey;
+
+        [ValueDropdown ("GetMakeupColorVariantsKeys")]
+        [ShowIf ("@!string.IsNullOrEmpty (makeupPatternKey)")]
+        public string makeupColorVariantKey;
 
         [ValueDropdown ("GetAccessoryHeadTopKeys")]
         [InlineButtonClear]
@@ -325,29 +415,31 @@ namespace PhantomBrigade.Data
         [InlineButtonClear]
         public string accessoryHeadFrontVariant;
         
-        [ValueDropdown ("GetBlendPresetArchetypeKeys")]
+        [ValueDropdown ("GetBlendshapesFacePresetsKeys")]
         [InlineButtonClear]
         public string blendPresetArchetype;
-        
-        [ValueDropdown ("GetBlendPresetFaceVariationJawKeys")]
-        [InlineButtonClear]
-        public string blendPresetFaceVariationJaw;
 
-        [ValueDropdown ("GetBlendPresetFaceVariationNoseKeys")]
-        [InlineButtonClear]
-        public string blendPresetFaceVariationNose;
-        
-        [ValueDropdown ("GetBlendPresetBuildKeys")]
-        [InlineButtonClear]
-        public string blendPresetBuild;
+        [DictionaryKeyDropdown("@DataLinkerSettingsPilot.data.blendshapesForCustomization.Keys")]
+        [DictionaryDrawerSettings (KeyColumnWidth = 200f)]
+        public Dictionary<string, int> blendAppearanceCustomization = new Dictionary<string, int> ();
 
         [InlineButtonClear]
         [ShowIf ("@blendShapes != null")]
         [ListDrawerSettings (DefaultExpandedState = false, CustomAddFunction = "@new DataBlockPilotBlendShape ()")]
         public List<DataBlockPilotBlendShape> blendShapes;
 
+        [InlineButtonClear]
+        [ValueDropdown ("@TextureManager.GetExposedTextureKeys (TextureGroupKeys.PilotPortraits)")]
+        [OnInspectorGUI ("@DropdownUtils.DrawTexturePreview ($value, TextureGroupKeys.PilotPortraits, 128)", false)]
         public string portrait;
+        
+        [InlineButtonClear]
+        [ValueDropdown ("@DataShortcuts.pilots.overlayVariants?.Keys")]
         public string portraitVariant;
+
+        [InlineButtonClear]
+        [ValueDropdown ("GetCameraAnglePresetKeys")]
+        public string cameraAnglePreset;
         
         public DataBlockPilotAppearance () { }
 
@@ -363,11 +455,20 @@ namespace PhantomBrigade.Data
 
             version = source.version;
             model = source.model;
+
+            heightOffset = source.heightOffset;
  
             skinMain = source.skinMain;
             skinOverlay = source.skinOverlay;
             skinTintPreset = source.skinTintPreset;
             eyesTintPreset = source.eyesTintPreset;
+            eyesIrisPreset = source.eyesIrisPreset;
+
+            lipsTintPreset = source.lipsTintPreset;
+            makeupPatternKey = source.makeupPatternKey;
+            makeupColorVariantKey = source.makeupColorVariantKey;
+
+            pilotSuitColorVariant = source.pilotSuitColorVariant;
             
             hairMain = source.hairMain;
             hairFacial = source.hairFacial;
@@ -383,13 +484,28 @@ namespace PhantomBrigade.Data
             accessoryHeadFrontVariant = source.accessoryHeadFrontVariant;
 
             blendPresetArchetype = source.blendPresetArchetype;
-            blendPresetBuild = source.blendPresetBuild;
-            
-            blendPresetFaceVariationJaw = source.blendPresetFaceVariationJaw;
-            blendPresetFaceVariationNose = source.blendPresetFaceVariationNose;
 
             portrait = source.portrait;
             portraitVariant = source.portraitVariant;
+
+            cameraAnglePreset = source.cameraAnglePreset;
+
+            if (blendAppearanceCustomization != null)
+                blendAppearanceCustomization.Clear ();
+
+            if (source.blendAppearanceCustomization != null && source.blendAppearanceCustomization.Count > 0)
+            {
+                foreach (var kv in source.blendAppearanceCustomization)
+                {
+                    // Don't copy customization parameters that have 0 influence
+                    if (kv.Value != 0)
+                    {
+                        if (blendAppearanceCustomization == null)
+                            blendAppearanceCustomization = new Dictionary<string, int> ();
+                        blendAppearanceCustomization[kv.Key] = kv.Value;
+                    }
+                }
+            }
 
             if (source.blendShapes != null && source.blendShapes.Count > 0)
             {
@@ -446,6 +562,33 @@ namespace PhantomBrigade.Data
         private IEnumerable<string> GetSkinTintKeys => DataLinkerSettingsPilot.data?.skinTints.Keys;
         private IEnumerable<string> GetHairTintKeys => DataLinkerSettingsPilot.data?.hairTints.Keys;
         private IEnumerable<string> GetEyesTintKeys => DataLinkerSettingsPilot.data?.eyeTints.Keys;
+        private IEnumerable<string> GetEyesIrisPresetsKeys => DataLinkerSettingsPilot.data?.eyeIrisPresets.Keys;
+        private IEnumerable<string> GetLipsTintKeys => DataLinkerSettingsPilot.data?.lipsTints.Keys;
+
+        private IEnumerable<string> GetMakeupPatternsKeys => DataLinkerSettingsPilot.data?.makeupPatterns.Keys;
+
+        private IEnumerable<string> GetMakeupColorVariantsKeys
+        {
+            get
+            {
+                #if !PB_MODSDK
+                if (!string.IsNullOrEmpty(makeupPatternKey) && DataLinkerSettingsPilot.data.makeupPatterns.ContainsKey(makeupPatternKey))
+                {
+                    bool assetFound = DataLinkerSettingsPilot.data.makeupPatterns.TryGetValue (makeupPatternKey, out var assetLink);
+                    if (assetFound && assetLink.asset != null)
+                    {
+                        return DataLinkerSettingsPilot.data.makeupColors[assetLink.asset.MakeupColorsGroupKey].Keys;
+                    }
+                }
+                #endif
+                
+                return Array.Empty<string> ();
+            }
+        }
+
+        private IEnumerable<string> GetPilotSuitColorVariantKeys => DataLinkerSettingsPilot.data?.pilotSuitColorVariants.Keys;
+
+        private IEnumerable<string> GetCameraAnglePresetKeys => DataLinkerSettingsPilot.data?.cameraAnglePresets.Keys;
 
         private IEnumerable<string> GetAccessoryHeadTopVariantKeys ()
         {
@@ -471,12 +614,9 @@ namespace PhantomBrigade.Data
             return modelFound && modelLink != null && modelLink.blendShapeKeys != null ? modelLink.blendShapeKeys : null;
         }
         
-        private IEnumerable<string> GetBlendPresetArchetypeKeys => DataLinkerSettingsPilot.data?.blendPresetsArchetypes.Keys;
-        private IEnumerable<string> GetBlendPresetBuildKeys => DataLinkerSettingsPilot.data?.blendPresetsBuilds.Keys;
-        
-        private IEnumerable<string> GetBlendPresetFaceVariationNoseKeys => DataLinkerSettingsPilot.data?.blendPresetsFaceVariationNose.Keys;
-        private IEnumerable<string> GetBlendPresetFaceVariationJawKeys => DataLinkerSettingsPilot.data?.blendPresetsFaceVariationJaw.Keys;
-        
+        private IEnumerable<string> GetBlendshapesFacePresetsKeys => DataLinkerSettingsPilot.data?.blendshapesFacePresets.Keys;
+        private IEnumerable<string> GetBlendshapesCustomizationKeys => DataLinkerSettingsPilot.data?.blendshapesForCustomization.Keys;
+
         #endif
     }
 
@@ -487,8 +627,34 @@ namespace PhantomBrigade.Data
         
         [ListDrawerSettings (DefaultExpandedState = false)]
         public List<string> blendShapeKeys;
+
+        // Editor-only utility to refresh the Blend Shape Keys list from the specified mesh
+        #if UNITY_EDITOR
+        [Button ("Refresh Blendshape Keys")]
+        private void RefreshListOfBlendshapeNames (SkinnedMeshRenderer characterMesh)
+        {
+            if (characterMesh)
+            {
+                if (blendShapeKeys == null)
+                    blendShapeKeys = new List<string> ();
+                else
+                    blendShapeKeys.Clear ();
+
+                for (int i = 0; i < characterMesh.sharedMesh.blendShapeCount; i++)
+                {
+                    string blendshapeName = characterMesh.sharedMesh.GetBlendShapeName (i);
+                    // Filter out any blendshapes that aren't related to customization
+                    if (blendshapeName.StartsWith("PB_C_"))
+                        blendShapeKeys.Add (blendshapeName);
+                }
+
+                blendShapeKeys.Sort ();
+            }
+        }
+        #endif
     }
 
+    [HideReferenceObjectPicker]
     public class DataContainerPilotEyebrows : DataContainer
     {
         [PropertyRange (0f, 3f)]
@@ -560,6 +726,22 @@ namespace PhantomBrigade.Data
         [HideLabel, HorizontalGroup (24f)]
         public bool selectable = true;
     }
+    
+    [HideReferenceObjectPicker]
+    public class DataContainerPilotEyeIrisPreset : DataContainer
+    {
+        [HideLabel, HorizontalGroup]
+        public float irisSize = 0.25f;
+        
+        [HideLabel, HorizontalGroup]
+        public float pupilDilation = -0.05f;
+        
+        [HideLabel, HorizontalGroup (24f)]
+        public bool generated = true;
+        
+        [HideLabel, HorizontalGroup (24f)]
+        public bool selectable = true;
+    }
 
     [HideReferenceObjectPicker]
     public class DataContainerPilotTintEyes : DataContainer
@@ -582,11 +764,49 @@ namespace PhantomBrigade.Data
         public bool selectable = true;
     }
 
+    [HideReferenceObjectPicker]
+    public class DataContainerPilotTintLips : DataContainer
+    {
+        [HideLabel, HorizontalGroup]
+        [ColorUsage (showAlpha: true)]
+        public Color color;
+        
+        [HideLabel, HorizontalGroup, PropertyRange (0f, 1f)]
+        public float genX = 0f;
+                
+        [HideLabel, HorizontalGroup (24f)]
+        public bool generated = true;
+        
+        [HideLabel, HorizontalGroup (24f)]
+        public bool selectable = true;
+    }
+
     public class DataBlockOverlayVariant
     {
         public Color filterColor = new Color (1f, 1f, 1f, 1f);
         public Vector4 filterInputs = new Vector4 (1f, 1f, 1f, 1f);
     }
+
+    public class DataBlockCameraAnglePreset
+    {
+        public class DataBlockCameraAngleTweakPerPersonality
+        {
+            [ValueDropdown ("@DataMultiLinkerPilotPersonality.data.Keys")]
+            public string personalityKey;
+
+            public Vector3 additionalOffset = new Vector3 (0f, 0f, 0f);
+        }
+
+        public Vector3 angle = new Vector3 (0f, 0f, 0f);
+        public Vector3 offset = new Vector3 (0f, 0f, 0f);
+        public float fov = 35f;
+        public float dolly = 0f;
+        public bool enemiesOnly = false;
+
+        // A list of optional additional offsets for Camera Center per personality type
+        public List <DataBlockCameraAngleTweakPerPersonality> additionalOffsetPerPersonality = new List <DataBlockCameraAngleTweakPerPersonality> ();
+    }
+
 
     [Serializable]
     public class DataContainerSettingsPilot : DataContainerUnique
@@ -596,6 +816,7 @@ namespace PhantomBrigade.Data
         private const string tgShapes = "Shapes";
         private const string tgAssets = "Assets";
         private const string tgColors = "Colors";
+        private const string tgProgression = "Progression";
         
         [TabGroup (tgValues)]
         public float pilotAnimationSpeedBase = 0.01f;
@@ -621,48 +842,93 @@ namespace PhantomBrigade.Data
         
         [TabGroup (tgValues)]
         public float accessoryHeadFrontChanceHostile = 0f;
+
+        [TabGroup (tgValues)]
+        public float facialHairChance = 0.15f;
+
+        [TabGroup (tgValues)]
+        public float makeupChance = 0.25f;
+                
+        [TabGroup (tgValues)]
+        public float blendPresetBuildChance = 0.3f;
+
+        [TabGroup (tgValues)]
+        public float blendPresetFaceVariationEyesChance = 0.5f;
+
+        [TabGroup (tgValues)]
+        public float blendPresetFaceVariationNoseChance = 0.5f;
+
+        [TabGroup (tgValues)]
+        public float blendPresetFaceVariationCheeksChance = 0.5f;
+
+         [TabGroup (tgValues)]
+        public float blendPresetFaceVariationLipsChance = 0.5f;
         
         [TabGroup (tgValues)]
-        public float blendPresetMultiplierJaw = 0.5f;
-        
+        public float blendPresetFaceVariationJawChance = 0.5f;
+
         [TabGroup (tgValues)]
-        public float blendPresetMultiplierNose = 0.5f;
-        
-        [TabGroup (tgValues)]
-        public float blendPresetBuildChance = 0.5f;
-        
-        [TabGroup (tgValues)]
-        public float blendPresetFaceVariationJawChance = 0f;
-        
-        [TabGroup (tgValues)]
-        public float blendPresetFaceVariationNoseChance = 0f;
+        public float blendPresetFaceVariationEarsChance = 0.5f;
 
         [TabGroup (tgValues)]
         public bool overlaySupport = false;
 
-        [TabGroup (tgPresets)]
+        [TabGroup (tgValues)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine)]
+        public SortedDictionary<string, DataBlockCameraAnglePreset> cameraAnglePresets;
+        
+        [InfoBox ("This list stores blendshapes of face presets that serve as a foundation that can be further customized.")]
+        [TabGroup (tgShapes)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataContainerPilotAppearancePreset> appearancePresets;
+        public SortedDictionary<string, DataBlockPilotBlendPresetUnified> blendshapesFacePresets;
 
-        [InfoBox ("These variations should use face type blend shapes. Since each model has differently named face types, there are separate blend shape lists per model.")]
+        [Space(15)]
+        [InfoBox ("This list stores blendshape names used for body and face customization. Min and max values limit the range of blendshape's influence on the character mesh.")]
         [TabGroup (tgShapes)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataBlockPilotBlendPresetSplit> blendPresetsArchetypes;
-        
-        [InfoBox ("These variations cover jaw and chin blend shapes")]
+        public SortedDictionary<string, DataBlockPilotBlendShapeClamped> blendshapesForCustomization;
+                
+        [Space(25)]
+        [InfoBox ("[Internal use only] - Eyes customization presets for random appearance generator.")]
         [TabGroup (tgShapes)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataBlockPilotBlendPresetUnified> blendPresetsFaceVariationJaw;
-        
-        [InfoBox ("These variations cover various nose blend shapes. Current content uses key scheme N*_W* where N is nose variation number and W is width variation.")]
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsFaceVariationEyes;
+
+        [Space(15)]
+        [InfoBox ("[Internal use only] - Nose customization presets for random appearance generator.")]
         [TabGroup (tgShapes)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataBlockPilotBlendPresetUnified> blendPresetsFaceVariationNose;
-        
-        [InfoBox ("These variations cover body shapes - musculature, weight, etc. Current content uses key scheme W*_M* where W is amount of weight and M is amount of muscle.")]
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsFaceVariationNose;
+
+        [Space(15)]
+        [InfoBox ("[Internal use only] - Cheeks customization presets for random appearance generator.")]
         [TabGroup (tgShapes)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataBlockPilotBlendPresetUnified> blendPresetsBuilds;
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsFaceVariationCheeks;
+
+        [Space(15)]
+        [InfoBox ("[Internal use only] - Lips customization presets for random appearance generator.")]
+        [TabGroup (tgShapes)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsFaceVariationLips;
+
+        [Space(15)]
+        [InfoBox ("[Internal use only] - Jaw and chin customization presets for random appearance generator.")]
+        [TabGroup (tgShapes)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsFaceVariationJaw;
+
+        [Space(15)]
+        [InfoBox ("[Internal use only] - Ears customization presets for random appearance generator.")]
+        [TabGroup (tgShapes)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsFaceVariationEars;
+
+        [Space(15)]
+        [InfoBox ("[Internal use only] - Body shape presets for random appearance generator - musculature, weight, etc. Current content uses key scheme W*_M* where W is amount of weight and M is amount of muscle.")]
+        [TabGroup (tgShapes)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> blendPresetsBuilds;
         
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
@@ -673,11 +939,11 @@ namespace PhantomBrigade.Data
     
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataContainerResourceScriptablePilot<CharacterHairData>> hairMain;
+        public SortedDictionary<string, DataContainerResourceAssetPilot<CharacterHairData>> hairMain;
         
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataContainerResourceScriptablePilot<CharacterHairData>> hairFacial;
+        public SortedDictionary<string, DataContainerResourceAssetPilot<CharacterHairData>> hairFacial;
         
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
@@ -689,15 +955,24 @@ namespace PhantomBrigade.Data
         
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataContainerResourceScriptablePilot<CharacterSkinTexturesData>> skinsMain;
+        public SortedDictionary<string, DataContainerResourceAssetPilot<CharacterSkinTexturesData>> skinsMain;
         
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataContainerResourceScriptablePilot<CharacterSkinTexturesData>> skinsOverlays;
+        public SortedDictionary<string, DataContainerResourceAssetPilot<CharacterBaseClothTexturesData>> skinsOverlays;
+
+        [TabGroup (tgAssets)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine)]
+        [InfoBox ("Background Fog parameter is placed together with suit color variants on purpose, to 'ground' suit color in pilot portrait environment and increase perceivable variety")]
+        public SortedDictionary<string, DataBlockPilotSuitVariant> pilotSuitColorVariants;
+
+        [TabGroup (tgAssets)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine)]
+        public SortedDictionary<string, DataContainerPilotEyebrows> hairEyebrows;
 
         [TabGroup (tgAssets)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
-        public SortedDictionary<string, DataContainerPilotEyebrows> hairEyebrows;
+        public SortedDictionary<string, DataContainerResourceAssetPilot<CharacterMakeupPatternData>> makeupPatterns;
 
         [TabGroup (tgColors)]
         [InfoBox ("These colors are multiplied by skin textures, check the effect of the multiplication with skin textures before configuring them. A specific color entered here will not yield a final skin color that is anywhere near.")]
@@ -705,6 +980,7 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine, KeyColumnWidth = 32, ValueLabel = "Color, Redness, Darkening, Axis (X/Y), Generated, Selectable")]
         public SortedDictionary<string, DataContainerPilotTintSkin> skinTints;
 
+        [TabGroup (tgColors)]
         public SortedDictionary<string, DataBlockOverlayVariant> overlayVariants;
 
         [TabGroup (tgColors)]
@@ -733,6 +1009,21 @@ namespace PhantomBrigade.Data
         [LabelText ("Eye color presets")]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine, KeyColumnWidth = 32, ValueLabel = "Color, Color Secondary, Axis (X), Generated, Selectable")]
         public SortedDictionary<string, DataContainerPilotTintEyes> eyeTints;
+        
+        [TabGroup (tgColors)]
+        [LabelText ("Eye iris presets")]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine, KeyColumnWidth = 32, ValueLabel = "Iris Size, Pupil Dilation, Generated, Selectable")]
+        public SortedDictionary<string, DataContainerPilotEyeIrisPreset> eyeIrisPresets;
+
+        [TabGroup (tgColors)]
+        [LabelText ("Lips color presets")]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine, KeyColumnWidth = 32, ValueLabel = "Color, Axis (X), Generated, Selectable")]
+        public SortedDictionary<string, DataContainerPilotTintLips> lipsTints;
+
+        [TabGroup (tgColors)]
+        [LabelText ("Makeup color presets")]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.OneLine)]
+        public SortedDictionary<string, SortedDictionary<string, DataBlockpilotMakeupPreset>> makeupColors;
 
         public override void OnBeforeSerialization ()
         {
@@ -908,6 +1199,16 @@ namespace PhantomBrigade.Data
                         link.OnAfterDeserialization (kvp.Key);
                 }
             }
+
+            if (makeupPatterns != null)
+            {
+                foreach (var kvp in makeupPatterns)
+                {
+                    var link = kvp.Value;
+                    if (link != null)
+                        link.OnAfterDeserialization (kvp.Key);
+                }
+            }
             
             if (skinTints != null)
             {
@@ -939,6 +1240,26 @@ namespace PhantomBrigade.Data
                 }
             }
             
+            if (eyeIrisPresets != null)
+            {
+                foreach (var kvp in eyeIrisPresets)
+                {
+                    var link = kvp.Value;
+                    if (link != null)
+                        link.OnAfterDeserialization (kvp.Key);
+                }
+            }
+
+            if (lipsTints != null)
+            {
+                foreach (var kvp in lipsTints)
+                {
+                    var link = kvp.Value;
+                    if (link != null)
+                        link.OnAfterDeserialization (kvp.Key);
+                }
+            }
+            
             /*
             if (skinTints != null)
             {
@@ -952,12 +1273,11 @@ namespace PhantomBrigade.Data
             */
         }
 
+
         private List<string> filteredKeys = new List<string> ();
-
-
         
         public List<string> GetFilteredResourceKeys<T> 
-            (int factionFilter, string modelFilter, IDictionary<string, DataContainerResourceScriptablePilot<T>> collection, bool includeEmpty = false, float interpolantFilter = -1f) where T : ScriptableObject
+            (int factionFilter, string modelFilter, IDictionary<string, DataContainerResourceAssetPilot<T>> collection, bool includeEmpty = false, float interpolantFilter = -1f) where T : UnityEngine.Object
         {
             bool interpolantFilterUsed = interpolantFilter >= 0f && interpolantFilter < 1f;
             bool factionFilterUsed = factionFilter == 1 || factionFilter == 2;
@@ -997,8 +1317,10 @@ namespace PhantomBrigade.Data
             return filteredKeys;
         }
         
-        public DataContainerResourceScriptablePilot<T> GetRandomResource<T> 
-            (int factionFilter, string modelFilter, float interpolantFilter, IDictionary<string, DataContainerResourceScriptablePilot<T>> collection) where T : ScriptableObject
+        #if !PB_MODSDK
+        
+        public DataContainerResourceAssetPilot<T> GetRandomResource<T> 
+            (int factionFilter, string modelFilter, float interpolantFilter, IDictionary<string, DataContainerResourceAssetPilot<T>> collection) where T : UnityEngine.Object // Changed from ScriptableObject to generic Object to support more asset types
         {
             var filteredKeysFound = GetFilteredResourceKeys (factionFilter, modelFilter, collection, false, interpolantFilter);
             if (filteredKeysFound.Count == 0)
@@ -1010,7 +1332,7 @@ namespace PhantomBrigade.Data
         }
         
         public string GetShiftedResourceKey<T>
-            (string keyCurrent, bool forward, bool insertEmpty, int factionFilter, string modelFilter, float interpolantFilter, IDictionary<string, DataContainerResourceScriptablePilot<T>> collection) where T : ScriptableObject
+            (string keyCurrent, bool forward, bool insertEmpty, int factionFilter, string modelFilter, float interpolantFilter, IDictionary<string, DataContainerResourceAssetPilot<T>> collection) where T : UnityEngine.Object // Changed from ScriptableObject to generic Object to support more asset types
         {
             var filteredKeysFound = GetFilteredResourceKeys (factionFilter, modelFilter, collection, false, interpolantFilter);
             if (filteredKeysFound.Count == 0)
@@ -1058,6 +1380,7 @@ namespace PhantomBrigade.Data
             
             return filteredKeys;
         }
+        
         
         public T GetRandomPrefab<T> 
             (int factionFilter, IDictionary<string, T> collection) where T : DataContainerResourcePrefabPilot
@@ -1136,6 +1459,7 @@ namespace PhantomBrigade.Data
             return presetBest;
         }
 
+        // TODO: Can refactor these two methods below and unify them
         public DataContainerPilotTintEyes GetTintPresetEyesFromInterpolant (float interpolant)
         {
             interpolant = Mathf.Clamp01 (interpolant);
@@ -1159,36 +1483,132 @@ namespace PhantomBrigade.Data
             return presetBest;
         }
         
+        public DataContainerPilotTintLips GetTintPresetLipsFromInterpolant (float interpolant)
+        {
+            interpolant = Mathf.Clamp01 (interpolant);
+            float distanceBest = 1f;
+            DataContainerPilotTintLips presetBest = null;
+            
+            foreach (var kvp in lipsTints)
+            {
+                var presetCandidate = kvp.Value;
+                if (presetCandidate == null || !presetCandidate.generated)
+                    continue;
+
+                var distance = Mathf.Abs (presetCandidate.genX - interpolant);
+                if (distance < distanceBest)
+                {
+                    distanceBest = distance;
+                    presetBest = presetCandidate;
+                }
+            }
+
+            return presetBest;
+        }
+
+        public string GetRandomSuitTintPresetKey ()
+        {
+            string keyBest;
+            List<string> keyCandidates = new List<string> ();
+            
+            foreach (var kvp in pilotSuitColorVariants)
+            {
+                var presetCandidate = kvp.Value;
+                if (presetCandidate == null || !presetCandidate.generated)
+                    continue;
+
+                keyCandidates.Add (kvp.Key);
+            }
+
+            keyBest = keyCandidates.GetRandomEntry ();
+
+            return keyBest;
+        }
+
+        public string GetRandomCameraAnglePresetKey ()
+        {
+            string keyBest;
+            List<string> keyCandidates = new List<string> ();
+            
+            foreach (var kvp in cameraAnglePresets)
+            {
+                var presetCandidate = kvp.Value;
+                if (presetCandidate == null || presetCandidate.enemiesOnly)
+                    continue;
+
+                keyCandidates.Add (kvp.Key);
+            }
+
+            keyBest = keyCandidates.GetRandomEntry ();
+
+            return keyBest;
+        }
+
+         public string GetRandomMakeupColorPresetVariantKey (string makeupColorsGroupKey)
+        {
+            string keyBest;
+            List<string> keyCandidates = new List<string> ();
+
+            if (!string.IsNullOrEmpty (makeupColorsGroupKey))
+            {
+                if (makeupColors.Count > 0 && makeupColors.ContainsKey(makeupColorsGroupKey) && makeupColors[makeupColorsGroupKey]?.Count > 0)
+                {
+                    // Build a list of keys that satisfy the criteria (available for random generation)
+                    foreach (var kvp in makeupColors[makeupColorsGroupKey])
+                    {
+                        var presetCandidate = kvp.Value;
+                        if (presetCandidate == null || !presetCandidate.generated)
+                            continue;
+
+                        keyCandidates.Add (kvp.Key);
+                    }
+                }
+            }
+
+            // Choose a random makeup color preset key from the list we've made
+            keyBest = keyCandidates.GetRandomEntry ();
+            return keyBest;
+        }
+        
+        public List<string> GetFilteredKeys<T> (IDictionary<string, T> dictionary, Func<T, bool> onFilter = null)
+        {
+            if (dictionary == null || dictionary.Count == 0)
+                return null;
+            
+            filteredKeys.Clear ();
+            if (onFilter != null)
+            {
+                foreach (var kvp in dictionary)
+                {
+                    if (onFilter.Invoke (kvp.Value))
+                        filteredKeys.Add (kvp.Key);
+                }
+            }
+            else
+                filteredKeys.AddRange (dictionary.Keys);
+            return filteredKeys;
+        }
+        
         public string GetShiftedKey<T> (string keyCurrent, bool forward, bool insertEmpty, IDictionary<string, T> dictionary, Func<T, bool> onFilter = null)
         {
             if (dictionary == null || dictionary.Count == 0)
                 return null;
+            
+            bool keyCurrentEmpty = string.IsNullOrEmpty (keyCurrent);
+            var keysFilteredLocal = GetFilteredKeys (dictionary, onFilter);
 
-            bool onFilterCallbackPresent = onFilter != null;
-            
-            filteredKeys.Clear ();
-            
-            if (insertEmpty)
-                filteredKeys.Add (string.Empty);
-            
-            foreach (var kvp in dictionary)
+            var indexCurrent = keysFilteredLocal.IndexOf (keyCurrent);
+            if (indexCurrent == -1 && keysFilteredLocal.Count > 0)
             {
-                if (onFilterCallbackPresent)
-                {
-                    bool filterPassed = onFilter.Invoke (kvp.Value);
-                    if (!filterPassed)
-                        continue;
-                }
-                
-                filteredKeys.Add (kvp.Key);
+                // If forward, empty is inserted, and current key is also empty, do not advance to empty position, go to first filled one
+                if (forward)
+                    return insertEmpty ? keysFilteredLocal[1] : keysFilteredLocal[0];
+                else
+                    return keysFilteredLocal[keysFilteredLocal.Count - 1];
             }
 
-            var indexCurrent = filteredKeys.IndexOf (keyCurrent);
-            if (indexCurrent == -1)
-                return filteredKeys[0];
-
-            var indexShifted = indexCurrent.OffsetAndWrap (forward, filteredKeys);
-            var keyShifted = filteredKeys[indexShifted];
+            var indexShifted = indexCurrent.OffsetAndWrap (forward, keysFilteredLocal);
+            var keyShifted = keysFilteredLocal[indexShifted];
             return keyShifted;
         }
         
@@ -1234,16 +1654,16 @@ namespace PhantomBrigade.Data
             return key;
         }
         
-        public DataContainerResourceScriptablePilot<CharacterHairData> GetRandomAssetHairMain (bool friendly, string modelFilter, float interpolantFilter = -1f) => 
+        public DataContainerResourceAssetPilot<CharacterHairData> GetRandomAssetHairMain (bool friendly, string modelFilter, float interpolantFilter = -1f) => 
             GetRandomResource (friendly ? 1 : 2, modelFilter, interpolantFilter, hairMain);
         
-        public DataContainerResourceScriptablePilot<CharacterHairData> GetRandomAssetHairFacial (bool friendly, string modelFilter, float interpolantFilter = -1f) => 
+        public DataContainerResourceAssetPilot<CharacterHairData> GetRandomAssetHairFacial (bool friendly, string modelFilter, float interpolantFilter = -1f) => 
             GetRandomResource (friendly ? 1 : 2, modelFilter, interpolantFilter, hairFacial);
         
-        public DataContainerResourceScriptablePilot<CharacterSkinTexturesData> GetRandomAssetSkinMain (string modelFilter, float interpolantFilter = -1f) => 
+        public DataContainerResourceAssetPilot<CharacterSkinTexturesData> GetRandomAssetSkinMain (string modelFilter, float interpolantFilter = -1f) => 
             GetRandomResource (0, modelFilter, interpolantFilter, skinsMain);
             
-        public DataContainerResourceScriptablePilot<CharacterSkinTexturesData> GetRandomAssetSkinOverlay (bool friendly, string modelFilter, float interpolantFilter = -1f) => 
+        public DataContainerResourceAssetPilot<CharacterBaseClothTexturesData> GetRandomAssetSkinOverlay (bool friendly, string modelFilter, float interpolantFilter = -1f) => 
             GetRandomResource (friendly ? 1 : 2, modelFilter, interpolantFilter, skinsOverlays);
         
         public DataContainerPilotAccessoryHeadTop GetRandomAccessoryHeadTop (bool friendly) => 
@@ -1252,47 +1672,8 @@ namespace PhantomBrigade.Data
         public DataContainerPilotAccessoryHeadFront GetRandomAccessoryHeadFront (bool friendly) => 
             GetRandomPrefab (friendly ? 1 : 2, accessoriesHeadFront);
 
-        public List<string> GetFilteredAppearancePresetKeys (int factionFilter, string modelFilter)
-        {
-            bool factionFilterUsed = factionFilter == 1 || factionFilter == 2;
-            bool modelFilterUsed = !string.IsNullOrEmpty (modelFilter);
-            filteredKeys.Clear ();
-
-            foreach (var kvp in appearancePresets)
-            {
-                var link = kvp.Value;
-                if (link == null || link.appearance == null)
-                    continue;
-                
-                if (factionFilterUsed)
-                {
-                    if (factionFilter == 1 && !link.usableByFriendly)
-                        continue;
-
-                    if (factionFilter == 2 && !link.usableByHostile)
-                        continue;
-                }
-
-                if (modelFilterUsed && link.appearance.model != modelFilter)
-                    continue;
-                
-                filteredKeys.Add (link.key);
-            }
-
-            return filteredKeys;
-        }
-        
-        public DataBlockPilotAppearance GetRandomAppearancePreset (int factionFilter, string modelFilter)
-        {
-            var filteredKeysFound = GetFilteredAppearancePresetKeys (factionFilter, modelFilter);
-            if (filteredKeysFound.Count == 0)
-                return null;
-
-            var selectedKey = filteredKeysFound.GetRandomEntry ();
-            var selection = appearancePresets[selectedKey];
-            var appearance = selection.appearance;
-            return appearance;
-        }
+        public DataContainerResourceAssetPilot<CharacterMakeupPatternData> GetRandomMakeupPattern (bool friendly, string modelFilter, float interpolantFilter = -1f) =>
+            GetRandomResource (friendly ? 1 : 2, modelFilter, interpolantFilter, makeupPatterns);
         
         public void RandomizePilotAppearance (DataBlockPilotAppearance data, bool friendly, string modelKeyOverride = null)
         {
@@ -1306,8 +1687,10 @@ namespace PhantomBrigade.Data
             data.version = DataBlockPilotAppearance.versionExpected;
             data.model = modelKey;
             data.skinOverlay = skinOverlayKey; 
+
+            data.heightOffset = Random.Range (-0.01f, 0.015f);
             
-            var faceKey = blendPresetsArchetypes.GetRandomKey ();
+            var faceKey = blendshapesFacePresets.GetRandomKey ();
             bool faceKeyBasedGeneration = false;
             float hairInterpolant = 0.5f;
             
@@ -1315,11 +1698,13 @@ namespace PhantomBrigade.Data
             string skinTintPreset = null;
             string hairMainTintPreset = null;
             string hairFacialTintPreset = null;
+            string eyesIrisPreset = null;
             string eyesTintPreset = null;
+            string lipsTintPreset = null;
 
             if (!string.IsNullOrEmpty (faceKey))
             {
-                if (faceKey.StartsWith ("african"))
+                if (faceKey.StartsWith ("a_"))
                 {
                     faceKeyBasedGeneration = true;
                     skinMainKey = sharedRandomPercentage > 0.5f ? "skin_a_alt" : "skin_a";
@@ -1327,7 +1712,7 @@ namespace PhantomBrigade.Data
                     hairMainTintPreset = hairFacialTintPreset = GetTintPresetHairFromInterpolant (Random.Range (0.7f, 1f))?.key;
                     hairInterpolant = 1f;
                 }
-                else if (faceKey.StartsWith ("eastern"))
+                else if (faceKey.StartsWith ("e_"))
                 {
                     faceKeyBasedGeneration = true;
                     skinMainKey = sharedRandomPercentage > 0.5f ? "skin_b_alt" : "skin_b";
@@ -1335,20 +1720,12 @@ namespace PhantomBrigade.Data
                     hairMainTintPreset = hairFacialTintPreset = GetTintPresetHairFromInterpolant (Random.Range (0.6f, 1f))?.key;
                     hairInterpolant = 0f;
                 }
-                else if (faceKey.StartsWith ("western"))
+                else if (faceKey.StartsWith ("w_"))
                 {
                     faceKeyBasedGeneration = true;
                     skinMainKey = sharedRandomPercentage > 0.5f ? "skin_b_alt" : "skin_b";
-                    skinTintPreset = GetTintPresetSkinFromInterpolant (Random.Range (0f, 0.4f))?.key;
-                    hairMainTintPreset = hairFacialTintPreset = GetTintPresetHairFromInterpolant (Random.Range (0f, 0.4f))?.key;
-                    hairInterpolant = 0.5f;
-                }
-                else if (faceKey.StartsWith ("generic"))
-                {
-                    faceKeyBasedGeneration = true;
-                    skinMainKey = sharedRandomPercentage > 0.5f ? "skin_b_alt" : "skin_b";
-                    skinTintPreset = GetTintPresetSkinFromInterpolant (Random.Range (0.3f, 0.6f))?.key;
-                    hairMainTintPreset = hairFacialTintPreset = GetTintPresetHairFromInterpolant (Random.Range (0.3f, 0.6f))?.key;
+                    skinTintPreset = GetTintPresetSkinFromInterpolant (Random.Range (0f, 0.6f))?.key;
+                    hairMainTintPreset = hairFacialTintPreset = GetTintPresetHairFromInterpolant (Random.Range (0f, 0.6f))?.key;
                     hairInterpolant = 0.5f;
                 }
             }
@@ -1366,39 +1743,85 @@ namespace PhantomBrigade.Data
 
             var config = DataShortcuts.pilots;
 
-            string buildKey = null;
+            // Apply random face and body appearance settings from a preset
+            data.blendAppearanceCustomization.Clear ();
+            string presetKey = null;
             bool buildUsed = Random.Range (0f, 1f) < config.blendPresetBuildChance;
             if (buildUsed && config.blendPresetsBuilds != null && config.blendPresetsBuilds.Count > 0)
-                buildKey = blendPresetsBuilds.GetRandomKey ();
-            
-            string faceVariationJawKey = null;
+            {
+                presetKey = config.blendPresetsBuilds.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsBuilds);
+            }
             bool faceVariationJawUsed = Random.Range (0f, 1f) < config.blendPresetFaceVariationJawChance;
             if (faceVariationJawUsed && config.blendPresetsFaceVariationJaw != null && config.blendPresetsFaceVariationJaw.Count > 0)
-                faceVariationJawKey = blendPresetsFaceVariationJaw.GetRandomKey ();
-            
-            string faceVariationNoseKey = null;
+            {
+                presetKey = config.blendPresetsFaceVariationJaw.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsFaceVariationJaw);
+            }
             bool faceVariationNoseUsed = Random.Range (0f, 1f) < config.blendPresetFaceVariationNoseChance;
             if (faceVariationNoseUsed && config.blendPresetsFaceVariationNose != null && config.blendPresetsFaceVariationNose.Count > 0)
-                faceVariationNoseKey = blendPresetsFaceVariationNose.GetRandomKey ();
+            {
+                presetKey = config.blendPresetsFaceVariationNose.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsFaceVariationNose);
+            }
+            bool faceVariationEyesUsed = Random.Range (0f, 1f) < config.blendPresetFaceVariationEyesChance;
+            if (faceVariationEyesUsed && config.blendPresetsFaceVariationEyes != null && config.blendPresetsFaceVariationEyes.Count > 0)
+            {
+                presetKey = config.blendPresetsFaceVariationEyes.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsFaceVariationEyes);
+            }
+            bool faceVariationCheeksUsed = Random.Range (0f, 1f) < config.blendPresetFaceVariationCheeksChance;
+            if (faceVariationCheeksUsed && config.blendPresetsFaceVariationCheeks != null && config.blendPresetsFaceVariationCheeks.Count > 0)
+            {
+                presetKey = config.blendPresetsFaceVariationCheeks.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsFaceVariationCheeks);
+            }
+            bool faceVariationLipsUsed = Random.Range (0f, 1f) < config.blendPresetFaceVariationLipsChance;
+            if (faceVariationLipsUsed && config.blendPresetsFaceVariationLips != null && config.blendPresetsFaceVariationLips.Count > 0)
+            {
+                presetKey = config.blendPresetsFaceVariationLips.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsFaceVariationLips);
+            }
+            bool faceVariationEarsUsed = Random.Range (0f, 1f) < config.blendPresetFaceVariationEarsChance;
+            if (faceVariationEarsUsed && config.blendPresetsFaceVariationEars != null && config.blendPresetsFaceVariationEars.Count > 0)
+            {
+                presetKey = config.blendPresetsFaceVariationEars.GetRandomKey ();
+                ApplyAppearanceCustomizationFromPreset (ref data, presetKey, ref config.blendPresetsFaceVariationEars);
+            }
+
+            data.blendPresetArchetype = faceKey;
+            
+            eyesIrisPreset = eyeIrisPresets != null ? eyeIrisPresets.GetRandomKeyChecked ((x) => x != null && x.generated) : "01";
+            data.eyesIrisPreset = eyesIrisPreset;
 
             eyesTintPreset = GetTintPresetEyesFromInterpolant (Random.Range (0f, 1f))?.key;
             data.eyesTintPreset = eyesTintPreset;
 
-            data.blendPresetArchetype = faceKey;
-            data.blendPresetBuild = buildKey;
-            data.blendPresetFaceVariationJaw = faceVariationJawKey;
-            data.blendPresetFaceVariationNose = faceVariationNoseKey;
+            lipsTintPreset = GetTintPresetLipsFromInterpolant (Random.Range (0f, 1f))?.key;
+            data.lipsTintPreset = lipsTintPreset;
 
             data.skinMain = skinMainKey;
             data.skinTintPreset = skinTintPreset;
             data.hairMainTintPreset = hairMainTintPreset;
             data.hairFacialTintPreset = hairFacialTintPreset;
+
+            if (config.pilotSuitColorVariants != null && config.pilotSuitColorVariants.Count > 0)
+            {
+                string pilotSuitColorVariant = GetRandomSuitTintPresetKey ();
+                data.pilotSuitColorVariant = pilotSuitColorVariant;
+            }
+
+            if (config.cameraAnglePresets != null && config.cameraAnglePresets.Count > 0)
+            {
+                string cameraAnglePreset = GetRandomCameraAnglePresetKey ();
+                data.cameraAnglePreset = cameraAnglePreset;
+            }
             
             var hairMain = GetRandomAssetHairMain (friendly, modelKey, hairInterpolant);
             var hairMainKey = hairMain?.key;
             data.hairMain = hairMainKey;
             
-            bool hairFacialUsed = Random.Range (0f, 1f) > 0.9f;
+            bool hairFacialUsed = Random.Range (0f, 1f) < facialHairChance;
             if (!hairFacialUsed)
                 data.hairFacial = null;
             else
@@ -1437,6 +1860,28 @@ namespace PhantomBrigade.Data
 
             data.accessoryHeadFront = accessoryHeadFrontKey;
             data.accessoryHeadFrontVariant = accessoryHeadFrontVariant;
+
+            // Commented out, but left in the code (if we decide to bring overlays on random generation back)
+            //var portraitKeys = TextureManager.GetExposedTextureKeys (TextureGroupKeys.PilotPortraits);
+            //data.portrait = portraitKeys.GetRandomEntry ();
+            //data.portraitVariant = overlayVariants.GetRandomKey ();
+
+            bool makeuplUsed = Random.Range (0f, 1f) < makeupChance;
+            if (!makeuplUsed)
+            {
+                data.makeupPatternKey = null;
+                data.makeupColorVariantKey = null;
+            }
+            else
+            {
+                var pilotMakeupPatternEntry = GetRandomMakeupPattern (friendly, modelKey, 0.5f);
+                var pilotMakeupEntryPatternKey = pilotMakeupPatternEntry?.key;
+                var makeupColorsGroupStoredKey = pilotMakeupPatternEntry?.asset?.MakeupColorsGroupKey;
+                var pilotMakeupColorVariantKey = GetRandomMakeupColorPresetVariantKey (makeupColorsGroupStoredKey);
+
+                data.makeupPatternKey = pilotMakeupEntryPatternKey;
+                data.makeupColorVariantKey = pilotMakeupColorVariantKey;
+            }
         }
         
         public void GetRandomColors (Vector2 interpolantRange, out string skinTintKey, out string hairTintKey, out string eyeTintKey)
@@ -1451,6 +1896,25 @@ namespace PhantomBrigade.Data
             skinTintKey = skinTintPreset?.key;
             hairTintKey = hairTintPreset?.key;
             eyeTintKey = eyeTintPreset?.key;
+        }
+
+        private void ApplyAppearanceCustomizationFromPreset (ref DataBlockPilotAppearance data, string key, ref SortedDictionary<string, List<DataBlockPilotBlendAppearanceCustomization>> dict)
+        {
+            if (data != null)
+            {
+                bool customizationPresetFound = dict.TryGetValue (key, out var blendAppearanceCustomizationPresets);
+                if (customizationPresetFound)
+                {
+                    if (blendAppearanceCustomizationPresets != null && blendAppearanceCustomizationPresets.Count > 0)
+                    {
+                        foreach (var entry in blendAppearanceCustomizationPresets)
+                        {
+                            if (!string.IsNullOrEmpty (entry.key))
+                                data.blendAppearanceCustomization[entry.key] = entry.influence;
+                        }
+                    }
+                }
+            }
         }
         
         /*
@@ -1607,5 +2071,6 @@ namespace PhantomBrigade.Data
             }
         }
         */
+        #endif
     }
 }

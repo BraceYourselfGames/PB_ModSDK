@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PhantomBrigade.Overworld;
 using UnityEngine;
 
 namespace PhantomBrigade.Data

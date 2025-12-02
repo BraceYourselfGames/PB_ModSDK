@@ -4,36 +4,30 @@ parents:
   offsetStart: 0
   offsetEnd: 0
 hidden: false
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 1
 ui:
   positionX: 3
-  positionY: -5
+  positionY: -1
   endpoint: false
   group: 
   icon: s_icon_l32_upgrade_units4
 unlock: 
 cost:
   resources:
-    components_r3: 20
+    components_r2: 36
+    components_r3: 24
     supplies: 2000
+    unit_token: 2
 effect:
-  calls: 
   stats:
   - key: unit_slots
     modifier: Offset
     value: 3
-  - key: mm_normal_speed
-    modifier: Offset
-    value: -0.2
-  - key: mm_stealth_speed
-    modifier: Offset
-    value: -0.2
-  - key: mm_fast_speed
-    modifier: Offset
-    value: -0.2
-  functions: []
+  functions: 
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

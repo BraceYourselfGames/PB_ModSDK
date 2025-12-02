@@ -1,0 +1,54 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: squad_invader_experimental
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_WarBase
+  visualLiberated:
+    path: Content/Overworld/Site_Battlefield_Inactive
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_battlesite_on_defeat
+- contest_s1
+- flag_preserve_on_victory
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByKey
+    keyChecked: generic_elimination
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 1
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_elimination: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards: 

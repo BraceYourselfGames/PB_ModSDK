@@ -9,9 +9,32 @@ using Entity = Unity.Entities.Entity;
 
 namespace CustomRendering
 {
+    public static class ECSRenderingSettings
+    {
+        public enum CleanupMethod
+        {
+            ViaEachEntity,
+            ViaArray,
+            ViaQuery
+        }
+        
+        public static CleanupMethod cleanupMethod = CleanupMethod.ViaQuery;
+    }
+    
     public class ECSRenderingBatcher : MonoBehaviour
     {
         private static ECSRenderingBatcher instance;
+        public static World world;
+
+        public static bool IsECSSafe ()
+        {
+            #if UNITY_EDITOR
+            if (UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode && !Application.isPlaying)
+                return false;
+            #endif
+            
+            return initialized && World.DefaultGameObjectInjectionWorld != null;
+        }
 
         public class BatchMeshData
         {
@@ -39,6 +62,9 @@ namespace CustomRendering
 
         //Batches that have not yet been emitted to ECS
         private static Dictionary<long, BatchData> pendingBatches = new Dictionary<long, BatchData> ();
+        
+        private static Dictionary<int, Entity> parentsPerBatch = new Dictionary<int, Entity> ();
+        
         private static EntityQuery rendererLinkQuery;
         private static bool initialized = false;
         private static bool debug = true;
@@ -71,7 +97,9 @@ namespace CustomRendering
             if (initialized)
                 return;
             initialized = true;
-
+            
+            DefaultWorldInitialization.DefaultLazyEditModeInitialize();
+            world = World.DefaultGameObjectInjectionWorld;
             var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
             rendererArchetype = entityManager.CreateArchetype
@@ -107,6 +135,7 @@ namespace CustomRendering
 
         public static void FullCleanup ()
         {
+            OverworldLandscapeManager.ClearProps ();
             CleanupGroups (allGroups);
         }
 
@@ -115,55 +144,97 @@ namespace CustomRendering
             FullCleanup ();
         }
 
-        public static int CleanupGroup (int groupID)
+
+        
+        private static double timeStart = 0;
+
+        public static int CleanupGroup (int groupID) 
         {
-            if (World.DefaultGameObjectInjectionWorld == null) return 0;
+            timeStart = Time.realtimeSinceStartup;
+            
+            if (World.DefaultGameObjectInjectionWorld == null) 
+                return 0;
 
             var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            if (entityManager == null) 
+                return 0;
 
-            if (entityManager == null) return 0;
+            if (parentsPerBatch.TryGetValue (groupID, out Entity parent))
+            {
+                // Debug.Log ($"Deleting parent entity for ECS group {groupID}");
+                entityManager.DestroyEntity (parent);
+                parentsPerBatch.Remove (groupID);
+            }
             
             rendererLinkQuery.SetSharedComponentFilter (new RendererGroup { id = groupID });
-            var rendererEntities = rendererLinkQuery.ToEntityArray (Allocator.TempJob);
-
-            for (int j = 0; j < rendererEntities.Length; ++j)
+            int length = 0;
+            
+            var cleanupMethod = ECSRenderingSettings.cleanupMethod;
+            if (cleanupMethod == ECSRenderingSettings.CleanupMethod.ViaEachEntity)
             {
-                var entity = rendererEntities[j];
+                var rendererEntities = rendererLinkQuery.ToEntityArray (Allocator.TempJob);
+                length = rendererEntities.Length;
+                
+                for (int j = 0; j < rendererEntities.Length; ++j)
+                {
+                    var entity = rendererEntities[j];
+                    entityManager.DestroyEntity (entity);
+                }
 
-                entityManager.DestroyEntity (entity);
+                rendererEntities.Dispose ();
             }
-
-            int length = rendererEntities.Length;
-            rendererEntities.Dispose ();
-
+            else if (cleanupMethod == ECSRenderingSettings.CleanupMethod.ViaArray)
+            {
+                var rendererEntities = rendererLinkQuery.ToEntityArray (Allocator.TempJob);
+                entityManager.DestroyEntity (rendererEntities);
+                rendererEntities.Dispose ();
+            }
+            else if (cleanupMethod == ECSRenderingSettings.CleanupMethod.ViaQuery)
+            {
+                entityManager.DestroyEntity (rendererLinkQuery);
+            }
+            
+            if (allGroups.ContainsKey (groupID))
+                allGroups.Remove (groupID);
+            
+            // Debug.Log ($"Finished cleaning group {groupID} | Time passed: {Time.realtimeSinceStartup - timeStart:0.###}s");
+            
             return length;
         }
 
+        private static List<int> groupIDsToClear = new List<int> ();
+
         private static void CleanupGroups (Dictionary<int, string> renderGroups)
         {
-            int groups = renderGroups.Count;
-            if (groups == 0) 
+            int count = renderGroups.Count;
+            if (count == 0) 
                 return;
             
             if (debug)
                 sb.Clear ();
                 
-            int entities = 0;
+            int entitiesCleared = 0;
+            
+            groupIDsToClear.Clear ();
+            foreach (var kvp in renderGroups)
+                groupIDsToClear.Add (kvp.Key);
 
-            foreach (var group in renderGroups)
+            foreach (var groupID in groupIDsToClear)
             {
-                int entityCount = CleanupGroup (group.Key);
-
-                entities += entityCount;
+                var groupName = renderGroups[groupID];
+                int entityCount = CleanupGroup (groupID);
+                entitiesCleared += entityCount;
                 
                 if (debug)
-                    sb.Append ($"Cleaning group {group.Value} with ID {group.Key} found {entityCount} instances ");
-                sb.Append ("\n");
+                {
+                    sb.Append ($"Cleaning group {groupName} with ID {groupID}, found {entityCount} instances ");
+                    sb.Append ("\n");
+                }
             }
 
             if (debug)
             {
-                sb.Append ($"Cleaned up: {entities} total entities");
+                sb.Append ($"Cleaned up: {entitiesCleared} total entities");
                 Debug.LogWarning (sb.ToString ());
             }
 
@@ -195,6 +266,9 @@ namespace CustomRendering
                 sb.Clear ();
                 sb.Append ($"Registering {objectGroups.Count} compressed object groups for batching... | Renderer link ID: {rendererLinkID}");
             }
+
+            if (parentEntity != Entity.Null)
+                parentsPerBatch[rendererLinkID] = parentEntity;
         
             // Logging moved to a condensed report
             // if (instance.debug)
@@ -203,7 +277,6 @@ namespace CustomRendering
             var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             RendererGroup rendererGroup = new RendererGroup { id = rendererLinkID }; 
             allGroups.Add (rendererLinkID, groupName);
-            
 
             for (int i = 0; i < objectGroups.Count; ++i)
             {
@@ -294,6 +367,123 @@ namespace CustomRendering
             if (debug)
                 Debug.Log (sb.ToString ());
         }
+        
+        public static void RegisterBatchInstances
+        (
+            Entity parentEntity,
+            List<OverworldLandscapePropGroup> landscapePropGroups,
+            int rendererLinkID,
+            string groupName
+        )
+        {
+            CheckInitialization ();
+            if (AreBatchInstancesRegistered (rendererLinkID))
+                return;
+            
+            if (debug)
+            {
+                sb.Clear ();
+                sb.Append ($"Registering {landscapePropGroups.Count} landscape prop groups for batching... | Renderer link ID: {rendererLinkID}");
+            }
+            
+            if (parentEntity != Entity.Null)
+                parentsPerBatch[rendererLinkID] = parentEntity;
+
+            // Logging moved to a condensed report
+            // if (instance.debug)
+            //     Debug.Log ($"Registering {meshRenderers.Length} batch instances with link id {rendererLinkID} : destroying renderers : {destroyRenderers.ToString ()}");
+            
+            var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            RendererGroup rendererGroup = new RendererGroup { id = rendererLinkID }; 
+            allGroups.Add (rendererLinkID, groupName);
+            
+
+            for (int i = 0; i < landscapePropGroups.Count; ++i)
+            {
+                var group = landscapePropGroups[i];
+                
+                var sharedMesh = group.mesh;
+                if (sharedMesh == null)
+                {
+                    Debug.LogWarning ($"Skipping batching of compressed group {groupName}/{rendererLinkID} due to null mesh reference");
+                    continue;
+                }
+                
+                var sharedMeshID = sharedMesh.GetInstanceID ();
+                var sharedMaterial = group.material;
+                if (sharedMaterial == null)
+                {
+                    Debug.LogWarning ($"Skipping batching of compressed group {groupName}/{rendererLinkID} due to null material reference");
+                    continue;
+                }
+                
+                if (sharedMaterial.enableInstancing != true)
+                {
+                    Debug.LogWarning ($"Skipping batching of compressed group {groupName}/{rendererLinkID} due to disabled instancing on material {sharedMaterial.name}", sharedMaterial);
+                    continue;
+                }
+
+                if (debug)
+                {
+                    sb.Append ("\n");
+                    sb.Append ($"- {i} | Group {groupName}/{rendererLinkID} | Mesh: {sharedMesh.name} | Count: {group.transforms.Count}");
+                }
+
+                long batchID = Utilities.MakeLong (sharedMeshID, sharedMaterial.name.GetHashCode ());
+                BatchData batchData = null;
+
+                if (pendingBatches.ContainsKey (batchID))
+                    batchData = pendingBatches[batchID];
+                else
+                {
+                    batchData = new BatchData
+                    {
+                        MeshData = new BatchMeshData
+                        {
+                            mesh = sharedMesh,
+                            id = batchID,
+                            material = sharedMaterial,
+                            shadowCastingMode = ShadowCastingMode.On,
+                            receiveShadows = true,
+                            subMesh = 0
+                        }
+                    };
+
+                    pendingBatches.Add (batchID, batchData);
+                    batchData.batchEntities = new List<Entity> ();
+                }
+
+                for (int x = 0; x < group.transforms.Count; ++x)
+                {
+                    var placement = group.transforms[x];
+                    var rotation = Quaternion.identity;
+                    var scale = Vector3.one * placement.scale;
+                    var trs = Matrix4x4.TRS (placement.position, rotation, scale);
+                    var s = placement.scale;
+                    
+                    Entity rendererEntity = entityManager.CreateEntity (rendererArchetype);
+
+                    entityManager.SetComponentData (rendererEntity, new Parent { Value = parentEntity });
+                    entityManager.SetComponentData (rendererEntity, new Translation { Value = placement.position });
+                    entityManager.SetComponentData (rendererEntity, new PropertyVersion { version = 1 });
+                    entityManager.SetComponentData (rendererEntity, new ScaleShaderProperty { property = new HalfVector4 (s, s, s, 1) });
+                    entityManager.SetComponentData (rendererEntity,
+                        new HSBOffsetProperty
+                        {
+                            property = new HalfVector8(new HalfVector4(0f, 0.5f, 0.5f, 1),
+                                new HalfVector4(0f, 0.5f, 0.5f, 1))
+                        });
+                    entityManager.SetComponentData (rendererEntity, new PackedPropShaderProperty { property = new HalfVector4(1, 0, 1, 0) });
+                    entityManager.SetComponentData (rendererEntity, new LocalToWorld { Value = trs });
+                    entityManager.SetSharedComponentData (rendererEntity, rendererGroup);
+
+                    batchData.batchEntities.Add (rendererEntity);
+                }
+            }
+            
+            if (debug)
+                Debug.Log (sb.ToString ());
+        }
 
         public static void RegisterBatchInstances (Entity parentEntity, MeshRenderer[] meshRenderers, int rendererLinkID, bool destroyRenderers, string groupName)
         {
@@ -308,6 +498,9 @@ namespace CustomRendering
                 sb.Clear ();
                 sb.Append ($"Registering {meshRenderers.Length} mesh renderers for batching... | Renderer link ID: {rendererLinkID} | Group name: {groupName} | Destroy source: {destroyRenderers}");
             }
+            
+            if (parentEntity != Entity.Null)
+                parentsPerBatch[rendererLinkID] = parentEntity;
             
             var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             RendererGroup rendererGroup = new RendererGroup { id = rendererLinkID };

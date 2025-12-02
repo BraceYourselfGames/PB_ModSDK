@@ -1,0 +1,41 @@
+comment:
+  comment: Consider replacing unit overheat damage increase with a penalty to heat dissipation. That way death from heat is not faster, it's the road to overheat that's faster. More player agency.
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_role_generic_r3
+tags:
+- starter
+- type_defender
+- defender_shield
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_barrier_shield:
+    mode: Offset
+    value: 0.35
+  unit_damage:
+    mode: Offset
+    value: -0.1
+  unit_hp_shield:
+    mode: Offset
+    value: 0.35
+  unit_mass_shield:
+    mode: Offset
+    value: -3
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: 1
+  hp:
+    mode: Offset
+    value: 5
+effectsOnEvents: 
+effectsShared: 

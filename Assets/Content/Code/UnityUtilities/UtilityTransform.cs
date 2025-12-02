@@ -7,12 +7,12 @@ public static class UtilityTransform
     {
         return t != null ? t.name : "null";
     }
-
+    
     public static string GetTransformPath (Transform t)
     {
         if (t == null)
             return "null";
-
+        
         string result = t.name;
         while (t.parent != null)
         {
@@ -22,7 +22,7 @@ public static class UtilityTransform
 
         return result;
     }
-
+    
     public static string GetTransformPath (Component t)
     {
         if (t == null)
@@ -45,16 +45,16 @@ public static class UtilityTransform
             listToUse.Add (parent);
 
         for (int i = 0; i < parent.childCount; ++i)
-            parent.GetChild (i).FindChildrenDeep (name, partialMatches, listToUse);
+             parent.GetChild (i).FindChildrenDeep (name, partialMatches, listToUse);
 
         return listToUse;
     }
-
+    
     public static Transform FindChildDeep (this Transform parent, string name, bool partialMatches)
     {
         if (partialMatches ? parent.name.Contains (name) : string.Equals (parent.name, name))
             return parent;
-
+        
         for (int i = 0; i < parent.childCount; ++i)
         {
             var result = parent.GetChild (i).FindChildDeep (name, partialMatches);
@@ -80,12 +80,12 @@ public static class UtilityTransform
         t.localRotation = Quaternion.identity;
         t.localScale = Vector3.one;
     }
-
+    
     public static void MatchTransform (this Transform t, Transform t2)
     {
         if (t2 == null)
             return;
-
+        
         t.localPosition = t2.localPosition;
         t.localRotation = t2.localRotation;
     }
@@ -100,7 +100,7 @@ public static class UtilityTransform
         target.z *= Multi;
         target.w *= Multi;
         // smooth damp (nlerp approx)
-        var Result = new Vector4
+        var Result = new Vector4 
         (
             Mathf.SmoothDamp (rot.x, target.x, ref deriv.x, time),
             Mathf.SmoothDamp (rot.y, target.y, ref deriv.y, time),
@@ -121,19 +121,25 @@ public static class UtilityTransform
         var p = t.localPosition;
         t.localPosition = new Vector3 (x, p.y, p.z);
     }
-
+    
     public static void SetPositionLocalY (this Transform t, float y)
     {
         var p = t.localPosition;
         t.localPosition = new Vector3 (p.x, y, p.z);
     }
-
+    
     public static void SetPositionLocalZ (this Transform t, float z)
     {
         var p = t.localPosition;
         t.localPosition = new Vector3 (p.x, p.y, z);
     }
-
+    
+    public static void OffsetPositionLocalY (this Transform t, float y)
+    {
+        var p = t.localPosition;
+        t.localPosition = new Vector3 (p.x, p.y + y, p.z);
+    }
+    
     public static GameObject CreateChild (this Transform t, string name)
     {
         var go = new GameObject (name);

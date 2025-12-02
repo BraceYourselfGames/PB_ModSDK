@@ -1,0 +1,57 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+core:
+  textIdentifierGroup: 
+  textName: 
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Squad_Convoy_Easy
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags: 
+generation: 
+interaction:
+  keys:
+  - ftue_22_convoy_combat
+  tags: 
+effectsOnEvents: 
+combat:
+  scenarioKeys:
+  - unique_tutorial_intercept_swarm
+  scenarioFilter: 
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion:
+    destroyed: true
+    functionsGlobal:
+    - !ModifyResources
+      resourceChanges:
+      - key: camp_supplies
+        check: false
+        checkStrict: false
+        offset: false
+        value: 1
+    functionsBase: 
+    functionsTarget: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - ftue_04_convoy
+        tags: 

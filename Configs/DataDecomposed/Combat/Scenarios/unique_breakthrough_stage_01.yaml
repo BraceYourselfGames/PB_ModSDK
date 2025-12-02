@@ -1,0 +1,2829 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: true
+  time: 5
+  scalingUsed: false
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: false
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation:
+    f: 0
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_breakthrough_stage_01
+entry:
+  squadUsed: true
+  squadSize: 3
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      player: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- listed
+- trait_units_detectable
+- type_breakthrough_train
+- trait_squad_limit
+- block_exit_on_defeat
+states:
+  cargo_destruction_counter:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 9
+    priority: 9
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnLevelDestruction
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            cargo_destruction_threshold: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_lost
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  cargo_destruction_threshold:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 10
+    priority: 30
+    priorityDisplay: 30
+    mood: -1
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: true
+      progressHiddenAtZero: true
+      moodIntensityNormal: 
+      moodIntensityProgress:
+        f: 0.8
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: s_icon_l16_context_point2
+    evaluationContext: OnLevelDestruction
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_lost
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 20
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Set
+              key: combat_sc_targets_lost
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+            - change: Offset
+              key: combat_sc_cargo_lost
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          - !CombatCreateCommsMessage
+            time: 0
+            key: br_train_cargo_lost
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_cargo_lost
+                  presenceDesired: true
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: GreaterEqual
+                  value: 3
+            checksBaseValues: 
+            functions:
+            - !CombatStateScopeChangeGroup
+              stateScopeChanges:
+                cargo_destruction_counter: false
+                cargo_destruction_threshold: false
+            - !Log
+              message: Reached maximum cargo lost, stopping tracking.
+            functionsElse: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_remains0:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 20
+    priority: 20
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: LessEqual
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_generator: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            reinforcements_progress: false
+            reinforcements_spawn: false
+            victory: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 2
+            key: br_train_engine_remains0
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_remains1:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 21
+    priority: 21
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: GreaterEqual
+        value: 7
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_generator: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      engine_remains0: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0.2
+            key: br_train_engine_remains1
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_remains4:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 22
+    priority: 22
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: GreaterEqual
+        value: 4
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_generator: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      engine_remains0: false
+      engine_remains1: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            reinforcements_progress: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessageGroup
+            clearQueue: false
+            comms:
+            - time: 0
+              hidden: false
+              key: br_train_engine_remains4
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_remains7:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 23
+    priority: 23
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: GreaterEqual
+        value: 1
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_generator: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      engine_remains0: false
+      engine_remains1: false
+      engine_remains4: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0.2
+            key: br_train_engine_remains7
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_wreck_activate_aoe_damage_center_l:
+    comment:
+      comment: Destroys any tanks present on the LEFT flank after center-left engine was destroyed (either of the two engines in the center). Destruction happens from nearby engine's explosion blast
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 10
+    priority: 45
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_blast_center_l: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: Distance
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags: 
+              name: 
+              faction:
+                key: Invaders
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked:
+                locationSourceName: loc_tanks_detector_l
+                locationSource: Location
+                occupied: 
+                distance:
+                  check: Less
+                  value: 40
+              relativeTransform: 
+              blueprints: 
+              classes:
+                tank: true
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction:
+                delay: 0.5
+              transform: 
+              actions: 
+              functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_wreck_activate_aoe_damage_center_r:
+    comment:
+      comment: Destroys any tanks present on the RIGHT flank after center-right engine was destroyed (either of the two engines in the center). Destruction happens from nearby engine's explosion blast
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 10
+    priority: 45
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_blast_center_r: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: Distance
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags: 
+              name: 
+              faction:
+                key: Invaders
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked:
+                locationSourceName: loc_tanks_detector_r
+                locationSource: Location
+                occupied: 
+                distance:
+                  check: Less
+                  value: 40
+              relativeTransform: 
+              blueprints: 
+              classes:
+                tank: true
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction:
+                delay: 0.5
+              transform: 
+              actions: 
+              functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_wreck_activate_aoe_damage_front_l:
+    comment:
+      comment: Destroys any tanks present on the LEFT flank after front-left engine was destroyed. Destruction happens after engine's panel hits the tanks
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 10
+    priority: 45
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_blast_front_l: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags: 
+              name: 
+              faction:
+                key: Invaders
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked:
+                locationSourceName: loc_tanks_detector_l
+                locationSource: Location
+                occupied: 
+                distance:
+                  check: Less
+                  value: 40
+              relativeTransform: 
+              blueprints: 
+              classes:
+                tank: true
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction:
+                delay: 1.5
+              transform: 
+              actions: 
+              functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_wreck_activate_aoe_damage_front_r:
+    comment:
+      comment: Destroys any tanks present on the RIGHT flank after front-right engine was destroyed. Destruction happens after engine's panel hits the tanks
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 10
+    priority: 45
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_blast_front_r: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags: 
+              name: 
+              faction:
+                key: Invaders
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked:
+                locationSourceName: loc_tanks_detector_r
+                locationSource: Location
+                occupied: 
+                distance:
+                  check: Less
+                  value: 40
+              relativeTransform: 
+              blueprints: 
+              classes:
+                tank: true
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction:
+                delay: 1.5
+              transform: 
+              actions: 
+              functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_wreck_effect:
+    comment:
+      comment: Checks for combat_sc_score, which indicates an engine was taken out during a turn. Resets temp memory combat_sc_score to 0.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 33
+    priority: 33
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_score
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 1
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Set
+              key: combat_sc_score
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          - !Log
+            message: Applied effect of engine destruction
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  engine_wreck_trigger:
+    comment:
+      comment: Every time an engine is destroyed, run this logic. Non-incremented reaction. The memory key combat_sc_score is used to communicate with wreck_effect state to apply destruction effects that shouldn't be repeated per engine.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 10
+    priority: 10
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_generator: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      engine_remains0: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Set
+              key: combat_sc_score
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          - !Log
+            message: Detected engine destruction
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  reinforcements_progress:
+    comment:
+      comment: If no guards are on the field, Increment combat_sc_progress by 1 to track how soon reinforcements should arrive. Another state will use this to spawn them.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 32
+    priority: 32
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: LessEqual
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_guard: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      engine_remains0: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            reinforcements_spawn: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_progress
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  reinforcements_spawn:
+    comment:
+      comment: If progress reaches threshold, spawn guard squad. Reset progress counter to spawning them.
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 35
+    priority: 35
+    priorityDisplay: 0
+    mood: -2
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: true
+      progressHiddenAtZero: true
+      moodIntensityNormal: 
+      moodIntensityProgress:
+        f: 0.8
+      progressLimitOverride:
+        i: 4
+      progressLimitMemory: 
+      progressSuffixSprite: s_icon_l16_context_time5
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      engine_remains0: false
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_progress
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 1
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            reinforcements_progress: false
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Set
+              key: combat_sc_progress
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupLink
+            key: army_tr_chase_guard
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: true
+            factionBranchKey: branch_army
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: false
+            functions:
+            - !CombatUnitTagChange
+              tagChanges:
+                fields_ignored: true
+                movement_anim_maxed: true
+                movement_skipped: true
+                purpose_guard: true
+            - !CombatUnitForceDissolveOnDestruction
+              forced: true
+            - !CombatUnitForceMovementFactor
+              factor: 1
+            - !CombatUnitSetStatMultiplier
+              key: hp
+              mode: Set
+              value: 0.5
+              refreshFullStats: true
+            spawnTagsUsed: true
+            spawnTags:
+              flank: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          unitGeneratorKeys: 
+          outcome: 
+  state_c1_engine_l_01_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c1: true
+        purpose_boss_generator: true
+        purpose_objective_01: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_l_01_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_l_01_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c1_engine_l_02_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c1: true
+        purpose_boss_generator: true
+        purpose_objective_02: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_l_02_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_l_02_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c1_engine_r_01_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c1: true
+        purpose_boss_generator: true
+        purpose_objective_03: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_r_01_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_r_01_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c1_engine_r_02_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c1: true
+        purpose_boss_generator: true
+        purpose_objective_04: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_r_02_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c1_engine_r_02_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c2_engine_l_01_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c2: true
+        purpose_boss_generator: true
+        purpose_objective_01: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_l_01_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_l_01_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c2_engine_l_02_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c2: true
+        purpose_boss_generator: true
+        purpose_objective_02: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_l_02_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_l_02_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c2_engine_r_01_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c2: true
+        purpose_boss_generator: true
+        purpose_objective_03: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_r_01_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_r_01_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  state_c2_engine_r_02_damage:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_engine_c2: true
+        purpose_boss_generator: true
+        purpose_objective_04: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 2
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_r_02_damage
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_01
+            child: c2_engine_r_02_damage_fx
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  victory:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0
+            key: br_train_victory
+          - !ModifyMemoryBaseAdv
+            keyInput: combat_sc_rewards_gained
+            keyOutput: 
+            operations:
+            - !FloatOperationSet
+              value: 4
+            - !FloatOperationSubtractResolvedInt
+              resolver: !OverworldIntValueMemory
+                key: combat_sc_cargo_lost
+            - !FloatOperationClamp
+              min: 1
+              max: 4
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_rewards_gained
+                  presenceDesired: true
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: GreaterEqual
+                  value: 1
+            checksBaseValues: 
+            functions:
+            - !CombatReserveRewardExact
+              groupKey: cargo
+              rewards:
+                part_armor_w1_set: 1
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_rewards_gained
+                value: -1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            functionsElse: 
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_rewards_gained
+                  presenceDesired: true
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: GreaterEqual
+                  value: 1
+            checksBaseValues: 
+            functions:
+            - !CombatReserveRewardExact
+              groupKey: cargo
+              rewards:
+                part_armor_w2_set: 1
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_rewards_gained
+                value: -1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            functionsElse: 
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_rewards_gained
+                  presenceDesired: true
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: GreaterEqual
+                  value: 1
+            checksBaseValues: 
+            functions:
+            - !CombatReserveRewardExact
+              groupKey: cargo
+              rewards:
+                part_armor_w3_set: 1
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_rewards_gained
+                value: -1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            functionsElse: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: false
+            instant: false
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.2688679
+        b: 0.2688679
+        a: 0
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w3_sr_shotgun
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: center
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w3_sr_shotgun
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: guard_01
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w1_sr_shotgun
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: guard_02
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w1_sr_shotgun
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      - keyExternal: true
+        key: vhc_mech_w2_mr_kinetic
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: guard_03
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w1_sr_smg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      - keyExternal: true
+        key: vhc_mech_w1_mr_ar_shield
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: guard_04
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w3_sr_shotgun_shield
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: guard_05
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: turrets_r1
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: turrets_r2
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: turrets_r3
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: turrets_l1
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: turrets_l2
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions:
+      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_attacks_need_sightline: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: turrets_l3
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges:
+      combat_sc_cargo_lost: true
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatChangeFogCustom
+      time: 0
+      delay: 0
+      densityGlobal: 0.05
+      densityDistance: 1
+      densityHeight: 0.35
+      heightOffset: -10
+    - !CombatCreateUnitComposite
+      tagsUsed: false
+      tags: 
+      blueprintKeys:
+      - breakthrough_vehicle_train
+      instanceNameOverride: ''
+      target:
+        type: Location
+        name: obj_boss_origin
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      levelOffset: 0
+      friendly: false
+      controllable: false
+      navigationSampled: false
+    - !CombatCreateCommsMessageGroup
+      clearQueue: true
+      comms:
+      - time: 3
+        hidden: false
+        key: br_train_intro1
+      - time: 15
+        hidden: false
+        key: br_train_intro2
+    - !ClearBaseCombatMemory {}
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

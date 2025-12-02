@@ -1,43 +1,36 @@
-hidden: false
-parent: internal_aux_plating
+hidden: true
+parent: internal_aux
 rating: 1
 textNameFromPreset: 
 textNameFromHardpoint: 
-textName:
-  split: true
+textName: 
 textDescFromPreset: 
-textDesc:
-  split: true
-hardpoints: 
+textDesc: 
+hardpoints:
+- internal_aux_defense
 tags:
-- plating_additive
-- stat_barrier
+- rating_1
 - stat_hp
-- stat_mass
+- stat_barrier
 statDistribution: ''
 stats:
   barrier:
-    value: 0.075
+    value: 1
     targetMode: 1
     targetSocket: ''
     targetHardpoint: ''
   comp2_value:
-    value: 1
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   comp3_value:
-    value: 1
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   hp:
-    value: 0.075
-    targetMode: 1
-    targetSocket: ''
-    targetHardpoint: ''
-  mass:
-    value: 0.15
+    value: 1
     targetMode: 1
     targetSocket: ''
     targetHardpoint: ''
@@ -53,3 +46,4 @@ projectile:
 beam: 
 custom: 
 functions: 
+workshopInfo: 

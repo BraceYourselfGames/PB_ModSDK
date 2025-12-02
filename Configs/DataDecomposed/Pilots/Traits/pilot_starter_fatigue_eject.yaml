@@ -1,0 +1,51 @@
+comment: 
+state: Finalized
+hidden: true
+priority: 0
+level: 0
+icon: s_icon_l32_pilot_injury2
+tags:
+- starter_fatigue
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatActionAttackEnd
+  - CombatActionMovementEnd
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal:
+  - !OverworldValidateChance
+    chance: 0.5
+  - !OverworldValidateResolvedInt
+    resolver: !OverworldIntValueCombatTurn {}
+    check: GreaterEqual
+    value: 2
+  checksBase: 
+  checksSelf:
+  - !PilotValidateStatValue
+    key: fatigue
+    normalized: true
+    check: RoughlyEqual
+    value: 1
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitPilotEject {}
+  functionsSelf:
+  - !PilotRecordTraitActivation
+    key: pilot_starter_fatigue_eject
+    log: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

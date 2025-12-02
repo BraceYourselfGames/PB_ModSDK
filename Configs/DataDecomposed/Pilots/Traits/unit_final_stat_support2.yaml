@@ -1,0 +1,63 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_part_arch_structure
+tags:
+- level_5
+- type_support
+- prestige_unpickable
+group: 
+existingTraitTagsFilter:
+  support_repair: true
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_mass_back:
+    mode: Offset
+    value: -4
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionVictoryEarly
+  - CombatMissionDefeatEarly
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal:
+  - !CombatModifyPlayerUnits
+    units: 0
+    checks: 
+    functions:
+    - !CombatUnitCheck
+      checks:
+      - !CombatValidateUnitPilot
+        checks:
+        - !PilotValidateTraitTriggered
+          key: unit_postcombat_repair
+          tag: false
+          present: false
+      functions:
+      - !CombatUnitIntegrityChange
+        value: 0.2
+        offset: true
+        sockets: 
+      functionsElse: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotRecordTraitActivation
+    key: unit_postcombat_repair
+    log: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

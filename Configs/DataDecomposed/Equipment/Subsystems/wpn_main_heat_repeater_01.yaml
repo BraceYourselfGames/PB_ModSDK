@@ -9,11 +9,13 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_10
-- spec_heat
+- spec_guided_precise
+- type_sightline_recommended
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
-    value: 20
+    value: 22
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -23,7 +25,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 120
+    value: 140
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -43,7 +45,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 8
+    value: 6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -53,17 +55,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_heat:
-    value: 17
+    value: 15
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 0
-    targetMode: 0
-    targetSocket: ''
-    targetHardpoint: ''
-  wpn_impact_radius:
-    value: 1
+    value: 14
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -73,7 +70,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 100
+    value: 77
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -88,7 +85,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 32
+    value: 16
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -175,13 +172,16 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
       keys:
       - tv_tg:
           x: 0
-          y: 0.2009277
+          y: 0.5001521
           z: 1.338159
           w: 1.338159
         w:
@@ -208,7 +208,7 @@ projectile:
         m: {}
       - tv_tg:
           x: 1
-          y: 0
+          y: 0.09643555
           z: -5.007175
           w: -5.007175
         w:
@@ -223,9 +223,7 @@ projectile:
   fuseProximity: 
   hitResponse: 
   splashDamage: 
-  splashImpact:
-    exponent: 2
-    triggerOnDamage: true
+  splashImpact: 
   guidanceData:
     rigidbodyMass: 0
     rigidbodyDrag: 3
@@ -306,11 +304,13 @@ projectile:
   statusBuildup:
     key: timed_burn
     statMultiplier: 
-    amount: 0.35
+    amount: 0.15
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

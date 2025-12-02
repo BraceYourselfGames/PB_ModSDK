@@ -1,39 +1,37 @@
+pointLimit: 3
+pointCountdownDisplayThreshold: 9
+pointSpawnRangeDefault:
+  x: 200
+  y: 300
+pointSeparationDefault: 50
 navGraphAssetPath: Content/Overworld/OverworldTerrainGraph
 navRestrictionOrigin:
   x: -835
   y: -630
 navRestrictionRadius: 72.5
 simulationStartTime: 6
-minEjectionRange: 50
-maxEjectionRange: 100
-retreatDurationBase: 24
-retreatDurationFromDistance: 72
-retreatDurationDistances:
-  x: 300
-  y: 1500
-createEnemyEjectionSites: false
+workshopStripsUnfusedSystems: true
+partsForWorkshopLevel:
+  core: 3
+  equipment_left: 3
+  equipment_right: 3
+  optional_right: 6
+  secondary: 3
+pilotRecruitCostsRookie:
+  supplies: -150
+pilotRecruitCostsPerLevel:
+  supplies: -100
+  unit_token: -1
+pilotRecruitPromotionHistory: 2
+pilotRecruitRefreshInterval: 24
+pilotRecruitCountBase:
+  min: 3
+  max: 4
+pilotRecruitCountLimited:
+  min: 2
+  max: 2
 destroyInRangeOnLiberation: true
-entityTagResupplyPoint: homebase
-entityTagMilitarySpawn: designation_military
-entityTagWarBase: war_base
-entityTagsSquad:
-- tag: squad
-  not: false
-- tag: role_convoy
-  not: true
-defaultScenarioTags: {}
-evaluateEventsOverTime: true
-logEventEvaluationOverTimeShort: false
-logEventEvaluationOverTimeMedium: false
-logEventEvaluationOverTimeLong: false
-logEventCulling: false
-logEventEvaluationOnContact: false
-logAgentDestinations: false
-eventOptionDetailsUpdated: true
-eventOptionDetailsCompact: false
-eventChanceShort: 0
-eventChanceMedium: 0.75
-eventChanceLong: 0
+logWorkshopLeveling: false
 eventEvaluationCooldownDelta:
   modePostWrap: ClampForever
   modePreWrap: ClampForever
@@ -56,37 +54,18 @@ eventEvaluationCooldownDelta:
       x: 0
       y: 0
     m: {}
-eventEvaluationCooldownShortBase: 0.01
-eventEvaluationCooldownShortDelta: 0
-eventEvaluationCooldownMediumBase: 15
-eventEvaluationCooldownMediumDelta: 5
-eventEvaluationCooldownLongBase: 40
-eventEvaluationCooldownLongDelta: 10
-eventHistorySize: 200
-eventRuleChanceOverride:
-- capital_interaction_victory
-- capital_notification_liberated
-- capital_interaction_center_combat
-- capital_interaction_center_defeat
-- capital_interaction_outskirts_combat
-- capital_interaction_outskirts_defeat
-- precombat_interaction_generic_02
-- precombat_interaction_generic_01
 entityEffectsOverTime: true
 entityEffectsOnEntry: true
 skyRenderTimeThreshold: 0.1
-DebugCanOrderEnemyUnits: false
-DebugEnableLMBScroll: false
-cameraMovementSpeed: 0.0014
+debugMovementOnSelections: false
 zoomDefault: 0.15
 zoomDistanceDefault: 385
 cameraRotationYDefault: 57
 cameraRotationXDefault: 26
-cameraMovementDelay: 0.1
 deltaTimeProtection: true
 deltaTimeMin: 0.008333334
 deltaTimeMax: 0.06666667
-overworldTimeProgression: 0.1666667
+overworldTimeProgression: 0.5
 weatherChangeMultiplier: 0.25
 weatherLevels:
   l025:
@@ -114,6 +93,30 @@ weatherLevels:
     visionMultiplierEnemy: 0.45
     visionMultiplierPlayer: 0.2
     icon: s_icon_l32_weather_rain3
+skyBestTimesOfDay:
+- 0
+- 1
+- 2
+- 3.5
+- 4
+- 5.35
+- 6
+- 6.5
+- 7
+- 7.5
+- 8
+- 10
+- 14
+- 15
+- 16
+- 17
+- 17.55
+- 18.35
+- 18.65
+- 18.8
+- 21
+- 22
+- 23
 viewBlipAnimationCurve:
   modePostWrap: ClampForever
   modePreWrap: ClampForever
@@ -197,70 +200,131 @@ viewFlareAnimationCurve:
     m: {}
 viewFlareAnimationDuration: 0.35
 pingDuration: 0.25
-visionAnimationDuration: 0.2
-movementSpeedMultiplier: 6
+movementSpeedMultiplier: 12
+movementSpeedMultiplierOverdrive: 3
+movementPredictedTimeMultiplier: 5
+movementPredictedTimeDisplay: true
+movementDistanceDisplayScale: 1
 directionDampSmoothTime: 0.02
 directionDampMaxSpeed: 500
+overdriveHeatBuildupSpeed: 0.5
+overdriveHeatDissipationSpeed: 0.15
+overdriveHeatDamageFrequency: 1
+overdriveHeatDamageLimit: 0.25
+overdriveHeatDamagePerHit: 0.1
 pathMovementWaypointApproachDistance: 1
 pathMovementLookaheadTime: 1
-pathVisualEnemy: false
+pathVisualEnemy: true
+positionUpdatesUnconditional: true
 playerRecognitionDelay: 1
+visionClippingDisabled: true
 visionTweenRate: 2.25
-snowAltitudeBaseline: 55
-snowAltitudeCamera: 55
-snowAltitudeBiomeFilter:
-  tags:
-    alpine: true
-visionRainEffect: true
 saveBeforeCombat: true
 saveAfterCombat: true
 autoSaveAtInterval: true
 autoSaveTimerSeconds: 600
-autoSaveSlotCount: 3
+autoSaveSlotCount: 2
 aiMaxUnitResponseRange: 300
-aiReinforcementCooldown: 10
-overworldDistancePerReinforcementTurn: 7
-reinforcementsFromChasingLimit: 3
-provinceWakeUpdateInterval: 5
-provinceWakeRadius: 400
-provinceLevelPerDistance: 1
 aiRecoveryDuration: 4
 aiRecoveryDurationStatic: 1
-aiPatrolRework: true
-aiPatrolReworkOriginTags:
-  designation_military: true
-aiPatrolReworkFallbackTags:
-  patrol_standard: true
 aiPatrolUpdateInterval: 5
-aiSpawnDistanceMin: 40
-aiPatrolQuotasPerEscalation:
-- 1
-- 2
-- 2
-- 3
 aiSearchMinRadius: 20
 aiSearchMaxRadius: 70
 aiInvestigationEnabled: true
-aiConvoyRedirect: false
-aiConvoyRework: true
-aiConvoyReworkSharedTags:
-  squad_invader_convoy: true
-aiConvoyUpdateInterval: 7
-aiConvoyTargetPopulation: 3
-aiConvoyExternalJourneyChance: 30
-aiConvoyReassignmentDestinationTags:
-- designation_civilian
-- designation_military
-aiCounterAttackUpdateInterval: 24
-aiCounterAttackQuota: 2
-provinceCounterAttackChance: 7
 seed: 1524376141
 createNewSeed: true
-startingProvinceName: province_00
-emptyProvinceName: empty
-effectRepairJuiceRecoveryRate: 5
-effectBatteryRecoveryRate: 35
 abilityRainSensorDuration: 5
+travelDurationRealtime: 3
+travelDurationSim: 12
+campCostBase: 1
+campCostIncreased: 2
+timeSkipDurationRealtime: 3
+timeSkipDurationCamp: 6
+timeSkipDurationResupply: 18
+timeSkipDurationRetreat: 24
+tutorialOnQuickStart: true
+campaignProgressTopRight: false
+liberationSpawnVariants:
+  s1_refresh:
+    comment:
+      comment: Used when refreshing missions in raid phases. 2 possible rolls, 1 spawn.
+    limit: 1
+    variants:
+    - escalationValue: 0
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 10
+    - escalationValue: 1
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 10
+        y: 12
+  s1_reset:
+    comment:
+      comment: Used when resetting missions in raid phases. 3 possible rolls, 3 spawns.
+    limit: 3
+    variants:
+    - escalationValue: 0
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 0
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 1
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 11
+        y: 12
+  s2_refresh:
+    comment:
+      comment: Used when refreshing missions in contest phases. 3 possible rolls, 2 spawns.
+    limit: 2
+    variants:
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 3
+      progressMemoryValue: 3
+      countdownOffset:
+        x: 11
+        y: 12
+  s2_reset:
+    comment:
+      comment: Used when resetting missions in contest phases. 3 possible rolls, 3 spawns.
+    limit: 3
+    variants:
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 11
+        y: 12
+threatEscalationStrings:
+- '[55]★★★[ff]★'
+- '[55]★★[ff]★★'
+- '[55]★[ff]★★★'
+- ★★★★
 threatComparisonLevels:
 - threshold: -35
   textName: selection_difficulty_level_0

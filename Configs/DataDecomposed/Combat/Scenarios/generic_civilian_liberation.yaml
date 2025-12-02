@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -56,6 +61,8 @@ tags:
 - listed
 - type_civilian_liberation
 - context_settlement
+- flag_escalation_squads
+- block_persistent_pilots
 states:
   destruction_critical:
     comment: 
@@ -121,17 +128,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Defeat
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   destruction_early:
     comment: 
     textNameKey: ''
@@ -197,14 +201,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   reinforcements_hg:
     comment: 
     textNameKey: ''
@@ -265,8 +266,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
@@ -296,9 +295,8 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -400,17 +398,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Victory
             early: false
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   main:
     comment: 
@@ -432,6 +427,7 @@ steps:
     tags:
     - start
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -462,3 +458,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

@@ -8,9 +8,15 @@ textDescFromPreset:
 textDesc: 
 hardpoints: 
 tags:
+- activation_is_attack
 - activation_targeted
+- aihint_nocharges
 - category_wpn_launcher_primary
+- spec_guided_precise
 - type_range_strict
+- spec_guided
+- spec_concussion
+- aihint_stopmovementtofire
 statDistribution: ''
 stats:
   act_charges:
@@ -24,12 +30,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 1.25
+    value: 1.1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 75
+    value: 95
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -69,7 +75,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_proj_lifetime:
-    value: 10
+    value: 7.6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -79,22 +85,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 60
+    value: 70
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 40
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 40
-    targetMode: 0
-    targetSocket: ''
-    targetHardpoint: ''
-  wpn_scatter_radius:
-    value: 10
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -191,6 +192,7 @@ projectile:
     distance: 3
     targetExclusive: false
     inertBeforeHit: false
+    inertPrimingDelay: 1
     triggerWithoutEntity: false
   hitResponse: 
   splashDamage:
@@ -443,8 +445,10 @@ projectile:
         m: {}
   uiSpeedAverage:
     f: 22
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

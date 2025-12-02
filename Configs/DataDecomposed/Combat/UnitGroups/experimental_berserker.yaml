@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_experimental
 tags:
@@ -12,21 +12,21 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_juggernaught
+  - keyExternal: true
+    key: vhc_mech_w3_lr_backpack_ew
     countMin: 1
     countMax: 1
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
     aiTargeting: juggernaut
     liveryPreset: inv_exp_g1_berserker
     custom: 
-  - keyExternal: false
-    key: tank_grenadier_standard_hybrid
+  - keyExternal: true
+    key: vhc_mech_w3_lr_harasser_ew
     countMin: 1
     countMax: 2
     countRandom: false
@@ -40,8 +40,8 @@ unitsPerGrade:
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_juggernaught
+  - keyExternal: true
+    key: vhc_mech_w3_lr_backpack_ew
     countMin: 1
     countMax: 1
     countRandom: false
@@ -53,21 +53,21 @@ unitsPerGrade:
     aiTargeting: juggernaut
     liveryPreset: inv_exp_g2_berserker
     custom: 
-  - keyExternal: false
-    key: tank_grenadier_standard_hybrid
+  - keyExternal: true
+    key: vhc_mech_w3_uh_ew
     countMin: 1
     countMax: 2
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: grenadier
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
+    aiTargeting: juggernaut
     liveryPreset: inv_exp_g1_berserker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_eleavted
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_far_0
     countMin: 1
     countMax: 1
     countRandom: false
@@ -76,39 +76,39 @@ unitsPerGrade:
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
     aiBehavior: Flanker
-    aiTargeting: vanguard
+    aiTargeting: artillery
     liveryPreset: inv_exp_g1_berserker
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_juggernaught
+  - keyExternal: true
+    key: vhc_mech_w3_lr_backpack_ew
     countMin: 2
     countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: juggernaut
+    liveryPreset: inv_exp_g3_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w3_uh_backpack_ew
+    countMin: 1
+    countMax: 2
     countRandom: false
     levelOffsetMin: 1
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q3_rare
-    aiBehavior: Flanker
+    aiBehavior: StandoffAttack
     aiTargeting: juggernaut
-    liveryPreset: inv_exp_g3_berserker
-    custom: 
-  - keyExternal: false
-    key: tank_grenadier_standard_hybrid
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: 0
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q2_uncommon
-    aiBehavior: Flanker
-    aiTargeting: grenadier
     liveryPreset: inv_exp_g2_berserker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_eleavted
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_far_0
     countMin: 1
     countMax: 2
     countRandom: false
@@ -117,8 +117,21 @@ unitsPerGrade:
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
     aiBehavior: Flanker
-    aiTargeting: vanguard
+    aiTargeting: artillery
     liveryPreset: inv_exp_g1_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w2_lr_harasser_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: 
+    aiBehavior: StandoffAttack
+    aiTargeting: support
+    liveryPreset: 
     custom: 
 unitPresets:
   mech_juggernaught: !UnitFilter

@@ -23,10 +23,16 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
   tagFilter:
+    context_cache: true
     type_main: true
   keys: 
 entry:
@@ -56,27 +62,112 @@ tags:
 - context_generic
 - listed
 - trait_objectives
+- flag_escalation_squads
 states:
-  no_hostiles:
+  obj_cache:
     comment: 
-    textNameKey: generic_breakin_objective_hostiles_header
-    textDescKey: generic_breakin_objective_hostiles_text
+    textNameKey: generic_breakin_objective_cache_header
+    textDescKey: generic_breakin_objective_cache_text
     textOnCompletion: 
     evaluated: true
     visible: true
-    startInScope: false
+    startInScope: true
     priorityGeneration: 0
     priority: 0
     priorityDisplay: 0
     mood: 0
     ui: 
-    evaluationContext: None
+    evaluationContext: OnExecutionEnd, OnLocationContact
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied:
+        present: true
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          utility_cache: true
+        filters: 
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !Log
+            message: 'Breakin: Cache entrance entry'
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_cache_elimination:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 10
+    priority: 10
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
     turn: 
     turnModulus: 
     unitChecks:
     - count:
-        check: LessEqual
+        check: Equal
         value: 0
       exportCountToMemory: 
       exportEntitiesToBlackboard: 
@@ -99,94 +190,157 @@ states:
     location: 
     locationRetreat: 
     volume: 
-    stateValues: 
+    stateValues:
+      obj_timer_fail: false
     memoryBase: 
     functions: 
-    reactions: 
-  obj_cache:
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            obj_cache: false
+            obj_timer_fail: false
+            obj_timer_progress: false
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards:
+            obj_tier1: 1
+          functions:
+          - !Log
+            message: 'Breakin: No enemies remain, cache open, rewarding...'
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_timer_fail:
     comment: 
-    textNameKey: generic_breakin_objective_cache_header
-    textDescKey: generic_breakin_objective_cache_text
+    textNameKey: generic_objective_loot_header
+    textDescKey: generic_breakin_turn_text
     textOnCompletion: 
     evaluated: true
     visible: true
-    startInScope: false
-    priorityGeneration: 0
-    priority: 0
-    priorityDisplay: 0
+    startInScope: true
+    priorityGeneration: 16
+    priority: 16
+    priorityDisplay: 16
     mood: 0
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
     turnModulus: 
-    unitChecks:
-    - count: 
-      exportCountToMemory: 
-      exportEntitiesToBlackboard: 
-      tags: 
-      name: 
-      faction:
-        key: Phantoms
-      state: 
-      actionPlanned: 
-      locationOccupied:
-        present: true
-      locationOccupiedUnlinked: 
-      relativeTransform: 
-      blueprints: 
-      classes: 
-      stats: 
-      statsNormalized: 
-      actionsInProgress: 
-      functions: 
+    unitChecks: 
     unitCheckLinked: 
-    location:
-      visibleInWorld: true
-      locationProvider: !AreaLocationFilter
-        includeOverlaps: false
-        tagRequirements:
-          utility_cache: true
-        filters: 
-      visual: 
+    location: 
     locationRetreat: 
     volume: 
-    stateValues: 
-    memoryBase: 
+    stateValues:
+      obj_cache_elimination: false
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_objective_progress_01
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 3
     functions: 
     reactions:
       expectedValue: true
       scopeRemovalOnLimit: true
-      triggerLimit: 3
+      triggerLimit: 1
       triggerIncrement: true
       effectsPerIncrement:
-        3:
+        1:
           tags: 
-          executionOnOutcome:
-            outcomeVictory: true
-            outcomeDefeat: false
-            caseEarly: true
-            caseTotal: true
-          stepTransition: 
-          commsOnStart:
-          - time: 0
-            hidden: false
-            key: breakin_entrance
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: cleanup
+          commsOnStart: 
           memoryChanges: 
+          stateScopeChanges:
+            obj_cache: false
+            obj_timer_progress: false
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !Log
+            message: 'Breakin: Entrance sealed'
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_timer_progress:
+    comment: 
+    textNameKey: generic_objective_loot_header
+    textDescKey: generic_breakin_objective_cache_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 1
+    priority: 1
+    priorityDisplay: 1
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      obj_cache: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges:
+          - context: Source
+            provinceKey: 
+            changes:
+            - change: Offset
+              key: combat_sc_objective_progress_01
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
           stateScopeChanges: 
           stateValueChanges: 
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
-          rewards:
-            obj_capture_loot: 1
-          callsImmediate: 
-          callsDelayed: 
-          functions: 
+          rewards: 
+          functions:
+          - !Log
+            message: 'Breakin: Seal progressed'
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -241,6 +395,7 @@ steps:
       visible: true
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -248,8 +403,8 @@ steps:
     unitChanges: 
     retreat:
       stateKey: retreat_default
-      stateValueModified: true
-      stateValue: true
+      stateValueModified: false
+      stateValue: false
     actionRestrictions: 
     cutsceneVideoOnStart: 
     atmosphereOnStart: 
@@ -258,11 +413,7 @@ steps:
     camera: 
     musicMood: 
     musicIntensity: 
-    musicReactive:
-      mode: Relative
-      value: 2
-      numberOfTurns: 2
-      pauseEvaluation: false
+    musicReactive: 
     commsOnStart: 
     audioEventsOnStart: 
     audioStatesOnStart: 
@@ -293,6 +444,7 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
+        range_short: true
         type_main: true
         weight_heavy: true
       check: 
@@ -302,7 +454,7 @@ steps:
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 0
+      baseGrade: 1
       maxGrade: 2
       cloneable: true
       functions: 
@@ -328,9 +480,19 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
+        range_long: true
         type_main: true
         weight_heavy: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -360,9 +522,8 @@ steps:
         key: obj_cache
         invert: true
       spawnRegistration: 
-    stateScopeChanges:
-      no_hostiles: true
-      obj_cache: true
+    unitGeneratorKeys: 
+    stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
     unitTagDisplayChanges: 
@@ -383,21 +544,13 @@ steps:
     commsOnStart:
     - time: 0
       hidden: false
-      key: start_reinforcement_request
+      key: generic_elimination_start_normal
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
-    functions: 
+    functions:
+    - !ClearBaseCombatMemory {}
     outcome: 
-    transitions:
-      transitionMode: OnStateChange
-      transitionBasedScope: true
-      transitionLocksExecution: false
-      transitionsStateBased:
-      - priority: 1
-        stateCleanupOnUse: false
-        stateRequirements:
-          obj_cache: true
-        stepKey: cleanup
-      transitionTimeBased: 
+    transitions: 
 unitPresets: 
+unitGenerators: 

@@ -9,10 +9,10 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class CreatePilot : IOverworldFunction, IOverworldActionFunction
+    public class CreatePilot : IOverworldFunction, IOverworldActionFunction, IFunctionLocalizedText
     {
         [DropdownReference (true)]
-        public PilotIdentification identification;
+        public PilotIdentificationLocOnly identification;
         
         [DropdownReference (true)]
         public string bio;
@@ -24,6 +24,7 @@ namespace PhantomBrigade.Functions
         public DataBlockPilotAppearance appearanceCustom;
 
         [DropdownReference]
+        [ValueDropdown ("@DataMultiLinkerPilotAppearancePreset.data.Keys")]
         public List<string> appearancePresets;
         
         [DropdownReference]
@@ -43,8 +44,8 @@ namespace PhantomBrigade.Functions
             if (playerBasePersistent == null)
                 return;
             
-            var nameInternalSafe = UnitUtilities.GetSafePersistentInternalName ("pilot");
-            var pilot = UnitUtilities.CreatePilotEntity
+            var nameInternalSafe = IDUtility.GetSafePersistentInternalName ("pilot");
+            var pilot = PilotUtility.CreatePilotEntity
             (
                 false,
                 Factions.player,
@@ -76,15 +77,11 @@ namespace PhantomBrigade.Functions
             else if (appearancePresets != null && appearancePresets.Count > 0)
             {
                 var appearancePresetKey = appearancePresets.GetRandomEntry ();
-                var appearancePresetsAll = DataLinkerSettingsPilot.data?.appearancePresets;
-                if (appearancePresetsAll != null && !string.IsNullOrEmpty (appearancePresetKey) && appearancePresetsAll.TryGetValue (appearancePresetKey, out var preset))
+                var appearancePreset = DataMultiLinkerPilotAppearancePreset.GetEntry (appearancePresetKey);
+                if (appearancePreset?.appearance != null)
                 {
-                    if (preset.appearance != null)
-                    {
-                        var pilotAppearance = pilot.pilotAppearance.data;
-                        pilotAppearance.CopyFrom (appearanceCustom);
-                        pilot.ReplacePilotAppearance (pilotAppearance);
-                    }
+                    var appearance = new DataBlockPilotAppearance (appearancePreset.appearance);
+                    pilot.ReplacePilotAppearance (appearance);
                 }
             }
 
@@ -100,20 +97,31 @@ namespace PhantomBrigade.Functions
             {
                 pilot.ReplacePilotIdentification
                 (
-                    identification.callsignIndex,
-                    identification.callsignOverride,
-                    identification.nameIndexPrimary,
-                    identification.nameIndexSecondary,
-                    identification.nameOverride
+                    identification.callsignLoc,
+                    null,
+                    identification.namePrimaryLoc,
+                    identification.nameSecondaryLoc,
+                    null
                 );
             }
 
             if (!string.IsNullOrEmpty (bio))
                 pilot.ReplacePilotBio (bio);
 
-            CIViewOverworldRoster.ins.RefreshOptionAvailability ();
+            // CIViewOverworldRoster.ins.RefreshOptionAvailability ();
             Contexts.sharedInstance.persistent.isPlayerCombatReadinessChecked = true;
             
+            #endif
+        }
+        
+        public string GetLocalizedText ()
+        {
+            #if !PB_MODSDK
+			
+            return Txt.Get (TextLibs.uiOverworld, "int_sh_effect_pilots_recruit");
+
+            #else
+            return null;
             #endif
         }
         

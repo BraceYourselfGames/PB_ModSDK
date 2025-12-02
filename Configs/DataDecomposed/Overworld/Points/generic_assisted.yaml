@@ -1,0 +1,80 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_base_small
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Battlefield
+  visualLiberated:
+    path: Content/Overworld/Site_Battlefield_Inactive
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_battlesite_on_defeat
+- contest_s2
+- flag_preserve_on_victory
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByKey
+    keyChecked: generic_assisted
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 2
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_assisted: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_module_wpn
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_lr
+        - part_weapon_mr
+        - part_weapon_sr
+        - sub_thruster
+        tags: 
+      - chance: 0.5
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_r2
+        - sub_reactor_r2
+        tags: 

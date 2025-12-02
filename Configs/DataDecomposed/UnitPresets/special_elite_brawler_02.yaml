@@ -32,7 +32,8 @@ parts:
     preset: !PartResolverTags
       filters:
       - tags:
-          part_energy: true
+          part_melee: false
+          wpn_secondary: true
     rating: 
     systems: 
   equipment_right:
@@ -40,7 +41,7 @@ parts:
     preset: !PartResolverTags
       filters:
       - tags:
-          wpn_special_drop_req: true
+          special_vip_brawler: true
     rating: 
     systems: 
   optional_left:
@@ -65,4 +66,4 @@ parts:
     rating: 
     systems: 
 animationOverrides: 
-functions: 
+effects: 

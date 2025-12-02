@@ -1,0 +1,461 @@
+depthBackground: 100
+depthForeground: 100
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1490196
+  center: 
+  hint:
+    color:
+      r: 0.3726415
+      g: 0.7891666
+      b: 1
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Top
+    framePositionX: -16
+    framePositionY: 16
+    frameSizeX: 544
+    frameSizeY: 406
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: LeftBottom
+    buttonLocation: Top
+    textWidth: 464
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3647059
+      b: 0.454902
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: 86
+    frameSizeX: 544
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -16
+        y: -16
+        z: -16
+        w: -16
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: false
+        checkStrict: false
+        offset: true
+        value: 300
+      - key: unit_token
+        check: false
+        checkStrict: false
+        offset: false
+        value: 2
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: -50
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3647059
+      b: 0.454902
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 24
+    framePositionY: -232
+    frameSizeX: 400
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -8
+        y: -8
+        z: -8
+        w: -8
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: -50
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3647059
+      b: 0.454902
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: 16
+    frameSizeX: 510
+    frameSizeY: 696
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: None
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: -50
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3647059
+      b: 0.454902
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 24
+    framePositionY: -232
+    frameSizeX: 400
+    frameSizeY: 184
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -8
+        y: -8
+        z: -8
+        w: -8
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: -50
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3647059
+      b: 0.454902
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: 16
+    frameSizeX: 510
+    frameSizeY: 696
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: None
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: pilots_recruitment
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3647059
+      b: 0.454902
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -16
+    framePositionY: 166
+    frameSizeX: 544
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -16
+        y: -16
+        z: -16
+        w: -16
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldPilotRecruitment
+      methodName: OnTutorialEnd
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.3058824
+      g: 0.2235294
+      b: 0.2235294
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 826
+    frameSizeY: 720
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.3058824
+      g: 0.2235294
+      b: 0.2235294
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -532
+    framePositionY: 84
+    frameSizeX: 408
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopLeft
+    buttonLocation: None
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.3058824
+      g: 0.2235294
+      b: 0.2235294
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Bottom
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 544
+    frameSizeY: 724
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: overworld_map_world
+    - !UnlockAchievement
+      key: first_province_liberated
+  effectsCombat: 

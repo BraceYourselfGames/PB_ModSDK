@@ -41,7 +41,7 @@ namespace PhantomBrigade.Functions
             if (playerBasePersistent == null)
                 return;
             
-            var nameInternalSafe = UnitUtilities.GetSafePersistentInternalName ("unit_new");
+            var nameInternalSafe = IDUtility.GetSafePersistentInternalName ("unit_new");
             var level = Mathf.Max (1, Contexts.sharedInstance.persistent.workshopLevel.level + levelOffset);
             var hostName = playerBasePersistent.nameInternal.s;
 

@@ -1,0 +1,201 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.6415094
+      g: 0.2474484
+      b: 0.1845852
+      a: 1
+    frameLocation: Center
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 800
+    frameSizeY: 488
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: 
+      stateName: 
+      position:
+        x: 128
+        y: -17.5
+        z: 195
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: ''
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 90
+        y: -10.45
+        z: 180
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 35
+      rotationYOverride: true
+      rotationY: 75
+      zoomOverride: true
+      zoom: 1
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: ''
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 90
+        y: -10.45
+        z: 180
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 35
+      rotationYOverride: true
+      rotationY: 75
+      zoomOverride: true
+      zoom: 1
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.6415094
+      g: 0.2474484
+      b: 0.1845852
+      a: 1
+    frameLocation: Center
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 64
+    frameSizeY: 64
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: 
+      stateName: 
+      position:
+        x: 103.8
+        y: -15.5
+        z: 199.8
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - combat_toggle_targeting
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 92
+        y: -19.5
+        z: 192
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 35
+      rotationYOverride: true
+      rotationY: 45
+      zoomOverride: true
+      zoom: 0.35
+      delay: 0.1
+    - !CombatSelectUnit
+      nameInternal: 
+      select: true
+      focus: true
+      delay: 0
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0

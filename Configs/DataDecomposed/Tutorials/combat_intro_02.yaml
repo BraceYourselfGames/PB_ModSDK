@@ -55,11 +55,7 @@ pages:
         value: 0
         valueFromMemory: false
         valueFromMemoryKey: 
-  effectsCombat:
-    functions:
-    - !CombatStateValueChange
-      key: prediction_bootable
-      value: true
+  effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
@@ -110,41 +106,7 @@ pages:
         valueFromMemory: false
         valueFromMemoryKey: 
   effectsCombat: 
-- depthForeground: 0
-  depthBackground: 0
-  skippable: true
-  cameraInputPermitted: true
-  backgroundUsed: false
-  backgroundBlur: false
-  backgroundColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  center: 
-  hint:
-    color:
-      r: 0.2156863
-      g: 0.3529412
-      b: 0.427451
-      a: 1
-    frameLocation: BottomLeft
-    frameGradientMode: None
-    framePositionX: 248
-    framePositionY: 194
-    frameSizeX: 304
-    frameSizeY: 80
-    frameBlocksInput: true
-    frameBoundary: true
-    textLocation: TopLeft
-    buttonLocation: Top
-    textWidth: 256
-    textReused: 
-    icon: 
-    worldAnchor: 
-    arrowCustom: 
-    frameHighlight: 
-    textInputActions: 
+effectsOnEnd:
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -152,9 +114,6 @@ pages:
       methodName: ForceRefreshFromTutorial
       argument: ''
       frameDelay: 1
-  effectsCombat: 
-effectsOnEnd:
-  effectsOverworld: 
   effectsCombat:
     functions:
     - !CombatStateValueChange

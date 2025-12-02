@@ -11,10 +11,11 @@ tags:
 - activation_untargeted
 - category_wpn_miner
 - wpn_miner
+- spec_concussion
 statDistribution: ''
 stats:
   act_charges:
-    value: 6
+    value: 8
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -29,12 +30,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 90
+    value: 55
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  barrier:
+    value: 100
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 6
+    value: 4
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -49,7 +55,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 300
+    value: 400
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -59,12 +65,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 55
+    value: 20
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact_radius:
-    value: 10
+    value: 8
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -74,22 +80,22 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 300
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 70
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 2
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 2
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -145,3 +151,4 @@ projectile:
 beam: 
 custom: 
 functions: 
+workshopInfo: 

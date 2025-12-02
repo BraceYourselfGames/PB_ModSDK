@@ -1,0 +1,88 @@
+comment:
+  comment: 'Sidequest step. Allows visiting liberation quest for a second time. Important note: this phase of the campaign used to include 3 steps instead of 2, but was too long for a midgame. Accordingly, the narrative event originally intended for 12_open_mid was moved to 13_side, as only 13_side remained in the campaign flow.'
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: 
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_12_open_mid
+  tags: 
+entry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_countdown_base_length
+      value: 20
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !ApplyProvinceArrivalEffects {}
+  - !QuestStart
+    questKey: province_liberation
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_breakthrough
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Offset
+      key: campaign_progress_region_02
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: false
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
+  functionsBase: 
+progressDisplay: 
+effects:
+  create_showdown:
+    functionsGlobal:
+    - !QuestProvinceCreatePoint
+      key: generic_base_showdown
+      spawnGroupOverride: 
+      nameOverride: 
+      functionsOnSpawn:
+      - !OverworldEntityMemorySet
+        value: 1
+        memoryKey: quest_liberation_progress_s3
+      - !OverworldEntityEscalation
+        offset: false
+        level: 3
+      questMain: true
+      questKey: 
+    functionsBase: 
+branches:
+- comment: 
+  preferences: 
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment:
+      comment: Link to breakthrough province.
+    checksGlobal: 
+    checksBase: 
+    stepKey: 20_breakthrough_central
+    direction: 180
+    levelOffset: 
+    branchKey: 
+    filter:
+      tagsUsed: false
+      keys:
+      - province_breakthrough_central
+      tags: 
+    modifiers: 
+tags: 

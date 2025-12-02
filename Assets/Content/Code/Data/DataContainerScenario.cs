@@ -109,7 +109,6 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         public DataBlockScenarioSlotSorting sorting;
         
-        [ShowIf ("spawnTagsUsed")]
         [DropdownReference (true)]
         public DataBlockScenarioSlotRegistration spawnRegistration;
         
@@ -156,20 +155,22 @@ namespace PhantomBrigade.Data
         [DictionaryKeyDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerScenario\", \"GetStateKeys\")")]
         [DictionaryDrawerSettings (KeyColumnWidth = DataEditor.dictionaryKeyWidth)]
         public SortedDictionary<string, bool> stateRequirements;
-
-        [DropdownReference]
-        public List<IOverworldValidationFunction> checksBase;
         
         [DropdownReference]
-        public List<IOverworldValidationFunction> checksTarget;
+        public List<IOverworldGlobalValidationFunction> checksGlobal;
+
+        [DropdownReference]
+        public List<IOverworldEntityValidationFunction> checksBase;
         
         [DropdownReference]
-        public List<IOverworldValidationFunction> checksProvince;
+        public List<IOverworldEntityValidationFunction> checksTarget;
+        
+        [DropdownReference]
+        public List<IOverworldEntityValidationFunction> checksProvince;
 
+        #if !PB_MODSDK
         public bool IsPassed ()
         {
-            #if !PB_MODSDK
-
             if (stateRequirements != null && stateRequirements.Count > 0)
             {
                 bool stateRequirementsMet = ScenarioUtility.AreStateRequirementsPassed (stateRequirements);
@@ -178,6 +179,19 @@ namespace PhantomBrigade.Data
                     if (log)
                         Debug.LogWarning ($"Step {parentSlot?.parentStep?.key} unit group slot {parentSlot?.index} skipped: state requirement check not passed");
                     return false;
+                }
+            }
+            
+            if (checksGlobal != null)
+            {
+                foreach (var function in checksGlobal)
+                {
+                    if (function != null && !function.IsValid ())
+                    {
+                        if (log)
+                            Debug.LogWarning ($"Step {parentSlot?.parentStep?.key} unit group slot {parentSlot?.index} skipped: didn't pass global condition {function.GetType ().Name}");
+                        return false;
+                    }
                 }
             }
 
@@ -243,11 +257,8 @@ namespace PhantomBrigade.Data
             if (log)
                 Debug.LogWarning ($"Step {parentSlot?.parentStep?.key} unit group slot {parentSlot?.index} will be activated, all checks passed");
             return true;
-
-            #else
-            return false;
-            #endif
         }
+        #endif
         
         #region Editor
         #if UNITY_EDITOR
@@ -329,6 +340,27 @@ namespace PhantomBrigade.Data
             var reportBase = base.GetReport ();
             return $"{reportBase} | Parent step: {(parentStep != null ? parentStep.key : "-")} | Index: {index}";
         }
+        
+        private static string factionBranchKeyFallback = "branch_army";
+
+        public DataContainerOverworldFactionBranch GetFactionBranchData (string factionBranchKeyExternal)
+        {
+            DataContainerOverworldFactionBranch branchData = null;
+            
+            // Before we continue, we need to resolve faction branch data
+            string factionBranchKeyUsed = null;
+            if (factionBranchOverride)
+                factionBranchKeyUsed = factionBranchKey;
+            else
+            {
+                bool externalBranchUsed = parentScenario?.coreProc == null || parentScenario.coreProc.externalBranchUsed;
+                if (externalBranchUsed)
+                    factionBranchKeyUsed = !string.IsNullOrEmpty (factionBranchKeyExternal) ? factionBranchKeyExternal : factionBranchKeyFallback;
+            }
+                
+            branchData = DataMultiLinkerOverworldFactionBranch.GetEntry (factionBranchKeyUsed, false);
+            return branchData;
+        }
     }
     
     [Serializable]
@@ -350,9 +382,9 @@ namespace PhantomBrigade.Data
         [LabelText ("Filter From Branch")]
         public bool tagsFromFactionBranch = true;
 
-        [ShowIf ("tagsFromFactionBranch"), ShowInInspector]
+        [ShowIf ("tagsFromFactionBranch"), ShowInInspector, YamlIgnore, NonSerialized]
         [HideLabel, HorizontalGroup (200f), ValueDropdown ("@DataMultiLinkerOverworldFactionBranch.data.Keys")]
-        private string branchKey = "branch_army";
+        public string branchKeyDebug = "branch_army";
         
         [OnValueChanged ("OnAfterDeserialization", true)]
         [DictionaryKeyDropdown ("@DataMultiLinkerCombatUnitGroup.tags")]
@@ -364,40 +396,134 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false, IsReadOnly = true)]
         public List<DataContainerLink<DataContainerCombatUnitGroup>> groupsFiltered;
 
-        private static SortedDictionary<string, bool> tagsCombined = new SortedDictionary<string, bool> ();
+        // private static SortedDictionary<string, bool> tagsCombined = new SortedDictionary<string, bool> ();
         
         public override void OnAfterDeserialization ()
         {
             #if UNITY_EDITOR
 
             UtilityCollections.ClearOrCreate (ref groupsFiltered);
-            if (tags == null || tags.Count == 0)
-                return;
-
-            SortedDictionary<string, bool> tagFilter = null;
-            if (tagsFromFactionBranch && !string.IsNullOrEmpty (branchKey))
-            {
-                tagsCombined.Clear ();
-                tagsCombined.Add (branchKey, true);
-                foreach (var kvp in tags)
-                    tagsCombined[kvp.Key] = kvp.Value;
-                tagFilter = tagsCombined;
-            }
-            else
-                tagFilter = tags;
+            var unitGroupsFound = GetFilteredUnitGroups (branchKeyDebug);
             
-            var groupsWithTags = DataTagUtility.GetContainersWithTags (DataMultiLinkerCombatUnitGroup.data, tagFilter);
-            foreach (var objectWithTags in groupsWithTags)
+            if (unitGroupsFound == null || unitGroupsFound.Count == 0)
+                return;
+            
+            foreach (var unitGroup in unitGroupsFound)
             {
-                var unitGroup = objectWithTags as DataContainerCombatUnitGroup;
-                if (unitGroup == null)
-                    continue;
-                    
                 var entry = new DataContainerLink<DataContainerCombatUnitGroup> (unitGroup);
                 groupsFiltered.Add (entry);
             }
 
             #endif
+        }
+
+        public SortedDictionary<string, bool> GetTagFilterFinalized (string factionBranchKeyExternal, out bool tagFilterWasModified)
+        {
+            tagFilterWasModified = false;
+            SortedDictionary<string, bool> tagFilterFinal = tags;
+
+            if (tagsFromFactionBranch)
+            {
+                var branchData = GetFactionBranchData (factionBranchKeyExternal);
+                if (branchData != null && branchData?.unitGroupTags != null && branchData.unitGroupTags.Count > 0)
+                {
+                    var filterCombined = ScenarioUtility.unitGroupTagFilterCombined;
+                    filterCombined.Clear ();
+
+                    // Tags from faction branch have lower priority so they go first
+                    foreach (var kvp in branchData.unitGroupTags)
+                        filterCombined.Add (kvp.Key, kvp.Value);
+
+                    // Tags from scenario can override tags from entity
+                    foreach (var kvp in tags)
+                    {
+                        // Making sure there are no conflicting branch tags
+                        // Built-in filter might have a branch tag, e.g. branch_specops: true
+                        if (kvp.Key.StartsWith (ScenarioUtility.unitGroupBranchTagPrefix))
+                        {
+                            // Clear reused collection
+                            var tagsRemoved = ScenarioUtility.unitGroupBranchTagsRemoved;
+                            tagsRemoved.Clear ();
+
+                            // Iterate over the filter stuffed from faction data
+                            // It might already contain some branch preferences, e.g. branch_army: true
+                            foreach (var kvp2 in filterCombined)
+                            {
+                                // Can't remove immediately as that'd invalidate iterator, save tag
+                                if (kvp2.Key.StartsWith (ScenarioUtility.unitGroupBranchTagPrefix))
+                                    tagsRemoved.Add (kvp2.Key);
+                            }
+
+                            // Remove all collected tags
+                            foreach (var branchTag in tagsRemoved)
+                                filterCombined.Remove (branchTag);
+                        }
+
+                        // Making sure no previously added keys collide
+                        filterCombined[kvp.Key] = kvp.Value;
+                    }
+
+                    tagFilterWasModified = true;
+                    tagFilterFinal = filterCombined;
+                }
+            }
+
+            return tagFilterFinal;
+        }
+
+        public List<DataContainerCombatUnitGroup> GetFilteredUnitGroups (string factionBranchKeyExternal)
+        {
+            var tagFilterFinal = GetTagFilterFinalized (factionBranchKeyExternal, out bool tagFilterWasModified);
+            return GetFilteredUnitGroups (tagFilterFinal, tagFilterWasModified);
+        }
+
+        public List<DataContainerCombatUnitGroup> GetFilteredUnitGroups (SortedDictionary<string, bool> tagFilterFinal, bool tagFilterWasModified)
+        {
+            // Avoid allocations by reusing this collection
+            var selections = ScenarioUtility.unitGroupsSelected;
+            selections.Clear ();
+            
+
+            if (tagFilterFinal == null || tagFilterFinal.Count == 0)
+                return selections;
+            
+            var unitGroupsFiltered = DataTagUtility.GetContainersWithTags (DataMultiLinkerCombatUnitGroup.data, tagFilterFinal);
+            if (unitGroupsFiltered.Count == 0 && tagFilterWasModified)
+            {
+                // Fall back to non-combined raw tags if we're not using raw filter
+                unitGroupsFiltered = DataTagUtility.GetContainersWithTags (DataMultiLinkerCombatUnitGroup.data, tags);
+                if (unitGroupsFiltered.Count == 0)
+                    return selections;
+            }
+            
+            foreach (var entry in unitGroupsFiltered)
+            {
+                var unitGroupCandidate = entry as DataContainerCombatUnitGroup;
+                if (unitGroupCandidate == null || unitGroupCandidate.hidden)
+                    continue;
+                    
+                selections.Add (unitGroupCandidate);
+            }
+            
+            int gradeRequired = baseGrade;
+            for (int i = selections.Count - 1; i >= 0; --i)
+            {
+                var unitGroupCandidate = selections[i];
+                if (unitGroupCandidate == null)
+                {
+                    selections.RemoveAt (i);
+                    continue;
+                }
+
+                if (unitGroupCandidate.unitsPerGrade == null || unitGroupCandidate.unitsPerGrade.Count == 0)
+                {
+                    Debug.LogWarning ($"- Unit group {unitGroupCandidate.key} disqualified due to missing units per grade collection");
+                    selections.RemoveAt (i);
+                    continue;
+                }
+            }
+
+            return selections;
         }
         
         public override string GetDescription ()
@@ -477,19 +603,14 @@ namespace PhantomBrigade.Data
         public DataBlockScenarioExit defeat;
         
         public List<DataBlockScenarioExitFunctions> functions;
-        
-        #if !PB_MODSDK
-        [ValueDropdown ("GetCallKeys")]
-        #endif
+
         public List<string> calls;
         
         #region Editor
         #if UNITY_EDITOR
 
-        #if !PB_MODSDK
         private IEnumerable<string> GetCallKeys => 
             FieldReflectionUtility.GetConstantStringFieldValues (typeof (ScenarioFunctionKeys));
-        #endif
 
         #endif
         #endregion
@@ -609,11 +730,10 @@ namespace PhantomBrigade.Data
         [ShowIf ("zoomOverride")]
         public float zoom = 0.5f;
 
+        #if !PB_MODSDK
         [Button ("Apply to camera"), PropertyOrder (-1), HideInEditorMode]
         public void ApplyToCamera ()
         {
-            #if !PB_MODSDK
-
             var cameraPos = GameCameraSystem.GetPositionTarget ();
             var cameraRotationX = GameCameraSystem.GetRotationX ();
             var cameraRotationY = GameCameraSystem.GetRotationY ();
@@ -643,9 +763,8 @@ namespace PhantomBrigade.Data
                 cameraZoom = zoom;
                 
             GameCameraSystem.OverrideInputTargets (cameraPos, cameraRotationY, cameraRotationX, cameraZoom);
-
-            #endif
         }
+        #endif
     }
     
     [HideReferenceObjectPicker]
@@ -1042,18 +1161,16 @@ namespace PhantomBrigade.Data
             return textContentCombined;
         }
 
+        #if !PB_MODSDK
         [Button, HideInEditorMode, PropertyOrder (-1)]
         private void Test ()
         {
-            #if !PB_MODSDK
-
             if (!Application.isPlaying)
                 return;
             
             CIViewCombatComms.ScheduleMessage (this);
-
-            #endif
         }
+        #endif
         
         private string GetSuffix => hidden ? "hidden" : "active";
 
@@ -1346,10 +1463,8 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         [LabelText ("Export To Memory (Limited)")]
         public DataBlockUnitFilterMemoryExport exportCountToMemoryLimited;
-
-
+        
         #if !PB_MODSDK
-
         public List<CombatEntity> GetFilteredUnitsUsingSettings
         (
             Vector3 originPosition = default,
@@ -1377,7 +1492,6 @@ namespace PhantomBrigade.Data
             
             return result;
         }
-
         #endif
         
         #if UNITY_EDITOR
@@ -1525,9 +1639,10 @@ namespace PhantomBrigade.Data
 
         [DropdownReference]
         public List<ICombatUnitValidationFunction> functions;
-
+        
+        
         #if !PB_MODSDK
-
+        
         private static List<CombatEntity> unitTargetsFiltered = new List<CombatEntity> ();
         private static List<CombatEntity> unitTargetsSelected = new List<CombatEntity> ();
         private static List<int> unitTargetsSelectedIndexes = new List<int> ();
@@ -1749,7 +1864,7 @@ namespace PhantomBrigade.Data
             unitTargetsFiltered.Clear ();
             if (IDUtility.IsGameState (GameStates.combat))
             {
-                var unitParticipants = ScenarioUtility.GetCombatParticipantUnits ();
+                var unitParticipants = ScenarioUtility.GetParticipantUnitsPersistent ();
                 // Debug.Log ($"Starting unit filtering | Participants: {unitParticipants.Count}");
 
                 bool desiredFactionOverrideUsed = desiredFactionOverride >= 0;
@@ -1959,27 +2074,27 @@ namespace PhantomBrigade.Data
         [LabelText ("UI")]
         public DataBlockScenarioStateUI ui;
 
-        [ShowIf("IsEvaluatedFieldVisible")]
+        [EnableIf("IsEvaluatedFieldVisible")]
         public ScenarioStateRefreshContext evaluationContext = ScenarioStateRefreshContext.OnExecutionEnd;
 
         [InfoBox("@GetEvaluationOnOutcomeText ()", "@evaluationOnOutcome != null")]
         [DropdownReference (true)]
         public DataBlockOverworldEventSubcheckBool evaluationOnOutcome;
 
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference (true)]
         public DataBlockScenarioSubcheckTurn turn;
         
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference (true)]
         public DataBlockScenarioSubcheckTurnModulus turnModulus;
 
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference]
         [ListDrawerSettings (DefaultExpandedState = true, AlwaysAddDefaultValue = true)]
         public List<DataBlockScenarioSubcheckUnitCounted> unitChecks;
 
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference (true)]
         public DataBlockScenarioSubcheckUnit unitCheckLinked;
         
@@ -1990,21 +2105,21 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         public DataBlockScenarioStateLocationRetreat locationRetreat;
 
-        [ShowIf("IsEvaluatedFieldVisible")]
+        [EnableIf("IsEvaluatedFieldVisible")]
         [DropdownReference(true)]
         public DataBlockScenarioVolume volume;
         
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference (false)]
         [DictionaryKeyDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerScenario\", \"GetStateKeys\")")]
         [DictionaryDrawerSettings (KeyColumnWidth = DataEditor.dictionaryKeyWidth)]
         public SortedDictionary<string, bool> stateValues;
 
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference (true)]
         public DataBlockOverworldMemoryCheckGroup memoryBase;
         
-        [ShowIf ("IsEvaluatedFieldVisible")]
+        [EnableIf ("IsEvaluatedFieldVisible")]
         [DropdownReference]
         public List<ICombatStateValidationFunction> functions;
         
@@ -2047,8 +2162,7 @@ namespace PhantomBrigade.Data
 
         #region Editor
         #if UNITY_EDITOR
-
-        [ShowIf ("evaluated")]
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
         
@@ -2104,7 +2218,7 @@ namespace PhantomBrigade.Data
         [HideIf ("SimpleDisplayPossible")]
         [InfoBox ("$effectsWarningString", InfoMessageType.Warning, "IsEffectsWarningVisible")]
         [PropertyTooltip ("Optional effects triggered when state gets expected value. Keyed by number of times state reached that value.")]
-        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout, KeyLabel = "Trigger count")]
         public Dictionary<int, DataBlockScenarioStateReaction> effectsPerIncrement = new Dictionary<int, DataBlockScenarioStateReaction>
         {
             { 1, new DataBlockScenarioStateReaction () }
@@ -2265,18 +2379,6 @@ namespace PhantomBrigade.Data
         public Dictionary<string, int> rewards;
         
         [DropdownReference]
-        #if !PB_MODSDK
-        [ValueDropdown ("GetCallKeys")]
-        #endif
-        public List<string> callsImmediate;
-        
-        [DropdownReference]
-        #if !PB_MODSDK
-        [ValueDropdown ("GetCallKeys")]
-        #endif
-        public List<string> callsDelayed;
-        
-        [DropdownReference]
         public List<ICombatFunction> functions;
         
         [DropdownReference]
@@ -2286,14 +2388,20 @@ namespace PhantomBrigade.Data
         [OnValueChanged ("UpdateUnitGroups", true)]
         public List<DataBlockScenarioUnitGroup> unitGroups;
         
+        [DropdownReference]
+        [OnValueChanged ("UpdateUnitGroupsGenerated", true)]
+        public List<string> unitGeneratorKeys;
+        
+        [YamlIgnore]
+        [ShowIf ("@unitGeneratorKeys != null && unitGroupsGenerated != null")]
+        [ListDrawerSettings (IsReadOnly = true, DefaultExpandedState = false)]
+        public List<DataBlockScenarioUnitGroup> unitGroupsGenerated;
+        
         [DropdownReference (true)]
         public DataBlockScenarioOutcome outcome;
 
-        [ShowIf ("AreCallsPresent")]
-        public bool callsDelayedOutcomeCheck = false;
-        
-        [ShowIf ("@AreCallsPresent && callsDelayedOutcomeCheck")]
-        public CombatOutcome callsDelayedOutcomeRequired = CombatOutcome.Victory;
+        [YamlIgnore, HideInInspector, NonSerialized] 
+        public DataBlockScenarioState parentState;
         
         public void UpdateUnitGroups ()
         {
@@ -2307,6 +2415,18 @@ namespace PhantomBrigade.Data
                 }
             }
         }
+
+        public void UpdateUnitGroupsGenerated ()
+        {
+            UpdateUnitGroupsGenerated (null);
+        }
+        
+        public void UpdateUnitGroupsGenerated (OverworldEntity targetOverworld)
+        {
+            #if !PB_MODSDK
+            ScenarioUtilityGeneration.UpdateGeneratedUnitGroupsList (targetOverworld, parentState?.parentScenario, unitGeneratorKeys, ref unitGroupsGenerated);
+            #endif
+        }
         
         #region Editor
         #if UNITY_EDITOR
@@ -2316,13 +2436,6 @@ namespace PhantomBrigade.Data
         
         public DataBlockScenarioStateReaction () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
-        
-        #if !PB_MODSDK
-        private IEnumerable<string> GetCallKeys => 
-            FieldReflectionUtility.GetConstantStringFieldValues (typeof (ScenarioStateFunctionKeys));
-        #endif
-
-        private bool AreCallsPresent => callsDelayed != null && callsDelayed.Count > 0;
         
         [GUIColor (1f, 0.75f, 0.5f), ShowIf ("IsCommsUpdateAvailable")]
         [Button ("Update comms", ButtonSizes.Medium), PropertyOrder (-1)]
@@ -2400,6 +2513,9 @@ namespace PhantomBrigade.Data
         [YamlIgnore, HideInInspector, NonSerialized] 
         public DataBlockScenarioStep parentStep;
         
+        [YamlIgnore, NonSerialized, ShowInInspector, ReadOnly] 
+        public string parentScenarioKey;
+        
         private void ResetTextHeaderKey ()
         {
             textCurrentPrimaryKey = string.Empty;
@@ -2440,7 +2556,7 @@ namespace PhantomBrigade.Data
             else
             {
                 var stepKey = parentStep.key;
-                var scenarioKey = parentStep.parentScenario.key;
+                var scenarioKey = parentScenarioKey; // parentStep.parentScenario.key; - this can cause empty strings on child scenarios
                 var headerShared = !string.IsNullOrEmpty (textCurrentPrimaryKey);
                 var headerSector = headerShared ? TextLibs.scenarioStepsShared : TextLibs.scenarioEmbedded;
                 var headerKey = headerShared ? textCurrentPrimaryKey : $"{scenarioKey}__step_{stepKey}_0c_header";
@@ -2449,8 +2565,13 @@ namespace PhantomBrigade.Data
                 var descSector = descShared ? TextLibs.scenarioStepsShared : TextLibs.scenarioEmbedded;
                 var descKey = descShared ? textCurrentSecondaryKey : $"{scenarioKey}__step_{stepKey}_0c_text";
 
-                textHeader = DataManagerText.GetText (headerSector, headerKey, true);
-                textDesc = DataManagerText.GetText (descSector, descKey, true);
+                var textHeaderResolved = DataManagerText.GetText (headerSector, headerKey, true);
+                var textDescResolved = DataManagerText.GetText (descSector, descKey, true);
+                if (!string.IsNullOrEmpty (textHeader) && string.IsNullOrEmpty (textHeaderResolved))
+                    Debug.Log ($"Header emptied from value: \"{textHeader}\" under step {stepKey} in scenario {scenarioKey}");
+                
+                textHeader = textHeaderResolved;
+                textDesc = textDescResolved;
             }
         }
     }
@@ -2477,6 +2598,41 @@ namespace PhantomBrigade.Data
         private bool AreStandardTransitionsVisible => transitionMode != ScenarioTransitionEvaluation.OnRealTime;
     }
     
+    public class DataBlockScenarioUnitGenerationNode
+    {
+        [HideLabel, SuffixLabel ("Context", true)]
+        public string context;
+        
+        [DropdownReference]
+        public List<IOverworldGlobalValidationFunction> checksGlobal;
+        
+        [DropdownReference]
+        public List<IOverworldEntityValidationFunction> checksBase;
+        
+        [DropdownReference]
+        public List<IOverworldEntityValidationFunction> checksTarget;
+        
+        [DropdownReference]
+        [ListDrawerSettings (AlwaysAddDefaultValue = true, CustomAddFunction = "@new DataBlockScenarioUnitGenerationNode ()")]
+        public List<DataBlockScenarioUnitGenerationNode> children;
+        
+        [DropdownReference]
+        [ListDrawerSettings (AlwaysAddDefaultValue = true)]
+        public List<DataBlockScenarioUnitGroup> unitGroups;
+        
+        #region EDITOR
+        #if UNITY_EDITOR
+        
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockScenarioUnitGenerationNode () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        #endif
+        #endregion
+    }
+    
     [LabelWidth (220f)]
     public class DataBlockScenarioStep
     {
@@ -2495,6 +2651,17 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (AlwaysAddDefaultValue = true, DefaultExpandedState = false)]
         [OnValueChanged ("UpdateUnitGroups", true)]
         public List<DataBlockScenarioUnitGroup> unitGroups;
+        
+        [ShowIf ("AreStepBlocksVisible")]
+        [DropdownReference]
+        [ListDrawerSettings (AlwaysAddDefaultValue = true, DefaultExpandedState = false)]
+        [OnValueChanged ("UpdateUnitGroupsGenerated", true)]
+        public List<string> unitGeneratorKeys;
+
+        [YamlIgnore]
+        [ShowIf ("@AreStepBlocksVisible && unitGeneratorKeys != null && unitGroupsGenerated != null")]
+        [ListDrawerSettings (IsReadOnly = true, DefaultExpandedState = false)]
+        public List<DataBlockScenarioUnitGroup> unitGroupsGenerated;
         
         [ShowIf ("AreStepBlocksVisible")]
         [DropdownReference]
@@ -2618,6 +2785,13 @@ namespace PhantomBrigade.Data
             }
         }
 
+        public void UpdateUnitGroupsGenerated (OverworldEntity targetOverworld)
+        {
+            #if !PB_MODSDK
+            ScenarioUtilityGeneration.UpdateGeneratedUnitGroupsList (targetOverworld, parentScenario, unitGeneratorKeys, ref unitGroupsGenerated);
+            #endif  
+        }
+
         #region Editor
         #if UNITY_EDITOR
 
@@ -2632,6 +2806,15 @@ namespace PhantomBrigade.Data
         
         public DataBlockScenarioStep () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
+
+        #if !PB_MODSDK
+        [Button, HideInEditorMode, ShowIf ("@commsOnStart != null")]
+        private void TestComms ()
+        {
+            if (commsOnStart != null && IDUtility.IsGameLoaded () && IDUtility.IsGameState (GameStates.combat))
+                CIViewCombatComms.ScheduleMessageGroup (commsOnStart);
+        }
+        #endif
 
         #endif
         #endregion
@@ -2987,11 +3170,97 @@ namespace PhantomBrigade.Data
         
         [ValueDropdown ("@DataManagerText.GetLibraryTextKeys (textSector)")]
         public string textKey;
+
+        /*
+        public DataBlockLocString GetCopy ()
+        {
+            return new DataBlockLocString
+            {
+                textSector = textSector,
+                textKey = textKey
+            };
+        }
+        */
+
+        public override string ToString ()
+        {
+            return (string.IsNullOrEmpty (textSector) ? "-" : textSector) + "/" + (string.IsNullOrEmpty (textKey) ? "-" : textKey);
+        }
+        
+        public static DataBlockLocString GetCopy (DataBlockLocString source)
+        {
+            if (source == null)
+                return null;
+            
+            return new DataBlockLocString
+            {
+                textSector = source.textSector,
+                textKey = source.textKey
+            };
+        }
+    }
+    
+    [Serializable]
+    public struct DataStructLocString
+    {
+        [PropertyOrder (-1)]
+        [YamlIgnore, ShowInInspector, DisplayAsString (true), ReadOnly, BoxGroup, HideLabel]
+        public string text => IsUsable ? DataManagerText.GetText (textSector, textKey, true) : string.Empty;
+        
+        [ValueDropdown ("@DataManagerText.GetLibrarySectorKeys ()")]
+        public string textSector;
+        
+        [ValueDropdown ("@DataManagerText.GetLibraryTextKeys (textSector)")]
+        public string textKey;
+        
+        
+        
+        public static readonly DataStructLocString Empty = default;
+
+        public DataStructLocString (string textSector, string textKey)
+        {
+            this.textSector = textSector;
+            this.textKey = textKey;
+        }
+        
+        public bool IsUsable => 
+            !string.IsNullOrEmpty (textSector) && !string.IsNullOrEmpty (textKey);
+        
+
+        
+        public bool Equals (DataStructLocString other)
+        {
+            return string.Equals (textSector, other.textSector, StringComparison.Ordinal) &&
+                   string.Equals (textKey, other.textKey, StringComparison.Ordinal);
+        }
+
+        public override bool Equals (object obj) =>
+            obj is DataStructLocString other && Equals (other);
+
+        public static bool operator == (DataStructLocString left, DataStructLocString right) => 
+            left.Equals (right);
+        
+        public static bool operator != (DataStructLocString left, DataStructLocString right) => 
+            !left.Equals (right);
+        
+        public override string ToString () => 
+            (string.IsNullOrEmpty (textSector) ? "-" : textSector) + "/" + (string.IsNullOrEmpty (textKey) ? "-" : textKey);
+        
+        public override int GetHashCode()
+        {
+            unchecked // allow overflow
+            {
+                int hash = textSector != null ? textSector.GetHashCode () : 0;
+                hash = hash * 31 + (textKey != null ? textKey.GetHashCode () : 0);
+                return hash;
+            }
+        }
     }
     
     [Serializable]
     public class DataBlockScenarioPilotAppearance
     {
+        [ValueDropdown ("@DataMultiLinkerPilotAppearancePreset.data.Keys")]
         public string presetKey;
     }
     
@@ -3104,11 +3373,6 @@ namespace PhantomBrigade.Data
             return colorNeutral;
         }
         
-        private static SortedDictionary<string, bool> unitGroupTagFilterCombined = new SortedDictionary<string, bool> ();
-        private static List<DataContainerCombatUnitGroup> unitGroupsSelected = new List<DataContainerCombatUnitGroup> ();
-        private static List<string> unitGroupBranchTagsRemoved = new List<string> ();
-        private static string unitGroupBranchTagPrefix = "branch_";
-        
         public void Refresh (string factionBranchDefault)
         {
             if (presetsFiltered == null)
@@ -3126,36 +3390,36 @@ namespace PhantomBrigade.Data
                 if (fb != null && fb.unitPresetTags != null && fb.unitPresetTags.Count > 0)
                 {
                     tagsModifed = true;
-                    if (unitGroupTagFilterCombined == null)
-                        unitGroupTagFilterCombined = new SortedDictionary<string, bool> ();
+                    if (ScenarioUtility.unitGroupTagFilterCombined == null)
+                        ScenarioUtility.unitGroupTagFilterCombined = new SortedDictionary<string, bool> ();
                     else
-                        unitGroupTagFilterCombined.Clear ();
+                        ScenarioUtility.unitGroupTagFilterCombined.Clear ();
                     
                     foreach (var kvp2 in fb.unitPresetTags)
-                        unitGroupTagFilterCombined.Add (kvp2.Key, kvp2.Value);
+                        ScenarioUtility.unitGroupTagFilterCombined.Add (kvp2.Key, kvp2.Value);
                     
                     foreach (var kvp2 in tags)
                     {
                         // Making sure there are no conflicting branch tags
-                        if (kvp2.Key.StartsWith (unitGroupBranchTagPrefix))
+                        if (kvp2.Key.StartsWith (ScenarioUtility.unitGroupBranchTagPrefix))
                         {
-                            unitGroupBranchTagsRemoved.Clear ();
-                            foreach (var kvp3 in unitGroupTagFilterCombined)
+                            ScenarioUtility.unitGroupBranchTagsRemoved.Clear ();
+                            foreach (var kvp3 in ScenarioUtility.unitGroupTagFilterCombined)
                             {
-                                if (kvp3.Key.StartsWith (unitGroupBranchTagPrefix))
-                                    unitGroupBranchTagsRemoved.Add (kvp3.Key);
+                                if (kvp3.Key.StartsWith (ScenarioUtility.unitGroupBranchTagPrefix))
+                                    ScenarioUtility.unitGroupBranchTagsRemoved.Add (kvp3.Key);
                             }
 
-                            foreach (var branchTag in unitGroupBranchTagsRemoved)
-                                unitGroupTagFilterCombined.Remove (branchTag);
+                            foreach (var branchTag in ScenarioUtility.unitGroupBranchTagsRemoved)
+                                ScenarioUtility.unitGroupTagFilterCombined.Remove (branchTag);
                         }
                         
-                        unitGroupTagFilterCombined[kvp2.Key] = kvp2.Value;
+                        ScenarioUtility.unitGroupTagFilterCombined[kvp2.Key] = kvp2.Value;
                     }
                 }
             }
 
-            var tagRequirementsUsed = tagsModifed ? unitGroupTagFilterCombined : tags;
+            var tagRequirementsUsed = tagsModifed ? ScenarioUtility.unitGroupTagFilterCombined : tags;
             var unitPresetsWithTags = DataTagUtility.GetContainersWithTags (DataMultiLinkerUnitPreset.data, tagRequirementsUsed);
             foreach (var objectWithTags in unitPresetsWithTags)
             {
@@ -3238,21 +3502,36 @@ namespace PhantomBrigade.Data
         [DropdownReference]
         public List<DataBlockScenarioBriefingGroup> briefingGroupsInjected;
         
-        [DropdownReference]
+        [DropdownReference (true)]
         public DataBlockScenarioBriefingUnitCounts briefingUnitsInjected;
         
         [DropdownReference]
         [ValueDropdown ("@DataMultiLinkerAction.data.Keys")]
         public HashSet<string> actionBlocklist;
         
-        [DropdownReference]
+        [DropdownReference (true)]
         public DataBlockScenarioExitBehaviour customExitBehaviour;
         
-        [DropdownReference]
-        public DataBlockFloat01 weatherOverridePrecipitation;
+        [DropdownReference (true)]
+        public DataBlockFloat01 weatherOverridePrecipitation; 
         
-        [DropdownReference]
+        [DropdownReference (true)]
         public DataBlockFloat weatherOverrideTemperature;
+        
+        [DropdownReference (true)]
+        public DataBlockScenarioIntroSettings introSettings;
+        
+        [DropdownReference (true)]
+        public DataBlockStringNonSerialized textIntroPrimary;
+        
+        [DropdownReference (true)]
+        public DataBlockStringNonSerialized textIntroLocation;
+        
+        [DropdownReference (true)]
+        public DataBlockStringNonSerialized textIntroThreat;
+        
+        [DropdownReference (true)]
+        public DataBlockStringNonSerialized textIntroReady;
         
         #region Editor
         #if UNITY_EDITOR
@@ -3263,8 +3542,23 @@ namespace PhantomBrigade.Data
         public DataBlockScenarioCore () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
+        #if !PB_MODSDK
+        [HideInEditorMode, Button]
+        private void TestIntro ()
+        {
+            ScenarioUtility.DisplayTitleAnimation ();
+        }
+        #endif
+
         #endif
         #endregion
+    }
+
+    public class DataBlockScenarioIntroSettings
+    {
+        public bool blurUsed = true;
+        public bool textReadyUsed = true;
+        public float durationOverride = -1f;
     }
 
     public class DataBlockScenarioMusicCustom
@@ -3285,10 +3579,70 @@ namespace PhantomBrigade.Data
         public SortedDictionary<string, bool> tagFilter = new SortedDictionary<string, bool> ();
         
         [DropdownReference]
-        public List<IOverworldValidationFunction> functionsBase;
+        public List<IOverworldGlobalValidationFunction> functionsOverworld;
         
         [DropdownReference]
-        public List<IOverworldValidationFunction> functionsSite;
+        public List<IOverworldEntityValidationFunction> functionsBase;
+        
+        [DropdownReference]
+        public List<IOverworldEntityValidationFunction> functionsSite;
+
+        #if !PB_MODSDK
+        public bool IsInjectionPossible (HashSet<string> scenarioTargetTags, PersistentEntity combatSitePersistent)
+        {
+            if (tagFilter != null && tagFilter.Count > 0)
+            {
+                bool match = true;
+                foreach (var kvp2 in tagFilter)
+                {
+                    var tag = kvp2.Key;
+                    bool required = kvp2.Value;
+                    bool present = scenarioTargetTags != null && scenarioTargetTags.Contains (tag);
+                    if (required != present)
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (!match)
+                    return false;
+            }
+
+            if (functionsOverworld != null)
+            {
+                foreach (var function in functionsOverworld)
+                {
+                    if (function != null && !function.IsValid ())
+                        return false;
+                }
+            }
+            
+            if (functionsBase != null)
+            {
+                var basePersistent = IDUtility.playerBasePersistent;
+                foreach (var function in functionsBase)
+                {
+                    if (function != null && !function.IsValid (basePersistent))
+                        return false;
+                }
+            }
+
+            if (functionsSite != null)
+            {
+                if (combatSitePersistent == null)
+                    return false;
+                
+                foreach (var function in functionsSite)
+                {
+                    if (function != null && !function.IsValid (combatSitePersistent))
+                        return false;
+                }
+            }
+
+            return true;
+        }
+        #endif
         
         #region Editor
         #if UNITY_EDITOR
@@ -3387,6 +3741,9 @@ namespace PhantomBrigade.Data
     [Serializable][LabelWidth (180f)]
     public class DataContainerScenario : DataContainerWithText, IDataContainerTagged
     {
+        [YamlIgnore, ReadOnly, HideInInspector]
+        public string groupKeyMain;
+        
         [YamlIgnore, ReadOnly]
         [PropertyOrder (-5), ShowIf ("@IsTabCore && groupKeys != null && groupKeys.Count > 0")]
         [ListDrawerSettings (DefaultExpandedState = false)]
@@ -3516,7 +3873,12 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (DefaultExpandedState = false)]
         public List<string> stateKeysSortedDisplay = new List<string> ();
         
-        [ShowIf ("IsTabStates")]
+        
+        [ShowIf ("@IsTabStates && IsDisplayIsolated"), YamlIgnore, HideLabel, ShowInInspector]
+        private DataViewIsolatedDictionary<DataBlockScenarioState> stateIsolated; 
+        
+        [ShowIf ("@IsTabStates && !IsDisplayIsolated")]
+        [DropdownReference]
         [OnValueChanged ("RefreshParentsInStates", true)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         public SortedDictionary<string, DataBlockScenarioState> states;
@@ -3527,7 +3889,11 @@ namespace PhantomBrigade.Data
         public SortedDictionary<string, DataBlockScenarioState> statesProc;
         
         
-        [ShowIf ("IsTabSteps")]
+        [ShowIf ("@IsTabSteps && IsDisplayIsolated"), YamlIgnore, HideLabel, ShowInInspector]
+        private DataViewIsolatedDictionary<DataBlockScenarioStep> stepIsolated; 
+        
+        [ShowIf ("@IsTabSteps && !IsDisplayIsolated")]
+        [DropdownReference]
         [OnValueChanged ("RefreshParentsInSteps", true)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         public SortedDictionary<string, DataBlockScenarioStep> steps;
@@ -3537,7 +3903,9 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         public SortedDictionary<string, DataBlockScenarioStep> stepsProc;
         
+        
         [ShowIf ("IsTabOther")]
+        [DropdownReference]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         public SortedDictionary<string, DataBlockScenarioUnit> unitPresets;
         
@@ -3545,7 +3913,19 @@ namespace PhantomBrigade.Data
         [YamlIgnore, ReadOnly]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         public SortedDictionary<string, DataBlockScenarioUnit> unitPresetsProc;
+        
+        
+        [ShowIf ("IsTabOther")]
+        [DropdownReference]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public SortedDictionary<string, DataBlockScenarioUnitGenerationNode> unitGenerators;
+        
+        [ShowIf ("@IsTabOther && IsInheritanceVisible")]
+        [YamlIgnore, ReadOnly]
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
+        public SortedDictionary<string, DataBlockScenarioUnitGenerationNode> unitGeneratorsProc;
 
+        
         public HashSet<string> GetTags (bool processed) => 
             processed ? tagsProc : tags;
         
@@ -3566,6 +3946,7 @@ namespace PhantomBrigade.Data
                         continue;
                     
                     step.UpdateUnitGroups ();
+                    // step.UpdateUnitGroupsGenerated (targetOverworld);
                 }
             }
             
@@ -3587,6 +3968,7 @@ namespace PhantomBrigade.Data
                                 continue;
                             
                             reaction.UpdateUnitGroups ();
+                            // reaction.UpdateUnitGroupsGenerated (targetOverworld);
                         }
                     }
                 }
@@ -3595,9 +3977,13 @@ namespace PhantomBrigade.Data
         
         public override void OnAfterDeserialization (string key)
         {
+            // Normally this is set by base.OnAfterDeserialization, but we want to run some methods first, and they depend on the key
+            this.key = key;
+            
             RefreshParentsInSteps ();
             RefreshParentsInStates ();
             
+            // This triggers ResolveText, which relies on refreshed parents above
             base.OnAfterDeserialization (key);
 
             UpdateGroups ();
@@ -3623,6 +4009,26 @@ namespace PhantomBrigade.Data
                     }
                 }
             }
+            
+            #if UNITY_EDITOR
+            
+            stepIsolated = new DataViewIsolatedDictionary<DataBlockScenarioStep> 
+            (
+                "Steps", 
+                () => steps, 
+                () => GetStepKeysNonProc,
+                RefreshParentsInSteps
+            );
+            
+            stateIsolated = new DataViewIsolatedDictionary<DataBlockScenarioState> 
+            (
+                "States", 
+                () => states, 
+                () => GetStateKeysNonProc,
+                RefreshParentsInStates
+            );
+            
+            #endif
         }
 
         public void Clear ()
@@ -3654,6 +4060,8 @@ namespace PhantomBrigade.Data
 
         public void UpdateGroups ()
         {
+            groupKeyMain = null;
+            
             if (groupKeys != null)
                 groupKeys.Clear ();
             else
@@ -3702,11 +4110,12 @@ namespace PhantomBrigade.Data
             foreach (var group in groupsFound)
                 groupKeys.Add (group.key);
 
-            if (stepsProc != null && groupKeys != null && groupKeys.Count > 0)
+            if (groupKeys.Count > 0)
+                groupKeyMain = groupKeys[0];
+
+            if (stepsProc != null && !string.IsNullOrEmpty (groupKeyMain))
             {
-                var groupKeyMain = groupKeys[0];
                 var groupMain = DataMultiLinkerScenarioGroup.GetEntry (groupKeyMain, false);
-                
                 foreach (var kvp in stepsProc)
                 {
                     var step = kvp.Value;
@@ -3733,20 +4142,23 @@ namespace PhantomBrigade.Data
             if (statesSelected == null)
                 return;
             
-            if (stateKeysSortedGeneration == null)
-                stateKeysSortedGeneration = new List<string> (statesSelected.Count);
-            else
-                stateKeysSortedGeneration.Clear ();
+            if (processed)
+            {
+                if (stateKeysSortedGeneration == null)
+                    stateKeysSortedGeneration = new List<string> (statesSelected.Count);
+                else
+                    stateKeysSortedGeneration.Clear ();
 
-            if (stateKeysSortedEvaluation == null)
-                stateKeysSortedEvaluation = new List<string> (statesSelected.Count);
-            else
-                stateKeysSortedEvaluation.Clear ();
+                if (stateKeysSortedEvaluation == null)
+                    stateKeysSortedEvaluation = new List<string> (statesSelected.Count);
+                else
+                    stateKeysSortedEvaluation.Clear ();
 
-            if (stateKeysSortedDisplay == null)
-                stateKeysSortedDisplay = new List<string> (statesSelected.Count);
-            else
-                stateKeysSortedDisplay.Clear ();
+                if (stateKeysSortedDisplay == null)
+                    stateKeysSortedDisplay = new List<string> (statesSelected.Count);
+                else
+                    stateKeysSortedDisplay.Clear ();
+            }
 
             foreach (var kvp in statesSelected)
             {
@@ -3757,16 +4169,65 @@ namespace PhantomBrigade.Data
 
                 state.key = stateKey;
                 state.parentScenario = this;
+
+                if (state.reactions?.effectsPerIncrement != null)
+                {
+                    foreach (var kvp2 in state.reactions.effectsPerIncrement)
+                    {
+                        var reaction = kvp2.Value;
+                        if (reaction == null)
+                            continue;
+
+                        reaction.parentState = state;
+
+                        if (reaction.unitGroups != null)
+                        {
+                            for (int i = 0; i < reaction.unitGroups.Count; ++i)
+                            {
+                                var unitGroupSlot = reaction.unitGroups[i];
+                                if (unitGroupSlot == null)
+                                    continue;
+                        
+                                unitGroupSlot.index = i;
+                                unitGroupSlot.parentScenario = this;
+
+                                if (unitGroupSlot.check != null)
+                                    unitGroupSlot.check.parentSlot = unitGroupSlot;
+
+                                if (unitGroupSlot is DataBlockScenarioUnitGroupEmbedded unitGroupSlotEmbedded)
+                                {
+                                    if (unitGroupSlotEmbedded.units != null)
+                                    {
+                                        foreach (var unit in unitGroupSlotEmbedded.units)
+                                        {
+                                            if (unit == null)
+                                                continue;
+                                
+                                            unit.parentScenario = this;
+                                            unit.OnAfterDeserialization ();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 
-                stateKeysSortedGeneration.Add (stateKey);
-                stateKeysSortedEvaluation.Add (stateKey);
-                if (state.visible)
-                    stateKeysSortedDisplay.Add (stateKey);
+                if (processed)
+                {
+                    stateKeysSortedGeneration.Add (stateKey);
+                    stateKeysSortedEvaluation.Add (stateKey);
+                    if (state.visible)
+                        stateKeysSortedDisplay.Add (stateKey);
+                }
             }
             
-            stateKeysSortedGeneration.Sort ((x, y) => statesSelected[x].priorityGeneration.CompareTo (statesSelected[y].priorityGeneration));
-            stateKeysSortedEvaluation.Sort ((x, y) => statesSelected[x].priority.CompareTo (statesSelected[y].priority));
-            stateKeysSortedDisplay.Sort ((x, y) => statesSelected[x].priorityDisplay.CompareTo (statesSelected[y].priorityDisplay));
+            if (processed)
+            {
+                stateKeysSortedGeneration.Sort ((x, y) => statesSelected[x].priorityGeneration.CompareTo (statesSelected[y].priorityGeneration));
+                stateKeysSortedEvaluation.Sort ((x, y) => statesSelected[x].priority.CompareTo (statesSelected[y].priority));
+                stateKeysSortedDisplay.Sort ((x, y) => statesSelected[x].priorityDisplay.CompareTo (statesSelected[y].priorityDisplay));
+            }
         }
 
         private void RefreshParentsInSteps () => RefreshParentsInStepsSelective (false);
@@ -3792,7 +4253,11 @@ namespace PhantomBrigade.Data
                 step.parentScenario = this;
 
                 if (step.core != null)
+                {
                     step.core.parentStep = step;
+                    if (!processed)
+                        step.core.parentScenarioKey = key;
+                }
 
                 if (step.unitGroups != null)
                 {
@@ -3869,6 +4334,21 @@ namespace PhantomBrigade.Data
         {
             // textName = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__core_header", true);
             // textDesc = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__core_text", true);
+
+            if (core != null)
+            {
+                if (core.textIntroPrimary != null)
+                    core.textIntroPrimary.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_primary", true);
+                
+                if (core.textIntroLocation != null)
+                    core.textIntroLocation.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_location", true);
+                
+                if (core.textIntroThreat != null)
+                    core.textIntroThreat.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_threat", true);
+                
+                if (core.textIntroReady != null)
+                    core.textIntroReady.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_ready", true);
+            }
             
             if (states != null)
             {
@@ -3971,7 +4451,10 @@ namespace PhantomBrigade.Data
         public DataContainerScenario () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
         
+        private IEnumerable<string> GetStateKeysNonProc => states != null ? states.Keys : null;
         private IEnumerable<string> GetStateKeys => statesProc != null ? statesProc.Keys : null;
+        
+        private IEnumerable<string> GetStepKeysNonProc => steps != null ? steps.Keys : null;
         private IEnumerable<string> GetStepKeys => stepsProc != null ? stepsProc.Keys : null;
 
         private bool AreTabsVisible => DataMultiLinkerScenario.Presentation.tabsVisiblePerConfig;
@@ -3979,6 +4462,8 @@ namespace PhantomBrigade.Data
         private Color GetElementColor (int index) => DataEditor.GetColorFromElementIndex (index);
         
         private bool IsInheritanceVisible => DataMultiLinkerScenario.Presentation.showInheritance;
+        private bool IsDisplayIsolated => DataMultiLinkerScenario.Presentation.showIsolatedEntries;
+        
         public bool IsTabCore => DataMultiLinkerScenario.Presentation.tabCore;
         public bool IsTabSteps => DataMultiLinkerScenario.Presentation.tabSteps;
         public bool IsTabStates => DataMultiLinkerScenario.Presentation.tabStates;
@@ -4002,6 +4487,21 @@ namespace PhantomBrigade.Data
 
         public override void SaveText ()
         {
+            if (core != null)
+            {
+                if (!string.IsNullOrEmpty (core.textIntroPrimary?.s))
+                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_primary", core.textIntroPrimary.s);
+                
+                if (!string.IsNullOrEmpty (core.textIntroLocation?.s))
+                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_location", core.textIntroLocation.s);
+                
+                if (!string.IsNullOrEmpty (core.textIntroThreat?.s))
+                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_threat", core.textIntroThreat.s);
+                
+                if (!string.IsNullOrEmpty (core.textIntroReady?.s))
+                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_ready", core.textIntroReady.s);
+            }
+            
             if (states != null)
             {
                 foreach (var kvp in states)

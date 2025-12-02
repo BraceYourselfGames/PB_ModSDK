@@ -3,7 +3,8 @@ parents:
   priority: 1
   offsetStart: 0
   offsetEnd: 0
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 2
@@ -19,12 +20,12 @@ cost:
     components_r2: 10
     supplies: 1000
 effect:
-  calls: 
   stats:
   - key: mm_stealth_vision_own
     modifier: Offset
     value: 0.15
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

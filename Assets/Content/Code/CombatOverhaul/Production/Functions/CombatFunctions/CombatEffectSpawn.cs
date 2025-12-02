@@ -14,6 +14,7 @@ namespace PhantomBrigade.Functions
         [PropertyRange (0f, 5f)]
         public float delay = 0f;
 
+        [Button]
         public void Run ()
         {
             #if !PB_MODSDK

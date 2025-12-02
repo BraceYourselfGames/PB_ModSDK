@@ -17,10 +17,13 @@ partTagPreferences:
 parts:
   equipment_right:
     livery: 
-    preset: !PartResolverKeys
-      keys:
-      - wpn_shotgun_auto_01
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          branch_army: true
+          equipment_left: false
+          part_shotgun: true
     rating: 
     systems: 
 animationOverrides: 
-functions: 
+effects: 

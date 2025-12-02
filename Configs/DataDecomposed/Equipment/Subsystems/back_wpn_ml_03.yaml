@@ -12,6 +12,9 @@ tags:
 - category_wpn_launcher_primary
 - type_force_root_rotation
 - type_range_strict
+- activation_is_attack
+- spec_guided
+- spec_concussion
 statDistribution: ''
 stats:
   act_charges:
@@ -159,9 +162,9 @@ projectile:
       key: fx_projectile_missile_01_regular
       keyEnemy: 
       scale:
-        x: 3
-        y: 3
-        z: 3
+        x: 2.5
+        y: 2.5
+        z: 2.5
       colorOverride: 
       colorOverrideEnemy: 
     impact:
@@ -213,6 +216,7 @@ projectile:
     distance: 25
     targetExclusive: true
     inertBeforeHit: false
+    inertPrimingDelay: 1
     triggerWithoutEntity: true
   hitResponse: 
   splashDamage:
@@ -374,6 +378,7 @@ projectile:
         m: {}
   uiSpeedAverage:
     f: 28
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
@@ -386,8 +391,31 @@ functions:
     functions:
     - !SubsystemFunctionModifyOwner
       functions:
-      - !CombatUnitStatusBuildup
-        key: timed_unstable
-        value: 0.45
-        source: Function
+      - !CombatUnitFunctionsChecked
+        unitCheck:
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags: 
+          name: 
+          faction: 
+          state: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform: 
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions:
+          - !CombatValidateUnitWithPilotProfile
+            present: false
+        functions:
+        - !CombatUnitStatusBuildup
+          key: timed_unstable
+          value: 0.45
+          source: Function
+        functionsElse: 
   action: 
+workshopInfo: 

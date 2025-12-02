@@ -1,3 +1,4 @@
+using PhantomBrigade.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,17 +8,16 @@ namespace PhantomBrigade.Data
     {
         private static Dictionary<string, List<string>> injectionCandidatesPerGroup = new Dictionary<string, List<string>> ();
         
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
 
             var basePersistent = IDUtility.playerBasePersistent;
             if (basePersistent == null)
                 return;
-            
-            var targetPersistent = ScenarioUtility.GetCombatSite ();
-            var targetOverworld = IDUtility.GetLinkedOverworldEntity (targetPersistent);
-            if (targetOverworld == null || !targetOverworld.hasDataLinkOverworldEntityBlueprint)
+
+            var targetPersistent = IDUtility.GetLinkedPersistentEntity (targetOverworld);
+            if (targetPersistent == null || targetOverworld == null || !targetOverworld.hasDataLinkPointPreset)
             {
                 // Debug.LogWarning ($"Skipping scenario changes from site: {targetOverworld.ToLog ()} has no blueprint");
                 return;
@@ -39,65 +39,10 @@ namespace PhantomBrigade.Data
                 var gi = scenarioCandidate.generationInjection;
                 if (!gi.enabled || string.IsNullOrEmpty (gi.group))
                     continue;
-
-                if (gi.tagFilter != null && gi.tagFilter.Count > 0)
-                {
-                    bool match = true;
-                    foreach (var kvp2 in gi.tagFilter)
-                    {
-                        var tag = kvp2.Key;
-                        bool required = kvp2.Value;
-                        bool present = scenarioTags.Contains (tag);
-                        if (required != present)
-                        {
-                            match = false;
-                            break;
-                        }
-                    }
-
-                    if (!match)
-                        continue;
-                }
                 
-                if (gi.functionsBase != null)
-                {
-                    bool match = true;
-                    foreach (var function in gi.functionsBase)
-                    {
-                        if (function != null)
-                        {
-                            bool valid = function.IsValid (basePersistent);
-                            if (!valid)
-                            {
-                                match = false;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if (!match)
-                        continue;
-                }
-
-                if (gi.functionsSite != null)
-                {
-                    bool match = true;
-                    foreach (var function in gi.functionsSite)
-                    {
-                        if (function != null)
-                        {
-                            bool valid = function.IsValid (targetPersistent);
-                            if (!valid)
-                            {
-                                match = false;
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if (!match)
-                        continue;
-                }
+                bool injectionPossible = gi.IsInjectionPossible (scenario.tagsProc, targetPersistent);
+                if (!injectionPossible)
+                    continue;
 
                 if (!injectionCandidatesPerGroup.ContainsKey (gi.group))
                     injectionCandidatesPerGroup.Add (gi.group, new List<string> { scenarioCandidate.key });

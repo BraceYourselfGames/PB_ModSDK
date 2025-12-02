@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -13.4
@@ -378,6 +386,8 @@ boundary:
 segments:
 - path: Content/AreaSegments/area_seg_unique_mountainbase
 biomeFilter:
-  tags:
-    default: true
+  tagsUsed: false
+  keys:
+  - alpine_06
+  tags: 
 scenarioChanges: 

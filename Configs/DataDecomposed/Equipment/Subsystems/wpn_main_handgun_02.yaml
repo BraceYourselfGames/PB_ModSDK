@@ -10,12 +10,13 @@ hardpoints:
 - internal_main_equipment
 tags:
 - mnf_06
+- spec_locking
 - spec_stabilized
-- stat_concussive
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
-    value: 4
+    value: 1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -25,12 +26,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 80
+    value: 85
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 1
+    value: 3
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -40,12 +41,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 4.2
+    value: 11
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 30
+    value: 65
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -60,7 +61,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 50
+    value: 30
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -70,17 +71,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 5
+    value: 4
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 5
+    value: 9
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_speed:
-    value: 380
+    value: 370
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -143,18 +144,21 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
       keys:
       - tv_tg:
           x: 0
-          y: 0.4962264
-          z: 2.356377
-          w: 2.356377
+          y: 1
+          z: 0.007089972
+          w: 0.007089972
         w:
           x: 0.3333333
-          y: 0.1946475
+          y: 0.7256457
         m: {}
       - tv_tg:
           x: 0.2756166
@@ -176,7 +180,7 @@ projectile:
         m: {}
       - tv_tg:
           x: 1
-          y: 0.125113
+          y: 0.0449128
           z: -0.008274017
           w: -0.008274017
         w:
@@ -195,8 +199,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

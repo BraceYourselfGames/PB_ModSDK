@@ -24,8 +24,12 @@ dataCore:
   durationType: Data
   duration: 1
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation:
   - IsRetreatAvailable
   eventsOnCreation: 
@@ -34,6 +38,7 @@ dataCore:
   - On_Retreat
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation: 
   functionsOnModification: 
@@ -57,6 +62,7 @@ dataCore:
     stats: 
     pilot: 
   unitCheck: 
+  pilotLink: 
 dataFactionCheck:
   requireFaction: Phantoms
 dataMovement: 

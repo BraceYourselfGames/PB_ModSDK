@@ -1,0 +1,36 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 1
+rating: 0
+mood: 1
+group: ''
+hue: 0.56
+icon: s_icon_l32_add_new
+textFromFunctions: FunctionTextInSecondary
+textSource: 
+tags:
+- camp_unit
+- camp_unit_random
+checksGlobal:
+- !OverworldValidateChance
+  chance: 0.5
+checksBase: 
+functionsGlobal:
+- !ModifyResources
+  resourceChanges:
+  - key: supplies
+    check: false
+    checkStrict: false
+    offset: true
+    value: -20
+functionsBase: 
+pilot: 
+unit:
+  checksUnit:
+  - !CombatValidateUnitFrameIntegrity
+    check: Less
+    value: 0.2
+  functionsUnit:
+  - !OverworldUnitFrameIntegrityOffset
+    value: 0.25

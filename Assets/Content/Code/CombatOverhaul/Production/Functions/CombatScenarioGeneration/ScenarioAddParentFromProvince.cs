@@ -1,3 +1,4 @@
+using PhantomBrigade.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,13 +6,11 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioAddParentFromProvince : ICombatScenarioGenStep
     {
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
-
-            var targetPersistent = ScenarioUtility.GetCombatSite ();
-            var targetOverworld = IDUtility.GetLinkedOverworldEntity (targetPersistent);
-            if (targetOverworld == null || !targetOverworld.hasDataLinkOverworldEntityBlueprint)
+            
+            if (targetOverworld == null || !targetOverworld.hasDataLinkPointPreset)
             {
                 // Debug.LogWarning ($"Skipping scenario changes from site: {targetOverworld.ToLog ()} has no blueprint");
                 return;
@@ -20,11 +19,15 @@ namespace PhantomBrigade.Data
             var provinceBlueprint = DataHelperProvince.GetProvinceBlueprintAtEntity (targetOverworld);
             if (provinceBlueprint == null || provinceBlueprint.scenarioChanges == null)
                 return;
+            
+            var targetPersistent = IDUtility.GetLinkedPersistentEntity (targetOverworld);
+            if (targetPersistent == null)
+                return;
 
             var changes = provinceBlueprint.scenarioChanges;
             foreach (var change in changes)
             {
-                if (change == null || !change.IsChangeApplicable (scenario))
+                if (change == null || !change.IsChangeApplicable (scenario, targetPersistent))
                     continue;
 
                 ApplyChange (scenario, seed, provinceBlueprint, change);

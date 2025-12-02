@@ -1,0 +1,66 @@
+hidden: false
+parents:
+- key: hg_base_reward
+core: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: 
+    background: 
+    mood: 
+    textHeader: 
+    text: 
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      option_a:
+        core: 
+        dataReused: 
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewards
+            rewards:
+              part_weapon_sp: 1
+              res_token: 1
+          functionsLocal: 
+      option_b:
+        core: 
+        dataReused: 
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewards
+            rewards:
+              part_armor_w2: 2
+              res_r3: 1
+          functionsLocal: 
+    optionsReused: 

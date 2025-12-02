@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_experimental
 tags:
@@ -12,36 +12,23 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_vanguard_uh
-    countMin: 1
+  - keyExternal: true
+    key: vhc_mech_w2_mr_ew
+    countMin: 2
     countMax: 1
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
+    qualityTableKey: unitgroup_q2_uncommon
     aiBehavior: Flanker
     aiTargeting: juggernaut
     liveryPreset: inv_exp_g1_attacker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_eleavted
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: vanguard
-    liveryPreset: inv_exp_g1_attacker
-    custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_vanguard_uh
+  - keyExternal: true
+    key: vhc_mech_w2_mr_ew
     countMin: 1
     countMax: 1
     countRandom: false
@@ -53,10 +40,23 @@ unitsPerGrade:
     aiTargeting: juggernaut
     liveryPreset: inv_exp_g2_attacker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_eleavted
+  - keyExternal: true
+    key: vhc_mech_w2_mr_rail_ew
     countMin: 1
     countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: vanguard
+    liveryPreset: inv_exp_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_heat_ew
+    countMin: 1
+    countMax: 1
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
@@ -66,23 +66,10 @@ unitsPerGrade:
     aiTargeting: vanguard
     liveryPreset: inv_exp_g1_attacker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_standard_hybrid
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: vanguard
-    liveryPreset: inv_exp_g1_attacker
-    custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_vanguard_uh
+  - keyExternal: true
+    key: vhc_mech_w2_mr_backpack_ew
     countMin: 1
     countMax: 1
     countRandom: false
@@ -94,9 +81,9 @@ unitsPerGrade:
     aiTargeting: juggernaut
     liveryPreset: inv_exp_g3_attacker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_eleavted
-    countMin: 2
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_heat_ew
+    countMin: 1
     countMax: 2
     countRandom: false
     levelOffsetMin: 0
@@ -107,18 +94,31 @@ unitsPerGrade:
     aiTargeting: vanguard
     liveryPreset: inv_exp_g2_attacker
     custom: 
-  - keyExternal: false
-    key: tank_vanguard_standard_hybrid
-    countMin: 2
+  - keyExternal: true
+    key: vhc_mech_w2_mr_rail_ew
+    countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
+    qualityTableKey: unitgroup_q2_uncommon
     aiBehavior: Flanker
     aiTargeting: vanguard
     liveryPreset: inv_exp_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w1_sidearms_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: 
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: 
     custom: 
 unitPresets:
   mech_vanguard_uh: !UnitFilter

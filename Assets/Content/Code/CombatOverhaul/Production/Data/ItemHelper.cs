@@ -16,13 +16,9 @@ public static class ItemHelper
         if (!autoloadAttempted)
         {
             autoloadAttempted = true;
-            
+            LoadVisuals ();
             if (itemVisualFileEntries == null)
-            {
-                LoadVisuals ();
-                if (itemVisualFileEntries == null)
-                    Debug.LogWarning ("Could not load the item visual DB, check existence of related files!");
-            }
+                Debug.LogWarning ("Could not load the item visual DB, check existence of related files!");
         }
     }
 

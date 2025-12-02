@@ -4,19 +4,18 @@ using PhantomBrigade.Data;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class OverworldValidateMovementMode : IOverworldValidationFunction
+    public class OverworldValidateMovementMode : DataBlockSubcheckBool, IOverworldGlobalValidationFunction
     {
-        public DataBlockOverworldEventSubcheckMovementMode check = new DataBlockOverworldEventSubcheckMovementMode ();
+        protected override string GetLabel () => present ? "Base should be in fast mode" : "Base should be in normal mode";
         
-        public bool IsValid (PersistentEntity entityPersistent)
+        public bool IsValid ()
         {
             #if !PB_MODSDK
             
             var overworld = Contexts.sharedInstance.overworld;
             var movementModeKey = overworld.hasActiveMovementMode ? overworld.activeMovementMode.key : MovementModes.normal;
-            bool required = !check.not;
-            bool match = check.modes.Contains (movementModeKey);
-            bool movementModeValid = required == match;
+            bool fast = string.Equals (movementModeKey, MovementModes.fast);
+            bool movementModeValid = present == fast;
             return movementModeValid;
 
             #else

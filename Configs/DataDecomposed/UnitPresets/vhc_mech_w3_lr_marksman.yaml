@@ -5,6 +5,7 @@ salvageExempted: false
 bodyTagPinningExempted: false
 parents:
 - key: vhc_mech_w3
+- key: vhc_mech_sec_sr
 blueprint: 
 textType: 
 livery: 
@@ -13,10 +14,6 @@ aiTargeting: juggernaut
 tags:
 - range_long
 partTagPreferences:
-  equipment_left:
-  - tags:
-      part_ml: false
-      range_medium: true
   equipment_right:
   - tags:
       part_energy: false
@@ -24,4 +21,4 @@ partTagPreferences:
       wpn_primary: true
 parts: 
 animationOverrides: 
-functions: 
+effects: 

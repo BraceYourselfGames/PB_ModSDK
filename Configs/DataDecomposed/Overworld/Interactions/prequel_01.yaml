@@ -1,0 +1,297 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: Negative
+  devSkipStep: ''
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 1
+        g: 0.5947713
+        b: 0.5137255
+        a: 0
+      image: event_inv_01
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/intro_01
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_settlement_razed
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/intro_02
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_03
+    optionsReused: 
+  step_03:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_start
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/intro_03
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.6792453
+            g: 0
+            b: 0.01013774
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_04
+    optionsReused: 
+  step_04:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_landscape_01
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/intro_04
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4009434
+            b: 0.4009434
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !SetGameplayUIActive
+            active: false
+          - !SetScreenFade
+            active: true
+            instant: true
+          - !OverworldDisplayTitle
+            hue: 0
+            textPrimary:
+              textSector: ui_overworld
+              textKey: campaign_title_02_s1
+            textSecondary:
+              textSector: ui_overworld
+              textKey: campaign_title_02_s2
+            textTertiary:
+              textSector: ui_overworld
+              textKey: campaign_title_02_s3
+          - !OverworldCameraChange
+            delay: 0.3
+            positionOverride: true
+            position:
+              x: 145.0933
+              y: 38.2615
+              z: 189.3555
+            positionFromEntityName: ''
+            rotationXOverride: true
+            rotationX: 39.60318
+            rotationYOverride: true
+            rotationY: 169.6708
+            zoomOverride: true
+            zoom: 1
+          - !DelayGroupRealtime
+            delay: 4
+            functions:
+            - !SetScreenFade
+              active: false
+              instant: false
+          - !DelayGroupRealtime
+            delay: 9
+            functions:
+            - !OverworldInteractionStartFilter
+              overrideOngoing: true
+              tagsUsed: false
+              keys:
+              - ftue_00_intro
+              tags: 
+            - !SetGameplayUIActive
+              active: true
+          functionsLocal: 
+    optionsReused: 

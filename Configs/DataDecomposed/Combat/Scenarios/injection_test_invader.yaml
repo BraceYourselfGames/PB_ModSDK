@@ -57,15 +57,13 @@ states:
           commsOnStart:
           - time: 0.1
             hidden: false
-            key: intruder_test
+            key: boss_intro
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
@@ -97,8 +95,8 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps: {}
 unitPresets: 
+unitGenerators: 

@@ -5,24 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character Skin Textures Data", menuName = "Pilots/Character Skin Textures Data", order = 1)]
 public class CharacterSkinTexturesData : ScriptableObject
 {
-    // Character skin textures
-    [BoxGroup]
-    public Texture HeadSkinTextureAlbedo;
-    
-    [BoxGroup]
-    public Texture HeadSkinTextureRDSO;
-    
-    [BoxGroup]
-    public Texture HeadSkinTextureNormal;
-    
-    [BoxGroup]
-    public Texture BodySkinTextureAlbedo;
-    
-    [BoxGroup]
-    public Texture BodySkinTextureRDSO;
-    
-    [BoxGroup]
-    public Texture BodySkinTextureNormal;
+    [Range (0.0f, 3.0f)]
+    public float SkinSmoothnessIntensity = 1.6f;
 
     [BoxGroup ("PBMale"), HideLabel]
     public CharacterSkinVariant variantM;

@@ -1,31 +1,29 @@
+using PhantomBrigade.Functions;
 using UnityEngine;
 
 namespace PhantomBrigade.Data
 {
     public class ScenarioPromoteUnitsFromThreat :  ICombatScenarioGenStep
     {
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
 
             if (!DataShortcuts.escalation.unitScalingThreatBased)
             {
-                Debug.Log ($"Scenario {scenario.key} won't be scaled by threat level as this method is disabled");
+                // Debug.Log ($"Scenario {scenario.key} won't be scaled by threat level as this method is disabled");
                 return;
             }
 
-            var target = ScenarioUtility.GetCombatSite ();
-            if (target == null)
-                return;
-            
-            if (!target.hasThreatRatingEscalated || !scenario.coreProc.scalingUsed)
+            var targetPersistent = IDUtility.GetLinkedPersistentEntity (targetOverworld);
+            if (!targetPersistent.hasThreatRatingEscalated || !scenario.coreProc.scalingUsed)
             {
                 return;
             }
 
-            int targetThreat = ScenarioUtilityGeneration.GetCombatTargetThreat (target);
-            var escalationLevel = ScenarioUtilityGeneration.GetCombatTargetEscalationLevel ();
-            Debug.Log ($"Scaling scenario {scenario.key} at {target.ToLog ()} using threat rating {targetThreat} (modified by escalation level {escalationLevel})");
+            int targetThreat = ScenarioUtilityGeneration.GetCombatTargetThreat (targetPersistent);
+            var escalationLevel = ScenarioUtilityGeneration.GetCombatTargetEscalationLevel (targetOverworld);
+            Debug.Log ($"Scaling scenario {scenario.key} at {targetPersistent.ToLog ()} using threat rating {targetThreat} (modified by escalation level {escalationLevel})");
 
             int unitGroupLimitTotal = DataShortcuts.escalation.embeddedUnitGroupLimitTotal;
             int unitGroupLimitAdded = DataShortcuts.escalation.embeddedUnitGroupLimitAdded;

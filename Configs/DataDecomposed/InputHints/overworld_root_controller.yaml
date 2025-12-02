@@ -1,0 +1,44 @@
+extended: false
+lines:
+- mode: KeyboardMouse
+  text: Select
+  actions:
+  - action: global_mouse_primary
+    newline: false
+- mode: KeyboardMouse
+  text: Move
+  actions:
+  - action: global_mouse_secondary
+    newline: false
+- mode: KeyboardMouse
+  text: Return
+  actions:
+  - action: overworld_selection_reset
+    newline: false
+- mode: Controller
+  text: Move
+  actions:
+  - action: global_confirm
+    newline: false
+- mode: Controller
+  text: Return / Stop
+  actions:
+  - action: global_cancel
+    newline: false
+- mode: All
+  text: Pause
+  actions:
+  - action: overworld_time_toggle
+    newline: false
+- mode: All
+  text: Select
+  actions:
+  - action: global_gamepad_y
+    newline: false
+- mode: Controller
+  text: Roster / Navbar
+  actions:
+  - action: overworld_tab_move_prev
+    newline: false
+  - action: overworld_tab_move_next
+    newline: false

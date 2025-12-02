@@ -1,0 +1,78 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_role_unit_generator
+tags:
+- level_4
+- bonus
+- type_brawler
+- type_special
+- type_support
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatUnitStatusGainSelf
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !CombatValidateUnitStatus
+    key: timed_charged
+    present: true
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitStatusDuration
+    key: timed_charged
+    operation: Set
+    value: 6
+  functionsSelf:
+  - !PilotStatOffsetClamped
+    key: ability_sprint
+    normalized: false
+    value: 1
+    min: 0
+    max: 1
+    avoidShiftIntoRange: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+- filterEventTypes:
+  - CombatUnitStatusGainSelf
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !CombatValidateUnitStatus
+    key: timed_charged_cooldown
+    present: true
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatOffsetClamped
+    key: ability_sprint
+    normalized: false
+    value: 1
+    min: 0
+    max: 1
+    avoidShiftIntoRange: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

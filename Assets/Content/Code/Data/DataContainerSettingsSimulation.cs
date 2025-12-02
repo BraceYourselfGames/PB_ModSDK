@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
+    public class DataBlockSalvageCost
+    {
+        public int costTakeIntact;
+        public int costTakeDamaged;
+
+        public int costDismantleIntact;
+        public int costDismantleDamaged;
+    }
+    
     [Serializable][Searchable]
     public class DataContainerSettingsSimulation : DataContainerUnique
     {
@@ -44,12 +54,14 @@ namespace PhantomBrigade.Data
         public float repairRate = 0.09f;
         public float repairResourceDrainRate = 1.44f;
 
+        public bool barrierRefuelResourceConsumption = false;
         public float repairCombatBarrierLimit = 2.5f;
         public float repairCombatBarrierCost = 16f;
         public bool combatReactionLights = true;
         public bool combatNightLights = true;
         public bool combatAccentLights = true;
         public bool combatIntro = false;
+        public bool combatLoadingBugfix = false;
 
         [Header ("Gameplay")]
         public bool noDamageFriendly = false;
@@ -67,8 +79,10 @@ namespace PhantomBrigade.Data
         
         [PropertyRange (0, 3), ShowIf ("editorAutoSelectCombat")]
         public int editorAutoSelectCombatMode = 0;
-        
+
         [Space (8f)]
+        public SortedDictionary<int, DataBlockSalvageCost> salvageCostsPart = new SortedDictionary<int, DataBlockSalvageCost> ();
+        
         public int costDismantlePartIntact = 5;
         public int costDismantlePartDamaged = 10;
         public int costTakePartIntact = 10;
@@ -78,12 +92,11 @@ namespace PhantomBrigade.Data
         public int costTakeSubsystemIntact = 10;
         public int costTakeSubsystemDamaged = 20;
         public int costTakeMechFrame = 80;
-        
+        public int mechDamageLimit = 3;
 
         public int salvageBudgetBaseDefeat = 60;
         public bool salvageWorkshopDuplicateProtection = true;
         public bool workshopChargeSpending = true;
-        public int workshopLevelBias = 2;
         public bool dismantlingRewardsUsed = false;
         public bool liveryUnlocks = false;
 
@@ -111,11 +124,12 @@ namespace PhantomBrigade.Data
         public float targetVelocityModifier = 0.5f;
         public float targetVelocityModifierPlayer = 1f;
         
+        public bool logOverworldPoints = false;
         public bool logEquipmentGeneration = false;
         public bool logEquipmentLoading = false;
         public bool logScenarioGeneration = false;
         public bool logScenarioUpdates = false;
-        public bool logCombatRequests = false;
+        public bool logRewardGeneration = false;
         public bool logCombatDamage = false;
         public bool logCombatActions = false;
         public bool logCombatTargeting = false;
@@ -123,8 +137,15 @@ namespace PhantomBrigade.Data
         public bool logCombatUnitStatus = false;
         public bool logCompositeLinks = false;
         public bool logCompositeBehavior = false;
+        public bool logStandaloneDirectors = false;
         public bool logProjectileStatus = false;
-
+        public bool logPilotTraitEffects = true;
+        public bool logPilotEventBuffer = true;
+        public bool logPilotEventExperience = true;
+        public bool logPilotGeneration = false;
+        
+        public bool debugCombatStructureAnalysis = true;
+        
         public bool partLevelUsed = true;
         public bool partLevelExponential = false;
         public int partLevelLimit = 99;
@@ -198,8 +219,12 @@ namespace PhantomBrigade.Data
         public bool fieldStatusImmediateWater = false;
         public float fieldDissipationMultiplierWater = 1.5f;
         public float fieldDissipationMultiplierLava = 0.5f;
+        public float fieldHeatLava = 10f;
+
+        [Header ("Time")]
+        public bool timeEventsRealtime = true;
+        public float timeEventDurationDefault = 1f;
         
-        [Header("Time")]
         public int timeScaleSteps = 1;
         public float timeScaleMain = 0.6f;
         public float timeScaleSlow = 0.2f;
@@ -225,6 +250,13 @@ namespace PhantomBrigade.Data
         public bool timelineAdjustmentPatchOnPlacement = false;
 
         [Header ("Damage")]
+        public string critEffectKey = "fx_thruster_flash";
+        public float critMultiplierBase = 2f;
+        public float critMultiplierOffsetPerScore = 0.5f;
+        public float critMultiplierLimitComposites = 1.2f;
+        public float critChanceBase = 0.5f;
+        public float critChanceOffsetPerScore = 0.15f;
+        
         public bool meleeDamageOnFriendlies = false;
         public bool meleeDamageOnPilotsMissing = false;
         public bool meleeDamageOnPilotsKnockedOut = false;
@@ -252,7 +284,8 @@ namespace PhantomBrigade.Data
         //How much additional gravity is added to a projectile
         public float ricochetGravityScalar = 2f;
         //What is the split of damage between the hit object and the projectile? (Applies only to units)
-        public float ricochetDamageScalar = 1f;
+        public float ricochetDamageMultiplierNext = 0.6f;
+        public float ricochetDamageMultiplierDirect = 0f;
         //Should props cause projectiles to ricochet
         public bool ricochetOnPropHit = false;
         //How is damage is lost after ricocheting off the environment? 1 - 0.33 == 66% of damage retained
@@ -307,9 +340,9 @@ namespace PhantomBrigade.Data
         public float shieldVsStaggerDamageMultiplier = 0.0f;
         public float shieldVsConcussionDamageMultiplier = 0.0f;
 
-        public bool concussionScalingFromWeight = true;
-        public bool concussionScalingFromWeightBody = true;
-        public bool unifiedWeightClasses = true;
+        public bool concussionScalingFromWeightClass = true;
+        public int weightClassThresholdMedium = 6;
+        public int weightClassThresholdHeavy = 10;
 
         public bool staggerUsed = false;
         public float staggerDebuffDecay = 0.2f;
@@ -320,6 +353,7 @@ namespace PhantomBrigade.Data
         public float heatLevelOffsetMultiplier = 0.25f;
         public float heatLevelMinMultiplier = 0.1f;
         public float heatLevelMaxMultiplier = 2.0f;
+        public float heatCooldownMessageThreshold = 0.05f;
 
         [Header("Pilot")]
         //How much extra damage do we take to concussion when flanked?
@@ -329,13 +363,25 @@ namespace PhantomBrigade.Data
         public float healthRecoveryRate = 0f;
         
         //How much concussion damage can a pilot take in one fight before they're unconscious?
-        public float concussionOffset = 28f;
-        public float concussionOffsetVariation = 5f;
+        public float concussionFatiguePenalty = 0.5f;
 
         //When a pilot is created, they start with this health
         public float pilotHealthBase = 100f;
         public float pilotHealthBaseVariation = 25f;
         public float pilotHealthDeficitVariationEnemy = 0.2f;
+
+        public bool pilotPrestigeFixedBonuses = false;
+        public bool pilotFatigueLowRangeLogic = false;
+        public bool pilotFatigueExperiencePenalty = false;
+
+        public bool pilotScoreUsed = false;
+        public bool pilotScoreLossWithoutDeployment = false;
+        public float pilotScoreExperienceBonus = 0f;
+        public float pilotScoreDamageBonus = 0f;
+
+        public bool pilotExperienceFromSquadLocked = false;
+        public float pilotExperienceFromSquadDisplayMultiplier = 2f;
+        public SortedDictionary<int, float> pilotExperienceFromSquad = new SortedDictionary<int, float> ();
         
         [Header ("Resources")]
         [Tooltip("How long can we start regenerating after damage?")]
@@ -347,6 +393,11 @@ namespace PhantomBrigade.Data
         [Tooltip("Per-pilot cost for pilot upkeep")]
         public float pilotUpkeepCost = 1f;
 
+        [Header ("Combat Observation")]
+        public float observationOffset = 4.5f;
+        public float observationDistanceMin = 12f;
+        public float observationDistanceMax = 200f;
+
         [Header ("Physics")]
         public bool allowPhysicsSubstepping = true;
         public float minimumSubstepLength = 0.001f;
@@ -356,13 +407,16 @@ namespace PhantomBrigade.Data
         public Vector3 gravityForce = Vector3.down * 9.7f;
 
         [Header ("Crashing")]
-        public float crashingGroundCastRadius = 0.5f;
+        public float crashingGroundCastRadius = 1f;
+        public float crashingGroundCastSkidRadius = 0.5f;
         public float crashingGroundRayOffset = 1f;
         public float crashingGroundRayThreshold = 1.25f;
         public float crashingGroundDecelerationRate = 5f;
-        public float crashingSlopeGroundingThreshold = 0.9f;
+        public float crashingSlopeGroundingThreshold = 0.95f;
+        public float crashingSteepSlopeThreshold = 0.75f;
         public bool crashingGroundOnEnd = false;
 
+        public float crumpleDuration = 3.5f;
         public float crashingDuration = 5.0f;
         public float crashingAngularVelocityMax = 10f;
         public float crashingDelayOnHeatDeath = 0f;
@@ -384,9 +438,12 @@ namespace PhantomBrigade.Data
         public float unitCollisionDamageScalar = 0.05f;
         public float vehicleEnvironmentDamageScalar = 0.1f;
         public float crashingImpactCoefficient = 0.75f;
+        public float crashingDestructionCoefficient = 0.125f;
         public float crashingSeparationThreshold = 3f;
         public float crashingSeparationSpeed = 5f;
         public float crashingVelocityLimit = 30f;
+        public float crashingVelocityTransferFactor = 0.866f;
+        public float crashingMassDifferentialLimit = 2f;
         public float tankAngularDamping = 1;
         public float tankLinearDamping = 1;
         public float mechAngularDamping = 1;
@@ -394,6 +451,8 @@ namespace PhantomBrigade.Data
 
         public float environmentalDamageCooldown = 0.3f;
         public float unitCrashDamageCooldown = 1f;
+        [Tooltip ("A small cooldown to prevent bumping and jostling between units in contact from triggering new collision FX")]
+        public float unitCrashCollisionCooldown = 0.3f;
 
         [Header ("Melee")]
         public bool meleeFallbackVariantsUsed = false;

@@ -1,0 +1,31 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 0
+rating: 0
+mood: 1
+group: 
+hue: 0.56
+icon: s_icon_l32_add_clone
+textFromFunctions: FunctionTextInSecondary
+textSource:
+  tagAssociated: ''
+  pilotEventAssociated: combat_unit_damage_outgoing_enemy
+tags:
+- camp_pilot_bespoke
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: CombatUnitDamageOutgoingEnemy
+    check: GreaterEqual
+    value: 15
+  functionsPilot:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.25
+unit: 

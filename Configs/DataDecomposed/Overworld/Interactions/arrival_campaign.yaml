@@ -1,0 +1,70 @@
+hidden: true
+parents: 
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: ResearchInvestigating
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check:
+  repeat: UniquePerCampaign
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: false
+      brightness: 0.627
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_smoke_distant
+      imageSecondary: 
+      video:
+        loop: true
+        contentDelay: 0
+        path: Content/Video/slides_temp/travel_loop_02
+    mood: 
+    textHeader: 
+    text: 
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.8811738
+            b: 0.5411765
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+    optionsReused: 

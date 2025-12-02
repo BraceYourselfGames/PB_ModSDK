@@ -53,9 +53,6 @@ namespace PhantomBrigade.Data
         public override void OnAfterDeserialization (string key)
         {
             base.OnAfterDeserialization (key);
-            
-            if (!ResourceDatabaseManager.IsDatabaseAvailable ())
-                return;
 
             foreach (var kvp in overrideControllerPaths)
             {

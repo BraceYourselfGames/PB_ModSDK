@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PhantomBrigade.Overworld.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -60,6 +61,8 @@ namespace PhantomBrigade.Data
     {
         public bool known;
         public bool recognized;
+        public bool visible;
+        public bool locked;
         public float sensorContactSeconds;
     }
 
@@ -121,7 +124,7 @@ namespace PhantomBrigade.Data
             #if UNITY_EDITOR
             if (prefab == null)
             {
-                // path = string.Empty;
+                path = string.Empty;
                 return;
             };
 
@@ -136,16 +139,9 @@ namespace PhantomBrigade.Data
 
         public void OnAfterDeserialization (string key)
         {
-            if (!ResourceDatabaseManager.IsDatabaseAvailable ())
-                return;
-            
             prefab = !string.IsNullOrEmpty (path) ? Resources.Load<GameObject> (path) : null;
-            #if !PB_MODSDK
-
             if (prefab == null)
-                Debug.LogWarning ($"Failed to find visual prefab at path [{path}] for overworld entity config {key}"); 
-
-            #endif
+                Debug.LogWarning ($"Failed to find visual prefab at path [{path}] for overworld entity config {key}");
         }
         
         #if UNITY_EDITOR

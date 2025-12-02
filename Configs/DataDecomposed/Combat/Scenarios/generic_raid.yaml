@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -55,6 +60,7 @@ tags:
 - trait_objectives
 - type_entity_convoy_cargo
 - type_raid
+- flag_escalation_squads
 states:
   obj_01_detection:
     comment:
@@ -120,8 +126,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -132,9 +136,8 @@ states:
               valueFromMemoryKey: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_01_disruption:
     comment:
       comment: This state reacts upon PB unit entering the location, visualizing disruption.
@@ -201,17 +204,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatCreateCommsMessage
             time: 0
             key: generic_target_block_a
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_01_extraction:
     comment: 
     textNameKey: generic_raid_obj_01_header
@@ -256,7 +256,8 @@ states:
         reactionAnimation: true
     locationRetreat: 
     volume: 
-    stateValues: 
+    stateValues:
+      outcome_reward_conditional: false
     memoryBase:
       method: RequireAll
       checks:
@@ -289,8 +290,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -310,9 +309,8 @@ states:
               modifiers: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_02_detection:
     comment:
       comment: This state reacts for every turn a PB mech is not in a designated location.
@@ -377,8 +375,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -389,9 +385,8 @@ states:
               valueFromMemoryKey: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_02_disruption:
     comment:
       comment: This state reacts upon PB unit entering the location, visualizing disruption.
@@ -458,17 +453,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatCreateCommsMessage
             time: 0
             key: generic_target_block_b
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_02_extraction:
     comment: 
     textNameKey: generic_raid_obj_02_header
@@ -513,7 +505,8 @@ states:
         reactionAnimation: true
     locationRetreat: 
     volume: 
-    stateValues: 
+    stateValues:
+      outcome_reward_conditional: false
     memoryBase:
       method: RequireAll
       checks:
@@ -546,8 +539,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -567,9 +558,8 @@ states:
               modifiers: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_fail:
     comment:
       comment: This state has negative priority to ensure it only returns true next turn after all cargo is extracted. It ends combat if player fails to stop every extraction.
@@ -624,18 +614,15 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Defeat
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-  outcome_reward_01:
+  outcome_reward_conditional:
     comment: 
     textNameKey: ''
     textDescKey: ''
@@ -658,8 +645,7 @@ states:
     location: 
     locationRetreat: 
     volume: 
-    stateValues:
-      obj_01_extraction: false
+    stateValues: 
     memoryBase: 
     functions: 
     reactions:
@@ -678,77 +664,54 @@ states:
           stepTransition: 
           commsOnStart: 
           memoryChanges: 
-          stateScopeChanges: 
+          stateScopeChanges:
+            obj_01_extraction: false
+            obj_02_extraction: false
           stateValueChanges: 
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
-          rewards:
-            obj_capture_loot: 1
-          callsImmediate: 
-          callsDelayed: 
-          functions: 
+          rewards: 
+          functions:
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 1
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier1: 1
+            functionsElse: 
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 0
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier2: 1
+            functionsElse: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-  outcome_reward_02:
-    comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
-    evaluated: true
-    visible: false
-    startInScope: true
-    priorityGeneration: 0
-    priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
-    evaluationContext: OnExecutionEnd
-    evaluationOnOutcome:
-      present: true
-    turn: 
-    turnModulus: 
-    unitChecks: 
-    unitCheckLinked: 
-    location: 
-    locationRetreat: 
-    volume: 
-    stateValues:
-      obj_02_extraction: false
-    memoryBase: 
-    functions: 
-    reactions:
-      expectedValue: true
-      scopeRemovalOnLimit: true
-      triggerLimit: 1
-      triggerIncrement: true
-      effectsPerIncrement:
-        1:
-          tags: 
-          executionOnOutcome:
-            outcomeVictory: true
-            outcomeDefeat: false
-            caseEarly: true
-            caseTotal: true
-          stepTransition: 
-          commsOnStart: 
-          memoryChanges: 
-          stateScopeChanges: 
-          stateValueChanges: 
-          memoryDisplayChanges: 
-          unitTagDisplayChanges: 
-          rewards:
-            obj_capture_loot: 1
-          callsImmediate: 
-          callsDelayed: 
-          functions: 
-          functionsPerUnit: 
-          unitGroups: 
-          outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   outcome_victory:
     comment: 
     textNameKey: generic_unknown_header
@@ -812,17 +775,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Victory
             early: false
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   reinforcements:
     comment: 
     textNameKey: generic_unknown_header
@@ -868,8 +828,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
@@ -901,9 +859,8 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -962,8 +919,8 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_short: false
-        type_main: true
+        range_medium: true
+        weight_heavy: false
       check: 
       combatTags: 
       spawnGroupOccupied: true
@@ -971,8 +928,8 @@ steps:
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 0
-      maxGrade: 1
+      baseGrade: 1
+      maxGrade: 2
       cloneable: false
       functions: 
       spawnTagsUsed: true
@@ -985,12 +942,12 @@ steps:
       filterDistanceLocation: 
       filterDistanceVolume: 
       filterDistanceState:
-        key: obj_looting_01
+        key: obj_01_extraction
         check: Greater
-        value: 0
+        value: 30
       filterDistanceRetreat: 
       sorting: !UnitSlotSortingState
-        key: obj_looting_01
+        key: obj_01_extraction
         invert: true
       spawnRegistration: 
     - !UnitGroupFilter
@@ -998,7 +955,16 @@ steps:
       tags:
         type_main: true
         weight_heavy: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -1006,7 +972,7 @@ steps:
       factionBranchOverride: false
       factionBranchKey: 
       baseGrade: 0
-      maxGrade: 1
+      maxGrade: 2
       cloneable: false
       functions: 
       spawnTagsUsed: true
@@ -1019,14 +985,15 @@ steps:
       filterDistanceLocation: 
       filterDistanceVolume: 
       filterDistanceState:
-        key: obj_looting_01
+        key: obj_02_extraction
         check: Greater
-        value: 0
+        value: 30
       filterDistanceRetreat: 
       sorting: !UnitSlotSortingState
-        key: obj_looting_01
+        key: obj_02_extraction
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -1064,3 +1031,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

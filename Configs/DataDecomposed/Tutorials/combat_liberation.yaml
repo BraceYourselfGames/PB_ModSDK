@@ -40,6 +40,7 @@ pages:
       focus: false
       delay: 0
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
         x: 144.7166
@@ -79,9 +80,9 @@ pages:
     frameSizeY: 358
     frameBlocksInput: false
     frameBoundary: false
-    textLocation: TopLeft
-    buttonLocation: Top
-    textWidth: 256
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
     textReused: 
     icon: 
     worldAnchor:
@@ -107,6 +108,7 @@ pages:
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
         x: 105.59
@@ -136,54 +138,27 @@ pages:
     g: 0
     b: 0
     a: 0
-  center: 
-  hint:
-    color:
-      r: 0.6415094
-      g: 0.2474484
-      b: 0.1845852
-      a: 1
-    frameLocation: Center
-    frameGradientMode: None
-    framePositionX: 0
-    framePositionY: 0
-    frameSizeX: 188
-    frameSizeY: 308
-    frameBlocksInput: false
-    frameBoundary: false
-    textLocation: TopLeft
-    buttonLocation: Top
-    textWidth: 256
-    textReused: 
-    icon: 
-    worldAnchor:
-      entityName: 
-      stateName: 
-      position:
-        x: 87.4
-        y: -11.2
-        z: 188
-      entityPrediction: false
-    arrowCustom: 
-    frameHighlight: 
-    textInputActions:
-      spriteWrap: true
-      actions:
-      - combat_toggle_overlay
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
   effectsOverworld: 
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
-        x: 91.73438
-        y: -19.5
-        z: 182.3562
+        x: 180.2501
+        y: -10.45
+        z: 196.3023
       positionFromEntityName: 
       rotationXOverride: true
-      rotationX: 30
+      rotationX: 34.93035
       rotationYOverride: true
-      rotationY: -145
+      rotationY: -159.5012
       zoomOverride: true
       zoom: 0.75
       delay: 0
@@ -191,70 +166,6 @@ pages:
       nameInternal: 
       select: true
       focus: true
-      delay: 0
-- depthForeground: 0
-  depthBackground: 0
-  skippable: true
-  cameraInputPermitted: false
-  backgroundUsed: false
-  backgroundBlur: false
-  backgroundColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  center: 
-  hint:
-    color:
-      r: 0.2910289
-      g: 0.5660378
-      b: 0.378115
-      a: 1
-    frameLocation: Center
-    frameGradientMode: None
-    framePositionX: 0
-    framePositionY: 0
-    frameSizeX: 256
-    frameSizeY: 256
-    frameBlocksInput: false
-    frameBoundary: false
-    textLocation: LeftTop
-    buttonLocation: Bottom
-    textWidth: 256
-    textReused: 
-    icon: 
-    worldAnchor:
-      entityName: ''
-      stateName: 
-      position:
-        x: 104.64
-        y: -6.9
-        z: 108.2
-      entityPrediction: false
-    arrowCustom: 
-    frameHighlight: 
-    textInputActions: 
-  effectsOverworld: 
-  effectsCombat:
-    functions:
-    - !CombatSelectUnit
-      nameInternal: pb_ml
-      select: true
-      focus: false
-      delay: 0
-    - !CombatCameraChange
-      positionOverride: true
-      position:
-        x: 105.2629
-        y: -10.45
-        z: 124.5458
-      positionFromEntityName: 
-      rotationXOverride: true
-      rotationX: 30
-      rotationYOverride: true
-      rotationY: -145
-      zoomOverride: true
-      zoom: 0.75
       delay: 0
 effectsOnEnd:
   effectsOverworld:
@@ -266,4 +177,10 @@ effectsOnEnd:
         value: 1
         valueFromMemory: false
         valueFromMemoryKey: 
-  effectsCombat: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0

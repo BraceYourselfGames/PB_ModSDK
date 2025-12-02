@@ -6,8 +6,15 @@ color:
   a: 1
 hidden: false
 debug: true
+showOverlay: true
+showNotifications: true
+showTutorial: false
 restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
 fxAttached: 
+fxRepeated: 
 durationFull:
   f: 4
 durationUpdate:
@@ -15,6 +22,7 @@ durationUpdate:
 buildupDecayRate: 
 buildupThreshold: 
 buildupOverflow: 
+buildupShieldMultiplier: 
 stackable: 
 audio: 
 effectsOnStart: 
@@ -101,8 +109,11 @@ effectsOnUpdate:
           y: 1
           z: 0
     present: true
+  triggerCheckPilot: 
   comment: 
   functionsOnHost: 
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 effectsOnEnd: 
 statOffsets: 

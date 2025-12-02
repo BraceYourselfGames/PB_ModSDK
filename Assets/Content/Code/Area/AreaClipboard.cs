@@ -5,6 +5,7 @@ namespace Area
 {
     public class AreaClipboard
     {
+        public string name;
         public readonly List<AreaVolumePoint> clipboardPointsSaved = new List<AreaVolumePoint> ();
         public readonly List<AreaPlacementProp> clipboardPropsSaved = new List<AreaPlacementProp> ();
         public Vector3Int clipboardBoundsSaved;

@@ -1,0 +1,120 @@
+hidden: false
+positive: true
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: true
+hue: 0
+icon: s_icon_l32_role_generic_r1
+tags:
+- type_special
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants:
+  s1_refresh:
+    comment:
+      comment: Used when refreshing missions in raid phases. 2 possible rolls, 1 spawn.
+    limit: 1
+    variants:
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 10
+        y: 12
+  s1_reset:
+    comment:
+      comment: Used when resetting missions in raid phases. 3 possible rolls, 3 spawns.
+    limit: 3
+    variants:
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 3
+      progressMemoryValue: 3
+      countdownOffset:
+        x: 11
+        y: 12
+  s2_refresh:
+    comment:
+      comment: Used when refreshing missions in contest phases. 3 possible rolls, 2 spawns.
+    limit: 2
+    variants:
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 9
+        y: 10
+    - escalationValue: 3
+      progressMemoryValue: 3
+      countdownOffset:
+        x: 11
+        y: 12
+  s2_reset:
+    comment:
+      comment: Used when resetting missions in contest phases. 3 possible rolls, 3 spawns.
+    limit: 3
+    variants:
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 3
+      progressMemoryValue: 3
+      countdownOffset:
+        x: 11
+        y: 12
+scenarioChanges: 
+effectsOnEntry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: quest_liberation_target_s1
+      value: 6
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Set
+      key: quest_liberation_target_s2
+      value: 8
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsBase: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit:
+  - !CombatValidateUnitAllied
+    present: false
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatUnitSetStatMultipliers
+    multipliers:
+      barrier: 1.15
+      hp: 1.15
+      wpn_damage: 1.15
+  functionsPilot:
+  - !PilotTraitInject
+    traitKey: enemy_pilot_increased_hp
+    slotKey: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

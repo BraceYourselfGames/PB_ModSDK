@@ -1,0 +1,39 @@
+hidden: false
+positive: false
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: true
+hue: 0
+icon: s_icon_l32_proximity_observation
+tags:
+- type_negative
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges:
+- enabled: true
+  comment: 
+  conditionScenarioKey: 
+  conditionScenarioTags:
+    block_strikes: false
+  conditionChecksBase:
+  - !OverworldValidateEscalationLevel
+    required: true
+    min: 1
+    max: 4
+  - !OverworldValidateChance
+    chance: 0.5
+  conditionChecksSite: 
+  parentKey: injection_strike_aircraft
+  functionsOnStart: 
+  units: 
+  rewards: 
+effectsOnEntry: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

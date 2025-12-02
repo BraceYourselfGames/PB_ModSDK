@@ -15,9 +15,11 @@ namespace PhantomBrigade.Data
     public class BinaryDataAttribute : Attribute
     {
         public string alias = null;
+        public bool logIfMissing = true;
         
         public BinaryDataAttribute () {  }
         public BinaryDataAttribute (string alias) { this.alias = alias; }
+        public BinaryDataAttribute (string alias, bool logIfMissing) { this.alias = alias; this.logIfMissing = logIfMissing; }
     }
 
     public static class BinaryDataUtility
@@ -262,7 +264,7 @@ namespace PhantomBrigade.Data
                     var (extension, read, _) = typesArray[fieldType];
                     var array = Array.CreateInstance (elementType, 0);
                     
-                    var (ok, pathFull, fileLength) = ResolvePath (pathBase, filename, extension);
+                    var (ok, pathFull, fileLength) = ResolvePath (pathBase, filename, extension, attributeData.logIfMissing);
                     if (ok)
                     {
                         try
@@ -294,7 +296,7 @@ namespace PhantomBrigade.Data
                     var (extension, read, _) = typesObject[fieldType];
                     object value = null;
                     
-                    var (ok, pathFull, fileLength) = ResolvePath (pathBase, filename, extension);
+                    var (ok, pathFull, fileLength) = ResolvePath (pathBase, filename, extension, attributeData.logIfMissing);
                     if (ok)
                     {
                         try
@@ -316,13 +318,14 @@ namespace PhantomBrigade.Data
             return true;
         }
 
-        static (bool, string, long) ResolvePath (string pathBase, string filename, string extension)
+        static (bool, string, long) ResolvePath (string pathBase, string filename, string extension, bool logIfMissing)
         {
             var pathFull = pathBase + filename + extension;
             var fileInfo = new FileInfo (pathFull);
             if (!fileInfo.Exists)
             {
-                Debug.LogWarning ($"Can't deserialize object from binary at path {pathFull} - file doesn't exist");
+                if (logIfMissing)
+                    Debug.LogWarning ($"Can't deserialize object from binary at path {pathFull} - file doesn't exist");
                 return (false, "", 0);
             }
             return (true, pathFull, fileInfo.Length);

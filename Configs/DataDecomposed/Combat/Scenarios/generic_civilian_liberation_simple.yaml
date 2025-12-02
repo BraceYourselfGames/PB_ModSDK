@@ -65,8 +65,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
@@ -99,9 +97,8 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   victory_elimination:
     comment: 
     textNameKey: generic_unknown_header
@@ -138,22 +135,24 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_long: false
+        range_short: false
         type_main: true
+        weight_heavy: false
       check: 
-      combatTags: 
+      combatTags:
+      - flag_attacks_need_sightline
       spawnGroupOccupied: true
       spawnCountStrict: true
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 0
-      maxGrade: 1
+      baseGrade: 1
+      maxGrade: 2
       cloneable: true
       functions: 
       spawnTagsUsed: true
       spawnTags:
-        perimeter_outer: true
+        perimeter_inner: true
       spawnGroupKey: 
       filterDistancePlayer:
         check: Greater
@@ -176,15 +175,25 @@ steps:
         range_short: true
         type_main: true
         weight_light: false
-      check: 
-      combatTags: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags:
+      - flag_attacks_need_sightline
       spawnGroupOccupied: true
       spawnCountStrict: true
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
       baseGrade: 0
-      maxGrade: 0
+      maxGrade: 2
       cloneable: false
       functions: 
       spawnTagsUsed: true
@@ -206,6 +215,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -229,3 +239,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

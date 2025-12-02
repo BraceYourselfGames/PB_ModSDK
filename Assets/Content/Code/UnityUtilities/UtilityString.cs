@@ -2,9 +2,28 @@
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class UtilityString
 {
+    private static readonly string[] newlineSplit = new string[] { "\r\n", "\n" };
+    private static StringBuilder sb = new StringBuilder ();
+    
+    public static string TrimLines (this string input, int lineLimit = 10)
+    {
+        var split = input.Split (newlineSplit, StringSplitOptions.None);
+        if (split.Length < lineLimit)
+            return input;
+
+        sb.Clear ();
+        for (int i = 0; i < lineLimit; ++i)
+            sb.AppendLine (split[i]);
+        sb.Append ("... (");
+        sb.Append (split.Length - lineLimit);
+        sb.Append (" lines trimmed)");
+        return sb.ToString ();
+    }
+    
     private static string[] byteCountSuffixes = { "B", "KB", "MB", "GB", "TB" };
         
     public static string FormatByteCount (long byteCount)
@@ -17,6 +36,44 @@ public static class UtilityString
             byteCountAsDouble = byteCount / 1024.0;
 
         return String.Format ("{0:0.##} {1}", byteCountAsDouble, byteCountSuffixes[i]);
+    }
+
+    public static void AppendBarToStringBuilder (int valueCurrent, int valueLimit, string segmentText, StringBuilder sb1)
+    {
+        if (sb1 == null || valueLimit <= 0 || string.IsNullOrEmpty (segmentText))
+            return;
+        
+        bool filled = true;
+        for (int f = 0; f < valueLimit; ++f)
+        {
+            if (filled)
+            {
+                filled = valueCurrent >= (f + 1);
+                if (!filled)
+                    sb1.Append ("[-][000000f0]");
+            }
+
+            sb1.Append (segmentText); //'■', " ▄▄▄▄"
+        }
+
+        sb1.Append ("[-]");
+    }
+    
+    public static void AppendOffsetToStringBuilder (float offset, StringBuilder sb1, string format)
+    {
+        if (sb1 == null)
+            return;
+            
+        var valueAbs = Mathf.Abs (offset);
+        sb1.Append (offset > 0f ? "+" : "-");
+        sb1.Append (valueAbs.ToString (format));
+    }
+    
+    public static string ToStringAsOffset (this float offset, string format)
+    {
+        var valueAbs = Mathf.Abs (offset);
+        var prefix = offset > 0f ? "+" : "-";
+        return prefix + valueAbs.ToString (format);
     }
     
     private const string fallbackNull = "null";
@@ -270,6 +327,9 @@ public static class UtilityString
     public static string TSFKVP<T1, T2> (this IDictionary<T1, T2> dict, bool multiline = false) => 
         ToStringFormattedKeyValuePairs (dict, multiline);
     
+    public static string ToStringMultilineDash<T1, T2> (this IDictionary<T1, T2> dict) => 
+        ToStringFormatted (dict, true, multilinePrefix: "- ");
+    
     public static string ToStringFormattedKeyValuePairs<T1, T2> (this IDictionary<T1, T2> dict, bool multiline = false, Func<T2,string> toStringOverride = null, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
@@ -322,6 +382,9 @@ public static class UtilityString
     
     public static string TSF<T> (this T[] array, bool multiline = false) => 
         ToStringFormatted (array, multiline);
+    
+    public static string ToStringMultilineDash<T> (this T[] array) => 
+        ToStringFormatted (array, true, multilinePrefix: "- ");
 
     public static string ToStringFormatted<T> (this T[] array, bool multiline = false, Func<T,string> toStringOverride = null, string multilinePrefix = null)
     {
@@ -364,6 +427,9 @@ public static class UtilityString
     
     public static string TSF<T> (this IEnumerable<T> collection, bool multiline = false) => 
         ToStringFormatted (collection, multiline);
+    
+    public static string ToStringMultilineDash<T> (this IEnumerable<T> collection) => 
+        ToStringFormatted (collection, true, multilinePrefix: "- ");
 
     public static string ToStringFormatted<T> (this IEnumerable<T> collection, bool multiline = false, Func<T,string> toStringOverride = null, bool appendBrackets = true, string multilinePrefix = null)
     {

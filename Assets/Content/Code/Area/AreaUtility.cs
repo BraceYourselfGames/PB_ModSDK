@@ -270,6 +270,18 @@ namespace Area
                 z >= 0 && z < boundsZ;
             return boundsFit ? x + z * boundsX : invalidIndex;
         }
+        
+        public static int GetIndexFromInternalPosition (Vector3Int position, Vector3Int bounds)
+        {
+            // Debug.Log ("AU | GetIndexFromInternalPosition | " + position);
+            if (GetIsInBounds (position, bounds))
+            {
+                return position.x
+                       + position.z * bounds.x
+                       + position.y * bounds.x * bounds.z;
+            }
+            return invalidIndex;
+        }
 
         public static Vector3Int GetInternalSpotPositionFromWorld (Vector3 positionInWorld, Vector3 positionOfVolume)
         {

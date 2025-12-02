@@ -46,7 +46,21 @@ parts:
     rating: 
     systems: 
 animationOverrides: 
-functions:
-- !CombatUnitSetSpeed
-  mode: Set
-  speed: 12
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 12
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

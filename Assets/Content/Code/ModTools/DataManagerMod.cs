@@ -25,11 +25,11 @@ namespace PhantomBrigade.SDK.ModTools
     public class DataManagerMod : MonoBehaviour
     {
         #if UNITY_EDITOR
-        
+
         private static DataManagerMod ins;
         private static bool initialized = false;
         private static bool loadedOnce = false;
-        
+
         private const string filenameMain = "project";
         private const string extensionYAML = ".yaml";
 
@@ -45,16 +45,16 @@ namespace PhantomBrigade.SDK.ModTools
             if (!loadedOnce)
                 LoadAll ();
         }
-        
+
         public static SDKChecksumData sdkChecksumData;
-        
+
         [Title ("Mod project manager", TitleAlignment = TitleAlignments.Centered)]
         [ShowInInspector, PropertyOrder (-1)]
         [PropertyTooltip ("The folder where mod projects are stored. If this folder does not exist, it will be created when you add your first mod.")]
         [PropertySpace (0f, 3f)]
         [LabelText ("Source folder"), LabelWidth (160f), ReadOnly, ElidedPath]
         public static string folderPathProjects;
-        
+
         // Parts providing a way to add a new mod
         // Wrapped in a subclass to separate utility fields like error strings, reduce the need for top level grouping attributes etc.
         #region ModCreation
@@ -67,7 +67,7 @@ namespace PhantomBrigade.SDK.ModTools
             [OnValueChanged (nameof(ValidateNewID))]
             [HideLabel, SuffixLabel ("Unique ID & folder name", true)]
             public string id;
-            
+
             [FoldoutGroup ("New mod"), HorizontalGroup ("New mod/H", 80f)]
             [EnableIf (nameof(creationPossible))]
             [Button ("Create", 21)]
@@ -76,7 +76,7 @@ namespace PhantomBrigade.SDK.ModTools
                 ValidateNewID ();
                 if (!idValid)
                     return;
-                
+
                 var modData = new DataContainerModData ()
                 {
                     key = id,
@@ -84,6 +84,7 @@ namespace PhantomBrigade.SDK.ModTools
                     metadata = new ModMetadata
                     {
                         id = id,
+                        gameVersionMin = "2.0",
                         ver = "0.1",
                         name = "New Mod Name",
                         desc = descDefault
@@ -97,7 +98,7 @@ namespace PhantomBrigade.SDK.ModTools
                 idError = null;
                 idValid = true;
             }
-            
+
             private bool creationPossible => !string.IsNullOrEmpty (id) && idValid;
             private bool idValid;
             private string idError;
@@ -109,25 +110,25 @@ namespace PhantomBrigade.SDK.ModTools
                 idValid = ModToolsHelper.ValidateModID (id, null, mods, out idError);
             }
         }
-        
+
         [ShowInInspector, HideLabel]
-        public static readonly ModSetup modSetup = new ModSetup (); 
+        public static readonly ModSetup modSetup = new ModSetup ();
 
         #endregion
 
-        
-        
+
+
         // Parts backing and displaying the selected mod
         #region ModSelected
 
         private static readonly SortedDictionary<string, DataContainerModData> mods = new SortedDictionary<string, DataContainerModData> ();
-        
-        private static string GetModCountText () => (mods != null ? mods.Count : 0).ToString ();
-        private static IEnumerable<string> GetModKeys () => mods.Keys;
-        private static bool IsModSelectionVisible () => modSelected != null;
-        private static bool IsModSelectionPossible () => SteamWorkshopHelper.IsUtilityOperationAvailable;
 
-        private static Color GetSelectedKeyColor ()
+        public static string GetModCountText () => (mods != null ? mods.Count : 0).ToString ();
+        public static IEnumerable<string> GetModKeys () => mods?.Keys;
+        public static bool IsModSelectionVisible () => modSelected != null;
+        public static bool IsModSelectionPossible () => SteamWorkshopHelper.IsUtilityOperationAvailable;
+        public static string GetModSelectionTitle () => modSelected != null ? "Selected mod" : "No mod selected";
+        public static Color GetSelectedKeyColor ()
         {
             if (DataContainerModData.selectedMod != null && DataContainerModData.selectedMod == modSelected)
                 return DataContainerModData.colorSelected;
@@ -170,13 +171,13 @@ namespace PhantomBrigade.SDK.ModTools
             }
             set
             {
-                
+
             }
         }
-        
+
         #endregion
 
-        
+
         // Parts providing options for selected mod (save/load/delete/rename/duplicate and more)
         // Wrapped in a subclass to separate utility fields like error strings, reduce the need for top level grouping attributes etc.
         #region ModOptions
@@ -191,17 +192,17 @@ namespace PhantomBrigade.SDK.ModTools
                 var id = modSelectedID;
                 LoadProject (id);
             }
-            
+
             public static void LoadProject (string id)
             {
                 if (string.IsNullOrEmpty (id))
                 {
                     Debug.LogWarning ($"");
                 }
-                
+
                 var projectPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, id);
                 var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, filenameMain + extensionYAML);
-                
+
                 var modData = UtilitiesYAML.LoadDataFromFile<DataContainerModData> (filePath, true, false);
                 if (modData == null)
                 {
@@ -249,13 +250,13 @@ namespace PhantomBrigade.SDK.ModTools
                         Debug.LogWarning ($"Can't save project: \"{id}\" {idError}");
                     return;
                 }
-                
+
                 Debug.Log ($"Saving mod {id}: {modData.GetModPathProject ()}");
                 modData.OnBeforeSerialization ();
 
                 var projectPath = modData.GetModPathProject ();
                 var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, filenameMain + extensionYAML);
-                
+
                 UtilitiesYAML.SaveToFile (filePath, modData);
             }
 
@@ -276,7 +277,7 @@ namespace PhantomBrigade.SDK.ModTools
                     Debug.LogWarning ($"Can't delete project: nothing selected | Selected ID: {modSelectedID}");
                     return;
                 }
-                
+
                 var projectPath = modData.GetModPathProject ();
                 if (!Directory.Exists (projectPath))
                 {
@@ -302,15 +303,15 @@ namespace PhantomBrigade.SDK.ModTools
                 mods.Remove (id);
                 modSelectedID = string.Empty;
             }
-            
-            [ShowInInspector] 
+
+            [ShowInInspector]
             [PropertyOrder (-1)]
             [FoldoutGroup ("Rename", false), HorizontalGroup ("Rename/H")]
             [InfoBoxBottom ("@" + nameof(idError), InfoMessageType.Error, VisibleIf = nameof(isIDErrorVisible), OverlayColor = "#FFCCCC")]
             [OnValueChanged (nameof(OnIDChange))]
             [HideLabel, SuffixLabel ("New ID", true)]
             public static string idNew;
-            
+
             private bool idValid;
             private string idError;
             private bool isIDErrorVisible => !idValid && !string.IsNullOrEmpty (idError);
@@ -325,7 +326,7 @@ namespace PhantomBrigade.SDK.ModTools
                 else
                     idValid = ModToolsHelper.ValidateModID (idNew, modSelected, mods, out idError);
             }
-            
+
             [PropertyOrder (-1)]
             [FoldoutGroup ("Rename"), HorizontalGroup ("Rename/H", 80f)]
             [EnableIf (nameof (idValid))]
@@ -334,7 +335,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 RenameConfigSelected (idNew);
             }
-            
+
             public static void RenameConfigSelected (string idNew)
             {
                 var modData = modSelected;
@@ -361,7 +362,7 @@ namespace PhantomBrigade.SDK.ModTools
 
                 var idOld = modData.key;
                 var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idOld);
-                
+
                 if (Directory.Exists (sourcePath))
                 {
                     var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idNew);
@@ -387,11 +388,11 @@ namespace PhantomBrigade.SDK.ModTools
                 mods.Add (idNew, modData);
                 modData.key = idNew;
                 modSelectedID = idNew;
-                
+
                 SaveProject (modData);
                 LoadProject (modData.id);
             }
-            
+
             [PropertyOrder (-1)]
             [FoldoutGroup ("Rename"), HorizontalGroup ("Rename/H", 80f)]
             [EnableIf (nameof(idValid))]
@@ -400,7 +401,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 DuplicateConfigSelected (idNew);
             }
-            
+
             public static void DuplicateConfigSelected (string idNew)
             {
                 var modData = modSelected;
@@ -422,19 +423,19 @@ namespace PhantomBrigade.SDK.ModTools
                 var idOld = modData.key;
                 var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idOld);
                 var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idNew);
-                
+
                 if (!Directory.Exists (sourcePath))
                 {
                     Debug.LogWarning ($"Can't duplicate project from ID \"{idOld}\" to \"{idNew}\": source directory not found on disk | Full path: {sourcePath}");
                     return;
                 }
-                
+
                 if (Directory.Exists (targetPath))
                 {
                     Debug.LogWarning ($"Can't duplicate project from ID \"{idOld}\" to \"{idNew}\": target directory with the same name discovered on disk | Full path: {targetPath}");
                     return;
                 }
-                
+
                 UtilitiesYAML.CopyDirectory (sourcePath, targetPath, true);
 
                 var modDataCopy = UtilitiesYAML.CloneThroughYaml (modData);
@@ -447,11 +448,11 @@ namespace PhantomBrigade.SDK.ModTools
 
                 mods.Add (idNew, modDataCopy);
                 modSelectedID = idNew;
-                
+
                 SaveProject (modDataCopy);
                 LoadProject (modDataCopy.id);
             }
-            
+
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonBlue))]
             [ShowIf (nameof(IsConfigSetupAllowed))]
             [HorizontalGroup ("Bt2", 0.3333f)]
@@ -463,7 +464,7 @@ namespace PhantomBrigade.SDK.ModTools
                 if (modData != null)
                     modData.EnableConfigs ();
             }
-            
+
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonGreen))]
             [ShowIf (nameof(IsConfigEntryAllowed))]
             [HorizontalGroup ("Bt2", 0.3333f)]
@@ -476,20 +477,43 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     return;
                 }
-                switch (ModToolsHelper.EnsureModChecksums (modData, showDialogs: true))
+                var (result, upgrade) = ModToolsHelper.EnsureModChecksums (modData);
+                switch (result)
                 {
                     case EnsureResult.Error:
-                        EditorUtility.DisplayDialog ("Config Editing Unavailable", "A technical error is preventing you from editing the config DBs. Please check the Unity log console for details.", "Dismiss");
+                        EditorUtility.DisplayDialog
+                        (
+                            "Config Editing Unavailable",
+                            "A technical error is preventing you from editing the config DBs. Please check the Unity log console for details.",
+                            "Dismiss"
+                        );
                         return;
                     case EnsureResult.Break:
-                        Debug.Log ("Cancelled update");
+                        Debug.Log ("Cancelled config editing");
                         return;
                 }
+                if (upgrade == null)
+                {
+                    ResetForEditing (modData);
+                    return;
+                }
+                EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
+                return;
+
+                IEnumerator UpgradeAndContinue ()
+                {
+                    yield return upgrade ();
+                    ResetForEditing (modData);
+                }
+            }
+
+            static void ResetForEditing (DataContainerModData modData)
+            {
                 DataContainerModData.selectedMod = modData;
                 ResetArea ();
                 ResetDBs ();
             }
-            
+
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightSelectedMod))]
             [ShowIf (nameof(IsConfigExitAllowed))]
             [HorizontalGroup ("Bt2", 0.3333f)]
@@ -502,15 +526,15 @@ namespace PhantomBrigade.SDK.ModTools
                 ResetDBs ();
             }
 
-            private static bool IsConfigSetupAllowed () => modSelected != null && 
-                                                           modSelected.hasProjectFolder && 
+            private static bool IsConfigSetupAllowed () => modSelected != null &&
+                                                           modSelected.hasProjectFolder &&
                                                            !Directory.Exists (modSelected.GetModPathConfigs ());
-            private static bool IsConfigExitAllowed () => DataContainerModData.selectedMod != null;
-            private static bool IsConfigEntryAllowed () => DataContainerModData.selectedMod == null && 
-                                                           modSelected != null && 
-                                                           modSelected.hasProjectFolder && 
-                                                           Directory.Exists (modSelected.GetModPathConfigs ());
-            
+            public static bool IsConfigExitAllowed () => DataContainerModData.selectedMod != null;
+            public static bool IsConfigEntryAllowed () => DataContainerModData.selectedMod == null &&
+                                                          modSelected != null &&
+                                                          modSelected.hasProjectFolder &&
+                                                          Directory.Exists (modSelected.GetModPathConfigs ());
+
             [HorizontalGroup ("Bt2", 0.3333f)]
             [Button (SdfIconType.Boxes, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to user")]
             [PropertyTooltip ("Export the mod into the user folder, allowing you to test it the next time you start the game.\n\nBefore the export, the original data will be compared to the data in the mod project folder: only the modified files will be exported. Make sure to check the appropriate metadata fields.")]
@@ -520,7 +544,7 @@ namespace PhantomBrigade.SDK.ModTools
                 if (modData != null)
                     modData.ExportToUserFolder ();
             }
-            
+
             [HorizontalGroup ("Bt2")]
             [Button (SdfIconType.BoxSeam, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to archive")]
             [PropertyTooltip ("Package the mod into a .zip file, allowing you to share it with other players.\n\nBefore the export, the original data will be compared to the data in the mod project folder: only the modified files will be exported. Make sure to check the appropriate metadata fields.")]
@@ -538,16 +562,16 @@ namespace PhantomBrigade.SDK.ModTools
                 OnIDChange ();
             }
         }
-        
-        
+
+
         [ShowIf (nameof(IsModSelectionVisible))]
         [ShowInInspector, HideLabel, PropertyOrder (23)]
         [BoxGroup ("BgSelected", false)]
-        public static readonly ModOptions modOptions = new ModOptions (); 
-        
+        public static readonly ModOptions modOptions = new ModOptions ();
+
         #endregion
-        
-        
+
+
 
         [PropertyOrder (-1)]
         [HorizontalGroup ("BgGlobal")]
@@ -564,17 +588,17 @@ namespace PhantomBrigade.SDK.ModTools
                 directoryModeFilename: filenameMain,
                 forceLowerCase: false
             );
-            
+
             loadedOnce = true;
             mods.Clear ();
-            
+
             foreach (var kvp in modsLoaded)
             {
                 var id = kvp.Key;
                 var mod = kvp.Value;
                 mods.Add (id, mod);
             }
-            
+
             Debug.Log ($"Loaded {mods.Count} mod projects");
             foreach (var kvp in mods)
             {
@@ -582,7 +606,7 @@ namespace PhantomBrigade.SDK.ModTools
                 var mod = kvp.Value;
                 mod.OnAfterDeserialization (id);
             }
-            
+
             // Debug.LogWarning ($"Discovered project files: {modsLoaded.ToStringFormattedKeyValuePairs (true, toStringOverride: (x) => $"ID: {x.id} / Key: {x.key}")}");
         }
 
@@ -673,7 +697,7 @@ namespace PhantomBrigade.SDK.ModTools
             }
             return directories;
         }
-        
+
         public static void SaveMod (DataContainerModData modData)
         {
             ModOptions.SaveProject (modData);
@@ -694,7 +718,7 @@ namespace PhantomBrigade.SDK.ModTools
         public static List<DataContainerModData> GetConfigEditMods () => mods.Values
             .Where (md => md.hasProjectFolder && Directory.Exists (md.GetModPathConfigs ()))
             .ToList ();
-        
+
         #endif
     }
 }

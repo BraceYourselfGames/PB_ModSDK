@@ -16,8 +16,8 @@ namespace PhantomBrigade.Functions
             if (playerBasePersistent == null)
                 return;
             
-            var nameInternalSafe = UnitUtilities.GetSafePersistentInternalName ("pilot");
-            var pilot = UnitUtilities.CreatePilotEntity
+            var nameInternalSafe = IDUtility.GetSafePersistentInternalName ("pilot");
+            var pilot = PilotUtility.CreatePilotEntity
             (
                 false,
                 Factions.player,
@@ -31,7 +31,7 @@ namespace PhantomBrigade.Functions
             
             playerBasePersistent.SetMemoryFloat ("world_tag_new_pilot", 1);
             
-            CIViewOverworldRoster.ins.RefreshOptionAvailability ();
+            // CIViewOverworldRoster.ins.RefreshOptionAvailability ();
             Contexts.sharedInstance.persistent.isPlayerCombatReadinessChecked = true;
             
             GameEventUtility.OnEventObject (GameEventObject.PilotAdded, pilot);

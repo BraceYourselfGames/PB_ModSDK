@@ -1,0 +1,42 @@
+hidden: false
+positive: true
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: true
+hue: 200
+icon: s_icon_l32_combat_type_elimination1
+tags:
+- type_special
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit:
+  - !CombatValidateUnitAllied
+    present: false
+  - !CombatValidateUnitChance
+    chance: 0.25
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatUnitIntegrityChangeRandom
+    range:
+      x: -0.2
+      y: 0.1
+    offset: true
+    randomPerPart: true
+    sockets: 
+  functionsPilot: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

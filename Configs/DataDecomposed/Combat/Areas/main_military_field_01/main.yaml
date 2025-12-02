@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.4
@@ -20,8 +28,9 @@ atmosphere:
     w: 1
 tags:
 - context_military
-- size_medium_or_large
 - type_main
+- size_medium
+- size_large
 spawnGroups:
   center:
     tags:
@@ -1872,6 +1881,11 @@ fields:
     x: 51.2
     y: 20
     z: 20
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 - type: water
   visible: true
@@ -1883,6 +1897,11 @@ fields:
     x: 135.4
     y: 20
     z: 20
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 waypointGroups:
   boss_path_01:

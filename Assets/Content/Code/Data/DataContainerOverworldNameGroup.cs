@@ -13,29 +13,25 @@ namespace PhantomBrigade.Data
         public bool suffixID;
         public string collectionTag;
 
+        #if !PB_MODSDK
         [YamlIgnore]
         [ShowInInspector, DisplayAsString, InlineButton ("RefreshExample", "Generate")]
         private string example = string.Empty;
 
         private void RefreshExample ()
         {
-            var collection = DataManagerText.GetTextCollectionByTag (collectionTag);
-            int collectionCount = collection != null ? collection.Count : 0;
-            if (collectionCount <= 0)
-            {
-                Debug.LogWarning ($"Failed to get random name index of a site using text collection tag {collectionTag}");
-                return;
-            }
-
-            var nameBase = collection.GetRandomEntry ();
+            var loc = DataManagerText.GetRandomLocStructFromTag (collectionTag);
+            var text = loc.text;
+            
             int serial = Mathf.RoundToInt (Random.Range (10, 256));
             if (prefixID)
-                example = $"{serial}-{nameBase}";
+                example = $"{serial}-{text}";
             else if (suffixID)
-                example = $"{nameBase}-{serial}";
+                example = $"{text}-{serial}";
             else
-                example = nameBase;
+                example = text;
         }
+        #endif
     }
 }
 

@@ -10,8 +10,55 @@ namespace PhantomBrigade.Functions
         protected override string GetLabel () => present ? "Part should be present" : "Part should be absent";
     }
     
+    public class CombatValidateUnitPartCharges : DataBlockOverworldEventSubcheckInt, ICombatUnitValidationFunction
+    {
+        [ValueDropdown ("@DataHelperUnitEquipment.GetSockets ()")]
+        public string socket;
+        
+        public bool IsValid (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+
+            if (unitPersistent == null || !unitPersistent.isUnitTag)
+                return false;
+
+            int charges = 0;
+            var part = EquipmentUtility.GetPartInUnit (unitPersistent, socket);
+            if (part != null)
+                charges = part.hasChargeCount ? part.chargeCount.i : 0;
+            
+            return IsPassed (true, charges);
+
+            #else
+            return false;
+            #endif
+        }
+    }
+    
+    public class CombatValidateUnitPartIntegrity : DataBlockOverworldEventSubcheckFloat, ICombatUnitValidationFunction
+    {
+        [ValueDropdown ("@DataHelperUnitEquipment.GetSockets ()")]
+        public string socket;
+        
+        public bool IsValid (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+
+            if (unitPersistent == null || !unitPersistent.isUnitTag)
+                return false;
+
+            var part = EquipmentUtility.GetPartInUnit (unitPersistent, socket);
+            float integrity = part != null && part.hasIntegrityNormalized ? part.integrityNormalized.f : 0f;
+            return IsPassed (true, integrity);
+
+            #else
+            return false;
+            #endif
+        }
+    }
+    
     [Serializable]
-    public class CombatValidateUnitPart : DataBlockSubcheckBoolPart, ICombatUnitValidationFunction
+    public class CombatValidateUnitPart : DataBlockSubcheckBoolPart, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
     {
         [DropdownReference (true)]
         [ValueDropdown ("@DataHelperUnitEquipment.GetSockets ()")]
@@ -88,7 +135,7 @@ namespace PhantomBrigade.Functions
                 }
             }
             
-            return false;
+            return true;
             
             #else
             return false;
@@ -106,5 +153,43 @@ namespace PhantomBrigade.Functions
         
         #endif
         #endregion
+    }
+    
+    public class CombatValidateUnitFrameDefects : DataBlockOverworldEventSubcheckInt, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
+    {
+        protected override string GetLabel () => "Frame damage";
+
+        public bool IsValid (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+
+            if (unitPersistent == null)
+                return false;
+
+            int defects = unitPersistent.hasUnitFrameDefects ? unitPersistent.unitFrameDefects.i : 0;
+            return IsPassed (true, defects);
+            
+            #else
+            return false;
+            #endif
+        }
+    }
+    
+    public class CombatValidateUnitFrameIntegrity : DataBlockOverworldEventSubcheckFloat, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
+    {
+        public bool IsValid (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+
+            if (unitPersistent == null)
+                return false;
+
+            float hp = unitPersistent.hasUnitFrameIntegrity ? unitPersistent.unitFrameIntegrity.f : 1f;
+            return IsPassed (true, hp);
+            
+            #else
+            return false;
+            #endif
+        }
     }
 }

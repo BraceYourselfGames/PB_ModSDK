@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -57,6 +62,7 @@ tags:
 - context_generic
 - listed
 - type_assisted
+- flag_escalation_squads
 states:
   comms_hg_lost_x1:
     comment: 
@@ -133,14 +139,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   comms_hg_lost_x2:
     comment: 
     textNameKey: generic_unknown_header
@@ -216,14 +219,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -387,10 +387,19 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_short: true
+        range_long: true
         type_main: true
-        weight_light: true
-      check: 
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -417,6 +426,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: false
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -446,3 +456,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

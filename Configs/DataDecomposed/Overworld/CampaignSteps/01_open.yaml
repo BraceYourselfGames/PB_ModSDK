@@ -1,0 +1,128 @@
+comment:
+  comment: Open phase with the liberation quest. Continues into first breakthrough or a side province.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: 
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_01_open
+  tags: 
+entry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_countdown_base_length
+      value: 24
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !ApplyProvinceArrivalEffects {}
+  - !QuestStart
+    questKey: province_liberation
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_breakthrough
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Offset
+      key: campaign_progress_region_01
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: false
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
+  functionsBase: 
+progressDisplay: 
+effects:
+  create_showdown:
+    functionsGlobal:
+    - !QuestProvinceCreatePoint
+      key: generic_boss_tutorial
+      spawnGroupOverride: 
+      nameOverride: 
+      functionsOnSpawn:
+      - !OverworldEntityMemorySet
+        value: 1
+        memoryKey: quest_liberation_progress_s3
+      - !OverworldEntityEscalation
+        offset: false
+        level: 3
+      questMain: true
+      questKey: 
+    functionsBase: 
+branches:
+- comment:
+    comment: This branch allows you to go to breakthrough or (if condition is satisfied) to a sidequest province.
+  preferences:
+    modifiersUnique: false
+  checksGlobal:
+  - !OverworldValidateResolvedInt
+    resolver: !OverworldIntValueMemory
+      key: campaign_progress_breakthrough
+    check: GreaterEqual
+    value: 1
+  checksBase: 
+  links:
+  - comment:
+      comment: Link to breakthrough province.
+    checksGlobal: 
+    checksBase: 
+    stepKey: 10_breakthrough_line
+    direction: 180
+    levelOffset: 
+    branchKey: 
+    filter:
+      tagsUsed: false
+      keys:
+      - province_breakthrough_line
+      tags: 
+    modifiers: 
+  - comment:
+      comment: Sidequest link. No level increase, same region. Available only if there's a non-liberated province and number of liberated provinces in this region is 1. Linked province has weaker units and a reward modifier.
+    checksGlobal: 
+    checksBase:
+    - !OverworldValidateMemory
+      check:
+        method: RequireAll
+        checks:
+        - key: campaign_progress_region_01
+          presenceDesired: false
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: Less
+          value: 1
+    stepKey: 02_side
+    direction: 240
+    levelOffset:
+      i: 0
+    branchKey: branch_reserves
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_01: true
+    modifiers:
+    - tagsUsed: false
+      keys:
+      - gen_reward_parts
+      tags: 
+    - tagsUsed: false
+      keys:
+      - sp_liberation_easy
+      tags: 
+tags: 

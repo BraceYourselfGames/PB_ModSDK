@@ -7,15 +7,29 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class ModifyMemoryBase : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunctionLog, IOverworldFunction, ICombatFunction
+    public class ModifyMemoryBaseAdv : DataBlockMemoryChangeAdv, IOverworldActionFunction, IOverworldFunction, ICombatFunction
     {
-        [ListDrawerSettings (CustomAddFunction = "@new DataBlockMemoryChangeFloat ()")]
-        public List<DataBlockMemoryChangeFloat> changes = new List<DataBlockMemoryChangeFloat> () { new DataBlockMemoryChangeFloat () };
-
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
+        public void Run (OverworldActionEntity source)
         {
             Run ();
         }
+        
+        public void Run ()
+        {
+            #if !PB_MODSDK
+            
+            var basePersistent = IDUtility.playerBasePersistent;
+            basePersistent.ApplyEventMemoryChangeAdv (this);
+            
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class ModifyMemoryBase : IOverworldActionFunction, IOverworldFunctionLog, IOverworldFunction, ICombatFunction
+    {
+        [ListDrawerSettings (CustomAddFunction = "@new DataBlockMemoryChangeFloat ()")]
+        public List<DataBlockMemoryChangeFloat> changes = new List<DataBlockMemoryChangeFloat> () { new DataBlockMemoryChangeFloat () };
         
         public void Run (OverworldActionEntity source)
         {
@@ -38,6 +52,50 @@ namespace PhantomBrigade.Functions
                 return "null";
 
             return changes.ToStringFormatted ();
+        }
+    }
+    
+    [Serializable]
+    public class ModifyMemory : IOverworldTargetedFunction
+    {
+        [ListDrawerSettings (CustomAddFunction = "@new DataBlockMemoryChangeFloat ()")]
+        public List<DataBlockMemoryChangeFloat> changes = new List<DataBlockMemoryChangeFloat> () { new DataBlockMemoryChangeFloat () };
+
+        public void Run (OverworldEntity target)
+        {
+            #if !PB_MODSDK
+            
+            var targetPersistent = IDUtility.GetLinkedPersistentEntity (target);
+            if (targetPersistent != null)
+                targetPersistent.ApplyEventMemoryChangeFloat (changes);
+            
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class ModifyMemoryProvinceCurrent : IOverworldFunction, ICombatFunction
+    {
+        [ListDrawerSettings (CustomAddFunction = "@new DataBlockMemoryChangeFloat ()")]
+        public List<DataBlockMemoryChangeFloat> changes = new List<DataBlockMemoryChangeFloat> () { new DataBlockMemoryChangeFloat () };
+
+        public void Run ()
+        {
+            #if !PB_MODSDK
+
+            bool provinceActiveFound = DataHelperProvince.TryGetProvinceDependenciesActive 
+            (
+                out var provinceActiveBlueprint, 
+                out var provinceActivePersistent, 
+                out var provinceActiveOverworld
+            );
+
+            if (!provinceActiveFound)
+                return;
+            
+            provinceActivePersistent.ApplyEventMemoryChangeFloat (changes);
+
+            #endif
         }
     }
 }

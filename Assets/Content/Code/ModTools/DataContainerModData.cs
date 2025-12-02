@@ -62,26 +62,32 @@ namespace PhantomBrigade.SDK.ModTools
     }
     #endif
 
-    [LabelWidth (100f)]
+    [LabelWidth (100f), BoxGroup ("Root", false)]
     public class ModConfigStatus
     {
         #if UNITY_EDITOR
 
-        [ShowInInspector]
-        [GUIColor (nameof(colorSelected))]
-        [ShowIf (nameof(hasSelectedMod)), HorizontalGroup (groupHr)]
-        [DisplayAsString, HideLabel]
-        public static string modSelectedID
-        {
-            get => DataContainerModData.selectedMod?.id;
-            set
-            {
+        public static IEnumerable<string> GetModKeys () => DataManagerMod.GetModKeys ();
+        public static bool IsModSelectionPossible () => DataManagerMod.IsModSelectionPossible () && DataContainerModData.selectedMod == null;
+        public static Color GetColor () => hasSelectedMod ? colorSelected : colorWarning; // DataManagerMod.GetSelectedKeyColor ();
 
+        private static string GetStatusText ()
+        {
+            if (DataManagerMod.modSelected == null)
+                return "You are viewing the original game data. It is a backup that can not be modified. Select a mod and enter config editing to unlock this inspector.";
+
+            if (DataContainerModData.selectedMod == null)
+            {
+                if (!DataManagerMod.ModOptions.IsConfigEntryAllowed ())
+                    return "You are viewing the original game data. It is a backup that can not be modified. Enter config editing with the currently selected mod to unlock this inspector.";
+
+                return "You are viewing the original game data. It is a backup that can not be modified. Setup config editing with the currently selected mod to unlock this inspector.";
             }
+
+            return "You are viewing a copy of game data from the mod folder. You can freely modify it. It will be compared to original game data on mod export.";
         }
 
-        [InfoBox ("You are viewing a copy of game data from the mod folder. You can freely modify it. It will be compared to original game data on mod export.", InfoMessageType.None)]
-        [ShowInInspector, PropertyOrder (-2)]
+        [ShowInInspector, InfoBox ("$" + nameof (GetStatusText), InfoMessageType.None, VisibleIf = nameof (hasSelectedMod))]
         [ShowIf (nameof (hasSelectedMod))]
         [PropertyTooltip ("$" + nameof (configsPath))]
         [HideLabel, ElidedPath]
@@ -95,20 +101,71 @@ namespace PhantomBrigade.SDK.ModTools
             }
         }
 
-        [ShowIf (nameof(hasSelectedMod)), HorizontalGroup (groupHr, 100)]
-        [Button ("Open mod", ButtonHeight = 24)]
-        [GUIColor (nameof(colorSelected))]
-        [PropertySpace (0f, 12f)]
-        private static void OpenModManagerInline () => DataManagerMod.SelectObject ();
+        [ShowInInspector, InfoBox ("$" + nameof (GetStatusText), InfoMessageType.None, VisibleIf = nameof (hasNoSelectedMod))]
+        [ValueDropdown (nameof (GetModKeys))]
+        [HideLabel]
+        [EnableIf (nameof(IsModSelectionPossible))]
+        [GUIColor (nameof(GetColor))]
+        public static string modSelectedID
+        {
+            get
+            {
+                return DataManagerMod.modSelectedID;
+            }
+            set
+            {
+                DataManagerMod.modSelectedID = value;
+            }
+        }
 
-        [HideIf (nameof(hasSelectedMod))]
-        [InfoBox ("You are viewing the original game data. It is a backup that can not be modified. Select a mod and enter config editing to unlock this inspector.", InfoMessageType.None)]
+        [HorizontalGroup (groupHr)]
         [Button (SdfIconType.FileLock2Fill, "Open mod manager", ButtonHeight = 32)]
         [PropertySpace (0f, 12f)]
-        [GUIColor (nameof(colorWarning))]
-        private static void OpenModManagerStandalone () => DataManagerMod.SelectObject ();
+        [GUIColor (nameof(GetColor))]
+        private static void OpenModManager () => DataManagerMod.SelectObject ();
+
+
+        [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonGreen))]
+        [ShowIf (nameof(IsConfigEntryAllowed))]
+        [HorizontalGroup (groupHr, 0.3333f)]
+        [Button (SdfIconType.FileEarmarkTextFill, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Enter config editing")]
+        [PropertyTooltip ("Switches all databases to config files copied into your mod project folder, enabling config editing")]
+        public static void SelectForEditing ()
+        {
+            DataManagerMod.ModOptions.SelectForEditing ();
+            EditorCoroutineUtility.StartCoroutineOwnerless (OnConfigEditingToggle ());
+        }
+
+        [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightSelectedMod))]
+        [ShowIf (nameof(IsConfigExitAllowed))]
+        [HorizontalGroup (groupHr, 0.3333f)]
+        [Button (SdfIconType.FileX, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Exit config editing")]
+        [PropertyTooltip ("Disables database editing, switching the editor back to reading backed up canonical Configs from the SDK folder.")]
+        public static void DeselectForEditing ()
+        {
+            DataManagerMod.ModOptions.DeselectForEditing ();
+            EditorCoroutineUtility.StartCoroutineOwnerless (OnConfigEditingToggle ());
+        }
+
+        // Switching config editing mode on or off might not update auto-assigned readonly attributes in the currently visible inspector
+        // This coroutine is a quick hack to solve this, switching away from a current selection then returning to it to guarantee a redraw
+        private static IEnumerator OnConfigEditingToggle ()
+        {
+            var selectionStart = Selection.activeGameObject;
+            if (selectionStart == null)
+                yield break;
+
+            Selection.activeGameObject = null;
+            yield return new EditorWaitForSeconds (0.1f);
+            Selection.activeGameObject = selectionStart;
+
+        }
+
+        private static bool IsConfigExitAllowed () => DataManagerMod.ModOptions.IsConfigExitAllowed ();
+        private static bool IsConfigEntryAllowed () => DataManagerMod.ModOptions.IsConfigEntryAllowed ();
 
         private static bool hasSelectedMod => DataContainerModData.hasSelectedConfigs;
+        private static bool hasNoSelectedMod => !DataContainerModData.hasSelectedConfigs;
 
         private const string groupHr = "Selected mod";
         private const string groupHrLine = "Selected mod/Line";
@@ -151,11 +208,15 @@ namespace PhantomBrigade.SDK.ModTools
         // The field is here to make it easy to display where mod folders are located.
         [ShowInInspector]
         [VerticalGroup (OdinGroup.Name.Project)]
-        [ShowIf (nameof(showDefaultPath))]
-        [ConditionalSpace (0f, 4f, nameof(spaceAfterWorkingPath))]
-        [PropertyTooltip ("$" + nameof(displayWorkingPath))]
-        [HideLabel, ReadOnly, ElidedPath]
-        public string displayWorkingPath => GetModPathProject ();
+        [ShowIf (nameof (showDefaultPath))]
+        [ConditionalSpace (0f, 4f, nameof (spaceAfterWorkingPath))]
+        [PropertyTooltip ("$" + nameof (displayWorkingPath))]
+        [HideLabel, ElidedPath]
+        public string displayWorkingPath
+        {
+            get => GetModPathProject ();
+            set { }
+        }
 
         // Let the modder override where the project files are stored for this particular mod.
         [VerticalGroup (OdinGroup.Name.Project)]
@@ -196,7 +257,30 @@ namespace PhantomBrigade.SDK.ModTools
 
         public void ExportToUserFolder ()
         {
-            ModToolsHelper.GenerateModFiles (this, ExportToUserFolderFinalize);
+            var (result, upgrade) = ModToolsHelper.EnsureModChecksums (this);
+            switch (result)
+            {
+                case EnsureResult.Error:
+                    EditorUtility.DisplayDialog ("Config Editing Unavailable", "A technical error is preventing you from exporting this mod. Please check the Unity log console for details.", "Dismiss");
+                    return;
+                case EnsureResult.Break:
+                    Debug.Log ("Cancelled export to user folder: " + id);
+                    return;
+            }
+
+            if (upgrade == null)
+            {
+                ModToolsHelper.GenerateModFiles (this, ExportToUserFolderFinalize);
+                return;
+            }
+            EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
+            return;
+
+            IEnumerator UpgradeAndContinue ()
+            {
+                yield return upgrade ();
+                ModToolsHelper.GenerateModFiles (this, ExportToUserFolderFinalize);
+            }
         }
 
         public void ExportToUserFolderFinalize ()
@@ -247,7 +331,30 @@ namespace PhantomBrigade.SDK.ModTools
 
         public void ExportToArchive ()
         {
-            ModToolsHelper.GenerateModFiles (this, ExportToArchiveFinalize);
+            var (result, upgrade) = ModToolsHelper.EnsureModChecksums (this);
+            switch (result)
+            {
+                case EnsureResult.Error:
+                    EditorUtility.DisplayDialog ("Config Editing Unavailable", "A technical error is preventing you from exporting this mod. Please check the Unity log console for details.", "Dismiss");
+                    return;
+                case EnsureResult.Break:
+                    Debug.Log ("Cancelled export to archive: " + id);
+                    return;
+            }
+
+            if (upgrade == null)
+            {
+                ModToolsHelper.GenerateModFiles (this, ExportToArchiveFinalize);
+                return;
+            }
+            EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
+            return;
+
+            IEnumerator UpgradeAndContinue ()
+            {
+                yield return upgrade ();
+                ModToolsHelper.GenerateModFiles (this, ExportToArchiveFinalize);
+            }
         }
 
         public void ExportToArchiveFinalize ()
@@ -500,21 +607,30 @@ namespace PhantomBrigade.SDK.ModTools
             return string.IsNullOrEmpty (projectPath) ? null : DataPathHelper.GetCombinedCleanPath (projectPath, "Configs");
         }
 
-        public bool LoadChecksums (SDKChecksumData sdkChecksumData)
+        public bool LoadChecksums (SDKChecksumData sdkChecksumData, bool errorOnUpgrade = true)
         {
             if (sdkChecksumData == null)
             {
-                Debug.LogWarning ("Missing checksum data for SDK");
+                Debug.LogWarning ("Missing checksum data for SDK. Build the data manually by clicking the Create checksums for SDK config DBs button in the DataModel game object.");
                 return false;
             }
 
             var checksumsDeserializer = new ConfigChecksums.Deserializer (new DirectoryInfo (GetModPathProject ()));
             var result = checksumsDeserializer.Load ();
-            if (!result.OK)
+            switch (result.Code)
             {
-                Debug.LogError (result.ErrorMessage);
-                return false;
+                case ConfigChecksums.Deserializer.ResultCode.Upgrade:
+                    if (errorOnUpgrade)
+                    {
+                        Debug.LogWarning ("Mod checksums: " + result.ErrorMessage);
+                        return false;
+                    }
+                    break;
+                case ConfigChecksums.Deserializer.ResultCode.Error:
+                    Debug.LogError (result.ErrorMessage);
+                    return false;
             }
+            dataVersion = result.DataVersion;
             originChecksum = result.OriginChecksum;
             checksumsRoot = result.Root;
             multiLinkerChecksumMap = result.MultiLinkerMap.Keys
@@ -583,6 +699,9 @@ namespace PhantomBrigade.SDK.ModTools
             }
         }
 
+        [HideInInspector]
+        [YamlIgnore]
+        public byte dataVersion;
         [HideInInspector]
         [YamlIgnore]
         public ConfigChecksums.Checksum originChecksum;

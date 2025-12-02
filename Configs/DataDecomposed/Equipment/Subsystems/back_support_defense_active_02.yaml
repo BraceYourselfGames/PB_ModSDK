@@ -31,6 +31,11 @@ stats:
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
+  barrier:
+    value: 150
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
   hp:
     value: 1.5
     targetMode: 0
@@ -88,3 +93,5 @@ functions:
       - !CombatUnitStatusAdd
         key: timed_defense_active_directional
         durationOverride: 4
+        source: Function
+workshopInfo: 

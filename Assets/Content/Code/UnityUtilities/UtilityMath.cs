@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 public enum ValueOperation
 {
@@ -10,8 +11,74 @@ public enum ValueOperation
     Multiply
 }
 
+public class RollingAverageFloat
+{
+    public int sampleCount = 10;
+    
+    [HideInInspector]
+    public int indexLast = 0;
+    
+    [HideInInspector]
+    private float[] values = null;
+
+    [ShowInInspector]
+    public float average => GetAverage ().Truncate (1);
+
+    private void CheckInit ()
+    {
+        if (sampleCount < 2)
+            sampleCount = 2;
+
+        if (values == null || sampleCount != values.Length)
+            values = new float[sampleCount];
+    }
+
+    public void AddSample (float sample)
+    {
+        CheckInit ();
+
+        if (indexLast < 0 || indexLast >= sampleCount)
+            indexLast = 0;
+
+        values[indexLast] = sample;
+        indexLast += 1;
+    }
+
+    public float GetAverage ()
+    {
+        CheckInit ();
+
+        float sum = 0f;
+        for (int i = 0; i < sampleCount; ++i)
+            sum += values[i];
+
+        sum /= sampleCount;
+        return sum;
+    }
+}
+
 public static class UtilityMath 
 {
+    public static int GetIntFromDigitViaString (int packedInteger, int digitIndex)
+    {
+        if (packedInteger <= 0)
+            return 0;
+        
+        var str = packedInteger.ToString ();
+        if (digitIndex >= str.Length)
+            return 0;
+
+        double charValue = Char.GetNumericValue (str[digitIndex]);
+        return (int)charValue;
+    }
+    
+    public static float WrapAngle (float angle)
+    {
+        while (angle > 180f) angle -= 360f;
+        while (angle < -180f) angle += 360f;
+        return angle;
+    }
+    
     public static float ApplyOperation (this float valueModified, ValueOperation op, float valueInput)
     {
         if (op == ValueOperation.Set)

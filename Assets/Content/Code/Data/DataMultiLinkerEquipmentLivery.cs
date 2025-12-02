@@ -31,6 +31,8 @@ namespace PhantomBrigade.Data
                 
                 dataSorted.Add (livery);
             }
+            
+            dataSorted.Sort ((x, y) => x.priority.CompareTo (y.priority));
         }
     }
 }

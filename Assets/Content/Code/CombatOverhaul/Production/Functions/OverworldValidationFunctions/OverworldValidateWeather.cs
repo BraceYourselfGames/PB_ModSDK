@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class OverworldValidateWeather : IOverworldValidationFunction
+    public class OverworldValidateWeather : IOverworldEntityValidationFunction
     {
         [HideReferenceObjectPicker, HideLabel]
         public DataBlockOverworldEventSubcheckFloatRange check = new DataBlockOverworldEventSubcheckFloatRange ();

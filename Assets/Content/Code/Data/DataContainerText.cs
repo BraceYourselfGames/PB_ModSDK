@@ -17,19 +17,26 @@ namespace PhantomBrigade.Data
         public const string equipmentSockets = "equipment_sockets";
         public const string equipmentHardpoints = "equipment_hardpoints";
         
-        public const string overworldEntities = "overworld_entities";
+        public const string overworldCampaign = "overworld_campaign";
+        public const string overworldPoints = "overworld_points";
         public const string overworldProvinces = "overworld_provinces";
+        public const string overworldModifiers = "overworld_modifiers";
         public const string overworldEvents = "overworld_events";
         public const string overworldEntityActions = "overworld_entity_actions";
         public const string overworldMemories = "overworld_memories";
         public const string overworldResources = "overworld_resources";
         public const string overworldBranches = "overworld_branches";
         public const string overworldOther = "overworld_other";
-
-        public const string baseActions = "base_actions";
+        public const string overworldInteraction = "overworld_interaction";
+        public const string overworldQuests = "overworld_quests";
+        public const string overworldRewards = "overworld_rewards";
+        
+        public const string baseEffects = "base_effects";
         public const string baseUpgrades = "base_upgrades";
         public const string baseStats = "base_stats";
         public const string baseStatsGroups = "base_stats_groups";
+        
+        public const string codex = "codex";
         
         public const string scenarioModifiers = "scenario_modifiers";
         public const string scenarioComms = "scenario_comms";
@@ -68,6 +75,12 @@ namespace PhantomBrigade.Data
         
         public const string pilotPersonalities = "pilot_personalities";
         public const string pilotChecks = "pilot_check";
+        public const string pilotTraits = "pilot_traits";
+        public const string pilotTypes = "pilot_types";
+        public const string pilotEvents = "pilot_events";
+        public const string pilotStats = "pilot_stats";
+        public const string pilotAppearance = "pilot_appearance";
+        public const string pilotProfiles = "pilot_profiles";
         
         public const string unitRoles = "unit_roles";
         public const string unitGroups = "unit_groups";
@@ -77,6 +90,7 @@ namespace PhantomBrigade.Data
         public const string unitPerformanceClasses = "unit_perf_classes";
         public const string unitComposites = "unit_composites";
         public const string unitStatus = "unit_status";
+        public const string unitPresets = "unit_presets";
     }
 
     public static class TextShortcuts
@@ -84,17 +98,6 @@ namespace PhantomBrigade.Data
         public static string GetUIHint (string textKey) => DataManagerText.GetText (TextLibs.uiHints, textKey);
         
         public static string GetUICombat (string textKey) => DataManagerText.GetText (TextLibs.uiCombat, textKey);
-    }
-
-    public static class TextKeysUIUnitInfo
-    {
-        public const string pilotMissingCallsign = "pilotMissingCallsign";
-        public const string pilotMissingName = "pilotMissingName";
-    }
-    
-    public static class TextErrors
-    {
-
     }
 
     public static class TextLibraryHelper
@@ -190,9 +193,9 @@ namespace PhantomBrigade.Data
                 {
                     var entry = entries[kvp.Key];
                     entry.temp = kvp.Value.temp;
-                    entry.color = kvp.Value.color;
+                    // entry.color = kvp.Value.color;
                     entry.noteDev = kvp.Value.noteDev;
-                    entry.noteWriter = kvp.Value.noteWriter;
+                    // entry.noteWriter = kvp.Value.noteWriter;
                 }
             }
         }
@@ -365,6 +368,81 @@ namespace PhantomBrigade.Data
 
             return argumentCount;
         }
+
+        #if !PB_MODSDK
+        private static List<string> actionText = new List<string> ();
+
+        public static string InsertInputActionList (string text, DataBlockTextInputActions data)
+        {
+            if (data == null)
+                return text;
+
+            return InsertInputActionList (text, data.actions, data.spriteWrap);
+        }
+
+        public static string InsertInputActionList (string text, List<string> actions, bool spriteWrap)
+        {
+            if (actions == null)
+                return text;
+            
+            int argumentCount = GetStringFormatArgumentCount (text);
+            if (argumentCount == 0)
+            {
+                Debug.LogWarning ($"Text can not be formatted with input actions due lack of argument points:\n{text}");
+                return text;
+            }
+            
+            int actionCount = actions.Count;
+            if (actionCount != argumentCount)
+            {
+                Debug.LogWarning ($"Text can not be formatted due to mismatch of input action count ({actionCount}) and argument points ({argumentCount}):\n{text}");
+                return text;
+            }
+
+            var mode = InputHelper.gamepad ? InputHintMode.Controller : InputHintMode.KeyboardMouse;
+            actionText.Clear ();
+            
+            foreach (var inputActionKey in actions)
+            {
+                var insert = SettingUtility.GetValueTextForInputAction (inputActionKey, spriteWrap, mode);
+                actionText.Add (insert);
+            }
+
+            var array = actionText.ToArray ();
+            return string.Format (text, array);
+        }
+
+        public static string InsertInputActions (string text, bool spriteWrap)
+        {
+            if (string.IsNullOrEmpty (text) || !text.Contains (markupTagInputAction))
+                return text;
+
+            int loops = 0;
+            while (text.IndexOf (markupTagInputAction, StringComparison.Ordinal) != -1)
+            {
+                int start = text.IndexOf (markupTagInputAction, StringComparison.Ordinal) + 1;
+                int end = text.IndexOf (markupTagEnd, start, StringComparison.Ordinal);
+                
+                // Bail out if tag isn't closed
+                if (end == -1)
+                    break;
+                
+                string inputActionKey = text.Substring (start + 3, end - start - 3);
+                string insert = SettingUtility.GetValueTextForInputAction (inputActionKey, spriteWrap);
+                string formatted = $"{text.Substring (0, start - 1)}{insert}{text.Substring (end + 1)}";
+                text = formatted;
+
+                loops += 1;
+                if (loops > 200)
+                {
+                    Debug.LogWarning ("Text markup processing seems to be broken, investigate this stack");
+                    break;
+                }
+            }
+
+            return text;
+        }
+        #endif
     }
 
     [Serializable]
@@ -408,34 +486,19 @@ namespace PhantomBrigade.Data
     [Serializable][HideReferenceObjectPicker]
     public class DataBlockTextEntryMain
     {
-        [PropertyOrder (-4)]
-        [LabelText ("Cell color"), LabelWidth (100f), HideIf ("@color == null"), InlineButtonClear]
-        public DataBlockTextColor color;
-        
         [PropertyOrder (-3)]
         [LabelText ("Dev. note"), LabelWidth (100f), HideIf ("@noteDev == null"), InlineButtonClear]
         public DataBlockTextNote noteDev;
 
-        [PropertyOrder (-2)]
-        [LabelText ("Writer note"), LabelWidth (100f), HideIf ("@noteWriter == null"), InlineButtonClear]
-        public DataBlockTextNote noteWriter;
-
         [YamlIgnore]
-        public string noteCombined
+        public string noteText
         {
             get
             {
-                bool noteDevFound = noteDev != null && !string.IsNullOrEmpty (noteDev.text);
-                bool noteWriterFound = noteWriter != null && !string.IsNullOrEmpty (noteWriter.text);
-                
-                if (noteDevFound && noteWriterFound)
-                    return $"{noteDev.text}\n\n{noteWriter.text}";
-                else if (noteDevFound)
+                if (noteDev != null && !string.IsNullOrEmpty (noteDev.text))
                     return noteDev.text;
-                else if (noteWriterFound)
-                    return noteWriter.text;
-                else
-                    return string.Empty;
+                
+                return string.Empty;
             }
         }
         
@@ -497,6 +560,7 @@ namespace PhantomBrigade.Data
         private void MarkAsFinal () =>
             temp = false;
 
+        /*
         [PropertyOrder (-5)]
         [ShowIf ("@color == null")]
         [ButtonGroup (bgOptions), Button ("+ Color", ButtonSizes.Medium), GUIColor ("colorNull")]
@@ -508,11 +572,11 @@ namespace PhantomBrigade.Data
         [ButtonGroup (bgOptions), Button ("+ Writer", ButtonSizes.Medium), GUIColor ("colorNull")]
         private void OnCommentButton () =>
             noteWriter = new DataBlockTextNote { text = "Writer note about the text entered" };
-            
+        */
                     
         [PropertyOrder (-5)]
         [ShowIf ("@noteDev == null")]
-        [ButtonGroup (bgOptions), Button ("+ Developer", ButtonSizes.Medium), GUIColor ("colorNull")]
+        [ButtonGroup (bgOptions), Button ("+ Note", ButtonSizes.Medium), GUIColor ("colorNull")]
         private void OnNoteButton () =>
             noteDev = new DataBlockTextNote { text = "Developer note about the context of the entry" };
 
@@ -524,6 +588,9 @@ namespace PhantomBrigade.Data
     [Serializable][HideReferenceObjectPicker]
     public class DataBlockTextEntryLocalization
     {
+        [HideLabel, ReadOnly]
+        public int id = 0;
+        
         [TextArea (1, 10)][HideLabel][HideIf ("@DataManagerText.showProcessedText")]
         public string text = "";
 
@@ -593,11 +660,26 @@ namespace PhantomBrigade.Data
     {
         [HideInInspector]
         public long timeLastSync;
+
+        #if !PB_MODSDK
+        [YamlIgnore]
+        [DisplayAsString, ShowInInspector, PropertyOrder (-1), LabelText ("Time At Sync")]
+        public string timeSinceSync
+        {
+            get
+            {
+                // Convert from seconds to ticks, then from ticks to date/time
+                var t = new DateTime (timeLastSync * TimeUtility.tickToSecondFactor);
+                
+                // Create a span from current date/time and sync date/time
+                var delta = DateTime.UtcNow - t;
+                return $"{t.Year:0000}-{t.Month:00}-{t.Day:00}, {t.Hour}:{t.Minute} — {delta.Days}d, {delta.Hours}h, {delta.Minutes}m ago";
+            }
+        }
+        #endif
         
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.Foldout)]
         public SortedDictionary<string, DataBlockTextEntryLocalization> entries = new SortedDictionary<string, DataBlockTextEntryLocalization> ();
-        
-        public DataBlockTextCollectionLocalized collection;
 
         [YamlIgnore, HideInInspector]
         public DataContainerTextLocalization parent;
@@ -656,10 +738,27 @@ namespace PhantomBrigade.Data
     }
 
     [Serializable, HideReferenceObjectPicker]
-    public class DataContainerTextSectorMain : DataContainer
+    public class DataContainerTextSectorMain : DataContainer, IDataContainerTagged
     {
         [HideInInspector]
         public long timeLastSync;
+
+        #if !PB_MODSDK
+        [YamlIgnore]
+        [DisplayAsString, ShowInInspector, PropertyOrder (-1), LabelText ("Time At Sync")]
+        public string timeSinceSync
+        {
+            get
+            {
+                // Convert from seconds to ticks, then from ticks to date/time
+                var t = new DateTime (timeLastSync * TimeUtility.tickToSecondFactor);
+                
+                // Create a span from current date/time and sync date/time
+                var delta = DateTime.UtcNow - t;
+                return $"{t.Year:0000}-{t.Month:00}-{t.Day:00}, {t.Hour}:{t.Minute} — {delta.Days}d, {delta.Hours}h, {delta.Minutes}m ago";
+            }
+        }
+        #endif
         
         public bool localized = false;
 
@@ -673,6 +772,9 @@ namespace PhantomBrigade.Data
         
         [LabelText ("Split Metadata"), ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false, AlwaysAddDefaultValue = true)]
         public List<DataBlockTextSectorSplitInfo> splits = new List<DataBlockTextSectorSplitInfo> (); 
+        
+        public HashSet<string> tags;
+        public Dictionary<string, HashSet<string>> groups;
         
         [PropertyOrder (2)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.Foldout)]
@@ -702,8 +804,6 @@ namespace PhantomBrigade.Data
         }
 
         private SortedDictionary<string, DataBlockTextEntryMain> entriesTempInternal = new SortedDictionary<string, DataBlockTextEntryMain> ();
-        
-        public DataBlockTextCollectionLibrary collection;
 
         [YamlIgnore, HideInInspector]
         public DataContainerTextLibrary parent;
@@ -738,12 +838,12 @@ namespace PhantomBrigade.Data
         }
         
         [Button ("Mark all placeholder"), ButtonGroup]
-        private void MarkAllTemporary () => Mark (true);
+        private void MarkAllTemporary () => MarkAll (true);
         
         [Button ("Mark all final"), ButtonGroup]
-        private void MarkAllFinal () => Mark (false);
+        private void MarkAllFinal () => MarkAll (false);
 
-        private void Mark (bool temp)
+        public void MarkAll (bool temp)
         {
             if (entries == null)
                 return;
@@ -757,6 +857,15 @@ namespace PhantomBrigade.Data
                 entry.temp = temp;
             }
         }
+        
+        public bool IsHidden () => false;
+        
+        public HashSet<string> GetTags (bool processed)
+        {
+            return tags;
+        }
+        
+        
 
         #if UNITY_EDITOR
         
@@ -808,37 +917,6 @@ namespace PhantomBrigade.Data
     }
     
     [Serializable]
-    public class DataBlockTextCollectionLibrary : DataContainer
-    {
-        public bool temp = true;
-        
-        public DataBlockTextNote noteWriter;
-        
-        public HashSet<string> tags = new HashSet<string> ();
-        
-        [ListDrawerSettings (DefaultExpandedState = false, ShowIndexLabels = true)]
-        public List<string> entries = new List<string> ();
-    }
-
-    [Serializable]
-    public class DataBlockTextCollectionLocalized : DataContainer
-    {
-        [ListDrawerSettings (DefaultExpandedState = false)]
-        public List<string> entries = new List<string> ();
-        
-        [ListDrawerSettings (DefaultExpandedState = false)]
-        public List<string> entriesEng = new List<string> ();
-    }
-    
-    
-    [Serializable]
-    public class DataContainerTextCollectionLocalization : DataContainer
-    {
-        [ListDrawerSettings (DefaultExpandedState = false)]
-        public List<string> entries = new List<string> ();
-    }
-    
-    [Serializable]
     public class DataContainerTextLibrary : DataContainerUnique
     {
         [FoldoutGroup ("Other", false)]
@@ -847,9 +925,12 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.CollapsedFoldout)]
         [HideReferenceObjectPicker]
         public SortedDictionary<string, DataContainerTextSectorMain> sectors = new SortedDictionary<string, DataContainerTextSectorMain> ();
-
-        [YamlIgnore, NonSerialized, HideInInspector]
-        public SortedDictionary<string, DataContainerTextSectorMain> sectorsWithCollections = new SortedDictionary<string, DataContainerTextSectorMain> ();
+        
+        [FoldoutGroup ("Tags", false), ShowInInspector, ReadOnly, YamlIgnore]
+        public HashSet<string> tags = new HashSet<string> ();
+        
+        [FoldoutGroup ("Tags", false), ShowInInspector, ReadOnly, YamlIgnore]
+        public Dictionary<string, HashSet<string>> tagsMap = new Dictionary<string, HashSet<string>> ();
 
         public override void OnAfterDeserialization ()
         {
@@ -858,10 +939,6 @@ namespace PhantomBrigade.Data
                 Debug.Log ("Text library has no sectors, skipping text processing");
                 return;
             }
-
-            if (sectorsWithCollections == null)
-                sectorsWithCollections = new SortedDictionary<string, DataContainerTextSectorMain> ();
-            sectorsWithCollections.Clear ();
 
             foreach (var kvp1 in sectors)
             {
@@ -874,10 +951,9 @@ namespace PhantomBrigade.Data
 
                 sector.parent = this;
                 sector.OnAfterDeserialization (kvp1.Key);
-                
-                if (sector.collection != null)
-                    sectorsWithCollections.Add (kvp1.Key, sector);
             }
+            
+            DataTagUtility.RegisterTags (sectors, ref tags, ref tagsMap);
         }
 
         public DataContainerTextSectorMain GetSector (string sectorKey)
@@ -888,7 +964,7 @@ namespace PhantomBrigade.Data
                 return sectors[sectorKey];
         }
 
-        public void TryAddingText (string sectorKey, string textKey, string text)
+        public void TryAddingText (string sectorKey, string textKey, string text, string note = null)
         {
             if (string.IsNullOrEmpty (sectorKey))
             {
@@ -913,10 +989,23 @@ namespace PhantomBrigade.Data
             if (text == null)
                 text = string.Empty;
 
-            if (sector.entries.ContainsKey (textKey))
-                sector.entries[textKey].text = text;
+            if (sector.entries.TryGetValue (textKey, out var entry))
+            {
+                entry.text = text;
+                entry.OnAfterDeserialization (textKey, core.insertNewLines);
+            }
             else
-                sector.entries.Add (textKey, new DataBlockTextEntryMain { text = text });
+            {
+                entry = new DataBlockTextEntryMain ();
+                sector.entries.Add (textKey, entry);
+                
+                entry.text = text;
+
+                if (!string.IsNullOrEmpty (note))
+                    entry.noteDev = new DataBlockTextNote { text = note };
+                
+                entry.OnAfterDeserialization (textKey, core.insertNewLines);
+            }
         }
         
         public void TryRemovingText (string sectorKey, string textKey)
@@ -986,8 +1075,10 @@ namespace PhantomBrigade.Data
             bool pseudolocMode = core != null && core.pseudolocMode;
             if (pseudolocMode)
             {
+                #if !PB_MODSDK
                 var libraryData = DataManagerText.libraryData;
                 bool pseudolocRestrictedToFinalText = DataShortcuts.debug.pseudolocRestrictedToFinalText;
+                bool pseudolocScaleDown = DataShortcuts.debug.pseudolocScaledDown;
 
                 sectors = new SortedDictionary<string, DataContainerTextSectorLocalization> ();
                 foreach (var kvp in libraryData.sectors)
@@ -998,7 +1089,7 @@ namespace PhantomBrigade.Data
                         continue;
 
                     var sectorNew = new DataContainerTextSectorLocalization ();
-                    sectors.Add(kvp.Key, sectorNew);
+                    sectors.Add (kvp.Key, sectorNew);
 
                     // Skip all empty collections from library
                     if (sectorFromLibrary.entries != null && sectorFromLibrary.entries.Count != 0)
@@ -1015,26 +1106,12 @@ namespace PhantomBrigade.Data
                                 continue;
 
                             var entryNew = new DataBlockTextEntryLocalization();
-                            entryNew.text = PseudoLoc.ApplyPseudoloc (entryFromLibrary.text);
+                            entryNew.text = PseudoLoc.ApplyPseudoloc (entryFromLibrary.text, pseudolocScaleDown);
                             sectorNew.entries.Add(kvp2.Key, entryNew);
                         }
                     }
-                    
-                    var collectionFromLibrary = sectorFromLibrary.collection;
-                    if (collectionFromLibrary != null && collectionFromLibrary.entries != null)
-                    {
-                        var entriesCollectionNew = new List<string> (collectionFromLibrary.entries.Count);
-                        sectorNew.collection = new DataBlockTextCollectionLocalized ();
-                        sectorNew.collection.entries = entriesCollectionNew;
-
-                        foreach (var entryFromLibrary in collectionFromLibrary.entries)
-                        {
-                            var entryNew = PseudoLoc.ApplyPseudoloc (entryFromLibrary);
-                            entriesCollectionNew.Add (entryNew);
-                        }
-                    }
-                    
                 }
+                #endif
             }
 
             if (sectors != null)

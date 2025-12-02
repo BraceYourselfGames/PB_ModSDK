@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using PhantomBrigade.Functions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -58,9 +59,6 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (CustomAddFunction = "@new DataBlockMemoryChangeFloat ()")]
         public List<DataBlockMemoryChangeFloat> changes = new List<DataBlockMemoryChangeFloat> () { new DataBlockMemoryChangeFloat () };
 
-        [YamlIgnore, HideInInspector]
-        public DataContainerOverworldEvent parentEvent;
-
         #region Editor
         #if UNITY_EDITOR
         
@@ -69,18 +67,6 @@ namespace PhantomBrigade.Data
 
         private bool IsProvinceKeyVisible =>
             context == MemoryChangeContextEvent.SpecificProvince;
-
-        private IEnumerable<string> GetActorKeys () 
-        {
-            if (context == MemoryChangeContextEvent.ActorUnit)
-                return parentEvent != null && parentEvent.actorsUnits != null ? parentEvent.actorsUnits.Keys : null;
-            else if (context == MemoryChangeContextEvent.ActorPilot)
-                return parentEvent != null && parentEvent.actorsPilots != null ? parentEvent.actorsPilots.Keys : null;
-            else if (context == MemoryChangeContextEvent.ActorWorld)
-                return parentEvent != null && parentEvent.actorsSites != null ? parentEvent.actorsSites.Keys : null;
-            else
-                return null;
-        }
 
         #endif
         #endregion
@@ -364,6 +350,35 @@ namespace PhantomBrigade.Data
 
         private string GetMemoryLabel => valueFromMemory ? "◄ + ▼" : "◄";
         private Color GetMemoryColor => new Color (1f, 1f, 1f, valueFromMemory ? 1f : 0.5f);
+
+        #endif
+        #endregion
+    }
+
+    public class DataBlockMemoryChangeAdv
+    {
+        [PropertyOrder (-1)]
+        [ValueDropdown ("GetEditableKeys")]
+        [LabelText ("Input"), LabelWidth (90f)]
+        [InlineButton ("@keyOutput = null", "Change output key", ShowIf = "@string.IsNullOrEmpty (keyOutput)")]
+        public string keyInput;
+        
+        [PropertyOrder (-1), HideIf ("@string.IsNullOrEmpty (keyOutput)")]
+        [ValueDropdown ("GetEditableKeys"), InlineButtonClear]
+        [LabelText ("Output"), LabelWidth (90f)]
+        public string keyOutput = null;
+        
+        public List<IFloatOperation> operations = new List<IFloatOperation> ();
+        
+        #region Editor
+        #if UNITY_EDITOR
+
+        private IEnumerable<string> GetEditableKeys ()
+        {
+            // Ensure memory DB is loaded
+            var data = DataMultiLinkerOverworldMemory.data;
+            return DataMultiLinkerOverworldMemory.keysEditableSorted;
+        }
 
         #endif
         #endregion

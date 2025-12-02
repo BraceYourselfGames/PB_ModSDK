@@ -1,0 +1,49 @@
+comment:
+  comment: Logic for pilots at camp stops. Covers main healing/fatigue effect + bonus effects like sleep & hope.
+hidden: false
+stopOnEmptyStep: false
+tags:
+- camp_pilot
+steps:
+- stopSequenceIfEmpty: true
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - camp_pilot_base
+  tags:
+    camp_general: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_pilot_hope: true
+- stopSequenceIfEmpty: false
+  checksGlobal:
+  - !OverworldValidateChance
+    chance: 1
+  - !OverworldValidateModifier
+    key: sp_tutorial_intro
+    present: false
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_pilot_bespoke: true
+- stopSequenceIfEmpty: false
+  checksGlobal:
+  - !OverworldValidateChance
+    chance: 0.5
+  - !OverworldValidateModifier
+    key: sp_tutorial_intro
+    present: false
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_pilot_random: true

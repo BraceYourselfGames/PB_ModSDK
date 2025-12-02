@@ -20,7 +20,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   comp2_value:
-    value: 0
+    value: 0.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -35,7 +35,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   scrap_value:
-    value: 1
+    value: 7.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -51,3 +51,14 @@ projectile:
 beam: 
 custom: 
 functions: 
+workshopInfo:
+  progressLimit:
+    i: 2
+  inputResourcesViaStats:
+    f: 1
+  inputResources:
+  - key: supplies
+    amount: 150
+  - key: components_r2
+    amount: 4
+  basePartRequirements: 

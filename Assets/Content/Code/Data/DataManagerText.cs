@@ -434,87 +434,6 @@ namespace PhantomBrigade.Data
             return libraryData.GetSector (sectorKey);
         }
 
-        public static List<string> GetTextCollectionByKey (string collectionKey)
-        {
-            if (string.IsNullOrEmpty (collectionKey))
-                return null;
-
-            if (libraryData != null && libraryData.sectorsWithCollections != null && libraryData.sectorsWithCollections.TryGetValue (collectionKey, out var sector))
-            {
-                if (!sector.localized || localizationDataInternal == null)
-                    return sector.collection.entries;
-
-                bool sectorLocalizedFound = localizationDataInternal.sectors.TryGetValue (collectionKey, out var sectorLocalized);
-                if (!sectorLocalizedFound || sectorLocalized == null || sectorLocalized.collection == null || sectorLocalized.collection.entries == null)
-                    return sector.collection.entries;
-
-                // Return localized entries
-                return sectorLocalized.collection.entries;
-            }
-
-            Debug.LogWarning ($"Failed to find text collection {collectionKey} in the library!");
-            return null;
-        }
-
-        private static Dictionary<string, DataContainerTextSectorMain> sectorsFilteredForCollection = new Dictionary<string, DataContainerTextSectorMain> ();
-        
-        public static List<string> GetTextCollectionByTag (string collectionTag)
-        {
-            if (string.IsNullOrEmpty (collectionTag))
-                return null;
-
-            sectorsFilteredForCollection.Clear ();
-
-            if (libraryData != null && libraryData.sectorsWithCollections != null)
-            {
-                foreach (var kvp in libraryData.sectorsWithCollections)
-                {
-                    var sectorCandidate = kvp.Value;
-                    if (sectorCandidate == null)
-                        continue;
-                    
-                    var collectionKey = kvp.Key;
-                    
-                    // Skip collections already inlcuded from localization
-                    if (sectorsFilteredForCollection.ContainsKey (collectionKey))
-                        continue;
-
-                    var c = sectorCandidate.collection;
-                    if (c == null || c.entries == null || c.entries.Count == 0)
-                        continue;
-
-                    if (c.tags == null || !c.tags.Contains (collectionTag))
-                        continue;
-                    
-                    sectorsFilteredForCollection.Add (kvp.Key, sectorCandidate);
-                }
-            }
-
-            if (sectorsFilteredForCollection.Count == 0)
-                return null;
-
-            var sectorSelected = sectorsFilteredForCollection.GetRandomValue ();
-            
-            
-            
-            // If library marks this collection as localized, try returning localized text
-            if 
-            (
-                sectorSelected.localized && 
-                localizationDataInternal != null && 
-                localizationDataInternal.sectors != null && 
-                localizationDataInternal.sectors.TryGetValue (sectorSelected.key, out var sectorSelectedLocalized) && 
-                sectorSelectedLocalized.collection != null && 
-                sectorSelectedLocalized.collection.entries != null
-            )
-            {
-                return sectorSelectedLocalized.collection.entries;
-            }
-                
-            // Fall back to library values
-            return sectorSelected.collection.entries;
-        }
-
         public static string GetText (string sectorKey, string textKey, bool suppressWarning = false)
         {
             if (string.IsNullOrEmpty (sectorKey))
@@ -759,7 +678,7 @@ namespace PhantomBrigade.Data
             return sector.entries.Keys;
         }
         
-        public static void TryAddingTextToLibrary (string sectorKey, string textKey, string text)
+        public static void TryAddingTextToLibrary (string sectorKey, string textKey, string text, string note = null)
         {
             if (libraryData == null)
             {
@@ -767,7 +686,7 @@ namespace PhantomBrigade.Data
                 return;
             }
             
-            libraryData.TryAddingText (sectorKey, textKey, text);
+            libraryData.TryAddingText (sectorKey, textKey, text, note);
         }
         
         public static void TryAddingSectorToLibrary (string sectorKey)

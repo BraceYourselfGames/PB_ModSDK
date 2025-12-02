@@ -24,6 +24,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas: 
 entry: 
 generationInjection: 
@@ -85,14 +90,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   early_arrival:
     comment: 
@@ -141,13 +143,11 @@ steps:
       filterDistanceLocation: 
       filterDistanceVolume: 
       filterDistanceState: 
-      filterDistanceRetreat:
-        key: default
-        check: Greater
-        value: 95
+      filterDistanceRetreat: 
       sorting: !UnitSlotSortingPlayer
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -178,6 +178,7 @@ steps:
     core: 
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -204,3 +205,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

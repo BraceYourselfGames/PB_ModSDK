@@ -1,0 +1,81 @@
+noteLoc: 
+hue: 0
+priority: -1
+parent: combat
+listed: true
+unlockable: false
+unlockOnQuickStart: true
+sections:
+- !CodexSectionTextSimple
+  color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
+- !CodexSectionTextControls
+  lines:
+  - mode: All
+    text: Back / Cancel
+    actions:
+    - action: global_cancel
+      newline: false
+  - mode: All
+    text: Execute
+    actions:
+    - action: global_confirm
+      newline: false
+  - mode: All
+    text: Move the camera
+    actions:
+    - action: global_move_vertical_pos
+      newline: false
+    - action: global_move_horizontal_neg
+      newline: false
+    - action: global_move_vertical_neg
+      newline: false
+    - action: global_move_horizontal_pos
+      newline: false
+  - mode: All
+    text: Rotate the camera
+    actions:
+    - action: global_camera_vertical_pos
+      newline: false
+    - action: global_camera_horizontal_neg
+      newline: false
+    - action: global_move_horizontal_pos
+      newline: false
+    - action: global_move_horizontal_pos
+      newline: false
+    - action: global_mouse_middle
+      newline: true
+  - mode: All
+    text: Select next unit
+    actions:
+    - action: combat_next_unit
+      newline: false
+  - mode: All
+    text: Show all units
+    actions:
+    - action: combat_toggle_overlay
+      newline: false
+  - mode: All
+    text: Targeting mode
+    actions:
+    - action: combat_toggle_targeting
+      newline: false
+  - mode: All
+    text: Toggle slow motion
+    actions:
+    - action: combat_time_toggle
+      newline: false
+  - mode: All
+    text: Set time scale
+    actions:
+    - action: combat_time_pause
+      newline: false
+    - action: combat_time_slow
+      newline: false
+    - action: combat_time_half
+      newline: false
+    - action: combat_time_full
+      newline: false

@@ -15,4 +15,16 @@ tags:
 - equipment_left
 - equipment_right
 - wpn_secondary
-genSteps: 
+workshopInfo: 
+genSteps:
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 111
+  comment:
+    comment: Make aux module component customizable at rating 3.
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3

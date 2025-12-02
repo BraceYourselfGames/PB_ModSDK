@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: false
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.3
@@ -18,7 +26,8 @@ atmosphere:
     y: 200
     z: 0.35
     w: 0.9
-tags: []
+tags:
+- force_high_alert
 spawnGroups:
   defense_a:
     tags: []
@@ -67,84 +76,84 @@ spawnGroups:
     tags: []
     points:
     - point:
-        x: 175.3589
+        x: 180.0858
         y: -16.45
-        z: 151.6656
+        z: 152.0203
       rotation:
         x: 0
-        y: 0
+        y: 223.6676
         z: 0
     - point:
-        x: 97.9398
+        x: 108.9407
         y: -16.45
-        z: 202.7629
+        z: 196.015
       rotation:
         x: 0
-        y: 0
+        y: 181.0398
         z: 0
     - point:
-        x: 217.4047
+        x: 227.2875
         y: -16.45
-        z: 83.26683
+        z: 80.56831
       rotation:
         x: 0
-        y: 0
+        y: 261.9384
         z: 0
     - point:
-        x: 171.9245
+        x: 174.9598
         y: -16.45
-        z: 128.7319
+        z: 134.1871
       rotation:
         x: 0
-        y: 360
+        y: 226.9878
         z: 0
     - point:
-        x: 150.6592
+        x: 153.3549
         y: -16.45
-        z: 150.5553
+        z: 152.2174
       rotation:
         x: 0
-        y: 360
+        y: 222.2773
         z: 0
   pb:
     tags: []
     points:
     - point:
-        x: 76.78783
-        y: -19.45
-        z: 99.49892
+        x: 43.5
+        y: -19.5
+        z: 34.5
       rotation:
         x: 0
         y: 41.89048
         z: 0
     - point:
-        x: 82.46466
-        y: -19.45
-        z: 83.601
+        x: 43.5
+        y: -19.5
+        z: 10.5
       rotation:
         x: 0
         y: 36.1231
         z: 0
     - point:
-        x: 63.20836
-        y: -19.45
-        z: 102.6852
+        x: 7.5
+        y: -19.5
+        z: 61.5
       rotation:
         x: 0
         y: 40.35068
         z: 0
     - point:
-        x: 61.2674
-        y: -19.45
-        z: 87.19069
+        x: 25.5
+        y: -19.5
+        z: 55.5
       rotation:
         x: 0
         y: 46.69817
         z: 0
     - point:
-        x: 57.01191
-        y: -19.45
-        z: 76.31421
+        x: 10.5
+        y: -19.5
+        z: 37.5
       rotation:
         x: 0
         y: 45.99765
@@ -343,7 +352,7 @@ locations:
         y: 0
         z: 300
       rotation: 0
-      sizeX: 242
+      sizeX: 223.9
       sizeY: 9
       rect: false
   barrier_2:
@@ -371,11 +380,11 @@ locations:
     - direction_e
     data: !AreaLocation
       point:
-        x: 238.5
+        x: 275
         y: -10.5
-        z: 256.5
+        z: 275
       rotation: 0
-      sizeX: 13.5
+      sizeX: 34
       sizeY: 18
       rect: false
   retreat:
@@ -646,5 +655,9 @@ boundary:
       m: {}
 segments:
 - path: Content/AreaSegments/area_seg_main_capital_outskirts
-biomeFilter: 
+biomeFilter:
+  tagsUsed: false
+  keys:
+  - mossy_clean
+  tags: 
 scenarioChanges: 

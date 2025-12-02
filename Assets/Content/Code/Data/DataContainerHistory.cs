@@ -37,9 +37,9 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.Foldout)]
         public Dictionary<string, KeyReplacementGroup> keyReplacementGroups = new Dictionary<string, KeyReplacementGroup> ();
 
-        public Dictionary<string, LocInvalidations> locInvalidations = new Dictionary<string, LocInvalidations> ();
+        public SortedDictionary<string, LocInvalidations> locInvalidations = new SortedDictionary<string, LocInvalidations> ();
         
-        public Dictionary<string, LocInvalidations> locInvalidationsSaved = new Dictionary<string, LocInvalidations> ();
+        public SortedDictionary<string, LocInvalidations> locInvalidationsSaved = new SortedDictionary<string, LocInvalidations> ();
 
         public override void OnAfterDeserialization ()
         {

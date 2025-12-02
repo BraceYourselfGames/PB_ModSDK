@@ -21,6 +21,8 @@ namespace PhantomBrigade.Data
         public bool textUsed = true;
         public bool selectable = true;
         public bool nameOverride = false;
+        
+        public string group;
 
         public override void ResolveText ()
         {

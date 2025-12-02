@@ -10,6 +10,7 @@ hardpoints:
 tags:
 - mnf_06
 - stat_concussive
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -172,6 +173,9 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
@@ -219,6 +223,7 @@ projectile:
     distance: 9
     targetExclusive: true
     inertBeforeHit: false
+    inertPrimingDelay: 1
     triggerWithoutEntity: false
   hitResponse: 
   splashDamage:
@@ -235,6 +240,7 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
@@ -246,3 +252,4 @@ custom:
   vectors: 
   strings: 
 functions: 
+workshopInfo: 

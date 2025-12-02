@@ -1,0 +1,30 @@
+comment:
+  comment: Basic2
+state: ReadyForReview
+hidden: true
+priority: 0
+level: 0
+icon: s_icon_l32_stat_hp
+tags:
+- target_unit_self
+- type_defender
+group: health_affecting
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive:
+- defender
+pilotTypesIncompatible:
+- sharpshooter
+activationRecordTags: 
+statValues:
+  unit_barrier_body:
+    mode: Offset
+    value: 0.25
+  unit_hp_body:
+    mode: Offset
+    value: 0.25
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

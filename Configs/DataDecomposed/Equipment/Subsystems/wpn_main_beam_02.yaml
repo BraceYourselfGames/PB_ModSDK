@@ -9,7 +9,6 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_01
-- spec_stabilized
 statDistribution: ''
 stats:
   act_count:
@@ -18,17 +17,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 3.5
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 180
+    value: 170
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 4
+    value: 5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -43,17 +42,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 12
+    value: 19.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage_buildup:
-    value: 2.25
+    value: 1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage_radius:
-    value: 1
+    value: 3.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -63,7 +62,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 5
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -73,7 +72,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 55
+    value: 41
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -93,7 +92,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_speed:
-    value: 1000
+    value: 700
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -103,7 +102,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_turnrate_limit:
-    value: 17
+    value: 12
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -145,7 +144,7 @@ activation:
   hitReaction: 
 projectile: 
 beam:
-  reflectionAngleLimit: 120
+  reflectionAngleLimit: 85
   body:
     key: fx_beam_friendly
     keyEnemy: 
@@ -179,3 +178,4 @@ beam:
   statusBuildup: 
 custom: 
 functions: 
+workshopInfo: 

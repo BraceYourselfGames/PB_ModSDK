@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Entitas;
 using PhantomBrigade.Functions;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -353,13 +354,19 @@ namespace PhantomBrigade.Data
     // Presets don't form an authoritative link with entities
     // This component is simply used to inspect where units came from and doesn't dictate their content
     
-    #if !PB_MODSDK
     [Persistent]
     public sealed class DataKeyUnitPreset : IComponent
     {
         public string s;
     }
-    #endif
+    
+    [Combat]
+    public sealed class DataLinkUnitProximityEffect : IComponent
+    {
+        public float updateTimeLast;
+        public int triggerCount;
+        public DataBlockUnitPresetProximityEffect data;
+    }
 
     public class DataBlockUnitPresetOption
     {
@@ -385,6 +392,72 @@ namespace PhantomBrigade.Data
             if (keys != null)
                 keys.Sort ();
         }
+    }
+
+    public class DataBlockUnitPresetProximityEffect
+    {
+        public float distance = 3f;
+        public bool triggerBreaksIteration = true;
+        
+        [DropdownReference (true)]
+        public DataBlockFloat updateInterval;
+
+        [DropdownReference (true)]
+        public DataBlockInt triggerLimit;
+        
+        [DropdownReference]
+        public List<ICombatUnitValidationFunction> checksUnit;
+        
+        [DropdownReference]
+        public List<ICombatUnitValidationFunction> checksUnitTarget;
+        
+        [DropdownReference]
+        public List<ICombatFunctionTargeted> functionsUnit;
+        
+        [DropdownReference]
+        public List<ICombatFunctionTargeted> functionsUnitTarget;
+        
+        #region Editor
+        #if UNITY_EDITOR
+        
+        [ShowInInspector, PropertyOrder (100)]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockUnitPresetProximityEffect () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        #endif
+        #endregion
+    }
+
+    public class DataBlockUnitPresetEffects
+    {
+        [DropdownReference]
+        public List<DataBlockUnitCombatEffect> effectsOnSpawn;
+        
+        [DropdownReference]
+        public List<DataBlockUnitCombatEffect> effectsOnArrival;
+        
+        [DropdownReference]
+        public DataBlockUnitPresetProximityEffect effectProximity;
+
+        [DropdownReference]
+        public List<DataBlockUnitCombatEffect> effectsOnEjection;  
+        
+        [DropdownReference]
+        public List<DataBlockUnitCombatEffect> effectsOnDestruction;
+        
+        #region Editor
+        #if UNITY_EDITOR
+        
+            [ShowInInspector, PropertyOrder (100)]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockUnitPresetEffects () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        #endif
+        #endregion
     }
 
     [LabelWidth (180f)]
@@ -493,37 +566,13 @@ namespace PhantomBrigade.Data
         public SortedDictionary<string, List<DataBlockPartTagFilter>> partTagPreferencesProcessed;
         
         
-
-        
         [PropertyOrder (10), DropdownReference]
         [ShowIf ("@IsEquipmentVisible")]
         [DictionaryKeyDropdown (DictionaryKeyDropdownType.Socket)]
         [DictionaryDrawerSettings (KeyLabel = "Socket")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         public SortedDictionary<string, DataBlockUnitPartOverride> parts;
-
-        /*
-        private List<DataBlockUnitPartOverride> partsListInternal = new List<DataBlockUnitPartOverride> ();
         
-        [PropertyOrder (10), YamlIgnore, ShowInInspector]
-        [ShowIf ("@IsEquipmentVisible && !ShowDictionaries")]
-        [OnValueChanged ("OnFullRefreshRequired", true)]
-        [ListDrawerSettings (HideAddButton = true, HideRemoveButton = true, DraggableItems = false, ElementColor = "GetElementColor", DefaultExpandedState = true)]
-        private List<DataBlockUnitPartOverride> partsList
-        {
-            get
-            {
-                partsListInternal.Clear ();
-                if (parts != null)
-                {
-                    foreach (var kvp in parts)
-                        partsListInternal.Add (kvp.Value);
-                }
-                return partsListInternal;
-            }
-            set => partsListInternal = value;
-        }
-        */
 
         [PropertyOrder (11), YamlIgnore, ReadOnly]
         [ShowIf ("IsEquipmentProcessedVisible")]
@@ -548,14 +597,14 @@ namespace PhantomBrigade.Data
         public DataBlockUnitAnimationOverrides animationOverridesProcessed;
         
         
-        [PropertyOrder (15), DropdownReference]
+        [PropertyOrder (16), DropdownReference]
         [ShowIf ("IsCoreVisible")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
-        public List<ICombatFunctionTargeted> functions;
+        public DataBlockUnitPresetEffects effects;
         
-        [PropertyOrder (15), YamlIgnore, ReadOnly]
+        [PropertyOrder (16), YamlIgnore, ReadOnly]
         [ShowIf ("IsCoreProcessedVisible")]
-        public List<ICombatFunctionTargeted> functionsProcessed;
+        public DataBlockUnitPresetEffects effectsProc;
         
         
         #if UNITY_EDITOR
@@ -588,7 +637,14 @@ namespace PhantomBrigade.Data
             #if UNITY_EDITOR
             RefreshInspectorData ();
             ResetUnitGroupRegister ();
+
             #endif
+        }
+        
+        public override void ResolveText ()
+        {
+            if (textType != null)
+                textType.s = DataManagerText.GetText (TextLibs.unitPresets, $"{key}__type");
         }
 
         public void OnAfterDeserializationEmbedded ()
@@ -601,7 +657,7 @@ namespace PhantomBrigade.Data
             partTagPreferencesProcessed = partTagPreferences;
             partsProcessed = parts;
             animationOverridesProcessed = animationOverrides;
-            functionsProcessed = functions;
+            effectsProc = effects;
         }
 
         public override void OnKeyReplacement (string keyOld, string keyNew)
@@ -668,6 +724,15 @@ namespace PhantomBrigade.Data
         
         public DataContainerUnitPreset () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        public override void SaveText ()
+        {
+            if (!IsTextSavingPossible ())
+                return;
+
+            if (textType != null)
+                DataManagerText.TryAddingTextToLibrary (TextLibs.unitPresets, $"{key}__type", textType.s);
+        }
 
         private static bool IsCoreVisible => DataMultiLinkerUnitPreset.Presentation.showCore;
         private static bool IsCoreProcessedVisible => DataMultiLinkerUnitPreset.Presentation.showCore && DataMultiLinkerUnitPreset.Presentation.showInheritance;

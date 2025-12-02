@@ -1,0 +1,35 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_pilot1
+tags:
+- type_brawler
+- starter
+- brawler_damage
+- brawler_speed
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible:
+- sharpshooter
+- support
+- defender
+activationRecordTags: 
+statValues:
+  unit_damage_sr:
+    mode: Offset
+    value: 0.25
+  unit_offset_speed:
+    mode: Offset
+    value: 2
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: -1
+effectsOnEvents: 
+effectsShared: 
