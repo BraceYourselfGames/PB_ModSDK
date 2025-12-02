@@ -119,6 +119,9 @@ namespace PhantomBrigade.Data
 
         private int GetSelectedIndex ()
         {
+            if (dictionaryResolver == null)
+                return -1;
+            
             var dict = dictionaryResolver.Invoke ();
             if (dict == null)
                 return -1;
@@ -140,6 +143,9 @@ namespace PhantomBrigade.Data
 
         private string GetSecondaryLabel ()
         {
+            if (dictionaryResolver == null)
+                return null;
+            
             var dict = dictionaryResolver.Invoke ();
             if (dict == null)
                 return "null";
@@ -152,6 +158,9 @@ namespace PhantomBrigade.Data
         
         private string GetHeaderLabel ()
         {
+            if (dictionaryResolver == null)
+                return null;
+            
             var dict = dictionaryResolver.Invoke ();
             if (dict == null)
                 return "null";
@@ -187,7 +196,7 @@ namespace PhantomBrigade.Data
             if (string.Equals (key, keyModified, StringComparison.Ordinal))
                 return false;
             
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null || dict.TryGetValue (keyModified, out var v))
                 return false;
             
@@ -208,7 +217,7 @@ namespace PhantomBrigade.Data
             if (string.Equals (key, keyModified, StringComparison.Ordinal))
                 return colorMatched;
             
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null || dict.TryGetValue (keyModified, out var v))
                 return colorError;
             
@@ -217,7 +226,7 @@ namespace PhantomBrigade.Data
         
         private Color GetEntryColor ()
         {
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null)
                 return colorFallback;
             
@@ -248,7 +257,7 @@ namespace PhantomBrigade.Data
             if (string.Equals (key, keyModified, StringComparison.Ordinal))
                 return string.Empty;
             
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null || dict.TryGetValue (keyModified, out var v))
                 return strCollision;
             
@@ -260,7 +269,7 @@ namespace PhantomBrigade.Data
             if (!IsKeyReplacementPossible ())
                 return;
 
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null || !dict.TryGetValue (key, out var v) || v == null)
                 return;
 
@@ -271,7 +280,7 @@ namespace PhantomBrigade.Data
         
         private void OnKeyRemoval ()
         {
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null || !dict.TryGetValue (key, out var v) || v == null)
                 return;
 
@@ -281,7 +290,7 @@ namespace PhantomBrigade.Data
         
         private void OnKeyDuplication ()
         {
-            var dict = dictionaryResolver.Invoke ();
+            var dict = dictionaryResolver != null ? dictionaryResolver.Invoke () : null;
             if (dict == null || !dict.TryGetValue (key, out var v) || v == null)
                 return;
 
