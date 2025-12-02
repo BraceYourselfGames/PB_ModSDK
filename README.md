@@ -43,6 +43,8 @@ Click the Tutorials button at the bottom of the Getting Started window to learn 
 
 We separated some assets into an optional download to keep the repository lightweight and easy to update. These include 3D models of mech items, levels, textures and some other art assets. These files are not required for most of the tools included in the SDK, but we recommend downloading and installing the optional asset package to unlock every feature. This includes ability to edit levels and ability to display items in the 3D viewport.
 
+![desc_getting_started.png](/ModWindowImages/repo/desc_optional_assets.png)
+
 Follow the instructions in the Getting Started window to install this optional asset package. To save time, we recommend [downloading the file](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_V20A.unitypackage) in the background while you set up the main project and follow the initial tutorials.
 
 ## Documentation
