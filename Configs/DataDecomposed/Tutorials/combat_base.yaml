@@ -27,47 +27,33 @@ pages:
         value: 1
         valueFromMemory: false
         valueFromMemoryKey: 
+    - !SetGameplayUIActive
+      active: false
   effectsCombat:
     functions:
+    - !SetCameraStable
+      stable: true
+      offset: 0
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
-        x: 151.3656
+        x: 142
         y: -19.45
-        z: 69.7549
+        z: 55
       positionFromEntityName: 
       rotationXOverride: true
       rotationX: 31.71593
       rotationYOverride: true
       rotationY: -17.73599
       zoomOverride: true
-      zoom: 1
+      zoom: 0.25
       delay: 0.1
     - !CombatSelectUnit
       nameInternal: ''
       select: true
       focus: false
       delay: 0
-    - !CombatSelectUnit
-      nameInternal: turret1
-      select: true
-      focus: false
-      delay: 1
-    - !CombatSelectUnit
-      nameInternal: turret2
-      select: true
-      focus: false
-      delay: 2
-    - !CombatSelectUnit
-      nameInternal: turret3
-      select: true
-      focus: false
-      delay: 3
-    - !CombatSelectUnit
-      nameInternal: turret4
-      select: true
-      focus: false
-      delay: 4
 - depthForeground: 0
   depthBackground: 0
   skippable: true
@@ -110,13 +96,17 @@ pages:
     arrowCustom: 
     frameHighlight: 
     textInputActions: 
-  effectsOverworld: 
+  effectsOverworld:
+    functions:
+    - !SetGameplayUIActive
+      active: true
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
-        x: 176.4069
+        x: 170
         y: -19.45
         z: 107.293
       positionFromEntityName: 
@@ -125,7 +115,7 @@ pages:
       rotationYOverride: true
       rotationY: -36.38368
       zoomOverride: true
-      zoom: 0.9904762
+      zoom: 0.8
       delay: 0
     - !CombatSelectUnit
       nameInternal: pb_homeguard_uhb
@@ -152,10 +142,10 @@ pages:
       a: 1
     frameLocation: BottomLeft
     frameGradientMode: None
-    framePositionX: 432
-    framePositionY: 206
-    frameSizeX: 56
-    frameSizeY: 56
+    framePositionX: 248
+    framePositionY: 194
+    frameSizeX: 426
+    frameSizeY: 88
     frameBlocksInput: false
     frameBoundary: false
     textLocation: TopLeft
@@ -171,21 +161,72 @@ pages:
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
-        x: 188.6952
+        x: 222.761
         y: -19.45
-        z: 142.6623
+        z: 157.5118
       positionFromEntityName: 
       rotationXOverride: true
-      rotationX: 22.03574
+      rotationX: 33.15637
       rotationYOverride: true
-      rotationY: -70.30314
+      rotationY: -165.7523
       zoomOverride: true
-      zoom: 0.6705412
+      zoom: 0.2595079
       delay: 0
     - !CombatSelectUnit
       nameInternal: pb_homeguard_melee
+      select: true
+      focus: false
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !SetGameplayUIActive
+      active: false
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 168.5447
+        y: -19.45
+        z: 124.6566
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 27.19417
+      rotationYOverride: true
+      rotationY: -122.3978
+      zoomOverride: true
+      zoom: 0.8378276
+      delay: 0.1
+    - !CombatSelectUnit
+      nameInternal: ''
       select: true
       focus: false
       delay: 0
@@ -199,4 +240,15 @@ effectsOnEnd:
         value: 1
         valueFromMemory: false
         valueFromMemoryKey: 
-  effectsCombat: 
+    - !SetGameplayUIActive
+      active: true
+  effectsCombat:
+    functions:
+    - !SetCameraStable
+      stable: false
+      offset: 0
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0

@@ -23,10 +23,16 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
   tagFilter:
+    context_military: true
     type_main: true
   keys: 
 entry:
@@ -59,6 +65,7 @@ tags:
 - trait_entrenched
 - trait_turrets
 - type_military_base
+- flag_escalation_squads
 states:
   power:
     comment: 
@@ -113,8 +120,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatUnitsApplyChanges
             unitFilter:
@@ -149,9 +154,8 @@ states:
               - !CombatUnitDestroy {}
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -233,14 +237,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             rew_project: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   wave0:
     comment: 
@@ -327,7 +328,16 @@ steps:
       tags:
         range_long: true
         type_main: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -359,7 +369,16 @@ steps:
       tags:
         range_medium: true
         type_main: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -386,6 +405,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: false
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -415,3 +435,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

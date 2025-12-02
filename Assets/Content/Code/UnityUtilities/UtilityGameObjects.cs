@@ -49,6 +49,19 @@ public static class DebugExtensions
 
 public static class UtilityGameObjects
 {
+    public static bool RaycastInContext (GameObject holder, Vector3 start, Vector3 direction, out RaycastHit hit, float distance, LayerMask mask)
+    {
+        if (Application.isPlaying)
+        {
+            return Physics.Raycast (start, direction, out hit, 400f, mask);
+        }
+        else
+        {
+            var physicsScene = holder.scene.GetPhysicsScene ();
+            return physicsScene.Raycast (start, direction, out hit, 400f, mask);
+        }
+    }
+    
     public static Transform GetTransformSafely (ref Transform t, string name, HideFlags hideFlags, Vector3 scenePosition, string tag = null)
     {
         if (t == null)
@@ -119,6 +132,9 @@ public static class UtilityGameObjects
 
     public static void ClearChildren (Transform parent, bool forceImmediate = false)
     {
+        if (parent == null)
+            return;
+        
         bool parentWasHidden = parent.gameObject.activeSelf == false;
         if (parentWasHidden) parent.gameObject.SetActive (true);
 
@@ -132,6 +148,28 @@ public static class UtilityGameObjects
 
         if (parentWasHidden)
             parent.gameObject.SetActive (false);
+    }
+    
+    public static T AddChildWithComponent<T> (this GameObject parent, string name = null) where T : Component
+    {
+        var go = new GameObject();
+        if (parent != null)
+        {
+            Transform t = go.transform;
+            t.parent = parent.transform;
+            t.localPosition = Vector3.zero;
+            t.localRotation = Quaternion.identity;
+            t.localScale = Vector3.one;
+            go.layer = parent.layer;
+        }
+
+        if (!string.IsNullOrEmpty (name))
+            go.name = name;
+        else
+            go.name = typeof (T).Name;
+        
+        var comp = go.AddComponent<T> ();
+        return comp;
     }
 
     public static void SetFlags (this GameObject parent, HideFlags hideFlags)

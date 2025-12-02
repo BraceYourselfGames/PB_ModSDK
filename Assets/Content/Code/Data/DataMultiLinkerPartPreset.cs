@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PhantomBrigade.Functions.Equipment;
@@ -59,6 +59,9 @@ namespace PhantomBrigade.Data
             public static bool showVisuals = false;
             
             [ShowInInspector]
+            public static bool showWorkshop = false;
+            
+            [ShowInInspector]
             [ShowIf ("showInheritance")]
             [InfoBox ("Warning: this mode triggers inheritance processing every time inheritable fields are modified. This is useful for instantly previewing changes to things like stat or inherited text, but it can cause data loss if you are not careful. Only currently modified config is protected from being reloaded, save if you switch to another config.", VisibleIf = "autoUpdateInheritance")]
             public static bool autoUpdateInheritance = false;
@@ -102,8 +105,18 @@ namespace PhantomBrigade.Data
         [ShowIf ("@DataMultiLinkerPartPreset.Presentation.showTagCollections")]
         [ShowInInspector, ReadOnly]
         public static Dictionary<string, string> subsystemFixedUsageMap = new Dictionary<string, string> ();
+        
+        [ShowIf ("@DataMultiLinkerPartPreset.Presentation.showTagCollections")]
+        [ShowInInspector, ReadOnly]
+        public static HashSet<string> keysWorkshopUnlockable = new HashSet<string> ();
 
         private static StringBuilder sb = new StringBuilder ();
+        
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
 
         public static void OnAfterDeserialization ()
         {
@@ -138,6 +151,7 @@ namespace PhantomBrigade.Data
             DataTagUtility.RegisterTags (data, ref tags, ref tagsMap);
             
             subsystemFixedUsageMap.Clear ();
+            keysWorkshopUnlockable.Clear ();
             
             foreach (var kvp1 in data)
                 Postprocess (kvp1.Value);
@@ -211,8 +225,13 @@ namespace PhantomBrigade.Data
                 }
             }
 
+            if (!preset.hidden && preset.workshopInfoProc != null)
+            {
+                if (preset.tagsProcessed == null || !preset.tagsProcessed.Contains (EquipmentTags.incompatible))
+                    keysWorkshopUnlockable.Add (preset.key);
+            }
+            
             #if !PB_MODSDK
-
             if (Application.isPlaying && IDUtility.IsGameLoaded ())
             {
                 var equipment = Contexts.sharedInstance.equipment;
@@ -224,7 +243,6 @@ namespace PhantomBrigade.Data
                         entity.ReplaceDataLinkPartPreset (preset);
                 }
             }
-
             #endif
         }
         
@@ -255,6 +273,7 @@ namespace PhantomBrigade.Data
             }
 
             origin.ratingRangeProcessed = null;
+            origin.workshopInfoProc = null;
 
             ProcessRecursive (origin, origin, 0);
         }
@@ -326,6 +345,39 @@ namespace PhantomBrigade.Data
             if (current.ratingRange != null && root.ratingRangeProcessed == null)
             {
                 root.ratingRangeProcessed = current.ratingRange;
+            }
+            
+            if (current.workshopInfo != null)
+            {
+                if (root.workshopInfoProc == null)
+                    root.workshopInfoProc = new SortedDictionary<int, WorkshopItemData> ();
+                
+                foreach (var kvp in current.workshopInfo)
+                {
+                    int rating = kvp.Key;
+                    var workshopInfoCurrent = kvp.Value;
+                    if (workshopInfoCurrent == null)
+                        continue;
+                    
+                    var workshopInfoRoot = root.workshopInfoProc.TryGetValue (rating, out var w) ? w : null;
+                    if (workshopInfoRoot == null)
+                    {
+                        workshopInfoRoot = new WorkshopItemData ();
+                        root.workshopInfoProc[rating] = workshopInfoRoot;
+                    }
+                    
+                    if (workshopInfoCurrent.progressLimit != null && workshopInfoRoot.progressLimit == null)
+                        workshopInfoRoot.progressLimit = workshopInfoCurrent.progressLimit;
+                    
+                    if (workshopInfoCurrent.inputResourcesViaStats != null && workshopInfoRoot.inputResourcesViaStats == null)
+                        workshopInfoRoot.inputResourcesViaStats = workshopInfoCurrent.inputResourcesViaStats;
+                    
+                    if (workshopInfoCurrent.inputResources != null && workshopInfoRoot.inputResources == null)
+                        workshopInfoRoot.inputResources = workshopInfoCurrent.inputResources;
+                    
+                    if (workshopInfoCurrent.basePartRequirements != null && workshopInfoRoot.basePartRequirements == null)
+                        workshopInfoRoot.basePartRequirements = workshopInfoCurrent.basePartRequirements;
+                }
             }
 
             if (current.sockets != null)
@@ -416,7 +468,7 @@ namespace PhantomBrigade.Data
 
         private static StringBuilder sbDesc = new StringBuilder ();
         private static string fallbackString = string.Empty;
-        
+
         public static bool IsSubsystemUsed (DataContainerSubsystem subsystem)
         {
             if (subsystem == null)
@@ -485,14 +537,8 @@ namespace PhantomBrigade.Data
         private static HashSet<string> collectedVisuals = new HashSet<string> ();
         private static Dictionary<string, DataBlockSubsystemAttachment> collectedAttachments = new Dictionary<string, DataBlockSubsystemAttachment> ();
 
-        public static void VisualizeObject (DataContainerPartPreset partPreset, bool useProcessedSystems)
+        public static void VisualizeObject (DataContainerPartPreset partPreset, bool useProcessedSystems, bool logMaterialWarnings = false)
         {
-            if (!AssetPackageHelper.AreUnitAssetsInstalled ())
-            {
-                Debug.LogWarning (AssetPackageHelper.unitAssetWarning);
-                return;
-            }
-            
             if (partPreset == null || partPreset.genStepsProcessed == null)
                 return;
 
@@ -539,7 +585,7 @@ namespace PhantomBrigade.Data
             {
                 visualHolder = new GameObject ("DataPreviewHolder");
                 // visualHolder.hideFlags = HideFlags.HideAndDontSave;
-                visualHolder.transform.position = new Vector3 (0f, 50f, 0f);
+                visualHolder.transform.position = new Vector3 (0f, 200f, 0f);
             }
 
             UtilityGameObjects.ClearChildren (visualHolder.transform);
@@ -562,6 +608,28 @@ namespace PhantomBrigade.Data
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero);
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity);
                     t.localScale = Vector3.one;
+
+                    if (logMaterialWarnings)
+                    {
+                        var renderers = visualInstance.GetComponentsInChildren<Renderer> (true);
+                        if (renderers != null && renderers.Length > 0)
+                        {
+                            for (int r = 0; r < renderers.Length; r++)
+                            {
+                                var renderer = renderers[r];
+                                var sm = renderer.sharedMaterials;
+                                if (sm == null || sm.Length == 0)
+                                    continue;
+
+                                for (int i = 0; i < sm.Length; i++)
+                                {
+                                    var mat = sm[i];
+                                    if (mat == null)
+                                        Debug.LogWarning ($"Material {i} on renderer {renderer.name} under visual {key} is null");
+                                }
+                            }
+                        }
+                    }
                 }
             }
             
@@ -587,6 +655,28 @@ namespace PhantomBrigade.Data
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero) + block.position;
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity) * Quaternion.Euler (block.rotation);
                     t.localScale = block.scale;
+                    
+                    if (logMaterialWarnings)
+                    {
+                        var renderers = visualInstance.GetComponentsInChildren<Renderer> (true);
+                        if (renderers != null && renderers.Length > 0)
+                        {
+                            for (int r = 0; r < renderers.Length; r++)
+                            {
+                                var renderer = renderers[r];
+                                var sm = renderer.sharedMaterials;
+                                if (sm == null || sm.Length == 0)
+                                    continue;
+
+                                for (int i = 0; i < sm.Length; i++)
+                                {
+                                    var mat = sm[i];
+                                    if (mat == null)
+                                        Debug.LogWarning ($"Material {i} on renderer {renderer.name} under visual {block.key} is null");
+                                }
+                            }
+                        }
+                    }
                 }
             }
             

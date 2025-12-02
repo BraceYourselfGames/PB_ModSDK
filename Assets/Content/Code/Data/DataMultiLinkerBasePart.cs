@@ -41,6 +41,44 @@ namespace PhantomBrigade.Data
             #endif
         }
 
+        [FoldoutGroup ("Utilities", false)]
+        [Button, PropertyOrder (-10)]
+        public static void AssignAudio ()
+        {
+            foreach (var kvp in data)
+            {
+                var bp = kvp.Value;
+                if (bp.audio != null)
+                    continue;
+
+                var key = kvp.Key;
+                if (key.Contains ("reactor"))
+                    bp.audio = new DataBlockBasePartAudio { onInstall = "ui_upgrade_reactor" };
+                else if (key.Contains ("workshop"))
+                    bp.audio = new DataBlockBasePartAudio { onInstall = "ui_upgrade_workshop" };
+                else if (key.Contains ("vision") || key.Contains ("sensor"))
+                    bp.audio = new DataBlockBasePartAudio { onInstall = "ui_upgrade_sensors" };
+                else if (key.Contains ("mm_"))
+                    bp.audio = new DataBlockBasePartAudio { onInstall = "ui_upgrade_movement" };
+                else if (key.Contains ("unit"))
+                    bp.audio = new DataBlockBasePartAudio { onInstall = "ui_upgrade_units" };
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button, PropertyOrder (-10)]
+        public static void LogEffectsPerInstance ()
+        {
+            foreach (var kvp in data)
+            {
+                var bp = kvp.Value;
+                if (bp.effectPerInstance == null || bp.effectPerInstance.Count == 0)
+                    continue;
+
+                Debug.Log ($"{kvp.Key}: {bp.effectPerInstance.Count} effects per instance");
+            }
+        }
+
         public static void OnHierarchyRefresh ()
         {
             foreach (var kvp in data)
@@ -93,12 +131,19 @@ namespace PhantomBrigade.Data
         {
             return childLink1.priority.CompareTo (childLink2.priority);
         }
-
+        
         [PropertyOrder (-20), Button ("Redraw UI", ButtonSizes.Large), HideInEditorMode]
         public static void RedrawUI ()
         {
             #if UNITY_EDITOR
             RefreshGrid ();
+            #endif
+            
+            #if !PB_MODSDK
+            if (!Application.isPlaying || CIViewBaseParts.ins == null || !CIViewBaseParts.ins.IsEntered ())
+                return;
+            
+            CIViewBaseParts.ins.RedrawGrid (false);
             #endif
         }
         

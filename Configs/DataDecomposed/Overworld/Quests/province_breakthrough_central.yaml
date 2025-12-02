@@ -1,0 +1,163 @@
+hidden: false
+parents: 
+textName: {}
+textDesc: {}
+core:
+  stepOnStart: prep
+  mainType: true
+  recordPointCompletion: true
+  recordPointMemory: true
+tags: 
+steps:
+  main:
+    comment: 
+    index:
+      i: 2
+    textName: 
+    textDesc: 
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestUnlinkPoints
+        onlyCombat: false
+        onlyHostile: false
+        checks: 
+        questMain: true
+        questKey: province_breakthrough_01
+      - !QuestProgress
+        stepRequired: 
+        stepNext: 
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCreatePoint
+        key: special_breakthrough_01
+        spawnGroupOverride: midpoint
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        questMain: true
+        questKey: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 2
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - breakthrough_central_prep_victory
+        tags: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCapture
+        questMain: true
+        questKey: 
+      - !QuestStart
+        questKey: province_selection
+      functionsBase:
+      - !OverworldEntityInteractionStart
+        key: breakthrough_central_exit
+        validated: false
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    stepNext: 
+  prep:
+    comment: 
+    index:
+      i: 1
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProgress
+        stepRequired: 
+        stepNext: 
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityQuestUnlink {}
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCreatePoint
+        key: special_breakthrough_01_prep
+        spawnGroupOverride: prep
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 2
+        questMain: true
+        questKey: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsBase:
+      - !OverworldEntityInteractionStart
+        key: breakthrough_central_intro
+        validated: false
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: main
+effectsShared: {}

@@ -2,40 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using YamlDotNet.Serialization;
+using YamlDotNet.Serialization; 
+
+#if PB_MODSDK
+using PhantomBrigade.SDK.ModTools;
+#endif
 
 namespace PhantomBrigade.Data
 {
-    #if PB_MODSDK
-    using SDK.ModTools;
-    #endif
-
     public static class DataPathUtility
     {
-        private static readonly Dictionary<Type, string> pathsFixed = new Dictionary<Type, string>
+        private static Dictionary<Type, string> pathsFixed = new Dictionary<Type, string>
         {
             { typeof (DataContainerPaths), "paths" },
             { typeof (DataContainerTextLibrary), "Text/" },
-            #if PB_MODSDK
+            #if !PB_MODSDK
+            { typeof (DataContainerSave), "Saves/" }, 
+            #else
             { typeof (DataContainerModToolsPage), "../ConfigsModTools/" },
             { typeof (DataContainerModData), "../ModConfigs/" },
             #endif
         };
-
+        
+        
+        
         public static string GetPath (Type linkerType)
         {
-            if (linkerType == null)
+            if (pathsFixed.ContainsKey (linkerType))
             {
-                Debug.LogError ($"Received no linker type, path can't be determined");
-                return null;
+                var pathEndFixed = pathsFixed[linkerType];
+                // Debug.Log ($"{linkerType.Name} loads data from fixed path {pathEndFixed}");
+                return $"Configs/{pathEndFixed}";
             }
             
-            if (pathsFixed.TryGetValue (linkerType, out var pathEndFixed))
-            {
-                // Debug.Log ($"{linkerType.Name} loads data from fixed path {pathEndFixed}");
-                return DataPathHelper.GetCombinedCleanPath ("Configs", pathEndFixed);
-            }
-
             var typeName = linkerType.Name;
             if (DataLinkerPaths.data == null || DataLinkerPaths.data.paths == null)
             {
@@ -48,14 +47,14 @@ namespace PhantomBrigade.Data
             {
                 Debug.LogError ($"{typeName} requires config to resolve its path, but DataLinkerPaths.data doesn't contain a matching key");
                 return null;
-            }
-
+            }  
+            
             var pathEnd = paths[typeName];
             // Debug.Log ($"{typeName} loads data from config derived path {pathEnd}");
-            return DataPathHelper.GetCombinedCleanPath ("Configs", pathEnd);
+            return $"Configs/{pathEnd}";
         }
 
-        public static string GetDataTypeFromPath (string path)
+        public static string GetDataTypeFromPath (string path, bool fallbackAllowed = true)
         {
             if (DataLinkerPaths.data == null || DataLinkerPaths.data.pathsInverted == null)
             {
@@ -63,22 +62,33 @@ namespace PhantomBrigade.Data
                 return null;
             }
 
-            var pathsInverted = DataLinkerPaths.data.pathsInverted;
-            if (!pathsInverted.ContainsKey (path))
+            var pathData = DataLinkerPaths.data;
+            var pathsInverted = pathData.pathsInverted;
+            if (pathsInverted.TryGetValue (path, out var typeName))
+                return typeName;
+
+            if (fallbackAllowed)
             {
-                // Debug.LogWarning ($"Failed to resolve data multi linker from path {path}, DataLinkerPaths.data.pathsInverted doesn't contain such a key");
-                return null;
+                foreach (var kvp in pathData.paths)
+                {
+                    var pathCompared = kvp.Value;
+                    if (path.Contains (pathCompared))
+                    {
+                        var typeNameFallback = kvp.Key;
+                        // Debug.Log ($"Fallback type determination based on path containing recognized pattern: {typeNameFallback} | Input:\n- {path}");
+                        return typeNameFallback;
+                    }
+                }
             }
 
-            var typeName = pathsInverted[path];
-            return typeName;
+            return null;
         }
     }
-
-    [Serializable]
+    
+    [Serializable] 
     public class DataContainerPaths : DataContainerUnique
     {
-        [DictionaryDrawerSettings (KeyLabel = "Type", ValueLabel = "Path")]
+        [DictionaryDrawerSettings (KeyLabel = "Type", ValueLabel = "Path")] 
         public Dictionary<string, string> paths;
 
         [YamlIgnore, ReadOnly]
@@ -87,16 +97,31 @@ namespace PhantomBrigade.Data
         public override void OnAfterDeserialization ()
         {
             base.OnAfterDeserialization ();
-
+            
             pathsInverted = new Dictionary<string, string> ();
             if (paths != null)
             {
                 foreach (var kvp in paths)
                 {
-                    if (!pathsInverted.ContainsKey (kvp.Value))
-                        pathsInverted.Add (kvp.Value, kvp.Key);
+                    var typeName = kvp.Key;
+                    var path = kvp.Value;
+                    
+                    if (!pathsInverted.ContainsKey (path))
+                        pathsInverted.Add (path, typeName);
+
+                    foreach (var kvp2 in paths)
+                    {
+                        var typeNameCompared = kvp2.Key;
+                        if (string.Equals (typeName, typeNameCompared, StringComparison.Ordinal))
+                            continue;
+                        
+                        var pathCompared = kvp2.Value;
+                        if (path.Contains (pathCompared, StringComparison.Ordinal))
+                            Debug.LogWarning ($"Path for type {typeName} ({path}) contains another path for type {typeNameCompared} ({pathCompared})");
+                    }
                 }
             }
         }
     }
 }
+

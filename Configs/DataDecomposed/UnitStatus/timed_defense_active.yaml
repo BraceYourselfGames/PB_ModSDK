@@ -6,8 +6,15 @@ color:
   a: 1
 hidden: false
 debug: true
+showOverlay: true
+showNotifications: true
+showTutorial: false
 restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
 fxAttached: 
+fxRepeated: 
 durationFull:
   f: 4
 durationUpdate:
@@ -15,6 +22,7 @@ durationUpdate:
 buildupDecayRate: 
 buildupThreshold: 
 buildupOverflow: 
+buildupShieldMultiplier: 
 stackable: 
 audio: 
 effectsOnStart: 
@@ -25,7 +33,7 @@ effectsOnUpdate:
   enabled: true
   triggerCheckUnit:
   - !CombatValidateUnitNeighborProjectiles
-    radius: 15
+    radius: 20
     offset:
       x: 0
       y: 4
@@ -90,8 +98,11 @@ effectsOnUpdate:
           y: 2
           z: 0.5
     present: true
+  triggerCheckPilot: 
   comment: 
   functionsOnHost: 
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 effectsOnEnd: 
 statOffsets: 

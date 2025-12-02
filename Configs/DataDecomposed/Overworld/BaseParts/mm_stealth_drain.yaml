@@ -3,7 +3,8 @@ parents:
   priority: 1
   offsetStart: 10
   offsetEnd: 10
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 3
@@ -19,12 +20,12 @@ cost:
     components_r3: 15
     supplies: 500
 effect:
-  calls: 
   stats:
   - key: mm_stealth_energy_change
     modifier: Multiply
     value: 0.85
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

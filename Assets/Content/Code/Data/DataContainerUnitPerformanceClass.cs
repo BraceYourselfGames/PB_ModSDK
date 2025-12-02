@@ -23,7 +23,7 @@ namespace PhantomBrigade.Data
     {
         [YamlIgnore, ReadOnly]
         public int index = 0;
-        
+
         public string textRange;
         
         [LabelText ("Name")][YamlIgnore]

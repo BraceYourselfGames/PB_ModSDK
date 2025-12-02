@@ -45,6 +45,8 @@ namespace PhantomBrigade.Functions
                 EquipmentUtility.OnPartDestruction (unitCombat, null, unitPersistent, part, HitDirections.front);
             }
             
+            DataHelperStats.RefreshStatCacheForUnit (unitPersistent);
+            
             #endif
         }
     }

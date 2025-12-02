@@ -1,0 +1,433 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: wave_01
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: false
+  tagFilterUsed: true
+  tagFilter:
+    context_base_showdown: true
+  keys: 
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      context_undefended: true
+      perimeter_outer: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Less
+      value: 135
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- block_exit_on_defeat
+- block_persistent_pilots
+- difficulty_hard
+- listed
+- type_assault
+- type_base_showdown
+- type_military_base
+states:
+  wave_02_completed:
+    comment: 
+    textNameKey: generic_breakin_objective_hostiles_header
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes:
+        turret: false
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: ftue_base_inv_outro_01
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  wave_02_trigger:
+    comment: 
+    textNameKey: generic_breakin_objective_hostiles_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Less
+        value: 2
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes:
+        turret: false
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: wave_02
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            wave_02_completed: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  wave_01:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: unique_stronghold_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_short: true
+        type_main: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 1
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: false
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_long: true
+        type_main: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 1
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: false
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: start_reinforcement_request
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatChangeFogCustom
+      time: 0
+      delay: 0
+      densityGlobal: 0.1
+      densityDistance: 0.625
+      densityHeight: 0.6
+      heightOffset: -6
+    outcome: 
+    transitions: 
+  wave_02:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: unique_stronghold_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_medium: true
+        type_main: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 2
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_short: true
+        type_main: true
+        weight_heavy: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 1
+      hidden: false
+      key: ftue_base_inv_reinforcements_00
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

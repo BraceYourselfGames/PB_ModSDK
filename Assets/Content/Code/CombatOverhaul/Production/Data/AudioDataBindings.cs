@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
 namespace PhantomBrigade.Game
 {
@@ -21,6 +21,15 @@ namespace PhantomBrigade.Game
         public const string TitleOptionToggle = "ui_title_option_toggle";
         public const string TitleApply = "ui_title_apply";
         public const string TitleStartGame = "ui_title_startgame";
+        
+        //2.0
+        public static string TitleAppear = "ui_title_appear";
+        public static string TitleButtonAppear = "ui_title_button_appear";
+        
+        public static string NewGameIntroText = "ui_new_game_intro_text";
+        
+        public const string CreditsStart = "credits_start"; 
+        public const string CreditsStop = "credits_stop"; 
     }
 
     public enum EventMusicMoods
@@ -34,6 +43,7 @@ namespace PhantomBrigade.Game
         Neutral = 6,
         Warning = 7,
         Standard = 8,
+        Sad = 9
     }
 
     public static class AudioEventOverworldNarrativeMusic
@@ -80,6 +90,7 @@ namespace PhantomBrigade.Game
         public const string DeployHoverPulse = "ui_crawler_deploy_hover_pulse";
         public const string DeployHoverOff = "ui_crawler_deploy_hover_off";
         public const string DeployConfirm = "ui_crawler_deploy_confirm";
+        public const string DeployBlocked = "ui_crawler_deploy_blocked";
         
         // ambient tweaks
         public const string ViewSelectSquad = "ui_crawler_view_select_squad"; // ?
@@ -104,6 +115,8 @@ namespace PhantomBrigade.Game
         
         public const string ContextDetachHoldStart = "ui_crawler_detach_hold_start";
         public const string ContextDetachHoldFinish = "ui_crawler_detach_hold_finish";
+        
+
         
         //Pilot and Unit Equip
         public const string UnitEquipHoldStart = "ui_crawler_unit_equip_hold_start";
@@ -135,6 +148,13 @@ namespace PhantomBrigade.Game
         public const string UpgradeStatsHoverOff = "ui_upgrade_stats_hover_off";
         public const string UpgradeStatsExpand = "ui_upgrade_stats_expand";
         public const string UpgradeStatsCollapse = "ui_upgrade_stats_collapse";
+        
+        public const string PilotRecruitConfirm = "ui_crawler_recruit_confirm";
+        public const string PilotPrestigeConfirm = "ui_crawler_pilot_prestige_confirm";
+        public const string PilotDismissConfirm = "ui_crawler_pilot_dismiss_confirm";
+        
+        //2.0
+        public const string ScrapWorkshopConfirm = "ui_crawler_scrap_workshop_confirm";
     }
     
     public static class AudioEventUICustomization
@@ -175,7 +195,7 @@ namespace PhantomBrigade.Game
 
             return UIMapPause;
         }
-        
+
         //Roster, resupply, repair
         public static string UIMapRepairPause = "ui_map_repair_pause";
         public static string UIMapRepairResume = "ui_map_repair_resume";
@@ -265,6 +285,40 @@ namespace PhantomBrigade.Game
 
         public const string UIMapGeneralHoverOn = "ui_map_general_hover_on";
         public const string UIMapGeneralHoverOff = "ui_map_general_hover_off";
+
+        //Roster
+        public const string CampPrepareToggleOn = "ui_map_camp_prepare_toggle_on";
+        public const string CampPrepareToggleOff = "ui_map_camp_prepare_toggle_off";
+        public const string CampConfirm = "ui_map_camp_confirm";
+        public const string OverdriveDamage = "ui_map_overdrive_damage";
+        
+        public const string CampAmbienceStart = "ambience_camping_start";
+        public const string CampAmbienceStop = "ambience_camping_stop";
+        
+        //Region
+        public const string CurrentRegionAppear = "ui_map_current_region_appear";
+        
+        // 2.0
+        public static string CampEffectNeutral = "ui_camp_effect_neutral"; // missing
+        public static string CampEffectRoll = "ui_camp_effect_roll"; // missing
+        public static string CampEffectNegative = "ui_camp_effect_negative"; // missing
+        public static string CampEffectPositive = "ui_camp_effect_positive"; // missing
+        public static string CampEffectFinal = "ui_camp_effect_final"; // missing
+        
+        public static string MapAreaHoverOn = "ui_worldmap_area_hover_on"; // missing
+        public static string MapAreaHoverOff = "ui_worldmap_area_hover_off"; // missing
+        public static string MapAreaSelect = "ui_worldmap_area_select"; // missing
+        public static string MapTravelConfirm = "ui_map_travel_confirm"; // missing
+        public static string MapTravelContinue = "ui_map_travel_continue"; // missing
+        
+        public static string MapEnemyRegroupHoverOn = "ui_map_enemyRegroup_hover_on";
+        public static string MapEnemyRegroupHoverOff = "ui_map_enemyRegroup_hover_off";
+        
+        public static string CrawlerTravelLoopStart = "crawler_travel_loop_start"; // missing
+        public static string CrawlerTravelLoopStop = "crawler_travel_loop_stop"; // missing
+
+        public static string CodexEntryUnlocked = "ui_map_codex_unlocked"; // "codex_entry_unlocked"; // missing
+        public static string CodexEntryRead = "ui_map_codex_read"; // "codex_entry_read"; // missing
     }
 
     public static class AudioEventUISalvage
@@ -303,6 +357,21 @@ namespace PhantomBrigade.Game
         public const string PredictionActivate = "ui_combat_prediction_activate";
         public const string PredictionHoverOn = "ui_start_locked_hover_on";
         public const string PredictionHoverOff = "ui_start_locked_hover_off";
+        
+        public const string InvadedIntro = "ui_invaded";
+        
+        public static string UICombatDebriefingVictory = "ui_combat_debriefing_victory";
+        
+        public const string DebriefingResultIn = "ui_combat_debriefing_result_in";
+        public const string DebriefingResultCount = "ui_combat_debriefing_result_count";
+        
+        public const string DebriefingUnitsDefeatedStart = "ui_combat_debriefing_units_defeated_start";
+        public const string DebriefingUnitsDefeatedStop = "ui_combat_debriefing_units_defeated_stop";
+        
+        public const string Reward1 = "ui_combat_reward_1";
+        public const string Reward2 = "ui_combat_reward_2";
+        public const string Reward3 = "ui_combat_reward_3";
+        public const string Reward4 = "ui_combat_reward_4";
     }
 
     public static class AudioEventGeneral
@@ -320,7 +389,9 @@ namespace PhantomBrigade.Game
         public const string SeedRandomToggleOn = "ui_title_seed_random_toggle_on";
         public const string SeedRandomToggleOff = "ui_title_seed_random_toggle_off";
         public const string SeedGenerate = "ui_title_seed_generate";
+        
         public const string GeneralTextInput = "ui_general_text_input"; 
+        public const string GeneralTextDelete = "ui_general_text_delete"; 
     }
     
     public static class AudioEventMusic
@@ -331,6 +402,8 @@ namespace PhantomBrigade.Game
         public const string Dynamic01 = "music_combat_cinematic_01";
         public const string MusicCombatLinear = "music_combat_linear";
         public const string MainMenu = "music_menu";
+        
+        public const string MusicOverworldStop = "music_overworld_stop";
     }
 
     public static class AudioSyncMusic
@@ -399,6 +472,7 @@ namespace PhantomBrigade.Game
         public const string City = "ambience_city"; 
         public const string Settlement = "ambience_settlement";
         public const string Forest = "ambience_forest";
+        public const string Bunker = "ambience_bunker";
 
         public const string Smoke = "camera_movement";
         public const string SmokeStop = "camera_movement_stop";
@@ -523,6 +597,7 @@ namespace PhantomBrigade.Game
     {
         public const string Boss = "boss";
         public const string BossBig = "boss_big";
+        public const string Waves = "waves";
         
         public const string Dire = "dire";
         public const string Negative = "negative";
@@ -656,12 +731,29 @@ namespace PhantomBrigade.Game
         public const string BossTargetingAlert = "ui_boss_target_unit";
         public const string BossTargetingAlertHover = "ui_boss_target_unit_hover";
         
+        //Status effects
+        public const string StatusActiveDefenseShot = "weapon_active_defense_shot";
+        public const string StatusBurningLoopStart = "status_burning_loop";
+        public const string StatusBurningLoopStop = "status_burning_loop_stop";
+        public const string StatusBurningWaterCool = "status_burning_water_cool";
+        public const string StatusVentingLoopStart = "status_venting_loop";
+        public const string StatusVentingLoopStop = "status_venting_loop_stop";
+        public const string StatusVentingIgnition = "status_venting_burning";
+        public const string StatusChargedLoopStart = "status_charged_loop";
+        public const string StatusChargedLoopStop = "status_charged_loop_stop";
+        public const string StatusChargedDischarge = "status_charged_discharge";
+        public const string StatusMeltdownLoopStart = "status_meltdown_loop";
+        public const string StatusMeltdownLoopStop = "status_meltdown_loop_stop";
+        public const string StatusStabilizeSuccess = "status_stabilize";
+        public const string LightningStrike = "lightning_strike";
 
         //Tank weapon rotate 
         public const string TankWeaponRotateLoopStart = "tank_weapon_rotate_loop_start";
         public const string TankWeaponRotateLoopStop = "tank_weapon_rotate_loop_stop";
         
         //Damage, impacts
+        public const string ImpactCrit = "impact_crit";
+        
         public const string ImpactBuilding = "impact_bullet_rock";
         public const string ImpactMechBulletSmall = "impact_bullet_mech_small";
         public const string ImpactMechBulletLarge = "impact_bullet_mech_large";
@@ -680,7 +772,10 @@ namespace PhantomBrigade.Game
         public const string ExplosionUnit = "explosion_unit";
         
         public const string MechFootfall = "mech_foot";
-
+        public const string MechFootfallWater = "mech_foot_water";
+        public const string MechWaterEntry = "mech_step_water_in";
+        public const string MechWaterExit = "mech_step_water_out";
+        
         public const string MechEjection = "mech_eject";
 
         public const string CutsceneSFXIntro = "cut_tutorial_intro";
@@ -783,7 +878,33 @@ namespace PhantomBrigade.Game
         //Prop drone
         public const string PropDroneFlyIn = "prop_drone_fly_in";
         public const string PropDroneFlyOut = "prop_drone_fly_out";
-
+        
+        //2.0
+        public static string JetFlyby = "jet_flyby"; // missing
+        
+        public static string WeaponMissileCruiseStart = "weapon_missile_cruise_start";
+        public static string WeaponMissileCruiseStop = "weapon_missile_cruise_stop";
+        public static string WeaponMissileCruiseExplode = "weapon_missile_cruise_explode";
+        
+        public static string UICombatIntro1 = "ui_combat_intro_1";
+        public static string UICombatIntro2 = "ui_combat_intro_2";
+        public static string UICombatIntro3 = "ui_combat_intro_3";
+        public static string UICombatIntroStop = "ui_combat_intro_stop";
+        
+        public static string BossBoatDroneLaunch = "boss_boat_drone_launch";
+        public static string CutsceneBaseLaserFire = "cutscene_base_laser_fire";
+        
+        public static string UICombatCapacitorChargeLoss = "ui_combat_capacitor_charge_lose";
+        public static string UICombatCapacitorChargeGain = "ui_combat_capacitor_charge_gain";
+        public static string UICombatCapacitorChargeFull = "ui_combat_capacitor_charge_full";
+        
+        public static string SatDoorExplosion = "door_satellite_explosion";
+        public static string SatAntennaDestruction = "satellite_destroyed";
+        
+        public static string TrainCombatMovementLoopStart = "train_combat_movement_loop";
+        public static string TrainCombatMovementLoopStop = "train_combat_movement_loop_stop";
+        public static string TrainCombatEngineExplode = "train_combat_engine_explode";
+        
         private static List<string> keys;
         public static List<string> GetKeys ()
         {

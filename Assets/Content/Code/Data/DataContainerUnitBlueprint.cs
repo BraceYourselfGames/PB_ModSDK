@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
+using Entitas.VisualDebugging.Unity;
 using PhantomBrigade.Functions;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,8 +26,25 @@ namespace PhantomBrigade.Data
         [HideInInspector][YamlIgnore]
         public DataContainerUnitBlueprint parent;
 
+        [DropdownReference (true)]
         [HideLabel, BoxGroup ("UI")]
         public DataBlockUnitSocketUI ui;
+        
+        [DropdownReference]
+        [DictionaryKeyDropdown ("@DataMultiLinkerUnitStats.data.Keys")]
+        public SortedDictionary<string, float> statOffsetsOnAbsence;
+        
+        #region Editor
+        #if UNITY_EDITOR
+        
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockUnitBlueprintSocket () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+
+        #endif
+        #endregion
     }
     
     [Serializable]
@@ -94,7 +114,25 @@ namespace PhantomBrigade.Data
         private IEnumerable<string> GetKeys () => DataMultiLinkerSubsystem.data.Keys;
         #endif
     }
+    
+    [Persistent]
+    public sealed class DataKeyUnitClass : IComponent
+    {
+        [EntityIndex]
+        public string s;
+    }
 
+    [Persistent]
+    public sealed class DataKeyUnitBlueprint : IComponent 
+    {
+        [EntityIndex]
+        public string s; 
+    }
+    
+    [Persistent][DontDrawComponent]
+    public sealed class DataLinkUnitBlueprint : IComponent 
+    { public DataContainerUnitBlueprint data; }
+    
     [Serializable][LabelWidth (180f)]
     public class DataContainerUnitBlueprint : DataContainerWithText
     {
@@ -163,12 +201,18 @@ namespace PhantomBrigade.Data
         
         [DropdownReference (true)]
         public DataBlockUnitDestructionFragments destructionFragments;
+        
+        [DropdownReference]
+        public List<ICombatFunctionTargeted> crashFunctions;
 
         [DropdownReference]
         public List<ICombatFunctionTargeted> destructionFunctions;
         
         [DropdownReference (true)]
         public DataBlockScenarioUnitUncrewed uncrewed;
+        
+        [DropdownReference (true)]
+        public DataBlockInt weightClassOverride;
 
         [Tooltip("Used by the AI system to find and load a behavior tree for this unit type (if controlled by AI)")]
 		public string aiBehavior;
@@ -228,7 +272,7 @@ namespace PhantomBrigade.Data
             foreach (var kvp in checks)
             {
                 var check = kvp.Value;
-                if (check.check.blueprints == null)
+                if (check.check?.blueprints == null)
                     continue;
 
                 foreach (var checkBlueprint in check.check.blueprints)

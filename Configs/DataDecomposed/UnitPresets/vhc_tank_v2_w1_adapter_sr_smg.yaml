@@ -17,11 +17,11 @@ partTagPreferences:
 parts:
   equipment_right:
     livery: 
-    preset: !PartResolverKeys
-      keys:
-      - wpn_mg_sub_01
-      - wpn_mg_sub_02
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_smg: true
     rating: 
     systems: 
 animationOverrides: 
-functions: 
+effects: 

@@ -10,26 +10,27 @@ hardpoints:
 - internal_main_equipment
 tags:
 - mnf_05
-- spec_stabilized
+- spec_concussion
+- spec_charge
 statDistribution: ''
 stats:
   act_count:
-    value: 7
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 1
+    value: 0.7
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 80
+    value: 65
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 1
+    value: 1.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -39,12 +40,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 0
+    value: 0.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 26
+    value: 45
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -54,7 +55,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 18
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -69,12 +70,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 5
+    value: 4
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 5
+    value: 4
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -158,6 +159,9 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
@@ -172,7 +176,7 @@ projectile:
           y: 0.1946475
         m: {}
       - tv_tg:
-          x: 0.2756166
+          x: 0.4964494
           y: 1
           z: 0
           w: 0
@@ -181,7 +185,7 @@ projectile:
           y: 0.3333333
         m: {}
       - tv_tg:
-          x: 0.6034884
+          x: 0.8493227
           y: 1
           z: 0.007910742
           w: 0.007910742
@@ -212,11 +216,13 @@ projectile:
   statusBuildup:
     key: timed_charged
     statMultiplier: 
-    amount: 0.35
+    amount: 1
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

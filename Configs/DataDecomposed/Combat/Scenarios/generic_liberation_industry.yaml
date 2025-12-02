@@ -23,10 +23,16 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
   tagFilter:
+    context_facility: true
     type_main: true
   keys: 
 entry:
@@ -58,6 +64,7 @@ tags:
 - listed
 - type_liberation
 - type_industry_liberation
+- flag_escalation_squads
 states:
   retreat_default:
     comment: 
@@ -117,10 +124,50 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_long: false
+        range_medium: true
         type_main: true
-        weight_light: false
       check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 1
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        context_defended: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        type_main: true
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
@@ -147,38 +194,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: true
       spawnRegistration: 
-    - !UnitGroupFilter
-      tagsFromFactionBranch: true
-      tags:
-        type_main: true
-        weight_light: true
-      check: 
-      combatTags: 
-      spawnGroupOccupied: true
-      spawnCountStrict: true
-      spawnOrderRandom: true
-      factionBranchOverride: false
-      factionBranchKey: 
-      baseGrade: 0
-      maxGrade: 1
-      cloneable: true
-      functions: 
-      spawnTagsUsed: true
-      spawnTags:
-        context_defended: true
-      spawnGroupKey: 
-      filterDistancePlayer:
-        check: Greater
-        value: 120
-      filterDistanceEnemy: 
-      filterDistanceSpawn: 
-      filterDistanceLocation: 
-      filterDistanceVolume: 
-      filterDistanceState: 
-      filterDistanceRetreat: 
-      sorting: !UnitSlotSortingPlayer
-        invert: true
-      spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -208,3 +224,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

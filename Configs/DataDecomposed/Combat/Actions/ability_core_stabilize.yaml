@@ -24,14 +24,19 @@ dataCore:
   durationType: Data
   duration: 1.5
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation: 
   functionsOnModification: 
@@ -75,6 +80,7 @@ dataCore:
       - timed_burn
       - timed_unstable
       - timed_meltdown
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

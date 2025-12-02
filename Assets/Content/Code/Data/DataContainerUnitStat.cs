@@ -41,6 +41,9 @@ namespace PhantomBrigade.Data
         [LabelText ("Color (Output UI)")]
         public Color uiColorOutput;
         
+        [YamlIgnore, ReadOnly, HideLabel]
+        public string uiColorOutputTag;
+        
         [ShowIf ("IsUIVisible")]
         [LabelText ("Icon")]
         [DataEditor.SpriteNameAttribute (true, 32f)]
@@ -76,6 +79,8 @@ namespace PhantomBrigade.Data
         public bool rounded = false;
         
         public bool derived = false;
+        
+        public bool offsetAbsolute;
 
         public DataBlockUnitStatFlags flags;
 
@@ -133,7 +138,12 @@ namespace PhantomBrigade.Data
         public DataBlockFloat maxInUnit;
         
         [DropdownReference (true)]
+        [ValueDropdown("@DataMultiLinkerUnitStats.data.Keys")]
         public string maxFromStat;
+        
+        [DropdownReference (true)]
+        [ValueDropdown("@DataMultiLinkerUnitStats.data.Keys")]
+        public string offsetFromUnitStat;
         
         [DropdownReference (true)]
         public DataBlockFloat increasePerLevel;
@@ -143,7 +153,13 @@ namespace PhantomBrigade.Data
         
         [DropdownReference (true)]
         public DataBlockUnitStatStatusRelationship statusLink;
-        
+
+        public override void OnAfterDeserialization (string key)
+        {
+            base.OnAfterDeserialization (key);
+            uiColorOutputTag = UtilityColor.ToHexTagRGB (uiColorOutput);
+        }
+
         public override void ResolveText ()
         {
             textName = DataManagerText.GetText (TextLibs.unitStats, $"{key}__name");
@@ -172,15 +188,13 @@ namespace PhantomBrigade.Data
         private static bool IsExposureVisible => DataMultiLinkerUnitStats.Presentation.showExposure;
         private static bool AreValuesVisible => DataMultiLinkerUnitStats.Presentation.showValues;
 
+        #if !PB_MODSDK
         private void UpdateStats ()
         {
-            #if !PB_MODSDK
-
             if (Application.isPlaying)
                 DataHelperStats.RefreshStatCacheForAllParts (key);
-
-            #endif
         }
+        #endif
         
         #endif
         #endregion

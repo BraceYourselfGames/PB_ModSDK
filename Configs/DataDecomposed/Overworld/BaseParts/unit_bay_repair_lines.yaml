@@ -3,7 +3,8 @@ parents:
   priority: 0
   offsetStart: 10
   offsetEnd: 10
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 3
@@ -19,12 +20,12 @@ cost:
     components_r3: 30
     supplies: 1000
 effect:
-  calls: 
   stats:
   - key: unit_repair_jobs
     modifier: Offset
     value: 1
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

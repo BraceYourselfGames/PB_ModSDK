@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_reserves
 tags:
@@ -12,8 +12,49 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_vanguard
+  - keyExternal: true
+    key: vhc_mech_w2_mr_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_mr_ar_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w1_mr_mls_res
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w2_mr_res
     countMin: 1
     countMax: 1
     countRandom: false
@@ -25,40 +66,12 @@ unitsPerGrade:
     aiTargeting: leader
     liveryPreset: inv_reserves_g2_attacker
     custom: 
-  - keyExternal: false
-    key: tank_striker
+  - keyExternal: true
+    key: vhc_tank_v2_w2_mr_mg_res
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: striker
-    liveryPreset: inv_reserves_g1_attacker
-    custom: 
-- liveryPreset: ''
-  units:
-  - keyExternal: false
-    key: mech_vanguard
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: 1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q2_uncommon
-    aiBehavior: Flanker
-    aiTargeting: leader
-    liveryPreset: inv_reserves_g2_attacker
-    custom: 
-  - keyExternal: false
-    key: tank_vanguard
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
@@ -66,13 +79,26 @@ unitsPerGrade:
     aiTargeting: vanguard
     liveryPreset: inv_reserves_g1_attacker
     custom: 
-  - keyExternal: false
-    key: tank_striker
+  - keyExternal: true
+    key: vhc_drone_exp_01
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: DumbAdvance
+    aiTargeting: default
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_standard_mr_cannon
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
     aiBehavior: Flanker
@@ -81,12 +107,12 @@ unitsPerGrade:
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_vanguard
+  - keyExternal: true
+    key: vhc_mech_w2_mr_full_res
     countMin: 1
     countMax: 1
     countRandom: false
-    levelOffsetMin: 2
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q3_rare
@@ -94,9 +120,22 @@ unitsPerGrade:
     aiTargeting: leader
     liveryPreset: inv_reserves_g3_attacker
     custom: 
-  - keyExternal: false
-    key: tank_striker
+  - keyExternal: true
+    key: vhc_mech_w2_mr_backonly_res
     countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_mr_cannon_res
+    countMin: 2
     countMax: 2
     countRandom: false
     levelOffsetMin: -1
@@ -107,25 +146,12 @@ unitsPerGrade:
     aiTargeting: striker
     liveryPreset: inv_reserves_g1_attacker
     custom: 
-  - keyExternal: false
-    key: mech_striker
+  - keyExternal: true
+    key: vhc_tank_v2_w3_adapter_mr_mg_res
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: striker
-    liveryPreset: inv_reserves_g1_attacker
-    custom: 
-  - keyExternal: false
-    key: tank_striker
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common

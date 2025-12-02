@@ -2,121 +2,78 @@ hidden: false
 parents: []
 image: 
 core:
-  backgroundTerrainUsed: true
-  altitudeChecked: false
+  backgroundTerrainUsed: false
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.3
   destructionMapping:
-    x: 0
-    y: 200
+    x: 50
+    y: 500
     z: 0.35
-    w: 0.9
-tags: []
+    w: 0.5
+tags:
+- force_high_alert
 spawnGroups:
   beam:
     tags: []
     points:
     - point:
-        x: 7.5
+        x: 5.791737
         y: -19.45
-        z: 256.5
+        z: 254.8005
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 49.96454
-        y: -19.45
-        z: 256.4187
+        x: 58.38776
+        y: -19.5
+        z: 257.5311
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 55.5
+        x: 54.07677
         y: -19.45
-        z: 229.5
+        z: 225.5676
       rotation:
         x: 0
         y: 179.1895
         z: 0
     - point:
-        x: 7.5
+        x: 12.71059
         y: -19.45
-        z: 226.5
+        z: 229.8021
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 31.5
-        y: -19.45
-        z: 193.5
+        x: 4.5
+        y: -19.5
+        z: 208.5
       rotation:
         x: 0
         y: 180
         z: 0
-  boss:
-    tags:
-    - perimeter_center
-    - direction_e
-    - player
-    - context_defended
-    - context_undefended
-    points:
-    - point:
-        x: 170.1819
-        y: -19.45
-        z: 116.295
-      rotation:
-        x: 0
-        y: 270
-        z: 0
-    - point:
-        x: 170.6139
-        y: -19.45
-        z: 93.63201
-      rotation:
-        x: 0
-        y: 269.4079
-        z: 0
-    - point:
-        x: 173.4854
-        y: -19.45
-        z: 169.0144
-      rotation:
-        x: 0
-        y: 225
-        z: 0
-    - point:
-        x: 190.1721
-        y: -19.45
-        z: 104.2633
-      rotation:
-        x: 0
-        y: 267.3138
-        z: 0
-    - point:
-        x: 171.1296
-        y: -19.45
-        z: 39.76453
-      rotation:
-        x: 0
-        y: 270
-        z: 0
-  fast:
-    tags:
-    - direction_e
-    - perimeter_outer
-    - context_defended
-    - context_undefended
+  city_hall_east:
+    tags: []
     points:
     - point:
         x: 216.1473
@@ -158,6 +115,170 @@ spawnGroups:
         x: 0
         y: 270
         z: 0
+  city_hall_landing:
+    tags: []
+    points:
+    - point:
+        x: 169.5
+        y: -19.5
+        z: 115.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 169.5
+        y: -19.5
+        z: 94.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 172.5
+        y: -19.5
+        z: 169.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 190.5
+        y: -19.5
+        z: 103.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 172.5
+        y: -19.5
+        z: 40.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  city_hall_landing2:
+    tags: []
+    points:
+    - point:
+        x: 207.774
+        y: -19.5
+        z: 104.7633
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 201.8174
+        y: -19.5
+        z: 92.91376
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 202.5538
+        y: -19.5
+        z: 117.304
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  city_hall_roof:
+    tags:
+    - perimeter_center
+    - direction_e
+    - player
+    - context_defended
+    - context_undefended
+    points:
+    - point:
+        x: 187.5
+        y: -1.5
+        z: 133.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 187.5
+        y: -1.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 220.5
+        y: -4.5
+        z: 67.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 220.5
+        y: -4.5
+        z: 142.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  city_hall_west:
+    tags: []
+    points:
+    - point:
+        x: 188.8754
+        y: -19.45
+        z: 227.0836
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 169.0255
+        y: -19.5
+        z: 219.4358
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 182.1717
+        y: -19.5
+        z: 185.4933
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 165.7786
+        y: -19.5
+        z: 190.6254
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 170.3964
+        y: -19.5
+        z: 239.7872
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  drone_spawn:
+    tags: []
+    points:
+    - point:
+        x: 289.5
+        y: -19.5
+        z: 265.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
   guard:
     tags:
     - perimeter_center
@@ -167,16 +288,16 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 122.5756
-        y: -19.45
-        z: 140.6263
+        x: 130.5
+        y: -19.5
+        z: 139.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 148.5
-        y: -19.45
+        x: 142.5
+        y: -19.5
         z: 106.5
       rotation:
         x: 0
@@ -199,19 +320,15 @@ spawnGroups:
         y: 225
         z: 0
     - point:
-        x: 145.5
-        y: -19.45
-        z: 157.5
+        x: 133.5
+        y: -19.5
+        z: 163.5
       rotation:
         x: 0
         y: 180
         z: 0
   heavy:
-    tags:
-    - direction_n
-    - perimeter_outer
-    - context_defended
-    - context_undefended
+    tags: []
     points:
     - point:
         x: 58.95774
@@ -219,7 +336,7 @@ spawnGroups:
         z: 48.73656
       rotation:
         x: 0
-        y: 180
+        y: 0
         z: 0
     - point:
         x: 59.27453
@@ -227,7 +344,7 @@ spawnGroups:
         z: 32.94536
       rotation:
         x: 0
-        y: 180
+        y: 30.00001
         z: 0
     - point:
         x: 115.8998
@@ -235,15 +352,15 @@ spawnGroups:
         z: 26.57826
       rotation:
         x: 0
-        y: 179.1895
+        y: 359.1895
         z: 0
     - point:
-        x: 137.0536
-        y: -19.45
-        z: 31.51907
+        x: 154.5
+        y: -19.5
+        z: 28.5
       rotation:
         x: 0
-        y: 180
+        y: 45
         z: 0
     - point:
         x: 82.5
@@ -251,55 +368,51 @@ spawnGroups:
         z: 28.78907
       rotation:
         x: 0
-        y: 180
+        y: 1.001791E-05
         z: 0
   hg:
     tags:
-    - direction_w
-    - direction_sw
     - perimeter_outer
-    - context_defended
-    - context_undefended
     points:
     - point:
-        x: 286.5
-        y: -19.45
-        z: 271.5
+        x: 289.2924
+        y: -19.5
+        z: 2.758368
       rotation:
         x: 0
-        y: 90
+        y: 315
         z: 0
     - point:
-        x: 235.5
-        y: -19.45
-        z: 271.5
+        x: 267.7931
+        y: -19.5
+        z: 17.83164
       rotation:
         x: 0
-        y: 90
+        y: 315
         z: 0
     - point:
-        x: 220.5
-        y: -19.45
-        z: 271.5
+        x: 286.3443
+        y: -19.5
+        z: 27.63777
       rotation:
         x: 0
-        y: 45
+        y: 315
         z: 0
     - point:
-        x: 253.5
-        y: -19.45
-        z: 271.5
+        x: 264.919
+        y: -19.5
+        z: 1.28688
       rotation:
         x: 0
-        y: 44.95628
+        y: 315
         z: 0
     - point:
-        x: 268.5
-        y: -19.45
-        z: 271.5
+        x: 288.8078
+        y: -19.5
+        z: 50.37415
       rotation:
         x: 0
-        y: 45
+        y: 315
         z: 0
   long:
     tags: []
@@ -392,6 +505,41 @@ spawnGroups:
         y: 90
         z: 0
 locations:
+  drone_trigger:
+    tags:
+    - obj_defense_navigable
+    data: !AreaLocation
+      point:
+        x: 8.624288
+        y: -19.45
+        z: 64.59236
+      rotation: 0
+      sizeX: 16
+      sizeY: 30
+      rect: true
+  obj_boss_origin:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 348.5
+        y: -21
+        z: 280.5
+      rotation: -90
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_defense_origin_01:
+    tags:
+    - obj_defense_origin
+    data: !AreaLocation
+      point:
+        x: -17.33
+        y: -19.56
+        z: 58.79
+      rotation: -135
+      sizeX: 9
+      sizeY: 9
+      rect: false
   retreat:
     tags:
     - obj_retreat
@@ -404,6 +552,17 @@ locations:
       sizeX: 14
       sizeY: 14
       rect: true
+  TEST_beam_activation:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 7.5
+        y: -19.5
+        z: 85.5
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
 volumes: {}
 fields: 
 waypointGroups: 
@@ -608,13 +767,40 @@ boundary:
         y: 0.3333333
       m: {}
     - tv_tg:
-        x: 1
+        x: 0.879
         y: 0
         z: 0
         w: 0
       w:
-        x: 0
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.88
+        y: -3
+        z: -1403
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.992
+        y: -3
+        z: 0
+        w: 1400
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.993
         y: 0
+        z: 1400
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
       m: {}
   west:
     modePostWrap: ClampForever
@@ -633,7 +819,7 @@ boundary:
         x: 0.3132796
         y: 0
         z: 0
-        w: -1403.892
+        w: 0
       w:
         x: 0.3333333
         y: 0.3333333
@@ -666,15 +852,46 @@ boundary:
         y: 0.3333333
       m: {}
     - tv_tg:
-        x: 1
+        x: 0.879
         y: 0
         z: 0
         w: 0
       w:
-        x: 0
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.88
+        y: -1
+        z: -1403
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.992
+        y: -1
+        z: 0
+        w: 1400
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.993
         y: 0
+        z: 1400
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
       m: {}
 segments:
 - path: Content/AreaSegments/area_seg_main_capital_center
-biomeFilter: 
+biomeFilter:
+  tagsUsed: false
+  keys:
+  - special_capital
+  tags: 
 scenarioChanges: 

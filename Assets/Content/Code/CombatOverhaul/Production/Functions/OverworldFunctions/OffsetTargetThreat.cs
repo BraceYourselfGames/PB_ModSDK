@@ -5,18 +5,9 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
 	[Serializable]
-	public class OffsetTargetThreat : IOverworldEventFunction, IOverworldActionFunction
+	public class OffsetTargetThreat : IOverworldActionFunction
 	{
 		public int offset;
-		
-		public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-		{
-			#if !PB_MODSDK
-            
-			Run (target);
-			
-			#endif
-		}
 
 		public void Run (OverworldActionEntity source)
 		{

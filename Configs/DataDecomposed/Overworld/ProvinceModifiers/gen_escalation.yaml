@@ -1,0 +1,31 @@
+hidden: false
+positive: false
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: true
+hue: 0
+icon: s_icon_l32_star3
+tags:
+- type_negative
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry: 
+effectsOnCompletion: 
+effectsOnSpawn:
+- checks:
+  - !OverworldValidateEscalationLevel
+    required: true
+    min: 0
+    max: 2
+  functionsTargeted:
+  - !OverworldEntityEscalation
+    offset: true
+    level: 1
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

@@ -22,8 +22,14 @@ core:
   actionBlocklist:
   - eject
   customExitBehaviour: 
-  weatherOverridePrecipitation: 
+  weatherOverridePrecipitation:
+    f: 0.15
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -53,6 +59,8 @@ tags:
 - unique_mountainbase
 - listed
 - trait_entrenched
+- block_exit_on_defeat
+- block_save_after
 states:
   main:
     comment: 
@@ -129,19 +137,15 @@ states:
           stateValueChanges: 
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
-          rewards:
-            obj_capture_loot: 1
-          callsImmediate: 
-          callsDelayed: 
+          rewards: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Victory
             early: false
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   wave_00_guard_turn:
     comment: 
     textNameKey: generic_enemy_reinforcements_header
@@ -198,14 +202,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   wave_00_guard:
     comment: 
@@ -229,8 +230,8 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: tank_aa
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -261,8 +262,8 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
-        key: tank_cannon
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
         countMin: 1
         countMax: 1
         countRandom: false
@@ -316,6 +317,7 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges:
       reinforcement_wave_test: true
       reward: true
@@ -380,18 +382,25 @@ steps:
     musicIntensity: 
     musicReactive: 
     commsOnStart:
-    - time: 2
-      hidden: false
-      key: unique_mountainbase_wave_00_intro
     - time: 12
       hidden: false
-      key: unique_mountainbase_wave_00_guard_c0
+      key: unique_mountainbase_intro_02
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
     functions:
     - !StartTutorial
       key: combat_mountainbase
+      allowRepeat: true
+    - !CombatModifyUnits
+      units: 1
+      checks:
+      - !UnitValidateNameInternal
+        nameInternal: pb_mech_01
+      functions:
+      - !CombatCreateCommsMessage
+        time: 0
+        key: unique_mountainbase_intro_01
     outcome: 
     transitions: 
   wave_01_alarm:
@@ -415,8 +424,8 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
-        key: mech_generic
+      - keyExternal: true
+        key: custom_mountainbase_bravo
         countMin: 1
         countMax: 1
         countRandom: false
@@ -473,6 +482,7 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -491,17 +501,12 @@ steps:
     commsOnStart:
     - time: 0.1
       hidden: false
-      key: unique_mountainbase_wave_01_alarm_c0
+      key: unique_mountainbase_reinforcement_01
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
     functions: 
     outcome: 
     transitions: 
-unitPresets:
-  mech_generic: !UnitPresetLink
-    preset: custom_mountainbase_bravo
-  tank_aa: !UnitPresetLink
-    preset: vhc_tank_training_aa_0
-  tank_cannon: !UnitPresetLink
-    preset: vhc_tank_training_cannon_0
+unitPresets: 
+unitGenerators: 

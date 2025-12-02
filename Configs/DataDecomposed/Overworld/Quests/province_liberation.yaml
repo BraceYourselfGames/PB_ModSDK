@@ -1,0 +1,958 @@
+hidden: false
+parents: 
+textName: {}
+textDesc: {}
+core:
+  stepOnStart: 01_raid
+  mainType: true
+  recordPointCompletion: true
+  recordPointMemory: true
+tags: 
+steps:
+  01_raid:
+    comment: 
+    index:
+      i: 1
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed:
+    - quest_liberation_progress_s1
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldQuestMemory
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue:
+          value: !OverworldIntValueQuestMemory
+            questKey: province_liberation
+            memoryPrefix: 
+            memoryKey: quest_liberation_progress_s1
+          target: !OverworldIntValueMemoryAdv
+            key: quest_liberation_target_s1
+            valueFallback: 4
+            operations: []
+        checksBase: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidateMemorySimple
+          filter:
+            quest_liberation_progress_s1:
+              check: Greater
+              value: 0
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityMemoryToQuest
+        memoryKey: quest_liberation_progress_s1
+        offset: true
+        consume: true
+        questMain: true
+        questKey: 
+      - !OverworldEntityQuestUnlink {}
+      - !OverworldEntityGlobalGroup
+        functions:
+        - !QuestActiveApplyEffectGroup
+          effectKey: 01_raid_spawn_refresh
+          questMain: true
+          questKey: 
+      linkedEffectKeys: 
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatDefeat
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidateMemorySimple
+          filter:
+            quest_liberation_progress_s1:
+              check: Greater
+              value: 0
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityGlobalGroup
+        functions:
+        - !QuestActiveApplyEffectGroup
+          effectKey: 01_raid_spawn_refresh
+          questMain: true
+          questKey: 
+      linkedEffectKeys: 
+    - early: false
+      filterEventTypes:
+      - OverworldResetReached
+      filterEventEntity: 
+      comment: 
+      checksGlobal:
+      - !OverworldValidateSimLock
+        present: false
+      checksBase: 
+      functionsGlobal:
+      - !QuestActiveApplyEffectGroup
+        effectKey: 01_raid_spawn_if_empty
+        questMain: true
+        questKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: true
+        keys: 
+        tags:
+          liberation_backslide: true
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    - early: false
+      filterEventTypes:
+      - OverworldTimeSkipEnd
+      filterEventEntity: 
+      comment: 
+      checksGlobal: 
+      checksBase:
+      - !OverworldValidateMemory
+        check:
+          method: RequireAll
+          checks:
+          - key: world_auto_countdown_expired
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+      functionsGlobal:
+      - !QuestActiveApplyEffectGroup
+        effectKey: 01_raid_spawn_if_empty
+        questMain: true
+        questKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - liberation_backslide_timeskip
+        tags: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment:
+        comment: 'On entry, we need to create 3 points: 2x E0 (+1 progress) and 1x E1 (+2 progress).'
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestActiveApplyEffectGroup
+        effectKey: 01_raid_spawn_reset
+        questMain: true
+        questKey: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 0
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !OverworldSetCountdownFromMemory
+        durationMemoryKey: campaign_countdown_base_length
+        durationFallback: 24
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 02_contest
+  02_contest:
+    comment: 
+    index:
+      i: 2
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed:
+    - quest_liberation_progress_s2
+    - quest_liberation_flag_raid
+    - quest_liberation_flag_incursion
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldQuestMemory
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue:
+          value: !OverworldIntValueQuestMemory
+            questKey: province_liberation
+            memoryPrefix: 
+            memoryKey: quest_liberation_progress_s2
+          target: !OverworldIntValueMemoryAdv
+            key: quest_liberation_target_s2
+            valueFallback: 6
+            operations: []
+        checksBase: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidateMemorySimple
+          filter:
+            quest_liberation_progress_s2:
+              check: Greater
+              value: 0
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityMemoryToQuest
+        memoryKey: quest_liberation_progress_s2
+        offset: true
+        consume: true
+        questMain: true
+        questKey: 
+      - !OverworldEntityQuestUnlink {}
+      - !OverworldEntityGlobalGroup
+        functions:
+        - !QuestActiveApplyEffectGroup
+          effectKey: 02_contest_spawn_refresh
+          questMain: true
+          questKey: 
+      linkedEffectKeys: 
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatDefeat
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidateMemorySimple
+          filter:
+            quest_liberation_progress_s2:
+              check: Greater
+              value: 0
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityGlobalGroup
+        functions:
+        - !QuestActiveApplyEffectGroup
+          effectKey: 02_contest_spawn_refresh
+          questMain: true
+          questKey: 
+      linkedEffectKeys: 
+    - early: false
+      filterEventTypes:
+      - OverworldResetReached
+      filterEventEntity: 
+      comment: 
+      checksGlobal:
+      - !OverworldValidateSimLock
+        present: false
+      checksBase: 
+      functionsGlobal:
+      - !QuestActiveApplyEffectGroup
+        effectKey: 02_contest_spawn_if_empty
+        questMain: true
+        questKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: true
+        keys: 
+        tags:
+          liberation_backslide: true
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    - early: false
+      filterEventTypes:
+      - OverworldTimeSkipEnd
+      filterEventEntity: 
+      comment: 
+      checksGlobal: 
+      checksBase:
+      - !OverworldValidateMemory
+        check:
+          method: RequireAll
+          checks:
+          - key: world_auto_countdown_expired
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+      functionsGlobal:
+      - !QuestActiveApplyEffectGroup
+        effectKey: 02_contest_spawn_if_empty
+        questMain: true
+        questKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - liberation_backslide_timeskip
+        tags: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment:
+        comment: On entry, we need to create 3 points.
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestMemorySet
+        memoryKey: quest_liberation_event_spawns
+        value: 0
+        questMain: true
+        questKey: 
+      - !QuestActiveApplyEffectGroup
+        effectKey: 02_contest_spawn_reset
+        questMain: true
+        questKey: 
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: false
+        onlyHostile: false
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_event
+            not: false
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !OverworldSetCountdownFromMemory
+        durationMemoryKey: campaign_countdown_base_length
+        durationFallback: 24
+      - !OverworldAudioSync
+        syncKey: music_worldmap_war
+        value: 1
+      functionsBase:
+      - !OverworldEntityInteractionStart
+        key: liberation_step2_intro
+        validated: false
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 03_showdown
+  03_showdown:
+    comment: 
+    index:
+      i: 3
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue:
+          value: !OverworldIntValueQuestMemory
+            questKey: province_liberation
+            memoryPrefix: 
+            memoryKey: quest_liberation_progress_s3
+          target: !OverworldIntValueFixed
+            value: 1
+        checksBase: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidateMemorySimple
+          filter:
+            quest_liberation_progress_s3:
+              check: Greater
+              value: 0
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityMemoryToQuest
+        memoryKey: quest_liberation_progress_s3
+        offset: true
+        consume: true
+        questMain: true
+        questKey: 
+      - !OverworldEntityQuestUnlink {}
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: false
+        onlyHostile: false
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_event
+            not: false
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: false
+        onlyHostile: false
+        checks:
+        - !OverworldValidatePointKey
+          key: hg_forward_base
+      - !QuestDeletePoints
+        onlyCombat: false
+        onlyHostile: false
+        checks: 
+        questMain: true
+        questKey: 
+      - !OverworldCampaignEffect
+        effectKey: create_showdown
+        effectFallback:
+          functionsGlobal:
+          - !QuestProvinceCreatePointFiltered
+            spawnRange:
+              x: 50
+              y: 10000
+            spawnPriority: Closest
+            filter:
+              contest_s3: true
+              special: false
+            spawnGroupOverride: 
+            nameOverride: 
+            functionsOnSpawn:
+            - !OverworldEntityMemorySet
+              value: 1
+              memoryKey: quest_liberation_progress_s3
+            - !OverworldEntityEscalation
+              offset: false
+              level: 3
+            questMain: true
+            questKey: 
+          functionsBase: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 2
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !OverworldRemoveCountdown {}
+      - !ModifyMemoryBase
+        changes:
+        - change: Set
+          key: quest_liberation_reward_earned
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsBase:
+      - !OverworldEntityInteractionStart
+        key: liberation_step3_intro
+        validated: false
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCapture
+        questMain: true
+        questKey: 
+      - !QuestProvinceWarState
+        active: false
+        questMain: true
+        questKey: 
+      - !QuestStart
+        questKey: province_selection
+      - !OverworldAudioSync
+        syncKey: music_worldmap_war
+        value: 0
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: false
+        onlyHostile: true
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_patrol
+            not: false
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    stepNext: 
+effectsShared:
+  01_raid_spawn_if_empty:
+    comment:
+      comment: Used to apply negative effects on countdown expiration, respawns everything.
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: world_auto_countdown_expired
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !OverworldSetCountdownFromMemory
+      durationMemoryKey: campaign_countdown_base_length
+      durationFallback: 24
+    - !QuestDeletePoints
+      onlyCombat: false
+      onlyHostile: false
+      checks: 
+      questMain: true
+      questKey: 
+    - !QuestLiberationUpdate
+      pointsPreserved: 0
+      pointChecks: 
+      progressMemoryKey: quest_liberation_progress_s1
+      filter:
+        contest_s1: true
+      spawnGroup: 
+      spawnShuffle: true
+      spawnLimit: 2
+      spawnLimitOverridesVariant: true
+      spawnVariantsKey: s1_reset
+      spawnVariantsCustom: 
+      questMain: true
+      questKey: 
+    - !LogMessage
+      data:
+        textSector: ui_overworld
+        textKey: quest_liberation_expiration_all
+      colorKey: negative_primary
+    - !QuestProvinceCreatePointFiltered
+      spawnRange:
+        x: 150
+        y: 200
+      spawnPriority: None
+      filter:
+        role_patrol: true
+      spawnGroupOverride: 
+      nameOverride: 
+      functionsOnSpawn:
+      - !OverworldEntityMemorySet
+        value: 1
+        memoryKey: quest_liberation_progress_s1
+      - !OverworldEntityMemorySetRandom
+        valueRange:
+          x: 8
+          y: 12
+        memoryKey: campaign_countdown_offset
+      - !OverworldEntityEscalation
+        offset: false
+        level: 2
+      - !OverworldEntityExpiration
+        duration: 12
+      - !OverworldEntityQuestUnlink {}
+      questMain: true
+      questKey: 
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 
+  01_raid_spawn_refresh:
+    comment: 
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !QuestLiberationUpdate
+      pointsPreserved: 4
+      pointChecks: 
+      progressMemoryKey: quest_liberation_progress_s1
+      filter:
+        contest_s1: true
+      spawnGroup: 
+      spawnShuffle: true
+      spawnLimit: 1
+      spawnLimitOverridesVariant: false
+      spawnVariantsKey: s1_refresh
+      spawnVariantsCustom: 
+      questMain: true
+      questKey: 
+    - !QuestActiveApplyEffectGroup
+      effectKey: event_reset
+      questMain: true
+      questKey: 
+    - !UnlockCodex
+      key: overworld_time
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 
+  01_raid_spawn_reset:
+    comment: 
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !QuestLiberationUpdate
+      pointsPreserved: 0
+      pointChecks: 
+      progressMemoryKey: quest_liberation_progress_s1
+      filter:
+        contest_s1: true
+      spawnGroup: 
+      spawnShuffle: true
+      spawnLimit: 0
+      spawnLimitOverridesVariant: false
+      spawnVariantsKey: s1_reset
+      spawnVariantsCustom: 
+      questMain: true
+      questKey: 
+    - !OverworldSetCountdownFromMemory
+      durationMemoryKey: campaign_countdown_base_length
+      durationFallback: 24
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 
+  02_contest_spawn_if_empty:
+    comment:
+      comment: Check active points in the quest. If none are active, reset (3x spawn) and subtract a progress point.
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: world_auto_countdown_expired
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !OverworldSetCountdownFromMemory
+      durationMemoryKey: campaign_countdown_base_length
+      durationFallback: 24
+    - !QuestDeletePoints
+      onlyCombat: false
+      onlyHostile: false
+      checks: 
+      questMain: true
+      questKey: 
+    - !QuestLiberationUpdate
+      pointsPreserved: 0
+      pointChecks: 
+      progressMemoryKey: quest_liberation_progress_s2
+      filter:
+        contest_s2: true
+      spawnGroup: 
+      spawnShuffle: true
+      spawnLimit: 2
+      spawnLimitOverridesVariant: true
+      spawnVariantsKey: s2_reset
+      spawnVariantsCustom: 
+      questMain: true
+      questKey: 
+    - !LogMessage
+      data:
+        textSector: ui_overworld
+        textKey: quest_liberation_expiration_all
+      colorKey: negative_primary
+    - !QuestProvinceCreatePointFiltered
+      spawnRange:
+        x: 150
+        y: 200
+      spawnPriority: None
+      filter:
+        role_patrol: true
+      spawnGroupOverride: 
+      nameOverride: 
+      functionsOnSpawn:
+      - !OverworldEntityMemorySet
+        value: 1
+        memoryKey: quest_liberation_progress_s2
+      - !OverworldEntityMemorySetRandom
+        valueRange:
+          x: 8
+          y: 12
+        memoryKey: campaign_countdown_offset
+      - !OverworldEntityEscalation
+        offset: false
+        level: 3
+      - !OverworldEntityExpiration
+        duration: 12
+      - !OverworldEntityQuestUnlink {}
+      questMain: true
+      questKey: 
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 
+  02_contest_spawn_refresh:
+    comment: 
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !Comment
+      comment: 'First, delete all points that are not part of core set: raids and incursions. 1'
+    - !QuestDeletePoints
+      onlyCombat: false
+      onlyHostile: false
+      checks:
+      - !OverworldValidateMemory
+        check:
+          method: RequireOne
+          checks:
+          - key: quest_liberation_flag_raid
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+          - key: quest_liberation_flag_incursion
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: NoValueCheck
+            value: 0
+      questMain: true
+      questKey: 
+    - !Comment
+      comment: Next, run logic update. This will cut the number of quest associated points to 1 and spawn 2 of the escalation/progress profiles below at random.
+    - !QuestLiberationUpdate
+      pointsPreserved: 1
+      pointChecks: 
+      progressMemoryKey: quest_liberation_progress_s2
+      filter:
+        contest_s2: true
+      spawnGroup: 
+      spawnShuffle: true
+      spawnLimit: 2
+      spawnLimitOverridesVariant: false
+      spawnVariantsKey: s2_refresh
+      spawnVariantsCustom: 
+      questMain: true
+      questKey: 
+    - !Comment
+      comment: "Now, if we pass the chance check, spawn a new incursion or raid. A raid is a high-escalation S1 opportunity in a nearby hostile province. It doesn't progress the quest but can be an opportunity to get loot from another faction. \n\nAn incursion is a max escalation S1 opportunity within current province. It provides lower progress than max escalation standard missions, but gives you opportunity to get loot from another faction."
+    - !OverworldGroupConditional
+      checksGlobal:
+      - !OverworldValidateModifier
+        key: sp_liberation_easy
+        present: false
+      - !OverworldValidateCampaignStepVisit
+        stepKey: 10_breakthrough_line
+        present: true
+      - !OverworldValidateChance
+        chance: 0.5
+      checksBase: 
+      checksBaseValues: 
+      functions:
+      - !Comment
+        comment: If chance roll succeeds, spawn an incursion
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: true
+        onlyHostile: true
+        checks:
+        - !OverworldValidateMemory
+          check:
+            method: RequireAll
+            checks:
+            - key: quest_liberation_flag_incursion
+              presenceDesired: true
+              valueFromMemory: false
+              valueFromMemoryKey: 
+              valueCheck: NoValueCheck
+              value: 0
+      - !QuestProvinceCreatePointFiltered
+        spawnRange:
+          x: 150
+          y: 300
+        spawnPriority: None
+        filter:
+          contest_s1: true
+        spawnGroupOverride: 
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityMemorySet
+          value: 1
+          memoryKey: quest_liberation_flag_incursion
+        - !OverworldEntityMemorySet
+          value: 2
+          memoryKey: quest_liberation_progress_s2
+        - !OverworldEntityMemorySet
+          value: 16
+          memoryKey: campaign_countdown_offset
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        - !OverworldEntityLevelRelative
+          levelOffset: 1
+        - !OverworldEntityBranchOutsideProvince {}
+        questMain: true
+        questKey: 
+      functionsElse: 
+    - !OverworldChanceBranchGroup
+      chance: 0
+      functions:
+      - !Comment
+        comment: If chance roll succeeds, spawn a patrol
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: true
+        onlyHostile: true
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_patrol
+            not: false
+      - !QuestProvinceCreatePointFiltered
+        spawnRange:
+          x: 150
+          y: 200
+        spawnPriority: None
+        filter:
+          role_patrol: true
+        spawnGroupOverride: 
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityMemorySet
+          value: 8
+          memoryKey: campaign_countdown_offset
+        - !OverworldEntityEscalation
+          offset: false
+          level: 1
+        - !OverworldEntityExpiration
+          duration: 6
+        - !OverworldEntityQuestUnlink {}
+        questMain: true
+        questKey: 
+      functionsElse: 
+    - !QuestActiveApplyEffectGroup
+      effectKey: event_reset
+      questMain: true
+      questKey: 
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 
+  02_contest_spawn_reset:
+    comment: 
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !QuestDeletePoints
+      onlyCombat: false
+      onlyHostile: false
+      checks: 
+      questMain: true
+      questKey: 
+    - !QuestLiberationUpdate
+      pointsPreserved: 0
+      pointChecks: 
+      progressMemoryKey: quest_liberation_progress_s2
+      filter:
+        contest_s2: true
+      spawnGroup: 
+      spawnShuffle: true
+      spawnLimit: 0
+      spawnLimitOverridesVariant: false
+      spawnVariantsKey: s2_reset
+      spawnVariantsCustom: 
+      questMain: true
+      questKey: 
+    - !OverworldSetCountdownFromMemory
+      durationMemoryKey: campaign_countdown_base_length
+      durationFallback: 24
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 
+  event_reset:
+    comment:
+      comment: This effect spawns event POIs, but only if the quest memory indicates they weren't spawned before.
+    checksGlobal: 
+    checksBase: 
+    functionsGlobal:
+    - !OverworldGroupConditional
+      checksGlobal: 
+      checksBase: 
+      checksBaseValues:
+      - resolver: !OverworldIntValueQuestMemory
+          questKey: province_liberation
+          memoryPrefix: 
+          memoryKey: quest_liberation_event_spawns
+        check: Less
+        value: 1
+      functions:
+      - !QuestMemorySet
+        memoryKey: quest_liberation_event_spawns
+        value: 1
+        questMain: true
+        questKey: 
+      - !DeletePoints
+        mode: All
+        target: 0
+        onlyCombat: false
+        onlyHostile: false
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_event
+            not: false
+      - !OverworldRepeatGroup
+        repeats: 3
+        functions:
+        - !CreatePoint
+          spawnPriority: None
+          spawnGroup: poi
+          spawnRange:
+            v:
+              x: 0
+              y: 10000
+          provinceOverride: 
+          nameOverride: 
+          questKey: 
+          functionsOnSpawn: 
+          tagsUsed: true
+          keys: 
+          tags:
+            role_event: true
+      - !UnlockCodex
+        key: overworld_poi_events
+      functionsElse: 
+    functionsBase: 
+    functionsEventEntity: 
+    linkedEffectKeys: 

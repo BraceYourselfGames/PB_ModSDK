@@ -20,7 +20,7 @@ namespace PhantomBrigade.Data
             foreach (var kvp in data)
             {
                 var c = kvp.Value;
-                if (string.IsNullOrEmpty (c.group))
+                if (string.IsNullOrEmpty (c.group) || c.hidden)
                     continue;
                 
                 if (dataByGroup.ContainsKey (c.group))

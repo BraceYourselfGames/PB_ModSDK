@@ -121,6 +121,12 @@ public static class UtilityColor
         return new Color (color.r, color.g, color.b, alpha);
     }
     
+    public static Color MultiplyAlpha (this Color color, float alpha)
+    {
+        alpha = Mathf.Clamp01 (alpha);
+        return new Color (color.r, color.g, color.b, color.a * alpha);
+    }
+    
     public static Color Opaque (this Color color)
     {
         return new Color (color.r, color.g, color.b, 1f);

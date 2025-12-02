@@ -9,6 +9,8 @@ namespace PhantomBrigade.Functions
     [Serializable]
     public class CombatCreateCommsMessageGroup : ICombatFunction
     {
+        
+        
         public bool clearQueue = false;
         
         [ListDrawerSettings (CustomAddFunction = "@new DataBlockScenarioCommLink ()")]
@@ -28,10 +30,27 @@ namespace PhantomBrigade.Functions
             
             #endif
         }
+        
+        #if UNITY_EDITOR
+
+        [Button, HideInEditorMode, PropertyOrder (-1)]
+        private void Test ()
+        {
+            #if !PB_MODSDK
+            
+            if (!Application.isPlaying)
+                return;
+
+            Run ();
+            
+            #endif
+        }
+        
+        #endif
     }
     
     [Serializable]
-    public class CombatCreateCommsMessage : ICombatFunction
+    public class CombatCreateCommsMessage : ICombatFunction, ICombatFunctionTargeted
     {
         [PropertyOrder (1), HideLabel, HorizontalGroup (50f)]
         public float time = 0f;
@@ -47,6 +66,15 @@ namespace PhantomBrigade.Functions
             #if !PB_MODSDK
             
             CIViewCombatComms.ScheduleMessage (key, time);
+            
+            #endif
+        }
+        
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            CIViewCombatComms.ScheduleMessage (key, time, unitPersistent);
             
             #endif
         }

@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_experimental
 tags:
@@ -12,10 +12,23 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_striker
+  - keyExternal: true
+    key: vhc_mech_w1_sr_ew
     countMin: 1
     countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_exp_g1_charger﻿
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w1_sr_beam_ew
+    countMin: 1
+    countMax: 2
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
@@ -25,27 +38,14 @@ unitsPerGrade:
     aiTargeting: striker
     liveryPreset: inv_exp_g1_charger﻿
     custom: 
-  - keyExternal: false
-    key: tank_support_ml_long_standard_hybrid
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: artillery
-    liveryPreset: inv_exp_g1_charger﻿
-    custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_striker
-    countMin: 1
+  - keyExternal: true
+    key: vhc_mech_w1_sr_ew
+    countMin: 2
     countMax: 1
     countRandom: false
-    levelOffsetMin: 1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q2_uncommon
@@ -53,36 +53,23 @@ unitsPerGrade:
     aiTargeting: striker
     liveryPreset: inv_exp_g2_charger﻿
     custom: 
-  - keyExternal: false
-    key: tank_support_ml_long_standard_hybrid
+  - keyExternal: true
+    key: vhc_mech_w1_sr_beam_ew
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: 0
+    levelOffsetMin: 1
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
+    qualityTableKey: unitgroup_q2_uncommon
     aiBehavior: Flanker
-    aiTargeting: artillery
-    liveryPreset: inv_exp_g1_charger﻿
-    custom: 
-  - keyExternal: false
-    key: tank_scout_eleavted
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: scout
+    aiTargeting: striker
     liveryPreset: inv_exp_g1_charger﻿
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_striker
+  - keyExternal: true
+    key: vhc_mech_w1_sr_ew
     countMin: 1
     countMax: 1
     countRandom: false
@@ -92,10 +79,10 @@ unitsPerGrade:
     qualityTableKey: unitgroup_q3_rare
     aiBehavior: Flanker
     aiTargeting: striker
-    liveryPreset: inv_exp_g3_charger﻿
+    liveryPreset: inv_exp_g2_charger﻿
     custom: 
-  - keyExternal: false
-    key: tank_support_ml_long_standard_hybrid
+  - keyExternal: true
+    key: vhc_mech_w1_sr_beam_ew
     countMin: 2
     countMax: 2
     countRandom: false
@@ -104,21 +91,34 @@ unitsPerGrade:
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q2_uncommon
     aiBehavior: Flanker
-    aiTargeting: artillery
-    liveryPreset: inv_exp_g2_charger﻿
+    aiTargeting: striker
+    liveryPreset: inv_exp_g1_charger﻿
     custom: 
-  - keyExternal: false
-    key: tank_scout_eleavted
-    countMin: 2
-    countMax: 2
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_heat_ew
+    countMin: 1
+    countMax: 1
     countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
     aiBehavior: Flanker
-    aiTargeting: striker
+    aiTargeting: scout
     liveryPreset: inv_exp_g1_charger﻿
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w1_sidearms_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: 
+    aiBehavior: Flanker
+    aiTargeting: vanguard
+    liveryPreset: 
     custom: 
 unitPresets:
   mech_striker: !UnitFilter

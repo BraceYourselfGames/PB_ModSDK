@@ -887,7 +887,8 @@ namespace PhantomBrigade.Functions.Equipment
                     var hardpointGenerated = kvp.Value;
                     var hardpointData = DataMultiLinkerSubsystemHardpoint.GetEntry (hardpointKey, false);
                     bool visible = hardpointData != null && hardpointData.exposed;
-                    bool editable = visible && hardpointData.editable && hardpointGenerated.fused;
+                    bool editableHardpoint = visible && hardpointData.editable;
+                    bool editableSubsystem = editableHardpoint && !hardpointGenerated.fused;
                     
                     sb.Append ("\n- Hardpoint: ");
                     sb.Append (hardpointKey);
@@ -901,12 +902,16 @@ namespace PhantomBrigade.Functions.Equipment
                             sb.Append (")");
                         }
                     }
-                    
+
                     if (!visible)
                         sb.Append (" | Hidden");
-                    
-                    if (editable)
-                        sb.Append (" | Editable");
+                    else
+                    {
+                        if (editableHardpoint)
+                            sb.Append (hardpointGenerated.fused ? " | Fused" : " | Swappable");
+                        else
+                            sb.Append (" | Non-editable slot");
+                    }
 
                     var subsystemCandidates = hardpointGenerated.subsystemCandidates;
                     if (subsystemCandidates != null && subsystemCandidates.Count > 0)

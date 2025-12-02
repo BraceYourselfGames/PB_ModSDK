@@ -3,13 +3,21 @@ parents: []
 image: main_facility_farm_03
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.6
@@ -1020,7 +1028,7 @@ locations:
         x: -11.5
         y: -29.09
         z: 187.47
-      rotation: 200.7691
+      rotation: -160
       sizeX: 9
       sizeY: 9
       rect: false
@@ -1028,14 +1036,15 @@ locations:
     tags:
     - direction_ne
     - obj_escape
+    - obj_defense_navigable
     data: !AreaLocation
       point:
-        x: 292.5
+        x: 299.2453
         y: -28.5
-        z: 238.5
+        z: 228.229
       rotation: 0
       sizeX: 13.7
-      sizeY: 107.4
+      sizeY: 53
       rect: true
   obj_escape_nw:
     tags:
@@ -1300,21 +1309,6 @@ locations:
       sizeX: 28
       sizeY: 14
       rect: true
-  obj_retreat_outer_ne:
-    tags:
-    - direction_ne
-    - obj_retreat
-    - perimeter_outer
-    - obj_defense_navigable
-    data: !AreaLocation
-      point:
-        x: 292.5
-        y: -28.5
-        z: 241.5
-      rotation: 0.3031629
-      sizeX: 14
-      sizeY: 28
-      rect: true
   obj_retreat_outer_sse:
     tags:
     - direction_s
@@ -1370,6 +1364,11 @@ fields:
     x: 30
     y: 5
     z: 75
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 - type: water
   visible: true
@@ -1381,6 +1380,11 @@ fields:
     x: 20
     y: 5
     z: 65
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 - type: water
   visible: true
@@ -1392,6 +1396,11 @@ fields:
     x: 105
     y: 5
     z: 155
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 - type: water
   visible: true
@@ -1403,6 +1412,11 @@ fields:
     x: 120
     y: 5
     z: 30
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
   rotation: 0
 waypointGroups: 
 briefingGroupsInjected: 

@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.5
@@ -876,6 +884,36 @@ spawnGroups:
         x: 0
         y: 0
         z: 0
+  tutorial_hangar:
+    tags: []
+    points:
+    - point:
+        x: 149.9189
+        y: -19.5
+        z: 195.0294
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+  tutorial_pb:
+    tags: []
+    points:
+    - point:
+        x: 67.5
+        y: -19.5
+        z: 214.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 52.5
+        y: -19.5
+        z: 211.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
 locations:
   obj_loot_center_00:
     tags:
@@ -1185,6 +1223,17 @@ locations:
       rotation: 0
       sizeX: 14
       sizeY: 20
+      rect: true
+  obj_retreat_tutorial:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 43.23376
+        y: -19.45
+        z: 267.8847
+      rotation: 0
+      sizeX: 35.2
+      sizeY: 60.2
       rect: true
   utility_structure_center:
     tags: []

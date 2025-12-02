@@ -3,13 +3,24 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: false
-  altitudeChecked: false
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange:
+    v:
+      x: 0
+      y: 0
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: 0
@@ -128,6 +139,103 @@ spawnGroups:
         x: 0
         y: 270
         z: 0
+  wave_final_01:
+    tags: []
+    points:
+    - point:
+        x: 279.654
+        y: -19.5
+        z: 144.6865
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 280.5
+        y: -19.5
+        z: 130.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 262.5
+        y: -19.5
+        z: 55.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 262.5
+        y: -19.5
+        z: 37.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 247.5
+        y: -19.5
+        z: 46.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  wave_final_02:
+    tags: []
+    points:
+    - point:
+        x: 271.5
+        y: -19.5
+        z: 223.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 271.5
+        y: -19.5
+        z: 244.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 250.5
+        y: -19.5
+        z: 235.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 247.5
+        y: -19.5
+        z: 211.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 258.178
+        y: -19.5
+        z: 275.8241
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  wave_outpost:
+    tags: []
+    points:
+    - point:
+        x: 291.6964
+        y: -19.5
+        z: 236.5285
+      rotation:
+        x: 0
+        y: 270
+        z: 0
 locations:
   retreat:
     tags: []
@@ -141,7 +249,39 @@ locations:
       sizeY: 24
       rect: true
 volumes: 
-fields: 
+fields:
+- type: water
+  visible: false
+  origin:
+    x: 118.303
+    y: -20.69032
+    z: 173.6148
+  size:
+    x: 225
+    y: 3
+    z: 45
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  rotation: 0
+- type: water
+  visible: false
+  origin:
+    x: 266.3107
+    y: -20.69032
+    z: 183.7983
+  size:
+    x: 75
+    y: 3
+    z: 60
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  rotation: 0
 waypointGroups: 
 briefingGroupsInjected: 
 intro: 
@@ -149,6 +289,8 @@ boundary:
 segments:
 - path: Content/AreaSegments/area_seg_unique_demo
 biomeFilter:
-  tags:
-    primary: true
+  tagsUsed: false
+  keys:
+  - mossy_neutral
+  tags: 
 scenarioChanges: 

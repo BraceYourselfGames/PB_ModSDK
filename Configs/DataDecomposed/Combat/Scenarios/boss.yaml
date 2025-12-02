@@ -34,22 +34,22 @@ core:
       fadeDuration: 0.3
       from:
         position:
-          x: 240
-          y: -11
-          z: 290
+          x: 240.61
+          y: 0.44
+          z: 290.73
         rotation:
-          x: -10
-          y: 220
+          x: 358.77
+          y: 218.11
           z: 0
         fov: 40
       to:
         position:
-          x: 40
-          y: -11
-          z: 290
+          x: 39.51
+          y: 1.31
+          z: 290.85
         rotation:
-          x: -10
-          y: 150
+          x: 358.59
+          y: 150.34
           z: 0
         fov: 40
     - duration: 5
@@ -58,9 +58,9 @@ core:
       fadeDuration: 0.3
       from:
         position:
-          x: 50
-          y: 5
-          z: 20
+          x: 65.35
+          y: 21.02
+          z: 38.3
         rotation:
           x: 20
           y: 40
@@ -68,12 +68,12 @@ core:
         fov: 40
       to:
         position:
-          x: 230
-          y: 15
-          z: 40
+          x: 223.8
+          y: 23.67
+          z: 47.38
         rotation:
           x: 25
-          y: -40
+          y: 320
           z: 0
         fov: 40
     - duration: 4
@@ -100,7 +100,7 @@ core:
           y: -135
           z: 0
         fov: 25
-    - duration: 2
+    - duration: 1
       easing: easeInOutCubic
       fadeOnEnd: false
       fadeDuration: 0.5
@@ -131,6 +131,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: false
   tagFilterUsed: true
@@ -168,6 +173,8 @@ tags:
 - trait_deadly
 - trait_adaptable_enemy
 - trait_move_or_die
+- block_persistent_pilots
+- block_exit_on_defeat
 states:
   boss_defeated:
     comment: 
@@ -245,17 +252,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Victory
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -311,6 +315,7 @@ steps:
     tags:
     - start
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -346,8 +351,9 @@ steps:
       delay: 6
       densityGlobal: 0.2
       densityDistance: 0.5
-      densityHeight: 0.2
+      densityHeight: 0.15
       heightOffset: 5
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

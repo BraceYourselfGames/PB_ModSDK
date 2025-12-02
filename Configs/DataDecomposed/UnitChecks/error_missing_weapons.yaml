@@ -1,3 +1,4 @@
+textDescInTooltips: false
 hidden: false
 icon: s_icon_l32_socket_arm
 severity: Critical
@@ -19,6 +20,11 @@ check:
     not: true
     requirement: Present
     tags: 
+  - socket: back
+    not: true
+    requirement: Present
+    tags: 
   subsystems: []
   stats: []
   pilot: []
+functions: 

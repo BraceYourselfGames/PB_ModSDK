@@ -10,6 +10,7 @@ hardpoints:
 tags:
 - mnf_04
 - spec_stabilized
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -43,7 +44,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 16
+    value: 20
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -53,7 +54,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 10
+    value: 12
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -63,12 +64,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 90
+    value: 85
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 20
+    value: 10
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -88,10 +89,10 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
 visuals:
-- basuto_rifle_set_01_stock
-- shared_grip_set_01_grip
-- basuto_rifle_set_01_front
-- basuto_rifle_set_01_body_a
+- basuto_rifle_set_02_stock
+- shared_grip_set_02_grip
+- basuto_rifle_set_02_front
+- basuto_rifle_set_02_body_b
 attachments: 
 activation:
   visual:
@@ -122,7 +123,36 @@ activation:
     key: recoil_rifle_auto
   timing: 
   hitReaction: 
-projectile: 
+projectile:
+  debugIndexRange: {}
+  visual: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff: 
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: -20
+    gradientSize: 50
+    exponent: 1
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

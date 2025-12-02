@@ -1,87 +1,122 @@
 timeLastSync: 63817553935
 entries:
+  error_frame_damage__header:
+    id: 2
+    text: Kaputter Rahmen
+    textEng: Broken frame
+  error_frame_damage__text:
+    id: 2
+    text: Weise diese Einheit während einer Rast einer Reparaturbucht zu, um sie zu reparieren.
+    textEng: Assign this unit to a repair bay during a rest stop to repair it.
   error_missing_part_core__header:
-    text: Fehlender Kern
-    textEng: Missing Core
+    id: 1
+    text: Fehlender Oberkörper
+    textEng: Missing upper body
   error_missing_part_core__text:
-    text: Der Kern enthält kritische Teile und ist für das Funktionieren unerlässlich. Stelle vor dem Einsatz sicher, dass er installiert ist.
-    textEng: The core houses critical parts and is essential to function. Ensure installation before deployment.
+    id: 1
+    text: Die Einheit funktioniert nicht ohne dieses Teil.
+    textEng: The unit can't function without this part.
   error_missing_part_optional_left__header:
+    id: 1
     text: Fehlender linker Arm
-    textEng: Missing Left Arm
+    textEng: Missing left arm
   error_missing_part_optional_left__text:
-    text: Dieser Teil ist für das Funktionieren unerlässlich. Stelle vor dem Einsatz sicher, dass er installiert ist.
-    textEng: This part is essential to functioning. Ensure installation before deployment.
+    id: 1
+    text: Die Einheit kann ohne dieses Teil in den Einsatz geschickt werden, allerdings ohne Sekundärausrüstung.
+    textEng: The unit can be deployed without this part, but can't bring any secondary equipment.
   error_missing_part_optional_right__header:
+    id: 1
     text: Fehlender rechter Arm
-    textEng: Missing Right Arm
+    textEng: Missing right arm
   error_missing_part_optional_right__text:
-    text: Dieser Teil ist für das Funktionieren unerlässlich. Stelle vor dem Einsatz sicher, dass er installiert ist.
-    textEng: This part is essential to functioning. Ensure installation before deployment.
+    id: 1
+    text: Die Einheit kann ohne dieses Teil in den Einsatz geschickt werden, allerdings ohne Primärwaffe.
+    textEng: The unit can be deployed without this part, but can't bring any primary weapon.
   error_missing_part_secondary__header:
+    id: 1
     text: Fehlender Unterkörper
-    textEng: Missing Lower Body
+    textEng: Missing lower body
   error_missing_part_secondary__text:
-    text: Dieser Teil ist für das Funktionieren unerlässlich. Stelle vor dem Einsatz sicher, dass er installiert ist.
-    textEng: This part is essential to functioning. Ensure installation before deployment.
+    id: 1
+    text: Die Einheit kann sich ohne dieses Teil nicht fortbewegen.
+    textEng: The unit can't move without this part.
   error_missing_system_reactor__header:
-    text: Fehlender Kern
-    textEng: Missing Core
+    id: 1
+    text: Fehlender Reaktor
+    textEng: Missing reactor
   error_missing_system_reactor__text:
-    text: Das Kern-Subsystem ist für den Betrieb entscheidend und kann nicht entfernt werden.
-    textEng: The core subsystem is critical to operation and can't be removed.
+    id: 1
+    text: Das Reaktorkern-Subsystem muss installiert sein.
+    textEng: The reactor core subsystem must be installed.
   error_missing_weapons__header:
-    text: Keine Primär- oder Sekundärwaffe
-    textEng: No Primary or Secondary Weapon
+    id: 1
+    text: Keine Waffen
+    textEng: No weapons
   error_missing_weapons__text:
+    id: 1
     text: Einheiten können nicht ohne Waffe eingesetzt werden.
     textEng: Units can't be fielded without a weapon.
   error_missing_weapons_shieldonly__header:
-    text: Keine Primär- oder Sekundärwaffe
-    textEng: No Primary or Secondary Weapon
+    id: 1
+    text: Keine Waffe
+    textEng: No weapon
   error_missing_weapons_shieldonly__text:
+    id: 1
     text: Einheiten können nicht nur mit einem Schild eingesetzt werden.
     textEng: Units can't be fielded with only a shield.
   info_incomplete_armor_core__header:
+    id: 1
     text: Unvollständige Kernrüstung
     textEng: Partial Core Armor
   info_incomplete_armor_core__text:
+    id: 1
     text: Ein Schutz der Sockel am Oberkörper erhöht die Überlebensfähigkeit.
     textEng: Protecting the upper body’s hardpoints increases survivability.
   info_incomplete_armor_left__header:
+    id: 1
     text: Unvollständige linke Rüstung
     textEng: Partial Left Armor
   info_incomplete_armor_left__text:
+    id: 1
     text: Die Installation von Rüstung an jedem Sockel schützt sekundäre Ausrüstung.
     textEng: Armor installation on every hardpoint protects secondary equipment.
   info_incomplete_armor_right__header:
+    id: 1
     text: Unvollständige rechte Rüstung
     textEng: Partial Right Armor
   info_incomplete_armor_right__text:
+    id: 1
     text: Die Installation von Rüstung an jedem Sockel schützt Primärwaffen.
     textEng: Armor installation on every hardpoint protects primary weapons.
   info_incomplete_armor_secondary__header:
+    id: 1
     text: Unvollständige Beinrüstung
     textEng: Partial Leg Armor
   info_incomplete_armor_secondary__text:
+    id: 1
     text: Eine Rüstung an den Unterkörper-Sockeln verbessert die Überlebensfähigkeit erheblich. Kritischer Schaden schränkt die Bewegungsfreiheit ein.
     textEng: Armoring lower body hardpoints significantly improves survivability. Critical damage impedes movement.
-  warning_damage__header:
-    text: Beschädigt
-    textEng: Damaged
-  warning_damage__text:
-    text: Vor dem Einsatz einer Einheit werden Reparaturen empfohlen. Reparaturen kommen automatisch voran, wenn Zeit auf der Oberwelt vergeht, und verbrauchen Reparaturgel.
-    textEng: Repairs are recommended before fielding a unit. Repairs progress automatically when time passes in overworld, consuming the supply of Liquid Fix.
+  warning_frame_critical__header:
+    id: 1
+    text: Rahmenzustand kritisch
+    textEng: Frame critical
+  warning_frame_critical__text:
+    id: 1
+    text: Dieser Mech wurde in vergangenen Kämpfen stark beschädigt und geht verloren, wenn er im nächsten Kampf ausgeschaltet wird.
+    textEng: Due to critical damage in the past, this mech will be lost if it is taken down in combat.
   warning_missing_primary__header:
+    id: 1
     text: Keine Primärwaffe
-    textEng: No Primary Weapon
+    textEng: No primary weapon
   warning_missing_primary__text:
-    text: Du solltest die Einheit vielleicht mit einer Primärwaffe ausstatten.
-    textEng: Consider fielding the unit with a primary weapon.
+    id: 1
+    text: Du solltest die Einheit vielleicht mit einer anderen Waffe ausstatten.
+    textEng: Consider equipping the unit with another weapon.
   warning_missing_secondary__header:
+    id: 1
     text: Kein Sekundärobjekt
-    textEng: No Secondary Item
+    textEng: No secondary item
   warning_missing_secondary__text:
-    text: Du solltest die Einheit vielleicht mit einer Seitenwaffe oder einem anderen Sekundärobjekt ausstatten, um die Primärwaffen zu ergänzen oder um eine Alternative zu haben, falls die Primärwaffe verloren geht.
-    textEng: Consider fielding the unit with a sidearm or other secondary equipment. This can complement the primary weapons or serve as a fallback if the primary limb is lost.
-collection: 
+    id: 1
+    text: Du solltest die Einheit vielleicht mit einem Schild oder einer Sekundärwaffe ausstatten.
+    textEng: Consider equipping the unit with a shield or a secondary weapon.

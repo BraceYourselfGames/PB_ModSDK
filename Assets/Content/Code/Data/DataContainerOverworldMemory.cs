@@ -29,15 +29,25 @@ namespace PhantomBrigade.Data
     {
         [YamlIgnore, LabelText ("Name")]
         public string textName;
-
-        public string format = "0.##";
-        public string suffix = null;
-        public float multiplier = 1f;
-        public bool showInEventOptions = true;
         
+        public bool showInEventOptions = true;
+        public bool showNumber = true;
+        
+        [ShowIf (nameof(showNumber))]
+        public string format = "0.##";
+        
+        [ShowIf (nameof(showNumber))]
+        public string suffix = null;
+        
+        [ShowIf (nameof(showNumber))]
+        public float multiplier = 1f;
+        
+        [ShowIf (nameof(showNumber))]
         [ValueDropdown ("@DataShortcuts.ui.colors.Keys"), InlineButtonClear]
         [GUIColor ("GetColorOverride")]
         public string combatColorOverride = null;
+        
+        [ShowIf (nameof(showNumber))]
         public DataBlockVector2 combatDisplayRange;
 
         private Color GetColorOverride ()
@@ -60,6 +70,9 @@ namespace PhantomBrigade.Data
         
         [LabelText ("Discard on reset")]
         public bool discardOnWorldChange = true;
+        
+        [LabelText ("Discard on travel")]
+        public bool discardOnTravel = false;
         
         [LabelText ("Old key")]
         public string keyOld;
@@ -129,13 +142,22 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (ShowPaging = false, CustomAddFunction = "@new DataBlockOverworldMemoryCheck ()")]
         public List<DataBlockOverworldMemoryCheck> checks = new List<DataBlockOverworldMemoryCheck> ();
 
+        #if !PB_MODSDK
         private static StringBuilder sb = new StringBuilder ();
         private static bool old = false;
         
         public override string ToString ()
         {
+            return ToStringWithComparison (null);
+        }
+        
+        public string ToStringWithComparison (PersistentEntity memoryComparisonProvider)
+        {
             sb.Clear ();
             old = false;
+            bool providerUsed = memoryComparisonProvider != null && memoryComparisonProvider.hasEventMemory;
+            var providerMemory = providerUsed ? memoryComparisonProvider.eventMemory.s : null;
+            bool providerMemoryPresent = providerMemory != null && providerMemory.Count > 0;
 
             if (checks != null && checks.Count > 0)
             {
@@ -150,6 +172,16 @@ namespace PhantomBrigade.Data
 
                     sb.Append ("\n  - ");
                     sb.Append (check.ToString ());
+
+                    if (providerUsed)
+                    {
+                        sb.Append (" (");
+                        if (providerMemoryPresent && !string.IsNullOrEmpty (check.key) && providerMemory.ContainsKey (check.key))
+                            sb.Append (providerMemory[check.key].ToString ("0.##"));
+                        else
+                            sb.Append ("missing");
+                        sb.Append (")");
+                    }
                 }
             }
             else
@@ -167,6 +199,48 @@ namespace PhantomBrigade.Data
             warning = old;
             return text;
         }
+
+        public bool IsPassed (PersistentEntity hostPersistent)
+        {
+            if (hostPersistent == null)
+                return false;
+
+            int checksCount = checks != null ? checks.Count : 0;
+            if (checksCount == 0)
+                return true;
+
+            bool passed = true;
+            var memoryData = hostPersistent.hasEventMemory ? hostPersistent.eventMemory.s : null;
+            bool memoryDataPresent = memoryData != null;
+            int checksPassed = 0;
+                    
+            foreach (var check in checks)
+            {
+                var key = check.key;
+                if (string.IsNullOrEmpty (key))
+                    continue;
+
+                var valueCurrent = 0f;
+                var valuePresent = memoryDataPresent && memoryData.TryGetValue (key, out valueCurrent);
+                
+                if (check.IsPassed (valuePresent, valueCurrent, memoryData))
+                {
+                    ++checksPassed;
+
+                    if (method == EntityCheckMethod.RequireOne)
+                        break;
+                }
+            }
+                
+            if (method == EntityCheckMethod.RequireOne)
+                passed = checksPassed > 0;
+
+            else if (method == EntityCheckMethod.RequireAll)
+                passed = checksPassed == checksCount;
+
+            return passed;
+        }
+        #endif
 
         #region Editor
         #if UNITY_EDITOR

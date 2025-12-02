@@ -75,6 +75,18 @@ namespace PhantomBrigade.Data
                 keysSorted.Add (resource.key);
             
         }
+        
+        #if !PB_MODSDK
+        [PropertyOrder (-1)]
+        [HideInEditorMode, Button ("Redraw UI", ButtonSizes.Large)]
+        private static void RedrawUI ()
+        {
+            if (!Application.isPlaying || CIViewOverworldRoot.ins == null || !CIViewOverworldRoot.ins.IsEntered ())
+                return;
+            
+            CIViewOverworldRoot.ins.OnResourceChange ();
+        }
+        #endif
     }
 }
 

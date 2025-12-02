@@ -6,20 +6,18 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioAddChangesFromSite : ICombatScenarioGenStep
     {
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
 
-            var targetPersistent = ScenarioUtility.GetCombatSite ();
-            var targetOverworld = IDUtility.GetLinkedOverworldEntity (targetPersistent);
-            if (targetOverworld == null || !targetOverworld.hasDataLinkOverworldEntityBlueprint)
+            if (targetOverworld == null || !targetOverworld.hasDataLinkPointPreset)
             {
                 // Debug.LogWarning ($"Skipping scenario changes from site: {targetOverworld.ToLog ()} has no blueprint");
                 return;
             }
             
-            var targetBlueprint = targetOverworld.dataLinkOverworldEntityBlueprint.data;
-            var changes = targetBlueprint.scenarioChanges;
+            var preset = targetOverworld.dataLinkPointPreset.data;
+            var changes = preset.combatProc?.scenarioChanges;
             if (changes == null)
             {
                 // Debug.LogWarning ($"Skipping scenario changes from site: {targetOverworld.ToLog ()} has no change data");

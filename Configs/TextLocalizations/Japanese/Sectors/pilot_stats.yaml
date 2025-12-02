@@ -1,0 +1,246 @@
+timeLastSync: 0
+entries:
+  crit_chance_offset__header:
+    id: 1
+    text: クリティカル率ボーナス
+    textEng: Crit chance bonus
+  crit_chance_offset__text:
+    id: 1
+    text: 基礎クリティカルヒット率が上昇します。パイロットの気に入らない武器を使用していても、クリティカルヒットが発生するようになります。
+    textEng: An increase to the base critical hit chance. Can allow the pilot to make critical hits even when using a weapon not matching their preference.
+  crit_multiplier_offset__header:
+    id: 1
+    text: クリティカル倍率補正
+    textEng: Crit multiplier offset
+  crit_multiplier_offset__text:
+    id: 1
+    text: 基礎クリティカルダメージ倍率を増加させます。クリティカルヒット時のダメージが増加します。
+    textEng: An increase to the base critical damage multiplier. Allows each critical hit to be more damaging.
+  fatigue__header:
+    id: 1
+    text: 疲労
+    textEng: Fatigue
+  fatigue__header_max:
+    id: 2
+    text: 疲労上限
+    textEng: Fatigue limit
+  fatigue__hint:
+    id: 1
+    text: 戦闘によって蓄積する疲労です。最大になると悪影響を起こします。
+    textEng: Exhaustion from combat. Triggers adverse effects if maxed.
+  fatigue__max_effect:
+    id: 1
+    text: このパイロットは限界に達しています。戦闘に投入すると、毎ターンHPを失い、命令の遂行に失敗することがあります。
+    textEng: This pilot is at their limit. If deployed into combat, they will lose health every turn and could randomly fail to perform their orders.
+  fatigue__text:
+    id: 1
+    text: 戦闘による疲労です。最大になると悪影響が発生します。そのパイロットを投入しない戦闘があるたびに、中立に向かって減少します。キャンプ中にパイロットを医療室に配置することでのみ、完全に解除されます。
+    textEng: Exhaustion from combat. Triggers adverse effects if maxed. Reduced towards neutral every time a pilot is not deployed into combat. Can only be fully cleared by assigning the pilot to the medbay during a camp stop.
+  hp__header:
+    id: 1
+    text: HP
+    textEng: Health
+  hp__header_max:
+    id: 2
+    text: 最大HP
+    textEng: Max health
+  hp__text:
+    id: 1
+    text: パイロットの心身の健康状態です。戦闘中にHPが尽きるとパイロットは気絶し、外傷を負います。キャンプストップ中にパイロットを医療室に配置することでHPを回復できます。
+    textEng: Mental and physical health of the pilot. Running out of health in combat will knock out the pilot and trigger trauma. Health can be restored by assigning the pilot to the medbay during a camp stop.
+  hp_recovery__header:
+    id: 1
+    text: HP回復
+    textEng: Health recovery
+  hp_recovery__text:
+    id: 1
+    text: パイロットが医療室で治療を受けた際に回復するHP量です。デフォルトでは100％ですが、特性によって異なることがあります。
+    textEng: How much health is restored when a pilot is treated in the medbay. Defaults to 100% but can differ as an effect of some traits.
+  score__header:
+    id: 1
+    text: 戦闘連勝
+    textEng: Combat streak
+  score__text:
+    id: 1
+    text: クリティカル率と獲得経験値が上昇します。戦闘ミッションのたびに増加し、キャンプのたびに減少します。パイロットが戦闘中にHPを失うか、キャンプ中に休息を取ると、完全に0にリセットされます。
+    textEng: Increases critical chance and experience gain. Incremented with every combat mission, reduced with each camp. Will completely reset to 0 if pilot loses all health in combat, or is selected to rest during camp.
+  self_offset_exp__header:
+    id: 1
+    text: 経験値補正
+    textEng: Experience offset
+  self_offset_exp__text:
+    id: 1
+    text: 獲得経験値に対する補正値。プラスにもマイナスにもなりえます。
+    textEng: Offset to acquired experience. Can be positive or negative.
+  support_salvage_budget__header:
+    id: 1
+    text: サルベージボーナス
+    textEng: Salvage bonus
+  support_salvage_budget__text:
+    id: 1
+    text: サルベージ予算を増額します。
+    textEng: Increase to the salvage budget.
+  support_scramble_range__header:
+    id: 1
+    text: スクランブル範囲
+    textEng: Scramble range
+  support_scramble_range__text:
+    id: 1
+    text: ダッシュ時に誘導兵器が無効化される範囲を拡大します。
+    textEng: Increase to the range in which guided munitions are blinded on dash.
+  trauma__header:
+    id: 1
+    text: 外傷
+    textEng: Trauma
+  trauma__header_max:
+    id: 2
+    text: 外傷上限
+    textEng: Trauma limit
+  trauma__hint:
+    id: 1
+    text: ノックアウトによる恒久的な外傷です。
+    textEng: Permanent trauma from knockouts combat.
+  trauma__max_effect:
+    id: 1
+    text: このパイロットはこれ以上の致命的負傷に耐えられません。戦闘で気絶すると死亡します。
+    textEng: This pilot can not tolerate more critical injuries. They will die if they are knocked out in combat.
+  trauma__text:
+    id: 1
+    text: 戦闘中に気絶すると、永続的外傷を負います。パイロットは一定数以上の外傷を受けると死亡します。外傷を受けるたびに、パイロットには新たな特性が付与されます。
+    textEng: Permanent trauma from getting knocked out in combat. Each pilot can only tolerate a set number of traumas before death. Each acquired trauma adds a new trait to the pilot.
+  unit_barrier_body__header:
+    id: 1
+    text: ボディバリア
+    textEng: Body Barrier
+  unit_barrier_shield__header:
+    id: 1
+    text: シールドバリア
+    textEng: Shield Barrier
+  unit_charges_back__header:
+    id: 1
+    text: バックパック
+    textEng: Backpack
+  unit_charges_back__text:
+    id: 1
+    text: バックパック武器で使用可能なチャージ数を改造します。
+    textEng: Modifies the charges available to backpack weapons.
+  unit_damage__header:
+    id: 1
+    text: 武器ダメージ
+    textEng: Weapon damage
+  unit_damage__text:
+    id: 1
+    text: 操縦中のメカの武器のダメージ出力を変更します。
+    textEng: Modified damage output of the piloted mech weapons.
+  unit_damage_backpack__header:
+    id: 1
+    text: バックパックダメージ
+    textEng: Backpack damage
+  unit_damage_backpack__text:
+    id: 1
+    text: バックパックベースの武器によるダメージ量を変更します。
+    textEng: Modifies the damage dealt by backpack based weapons.
+  unit_damage_lr__header:
+    id: 1
+    text: 長距離ダメージ
+    textEng: Long range damage
+  unit_damage_lr__text:
+    id: 1
+    text: 操縦中のメカに搭載された長距離弾道武器の変更後のダメージ出力。
+    textEng: Modified damage output of long range ballistic weapons on the piloted mech.
+  unit_damage_ml__header:
+    id: 2
+    text: ミサイルランチャーのダメージ
+    textEng: Missile launcher damage
+  unit_damage_ml__text:
+    id: 2
+    text: 操縦中のメカに搭載されたミサイルランチャーの変更後のダメージ出力。
+    textEng: Modified damage output of the missile launcher weapons on the piloted mech.
+  unit_damage_sr__header:
+    id: 1
+    text: 近距離ダメージ
+    textEng: Short range damage
+  unit_damage_sr__text:
+    id: 1
+    text: 操縦するメカの短距離武器のダメージ出力を変更します。
+    textEng: Modified damage output of the short range weapons on the piloted mech.
+  unit_duration_shield_act__header:
+    id: 1
+    text: シールド
+    textEng: Shield
+  unit_duration_shield_act__text:
+    id: 1
+    text: 戦闘中のシールドアクションの持続時間を調整します。
+    textEng: Modifies duration of shield actions in combat.
+  unit_hp_body__header:
+    id: 1
+    text: ボディアーマー
+    textEng: Body armor
+  unit_hp_body__text:
+    id: 1
+    text: このパイロットはメカのボディアーマーを巧みに操り、より多くのダメージを吸収します。
+    textEng: This pilot carefully controls mech body armor, allowing it to absorb more damage.
+  unit_hp_shield__header:
+    id: 1
+    text: シールドアーマー
+    textEng: Shield armor
+  unit_hp_shield__text:
+    id: 1
+    text: このパイロットはシールドをより効果的に使用でき、バリアで受けるダメージをより多く吸収できます。
+    textEng: This pilot can use the shield more effectively, allowing it to absorb more damage with barrier.
+  unit_mass__header:
+    id: 1
+    text: ユニット質量
+    textEng: Unit mass
+  unit_mass__text:
+    id: 1
+    text: パイロットの特性によって生じるユニット質量の変化です。
+    textEng: A change in unit mass caused by the pilot traits.
+  unit_mass_back__header:
+    id: 1
+    text: バックパック
+    textEng: Backpack
+  unit_mass_back__text:
+    id: 1
+    text: メカに装備されているバックパックの質量を改造します。
+    textEng: Modifies the mass of the backpack equipped on the mech.
+  unit_mass_shield__header:
+    id: 1
+    text: シールド
+    textEng: Shield
+  unit_mass_shield__text:
+    id: 1
+    text: メカに装備されているシールドの質量を改造します。
+    textEng: Modifies the mass of the shield equipped on the mech.
+  unit_offset_damage__header:
+    id: 1
+    text: 武器ブースト
+    textEng: Weapon boost
+  unit_offset_damage__text:
+    id: 1
+    text: 発射時の武器ダメージを増加させます。
+    textEng: Increases weapon damage at the moment of firing.
+  unit_offset_overheat_damage__header:
+    id: 1
+    text: ユニットの過熱ダメージ
+    textEng: Unit overheat damage
+  unit_offset_overheat_damage__text:
+    id: 1
+    text: 搭乗ユニットが受ける過熱ダメージを調整します。
+    textEng: Adjustment to the overheat damage taken by the piloted unit.
+  unit_offset_speed__header:
+    id: 1
+    text: ユニット速度
+    textEng: Unit speed
+  unit_offset_speed__text:
+    id: 1
+    text: 操縦ユニットの速度（m/s）の調整。
+    textEng: Adjustment to the speed of the piloted unit, in meters per second.
+  unit_shield_resist_buildup__header:
+    id: 1
+    text: シールド状態耐性
+    textEng: Shield status resistance
+  unit_shield_resist_buildup__text:
+    id: 1
+    text: メカがシールドに攻撃を受けた際の、ステータス効果蓄積に対する耐性を決定します。値が100％の場合、シールドへの被弾によるステータス効果の蓄積は完全に無効化されます。
+    textEng: Determines the resistance to status effect buildup when the mech takes a hit to its shield. A value of 100% entirely negates status effect buildup on shield hits.

@@ -101,8 +101,8 @@ namespace PhantomBrigade.Functions
             }
             
             if (scrambleCount > 0 && CombatUIUtility.IsUnitFriendly (unitCombat))
-                AchievementHelper.UnlockAchievement(Achievement.ScrambleMissile);
-
+                AchievementHelper.UnlockAchievement(AchievementKeys.ScrambleMissile);
+            
             #endif
         }
     }

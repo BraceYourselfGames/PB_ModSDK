@@ -1,6 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Text;
+using Entitas;
+using Entitas.VisualDebugging.Unity;
 using PhantomBrigade.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -45,6 +48,7 @@ namespace PhantomBrigade.Data
         
         public const string ReactionAngleThreshold = "reaction_angle_threshold";
         public const string ReactionRotationSpeed = "reaction_rotation_speed";
+        public const string MeleeStatusBuildupAmount = "melee_status_buildup_amount";
 
         private static List<string> keys;
         public static List<string> GetKeys ()
@@ -82,6 +86,7 @@ namespace PhantomBrigade.Data
     public static class PartCustomStringKeys
     {
         public const string MeleeTrajectory = "melee_trajectory";
+        public const string MeleeStatusBuildupKey = "melee_status_buildup_key";
 
         private static List<string> keys;
         public static List<string> GetKeys ()
@@ -153,11 +158,23 @@ namespace PhantomBrigade.Data
         #region Editor
         #if UNITY_EDITOR
         
-        [ShowInInspector]
+        [ShowInInspector, PropertyOrder (10)]
         private DataEditor.DropdownReferenceHelper helper;
         
         public DataBlockPartCustom () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
+
+        [Button, PropertyOrder (-1)]
+        private void AddStatusBuildup ([ValueDropdown("@DataMultiLinkerUnitStatus.data.Keys")]string statusKey, float amount)
+        {
+            if (strings == null)
+                strings = new SortedDictionary<string, string> ();
+            strings[PartCustomStringKeys.MeleeStatusBuildupKey] = statusKey;
+
+            if (floats == null)
+                floats = new SortedDictionary<string, float> ();
+            floats[PartCustomFloatKeys.MeleeStatusBuildupAmount] = amount;
+        }
         
         #endif
         #endregion
@@ -342,7 +359,8 @@ namespace PhantomBrigade.Data
         [PropertyRange (1, 50)]
         public int count = 2;
         
-        [PropertyRange (0.01f, 5f)]
+        [PropertyTooltip ("Fragmentation can also occur from proximity fuse - if you're after that, set this time higher")]
+        [PropertyRange (0.01f, 20f)]
         public float time = 0.5f;
         
         [PropertyRange (0f, 270f)]
@@ -565,6 +583,13 @@ namespace PhantomBrigade.Data
         #endif
     }
     
+    
+    [Combat][DontDrawComponent]
+    public sealed class DataLinkSubsystemProjectile : IComponent
+    {
+        public DataBlockSubsystemProjectile_V2 data;
+    }
+    
     public class DataBlockSubsystemStatusBuildup
     {
         [ValueDropdown ("@DataMultiLinkerUnitStatus.data.Keys")]
@@ -645,6 +670,12 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         public DataBlockFloat uiSpeedAverage;
         
+        [PropertyTooltip ("This this block multiplies the calculated effectiveness. Can be helpful for weapons that have distracting peaks, e.g. to give 1.05x multiplier to a weapon with 95% effectiveness across a wide band with one small spike.")]
+        [OnValueChanged ("TryUpdatingEffectiveness", true)]
+        [DropdownReference (true)]
+        [LabelText ("UI - Effectiveness Mul.")]
+        public DataBlockFloat uiEffectivenessMultiplier;
+
         [PropertyTooltip ("This block alters the maximum permitted cross section of a target in coverage calculation, increasing it by 1 meter for every 0.1 reduction. Default is 1.0, which keeps the calculated target at 2.5m. Value of 0.8 expands it to 4.5m, etc. Useful for decreasing the weight of the coverage calculation in the optimum range band.")]
         [OnValueChanged ("TryUpdatingEffectiveness", true)]
         [DropdownReference (true)]
@@ -704,7 +735,7 @@ namespace PhantomBrigade.Data
             this.parentSubsystem = parentSubsystem;
             
             if (falloff != null)
-                falloff.OnAfterDeserialization ();
+                falloff.OnAfterDeserialization (parentSubsystem);
             
             if (uiTrajectory != null)
                 uiTrajectory.OnAfterDeserialization ();
@@ -858,30 +889,355 @@ namespace PhantomBrigade.Data
         }
     }
 
+    public enum FalloffMappingStart
+    {
+        Origin = 0,
+        RangeMin = 1,
+        Coverage = 2,
+    }
+    
+    public enum FalloffMappingMid
+    {
+        Average = 0,
+        Coverage150 = 1,
+        Coverage100 = 2,
+        Coverage50 = 3
+    }
+    
+    public enum FalloffMappingEnd
+    {
+        Coverage100 = 2,
+        Coverage50 = 3
+    }
+    
+    public enum WeaponRangefinderReference
+    {
+        Origin = 0,
+        RangeMin = 1,
+        RangeMax = 2,
+        RangeAverage = 3,
+        Coverage = 4
+    }
+
+    public class DataBlockWeaponRangefinder
+    {
+        public WeaponRangefinderReference type = WeaponRangefinderReference.Coverage;
+        
+        public float coverageTarget = 1f;
+
+        [SuffixLabel ("m")]
+        public float worldOffset = 0f;
+
+        public float GetRange (float invScatterRad, float rangeMin, float rangeMax)
+        {
+            float baseDistance = 0f;
+            if (type == WeaponRangefinderReference.RangeMin)
+                baseDistance = rangeMin;
+            else if (type == WeaponRangefinderReference.RangeMax)
+                baseDistance = rangeMax;
+            else if (type == WeaponRangefinderReference.RangeAverage)
+                baseDistance = (rangeMin + rangeMax) * 0.5f;
+            else if (type == WeaponRangefinderReference.Coverage)
+            {
+                // Allow for a target coverage different from 100%
+                // E.g. coverageTarget value of 2 should return distance where cone intersects 2 units
+                var trigLegOpposite = DataHelperStats.unitSizeAverageHalf * coverageTarget;
+                
+                // Base distance is the side of a right angle triangle with unit-based coverage on opposite side
+                baseDistance = trigLegOpposite * Mathf.Tan (invScatterRad);
+            }
+
+            return baseDistance + worldOffset;
+        }
+    }
+    
     public class DataBlockProjectileDamageFalloff
     {
         public bool animated = true;
+
+        [DropdownReference (true)]
+        public DataBlockWeaponRangefinder referenceStart;
+        
+        [DropdownReference (true)]
+        public DataBlockWeaponRangefinder referenceMid;
+        
+        [DropdownReference (true)]
+        public DataBlockWeaponRangefinder referenceEnd;
     
         [HideLabel]
         [YamlIgnore, HideReferenceObjectPicker]
-        public AnimationCurveContainer curve = new AnimationCurveContainer ();
+        public AnimationCurveContainer curveRuntime = new AnimationCurveContainer ();
         
         [YamlMember (Alias = "damageFalloff"), HideInInspector] 
         public AnimationCurveSerialized curveSerialized;
         
+        public float GetValueAtDistance (float distanceInput, float scatterAngle, float rangeMin, float rangeMax)
+        {
+            if (curveRuntime == null || curveRuntime.curve == null)
+                return 1f;
+
+            // Ensure scatter angle is usable
+            scatterAngle = Mathf.Max (1f, scatterAngle);
+            
+            float invScatterRad = (90f - scatterAngle * 0.5f) * Mathf.Deg2Rad;
+            float distanceStart = referenceStart != null ? referenceStart.GetRange (invScatterRad, rangeMin, rangeMax) : rangeMin;
+            float distanceEnd = referenceEnd != null ? referenceEnd.GetRange (invScatterRad, rangeMin, rangeMax) : rangeMax;
+            float distanceMid = referenceMid != null ? referenceMid.GetRange (invScatterRad, rangeMin, rangeMax) : (distanceStart + distanceEnd) * 0.5f;
+
+            distanceStart = Mathf.Max (1f, distanceStart);
+            distanceMid = Mathf.Max (distanceStart + 1f, distanceMid);
+            distanceEnd = Mathf.Max (distanceMid + 1f, distanceEnd);
+
+            float curveTime = 0f;
+            if (distanceInput > distanceEnd)
+                curveTime = 1f;
+            else if (distanceInput > distanceMid)
+            {
+                var distanceInputLocal = distanceInput - distanceMid;
+                var intervalLength = Mathf.Max (0.1f, distanceEnd - distanceMid);
+                curveTime = (distanceInputLocal / intervalLength) * 0.5f + 0.5f;
+            }
+            else if (distanceInput > distanceStart)
+            {
+                var distanceInputLocal = distanceInput - distanceStart;
+                var intervalLength = Mathf.Max (0.1f, distanceMid - distanceStart);
+                curveTime = (distanceInputLocal / intervalLength) * 0.5f;
+            }
+            
+            return curveRuntime.curve.Evaluate (curveTime);
+        }
+        
         public void OnBeforeSerialization ()
         {
-            if (curve != null)
-                curveSerialized = (AnimationCurveSerialized) curve.curve;
+            if (curveRuntime != null)
+                curveSerialized = (AnimationCurveSerialized) curveRuntime.curve;
         }
 
-        public void OnAfterDeserialization ()
+        public void OnAfterDeserialization (DataContainerSubsystem parent)
         {
             if (curveSerialized != null)
-                curve = new AnimationCurveContainer ((AnimationCurve) curveSerialized);
+                curveRuntime = new AnimationCurveContainer ((AnimationCurve) curveSerialized);
+            
+            #if UNITY_EDITOR
+
+            if (parent != null)
+            {
+                var stats = parent.stats;
+                if (stats != null)
+                {
+                    float scatterAngle = stats.TryGetValue (UnitStats.weaponScatterAngle, out var v0) ? v0.value : 10f;
+                    float rangeMin = stats.TryGetValue (UnitStats.weaponRangeMin, out var v1) ? v1.value : 0f;
+                    float rangeMax = stats.TryGetValue (UnitStats.weaponRangeMax, out var v2) ? v2.value : 100f;
+
+                    debugScatterAngle = scatterAngle;
+                    debugRange = new Vector2 (rangeMin, rangeMax);
+                }
+            }
+            
+            #endif
         }
+        
+        /*
+        public float GetDamageFromDistanceAndScatter (float scatterAngle, float inputDistance)
+        {
+            if (curveRuntime == null)
+                return 1f;
+
+            // Find the opposite angle in a right angle triangle made up from half the scatter cone
+            // Input angle is in degrees and is a full cone. First, halve it, then subtract it from 90, then convert to radians
+            float trigAngleOppositeRad = (90f - scatterAngle * 0.5f) * Mathf.Deg2Rad;
+            float trigLegOpposite = DataHelperStats.unitSizeAverageHalf;
+            float coverageEndDistance = trigLegOpposite * Mathf.Tan (trigAngleOppositeRad);
+            return GetDamageFromDistanceAndMidpoint (coverageEndDistance, inputDistance);
+        }
+        */
+        
+        /*
+        public float GetCoverageEndpoint (float scatterAngle)
+        {
+            if (midpointCustom != null)
+                return Mathf.Clamp (midpointCustom.f, 10f, 300f);
+
+            // Allow weapons with pinpoint accuracy to receive a result
+            if (scatterAngle < 1f)
+                return 150f;
+            
+            // Find the opposite angle in a right angle triangle made up from half the scatter cone
+            // Input angle is in degrees and is a full cone. First, halve it, then subtract it from 90, then convert to radians
+            float trigAngleOppositeRad = (90f - scatterAngle * 0.5f) * Mathf.Deg2Rad;
+            float trigLegOpposite = DataHelperStats.unitSizeAverageHalf;
+            float coverageEndDistance = trigLegOpposite * Mathf.Tan (trigAngleOppositeRad);
+            return coverageEndDistance;
+        }
+        
+        public float GetDamageFromDistanceAndScatter (float scatterAngle, float inputDistance)
+        {
+            if (curveRuntime == null)
+                return 1f;
+
+            var midpoint = GetCoverageEndpoint (scatterAngle);
+            return GetDamageFromDistanceAndMidpoint (midpoint, inputDistance);
+        }
+        
+        public float GetDamageFromDistanceAndMidpoint (float midpoint, float inputDistance)
+        {
+            if (curveRuntime == null)
+                return 1f;
+
+            var c = curveRuntime.curve;
+            if (inputDistance < midpoint)
+            {
+                // sample 0% to 50% of the curve
+                var curveTime = (inputDistance / midpoint) * 0.5f;
+                return c.Evaluate (curveTime);
+            }
+            else
+            {
+                // sample 50% to 100% of the curve
+                var curveTime = ((inputDistance - midpoint) / midpoint) * 0.5f + 0.5f;
+                return c.Evaluate (curveTime);
+            }
+        }
+        
+        public float GetDamageFromDistanceAndInterval (float inputDistance, float rangeStart, float rangeEnd)
+        {
+            if (curveRuntime == null)
+                return 1f;
+
+            var midpoint = (rangeStart + rangeEnd) * 0.5f;
+            var c = curveRuntime.curve;
+            if (inputDistance < midpoint)
+            {
+                // sample 0% to 50% of the curve
+                var curveTime = (inputDistance / midpoint) * 0.5f;
+                return c.Evaluate (curveTime);
+            }
+            else
+            {
+                // sample 50% to 100% of the curve
+                var curveTime = ((inputDistance - midpoint) / midpoint) * 0.5f + 0.5f;
+                return c.Evaluate (curveTime);
+            }
+        }
+        */
+        
+        #if UNITY_EDITOR
+
+        [ShowInInspector, PropertyOrder (100)]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockProjectileDamageFalloff () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+
+        private static StringBuilder sb = new StringBuilder ();
+        
+        [InfoBox ("@GetInfo ()", InfoMessageType.None)]
+        [YamlIgnore, ShowInInspector, FoldoutGroup ("Debug", false), LabelText ("Distance")]
+        [PropertyRange (0f, 300f)]
+        public float debugDistance = 0f;
+        
+        [YamlIgnore, ShowInInspector, FoldoutGroup ("Debug"), LabelText ("Scatter")]
+        [PropertyRange (1f, 45f)]
+        public float debugScatterAngle = 10f;
+        
+        [YamlIgnore, ShowInInspector, FoldoutGroup ("Debug"), LabelText ("Ranges")]
+        [MinMaxSlider (0f, 300f, true)]
+        public Vector2 debugRange = new Vector2 (0f, 100f);
+        
+        [ShowInInspector, FoldoutGroup ("Debug"), LabelText ("Damage"), Unit (Units.PercentMultiplier), ReadOnly]
+        [PropertyRange (0f, 1f)]
+        private float debugResultDamage = 1f;
+        
+        [ShowInInspector, FoldoutGroup ("Debug"), LabelText ("Coverage"), Unit (Units.PercentMultiplier), ReadOnly]
+        [PropertyRange (0f, 1f)]
+        private float debugResultCoverage = 1f;
+        
+        [ShowInInspector, FoldoutGroup ("Debug"), LabelText ("Effectiveness"), Unit (Units.PercentMultiplier), ReadOnly]
+        [PropertyRange (0f, 1f)]
+        private float debugResultEffectiveness = 1f;
+
+        private string GetInfo ()
+        {
+            sb.Clear ();
+
+            var distance = Mathf.Max (1f, debugDistance);
+            var scatterAngle = Mathf.Max (0.5f, debugScatterAngle);
+            var rangeMin = debugRange.x;
+            var rangeMax = debugRange.y;
+            
+            float invScatterRad = (90f - scatterAngle * 0.5f) * Mathf.Deg2Rad;
+            float distanceStart = referenceStart != null ? referenceStart.GetRange (invScatterRad, rangeMin, rangeMax) : rangeMin;
+            float distanceEnd = referenceEnd != null ? referenceEnd.GetRange (invScatterRad, rangeMin, rangeMax) : rangeMax;
+            float distanceMid = referenceMid != null ? referenceMid.GetRange (invScatterRad, rangeMin, rangeMax) : (distanceStart + distanceEnd) * 0.5f;
+            
+            var coverageCurve = DataShortcuts.sim.damageCoverageApproximation.curve;
+            float trigAngleOriginRad = (scatterAngle * 0.5f) * Mathf.Deg2Rad;
+            var oppositeSide = distance * Mathf.Tan (trigAngleOriginRad);
+            var targetSize = DataHelperStats.unitSizeAverageHalf;
+            var coverage = 1f - Mathf.Max (0, oppositeSide - targetSize) / oppositeSide;
+            
+            debugResultDamage = GetValueAtDistance (distance, scatterAngle, rangeMin, rangeMax);
+            debugResultCoverage = Mathf.Clamp01 (coverage); // coverageCurve.Evaluate (Mathf.Clamp01 (coverage));
+            debugResultEffectiveness = debugResultCoverage * debugResultDamage;
+            
+            sb.Append (distanceStart.ToString ("F0"));
+            sb.Append (" — ");
+            sb.Append (distanceMid.ToString ("F0"));
+            sb.Append (" — ");
+            sb.Append (distanceEnd.ToString ("F0"));
+            sb.Append ("\nstart — mid — end");
+
+            return sb.ToString ();
+        }
+
+        [Button ("SR preset"), ButtonGroup]
+        private void ConfigureSR ()
+        {
+            referenceStart = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.Coverage, coverageTarget = 1 };
+            referenceMid = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.Coverage, coverageTarget = 2 };
+            referenceEnd = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.Coverage, coverageTarget = 2, worldOffset = 60 };
+            
+            UtilityAnimationCurve.ApplyToCurve (ref curveRuntime.curve, true, new List<Keyframe>
+            {
+                new Keyframe (0f, 0.5f),
+                new Keyframe (0.5f, 1f),
+                new Keyframe (1f, 0f)
+            });
+        }
+        
+        [Button ("MR preset"), ButtonGroup]
+        private void ConfigureMR ()
+        {
+            referenceStart = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.Origin };
+            referenceMid = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.RangeAverage };
+            referenceEnd = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.RangeAverage, worldOffset = 60 };
+            
+            UtilityAnimationCurve.ApplyToCurve (ref curveRuntime.curve, true, new List<Keyframe>
+            {
+                new Keyframe (0f, 0.5f),
+                new Keyframe (0.5f, 1f),
+                new Keyframe (1f, 0.25f)
+            });
+        }
+        
+        [Button ("LR preset"), ButtonGroup]
+        private void ConfigureLR ()
+        {
+            referenceStart = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.RangeAverage, worldOffset = -30 };
+            referenceMid = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.RangeAverage };
+            referenceEnd = new DataBlockWeaponRangefinder { type = WeaponRangefinderReference.RangeAverage, worldOffset = 30 };
+            
+            UtilityAnimationCurve.ApplyToCurve (ref curveRuntime.curve, true, new List<Keyframe>
+            {
+                new Keyframe (0f, 0.25f),
+                new Keyframe (0.5f, 1f),
+                new Keyframe (1f, 0.25f)
+            });
+        }
+
+        #endif
     }
-    
+
     public class DataBlockProjectileDamageFalloffGlobal
     {
         public bool rangeStartFromStat = false;
@@ -935,6 +1291,7 @@ namespace PhantomBrigade.Data
         public float distance = 3f;
         public bool targetExclusive = false;
         public bool inertBeforeHit = false;
+        public float inertPrimingDelay = 1f;
         public bool triggerWithoutEntity = false;
     }
 

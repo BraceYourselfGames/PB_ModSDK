@@ -26,15 +26,13 @@ namespace PhantomBrigade.Data
         {
             [ShowInInspector] public static bool showCore = true;
         
-            [ShowInInspector] public static bool showText = true;
+            [ShowInInspector] public static bool showText = false;
 
             [ShowInInspector] public static bool showTags = true;
             
             [ShowInInspector] public static bool showGrades = true;
             
             [ShowInInspector] public static bool showUnits = true;
-            
-            [ShowInInspector] public static bool showOverridesInScenarios = true;
 
             [ShowInInspector] public static bool showTagCollections = false;
         }
@@ -51,6 +49,12 @@ namespace PhantomBrigade.Data
         [ShowInInspector][ReadOnly]
         public static Dictionary<string, List<string>> gradeUpgradeLookup = new Dictionary<string, List<string>> ();
 
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
+        
         public static void OnAfterDeserialization ()
         {
             DataTagUtility.RegisterTags (data, ref tags, ref tagsMap);

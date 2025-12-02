@@ -10,6 +10,7 @@ hardpoints:
 tags:
 - category_wpn_mg
 - mnf_06
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -18,7 +19,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 2
+    value: 2.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -58,12 +59,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 80
+    value: 90
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 25
+    value: 30
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -141,13 +142,16 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
       keys:
       - tv_tg:
-          x: 0
-          y: 0.3972892
+          x: 0.01250076
+          y: 0.5980643
           z: 0.006913905
           w: 0.006913905
         w:
@@ -193,8 +197,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

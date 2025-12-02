@@ -156,6 +156,127 @@ namespace PhantomBrigade.Data
             }
             return rootHardpointInfo;
         }
+        
+        #if !PB_MODSDK
+        [PropertyOrder (-1)]
+        [FoldoutGroup ("Utilities", false)]
+        [Button (ButtonSizes.Medium)]
+        public void SaveFromCustomization ()
+        {
+            if (!Application.isPlaying)
+                return;
+
+            var game = Contexts.sharedInstance.game;
+            if (!IDUtility.IsGameLoaded () || !IDUtility.IsGameState (GameStates.basecrawler) || !CIViewBaseLoadout.ins.IsEntered ())
+            {
+                Debug.LogWarning ($"Failed to save preset: the game isn't loaded or player isn't in customization view");
+                return;
+            }
+            
+            if (string.IsNullOrWhiteSpace (savedPresetName))
+            {
+                Debug.LogWarning ($"Failed to save preset: no valid key entered");
+                return;
+            }
+            
+            if (data.ContainsKey (savedPresetName))
+            {
+                Debug.LogWarning ($"Failed to save preset: key {savedPresetName} already exists");
+                return;
+            }
+            
+            var unit = IDUtility.GetPersistentEntity (CIViewBaseLoadout.selectedUnitName);
+            if (unit == null)
+            {
+                Debug.LogWarning ($"Failed to save preset: currently customized unit wasn't found");
+                return;
+            }
+
+            var preset = new DataContainerUnitLiveryPreset ();
+
+            var liveryRoot = unit.hasDataKeyEquipmentLivery ? unit.dataKeyEquipmentLivery.s : null;
+            if (liveryRoot != null)
+            {
+                preset.node = new DataBlockUnitLiveryPresetNode ();
+                preset.node.livery = liveryRoot;
+                preset.node.RefreshPreview ();
+            }
+            
+            var parts = EquipmentUtility.GetPartsInUnit (unit);
+            foreach (var part in parts)
+            {
+                var liveryPart = part.hasDataKeyEquipmentLivery ? part.dataKeyEquipmentLivery.s : null;
+                if (liveryPart != null)
+                {
+                    var overridePerSocket = GetOverridePerSocket (preset, part);
+                    overridePerSocket.node = new DataBlockUnitLiveryPresetNode ();
+                    overridePerSocket.node.livery = liveryPart;
+                    overridePerSocket.node.RefreshPreview ();
+                }
+                
+                var subsystems = EquipmentUtility.GetSubsystemsInPart (part);
+                foreach (var subsystem in subsystems)
+                {
+                    var liverySubsystem = subsystem.hasDataKeyEquipmentLivery ? subsystem.dataKeyEquipmentLivery.s : null;
+                    if (liverySubsystem != null)
+                    {
+                        var overridePerHardpoint = GetOverridePerHardpoint (preset, part, subsystem);
+                        overridePerHardpoint.livery = liverySubsystem;
+                        overridePerHardpoint.RefreshPreview ();
+                    }
+                }
+            }
+            
+            preset.OnAfterDeserialization (savedPresetName);
+            data.Add (savedPresetName, preset);
+            
+            #if UNITY_EDITOR
+            filter = savedPresetName;
+            filterUsed = true;
+            RequestFilter ();
+            #endif
+        }
+
+        private DataBlockUnitLiveryPresetSocket GetOverridePerSocket (DataContainerUnitLiveryPreset preset, EquipmentEntity part)
+        {
+            if (preset.sockets == null)
+                preset.sockets = new Dictionary<string, DataBlockUnitLiveryPresetSocket> ();
+                    
+            var socket = part.partParentUnit.socket;
+            if (!preset.sockets.ContainsKey (socket))
+            {
+                var overridePerSocket = new DataBlockUnitLiveryPresetSocket ();
+                preset.sockets.Add (socket, overridePerSocket);
+                return overridePerSocket;
+            }
+            else
+            {
+                var overridePerSocket = preset.sockets[socket];
+                return overridePerSocket;
+            }
+        }
+        
+        private DataBlockUnitLiveryPresetNode GetOverridePerHardpoint (DataContainerUnitLiveryPreset preset, EquipmentEntity part, EquipmentEntity subsystem)
+        {
+            var overridePerSocket = GetOverridePerSocket (preset, part);
+            
+            if (overridePerSocket.hardpoints == null)
+                overridePerSocket.hardpoints = new Dictionary<string, DataBlockUnitLiveryPresetNode> ();
+
+            var hardpoint = subsystem.subsystemParentPart.hardpoint;
+            if (!overridePerSocket.hardpoints.ContainsKey (hardpoint))
+            {
+                var overridePerHardpoint = new DataBlockUnitLiveryPresetNode ();
+                overridePerSocket.hardpoints.Add (hardpoint, overridePerHardpoint);
+                return overridePerHardpoint;
+            }
+            else
+            {
+                var overridePerHardpoint = overridePerSocket.hardpoints[hardpoint];
+                return overridePerHardpoint;
+            }
+        }
+        #endif
 
         [PropertyOrder (-1)]
         [FoldoutGroup ("Utilities", false)]

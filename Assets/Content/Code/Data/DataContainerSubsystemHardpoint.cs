@@ -55,10 +55,15 @@ namespace PhantomBrigade.Data
         public bool forceVisualRoot = false;
         
         [ShowIf ("exposed")]
+        [DataEditor.SpriteNameAttribute (true, 32f)]
         public string icon = "s_icon_m_link_squad";
         
         [ShowIf ("exposed")]
         public int sortPriority = 0;
+        
+        [PropertyTooltip ("How many copies of a subsystem belonging to this hardpoint would be spawned when you use the inventory spawn cheat")]
+        [LabelText ("Spawn cheat copies")]
+        [PropertyRange(1, 4)]
         public int duplication = 1;
 
         [PropertyRange (0f, 1f)]
@@ -230,7 +235,7 @@ namespace PhantomBrigade.Data
             foreach (var kvp in checks)
             {
                 var check = kvp.Value;
-                if (check.check.subsystems == null)
+                if (check.check?.subsystems == null)
                     continue;
 
                 foreach (var checkSubsystem in check.check.subsystems)

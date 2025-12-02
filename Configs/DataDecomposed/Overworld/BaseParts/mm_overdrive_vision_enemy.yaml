@@ -3,7 +3,8 @@ parents:
   priority: 1
   offsetStart: 10
   offsetEnd: 10
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 3
@@ -19,7 +20,6 @@ cost:
     components_r3: 15
     supplies: 500
 effect:
-  calls: 
   stats:
   - key: mm_fast_vision_enemy
     modifier: Offset
@@ -28,6 +28,7 @@ effect:
     modifier: Offset
     value: 0.2
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

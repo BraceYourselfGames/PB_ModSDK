@@ -24,8 +24,12 @@ dataCore:
   durationType: Equipment
   duration: 0
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: 0
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
@@ -35,6 +39,7 @@ dataCore:
   - OnBeamReflectEnd
   eventsOnDispose:
   - OnBeamReflectEnd
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation: 
   functionsOnModification: 
@@ -67,6 +72,7 @@ dataCore:
     stats: 
     pilot: 
   unitCheck: 
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment:

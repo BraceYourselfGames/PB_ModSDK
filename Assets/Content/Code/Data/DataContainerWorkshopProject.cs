@@ -8,17 +8,11 @@ namespace PhantomBrigade.Data
 {
     public static class ResourceKeys
     {
+        public const string hope = "hope";
         public const string supplies = "supplies";
-        public const string battery = "battery";
-        public const string repairJuice = "repair_juice";
         public const string componentsR2 = "components_r2";
         public const string componentsR3 = "components_r3";
-        
-        public const string itemDroneDecoy = "item_drone_decoy";
-        public const string itemBlockCombat = "item_block_combat";
-        public const string itemBlockEscalation = "item_block_escalation";
-        public const string itemBlockReinforcements = "item_block_reinforcements";
-        public const string itemRainSensor = "item_rain_sensor";
+        public const string campSupplies = "camp_supplies";
     }
     
     [HideReferenceObjectPicker]
@@ -163,7 +157,7 @@ namespace PhantomBrigade.Data
     [HideReferenceObjectPicker]
     public class DataBlockFloat01
     {
-        [LabelText ("Value")]
+        [HideLabel]
         [Range (0f, 1f)]
         public float f;
     }
@@ -173,35 +167,35 @@ namespace PhantomBrigade.Data
     {
         public bool normalized;
         
-        [LabelText ("Value")]
+        [HideLabel]
         public float f;
     }
     
     [HideReferenceObjectPicker]
     public class DataBlockFloat
     {
-        [LabelText ("Value")]
+        [HideLabel]
         public float f;
     }
 
     [HideReferenceObjectPicker]
     public class DataBlockInt
     {
-        [LabelText ("Value")]
+        [HideLabel]
         public int i;
     }
     
     [HideReferenceObjectPicker]
     public class DataBlockVector2
     {
-        [LabelText ("Value")]
+        [HideLabel]
         public Vector2 v;
     }
     
     [HideReferenceObjectPicker]
     public class DataBlockVector3
     {
-        [LabelText ("Value")]
+        [HideLabel]
         public Vector3 v;
     }
     
@@ -212,7 +206,6 @@ namespace PhantomBrigade.Data
         public int max;
     }
     
-    [HideReferenceObjectPicker, HideDuplicateReferenceBox]
     public class DataBlockComment
     {
         [HideIf ("editMode"), GUIColor ("commentColor"), YamlIgnore, ShowInInspector]
@@ -252,6 +245,8 @@ namespace PhantomBrigade.Data
         public int rating;
         public float duration;
         public int inputCharges;
+        
+        public int unlockChargeCount;
 
         public Dictionary<string, int> inputResources = new Dictionary<string, int> ();
         
@@ -266,6 +261,8 @@ namespace PhantomBrigade.Data
         public List<DataBlockWorkshopUnit> outputUnits = new List<DataBlockWorkshopUnit> ();
         
         public List<DataBlockWorkshopOutputResource> outputResources = new List<DataBlockWorkshopOutputResource> ();
+        
+        public List<IOverworldFunction> outputFunctions = new List<IOverworldFunction> ();
     }
     
     public class DataBlockWorkshopProjectVariant
@@ -388,7 +385,7 @@ namespace PhantomBrigade.Data
             {
                 var partPreset = DataMultiLinkerPartPreset.GetEntry (key, false);
                 if (partPreset != null)
-                    result = IsShortTextPreferred () ? partPreset.GetPartModelName () : partPreset.GetPartModelDesc (appendGroupMain: true);
+                    result = IsShortTextPreferred () ? partPreset.GetPartModelName () : partPreset.GetPartModelDesc (appendGroupMain: false);
             }
             
             if (source == WorkshopTextSource.Subsystem)
@@ -489,6 +486,10 @@ namespace PhantomBrigade.Data
         [ShowIf ("AreInputsOutputsVisible")]
         [DropdownReference (true)]
         public DataBlockInt inputCharges;
+        
+        [ShowIf ("AreInputsOutputsVisible")]
+        [DropdownReference (true)]
+        public DataBlockInt unlockCharges;
         
         [ShowIf ("AreInputsOutputsVisible")]
         [DropdownReference, ListDrawerSettings (CustomAddFunction = "@new DataBlockResourceCost ()")]
@@ -614,6 +615,51 @@ namespace PhantomBrigade.Data
         private bool IsTextPreviewVisible => DataMultiLinkerWorkshopProject.Presentation.showTextPreview;
         private bool AreTagsVisible => DataMultiLinkerWorkshopProject.Presentation.showTags;
         private bool AreInputsOutputsVisible => DataMultiLinkerWorkshopProject.Presentation.showInputsOutputs;
+
+        #if !PB_MODSDK
+        [HideInEditorMode]
+        [HorizontalGroup ("Header"), PropertyOrder (-2)]
+        [ButtonGroup ("Header/Buttons"), Button ("+ Resources")]
+        private void IssueResources ()
+        {
+            if (inputResources == null || inputResources.Count == 0)
+                return;
+            
+            var basePersistent = IDUtility.playerBasePersistent;
+            if (basePersistent == null || !basePersistent.hasInventoryResources)
+                return;
+
+            var resources = basePersistent.inventoryResources.s;
+            foreach (var block in inputResources)
+            {
+                if (resources.ContainsKey (block.key))
+                    resources[block.key] += block.amount;
+                else
+                    resources.Add (block.key, block.amount);
+            }
+            
+            if (CIViewBaseWorkshopV2.ins != null && CIViewBaseWorkshopV2.ins.IsEntered ())
+                CIViewBaseWorkshopV2.ins.RefreshList ();
+        }
+        
+        [HideInEditorMode]
+        [HorizontalGroup ("Header"), PropertyOrder (-2)]
+        [ButtonGroup ("Header/Buttons"), Button ("+ Charge")]
+        private void IssueCharge ()
+        {
+            var playerBase = IDUtility.playerBasePersistent;
+            if (playerBase == null || !playerBase.hasInventoryWorkshopCharges)
+                return;
+
+            var playerCharges = playerBase.inventoryWorkshopCharges.s;
+            if (playerCharges.ContainsKey (key))
+                playerCharges[key] += 1;
+            else
+                playerCharges.Add (key, 1);
+            
+            if (CIViewBaseWorkshopV2.ins != null && CIViewBaseWorkshopV2.ins.IsEntered ())
+                CIViewBaseWorkshopV2.ins.RefreshList ();
+        }
         
         [PropertyOrder (10)]
         [FoldoutGroup ("Testing", false)]
@@ -648,6 +694,7 @@ namespace PhantomBrigade.Data
         private IEnumerable<string> GetPrimaryVariantKeys () => GetVariantsPrimary ()?.Keys;
         private IEnumerable<string> GetSecondaryVariantKeys () => GetVariantsSecondary ()?.Keys;
 
+        #endif
         #endif
 
         #endregion

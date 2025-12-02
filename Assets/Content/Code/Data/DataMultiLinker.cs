@@ -42,10 +42,16 @@ namespace PhantomBrigade.Data
         public static INGUIAtlas atlasLast;
         #endif
 
-        public static Color GetColorFromElementIndex (int index, float alpha = 0.2f)
+        public static Color GetColorFromElementIndex (int index, float alpha = 0.2f, float hueStart = 0.6f)
         {
-            var b = index % 2 == 0 ? 0.6f : 0.7f;
-            var col = Color.HSVToRGB (Mathf.Abs (0.6f - (float)index / 12f) % 1f, 0.25f, index % 2 == 0 ? 0.65f : 0.8f).WithAlpha (alpha);
+            var b = index % 2 == 0 ? 0.65f : 0.8f;
+            var col = Color.HSVToRGB (Mathf.Abs (hueStart - (float)index / 12f) % 1f, 0.25f, b).WithAlpha (alpha);
+            return col;
+        }
+        
+        public static Color GetColorFromElementIndexBright (int index, float hueStart = 0.6f, float saturation = 0.25f)
+        {
+            var col = Color.HSVToRGB (Mathf.Abs (hueStart - (float)index / 12f) % 1f, saturation, 1f).WithAlpha (1f);
             return col;
         }
 
@@ -694,6 +700,7 @@ namespace PhantomBrigade.Data
     {
         public bool IsUsingDirectories ();
         public bool IsDisplayIsolated ();
+        public DataContainer GetDisplayIsolatedOverride ();
         public bool IsModdable ();
 
         public GameObject GetObject ();
@@ -1142,6 +1149,7 @@ namespace PhantomBrigade.Data
 
         public virtual bool IsUsingDirectories () => false;
         public virtual bool IsDisplayIsolated () => false;
+        public virtual DataContainer GetDisplayIsolatedOverride () => null;
         public virtual bool IsModdable () => true;
 
         protected static bool IsModdableStatic () => ins != null && ins.IsModdable ();

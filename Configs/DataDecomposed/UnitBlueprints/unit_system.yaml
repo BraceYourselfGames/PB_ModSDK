@@ -24,7 +24,7 @@ centerPoint:
   y: 1
   z: 0
 bodyTagPinningExempted: true
-salvageExempted: false
+salvageExempted: true
 salvageBudgetBonus: 0
 heatMax: 100
 heatOverloadConstant: 0.4
@@ -38,10 +38,14 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_tank_core_aa
       textOverride: false
+    statOffsetsOnAbsence: 
 dependencies: 
 destructionFragments: 
+crashFunctions: 
 destructionFunctions: 
 uncrewed: 
+weightClassOverride:
+  i: 4
 aiBehavior: Flanker
 aiCollisionRadius: 5
 aiCollisionHeight: 10

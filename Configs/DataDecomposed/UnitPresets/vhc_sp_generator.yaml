@@ -1,0 +1,54 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: true
+bodyTagPinningExempted: true
+parents: []
+blueprint: unit_system
+textType: 
+livery: inv_specops_g3_atk
+aiBehavior: 
+aiTargeting: 
+tags:
+- type_system
+- type_uncrewed
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_sp_generator
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitModifyMemory
+      changes:
+      - change: Set
+        key: unit_weight_class_override
+        value: 4
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CombatUnitTagChange
+      tagChanges:
+        flag_no_concussion_in: true
+        movement_skipped: true
+        purpose_sp_generator: true
+    - !CombatUnitControlChange
+      ai: false
+      player: false
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

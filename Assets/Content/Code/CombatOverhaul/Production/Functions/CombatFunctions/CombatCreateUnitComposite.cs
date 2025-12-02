@@ -86,8 +86,7 @@ namespace PhantomBrigade.Functions
 
             Debug.Log ($"Spawning unit composite {blueprintKey} with instance name {instanceName} at {pos}");
             UnitUtilities.CreateCompositeUnit (blueprintKey, instanceName, pos, rot, level, controllable, friendly, navigationSampled);
-            ConsoleCommandsCombat.unitCompositeInstanceKeyLast = instanceName;
-            
+
             #endif
         }
 

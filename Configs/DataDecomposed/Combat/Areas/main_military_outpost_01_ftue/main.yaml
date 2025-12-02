@@ -3,13 +3,21 @@ parents:
 image: main_military_outpost_01
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.4
@@ -32,20 +40,12 @@ spawnGroups:
         y: 270
         z: 0
     - point:
-        x: 199.5
-        y: -13.5
-        z: 142.5
-      rotation:
-        x: 0
-        y: 315
-        z: 0
-    - point:
-        x: 220.5
+        x: 223.5
         y: -19.5
-        z: 130.5
+        z: 157.5
       rotation:
         x: 0
-        y: 315
+        y: 270
         z: 0
   custom_ftue_inv_w1:
     tags: []
@@ -132,6 +132,41 @@ spawnGroups:
       rotation:
         x: 0
         y: 38.25883
+        z: 0
+  custom_ftue_landing:
+    tags: []
+    points:
+    - point:
+        x: 78.69611
+        y: -19.45
+        z: 179.0449
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 122.6684
+        y: -19.5
+        z: 170.6504
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 124.1053
+        y: -19.5
+        z: 144.4816
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 78.1353
+        y: -19.5
+        z: 140.626
+      rotation:
+        x: 0
+        y: 0
         z: 0
   custom_ftue_pb:
     tags: []

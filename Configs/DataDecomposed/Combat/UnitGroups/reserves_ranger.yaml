@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_reserves
 tags:
@@ -12,8 +12,49 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_scout
+  - keyExternal: true
+    key: vhc_mech_w1_lr_backonly_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_lr_ml_unguided_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w1_lr_mls_guided_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: grenadier
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w1_lr_res
     countMin: 1
     countMax: 1
     countRandom: false
@@ -25,9 +66,9 @@ unitsPerGrade:
     aiTargeting: leader
     liveryPreset: inv_reserves_g2_ranger
     custom: 
-  - keyExternal: false
-    key: tank_guardian
-    countMin: 1
+  - keyExternal: true
+    key: vhc_tank_v2_w2_lr_ml_unguided_res
+    countMin: 2
     countMax: 2
     countRandom: false
     levelOffsetMin: -1
@@ -38,40 +79,12 @@ unitsPerGrade:
     aiTargeting: guardian
     liveryPreset: inv_reserves_g1_ranger
     custom: 
-- liveryPreset: ''
-  units:
-  - keyExternal: false
-    key: mech_scout
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: 1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q2_uncommon
-    aiBehavior: Flanker
-    aiTargeting: leader
-    liveryPreset: inv_reserves_g2_ranger
-    custom: 
-  - keyExternal: false
-    key: tank_guardian
+  - keyExternal: true
+    key: vhc_tank_v2_w1_lr_mls_guided_res
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: guardian
-    liveryPreset: inv_reserves_g1_ranger
-    custom: 
-  - keyExternal: false
-    key: tank_striker
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
@@ -81,12 +94,12 @@ unitsPerGrade:
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_scout
+  - keyExternal: true
+    key: vhc_mech_w1_lr_full_res
     countMin: 1
     countMax: 1
     countRandom: false
-    levelOffsetMin: 2
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q3_rare
@@ -94,9 +107,9 @@ unitsPerGrade:
     aiTargeting: leader
     liveryPreset: inv_reserves_g3_ranger
     custom: 
-  - keyExternal: false
-    key: tank_guardian
-    countMin: 1
+  - keyExternal: true
+    key: vhc_tank_v2_w1_lr_mls_guided_res
+    countMin: 2
     countMax: 2
     countRandom: false
     levelOffsetMin: -1
@@ -107,12 +120,12 @@ unitsPerGrade:
     aiTargeting: guardian
     liveryPreset: inv_reserves_g1_ranger
     custom: 
-  - keyExternal: false
-    key: mech_sharpshooter
+  - keyExternal: true
+    key: vhc_mech_w1_lr_mls_res
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
@@ -120,17 +133,17 @@ unitsPerGrade:
     aiTargeting: sharpshooter
     liveryPreset: inv_reserves_g1_ranger
     custom: 
-  - keyExternal: false
-    key: tank_striker
+  - keyExternal: true
+    key: vhc_drone_exp_01
     countMin: 1
     countMax: 2
     countRandom: false
-    levelOffsetMin: -1
+    levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: striker
+    aiBehavior: DumbAdvance
+    aiTargeting: default
     liveryPreset: inv_reserves_g1_ranger
     custom: 
 unitPresets:

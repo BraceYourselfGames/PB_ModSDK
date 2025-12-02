@@ -1,0 +1,116 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit: 
+tags:
+- ev_general
+check:
+  repeat: UniquePerProvince
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_celebration
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      option_a:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: true
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused:
+          textSector: ui_overworld
+          textKey: int_sh_effect_pilots_fatigue_reduced
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyPilots
+            pilots: 0
+            deployed: false
+            checks:
+            - !PilotValidateStatValueRounded
+              key: fatigue
+              check: Greater
+              value: 0
+            functions:
+            - !PilotStatOffset
+              key: fatigue
+              normalized: false
+              value: -1
+          - !ModifyResources
+            resourceChanges:
+            - key: supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: 150
+          functionsLocal: 
+      option_b:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: false
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_armor: true
+          - !OverworldOffsetCountdownStartTime
+            hours: 12
+          functionsLocal: 
+    optionsReused: 

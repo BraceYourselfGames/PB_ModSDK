@@ -21,6 +21,7 @@ namespace PhantomBrigade.Functions
 
             bool available = DataHelperAction.IsAvailable (dependencyData, unitPersistent);
             return available;
+
             #else
             return false;
             #endif

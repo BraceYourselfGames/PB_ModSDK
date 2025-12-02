@@ -84,6 +84,7 @@ projectile:
     distance: 10
     targetExclusive: false
     inertBeforeHit: true
+    inertPrimingDelay: 1
     triggerWithoutEntity: false
   hitResponse:
     unitHitDestruction: true
@@ -94,7 +95,7 @@ projectile:
   splashDamage:
     exponent: 2
     fxDetonation: fx_aoe_explosion_01_large
-    fxDetonationScale: 1.5
+    fxDetonationScale: 3
     fxArea: fx_aoe_volume_01
     fxHit: fx_aoe_hit_01
   splashImpact:
@@ -105,8 +106,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

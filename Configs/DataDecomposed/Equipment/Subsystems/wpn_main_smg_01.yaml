@@ -10,26 +10,26 @@ hardpoints:
 tags:
 - mnf_06
 - spec_stabilized
-- stat_concussive
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
-    value: 20
+    value: 23
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 1.2
+    value: 1.1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 95
+    value: 90
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 2.2
+    value: 2.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -39,12 +39,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 0.7
+    value: 0.3
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 8
+    value: 7
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -69,22 +69,22 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 8
+    value: 1
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 12
+    value: 14
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle_moving:
-    value: 15
+    value: 14
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_speed:
-    value: 300
+    value: 250
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -123,7 +123,36 @@ activation:
     key: recoil_smg
   timing: 
   hitReaction: 
-projectile: 
+projectile:
+  debugIndexRange: {}
+  visual: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff: 
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: -10
+    gradientSize: 10
+    exponent: 1
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

@@ -2,22 +2,23 @@ hidden: false
 parents:
 - key: wpn_root_primary
 - key: wpn_perk_filter_melee
-livery: 
+livery: ''
 ratingRange: 
 comment: 
 textName:
-  split: false
+  split: true
 textDesc:
-  split: false
+  split: true
 textNameFromRating: 
 textDescFromRating: 
 sockets: 
 tags:
 - difficulty_hard
-- part_melee
 - part_cutter
-- range_close
-- weight_heavy
+- part_melee
+- range_short
+- branch_specops
+workshopInfo: 
 genSteps:
 - !AddHardpoints
   subsystemsInitial:

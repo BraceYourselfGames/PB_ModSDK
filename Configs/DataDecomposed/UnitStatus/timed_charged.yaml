@@ -6,9 +6,19 @@ color:
   a: 1
 hidden: false
 debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
 restartOnRefresh: false
-fxAttached:
-  key: fx_status_electric_loop
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.9
+  velocityDecayTime: 1
+  key: fx_status_electric_oneshot
   scale:
     x: 1
     y: 1
@@ -21,11 +31,12 @@ buildupDecayRate:
   f: 0.5
   compMultiplier: 2
 buildupThreshold:
-  f: 1
+  f: 0.95
   compMultiplier: 2
 buildupOverflow:
   f: 0.25
   compMultiplier: 0
+buildupShieldMultiplier: 
 stackable:
   limit: 3
   composite: false
@@ -97,11 +108,13 @@ effectsOnUpdate:
       key: tgt_status_charged_water
       indexed: false
     present: true
+  triggerCheckPilot: 
   comment: 
   functionsOnHost:
   - !CombatUnitStatusAdd
     key: timed_charged_cooldown
     durationOverride: -1
+    source: Function
   - !CombatAudioEvent
     offset:
       x: 0
@@ -109,6 +122,8 @@ effectsOnUpdate:
       z: 0
     audio: status_charged_discharge
     delayScaled: 0
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard:
   - key: tgt_status_charged_water
     indexed: false
@@ -235,10 +250,12 @@ effectsOnUpdate:
           function: !CombatUnitStatusAdd
             key: timed_charged
             durationOverride: -1
+            source: Function
       functionsElse: 
     - !CombatUnitStatusAdd
       key: timed_charged_cooldown
       durationOverride: -1
+      source: Function
 - triggerRemoval: true
   triggerInStack: false
   applyMissedUpdates: false
@@ -282,11 +299,13 @@ effectsOnUpdate:
       key: tgt_status_charged
       indexed: false
     present: true
+  triggerCheckPilot: 
   comment: 
   functionsOnHost:
   - !CombatUnitStatusAdd
     key: timed_charged_cooldown
     durationOverride: -1
+    source: Function
   - !CombatAudioEvent
     offset:
       x: 0
@@ -294,6 +313,8 @@ effectsOnUpdate:
       z: 0
     audio: status_charged_discharge
     delayScaled: 0
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard:
   - key: tgt_status_charged
     indexed: false
@@ -394,15 +415,18 @@ effectsOnUpdate:
           function: !CombatUnitStatusAdd
             key: timed_charged
             durationOverride: -1
+            source: Function
       functionsElse: 
     - !CombatUnitStatusAdd
       key: timed_charged_cooldown
       durationOverride: -1
+      source: Function
 effectsOnEnd:
 - triggerOnCompletion: true
   triggerOnCancel: false
   enabled: true
   triggerCheckUnit: 
+  triggerCheckPilot: 
   comment:
     comment: On end, inflict damage.
   functionsOnHost:
@@ -428,11 +452,14 @@ effectsOnEnd:
       x: 0
       y: 0
       z: 0
+    centered: true
     asset:
       key: fx_status_electric_timeout_self_damage
       scale:
         x: 1
         y: 1
         z: 1
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 statOffsets: 

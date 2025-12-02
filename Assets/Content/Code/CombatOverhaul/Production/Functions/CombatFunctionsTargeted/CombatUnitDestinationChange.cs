@@ -47,7 +47,7 @@ namespace PhantomBrigade.Functions
         [ShowIf ("IsCenterUsed")]
         public bool center = true;
         
-        [ShowIf ("@modifiers != null")]
+        [ShowIf ("IsDirectionalFlagVisible")]
         [PropertyTooltip ("If false, local modifiers are applied in the rotation frame of a target. If true, local modifiers are applied in a rotation frame from origin to target. The latter is useful for cases like expressing a target position that's always to the left of a targeted unit in the eyes of a firing unit.")]
         public bool modifiersDirectional = false;
 
@@ -60,7 +60,8 @@ namespace PhantomBrigade.Functions
         #if UNITY_EDITOR
         
         public bool IsLocalUsed => type == CombatTargetSource.None;
-        public bool IsCenterUsed => type == CombatTargetSource.State || type == CombatTargetSource.Location || type == CombatTargetSource.Volume;
+        public bool IsCenterUsed => true; // type == CombatTargetSource.State || type == CombatTargetSource.Location || type == CombatTargetSource.Volume || unit;
+        public bool IsDirectionalFlagVisible => modifiers != null && type != CombatTargetSource.Self && type != CombatTargetSource.SelfRelative;
         private Color GetNameColor => IsTargetUsed && string.IsNullOrEmpty (name) ? Color.HSVToRGB (0f, 0.5f, 1f) : Color.white;
 
         #endif

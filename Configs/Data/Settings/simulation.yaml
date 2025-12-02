@@ -14,14 +14,16 @@ unitPhysicsMassMin: 20
 unitPhysicsMassMax: 140
 unitGameMassMin: 50
 unitGameMassMax: 98
-repairRate: 0.09
+repairRate: 0
 repairResourceDrainRate: 1.44
+barrierRefuelResourceConsumption: false
 repairCombatBarrierLimit: 2.5
 repairCombatBarrierCost: 16
 combatReactionLights: true
 combatNightLights: true
 combatAccentLights: true
 combatIntro: true
+combatLoadingBugfix: true
 noDamageFriendly: false
 noDamageEnemy: false
 noHeatModeFriendly: false
@@ -33,6 +35,22 @@ estimatedStatsIncludeRandomSystems: false
 editorAutoSelectOverworld: false
 editorAutoSelectCombat: false
 editorAutoSelectCombatMode: 0
+salvageCostsPart:
+  1:
+    costTakeIntact: 10
+    costTakeDamaged: 15
+    costDismantleIntact: 5
+    costDismantleDamaged: 5
+  2:
+    costTakeIntact: 15
+    costTakeDamaged: 20
+    costDismantleIntact: 10
+    costDismantleDamaged: 10
+  3:
+    costTakeIntact: 20
+    costTakeDamaged: 25
+    costDismantleIntact: 15
+    costDismantleDamaged: 15
 costDismantlePartIntact: 5
 costDismantlePartDamaged: 10
 costTakePartIntact: 15
@@ -42,10 +60,10 @@ costDismantleSubsystemDamaged: 10
 costTakeSubsystemIntact: 10
 costTakeSubsystemDamaged: 15
 costTakeMechFrame: 80
+mechDamageLimit: 2
 salvageBudgetBaseDefeat: 50
 salvageWorkshopDuplicateProtection: true
 workshopChargeSpending: false
-workshopLevelBias: 0
 dismantlingRewardsUsed: false
 liveryUnlocks: false
 shotAimDeviationLimit: 10
@@ -60,11 +78,12 @@ targetSelectionFromPaths: false
 targetTrackingIterations: 3
 targetVelocityModifier: 0.5
 targetVelocityModifierPlayer: 1
+logOverworldPoints: false
 logEquipmentGeneration: false
 logEquipmentLoading: false
 logScenarioGeneration: false
 logScenarioUpdates: false
-logCombatRequests: false
+logRewardGeneration: false
 logCombatDamage: false
 logCombatActions: false
 logCombatTargeting: false
@@ -72,7 +91,13 @@ logCombatAreaOfEffect: false
 logCombatUnitStatus: false
 logCompositeLinks: false
 logCompositeBehavior: false
+logStandaloneDirectors: false
 logProjectileStatus: false
+logPilotTraitEffects: false
+logPilotEventBuffer: false
+logPilotEventExperience: false
+logPilotGeneration: false
+debugCombatStructureAnalysis: false
 partLevelUsed: true
 partLevelExponential: false
 partLevelLimit: 99
@@ -149,6 +174,9 @@ fieldStatusFromWater: false
 fieldStatusImmediateWater: false
 fieldDissipationMultiplierWater: 1.5
 fieldDissipationMultiplierLava: 0.5
+fieldHeatLava: 10
+timeEventsRealtime: true
+timeEventDurationDefault: 3.5
 timeScaleSteps: 6
 timeScaleMain: 0.6
 timeScaleSlow: 0.03875786
@@ -167,11 +195,17 @@ predictionFadeoutThreshold: 5
 timelineAdjustmentPatchUsed: true
 timelineAdjustmentPatchLog: false
 timelineAdjustmentPatchOnPlacement: false
+critEffectKey: fx_thruster_flash
+critMultiplierBase: 2
+critMultiplierOffsetPerScore: 0
+critMultiplierLimitComposites: 1.2
+critChanceBase: 0.15
+critChanceOffsetPerScore: 0.15
 meleeDamageOnFriendlies: false
 meleeDamageOnPilotsMissing: false
 meleeDamageOnPilotsKnockedOut: false
 ricochetOnDash: true
-ricochetOnDashDamageScalar: 0.3
+ricochetOnDashDamageScalar: 0.5
 ricochetOnMelee: true
 ricochetOnEjected: false
 minimumEnvironmentalDamageFalloffThreshold: 1
@@ -181,10 +215,11 @@ environmentExplosionAsset: fx_environment_destruction_overkill
 environmentFireAsset: fx_environment_fire
 environmentFireChance: 0.5
 falloffRicochetThreshold: 0.5
-ricochetScatterDegrees: 20
-ricochetVelocityDecay: 0.3
-ricochetGravityScalar: 2
-ricochetDamageScalar: 1
+ricochetScatterDegrees: 45
+ricochetVelocityDecay: 0.2
+ricochetGravityScalar: 1
+ricochetDamageMultiplierNext: 0.6
+ricochetDamageMultiplierDirect: 0
 ricochetOnPropHit: false
 environmentRicochetScalar: 0.33
 propRicochetScalar: 0.33
@@ -233,17 +268,8 @@ damageCoverageApproximation:
   - tv_tg:
       x: 0
       y: 0
-      z: 0
-      w: 0
-    w:
-      x: 0
-      y: 0
-    m: {}
-  - tv_tg:
-      x: 0.799682
-      y: 1
-      z: 0
-      w: 0
+      z: 1
+      w: 1
     w:
       x: 0
       y: 0
@@ -251,18 +277,18 @@ damageCoverageApproximation:
   - tv_tg:
       x: 1
       y: 1
-      z: 0
-      w: 0
+      z: 1
+      w: 1
     w:
       x: 0
       y: 0
     m: {}
-shieldVsHeatDamageMultiplier: 0.5
-shieldVsStaggerDamageMultiplier: 0.8
-shieldVsConcussionDamageMultiplier: 0.25
-concussionScalingFromWeight: true
-concussionScalingFromWeightBody: true
-unifiedWeightClasses: true
+shieldVsHeatDamageMultiplier: 0.25
+shieldVsStaggerDamageMultiplier: 0
+shieldVsConcussionDamageMultiplier: 0
+concussionScalingFromWeightClass: true
+weightClassThresholdMedium: 6
+weightClassThresholdHeavy: 10
 staggerUsed: false
 staggerDebuffDecay: 0.45
 staggerLevelOffsetMultiplier: 0.25
@@ -271,16 +297,33 @@ staggerLevelMaxMultiplier: 2
 heatLevelOffsetMultiplier: 0.25
 heatLevelMinMultiplier: 0.1
 heatLevelMaxMultiplier: 2
+heatCooldownMessageThreshold: 0.05
 concussionScalarFlanking: 2.25
-healthRecoveryRate: 0.8
-concussionOffset: 30
-concussionOffsetVariation: 10
+healthRecoveryRate: 0
+concussionFatiguePenalty: 1
 pilotHealthBase: 100
 pilotHealthBaseVariation: 25
 pilotHealthDeficitVariationEnemy: 0.2
+pilotPrestigeFixedBonuses: false
+pilotFatigueLowRangeLogic: false
+pilotFatigueExperiencePenalty: false
+pilotScoreUsed: false
+pilotScoreLossWithoutDeployment: false
+pilotScoreExperienceBonus: 0
+pilotScoreDamageBonus: 0
+pilotExperienceFromSquadLocked: false
+pilotExperienceFromSquadDisplayMultiplier: 1
+pilotExperienceFromSquad:
+  1: 3
+  2: 2.5
+  3: 2
+  4: 1
 barrierRegenerationDelay: 1.9
 pilotUpkeepFrequency: 24
 pilotUpkeepCost: 0
+observationOffset: 4.5
+observationDistanceMin: 12
+observationDistanceMax: 160
 allowPhysicsSubstepping: true
 minimumSubstepLength: 0.001
 maximumStepLength: 0.06
@@ -290,12 +333,15 @@ gravityForce:
   x: 0
   y: -0.66
   z: 0
-crashingGroundCastRadius: 0.25
+crashingGroundCastRadius: 1
+crashingGroundCastSkidRadius: 0.5
 crashingGroundRayOffset: 2
 crashingGroundRayThreshold: 2.25
 crashingGroundDecelerationRate: 10
-crashingSlopeGroundingThreshold: 0.9
+crashingSlopeGroundingThreshold: 0.95
+crashingSteepSlopeThreshold: 0.75
 crashingGroundOnEnd: false
+crumpleDuration: 3.5
 crashingDuration: 4
 crashingAngularVelocityMax: 80
 crashingDelayOnHeatDeath: 0.1
@@ -311,15 +357,19 @@ mechEnvironmentDamageScalar: 0.1
 unitCollisionDamageScalar: 0.1
 vehicleEnvironmentDamageScalar: 0.1
 crashingImpactCoefficient: 0.75
+crashingDestructionCoefficient: 0.125
 crashingSeparationThreshold: 3
 crashingSeparationSpeed: 5
 crashingVelocityLimit: 15
+crashingVelocityTransferFactor: 0.866
+crashingMassDifferentialLimit: 2
 tankAngularDamping: 0.75
 tankLinearDamping: 1.25
 mechAngularDamping: 0.9
 mechLinearDamping: 1.5
 environmentalDamageCooldown: 0.3
 unitCrashDamageCooldown: 1
+unitCrashCollisionCooldown: 0.3
 meleeFallbackVariantsUsed: false
 meleeRangeFromDash: true
 meleeProjectileCollision: true
@@ -385,7 +435,10 @@ scenarioRewardKeys:
 - rew_locked
 - rew_warmemorial
 scenarioUnitTags:
+- auto_eject_on_destruction
 - custom_homeguard
+- fields_ignored
+- flag_attacks_need_sightline
 - flag_boss_state_enrage_active
 - flag_boss_state_enrage_started
 - flag_no_concussion_in
@@ -396,10 +449,19 @@ scenarioUnitTags:
 - flag_reduced_heat
 - flag_uncollideable
 - flag_untargetable
+- hide_disposable_status
+- movement_anim_maxed
+- movement_skipped
 - purpose_boss_core
 - purpose_boss_generator
 - purpose_flying
+- purpose_gen
+- purpose_gen_00
+- purpose_gen_01
+- purpose_gen_02
+- purpose_gen_03
 - purpose_guard
+- purpose_objective_00
 - purpose_objective_01
 - purpose_objective_02
 - purpose_objective_03

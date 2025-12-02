@@ -1,20 +1,33 @@
 ﻿using System;
+using Entitas;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace PhantomBrigade.Data
 {
+    [Equipment, Persistent]
+    public sealed class DataKeyEquipmentLivery : IComponent
+    {
+        public string s;
+    }
+    
     [Serializable]
     public class DataContainerEquipmentLivery : DataContainer
     {
         public bool hidden;
+        public int priority;
+        
+        [HideInInspector]
         public string textName;
+        
+        [HideInInspector]
         public string source;
+        
         [PropertyRange (1, 3)]
         public int rating;
 
         // [ValueDropdown ("@DataLinkerUI.GetUnitPatternKeys ()")]
-        [HideInInspector]
+        [InlineButton ("ClearPattern", "-")]
         public string pattern;
 
         public Color colorPrimary = new Color (0.5f, 0.5f, 0.5f, 0f);
@@ -29,6 +42,7 @@ namespace PhantomBrigade.Data
         
         #if UNITY_EDITOR
         private void ClearPattern (string value) => pattern = null;
+        
         #endif
     }
 }

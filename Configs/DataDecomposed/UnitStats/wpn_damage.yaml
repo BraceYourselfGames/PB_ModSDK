@@ -10,7 +10,7 @@ uiColorOutput:
   b: 1
   a: 1
 uiIcon: s_icon_l32_stat_wpn_damage2
-uiIconOutput: s_text_24_insert_int
+uiIconOutput: s_text_24_insert_bar
 uiLimit: 200
 uiMultiplier: 1
 uiComparisonInverted: false
@@ -18,6 +18,7 @@ uiPercentage: false
 uiSeparator: false
 rounded: false
 derived: false
+offsetAbsolute: false
 flags:
   isDamage: true
 exposedPerUnit: false
@@ -34,6 +35,7 @@ minFromStat:
 maxInPart: 
 maxInUnit: 
 maxFromStat: 
+offsetFromUnitStat: wpn_damage_offset
 increasePerLevel:
   f: 0.25
 scale: 

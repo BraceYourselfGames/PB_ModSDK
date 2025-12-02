@@ -299,7 +299,7 @@ namespace PhantomBrigade.Functions
                             var part = EquipmentUtility.GetPartInUnit (unitPersistent, effect.fxTransformSocket);
                             if (part != null)
                             {
-                                bool transformFound = part.TryGetPartTransform (out var transformFx);
+                                bool transformFound = part.TryGetPartTransform (false, false, out var transformFx);
                                 if (transformFound && transformFx != null)
                                     positionSource = transformFx.position;
                             }

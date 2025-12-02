@@ -1,0 +1,14 @@
+extended: false
+lines:
+- mode: All
+  text: Exit
+  actions:
+  - action: global_cancel
+    newline: false
+- mode: All
+  text: Scroll
+  actions:
+  - action: global_move_vertical_pos
+    newline: false
+  - action: global_move_vertical_neg
+    newline: false

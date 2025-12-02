@@ -55,6 +55,7 @@ pages:
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
         x: 165.9297
@@ -67,7 +68,7 @@ pages:
       rotationY: -122.5543
       zoomOverride: true
       zoom: 0.6955295
-      delay: 0
+      delay: 0.1
     - !CombatSelectUnit
       nameInternal: ''
       select: true
@@ -99,7 +100,7 @@ pages:
     frameSizeY: 220
     frameBlocksInput: false
     frameBoundary: true
-    textLocation: RightTop
+    textLocation: RightBottom
     buttonLocation: Bottom
     textWidth: 256
     textReused: 
@@ -130,6 +131,7 @@ pages:
       focus: false
       delay: 0
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
         x: 166.0782
@@ -142,7 +144,7 @@ pages:
       rotationY: -139.7075
       zoomOverride: true
       zoom: 1
-      delay: 0
+      delay: 0.1
 - depthForeground: 0
   depthBackground: 0
   skippable: true
@@ -158,8 +160,8 @@ pages:
   hint:
     color:
       r: 1
-      g: 0.6910378
-      b: 0.3820755
+      g: 0.5520315
+      b: 0.3803922
       a: 1
     frameLocation: Center
     frameGradientMode: None
@@ -189,6 +191,7 @@ pages:
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
         x: 172.4357
@@ -201,7 +204,7 @@ pages:
       rotationY: -171.5469
       zoomOverride: true
       zoom: 0.85
-      delay: 0
+      delay: 0.1
     - !CombatSelectUnit
       nameInternal: 
       select: true
@@ -222,21 +225,7 @@ effectsOnEnd:
     - !CombatSelectUnit
       nameInternal: pb_mech_01
       select: true
-      focus: false
-      delay: 0
-    - !CombatCameraChange
-      positionOverride: true
-      position:
-        x: 176.2489
-        y: -1.45
-        z: 129.3167
-      positionFromEntityName: 
-      rotationXOverride: true
-      rotationX: 48.03362
-      rotationYOverride: true
-      rotationY: -92.88811
-      zoomOverride: true
-      zoom: 1
+      focus: true
       delay: 0
     - !CombatUnitsApplyChanges
       unitFilter:

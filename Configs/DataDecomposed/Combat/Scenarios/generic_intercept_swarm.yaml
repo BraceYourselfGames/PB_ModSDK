@@ -172,8 +172,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -228,7 +226,16 @@ states:
               skipRegistration: true
           - !UnitGroupLink
             key: army_convoy_swarm_guard
-            check: 
+            check:
+              log: false
+              stateRequirements: 
+              checksGlobal:
+              - !OverworldValidateModifier
+                key: sp_liberation_easy
+                present: false
+              checksBase: 
+              checksTarget: 
+              checksProvince: 
             combatTags: 
             spawnGroupOccupied: false
             spawnCountStrict: true
@@ -264,15 +271,15 @@ states:
             sorting: 
             spawnRegistration:
               skipRegistration: true
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   00_start:
     comment: 
     core: 
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -310,3 +317,4 @@ unitPresets:
     preset: vhc_tank_generic_cargo_0
   custom_tank_escort: !UnitPresetLink
     preset: vhc_tank_elevated_generic
+unitGenerators: 

@@ -1,48 +1,41 @@
 extended: true
-actions:
-- action: global_mouse_primary
-  newline: true
-- action: global_mouse_secondary
-  newline: true
-- action: global_move_vertical_pos
-  newline: true
-- action: global_move_horizontal_neg
-  newline: false
-- action: global_move_vertical_neg
-  newline: false
-- action: global_move_horizontal_pos
-  newline: false
-- action: global_camera_vertical_pos
-  newline: true
-- action: global_camera_horizontal_neg
-  newline: false
-- action: global_camera_vertical_neg
-  newline: false
-- action: global_move_horizontal_pos
-  newline: false
-- action: global_mouse_middle
-  newline: true
-- action: overworld_time_toggle
-  newline: true
-- action: overworld_time_1x
-  newline: true
-- action: overworld_time_2x
-  newline: false
-- action: overworld_time_3x
-  newline: false
-- action: overworld_action2_stealth
-  newline: true
-- action: overworld_action3_normal
-  newline: false
-- action: overworld_action4_overdrive
-  newline: false
-- action: overworld_tab_nav2_pilots
-  newline: true
-- action: overworld_tab_nav3_units
-  newline: true
-- action: overworld_tab_nav4_inventory
-  newline: true
-- action: overworld_tab_nav5_workshop
-  newline: true
-- action: overworld_tab_nav6_upgrades
-  newline: true
+lines:
+- mode: All
+  text: Select
+  actions:
+  - action: global_mouse_primary
+    newline: false
+- mode: All
+  text: Move the base
+  actions:
+  - action: global_mouse_secondary
+    newline: false
+- mode: All
+  text: Move the camera
+  actions:
+  - action: global_move_vertical_pos
+    newline: false
+  - action: global_move_horizontal_neg
+    newline: false
+  - action: global_move_vertical_neg
+    newline: false
+  - action: global_move_horizontal_pos
+    newline: false
+- mode: All
+  text: Rotate the camera
+  actions:
+  - action: global_camera_vertical_pos
+    newline: false
+  - action: global_camera_horizontal_neg
+    newline: false
+  - action: global_move_horizontal_pos
+    newline: false
+  - action: global_move_horizontal_pos
+    newline: false
+  - action: global_mouse_middle
+    newline: true
+- mode: All
+  text: Toggle pause
+  actions:
+  - action: overworld_time_toggle
+    newline: false

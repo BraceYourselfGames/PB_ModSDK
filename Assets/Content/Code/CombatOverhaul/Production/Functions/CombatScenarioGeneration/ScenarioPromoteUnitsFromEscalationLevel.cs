@@ -1,3 +1,4 @@
+using PhantomBrigade.Functions;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioPromoteUnitsFromEscalationLevel : ICombatScenarioGenStep
     {
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
 
@@ -15,15 +16,15 @@ namespace PhantomBrigade.Data
                 return;
             }
 
-            var escalationLevel = ScenarioUtilityGeneration.GetCombatTargetEscalationLevel ();
+            var escalationLevel = ScenarioUtilityGeneration.GetCombatTargetEscalationLevel (targetOverworld);
             if (escalationLevel <= 0)
             {
-                Debug.Log ($"Scenario {scenario.key} won't be scaled by escalation level as it is at 0");
+                // Debug.Log ($"Scenario {scenario.key} won't be scaled by escalation level as it is at 0");
                 return;
             }
-
-            var target = ScenarioUtility.GetCombatSite ();
-            Debug.Log ($"Scaling scenario {scenario.key} at {target.ToLog ()} using escalation level {escalationLevel}");
+            
+            if (DataShortcuts.sim.logScenarioGeneration)
+                Debug.Log ($"Scaling scenario {scenario.key} at {targetOverworld.ToLog ()} using escalation level {escalationLevel}");
             
             foreach (var stepKvp in scenario.stepsProc)
             {
@@ -143,8 +144,9 @@ namespace PhantomBrigade.Data
                 
                 int gradeIndexFinal = Mathf.Min (gradeIndexEscalated, group.maxGrade);
                 if (gradeIndexFinal != gradeIndexCurrent)
-                {
-                    Debug.Log ($"{context} | Changing group {i} ({group.origin}) grade from {gradeIndexCurrent} to {gradeIndexFinal}/{group.maxGrade} | Grades from escalation level {escalationLevel}: {gradeIndexMin}-{gradeIndexMax} | Fractional index: {fractionalIndex:0.##} | Proportion: {gradeProportion:0.##} | Fraction reached: {fractionReached}\n- {group.GetDescription ()}");
+                { 
+                    if (DataShortcuts.sim.logScenarioGeneration)
+                        Debug.Log ($"{context} | Changing group {i} ({group.origin}) grade from {gradeIndexCurrent} to {gradeIndexFinal}/{group.maxGrade} | Grades from escalation level {escalationLevel}: {gradeIndexMin}-{gradeIndexMax} | Fractional index: {fractionalIndex:0.##} | Proportion: {gradeProportion:0.##} | Fraction reached: {fractionReached}\n- {group.GetDescription ()}");
                     group.baseGrade = gradeIndexEscalated;
                 }
             }

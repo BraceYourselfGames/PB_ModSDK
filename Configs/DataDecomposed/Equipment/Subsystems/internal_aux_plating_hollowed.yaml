@@ -1,5 +1,5 @@
 hidden: false
-parent: internal_aux_plating
+parent: internal_aux_plating_standalone
 rating: 1
 textNameFromPreset: 
 textNameFromHardpoint: 
@@ -11,12 +11,11 @@ textDesc:
 hardpoints: 
 tags:
 - plating_subtractive
-- stat_hp
 - stat_mass
 statDistribution: ''
 stats:
   barrier:
-    value: -0.15
+    value: 0
     targetMode: 1
     targetSocket: ''
     targetHardpoint: ''
@@ -31,7 +30,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   hp:
-    value: -0.15
+    value: 0
     targetMode: 1
     targetSocket: ''
     targetHardpoint: ''
@@ -52,3 +51,4 @@ projectile:
 beam: 
 custom: 
 functions: 
+workshopInfo: 

@@ -61,6 +61,8 @@ namespace PhantomBrigade.Data.UI
     [Serializable][LabelWidth (70f)][HideReferenceObjectPicker]
     public class DataBlockSpriteName
     {
+        [DataEditor.SpriteNameAttribute (true, 32f)]
+        [InlineButtonClear]
         public string name;
     }
     
@@ -125,6 +127,11 @@ namespace PhantomBrigade.Data.UI
 
     public class DataBlockEfficiencyPrediction
     {
+        public bool statDisplay = true;
+        
+        public List<string> statKeysUnit = new List<string> { UnitStats.weaponDamage, UnitStats.weaponConcussion };
+        public List<string> statKeysLocation = new List<string> { UnitStats.weaponImpact };
+        
         public int slices = 300;
 
         public float distanceLimit = 300;
@@ -208,6 +215,77 @@ namespace PhantomBrigade.Data.UI
         public Color colorProjProjectileEnemy = new Color (0.9f, 0.2f, 0.4f, 1f);
     }
 
+    public class DataBlockInputIconLink
+    {
+        public string id;
+        
+        // [DataEditor.SpriteNameAttribute (true, 32f)]
+        public string spriteName;
+    }
+    
+    [LabelWidth (100f)]
+    public class DataBlockInputDisplay
+    {
+        [InlineButtonClear]
+        [DataEditor.SpriteNameAttribute (true, 32f)]
+        public string spriteName;
+        
+        [HideLabel]
+        public string locKey;
+        
+        [HideLabel, HorizontalGroup, YamlIgnore, GUIColor ("GetColorText")]
+        public string locText;
+        
+        [HideLabel, HorizontalGroup (100f), GUIColor ("GetColorIndex")]
+        public int locIndex = -1;
+
+        private Color GetColorText => !string.IsNullOrEmpty (locText) ? new Color (0.64f, 0.79f, 1f) : new Color (1f, 0.56f, 0.59f);
+        private Color GetColorIndex => locIndex <= 0 ? Color.gray : Color.white;
+
+        public string GetText (bool appendIndex)
+        {
+            if (string.IsNullOrEmpty (locKey))
+                return string.Empty;
+            
+            var value = Txt.Get (TextLibs.uiPause, $"input_{locKey}");
+            if (string.IsNullOrEmpty (value))
+                return string.Empty;
+
+            if (!appendIndex || locIndex <= 0)
+                return value;
+            
+            return value + " " + locIndex;
+        }
+        
+        public void ResolveText ()
+        {
+            locText = GetText (false);
+        }
+        
+        public void SaveText ()
+        {
+            if (!string.IsNullOrEmpty (locKey) && !string.IsNullOrEmpty (locText))
+                DataManagerText.TryAddingTextToLibrary (TextLibs.uiPause, $"input_{locKey}", locText);
+        }
+    }
+    
+    [Serializable]
+    public class StatDisplayLevel
+    {
+        [PropertyRange (0f, 1f)]
+        public float threshold;
+        
+        [PropertyRange (0f, 1f)]
+        public float glowAmount = 1f;
+
+        public Color colorIcon = new Color (1f, 1f, 1f, 1f);
+        public Color colorOverride = new Color (1f, 1f, 1f, 1f);
+        public Color colorBackground = new Color (1f, 1f, 1f, 1f);
+
+        [DataEditor.SpriteNameAttribute (true, 32)]
+        public string icon;
+    }
+
     [Serializable] 
     public class DataContainerUI : DataContainerUnique
     {
@@ -243,6 +321,12 @@ namespace PhantomBrigade.Data.UI
         public SortedDictionary<string, FactionColorGroup> factionColors;
         
         [TabGroup ("Other")]
+        public bool controllerSupportEnabled = true;
+        
+        [TabGroup ("Other")]
+        public bool directionalNavigationKeyboardEnabled = false;
+        
+        [TabGroup ("Other")]
         public bool workshopDisplayed = false;
         
         [TabGroup ("Other")]
@@ -250,21 +334,6 @@ namespace PhantomBrigade.Data.UI
         
         [TabGroup ("Other")]
         public bool combatMultiTargetSupport = false;
-        
-        [TabGroup ("Other")]
-        public bool minifiedStatsVisible = false;
-        
-        [TabGroup ("Other")]
-        public float overlayThresholdHeat = 0.05f;
-        
-        [TabGroup ("Other")]
-        public float overlayThresholdPilotHealth = 0.05f;
-        
-        [TabGroup ("Other")]
-        public float overlayThresholdStagger = 0.05f;
-        
-        [TabGroup ("Other")]
-        public float overlayOverworldSwitchHeight = 300f;
         
         [TabGroup ("Other")]
         public Vector2 overlayOverworldSwitchHeights = new Vector2 (200f, 300f);
@@ -281,6 +350,17 @@ namespace PhantomBrigade.Data.UI
         [TabGroup ("Other")]
         public Vector2 overlayOverworldSwitchDistanceEntity = new Vector2 (900f, 5000f);
 
+        
+        
+        [TabGroup ("Other")]
+        public StatDisplayLevel pilotDisplayLevelConcussed = new StatDisplayLevel ();
+        
+        [TabGroup ("Other")]
+        public List<StatDisplayLevel> pilotDisplayLevelsFatigue = new List<StatDisplayLevel> ();
+        
+        [TabGroup ("Other")]
+        public List<StatDisplayLevel> pilotDisplayLevelsScore = new List<StatDisplayLevel> ();
+
         [TabGroup ("Other")]
         [Space (4f)]
         public Dictionary<UIBasicSprite.Pivot, Vector2> tooltipPivotOffsets;
@@ -291,6 +371,22 @@ namespace PhantomBrigade.Data.UI
         
         [TabGroup ("Colors")]
         public Color fallbackColor = Color.white.WithAlpha (1f);
+        
+        [TabGroup ("Colors")]
+        [ColorUsage (false, true)]
+        public Color colorWorldDistanceReachable = Color.cyan.WithAlpha (1f);
+        
+        [TabGroup ("Colors")]
+        [ColorUsage (false, true)]
+        public Color colorWorldDistanceOverdrive = Color.yellow.WithAlpha (1f);
+        
+        [TabGroup ("Colors")]
+        [ColorUsage (false, true)]
+        public Color colorWorldDistanceUnreachable = Color.red.WithAlpha (1f);
+        
+        [TabGroup ("Colors")]
+        [ColorUsage (false, true)]
+        public Color colorWorldVision = Color.red.WithAlpha (1f);
         
         [TabGroup ("Colors")]
         [Space (4f)]
@@ -321,6 +417,111 @@ namespace PhantomBrigade.Data.UI
         [TabGroup ("Other")]
         [DataEditor.SpriteNameAttribute (true, 32f)]
         public string iconStateProgressDestruction;
+        
+        // [TabGroup ("Other")]
+        // [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = "@new DataBlockInputIconLink ()")]
+        // public List<DataBlockInputIconLink> inputIconListController;
+
+        [TabGroup ("Other"), PropertyOrder (2)]
+        public SortedDictionary<string, DataBlockInputDisplay> inputDisplayController;
+        
+        [TabGroup ("Other"), PropertyOrder (2)]
+        public SortedDictionary<string, DataBlockInputDisplay> inputDisplayMkb;
+        
+        [TabGroup ("Other"), PropertyOrder (3)]
+        public HashSet<int> inputMappingBlocksKeyboard;
+
+        [TabGroup ("Other"), PropertyOrder (2)]
+        public SortedDictionary<string, string> inputSpecialStringsController;
+        
+        [TabGroup ("Other"), PropertyOrder (2)]
+        public SortedDictionary<string, string> inputSpecialStringsControllerBackup;
+
+        /*
+        [TabGroup ("Other"), Button]
+        private void ConvertInputs ()
+        {
+            if (inputSpritesController != null)
+            {
+                inputDisplayController = new SortedDictionary<string, DataBlockInputDisplay> ();
+                foreach (var kvp in inputSpritesController)
+                {
+                    inputDisplayController.Add (kvp.Key, new DataBlockInputDisplay
+                    {
+                        locKey = string.Empty,
+                        spriteName = kvp.Value.name
+                    });
+                }
+            }
+            
+            if (inputSpritesMkb != null)
+            {
+                inputDisplayMkb = new SortedDictionary<string, DataBlockInputDisplay> ();
+                foreach (var kvp in inputSpritesMkb)
+                {
+                    inputDisplayMkb.Add (kvp.Key, new DataBlockInputDisplay
+                    {
+                        locKey = string.Empty,
+                        spriteName = kvp.Value.name
+                    });
+                }
+            }
+        }
+        */
+
+        [PropertyOrder (1), ButtonGroup ("_DefaultTabGroup/Other/Bt"), Button ("Load input text")]
+        public void ResolveText ()
+        {
+            if (inputDisplayController != null)
+            {
+                foreach (var kvp in inputDisplayController)
+                {
+                    var displayLink = kvp.Value;
+                    if (displayLink != null)
+                        displayLink.ResolveText ();
+                }
+            }
+            
+            if (inputDisplayMkb != null)
+            {
+                foreach (var kvp in inputDisplayMkb)
+                {
+                    var displayLink = kvp.Value;
+                    if (displayLink != null)
+                        displayLink.ResolveText ();
+                }
+            }
+        }
+
+        #if UNITY_EDITOR
+        
+        [PropertyOrder (1), ButtonGroup ("_DefaultTabGroup/Other/Bt"), Button ("Save input text")]
+        public void SaveText ()
+        {
+            if (inputDisplayController != null)
+            {
+                foreach (var kvp in inputDisplayController)
+                {
+                    var displayLink = kvp.Value;
+                    if (displayLink != null)
+                        displayLink.SaveText ();
+                }
+            }
+            
+            if (inputDisplayMkb != null)
+            {
+                foreach (var kvp in inputDisplayMkb)
+                {
+                    var displayLink = kvp.Value;
+                    if (displayLink != null)
+                        displayLink.SaveText ();
+                }
+            }
+            
+            DataManagerText.SaveLibrary ();
+        }
+        
+        #endif
 
         public override void OnBeforeSerialization ()
         {
@@ -356,6 +557,22 @@ namespace PhantomBrigade.Data.UI
                 foreach (var entry in unitPatterns)
                     entry.Value.OnAfterDeserialization ();
             }
+            
+            ResolveText ();
+            
+            /*
+            inputIconLookupController.Clear ();
+            if (inputIconListController != null)
+            {
+                foreach (var link in inputIconListController)
+                {
+                    if (link == null || string.IsNullOrEmpty (link.id) || string.IsNullOrEmpty (link.spriteName))
+                        continue;
+
+                    inputIconLookupController[link.id] = link.spriteName;
+                }
+            }
+            */
         }
 
         public void UpdateColorBase (bool updateColorDatabase = false)

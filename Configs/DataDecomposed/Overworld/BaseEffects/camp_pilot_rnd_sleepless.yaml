@@ -1,0 +1,42 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 10
+rating: 0
+mood: 0
+group: ''
+hue: 0
+icon: s_icon_l32_pilot3
+textFromFunctions: FunctionTextInSecondary
+textSource: 
+tags:
+- camp_pilot
+- camp_pilot_random
+checksGlobal:
+- !OverworldValidateChance
+  chance: 0.5
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateStatValue
+    key: fatigue
+    normalized: true
+    check: Less
+    value: 0.5
+  - !PilotValidateStatMaxRounded
+    key: fatigue
+    check: Greater
+    value: 1
+  - !PilotValidateStatValue
+    key: fatigue
+    normalized: false
+    check: Greater
+    value: 1
+  functionsPilot:
+  - !PilotStatOffset
+    key: fatigue
+    normalized: false
+    value: 1
+unit: 

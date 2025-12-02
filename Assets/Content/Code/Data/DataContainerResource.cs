@@ -34,6 +34,7 @@ namespace PhantomBrigade.Data
         public Color colorOverride = Color.white.WithAlpha (1f);
         
         public bool showCounter = true;
+        public bool showCounterNegative = false;
         public bool maxOnResupply = false;
 
         [DataEditor.SpriteNameAttribute (false, 32f)]

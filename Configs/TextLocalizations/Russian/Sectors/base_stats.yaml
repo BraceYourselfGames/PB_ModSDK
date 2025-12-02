@@ -1,183 +1,50 @@
 timeLastSync: 63817557203
 entries:
-  energy_limit__name:
-    text: Размер хранилища
-    textEng: Storage capacity
-  energy_limit__text:
-    text: Размер хранилища запасной энергии. Энергия будет восстанавливаться до этого уровня, когда база не выполняет действия, активно расходующие ее.
-    textEng: The amount of reserve power that can be stored. Energy will regenerate up to this point when the base is not actively consuming power.
-  energy_recharge_delay__name:
-    text: Задержка перезарядки
-    textEng: Recharge delay
-  energy_recharge_delay__text:
-    text: Время в часах между расходом энергии и ее восстановлением. Время задержки может быть уменьшено с помощью улучшений.
-    textEng: The time between energy drainage and energy generation, in hours. Delay time can be improved by upgrading.
-  item_block_combat_limit__name:
-    text: Склад дымовых зарядов
-    textEng: Smoke Charge capacity
-  item_block_combat_limit__text:
-    text: Сколько дымовых зарядов может храниться на базе.
-    textEng: How many Smoke Charges can be stored at the base.
-  item_block_escalation_limit__name:
-    text: Склад генераторов помех сканирования
-    textEng: Scan Jammer capacity
-  item_block_escalation_limit__text:
-    text: Сколько генераторов помех сканирования может храниться на базе.
-    textEng: How many Scan Jammers can be stored at the base.
-  item_block_reinforcements_limit__name:
-    text: Склад генераторов помех связи
-    textEng: Comms Jammer capacity
-  item_block_reinforcements_limit__text:
-    text: Сколько генераторов помех связи может храниться на базе.
-    textEng: How many Comms Jammers can be stored at the base.
-  item_drone_decoy_limit__name:
-    text: Склад отвлекающих беспилотных средств
-    textEng: Decoy Drone capacity
-  item_drone_decoy_limit__text:
-    text: Сколько отвлекающих беспилотных средств может храниться на базе.
-    textEng: How many Decoy Drones can be stored at the base.
-  item_rain_sensor_limit__name:
-    text: Склад датчиков дождя
-    textEng: Rain Sensor capacity
-  item_rain_sensor_limit__text:
-    text: Сколько датчиков дождя может храниться на базе.
-    textEng: How many Rain Sensors can be stored at the base.
-  mm_fast_energy_change__name:
-    text: Расход энергии
-    textEng: Energy drain
-  mm_fast_energy_change__text:
-    text: Скорость расходования энергии в режиме форсажа, в единицах в час.
-    textEng: Rate of energy drainage in overdrive mode, in units per hour.
-  mm_fast_speed__name:
-    text: Скоростное
-    textEng: Speed
-  mm_fast_speed__text:
-    text: Скорость движения базы в режиме форсажа в км/ч.
-    textEng: Base movement speed in overdrive mode, in kilometers per hour.
-  mm_fast_vision_enemy__name:
-    text: Зона видимости врага
-    textEng: Enemy vision
-  mm_fast_vision_enemy__text:
-    text: Расстояние, на котором вражеские радары могут засечь мобильную базу, работающую в режиме форсажа.
-    textEng: Distance for enemy scanners to detect the mobile base when running in overdrive mode.
-  mm_fast_vision_own__name:
-    text: Зона видимости базы
-    textEng: Base vision
-  mm_fast_vision_own__text:
-    text: Расстояние, на котором радар может обнаружить врагов, когда база работает в режиме форсажа.
-    textEng: Distance for scanners to detect enemy contacts when the base is running in overdrive mode.
-  mm_normal_energy_change__name:
-    text: Восстановление энергии
-    textEng: Energy regeneration
-  mm_normal_energy_change__text:
-    text: Скорость восстановления энергии в режиме форсажа, в единицах в час.
-    textEng: Rate of energy regeneration in overdrive mode, in units per hour.
-  mm_normal_speed__name:
-    text: Скоростное
-    textEng: Speed
-  mm_normal_speed__text:
-    text: Скорость движения базы в крейсерском режиме в км/ч.
-    textEng: Base movement speed in cruise mode, in kilometers per hour.
-  mm_normal_vision_enemy__name:
-    text: Зона видимости врага
-    textEng: Enemy vision
-  mm_normal_vision_enemy__text:
-    text: Расстояние, на котором вражеские радары могут засечь мобильную базу, работающую в крейсерском режиме.
-    textEng: Detection distance by enemy scanners when the base is running in cruise mode.
-  mm_normal_vision_own__name:
-    text: Зона видимости базы
-    textEng: Base vision
-  mm_normal_vision_own__text:
-    text: Расстояние, на котором радар может обнаружить врагов, когда база работает в крейсерском режиме.
-    textEng: Distance for enemy scanners to detect the mobile base when running in cruise mode.
-  mm_stealth_energy_change__name:
-    text: Расход энергии
-    textEng: Energy drain
-  mm_stealth_energy_change__text:
-    text: Скорость расходования энергии в режиме скрытности, в единицах в час.
-    textEng: Rate of energy drainage in stealth mode, in units per hour.
-  mm_stealth_speed__name:
-    text: Скоростное
-    textEng: Speed
-  mm_stealth_speed__text:
-    text: Скорость движения базы в режиме скрытности в км/ч.
-    textEng: Base movement speed in stealth mode, in kilometers per hour.
-  mm_stealth_vision_enemy__name:
-    text: Зона видимости врага
-    textEng: Enemy vision
-  mm_stealth_vision_enemy__text:
-    text: Расстояние, на котором вражеские радары могут засечь мобильную базу, работающую в режиме скрытности.
-    textEng: Detection distance by enemy scanners when the base is running in stealth mode.
-  mm_stealth_vision_own__name:
-    text: Зона видимости базы
-    textEng: Base vision
-  mm_stealth_vision_own__text:
-    text: Расстояние, на котором радар может обнаружить врагов, когда база работает в режиме скрытности.
-    textEng: Distance for enemy scanners to detect the mobile base when running in stealth mode.
+  camp_supply_limit__name:
+    id: 1
+    text: Лимит лагерных припасов
+    textEng: Camp supply limit
+  camp_supply_limit__text:
+    id: 1
+    text: Максимальное количество припасов, которое можно хранить на базе.
+    textEng: The amount of camp supplies that can be stored at the base.
   pilot_slots__name:
+    id: 1
     text: Макс. количество пилотов
     textEng: Pilot limit
   pilot_slots__text:
+    id: 1
     text: Сколько пилотов может поддерживать база.
     textEng: Number of pilots the base can support.
-  sensor_rain_effect__name:
-    text: Компенсатор дождя
-    textEng: Rain compensation
-  sensor_rain_effect__text:
-    text: Сильный дождь уменьшает видимость. С помощью улучшений база может повысить свою видимость в сложных погодных условиях.
-    textEng: Heavy rain reduces visibility. With upgrades, the base can increase visibility in inclement weather.
-  sensor_scan_time_enemy__name:
-    text: Время сканирования врага
-    textEng: Enemy scan time
-  sensor_scan_time_enemy__text:
-    text: Время в часах, необходимое радарам врага, чтобы обнаружить базу.
-    textEng: Time needed for enemy scanners to detect the mobile base, in hours.
-  sensor_scan_time_own__name:
-    text: Время сканирования базы
-    textEng: Base scan time
-  sensor_scan_time_own__text:
-    text: Время в часах, необходимое, чтобы выполнить сканирование и получить подробную информацию от новых связных. Время сканирования можно уменьшить с помощью улучшений.
-    textEng: Time needed to scan and retrieve detailed information from new contacts, in hours. With upgrades, scan time can be reduced.
+  unit_repair_amount__name:
+    id: 1
+    text: Ремонтопригодность робота
+    textEng: Mech repair capability
+  unit_repair_amount__text:
+    id: 1
+    text: 'Показывает, насколько можно восстановить состояние корпуса робота за одну стоянку. Например: если ремонтопригодность составляет 50%, робот с прочностью 40% будет отремонтирован до 90% за одну стоянку. Этот показатель можно повысить с помощью улучшений базы.'
+    textEng: 'How much mech frame integrity can be repaired at one camp stop. For example: if the repair capability is 50%, a mech with 40% integrity will be repaired to 90% after one camp stop. Can be improved with base upgrades.'
   unit_repair_jobs__name:
-    text: Параллельный ремонт
-    textEng: Parallel repairs
+    id: 1
+    text: Ячейки восстановления
+    textEng: Recovery slots
   unit_repair_jobs__text:
-    text: Количество юнитов, которое можно ремонтировать одновременно. Крайне рекомендуется повышать возможности по параллельному ремонту, чтобы избежать задержек в полевых условиях.
-    textEng: Number of units that can be repaired simultaneously. High capacity for parallel repairs is strongly recommended to avoid interruptions on the field.
-  unit_repair_resource_drain__name:
-    text: Расход жидкой заплаты
-    textEng: Liquid Fix drain
-  unit_repair_resource_drain__text:
-    text: Скорость расхода жидких заплат во время ремонта юнитов.
-    textEng: Rate at which Liquid Fix is depleted during unit repairs.
-  unit_repair_resource_limit__name:
-    text: Макс. запас жидкой заплаты
-    textEng: Liquid Fix limit
-  unit_repair_resource_limit__text:
-    text: Максимальное количество жидких заплат, хранимое на базе.
-    textEng: Amount of Liquid Fix that can be stored on base.
-  unit_repair_speed__name:
-    text: Скорость ремонта
-    textEng: Repair speed
-  unit_repair_speed__text:
-    text: Скорость ремонта юнитов. Зависит от базового времени ремонта.
-    textEng: Speed at which units are repaired, relative to baseline repair time.
+    id: 1
+    text: Количество юнитов и пилотов, которым может быть оказана помощь во время стоянки. Зависит от наличия медицинского отсека и ремонтного оборудования.
+    textEng: Number of units and pilots that that can be attended to during a camp stop. Depends on the medical bay and repair equipment.
   unit_slots__name:
+    id: 1
     text: Ячейки хранения
     textEng: Storage slots
   unit_slots__text:
+    id: 1
     text: Максимальное количество юнитов, хранимых на базе. Определяет, можно ли построить новые юниты.
     textEng: Number of units that can be stored on base. Determines whether new units can be built.
   workshop_jobs__name:
-    text: Параллельная постройка
-    textEng: Parallel builds
+    id: 1
+    text: Лимит проекта
+    textEng: Project limit
   workshop_jobs__text:
+    id: 1
     text: Количество проектов, которое можно создавать в мастерской одновременно.
     textEng: Number of projects the workshop is capable of building simultaneously.
-  workshop_speed__name:
-    text: Скорость строительства
-    textEng: Build speed
-  workshop_speed__text:
-    text: Скорость изготовления снаряжения в мастерской, зависит от базового времени ремонта.
-    textEng: Speed at which the workshop builds equipment, relative to baseline repair time.
-collection: 

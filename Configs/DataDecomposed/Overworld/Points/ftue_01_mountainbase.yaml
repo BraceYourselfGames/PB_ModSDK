@@ -1,0 +1,61 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+core:
+  textIdentifierGroup: 
+  textName: {}
+  textDesc: {}
+  image: t_world_crop_mt1
+  icon: s_icon_overlay_type_site9
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_MountainBase
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_pilot_mechanics_disabled
+- flag_force_site_info
+- flag_preserve_on_victory
+- flag_preserve_on_defeat
+- flag_resupply_base
+- flag_skip_recording
+- flag_weather_clear
+generation: 
+interaction:
+  keys:
+  - ftue_01_mountainbase_combat
+  - hg_base_01
+  tags: 
+effectsOnEvents: 
+combat:
+  scenarioKeys:
+  - unique_mountainbase
+  scenarioFilter: 
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion:
+    destroyed: false
+    functionsGlobal: 
+    functionsBase:
+    - !OverworldEntityInteractionStart
+      key: ftue_interaction_mobilebase
+      validated: false
+    functionsTarget: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - ftue_01_mountainbase
+        tags: 

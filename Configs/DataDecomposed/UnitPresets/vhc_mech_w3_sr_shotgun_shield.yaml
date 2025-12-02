@@ -5,26 +5,22 @@ salvageExempted: false
 bodyTagPinningExempted: false
 parents:
 - key: vhc_mech_w3
+- key: vhc_mech_sec_shield_h
 blueprint: 
 textType: 
 livery: 
 aiBehavior: 
 aiTargeting: guardian
 tags:
-- range_medium
+- range_short
 partTagPreferences:
-  equipment_left:
-  - tags:
-      category_shield: true
-      weight_light: false
-      wpn_secondary: true
   equipment_right:
   - tags:
       part_energy: false
       part_ml: false
+      part_shotgun: true
       part_ultraheavy: false
-      range_short: true
       wpn_primary: true
 parts: 
 animationOverrides: 
-functions: 
+effects: 

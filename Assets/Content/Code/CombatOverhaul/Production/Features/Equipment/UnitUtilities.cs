@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PhantomBrigade.Functions.Equipment;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using PhantomBrigade.Functions.Equipment;
 
 namespace PhantomBrigade.Data
 {
@@ -16,22 +16,25 @@ namespace PhantomBrigade.Data
         private static Dictionary<string, DataBlockPartTagFilter> partTagPreferencesCollapsed = new Dictionary<string, DataBlockPartTagFilter> ();
 
         private static List<string> subsystemsFilteredByHardpoint = new List<string> ();
+
         // private static List<string> presetsFiltered = new List<string> ();
         private static Dictionary<string, DataBlockSavedPart> unitDescription;
-        
+        private static List<DataBlockUnitGenerationModifier> unitGenerationModifiersActive = new List<DataBlockUnitGenerationModifier> ();
+
         // private static SortedDictionary<string, bool> partTagPreferenceForSocket = new SortedDictionary<string, bool> ();
 
-        public static Dictionary<string, DataBlockSavedPart> CreatePersistentUnitDescription 
+        public static Dictionary<string, DataBlockSavedPart> CreatePersistentUnitDescription
         (
-            DataContainerUnitPreset preset, 
-            int level = 1, 
-            bool reuseCollections = true, 
+            DataContainerUnitPreset preset,
+            int level = 1,
+            bool reuseCollections = true,
             bool saveForDebugging = false,
             DataContainerOverworldFactionBranch factionData = null,
             DataContainerUnitLiveryPreset liveryPreset = null,
             string equipmentQualityTableKey = null,
             int rating = -1,
-            bool acceptLowerQuality = false
+            bool acceptLowerQuality = false,
+            Dictionary<string, string> lockedPartPresets = null
         )
         {
             bool logExtended = DataShortcuts.sim.logEquipmentGeneration;
@@ -40,7 +43,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Failed to create  unit description due to null preset");
                 return null;
             }
-            
+
             var unitBlueprint = DataMultiLinkerUnitBlueprint.GetEntry (preset.blueprintProcessed);
             if (unitBlueprint == null)
             {
@@ -48,20 +51,20 @@ namespace PhantomBrigade.Data
                 return null;
             }
 
-            var partFilterFromBlueprint = 
-                unitBlueprint.partPresetFilter != null && 
-                unitBlueprint.partPresetFilter.Count > 0 ? 
-                unitBlueprint.partPresetFilter : 
-                null;
-            
-            var partFiltersFromFaction = 
+            var partFilterFromBlueprint =
+                unitBlueprint.partPresetFilter != null &&
+                unitBlueprint.partPresetFilter.Count > 0
+                    ? unitBlueprint.partPresetFilter
+                    : null;
+
+            var partFiltersFromFaction =
                 !string.IsNullOrEmpty (unitBlueprint.classTag) &&
                 factionData != null &&
-                factionData.unitPartFilters != null && 
-                factionData.unitPartFilters.ContainsKey (unitBlueprint.classTag) ? 
-                factionData.unitPartFilters[unitBlueprint.classTag].filters : 
-                null;
-            
+                factionData.unitPartFilters != null &&
+                factionData.unitPartFilters.ContainsKey (unitBlueprint.classTag)
+                    ? factionData.unitPartFilters[unitBlueprint.classTag].filters
+                    : null;
+
             // Just in case passed in rating is weird
             if (rating != -1)
                 rating = Mathf.Max (rating, 0);
@@ -69,7 +72,7 @@ namespace PhantomBrigade.Data
             // Drop rating to 0 for training factions
             if (factionData != null && factionData.training)
                 rating = 0;
-            
+
             // Drop rating to 1 in absence of quality table if fixed rating wasn't provided
             if (string.IsNullOrEmpty (equipmentQualityTableKey) && rating == -1)
                 rating = 1;
@@ -91,7 +94,7 @@ namespace PhantomBrigade.Data
                 {
                     var socketTag = kvp.Key;
                     var partTagPreferences = kvp.Value;
-                    
+
                     if (partTagPreferences == null || partTagPreferences.Count == 0)
                         continue;
 
@@ -114,6 +117,28 @@ namespace PhantomBrigade.Data
             bool bodyTagPinningUsed = !unitBlueprint.bodyTagPinningExempted && !preset.bodyTagPinningExempted;
             bool bodyTagPinnedFound = false;
             string bodyTagPinned = null;
+
+            unitGenerationModifiersActive.Clear ();
+
+#if !PB_MODSDK
+            var modifiers = DataHelperProvince.GetProvinceActiveModifiers ();
+            if (modifiers != null)
+            {
+                foreach (var modifierKey in modifiers)
+                {
+                    var modifierData = DataMultiLinkerOverworldProvinceModifier.GetEntry (modifierKey, false);
+                    if (modifierData == null || modifierData.unitGenModifiers == null)
+                        continue;
+						
+                    var unitGenModifiers = modifierData.unitGenModifiers;
+                    foreach (var unitGenModifier in unitGenModifiers)
+                    {
+                        if (unitGenModifier != null && unitGenModifier.partOverrides != null && unitGenModifier.IsApplicable (preset))
+                            unitGenerationModifiersActive.Add (unitGenModifier);
+                    }
+                }
+            }
+#endif
 
             foreach (var partEntry in unitBlueprint.sockets)
             {
@@ -138,7 +163,7 @@ namespace PhantomBrigade.Data
                 // I'd prefer not to manage two places where we merge filters, so I handle them separately until they go into GetPartPresetKey
                 SortedDictionary<string, bool> partFilterFromPresetOverrides = null;
                 SortedDictionary<string, bool> partFilterFromPresetPrefs = null;
-                
+
                 // We need to check part overrides to fetch one of the filter sets or skip filtering process
                 if (socketOverrideData != null && socketOverrideData.preset != null)
                 {
@@ -167,9 +192,52 @@ namespace PhantomBrigade.Data
                     }
                 }
 
+                if (unitGenerationModifiersActive != null)
+                {
+                    DataBlockUnitPartOverride socketOverrideDataExternal = null;
+                    foreach (var unitGenerationModifier in unitGenerationModifiersActive)
+                    {
+                        if (unitGenerationModifier.partOverrides != null && unitGenerationModifier.partOverrides.TryGetValue (socket, out var s) && s != null)
+                            socketOverrideDataExternal = s;
+                    }
+
+                    if (socketOverrideDataExternal?.preset != null)
+                    {
+                        // If the socket override instructs that part should be missing, there is no point continuing
+                        if (socketOverrideDataExternal.preset is DataBlockPartSlotResolverClear)
+                            continue;
+
+                        // If the socket overrides reference a specific part, then we can stop right there - no need to filter anything
+                        if (socketOverrideDataExternal.preset is DataBlockPartSlotResolverKeys resolverKeys)
+                        {
+                            partPresetFiltered = false;
+                            partPresetKey = null;
+                            if (resolverKeys != null && resolverKeys.keys.Count > 0)
+                                partPresetKey = resolverKeys.keys.GetRandomEntry ();
+                        }
+
+                        // If tag mode is used, then we don't skip filtering and just save the filter for later merge
+                        else if (socketOverrideDataExternal.preset is DataBlockPartSlotResolverTags resolverTags)
+                        {
+                            if (resolverTags.filters != null && resolverTags.filters.Count > 0)
+                            {
+                                var partFilterContainer = resolverTags.filters.GetRandomEntry ();
+                                if (partFilterContainer != null && partFilterContainer.tags != null && partFilterContainer.tags.Count > 0)
+                                    partFilterFromPresetOverrides = partFilterContainer.tags;
+                            }
+                        }
+                    }
+                }
+
+                if (lockedPartPresets != null && lockedPartPresets.TryGetValue (socket, out var lockedPartPreset))
+                {
+                    partPresetFiltered = false;
+                    partPresetKey = lockedPartPreset;
+                }
+
                 // Local var for rating, accounting for rating possibly changing to fall back after failed filtering
                 int ratingResolved = rating;
-                
+
                 var qualityTable = equipmentQualityTableKey != null ? DataMultiLinkerQualityTable.GetEntry (equipmentQualityTableKey, false) : null;
                 if (qualityTable != null)
                 {
@@ -184,7 +252,7 @@ namespace PhantomBrigade.Data
                     if (logExtended)
                         Debug.Log ($"Socket {socket} | Rating changed to {ratingResolved} based on rating override");
                 }
-                
+
                 // Ensure rating is sensible
                 int ratingResolvedClamped = Mathf.Clamp (ratingResolved, 0, 4);
                 if (ratingResolvedClamped != ratingResolved)
@@ -193,7 +261,7 @@ namespace PhantomBrigade.Data
                         Debug.Log ($"Socket {socket} | Rating changed to {ratingResolvedClamped} due to value {ratingResolved} being out of 0-4 limit");
                     ratingResolved = ratingResolvedClamped;
                 }
-                
+
                 // We continue to compiling dependencies for filtering only if we haven't encountered direct part preset override
                 if (partPresetFiltered)
                 {
@@ -235,7 +303,7 @@ namespace PhantomBrigade.Data
                         }
                     }
 
-                    partPresetKey = GetPartPresetKey 
+                    partPresetKey = GetPartPresetKey
                     (
                         preset.key,
                         socket,
@@ -248,7 +316,7 @@ namespace PhantomBrigade.Data
                         0
                     );
                 }
-                
+
                 // If part preset name is null or empty, there is no point in continuing (no log because all cases where this could be unexpected already log)
                 if (string.IsNullOrEmpty (partPresetKey))
                     continue;
@@ -281,7 +349,7 @@ namespace PhantomBrigade.Data
                             {
                                 if (logExtended)
                                     Debug.Log ($"Unit preset {preset.key} | Pinned armor tag to {tag} (from {partPresetKey} in {socket})");
-                                
+
                                 bodyTagPinnedFound = true;
                                 bodyTagPinned = tag;
                                 partFilterBody[bodyTagPinned] = true;
@@ -314,11 +382,9 @@ namespace PhantomBrigade.Data
                     }
                 }
 
-                var liveryOverridePerSocket = 
-                    liveryPreset != null && liveryPreset.socketsProcessed != null && liveryPreset.socketsProcessed.ContainsKey (socket) ? 
-                    liveryPreset.socketsProcessed[socket] : 
-                    null;
-                
+                var liveryOverridePerSocket =
+                    liveryPreset != null && liveryPreset.socketsProcessed != null && liveryPreset.socketsProcessed.ContainsKey (socket) ? liveryPreset.socketsProcessed[socket] : null;
+
                 if (liveryOverridePerSocket != null && liveryOverridePerSocket.node != null)
                     partLiveryName = liveryOverridePerSocket.node.livery;
 
@@ -331,13 +397,13 @@ namespace PhantomBrigade.Data
                     socketOverrideData.systems.Count > 0;
 
                 partGenerationLayout.Clear ();
-                
+
                 foreach (var step in partPreset.genStepsProcessed)
                 {
                     if (step != null)
                         step.Run (partPreset, partGenerationLayout, ratingResolved, false);
                 }
-                
+
                 if (logExtended)
                     Debug.Log ($"Socket {socket} | L{level} | R{ratingResolved} | Part preset {preset.key} generated | Steps: {partPreset.genStepsProcessed.Count}\n{EquipmentGenUtility.GetLayoutDescription (partGenerationLayout)}");
 
@@ -353,10 +419,10 @@ namespace PhantomBrigade.Data
                         Debug.LogWarning ($"Unit preset {preset.key} | Skipping unknown hardpoint {socket}/{hardpoint} in unit preset {preset.key}");
                         continue;
                     }
-                    
+
                     hardpoints.Add (hardpoint);
                 }
-                
+
                 // Just in case where part preset doesn't contain some hardpoint but we want to inject something on top of standard layout
                 if (subsystemOverridesPresent)
                 {
@@ -367,14 +433,14 @@ namespace PhantomBrigade.Data
                             hardpoints.Add (hardpoint);
                     }
                 }
-                
+
                 var sockets = new HashSet<string> ();
                 foreach (var s in partPreset.socketsProcessed)
                     sockets.Add (s);
-                
+
                 // Finally, it's time to compile final list of subsystems
                 // We can start the process by iterating through full set of hardpoints defined by part blueprint
-                
+
                 var subsystemsCompiled = new Dictionary<string, DataBlockSavedSubsystem> ();
                 foreach (var kvp in partGenerationLayout)
                 {
@@ -382,7 +448,7 @@ namespace PhantomBrigade.Data
                     var hardpointGenerated = kvp.Value;
                     var subsystemCandidates = hardpointGenerated.subsystemCandidates;
                     bool subsystemFused = hardpointGenerated.fused;
-                    
+
                     var subsystemBlueprintFromLayout = subsystemCandidates.Count > 0 ? subsystemCandidates.GetRandomEntry () : null;
                     var subsystemBlueprintKey = subsystemBlueprintFromLayout != null ? subsystemBlueprintFromLayout.key : null;
                     var subsystemBlueprintSource = "part preset";
@@ -399,17 +465,15 @@ namespace PhantomBrigade.Data
 
                     if (logExtended)
                         Debug.Log ($"Unit preset: {preset.key} | Resolved subsystem in {socket}/{hardpoint} | Blueprint: {subsystemBlueprintKey} | Source: {subsystemBlueprintSource}");
-                    
+
                     // If we arrived here with no subsystem name, no point proceeding
                     if (string.IsNullOrEmpty (subsystemBlueprintKey))
                         continue;
 
                     string subsystemLiveryName = null;
-                    var liveryOverridePerHardpoint = 
-                        liveryOverridePerSocket != null && liveryOverridePerSocket.hardpoints != null && liveryOverridePerSocket.hardpoints.ContainsKey (hardpoint) ? 
-                        liveryOverridePerSocket.hardpoints[hardpoint] : 
-                        null;
-                    
+                    var liveryOverridePerHardpoint =
+                        liveryOverridePerSocket != null && liveryOverridePerSocket.hardpoints != null && liveryOverridePerSocket.hardpoints.ContainsKey (hardpoint) ? liveryOverridePerSocket.hardpoints[hardpoint] : null;
+
                     if (liveryOverridePerHardpoint != null)
                         subsystemLiveryName = liveryOverridePerHardpoint.livery;
 
@@ -429,17 +493,15 @@ namespace PhantomBrigade.Data
                         var hardpoint = kvp.Key;
                         if (subsystemsCompiled.ContainsKey (hardpoint))
                             continue;
-                        
+
                         var subsystemOverrideData = kvp.Value;
                         var subsystemBlueprintKey = subsystemOverrideData.GetBlueprint ();
                         var subsystemFused = subsystemOverrideData.flags == null || subsystemOverrideData.flags.fused;
-                        
+
                         string subsystemLiveryName = null;
-                        var liveryOverridePerHardpoint = 
-                            liveryOverridePerSocket != null && liveryOverridePerSocket.hardpoints != null && liveryOverridePerSocket.hardpoints.ContainsKey (hardpoint) ? 
-                                liveryOverridePerSocket.hardpoints[hardpoint] : 
-                                null;
-                    
+                        var liveryOverridePerHardpoint =
+                            liveryOverridePerSocket != null && liveryOverridePerSocket.hardpoints != null && liveryOverridePerSocket.hardpoints.ContainsKey (hardpoint) ? liveryOverridePerSocket.hardpoints[hardpoint] : null;
+
                         if (liveryOverridePerHardpoint != null)
                             subsystemLiveryName = liveryOverridePerHardpoint.livery;
 
@@ -451,10 +513,10 @@ namespace PhantomBrigade.Data
                         subsystemsCompiled.Add (hardpoint, subsystemDesc);
                     }
                 }
-                
+
                 var block = new DataBlockSavedPart ();
                 description.Add (socket, block);
-                
+
                 block.version = EquipmentUtility.generationVersionExpected;
                 block.serial = -1;
                 block.level = level;
@@ -468,7 +530,7 @@ namespace PhantomBrigade.Data
                 block.salvageable = false;
                 block.inventoryAdded = false;
                 block.systems = subsystemsCompiled;
-                
+
                 EquipmentGenUtility.ReturnTempGenerationData (partGenerationLayout);
 
                 if (logExtended)
@@ -484,7 +546,7 @@ namespace PhantomBrigade.Data
                 if (DataMultiLinkerUnitPreset.unitsGenerated != null)
                     DataMultiLinkerUnitPreset.unitsGenerated.Add (new DataBlockUnitDescriptionDebug
                     {
-                        preset = preset?.key, 
+                        preset = preset?.key,
                         factionDataSource = factionData != null ? factionData.key : null,
                         qualityTableKey = equipmentQualityTableKey,
                         quality = rating,
@@ -501,10 +563,10 @@ namespace PhantomBrigade.Data
         private static List<string> partPresetsFiltered = new List<string> ();
         private static List<string> partFilterKeysToRemove = new List<string> ();
 
-        private static void TrimConflictsWithPrefixAndValue 
+        private static void TrimConflictsWithPrefixAndValue
         (
-            SortedDictionary<string, bool> filterModified, 
-            SortedDictionary<string, bool> filterIncoming, 
+            SortedDictionary<string, bool> filterModified,
+            SortedDictionary<string, bool> filterIncoming,
             string prefix,
             bool expectedValue
         )
@@ -514,27 +576,27 @@ namespace PhantomBrigade.Data
             {
                 var tag = kvp.Key;
                 bool required = kvp.Value;
-                
+
                 if (required != expectedValue || !tag.StartsWith (prefix))
                     continue;
 
                 conflictFound = true;
                 break;
             }
-            
+
             if (!conflictFound)
                 return;
-        
+
             partFilterKeysToRemove.Clear ();
-            
+
             foreach (var kvp in filterModified)
             {
                 var tag = kvp.Key;
                 bool required = kvp.Value;
-                
+
                 if (required != expectedValue || !tag.StartsWith (prefix))
                     continue;
-                
+
                 partFilterKeysToRemove.Add (tag);
             }
 
@@ -583,7 +645,7 @@ namespace PhantomBrigade.Data
                     {
                         var tag = kvp.Key;
                         var required = kvp.Value;
-                        
+
                         // Since this is happening after unit filter addition, we need to check whether tag is already added
                         if (partFilterCombined.ContainsKey (tag))
                             partFilterCombined[tag] = required;
@@ -591,7 +653,7 @@ namespace PhantomBrigade.Data
                             partFilterCombined.Add (kvp.Key, kvp.Value);
                     }
                 }
-                
+
                 // Pop the top entry from the stack - if we fail to select a part, we'll be able to do another pass with the next filter
                 // tagFilterStackFromFaction.RemoveAt (0);
             }
@@ -601,7 +663,7 @@ namespace PhantomBrigade.Data
             {
                 // If this filter has rating requirement, we want to avoid conflict with auto-injected tag
                 TrimConflictsWithPrefixAndValue (partFilterCombined, partFilterFromPresetPrefs, UnitEquipmentQuality.tagPrefix, true);
-            
+
                 foreach (var kvp in partFilterFromPresetPrefs)
                 {
                     string tag = kvp.Key;
@@ -613,13 +675,13 @@ namespace PhantomBrigade.Data
                         partFilterCombined.Add (kvp.Key, kvp.Value);
                 }
             }
-            
+
             // Tag filter from socket key based preset overrides is merged last, to give them a chance to override things at last possible moment
             if (partFilterFromPresetOverrides != null && partFilterFromPresetOverrides.Count > 0)
             {
                 // If this filter has rating requirement, we want to avoid conflict with auto-injected tag
                 TrimConflictsWithPrefixAndValue (partFilterCombined, partFilterFromPresetOverrides, UnitEquipmentQuality.tagPrefix, true);
-                
+
                 foreach (var kvp in partFilterFromPresetOverrides)
                 {
                     string tag = kvp.Key;
@@ -631,7 +693,7 @@ namespace PhantomBrigade.Data
                         partFilterCombined.Add (kvp.Key, kvp.Value);
                 }
             }
-            
+
             // Tag filter from socket key based preset overrides is merged last, to give them a chance to override things at last possible moment
             if (partFilterCustom != null && partFilterCustom.Count > 0)
             {
@@ -650,23 +712,23 @@ namespace PhantomBrigade.Data
             if (partFilterCombined.Count > 0)
             {
                 // Now get a random part preset key using a given filter
-                var partPresetsFromTags = DataTagUtility.GetContainersWithTags 
+                var partPresetsFromTags = DataTagUtility.GetContainersWithTags
                 (
-                    DataMultiLinkerPartPreset.data, 
+                    DataMultiLinkerPartPreset.data,
                     partFilterCombined
                 );
-                
+
                 if (partPresetsFromTags.Count > 0)
                 {
                     string presetFromTagNameLast = null;
-                    
+
                     // Filtering out presets based on factors not covered by tagging: hidden flag, missing or mismatched socket
                     foreach (var entry in partPresetsFromTags)
                     {
                         var presetFromTag = entry as DataContainerPartPreset;
                         if (presetFromTag == null || presetFromTag.hidden || presetFromTag.socketsProcessed == null)
                             continue;
-                        
+
                         // Discard candidates that have constrained rating
                         if (ratingChecked)
                         {
@@ -679,7 +741,7 @@ namespace PhantomBrigade.Data
 
                         // Useful for logging socket based rejections
                         presetFromTagNameLast = presetFromTag.key;
-                        
+
                         if (!presetFromTag.socketsProcessed.Contains (socketKey))
                             continue;
 
@@ -706,15 +768,15 @@ namespace PhantomBrigade.Data
             {
                 // Pop the top entry from the stack
                 partFilterStackFromFaction.RemoveAt (0);
-                
+
                 if (logExtended)
                     Debug.LogWarning ($"Unit preset {unitPresetKey} / socket {socketKey} | Depth: {depth} | Attempting to select a part using next available faction filter");
-                
-                partPresetKey = GetPartPresetKey 
+
+                partPresetKey = GetPartPresetKey
                 (
-                    unitPresetKey, 
+                    unitPresetKey,
                     socketKey,
-                    partFilterFromBlueprint, 
+                    partFilterFromBlueprint,
                     partFilterFromPresetPrefs,
                     partFilterFromPresetOverrides,
                     partFilterCustom,

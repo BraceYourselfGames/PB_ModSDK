@@ -9,8 +9,9 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_01
+- spec_guided
 - spec_stabilized
-- stat_concussive
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
@@ -24,12 +25,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 60
+    value: 70
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 4
+    value: 3
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -39,42 +40,42 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 0.8387063
+    value: 0.3
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 14
+    value: 30
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage_radius:
-    value: 5
+    value: 8
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 40
+    value: 35
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact_radius:
-    value: 2
-    targetMode: 0
-    targetSocket: ''
-    targetHardpoint: ''
-  wpn_proj_lifetime:
     value: 6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
   wpn_range_max:
-    value: 100
+    value: 70
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 30
+    value: 25
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -89,7 +90,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_radius:
-    value: 100
+    value: 60
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -174,6 +175,7 @@ projectile:
     distance: 2.5
     targetExclusive: false
     inertBeforeHit: false
+    inertPrimingDelay: 1
     triggerWithoutEntity: false
   hitResponse: 
   splashDamage:
@@ -382,8 +384,10 @@ projectile:
         m: {}
   uiSpeedAverage:
     f: 24
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

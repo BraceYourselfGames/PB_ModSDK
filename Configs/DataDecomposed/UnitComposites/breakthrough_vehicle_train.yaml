@@ -1,0 +1,430 @@
+parents: []
+hidden: false
+core:
+  unitRoot: a_core
+  speedTranslation: 6
+  speedRotationPrimary: 0.35
+  speedRotationSecondary: 30
+ui:
+  textName: {}
+  textType: {}
+tags: 
+layout:
+  units:
+    a_core:
+      comment: 
+      preset: vhc_system_core_train_crawler
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_core
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats:
+          healthCurrent: 200
+          healthLimit: 200
+          concussionOffset: 100
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers:
+          barrier: 1
+          hp: 1
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_no_concussion_in
+        - purpose_boss_core
+        - flag_untargetable
+        - flag_no_damage_in
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform: 
+      linksConditional: 
+      legStepBlocklist: 
+    c1_engine_l_01:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name:
+          name: c1_engine_l_01
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_objective_01
+        - purpose_boss_generator
+        - custom_engine_c1
+        - custom_engine_blast_front_l
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -16.5
+          y: -0.95
+          z: 136.5
+        rotation:
+          x: 0
+          y: 180
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c1_engine_l_02:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name:
+          name: c1_engine_l_02
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_objective_02
+        - purpose_boss_generator
+        - custom_engine_c1
+        - custom_engine_blast_center_l
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -16.5
+          y: -0.95
+          z: 10.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c1_engine_r_01:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name:
+          name: c1_engine_r_01
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_boss_generator
+        - purpose_objective_03
+        - custom_engine_c1
+        - custom_engine_blast_front_r
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 16.5
+          y: -0.95
+          z: 136.5
+        rotation:
+          x: 0
+          y: 180
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c1_engine_r_02:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name:
+          name: c1_engine_r_02
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_objective_04
+        - purpose_boss_generator
+        - custom_engine_c1
+        - custom_engine_blast_center_r
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 16.5
+          y: -0.95
+          z: 10.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c2_engine_l_01:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_boss_generator
+        - purpose_objective_01
+        - custom_engine_c2
+        - custom_engine_blast_center_l
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -16.5
+          y: -0.95
+          z: -10.7
+        rotation:
+          x: 0
+          y: 180
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c2_engine_l_02:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_boss_generator
+        - purpose_objective_02
+        - custom_engine_c2
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -16.5
+          y: -0.95
+          z: -136.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c2_engine_r_01:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_boss_generator
+        - purpose_objective_03
+        - custom_engine_c2
+        - custom_engine_blast_center_r
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 16.5
+          y: -0.95
+          z: -10.7
+        rotation:
+          x: 0
+          y: 180
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    c2_engine_r_02:
+      comment: 
+      preset: vhc_system_crawler_engine_01
+      textName: 
+      textDesc: {}
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_engine
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - purpose_boss_generator
+        - custom_engine_c2
+        - purpose_objective_04
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 16.5
+          y: -0.95
+          z: -136.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes: 
+events: 

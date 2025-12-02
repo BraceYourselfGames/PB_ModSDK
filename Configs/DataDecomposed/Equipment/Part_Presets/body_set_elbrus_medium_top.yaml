@@ -11,6 +11,7 @@ textNameFromRating:
 textDescFromRating: 
 sockets: 
 tags: 
+workshopInfo: 
 genSteps:
 - !AddHardpoints
   subsystemsInitial:
@@ -61,4 +62,15 @@ genSteps:
   checks:
   - !CheckPartRating
     ratingMin: 3
+    ratingMax: 3
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_top_thrusters
+  - internal_aux_pilot
+  priority: 51
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
     ratingMax: 3

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using PhantomBrigade.Combat.Components;
-using PhantomBrigade.Overworld;
-using UnityEngine;
+using PhantomBrigade.Functions;
 
 namespace PhantomBrigade.Data
 {
@@ -9,21 +7,19 @@ namespace PhantomBrigade.Data
     {
         private List<OverworldEntity> reinforcementProviderListModified = new List<OverworldEntity> ();
     
-        public void Run (DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
         {
             #if !PB_MODSDK
 
+            /*
             // If this is 0, no point continuing
-            var reinforcementProviderLimit = ScenarioUtilityGeneration.GetReinforcementProviderLimit ();
+            var reinforcementProviderLimit = ScenarioUtilityGeneration.GetReinforcementProviderLimit (targetOverworld);
             if (reinforcementProviderLimit <= 0)
                 return;
 
             var sourceOverworld = IDUtility.playerBaseOverworld;
             if (sourceOverworld == null || !sourceOverworld.hasPosition)
                 return;
-
-            var targetPersistent = ScenarioUtility.GetCombatSite ();
-            var targetOverworld = IDUtility.GetLinkedOverworldEntity (targetPersistent);
 
             // The method excepts entities with CombatParticipant component, but just in case, let's pass excepted entity directly
             // This will keep this implementation more resilient to future changes, e.g. if combat participants get marked after generator runs
@@ -184,6 +180,8 @@ namespace PhantomBrigade.Data
                 if (DataShortcuts.sim.logCombatRequests)
                     Debug.Log ($"Adding enemy reinforcement state from entity {providerOverworld.ToLog ()} | Turn: {turn} | Unit groups: {generatedUnitGroups.Count} | Threat: {threat}");
             }
+            
+            */
             
             #endif
         }

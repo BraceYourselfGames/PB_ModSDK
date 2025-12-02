@@ -1,0 +1,108 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: generic_reward_01
+core:
+  textIdentifierGroup: 
+  textName: {}
+  textDesc: {}
+  image: 
+  icon: s_icon_overlay_type_squad6
+  visionColor: 
+  visual:
+    path: Content/Overworld/Squad_Boss_Train
+  visualLiberated:
+    path: Content/Overworld/Site_Battlefield_Inactive
+  observer: 
+  movement:
+    speed: 4
+    rotateToFacing: false
+  rangeVision:
+    f: 15
+  rangeInteraction:
+    f: 15
+  detection: 
+tags:
+- flag_preserve_on_victory
+- flag_preserve_on_defeat
+- flag_weather_clear
+- flag_force_site_info
+generation: 
+interaction:
+  keys:
+  - breakthrough_line_crawler_combat
+  tags: 
+effectsOnEvents:
+  Spawn:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityEscalation
+      offset: false
+      level: 3
+    - !OverworldEntityMoveThroughSpawnGroup
+      rawPath: true
+      rawPathSubdivision: 3
+      destroyOnEnd: false
+      speed: 4
+      spawnGroupKey: track
+      indexMemoryKey: waypoint_index
+  Arrival:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveThroughSpawnGroup
+      rawPath: true
+      rawPathSubdivision: 3
+      destroyOnEnd: false
+      speed: 4
+      spawnGroupKey: track
+      indexMemoryKey: waypoint_index
+combat:
+  scenarioKeys:
+  - unique_breakthrough_stage_01
+  scenarioFilter: 
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion:
+    destroyed: false
+    functionsGlobal: 
+    functionsBase: 
+    functionsTarget: 
+  salvageBudget:
+    f: 0
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 2
+        tagsUsed: false
+        keys:
+        - res_token
+        tags: 
+    obj_tier1:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_armor_w1_set
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_armor_w2_set
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_armor_w3_set
+        tags: 

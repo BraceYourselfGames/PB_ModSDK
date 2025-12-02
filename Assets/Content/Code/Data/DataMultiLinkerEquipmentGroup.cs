@@ -413,6 +413,18 @@ namespace PhantomBrigade.Data
             return subsystem;
         }
 
+        #if !PB_MODSDK
+        public static string GetPartModelName (this EquipmentEntity part, bool appendSuffixes = true)
+        {
+            if (!part.isPart || !part.hasDataLinkPartPreset)
+                return fallbackPartModelName;
+
+            var preset = part.dataLinkPartPreset.data;
+            int rating = part.hasRating ? part.rating.i : 1;
+            return GetPartModelName (preset, rating, appendSuffixes: appendSuffixes);
+        }
+        #endif
+
         public static string GetPartModelName (this DataContainerPartPreset preset, int rating = 1, bool descendToChildren = false, bool appendSuffixes = true)
         {
             if (preset == null)
@@ -451,6 +463,15 @@ namespace PhantomBrigade.Data
 
             return text;
         }
+
+        #if !PB_MODSDK
+        public static string GetPartModelDesc (this EquipmentEntity part)
+        {
+            var preset = part.dataLinkPartPreset.data;
+            int rating = part.hasRating ? part.rating.i : 1;
+            return GetPartModelDesc (preset, rating);
+        }
+        #endif
 
         public static string GetPartModelDesc (this DataContainerPartPreset preset, int rating = 1, bool descendToChildren = false, bool appendGroupMain = false, bool appendGroupsSecondary = false)
         {
@@ -531,10 +552,113 @@ namespace PhantomBrigade.Data
 
             return text;
         }
-        
+
+        #if !PB_MODSDK
+        public static List<string> GetEquipmentGroupKeys (this EquipmentEntity part)
+        {
+            if (!part.isPart || !part.hasDataLinkPartPreset)
+                return null;
+            
+            var preset = part.dataLinkPartPreset.data;
+            return preset.groupFilterKeys;
+        }
+
+        public static DataContainerEquipmentGroup GetEquipmentGroup (this EquipmentEntity part)
+        {
+            if (!part.isPart || !part.hasDataLinkPartPreset)
+                return null;
+            
+            var preset = part.dataLinkPartPreset.data;
+            if (string.IsNullOrEmpty (preset.groupMainKey))
+                return null;
+            
+            // This method works if we want filter groups to be the same as name group, but we want more precise control over groups getting into name
+            // if (preset.groupFilterKeys == null || preset.groupFilterKeys.Count == 0)
+            //     return null;
+            // var groupKey = preset.groupFilterKeys.FirstOrDefault ();
+            // var group = DataMultiLinkerEquipmentGroup.GetEntry (groupKey);
+
+            var group = DataMultiLinkerEquipmentGroup.GetEntry (preset.groupMainKey);
+            return group;
+        }
+        #endif
         
         private static string partPresetTagBody = "body_part";
         
+        public static string GetEquipmentGroupName (DataContainerEquipmentGroup group, DataContainerPartPreset preset = null)
+        {
+            if (group == null || string.IsNullOrEmpty (group.textName))
+                return fallbackGroupName;
+
+            if (preset != null && preset.tagsProcessed != null && preset.tagsProcessed.Contains (partPresetTagBody))
+            {
+                var sockets = preset.socketsProcessed;
+                string socketSuffix = null;
+                    
+                if (sockets.Contains (LoadoutSockets.corePart))
+                    socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_torso");
+                else if (sockets.Contains (LoadoutSockets.secondaryPart))
+                    socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_legs");
+                else if (sockets.Contains (LoadoutSockets.leftOptionalPart))
+                    socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_arm");
+
+                if (!string.IsNullOrEmpty (socketSuffix))
+                    return $"{group.textName} / {socketSuffix}";
+            }
+            
+            return group.textName;
+        }
+        
+        #if !PB_MODSDK
+        public static string GetEquipmentGroupName (this EquipmentEntity entity, DataContainerEquipmentGroup group = null)
+        {
+            if (group == null)
+                group = GetEquipmentGroup (entity);
+            
+            if (group == null || string.IsNullOrEmpty (group.textName))
+                return fallbackGroupName;
+
+            if (entity.hasDataLinkPartPreset)
+            {
+                var preset = entity.dataLinkPartPreset.data;
+                var tags = preset.tagsProcessed;
+                if (tags != null && tags.Contains (partPresetTagBody))
+                {
+                    var sockets = preset.socketsProcessed;
+                    string socketSuffix = null;
+                    
+                    if (sockets.Contains (LoadoutSockets.corePart))
+                        socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_torso");
+                    else if (sockets.Contains (LoadoutSockets.secondaryPart))
+                        socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_legs");
+                    else if (sockets.Contains (LoadoutSockets.leftOptionalPart))
+                        socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_arm");
+
+                    if (!string.IsNullOrEmpty (socketSuffix))
+                        return $"{group.textName} / {socketSuffix}";
+                }
+            }
+            
+            return group.textName;
+        }
+        
+        public static string GetEquipmentGroupDesc (this EquipmentEntity entity)
+        {
+            var group = GetEquipmentGroup (entity);
+            if (group == null || string.IsNullOrEmpty (group.textDesc))
+                return fallbackGroupDesc;
+            return group.textDesc;
+        }
+        
+        public static string GetEquipmentGroupIcon (this EquipmentEntity entity)
+        {
+            var group = GetEquipmentGroup (entity);
+            if (group == null || string.IsNullOrEmpty (group.icon))
+                return fallbackGroupIcon;
+            return group.icon;
+        }
+        #endif
+
         public static Color GetSocketEditorColor (string socket)
         {
             if (string.IsNullOrEmpty (socket) || !socketsToColors.TryGetValue (socket, out var color))

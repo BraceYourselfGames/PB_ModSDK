@@ -1,0 +1,77 @@
+comment:
+  comment: Special quest leading back to open gameplay.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: province_breakthrough_capital
+travelInteraction: 
+entry:
+  functionsGlobal:
+  - !QuestStart
+    questKey: province_breakthrough_capital
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_progress_breakthrough
+      value: 0
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsBase: 
+progressDisplay: 
+effects: 
+branches:
+- comment: 
+  preferences: 
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 40_postgame_start
+    direction: 0
+    levelOffset: 
+    branchKey: 
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_positive: true
+    - tagsUsed: false
+      keys:
+      - sp_weakened
+      tags: 
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 40_postgame_start
+    direction: 0
+    levelOffset: 
+    branchKey: 
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_positive: true
+tags:
+- priority
+- branch_hidden

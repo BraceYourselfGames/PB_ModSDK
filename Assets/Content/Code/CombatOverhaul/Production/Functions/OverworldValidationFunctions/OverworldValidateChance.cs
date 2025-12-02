@@ -6,12 +6,17 @@ using Random = UnityEngine.Random;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class OverworldValidateChance : IOverworldValidationFunction
+    public class OverworldValidateChance : IOverworldEntityValidationFunction, IOverworldGlobalValidationFunction
     {
         [PropertyRange (0f, 1f)]
         public float chance = 0.5f;
 
         public bool IsValid (PersistentEntity entityPersistent)
+        {
+            return IsValid ();
+        }
+        
+        public bool IsValid ()
         {
             #if !PB_MODSDK
 

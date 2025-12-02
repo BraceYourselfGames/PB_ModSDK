@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using PhantomBrigade.Functions;
+using PhantomBrigade.Overworld;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -42,9 +44,75 @@ namespace PhantomBrigade.Data
         public string icon;
     }
     
+    [HideReferenceObjectPicker]
+    public class QuestLiberationSpawnVariant
+    {
+        [PropertyRange (0, 3)]
+        [LabelText ("Escalation"), SuffixLabel ("$GetEscalationSuffix")]
+        [GUIColor ("GetColor")]
+        public int escalationValue = 0;
+		
+        [LabelText ("+ Progress")]
+        public int progressMemoryValue = 1;
+        
+        [LabelText ("- Countdown")]
+        public Vector2 countdownOffset = new Vector2 (0f, 0f);
+        
+        #if UNITY_EDITOR
+        
+        private Color GetColor () => new HSBColor (0.3f - escalationValue * 0.1f, 0.5f, 1f).ToColor ();
+
+        private static List<string> escalationStrings = new List<string> ()
+        {
+            "★   ",
+            "★★  ",
+            "★★★ ",
+            "★★★★"
+        };
+
+        private string GetEscalationSuffix ()
+        {
+            #if !PB_MODSDK
+            if (escalationStrings == null || escalationStrings.Count == 0 || !escalationValue.IsValidIndex (escalationStrings))
+                return "?";
+            return escalationStrings[escalationValue];
+            #else 
+            return null;
+            #endif
+        }
+        
+        #endif
+    }
+
+    public class QuestLiberationSpawnVariants
+    {
+        [HideLabel, HideReferenceObjectPicker] 
+        public DataBlockComment comment = new DataBlockComment ();
+
+        public int limit = 1;
+        public List<QuestLiberationSpawnVariant> variants = new List<QuestLiberationSpawnVariant> ();
+    }
+    
+    public class DataBlockOverworldProvinceFilter : DataBlockFilterLinked<DataContainerOverworldProvinceBlueprint>
+    {
+        public override IEnumerable<string> GetTags () => DataMultiLinkerOverworldProvinceBlueprints.GetTags ();
+        public override SortedDictionary<string, DataContainerOverworldProvinceBlueprint> GetData () => DataMultiLinkerOverworldProvinceBlueprints.data;
+    }
+    
+    public class DataBlockOverworldModifierFilter : DataBlockFilterLinked<DataContainerOverworldProvinceModifier>
+    {
+        public override IEnumerable<string> GetTags () => DataMultiLinkerOverworldProvinceModifier.GetTags ();
+        public override SortedDictionary<string, DataContainerOverworldProvinceModifier> GetData () => DataMultiLinkerOverworldProvinceModifier.data;
+    }
+    
     [Serializable]
     public class DataContainerSettingsOverworld : DataContainerUnique
     {
+        public int pointLimit = 3;
+        public float pointCountdownDisplayThreshold = 6f;
+        public Vector2 pointSpawnRangeDefault = new Vector2 (75f, 150f);
+        public float pointSeparationDefault = 40f;
+        
         #if UNITY_EDITOR
         [FilePath (ParentFolder = "Assets/Resources", Extensions = ".bytes")]
         [OnValueChanged ("ValidateNavGraphAssetPath")]
@@ -55,70 +123,31 @@ namespace PhantomBrigade.Data
         public float navRestrictionRadius = 60f;
 
         public float simulationStartTime = 12f;
-
-        //public float selectionTimeout = 2f;
-
-        public float minEjectionRange = 50f;
-        public float maxEjectionRange = 100f;
         
-        public float retreatDurationBase = 24f;
-        public float retreatDurationFromDistance = 72f;
-        public Vector2 retreatDurationDistances = new Vector2 (300f, 1000f);
+        public bool workshopStripsUnfusedSystems = true;
+            
+        [DictionaryKeyDropdown ("@DataMultiLinkerPartPreset.data.Keys")]
+        public SortedDictionary<string, int> partsForWorkshopLevel = new SortedDictionary<string, int> ();
 
-        public bool createEnemyEjectionSites = false;
+        [DictionaryKeyDropdown ("@DataMultiLinkerResource.data.Keys")]
+        public SortedDictionary<string, int> pilotRecruitCostsRookie = new SortedDictionary<string, int> { { ResourceKeys.supplies, 100 } };
+        public SortedDictionary<string, int> pilotRecruitCostsPerLevel = new SortedDictionary<string, int> { { ResourceKeys.supplies, 100 } };
+
+        public int pilotRecruitPromotionHistory = 2;
+        public float pilotRecruitRefreshInterval = 24f;
+        public DataBlockRangeInt pilotRecruitCountBase = new DataBlockRangeInt { min = 3, max = 4 };
+        public DataBlockRangeInt pilotRecruitCountLimited = new DataBlockRangeInt { min = 2, max = 2 };
+        
         public bool destroyInRangeOnLiberation = true;
-        
-        public string entityTagResupplyPoint = "homebase";
-        public string entityTagMilitarySpawn = "designation_military";
-        public string entityTagWarBase = "war_base";
-        
-        public List<DataBlockOverworldEventSubcheckTag> entityTagsSquad = new List<DataBlockOverworldEventSubcheckTag> ();
 
-        [DictionaryKeyDropdown(DictionaryKeyDropdownType.ScenarioTag)]
-        [DictionaryDrawerSettings (KeyColumnWidth = DataEditor.dictionaryKeyWidth)]
-        public SortedDictionary<string, bool> defaultScenarioTags;
-
-      
-        public bool evaluateEventsOverTime = true;
         [FoldoutGroup("Logging")]
-        public bool logEventEvaluationOverTimeShort = false;  
-        [FoldoutGroup("Logging")]
-        public bool logEventEvaluationOverTimeMedium = false;  
-        [FoldoutGroup("Logging")]
-        public bool logEventEvaluationOverTimeLong = false;
-        [FoldoutGroup("Logging")]
-        public bool logEventCulling = false;
-        [FoldoutGroup("Logging")]
-        public bool logEventEvaluationOnContact = false;
-        [FoldoutGroup("Logging")]
-        public bool logAgentDestinations = false;
-
-        public bool eventOptionDetailsUpdated = false;
-        public bool eventOptionDetailsCompact = false;
-
-        public float eventChanceShort = 0.5f;
-        public float eventChanceMedium = 0.5f;
-        public float eventChanceLong = 0.5f;
+        public bool logWorkshopLeveling = false;
         
         [YamlIgnore, HideReferenceObjectPicker]
         public AnimationCurve eventEvaluationCooldownDelta;
         
         [YamlMember (Alias = "eventEvaluationCooldownDelta"), HideInInspector] 
         public AnimationCurveSerialized eventEvaluationCooldownDeltaSerialized;
-        
-        public float eventEvaluationCooldownShortBase = 1f;
-        public float eventEvaluationCooldownShortDelta = 0.1f;
-        
-        public float eventEvaluationCooldownMediumBase = 24f;
-        public float eventEvaluationCooldownMediumDelta = 8f;
-        
-        public float eventEvaluationCooldownLongBase = 168f;
-        public float eventEvaluationCooldownLongDelta = 24f;
-
-        public int eventHistorySize = 100;
-        
-        [ValueDropdown("@DataMultiLinkerOverworldEvent.data.Keys", IsUniqueList = true), ListDrawerSettings(DraggableItems = false)]
-        public List<string> eventRuleChanceOverride;
 
         [Space (8f)]
         public bool entityEffectsOverTime = false;
@@ -126,14 +155,11 @@ namespace PhantomBrigade.Data
 
         [Space (8f)]
         public float skyRenderTimeThreshold = .1f;
-        public bool DebugCanOrderEnemyUnits;
-        public bool DebugEnableLMBScroll;
-        public float cameraMovementSpeed = 1f;
+        public bool debugMovementOnSelections;
         public float zoomDefault = 0.15f;
         public float zoomDistanceDefault = 385f;
         public float cameraRotationYDefault = 57f;
         public float cameraRotationXDefault = 26f;
-        public float cameraMovementDelay = 1f;
 
         public bool deltaTimeProtection = true;
         public float deltaTimeMin = 1 / 240f;
@@ -144,6 +170,8 @@ namespace PhantomBrigade.Data
         
         public float weatherChangeMultiplier = 1f;
         public SortedDictionary<string, WeatherLevel> weatherLevels = new SortedDictionary<string, WeatherLevel> ();
+
+        public float[] skyBestTimesOfDay;
         
         [YamlIgnore, HideInInspector, NonSerialized]
         public List<WeatherLevel> weatherLevelsSorted = new List<WeatherLevel> ();
@@ -164,26 +192,29 @@ namespace PhantomBrigade.Data
         public float viewFlareAnimationDuration = 0.25f;
         
         public float pingDuration = 0.1f;
-        public float visionAnimationDuration = 0.2f;
         public float movementSpeedMultiplier = 10f;
+        public float movementSpeedMultiplierOverdrive = 3f;
+        public float movementPredictedTimeMultiplier = 1.3f;
+        public bool movementPredictedTimeDisplay = true;
+        public float movementDistanceDisplayScale = 0.2f;
+        
         public float directionDampSmoothTime = 0.1f;
         public float directionDampMaxSpeed = 10000f;
 
+        public float overdriveHeatBuildupSpeed = 1f;
+        public float overdriveHeatDissipationSpeed = 0.5f;
+        public float overdriveHeatDamageFrequency = 1f;
+        public float overdriveHeatDamageLimit = 0.25f;
+        public float overdriveHeatDamagePerHit = 0.1f;
+        
         public float pathMovementWaypointApproachDistance = 1.0f;
         public float pathMovementLookaheadTime = 1.0f;
         public bool pathVisualEnemy = false;
         
+        public bool positionUpdatesUnconditional = true;
         public float playerRecognitionDelay = 1f;
+        public bool visionClippingDisabled = true;
         public float visionTweenRate = 0.6f;
-
-        public float snowAltitudeBaseline = 55f;
-        public float snowAltitudeCamera = 55f;
-        public DataBlockCombatBiomeFilter snowAltitudeBiomeFilter;
-        
-        public bool visionRainEffect = true;
-        // public float visionRainMultiplierPlayer = 0.5f;
-        // public float visionRainMultiplierEnemy = 0.5f;
-        // public float visionRainChangeSpeed = 1f;
         
         [FoldoutGroup("Campaign Autosaving")] 
         public bool saveBeforeCombat = true;
@@ -198,111 +229,50 @@ namespace PhantomBrigade.Data
         
         [FoldoutGroup ("Overworld AI")] 
         public float aiMaxUnitResponseRange = 300;
-        [FoldoutGroup ("Overworld AI")] 
-        public float aiReinforcementCooldown = 100f;
-
-        [FoldoutGroup("Reinforcements")]
-        public float overworldDistancePerReinforcementTurn = 15.0f;
-        [FoldoutGroup("Reinforcements")]
-        public int reinforcementsFromChasingLimit = 3;
         
-        [FoldoutGroup ("Overworld AI/Province Sleep&Wake")]
-        public float provinceWakeUpdateInterval = 10f;
-
-        [FoldoutGroup ("Overworld AI/Province Sleep&Wake")]
-		public float provinceWakeRadius = 300f;
-
-        public int provinceLevelPerDistance = 1;
-
         [FoldoutGroup ("Overworld AI/Recovery duration")]
         public float aiRecoveryDuration = 4f;
         
         [FoldoutGroup ("Overworld AI/Recovery duration")]
         public float aiRecoveryDurationStatic = 1f;
         
-        [FoldoutGroup ("Overworld AI/Patrols")] 
-        public bool aiPatrolRework = true;
-        
-        [FoldoutGroup ("Overworld AI/Patrols")] 
-        public SortedDictionary<string, bool> aiPatrolReworkOriginTags;
-        
-        [FoldoutGroup ("Overworld AI/Patrols")] 
-        public SortedDictionary<string, bool> aiPatrolReworkFallbackTags;
-
         [FoldoutGroup ("Overworld AI/Patrols")]
         public float aiPatrolUpdateInterval = 20f;
         
         [FoldoutGroup ("Overworld AI/Patrols")]
-        public float aiSpawnDistanceMin = 40f;
-        
-        [FoldoutGroup ("Overworld AI/Patrols")]
-        public List<int> aiPatrolQuotasPerEscalation = new List<int> { 2, 4, 6, 7 };
-        
-        
-        [FoldoutGroup ("Overworld AI/Patrols")]
         public float aiSearchMinRadius = 25f;
+        
         [FoldoutGroup ("Overworld AI/Patrols")]
         public float aiSearchMaxRadius = 50f;
         
         [FoldoutGroup ("Overworld AI/Patrols")]
         public bool aiInvestigationEnabled = false;
-        
-        [FoldoutGroup ("Overworld AI/Convoys")] 
-        public bool aiConvoyRedirect = false;
-        
-        [FoldoutGroup ("Overworld AI/Convoys")] 
-        public bool aiConvoyRework = true;
-        
-        [FoldoutGroup ("Overworld AI/Convoys")] 
-        public SortedDictionary<string, bool> aiConvoyReworkSharedTags;
-        
-        [FoldoutGroup ("Overworld AI/Convoys")] 
-        public float aiConvoyUpdateInterval = 20f;
-        
-        [FoldoutGroup ("Overworld AI/Convoys")] 
-        public int aiConvoyTargetPopulation = 3;
-        
-        // [FoldoutGroup("Overworld AI/Convoys")] 
-        // public int aiConvoySpawnLimit = 2;
-        
-        [FoldoutGroup("Overworld AI/Convoys")] 
-        public float aiConvoyExternalJourneyChance = 30f;
-        
-        [FoldoutGroup("Overworld AI/Convoys")]
-        [ValueDropdown ("@DataMultiLinkerOverworldEntityBlueprint.tags")]
-        public List<string> aiConvoyReassignmentDestinationTags;
 
-        [FoldoutGroup ("Overworld AI/Counter Attacks")]
-        public float aiCounterAttackUpdateInterval = 20f;
-
-        [FoldoutGroup("Overworld AI/Counter Attacks")]
-        public int aiCounterAttackQuota = 2;
-        
-        [FoldoutGroup ("Overworld AI/Counter Attacks")]
-        public float provinceCounterAttackChance = 10f;
-        
         [FoldoutGroup("Overworld Generation")]
         public int seed = 1524376141;
         
         [FoldoutGroup("Overworld Generation")] 
         public bool createNewSeed = false;
-        
-        [ValueDropdown ("@DataLinkerSettingsProvinces.data.definitionsOfProvinces.keys")]
-        [FoldoutGroup("Overworld Generation")] 
-        public string startingProvinceName = "province_base";
-        
-        [ValueDropdown ("@DataLinkerSettingsProvinces.data.definitionsOfProvinces.keys")]
-        [FoldoutGroup("Overworld Generation")] 
-        public string emptyProvinceName = "province_empty";
-        
-        [FoldoutGroup("Overworld Effects")]
-        public float effectRepairJuiceRecoveryRate= 2f;
-        
-        [FoldoutGroup("Overworld Effects")]
-        public float effectBatteryRecoveryRate = 5f;
 
         [FoldoutGroup("Overworld Base Ability")]
         public float abilityRainSensorDuration = 15f;
+
+        public float travelDurationRealtime = 3f;
+        public float travelDurationSim = 12f;
+
+        public int campCostBase = 1;
+        public int campCostIncreased = 2;
+        
+        public float timeSkipDurationRealtime = 3;
+        public float timeSkipDurationCamp = 12;
+        public float timeSkipDurationResupply = 24;
+        public float timeSkipDurationRetreat = 32;
+        public bool tutorialOnQuickStart = true;
+        public bool campaignProgressTopRight = false;
+
+        public SortedDictionary<string, QuestLiberationSpawnVariants> liberationSpawnVariants = new SortedDictionary<string, QuestLiberationSpawnVariants> ();
+        
+        public List<string> threatEscalationStrings = new List<string> ();
         
         public List<ThreatComparisonLevel> threatComparisonLevels = new List<ThreatComparisonLevel> ();
         
@@ -362,6 +332,26 @@ namespace PhantomBrigade.Data
 
                 threatComparisonLevelsSorted.Sort ((x, y) => x.threshold.CompareTo (y.threshold));
             }
+
+            #if UNITY_EDITOR && !PB_MODSDK
+            // EDITOR ONLY - QoL feature to allow for easy preview of the 'best time of day hours' in editor
+            // Pass temporary float array to TOD Sky system, as PB -> TOD communication is easy, but TOD -> PB is not (TOD classes are compiled before PB)
+            TOD_TemporaryStaticParameters.skyBestTimesOfDayTemp = skyBestTimesOfDay;
+            #endif
+        }
+
+        public float GetBestTimeOfDayHour (float hour)
+        {
+			float hourNormalized = (hour % 24.0f) / 24.0f;
+			return skyBestTimesOfDay [Mathf.RoundToInt (hourNormalized * (skyBestTimesOfDay.Length - 1))];
+        }
+        
+        public IEnumerable<string> GetLiberationSpawnVariantKeys ()
+        {
+            if (liberationSpawnVariants == null)
+                return null;
+
+            return liberationSpawnVariants.Keys;
         }
     }
 }

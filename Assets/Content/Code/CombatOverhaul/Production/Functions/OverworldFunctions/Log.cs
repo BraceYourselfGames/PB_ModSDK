@@ -5,16 +5,15 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
 	[Serializable]
-	public class Log : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunction, ICombatFunction, ICombatFunctionTargeted
+	public class Log : IOverworldTargetedFunction, IOverworldActionFunction, IOverworldFunction, ICombatFunction, ICombatFunctionTargeted
 	{
 		public string message;
-
-		public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
+		
+		public void Run (OverworldEntity entityOverworld)
 		{
 			#if !PB_MODSDK
-
-			var eventText = eventData != null ? eventData.key : "?";
-			Debug.Log ($"Logging from event function with event: {eventText} | Target: {target.ToLog ()} | Message: {message}");
+			
+			Debug.Log ($"Logging from targeted function: {entityOverworld.ToLog ()} | Message: {message}");
 			
 			#endif
 		}
@@ -48,5 +47,28 @@ namespace PhantomBrigade.Functions
 			
 			#endif
 		}
+	}
+	
+	[Serializable]
+	public class Comment : 
+        DataBlockComment, 
+        IOverworldTargetedFunction, 
+        IOverworldEntityValidationFunction, 
+        IOverworldGlobalValidationFunction,
+        IOverworldActionFunction, 
+        IOverworldFunction, 
+        ICombatFunction, 
+        ICombatFunctionTargeted, 
+        IPilotTargetedFunction, 
+        IPilotValidationFunction
+	{
+		public bool IsValid (PersistentEntity pilot, PersistentEntity entityPersistentLinked) => true;
+		public bool IsValid (PersistentEntity entityPersistent) => true;
+		public bool IsValid () => true;
+		public void Run (OverworldEntity entityOverworld) { }
+		public void Run (OverworldActionEntity source) { }
+		public void Run () { }
+		public void Run (PersistentEntity unitPersistent) { }
+		public void Run (PersistentEntity pilot, PersistentEntity entityPersistentLinked) { }
 	}
 }

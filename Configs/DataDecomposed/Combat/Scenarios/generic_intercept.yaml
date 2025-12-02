@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: false
   tagFilterUsed: true
@@ -58,6 +63,7 @@ tags:
 - listed
 - trait_intercept
 - type_entity_convoy_cargo
+- flag_escalation_squads
 states:
   guard_escape:
     comment:
@@ -134,8 +140,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions: 
@@ -145,9 +149,8 @@ states:
               tagChanges:
                 purpose_guard: false
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   guard_flee:
     comment:
       comment: Enters scope when every target has left the field. Changes AI behavior of the enemy to make them move towards exit instead of continuing to circle PB. One time reaction.
@@ -230,8 +233,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions: 
@@ -239,9 +240,8 @@ states:
             - !CombatUnitBehaviorChange
               behaviourName: DefensiveDestination
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   info_end:
     comment:
       comment: Enters scope when everyone has arrived. Drops the player out when the field is empty / no targets remain.
@@ -336,17 +336,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Victory
             early: false
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   info_progress:
     comment: 
     textNameKey: generic_intercept_targets_incoming_header
@@ -412,14 +409,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   objective_tier1:
     comment: 
     textNameKey: generic_salvage_t1_header
@@ -475,14 +469,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_tier1: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   objective_tier2:
     comment: 
     textNameKey: generic_salvage_t2_header
@@ -538,14 +529,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_tier2: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   objective_tier3:
     comment: 
     textNameKey: generic_salvage_t3_header
@@ -600,14 +588,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_tier3: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   runner_delay:
     comment:
       comment: The purpose of this state is to delay introduction of first actionable objective into scope until first batch of targets spawns in. This is to avoid confusing the player.
@@ -655,14 +640,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   runner_escape:
     comment:
       comment: This state makes enemy units that have reached their destination escape the fight. Units are retreated, tags removed, counters updated. State is non-incrementing, so reactions repeat forever, per unit.
@@ -741,8 +723,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions:
@@ -764,9 +744,8 @@ states:
               tagChanges:
                 purpose_runner: false
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   runner_intercepted:
     comment:
       comment: This state detects targets being taken out. Specifically, since the goal of these targets is to escape, they are considered taken out if they lose ability to move, not just lose pilots/HP. This state reacts forever, per unit.
@@ -841,8 +820,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit:
             functions:
@@ -870,6 +847,7 @@ states:
                 x: 0
                 y: 0
                 z: 0
+              centered: true
               asset:
                 key: fx_prop_destruction_vehicle_loot
                 scale:
@@ -881,9 +859,8 @@ states:
                 purpose_runner: false
             - !CombatUnitPilotEject {}
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   runner_spawn:
     comment:
       comment: This state spawns new enemy squads. Spawns occur every 2 turns starting from 1 (1, 3, 5, 7, ...). Spawns require total spawns to be less than goal and for total online targets to be less than a certain number, to avoid overloading the field. Spawns are relative to escape objective and can't be too close. Spawns are not precooked, as the state runs repeatedly. Only unit groups specially customized to disable spawn group registration should be used in this, otherwise spawns run out. All spawns receive a destination AI data to proceed forward (guards won't make use of it immediately).
@@ -948,8 +925,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -1002,9 +977,8 @@ states:
             sorting: 
             spawnRegistration:
               skipRegistration: true
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   00_start:
     comment: 
@@ -1073,14 +1047,23 @@ steps:
       tagsFromFactionBranch: true
       tags:
         type_ranger: true
-      check: 
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
       combatTags: 
       spawnGroupOccupied: true
       spawnCountStrict: true
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 0
+      baseGrade: 1
       maxGrade: 2
       cloneable: true
       functions:
@@ -1112,6 +1095,7 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges:
@@ -1147,3 +1131,4 @@ unitPresets:
     preset: vhc_tank_generic_cargo_0
   custom_tank_escort: !UnitPresetLink
     preset: vhc_tank_elevated_generic
+unitGenerators: 

@@ -1,0 +1,42 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_part_arch_structure
+tags:
+- level_4
+- bonus
+- type_defender
+- type_support
+group: pilot_healing
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionExit
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.2
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

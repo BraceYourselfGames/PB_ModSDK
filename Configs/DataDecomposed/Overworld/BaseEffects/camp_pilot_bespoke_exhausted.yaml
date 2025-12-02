@@ -1,0 +1,31 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 0
+rating: 0
+mood: 1
+group: 
+hue: 0.358
+icon: s_icon_l32_face1
+textFromFunctions: FunctionTextInSecondary
+textSource:
+  tagAssociated: ''
+  pilotEventAssociated: state_fatigue_maxed
+tags:
+- camp_pilot_bespoke
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: StateFatigueMaxed
+    check: GreaterEqual
+    value: 1
+  functionsPilot:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.4
+unit: 

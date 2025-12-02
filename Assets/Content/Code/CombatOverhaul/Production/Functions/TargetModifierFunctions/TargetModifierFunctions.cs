@@ -22,6 +22,23 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
+    public class TargetModifierTransformGlobal : ITargetModifierFunction
+    {
+        public Vector3 position;
+        public Vector3 rotation;
+        
+        public void Run (Vector3 originPosition, Vector3 originDirection, ref Vector3 positionModified, ref Vector3 directionModified)
+        {
+            #if !PB_MODSDK
+
+            positionModified = position;
+            directionModified = rotation != Vector3.zero ? Quaternion.Euler (rotation) * Vector3.forward : Vector3.forward;
+
+            #endif
+        }
+    }
+    
+    [Serializable]
     public class TargetModifierOffsetGlobalRandom : ITargetModifierFunction
     {
         public List<Vector3> offsets = new List<Vector3>();

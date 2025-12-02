@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UtilityData;
+﻿using UnityEngine;
 
 namespace PhantomBrigade.Data.UI
 {

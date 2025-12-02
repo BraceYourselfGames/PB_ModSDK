@@ -55,6 +55,34 @@ public class AreaBackgroundHelper : MonoBehaviour
         Rebuild (testKey);
     }
     
+    public void RebuildOnlyBoundaryDecal ()
+    {
+        if (am == null || am.points.Count < 8)
+        {
+            Debug.LogWarning ($"Failed to load background for area due to no manager reference or points");
+            return;
+        }
+        
+        int sizeX = am.boundsFull.x - 1;
+        int sizeZ = am.boundsFull.z - 1;
+        
+        float sizeXScaled = sizeX * TilesetUtility.blockAssetSize;
+        float sizeZScaled = sizeZ * TilesetUtility.blockAssetSize;
+        
+        #if !PB_MODSDK
+        WorldUICombat.OnConfigureMapBoundaries (sizeXScaled, sizeZScaled);
+        #endif
+
+        foreach (var biome in biomes)
+        {
+            if (biome == null)
+                continue;
+
+            if (biome.holder != null)
+                biome.holder.SetActive (false);
+        }
+    }
+    
     public void Rebuild (string biomeKey)
     {
         if (am == null || am.points.Count < 8)

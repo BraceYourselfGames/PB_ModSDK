@@ -4,6 +4,28 @@ using UnityEngine;
 
 namespace PhantomBrigade.Functions
 {
+    public class CombatToOverworldGroup : ICombatFunction
+    {
+        public List<IOverworldFunction> functions = new List<IOverworldFunction> ();
+        
+        public void Run ()
+        {
+            #if !PB_MODSDK
+
+            if (functions != null)
+            {
+                foreach (var function in functions)
+                {
+                    if (function != null)
+                        function.Run ();
+                }
+            }
+            
+            #endif
+        }
+
+    }
+    
     [PropertyTooltip ("Allows delaying a group of functions")]
     public class CombatDelayGroup : ICombatFunction
     {
@@ -41,10 +63,12 @@ namespace PhantomBrigade.Functions
             if (!IDUtility.IsGameLoaded () || !IDUtility.IsGameState (GameStates.combat))
                 return;
             
+            /*
             var game = Contexts.sharedInstance.game;
             var combat = Contexts.sharedInstance.combat;
             if (game.isCutsceneInProgress || combat.isScenarioIntroInProgress)
                 return;
+            */
             
             if (functions != null)
             {

@@ -7,8 +7,8 @@ tags: []
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: drone_core
+  - keyExternal: true
+    key: vhc_drone_core_01
     countMin: 1
     countMax: 1
     countRandom: false
@@ -55,6 +55,4 @@ unitsPerGrade:
       combatTags:
       - purpose_runner
       - flag_uncollideable
-unitPresets:
-  drone_core: !UnitPresetLink
-    preset: vhc_drone_core_01
+unitPresets: 

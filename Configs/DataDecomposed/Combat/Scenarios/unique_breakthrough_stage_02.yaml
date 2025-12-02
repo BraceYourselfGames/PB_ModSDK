@@ -1,0 +1,2073 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: true
+  time: 18.5
+  scalingUsed: false
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: false
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: {}
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_breakthrough_stage_02
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      player: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- type_breakthrough_01
+- listed
+- trait_deadly
+- trait_long
+- trait_move_or_die
+- trait_turrets
+- block_exit_on_defeat
+states:
+  auto_comp_state1:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0
+            key: br_01_crawler_realization
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags:
+                group_01: true
+              name: 
+              faction: 
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked: 
+              relativeTransform: 
+              blueprints: 
+              classes: 
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction: 
+              transform: 
+              actions: 
+              functions:
+              - !CombatUnitTagChange
+                tagChanges:
+                  flag_no_power: false
+                  flag_untargetable: false
+              - !Log
+                message: 'Group 1: turret units activated'
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  auto_comp_state2:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0
+            key: br_01_crawler_turrets_online
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags:
+                group_02: true
+              name: 
+              faction: 
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked: 
+              relativeTransform: 
+              blueprints: 
+              classes: 
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction: 
+              transform: 
+              actions: 
+              functions:
+              - !CombatUnitTagChange
+                tagChanges:
+                  flag_no_power: false
+                  flag_untargetable: false
+              - !Log
+                message: 'Group 2: behemoth core and weapons activated'
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags:
+                purpose_gen: true
+              name: 
+              faction: 
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked: 
+              relativeTransform: 
+              blueprints: 
+              classes: 
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction: 
+              transform: 
+              actions: 
+              functions:
+              - !CombatUnitTagChange
+                tagChanges:
+                  flag_no_damage_in: false
+                  flag_untargetable: false
+              - !Log
+                message: Generator unit activated
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  auto_comp_state3:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: GreaterEqual
+        value: 1
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_core: true
+      name: 
+      faction: 
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: final
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  auto_reinf_01:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_progress
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 1
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatLogMessageUnlocalized
+            colorKey: faction_enemy
+            text: New hostile contacts rapidly approaching.
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              range_medium: false
+              weight_light: false
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 1
+            maxGrade: 1
+            cloneable: true
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              context_undefended: true
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  auto_reinf_02:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_progress
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 2
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatLogMessageUnlocalized
+            colorKey: faction_enemy
+            text: New hostile contacts rapidly approaching.
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              range_long: false
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: true
+            factionBranchKey: branch_army
+            baseGrade: 1
+            maxGrade: 1
+            cloneable: true
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              context_undefended: true
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  auto_reinf_03:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_progress
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 3
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatLogMessageUnlocalized
+            colorKey: faction_enemy
+            text: New hostile contacts rapidly approaching.
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              range_long: false
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: true
+            factionBranchKey: branch_army
+            baseGrade: 1
+            maxGrade: 1
+            cloneable: true
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              context_undefended: true
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_breakin:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_gen_00: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            obj_breakin_delay: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges:
+            purpose_gen_00: false
+          rewards: 
+          functions:
+          - !CombatCreateDamage
+            delay: 0
+            target:
+              x: 219
+              y: -24.5
+              z: 94
+            damage: 100
+            forceDestructible: true
+            radius:
+              radius: 12
+              exponent: 2
+          - !CombatCreateDamage
+            delay: 0
+            target:
+              x: 225
+              y: -24
+              z: 82.5
+            damage: 100
+            forceDestructible: true
+            radius:
+              radius: 11
+              exponent: 2
+          - !CombatCreateDamage
+            delay: 0
+            target:
+              x: 232
+              y: -22
+              z: 80
+            damage: 100
+            forceDestructible: true
+            radius:
+              radius: 4
+              exponent: 2
+          - !CombatBackgroundChildActivation
+            active: false
+            segment: area_seg_unique_breakthrough_stage_02
+            child: gate_intact
+          - !CombatBackgroundChildActivation
+            active: false
+            segment: area_seg_unique_breakthrough_stage_02
+            child: gate_intact_lights
+          - !CombatBackgroundChildActivation
+            active: true
+            segment: area_seg_unique_breakthrough_stage_02
+            child: gate_destroyed_lights
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_02
+            child: gate_destroyed_particle
+          - !CombatBackgroundChildTween
+            active: true
+            duration: 1
+            range:
+              x: 0
+              y: 1
+            segment: area_seg_unique_breakthrough_stage_02
+            child: gate_destroyed_sim
+          - !ModifyMemoryCombat
+            data:
+              context: Source
+              provinceKey: 
+              changes:
+              - change: Offset
+                key: combat_sc_progress
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+          - !CombatCreateCommsMessage
+            time: 0
+            key: br_01_gate1
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_breakin_delay:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: -1
+    priority: -1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: towers
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            auto_comp_state2: true
+            obj_satellite_tower_01: true
+            obj_satellite_tower_02: true
+            obj_satellite_tower_03: true
+            obj_satellite_towers_destroyed: true
+            obj_satellite_towers_destroyed_camera: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_satellite_tower_01:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_gen_01: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges:
+            purpose_gen_01: false
+          rewards: 
+          functions:
+          - !CombatEffectSpawn
+            target:
+              type: None
+              name: obj_satellite_tower_01
+              center: true
+              modifiersDirectional: false
+              modifiers:
+              - !TargetModifierTransformGlobal
+                position:
+                  x: 215.98
+                  y: -9.02
+                  z: 251.85
+                rotation:
+                  x: -90
+                  y: 0
+                  z: 0
+            asset:
+              key: fx_status_electric_hit
+              scale:
+                x: 1
+                y: 1
+                z: 1
+            delay: 0
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_02
+            child: tower_a_electric_charge
+          - !CombatBackgroundChildActivation
+            active: false
+            segment: area_seg_unique_breakthrough_stage_02
+            child: towers_intact_lights_a
+          - !ModifyMemoryCombat
+            data:
+              context: Source
+              provinceKey: 
+              changes:
+              - change: Offset
+                key: combat_sc_progress
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 0.5
+            delayMax: 0.5
+            repeats: 1
+            functions:
+            - !CombatUnitsApplyChanges
+              unitFilter:
+                sort: None
+                unitLimit: -1
+                unitRepeats: false
+                exportEntitiesToBlackboardLimited: 
+                exportCountToMemoryLimited: 
+                exportCountToMemory: 
+                exportEntitiesToBlackboard: 
+                tags:
+                  purpose_boss_core: true
+                name: 
+                faction: 
+                state: 
+                actionPlanned: 
+                locationOccupied: 
+                locationOccupiedUnlinked: 
+                relativeTransform: 
+                blueprints: 
+                classes: 
+                stats: 
+                statsNormalized: 
+                actionsInProgress: 
+                functions: 
+              change:
+                flags: 
+                destruction: 
+                transform: 
+                actions: 
+                functions:
+                - !CombatUnitIntegrityChange
+                  value: -0.15
+                  offset: true
+                  sockets: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_satellite_tower_02:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_gen_02: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges:
+            purpose_gen_02: false
+          rewards: 
+          functions:
+          - !CombatEffectSpawn
+            target:
+              type: None
+              name: obj_satellite_tower_01
+              center: true
+              modifiersDirectional: false
+              modifiers:
+              - !TargetModifierTransformGlobal
+                position:
+                  x: 149.94
+                  y: -9.02
+                  z: 135.05
+                rotation:
+                  x: -90
+                  y: 0
+                  z: 0
+            asset:
+              key: fx_status_electric_hit
+              scale:
+                x: 1
+                y: 1
+                z: 1
+            delay: 0
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_02
+            child: tower_b_electric_charge
+          - !CombatBackgroundChildActivation
+            active: false
+            segment: area_seg_unique_breakthrough_stage_02
+            child: towers_intact_lights_b
+          - !ModifyMemoryCombat
+            data:
+              context: Source
+              provinceKey: 
+              changes:
+              - change: Offset
+                key: combat_sc_progress
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 0.5
+            delayMax: 0.5
+            repeats: 1
+            functions:
+            - !CombatUnitsApplyChanges
+              unitFilter:
+                sort: None
+                unitLimit: -1
+                unitRepeats: false
+                exportEntitiesToBlackboardLimited: 
+                exportCountToMemoryLimited: 
+                exportCountToMemory: 
+                exportEntitiesToBlackboard: 
+                tags:
+                  purpose_boss_core: true
+                name: 
+                faction: 
+                state: 
+                actionPlanned: 
+                locationOccupied: 
+                locationOccupiedUnlinked: 
+                relativeTransform: 
+                blueprints: 
+                classes: 
+                stats: 
+                statsNormalized: 
+                actionsInProgress: 
+                functions: 
+              change:
+                flags: 
+                destruction: 
+                transform: 
+                actions: 
+                functions:
+                - !CombatUnitIntegrityChange
+                  value: -0.15
+                  offset: true
+                  sockets: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_satellite_tower_03:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_gen_03: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges:
+            purpose_gen_03: false
+          rewards: 
+          functions:
+          - !CombatEffectSpawn
+            target:
+              type: None
+              name: obj_satellite_tower_01
+              center: true
+              modifiersDirectional: false
+              modifiers:
+              - !TargetModifierTransformGlobal
+                position:
+                  x: 81.12
+                  y: -9.02
+                  z: 251.72
+                rotation:
+                  x: -90
+                  y: 0
+                  z: 0
+            asset:
+              key: fx_status_electric_hit
+              scale:
+                x: 1
+                y: 1
+                z: 1
+            delay: 0
+          - !CombatBackgroundChildParticle
+            active: true
+            segment: area_seg_unique_breakthrough_stage_02
+            child: tower_c_electric_charge
+          - !CombatBackgroundChildActivation
+            active: false
+            segment: area_seg_unique_breakthrough_stage_02
+            child: towers_intact_lights_c
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags:
+                purpose_boss_core: true
+              name: 
+              faction: 
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked: 
+              relativeTransform: 
+              blueprints: 
+              classes: 
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction: 
+              transform: 
+              actions: 
+              functions:
+              - !CombatUnitIntegrityChange
+                value: -30
+                offset: true
+                sockets: 
+          - !ModifyMemoryCombat
+            data:
+              context: Source
+              provinceKey: 
+              changes:
+              - change: Offset
+                key: combat_sc_progress
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 0.5
+            delayMax: 0.5
+            repeats: 1
+            functions:
+            - !CombatUnitsApplyChanges
+              unitFilter:
+                sort: None
+                unitLimit: -1
+                unitRepeats: false
+                exportEntitiesToBlackboardLimited: 
+                exportCountToMemoryLimited: 
+                exportCountToMemory: 
+                exportEntitiesToBlackboard: 
+                tags:
+                  purpose_boss_core: true
+                name: 
+                faction: 
+                state: 
+                actionPlanned: 
+                locationOccupied: 
+                locationOccupiedUnlinked: 
+                relativeTransform: 
+                blueprints: 
+                classes: 
+                stats: 
+                statsNormalized: 
+                actionsInProgress: 
+                functions: 
+              change:
+                flags: 
+                destruction: 
+                transform: 
+                actions: 
+                functions:
+                - !CombatUnitIntegrityChange
+                  value: -0.15
+                  offset: true
+                  sockets: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_satellite_towers_destroyed:
+    comment:
+      comment: This state triggers after all 3 satellite tower generators have been destroyed by PB units. Intact towers get hidden, then we spawn an FX tween effect in the same place towers' location to play tower destruction fx.
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      obj_satellite_tower_01: true
+      obj_satellite_tower_02: true
+      obj_satellite_tower_03: true
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            auto_comp_state3: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatUnitsApplyChanges
+            unitFilter:
+              sort: None
+              unitLimit: -1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags:
+                group_02: true
+              name: 
+              faction: 
+              state: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked: 
+              relativeTransform: 
+              blueprints: 
+              classes: 
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            change:
+              flags: 
+              destruction: 
+              transform: 
+              actions: 
+              functions:
+              - !CombatUnitTagChange
+                tagChanges:
+                  flag_no_power: true
+              - !CombatUnitAIPause
+                discardActions: true
+              - !CombatUnitActionsDiscard
+                locked: true
+                primary: true
+                secondary: true
+              - !Log
+                message: 'Group 2: behemoth core and weapons deactivated'
+          - !CombatCreateCommsMessageGroup
+            clearQueue: false
+            comms:
+            - time: 1
+              hidden: false
+              key: br_01_artillery1
+          - !CombatCreateStrike
+            delay: 0
+            blueprintKey: aircraft_ml_hg_01
+            target:
+              type: Location
+              name: obj_satellite_tower_a_strike
+              center: true
+              modifiersDirectional: false
+              modifiers: []
+          - !CombatCreateStrike
+            delay: 0.2
+            blueprintKey: aircraft_ml_hg_01
+            target:
+              type: Location
+              name: obj_satellite_tower_b_strike
+              center: true
+              modifiersDirectional: false
+              modifiers: []
+          - !CombatCreateStrike
+            delay: 0.1
+            blueprintKey: aircraft_ml_hg_01
+            target:
+              type: Location
+              name: obj_satellite_tower_c_strike
+              center: true
+              modifiersDirectional: false
+              modifiers: []
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 2.3
+            delayMax: 2.3
+            repeats: 1
+            functions:
+            - !CombatBackgroundChildActivation
+              active: false
+              segment: area_seg_unique_breakthrough_stage_02
+              child: towers_intact
+            - !CombatBackgroundChildActivation
+              active: true
+              segment: area_seg_unique_breakthrough_stage_02
+              child: towers_destroyed
+            - !CombatBackgroundChildTween
+              active: true
+              duration: 2.8
+              range:
+                x: 0
+                y: 1
+              segment: area_seg_unique_breakthrough_stage_02
+              child: towers_destroyed_anim
+            - !CombatBackgroundChildParticle
+              active: true
+              segment: area_seg_unique_breakthrough_stage_02
+              child: towers_destroyed_particles
+            - !CombatDelayGroup
+              unscaled: false
+              delayMin: 1.2
+              delayMax: 1.2
+              repeats: 1
+              functions:
+              - !CombatUnitsApplyChanges
+                unitFilter:
+                  sort: None
+                  unitLimit: -1
+                  unitRepeats: false
+                  exportEntitiesToBlackboardLimited: 
+                  exportCountToMemoryLimited: 
+                  exportCountToMemory: 
+                  exportEntitiesToBlackboard: 
+                  tags:
+                    purpose_boss_core: true
+                  name: 
+                  faction: 
+                  state: 
+                  actionPlanned: 
+                  locationOccupied: 
+                  locationOccupiedUnlinked: 
+                  relativeTransform: 
+                  blueprints: 
+                  classes: 
+                  stats: 
+                  statsNormalized: 
+                  actionsInProgress: 
+                  functions: 
+                change:
+                  flags: 
+                  destruction: 
+                  transform: 
+                  actions: 
+                  functions:
+                  - !CombatUnitDestroy {}
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_satellite_towers_destroyed_camera:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: Equal
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      obj_satellite_tower_01: true
+      obj_satellite_tower_02: true
+      obj_satellite_tower_03: true
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 0.5
+            delayMax: 0.5
+            repeats: 1
+            functions:
+            - !CombatBackgroundChildActivation
+              active: true
+              segment: area_seg_unique_breakthrough_stage_02
+              child: camera_explosion
+            - !CombatCameraCutsceneState
+              enabled: true
+            - !CombatCameraChange
+              smoothed: true
+              positionOverride: true
+              position:
+                x: 167.0134
+                y: -31.5
+                z: 196.8991
+              positionFromEntityName: 
+              rotationXOverride: true
+              rotationX: 25.39167
+              rotationYOverride: true
+              rotationY: -50.85574
+              zoomOverride: true
+              zoom: 1
+              delay: 0
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 4.15
+            delayMax: 4.15
+            repeats: 1
+            functions:
+            - !CombatBackgroundChildActivation
+              active: false
+              segment: area_seg_unique_breakthrough_stage_02
+              child: camera_explosion
+            - !CombatCameraCutsceneState
+              enabled: false
+            - !CombatCameraChange
+              smoothed: true
+              positionOverride: true
+              position:
+                x: 167.0134
+                y: -31.5
+                z: 196.8991
+              positionFromEntityName: 
+              rotationXOverride: true
+              rotationX: 25.39167
+              rotationYOverride: true
+              rotationY: -50.85574
+              zoomOverride: true
+              zoom: 1
+              delay: 0
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  final:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.2688679
+        b: 0.2688679
+        a: 0
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateCommsMessageGroup
+      clearQueue: false
+      comms:
+      - time: 2
+        hidden: false
+        key: br_01_final1
+    outcome: 
+    transitions: 
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.2688679
+        b: 0.2688679
+        a: 0
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_short: true
+        weight_light: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 1
+      maxGrade: 1
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        direction_s: true
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sp_generator_small
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused:
+            textSector: unit_roles
+            textKey: comp_generator__name
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - purpose_gen
+          - purpose_gen_00
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: false
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: sp_generator_gate
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sp_generator_small_vertical
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused:
+            textSector: unit_roles
+            textKey: comp_generator__name
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_no_damage_in
+          - flag_untargetable
+          - purpose_gen
+          - purpose_gen_01
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: false
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: sp_generator_sat_01
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sp_generator_small_vertical
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused:
+            textSector: unit_roles
+            textKey: comp_generator__name
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_no_damage_in
+          - flag_untargetable
+          - purpose_gen
+          - purpose_gen_02
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: false
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: sp_generator_sat_02
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sp_generator_small_vertical
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused:
+            textSector: unit_roles
+            textKey: comp_generator__name
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_no_damage_in
+          - flag_untargetable
+          - purpose_gen
+          - purpose_gen_03
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: false
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: sp_generator_sat_03
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_gen_00: true
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatChangeFogCustom
+      time: 0
+      delay: 0
+      densityGlobal: 0.2
+      densityDistance: 0.6
+      densityHeight: 0.5
+      heightOffset: -9.5
+    - !CombatCreateUnitComposite
+      tagsUsed: false
+      tags: 
+      blueprintKeys:
+      - breakthrough_vehicle
+      instanceNameOverride: breakthrough_vehicle
+      target:
+        type: Location
+        name: obj_boss_origin
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      levelOffset: 0
+      friendly: false
+      controllable: false
+      navigationSampled: false
+    - !CombatCreateCommsMessageGroup
+      clearQueue: false
+      comms:
+      - time: 3
+        hidden: false
+        key: br_01_intro1
+      - time: 15
+        hidden: false
+        key: br_01_intro2
+    outcome: 
+    transitions: 
+  towers:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.2688679
+        b: 0.2688679
+        a: 0
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      obj_breakin: false
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_gen_00: false
+      purpose_gen_01: true
+      purpose_gen_02: true
+      purpose_gen_03: true
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: false
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateCommsMessageGroup
+      clearQueue: false
+      comms:
+      - time: 2
+        hidden: false
+        key: br_01_towers1
+      - time: 13
+        hidden: false
+        key: br_01_towers2
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

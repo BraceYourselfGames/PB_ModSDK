@@ -1,0 +1,305 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: ResearchInvestigating
+  devSkipStep: step_skip
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 0.8
+      color:
+        r: 1
+        g: 0.7568628
+        b: 0.5137255
+        a: 0
+      image: event_world_rings_02
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 3
+        path: Content/Video/slides/01_ring
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.7901961
+            b: 0.5803922
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_world_province3
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.8440701
+            b: 0.5801887
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_03
+    optionsReused: 
+  step_03:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_world_province4
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.3443396
+            g: 0.6870713
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_04
+    optionsReused: 
+  step_04:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_capital_assault
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.514151
+            b: 0.514151
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !OverworldCombatForced
+            scenarioKey: unique_intro
+            areaKey: 
+          functionsLocal: 
+    optionsReused: 
+  step_skip:
+    comment: 
+    image: bg_blur_squad
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.5137255
+        g: 0.6758171
+        b: 1
+        a: 0
+      image: bg_blur_squad
+      imageSecondary: 
+      video: 
+    mood:
+      value: Warning
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5137255
+            g: 0.6758171
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CallMethodStatic
+            typeName: DataHelperLoading
+            methodName: OnPrequelBypass
+            argument: ''
+            frameDelay: 0
+          functionsLocal: 
+    optionsReused: 

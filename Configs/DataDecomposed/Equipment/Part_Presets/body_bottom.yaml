@@ -12,6 +12,37 @@ sockets:
 tags:
 - body_part
 - part_bottom
+workshopInfo:
+  1:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 250
+    basePartRequirements: 
+  2:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 320
+    - key: components_r2
+      amount: 16
+    basePartRequirements: 
+  3:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 450
+    - key: components_r2
+      amount: 16
+    - key: components_r3
+      amount: 8
+    basePartRequirements: 
 genSteps:
 - !AddHardpoints
   subsystemsInitial: 

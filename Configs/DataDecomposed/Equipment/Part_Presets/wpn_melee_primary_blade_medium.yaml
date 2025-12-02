@@ -2,72 +2,30 @@ hidden: false
 parents:
 - key: wpn_root_primary
 - key: wpn_perk_filter_melee
-livery: ''
+livery: 
 ratingRange: 
 comment: 
-textName: 
-textDesc: 
-textNameFromRating:
-  r1:
-    min: 0
-    max: 1
-  r2:
-    min: 2
-    max: 2
-  r3:
-    min: 3
-    max: 3
-textDescFromRating:
-  r1:
-    min: 0
-    max: 1
-  r2:
-    min: 2
-    max: 2
-  r3:
-    min: 3
-    max: 3
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
 sockets: 
 tags:
 - difficulty_medium
 - part_blade
-- range_close
-- weight_medium
 - part_melee
+- range_short
+- branch_army
+workshopInfo: 
 genSteps:
 - !AddHardpoints
   subsystemsInitial:
-  - wpn_main_melee_primary_blade_medium_r1
+  - wpn_main_melee_primary_blade_medium
   pickRandom: false
   hardpointsTargeted:
   - internal_main_equipment
   priority: 0
   comment: 
-  checks:
-  - !CheckPartRating
-    ratingMin: 0
-    ratingMax: 1
-- !AddHardpoints
-  subsystemsInitial:
-  - wpn_main_melee_primary_blade_medium_r2
-  pickRandom: false
-  hardpointsTargeted:
-  - internal_main_equipment
-  priority: 1
-  comment: 
-  checks:
-  - !CheckPartRating
-    ratingMin: 2
-    ratingMax: 2
-- !AddHardpoints
-  subsystemsInitial:
-  - wpn_main_melee_primary_blade_medium_r3
-  pickRandom: false
-  hardpointsTargeted:
-  - internal_main_equipment
-  priority: 2
-  comment: 
-  checks:
-  - !CheckPartRating
-    ratingMin: 3
-    ratingMax: 3
+  checks: 

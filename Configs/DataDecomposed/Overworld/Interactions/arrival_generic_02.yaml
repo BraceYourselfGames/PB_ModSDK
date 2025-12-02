@@ -1,0 +1,143 @@
+hidden: false
+parents:
+- key: arrival_generic
+core: 
+effectsOnExit: 
+tags: 
+check:
+  repeat: Enabled
+  checksGlobal:
+  - !OverworldValidateResolvedInt
+    resolver: !OverworldIntValueMemory
+      key: campaign_arrival_event_count
+    check: Equal
+    value: 1
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_smoke_distant
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.7829362
+        g: 1
+        b: 0.4009434
+        a: 0
+      image: event_smoke_distant
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !ModifyMemoryBase
+        changes:
+        - change: Set
+          key: campaign_arrival_event_count
+          value: 2
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 10
+          color:
+            r: 0.7843138
+            g: 1
+            b: 0.4
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: event_hologram_default
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.7022639
+        b: 0.3725491
+        a: 0
+      image: event_hologram_default
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 10
+          color:
+            r: 1
+            g: 0.7098039
+            b: 0.3529412
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !Log
+            message: Applying arrival effects!
+          - !ApplyProvinceArrivalEffects {}
+          functionsLocal: 
+    optionsReused: 

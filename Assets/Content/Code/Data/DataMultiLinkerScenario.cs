@@ -1,16 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using PhantomBrigade.Combat.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
-
-#if UNITY_EDITOR
-using System;
-using System.IO;
-using UnityEditor;
-using Unity.EditorCoroutines.Editor;
-#endif
 
 namespace PhantomBrigade.Data
 {
@@ -66,9 +58,6 @@ namespace PhantomBrigade.Data
             public static bool showUnits = true;
 
             [ShowInInspector, FoldoutGroup (foldoutGroup)]
-            public static bool showUnitOverrides;
-
-            [ShowInInspector, FoldoutGroup (foldoutGroup)]
             public static bool showStats = false;
 
             [ShowInInspector, FoldoutGroup (foldoutGroup)]
@@ -76,6 +65,9 @@ namespace PhantomBrigade.Data
             
             [ShowInInspector, FoldoutGroup (foldoutGroup)]
             public static bool showInheritance = false;
+            
+            [ShowInInspector, FoldoutGroup (foldoutGroup)]
+            public static bool showIsolatedEntries = true;
             
             [ShowInInspector, FoldoutGroup (foldoutGroup)]
             public static bool showUtilityData = false;
@@ -106,17 +98,33 @@ namespace PhantomBrigade.Data
         public static DataContainerScenario selectedScenario;
         public static DataBlockScenarioStep selectedStep;
         private DataBlockScenarioUnitGroup blockScenarioUnitGroup;
-
+        
         #if !PB_MODSDK
-
         [LabelWidth (180f)]
         public class ScenarioStatePreview
         {
             [ShowInInspector][FoldoutGroup ("Generation")]
             public string scenarioKeyLast
             {
-                get => ScenarioUtility.scenarioGeneratedKeyLast; 
-                set => ScenarioUtility.scenarioGeneratedKeyLast = value;
+                get
+                {
+                    var scenario = ScenarioUtility.GetCurrentScenario (false);
+                    return scenario != null ? scenario.key : null;
+                }
+                set
+                {
+                    
+                }
+            }
+            
+            [ShowInInspector][FoldoutGroup ("Generation")]
+            public CombatDescription combatDescription
+            {
+                get => ScenarioUtility.GetCurrentCombatDescription ();
+                set
+                {
+                    
+                }
             }
             
             [ShowInInspector][FoldoutGroup ("Generation")]
@@ -175,13 +183,6 @@ namespace PhantomBrigade.Data
                 get => cmb.hasScenarioStateTriggerCounts ? cmb.scenarioStateTriggerCounts.s : null; 
                 set => cmb.ReplaceScenarioStateTriggerCounts (value);
             }
-            
-            [ShowInInspector]
-            public SortedDictionary<string, string> stateLocations
-            {
-                get => cmb.hasScenarioStateLocations ? cmb.scenarioStateLocations.s : null; 
-                set => cmb.ReplaceScenarioStateLocations (value);
-            }
 
             private CombatContext cmb => Contexts.sharedInstance.combat;
 
@@ -196,20 +197,22 @@ namespace PhantomBrigade.Data
 
             [Button ("Replace state values")]
             private void ForceValues () { if (cmb.hasScenarioStateValues) cmb.ReplaceScenarioStateValues (cmb.scenarioStateValues.s); }
-            
-            [Button ("Regenerate")]
-            private void Regenerate () { ScenarioUtility.RegenerateCurrentScenario (); }
         }
 
         [HideLabel, HideReferenceObjectPicker, ShowInInspector, HideInEditorMode]
         [ShowIf ("IsCombatActive"), FoldoutGroup ("Combat State", false)]
         public static ScenarioStatePreview preview = new ScenarioStatePreview ();
+        
+        #endif
 
         private bool IsCombatActive => Application.isPlaying;
-
-        #endif
-        
         private static StringBuilder sb = new StringBuilder ();
+        
+        public static HashSet<string> GetTags ()
+        {
+            LoadDataChecked ();
+            return tags;
+        }
 
         public static void OnAfterDeserialization ()
         {
@@ -329,6 +332,7 @@ namespace PhantomBrigade.Data
             origin.statesProc = null;
             origin.stepsProc = null;
             origin.unitPresetsProc = null;
+            origin.unitGeneratorsProc = null;
                 
             ProcessRecursive (origin, origin, 0);
         }
@@ -340,8 +344,8 @@ namespace PhantomBrigade.Data
 
             if (scenario.stepsProc == null || scenario.stepsProc.Count == 0)
             {
-                // if (scenario.generationInjection == null)
-                //     Debug.LogWarning ($"Scenario {scenario.key} has no processed steps!");
+                if (scenario.generationInjection == null)
+                    Debug.LogWarning ($"Scenario {scenario.key} has no processed steps!");
             }
             else
             {
@@ -525,10 +529,6 @@ namespace PhantomBrigade.Data
                                 {
                                     reactionProc = new DataBlockScenarioStateReaction ();
                                     effectsProc[reactionCurrentKey] = reactionProc;
-                                    
-                                    // Set non-reference fields
-                                    reactionProc.callsDelayedOutcomeCheck = reactionCurrent.callsDelayedOutcomeCheck;
-                                    reactionProc.callsDelayedOutcomeRequired = reactionCurrent.callsDelayedOutcomeRequired;
                                 }
                                 
                                 // Grab references to existing objects for reference fields, where available
@@ -563,12 +563,6 @@ namespace PhantomBrigade.Data
                                 if (reactionCurrent.rewards != null && reactionProc.rewards == null)
                                     reactionProc.rewards = reactionCurrent.rewards;
                                 
-                                if (reactionCurrent.callsImmediate != null && reactionProc.callsImmediate == null)
-                                    reactionProc.callsImmediate = reactionCurrent.callsImmediate;
-                                
-                                if (reactionCurrent.callsDelayed != null && reactionProc.callsDelayed == null)
-                                    reactionProc.callsDelayed = reactionCurrent.callsDelayed;
-                                
                                 if (reactionCurrent.functions != null && reactionProc.functions == null)
                                     reactionProc.functions = reactionCurrent.functions;
                                 
@@ -577,6 +571,9 @@ namespace PhantomBrigade.Data
                                 
                                 if (reactionCurrent.outcome != null && reactionProc.outcome == null)
                                     reactionProc.outcome = reactionCurrent.outcome;
+                                
+                                if (reactionCurrent.unitGeneratorKeys != null && reactionProc.unitGeneratorKeys == null)
+                                    reactionProc.unitGeneratorKeys = reactionCurrent.unitGeneratorKeys;
                                 
                                 // Exception modified by generators: unit groups
                                 // This field shouldn't be grabbed by reference and should always be copied
@@ -624,6 +621,9 @@ namespace PhantomBrigade.Data
                         // Transfer loc hidden in unit customization
                         TransferNonSerializedDataToClones (stepCurrent.unitGroups, stepProc.unitGroups);
                     }
+                    
+                    if (stepCurrent.unitGeneratorKeys != null && stepProc.unitGeneratorKeys == null)
+                        stepProc.unitGeneratorKeys = stepCurrent.unitGeneratorKeys;
                     
                     if (stepCurrent.functions != null && stepProc.functions == null)
                         stepProc.functions = UtilitiesYAML.CloneThroughYaml (stepCurrent.functions);
@@ -719,6 +719,23 @@ namespace PhantomBrigade.Data
                     var unitKey = kvp.Key;
                     if (!root.unitPresetsProc.ContainsKey (unitKey))
                         root.unitPresetsProc.Add (unitKey, unitCurrent);
+                }
+            }
+            
+            if (current.unitGenerators != null && current.unitGenerators.Count > 0)
+            {
+                if (root.unitGeneratorsProc == null)
+                    root.unitGeneratorsProc = new SortedDictionary<string, DataBlockScenarioUnitGenerationNode> ();
+                
+                foreach (var kvp in current.unitGenerators)
+                {
+                    var unitGeneratorCurrent = kvp.Value;
+                    if (unitGeneratorCurrent == null)
+                        continue;
+
+                    var unitGeneratorKey = kvp.Key;
+                    if (!root.unitGeneratorsProc.ContainsKey (unitGeneratorKey))
+                        root.unitGeneratorsProc.Add (unitGeneratorKey, unitGeneratorCurrent);
                 }
             }
 
@@ -820,9 +837,111 @@ namespace PhantomBrigade.Data
                 }
             }
         }
+        
+        /*
+        [FoldoutGroup ("Upgrade methods", false)]
+        [Button ("Upgrade state distance filters", ButtonSizes.Large), PropertyOrder (-10)]
+        public void UpgradeStateDistanceFilters ()
+        {
+            foreach (var kvp in data)
+            {
+                var s = kvp.Value;
+                if (s.steps == null)
+                    continue;
+
+                foreach (var kvp2 in s.states)
+                {
+                    var state = kvp2.Value;
+                    if (state == null || state.location == null || state.location.locationProvider == null)
+                        continue;
+
+                    if (state.location.locationProvider is DataBlockAreaLocationTagFilter p)
+                    {
+                        if (p.filterDistanceState == null)
+                            continue;
+
+                        if (p.filters == null)
+                            p.filters = new List<ICombatPositionValidationFunction> ();
+
+                        p.filters.Add (new CombatPositionValidationByStateDistance
+                        {
+                            stateKey = p.filterDistanceState.key,
+                            checkDistance = new DataBlockOverworldEventSubcheckFloat
+                            {
+                                check = p.filterDistanceState.check,
+                                value = p.filterDistanceState.value
+                            }
+                        });
+
+                        p.filterDistanceState = null;
+                    }
+                }
+            }
+        }
+        */
 
         private static SortedDictionary<string, bool> areaRequirementsCombined = new SortedDictionary<string, bool> ();
 
+
+        [HideReferenceObjectPicker]
+        private class DuplicateTextInstance
+        {
+            public string scenario;
+            public string blockKey;
+
+            public override string ToString () { return $"{scenario} / {blockKey}"; }
+        }
+
+        private class DuplicateTextGroup
+        {
+            public bool replaceWithFallback = false;
+        
+            [HideIf ("replaceWithFallback")]
+            public string key;
+            
+            [TextArea (1, 10), HideLabel]
+            public string text;
+            public List<DuplicateTextInstance> instances = new List<DuplicateTextInstance> ();
+        }
+        
+        [FoldoutGroup ("Upgrade methods", false)]
+        [ShowInInspector, ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false, HideAddButton = true)]
+        private static List<DuplicateTextGroup> headerDuplicationSteps = new List<DuplicateTextGroup> ();
+        
+        [FoldoutGroup ("Upgrade methods", false)]
+        [ShowInInspector, ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false, HideAddButton = true)]
+        private static List<DuplicateTextGroup> contentDuplicationSteps = new List<DuplicateTextGroup> ();
+        
+        [FoldoutGroup ("Upgrade methods", false)]
+        [ShowInInspector, ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false, HideAddButton = true)]
+        private static List<DuplicateTextGroup> headerDuplicationStates = new List<DuplicateTextGroup> ();
+        
+        [FoldoutGroup ("Upgrade methods", false)]
+        [ShowInInspector, ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false, HideAddButton = true)]
+        private static List<DuplicateTextGroup> contentDuplicationStates = new List<DuplicateTextGroup> ();
+
+        [FoldoutGroup ("Upgrade methods", false)]
+        [Button ("Clear state text keys", ButtonSizes.Large), PropertyOrder (-10)]
+        public void ClearStateTextKeys ()
+        {
+            foreach (var kvp in data)
+            {
+                var scenario = kvp.Value;
+
+                if (scenario.statesProc != null)
+                {
+                    foreach (var kvp2 in scenario.statesProc)
+                    {
+                        var state = kvp2.Value;
+                        if (state == null)
+                            continue;
+
+                        state.textNameKey = string.Empty;
+                        state.textDescKey = string.Empty;
+                    }
+                }
+            }
+        }
         
         [FoldoutGroup ("Utilities", false)]
         [Button ("Print execution locks", ButtonSizes.Large), PropertyOrder (-10)]
@@ -888,38 +1007,28 @@ namespace PhantomBrigade.Data
         {
             var sb = new StringBuilder ();
             
-            var blueprints = DataMultiLinkerOverworldEntityBlueprint.data;
-            foreach (var kvp in blueprints)
+            var presets = DataMultiLinkerOverworldPointPreset.data;
+            foreach (var kvp in presets)
             {
-                var bp = kvp.Value;
-                if (bp.hidden)
+                var preset = kvp.Value;
+                if (preset.hidden)
                     continue;
 
-                if (bp.scenariosProcessed == null || bp.scenariosProcessed.tags == null || bp.scenariosProcessed.tags.Count == 0)
+                var c = preset.combatProc;
+                if (c == null || c.scenarioFilter == null)
                     continue;
+                
+                c.scenarioFilter.Refresh ();
+                var scenarioKeys = c.scenarioFilter.GetFilteredKeys (DataMultiLinkerScenario.data);
+                var areaKeys = c.areaFilter != null ? c.areaFilter.GetFilteredKeys (DataMultiLinkerCombatArea.data) : null;
 
                 sb.Append ("\n\n");
-                sb.Append (bp.textNameProcessed != null ? bp.textNameProcessed.s : "?");
-                sb.Append ("\n- ");
-                sb.Append (bp.key);
-
-                SortedDictionary<string, bool> areaRequirementsFromSite = null;
-                string areaKeyUnpacked = null;
-            
-                // If selection needs to happen, we fetch the requirements
-                if (bp.areasProcessed != null)
-                {
-                    var areaRequirementCandidate = bp.areasProcessed.tags;
-                    if (areaRequirementCandidate != null && areaRequirementCandidate.Count > 0)
-                        areaRequirementsFromSite = areaRequirementCandidate;
-                }
-
-                var scenarios = DataTagUtility.GetContainersWithTags (DataMultiLinkerScenario.data, bp.scenariosProcessed.tags);
-                int i = 0;
+                sb.Append (preset.key);
                 
-                foreach (var arg in scenarios)
+                int i = 0;
+                foreach (var scenarioKey in scenarioKeys)
                 {
-                    var scenario = arg as DataContainerScenario;
+                    var scenario = DataMultiLinkerScenario.GetEntry (scenarioKey, false);
                     if (scenario == null || scenario.hidden)
                         continue;
 
@@ -931,22 +1040,8 @@ namespace PhantomBrigade.Data
                     {
                         sb.Append ($" (random level): ");
                         areaRequirementsCombined.Clear ();
-                
-                        // Size, shape tags etc
-                        foreach (var kvp2 in scenario.areasProc.tagFilter)
-                            areaRequirementsCombined.Add (kvp2.Key, kvp2.Value);
 
-                        // Biome tags etc
-                        if (areaRequirementsFromSite != null)
-                        {
-                            foreach (var kvp2 in areaRequirementsFromSite)
-                            {
-                                if (!areaRequirementsCombined.ContainsKey (kvp2.Key))
-                                    areaRequirementsCombined.Add (kvp2.Key, kvp2.Value);
-                            }
-                        }
-
-                        var areasMatchingTag = DataTagUtility.GetKeysWithTags (DataMultiLinkerCombatArea.data, areaRequirementsCombined);
+                        var areasMatchingTag = DataTagUtility.GetKeysWithTags (DataMultiLinkerCombatArea.data, scenario.areasProc.tagFilter);
                         foreach (var areaKey in areasMatchingTag)
                             sb.Append ($"\n- {areaKey}");
                     }
@@ -1012,228 +1107,6 @@ namespace PhantomBrigade.Data
             }
         }
 
-        /*
-        [FoldoutGroup ("Utilities", false)]
-        [Button ("Convert hints", ButtonSizes.Large), PropertyOrder (-10)]
-        private static void ConvertHints ()
-        {
-            foreach (var kvp in data)
-            {
-                var scenario = kvp.Value;
-                if (scenario == null || scenario.steps == null)
-                    continue;
-
-                foreach (var kvp2 in scenario.steps)
-                {
-                    var step = kvp2.Value;
-                    if (step.hintsConditional != null)
-                    {
-                        for (int i = 0; i < step.hintsConditional.Count; ++i)
-                        {
-                            var hint = step.hintsConditional[i];
-                            Debug.LogWarning ($"{kvp.Key} / {kvp2.Key}: Hint {i + 1}\n- {hint.text}");
-
-                            hint.data = new DataBlockTutorialHint ();
-                            var h = hint.data;
-
-                            h.text = hint.text;
-                            h.color = hint.color;
-                            h.frameSizeX = Mathf.RoundToInt (hint.frameSize.x);
-                            h.frameSizeY = Mathf.RoundToInt (hint.frameSize.y);
-                            h.icon = hint.icon;
-
-                            if (hint.lockWidth)
-                                h.textWidth = h.frameSizeX - 48;
-                            else
-                                h.textWidth = 256;
-
-                            if (hint.positionInUI)
-                            {
-                                h.framePositionX = Mathf.RoundToInt (hint.position.x);
-                                h.framePositionY = Mathf.RoundToInt (hint.position.y);
-                                
-                                if (hint.uiLocation == CIHintLocation.BottomLeft)
-                                    h.frameLocation = CIViewTutorialHint.FrameLocation.BottomLeft;
-                                else if (hint.uiLocation == CIHintLocation.BottomRight)
-                                    h.frameLocation = CIViewTutorialHint.FrameLocation.BottomRight;
-                                else if (hint.uiLocation == CIHintLocation.TopLeft)
-                                    h.frameLocation = CIViewTutorialHint.FrameLocation.TopLeft;
-                                else if (hint.uiLocation == CIHintLocation.TopRight)
-                                    h.frameLocation = CIViewTutorialHint.FrameLocation.TopRight;
-
-                                if (hint.uiMode == CIHintMode.BottomLeft)
-                                    h.textLocation = CIViewTutorialHint.TextLocation.BottomLeft;
-                                else if (hint.uiMode == CIHintMode.BottomRight)
-                                    h.textLocation = CIViewTutorialHint.TextLocation.BottomRight;
-                                else if (hint.uiMode == CIHintMode.TopLeft)
-                                    h.textLocation = CIViewTutorialHint.TextLocation.TopLeft;
-                                else if (hint.uiMode == CIHintMode.TopRight)
-                                    h.textLocation = CIViewTutorialHint.TextLocation.TopRight;
-                            }
-                            else
-                            {
-                                h.frameLocation = CIViewTutorialHint.FrameLocation.Center;
-                                h.worldAnchor = new DataBlockTutorialHintWorldAnchor ();
-                                if (!string.IsNullOrEmpty (hint.positionFromState))
-                                    h.worldAnchor.stateName = hint.positionFromState;
-                                else if (!string.IsNullOrEmpty (hint.positionFromUnitName))
-                                    h.worldAnchor.entityName = hint.positionFromUnitName;
-                                else
-                                    h.worldAnchor.position = hint.position;
-                            }
-
-                            hint.frameSize = default;
-                            hint.position = default;
-                            hint.positionFromUnitName = null;
-                            hint.positionFromState = null;
-                            hint.color = default;
-                            hint.text = null;
-                        }
-                    }
-                }
-            }
-        }
-        */
-        
-        /*
-        [FoldoutGroup ("Utilities", false)]
-        [Button ("Convert unit hints counting actions", ButtonSizes.Large), PropertyOrder (-10)]
-        private static void ConvertUnitHintsActionCounts ()
-        {
-            int count = 0;
-            
-            foreach (var kvp in data)
-            {
-                var scenario = kvp.Value;
-                if (scenario == null || scenario.steps == null)
-                    continue;
-
-                foreach (var kvp2 in scenario.steps)
-                {
-                    var step = kvp2.Value;
-                    if (step.hintsConditional != null)
-                    {
-                        for (int i = 0; i < step.hintsConditional.Count; ++i)
-                        {
-                            var hint = step.hintsConditional[i];
-                            if (hint == null || hint.unitLink == null)
-                                continue;
-
-                            if (hint.unitLink.actionTypeCounts != null)
-                            {
-                                hint.unitLink.actionCounts = new SortedDictionary<string, DataBlockOverworldEventSubcheckInt> ();
-                                foreach (var kvp3 in hint.unitLink.actionTypeCounts)
-                                {
-                                    var actionKey = kvp3.Key;
-                                    var countRequired = kvp3.Value;
-                                    hint.unitLink.actionCounts.Add (actionKey, new DataBlockOverworldEventSubcheckInt { check = IntCheckMode.Equal, value = countRequired });
-                                }
-                                
-                                hint.unitLink.actionTypeCounts = null;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
-        
-        /*
-        [FoldoutGroup ("Utilities", false)]
-        [Button ("Convert unit hints", ButtonSizes.Large), PropertyOrder (-10)]
-        private static void ConvertUnitHints ()
-        {
-            int count = 0;
-            
-            foreach (var kvp in data)
-            {
-                var scenario = kvp.Value;
-                if (scenario == null || scenario.steps == null)
-                    continue;
-
-                foreach (var kvp2 in scenario.steps)
-                {
-                    var step = kvp2.Value;
-                    if (step.hintsConditional != null)
-                    {
-                        for (int i = 0; i < step.hintsConditional.Count; ++i)
-                        {
-                            var hint = step.hintsConditional[i];
-                            if (hint == null || !hint.unitLinked)
-                                continue;
-
-                            if (hint.contextMenuChecked)
-                            {
-                                hint.actionContextMenu = new DataBlockOverworldEventSubcheckBool { present = hint.contextMenuDesired };
-                                Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Context menu checked / Desired: {hint.contextMenuDesired}");
-                            }
-                            
-                            if (hint.selectedActionChecked && !string.IsNullOrEmpty (hint.selectedActionName))
-                            {
-                                hint.actionSelection = hint.selectedActionName;
-                                Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Selected action checked: {hint.selectedActionName}");
-                                hint.selectedActionName = null;
-                            }
-
-                            if (hint.unitActionsBlocked != null && hint.unitActionsBlocked.Count > 0)
-                            {
-                                hint.actionsBlocked = hint.unitActionsBlocked;
-                                hint.unitActionsBlocked = null;
-                            }
-                            
-                            if (hint.unitActionsUnblocked != null && hint.unitActionsUnblocked.Count > 0)
-                            {
-                                hint.actionsUnblocked = hint.unitActionsUnblocked;
-                                hint.unitActionsUnblocked = null;
-                            }
-
-                            if (hint.unitLinked)
-                            {
-                                var link = new DataBlockScenarioHintUnitLink ();
-                                hint.unitLink = link;
-                                hint.unitLinked = false;
-
-                                if (!string.IsNullOrEmpty (hint.unitNameInternal))
-                                {
-                                    link.name = new DataBlockScenarioSubcheckConstraintUnit { nameInternal = hint.unitNameInternal };
-                                    Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Unit name filter: {hint.unitNameInternal}");
-                                    hint.unitNameInternal = null;
-                                }
-                                else
-                                    Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Unit name filter empty");
-
-                                if (hint.unitSelectionChecked)
-                                {
-                                    link.selection = new DataBlockOverworldEventSubcheckBool { present = hint.unitSelectionDesired };
-                                    Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Unit selection checked / Desired: {hint.unitSelectionDesired}");
-                                }
-
-                                if (hint.unitActionTotalCount != null)
-                                {
-                                    link.actionTotalCount = new DataBlockOverworldEventSubcheckInt { value = hint.unitActionTotalCount.i, check = IntCheckMode.Equal };
-                                    Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Unit action total checked / Desired: {hint.unitActionTotalCount.i}");
-                                    hint.unitActionTotalCount = null;
-                                }
-
-                                if (hint.unitActionTypeCounts != null && hint.unitActionTypeCounts.Count > 0)
-                                {
-                                    link.actionTypeCounts = new SortedDictionary<string, int> ();
-                                    foreach (var kvp3 in hint.unitActionTypeCounts)
-                                        link.actionTypeCounts.Add (kvp3.Key, kvp3.Value);
-
-                                    Debug.Log ($"{count} / {kvp.Key} / {kvp2.Key} / H{i} / Unit action type counts checked:\n{link.actionTypeCounts.ToStringFormatted (true, multilinePrefix: "- ")}");
-                                    hint.unitActionTypeCounts = null;
-                                }
-
-                                count += 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
-        
         [FoldoutGroup ("Utilities", false)]
         [Button ("Log embedded units", ButtonSizes.Large), PropertyOrder (-10)]
         public void LogEmbeddedUnits ()
@@ -1285,6 +1158,375 @@ namespace PhantomBrigade.Data
                 if (scenario.unitPresetsProc != null)
                 {
                     Debug.Log ($"Scenario {scenario.key} has {scenario.unitPresetsProc.Count} embedded units");
+                }
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button ("Simplify unit preset links", ButtonSizes.Large), PropertyOrder (-10)]
+        public void SimplifyUnitPresetLinks ()
+        {
+            var unitPresetsEmbeddedRemoved = new HashSet<string> ();
+            var unitPresetsEmbeddedUnique = new HashSet<string> ();
+            
+            foreach (var kvp in data)
+            {
+                var scenario = kvp.Value;
+                var unitPresetsEmbedded = scenario.unitPresets;
+                
+                unitPresetsEmbeddedRemoved.Clear ();
+                unitPresetsEmbeddedUnique.Clear ();
+                
+                if (scenario.steps != null)
+                {
+                    foreach (var kvp2 in scenario.steps)
+                    {
+                        var step = kvp2.Value;
+                        if (step.unitGroups == null)
+                            continue;
+
+                        for (int i = 0, count = step.unitGroups.Count; i < count; ++i)
+                        {
+                            var unitGroupResolver = step.unitGroups[i];
+                            if (unitGroupResolver is DataBlockScenarioUnitGroupEmbedded unitGroupResolverEmbedded)
+                            {
+                                var units = unitGroupResolverEmbedded.units;
+                                if (units == null || units.Count == 0)
+                                {
+                                    Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} has embedded unit group {i}: empty");
+                                    continue;
+                                }
+
+                                int u = -1;
+                                foreach (var unitSlot in units)
+                                {
+                                    u += 1;
+                                    if (unitSlot == null)
+                                    {
+                                        Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} is null");
+                                        continue;
+                                    }
+                                    
+                                    if (unitSlot.keyExternal)
+                                        continue;
+
+                                    var unitPresetLink = unitPresetsEmbedded != null && unitPresetsEmbedded.TryGetValue (unitSlot.key, out var l) ? l : null;
+                                    if (unitPresetLink == null)
+                                    {
+                                        Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} with internal key {unitSlot.key} has no link data");
+                                        continue;
+                                    }
+
+                                    if (unitPresetLink is DataBlockScenarioUnitPresetLink unitPresetLinkKey)
+                                    {
+                                        Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} can drop redundant internal link data at key {unitSlot.key} and directly link to preset {unitPresetLinkKey.preset}");
+                                        unitPresetsEmbeddedRemoved.Add (unitSlot.key);
+                                        unitSlot.keyExternal = true;
+                                        unitSlot.key = unitPresetLinkKey.preset;
+                                    }
+                                    else if (unitPresetLink is DataBlockScenarioUnitPresetEmbedded unitPresetLinkEmbedded)
+                                    {
+                                        Debug.LogError ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} with internal key {unitSlot.key} is an illegal embedded preset");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (scenario.states != null)
+                {
+                    foreach (var kvp2 in scenario.states)
+                    {
+                        var state = kvp2.Value;
+                        if (state == null || state.reactions == null || state.reactions.effectsPerIncrement == null)
+                            continue;
+
+                        foreach (var kvp3 in state.reactions.effectsPerIncrement)
+                        {
+                            var effect = kvp3.Value;
+                            if (effect == null || effect.unitGroups == null)
+                                continue;
+
+                            for (int i = 0, count = effect.unitGroups.Count; i < count; ++i)
+                            {
+                                var unitGroupResolver = effect.unitGroups[i];
+                                if (unitGroupResolver is DataBlockScenarioUnitGroupEmbedded unitGroupResolverEmbedded)
+                                {
+                                    var units = unitGroupResolverEmbedded.units;
+                                    if (units == null || units.Count == 0)
+                                    {
+                                        Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} has embedded unit group {i}: empty");
+                                        continue;
+                                    }
+
+                                    int u = -1;
+                                    foreach (var unitSlot in units)
+                                    {
+                                        u += 1;
+                                        if (unitSlot == null)
+                                        {
+                                            Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} is null");
+                                            continue;
+                                        }
+                                        
+                                        if (unitSlot.keyExternal)
+                                            continue;
+
+                                        var unitPresetLink = unitPresetsEmbedded != null && unitPresetsEmbedded.TryGetValue (unitSlot.key, out var l) ? l : null;
+                                        if (unitPresetLink == null)
+                                        {
+                                            Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} with internal key {unitSlot.key} has no link data");
+                                            continue;
+                                        }
+
+                                        if (unitPresetLink is DataBlockScenarioUnitPresetLink unitPresetLinkKey)
+                                        {
+                                            Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} can drop redundant internal link data at key {unitSlot.key} and directly link to preset {unitPresetLinkKey.preset}");
+                                            unitPresetsEmbeddedRemoved.Add (unitSlot.key);
+                                            unitSlot.keyExternal = true;
+                                            unitSlot.key = unitPresetLinkKey.preset;
+                                        }
+                                        else if (unitPresetLink is DataBlockScenarioUnitPresetEmbedded unitPresetLinkEmbedded)
+                                        {
+                                            Debug.LogError ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} with internal key {unitSlot.key} is an illegal embedded preset");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (unitPresetsEmbeddedRemoved.Count > 0)
+                {
+                    Debug.Log ($"Scenario {scenario.key} no longer needs {unitPresetsEmbeddedRemoved.Count}/{unitPresetsEmbedded.Count} embedded unit presets: {unitPresetsEmbeddedRemoved.ToStringFormatted ()}");
+                    foreach (var unitPresetKey in unitPresetsEmbeddedRemoved)
+                        unitPresetsEmbedded.Remove (unitPresetKey);
+                    
+                    if (unitPresetsEmbedded.Count > 0)
+                        Debug.Log ($"Scenario {scenario.key} has the following embedded presets left: {unitPresetsEmbedded.ToStringFormattedKeys ()}");
+                    else
+                        Debug.Log ($"Scenario {scenario.key} has no more internal unit presets!");
+                }
+
+                if (scenario.unitPresets != null && scenario.unitPresets.Count == 0)
+                    scenario.unitPresets = null;
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button ("Log broken unit preset links", ButtonSizes.Large), PropertyOrder (-10)]
+        public void LogBrokenUnitPresetLinks ()
+        {
+            foreach (var kvp in data)
+            {
+                var scenario = kvp.Value;
+                var unitLinks = scenario.unitPresets;
+                
+                if (scenario.steps != null)
+                {
+                    foreach (var kvp2 in scenario.steps)
+                    {
+                        var step = kvp2.Value;
+                        if (step.unitGroups == null)
+                            continue;
+
+                        for (int i = 0, count = step.unitGroups.Count; i < count; ++i)
+                        {
+                            var unitGroupResolver = step.unitGroups[i];
+                            if (unitGroupResolver is DataBlockScenarioUnitGroupEmbedded unitGroupResolverEmbedded)
+                            {
+                                var units = unitGroupResolverEmbedded.units;
+                                if (units == null || units.Count == 0)
+                                {
+                                    Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} has embedded unit group {i}: empty");
+                                    continue;
+                                }
+
+                                int u = -1;
+                                foreach (var unitSlot in units)
+                                {
+                                    u += 1;
+                                    if (unitSlot == null)
+                                    {
+                                        Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} is null");
+                                        continue;
+                                    }
+                                    
+                                    if (unitSlot.keyExternal)
+                                    {
+                                        var unitPreset = DataMultiLinkerUnitPreset.GetEntry (unitSlot.key, false);
+                                        if (unitPreset == null)
+                                            Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} has invalid unit preset (external) key {unitSlot.key}");
+                                    }
+                                    else
+                                    {
+                                        var unitPresetLink = unitLinks != null && unitLinks.TryGetValue (unitSlot.key, out var l) ? l : null;
+                                        if (unitPresetLink == null)
+                                            Debug.LogWarning ($"Scenario {scenario.key} step {kvp2.Key} embedded unit group {i} unit {u} has invalid internal unit key {unitSlot.key}");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (scenario.states != null)
+                {
+                    foreach (var kvp2 in scenario.states)
+                    {
+                        var state = kvp2.Value;
+                        if (state == null || state.reactions == null || state.reactions.effectsPerIncrement == null)
+                            continue;
+
+                        foreach (var kvp3 in state.reactions.effectsPerIncrement)
+                        {
+                            var effect = kvp3.Value;
+                            if (effect == null || effect.unitGroups == null)
+                                continue;
+
+                            for (int i = 0, count = effect.unitGroups.Count; i < count; ++i)
+                            {
+                                var unitGroupResolver = effect.unitGroups[i];
+                                if (unitGroupResolver is DataBlockScenarioUnitGroupEmbedded unitGroupResolverEmbedded)
+                                {
+                                    var units = unitGroupResolverEmbedded.units;
+                                    if (units == null || units.Count == 0)
+                                    {
+                                        Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} has embedded unit group {i}: empty");
+                                        continue;
+                                    }
+
+                                    int u = -1;
+                                    foreach (var unitSlot in units)
+                                    {
+                                        u += 1;
+                                        if (unitSlot == null)
+                                        {
+                                            Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} is null");
+                                            continue;
+                                        }
+                                    
+                                        if (unitSlot.keyExternal)
+                                        {
+                                            var unitPreset = DataMultiLinkerUnitPreset.GetEntry (unitSlot.key, false);
+                                            if (unitPreset == null)
+                                                Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} has invalid unit preset (external) key {unitSlot.key}");
+                                        }
+                                        else
+                                        {
+                                            var unitPresetLink = unitLinks != null && unitLinks.TryGetValue (unitSlot.key, out var l) ? l : null;
+                                            if (unitPresetLink == null)
+                                                Debug.LogWarning ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} embedded unit group {i} unit {u} has invalid internal unit key {unitSlot.key}");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (scenario.unitPresets != null && scenario.unitPresets.Count == 0)
+                    scenario.unitPresets = null;
+            }
+        }
+
+        private static SortedDictionary<string, bool> tagsCombined = new SortedDictionary<string, bool> ();
+        
+        private void LogAmbiguousUnitFilter (string prefix, DataBlockScenarioUnitGroup unitGroupResolver)
+        {
+            if (unitGroupResolver is DataBlockScenarioUnitGroupFilter unitGroupResolverFilter)
+            {
+                if (unitGroupResolverFilter.tags == null || unitGroupResolverFilter.tags.Count == 0)
+                {
+                    Debug.LogError ($"{prefix} has no tag filter");
+                    return;
+                }
+                                
+                var units = unitGroupResolverFilter.groupsFiltered;
+                if (units == null || units.Count == 0)
+                {
+                    Debug.LogError ($"{prefix} failed to find any units");
+                    return;
+                }
+
+                bool allNegative = true;
+                foreach (var kvp3 in unitGroupResolverFilter.tags)
+                {
+                    if (kvp3.Value)
+                    {
+                        allNegative = false;
+                        break;
+                    }
+                }
+
+                if (allNegative)
+                {
+                    var factionBranchKeyExternal = unitGroupResolverFilter.branchKeyDebug;
+                    var tagFilterFinal = unitGroupResolverFilter.GetTagFilterFinalized (factionBranchKeyExternal, out bool tagFilterWasModified);
+                    var unitGroupsFound = unitGroupResolverFilter.GetFilteredUnitGroups (tagFilterFinal, tagFilterWasModified);
+                    
+                    Debug.LogWarning ($"{prefix} has an all-negative tag filter ({(tagFilterWasModified ? "modified by branch" : "no branch")}):\n{tagFilterFinal.ToStringFormattedKeyValuePairs (true, multilinePrefix: "- ")}\nFiltered units:\n{unitGroupsFound.ToStringFormatted (true, multilinePrefix: "- ")}");
+                }
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button ("Log ambiguous unit filters", ButtonSizes.Large), PropertyOrder (-10)]
+        public void LogAmbiguousUnitFilters ()
+        {
+            foreach (var kvp in data)
+            {
+                var scenario = kvp.Value;
+                if (scenario.coreProc == null)
+                {
+                    Debug.Log ($"Scenario {scenario.key} has no processed core data");
+                    continue;
+                }
+                
+                if (!scenario.coreProc.externalBranchUsed)
+                {
+                    Debug.Log ($"Scenario {scenario.key} does not use an external branch");
+                }
+                
+                if (scenario.steps != null)
+                {
+                    foreach (var kvp2 in scenario.steps)
+                    {
+                        var step = kvp2.Value;
+                        if (step.unitGroups == null)
+                            continue;
+
+                        for (int i = 0, count = step.unitGroups.Count; i < count; ++i)
+                        {
+                            var unitGroupResolver = step.unitGroups[i];
+                            LogAmbiguousUnitFilter ($"Scenario {scenario.key} step {step.key} unit group {i}", unitGroupResolver);
+                        }
+                    }
+                }
+
+                if (scenario.states != null)
+                {
+                    foreach (var kvp2 in scenario.states)
+                    {
+                        var state = kvp2.Value;
+                        if (state == null || state.reactions == null || state.reactions.effectsPerIncrement == null)
+                            continue;
+
+                        foreach (var kvp3 in state.reactions.effectsPerIncrement)
+                        {
+                            var effect = kvp3.Value;
+                            if (effect == null || effect.unitGroups == null)
+                                continue;
+
+                            for (int i = 0, count = effect.unitGroups.Count; i < count; ++i)
+                            {
+                                var unitGroupResolver = effect.unitGroups[i];
+                                LogAmbiguousUnitFilter ($"Scenario {scenario.key} state {kvp2.Key} reaction {kvp3.Key} unit group {i}", unitGroupResolver);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1526,5 +1768,16 @@ namespace PhantomBrigade.Data
                 }
             }
         }
+        
+        #if UNITY_EDITOR
+
+        public static IEnumerable<string> GetSelectedScenarioStateKeys ()
+        {
+            if (selectedScenario == null || selectedScenario.statesProc == null)
+                return null;
+            return selectedScenario.statesProc.Keys;
+        }
+
+        #endif
     }
 }

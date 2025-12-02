@@ -8,12 +8,12 @@ textDescFromPreset:
 textDesc: 
 hardpoints: 
 tags:
-- mnf_04
-- category_wpn_melee_cutter
+- mnf_06
+- category_wpn_melee_blade
 statDistribution: ''
 stats:
   act_heat:
-    value: 125
+    value: 110
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -28,7 +28,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 4
+    value: 6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -43,7 +43,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 97.5
+    value: 210
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -53,17 +53,23 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 30
+    value: 45
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 10
+    value: 15
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_stagger:
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
 visuals:
-- wpn_sword_02
+- wpn_melee_sword_03_bottom_c
+- wpn_melee_sword_03_top_a_m
 attachments: 
 activation:
   visual:
@@ -113,3 +119,4 @@ custom:
       z: 4
   strings: 
 functions: 
+workshopInfo: 

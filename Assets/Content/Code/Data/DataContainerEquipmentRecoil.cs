@@ -1,10 +1,18 @@
 ﻿using System;
+using Entitas;
+using Entitas.VisualDebugging.Unity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
+    [Equipment][DontDrawComponent]
+    public sealed class DataLinkEquipmentRecoil : IComponent
+    {
+        public DataContainerEquipmentRecoil data;
+    }
+
     public class RecoilOffsetDataBlock
     {
         [HorizontalGroup ("recoil")]

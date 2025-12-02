@@ -1,0 +1,34 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_inventory
+tags:
+- starter
+- support_backpack
+- type_support
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_damage_backpack:
+    mode: Offset
+    value: 0.25
+  unit_mass_back:
+    mode: Offset
+    value: -4
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: 1
+  hp:
+    mode: Offset
+    value: -5
+effectsOnEvents: 
+effectsShared: 

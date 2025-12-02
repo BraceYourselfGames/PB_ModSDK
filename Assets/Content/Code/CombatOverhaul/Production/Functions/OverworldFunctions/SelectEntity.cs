@@ -48,6 +48,12 @@ namespace PhantomBrigade.Functions
                     GameCameraSystem.ClearTarget ();
                 }
                 
+                if (Contexts.sharedInstance.overworld.hasSelectedEntity)
+                {
+                    Contexts.sharedInstance.overworld.RemoveSelectedEntity ();
+                    GameCameraSystem.ClearTarget ();
+                }
+                
                 return;
             }
 

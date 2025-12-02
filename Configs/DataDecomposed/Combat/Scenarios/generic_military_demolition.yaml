@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -57,6 +62,9 @@ tags:
 - listed
 - type_military_demolition
 - type_military_base
+- flag_escalation_squads
+- trait_damage_env
+- block_persistent_pilots
 states:
   demolition_t1:
     comment: 
@@ -113,14 +121,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_tier1: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   demolition_t2:
     comment: 
     textNameKey: ''
@@ -176,14 +181,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_tier2: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   demolition_t3:
     comment: 
     textNameKey: ''
@@ -238,14 +240,11 @@ states:
           unitTagDisplayChanges: 
           rewards:
             obj_tier3: 1
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   retreat_default:
     comment: 
     textNameKey: retreat_general_header
@@ -353,8 +352,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
@@ -364,7 +361,8 @@ states:
               range_long: false
               weight_heavy: false
             check: 
-            combatTags: 
+            combatTags:
+            - flag_attacks_need_sightline
             spawnGroupOccupied: false
             spawnCountStrict: true
             spawnOrderRandom: true
@@ -390,9 +388,8 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   timer_escape_comms:
     comment: 
     textNameKey: ''
@@ -441,8 +438,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatCreateStrikeTargeted
             unitFilter:
@@ -476,9 +471,8 @@ states:
             modifiers: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   timer_escape_defeat:
     comment: 
     textNameKey: ''
@@ -538,17 +532,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Defeat
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   timer_escape_victory:
     comment: 
     textNameKey: ''
@@ -608,17 +599,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome:
             type: Victory
             early: true
             instant: false
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   main:
     comment: 
@@ -671,16 +659,18 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_long: false
-        type_main: true
+        range_short: true
+        weight_heavy: true
       check: 
-      combatTags: 
+      combatTags:
+      - ''
+      - flag_attacks_need_sightline
       spawnGroupOccupied: true
       spawnCountStrict: true
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 0
+      baseGrade: 1
       maxGrade: 2
       cloneable: true
       functions: 
@@ -707,9 +697,19 @@ steps:
       tagsFromFactionBranch: true
       tags:
         range_long: true
-        type_main: true
-      check: 
-      combatTags: 
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags:
+      - flag_attacks_need_sightline
       spawnGroupOccupied: true
       spawnCountStrict: true
       spawnOrderRandom: true
@@ -735,6 +735,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: false
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges:
@@ -766,3 +767,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

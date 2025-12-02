@@ -4,14 +4,15 @@ core:
 areas: 
 entry: 
 generationInjection:
-  enabled: false
+  enabled: true
   group: weather
   tagFilter: 
+  functionsOverworld: 
   functionsBase:
   - !OverworldValidateWeather
     check:
       required: true
-      min: 0.5
+      min: 0.8
       max: 1
   functionsSite: 
 tags:
@@ -69,12 +70,10 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatDelayGroup
             unscaled: false
-            delayMin: 0.5
+            delayMin: 2.5
             delayMax: 4.5
             repeats: 3
             functions:
@@ -125,6 +124,7 @@ states:
                       x: 0
                       y: 0
                       z: 0
+                    centered: true
                     asset:
                       key: fx_lightning_arc
                       scale:
@@ -186,26 +186,15 @@ states:
                       - !CombatUnitStatusAdd
                         key: timed_charged
                         durationOverride: -1
-                      - !CombatUnitDamageEvent
-                        delay: 0
-                        splash: true
-                        dispersed: true
-                        sourceInternal: false
-                        integrity:
-                          normalized: false
-                          leveled: true
-                          f: 100
-                        concussion: 
-                        heat: 
-                        stagger: 
-                        statusBuildup: 
+                        source: Function
                   - !CombatUnitStatusAdd
                     key: timed_charged_cooldown
                     durationOverride: -1
+                    source: Function
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps: 
 unitPresets: 
+unitGenerators: 

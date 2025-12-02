@@ -4,16 +4,28 @@ exportMode: Collection
 name: Col. (Sites - Caches)
 description: This is a text collection. In contrast to most text sectors, this has no pairs of keys and text. Instead, it simply contains a list of text. The game randomly selects from this list.
 splits: []
-entries: {}
-collection:
-  temp: false
-  noteWriter: 
-  tags:
-  - group_overworld
-  - site_cache
-  entries:
-  - Stockpile
-  - Vault
-  - Storehouse
-  - Bunker
-  - Shelter
+tags:
+- group_overworld
+- site_cache
+groups: 
+entries:
+  00:
+    noteDev: 
+    temp: false
+    text: Stockpile
+  01:
+    noteDev: 
+    temp: false
+    text: Vault
+  02:
+    noteDev: 
+    temp: false
+    text: Storehouse
+  03:
+    noteDev: 
+    temp: false
+    text: Bunker
+  04:
+    noteDev: 
+    temp: false
+    text: Shelter

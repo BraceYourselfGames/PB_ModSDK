@@ -9,26 +9,26 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_05
-- stat_concussive
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
-    value: 6
+    value: 4
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 2
+    value: 1.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 145
+    value: 135
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 4
+    value: 4.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -38,12 +38,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 3
+    value: 1.25
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 40
+    value: 53.75
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -63,17 +63,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 80
+    value: 90
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 30
+    value: 35
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 4
+    value: 3
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -122,7 +122,89 @@ activation:
     key: recoil_rifle_sniper
   timing: 
   hitReaction: 
-projectile: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_standard_blue
+      keyEnemy: fx_projectile_standard_red
+      scale:
+        x: 0.9
+        y: 0.9
+        z: 3
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact: 
+    deactivation: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.25
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+      - tv_tg:
+          x: 0.3974032
+          y: 1
+          z: 0.00505951
+          w: 0.00505951
+        w:
+          x: 0.9790305
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.6019017
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.508078
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0.3129921
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

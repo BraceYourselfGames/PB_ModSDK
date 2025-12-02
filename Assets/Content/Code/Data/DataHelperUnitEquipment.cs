@@ -8,7 +8,7 @@ namespace PhantomBrigade.Data
         private static List<string> fallbackStringList = new List<string> ();
 
         private static bool initialized = false;
-        
+
         public static void InvalidateLookups ()
         {
             initialized = false;
@@ -223,7 +223,7 @@ namespace PhantomBrigade.Data
                 return fallbackStringList;
             return presets[socket];
         }
-        
+
         private static List<string> keysReturned = new List<string> ();
 
         public static List<string> FilterPartPresetsForSocket (string socket, SortedDictionary<string, bool> filter)

@@ -7,6 +7,7 @@ entry:
 generationInjection: 
 tags:
 - trait_cas
+- block_strikes
 states:
   strike_recurring:
     comment: 
@@ -63,7 +64,11 @@ states:
     volume: 
     stateValues: 
     memoryBase: 
-    functions: 
+    functions:
+    - !CombatValidateOverworldBase
+      functions:
+      - !OverworldValidateChance
+        chance: 0.5
     reactions:
       expectedValue: true
       scopeRemovalOnLimit: false
@@ -81,8 +86,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatLogMessage
             data:
@@ -131,9 +134,8 @@ states:
             modifiers: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   strike_spotters:
     comment: 
     textNameKey: generic_target_spotter_header
@@ -230,6 +232,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: false
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -257,3 +260,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

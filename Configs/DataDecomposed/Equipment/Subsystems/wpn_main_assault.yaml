@@ -123,62 +123,20 @@ projectile:
   range: 
   fragmentation: 
   fragmentationDelayed: 
-  falloff:
-    animated: true
-    damageFalloff:
-      modePostWrap: ClampForever
-      modePreWrap: ClampForever
-      keys:
-      - tv_tg:
-          x: 0
-          y: 0.4976501
-          z: 1.831658
-          w: 1.831658
-        w:
-          x: 0.3333333
-          y: 0.2391171
-        m: {}
-      - tv_tg:
-          x: 0.35
-          y: 1
-          z: 0
-          w: 0
-        w:
-          x: 0.1507785
-          y: 0.5644016
-        m: {}
-      - tv_tg:
-          x: 0.6
-          y: 1
-          z: 0
-          w: 0
-        w:
-          x: 0.9979232
-          y: 0.2294297
-        m: {}
-      - tv_tg:
-          x: 1
-          y: 0.5
-          z: -1.25
-          w: -1.25
-        w:
-          x: 0.3288348
-          y: 0.3333333
-        m: {}
+  falloff: 
   falloffGlobal: 
   animationFade: 
   ballistics: 
   fuseProximity: 
   hitResponse: 
   splashDamage: 
-  splashImpact:
-    exponent: 2
-    triggerOnDamage: false
+  splashImpact: 
   guidanceData: 
   guidanceAudio: 
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
@@ -189,3 +147,4 @@ custom:
   vectors: 
   strings: 
 functions: 
+workshopInfo: 

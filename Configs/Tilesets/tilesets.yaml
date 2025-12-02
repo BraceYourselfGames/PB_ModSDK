@@ -140,7 +140,15 @@ tilesets:
     60: mb-stair
     100: wall-retaining
     110: wall-road
-  navOverrides: 
+  navOverrides:
+  - config: 3
+    group: 110
+    subtype: 1
+    offsetY: -1.5
+  - config: 15
+    group: 110
+    subtype: 2
+    offsetY: 0.5
   navRestrictions:
     0:
       subtypes:
@@ -152,8 +160,6 @@ tilesets:
     44:
       subtypes: 
     46:
-      subtypes: 
-    60:
       subtypes: 
     110:
       subtypes: 
@@ -246,6 +252,37 @@ tilesets:
   - 109
   materialOverlays: 
   groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+  secondaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+- id: 70
+  idOfInterior: 11
+  name: tileset_cargo
+  destructible: true
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_metal
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_bricks
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 107
+  - 108
+  - 109
+  materialOverlays:
+    3: concrete
+  groupIdentifiers:
+    0: base
+    10: foundation
   navOverrides: 
   navRestrictions: 
   primaryColor:
@@ -463,6 +500,32 @@ tilesets:
     group: 101
     subtype: 31
     offsetY: 0.5
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 250
+  idOfInterior: -1
+  name: tileset_empty
+  destructible: false
+  hardness: 0
+  sfxNameImpact: impact_bullet_building
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
   navRestrictions: 
   primaryColor:
     x: 1

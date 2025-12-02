@@ -1,4 +1,5 @@
 tags:
+- alpine_light
 - alpine
 slot1:
   layerKey: rock4
@@ -54,7 +55,7 @@ gradientRange:
 gradient:
   mode: Blend
   alphaKeys:
-  - alpha: 0
+  - alpha: 1
     time: 0
   - alpha: 1
     time: 0.9411765
@@ -62,9 +63,9 @@ gradient:
     time: 1
   colorKeys:
   - color:
-      r: 1
-      g: 1
-      b: 1
+      r: 0.7169812
+      g: 0.6282945
+      b: 0.5647918
       a: 1
     time: 0
   - color:
@@ -83,4 +84,4 @@ vegetationColorSecondary:
   g: 0.1352201
   b: 0
   a: 0.6
-weatherSnowAmount: 0.3
+weatherSnowAmount: 0.16

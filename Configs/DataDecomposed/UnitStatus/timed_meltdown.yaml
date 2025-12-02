@@ -6,9 +6,19 @@ color:
   a: 1
 hidden: false
 debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
 restartOnRefresh: false
-fxAttached:
-  key: fx_status_meltdown_loop
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.9
+  velocityDecayTime: 1
+  key: fx_status_meltdown_oneshot
   scale:
     x: 1
     y: 1
@@ -19,6 +29,7 @@ durationUpdate:
 buildupDecayRate: 
 buildupThreshold: 
 buildupOverflow: 
+buildupShieldMultiplier: 
 stackable: 
 audio:
   audioOnStart: status_meltdown_loop
@@ -30,8 +41,11 @@ effectsOnEnd:
   triggerOnCancel: false
   enabled: true
   triggerCheckUnit: 
+  triggerCheckPilot: 
   comment: 
   functionsOnHost:
   - !CombatUnitDestroy {}
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 statOffsets: 

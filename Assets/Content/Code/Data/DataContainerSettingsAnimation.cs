@@ -172,7 +172,7 @@ namespace PhantomBrigade.Data
         public SortedDictionary<string, DataBlockResourceTexture> shockwaveTextures;
         
         [FoldoutGroup ("Shockwaves")]
-        public SortedDictionary<string, DataContainerResourceScriptable<ShockwaveVisualPreset>> shockwavePresets;
+        public SortedDictionary<string, DataContainerResourceAsset<ShockwaveVisualPreset>> shockwavePresets;
         
         [Header ("Dash")]
         [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
@@ -385,6 +385,8 @@ namespace PhantomBrigade.Data
         public float slidingEndThreshold = 0.75f;
         public float animationSlidingPrep = 0.66f;
         public float animationLengthFiringPrep = 0.33f; //this needs to be maximum the outro buffer of an action, otherwise upcoming action will take precedent of current action for chained actions. Forcing current to exit early
+
+        public int rotationFixTemp = 0;
         public float animationLengthMovementStop = 0.8f;
         public float animationLengthMovementStopFastMechs = 0.333f; //20 frames at 30fps
         public float animationLengthMovementStart = 0.8f;
@@ -579,11 +581,15 @@ namespace PhantomBrigade.Data
         
         public ShockwaveVisualPreset GetShockwavePreset (string key)
         {
+            #if !PB_MODSDK
             if (shockwavePresets == null || string.IsNullOrEmpty (key))
                 return null;
 
             bool found = shockwavePresets.TryGetValue (key, out var value);
             return found ? value.asset : null;
+            #else
+            return null;
+            #endif
         }
     }
 
@@ -839,10 +845,41 @@ namespace PhantomBrigade.Data
         }
     }
 
+    public static class UtilityAnimationCurve
+    {
+        public static void ApplyToCurve (ref AnimationCurve target, bool linear, List<Keyframe> keyframes)
+        {
+            if (keyframes == null || keyframes.Count < 2)
+                return;
+
+            int keyframeCount = keyframes.Count;
+            target = new AnimationCurve (keyframes.ToArray ());
+
+            if (linear)
+            {
+                #if UNITY_EDITOR
+                AnimationUtility.SetKeyRightTangentMode (target, 0, AnimationUtility.TangentMode.Linear);
+                AnimationUtility.SetKeyLeftTangentMode (target, keyframeCount - 1, AnimationUtility.TangentMode.Linear);
+                
+                if (keyframeCount > 2)
+                {
+                    for (int i = 1, iLimit = keyframeCount - 1; i < iLimit; ++i)
+                    {
+                        AnimationUtility.SetKeyBroken (target, i, true);
+                        AnimationUtility.SetKeyRightTangentMode (target, i, AnimationUtility.TangentMode.Linear);
+                        AnimationUtility.SetKeyLeftTangentMode (target, i, AnimationUtility.TangentMode.Linear);
+                    }
+                }
+                #endif
+            }
+        }
+    }
 
 #if UNITY_EDITOR
     public static class AnimationCurvePresets
     {
+        
+        
         public static AnimationCurve fallback01
         {
             get

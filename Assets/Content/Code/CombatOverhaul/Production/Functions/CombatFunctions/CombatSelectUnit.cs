@@ -1,4 +1,5 @@
 using System;
+using PhantomBrigade.Data;
 using Sirenix.OdinInspector;
 
 namespace PhantomBrigade.Functions
@@ -49,6 +50,50 @@ namespace PhantomBrigade.Functions
             
             if (focus)
                 GameCameraSystem.MoveToUnit (unitCombat);
+            
+            #endif
+        }
+    }
+    
+    [Serializable]
+    [PropertyTooltip ("Allows selecting and/or focusing a any friendly unit.")]
+    public class CombatSelectUnitAnyFriendly : CombatFunctionWithDelay, ICombatFunction
+    {
+        [PropertyTooltip ("Whether a unit should be selected on the timeline")]
+        public bool select = true;
+        
+        [PropertyTooltip ("Whether a unit should be focused by the camera")]
+        public bool focus = true;
+        
+        public override void Run ()
+        {
+            base.Run ();
+        }
+        
+        [Button ("Apply"), ButtonGroup, PropertyOrder (-1), ShowIf ("IsInCombat")]
+        protected override void RunDelayed ()
+        {
+            #if !PB_MODSDK
+            
+            if (!IsRunningPossible ())
+                return;
+
+            var units = ScenarioUtility.GetParticipantUnitsPersistent ();
+            foreach (var unit in units)
+            {
+                if (unit.isDestroyed || !unit.hasFaction || unit.faction.s != Factions.player || unit.isWrecked)
+                    continue;
+
+                var unitCombat = IDUtility.GetLinkedCombatEntity (unit);
+                if (unitCombat == null)
+                    continue;
+                
+                if (select)
+                    Contexts.sharedInstance.combat.ReplaceUnitSelected (unitCombat.id.id);
+            
+                if (focus)
+                    GameCameraSystem.MoveToUnit (unitCombat);
+            }
             
             #endif
         }

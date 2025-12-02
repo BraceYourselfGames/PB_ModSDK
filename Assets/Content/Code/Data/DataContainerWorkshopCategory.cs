@@ -6,10 +6,18 @@ using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
+    public enum WorkshopProjectType
+    {
+        Custom = 0,
+        Part = 1,
+        Subsystem = 2
+    }
+    
     [Serializable][HideReferenceObjectPicker]
     public class DataContainerWorkshopCategory : DataContainerWithText
     {
         public int priority;
+        public WorkshopProjectType contentType = WorkshopProjectType.Custom;
         
         [YamlIgnore]
         [LabelText ("Name / Desc.")]
@@ -22,8 +30,8 @@ namespace PhantomBrigade.Data
         [DataEditor.SpriteNameAttribute (false, 180f)]
         public string icon;
         
-        [ValueDropdown ("@DataMultiLinkerWorkshopProject.tags")]
-        public HashSet<string> tags = new HashSet<string> ();
+        [DropdownReference]
+        public SortedDictionary<string, bool> tagFilter = new SortedDictionary<string, bool> ();
 
         public override void ResolveText ()
         {
@@ -32,6 +40,12 @@ namespace PhantomBrigade.Data
         }
 
         #if UNITY_EDITOR 
+        
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataContainerWorkshopCategory () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
 
         public override void SaveText ()
         {

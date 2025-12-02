@@ -5,21 +5,12 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
 	[Serializable]
-	public class PlayCutscene : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunction
+	public class PlayCutscene : IOverworldActionFunction, IOverworldFunction, ICombatFunction
 	{
 		[ValueDropdown("@DataMultiLinkerCutsceneVideo.data.Keys")]
 		public string key;
 		
 		public bool instant;
-		
-		public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-		{
-			#if !PB_MODSDK
-
-			CutsceneService.TryPlayingCutsceneVideo (key, instant);
-			
-			#endif
-		}
 		
 		public void Run (OverworldActionEntity source)
 		{

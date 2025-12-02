@@ -20,7 +20,7 @@ namespace PhantomBrigade.Functions
         public string key;
         public Mode mode = Mode.Set;
         public float value = 5f;
-        public bool refreshFullStats = false;
+        public bool refreshFullStats = true;
         
         public void Run (PersistentEntity unitPersistent)
         {
@@ -59,7 +59,58 @@ namespace PhantomBrigade.Functions
                 unitPersistent.AddStatMultipliers (multipliers);
             }
             
-            DataHelperStats.RefreshStatCacheForUnit (unitPersistent, false, true, refreshFullStats);
+            DataHelperStats.RefreshStatCacheForUnit (unitPersistent, evaluateFullBaseline: refreshFullStats);
+            
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class CombatUnitSetStatMultipliers : ICombatFunctionTargeted
+    {
+        [DictionaryKeyDropdown ("@DataMultiLinkerUnitStats.data.Keys")]
+        public SortedDictionary<string, float> multipliers = new SortedDictionary<string, float> ();
+
+        private static bool log = false;
+        
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            if (unitCombat == null || multipliers == null)
+                return;
+            
+            var multipliersCurrent = unitPersistent.hasStatMultipliers ? unitPersistent.statMultipliers.multipliers : null;
+            if (multipliersCurrent == null)
+                multipliersCurrent = new Dictionary<string, float> ();
+
+            foreach (var kvp in multipliers)
+                multipliersCurrent[kvp.Key] = kvp.Value;
+
+            unitPersistent.ReplaceStatMultipliers (multipliersCurrent);
+            
+            if (log)
+                Debug.Log ($"Unit {unitPersistent.ToLog ()} receives new stat multipliers: {multipliers.ToStringFormattedKeyValuePairs ()}");
+            
+            DataHelperStats.RefreshStatCacheForUnit (unitPersistent, false, true, true);
+            
+            #endif
+        }
+    }
+
+    [Serializable]
+    public class CombatUnitResetStatMultipliers : ICombatFunctionTargeted
+    {
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            if (unitPersistent.hasStatMultipliers)
+            {
+                unitPersistent.RemoveStatMultipliers ();
+                DataHelperStats.RefreshStatCacheForUnit (unitPersistent, false, true, true);
+            }
             
             #endif
         }

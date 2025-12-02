@@ -13,8 +13,11 @@ namespace PhantomBrigade.SDK.ModTools
 
     public static class ConfigChecksums
     {
+        // ***** INCREMENT THIS VALUE EVERY TIME CHANGES TO THE CONFIG DATABASE YAML FILES ARE COMMITTED *****
+        public const byte configDatabaseVersion = 2;
+
         public static bool logPathResolution = false;
-        
+
         public static bool ChecksumsExist (DirectoryInfo source) => File.Exists (Path.Combine (source.FullName, checksumsFileName));
         public static bool CopyChecksumsFile (DirectoryInfo source, DirectoryInfo dest)
         {
@@ -73,14 +76,14 @@ namespace PhantomBrigade.SDK.ModTools
 
         public static bool ChecksumEqual (Checksum lhs, Checksum rhs) => lhs.HalfSum1 == rhs.HalfSum1 && lhs.HalfSum2 == rhs.HalfSum2;
 
-        static readonly byte[] signatureV1Bytes =
+        static readonly byte[] signatureBytes =
         {
             0x63,
             0x63,
-            0,
-            1,
+            0,  // file format version -- increment when the format is changed
+            configDatabaseVersion,  // version of the config databases
         };
-        static readonly uint signatureV1 = BitConverter.ToUInt32 (signatureV1Bytes, 0);
+        static readonly uint signature = BitConverter.ToUInt32 (signatureBytes, 0);
 
         static readonly char[] pathSeparators =
         {
@@ -193,7 +196,7 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     directoryQueue.Clear ();
                     fileQueue.Clear ();
-                    outp.Write (signatureV1Bytes);
+                    outp.Write (signatureBytes);
                     var osum = useRootChecksumAsOrigin ? root.Checksum : originChecksum;
                     outp.Write (osum.HalfSum1);
                     outp.Write (osum.HalfSum2);
@@ -339,12 +342,25 @@ namespace PhantomBrigade.SDK.ModTools
                 using (var inp = new BinaryReader (checksumsFile.OpenRead ()))
                 {
                     var sig = inp.ReadUInt32 ();
-                    if (sig != signatureV1)
+                    if (sig != signature)
                     {
-                        var sigBytes = string.Join (" ", signatureV1Bytes.Select (b => b.ToString ("x2")));
-                        var readBytes = string.Join (" ", BitConverter.GetBytes (sig).Select (b => b.ToString ("x2")));
-                        result.ErrorMessage = string.Format ("Signature error | expected: {0} | actual: {1} | file: {2}", sigBytes, readBytes, checksumsFile.FullName);
-                        return result;
+                        var dataVersion = (byte)(sig >> 24);
+                        if (configDatabaseVersion < dataVersion)
+                        {
+                            var sigBytes = string.Join (" ", signatureBytes.Select (b => b.ToString ("x2")));
+                            var readBytes = string.Join (" ", BitConverter.GetBytes (sig).Select (b => b.ToString ("x2")));
+                            result.ErrorMessage = string.Format ("Signature error | expected: {0} | actual: {1} | file: {2}", sigBytes, readBytes, checksumsFile.FullName);
+                            return result;
+                        }
+                        result.Code = ResultCode.Upgrade;
+                        result.DataVersion = dataVersion;
+                        result.ErrorMessage = string.Format
+                        (
+                            "Upgrade required | current version: {0} | file version: {1} | file: {2}",
+                            configDatabaseVersion,
+                            dataVersion,
+                            checksumsFile.FullName
+                        );
                     }
 
                     var originChecksum = new Checksum ()
@@ -391,7 +407,10 @@ namespace PhantomBrigade.SDK.ModTools
                     result.LinkerMap = new Dictionary<Type, ConfigFile> (linkerMap);
                 }
 
-                result.OK = true;
+                if (result.Code != ResultCode.Upgrade)
+                {
+                    result.Code = ResultCode.OK;
+                }
                 return result;
             }
 
@@ -494,14 +513,16 @@ namespace PhantomBrigade.SDK.ModTools
                     if (entry.RelativePath.StartsWith (DataDecomposedDirectoryName))
                     {
                         var cleanedPath = DataPathHelper.GetCleanPath (entry.RelativePath) + "/";
-                        var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath);
+                        var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath, fallbackAllowed: false);
                         if (typeName != null)
                         {
                             var t = FieldReflectionUtility.GetTypeByName (typeName);
                             if (t == null)
                             {
                                 if (logPathResolution)
+                                {
                                     Debug.Log ("Unable to resolve name to type (directory): " + typeName);
+                                }
                             }
                             else
                             {
@@ -579,7 +600,9 @@ namespace PhantomBrigade.SDK.ModTools
                             if (t == null)
                             {
                                 if (logPathResolution)
+                                {
                                     Debug.Log ("Unable to resolve name to type (file): " + typeName);
+                                }
                             }
                             else
                             {
@@ -601,12 +624,20 @@ namespace PhantomBrigade.SDK.ModTools
 
             public sealed class Result
             {
-                public bool OK;
+                public ResultCode Code;
+                public byte DataVersion;
                 public string ErrorMessage;
                 public Checksum OriginChecksum;
                 public ConfigDirectory Root;
                 public Dictionary<Type, ConfigDirectory> MultiLinkerMap;
                 public Dictionary<Type, ConfigFile> LinkerMap;
+            }
+
+            public enum ResultCode
+            {
+                Error = 0,
+                Upgrade = 1,
+                OK = 2,
             }
         }
 

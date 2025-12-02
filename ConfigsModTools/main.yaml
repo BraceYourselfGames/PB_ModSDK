@@ -1030,11 +1030,33 @@ sections:
       actionsOnClick: 
       buttons: 
       childPage: 
-    - icon: Images
-      image: t3_03_preview
+    - icon: BookmarkStar
+      image: t3_07_preview_default
       hint: ''
       header: Preview image
-      description: To make your mod easy to find in the Workshop, we recommend providing a preview image. This must be a 512x512 PNG called workshop_preview.png, placed into your mod project folder. Click the folder icon next to the project path on top of your mod to navigate to that folder. Click "Refresh" under the Workshop preview field to refresh the loaded texture if you recently modified it.
+      description: "If no custom image is provided, each workshop mod will get a default thumbnail you can see here. If you'd like to customize it, there are a few ways to do that. You can start by pressing the \"Create custom\" button next to the default thumbnail: this will copy it to the mod project folder, letting you make changes."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Images
+      image: t3_09_preview_folder
+      hint: ''
+      header: Preview image
+      description: The preview must be a 512x512 PNG called workshop_preview.png, placed into your mod project folder. The quick copy method above will give a file you can start from. Click the folder icon next to the project path on top of your mod to navigate to that folder. From there, you can modify the image in the editing software of your choice and click "Reload" under the Workshop preview field to refresh the loaded texture.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: Images
+      image: t3_08_preview_copy
+      hint: ''
+      header: Quick tinting
+      description: If you'd prefer not to spend time making a custom image, consider using the quick tinting option. Use the "Create custom" option if you don't have a workshop_preview.png file. Simply choose a hue using the slider to the left, click "Set Hue", then click "Save". This is a quick way to make a unique thumbnail.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
@@ -1060,7 +1082,7 @@ sections:
         The upload is facilitated by Steam client API. You must have Steam running on your PC, logged into an account with Phantom Brigade. If the SDK fails to connect to Steam, you'll see the message above in the Console tab of Unity Editor.
 
 
-        Once you fix the issue (e.g. start Steam), restart the SDK or force a code reimport and try exporting again.
+        Once you fix the issue (e.g. start Steam), restart the SDK or force a code reimport (right click any code file in the Project tab and select "Reimport") and try exporting again.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
@@ -1115,11 +1137,22 @@ sections:
       image: 
       hint: ''
       header: Playing
+      description: You're done! You and other players (assuming the mod is set to Public) can now subscribe through the Workshop portal and enjoy the mod the next time they launch Phantom Brigade!
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: 
+      hint: ''
+      header: Common issues
       description: >-
-        You're done! You and other players (assuming the mod is set to Public) can now subscribe through the Workshop portal and enjoy the mod the next time they launch Phantom Brigade!
+        Steam might not always immediately download your Workshop subscriptions. Check Steam Downloads page and verify a download has occurred if you can't see your new subscription in game.
 
 
-        Important note: Steam might not always immediately download your Workshop subscriptions. Check Steam Downloads page and verify a download has occurred if you can't see your new subscription in game.
+        Steam might also confuse the SDK with the game and think you are running Phantom Brigade, preventing launch or Workshop downloads. Close the SDK and restart Steam if you encounter this issue.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 

@@ -7,19 +7,10 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class ChangeTargetFaction : IOverworldEventFunction, IOverworldActionFunction
+    public class ChangeTargetFaction : IOverworldActionFunction
     {
         [ValueDropdown ("@Factions.GetList ()")]
         public string faction;
-
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            #if !PB_MODSDK
-
-            Run (target);
-            
-            #endif
-        }
 
         public void Run (OverworldActionEntity source)
         {

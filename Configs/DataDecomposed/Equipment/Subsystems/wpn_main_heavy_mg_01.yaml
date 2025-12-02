@@ -12,7 +12,8 @@ tags:
 - spec_ballistic
 - spec_locking
 - mnf_06
-- stat_concussive
+- spec_impact
+- category_wpn_heavy
 statDistribution: ''
 stats:
   act_count:
@@ -26,12 +27,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 171
+    value: 165
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 25
+    value: 22
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -41,12 +42,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 0.1
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 2.6
+    value: 8
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -61,7 +62,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 20
+    value: 15
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -81,7 +82,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 120
+    value: 125
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -91,7 +92,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_scatter_angle:
-    value: 3
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -182,6 +183,9 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
@@ -234,8 +238,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

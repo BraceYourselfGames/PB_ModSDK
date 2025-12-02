@@ -1,0 +1,44 @@
+color:
+  r: 1
+  g: 1
+  b: 1
+  a: 1
+hidden: false
+icon: s_icon_m_unit_mech2
+tags: []
+resources:
+  camp_supplies:
+    amountMin: 1
+    amountMax: 1
+    amountRandom: false
+  hope:
+    amountMin: 1
+    amountMax: 1
+    amountRandom: false
+projects: 
+parts:
+- factionFilter: false
+  qualityTableKey: 
+  levelRange: 
+  countMin: 2
+  countMax: 2
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - body_set_knox_light_arm
+  tags:
+    body_part: true
+    weight_medium: true
+- factionFilter: false
+  qualityTableKey: 
+  levelRange: 
+  countMin: 2
+  countMax: 2
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - body_set_knox_medium_arm
+  tags:
+    body_part: true
+    weight_medium: true
+subsystems: 

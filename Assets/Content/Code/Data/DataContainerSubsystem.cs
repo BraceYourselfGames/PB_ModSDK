@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using PhantomBrigade.Functions;
 using PhantomBrigade.Functions.Equipment;
-using PhantomBrigade.SDK.ModTools;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -29,7 +28,7 @@ namespace PhantomBrigade.Data
     {
         public DataContainerSubsystem data;
     }
-
+    
     [Equipment]
     public sealed class DataLinkSubsystemsInPart : IComponent
     {
@@ -47,14 +46,14 @@ namespace PhantomBrigade.Data
         public const string OnCollision = "on_collision";
         public const string OnCrash = "on_crash";
     }
-
+    
     public static class PartEventsTargeted
     {
         public const string OnWeaponFired = "on_wpn_fired";
         public const string OnWeaponHit = "on_wpn_hit";
         public const string OnWeaponPartDestruction = "on_wpn_part_destruction";
     }
-
+    
     public static class PartEventsAction
     {
         public const string OnActionStart = "on_action_start";
@@ -66,24 +65,24 @@ namespace PhantomBrigade.Data
         [DropdownReference]
         [ListDrawerSettings (CustomAddFunction = "@new DataBlockSubsystemFunctionsGeneral ()")]
         public List<DataBlockSubsystemFunctionsGeneral> general;
-
+        
         [DropdownReference]
         [ListDrawerSettings (CustomAddFunction = "@new DataBlockSubsystemFunctionsTargeted ()")]
         public List<DataBlockSubsystemFunctionsTargeted> targeted;
-
+        
         [DropdownReference]
         [ListDrawerSettings (CustomAddFunction = "@new DataBlockSubsystemFunctionsAction ()")]
         public List<DataBlockSubsystemFunctionsAction> action;
-
+        
         #region Editor
         #if UNITY_EDITOR
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
-
+        
         public DataBlockSubsystemFunctions () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
-
+        
         #endif
         #endregion
     }
@@ -95,7 +94,7 @@ namespace PhantomBrigade.Data
 
         [ShowInInspector, PropertyOrder (100)]
         private DataEditor.DropdownReferenceHelper helper;
-
+        
         public DataBlockSubsystemFunction () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
@@ -104,41 +103,41 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
-
+    
     public class DataBlockSubsystemFunctionsGeneral : DataBlockSubsystemFunction
     {
         [ValueDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (PartEventsGeneral), false)")]
         public string context = string.Empty;
-
+        
         [DropdownReference]
         [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
         public List<ICombatUnitValidationFunction> checks;
-
+        
         [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
         public List<ISubsystemFunctionGeneral> functions = new List<ISubsystemFunctionGeneral> ();
     }
-
+    
     public class DataBlockSubsystemFunctionsTargeted : DataBlockSubsystemFunction
     {
         [ValueDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (PartEventsTargeted), false)")]
         public string context = string.Empty;
-
+        
         [DropdownReference]
         [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
         public List<ICombatUnitValidationFunction> checks;
-
+        
         [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
         public List<ISubsystemFunctionTargeted> functions = new List<ISubsystemFunctionTargeted> ();
     }
-
+    
     public class DataBlockSubsystemFunctionsAction : DataBlockSubsystemFunction
     {
         [ValueDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (PartEventsAction), false)")]
         public string context = string.Empty;
-
+        
         [ValueDropdown ("@DataMultiLinkerAction.data.Keys")]
         public List<string> actionKeys = new List<string> ();
-
+        
         [DropdownReference]
         [ListDrawerSettings (DefaultExpandedState = true, ElementColor = "GetElementColor")]
         public List<ICombatUnitValidationFunction> checks;
@@ -168,7 +167,7 @@ namespace PhantomBrigade.Data
 
         [PropertyTooltip ("Set to True to register this attachment to use its activation transforms (if any are present), when the subsystem is activated")]
         public bool activated = true;
-
+        
         public Vector3 position;
         public Vector3 rotation;
         public Vector3 scale = new Vector3 (1f, 1f, 1f);
@@ -193,10 +192,10 @@ namespace PhantomBrigade.Data
         {
             if (local)
                 positionChange = Quaternion.Euler (rotation) * positionChange;
-
+            
             SetPosition (position + positionChange, false);
         }
-
+        
         public void SetPosition (Vector3 positionNew, bool local)
         {
             if (local)
@@ -207,12 +206,12 @@ namespace PhantomBrigade.Data
             position.y = Mathf.Clamp (position.y, -10f, 10f);
             position.z = Mathf.Clamp (position.z, -10f, 10f);
         }
-
+        
         public void OffsetRotation (Vector3 rotationChange)
         {
             SetRotation (rotation + rotationChange);
         }
-
+        
         public void SetRotation (Vector3 rotationChange)
         {
             rotation = rotationChange;
@@ -220,14 +219,14 @@ namespace PhantomBrigade.Data
             rotation.y = WrapAngle (rotation.y);
             rotation.z = WrapAngle (rotation.z);
         }
-
+        
         private float WrapAngle (float angle)
         {
             while (angle > 180f) angle -= 360f;
             while (angle < -180f) angle += 360f;
             return angle;
         }
-
+        
         public void OffsetScale (Vector3 scaleChange)
         {
             SetScale (scale + scaleChange);
@@ -237,13 +236,13 @@ namespace PhantomBrigade.Data
         {
             scale = scaleChange;
             var limit = 0.01f;
-
+            
             if (Mathf.Abs (scale.x) < limit)
                 scale.x = scale.x < 0f ? -limit : limit;
-
+            
             if (Mathf.Abs (scale.y) < limit)
                 scale.y = scale.y < 0f ? -limit : limit;
-
+            
             if (Mathf.Abs (scale.z) < limit)
                 scale.z = scale.z < 0f ? -limit : limit;
         }
@@ -266,7 +265,7 @@ namespace PhantomBrigade.Data
             var rotationQt = Quaternion.Euler (rotation);
             var directionForward = rotationQt * Vector3.forward;
             var directionUp = rotationQt * Vector3.up;
-
+            
             if (string.Equals (axis, "x", StringComparison.InvariantCultureIgnoreCase))
             {
                 directionForward = Vector3.Reflect (directionForward, Vector3.right);
@@ -346,14 +345,16 @@ namespace PhantomBrigade.Data
             }
         }
     }
-
+    
+    
+    
     [Serializable][HideReferenceObjectPicker]
     public class DataBlockSubsystemStat
     {
         [HorizontalGroup ("A")]
         [HideLabel]
         public float value;
-
+        
         [HorizontalGroup ("A")]
         [YamlIgnore, ShowIf ("IsReportVisible")]
         [HideLabel]
@@ -368,7 +369,7 @@ namespace PhantomBrigade.Data
         [ValueDropdown ("@DataMultiLinkerPartSocket.data.Keys")]
         [InlineButton ("@targetSocket = string.Empty", "-", ShowIf = "@!string.IsNullOrEmpty (targetSocket)")]
         public string targetSocket = string.Empty;
-
+        
         [HorizontalGroup ("B")]
         [ShowIf ("IsTargetVisible")]
         [HideLabel]
@@ -381,7 +382,7 @@ namespace PhantomBrigade.Data
 
         private bool IsTargetVisible => targetMode > 0;
         private bool IsReportVisible => report != null;
-
+        
         private string GetTargetModeText ()
         {
             if (targetMode == 0)
@@ -393,7 +394,7 @@ namespace PhantomBrigade.Data
             else
                 return "== (TGT)"; // value is forced to provided one
         }
-
+        
         [PropertyOrder (-1)]
         [HorizontalGroup ("A", 80f)]
         [Button ("@GetTargetModeText ()")]
@@ -406,12 +407,15 @@ namespace PhantomBrigade.Data
             if (targetMode != 0)
                 targetSocket = targetHardpoint = string.Empty;
         }
-
+        
         #endif
         #endregion
-
+        
     }
-
+    
+    
+    
+    
     [Serializable][LabelWidth (180f)]// [HideReferenceObjectPicker]
     public class DataContainerSubsystem : DataContainerWithText, IDataContainerTagged
     {
@@ -428,11 +432,11 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (DefaultExpandedState = false)]
         [LabelText ("Groups (Filtering)")]
         public List<string> groupFilterKeys;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("IsCoreVisible")]
         public bool hidden = false;
-
+        
         [PropertyOrder (-8)]
         [GUIColor ("GetParentColor")]
         [ShowIf ("IsCoreVisible")]
@@ -440,18 +444,18 @@ namespace PhantomBrigade.Data
         [SuffixLabel ("@parentHierarchy")]
         [OnValueChanged ("OnFullRefreshRequired")]
         public string parent = string.Empty;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("IsCoreVisible")]
         [YamlIgnore, ReadOnly, HideInInspector]
         public string parentHierarchy = string.Empty;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("@IsCoreVisible && children != null && children.Count > 0")]
         [YamlIgnore, LabelText ("Children"), ReadOnly]
         [ListDrawerSettings (DefaultExpandedState = false)]
         public List<string> children;
-
+        
         [PropertyOrder (-8)]
         [PropertyRange (0, 4)]
         [ShowIf ("IsCoreVisible")]
@@ -462,20 +466,20 @@ namespace PhantomBrigade.Data
         [ShowInInspector, DisplayAsString (true)]
         [LabelText ("Part preset usage")]
         private string partPresetUsage => DataMultiLinkerPartPreset.TryGetFixedUsageDescription (this);
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("@IsUIVisible")]
         [DropdownReference (true)]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [ValueDropdown ("@DataMultiLinkerPartPreset.data.Keys")]
         public string textNameFromPreset;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("@IsUIVisible")]
         [DropdownReference (true)]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         public DataBlockEquipmentTextFromHardpoint textNameFromHardpoint;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("@IsUIVisible")]
         [DropdownReference]
@@ -485,14 +489,14 @@ namespace PhantomBrigade.Data
         [ShowIf ("@IsUIVisible && IsInheritanceVisible && textNameProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockEquipmentTextName textNameProcessed;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("@IsUIVisible")]
         [DropdownReference (true)]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [ValueDropdown ("@DataMultiLinkerPartPreset.data.Keys")]
         public string textDescFromPreset;
-
+        
         [PropertyOrder (-8)]
         [ShowIf ("@IsUIVisible")]
         [DropdownReference]
@@ -503,6 +507,8 @@ namespace PhantomBrigade.Data
         [YamlIgnore, ReadOnly]
         public DataBlockEquipmentTextDesc textDescProcessed;
 
+
+
         [PropertyOrder (-7)]
         [BoxGroup ("Hardpoints", false)]
         [ShowIf ("AreHardpointsVisible")]
@@ -511,7 +517,7 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false)]
         [DropdownReference]
         public List<string> hardpoints = new List<string> ();
-
+        
         [PropertyOrder (-7)]
         [BoxGroup ("Hardpoints", false)]
         [ShowIf ("AreHardpointsProcessedVisible")]
@@ -519,7 +525,7 @@ namespace PhantomBrigade.Data
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false)]
         [YamlIgnore, ReadOnly]
         public List<string> hardpointsProcessed = new List<string> ();
-
+        
         [PropertyOrder (-4)]
         [BoxGroup ("Tags", false)]
         [ShowIf ("AreTagsVisible")] 
@@ -527,14 +533,15 @@ namespace PhantomBrigade.Data
         [ValueDropdown ("@DataMultiLinkerSubsystem.tags")]
         [DropdownReference]
         public HashSet<string> tags = new HashSet<string> ();
-
+        
         [PropertyOrder (-4)]
         [BoxGroup ("Tags", false)]
         [ShowIf ("AreTagsProcessedVisible")] 
         [ValueDropdown ("@DataMultiLinkerSubsystem.tags")]
         [YamlIgnore, ReadOnly]
         public HashSet<string> tagsProcessed = new HashSet<string> ();
-
+        
+        
         [PropertyOrder (-3)]
         [BoxGroup ("Stats", false)]
         [ShowIf ("@AreStatsVisible && stats != null && hardpointsProcessed != null && hardpointsProcessed.Count > 1")]
@@ -553,7 +560,7 @@ namespace PhantomBrigade.Data
         [DictionaryDrawerSettings (KeyColumnWidth = 200f)]
         [DropdownReference]
         public SortedDictionary<string, DataBlockSubsystemStat> stats = new SortedDictionary<string, DataBlockSubsystemStat> ();
-
+        
         [PropertyOrder (-3)]
         [BoxGroup ("Stats", false)]
         [ShowIf ("AreStatsProcessedVisible")]
@@ -562,85 +569,106 @@ namespace PhantomBrigade.Data
         [ReadOnly, YamlIgnore]
         public SortedDictionary<string, DataBlockSubsystemStat> statsProcessed = new SortedDictionary<string, DataBlockSubsystemStat> ();
 
+
         [ShowIf ("AreVisualsVisible")]
         [DropdownReference]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false)]
         [ValueDropdown ("GetVisualKeys")]
         public List<string> visuals;
-
+        
         [ShowIf ("AreVisualsProcessedVisible")]
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false)]
         [YamlIgnore, ReadOnly]
         public List<string> visualsProcessed;
-
+        
+        
         [ShowIf ("AreAttachmentsVisible")]
         [DropdownReference]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false)]
         public Dictionary<string, DataBlockSubsystemAttachment> attachments;
-
+        
         [ShowIf ("AreAttachmentsProcessedVisible")]
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false)]
         [YamlIgnore, ReadOnly]
         public Dictionary<string, DataBlockSubsystemAttachment> attachmentsProcessed;
 
+        
         [ShowIf ("AreBlocksVisible")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [DropdownReference (true)]
         public DataBlockSubsystemActivation_V2 activation; 
-
+        
         [ShowIf ("@AreBlocksProcessedVisible && activationProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockSubsystemActivation_V2 activationProcessed;
+
 
         [ShowIf ("AreBlocksVisible")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [DropdownReference (true)]
         public DataBlockSubsystemProjectile_V2 projectile; 
-
+        
         [ShowIf ("@AreBlocksProcessedVisible && projectileProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockSubsystemProjectile_V2 projectileProcessed;
+        
 
         [ShowIf ("AreBlocksVisible")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [DropdownReference (true)]
         public DataBlockSubsystemBeam_V2 beam; 
-
+        
         [ShowIf ("@AreBlocksProcessedVisible && beamProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockSubsystemBeam_V2 beamProcessed;
+
 
         [ShowIf ("AreBlocksVisible")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [DropdownReference (true)]
         public DataBlockPartCustom custom; 
-
+        
         [ShowIf ("@AreBlocksProcessedVisible && customProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockPartCustom customProcessed;
-
+        
+        
+        
         [ShowIf ("AreBlocksVisible")]
         [OnValueChanged ("OnFullRefreshRequired", true)]
         [DropdownReference (true)]
         public DataBlockSubsystemFunctions functions; 
-
+        
         [ShowIf ("@AreBlocksProcessedVisible && functions != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockSubsystemFunctions functionsProcessed;
+        
+        
+        
+        [OnValueChanged ("OnFullRefreshRequired", true)]
+        [DropdownReference]
+        public WorkshopItemData workshopInfo;
+        
+        [ShowIf ("IsInheritanceVisible")]
+        [ReadOnly, YamlIgnore]
+        [HideDuplicateReferenceBox]
+        public WorkshopItemData workshopInfoProc;
 
+
+        
         public HashSet<string> GetTags (bool processed)
         {
             return processed ? tagsProcessed : tags;
         }
-
+        
         public bool IsHidden () => hidden;
 
         public override void OnBeforeSerialization ()
         {
             base.OnBeforeSerialization ();
-
+            
             if (projectile != null)
                 projectile.OnBeforeSerialization ();
         }
@@ -648,62 +676,63 @@ namespace PhantomBrigade.Data
         public override void OnAfterDeserialization (string key)
         {
             base.OnAfterDeserialization (key);
-
+            
             if (key == parent)
                 parent = null;
-
+            
             if (projectile != null)
                 projectile.OnAfterDeserialization (this);
 
             UpdateStatDistribution ();
         }
-
+        
         public bool IsFlagPresent (string key)
         {
             var found = customProcessed != null && customProcessed.IsFlagPresent (key);
             return found;
         }
-
+        
         public bool TryGetInt (string key, out int result, int fallback = default)
         {
             result = fallback;
             var found = customProcessed != null && customProcessed.TryGetInt (key, out result);
             if (!found)
                 result = fallback;
-
+            
             return found;
         }
-
+        
         public bool TryGetFloat (string key, out float result, float fallback = default)
         {
             result = fallback;
             var found = customProcessed != null && customProcessed.TryGetFloat (key, out result);
             if (!found)
                 result = fallback;
-
+            
             return found;
         }
-
+        
         public bool TryGetVector (string key, out Vector3 result, Vector3 fallback = default)
         {
             result = fallback;
             var found = customProcessed != null && customProcessed.TryGetVector (key, out result);
             if (!found)
                 result = fallback;
-
+            
             return found;
         }
-
+        
         public bool TryGetString (string key, out string result, string fallback = default)
         {
             result = default;
             var found = customProcessed != null && customProcessed.TryGetString (key, out result);
             if (!found)
                 result = fallback;
-
+            
             return found;
         }
-
+        
+        
         public override void OnKeyReplacement (string keyOld, string keyNew)
         {
             base.OnKeyReplacement (keyOld, keyNew);
@@ -772,7 +801,7 @@ namespace PhantomBrigade.Data
                 var scenario = kvp.Value;
                 if (scenario.unitPresetsProc == null)
                     continue;
-
+                
                 foreach (var kvp2 in scenario.unitPresetsProc)
                 {
                     if (kvp2.Value is DataBlockScenarioUnitPresetEmbedded presetEmbedded)
@@ -815,7 +844,7 @@ namespace PhantomBrigade.Data
                     }
                 }
             }
-
+            
             var subsystems = DataMultiLinkerSubsystem.data;
             foreach (var kvp in subsystems)
             {
@@ -826,52 +855,42 @@ namespace PhantomBrigade.Data
                     Debug.Log ($"Updated subsystem {kvp.Key} with new parent key:\n{keyOld} -> {keyNew}");
                 }
             }
-
-            var overworldEntities = DataMultiLinkerOverworldEntityBlueprint.data;
-            foreach (var kvp in overworldEntities)
+            
+            var rewards = DataMultiLinkerOverworldReward.data;
+            foreach (var kvp in rewards)
             {
-                var blueprint = kvp.Value;
-                if (blueprint.rewards == null || blueprint.rewards.blocks == null)
+                var reward = kvp.Value;
+                if (reward.subsystems == null)
                     continue;
-
-                var rewards = blueprint.rewards.blocks;
-                foreach (var kvp2 in rewards)
+                
+                foreach (var subsystem in reward.subsystems)
                 {
-                    var blocks = kvp2.Value;
-                    if (blocks == null)
+                    if (subsystem == null || subsystem.tagsUsed)
                         continue;
 
-                    foreach (var block in blocks)
+                    if (subsystem.keys != null && subsystem.keys.Contains (keyOld))
                     {
-                        if (block == null || block.subsystems == null)
-                            continue;
-
-                        foreach (var subsystem in block.subsystems)
-                        {
-                            if (subsystem == null || subsystem.tagsUsed || subsystem.blueprint != keyOld)
-                                continue;
-
-                            subsystem.blueprint = keyNew;
-                            Debug.Log ($"Updated reward block in overworld entity {blueprint.key} reward {kvp2.Key} with subsystem key {keyOld} -> {keyNew}");
-                        }
+                        subsystem.keys.Remove (keyOld);
+                        subsystem.keys.Add (keyNew);
+                        Debug.Log ($"Updated reward {reward.key} reward with subsystem key {keyOld} -> {keyNew}");
                     }
                 }
             }
-
+            
             DataMultiLinkerSubsystem.OnAfterDeserialization ();
         }
-
+        
         private static List<DataContainerEquipmentGroup> groupsFound = new List<DataContainerEquipmentGroup> ();
-
+        
         public void UpdateGroups ()
         {
             if (hidden)
                 return;
-
+            
             bool groupsPresent = groupFilterKeys != null;
             if (groupsPresent)
                 groupFilterKeys.Clear ();
-
+            
             groupsFound.Clear ();
 
             foreach (var kvp in DataMultiLinkerEquipmentGroup.data)
@@ -879,7 +898,7 @@ namespace PhantomBrigade.Data
                 var group = kvp.Value;
                 if (!group.subsystems)
                     continue;
-
+                
                 if (group.tagsSubsystem != null && group.tagsSubsystem.Count > 0)
                 {
                     bool match = true;
@@ -905,13 +924,13 @@ namespace PhantomBrigade.Data
 
             foreach (var kvp in DataMultiLinkerEquipmentGroup.dataGenerated)
             {
-
+                
             }
 
             int groupsCount = groupsFound.Count;
             if (groupsCount == 0)
                 return;
-
+            
             if (groupsCount > 1)
                 groupsFound.Sort ((x, y) => x.priority.CompareTo (y.priority));
 
@@ -919,7 +938,7 @@ namespace PhantomBrigade.Data
             {
                 if (group.visibleInName && string.IsNullOrEmpty (groupMainKey))
                     groupMainKey = group.key;
-
+                
                 if (group.visibleInFilters || group.visibleAsPerk)
                 {
                     if (!groupsPresent)
@@ -927,7 +946,7 @@ namespace PhantomBrigade.Data
                         groupsPresent = true;
                         groupFilterKeys = new List<string> ();
                     }
-
+                    
                     groupFilterKeys.Add (group.key);
                 }
             }
@@ -938,21 +957,21 @@ namespace PhantomBrigade.Data
             // Override stats collection using the parent
             if (string.IsNullOrEmpty (statDistribution))
                 return;
-
+            
             var subsystemParent = DataMultiLinkerSubsystem.GetEntry (parent);
             if (subsystemParent == null || subsystemParent.stats == null || subsystemParent.stats.Count == 0)
             {
                 Debug.LogWarning ($"Subsystem {key} | Failed to apply stat distribution {statDistribution}: parent subsystem {parent} doesn't exist or contains no stats");
                 return;
             }
-
+            
             var data = DataMultiLinkerSubsystemStatDistributions.GetEntry (statDistribution, false);
             if (data == null || data.hardpoints == null || data.hardpoints.Count == 0)
             {
                 Debug.LogWarning ($"Subsystem {key} | Failed to apply stat distribution {statDistribution}: such a distribution doesn't exist or has no hardpoints");
                 return;
             }
-
+            
             if (hardpoints == null || hardpoints.Count == 0)
             {
                 Debug.LogWarning ($"Subsystem {key} | Failed to apply stat distribution {statDistribution}: no hardpoints defined so it's not possible to determine which multiplier to use");
@@ -961,7 +980,7 @@ namespace PhantomBrigade.Data
 
             string hardpointUsed = null;
             float hardpointMultiplier = 0f;
-
+            
             foreach (var hardpointCandidate in hardpoints)
             {
                 if (data.hardpoints.ContainsKey (hardpointCandidate))
@@ -971,7 +990,7 @@ namespace PhantomBrigade.Data
                     break;
                 }
             }
-
+            
             if (hardpointUsed == null)
             {
                 Debug.LogWarning ($"Subsystem {key} | Failed to apply stat distribution {statDistribution}: no hardpoint compatible with distribution | Subsystem hardpoints: {hardpoints.ToStringFormatted ()} | Distribution hardpoints: {data.hardpoints.ToStringFormattedKeys ()}");
@@ -1001,14 +1020,14 @@ namespace PhantomBrigade.Data
         {
             if (textName != null)
                 textName.s = DataManagerText.GetText (TextLibs.equipmentSubsystems, $"{key}__name");
-
+            
             if (textDesc != null)
                 textDesc.s = DataManagerText.GetText (TextLibs.equipmentSubsystems, $"{key}__text");
         }
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         public override void SaveText ()
         {
             if (!IsTextSavingPossible ())
@@ -1016,42 +1035,42 @@ namespace PhantomBrigade.Data
 
             if (textName != null)
                 DataManagerText.TryAddingTextToLibrary (TextLibs.equipmentSubsystems, $"{key}__name", textName.s);
-
+            
             if (textDesc != null)
                 DataManagerText.TryAddingTextToLibrary (TextLibs.equipmentSubsystems, $"{key}__text", textDesc.s);
         }
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
-
+        
         public DataContainerSubsystem () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
-
+        
         private bool IsInheritanceVisible => DataMultiLinkerSubsystem.Presentation.showInheritance;
         private bool IsCoreVisible => DataMultiLinkerSubsystem.Presentation.showCore;
         private bool IsUIVisible => DataMultiLinkerSubsystem.Presentation.showUI;
-
+        
         private bool AreTagsVisible => DataMultiLinkerSubsystem.Presentation.showTags;
         private bool AreTagsProcessedVisible => AreTagsVisible && IsInheritanceVisible;
-
+        
         private bool AreHardpointsVisible => DataMultiLinkerSubsystem.Presentation.showHardpoints;
         private bool AreHardpointsProcessedVisible => AreHardpointsVisible && IsInheritanceVisible;
-
+        
         private bool AreVisualsVisible => DataMultiLinkerSubsystem.Presentation.showVisuals;
         private bool AreVisualsProcessedVisible => AreVisualsVisible && IsInheritanceVisible && visualsProcessed != null;
         private bool AreVisualsVisibleAndPresent => AreVisualsVisible && ((visualsProcessed != null && visualsProcessed.Count > 0) || (attachmentsProcessed != null && attachmentsProcessed.Count > 0));
-
+        
         private bool AreAttachmentsVisible => DataMultiLinkerSubsystem.Presentation.showVisuals;
         private bool AreAttachmentsProcessedVisible => AreAttachmentsVisible && IsInheritanceVisible && attachmentsProcessed != null;
-
+        
         private bool AreStatsVisible => DataMultiLinkerSubsystem.Presentation.showStats;
         private bool AreStatsProcessedVisible => AreStatsVisible && IsInheritanceVisible && statsProcessed != null;
-
+        
         private bool AreBlocksVisible => DataMultiLinkerSubsystem.Presentation.showBlocks;
         private bool AreBlocksProcessedVisible => AreBlocksVisible && IsInheritanceVisible;
-
+        
         private bool IsWorkshopVisible => DataMultiLinkerSubsystem.Presentation.showWorkshop;
-
+        
         private bool IsPartTextVisible => DataMultiLinkerSubsystem.Presentation.showPartText && !string.IsNullOrEmpty (DataMultiLinkerPartPreset.TryGetFixedUsageDescription (this));
         private bool IsProjectileRelocationVisible => AreBlocksVisible && projectile != null && DataMultiLinkerSubsystem.Presentation.showProjectileRelocation;
 
@@ -1059,11 +1078,11 @@ namespace PhantomBrigade.Data
         {
             if (hidden)
                 return false;
-
+            
             bool used = DataMultiLinkerPartPreset.IsSubsystemUsed (this);
             return !used;
         }
-
+        
         private Color GetParentColor => 
             !string.IsNullOrEmpty (parent) && DataMultiLinkerSubsystem.data.ContainsKey (parent) ? Color.white : Color.yellow;
 
@@ -1073,13 +1092,13 @@ namespace PhantomBrigade.Data
             statDistribution = string.Empty;
             DataMultiLinkerSubsystem.ProcessRelated (this);
         }
-
+        
         private static IEnumerable<string> GetVisualKeys ()
         {
             var visuals = ItemHelper.GetAllVisuals ();
             return visuals != null && visuals.Count > 0 ? visuals.Keys : null;
         }
-
+        
         private void OnFullRefreshRequired ()
         {
             // It's useful to re-run whole post-deserialization process to refresh child list, validate parent links etc.
@@ -1091,7 +1110,7 @@ namespace PhantomBrigade.Data
                 DataHelperStats.RefreshStatCacheForSubsystem (this);
             #endif
         }
-
+        
         [PropertyOrder (-5)]
         [BoxGroup ("tags", false)]
         [ShowIf ("AreTagsVisible")] 
@@ -1130,7 +1149,7 @@ namespace PhantomBrigade.Data
             target.projectile = projectile;
             if (clearAfter)
                 projectile = null;
-
+            
             if (stats != null)
             {
                 if (stats.ContainsKey (UnitStats.weaponProjectileRicochet))
@@ -1139,18 +1158,18 @@ namespace PhantomBrigade.Data
                     if (target.stats == null)
                         target.stats = new SortedDictionary<string, DataBlockSubsystemStat> ();
                     target.stats[UnitStats.weaponProjectileRicochet] = value;
-
+                    
                     if (clearAfter)
                         stats.Remove (UnitStats.weaponProjectileRicochet);
                 }
-
+                
                 if (stats.ContainsKey (UnitStats.weaponProjectileLifetime))
                 {
                     var value = stats[UnitStats.weaponProjectileLifetime];
                     if (target.stats == null)
                         target.stats = new SortedDictionary<string, DataBlockSubsystemStat> ();
                     target.stats[UnitStats.weaponProjectileLifetime] = value;
-
+                    
                     if (clearAfter)
                         stats.Remove (UnitStats.weaponProjectileLifetime);
                 }
@@ -1166,11 +1185,11 @@ namespace PhantomBrigade.Data
 
                 if (!target.custom.flags.Contains (PartCustomFlagKeys.DamageDispersed))
                     target.custom.flags.Add (PartCustomFlagKeys.DamageDispersed);
-
+                
                 if (clearAfter)
                 {
                     custom.flags.Remove (PartCustomFlagKeys.DamageDispersed);
-
+                    
                     if (custom.flags.Count == 0)
                         custom.flags = null;
 
@@ -1178,7 +1197,7 @@ namespace PhantomBrigade.Data
                         custom = null;
                 }
             }
-
+            
             Debug.Log (clearAfter ? $"Moved projectile data from {key} to {targetKey}" : $"Copied projectile data from {key} to {targetKey}");
         }
 
@@ -1188,7 +1207,6 @@ namespace PhantomBrigade.Data
         [EnableIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
         #endif
         [Button ("Visualize (processed)"), ButtonGroup, PropertyOrder (-3)]
-        [PropertyTooltip ("Display how the item looks like with the visuals inherited throughout the whole parent tree. Note: this might not refresh until you save and load.")]
         [ShowIf ("AreVisualsVisible")]
         public void Visualize ()
         {
@@ -1198,7 +1216,7 @@ namespace PhantomBrigade.Data
                 keyVisualizedLast = key;
                 focus = true;
             }
-
+            
             DataMultiLinkerSubsystem.VisualizeObject (this, true, focus: focus);
         }
 
@@ -1206,7 +1224,6 @@ namespace PhantomBrigade.Data
         [EnableIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
         #endif
         [Button ("Visualize (isolated)"), ButtonGroup, PropertyOrder (-3)]
-        [PropertyTooltip ("Display how the item looks like with just the visuals defined on this config")]
         [ShowIf ("AreVisualsVisible")]
         public void VisualizeIsolated ()
         {
@@ -1216,15 +1233,14 @@ namespace PhantomBrigade.Data
                 keyVisualizedLast = key;
                 focus = true;
             }
-
+            
             DataMultiLinkerSubsystem.VisualizeObject (this, false, focus: focus);
         }
-
+        
         #if PB_MODSDK
         [EnableIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
         #endif
         [Button ("Visuals from scene"), ButtonGroup, PropertyOrder (-3)]
-        [PropertyTooltip ("Scan contents of DataPreviewHolder scene object and fill the attachments collection with detected item visuals. Allows you to configure item visuals by dragging objects in the scene.")]
         [ShowIf ("AreVisualsVisible")]
         public void FillFromScene ()
         {
@@ -1234,33 +1250,49 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Can't find the DataPreviewHolder object. Try to visualize your subsystem first.");
                 return;
             }
-
+            
             var visuals = visualHolder.GetComponentsInChildren<ItemVisual> ();
             if (visuals.Length == 0)
             {
                 Debug.LogWarning ($"No visuals found under the DataPreviewHolder. Make sure to place ItemVisual prefabs under this object.");
                 return;
             }
-
-            if (this.visuals != null && this.visuals.Count > 0)
-            {
-                Debug.Log ($"Subsystem {key} has legacy {this.visuals.Count} visuals, deleting them");
-                this.visuals = null;
-            }
-
-            Debug.Log ($"Found {visuals.Length} visual objects under DataPreviewHolder");
+            
+            Debug.Log ($"Found {visuals.Length} visuals");
             attachments = new Dictionary<string, DataBlockSubsystemAttachment> ();
-            int i = 0;
-
+            int i = -1;
+            string separator = " | ";
+            
             foreach (var visual in visuals)
             {
+                i += 1;
                 var t = visual.transform;
-                var lookupKey = $"{i:00}_{visual.name}";
                 var pos = t.localPosition;
                 var rot = t.localRotation.eulerAngles; // Quaternion.LookRotation (root.InverseTransformDirection (t.forward)).eulerAngles;
                 var scale = t.localScale;
 
-                var visualKey = visual.name;
+                string lookupKey = null;
+                string visualKey = null;
+                
+                int lengthBeforeSeparator = visual.name.IndexOf (separator, StringComparison.Ordinal);
+                if (lengthBeforeSeparator <= 0)
+                {
+                    Debug.LogWarning ($"Child {i} has no separator | in the name, assuming that entire name is the visual key");
+                    lookupKey = $"{visual.name}_{i:00}";
+                    visualKey = visual.name;
+                }
+                else
+                {
+                    lookupKey = visual.name.Substring (0, lengthBeforeSeparator);
+                    visualKey = visual.name.Substring (lengthBeforeSeparator + separator.Length, visual.name.Length - lengthBeforeSeparator - separator.Length);
+                }
+
+                if (attachments.ContainsKey (lookupKey))
+                {
+                    lookupKey = $"{lookupKey}_{i:00}";
+                    Debug.LogWarning ($"Lookup key already used: {lookupKey} | Adjusting to {lookupKey}_{i:00}");
+                }
+                
                 var path = UnityEditor.PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot (visual);
                 if (!string.IsNullOrEmpty (path) && path.EndsWith (".prefab"))
                 {
@@ -1270,75 +1302,7 @@ namespace PhantomBrigade.Data
                         path = split[split.Length - 1];
                     visualKey = path;
                 }
-
-                var visualKeyValid = ItemHelper.IsVisualValid (visualKey);
-                if (!visualKeyValid)
-                {                    
-                    Debug.Log ($"Object {t.name} (key {visualKey}) can't be found in the built-in ItemVisual prefab library. ");
-
-                    #if UNITY_EDITOR
-        
-                    if (DataContainerModData.selectedMod != null)
-                    {
-                        var prefabExtension = ".prefab";
-                        var mod = DataContainerModData.selectedMod;
-                        if (mod.assetBundles != null && mod.assetBundles.bundleDefinitions != null)
-                        {
-                            bool match = false;
-                            foreach (var assetBundleDefinition in mod.assetBundles.bundleDefinitions)
-                            {
-                                if (assetBundleDefinition == null)
-                                    continue;
-
-                                if (!assetBundleDefinition.enabled)
-                                    continue;
-
-                                if (string.IsNullOrEmpty (assetBundleDefinition.name))
-                                {
-                                    Debug.LogWarning ($"Mod {mod.id} | Asset bundle has no name");
-                                    continue;
-                                }
-                                
-                                if (assetBundleDefinition.files == null || assetBundleDefinition.files.Count == 0)
-                                    continue;
-
-                                foreach (var file in assetBundleDefinition.files)
-                                {
-                                    if (file == null)
-                                        continue;
-                                    
-                                    if (string.IsNullOrEmpty (file.path))
-                                        continue;
-
-                                    if (!file.path.EndsWith (prefabExtension))
-                                        continue;
-
-                                    var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject> (file.path);
-                                    if (prefab == null)
-                                        continue;
-                                    
-                                    var component = prefab.GetComponent<ItemVisual> ();
-                                    if (component == null)
-                                        continue;
-                                    
-                                    if (!visualKey.Contains (prefab.name))
-                                        continue;
-                                    
-                                    visualKey = $"{assetBundleDefinition.name}/{prefab.name}";
-                                    Debug.Log ($"Object {t.name} assumed to be ItemVisual from mod {mod.id} AssetBundle: {visualKey}");
-                                    match = true;
-                                    break;
-                                }
-                                
-                                if (match)
-                                    break;
-                            }
-                        }
-                    }
-                    
-                    #endif
-                }
-
+                
                 attachments[lookupKey] = new DataBlockSubsystemAttachment
                 {
                     key = visualKey,
@@ -1346,14 +1310,11 @@ namespace PhantomBrigade.Data
                     rotation = rot,
                     scale = scale
                 };
-
+                
                 Debug.Log ($"{key} attachment {visualKey}: {visual.name}, pos. {pos}, rot. {rot}, scale {scale}\nPath: {path}");
-                i += 1;
             }
-
-            DataMultiLinkerSubsystem.unsavedChangesPossible = true;
         }
-
+        
         #if !PB_MODSDK
         [Button ("Spawn"), ButtonGroup, HideInEditorMode, PropertyOrder (-9)]
         private void IssueToPlayer ()
@@ -1364,7 +1325,7 @@ namespace PhantomBrigade.Data
             var playerBasePersistent = IDUtility.playerBasePersistent;
             if (playerBasePersistent == null)
                 return;
-
+            
             var level = EquipmentUtility.debugGenerationLevel;
             var subsystemEntity = UnitUtilities.CreateSubsystemEntity (key);
             if (subsystemEntity == null)
@@ -1373,7 +1334,7 @@ namespace PhantomBrigade.Data
             EquipmentUtility.AttachSubsystemToInventory (subsystemEntity, playerBasePersistent, true, true);
         }
         #endif
-
+        
         // [Button ("Remove & record replacement"), PropertyOrder (-9)]
         private void RemoveAndRecord ([ValueDropdown("@DataMultiLinkerSubsystem.data.Keys")] string replacementKey)
         {
@@ -1388,7 +1349,7 @@ namespace PhantomBrigade.Data
 
             var data = DataMultiLinkerSubsystem.data;
             data.Remove (key);
-
+            
             var obj = DataMultiLinkerUtility.FindLinkerAsInterface (typeof (DataContainerSubsystem));
             if (obj != null)
             {
@@ -1408,7 +1369,7 @@ namespace PhantomBrigade.Data
                 Debug.Log ($"Subsystem {key} is already being used by a part preset");
                 return;
             }
-
+            
             var presetMatch = DataMultiLinkerPartPreset.GetEntry (key, false);
             if (presetMatch != null)
             {
@@ -1422,7 +1383,7 @@ namespace PhantomBrigade.Data
                 Debug.Log ($"Failed to find a hardpoint to use in a new preset {key}");
                 return;
             }
-
+            
             var partPreset = new DataContainerPartPreset ();
 
             partPreset.hidden = false;
@@ -1431,7 +1392,7 @@ namespace PhantomBrigade.Data
             {
                 new DataBlockPartPresetParent { key = parent }
             };
-
+            
             partPreset.genSteps = new List<IPartGenStep>
             {
                 new AddHardpoints
@@ -1440,15 +1401,15 @@ namespace PhantomBrigade.Data
                     subsystemsInitial = new List<string> { key }
                 }
             };
-
+            
             DataMultiLinkerPartPreset.data.Add (key, partPreset);
             DataMultiLinkerPartPreset.ProcessRelated (partPreset);
-
+            
             var obj = DataMultiLinkerUtility.FindLinkerAsInterface (typeof (DataContainerPartPreset));
             if (obj != null)
                 obj.SetFilter (true, parent, false);
         }
-
+        
         [ShowIf ("IsWorkshopVisible")]
         [Button ("Generate workshop project"), PropertyOrder (-10)]
         private void ToWorkshop ()
@@ -1472,7 +1433,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Can't generate a workshop project: no editable hardpoints found");
                 return;
             }
-
+            
             var data = DataMultiLinkerWorkshopProject.data;
             var keyWorkshop = key.Replace ("internal_", "sub_");
 
@@ -1481,13 +1442,13 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Workshop project with key {keyWorkshop} already present: ");
                 return;
             }
-
+            
             var p = new DataContainerWorkshopProject ();
             p.hidden = false;
             p.textSourceName = new DataBlockWorkshopTextSourceName { key = key, source = WorkshopTextSource.Subsystem };
             p.textSourceSubtitle = new DataBlockWorkshopTextSourceSubtitle { key = hardpointKeySelected, source = WorkshopTextSource.Hardpoint };
             p.textSourceDesc = new DataBlockWorkshopTextSourceDesc { key = key, source = WorkshopTextSource.Hardpoint };
-
+            
             p.tags = new HashSet<string> { "group_utility", "type_subsystem" };
             p.icon = DataMultiLinkerEquipmentGroup.GetEntry (groupMainKey)?.icon;
             p.duration = new DataBlockFloat { f = 1f };
@@ -1499,15 +1460,16 @@ namespace PhantomBrigade.Data
             };
 
             p.outputSubsystems = new List<DataBlockWorkshopSubsystem> { new DataBlockWorkshopSubsystem { count = 1, key = key, tags = null } };
-
+            
             data.Add (keyWorkshop, p);
-
+            
             var linker = GameObject.FindObjectOfType<DataMultiLinkerWorkshopProject> ();
             if (linker != null)
                 linker.SetFilterAndSelect (keyWorkshop);
         }
-
+        
         #endif
         #endregion
     }
 }
+

@@ -1,0 +1,83 @@
+comment: 
+hidden: false
+parents:
+- key: generic_convoy
+core: 
+tags: 
+generation: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_raid: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_armor_w1
+        - part_armor_w2
+        - part_armor_w3
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_supplies
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_r1
+        - res_camp
+        tags: 
+    obj_tier1:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_module_armor
+        - sub_module_wpn
+        tags: 
+    obj_tier2:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_lr
+        - part_weapon_mr
+        - part_weapon_sr
+        - sub_reactor_r2
+        tags: 
+    obj_tier3:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_r3
+        - part_weapon_melee
+        tags: 

@@ -27,12 +27,11 @@ namespace PhantomBrigade.Data
 
         #endif
     }
-    
-    public enum SettingMode
+
+    public class DataBlockDifficultyValuesPreset
     {
-        Bool,
-        Slider,
-        String
+        public string valueEasy;
+        public string valueHard;
     }
     
     [Serializable]
@@ -52,8 +51,15 @@ namespace PhantomBrigade.Data
         [YamlIgnore, ShowIf (DataEditor.textAttrArg), HideLabel, TextArea]
         public string textDesc;
 
+        [BoxGroup]
+        public string valueEasy;
+        
+        [BoxGroup]
         public string valueDefault;
-
+        
+        [BoxGroup]
+        public string valueHard;
+        
         [ShowIf ("IsSlider")]
         public string valueMin;
 

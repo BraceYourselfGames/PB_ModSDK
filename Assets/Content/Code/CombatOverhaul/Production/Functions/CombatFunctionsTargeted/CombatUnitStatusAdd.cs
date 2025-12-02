@@ -11,13 +11,14 @@ namespace PhantomBrigade.Functions
         [ValueDropdown ("@DataMultiLinkerUnitStatus.data.Keys")]
         public string key = string.Empty;
         public float durationOverride = -1f;
+        public UnitStatusSource source = UnitStatusSource.Function;
 
         public void Run (PersistentEntity unitPersistent)
         {
             #if !PB_MODSDK
             
             var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
-            UnitStatusUtility.AddStatus (unitCombat, key, UnitStatusSource.Function, durationOverride);
+            UnitStatusUtility.AddStatus (unitCombat, key, source, durationOverride);
             
             #endif
         }
@@ -31,6 +32,7 @@ namespace PhantomBrigade.Functions
         
         [ValueDropdown ("@DataMultiLinkerUnitStats.data.Keys")]
         public string stat;
+        public UnitStatusSource source = UnitStatusSource.Function;
 
         public void Run (PersistentEntity unitPersistent)
         {
@@ -41,7 +43,7 @@ namespace PhantomBrigade.Functions
             if (statValue <= 0f)
                 return;
             
-            UnitStatusUtility.AddStatus (unitCombat, key, UnitStatusSource.Function, statValue);
+            UnitStatusUtility.AddStatus (unitCombat, key, source, statValue);
             
             #endif
         }

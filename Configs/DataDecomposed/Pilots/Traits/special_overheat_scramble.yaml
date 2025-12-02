@@ -1,0 +1,54 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_spec_guided
+tags:
+- level_2
+- bonus
+- type_defender
+- type_special
+- type_support
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags:
+- type_special
+statValues:
+  unit_offset_overheat_damage:
+    mode: Offset
+    value: -0.1
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatUnitSelfOverheat
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !CombatValidateUnitOverheating
+    present: true
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitScrambleGuidance
+    fxKey: fx_thruster_flash
+    offset:
+      x: 0
+      y: 2
+      z: 0
+  functionsSelf:
+  - !PilotRecordTraitActivation
+    key: special_overheat_scramble
+    log: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

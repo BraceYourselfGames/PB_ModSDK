@@ -80,7 +80,7 @@ namespace PhantomBrigade.Data
             return false;
         }
 
-        public static string GetUpgradedKey (string type, string keyInput, out bool replaced)
+        public static string GetUpgradedKey (string type, string keyInput, out bool replaced, bool log = true)
         {
             replaced = false;
             
@@ -106,7 +106,8 @@ namespace PhantomBrigade.Data
 
             while (IsKeyReplacementAvailable (type, keyCurrent, out string keyNew, out int index))
             {
-                Debug.Log ($"{type} | Upgraded key {keyCurrent} to {keyNew}");
+                if (log)
+                    Debug.Log ($"{type} | Upgraded key {keyCurrent} to {keyNew}");
 
                 keyCurrent = keyNew;
                 replaced = true;

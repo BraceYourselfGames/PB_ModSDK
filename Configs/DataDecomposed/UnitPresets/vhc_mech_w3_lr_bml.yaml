@@ -15,7 +15,7 @@ tags:
 partTagPreferences:
   body:
   - tags:
-      armor_hakobu_req: true
+      armor_hakobu: true
 parts:
   back:
     livery: 
@@ -45,7 +45,21 @@ parts:
     rating: 
     systems: 
 animationOverrides: 
-functions:
-- !CombatUnitSetSpeed
-  mode: Set
-  speed: 7.5
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 7.5
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

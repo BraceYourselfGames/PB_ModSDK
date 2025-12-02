@@ -1,0 +1,49 @@
+comment:
+  comment: Logic for mechs at camp stops. Covers main repair effect + bonus effects from hope and other sources.
+hidden: false
+stopOnEmptyStep: false
+tags:
+- camp_unit
+steps:
+- stopSequenceIfEmpty: true
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - camp_unit_base
+  tags:
+    camp_unit_base: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_unit_hope: true
+- stopSequenceIfEmpty: false
+  checksGlobal:
+  - !OverworldValidateChance
+    chance: 0.5
+  - !OverworldValidateModifier
+    key: sp_tutorial_intro
+    present: false
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_unit_random: true
+- stopSequenceIfEmpty: false
+  checksGlobal:
+  - !OverworldValidateChance
+    chance: 0.5
+  - !OverworldValidateModifier
+    key: sp_tutorial_intro
+    present: false
+  checksBase: 
+  tagsUsed: true
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_unit_random: true

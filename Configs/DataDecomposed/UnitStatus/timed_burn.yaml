@@ -6,9 +6,19 @@ color:
   a: 1
 hidden: false
 debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
 restartOnRefresh: false
-fxAttached:
-  key: fx_status_burning_loop
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.5
+  velocityDecayTime: 1
+  key: fx_status_burning_oneshot
   scale:
     x: 1
     y: 1
@@ -21,11 +31,12 @@ buildupDecayRate:
   f: 0.5
   compMultiplier: 2
 buildupThreshold:
-  f: 1
+  f: 0.95
   compMultiplier: 2
 buildupOverflow:
   f: 0.25
   compMultiplier: 0
+buildupShieldMultiplier: 
 stackable: 
 audio:
   audioOnStart: status_burning_loop
@@ -44,6 +55,7 @@ effectsOnStart:
         valueFromMemoryKey: 
         valueCheck: Greater
         value: 0.5
+  triggerCheckPilot: 
   comment:
     comment: On start, check for weather. If weather is rainy, cut the duration in half.
   functionsOnHost:
@@ -51,6 +63,8 @@ effectsOnStart:
     key: timed_burn
     operation: Set
     value: 1
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 effectsOnUpdate:
 - triggerRemoval: false
@@ -58,6 +72,7 @@ effectsOnUpdate:
   applyMissedUpdates: true
   enabled: true
   triggerCheckUnit: 
+  triggerCheckPilot: 
   comment:
     comment: Each update, apply damage.
   functionsOnHost:
@@ -69,11 +84,13 @@ effectsOnUpdate:
     integrity:
       normalized: false
       leveled: true
-      f: 4
+      f: 2
     concussion: 
     heat: 
     stagger: 
     statusBuildup: 
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 - triggerRemoval: true
   triggerInStack: false
@@ -99,6 +116,7 @@ effectsOnUpdate:
       statsNormalized: 
       actionsInProgress: 
       functions: 
+  triggerCheckPilot: 
   comment:
     comment: Each update, check if the unit is in water. If yes, remove this status.
   functionsOnHost:
@@ -111,6 +129,7 @@ effectsOnUpdate:
       x: 0
       y: 0
       z: 0
+    centered: true
     asset:
       key: fx_emergency_vent
       scale:
@@ -124,7 +143,9 @@ effectsOnUpdate:
       z: 0
     audio: status_burning_water_cool
     delayScaled: 0
+  functionsOnPilot: 
+  functionsGlobal: 
   functionsOnBlackboard: 
 effectsOnEnd: 
 statOffsets:
-  heat_dissipation: -0.1
+  heat_dissipation: -0.7

@@ -50,7 +50,7 @@ namespace PhantomBrigade.Functions
             rotationX = cameraRotationX;
             
             rotationYOverride = true;
-            rotationY = cameraRotationY;
+            rotationY = UtilityMath.WrapAngle (cameraRotationY);
             
             zoomOverride = true;
             zoom = cameraZoom;

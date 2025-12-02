@@ -1,0 +1,34 @@
+parents:
+- key: unit_storage_l1
+  priority: -1
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 2
+  positionY: -2
+  endpoint: false
+  group: 
+  icon: s_icon_sm_repair2
+unlock: 
+cost:
+  resources:
+    components_r2: 8
+    supplies: 600
+    unit_token: 1
+effect:
+  stats:
+  - key: unit_repair_amount
+    modifier: Offset
+    value: 0.1
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

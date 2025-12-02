@@ -1,0 +1,93 @@
+hidden: false
+parents:
+- key: sh_option_main_continue
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment:
+      comment: "The first non-fullscreen event player encounters. The player just saw the slideshow event outlining history after the prequel events, and the \"three years later\" title card with the reveal of the province scene. This event gives the player quick context on exact current moment state: you're a commander, you lead a small group, you've just returned back home into Fyrland and you need a place to recover. The mention of non combat crew helps support how you manage to make use of the mobile base quickly after this mission. Additional context waits until the pre-combat event, this one is limited to 1 page to nicely flow into the tutorial."
+    image: event_ambush
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase:
+      - !OverworldEntityChangeView
+        assetKey: Squad_MobileBase_Early
+      - !ModifyMemory
+        changes:
+        - change: Set
+          key: base_visual_early
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsTarget: 
+      functionsGlobal:
+      - !ModifyPilots
+        pilots: 1
+        deployed: false
+        checks:
+        - !PilotValidateNameInternal
+          nameInternal: pb_pilot_01
+        functions:
+        - !PilotTypeReset
+          typeKey: defender
+          traitKeyStarter: pilot_starter_stat_defender
+      - !ModifyPilots
+        pilots: 1
+        deployed: false
+        checks:
+        - !PilotValidateNameInternal
+          nameInternal: pb_pilot_02
+        functions:
+        - !PilotTypeReset
+          typeKey: support
+          traitKeyStarter: pilot_starter_stat_support2
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5613208
+            g: 0.7988915
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !StartTutorial
+            key: overworld_intro
+            allowRepeat: true
+          functionsLocal: 
+    optionsReused: 

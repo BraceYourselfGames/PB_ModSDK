@@ -23,6 +23,11 @@ core:
   customExitBehaviour: 
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -60,7 +65,7 @@ steps:
     unitGroups:
     - !UnitGroupEmbedded
       units:
-      - keyExternal: false
+      - keyExternal: true
         key: test_mech_loadout_heaviest
         countMin: 1
         countMax: 1
@@ -96,7 +101,7 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
+      - keyExternal: true
         key: test_mech_loadout_heaviest_fast
         countMin: 1
         countMax: 1
@@ -132,7 +137,7 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
+      - keyExternal: true
         key: test_mech_loadout_average
         countMin: 1
         countMax: 1
@@ -168,7 +173,7 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
+      - keyExternal: true
         key: test_mech_loadout_lightest
         countMin: 1
         countMax: 1
@@ -204,7 +209,7 @@ steps:
           hitDirectionModifiers: 
           functions: 
           combatTags: 
-      - keyExternal: false
+      - keyExternal: true
         key: test_mech_loadout_lightest_slow
         countMin: 1
         countMax: 1
@@ -264,6 +269,7 @@ steps:
       filterDistanceRetreat: 
       sorting: 
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -286,14 +292,5 @@ steps:
     functions: 
     outcome: 
     transitions: 
-unitPresets:
-  test_mech_loadout_average: !UnitPresetLink
-    preset: test_mech_loadout_average
-  test_mech_loadout_heaviest: !UnitPresetLink
-    preset: test_mech_loadout_heaviest
-  test_mech_loadout_heaviest_fast: !UnitPresetLink
-    preset: test_mech_loadout_heaviest_fast
-  test_mech_loadout_lightest: !UnitPresetLink
-    preset: test_mech_loadout_lightest
-  test_mech_loadout_lightest_slow: !UnitPresetLink
-    preset: test_mech_loadout_lightest_slow
+unitPresets: 
+unitGenerators: 

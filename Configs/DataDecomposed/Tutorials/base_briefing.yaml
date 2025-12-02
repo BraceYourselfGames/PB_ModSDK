@@ -6,19 +6,22 @@ pages:
   skippable: true
   cameraInputPermitted: true
   backgroundUsed: true
-  backgroundBlur: true
+  backgroundBlur: false
   backgroundColor:
     r: 0
     g: 0
     b: 0
-    a: 0.6980392
+    a: 0.05098039
   center:
     textImage: 
     textHeaderReused: 
     textContentReused: 
     textInputActions: 
   hint: 
-  effectsOverworld: 
+  effectsOverworld:
+    functions:
+    - !SetGameplayUIActive
+      active: false
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
@@ -27,10 +30,10 @@ pages:
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
-    r: 0.3490566
-    g: 0.3490566
-    b: 0.3490566
-    a: 1
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
   center: 
   hint:
     color:
@@ -39,13 +42,13 @@ pages:
       b: 0.3019608
       a: 1
     frameLocation: BottomLeft
-    frameGradientMode: None
-    framePositionX: 0
-    framePositionY: 0
-    frameSizeX: 802
+    frameGradientMode: Top
+    framePositionX: 4
+    framePositionY: 4
+    frameSizeX: 539
     frameSizeY: 366
     frameBlocksInput: false
-    frameBoundary: true
+    frameBoundary: false
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 282
@@ -55,7 +58,12 @@ pages:
     arrowCustom: 
     frameHighlight: 
     textInputActions: 
-  effectsOverworld: 
+  effectsOverworld:
+    functions:
+    - !SetGameplayUIActive
+      active: true
+    - !UnlockCodex
+      key: base_briefing
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
@@ -82,7 +90,7 @@ pages:
     frameSizeX: 800
     frameSizeY: 512
     frameBlocksInput: false
-    frameBoundary: true
+    frameBoundary: false
     textLocation: BottomRight
     buttonLocation: Bottom
     textWidth: 282
@@ -105,12 +113,30 @@ pages:
     g: 0
     b: 0
     a: 0.2
-  center:
-    textImage: 
-    textHeaderReused: 
-    textContentReused: 
+  center: 
+  hint:
+    color:
+      r: 0.3921569
+      g: 0.5647059
+      b: 0.6588235
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 434
+    frameSizeY: 384
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
     textInputActions: 
-  hint: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -119,6 +145,28 @@ pages:
       argument: ''
       frameDelay: 1
   effectsCombat: 
-effectsOnEnd:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.2
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
   effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: base_briefing_squad
   effectsCombat: 

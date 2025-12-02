@@ -7,17 +7,12 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class CreateWorkshopProjects : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunction, ICombatFunction
+    public class CreateWorkshopProjects : IOverworldActionFunction, IOverworldFunction, ICombatFunction
     {
         [ListDrawerSettings (DefaultExpandedState = true, CustomAddFunction = "@new DataBlockVirtualWorkshopProject ()")]
         public List<DataBlockVirtualWorkshopProject> projects = new List<DataBlockVirtualWorkshopProject> ();
         
         private static List<string> keysFiltered = new List<string> ();
-
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            Run ();
-        }
         
         public void Run (OverworldActionEntity source)
         {

@@ -15,7 +15,7 @@ layout:
   units:
     c1_wpn_main_front:
       comment: 
-      preset: vhc_system_wpn_main_beam_01_ud
+      preset: vhc_system_wpn_main_cannon_01_ud
       textName: 
       textDesc: 
       spawnInfo: 
@@ -80,7 +80,7 @@ layout:
       legStepBlocklist: 
     l1_wpn_launcher_back:
       comment: 
-      preset: vhc_system_wpn_launcher_vertical_01
+      preset: vhc_system_module_frigate_wpn_top_hatch_02
       textName: 
       textDesc: 
       spawnInfo: 
@@ -89,7 +89,7 @@ layout:
         id: 
         idReused: 
         idPilot: 
-        role: comp_wpn_launcher
+        role: 
         spawn: 
         landing: 
         flags: 
@@ -103,7 +103,11 @@ layout:
         statMultipliers: 
         hitDirectionModifiers: 
         functions: 
-        combatTags: 
+        combatTags:
+        - flag_untargetable
+        - flag_no_concussion_in
+        - flag_no_heat
+        - flag_no_power
       spawnFunctions: 
       assignableEventsDestruction: 
       linkDamageRedirect: 
@@ -111,11 +115,11 @@ layout:
         unitKey: a_core
         position:
           x: 0
-          y: 17
-          z: -9.05
+          y: 11
+          z: 0
         rotation:
           x: 0
-          y: 180
+          y: 0
           z: 0
         secondary: 
       linksConditional: 

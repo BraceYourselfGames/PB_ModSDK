@@ -13,7 +13,7 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class CombatValidateUnitMemory : ICombatUnitValidationFunction
+    public class CombatValidateUnitMemory : ICombatUnitValidationFunction, IOverworldUnitValidationFunction
     {
         public UnitMemoryContext context = UnitMemoryContext.MobileBase;
         

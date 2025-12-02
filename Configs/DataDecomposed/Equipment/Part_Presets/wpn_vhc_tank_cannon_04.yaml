@@ -1,0 +1,26 @@
+hidden: false
+parents:
+- key: wpn_vhc_primary
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: []
+tags:
+- branch_reserves
+- range_medium
+- tank_part
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_vhc_tank_cannon_04
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

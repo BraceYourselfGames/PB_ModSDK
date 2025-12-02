@@ -3,27 +3,36 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: -15
     y: 6
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -19.4
   destructionMapping:
-    x: 10
-    y: 20
+    x: 100
+    y: 500
     z: 0
-    w: 1
+    w: 0.6
 tags:
 - context_facility_powerplant
 - size_large
 - size_medium
 - size_small
 - type_main
+- context_base_showdown
 spawnGroups:
   center:
     tags:
@@ -2133,5 +2142,9 @@ boundary:
       m: {}
 segments:
 - path: Content/AreaSegments/area_seg_reuse_powerplant
-biomeFilter: 
+biomeFilter:
+  tagsUsed: true
+  keys: 
+  tags:
+    industrial: true
 scenarioChanges: 

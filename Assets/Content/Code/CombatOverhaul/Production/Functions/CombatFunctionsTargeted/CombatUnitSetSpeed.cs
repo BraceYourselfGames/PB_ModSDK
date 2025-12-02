@@ -38,7 +38,7 @@ namespace PhantomBrigade.Functions
                 speedModified = speedCurrent * speed;
 
             speedModified = Mathf.Clamp (speedModified, 0.01f, 50f);
-            Debug.Log ($"Unit {unitPersistent.ToLog ()} speed modified: {speedCurrent} -> {speedModified}");
+            // Debug.Log ($"Unit {unitPersistent.ToLog ()} speed modified: {speedCurrent} -> {speedModified}");
             
             unitPersistent.ReplaceMovementSpeedOverride (speedModified);
             DataHelperStats.RefreshStatBasedCombatComponents (unitPersistent);

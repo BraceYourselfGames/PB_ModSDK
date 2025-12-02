@@ -77,19 +77,17 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups:
           - !UnitGroupFilter
             tagsFromFactionBranch: true
             tags:
-              range_short: true
               type_main: true
               weight_light: true
             check: 
-            combatTags: 
+            combatTags:
+            - flag_attacks_need_sightline
             spawnGroupOccupied: false
             spawnCountStrict: true
             spawnOrderRandom: true
@@ -112,9 +110,47 @@ states:
             filterDistanceRetreat: 
             sorting: 
             spawnRegistration: 
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              range_short: true
+              weight_heavy: true
+            check:
+              log: false
+              stateRequirements: 
+              checksGlobal:
+              - !OverworldValidateModifier
+                key: sp_liberation_easy
+                present: false
+              checksBase: 
+              checksTarget: 
+              checksProvince: 
+            combatTags:
+            - flag_attacks_need_sightline
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 1
+            cloneable: false
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   reinforcements_enemy_limit_cleanup:
     comment:
       comment: Since reinforcements are not repeating forever, it makes sense to remove the tower objective and the reinforcement state once the latter stops being valid.
@@ -168,14 +204,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   reinforcements_enemy_tower:
     comment: 
     textNameKey: generic_tower_destruction_header
@@ -230,14 +263,11 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   main:
     comment: 
@@ -247,10 +277,12 @@ steps:
     - !UnitGroupFilter
       tagsFromFactionBranch: true
       tags:
-        range_long: false
+        range_short: false
         type_main: true
+        weight_heavy: false
       check: 
-      combatTags: 
+      combatTags:
+      - flag_attacks_need_sightline
       spawnGroupOccupied: true
       spawnCountStrict: true
       spawnOrderRandom: true
@@ -262,7 +294,7 @@ steps:
       functions: 
       spawnTagsUsed: true
       spawnTags:
-        perimeter_outer: true
+        perimeter_inner: true
       spawnGroupKey: 
       filterDistancePlayer:
         check: Greater
@@ -279,6 +311,7 @@ steps:
       sorting: !UnitSlotSortingPlayer
         invert: true
       spawnRegistration: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -302,3 +335,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

@@ -4,12 +4,13 @@ parents:
   offsetStart: 0
   offsetEnd: 0
 hidden: false
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 1
 ui:
   positionX: 2
-  positionY: 7
+  positionY: 5
   endpoint: false
   group: 
   icon: s_icon_l32_upgrade_workshop3
@@ -20,7 +21,6 @@ cost:
     components_r3: 20
     supplies: 2000
 effect:
-  calls: 
   stats:
   - key: workshop_speed
     modifier: Offset
@@ -28,7 +28,16 @@ effect:
   - key: unit_repair_jobs
     modifier: Offset
     value: 1
-  functions: []
+  functions:
+  - !CreateWorkshopProjects
+    projects:
+    - countMin: 1
+      countMax: 1
+      countRandom: false
+      tagsUsed: false
+      key: utl_res_convert_r3
+      tags: 
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

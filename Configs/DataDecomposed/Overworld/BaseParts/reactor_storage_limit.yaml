@@ -3,7 +3,8 @@ parents:
   priority: 1
   offsetStart: 0
   offsetEnd: 209
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 3
@@ -19,12 +20,12 @@ cost:
     components_r2: 20
     supplies: 2000
 effect:
-  calls: 
   stats:
   - key: energy_limit
     modifier: Multiply
     value: 1.15
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

@@ -3,7 +3,8 @@ parents:
   priority: 0
   offsetStart: 0
   offsetEnd: 0
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 3
@@ -20,12 +21,12 @@ cost:
     components_r3: 10
     supplies: 400
 effect:
-  calls: 
   stats:
   - key: sensor_rain_effect
     modifier: Offset
     value: 0.15
   functions: []
+  functionsOnLoad: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

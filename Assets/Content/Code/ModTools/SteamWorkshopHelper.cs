@@ -18,11 +18,14 @@ namespace PhantomBrigade.SDK.ModTools
     static class SteamWorkshopHelper
     {
         #if UNITY_EDITOR
-        
+
+        public static readonly string tagCompatibleCurrent = "PB 2.0";
         public static readonly List<string> tags = new List<string> ()
         {
             "Combat",
+            "Campaign",
             "Overworld",
+            "Events",
             "Base",
             "Pilots",
             "Units",
@@ -105,10 +108,40 @@ namespace PhantomBrigade.SDK.ModTools
                 return;
             }
 
+            var (result, upgrade) = ModToolsHelper.EnsureModChecksums (mod);
+            switch (result)
+            {
+                case EnsureResult.Error:
+                    EditorUtility.DisplayDialog
+                    (
+                        "Upload to Steam Workshop Unavailable",
+                        "A technical error is preventing you from uploading this mod. Please check the Unity log console for details.",
+                        "Dismiss"
+                    );
+                    return;
+                case EnsureResult.Break:
+                    Debug.Log ("Cancelled upload to Steam Workshop: " + mod.id);
+                    return;
+            }
+
             var modID = mod.id;
-            if (EditorUtility.DisplayDialog ("Start upload", $"Are you sure you'd like to upload the mod {modID}?", "Confirm", "Cancel"))
+            if (!EditorUtility.DisplayDialog ("Start upload", $"Are you sure you'd like to upload the mod {modID}?", "Confirm", "Cancel"))
+            {
+                return;
+            }
+
+            if (upgrade == null)
             {
                 utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (UploadSelectedWithProgressIE (mod));
+                return;
+            }
+            utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
+            return;
+
+            IEnumerator UpgradeAndContinue ()
+            {
+                yield return upgrade ();
+                yield return UploadSelectedWithProgressIE (mod);
             }
         }
 
@@ -119,7 +152,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 yield return initIE.Current;
             }
-            
+
             if (!SteamManagerStatic.initSuccessful)
             {
                 yield break;
@@ -145,7 +178,7 @@ namespace PhantomBrigade.SDK.ModTools
                     folder,
                     timeStamp
                 );
-                
+
                 Application.OpenURL (folder);
             }
             else
@@ -190,7 +223,7 @@ namespace PhantomBrigade.SDK.ModTools
                 Debug.LogWarning ("Steam Workshop | Can't parse published ID, no mod selected or selected mod has no workshop data");
                 return (false, default);
             }
-            
+
             var publishedIDParsed = ulong.TryParse (modTargetedLast.workshop.publishedID, out var publishedID);
             if (!publishedIDParsed)
             {
@@ -198,6 +231,61 @@ namespace PhantomBrigade.SDK.ModTools
                 return (false, default);
             }
             return (true, new PublishedFileId_t (publishedID));
+        }
+
+        private static bool texPreviewSharedLoaded = false;
+        private static Texture2D texPreviewShared = null;
+        private static string texPathFallbackLocal = "ModWindowImages/t0_preview_fallback.png";
+
+        public static Texture2D GetPreviewTexShared ()
+        {
+            if (!texPreviewSharedLoaded)
+            {
+                texPreviewSharedLoaded = true;
+                var texPathFallback = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), texPathFallbackLocal);
+                
+                if (File.Exists (texPathFallback))
+                {
+                    var pngBytes = File.ReadAllBytes (texPathFallback);
+                    texPreviewShared = new Texture2D (4, 4, TextureFormat.RGBA32, true, false)
+                    {
+                        name = "t0_preview_fallback",
+                        wrapMode = TextureWrapMode.Clamp,
+                        filterMode = FilterMode.Bilinear,
+                        anisoLevel = 2,
+                    };
+                    
+                    texPreviewShared.LoadImage (pngBytes);
+                }
+                else
+                {
+                    Debug.LogWarning ($"Failed to find fallback preview texture at: \n{texPathFallback}");
+                }
+            }
+            
+            return texPreviewShared;
+        }
+        
+        public static Texture2D GetPreviewTexUnique ()
+        {
+            var texPathFallback = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), texPathFallbackLocal);
+            if (!File.Exists (texPathFallback))
+            {
+                Debug.LogWarning ($"Failed to find fallback preview texture at: \n{texPathFallback}");
+                return null;
+            }
+
+            var pngBytes = File.ReadAllBytes (texPathFallback);
+            var texPreview = new Texture2D (4, 4, TextureFormat.RGBA32, true, false)
+            {
+                name = "t0_preview_fallback",
+                wrapMode = TextureWrapMode.Clamp,
+                filterMode = FilterMode.Bilinear,
+                anisoLevel = 2,
+            };
+
+            texPreview.LoadImage (pngBytes);
+            return texPreview;
         }
 
         private static float timeOutLimit = 120f;
@@ -214,7 +302,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 yield return initIE.Current;
             }
-            
+
             if (!SteamManagerStatic.initSuccessful)
             {
                 yield break;
@@ -223,23 +311,23 @@ namespace PhantomBrigade.SDK.ModTools
             // Export contents of the mod to the temp subfolder
             var dirPathWorkshopTemp = mod.GetModPathWorkshopTemp ();
             bool exportSuccess = mod.TryExportToFolderShared (dirPathWorkshopTemp, "Steam Workshop staging folder", false);
-            
+
             yield return new EditorWaitForSeconds (0.5f);
             if (!exportSuccess)
             {
                 Debug.LogWarning ("Steam Workshop | Failed to export mod files to local temporary folder, cancelling upload!");
                 yield break;
             }
-            
+
             string progressBarHeader = $"Uploading {mod.id}";
             EditorUtility.DisplayProgressBar (progressBarHeader, "Starting...", 0f);
             yield return new EditorWaitForSeconds (0.05f);
-            
+
             var modID = mod.id;
             if (string.IsNullOrEmpty (mod.workshop.publishedID))
             {
                 Debug.LogWarning ($"Steam Workshop | Uploading {modID} | No saved published ID, requesting a new one...");
-                
+
                 var appId = SteamUtils.GetAppID ();
                 var callCreate = SteamUGC.CreateItem (appId, EWorkshopFileType.k_EWorkshopFileTypeCommunity);
                 var callResultCreate = CallResult<CreateItemResult_t>.Create (UploadToWorkshopCreateResult);
@@ -251,7 +339,7 @@ namespace PhantomBrigade.SDK.ModTools
                     yield return new EditorWaitForSeconds (0.05f);
                     float timePassed = (float)(Time.realtimeSinceStartupAsDouble - timeAtStartOfCreation);
                     EditorUtility.DisplayProgressBar (progressBarHeader, "Waiting for response to creation request...", timePassed % 1f);
-                    
+
                     if (timePassed > timeOutLimit)
                     {
                         Debug.LogWarning ($"Steam Workshop | Mod {modID} creation timed out after {timeOutLimit}s");
@@ -337,6 +425,11 @@ namespace PhantomBrigade.SDK.ModTools
                     }
                     tagsProcessed.Add (tagCandidate);
                 }
+                
+                // Allow easy filtering of Workshop for mods compatible with 2.x
+                // We could potentially update tagCompatibleCurrent every time SDK is brought up to a new release like 2.1
+                if (!string.IsNullOrEmpty (mod.metadata.gameVersionMin) && mod.metadata.gameVersionMin.StartsWith ("2."))
+                    tagsProcessed.Add (tagCompatibleCurrent);
 
                 if (tagsProcessed.Count != 0)
                 {
@@ -346,7 +439,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             bool textChangesPresent = !string.IsNullOrEmpty (mod.workshop.changes);
             string textChanges = textChangesPresent ? mod.workshop.changes : "No changelog available";
-            
+
             if (!string.IsNullOrEmpty (mod.metadata.ver))
             {
                 if (textChangesPresent)
@@ -369,7 +462,7 @@ namespace PhantomBrigade.SDK.ModTools
 
                 float timePassed = (float)(Time.realtimeSinceStartupAsDouble - timeAtStartOfUpdate);
                 // EditorUtility.DisplayProgressBar (progressBarHeader, "Waiting for response to update request...", timePassed % 1f);
-                
+
                 if (timePassed > timeOutLimit)
                 {
                     Debug.LogWarning ($"Steam Workshop | Mod {modID} creation timed out after {timeOutLimit}s");
@@ -407,7 +500,7 @@ namespace PhantomBrigade.SDK.ModTools
                 statusText += $" | {bytesDone}/{bytesTotal}B";
                 EditorUtility.DisplayProgressBar ("Uploading...", statusText, progress);
             }
-            
+
             // Ensure published ID is saved
             DataManagerMod.SaveMod (mod);
         }
@@ -435,13 +528,13 @@ namespace PhantomBrigade.SDK.ModTools
                     Debug.LogWarning ("Steam Workshop | Failed to save published item ID to mod config: no selected mod!");
                     return;
                 }
-                
+
                 if (modTargetedLast.workshop == null)
                 {
                     Debug.LogWarning ("Steam Workshop | Failed to save published item ID to mod config: selected mod has no workshop data. Ensure you don't edit anything in the inspector during utility calls.");
                     return;
                 }
-                
+
                 modTargetedLast.workshop.publishedID = callback.m_nPublishedFileId.ToString ();
                 return;
             }
@@ -484,7 +577,7 @@ namespace PhantomBrigade.SDK.ModTools
             [(int)EResult.k_EResultServiceReadOnly] = "Due to a recent password or email change, you are not allowed to upload new content. Usually this restriction will expire in 5 days, but can last up to 30 days if the account has been inactive recently.",
             [(int)EResult.k_EResultLockingFailed] = "Failed to acquire UGC Lock.",
         };
-        
+
         #endif
     }
 }

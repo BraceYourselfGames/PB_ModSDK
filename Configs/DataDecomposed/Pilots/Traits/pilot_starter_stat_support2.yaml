@@ -1,0 +1,60 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_part_arch_structure
+tags:
+- prestige_unpickable
+- starter
+- support_repair
+- type_support
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_mass_back:
+    mode: Offset
+    value: -3
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: 1
+  hp:
+    mode: Offset
+    value: -5
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitIntegrityChange
+    value: 0.15
+    offset: true
+    sockets:
+    - back
+    - core
+    - optional_right
+    - optional_left
+    - secondary
+    - equipment_left
+  functionsSelf:
+  - !PilotRecordTraitActivation
+    key: unit_precombat_repair
+    log: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

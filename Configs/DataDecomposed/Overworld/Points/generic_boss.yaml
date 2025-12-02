@@ -1,0 +1,92 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_base_large
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Base_ExtraLarge
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_preserve_on_victory
+- flag_preserve_on_defeat
+- contest_s3
+generation:
+  spawnPrefs:
+    groupOverride: midpoint
+    groupReusable: false
+    rangeIgnored: true
+    rangeOverride: 
+    distancePriority: None
+  checksBase: 
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      type_boss: true
+      type_boss_tutorial: false
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget:
+    f: 100
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_reactor_r2
+        - sub_pilot_pod
+        - part_backpack
+        tags:
+          part_armor: false
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_sp
+        tags:
+          part_armor: false
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_armor_w3_set
+        - part_armor_w2_set
+        - part_armor_w1_set
+        tags:
+          part_armor: false
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_melee_primary
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_token
+        tags: 

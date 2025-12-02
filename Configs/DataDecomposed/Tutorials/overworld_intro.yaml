@@ -32,29 +32,29 @@ pages:
   effectsOverworld:
     functions:
     - !SelectEntity
-      nameInternal: squad_mobilebase
+      nameInternal: internal_mobilebase
       delay: 0
-      select: true
+      select: false
       focus: false
     - !OverworldCameraChange
-      delay: 0
+      delay: 0.3
       positionOverride: true
       position:
-        x: -925
-        y: 58
-        z: -667
+        x: 145.0933
+        y: 38.2615
+        z: 189.3555
       positionFromEntityName: ''
       rotationXOverride: true
-      rotationX: 22
+      rotationX: 39.60318
       rotationYOverride: true
-      rotationY: 56
+      rotationY: 169.6708
       zoomOverride: true
-      zoom: 0.15
+      zoom: 1
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
-  cameraInputPermitted: true
+  cameraInputPermitted: false
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -70,14 +70,14 @@ pages:
       b: 0.3726415
       a: 1
     frameLocation: TopLeft
-    frameGradientMode: None
+    frameGradientMode: Bottom
     framePositionX: 0
-    framePositionY: -94
-    frameSizeX: 330
-    frameSizeY: 140
+    framePositionY: -64
+    frameSizeX: 352
+    frameSizeY: 380
     frameBlocksInput: true
     frameBoundary: true
-    textLocation: BottomLeft
+    textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 282
     textReused: 
@@ -86,56 +86,33 @@ pages:
     arrowCustom: 
     frameHighlight: 
     textInputActions: 
-  effectsOverworld: 
+  effectsOverworld:
+    functions:
+    - !SelectEntity
+      nameInternal: internal_mobilebase
+      delay: 0
+      select: false
+      focus: true
+    - !OverworldCameraChange
+      delay: 0.3
+      positionOverride: false
+      position:
+        x: 145.0933
+        y: 38.2615
+        z: 189.3555
+      positionFromEntityName: ''
+      rotationXOverride: false
+      rotationX: 39.60318
+      rotationYOverride: false
+      rotationY: 169.6708
+      zoomOverride: true
+      zoom: 0.75
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
-  cameraInputPermitted: true
-  backgroundUsed: false
-  backgroundBlur: false
-  backgroundColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  center: 
-  hint:
-    color:
-      r: 0
-      g: 1
-      b: 1
-      a: 1
-    frameLocation: TopRight
-    frameGradientMode: None
-    framePositionX: 0
-    framePositionY: 0
-    frameSizeX: 321
-    frameSizeY: 67
-    frameBlocksInput: false
-    frameBoundary: true
-    textLocation: LeftTop
-    buttonLocation: Bottom
-    textWidth: 256
-    textReused: 
-    icon: 
-    worldAnchor: 
-    arrowCustom: 
-    frameHighlight: 
-    textInputActions:
-      spriteWrap: true
-      actions:
-      - overworld_time_toggle
-      - overworld_time_1x
-      - overworld_time_2x
-      - overworld_time_3x
-  effectsOverworld: 
-  effectsCombat: 
-- depthForeground: 0
-  depthBackground: 0
-  skippable: false
   cameraInputPermitted: false
-  backgroundUsed: true
+  backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
     r: 0
@@ -145,20 +122,20 @@ pages:
   center: 
   hint:
     color:
-      r: 0
-      g: 1
+      r: 0.3915094
+      g: 0.9094732
       b: 1
       a: 1
     frameLocation: Center
     frameGradientMode: None
     framePositionX: 0
     framePositionY: 0
-    frameSizeX: 384
-    frameSizeY: 384
-    frameBlocksInput: true
-    frameBoundary: true
-    textLocation: BottomLeft
-    buttonLocation: None
+    frameSizeX: 512
+    frameSizeY: 512
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
     textWidth: 256
     textReused: 
     icon: 
@@ -182,22 +159,8 @@ pages:
     - !SelectEntity
       nameInternal: mountainbase
       delay: 0
-      select: true
+      select: false
       focus: true
-    - !OverworldCameraChange
-      delay: 0.3
-      positionOverride: true
-      position:
-        x: -863
-        y: 58.5
-        z: -638
-      positionFromEntityName: mountainbase
-      rotationXOverride: true
-      rotationX: 27.5
-      rotationYOverride: true
-      rotationY: 26.5
-      zoomOverride: true
-      zoom: 0.05
   effectsCombat: 
 effectsOnEnd:
   effectsOverworld:
@@ -255,8 +218,20 @@ effectsOnEnd:
         valueFromMemory: false
         valueFromMemoryKey: 
       - change: Set
+        key: feature_combat_event_log
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
         key: feature_combat_prediction
         value: 1
         valueFromMemory: false
         valueFromMemoryKey: 
+    - !UnlockCodex
+      key: history_invasion
+    - !CallMethodStatic
+      typeName: DataHelperLoading
+      methodName: OnAfterCombatSaveCustom
+      argument: ''
+      frameDelay: 0
   effectsCombat: 

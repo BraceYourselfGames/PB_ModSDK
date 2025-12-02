@@ -1,0 +1,31 @@
+hidden: false
+positive: false
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: false
+hue: 0
+icon: s_icon_l32_salvage_intact
+tags:
+- type_negative
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry:
+  functionsGlobal: 
+  functionsBase:
+  - !ModifyMemory
+    changes:
+    - change: Set
+      key: world_auto_salvage_multiplier
+      value: -0.5
+      valueFromMemory: false
+      valueFromMemoryKey: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

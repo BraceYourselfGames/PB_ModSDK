@@ -41,12 +41,14 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_tank_core
       textOverride: true
+    statOffsetsOnAbsence: 
   equipment_right:
     presetDefault: 
     presetFiltered: true
     critical: false
     stabilizing: false
     ui: 
+    statOffsetsOnAbsence: 
   secondary:
     presetDefault: 
     presetFiltered: true
@@ -55,11 +57,15 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_tank_turret_aa
       textOverride: true
+    statOffsetsOnAbsence: 
 dependencies: 
 destructionFragments: 
+crashFunctions: 
 destructionFunctions: 
 uncrewed:
   portraitKey: 01
+weightClassOverride:
+  i: 4
 aiBehavior: Flanker
 aiCollisionRadius: 5
 aiCollisionHeight: 10

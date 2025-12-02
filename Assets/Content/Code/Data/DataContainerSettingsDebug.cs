@@ -37,23 +37,34 @@ namespace PhantomBrigade.Data
         public bool debugAudioEvents = false;
         public bool debugOptions = false;
         public bool debugWeapons = false;
-
+        public bool debugInteractions = false;
+        public bool debugAchievements = false;
+        
+        public bool combatSubsystemTooltips = false;
+        public bool combatBeamsHidden = false;
+        
         public bool forceFirstTimeBoot = false;
         public bool forceQuickLoad = false;
         public bool forceWorldGeneration = false;
         public bool forceWorldPreservation = false;
         
+        public bool textSaveNamesRaw = false;
         public bool textWarningWhenEmpty = false;
         public bool textFromLibraryWhenEmpty = true;
         public bool pseudolocRestrictedToFinalText = false;
-
+        public bool pseudolocScaledDown = false;
+        
         public bool enableAchievement = true;
         public bool enableInputRemapping = true;
-        public bool enableVersionDisplay = false;
+        public bool enableVersionDisplay = true;
         public bool enableVersionAnnouncementDynamic = false;
         public bool enableEquipmentDetailsInCombat = false;
-        public bool forceDemoMode = false;
 
+        public bool testEnts = false;
+        public bool forceDemoMode = false;
+        public bool forceTestMode = false;
+        public bool forceModLoading = false;
+        
         public override void OnAfterDeserialization ()
         {
             base.OnAfterDeserialization ();
@@ -63,7 +74,10 @@ namespace PhantomBrigade.Data
 
         private void ApplyDeveloperMode ()
         {
-
+            #if !PB_MODSDK
+            if (Application.isPlaying)
+                CIViewLoader.RefreshDeveloperMode (developerMode);
+            #endif
         }
     }
 }

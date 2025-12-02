@@ -46,6 +46,7 @@ sockets:
     ui:
       blueprintSpriteName: mech_tpose_200_head_outline
       textOverride: false
+    statOffsetsOnAbsence: 
   core:
     presetDefault: body_set_elbrus_medium_top
     presetFiltered: true
@@ -54,6 +55,10 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_mech_upperbody
       textOverride: false
+    statOffsetsOnAbsence:
+      heat_dissipation: 5
+      mass: 1
+      power: 5
   equipment_left:
     presetDefault: 
     presetFiltered: true
@@ -62,12 +67,14 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_mech_weapon_long
       textOverride: true
+    statOffsetsOnAbsence: 
   equipment_right:
     presetDefault: wpn_rifle_assault_02
     presetFiltered: true
     critical: false
     stabilizing: false
     ui: 
+    statOffsetsOnAbsence: 
   optional_left:
     presetDefault: body_set_elbrus_medium_arm
     presetFiltered: true
@@ -76,6 +83,9 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_mech_arm
       textOverride: false
+    statOffsetsOnAbsence:
+      heat_dissipation: 3
+      mass: 1
   optional_right:
     presetDefault: body_set_elbrus_medium_arm
     presetFiltered: true
@@ -84,6 +94,9 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_mech_arm
       textOverride: false
+    statOffsetsOnAbsence:
+      heat_dissipation: 3
+      mass: 1
   secondary:
     presetDefault: body_set_elbrus_medium_bottom
     presetFiltered: true
@@ -92,6 +105,7 @@ sockets:
     ui:
       blueprintSpriteName: s_icon_l_unit_mech_lowerbody
       textOverride: false
+    statOffsetsOnAbsence: 
 dependencies:
   optional_left: equipment_left
   optional_right: equipment_right
@@ -104,6 +118,23 @@ destructionFragments:
   damage: 0.1
   impact: 10
   scatterVertical: 0.2
+crashFunctions:
+- !CombatUnitEffectSpawn
+  position:
+    x: 0
+    y: 0
+    z: 0
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  centered: false
+  asset:
+    key: fx_podejection_shockwave
+    scale:
+      x: 1
+      y: 1
+      z: 1
 destructionFunctions:
 - !CombatAreaOfEffect
   offset:
@@ -120,7 +151,10 @@ destructionFunctions:
   concussion: 
   heat: 
   stagger: 
+  statusBuildup: 
   crash: 
+  targetCheck: 
+  functionsOnHit: 
   impactUnitSelf: true
   impactUnitAllies: true
   impactUnitHostiles: true
@@ -133,6 +167,7 @@ destructionFunctions:
   fxHit: fx_aoe_hit_01
   audioDetonation: 
 uncrewed: 
+weightClassOverride: 
 aiBehavior: Flanker
 aiCollisionRadius: 5
 aiCollisionHeight: 10

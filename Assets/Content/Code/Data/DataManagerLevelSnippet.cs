@@ -9,12 +9,12 @@ namespace PhantomBrigade.Data
     public class DataManagerLevelSnippet : MonoBehaviour
     {
         public static bool unsavedChangesPossible = false;
-
+        
         [LabelText ("Folder")][FolderPath][ShowInInspector, ReadOnly]
         public static string folderPath = "Configs/LevelSnippets/";
-
+        
         private static bool keyListLoadedOnce = false;
-
+        
         [ListDrawerSettings (DefaultExpandedState = false, ShowPaging = true)]
         private static List<string> keyListInternal;
 
@@ -39,14 +39,14 @@ namespace PhantomBrigade.Data
         public static string keySelected = "test";
 
         [ShowInInspector]
-        public static bool log = false;
-
+        public static bool log = false; 
+        
         [ShowInInspector]
         public static bool applyToArea = true;
 
-        // [ShowInInspector]
-        // [PropertySpace (8f)]
-        // public static DataContainerLevel data;
+        [ShowInInspector]
+        [PropertySpace (8f)]
+        public static DataContainerLevel data;
 
         [PropertyOrder (-4)][ButtonGroup]
         [Button ("Load data", ButtonSizes.Large)]
@@ -54,11 +54,11 @@ namespace PhantomBrigade.Data
         {
             LoadDataFromKey (keySelected, applyToArea, out bool success);
         }
-
+        
         public static void LoadDataFromKey (string keyLoaded, bool applyToManager, out bool success)
         {
             success = false;
-
+            
             if (string.IsNullOrEmpty (folderPath))
             {
                 Debug.LogError ($"Failed to load level data ({keyLoaded}) due null or empty root folder path");
@@ -70,16 +70,16 @@ namespace PhantomBrigade.Data
 
             if (applyToManager)
                 ApplyToManager (out success);
-            // else
-            //     success = data != null && data.dataUnpacked != null;
+            else
+                success = data != null && data.dataUnpacked != null;
         }
-
+        
         public static void LoadDataFromPath (string levelPath, string keyLoaded)
         {
             /*
-            // Debug.Log ($"Loading level snippet data from {levelPath}");
+            // Debug.Log ($"Loading level snippet data from {levelPath}"); 
             keySelected = keyLoaded;
-
+            
             // Load root config
             var core = UtilitiesYAML.LoadDataFromFile<AreaDataCore> (levelPath, "core.yaml");
             if (core == null)
@@ -87,13 +87,13 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Failed to load core level snippet data from {levelPath}");
                 return;
             }
-
+            
             data = new DataContainerLevel ();
             data.dataCollections = new DataBlockLevelCollections ();
 
             // Load content of all fields marked with BinaryData attribute
             BinaryDataUtility.LoadFieldsFromBinary (core, data.dataCollections, levelPath);
-
+            
             // Generate unpacked data from that
             data.dataUnpacked = new AreaDataContainer (keyLoaded, core, data.dataCollections);
 
@@ -101,18 +101,28 @@ namespace PhantomBrigade.Data
             RefreshList ();
             */
         }
-
+        
         [PropertyOrder (-1)][ButtonGroup][GUIColor ("GetSaveButtonColor")]
         [Button ("@unsavedChangesPossible ? \"Save data*\" : \"Save data\"", ButtonSizes.Large)]
         public static void SaveData ()
         {
             /*
-            DataManagerLevel.SaveData (new DataBlockLevelSaveSpec()
-            {
-                Key = keySelected,
-                Data = data,
-                FolderPath = folderPath,
-            });
+            if (data == null)
+                return;
+
+            var levelPath = $"{folderPath}{keySelected}/"; 
+            if (log)
+                Debug.Log ($"Writing level data to path {levelPath} | Folder path: {folderPath} | Key selected: {keySelected}");
+        
+            // Save root config
+            UtilitiesYAML.SaveDataToFile (levelPath, "core.yaml", data.dataUnpacked.core);
+            
+            // Generate collections from unpacked datas
+            data.dataCollections = new DataBlockLevelCollections (data.dataUnpacked);
+
+            // Save content of all fields marked with BinaryData attribute
+            BinaryDataUtility.SaveFieldsToBinary (data.dataCollections, levelPath, data.dataUnpacked.core.features);
+
             unsavedChangesPossible = false;
             RefreshList ();
             */
@@ -125,29 +135,31 @@ namespace PhantomBrigade.Data
             var sceneHelper = CombatSceneHelper.ins;
             if (sceneHelper == null)
                 return;
-
+            
             SaveFromManager (sceneHelper.areaManager);
         }
-
+        
         public static void SaveFromManager (AreaManager am)
         {
-            // if (am == null || am.clipboard == null)
-            // {
-            //     Debug.LogWarning ($"Failed to save level snippet data due to missing area manager or clipboard object");
-            //     return;
-            // }
+            if (am == null || am.clipboard == null)
+            {
+                Debug.LogWarning ($"Failed to save level snippet data due to missing area manager or clipboard object");
+                return;
+            }
+            
+            if (string.IsNullOrEmpty (am.clipboard.name))
+            {
+                Debug.LogWarning ($"Failed to save: invalid filename");
+                return;
+            }
 
-            // if (string.IsNullOrEmpty (am.clipboard.name))
-            // {
-            //     Debug.LogWarning ($"Failed to save: invalid filename");
-            //     return;
-            // }
+            #if !PB_MODSDK
+            keySelected = am.clipboard.name;
+            data = new DataContainerLevel ();
+            data.dataUnpacked = new AreaDataContainer (am.clipboard); 
+            #endif
 
-            // keySelected = am.clipboard.name;
-            // data = new DataContainerLevel ();
-            // data.dataUnpacked = new AreaDataContainer (am.clipboard);
-            //
-            // SaveData ();
+            SaveData ();
         }
 
         [FoldoutGroup ("Utilities")]
@@ -156,29 +168,33 @@ namespace PhantomBrigade.Data
         {
             ApplyToManager (out bool success);
         }
-
+        
         public static void ApplyToManager (out bool success)
         {
             success = false;
-
+            
+            /*
             var sceneHelper = CombatSceneHelper.ins;
             if (sceneHelper == null || sceneHelper.areaManager == null)
             {
                 Debug.LogWarning ($"Failed to apply level data due to missing references to area manager");
                 return;
             }
+            
+            if (data == null || data.dataUnpacked == null)
+            {
+                Debug.LogWarning ($"Failed to apply level data to area manager due to loaded data or unpacked data being null");
+                return;
+            }
 
-            // if (data == null || data.dataUnpacked == null)
-            // {
-            //     Debug.LogWarning ($"Failed to apply level data to area manager due to loaded data or unpacked data being null");
-            //     return;
-            // }
+            sceneHelper.areaManager.LoadAreaSnippet (keySelected, core, data.dataUnpacked);
             success = true;
+            */
         }
-
-
-
-
+        
+        
+        
+        
         [Button ("Refresh list", ButtonSizes.Large), ButtonGroup, PropertyOrder (-5)]
         private static void RefreshList ()
         {
@@ -195,7 +211,7 @@ namespace PhantomBrigade.Data
         }
 
         #if UNITY_EDITOR
-
+        
         private Color GetSaveButtonColor ()
         {
             if (unsavedChangesPossible)

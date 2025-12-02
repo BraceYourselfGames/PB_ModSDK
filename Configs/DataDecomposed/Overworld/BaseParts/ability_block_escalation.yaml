@@ -3,7 +3,8 @@ parents:
   priority: 1
   offsetStart: 10
   offsetEnd: 10
-hidden: false
+hidden: true
+hiddenUntilInstalled: false
 removable: false
 preinstalled: false
 limit: 3
@@ -21,27 +22,26 @@ cost:
 effect: 
 effectPerInstance:
   1:
-    calls:
-    - OnAbilityBlockEscalation
     stats:
     - key: item_block_escalation_limit
       modifier: Offset
       value: 1
     functions: []
+    functionsOnLoad: 
   2:
-    calls: 
     stats:
     - key: item_block_escalation_limit
       modifier: Offset
       value: 1
     functions: []
+    functionsOnLoad: 
   3:
-    calls: 
     stats:
     - key: item_block_escalation_limit
       modifier: Offset
       value: 1
     functions: []
+    functionsOnLoad: 
 visual: 
 visualPerInstance: 
 audio:

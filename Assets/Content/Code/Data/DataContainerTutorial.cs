@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PhantomBrigade.Functions;
+using PhantomBrigade.Input.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -96,10 +97,13 @@ namespace PhantomBrigade.Data
         public DataBlockScenarioHintConditional () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
+        #if !PB_MODSDK
         private void OnDataChange ()
         {
-
+            if (Application.isPlaying && IDUtility.IsGameState (GameStates.combat))
+                ScenarioUtility.RecheckConditionalHints (true);
         }
+        #endif
 
         #endif
         #endregion
@@ -152,6 +156,7 @@ namespace PhantomBrigade.Data
         public DataBlockTutorialCenter center;
         
         [DropdownReference, BoxGroup ("Hint", false)]
+        [OnValueChanged (onChange, true)]
         public DataBlockTutorialHint hint;
 
         [DropdownReference, BoxGroup ("Combat effects", false)]
@@ -173,7 +178,15 @@ namespace PhantomBrigade.Data
         
         public void OnChange ()
         {
+            #if !PB_MODSDK
+            if (!Application.isPlaying || CIViewTutorial.ins == null || !CIViewTutorial.ins.IsEntered ())
+                return;
 
+            if (CIViewTutorial.ins.pageIDLast != id)
+                return;
+
+            CIViewTutorial.ins.Refresh (this, true);
+            #endif
         }
         
         #if UNITY_EDITOR
@@ -278,10 +291,10 @@ namespace PhantomBrigade.Data
         public Color color = Color.cyan.WithAlpha (1f);
 
         [OnValueChanged (onChange)]
-        public FrameLocation frameLocation = FrameLocation.TopLeft;
+        public CIViewTutorialHint.FrameLocation frameLocation = CIViewTutorialHint.FrameLocation.TopLeft;
         
         [OnValueChanged (onChange)]
-        public FrameGradientMode frameGradientMode = FrameGradientMode.None;
+        public CIViewTutorialHint.FrameGradientMode frameGradientMode = CIViewTutorialHint.FrameGradientMode.None;
         
         [OnValueChanged (onChange)]
         [HorizontalGroup ("Position")]
@@ -310,10 +323,10 @@ namespace PhantomBrigade.Data
         public bool frameBoundary = true;
 
         [OnValueChanged (onChange)]
-        public TextLocation textLocation = TextLocation.BottomLeft;
+        public CIViewTutorialHint.TextLocation textLocation = CIViewTutorialHint.TextLocation.BottomLeft;
         
         [OnValueChanged (onChange)]
-        public ButtonLocation buttonLocation = ButtonLocation.None;
+        public CIViewTutorialHint.ButtonLocation buttonLocation = CIViewTutorialHint.ButtonLocation.None;
         
         [OnValueChanged (onChange)]
         public int textWidth = 256;
@@ -418,13 +431,21 @@ namespace PhantomBrigade.Data
     {
         public const string OverworldIntro = "overworld_intro";
         public const string OverworldSalvage = "overworld_salvage";
+        public const string OverworldPilotProgression = "overworld_pilot_progression";
+        public const string OverworldPilotRecruit = "overworld_pilot_recruit";
+        
         public const string OverworldResupply = "overworld_resupply";
         public const string OverworldContest = "overworld_contest";
         public const string OverworldOpen = "overworld_open";
         public const string OverworldBoss = "overworld_boss";
+        public const string OverworldGeneralOverview = "overworld_general_overview";
+        public const string OverworldCamp = "overworld_camp";
+        public const string OverworldCapitalCamp = "overworld_capital_camp";
         
         public const string BaseIntroduction = "base_introduction";
         public const string BaseBriefing = "base_briefing";
+        public const string BaseBriefingDemolition = "base_briefing_demolition";
+        public const string BaseWorkshop = "base_workshop";
         
         public const string CombatIntro1 = "combat_intro_01";
         public const string CombatIntro2 = "combat_intro_02";
@@ -537,6 +558,16 @@ namespace PhantomBrigade.Data
                 }
             }
         }
+
+        #if !PB_MODSDK
+        [HideInEditorMode]
+        [Button (ButtonSizes.Medium), PropertyOrder (-1)]
+        private void Test ()
+        {
+            if (CIViewTutorial.ins != null)
+                CIViewTutorial.ins.OnTutorialStartFromKey (key, true);
+        }
+        #endif
         
         #endif
     }

@@ -8,12 +8,13 @@ preset:
 blueprint: unit_mech
 pilotName: 
 faction: Phantoms
-parentEntityName: squad_mobilebase
+parentEntityName: internal_mobilebase
 livery: dune_b
 salvageable: false
 wrecked: false
+defects: 0
 combatStatus: 
-repairStatus: 
+frameIntegrity: 
 eventMemory: 
 customMemory: 
 parts:
@@ -86,15 +87,6 @@ parts:
         livery: 
         destroyed: false
         fused: true
-        salvageable: false
-        inventoryAdded: false
-        favorite: false
-      internal_aux_defense:
-        serial: 323
-        blueprint: internal_aux_plating_empty
-        livery: 
-        destroyed: false
-        fused: false
         salvageable: false
         inventoryAdded: false
         favorite: false
@@ -314,11 +306,11 @@ parts:
         favorite: false
   equipment_right:
     version: 3
-    serial: 20
+    serial: 9
     rating: 1
     level: 2
     levelOriginal: 2
-    preset: wpn_mg_heavy_01
+    preset: wpn_rifle_assault_02
     livery: 
     integrity: 1
     barrier: 1
@@ -334,8 +326,8 @@ parts:
     - perk_1
     systems:
       internal_main_equipment:
-        serial: 340
-        blueprint: wpn_main_mg_03
+        serial: 34
+        blueprint: wpn_main_assault_02
         livery: 
         destroyed: false
         fused: true
@@ -343,7 +335,7 @@ parts:
         inventoryAdded: false
         favorite: false
       rarity:
-        serial: 341
+        serial: 35
         blueprint: rarity_1
         livery: 
         destroyed: false
@@ -352,8 +344,8 @@ parts:
         inventoryAdded: false
         favorite: false
       perk_1:
-        serial: 342
-        blueprint: perk_mass_pos_r1
+        serial: 36
+        blueprint: perk_heat_pos_r1
         livery: 
         destroyed: false
         fused: true

@@ -5,11 +5,8 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class OverworldValidateEscalationLevel : IOverworldValidationFunction
+    public class OverworldValidateEscalationLevel : DataBlockOverworldEventSubcheckIntRange, IOverworldEntityValidationFunction
     {
-        [HideReferenceObjectPicker, HideLabel]
-        public DataBlockOverworldEventSubcheckIntRange check = new DataBlockOverworldEventSubcheckIntRange ();
-        
         public bool IsValid (PersistentEntity entityPersistent)
         {
             #if !PB_MODSDK
@@ -17,11 +14,9 @@ namespace PhantomBrigade.Functions
             if (entityPersistent == null)
                 return false;
 
-            if (check == null)
-                return false;
-            
-            var escalationLevel = ScenarioUtilityGeneration.GetCombatTargetEscalationLevel ();
-            bool escalationValid = check.IsPassed (escalationLevel);
+            var entityOverworld = IDUtility.GetLinkedOverworldEntity (entityPersistent);
+            var escalationLevel = ScenarioUtilityGeneration.GetCombatTargetEscalationLevel (entityOverworld);
+            bool escalationValid = IsPassed (escalationLevel);
             return escalationValid;
 
             #else

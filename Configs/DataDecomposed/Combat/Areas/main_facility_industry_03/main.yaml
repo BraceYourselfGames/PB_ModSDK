@@ -3,13 +3,21 @@ parents: []
 image: 
 core:
   backgroundTerrainUsed: true
-  altitudeChecked: true
   sliceShadingUsed: false
   sliceShadingInputs:
     x: 0
     y: 0
     z: 0
     w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
 content: {}
 atmosphere:
   groundHeight: -13.5
@@ -33,41 +41,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 127.5
-        y: -10.5
-        z: 163.5
+        x: 133.5
+        y: -16.45
+        z: 151.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 142.5
-        y: -10.5
-        z: 157.5
+        x: 151.5
+        y: -16.45
+        z: 151.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 145.5
-        y: -10.5
+        x: 151.5
+        y: -16.45
         z: 136.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 160.5
-        y: -7.5
-        z: 160.5
+        x: 166.5
+        y: -16.45
+        z: 154.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 148.5
-        y: -10.5
-        z: 175.5
+        x: 151.5
+        y: -16.45
+        z: 166.5
       rotation:
         x: 0
         y: 180
@@ -80,40 +88,40 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 190.5
-        y: -13.5
-        z: 157.5
+        x: 199.5
+        y: -22.5
+        z: 136.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 211.5
-        y: -13.5
-        z: 157.5
+        x: 199.5
+        y: -22.5
+        z: 166.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 202.5
-        y: -10.5
-        z: 172.5
+        x: 199.5
+        y: -22.5
+        z: 181.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 181.5
-        y: -13.5
-        z: 172.5
+        x: 214.5
+        y: -22.5
+        z: 181.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 226.5
-        y: -13.5
+        x: 214.5
+        y: -22.5
         z: 166.5
       rotation:
         x: 0
@@ -127,8 +135,8 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 148.5
-        y: -13.5
+        x: 124.5
+        y: -22.5
         z: 211.5
       rotation:
         x: 0
@@ -136,32 +144,32 @@ spawnGroups:
         z: 0
     - point:
         x: 163.5
-        y: -13.5
-        z: 217.5
-      rotation:
-        x: 0
-        y: 180
-        z: 0
-    - point:
-        x: 136.5
-        y: -13.5
-        z: 220.5
+        y: -22.5
+        z: 214.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
         x: 163.5
-        y: -13.5
-        z: 202.5
+        y: -22.5
+        z: 232.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 163.5
+        y: -22.5
+        z: 196.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
         x: 136.5
-        y: -13.5
-        z: 205.5
+        y: -22.5
+        z: 196.5
       rotation:
         x: 0
         y: 180
@@ -174,41 +182,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 151.5
-        y: -13.5
-        z: 88.5
+        x: 163.5
+        y: -22.5
+        z: 70.5
       rotation:
         x: 0
         y: 360
         z: 0
     - point:
-        x: 130.5
-        y: -10.5
+        x: 136.5
+        y: -22.5
+        z: 82.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 136.5
+        y: -22.5
         z: 100.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 148.5
-        y: -13.5
-        z: 115.5
-      rotation:
-        x: 0
-        y: 0
-        z: 0
-    - point:
-        x: 157.5
-        y: -13.5
-        z: 103.5
+        x: 163.5
+        y: -22.5
+        z: 91.5
       rotation:
         x: 0
         y: 360
         z: 0
     - point:
-        x: 121.5
-        y: -13.5
-        z: 118.5
+        x: 136.5
+        y: -22.5
+        z: 64.5
       rotation:
         x: 0
         y: 45
@@ -221,40 +229,40 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 103.5
-        y: -13.5
-        z: 172.5
+        x: 79.5
+        y: -22.5
+        z: 154.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 85.5
-        y: -13.5
-        z: 163.5
+        x: 67.5
+        y: -22.5
+        z: 154.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
-        x: 70.5
-        y: -13.5
+        x: 67.5
+        y: -22.5
         z: 130.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
-        x: 82.5
-        y: -13.5
-        z: 145.5
+        x: 97.5
+        y: -22.5
+        z: 133.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
         x: 82.5
-        y: -13.5
+        y: -22.5
         z: 121.5
       rotation:
         x: 0
@@ -269,41 +277,41 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 241.5
-        y: -13.5
-        z: 223.5
+        x: 244.5
+        y: -22.45
+        z: 190.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 262.5
-        y: -13.5
-        z: 211.5
+        x: 244.5
+        y: -22.45
+        z: 208.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 247.5
-        y: -13.5
-        z: 193.5
+        x: 244.5
+        y: -22.45
+        z: 175.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 241.5
-        y: -13.5
-        z: 178.5
+        x: 259.5
+        y: -22.45
+        z: 175.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 241.5
-        y: -13.5
-        z: 244.5
+        x: 259.5
+        y: -22.45
+        z: 208.5
       rotation:
         x: 0
         y: 225
@@ -318,40 +326,40 @@ spawnGroups:
     points:
     - point:
         x: 232.5
-        y: -13.5
-        z: 145.5
-      rotation:
-        x: 0
-        y: 270
-        z: 0
-    - point:
-        x: 247.5
-        y: -13.5
+        y: -22.5
         z: 136.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 241.5
-        y: -13.5
-        z: 118.5
+        x: 247.5
+        y: -22.5
+        z: 136.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 244.5
-        y: -10.5
-        z: 70.5
+        x: 232.5
+        y: -22.5
+        z: 121.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 247.5
+        y: -22.5
+        z: 121.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 235.5
-        y: -13.5
-        z: 97.5
+        x: 232.5
+        y: -22.5
+        z: 106.5
       rotation:
         x: 0
         y: 315
@@ -364,40 +372,40 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 199.5
-        y: -7.5
-        z: 187.5
-      rotation:
-        x: 0
-        y: 225
-        z: 0
-    - point:
-        x: 226.5
-        y: -13.5
+        x: 217.5
+        y: -22.5
         z: 190.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 199.5
-        y: -7.5
-        z: 202.5
+        x: 232.5
+        y: -22.5
+        z: 190.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
         x: 232.5
-        y: -13.5
-        z: 205.5
+        y: -22.5
+        z: 175.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 223.5
-        y: -10.5
+        x: 232.5
+        y: -22.5
+        z: 208.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 232.5
+        y: -22.5
         z: 232.5
       rotation:
         x: 0
@@ -412,40 +420,40 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 160.5
-        y: -13.5
+        x: 136.5
+        y: -22.5
+        z: 232.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 121.5
+        y: -22.5
+        z: 232.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 136.5
+        y: -22.5
         z: 247.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 139.5
-        y: -13.5
-        z: 238.5
+        x: 103.5
+        y: -22.5
+        z: 247.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 139.5
-        y: -13.5
-        z: 253.5
-      rotation:
-        x: 0
-        y: 180
-        z: 0
-    - point:
-        x: 109.5
-        y: -13.5
-        z: 250.5
-      rotation:
-        x: 0
-        y: 180
-        z: 0
-    - point:
-        x: 109.5
-        y: -13.5
+        x: 103.5
+        y: -22.5
         z: 232.5
       rotation:
         x: 0
@@ -460,40 +468,40 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 199.5
-        y: -10.5
-        z: 220.5
+        x: 205.5
+        y: -22.5
+        z: 223.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
         x: 193.5
-        y: -13.5
-        z: 238.5
+        y: -22.5
+        z: 247.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 178.5
-        y: -13.5
-        z: 226.5
+        x: 187.5
+        y: -22.5
+        z: 223.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
         x: 178.5
-        y: -13.5
-        z: 247.5
+        y: -22.5
+        z: 235.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 208.5
-        y: -13.5
+        x: 205.5
+        y: -22.5
         z: 247.5
       rotation:
         x: 0
@@ -507,41 +515,41 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 73.5
-        y: -7.5
+        x: 67.5
+        y: -22.5
         z: 238.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 85.5
-        y: -13.5
-        z: 220.5
-      rotation:
-        x: 0
-        y: 135
-        z: 0
-    - point:
-        x: 115.5
-        y: -13.5
-        z: 199.5
-      rotation:
-        x: 0
-        y: 135
-        z: 0
-    - point:
-        x: 94.5
-        y: -13.5
-        z: 208.5
+        x: 91.5
+        y: -22.5
+        z: 238.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
         x: 91.5
-        y: -13.5
-        z: 193.5
+        y: -22.5
+        z: 217.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 67.5
+        y: -22.5
+        z: 217.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 82.5
+        y: -22.5
+        z: 202.5
       rotation:
         x: 0
         y: 135
@@ -554,41 +562,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 181.5
-        y: -13.5
-        z: 85.5
+        x: 175.5
+        y: -22.45
+        z: 88.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 211.5
-        y: -13.5
-        z: 94.5
+        x: 208.5
+        y: -22.45
+        z: 88.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 190.5
-        y: -13.5
-        z: 97.5
+        x: 208.5
+        y: -22.45
+        z: 103.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 214.5
-        y: -13.5
-        z: 112.5
+        x: 223.5
+        y: -22.45
+        z: 103.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 220.5
-        y: -10.5
-        z: 76.5
+        x: 223.5
+        y: -22.45
+        z: 88.5
       rotation:
         x: 0
         y: 315
@@ -602,41 +610,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 202.5
-        y: -7.5
-        z: 61.5
+        x: 205.5
+        y: -22.5
+        z: 67.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 211.5
-        y: -10.5
-        z: 43.5
+        x: 205.5
+        y: -22.5
+        z: 46.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 179.8988
-        y: -13.5
-        z: 69.04205
+        x: 187.5
+        y: -22.5
+        z: 67.5
       rotation:
         x: 0
         y: 360
         z: 0
     - point:
-        x: 196.5
-        y: -10.5
-        z: 43.5
+        x: 172.5
+        y: -22.5
+        z: 67.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 175.5
-        y: -13.5
-        z: 43.5
+        x: 163.5
+        y: -22.5
+        z: 55.5
       rotation:
         x: 0
         y: 360
@@ -650,41 +658,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 109.5
-        y: -7.5
-        z: 82.5
+        x: 103.5
+        y: -22.5
+        z: 85.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 112.5
-        y: -10.5
+        x: 103.5
+        y: -22.5
+        z: 70.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 103.5
+        y: -22.5
         z: 58.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 124.5
-        y: -10.5
+        x: 127.5
+        y: -22.5
         z: 58.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 142.5
-        y: -13.5
-        z: 55.5
-      rotation:
-        x: 0
-        y: 0
-        z: 0
-    - point:
-        x: 124.5
-        y: -7.5
-        z: 76.5
+        x: 127.5
+        y: -22.5
+        z: 70.5
       rotation:
         x: 0
         y: 0
@@ -697,41 +705,41 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 88.5
-        y: -13.5
-        z: 55.5
+        x: 91.5
+        y: -22.5
+        z: 52.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 94.5
-        y: -13.5
-        z: 70.5
-      rotation:
-        x: 0
-        y: 45
-        z: 0
-    - point:
-        x: 100.5
-        y: -13.5
-        z: 40.5
-      rotation:
-        x: 0
-        y: 45
-        z: 0
-    - point:
-        x: 79.5
-        y: -13.5
-        z: 40.5
-      rotation:
-        x: 0
-        y: 45
-        z: 0
-    - point:
-        x: 79.5
-        y: -13.5
+        x: 91.5
+        y: -22.5
         z: 67.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 91.5
+        y: -22.5
+        z: 40.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 76.5
+        y: -22.5
+        z: 58.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 103.5
+        y: -22.5
+        z: 40.5
       rotation:
         x: 0
         y: 45
@@ -745,41 +753,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 43.5
-        y: -10.5
-        z: 196.5
+        x: 46.5
+        y: -22.5
+        z: 202.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 61.5
-        y: -7.5
-        z: 190.5
+        x: 67.5
+        y: -22.5
+        z: 202.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 64.5
-        y: -10.5
+        x: 46.5
+        y: -22.5
         z: 220.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 43.5
-        y: -10.5
-        z: 181.5
+        x: 37.5
+        y: -22.5
+        z: 190.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
-        x: 70.5
-        y: -10.5
-        z: 178.5
+        x: 67.5
+        y: -22.5
+        z: 190.5
       rotation:
         x: 0
         y: 90
@@ -793,41 +801,41 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 52.5
-        y: -13.5
-        z: 103.5
+        x: 58.5
+        y: -22.5
+        z: 112.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 52.5
-        y: -13.5
-        z: 91.5
+        x: 58.5
+        y: -22.5
+        z: 100.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 40.5
-        y: -13.5
-        z: 73.5
+        x: 58.5
+        y: -22.5
+        z: 67.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 64.5
-        y: -13.5
-        z: 70.5
+        x: 73.5
+        y: -22.5
+        z: 85.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 64.5
-        y: -13.5
-        z: 97.5
+        x: 73.5
+        y: -22.5
+        z: 100.5
       rotation:
         x: 0
         y: 45
@@ -840,23 +848,23 @@ spawnGroups:
     points:
     - point:
         x: 289.5
-        y: -10.5
-        z: 160.5
-      rotation:
-        x: 0
-        y: 270
-        z: 0
-    - point:
-        x: 283.5
-        y: -10.5
-        z: 142.5
+        y: -22.5
+        z: 157.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
         x: 289.5
-        y: -7.5
+        y: -22.5
+        z: 145.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 289.5
+        y: -22.5
         z: 127.5
       rotation:
         x: 0
@@ -864,16 +872,16 @@ spawnGroups:
         z: 0
     - point:
         x: 259.5
-        y: -13.5
-        z: 133.5
+        y: -22.5
+        z: 130.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 253.5
-        y: -13.5
-        z: 112.5
+        x: 259.5
+        y: -22.5
+        z: 118.5
       rotation:
         x: 0
         y: 270
@@ -887,23 +895,23 @@ spawnGroups:
     points:
     - point:
         x: 274.5
-        y: -13.5
-        z: 223.5
+        y: -22.45
+        z: 220.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 289.5
-        y: -13.5
-        z: 214.5
+        x: 286.5
+        y: -22.45
+        z: 208.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 277.5
-        y: -10.5
+        x: 274.5
+        y: -22.45
         z: 199.5
       rotation:
         x: 0
@@ -911,16 +919,16 @@ spawnGroups:
         z: 0
     - point:
         x: 286.5
-        y: -10.5
-        z: 184.5
+        y: -22.45
+        z: 190.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 271.5
-        y: -7.5
-        z: 163.5
+        x: 265.5
+        y: -22.45
+        z: 190.5
       rotation:
         x: 0
         y: 270
@@ -933,41 +941,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 277.5
-        y: -13.5
+        x: 274.5
+        y: -22.5
         z: 88.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 289.5
-        y: -10.5
-        z: 109.5
+        x: 274.5
+        y: -22.5
+        z: 103.5
       rotation:
         x: 0
         y: 270
         z: 0
     - point:
-        x: 280.5
-        y: -10.5
-        z: 67.5
+        x: 283.5
+        y: -22.5
+        z: 70.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 265.5
-        y: -13.5
-        z: 76.5
+        x: 259.5
+        y: -22.5
+        z: 103.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 256.5
-        y: -13.5
-        z: 91.5
+        x: 259.5
+        y: -22.5
+        z: 88.5
       rotation:
         x: 0
         y: 315
@@ -979,24 +987,24 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 124.5
-        y: -13.5
+        x: 118.5
+        y: -22.5
         z: 265.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 112.5
-        y: -13.5
-        z: 280.5
+        x: 118.5
+        y: -22.5
+        z: 283.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 142.5
-        y: -13.5
+        x: 136.5
+        y: -22.5
         z: 265.5
       rotation:
         x: 0
@@ -1004,15 +1012,15 @@ spawnGroups:
         z: 0
     - point:
         x: 136.5
-        y: -13.5
+        y: -22.5
         z: 283.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
-        x: 160.5
-        y: -13.5
+        x: 172.5
+        y: -22.5
         z: 283.5
       rotation:
         x: 0
@@ -1025,41 +1033,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 283.5
-        y: -13.5
-        z: 286.5
+        x: 280.5
+        y: -22.5
+        z: 289.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 283.5
-        y: -13.5
+        x: 280.5
+        y: -22.5
         z: 247.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 259.5
-        y: -13.5
-        z: 250.5
-      rotation:
-        x: 0
-        y: 225
-        z: 0
-    - point:
-        x: 259.5
-        y: -13.5
-        z: 283.5
-      rotation:
-        x: 0
-        y: 225
-        z: 0
-    - point:
-        x: 271.5
-        y: -13.5
+        x: 241.5
+        y: -22.5
         z: 271.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 259.5
+        y: -22.5
+        z: 289.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 280.5
+        y: -22.5
+        z: 268.5
       rotation:
         x: 0
         y: 225
@@ -1072,40 +1080,40 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 241.5
-        y: -13.5
-        z: 268.5
-      rotation:
-        x: 0
-        y: 225
-        z: 0
-    - point:
-        x: 235.5
-        y: -13.5
-        z: 286.5
+        x: 226.5
+        y: -22.5
+        z: 262.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
         x: 211.5
-        y: -13.5
+        y: -22.5
+        z: 262.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 211.5
+        y: -22.5
         z: 280.5
       rotation:
         x: 0
         y: 225
         z: 0
     - point:
-        x: 184.5
-        y: -13.5
-        z: 283.5
+        x: 193.5
+        y: -22.5
+        z: 280.5
       rotation:
         x: 0
         y: 180
         z: 0
     - point:
         x: 193.5
-        y: -13.5
+        y: -22.5
         z: 262.5
       rotation:
         x: 0
@@ -1119,24 +1127,16 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 61.5
-        y: -10.5
-        z: 253.5
-      rotation:
-        x: 0
-        y: 135
-        z: 0
-    - point:
         x: 73.5
-        y: -13.5
+        y: -22.5
         z: 271.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 88.5
-        y: -13.5
+        x: 73.5
+        y: -22.5
         z: 286.5
       rotation:
         x: 0
@@ -1144,7 +1144,15 @@ spawnGroups:
         z: 0
     - point:
         x: 88.5
-        y: -13.5
+        y: -22.5
+        z: 286.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 88.5
+        y: -22.5
         z: 262.5
       rotation:
         x: 0
@@ -1152,7 +1160,7 @@ spawnGroups:
         z: 0
     - point:
         x: 103.5
-        y: -13.5
+        y: -19.5
         z: 265.5
       rotation:
         x: 0
@@ -1165,41 +1173,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 55.5
-        y: -13.5
-        z: 283.5
+        x: 49.5
+        y: -22.5
+        z: 274.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 13.5
-        y: -13.5
-        z: 286.5
+        x: 10.5
+        y: -22.5
+        z: 292.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 13.5
-        y: -13.5
-        z: 265.5
-      rotation:
-        x: 0
-        y: 135
-        z: 0
-    - point:
-        x: 31.5
-        y: -13.5
-        z: 268.5
+        x: 10.5
+        y: -22.5
+        z: 274.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
         x: 34.5
-        y: -13.5
-        z: 283.5
+        y: -22.5
+        z: 262.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 49.5
+        y: -22.5
+        z: 292.5
       rotation:
         x: 0
         y: 135
@@ -1211,41 +1219,41 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 121.5
-        y: -13.5
-        z: 37.5
+        x: 112.5
+        y: -22.5
+        z: 25.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 151.5
-        y: -13.5
-        z: 22.5
+        x: 136.5
+        y: -22.5
+        z: 25.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 127.5
-        y: -13.5
-        z: 10.5
+        x: 124.5
+        y: -22.5
+        z: 19.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 154.5
-        y: -13.5
-        z: 37.5
+        x: 181.5
+        y: -22.5
+        z: 19.5
       rotation:
         x: 0
         y: 360
         z: 0
     - point:
-        x: 163.5
-        y: -13.5
-        z: 10.5
+        x: 196.5
+        y: -22.5
+        z: 19.5
       rotation:
         x: 0
         y: 360
@@ -1257,32 +1265,16 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 265.5
-        y: -7.5
-        z: 10.5
+        x: 259.5
+        y: -22.45
+        z: 7.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
-        x: 256.5
-        y: -10.5
-        z: 28.5
-      rotation:
-        x: 0
-        y: 315
-        z: 0
-    - point:
-        x: 286.5
-        y: -7.5
-        z: 10.5
-      rotation:
-        x: 0
-        y: 315
-        z: 0
-    - point:
-        x: 271.5
-        y: -7.5
+        x: 259.5
+        y: -22.45
         z: 25.5
       rotation:
         x: 0
@@ -1290,8 +1282,24 @@ spawnGroups:
         z: 0
     - point:
         x: 280.5
-        y: -4.5
-        z: 37.5
+        y: -22.45
+        z: 7.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 280.5
+        y: -22.45
+        z: 25.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 280.5
+        y: -22.45
+        z: 40.5
       rotation:
         x: 0
         y: 315
@@ -1304,41 +1312,41 @@ spawnGroups:
     - context_defended
     points:
     - point:
-        x: 229.5
-        y: -10.5
-        z: 28.5
+        x: 241.5
+        y: -22.5
+        z: 19.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 241.5
+        y: -22.5
+        z: 7.5
       rotation:
         x: 0
         y: 315
         z: 0
     - point:
         x: 220.5
-        y: -10.5
-        z: 10.5
-      rotation:
-        x: 0
-        y: 315
-        z: 0
-    - point:
-        x: 187.5
-        y: -13.5
+        y: -22.5
         z: 7.5
       rotation:
         x: 0
         y: 360
         z: 0
     - point:
-        x: 187.5
-        y: -13.5
-        z: 22.5
+        x: 241.5
+        y: -22.5
+        z: 34.5
       rotation:
         x: 0
         y: 360
         z: 0
     - point:
-        x: 211.5
-        y: -10.5
-        z: 25.5
+        x: 220.5
+        y: -22.5
+        z: 19.5
       rotation:
         x: 0
         y: 315
@@ -1351,40 +1359,40 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 109.5
-        y: -13.5
-        z: 10.5
+        x: 94.5
+        y: -22.5
+        z: 19.5
       rotation:
         x: 0
         y: 0
         z: 0
     - point:
-        x: 94.5
-        y: -13.5
-        z: 22.5
+        x: 76.5
+        y: -22.5
+        z: 19.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 85.5
-        y: -13.5
+        x: 76.5
+        y: -22.5
         z: 7.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 79.5
-        y: -13.5
-        z: 22.5
+        x: 58.5
+        y: -22.5
+        z: 7.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 67.5
-        y: -13.5
+        x: 58.5
+        y: -22.5
         z: 19.5
       rotation:
         x: 0
@@ -1397,41 +1405,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 43.5
-        y: -13.5
-        z: 37.5
+        x: 40.5
+        y: -22.5
+        z: 34.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 55.5
-        y: -13.5
-        z: 25.5
-      rotation:
-        x: 0
-        y: 45
-        z: 0
-    - point:
-        x: 52.5
-        y: -10.5
-        z: 7.5
-      rotation:
-        x: 0
-        y: 45
-        z: 0
-    - point:
-        x: 22.5
-        y: -10.5
+        x: 28.5
+        y: -22.5
         z: 22.5
       rotation:
         x: 0
         y: 45
         z: 0
     - point:
-        x: 13.5
-        y: -10.5
-        z: 37.5
+        x: 28.5
+        y: -22.5
+        z: 7.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 10.5
+        y: -22.5
+        z: 7.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 10.5
+        y: -22.5
+        z: 22.5
       rotation:
         x: 0
         y: 45
@@ -1443,41 +1451,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 10.5
-        y: -13.5
-        z: 151.5
+        x: 7.5
+        y: -22.5
+        z: 124.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
-        x: 10.5
-        y: -13.5
-        z: 178.5
+        x: 7.5
+        y: -22.5
+        z: 139.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 34.5
+        y: -22.5
+        z: 139.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 7.5
+        y: -22.5
+        z: 181.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
         x: 37.5
-        y: -13.5
-        z: 145.5
-      rotation:
-        x: 0
-        y: 90
-        z: 0
-    - point:
-        x: 25.5
-        y: -13.5
-        z: 172.5
-      rotation:
-        x: 0
-        y: 90
-        z: 0
-    - point:
-        x: 25.5
-        y: -13.5
-        z: 157.5
+        y: -22.5
+        z: 181.5
       rotation:
         x: 0
         y: 90
@@ -1491,40 +1499,40 @@ spawnGroups:
     points:
     - point:
         x: 34.5
-        y: -13.5
+        y: -22.45
         z: 244.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 25.5
-        y: -7.5
+        x: 34.5
+        y: -22.45
         z: 223.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
-        x: 22.5
-        y: -13.5
-        z: 196.5
+        x: 34.5
+        y: -22.45
+        z: 208.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
         x: 10.5
-        y: -13.5
-        z: 205.5
+        y: -22.45
+        z: 208.5
       rotation:
         x: 0
         y: 135
         z: 0
     - point:
         x: 10.5
-        y: -13.5
-        z: 244.5
+        y: -22.45
+        z: 223.5
       rotation:
         x: 0
         y: 135
@@ -1537,41 +1545,41 @@ spawnGroups:
     - context_undefended
     points:
     - point:
-        x: 25.5
-        y: -10.5
-        z: 127.5
-      rotation:
-        x: 0
-        y: 90
-        z: 0
-    - point:
-        x: 25.5
-        y: -10.5
+        x: 10.5
+        y: -22.5
         z: 100.5
       rotation:
         x: 0
         y: 90
         z: 0
     - point:
-        x: 13.5
-        y: -13.5
-        z: 82.5
+        x: 25.5
+        y: -22.5
+        z: 100.5
       rotation:
         x: 0
-        y: 45
-        z: 0
-    - point:
-        x: 37.5
-        y: -13.5
-        z: 88.5
-      rotation:
-        x: 0
-        y: 45
+        y: 90
         z: 0
     - point:
         x: 25.5
-        y: -13.5
-        z: 64.5
+        y: -22.5
+        z: 112.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 40.5
+        y: -22.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 40.5
+        y: -22.5
+        z: 112.5
       rotation:
         x: 0
         y: 45
@@ -1591,9 +1599,9 @@ locations:
     - direction_e
     data: !AreaLocation
       point:
-        x: 95.7964
-        y: -13.45
-        z: 118.773
+        x: 97.5
+        y: -22.5
+        z: 100.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1612,51 +1620,9 @@ locations:
     - direction_e
     data: !AreaLocation
       point:
-        x: 163.7506
-        y: -13.45
-        z: 118.9565
-      rotation: 0
-      sizeX: 9
-      sizeY: 9
-      rect: false
-  obj_loot_center_02:
-    tags:
-    - obj_loot
-    - perimeter_center
-    - direction_w
-    - direction_sw
-    - direction_se
-    - direction_s
-    - direction_nw
-    - direction_ne
-    - direction_n
-    - direction_e
-    data: !AreaLocation
-      point:
-        x: 97.77582
-        y: -13.45
-        z: 194.4645
-      rotation: 0
-      sizeX: 9
-      sizeY: 9
-      rect: false
-  obj_loot_center_03:
-    tags:
-    - obj_loot
-    - perimeter_center
-    - direction_w
-    - direction_sw
-    - direction_se
-    - direction_s
-    - direction_nw
-    - direction_ne
-    - direction_n
-    - direction_e
-    data: !AreaLocation
-      point:
-        x: 161.9716
-        y: -13.45
-        z: 198.6272
+        x: 191.9586
+        y: -22.45
+        z: 194.5818
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1669,9 +1635,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 225.6892
-        y: -13.45
-        z: 158.3967
+        x: 217.5
+        y: -22.5
+        z: 133.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1684,9 +1650,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 253.6854
-        y: -13.45
-        z: 238.2159
+        x: 262.5
+        y: -22.5
+        z: 235.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1699,9 +1665,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 166.7809
-        y: -13.45
-        z: 250.15
+        x: 178.5
+        y: -22.5
+        z: 262.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1714,9 +1680,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 107.9441
-        y: -13.45
-        z: 243.2684
+        x: 121.5
+        y: -22.5
+        z: 247.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1729,9 +1695,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 167.0799
-        y: -13.45
-        z: 34.12679
+        x: 196.5
+        y: -22.5
+        z: 34.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1744,9 +1710,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 67.14853
-        y: -13.45
-        z: 66.00695
+        x: 76.5
+        y: -22.5
+        z: 37.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1759,9 +1725,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 61.5226
-        y: -13.45
-        z: 220.3282
+        x: 34.5
+        y: -22.5
+        z: 280.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1774,9 +1740,9 @@ locations:
     - perimeter_inner
     data: !AreaLocation
       point:
-        x: 72.77013
-        y: -13.45
-        z: 143.218
+        x: 52.5
+        y: -22.5
+        z: 166.5
       rotation: 0
       sizeX: 9
       sizeY: 9
@@ -1789,7 +1755,7 @@ locations:
     data: !AreaLocation
       point:
         x: 290
-        y: -13.45
+        y: -22.45
         z: 89.36162
       rotation: 0
       sizeX: 20
@@ -1803,8 +1769,8 @@ locations:
     data: !AreaLocation
       point:
         x: 292.5
-        y: -13.45
-        z: 252.8777
+        y: -22.5
+        z: 259.5
       rotation: 0
       sizeX: 14
       sizeY: 71.4
@@ -1816,23 +1782,9 @@ locations:
     - perimeter_outer
     data: !AreaLocation
       point:
-        x: 204.7083
-        y: -13.45
+        x: 154.5
+        y: -22.5
         z: 292.5
-      rotation: 0
-      sizeX: 90
-      sizeY: 14
-      rect: true
-  obj_retreat_outer_n_01:
-    tags:
-    - direction_n
-    - obj_retreat
-    - perimeter_outer
-    data: !AreaLocation
-      point:
-        x: 107.9993
-        y: -13.45
-        z: 293
       rotation: 0
       sizeX: 90
       sizeY: 14
@@ -1845,7 +1797,7 @@ locations:
     data: !AreaLocation
       point:
         x: 146.3232
-        y: -13.45
+        y: -22.45
         z: 7.5
       rotation: 0
       sizeX: 90
@@ -1859,8 +1811,8 @@ locations:
     data: !AreaLocation
       point:
         x: 7.5
-        y: -13.45
-        z: 176.9357
+        y: -22.5
+        z: 166.5
       rotation: 0
       sizeX: 14
       sizeY: 66.1
@@ -1873,7 +1825,7 @@ locations:
     data: !AreaLocation
       point:
         x: 10
-        y: -13.45
+        y: -22.45
         z: 77.93084
       rotation: 0
       sizeX: 20
@@ -1904,7 +1856,23 @@ volumes:
         x: 8
         y: 1
         z: 5
-fields: 
+fields:
+- type: water
+  visible: true
+  origin:
+    x: 150
+    y: -14
+    z: 150
+  size:
+    x: 50
+    y: 5
+    z: 50
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  rotation: 0
 waypointGroups: 
 briefingGroupsInjected: 
 intro:
@@ -1942,7 +1910,7 @@ intro:
       position:
         x: 175
         y: -11.73
-        z: 257.5
+        z: 277.7
       rotation:
         x: 349.81
         y: 227.5
@@ -1964,7 +1932,7 @@ intro:
     fadeDuration: 0.35
     from:
       position:
-        x: 172.02
+        x: 107
         y: 1.5
         z: 55
       rotation:
@@ -2007,7 +1975,7 @@ intro:
         z: 0
       fov: 0
 boundary:
-  groundHeight: -13.5
+  groundHeight: -23.5
   innerSkirtSize: 30
   curveBoundsOffset: 0
   curveBoundsHeight: 12
@@ -2038,53 +2006,17 @@ boundary:
     modePreWrap: ClampForever
     keys:
     - tv_tg:
-        x: 0
-        y: 0.3098628
-        z: 10.10096
-        w: 10.10096
+        x: 0.004291832
+        y: 0.2018779
+        z: 0
+        w: 0
       w:
         x: 0
-        y: 0.2060318
-      m: {}
-    - tv_tg:
-        x: 0.1171296
-        y: 0.9569803
-        z: -1.106191
-        w: -1.106191
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.2514849
-        y: 0.338028
-        z: -4.551861
-        w: -4.551861
-      w:
-        x: 0.3333333
-        y: 0.06337177
-      m: {}
-    - tv_tg:
-        x: 0.576995
         y: 0
-        z: 2.005791
-        w: 2.005791
-      w:
-        x: 0.08536702
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.8027043
-        y: 0.4753867
-        z: 0.08514186
-        w: 0.08514186
-      w:
-        x: 0.3333333
-        y: 0.2075556
       m: {}
     - tv_tg:
         x: 1
-        y: 0.5117366
+        y: 0.2018779
         z: 0
         w: 0
       w:
@@ -2096,8 +2028,8 @@ boundary:
     modePreWrap: ClampForever
     keys:
     - tv_tg:
-        x: 0.002457082
-        y: 0.7793436
+        x: 0.004291832
+        y: 0.2018779
         z: 0
         w: 0
       w:
@@ -2105,71 +2037,8 @@ boundary:
         y: 0
       m: {}
     - tv_tg:
-        x: 0.211979
-        y: 0.7824698
-        z: 0.1361238
-        w: 0.1361238
-      w:
-        x: 0.3333333
-        y: 0.4866735
-      m: {}
-    - tv_tg:
-        x: 0.3052825
-        y: 0.1314554
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.4041768
-        y: 0.1314554
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.4705357
-        y: 0.7528653
-        z: -0.04920402
-        w: -0.04920402
-      w:
-        x: 0.3333333
-        y: 0.4910846
-      m: {}
-    - tv_tg:
-        x: 0.5724815
-        y: 0.7276995
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.7025275
-        y: 0.6340587
-        z: -4.290521
-        w: -4.290521
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.7788697
-        y: 0.1314554
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
         x: 1
-        y: 0.1314554
+        y: 0.2018779
         z: 0
         w: 0
       w:
@@ -2181,8 +2050,8 @@ boundary:
     modePreWrap: ClampForever
     keys:
     - tv_tg:
-        x: 0.004299164
-        y: 0.3990683
+        x: 0.004291832
+        y: 0.2018779
         z: 0
         w: 0
       w:
@@ -2190,62 +2059,8 @@ boundary:
         y: 0
       m: {}
     - tv_tg:
-        x: 0.06683689
-        y: 0.4178366
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.1324341
-        y: 0.4084507
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.2043761
-        y: 0.08450868
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.2528571
-        y: 0.09859254
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.3588097
-        y: 1
-        z: 0
-        w: 0
-      w:
-        x: 0.3333333
-        y: 0.3333333
-      m: {}
-    - tv_tg:
-        x: 0.4286832
-        y: 0.4413199
-        z: -1.525936
-        w: -1.525936
-      w:
-        x: 0.3333333
-        y: 0.05924473
-      m: {}
-    - tv_tg:
         x: 1
-        y: 0.1126761
+        y: 0.2018779
         z: 0
         w: 0
       w:
@@ -2254,7 +2069,5 @@ boundary:
       m: {}
 segments:
 - path: Content/AreaSegments/area_seg_main_facility_industry_03
-biomeFilter:
-  tags:
-    industrial: true
+biomeFilter: 
 scenarioChanges: 

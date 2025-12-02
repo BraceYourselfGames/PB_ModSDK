@@ -4,365 +4,54 @@ exportMode: LinePerKeySimple
 name: Base (Stats)
 description: Base stats are metrics determining capabilities and performance of the mobile base. They range from what the player can carry to how fast a player can build new equipment and repair their units. The player will primarily encounter this text in the base upgrade UI.
 splits: []
+tags: 
+groups: 
 entries:
-  energy_limit__name:
-    color: 
+  camp_supply_limit__name:
     noteDev: 
-    noteWriter: 
     temp: false
-    text: Storage capacity
-  energy_limit__text:
-    color: 
+    text: Camp supply limit
+  camp_supply_limit__text:
     noteDev: 
-    noteWriter: 
     temp: false
-    text: The amount of reserve power that can be stored. Energy will regenerate up to this point when the base is not actively consuming power.
-  energy_recharge_delay__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Recharge delay
-  energy_recharge_delay__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: The time between energy drainage and energy generation, in hours. Delay time can be improved by upgrading.
-  item_block_combat_limit__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Smoke Charge capacity
-  item_block_combat_limit__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: How many Smoke Charges can be stored at the base.
-  item_block_escalation_limit__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Scan Jammer capacity
-  item_block_escalation_limit__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: How many Scan Jammers can be stored at the base.
-  item_block_reinforcements_limit__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Comms Jammer capacity
-  item_block_reinforcements_limit__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: How many Comms Jammers can be stored at the base.
-  item_drone_decoy_limit__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Decoy Drone capacity
-  item_drone_decoy_limit__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: How many Decoy Drones can be stored at the base.
-  item_rain_sensor_limit__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Rain Sensor capacity
-  item_rain_sensor_limit__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: How many Rain Sensors can be stored at the base.
-  mm_fast_energy_change__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Energy drain
-  mm_fast_energy_change__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Rate of energy drainage in overdrive mode, in units per hour.
-  mm_fast_speed__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Speed
-  mm_fast_speed__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base movement speed in overdrive mode, in kilometers per hour.
-  mm_fast_vision_enemy__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Enemy vision
-  mm_fast_vision_enemy__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Distance for enemy scanners to detect the mobile base when running in overdrive mode.
-  mm_fast_vision_own__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base vision
-  mm_fast_vision_own__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Distance for scanners to detect enemy contacts when the base is running in overdrive mode.
-  mm_normal_energy_change__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Energy regeneration
-  mm_normal_energy_change__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Rate of energy regeneration in overdrive mode, in units per hour.
-  mm_normal_speed__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Speed
-  mm_normal_speed__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base movement speed in cruise mode, in kilometers per hour.
-  mm_normal_vision_enemy__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Enemy vision
-  mm_normal_vision_enemy__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Detection distance by enemy scanners when the base is running in cruise mode.
-  mm_normal_vision_own__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base vision
-  mm_normal_vision_own__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Distance for enemy scanners to detect the mobile base when running in cruise mode.
-  mm_stealth_energy_change__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Energy drain
-  mm_stealth_energy_change__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Rate of energy drainage in stealth mode, in units per hour.
-  mm_stealth_speed__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Speed
-  mm_stealth_speed__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base movement speed in stealth mode, in kilometers per hour.
-  mm_stealth_vision_enemy__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Enemy vision
-  mm_stealth_vision_enemy__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Detection distance by enemy scanners when the base is running in stealth mode.
-  mm_stealth_vision_own__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base vision
-  mm_stealth_vision_own__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Distance for enemy scanners to detect the mobile base when running in stealth mode.
+    text: The amount of camp supplies that can be stored at the base.
   pilot_slots__name:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
     text: Pilot limit
   pilot_slots__text:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
     text: Number of pilots the base can support.
-  sensor_rain_effect__name:
-    color: 
+  unit_repair_amount__name:
     noteDev: 
-    noteWriter: 
     temp: false
-    text: Rain compensation
-  sensor_rain_effect__text:
-    color: 
+    text: Mech repair capability
+  unit_repair_amount__text:
     noteDev: 
-    noteWriter: 
     temp: false
-    text: Heavy rain reduces visibility. With upgrades, the base can increase visibility in inclement weather.
-  sensor_scan_time_enemy__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Enemy scan time
-  sensor_scan_time_enemy__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Time needed for enemy scanners to detect the mobile base, in hours.
-  sensor_scan_time_own__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Base scan time
-  sensor_scan_time_own__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Time needed to scan and retrieve detailed information from new contacts, in hours. With upgrades, scan time can be reduced.
+    text: 'How much mech frame integrity can be repaired at one camp stop. For example: if the repair capability is 50%, a mech with 40% integrity will be repaired to 90% after one camp stop. Can be improved with base upgrades.'
   unit_repair_jobs__name:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
-    text: Parallel repairs
+    text: Recovery slots
   unit_repair_jobs__text:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
-    text: Number of units that can be repaired simultaneously. High capacity for parallel repairs is strongly recommended to avoid interruptions on the field.
-  unit_repair_resource_drain__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Liquid Fix drain
-  unit_repair_resource_drain__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Rate at which Liquid Fix is depleted during unit repairs.
-  unit_repair_resource_limit__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Liquid Fix limit
-  unit_repair_resource_limit__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Amount of Liquid Fix that can be stored on base.
-  unit_repair_speed__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Repair speed
-  unit_repair_speed__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Speed at which units are repaired, relative to baseline repair time.
+    text: Number of units and pilots that that can be attended to during a camp stop. Depends on the medical bay and repair equipment.
   unit_slots__name:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
     text: Storage slots
   unit_slots__text:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
     text: Number of units that can be stored on base. Determines whether new units can be built.
   workshop_jobs__name:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
-    text: Parallel builds
+    text: Project limit
   workshop_jobs__text:
-    color: 
     noteDev: 
-    noteWriter: 
     temp: false
     text: Number of projects the workshop is capable of building simultaneously.
-  workshop_speed__name:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Build speed
-  workshop_speed__text:
-    color: 
-    noteDev: 
-    noteWriter: 
-    temp: false
-    text: Speed at which the workshop builds equipment, relative to baseline repair time.
-collection: 

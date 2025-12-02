@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PhantomBrigade.Data;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace PhantomBrigade.Functions
 {
@@ -42,5 +43,25 @@ namespace PhantomBrigade.Functions
             
             #endif
         }
+        
+        #if !PB_MODSDK
+
+        [HideInEditorMode]
+        [Button ("Test on selection")]
+        private void Test ()
+        {
+            if (!Application.isPlaying || !IDUtility.IsGameLoaded () || !IDUtility.IsGameState (GameStates.combat))
+                return;
+            
+            var unitCombat = IDUtility.GetSelectedCombatEntity ();
+            var unitPersistent = IDUtility.GetLinkedPersistentEntity (unitCombat);
+
+            if (unitPersistent == null)
+                return;
+            
+            Run (unitPersistent);
+        }
+        
+        #endif
     }
 }

@@ -24,14 +24,19 @@ dataCore:
   durationType: Data
   duration: 1
   durationUnitStat: 
+  durationPilotStat: 
   heatChange: -20
   secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
   eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
   eventsOnEnd: 
   eventsOnDispose: 
+  functionsOnTargetCheck: 
   functionsOnValidation: 
   functionsOnCreation: 
   functionsOnModification: 
@@ -43,9 +48,11 @@ dataCore:
     - !CombatUnitStatusAdd
       key: timed_charged
       durationOverride: -1
+      source: Function
     - !CombatUnitStatusAdd
       key: timed_charged_cooldown
       durationOverride: -1
+      source: Function
   functionsOnDispose: 
   check: 
   unitCheck:
@@ -71,6 +78,7 @@ dataCore:
       tags:
         ability_charge: true
       present: true
+  pilotLink: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

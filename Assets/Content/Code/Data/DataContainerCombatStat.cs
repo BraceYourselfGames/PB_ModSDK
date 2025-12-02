@@ -9,37 +9,37 @@ namespace PhantomBrigade.Data
     {
         public const string Duration = "duration";
         public const string ActionsPlanned = "actions_planned";
-        public const string DamageInflictedPerSecond = "damage_inflicted_per_second";
         public const string DamageInflictedTotal = "damage_inflicted_total";
         public const string DamageTakenTotal = "damage_taken_total";
-        public const string SalvageableParts = "loot_parts";
-        public const string SalvageableSupplies = "loot_supplies";
-        public const string SalvageableSubsystems = "loot_subsystems";
         public const string MoveDistance = "move_distance";
-        
-        public const string FriendlyUnitsLost = "friendly_units_lost";
+        public const string LevelPointsDestroyed = "level_points_destroyed";
+
         public const string FriendlyUnitsCount = "friendly_units_count";
         public const string FriendlyUnitsLevel = "friendly_units_level";
         public const string FriendlyUnitsThreat = "friendly_units_threat";
+        public const string FriendlyUnitsCrashed = "friendly_units_crashed";
+        public const string FriendlyUnitsDestroyed = "friendly_units_destroyed";
+        public const string FriendlyUnitsDisabled = "friendly_units_disabled";
         
-        public const string EnemyUnitsLost = "enemy_units_lost";
+        public const string FriendlyProjectiles = "friendly_projectiles_fired";
+        public const string FriendlyHitRate = "friendly_hit_rate";
+        public const string FriendlyHitRateAccidental = "friendly_hit_rate_accidental";
+        
         public const string EnemyUnitsCount = "enemy_units_count";
         public const string EnemyUnitsLevel = "enemy_units_level";
         public const string EnemyUnitsThreat = "enemy_units_threat";
+        public const string EnemyUnitsCrashed = "enemy_units_crashed";
+        public const string EnemyUnitsDestroyed = "enemy_units_destroyed";
+        public const string EnemyUnitsDisabled = "enemy_units_disabled";
         
-        public const string LevelPointsDestroyed = "level_points_destroyed";
-        public const string EnemyUnitsAvoided = "enemy_units_avoided";
+        public const string EnemyProjectiles = "enemy_projectiles_fired";
+        public const string EnemyHitRate = "enemy_hit_rate";
+        public const string EnemyHitRateAccidental = "enemy_hit_rate_accidental";
         
-        //Hit rate keys
-        public const string HitRateFriendlyIntended = "friendly_intended_hit_rate";
-        public const string HitRateFriendlyUnintended = "friendly_unintended_hit_rate";
-        public const string HitRateEnemyIntended = "enemy_intended_hit_rate";
-        public const string HitRateEnemyUnintended = "enemy_unintended_hit_rate";
-        
-        //Projectile keys
-        public const string ProjectilesFired = "projectiles_fired";
-        public const string ProjectilesIntended = "projectile_intended";
-        public const string ProjectilesUnintended = "projectile_unintended";
+        public const string UnitProjectilesFired = "unit_projectiles_fired";
+        public const string UnitHitsIntended = "unit_hits_intended";
+        public const string UnitHitsAccidental = "unit_hits_accidental";
+        public const string UnitCrashes = "unit_crashes";
     }
     
     public struct DataBlockCombatStat
@@ -62,7 +62,6 @@ namespace PhantomBrigade.Data
         
         public string textSuffix;
         public string format = "0.##";
-        public string icon;
         
         [Range (1f, 100f)]
         public float valueMultiplier = 1f;

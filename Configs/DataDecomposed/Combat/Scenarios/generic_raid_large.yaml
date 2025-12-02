@@ -71,8 +71,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -83,9 +81,8 @@ states:
               valueFromMemoryKey: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_03_disruption:
     comment:
       comment: This state reacts upon PB unit entering the location, visualizing disruption.
@@ -152,17 +149,14 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !CombatCreateCommsMessage
             time: 0
             key: generic_target_block_c
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
   obj_03_extraction:
     comment: 
     textNameKey: generic_raid_obj_03_header
@@ -240,8 +234,6 @@ states:
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
           rewards: 
-          callsImmediate: 
-          callsDelayed: 
           functions:
           - !ModifyMemoryBase
             changes:
@@ -261,10 +253,9 @@ states:
               modifiers: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
-  outcome_reward_03:
+  outcome_reward_conditional:
     comment: 
     textNameKey: ''
     textDescKey: ''
@@ -287,8 +278,7 @@ states:
     location: 
     locationRetreat: 
     volume: 
-    stateValues:
-      obj_03_extraction: false
+    stateValues: 
     memoryBase: 
     functions: 
     reactions:
@@ -311,22 +301,73 @@ states:
           stateValueChanges: 
           memoryDisplayChanges: 
           unitTagDisplayChanges: 
-          rewards:
-            obj_capture_loot: 1
-          callsImmediate: 
-          callsDelayed: 
-          functions: 
+          rewards: 
+          functions:
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 2
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier1: 1
+            functionsElse: 
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 1
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier2: 1
+            functionsElse: 
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 0
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier3: 1
+            functionsElse: 
           functionsPerUnit: 
           unitGroups: 
+          unitGeneratorKeys: 
           outcome: 
-          callsDelayedOutcomeCheck: false
-          callsDelayedOutcomeRequired: Victory
 steps:
   main:
     comment: 
     core: 
     tags: 
     unitGroups: 
+    unitGeneratorKeys: 
     stateScopeChanges: 
     stateValueChanges: 
     memoryDisplayChanges: 
@@ -358,3 +399,4 @@ steps:
     outcome: 
     transitions: 
 unitPresets: 
+unitGenerators: 

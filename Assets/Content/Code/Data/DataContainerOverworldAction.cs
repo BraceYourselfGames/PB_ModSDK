@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using PhantomBrigade.Functions;
+using Entitas;
+using Entitas.CodeGeneration.Attributes;
+using Entitas.VisualDebugging.Unity;
 using PhantomBrigade.Game;
 using PhantomBrigade.Overworld;
 using Sirenix.OdinInspector;
@@ -9,6 +12,19 @@ using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
+    [OverworldAction]
+    public sealed class DataKeyOverworldAction : IComponent
+    {
+        [EntityIndex]
+        public string s;
+    }
+
+    [OverworldAction][DontDrawComponent]
+    public sealed class DataLinkOverworldAction : IComponent
+    {
+        public DataContainerOverworldAction data;
+    }
+
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockOverworldActionUI
     {
@@ -265,14 +281,6 @@ namespace PhantomBrigade.Data
         {
             base.OnKeyReplacement (keyOld, keyNew);
             
-            FunctionUtility.ReplaceInFunction (typeof (StartAction), keyOld, keyNew, (function, context) =>
-            {
-                var functionTyped = (StartAction)function;
-                var spawnData = functionTyped.data;
-                if (spawnData != null)
-                    FunctionUtility.TryReplaceInString (ref spawnData.key, keyOld, keyNew, context);
-            });
-            
             FunctionUtility.ReplaceInFunction (typeof (CancelAction), keyOld, keyNew, (function, context) =>
             {
                 var functionTyped = (CancelAction)function;
@@ -291,62 +299,6 @@ namespace PhantomBrigade.Data
                 FunctionUtility.TryReplaceInString (ref functionTyped.actionKey, keyOld, keyNew, context);
             });
 
-            var dataEvents = DataMultiLinkerOverworldEvent.data;
-            foreach (var kvp in dataEvents)
-            {
-                var eventData = kvp.Value;
-                if (eventData == null)
-                    continue;
-                
-                if (eventData.steps != null)
-                {
-                    foreach (var kvp2 in eventData.steps)
-                    {
-                        var step = kvp2.Value;
-                        var context = $"Event {kvp.Key}, step {kvp2.Key}";
-                        OnKeyReplacementInEventFunctions (step.functions, keyOld, keyNew, context);
-                        OnKeyReplacementInActionChecks (step.check?.action, keyOld, keyNew, context);
-                    }
-                }
-
-                if (eventData.options != null)
-                {
-                    foreach (var kvp2 in eventData.options)
-                    {
-                        var option = kvp2.Value;
-                        var context = $"Event {kvp.Key}, embedded option {kvp2.Key}";
-                        OnKeyReplacementInEventFunctions (option.functions, keyOld, keyNew, context);
-                        OnKeyReplacementInActionChecks (option.check?.action, keyOld, keyNew, context);
-                    }
-                }
-
-                if (eventData.actions != null)
-                {
-                    if (eventData.actions.resetCompletionOnOwner.Contains (keyOld))
-                    {
-                        Debug.LogWarning ($"Event {kvp.Key}, action link on owner | Replacing action key: {keyOld} -> {keyNew})");
-                        eventData.actions.resetCompletionOnOwner.Add (keyOld);
-                        eventData.actions.resetCompletionOnOwner.Add (keyNew);
-                    }
-                    
-                    if (eventData.actions.resetCompletionOnTarget.Contains (keyOld))
-                    {
-                        Debug.LogWarning ($"Event {kvp.Key}, action link on target | Replacing action key: {keyOld} -> {keyNew})");
-                        eventData.actions.resetCompletionOnTarget.Add (keyOld);
-                        eventData.actions.resetCompletionOnTarget.Add (keyNew);
-                    }
-                }
-            }
-
-            var dataOptions = DataMultiLinkerOverworldEventOption.data;
-            foreach (var kvp in dataOptions)
-            {
-                var option = kvp.Value;
-                var context = $"Shared option {kvp.Key}";
-                OnKeyReplacementInEventFunctions (option.functions, keyOld, keyNew, context);
-                OnKeyReplacementInActionChecks (option.check?.action, keyOld, keyNew, context);
-            }
-
             var dataActions = DataMultiLinkerOverworldAction.data;
             foreach (var kvp in dataActions)
             {
@@ -358,38 +310,6 @@ namespace PhantomBrigade.Data
             }
         }
         
-        private void OnKeyReplacementInEventFunctions (List<IOverworldEventFunction> functions, string keyOld, string keyNew, string context)
-        {
-            if (functions == null)
-                return;
-            
-            for (int i = 0; i < functions.Count; ++i)
-            {
-                var function = functions[i];
-
-                if (function is CompleteAction completeAction && completeAction.actionKey == keyOld)
-                {
-                    Debug.LogWarning ($"{context} | Call {i} (CompleteAction) | Replacing action key: {keyOld} -> {keyNew})");
-                    completeAction.actionKey = keyNew;
-                }
-                else if (function is CancelAction cancelAction && cancelAction.actionKey == keyOld)
-                {
-                    Debug.LogWarning ($"{context} | Call {i} (CancelAction) | Replacing action key: {keyOld} -> {keyNew})");
-                    cancelAction.actionKey = keyNew;
-                }
-                else if (function is TerminateAction terminateAction && terminateAction.actionKey == keyOld)
-                {
-                    Debug.LogWarning ($"{context} | Call {i} (TerminateAction) | Replacing action key: {keyOld} -> {keyNew})");
-                    terminateAction.actionKey = keyNew;
-                }
-                else if (function is StartAction startAction && startAction.data != null && startAction.data.key == keyOld)
-                {
-                    Debug.LogWarning ($"{context} | Call {i} (StartAction) | Replacing action key: {keyOld} -> {keyNew})");
-                    startAction.data.key = keyNew;
-                }
-            }
-        }
-
         private void OnKeyReplacementInActionFunctions (List<IOverworldActionFunction> functions, string keyOld, string keyNew, string context)
         {
             if (functions == null)
@@ -413,27 +333,6 @@ namespace PhantomBrigade.Data
                 {
                     Debug.LogWarning ($"{context} | Call {i} (TerminateAction) | Replacing action key: {keyOld} -> {keyNew})");
                     terminateAction.actionKey = keyNew;
-                }
-                else if (function is StartAction startAction && startAction.data != null && startAction.data.key == keyOld)
-                {
-                    Debug.LogWarning ($"{context} | Call {i} (StartAction) | Replacing action key: {keyOld} -> {keyNew})");
-                    startAction.data.key = keyNew;
-                }
-            }
-        }
-        
-        private void OnKeyReplacementInActionChecks (DataBlockOverworldEventCheckAction check, string keyOld, string keyNew, string context)
-        {
-            if (check == null || check.actions == null)
-                return;
-
-            for (int i = 0; i < check.actions.Count; ++i)
-            {
-                var block = check.actions[i];
-                if (block != null && block.key == keyOld)
-                {
-                    Debug.LogWarning ($"{context} | Action check {i} | Replacing action key: {keyOld} -> {keyNew})");
-                    block.key = keyNew;
                 }
             }
         }
@@ -551,6 +450,73 @@ namespace PhantomBrigade.Data
         private static bool IsAudioVisible => DataMultiLinkerOverworldAction.Presentation.showAudio;
         
         public static readonly List<string> progressTypes = new List<string> {ProgressDisplayType.Accumulating, ProgressDisplayType.Diminishing};
+
+        #if !PB_MODSDK
+        [HideInEditorMode]
+        [ButtonGroup, Button ("Create\nBase", ButtonSizes.Large), PropertyOrder (-1)]
+        public void Test ()
+        {
+            if (!Application.isPlaying || !IDUtility.IsGameLoaded ())
+                return;
+
+            OverworldActionUtility.InstantiateOverworldActionForBase (key);
+        }
+
+        [HideInEditorMode]
+        [ButtonGroup, Button ("Create\nBase → Selected", ButtonSizes.Large), PropertyOrder (-1)]
+        public void TestOnBaseAndSelection ()
+        {
+            if (!Application.isPlaying || !IDUtility.IsGameLoaded ())
+                return;
+
+            var overworld = Contexts.sharedInstance.overworld;
+            if (!overworld.hasSelectedEntity)
+            {
+                Debug.LogWarning ($"No selected entity currently exists!");
+                return;
+            }
+
+            var targetOverworld = IDUtility.GetOverworldEntity (overworld.selectedEntity.id);
+            OverworldActionUtility.InstantiateOverworldActionForBase (key, targetOverworld);
+        }
+
+        [HideInEditorMode]
+        [ButtonGroup, Button ("Create\nSelected", ButtonSizes.Large), PropertyOrder (-1)]
+        public void TestOnSelection ()
+        {
+            if (!Application.isPlaying || !IDUtility.IsGameLoaded ())
+                return;
+
+            var overworld = Contexts.sharedInstance.overworld;
+            if (!overworld.hasSelectedEntity)
+            {
+                Debug.LogWarning ($"No selected entity currently exists!");
+                return;
+            }
+
+            var ownerOverworld = IDUtility.GetOverworldEntity (overworld.selectedEntity.id);
+            OverworldActionUtility.InstantiateOverworldAction (ownerOverworld, key);
+        }
+
+        [HideInEditorMode]
+        [ButtonGroup, Button ("Create\nSelected → Hovered", ButtonSizes.Large), PropertyOrder (-1)]
+        public void TestOnSelectionAndHover ()
+        {
+            if (!Application.isPlaying || !IDUtility.IsGameLoaded ())
+                return;
+
+            var overworld = Contexts.sharedInstance.overworld;
+            if (!overworld.hasSelectedEntity || !overworld.hasHoveredEntity)
+            {
+                Debug.LogWarning ($"No selected entity or hovered entity currently exists!");
+                return;
+            }
+
+            var ownerOverworld = IDUtility.GetOverworldEntity (overworld.selectedEntity.id);
+            var targetOverworld = IDUtility.GetOverworldEntity (overworld.hoveredEntity.id);
+            OverworldActionUtility.InstantiateOverworldAction (ownerOverworld, key, targetOverworld);
+        }
+        #endif
         
         #endif
         #endregion

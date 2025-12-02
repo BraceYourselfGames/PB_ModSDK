@@ -9,6 +9,9 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_04
+- category_wpn_rifle_sniper
+- aihint_stopmovementtofire
+- spec_concussion
 statDistribution: ''
 stats:
   act_count:
@@ -17,17 +20,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   act_duration:
-    value: 0.5
+    value: 0.85
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   act_heat:
-    value: 90
+    value: 130
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 4
+    value: 4.5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -37,12 +40,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_concussion:
-    value: 0
+    value: 3
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_damage:
-    value: 120
+    value: 170
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -52,7 +55,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 200
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -87,12 +90,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 120
+    value: 165
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 60
+    value: 50
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -189,6 +192,9 @@ projectile:
   fragmentationDelayed: 
   falloff:
     animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
     damageFalloff:
       modePostWrap: ClampForever
       modePreWrap: ClampForever
@@ -222,11 +228,11 @@ projectile:
         m: {}
       - tv_tg:
           x: 1
-          y: 0
-          z: -0.02293707
-          w: -0.02293707
+          y: 0.3995847
+          z: 0.01380833
+          w: 0.01380833
         w:
-          x: 0.217062
+          x: 0.3516486
           y: 0.3333333
         m: {}
   falloffGlobal: 
@@ -243,8 +249,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

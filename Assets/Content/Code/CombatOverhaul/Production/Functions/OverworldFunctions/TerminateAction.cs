@@ -6,30 +6,12 @@ using UnityEngine;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class TerminateAction : IOverworldEventFunction
+    public class TerminateAction : IOverworldFunction
     {
         [ValueDropdown ("@DataMultiLinkerOverworldAction.data.Keys")]
         public string actionKey;
 
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            #if !PB_MODSDK
-
-            Run ();
-            
-            #endif
-        }
-
-        public void Run (OverworldActionEntity source)
-        {
-            #if !PB_MODSDK
-
-            Run ();
-            
-            #endif
-        }
-
-        private void Run ()
+        public void Run ()
         {
             #if !PB_MODSDK
 

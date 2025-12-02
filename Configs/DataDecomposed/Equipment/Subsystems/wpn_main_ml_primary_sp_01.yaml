@@ -9,9 +9,12 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_01
+- spec_guided
+- spec_guided_precise
 - spec_stabilized
-- stat_concussive
+- spec_concussion
 - type_level_locked
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -180,6 +183,7 @@ projectile:
     distance: 5
     targetExclusive: false
     inertBeforeHit: false
+    inertPrimingDelay: 1
     triggerWithoutEntity: false
   hitResponse: 
   splashDamage:
@@ -435,8 +439,10 @@ projectile:
         m: {}
   uiSpeedAverage:
     f: 25
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

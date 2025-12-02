@@ -1,0 +1,51 @@
+hidden: false
+parents:
+- key: sh_core_basic
+- key: sh_option_main_continue
+core:
+  stepOnStart: main
+  priority: -1
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags:
+- liberation_backslide
+check:
+  repeat: Enabled
+  checksGlobal:
+  - !OverworldValidateBaseResources
+    checks:
+      camp_supplies:
+        check: Greater
+        value: 1
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_under_fire
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !ModifyResources
+        resourceChanges:
+        - key: camp_supplies
+          check: false
+          checkStrict: false
+          offset: true
+          value: -1
+        - key: hope
+          check: false
+          checkStrict: false
+          offset: true
+          value: -1
+      functionsLocal: 
+    options: 
+    optionsReused: 

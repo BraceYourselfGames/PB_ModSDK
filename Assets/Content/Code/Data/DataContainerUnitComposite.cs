@@ -30,31 +30,31 @@ namespace PhantomBrigade.Data
             Animate,
             Apply
         }
-
+        
         [BoxGroup]
         public SecondaryStartMode startMode = SecondaryStartMode.Ignore;
-
+        
         [ShowIf ("@startMode == SecondaryStartMode.Animate")]
         public Vector2 startAnimTimings = new Vector2 (0f, 1f);
-
+        
         public Vector3 position;
         public Vector3 rotation;
     }
-
+    
     public class DataBlockUnitLinkDamageRedirect
     {
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerUnitComposite\", \"GetUnitKeys\")")]
         public string unitKey;
     }
-
+    
     public class DataBlockUnitLinkConditional
     {
-        [DropdownReference (true), HideLabel]
+        [DropdownReference (true), HideLabel] 
         public DataBlockComment comment;
-
+        
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerUnitComposite\", \"GetUnitKeys\")")]
         public HashSet<string> unitKeys = new HashSet<string> ();
-
+        
         [BoxGroup ("Check", false)]
         public DataBlockScenarioSubcheckUnit check = new DataBlockScenarioSubcheckUnit ();
 
@@ -62,20 +62,20 @@ namespace PhantomBrigade.Data
 
         [DropdownReference]
         public List<ICombatFunction> functions;
-
+        
         [DropdownReference]
-        public List<ICombatFunctionTargeted> functionsTargetedSelf;
-
+        public List<ICombatFunctionTargeted> functionsTargetedSelf; 
+        
         [DropdownReference]
         public List<ICombatFunctionTargeted> functionsTargetedPerLink;
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
-
-        public DataBlockUnitLinkConditional () =>
+        
+        public DataBlockUnitLinkConditional () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
         [GUIColor (1f, 0.75f, 0.5f), ShowIf ("IsCommsUpdateAvailable")]
@@ -97,7 +97,7 @@ namespace PhantomBrigade.Data
             }
             return false;
         }
-
+        
         #endif
         #endregion
     }
@@ -110,23 +110,23 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         [ValueDropdown ("@DataMultiLinkerUnitLiveryPreset.data.Keys")]
         public string liveryPreset;
-
+        
         [DropdownReference (true)]
         [LabelText ("Default AI Behavior")]
         [ValueDropdown ("@DataShortcuts.ai.unitBehaviors")]
         public string aiBehavior;
-
+        
         [DropdownReference (true)]
         [ValueDropdown ("@DataMultiLinkerAITargetingProfile.data.Keys")]
         public string aiTargeting;
-
+        
         #region Editor
         #if UNITY_EDITOR
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
-
-        public DataBlockUnitCompositeSpawn () =>
+        
+        public DataBlockUnitCompositeSpawn () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
         #endif
@@ -135,9 +135,9 @@ namespace PhantomBrigade.Data
 
     public class DataBlockUnitComposite
     {
-        [DropdownReference (true), HideLabel]
+        [DropdownReference (true), HideLabel] 
         public DataBlockComment comment;
-
+        
         [ValueDropdown ("@DataMultiLinkerUnitPreset.data.Keys")]
         public string preset;
 
@@ -152,37 +152,37 @@ namespace PhantomBrigade.Data
 
         [DropdownReference (true)]
         public DataBlockScenarioUnitCustomization spawnCustomization;
-
+        
         [DropdownReference]
         public List<ICombatFunctionTargeted> spawnFunctions;
-
+        
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerUnitComposite\", \"GetAssignableEventKeys\")")]
         [DropdownReference (true)]
         public HashSet<string> assignableEventsDestruction;
-
+        
         [DropdownReference (true)]
         public DataBlockUnitLinkDamageRedirect linkDamageRedirect;
 
         [DropdownReference (true)]
         public DataBlockUnitLinkTransform linkTransform;
-
+        
         [DropdownReference]
         public List<DataBlockUnitLinkConditional> linksConditional;
-
+        
         [DropdownReference]
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerUnitComposite\", \"GetUnitKeys\")")]
         public HashSet<string> legStepBlocklist;
-
+        
         [HideInInspector, NonSerialized, YamlIgnore]
         public bool removedInProcessing = false;
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
-
-        public DataBlockUnitComposite () =>
+        
+        public DataBlockUnitComposite () => 
             helper = new DataEditor.DropdownReferenceHelper (this);
 
         #endif
@@ -193,13 +193,13 @@ namespace PhantomBrigade.Data
     {
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerUnitComposite\", \"GetUnitKeys\")")]
         public string unitRoot = "a_core";
-
+        
         [PropertyTooltip ("Primary movement speed in meters per second")]
         public float speedTranslation = 3f;
-
+        
         [PropertyTooltip ("Primary rotation speed in radians per second")]
         public float speedRotationPrimary = 0.5f;
-
+        
         [PropertyTooltip ("Secondary rotation speed in degrees per second")]
         public float speedRotationSecondary = 30f;
 
@@ -209,7 +209,7 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
 
-
+        
     }
 
     public class DataBlockUnitCompositeLayout
@@ -221,11 +221,11 @@ namespace PhantomBrigade.Data
         [OnValueChanged ("ApplyFilter")]
         [SuffixLabel ("Isolated selection")]
         public string unitKey = string.Empty;
-
+        
         [ShowIf ("IsUnitSelected")]
         [YamlIgnore, BoxGroup ("A", false), HideLabel]
         public DataBlockUnitComposite unitFiltered;
-
+        
         [HideIf ("IsUnitSelected")]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
         public SortedDictionary<string, DataBlockUnitComposite> units = new SortedDictionary<string, DataBlockUnitComposite> ();
@@ -240,17 +240,17 @@ namespace PhantomBrigade.Data
         {
             return unitFiltered != null;
         }
-
+        
         private void ClearFilter ()
         {
             unitFiltered = null;
             unitKey = string.Empty;
         }
-
+        
         private void ApplyFilter ()
         {
             unitFiltered = null;
-
+            
             if (units == null || string.IsNullOrEmpty (unitKey))
                 return;
 
@@ -278,7 +278,7 @@ namespace PhantomBrigade.Data
                 unitKeyRoot = parent.coreProcessed.unitRoot;
             if (string.IsNullOrEmpty (unitKeyRoot))
                 unitKeyRoot = "a_core";
-
+            
             if (clear && units != null)
             {
                 var keys = units.Keys.ToList ();
@@ -291,17 +291,17 @@ namespace PhantomBrigade.Data
 
             var subsystems = DataMultiLinkerSubsystem.data;
             var presets = DataMultiLinkerPartPreset.data;
-
+            
             var t = holder.transform;
             for (int i = 0; i < t.childCount; ++i)
             {
                 var child = t.GetChild (i);
                 var childObject = child.gameObject;
                 var childName = child.name;
-
+                
                 if (!childObject.activeSelf)
                     continue;
-
+                
                 // Determine it's a valid visual prefab that'll be found by the game
                 var itemVisual = childObject.GetComponent<ItemVisual> ();
                 if (itemVisual == null)
@@ -311,37 +311,37 @@ namespace PhantomBrigade.Data
                 var prefabInstance = UnityEditor.PrefabUtility.IsPartOfPrefabInstance (childObject);
                 if (!prefabInstance)
                     continue;
-
+                
                 // Determine whether the object we're dealing with is the root of an instance and not part of a higher level instance
                 var prefabRoot = UnityEditor.PrefabUtility.GetNearestPrefabInstanceRoot (childObject);
                 if (prefabRoot == null || prefabRoot != childObject)
                     continue;
-
+                
                 var prefabAsset = UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource (prefabRoot);
                 var prefabName = prefabAsset.name;
-
+                
                 Debug.Log ($"C{i} ({childName}) | Prefab asset: {prefabName} ({prefabAsset.GetInstanceID ()})");
 
                 bool subsystemFound = false;
                 string subsystemKeySelected = null;
-
+                
                 foreach (var kvp in subsystems)
                 {
                     var subsystem = kvp.Value;
                     if (subsystem == null || subsystem.hidden || subsystem.attachments == null || subsystem.attachments.Count == 0)
                         continue;
-
+                    
                     var subsystemKey = kvp.Key;
                     foreach (var kvp2 in subsystem.attachments)
                     {
                         var attachment = kvp2.Value;
                         if (attachment == null || prefabName != attachment.key)
                             continue;
-
+                        
                         var attachmentKey = kvp2.Key;
                         subsystemKeySelected = subsystemKey;
                         subsystemFound = true;
-
+                        
                         Debug.Log ($"C{i} ({childName}) | Found a matching subsystem attachment: {subsystemKey}/{attachmentKey}");
                         break;
                     }
@@ -382,7 +382,7 @@ namespace PhantomBrigade.Data
                 // Don't update transform on root
                 if (childName == unitKeyRoot)
                     continue;
-
+                
                 if (block.linkTransform == null)
                     block.linkTransform = new DataBlockUnitLinkTransform ();
 
@@ -390,20 +390,20 @@ namespace PhantomBrigade.Data
                 lt.position = child.localPosition;
                 lt.rotation = child.localRotation.eulerAngles;
                 lt.unitKey = unitKeyRoot;
-
+                
                 Debug.LogWarning ($"C{i} ({childName}) | Updated unit transform | Position: {lt.position} | Rotation: {lt.rotation}");
             }
         }
-
+        
         #endif
         #endregion
     }
-
+    
     public class DataBlockUnitChildFunctions
     {
         [ValueDropdown ("@DropdownUtils.ParentTypeProperty ($property, \"DataContainerUnitComposite\", \"GetUnitKeys\")")]
         public string unitKey = string.Empty;
-        public List<ICombatFunctionTargeted> functions = new List<ICombatFunctionTargeted> ();
+        public List<ICombatFunctionTargeted> functions = new List<ICombatFunctionTargeted> (); 
     }
 
     public class DataBlockUnitDirectorBooting
@@ -411,26 +411,47 @@ namespace PhantomBrigade.Data
         public bool evaluateFacing = false;
         public bool evaluateNavigation = false;
         public bool evaluateNodes = false;
-
-        public List<ICombatFunction> functions = new List<ICombatFunction> ();
-
+        
+        public List<ICombatFunction> functions = new List<ICombatFunction> (); 
+        
         public List<DataBlockUnitChildFunctions> functionsPerChild = new List<DataBlockUnitChildFunctions> ();
     }
 
-    public class DataBlockUnitCompositeDirector
+    public class DataBlockUnitCompositeDirector : DataBlockUnitDirector
     {
         // [TabGroup ("Routines")]
-        [DropdownReference]
+        [DropdownReference, PropertyOrder (-1)]
         public DataBlockUnitDirectorBooting booting;
 
         // [TabGroup ("Routines")]
-        [DropdownReference]
+        [DropdownReference, PropertyOrder (-1)]
         public DataBlockUnitDirectorFacing facing;
 
         // [TabGroup ("Routines")]
-        [DropdownReference]
+        [DropdownReference, PropertyOrder (-1)]
         public DataBlockUnitDirectorNavigation navigation;
+        
+        #region Editor
+        #if UNITY_EDITOR
 
+        private string GetSelectLabel => DataMultiLinkerUnitComposite.selectedDirector == this ? "Deselect" : "Select";
+
+        // [TabGroup ("Routines")]
+        [Button ("@GetSelectLabel"), PropertyOrder (-10)]
+        private void Select ()
+        {
+            if (DataMultiLinkerUnitComposite.selectedDirector != this)
+                DataMultiLinkerUnitComposite.selectedDirector = this;
+            else
+                DataMultiLinkerUnitComposite.selectedDirector = null;
+        }
+        
+        #endif
+        #endregion
+    }
+
+    public class DataBlockUnitDirector
+    {
         // [TabGroup ("Nodes")]
         [YamlIgnore]
         [GUIColor ("GetNodeKeyColor"), HideLabel]
@@ -439,7 +460,7 @@ namespace PhantomBrigade.Data
         [OnValueChanged ("ApplyFilter")]
         [SuffixLabel ("Isolated selection")]
         public string nodeKey = string.Empty;
-
+        
         // [TabGroup ("Nodes")]
         [ShowIf ("IsNodeSelected")]
         [YamlIgnore, HideLabel]
@@ -462,7 +483,7 @@ namespace PhantomBrigade.Data
                 var node = nodes[i];
                 if (node == null)
                     continue;
-
+                
                 node.treeParent = null;
                 node.treeDepth = 1;
                 node.treeIndex = i + 1;
@@ -479,7 +500,7 @@ namespace PhantomBrigade.Data
                 }
             }
         }
-
+        
         private static string nameFallback = "...";
         private static StringBuilder sb = new StringBuilder ();
         private static List<DataBlockUnitDirectorNode> nodesPrinted = new List<DataBlockUnitDirectorNode> ();
@@ -488,7 +509,7 @@ namespace PhantomBrigade.Data
         {
             if (node == null)
                 return string.Empty;
-
+            
             sb.Clear ();
 
             var root = node;
@@ -508,13 +529,13 @@ namespace PhantomBrigade.Data
             sb.Append ("   ");
             sb.Append (node.treeIndex);
             sb.Append (' ');
-
+            
             for (int i = 0; i < node.treeDepth; ++i)
                 sb.Append ('|');
 
             return sb.ToString ();
         }
-
+        
         private string GetIndexText (int treeDepth, int treeIndex)
         {
             sb.Clear ();
@@ -536,7 +557,7 @@ namespace PhantomBrigade.Data
             node.treeIndex = index + 1;
             node.hierarchyTextCached = GetHierarchyText (node);
             node.OnDataChanges ();
-
+            
             if (node.children != null)
             {
                 for (int c = 0, cLimit = node.children.Count; c < cLimit; ++c)
@@ -551,23 +572,11 @@ namespace PhantomBrigade.Data
         #region Editor
         #if UNITY_EDITOR
 
-        private string GetSelectLabel => DataMultiLinkerUnitComposite.selectedDirector == this ? "Deselect" : "Select";
-
-        // [TabGroup ("Routines")]
-        [Button ("@GetSelectLabel"), PropertyOrder (-10)]
-        private void Select ()
-        {
-            if (DataMultiLinkerUnitComposite.selectedDirector != this)
-                DataMultiLinkerUnitComposite.selectedDirector = this;
-            else
-                DataMultiLinkerUnitComposite.selectedDirector = null;
-        }
-
         private Color GetElementColor (int index, Color defaultColor)
         {
             var value = nodes != null && index >= 0 && index < nodes.Count ? nodes[index] : null;
             if (value != null)
-            {
+            { 
                 if (!value.enabled)
                     return Color.gray.WithAlpha (0.2f);
                 if (value.color != null)
@@ -575,16 +584,16 @@ namespace PhantomBrigade.Data
             }
             return DataEditor.GetColorFromElementIndex (index);
         }
-
+        
         private void DrawEntryGUI (int index)
         {
             if (nodes == null || !index.IsValidIndex (nodes))
                 return;
-
+            
             var node = nodes[index];
             if (node == null)
                 return;
-
+            
             // GUI.backgroundColor = bgColor;
 
             sb.Clear ();
@@ -605,29 +614,29 @@ namespace PhantomBrigade.Data
                 sb.Append (node.children.Count);
                 sb.Append (" nodes");
             }
-
+		    
             GUILayout.BeginHorizontal ();
             GUILayout.Label (sb.ToString (), UnityEditor.EditorStyles.miniLabel);
             GUILayout.EndHorizontal ();
-
+            
             // GUI.backgroundColor = bgColorOld;
         }
-
+        
         private bool IsNodeSelected ()
         {
             return nodeFiltered != null;
         }
-
+        
         private void ClearFilter ()
         {
             nodeFiltered = null;
             nodeKey = string.Empty;
         }
-
+        
         private void ApplyFilter ()
         {
             nodeFiltered = null;
-
+            
             if (nodes == null || string.IsNullOrEmpty (nodeKey))
                 return;
 
@@ -649,7 +658,7 @@ namespace PhantomBrigade.Data
         private IEnumerable<string> GetNodeKeys ()
         {
             nodeKeys.Clear ();
-
+            
             if (nodes != null)
             {
                 foreach (var node in nodes)
@@ -661,29 +670,29 @@ namespace PhantomBrigade.Data
 
             return nodeKeys;
         }
-
+        
         [ShowInInspector]
         private DataEditor.DropdownReferenceHelper helper;
 
-        public DataBlockUnitCompositeDirector () =>
+        public DataBlockUnitDirector () =>
             helper = new DataEditor.DropdownReferenceHelper (this);
-
+	    
         #endif
         #endregion
     }
-
+    
     public class DataBlockUnitCompositeEvents
     {
         [DropdownReference]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout, KeyLabel = " ")]
         // [DictionaryKeyDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (UnitCompositeEventTypes), false)")]
         public SortedDictionary<string, List<DataBlockUnitCompositeSpatialEffect>> eventsSpatial;
-
+        
         [DropdownReference]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout, KeyLabel = " ")]
         // [DictionaryKeyDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (UnitCompositeEventTypes), false)")]
         public SortedDictionary<string, DataBlockUnitCompositeAssignedEvent> eventsAssignable;
-
+        
         #region Editor
         #if UNITY_EDITOR
 
@@ -696,7 +705,7 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
-
+    
     [HideReferenceObjectPicker]
     public class DataBlockUnitCompositeParent
     {
@@ -707,7 +716,7 @@ namespace PhantomBrigade.Data
 
         [YamlIgnore, ReadOnly, HideInInspector]
         private string hierarchyProperty => DataMultiLinkerPartPreset.Presentation.showHierarchy ? hierarchy : string.Empty;
-
+        
         [YamlIgnore, ReadOnly, HideInInspector]
         public string hierarchy;
 
@@ -716,7 +725,7 @@ namespace PhantomBrigade.Data
 
         private static Color colorError = Color.Lerp (Color.red, Color.white, 0.5f);
         private static Color colorNormal = Color.white;
-
+        
         private Color GetKeyColor ()
         {
             if (string.IsNullOrEmpty (key))
@@ -725,11 +734,11 @@ namespace PhantomBrigade.Data
             bool present = DataMultiLinkerUnitComposite.data.ContainsKey (key);
             return present ? colorNormal : colorError;
         }
-
+        
         #endif
         #endregion
     }
-
+    
     public class DataContainerUnitComposite : DataContainerWithText, IDataContainerTagged
     {
         [TabGroup ("Core")]
@@ -746,63 +755,63 @@ namespace PhantomBrigade.Data
 
         [TabGroup ("Core")]
         public bool hidden = false;
-
-
+        
+        
         [TabGroup ("Core")]
         public DataBlockUnitCompositeCore core = new DataBlockUnitCompositeCore ();
-
+        
         [TabGroup ("Core")]
         [ShowIf ("@IsInheritanceVisible && coreProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockUnitCompositeCore coreProcessed;
-
-
+        
+        
         [LabelText ("UI")]
         [TabGroup ("Core")]
         public DataBlockUnitCompositeUI ui = new DataBlockUnitCompositeUI ();
-
+        
         [TabGroup ("Core")]
         [LabelText ("UI Processed")]
         [ShowIf ("@IsInheritanceVisible && uiProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockUnitCompositeUI uiProcessed;
-
-
+        
+        
         [TabGroup ("Core")]
         public HashSet<string> tags;
-
+        
         [TabGroup ("Core")]
         [ShowIf ("@IsInheritanceVisible && tagsProcessed != null")]
         [YamlIgnore, ReadOnly]
         public HashSet<string> tagsProcessed;
-
-
+        
+        
         [TabGroup ("Layout")]
         [HideReferenceObjectPicker, HideLabel]
         public DataBlockUnitCompositeLayout layout = new DataBlockUnitCompositeLayout ();
-
+        
         [TabGroup ("Layout")]
         [HideReferenceObjectPicker, HideLabel]
         [ShowIf ("@IsInheritanceVisible && layoutProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockUnitCompositeLayout layoutProcessed;
-
-
+        
+        
         [TabGroup ("Director")]
         [HideReferenceObjectPicker, HideLabel]
         public DataBlockUnitCompositeDirector director = new DataBlockUnitCompositeDirector ();
-
+        
         [TabGroup ("Director")]
         [HideReferenceObjectPicker, HideLabel]
         [ShowIf ("@IsInheritanceVisible && directorProcessed != null")]
         [YamlIgnore, ReadOnly]
         public DataBlockUnitCompositeDirector directorProcessed;
-
-
+        
+        
         [TabGroup ("Events")]
         [HideReferenceObjectPicker, HideLabel]
         public DataBlockUnitCompositeEvents events = new DataBlockUnitCompositeEvents ();
-
+        
         [TabGroup ("Events")]
         [HideReferenceObjectPicker, HideLabel]
         [ShowIf ("@IsInheritanceVisible && eventsProcessed != null")]
@@ -810,10 +819,10 @@ namespace PhantomBrigade.Data
         public DataBlockUnitCompositeEvents eventsProcessed;
 
         public bool IsHidden () => hidden;
-
-        public HashSet<string> GetTags (bool processed) =>
+        
+        public HashSet<string> GetTags (bool processed) => 
             processed ? tagsProcessed : tags;
-
+        
         public override void OnAfterDeserialization (string key)
         {
             base.OnAfterDeserialization (key);
@@ -822,7 +831,7 @@ namespace PhantomBrigade.Data
             if (layout != null)
                 layout.parent = this;
         }
-
+        
         public override void ResolveText ()
         {
             if (ui != null)
@@ -839,10 +848,10 @@ namespace PhantomBrigade.Data
                 {
                     var unitKey = kvp.Key;
                     var unitInfo = kvp.Value;
-
+                    
                     if (unitInfo.textName != null)
                         unitInfo.textName.s = DataManagerText.GetText (TextLibs.unitComposites, $"{key}__unit_{unitKey}_name");
-
+                    
                     if (unitInfo.textDesc != null)
                         unitInfo.textDesc.s = DataManagerText.GetText (TextLibs.unitComposites, $"{key}__unit_{unitKey}_text");
                 }
@@ -856,10 +865,10 @@ namespace PhantomBrigade.Data
                     {
                         var eventKey = kvp.Key;
                         var eventData = kvp.Value;
-
+                        
                         if (string.IsNullOrEmpty(eventKey) || eventData == null || eventData.ui == null)
                             continue;
-
+                        
                         eventData.ui.textName = DataManagerText.GetText (TextLibs.unitComposites, $"{key}__ev_{eventKey}_name");
                         eventData.ui.textDesc = DataManagerText.GetText (TextLibs.unitComposites, $"{key}__ev_{eventKey}_text");
                     }
@@ -882,7 +891,7 @@ namespace PhantomBrigade.Data
                     nodes.RemoveAt (i);
             }
         }
-
+        
         private int CompareDirectorNodesForSorting (DataBlockUnitDirectorNodeRoot node1, DataBlockUnitDirectorNodeRoot node2)
         {
             if (node1 == null)
@@ -903,12 +912,12 @@ namespace PhantomBrigade.Data
 
         #region Editor
         #if UNITY_EDITOR
-
+        
         public override void SaveText ()
         {
             if (!IsTextSavingPossible ())
                 return;
-
+            
             if (ui != null)
             {
                 if (ui.textName != null)
@@ -916,22 +925,22 @@ namespace PhantomBrigade.Data
                 if (ui.textType != null)
                     DataManagerText.TryAddingTextToLibrary (TextLibs.unitComposites, $"{key}__core_type", ui.textType.s);
             }
-
+            
             if (layout != null && layout.units != null)
             {
                 foreach (var kvp in layout.units)
                 {
                     var unitKey = kvp.Key;
                     var unitInfo = kvp.Value;
-
+                    
                     if (unitInfo.textName != null)
                         DataManagerText.TryAddingTextToLibrary (TextLibs.unitComposites, $"{key}__unit_{unitKey}_name", unitInfo.textName.s);
-
+                    
                     if (unitInfo.textDesc != null)
                         DataManagerText.TryAddingTextToLibrary (TextLibs.unitComposites, $"{key}__unit_{unitKey}_text", unitInfo.textDesc.s);
                 }
             }
-
+            
             if (events != null)
             {
                 if (events.eventsAssignable != null)
@@ -940,20 +949,20 @@ namespace PhantomBrigade.Data
                     {
                         var eventKey = kvp.Key;
                         var eventData = kvp.Value;
-
+                        
                         if (string.IsNullOrEmpty(eventKey) || eventData == null || eventData.ui == null)
                             continue;
-
+                        
                         DataManagerText.TryAddingTextToLibrary (TextLibs.unitComposites, $"{key}__ev_{eventKey}_name", eventData.ui.textName);
                         DataManagerText.TryAddingTextToLibrary (TextLibs.unitComposites, $"{key}__ev_{eventKey}_text", eventData.ui.textDesc);
                     }
                 }
             }
         }
-
+        
         private IEnumerable<string> GetUnitKeys => layoutProcessed?.units?.Keys;
         private IEnumerable<string> GetAssignableEventKeys => eventsProcessed?.eventsAssignable?.Keys;
-
+        
         private bool IsInheritanceVisible => DataMultiLinkerUnitComposite.Presentation.showInheritance;
 
         [ShowInInspector]
@@ -961,25 +970,24 @@ namespace PhantomBrigade.Data
 
         public DataContainerUnitComposite () =>
             helper = new DataEditor.DropdownReferenceHelper (this);
-
+        
         private static GameObject visualHolder;
+
+        [Button, PropertyOrder (-1), ButtonGroup ("Header")]
+        private void Reprocess ()
+        {
+            DataMultiLinkerUnitComposite.ProcessRelated (this);
+        }
 
         [Button, PropertyOrder (-1), ButtonGroup ("Header")]
         public void DestroyVisualHolder () => DataMultiLinkerSubsystem.DestroyVisualHolder ();
 
-        [EnableIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
         [Button, PropertyOrder (-1), ButtonGroup ("Header")]
         public void Visualize ()
         {
-            if (!AssetPackageHelper.AreUnitAssetsInstalled ())
-            {
-                Debug.LogWarning (AssetPackageHelper.unitAssetWarning);
-                return;
-            }
-
             if (layoutProcessed == null || layoutProcessed.units == null || layoutProcessed.units.Count == 0)
                 return;
-
+            
             bool first = true;
             foreach (var kvp in layoutProcessed.units)
             {
@@ -991,19 +999,19 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"{unitKey}: null data");
                     continue;
                 }
-
+               
                 var unitPreset = DataMultiLinkerUnitPreset.GetEntry (unit.preset, false);
                 if (unitPreset == null)
                 {
                     Debug.LogWarning ($"{unitKey}: unit preset {unit.preset} not found");
                     continue;
                 }
-
+                
                 if (unitPreset.partsProcessed == null || !unitPreset.partsProcessed.TryGetValue (LoadoutSockets.corePart, out var link))
                 {
                     Debug.LogWarning ($"{unitKey}: unit preset {unit.preset} contains no processed part for core socket");
                     continue;
-                }
+                }  
 
                 if (link.preset != null && link.preset is DataBlockPartSlotResolverKeys resolver)
                 {
@@ -1019,8 +1027,8 @@ namespace PhantomBrigade.Data
                     {
                         Debug.LogWarning ($"{unitKey}: part preset {partPresetKey} not found (from unit preset {unitPreset.key})");
                         continue;
-                    }
-
+                    }  
+                    
                     if (partPreset.genStepsProcessed == null || partPreset.genStepsProcessed.Count == 0)
                     {
                         Debug.LogWarning ($"{unitKey}: part preset {partPreset.key} contains no processed gen steps");
@@ -1033,7 +1041,7 @@ namespace PhantomBrigade.Data
                         if (step != null && step is AddHardpoints stepHardpoint)
                         {
                             found = true;
-
+                            
                             if (stepHardpoint.subsystemsInitial == null || stepHardpoint.subsystemsInitial.Count == 0)
                             {
                                 Debug.LogWarning ($"{unitKey}: part preset {partPreset.key} hardpoint step has no subsystem keys");
@@ -1074,11 +1082,11 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         [LabelText ("Functions (Spatial)")]
         public List<ICombatFunctionSpatial> functionsSpatial;
-
+        
         [DropdownReference (true)]
         [LabelText ("Functions (Self-targeted)")]
         public List<ICombatFunctionTargeted> functionsTargetedSelf;
-
+        
         #region Editor
         #if UNITY_EDITOR
 
@@ -1098,16 +1106,16 @@ namespace PhantomBrigade.Data
         public string icon;
 
         public bool iconEmbedded;
-
+        
         [YamlIgnore]
         [LabelText ("Name / Desc.")]
         public string textName;
-
+        
         [YamlIgnore]
         [HideLabel, TextArea (1, 10)]
         public string textDesc;
     }
-
+    
     public class DataBlockUnitCompositeAssignedEvent
     {
         [DropdownReference (true)]
@@ -1116,15 +1124,15 @@ namespace PhantomBrigade.Data
         [LabelText ("UI")]
         [DropdownReference (true)]
         public DataBlockUnitCompositeAssignedEventUI ui;
-
+        
         [DropdownReference (true)]
         [LabelText ("Functions (Global)")]
         public List<ICombatFunction> functions;
-
+        
         [DropdownReference (true)]
         [LabelText ("Functions (Self-targeted)")]
         public List<ICombatFunctionTargeted> functionsTargeted;
-
+        
         #region Editor
         #if UNITY_EDITOR
 
@@ -1150,3 +1158,4 @@ namespace PhantomBrigade.Data
         public const string legContact = "leg_contact";
     }
 }
+

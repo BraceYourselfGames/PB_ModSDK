@@ -1,6 +1,6 @@
 comment: 
 hidden: false
-listed: false
+listed: true
 factionAllied: false
 factionBranchDefault: branch_specops
 tags:
@@ -12,36 +12,8 @@ tags:
 unitsPerGrade:
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_juggernaut
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: 0
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: juggernaut
-    liveryPreset: inv_specops_g1_berserker
-    custom: 
-  - keyExternal: false
-    key: mech_support_e_long
-    countMin: 1
-    countMax: 2
-    countRandom: false
-    levelOffsetMin: -1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
-    aiBehavior: Flanker
-    aiTargeting: support
-    liveryPreset: inv_specops_g1_berserker
-    custom: 
-- liveryPreset: ''
-  units:
-  - keyExternal: false
-    key: mech_juggernaut
+  - keyExternal: true
+    key: vhc_mech_w3_lr_shield_spec
     countMin: 1
     countMax: 1
     countRandom: false
@@ -53,8 +25,8 @@ unitsPerGrade:
     aiTargeting: juggernaut
     liveryPreset: inv_specops_g2_berserker
     custom: 
-  - keyExternal: false
-    key: mech_support_e_long
+  - keyExternal: true
+    key: vhc_mech_w3_cannon_spec
     countMin: 1
     countMax: 2
     countRandom: false
@@ -68,8 +40,8 @@ unitsPerGrade:
     custom: 
 - liveryPreset: ''
   units:
-  - keyExternal: false
-    key: mech_juggernaut
+  - keyExternal: true
+    key: vhc_mech_w3_lr_shield_spec
     countMin: 1
     countMax: 1
     countRandom: false
@@ -81,35 +53,50 @@ unitsPerGrade:
     aiTargeting: juggernaut
     liveryPreset: inv_specops_g3_berserker
     custom: 
-  - keyExternal: false
-    key: mech_juggernaut
-    countMin: 1
-    countMax: 1
-    countRandom: false
-    levelOffsetMin: 1
-    levelOffsetMax: -1
-    levelOffsetRandom: false
-    qualityTableKey: unitgroup_q2_uncommon
-    aiBehavior: Flanker
-    aiTargeting: juggernaut
-    liveryPreset: inv_specops_g2_berserker
-    custom: 
-  - keyExternal: false
-    key: mech_support_e_long
+  - keyExternal: true
+    key: vhc_mech_w3_lr_rail_spec
     countMin: 1
     countMax: 2
     countRandom: false
     levelOffsetMin: 0
     levelOffsetMax: -1
     levelOffsetRandom: false
-    qualityTableKey: unitgroup_q1_common
+    qualityTableKey: unitgroup_q2_uncommon
     aiBehavior: Flanker
     aiTargeting: support
-    liveryPreset: inv_specops_g1_berserker
+    liveryPreset: inv_specops_g2_berserker
     custom: 
-  - keyExternal: false
-    key: tank_striker_eleavted
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w3_lr_shield_spec
     countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 2
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: Flanker
+    aiTargeting: juggernaut
+    liveryPreset: inv_specops_g3_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w3_lr_rail_spec
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: Flanker
+    aiTargeting: juggernaut
+    liveryPreset: inv_specops_g3_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w3_cannon_spec
+    countMin: 2
     countMax: 2
     countRandom: false
     levelOffsetMin: -1

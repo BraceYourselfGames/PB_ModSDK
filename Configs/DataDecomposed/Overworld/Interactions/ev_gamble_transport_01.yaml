@@ -1,0 +1,258 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit: 
+tags:
+- ev_general
+check:
+  repeat: UniquePerProvince
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_underground_market
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      route_long:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4573113
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !OffsetTime
+            time: 2
+            holdCountdown: true
+          functionsLocal:
+          - !InteractionOptionEnterStepRandom
+            steps:
+            - outcome_loot_low
+            - outcome_loot_normal
+            - outcome_loot_patrol
+      route_short:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: false
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_res: true
+                part_res_rare: false
+          functionsLocal: 
+    optionsReused: 
+  outcome_loot_low:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: 100
+          functionsLocal: 
+    optionsReused: 
+  outcome_loot_normal:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: false
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_res: false
+                subsystem: false
+          functionsLocal: 
+    optionsReused: 
+  outcome_loot_patrol:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: false
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_res: false
+                subsystem: false
+          - !CreateSimplePatrol {}
+          functionsLocal: 
+    optionsReused: 

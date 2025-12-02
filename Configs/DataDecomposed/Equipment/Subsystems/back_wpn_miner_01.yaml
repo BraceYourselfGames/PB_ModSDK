@@ -8,10 +8,14 @@ textDescFromPreset:
 textDesc: 
 hardpoints: 
 tags:
+- activation_is_attack
 - activation_targeted
 - category_wpn_miner
-- wpn_miner
 - type_range_strict
+- wpn_miner
+- spec_guided
+- spec_concussion
+- aihint_stopmovementtofire
 statDistribution: ''
 stats:
   act_charges:
@@ -35,7 +39,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   mass:
-    value: 14
+    value: 12
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -60,12 +64,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 55
+    value: 110
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact_radius:
-    value: 10
+    value: 12
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -75,12 +79,12 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 150
+    value: 120
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 30
+    value: 15
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -345,8 +349,10 @@ projectile:
         m: {}
   uiSpeedAverage:
     f: 25
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

@@ -10,7 +10,8 @@ hardpoints:
 tags:
 - category_wpn_mg
 - mnf_06
-- stat_concussive
+- spec_concussion
+- spec_impact
 statDistribution: ''
 stats:
   act_count:
@@ -54,17 +55,17 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_impact:
-    value: 0
+    value: 2
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 60
+    value: 50
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 10
+    value: 5
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -140,49 +141,12 @@ projectile:
   range: 
   fragmentation: 
   fragmentationDelayed: 
-  falloff:
-    animated: true
-    damageFalloff:
-      modePostWrap: ClampForever
-      modePreWrap: ClampForever
-      keys:
-      - tv_tg:
-          x: 0
-          y: 0.3972892
-          z: 0.006913905
-          w: 0.006913905
-        w:
-          x: 0.3333333
-          y: 0.3872665
-        m: {}
-      - tv_tg:
-          x: 0.3724926
-          y: 1
-          z: 0.03605096
-          w: 0.03605096
-        w:
-          x: 0.371355
-          y: 1
-        m: {}
-      - tv_tg:
-          x: 0.6039125
-          y: 1
-          z: 0.007910742
-          w: 0.007910742
-        w:
-          x: 0.9979232
-          y: 0.9973046
-        m: {}
-      - tv_tg:
-          x: 1
-          y: 0.2144867
-          z: -0.008274017
-          w: -0.008274017
-        w:
-          x: 0.3288348
-          y: 0.3333333
-        m: {}
-  falloffGlobal: 
+  falloff: 
+  falloffGlobal:
+    rangeStartFromStat: true
+    rangeStart: -10
+    gradientSize: 15
+    exponent: 1
   animationFade: 
   ballistics: 
   fuseProximity: 
@@ -194,8 +158,10 @@ projectile:
   statusBuildup: 
   uiTrajectory: 
   uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
   uiCoverageWeight: 
   uiOptimumThreshold: 
 beam: 
 custom: 
 functions: 
+workshopInfo: 

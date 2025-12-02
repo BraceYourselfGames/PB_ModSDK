@@ -540,15 +540,6 @@ namespace PhantomBrigade.Data
         
         #if UNITY_EDITOR
         
-        [BoxGroup ("Assets", false), GUIColor (1f, 0.9f, 0.8f)]
-        [HideIf ("@AssetPackageHelper.AreUnitAssetsInstalled ()")]
-        [InfoBox ("@AssetPackageHelper.unitAssetWarning", InfoMessageType.Warning)]
-        [Button (SdfIconType.Download, "Download package"), PropertyOrder (-3)]
-        public void DownloadAssets ()
-        {
-            Application.OpenURL (AssetPackageHelper.levelAssetURL);
-        }
-        
         public static void UpdateUnlocalizedCommsInFunctions (List<ICombatFunction> functions, string messageKey)
         {
             if (functions == null || string.IsNullOrEmpty (messageKey))
@@ -652,6 +643,93 @@ namespace PhantomBrigade.Data
                 }
             }
         }
+
+        /*
+        string tgtName = null;
+        if (unitFilterCheck != null && unitFilterCheck.exportEntitiesToBlackboardLimited != null)
+            tgtName = unitFilterCheck.exportEntitiesToBlackboardLimited.key;
+        else if (functionGroups != null)
+        {
+            foreach (var fg in functionGroups)
+            {
+                if (fg.functionsTargeted == null || fg.functionsTargetedContext != DirectorTargetedFunctionContext.FilteredUnits)
+                    continue;
+
+                foreach (var ft in fg.functionsTargeted)
+                {
+                    if (ft != null && ft is CombatUnitBlackboardSet ftbs)
+                    {
+                        Debug.Log ($"Found CombatUnitBlackboardSet with key {ftbs.key}");
+                        tgtName = ftbs.key;
+                    }
+                }
+            }
+        }
+
+        if (string.IsNullOrEmpty (tgtName))
+            return;
+
+        UpdateChildRecursive (this, (n) =>
+        {
+            if (n == null)
+                return;
+
+            var tgtNameUsed = tgtName;
+            if (n.functionGroups != null)
+            {
+                foreach (var fg in n.functionGroups)
+                {
+                    if (fg.functionsTargeted == null)
+                        continue;
+
+                    foreach (var ft in fg.functionsTargeted)
+                        UpdateBlackboardTargetName (ft, tgtNameUsed);
+                }
+            }
+        });
+        */
+	    
+
+        /*
+	    private void UpdateBlackboardTargetName (ICombatFunctionTargeted ft, string tgtNameUsed)
+	    {
+		    if (ft == null)
+			    return;
+		    
+		    if (ft is CombatUnitActionsCreate ftac && ftac.actions != null)
+		    {
+			    foreach (var a in ftac.actions)
+			    {
+				    if (a.target != null)
+				    {
+					    var tgt = a.target;
+					    if (tgt.type == CombatTargetSource.UnitBlackboard || tgt.type == CombatTargetSource.UnitBlackboardRelative)
+					    {
+						    if (tgt.name != tgtNameUsed)
+							    Debug.Log ($"Updated blackboard target (P) to {tgtNameUsed}");
+						    tgt.name = tgtNameUsed;
+					    }
+				    }
+								    
+				    if (a.targetSecondary != null)
+				    {
+					    var tgt = a.targetSecondary;
+					    if (tgt.type == CombatTargetSource.UnitBlackboard || tgt.type == CombatTargetSource.UnitBlackboardRelative)
+					    {
+						    if (tgt.name != tgtNameUsed)
+							    Debug.Log ($"Updated blackboard target (P) to {tgtNameUsed}");
+						    tgt.name = tgtNameUsed;
+					    }
+				    }
+			    }
+		    }
+		    else if (ft is CombatUnitTargetCompositeConnected ftcs && ftcs.functionsTargeted != null)
+		    {
+			    foreach (var ftc in ftcs.functionsTargeted)
+				    UpdateBlackboardTargetName (ftc, tgtNameUsed);
+		    }
+	    }
+	    */
         
         #endif
     }

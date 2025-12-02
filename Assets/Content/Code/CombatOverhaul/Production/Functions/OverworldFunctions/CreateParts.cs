@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class CreateParts : IOverworldEventFunction, IOverworldActionFunction, IOverworldFunction, ICombatFunction
+    public class CreateParts : IOverworldActionFunction, IOverworldFunction, ICombatFunction
     {
         public bool log = false;
         
@@ -16,11 +16,6 @@ namespace PhantomBrigade.Functions
         
         private static List<string> keysFiltered = new List<string> ();
 
-        public void Run (OverworldEntity target, DataContainerOverworldEvent eventData)
-        {
-            Run ();
-        }
-        
         public void Run (OverworldActionEntity source)
         {
             Run ();

@@ -6,6 +6,132 @@ using UnityEngine;
 
 namespace PhantomBrigade.Functions
 {
+    public class CombatFragmentSpawn : ICombatFunctionTargeted
+    {
+        [ValueDropdown("@DataMultiLinkerSubsystem.data.Keys")]
+        public string subsystemKey = "fx_projectile_debris";
+        
+        public Vector3 offset;
+
+        [PropertyRange (1, 30)]
+        public int count = 10;
+        
+        [PropertyRange (0.05f, 5f)]
+        public float lifetime = 2f;
+        
+        [PropertyRange (0f, 100f)]
+        public float speed = 30f;
+        
+        [PropertyRange (-2f, 2f)]
+        public float gravity = 0.66f;
+        
+        [PropertyRange (0f, 1f)]
+        public float damage = 0.1f;
+        
+        [PropertyRange (0f, 100f)]
+        public float impact = 10f;
+        
+        [PropertyRange (0f, 1f)]
+        public float scatterVertical = 0.2f;
+        
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            if (unitCombat == null || !unitCombat.isUnitTag || !unitCombat.hasPosition)
+                return;
+
+            var position = unitCombat.position.v;
+            if (unitCombat.hasLocalCenterPoint)
+                position += unitCombat.GetCenterOffset ();
+            
+            if (unitCombat.hasRotation)
+                position += unitCombat.rotation.q * offset;
+
+            if (unitCombat.hasCombatView)
+            {
+                var combatView = unitCombat.combatView.view;
+                var visualManager = combatView.visualManager;
+                position = visualManager.GetCorePosition ();
+            }
+
+            var direction = (unitCombat.rotation.q * Vector3.forward).FlattenAndNormalize ();
+            int level = Mathf.RoundToInt (DataHelperStats.GetAverageUnitLevel (unitPersistent));
+            
+            var subsystemBlueprint = DataMultiLinkerSubsystem.GetEntry (subsystemKey);
+            if (subsystemBlueprint == null || subsystemBlueprint.projectileProcessed == null)
+                return;
+
+            var combat = Contexts.sharedInstance.combat;
+            bool friendly = CombatUIUtility.IsUnitFriendly (unitPersistent);
+            var projectileData = subsystemBlueprint.projectileProcessed;
+            bool bodyAssetUsed = false;
+            string bodyAssetKey = null;
+            DataBlockColorInterpolated bodyAssetColorOverride = null;
+
+            if (projectileData.visual != null && projectileData.visual.body != null)
+            {
+                var body = projectileData.visual.body;
+                bodyAssetKey = friendly || string.IsNullOrEmpty (body.keyEnemy) ? body.key : body.keyEnemy;
+                bodyAssetUsed = !string.IsNullOrEmpty (bodyAssetKey);
+                bodyAssetColorOverride = friendly || body.colorOverrideEnemy == null ? body.colorOverride : body.colorOverrideEnemy;
+            }
+
+            if (bodyAssetUsed)
+            {
+                var projectileSize = new Vector3 (0.5f, 0.5f, 2f);
+                var projectileCenter = new Vector3 (0f, 0f, -1.1f);
+
+                for (int p = 0; p < count; ++p)
+                {
+                    var scatteredDirection = UnityEngine.Random.onUnitSphere;
+                    if (scatteredDirection.y < 0f)
+                        scatteredDirection.y = -scatteredDirection.y;
+                    scatteredDirection.y *= scatterVertical;
+                    scatteredDirection = scatteredDirection.normalized;
+
+                    var entity = combat.CreateEntity ();
+                    entity.AddBoxCollision (projectileSize, projectileCenter);
+                    entity.AddProjectileCollision (LayerMasks.projectileMask, 0.5f);
+                    entity.AddDataLinkSubsystemProjectile (projectileData);
+
+                    entity.AddInflictedDamage (damage);
+                    entity.AddInflictedImpact (impact);
+                    entity.isInflictedDamageNormalized = true;
+
+                    var positionAdjusted = position;
+                    positionAdjusted += scatteredDirection * UnityEngine.Random.Range (0f, 1f);
+
+                    entity.ReplacePosition (positionAdjusted);
+                    entity.ReplaceRotation (Quaternion.LookRotation (scatteredDirection));
+                    entity.ReplaceScale (Vector3.one);
+
+                    entity.ReplaceFacing (scatteredDirection);
+                    entity.ReplaceTimeToLive (lifetime * UnityEngine.Random.Range (0.9f, 1.1f));
+                    entity.ReplaceFlightInfo (0f, 0f, position, position);
+                    entity.ReplaceSourceEntity (unitCombat.id.id);
+                    entity.ReplaceMovementSpeedCurrent (speed * UnityEngine.Random.Range (0.8f, 1.2f));
+                    entity.ReplaceSimpleForce (Vector3.down * gravity * UnityEngine.Random.Range (0.8f, 1.2f));
+
+                    entity.SimpleMovement = true;
+                    entity.SimpleFaceMotion = true;
+
+                    AssetPoolUtility.AttachInstance (bodyAssetKey, entity, true); // "fx_projectile_debris"
+
+                    var instance = entity.hasAssetLink ? entity.assetLink.instance : null;
+                    bool instancePresent = instance != null;
+
+                    if (instancePresent)
+                        instance.UpdateColors (null, bodyAssetColorOverride);
+                }
+            }
+
+
+            #endif
+        }
+    }
+    
     [HideReferenceObjectPicker]
     public class DataBlockIntegrityDamage
     {

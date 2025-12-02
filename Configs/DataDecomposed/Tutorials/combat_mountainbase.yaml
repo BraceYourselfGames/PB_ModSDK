@@ -40,18 +40,19 @@ pages:
   effectsCombat:
     functions:
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
-        x: 154.2258
-        y: -0.8872181
-        z: 216.4251
+        x: 128.6553
+        y: -19.44927
+        z: 222.7947
       positionFromEntityName: 
       rotationXOverride: true
-      rotationX: 37.98349
+      rotationX: 35.11586
       rotationYOverride: true
-      rotationY: -28.87354
+      rotationY: -34.06136
       zoomOverride: true
-      zoom: 0.8103928
+      zoom: 0.5045891
       delay: 0
     - !CombatSelectUnit
       nameInternal: 
@@ -81,7 +82,7 @@ pages:
     framePositionX: 0
     framePositionY: 0
     frameSizeX: 410
-    frameSizeY: 220
+    frameSizeY: 224
     frameBlocksInput: true
     frameBoundary: true
     textLocation: LeftTop
@@ -168,6 +169,7 @@ effectsOnEnd:
       focus: false
       delay: 0
     - !CombatCameraChange
+      smoothed: true
       positionOverride: true
       position:
         x: 117.5655

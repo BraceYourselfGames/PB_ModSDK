@@ -11,20 +11,19 @@ paths:
   DataContainerSettingsPilot: Data/Settings/pilots
   DataContainerCombatBiomes: Data/Combat/biomes
   DataContainerSettingsEscalation: Data/Settings/escalation
-  DataContainerCredits: Data/credits
   DataContainerRoadmap: Data/roadmap
   DataContainerHistory: Data/history
   DataContainerRendering: Data/Settings/rendering
   DataContainerUI: Data/Settings/ui
   DataContainerGameSettingSelections: settings
   DataContainerGameSettingGlobals: Data/Settings/game
-  DataContainerGameSetting: DataDecomposed/Settings/
+  DataContainerGameSetting: DataDecomposed/Settings/ 
   DataContainerInputAction: DataDecomposed/InputActions/
   DataContainerTutorial: DataDecomposed/Tutorials/
   DataContainerInputHint: DataDecomposed/InputHints/
-  DataContainerInfoPage: DataDecomposed/InfoPages/
   DataContainerCreditsGroup: DataDecomposed/CreditsGroup/
   DataContainerAssetPool: DataDecomposed/AssetPools/
+  DataContainerCodex: DataDecomposed/Codex/
   DataContainerCutscene: DataDecomposed/Cutscenes/
   DataContainerCutsceneVideo: DataDecomposed/CutscenesVideo/
   DataContainerCutsceneActivator: DataDecomposed/CutsceneActivators/
@@ -44,21 +43,23 @@ paths:
   DataContainerCombatReinforcement: DataDecomposed/Combat/Reinforcement/
   DataContainerOverworldAction: DataDecomposed/Overworld/Actions/
   DataContainerOverworldMemory: DataDecomposed/Overworld/Memories/
-  DataContainerOverworldInteraction: DataDecomposed/Overworld/InteractionEvents/Interactions/
-  DataContainerBaseAction: DataDecomposed/Overworld/BaseActions/
+  DataContainerBaseEffect: DataDecomposed/Overworld/BaseEffects/
+  DataContainerBaseSequence: DataDecomposed/Overworld/BaseSequences/
   DataContainerBasePart: DataDecomposed/Overworld/BaseParts/
   DataContainerBaseStat: DataDecomposed/Overworld/BaseStats/
   DataContainerBaseStatGroup: DataDecomposed/Overworld/BaseStatGroups/
-  DataContainerMovementMode: DataDecomposed/Overworld/MovementModes/
   DataContainerEventOutcome: DataDecomposed/Overworld/InteractionEvents/Outcomes/
-  DataContainerOverworldEvent: DataDecomposed/Overworld/Events/
-  DataContainerOverworldEventOption: DataDecomposed/Overworld/EventOptions/
-  DataContainerOverworldEventStat: DataDecomposed/Overworld/EventStats/
-  DataContainerOverworldEntityBlueprint: DataDecomposed/Overworld/Blueprints/
+  DataContainerOverworldCampaignStep: DataDecomposed/Overworld/CampaignSteps/
   DataContainerOverworldNameGroup: DataDecomposed/Overworld/NameGroups/
   DataContainerOverworldFactionBranch: DataDecomposed/Overworld/FactionBranches/
   DataContainerOverworldProvinceBlueprint: DataDecomposed/Overworld/Provinces/
+  DataContainerOverworldProvinceModifier: DataDecomposed/Overworld/ProvinceModifiers/
+  DataContainerOverworldLandscape: DataDecomposed/Overworld/Landscapes/
   DataContainerOverworldUnitGroup: DataDecomposed/Overworld/UnitGroups/
+  DataContainerOverworldPointPreset: DataDecomposed/Overworld/Points/
+  DataContainerOverworldInteraction: DataDecomposed/Overworld/Interactions/
+  DataContainerOverworldQuest: DataDecomposed/Overworld/Quests/
+  DataContainerOverworldReward: DataDecomposed/Overworld/Rewards/
   DataContainerPartSocket: DataDecomposed/Equipment/Part_Sockets/
   DataContainerPartPreset: DataDecomposed/Equipment/Part_Presets/
   DataContainerEquipmentGroup: DataDecomposed/Equipment/Groups/
@@ -77,8 +78,16 @@ paths:
   DataContainerWorkshopProject: DataDecomposed/Workshop/Projects/
   DataContainerWorkshopVariants: DataDecomposed/Workshop/Variants/
   DataContainerResource: DataDecomposed/Resources/
-  DataContainerPilot: DataDecomposed/Pilots/
-  DataContainerPilotCheck: DataDecomposed/PilotChecks/
+  DataContainerPilot: DataDecomposed/Pilots/Presets/
+  DataContainerPilotCheck: DataDecomposed/Pilots/Checks/
+  DataContainerPilotType: DataDecomposed/Pilots/Types/
+  DataContainerPilotTrait: DataDecomposed/Pilots/Traits/
+  DataContainerPilotEvent: DataDecomposed/Pilots/Events/
+  DataContainerPilotPersonality: DataDecomposed/Pilots/Personalities/
+  DataContainerPilotStat: DataDecomposed/Pilots/Stats/
+  DataContainerPilotPersistentProfile: DataDecomposed/Pilots/PersistentProfiles/
+  DataContainerPilotAppearancePreset: DataDecomposed/Pilots/AppearancePresets/
+  DataContainerPilotAppearanceProperty: DataDecomposed/Pilots/AppearanceProperties/
   DataContainerProjectile: DataDecomposed/Projectiles/
   DataContainerUnitBlueprint: DataDecomposed/UnitBlueprints/
   DataContainerUnitCheck: DataDecomposed/UnitChecks/
@@ -91,18 +100,12 @@ paths:
   DataContainerUnitRole: DataDecomposed/UnitRoles/
   DataContainerUnitStat: DataDecomposed/UnitStats/
   DataContainerUnitStatus: DataDecomposed/UnitStatus/
-  DataContainerOverworldSiteGenerationSettings: DataDecomposed/Overworld/SiteGeneration/
-  DataBlockInvestigationSquad: DataDecomposed/Overworld/UnitSpawning/InvestigationSquads/
-  DataBlockAttackSquad: DataDecomposed/Overworld/UnitSpawning/AttackSquads/
-  DataBlockOverworldConvoy: DataDecomposed/Overworld/UnitSpawning/ConvoySquads/
-  DataBlockOverworldPatrol: DataDecomposed/Overworld/UnitSpawning/PatrolSquads/
   DataContainerUIColor: DataDecomposed/UI/Colors/
   DataContainerAnimationAudioSettings: Data/Settings/AnimationStateAudioEvents/
   DataContainerSettingsDebug: Data/Settings/debug
   DataContainerAITargetingProfile: DataDecomposed/AITargetingProfiles/
   DataContainerQualityTable: DataDecomposed/Combat/QualityTables/
   DataContainerOverworldBehaviorTree: DataDecomposed/Overworld/BehaviorTrees/
-  DataContainerPilotPersonality: DataDecomposed/PilotPersonalities/
   DataContainerOverworldStateMachine: DataDecomposed/Overworld/StateMachines/
   DataContainerDifficultySettingGlobals: Data/Settings/difficulty
   DataContainerDifficultySetting: DataDecomposed/SettingsDifficulty/

@@ -1,4 +1,5 @@
 using System;
+using PhantomBrigade.Data;
 
 namespace PhantomBrigade.Functions
 {
@@ -16,10 +17,7 @@ namespace PhantomBrigade.Functions
             var unitEntityCombat = IDUtility.GetSelectedCombatEntity ();
             var pilot = IDUtility.GetLinkedPilot (IDUtility.GetLinkedPersistentEntity (unitEntityCombat));
             if (pilot != null && !pilot.isKnockedOut)
-            {
-                var concussionThreshold = pilot.hasPilotConcussionInputs ? pilot.pilotConcussionInputs.concussionThreshold : 1f;
-                pilot.ReplacePilotHealth (concussionThreshold);
-            }
+                pilot.SetPilotStat (PilotStatKeys.hp, 0f);
             
             #endif
         }

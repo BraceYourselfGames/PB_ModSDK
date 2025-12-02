@@ -483,13 +483,11 @@ public class EditableKeyStringResolverDB12 : EditableKeyStringResolver<DataBlock
 public class EditableKeyStringResolverDB13 : EditableKeyStringResolver<List<DataBlockSubsystemTagFilter>> { }
 public class EditableKeyStringResolverDB14 : EditableKeyStringResolver<List<DataBlockPartTagFilter>> { }
 
-public class EditableKeyStringResolverDB21 : EditableKeyStringResolver<DataBlockOverworldProvinceEntityGenerator> { }
 public class EditableKeyStringResolverDB22 : EditableKeyStringResolver<DataBlockMemoryChangeInt> { }
 public class EditableKeyStringResolverDB23 : EditableKeyStringResolver<DataBlockMemoryChangeFloat> { }
 
 public class EditableKeyStringResolverDB24 : EditableKeyStringResolver<DataBlockAnimationStateAudioEvent> { }
 
-public class EditableKeyStringResolverDB25 : EditableKeyStringResolver<List<DataBlockOverworldEntityRewardBlock>> { }
 public class EditableKeyStringResolverDB26 : EditableKeyStringResolver<DataBlockFactionPartFilters> { }
 public class EditableKeyStringResolverDB27 : EditableKeyStringResolver<DataBlockUnitLiverySocket> { }
 
@@ -922,7 +920,6 @@ abstract class FunctionListAttributeProcessor<T> : OdinAttributeProcessor<List<T
 }
 
 // TypeHinted interfaces
-sealed class FunctionListAttributeProcessor01 : FunctionListAttributeProcessor<IOverworldEventFunction> { }
 sealed class FunctionListAttributeProcessor02 : FunctionListAttributeProcessor<IOverworldActionFunction> { }
 sealed class FunctionListAttributeProcessor03 : FunctionListAttributeProcessor<ICombatFunctionTargeted> { }
 sealed class FunctionListAttributeProcessor04 : FunctionListAttributeProcessor<ICombatFunctionSpatial> { }
@@ -935,7 +932,6 @@ sealed class FunctionListAttributeProcessor10 : FunctionListAttributeProcessor<I
 sealed class FunctionListAttributeProcessor11 : FunctionListAttributeProcessor<ICombatActionExecutionFunction> { }
 sealed class FunctionListAttributeProcessor12 : FunctionListAttributeProcessor<ICombatActionValidationFunction> { }
 sealed class FunctionListAttributeProcessor13 : FunctionListAttributeProcessor<ICombatStateValidationFunction> { }
-sealed class FunctionListAttributeProcessor14 : FunctionListAttributeProcessor<IOverworldValidationFunction> { }
 sealed class FunctionListAttributeProcessor15 : FunctionListAttributeProcessor<ICombatPositionValidationFunction> { }
 sealed class FunctionListAttributeProcessor16 : FunctionListAttributeProcessor<ICombatUnitValidationFunction> { }
 sealed class FunctionListAttributeProcessor17 : FunctionListAttributeProcessor<ICombatUnitValueResolver> { }

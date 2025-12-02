@@ -321,6 +321,18 @@ namespace PhantomBrigade.Data
             return containersWithTags;
         }
 
+        public static bool HasTag<T> (this T container, string tag, bool processed = true) where T : DataContainer, IDataContainerTagged, new()
+        {
+            if (container == null)
+                return false;
+            
+            var tagsInContainer = container.GetTags (processed);
+            if (tagsInContainer == null)
+                return false;
+            
+            return !string.IsNullOrEmpty (tag) && tagsInContainer.Contains (tag);
+        }
+
         public static bool AreContainerTagsMatchingFilter<T>
         (
             T container,

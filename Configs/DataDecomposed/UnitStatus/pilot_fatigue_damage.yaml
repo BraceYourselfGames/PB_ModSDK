@@ -1,0 +1,53 @@
+icon: s_icon_l32_face4
+color:
+  r: 0.7490196
+  g: 0.2980392
+  b: 0.5798934
+  a: 1
+hidden: false
+debug: false
+showOverlay: false
+showNotifications: true
+showTutorial: false
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated: 
+durationFull: 
+durationUpdate:
+  f: 1
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio: 
+effectsOnStart: 
+effectsOnUpdate:
+- triggerRemoval: false
+  triggerInStack: false
+  applyMissedUpdates: true
+  enabled: true
+  triggerCheckUnit: 
+  triggerCheckPilot: 
+  comment:
+    comment: Each update, apply damage.
+  functionsOnHost:
+  - !CombatUnitDamageEvent
+    delay: 0
+    splash: false
+    dispersed: false
+    sourceInternal: true
+    integrity: 
+    concussion:
+      f: 1
+    heat: 
+    stagger: 
+    statusBuildup: 
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+effectsOnEnd: 
+statOffsets: 
