@@ -1,6 +1,7 @@
-![pb_modtools_splash_composite.png](/ModWindowImages/t0_splash.png)
+![t0_splash.png](/ModWindowImages/t0_splash.png)
 
 ## Overview
+
 Phantom Brigade Mod SDK is a mod development suite created in collaboration with our valued community. Based on the tools we used to develop the game, it is a free Unity project that includes:
 - Mod project manager: simplifies mod metadata setup, manages mod source files and helps you manage different mod tools. Facilitates export of completed mods to the local user folder, to a distributable archive or to Steam Workshop.
 - Config editors: powerful inspectors putting every database underpinning the game at your fingertips. Modify everything from game balance to enemy squad compositions and from mission logic to combat abilities. Take advantage of data validation, reactive inspectors, value dropdowns and specialized editors for complex data types like curves to create what would take hours to set up through manual text editing in minutes. Preview kitbashed weapons, put together bosses with complex behaviors, create new status effects and more.
@@ -19,23 +20,30 @@ Quick setup overview:
 - Install git and make sure it is in your `PATH`. If you're using a GUI client, you might not have standalone git.exe installed or might not have `PATH` set up. [Download Git here](https://www.git-scm.com/download).
 - Download the project from this repository. We strongly recommend downloading (cloning) through Git to facilitate easy updating.
 - In Unity Hub, navigate to the **Projects** tab and choose **Open**, selecting the folder with the project. Wait for the project to import.
-- Once the project is open, click **PB Mod SDK/Getting Started** in the top menu of the Unity Editor
 
-> Pick a drive with at least 10Gb of free space and select a location with a short path, such as **C:/Work/Unity Projects/PB_ModSDK**. The core repository is a fairly small download, but an optional asset package totals around 3Gb. Full import of the project with the optional asset package installed might create up to 5Gb of temporary files, hence our recommendation to reserve up to 10Gb.
+
+> Pick a drive with at least 10Gb of free space and select a location with a short path, such as **C:/Work/Unity Projects/PB_ModSDK**. The core repository is a fairly small download, but an optional asset package totals around 4Gb. Full import of the project with the optional asset package installed might create up to 5Gb of temporary files, hence our recommendation to reserve up to 10Gb.
 
 > If you're not familiar with Git and are unsure how to download the SDK project from GitHub, try installing the [GitHub Desktop](https://desktop.github.com/) client and [following this tutorial](https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop). You can find the list alternative Windows GUI clients [here](https://www.git-scm.com/download/gui/windows).
 
-The Getting Started window can guide you through subsequent steps such as:
-- Opening the main scene
-- Opening the mod project manager
-- Creating your first mod
-- Installing the optional asset package
+## Getting started
+
+Once the project is open, click **PB Mod SDK/Getting Started** in the top menu of the Unity Editor window to get additional guidance. The Getting Started window is the central point of the SDK: it can help you check the status of different components, navigate to important links and scenes and guide you through creating your own mods.
+
+![desc_getting_started.png](/ModWindowImages/repo/desc_getting_started.png)
+
+Click the Tutorials button at the bottom of the Getting Started window to learn more information. We strongly recommend using the window to check how to:
+- Open the correct scene
+- Find the mod project manager and create a simple config mod
+- Install the optional asset package to unlock item previews & level editing
+- Export your mods through the Steam Workshop
+- And more!
 
 ## Optional assets
 
 We separated some assets into an optional download to keep the repository lightweight and easy to update. These include 3D models of mech items, levels, textures and some other art assets. These files are not required for most of the tools included in the SDK, but we recommend downloading and installing the optional asset package to unlock every feature. This includes ability to edit levels and ability to display items in the 3D viewport.
 
-Follow the instructions in the Getting Started window to install this optional asset package. To save time, we recommend [downloading the file](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_v4.unitypackage) in the background while you set up the main project and follow the initial tutorials.
+Follow the instructions in the Getting Started window to install this optional asset package. To save time, we recommend [downloading the file](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_V20A.unitypackage) in the background while you set up the main project and follow the initial tutorials.
 
 ## Documentation
 
