@@ -669,17 +669,17 @@ namespace PhantomBrigade.SDK.ModTools
 
         public void DeleteOutputDirectories ()
         {
-            var configOverridesPath = Path.Combine (GetModPathProject (), overridesFolderName);
+            var configOverridesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), overridesFolderName);
             if (Directory.Exists (configOverridesPath))
             {
                 Directory.Delete (configOverridesPath, true);
             }
-            var configEditsPath = Path.Combine (GetModPathProject (), editsFolderName);
+            var configEditsPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), editsFolderName);
             if (Directory.Exists (configEditsPath))
             {
                 Directory.Delete (configEditsPath, true);
             }
-            var assetBundlesPath = Path.Combine (GetModPathProject (), assetBundlesFolderName);
+            var assetBundlesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), assetBundlesFolderName);
             if (Directory.Exists (assetBundlesPath))
             {
                 Directory.Delete (assetBundlesPath, true);

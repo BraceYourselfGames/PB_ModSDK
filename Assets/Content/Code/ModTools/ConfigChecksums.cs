@@ -18,11 +18,11 @@ namespace PhantomBrigade.SDK.ModTools
 
         public static bool logPathResolution = false;
 
-        public static bool ChecksumsExist (DirectoryInfo source) => File.Exists (Path.Combine (source.FullName, checksumsFileName));
+        public static bool ChecksumsExist (DirectoryInfo source) => File.Exists (DataPathHelper.GetCombinedCleanPath (source.FullName, checksumsFileName));
         public static bool CopyChecksumsFile (DirectoryInfo source, DirectoryInfo dest)
         {
-            var checksumsPath = Path.Combine (source.FullName, checksumsFileName);
-            var destPath = Path.Combine (dest.FullName, checksumsFileName);
+            var checksumsPath = DataPathHelper.GetCombinedCleanPath (source.FullName, checksumsFileName);
+            var destPath = DataPathHelper.GetCombinedCleanPath (dest.FullName, checksumsFileName);
             try
             {
                 File.Copy (checksumsPath, destPath, true);
@@ -190,8 +190,8 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 current = root;
                 ComputeDirectoryChecksums (root);
-                var pathChecksums = Path.Combine (sourceDirectory.Parent.FullName, checksumsFileName);
-                var fi = new FileInfo (Path.Combine (pathChecksums + ".tmp"));
+                var pathChecksums = DataPathHelper.GetCombinedCleanPath (sourceDirectory.Parent.FullName, checksumsFileName);
+                var fi = new FileInfo (DataPathHelper.GetCombinedCleanPath (pathChecksums + ".tmp"));
                 using (var outp = new BinaryWriter (fi.OpenWrite ()))
                 {
                     directoryQueue.Clear ();
@@ -324,7 +324,7 @@ namespace PhantomBrigade.SDK.ModTools
         {
             public Deserializer (DirectoryInfo rootDirectory)
             {
-                checksumsFile = new FileInfo (Path.Combine (rootDirectory.FullName, checksumsFileName));
+                checksumsFile = new FileInfo (DataPathHelper.GetCombinedCleanPath (rootDirectory.FullName, checksumsFileName));
             }
 
             public Result Load ()
@@ -501,7 +501,7 @@ namespace PhantomBrigade.SDK.ModTools
                             HalfSum1 = cksum0,
                             HalfSum2 = cksum1,
                         },
-                        RelativePath = Encoding.UTF8.GetString (rawPath),
+                        RelativePath = DataPathHelper.GetCleanPath (Encoding.UTF8.GetString (rawPath)),
                         Locator = locator.Select(v => (int)v).ToArray(),
                     };
                     var dirCount = inp.ReadUInt16 ();
@@ -512,7 +512,7 @@ namespace PhantomBrigade.SDK.ModTools
 
                     if (entry.RelativePath.StartsWith (DataDecomposedDirectoryName))
                     {
-                        var cleanedPath = DataPathHelper.GetCleanPath (entry.RelativePath) + "/";
+                        var cleanedPath = entry.RelativePath + "/";
                         var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath, fallbackAllowed: false);
                         if (typeName != null)
                         {
@@ -583,7 +583,7 @@ namespace PhantomBrigade.SDK.ModTools
                             HalfSum1 = cksum0,
                             HalfSum2 = cksum1,
                         },
-                        RelativePath = Encoding.UTF8.GetString (rawPath),
+                        RelativePath = DataPathHelper.GetCleanPath (Encoding.UTF8.GetString (rawPath)),
                         Locator = locator.ToArray(),
                     };
                     entries.Add (entry);
@@ -591,9 +591,9 @@ namespace PhantomBrigade.SDK.ModTools
                     var ext = Path.GetExtension (entry.RelativePath);
                     if (!entry.RelativePath.StartsWith (DataDecomposedDirectoryName) && ext == ".yaml")
                     {
-                        var cleanedPath = DataPathHelper.GetCleanPath (entry.RelativePath);
+                        var cleanedPath = entry.RelativePath;
                         cleanedPath = cleanedPath.Substring (0, cleanedPath.Length - ext.Length);
-                        var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath);
+                        var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath, fallbackAllowed: false);
                         if (typeName != null)
                         {
                             var t = FieldReflectionUtility.GetTypeByName (typeName);
@@ -733,7 +733,7 @@ namespace PhantomBrigade.SDK.ModTools
                 for (var i = 0; i < newEntries.Count; i += 1)
                 {
                     var entry = newEntries[i];
-                    var subdirectory = new DirectoryInfo (Path.Combine (root.FullName, entry.RelativePath));
+                    var subdirectory = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (root.FullName, entry.RelativePath));
                     try
                     {
                         AddRecursive (root, source, entry, subdirectory);
@@ -820,7 +820,7 @@ namespace PhantomBrigade.SDK.ModTools
                 }
                 foreach (var entry in newEntries)
                 {
-                    var subdirectory = new DirectoryInfo (Path.Combine (root.FullName, entry.RelativePath));
+                    var subdirectory = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (root.FullName, entry.RelativePath));
                     if (!subdirectory.Exists)
                     {
                         continue;
