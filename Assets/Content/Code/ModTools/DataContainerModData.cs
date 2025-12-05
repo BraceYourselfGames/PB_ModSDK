@@ -645,7 +645,7 @@ namespace PhantomBrigade.SDK.ModTools
                 })
                 .ToDictionary (x => x.Key, x => x.Pair);
             linkerChecksumMap = result.LinkerMap.Keys
-                .Select(k =>
+                .Select (k =>
                 {
                     sdkChecksumData.LinkerChecksumMap.TryGetValue (k, out var sdk);
                     return new
@@ -654,13 +654,40 @@ namespace PhantomBrigade.SDK.ModTools
                         Pair = (sdk, result.LinkerMap[k]),
                     };
                 })
-                .ToDictionary(x => x.Key, x => x.Pair);
+                .ToDictionary (x => x.Key, x => x.Pair);
+            if (result.TextLibraryMap.TryGetValue (ConfigChecksums.TextLibraryCoreName, out var textLibraryCore))
+            {
+                var sdkLibDir = sdkChecksumData.TextLibraryMap["/"] as ConfigChecksums.ConfigDirectory;
+                var modLibDir = result.TextLibraryMap["/"] as ConfigChecksums.ConfigDirectory;
+                var sdkSectorsDir = sdkChecksumData.TextLibraryMap["//"] as ConfigChecksums.ConfigDirectory;
+                var modSectorsDir = result.TextLibraryMap["//"] as ConfigChecksums.ConfigDirectory;
+                sdkChecksumData.TextLibraryMap.TryGetValue (ConfigChecksums.TextLibraryCoreName, out var sdkCore);
+                textLibrary = new ConfigChecksums.TextLibrary
+                {
+                    LibraryDirectory = (sdkLibDir, modLibDir),
+                    SectorsDirectory = (sdkSectorsDir, modSectorsDir),
+                    Core = (sdkCore as ConfigChecksums.ConfigFile, textLibraryCore as ConfigChecksums.ConfigFile),
+                    Sectors = result.TextLibraryMap.Keys
+                        .Where (k => k.StartsWith (ConfigChecksums.TextSectorsDirectoryName))
+                        .Select (k =>
+                        {
+                            sdkChecksumData.TextLibraryMap.TryGetValue (k, out var sdk);
+                            return new
+                            {
+                                Key = k.Substring (ConfigChecksums.TextSectorsDirectoryName.Length + 1),
+                                Pair = (sdk as ConfigChecksums.ConfigFile, result.TextLibraryMap[k] as ConfigChecksums.ConfigFile),
+                            };
+                        })
+                        .ToDictionary (x => x.Key, x => x.Pair),
+                };
+            }
 
             return true;
         }
 
         public void UnloadChecksums ()
         {
+            textLibrary = null;
             linkerChecksumMap = null;
             multiLinkerChecksumMap = null;
             checksumsRoot = null;
@@ -714,6 +741,8 @@ namespace PhantomBrigade.SDK.ModTools
         [HideInInspector]
         [YamlIgnore]
         public Dictionary<Type, (ConfigChecksums.ConfigFile SDK, ConfigChecksums.ConfigFile Mod)> linkerChecksumMap;
+        [YamlIgnore]
+        public ConfigChecksums.TextLibrary textLibrary;
 
         public string defaultWorkingPath => DataPathHelper.GetCombinedCleanPath (defaultWorkingPathParent, id);
 

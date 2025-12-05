@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 #if PB_MODSDK
+using System.Linq;
 using PhantomBrigade.SDK.ModTools;
 #endif
 
@@ -19,9 +20,9 @@ namespace PhantomBrigade.Data
         private const string tgLib = "Library";
         private const string fgAddText = "_DefaultTabGroup/Library/Add or replace text";
         private const string bgAddText = "_DefaultTabGroup/Library/Add or replace text/Bg";
-        
+
         private const string tgLoc = "Localization";
-        
+
         private const string tgUtilities = "Utilities";
         private const string bgUtilitiesLegacy = "_DefaultTabGroup/Utilities/ButtonsLegacy";
         private const string bgUtilitiesOther = "_DefaultTabGroup/Utilities/ButtonsOther";
@@ -34,7 +35,7 @@ namespace PhantomBrigade.Data
 
         private static bool libraryLoadedOnce = false;
         private static DataContainerTextLibrary libraryDataInternal;
-        
+
         [PropertySpace (8f), PropertyOrder (-5)]
         [TabGroup (tgLib), ShowInInspector, OnValueChanged ("OnLibraryModified", true)]
         public static DataContainerTextLibrary libraryData
@@ -50,15 +51,15 @@ namespace PhantomBrigade.Data
                 libraryDataInternal = value;
             }
         }
-        
+
         private static bool libraryUnsaved = false;
         private static string libraryPath = "Configs/TextLibrary";
-        
+
         #if PB_MODSDK
-        
+
         private static bool librarySourceLoadedOnce = false;
         private static DataContainerTextLibrary librarySourceDataInternal;
-        
+
         [PropertySpace (8f), PropertyOrder (-5)]
         [TabGroup (tgLib), ShowInInspector]
         public static DataContainerTextLibrary librarySourceData
@@ -70,30 +71,30 @@ namespace PhantomBrigade.Data
                 return librarySourceDataInternal;
             }
         }
-        
+
         #endif
-        
-        
+
+
 
         [TabGroup (tgLoc), ShowInInspector, PropertyOrder (-2)]
         private static SortedDictionary<string, string> localizationKeysToPathsBuiltin = new SortedDictionary<string, string> ();
-        
+
         [TabGroup (tgLoc), ShowInInspector, PropertyOrder (-2)]
         private static SortedDictionary<string, string> localizationKeysToPathsMods = new SortedDictionary<string, string> ();
 
         [TabGroup (tgLoc), ShowInInspector]
         [ValueDropdown ("@localizationKeysToPathsBuiltin.Keys")]
         public static string localizationKeySelected = "French";
-        
+
         [TabGroup (tgLoc), ShowInInspector, ReadOnly]
         public static string localizationKeyLast;
 
         [TabGroup (tgLoc), ShowInInspector, ReadOnly]
         public static string localizationPathLast;
-        
+
         [TabGroup (tgLoc), ShowInInspector, ReadOnly]
         public static bool localizationPathAppendedLast;
-        
+
 
         [PropertySpace (8f), PropertyOrder (1)]
         [TabGroup (tgLoc), ShowInInspector, OnValueChanged ("OnLocalizationModified", true)]
@@ -103,7 +104,7 @@ namespace PhantomBrigade.Data
 
         private static bool localizationUnsaved = false;
         private static string localizationPathBuiltin = "Configs/TextLocalizations/";
-        
+
 
 
         private void OnEnable ()
@@ -118,7 +119,7 @@ namespace PhantomBrigade.Data
 
         private void OnLibraryModified () => libraryUnsaved = true;
         private void OnLocalizationModified () => localizationUnsaved = true;
-        
+
         [PropertyOrder (-10)]
         [TabGroup (tgLib)]
         [ButtonGroup ("_DefaultTabGroup/Library/Buttons"), Button ("Load", ButtonSizes.Large)]
@@ -128,59 +129,74 @@ namespace PhantomBrigade.Data
             libraryDataInternal = new DataContainerTextLibrary ();
 
             var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
-            
+
             #if PB_MODSDK && UNITY_EDITOR
-            
+
             if (IsModOverrideUsed ())
             {
                 var modPath = DataContainerModData.selectedMod.GetModPathProject ();
                 pathFull = DataPathHelper.GetCombinedCleanPath (modPath, libraryPath);
                 Debug.Log ($"Loading text library from config enabled mod | Path: {pathFull}");
             }
-            
+
             #endif
-            
-            libraryDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> 
+
+            libraryDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore>
             (
-                pathFull, 
-                "core.yaml", 
+                pathFull,
+                "core.yaml",
                 appendApplicationPath: false
             );
 
-            libraryDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain> 
+            libraryDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain>
             (
-                pathFull + "/Sectors", 
+                pathFull + "/Sectors",
                 appendApplicationPath: false
             );
-            
+
             libraryDataInternal.OnAfterDeserialization ();
+
+            #if PB_MODSDK && UNITY_EDITOR
+            if (IsModOverrideUsed())
+            {
+                // Check for disk changes that happened offline.
+                var modData = DataContainerModData.selectedMod;
+                var checksum = modData.textLibrary.LibraryDirectory.Mod.Checksum;
+                UpdateChecksums ();
+                if (!ConfigChecksums.ChecksumEqual (checksum, modData.textLibrary.LibraryDirectory.Mod.Checksum))
+                {
+                    Debug.Log ("TextLibrary: offline or format changes detected in mod configs -- refreshing checksums on disk");
+                    ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
+                }
+            }
+            #endif
         }
-        
+
         #if PB_MODSDK
 
         public static void LoadLibrarySource ()
         {
             librarySourceLoadedOnce = true;
             librarySourceDataInternal = new DataContainerTextLibrary ();
-            
+
             var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
-            
-            librarySourceDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> 
+
+            librarySourceDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore>
             (
-                pathFull, 
-                "core.yaml", 
+                pathFull,
+                "core.yaml",
                 appendApplicationPath: false
             );
 
-            librarySourceDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain> 
+            librarySourceDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain>
             (
-                pathFull + "/Sectors", 
+                pathFull + "/Sectors",
                 appendApplicationPath: false
             );
-            
+
             librarySourceDataInternal.OnAfterDeserialization ();
         }
-        
+
         public static void ResetLoadedOnce ()
         {
             libraryLoadedOnce = false;
@@ -190,16 +206,16 @@ namespace PhantomBrigade.Data
         private static bool IsModOverrideUsed ()
         {
             #if UNITY_EDITOR
-            return DataContainerModData.selectedMod != null && 
-                   DataContainerModData.selectedMod.hasProjectFolder && 
+            return DataContainerModData.selectedMod != null &&
+                   DataContainerModData.selectedMod.hasProjectFolder &&
                    Directory.Exists (DataContainerModData.selectedMod.GetModPathConfigs ());
             #else
             return false;
             #endif
         }
-        
+
         #endif
-        
+
         [PropertyOrder (-10)]
         [TabGroup (tgLib)]
         [ButtonGroup ("_DefaultTabGroup/Library/Buttons"), Button ("@libraryUnsaved ? \"Save data*\" : \"Save data\"", ButtonSizes.Large)]
@@ -211,20 +227,20 @@ namespace PhantomBrigade.Data
                 Debug.Log ($"No library data available, can't save");
                 return;
             }
-            
+
             var pathFull = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), libraryPath);
-            
+
             #if PB_MODSDK && UNITY_EDITOR
-            
+
             if (IsModOverrideUsed ())
             {
                 var modPath = DataContainerModData.selectedMod.GetModPathProject ();
                 pathFull = DataPathHelper.GetCombinedCleanPath (modPath, libraryPath);
                 Debug.Log ($"Saving text library to config enabled mod | Path: {pathFull}");
             }
-            
+
             #endif
-            
+
             if (log)
                 Debug.Log ($"Writing main text library to path {pathFull}");
 
@@ -253,13 +269,134 @@ namespace PhantomBrigade.Data
             }
 
             libraryUnsaved = false;
+
+            #if PB_MODSDK && UNITY_EDITOR
+            SaveChecksums ();
+            #endif
         }
-        
+
+        #if PB_MODSDK && UNITY_EDITOR
+        static void SaveChecksums ()
+        {
+            if (!IsModOverrideUsed ())
+            {
+                return;
+            }
+            UpdateChecksums ();
+            ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
+        }
+
+        static void UpdateChecksums ()
+        {
+            var modData = DataContainerModData.selectedMod;
+            var modPath = modData.GetModPathProject ();
+            var pathLibrary = DataPathHelper.GetCombinedCleanPath (modPath, libraryPath);
+            var pathCore = DataPathHelper.GetCombinedCleanPath (pathLibrary, "core.yaml");
+            var modLibraryChecksum = modData.textLibrary.LibraryDirectory.Mod;
+            var entryCore = modLibraryChecksum.Entries.SingleOrDefault (e => e.RelativePath.EndsWith ("core.yaml"));
+            if (entryCore != null)
+            {
+                try
+                {
+                    ((ConfigChecksums.ConfigFile)entryCore).Update (ConfigChecksums.EntrySource.Mod, File.ReadAllText (pathCore));
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogErrorFormat ("Error during checksum operation | mod: {0} | key: {1} | path: {2}", modData.id, "core", pathCore);
+                    Debug.LogException (ex);
+                }
+            }
+
+            var pathSectors = DataPathHelper.GetCombinedCleanPath (pathLibrary, "Sectors");
+            var sectorsChecksum = modData.textLibrary.SectorsDirectory;
+            var modSectorsChecksums = new ConfigChecksums.ConfigDirectory (ConfigChecksums.EntryType.Directory)
+            {
+                Source = ConfigChecksums.EntrySource.Mod,
+                Locator = sectorsChecksum.Mod.Locator,
+                RelativePath = sectorsChecksum.Mod.RelativePath,
+            };
+            var errorKeys = new List<string> ();
+            var entries = new List<(string, string)> ();
+            foreach (var key in libraryData.sectors.Keys)
+            {
+                var fileName = key + ".yaml";
+                var filePath = DataPathHelper.GetCombinedCleanPath (pathSectors, fileName);
+                try
+                {
+                    entries.Add ((fileName, File.ReadAllText (filePath)));
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogErrorFormat ("Error during checksum operation | mod: {0} | key: {1} | path: {2}", modData.id, key, filePath);
+                    Debug.LogException (ex);
+                    errorKeys.Add (key);
+                }
+            }
+            modSectorsChecksums.AddFiles (ConfigChecksums.EntrySource.Mod, entries);
+            UpdateChecksumSource (sectorsChecksum.SDK, modSectorsChecksums);
+            RemoveErrors (sectorsChecksum.SDK, errorKeys);
+            modData.textLibrary.SectorsDirectory = (sectorsChecksum.SDK, modSectorsChecksums);
+
+            modData.checksumsRoot.Patch (modSectorsChecksums);
+            ConfigChecksums.UpdateChecksums (ConfigChecksums.EntrySource.Mod, modData.checksumsRoot, modSectorsChecksums);
+        }
+
+        static void UpdateChecksumSource (ConfigChecksums.ConfigDirectory sdk, ConfigChecksums.ConfigDirectory mod)
+        {
+            if (sdk == null)
+            {
+                return;
+            }
+
+            var sdkKeyMap = ModToolsHelper.GetEntriesByKey (sdk, false);
+            var modKeyMap = ModToolsHelper.GetEntriesByKey (mod, false);
+            foreach (var kvp in modKeyMap)
+            {
+                if (!sdkKeyMap.TryGetValue (kvp.Key, out var sdkEntry))
+                {
+                    continue;
+                }
+                if (!ConfigChecksums.ChecksumEqual (sdkEntry.Checksum, kvp.Value.Checksum))
+                {
+                    continue;
+                }
+                kvp.Value.Source = ConfigChecksums.EntrySource.SDK;
+            }
+        }
+
+        static void RemoveErrors (ConfigChecksums.ConfigDirectory sdk, List<string> errorKeys)
+        {
+            if (errorKeys.Any ())
+            {
+                var sdkKeyMap = ModToolsHelper.GetEntriesByKey (sdk, false);
+                var errorIndexes = errorKeys
+                    .Where (k => sdkKeyMap.ContainsKey (k))
+                    .Select (k => -sdkKeyMap[k].Locator.Last ())
+                    .ToList ();
+
+                if (sdk != null)
+                {
+                    errorIndexes.Sort ();
+                    foreach (var idx in errorIndexes)
+                    {
+                        sdk.Entries.RemoveAt (-idx);
+                    }
+                    sdk.FixLocators ();
+                }
+
+                foreach (var key in errorKeys)
+                {
+                    libraryData.sectors.Remove (key);
+                }
+            }
+        }
+        #endif
+
         public static void MarkLibraryChanged ()
         {
             libraryUnsaved = true;
         }
-        
+
         public static void MarkLocalizationChanged ()
         {
             libraryUnsaved = true;
@@ -276,15 +413,15 @@ namespace PhantomBrigade.Data
                 return localizationDataInternal.core.font;
             return libraryDataInternal.core.font;
         }
-        
-        
+
+
         [PropertyOrder (-1)]
         [TabGroup (tgLoc)]
         [ButtonGroup ("_DefaultTabGroup/Localization/Buttons"), Button ("Refresh list", ButtonSizes.Large)]
         public static void RefreshLocalizationListBuiltin ()
         {
             localizationKeysToPathsBuiltin.Clear ();
-            
+
             // Initialize lookup first, provided its possible
             if (!Directory.Exists (localizationPathBuiltin))
             {
@@ -305,7 +442,7 @@ namespace PhantomBrigade.Data
                 var files = Directory.GetFiles (path);
                 if (files.Length == 0)
                     continue;
-                    
+
                 var key = path.Replace (localizationPathBuiltin, string.Empty).Replace ("\\", "/");
                 localizationKeysToPathsBuiltin.Add (key, path);
             }
@@ -326,7 +463,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Null or empty localization key provided, can't load localization");
                 return;
             }
-            
+
             // Initialize lookup first, provided its possible
             if (localizationKeysToPathsBuiltin.Count == 0)
                 RefreshLocalizationListBuiltin ();
@@ -349,25 +486,25 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Failed to find any localizations with key {localizationKey}");
             }
         }
-        
+
         public static void LoadLocalization (string localizationPath, bool appendApplicationPath)
         {
             localizationPathLast = DataPathHelper.GetCleanPath (localizationPath);
             localizationPathAppendedLast = appendApplicationPath;
             Debug.Log ($"Attempting to load localization using path {localizationPathLast} | Application path appended: {localizationPathAppendedLast}");
-            
+
             localizationDataInternal = new DataContainerTextLocalization ();
-            
-            localizationDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> 
+
+            localizationDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore>
                 (localizationPath, "core.yaml", appendApplicationPath: appendApplicationPath);
 
-            localizationDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorLocalization> 
+            localizationDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorLocalization>
                 ($"{localizationPath}/Sectors", appendApplicationPath: appendApplicationPath);
-                
+
             // Only inject mod text at runtime and before post-deserialization code
             if (Application.isPlaying)
                 ModManager.ProcessLocalizationEdits (localizationKeyLast, localizationDataInternal.sectors);
-                
+
             localizationDataInternal.OnAfterDeserialization ();
         }
 
@@ -383,7 +520,7 @@ namespace PhantomBrigade.Data
             localizationPathLast = null;
             localizationPathAppendedLast = false;
         }
-        
+
         [PropertyOrder (-1)]
         [TabGroup (tgLoc)]
         [ButtonGroup ("_DefaultTabGroup/Localization/Buttons"), Button ("@localizationUnsaved ? \"Save data*\" : \"Save data\"", ButtonSizes.Large)]
@@ -401,7 +538,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ("No last localization path available, can't save");
                 return;
             }
-            
+
             if (log)
                 Debug.Log ($"Writing localization {localizationKeyLast} to path {localizationPathLast} | Appended: {localizationPathAppendedLast}");
 
@@ -415,14 +552,14 @@ namespace PhantomBrigade.Data
 
             localizationUnsaved = false;
         }
-        
-        
-        
+
+
+
         public static DataContainerTextSectorLocalization GetLocalizationSector (string sectorKey)
         {
             if (localizationDataInternal == null || localizationDataInternal.sectors == null)
                 return null;
-            
+
             return localizationDataInternal.GetSector (sectorKey);
         }
 
@@ -430,7 +567,7 @@ namespace PhantomBrigade.Data
         {
             if (libraryData == null || libraryData.sectors == null)
                 return null;
-            
+
             return libraryData.GetSector (sectorKey);
         }
 
@@ -442,18 +579,18 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found: Null or empty sector key");
                 return string.Empty;
             }
-            
+
             if (string.IsNullOrEmpty (textKey))
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found: Null or empty text key");
                 return string.Empty;
             }
-            
+
             // Only check loc. during play mode
             if (!Application.isPlaying)
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
-            
+
             // If localization is missing entirely, go straight to library as fallback
             if (localizationDataInternal == null)
             {
@@ -461,7 +598,7 @@ namespace PhantomBrigade.Data
                 //     Debug.LogWarning ($"Text not found in localization ({sectorKey}/{textKey}): Localization not loaded, falling back to library");
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
             }
-            
+
             var sector = localizationDataInternal.GetSector (sectorKey);
             if (sector == null)
             {
@@ -469,7 +606,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in localization ({sectorKey}/{textKey}): Sector not present, falling back to library");
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
             }
-            
+
             if (sector.entries == null || !sector.entries.ContainsKey (textKey))
             {
                 if (!suppressWarning)
@@ -480,7 +617,7 @@ namespace PhantomBrigade.Data
             var entry = sector.entries[textKey];
             var text = entry.textProcessed;
             bool textEmpty = string.IsNullOrEmpty (text);
-            
+
             if (textEmpty)
             {
                 if (DataShortcuts.debug.textFromLibraryWhenEmpty)
@@ -495,7 +632,7 @@ namespace PhantomBrigade.Data
         }
 
         #if PB_MODSDK
-        
+
         public static string GetRawTextFromLibrary (bool forceSource, string sectorKey, string textKey, bool suppressWarning = true)
         {
             if (string.IsNullOrEmpty (sectorKey))
@@ -504,7 +641,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in library: Null or empty sector key");
                 return string.Empty;
             }
-            
+
             if (string.IsNullOrEmpty (textKey))
             {
                 if (!suppressWarning)
@@ -519,7 +656,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Library not loaded");
                 return string.Empty;
             }
-            
+
             var sector = libraryData.GetSector (sectorKey);
             if (sector == null)
             {
@@ -527,7 +664,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Sector not present");
                 return string.Empty;
             }
-            
+
             if (sector.entries == null || !sector.entries.ContainsKey (textKey))
             {
                 if (!suppressWarning)
@@ -538,9 +675,9 @@ namespace PhantomBrigade.Data
             var entry = sector.entries[textKey];
             return entry.text;
         }
-        
+
         #endif
-        
+
         private static string GetTextFromLibrary (string sectorKey, string textKey, bool suppressWarning = false)
         {
             if (string.IsNullOrEmpty (sectorKey))
@@ -549,21 +686,21 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in library: Null or empty sector key");
                 return string.Empty;
             }
-            
+
             if (string.IsNullOrEmpty (textKey))
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found in library: Null or empty text key");
                 return string.Empty;
             }
-            
+
             if (libraryData == null)
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Main library not loaded");
                 return string.Empty;
             }
-            
+
             var sector = libraryData.GetSector (sectorKey);
             if (sector == null)
             {
@@ -571,7 +708,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Sector not present");
                 return string.Empty;
             }
-            
+
             if (sector.entries == null || !sector.entries.ContainsKey (textKey))
             {
                 if (!suppressWarning)
@@ -582,7 +719,7 @@ namespace PhantomBrigade.Data
             var entry = sector.entries[textKey];
             var text = entry.textProcessed;
             bool textEmpty = string.IsNullOrEmpty (text);
-            
+
             if (textEmpty)
             {
                 if (DataShortcuts.debug.textWarningWhenEmpty)
@@ -593,7 +730,7 @@ namespace PhantomBrigade.Data
 
             return entry.textProcessed;
         }
-        
+
         public static DataBlockTextEntryMain GetTextEntryFromLibrary (string sectorKey, string textKey)
         {
             if (string.IsNullOrEmpty (sectorKey))
@@ -601,26 +738,26 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Text not found in library: Null or empty sector key");
                 return null;
             }
-            
+
             if (string.IsNullOrEmpty (textKey))
             {
                 Debug.LogWarning ($"Text not found in library: Null or empty text key");
                 return null;
             }
-            
+
             if (libraryData == null)
             {
                 Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Main library not loaded");
                 return null;
             }
-            
+
             var sector = libraryData.GetSector (sectorKey);
             if (sector == null)
             {
                 Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Sector not present");
                 return null;
             }
-            
+
             if (sector.entries == null || !sector.entries.ContainsKey (textKey))
             {
                 Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Sector doesn't contain a given key");
@@ -637,10 +774,10 @@ namespace PhantomBrigade.Data
         {
             if (libraryData == null || libraryData.sectors == null)
                 return fallbackKeyList;
-            
+
             return libraryData.sectors.Keys;
         }
-        
+
         #if UNITY_EDITOR
         public static IEnumerable<string> GetAddTextKeys ()
         {
@@ -663,10 +800,10 @@ namespace PhantomBrigade.Data
         {
             if (localizationDataInternal == null || localizationDataInternal.sectors == null)
                 return fallbackKeyList;
-            
+
             return localizationDataInternal.sectors.Keys;
         }
-        
+
         public static IEnumerable<string> GetLibraryTextKeys (string sectorKey)
         {
             if (libraryData == null || libraryData.sectors == null || string.IsNullOrEmpty (sectorKey) || !libraryData.sectors.ContainsKey (sectorKey))
@@ -677,7 +814,7 @@ namespace PhantomBrigade.Data
                 return fallbackKeyList;
             return sector.entries.Keys;
         }
-        
+
         public static void TryAddingTextToLibrary (string sectorKey, string textKey, string text, string note = null)
         {
             if (libraryData == null)
@@ -685,10 +822,10 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Can't add text to library: no library loaded");
                 return;
             }
-            
+
             libraryData.TryAddingText (sectorKey, textKey, text, note);
         }
-        
+
         public static void TryAddingSectorToLibrary (string sectorKey)
         {
             if (libraryData == null)
@@ -696,11 +833,11 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Can't add sector to library: no library loaded");
                 return;
             }
-            
+
             libraryData.TryAddingSector (sectorKey);
         }
-        
-        
+
+
         public static void ClearLocalizationsFromMods ()
         {
             localizationKeysToPathsMods.Clear ();
@@ -713,27 +850,27 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Failed to add localization due to null or empty key");
                 return;
             }
-            
+
             if (localizationKeysToPathsMods.ContainsKey (key))
             {
                 Debug.LogWarning ($"Failed to add localization due to key {key} already being registered");
                 return;
             }
-            
+
             if (localizationKeysToPathsMods.ContainsKey (path))
             {
                 Debug.LogWarning ($"Failed to add localization due to key {key} already being registered");
                 return;
             }
-            
+
             localizationKeysToPathsMods.Add (key, path);
         }
 
         #if UNITY_EDITOR
-        
+
         private static Color colorNormal = new Color (1f, 1f, 1f, 1f);
         private static Color colorUnsaved = Color.HSVToRGB (0.6f, 0.5f, 1f);
-        
+
         private Color GetLibrarySaveButtonColor => libraryUnsaved ? colorUnsaved : colorNormal;
         private Color GetLocalizationSaveButtonColor => localizationUnsaved ? colorUnsaved : colorNormal;
 
@@ -750,7 +887,7 @@ namespace PhantomBrigade.Data
         }
 
 
-        
+
         [PropertyOrder (-6)]
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText, false)]
@@ -785,7 +922,7 @@ namespace PhantomBrigade.Data
         [LabelText ("Sector"), LabelWidth (120f), ValueDropdown ("GetLibrarySectorKeys")]
         [InfoBox ("@GetExistingText ()", "IsExistingTextVisible", InfoMessageType = InfoMessageType.None)]
         private static string addTextSector;
-        
+
         [PropertyOrder (-6)]
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText)]
@@ -799,7 +936,7 @@ namespace PhantomBrigade.Data
         [ShowInInspector]
         [LabelText ("Key / Text"), LabelWidth (120f), InfoBox ("Invalid key (empty or already registered)", "IsAddKeyInvalid", InfoMessageType = InfoMessageType.Warning)]
         private static string addTextKey;
-        
+
         [PropertyOrder (-6)]
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText)]
@@ -823,10 +960,10 @@ namespace PhantomBrigade.Data
         {
             if (string.IsNullOrEmpty (addTextSector) || string.IsNullOrEmpty (addTextKey))
                 return string.Empty;
-            
+
             var fields = FieldReflectionUtility.GetConstantStringFieldNamesValues (textSectorKeyClassType);
             string shortcut = null;
-            
+
             foreach (var kvp in fields)
             {
                 bool match = kvp.Value == addTextSector;
@@ -836,7 +973,7 @@ namespace PhantomBrigade.Data
                     break;
                 }
             }
-            
+
             if (shortcut != null)
                 return $"Txt.Get (TextLibs.{shortcut}, \"{addTextKey}\")";
             else
@@ -844,29 +981,29 @@ namespace PhantomBrigade.Data
         }
 
         #endif
-        
-        
+
+
         [PropertySpace (8f), PropertyOrder (1)]
         [TabGroup (tgUtilities), ShowInInspector]
         private static DataContainerTextLibraryOld libraryDataOld;
 
         private static string libraryPathOld = "Configs/Text/English";
-        
+
         [TabGroup (tgUtilities)]
         [ButtonGroup (bgUtilitiesLegacy), Button ("Load (old)", ButtonSizes.Large)]
         public static void LoadLibraryOld ()
         {
             Debug.Log ($"Loading old library from {libraryPathOld}");
-            
+
             libraryDataOld = new DataContainerTextLibraryOld ();
-            libraryDataOld.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCoreOld> 
+            libraryDataOld.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCoreOld>
                 (libraryPathOld, "core.yaml", appendApplicationPath: true);
-            libraryDataOld.specialized = UtilitiesYAML.LoadDataFromFile<DataContainerTextSpecializedOld> 
+            libraryDataOld.specialized = UtilitiesYAML.LoadDataFromFile<DataContainerTextSpecializedOld>
                 (libraryPathOld, "specialized.yaml", appendApplicationPath: true);
-            libraryDataOld.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorOld> 
+            libraryDataOld.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorOld>
                 ($"{libraryPathOld}/Sectors", appendApplicationPath: true);
         }
-        
+
         [TabGroup (tgUtilities)]
         [ButtonGroup (bgUtilitiesLegacy), Button ("Save (old)", ButtonSizes.Large)]
         public static void SaveLibraryOld ()
@@ -876,19 +1013,19 @@ namespace PhantomBrigade.Data
                 Debug.Log ($"No old library data available, can't save");
                 return;
             }
-            
+
             Debug.Log ($"Writing old text library to path {libraryPathOld}");
 
             if (libraryDataOld.core != null)
                 UtilitiesYAML.SaveDataToFile (libraryPathOld, "core.yaml", libraryDataOld.core);
-            
+
             if (libraryDataOld.specialized != null)
                 UtilitiesYAML.SaveDataToFile (libraryPathOld, "specialized.yaml", libraryDataOld.specialized);
 
             if (libraryDataOld.sectors != null)
                 UtilitiesYAML.SaveDecomposedDictionary ($"{libraryPathOld}/Sectors", libraryDataOld.sectors, false);
         }
-        
+
         [TabGroup (tgUtilities)]
         [ButtonGroup (bgUtilitiesLegacy), Button ("Convert to\nnew format", ButtonSizes.Large)]
         public static void ConvertLibraryOld ()
@@ -907,7 +1044,7 @@ namespace PhantomBrigade.Data
 
             core.name = "English";
             core.flag = "icon_flag_english";
-            
+
             core.subtitleBuffer = coreOld.subtitleBuffer;
             core.subtitleFadeoutTime = coreOld.subtitleFadeoutTime;
             core.insertNewLines = coreOld.insertNewLines;
@@ -917,7 +1054,7 @@ namespace PhantomBrigade.Data
             core.sizeTooltipHeader = coreOld.sizeTooltipHeader;
             core.sizeTooltipContent = coreOld.sizeTooltipContent;
             core.spacingTooltipHeader = coreOld.spacingTooltipHeader;
-       
+
             /*
             var specOld = libraryDataOld.specialized;
             var collections = new SortedDictionary<string, DataContainerTextCollectionMain> ();
@@ -933,14 +1070,14 @@ namespace PhantomBrigade.Data
                         tags = new HashSet<string> { "group_pilot", "pilot_names_family" },
                         entries = new List<string> (group.familyNames)
                     });
-                    
+
                     collections.Add ("pilot_names_given_01", new DataContainerTextCollectionMain
                     {
                         localized = true,
                         tags = new HashSet<string> { "group_pilot", "pilot_names_given" },
                         entries = new List<string> (group.givenNames)
                     });
-                    
+
                     collections.Add ("pilot_names_callsigns_01", new DataContainerTextCollectionMain
                     {
                         localized = true,
@@ -949,7 +1086,7 @@ namespace PhantomBrigade.Data
                     });
                 }
             }
-            
+
             if (specOld.overworldEntityGroups != null)
             {
                 var nameGroupData = DataMultiLinkerOverworldNameGroup.data;
@@ -963,7 +1100,7 @@ namespace PhantomBrigade.Data
 
                     if (group.names == null || group.names.Count == 0)
                         continue;
-                    
+
                     nameGroupData.Add (groupKey, new DataContainerOverworldNameGroup
                     {
                         key = groupKey,
@@ -971,7 +1108,7 @@ namespace PhantomBrigade.Data
                         prefixID = group.prefixFromID,
                         suffixID = group.suffixFromID
                     });
-                    
+
                     collections.Add ($"overworld_{groupKey}", new DataContainerTextCollectionMain
                     {
                         localized = true,
@@ -981,7 +1118,7 @@ namespace PhantomBrigade.Data
 
                     i += 1;
                 }
-                
+
                 DataMultiLinkerOverworldNameGroup.SaveData ();
             }
             */
@@ -1033,11 +1170,11 @@ namespace PhantomBrigade.Data
                     entry.text = entryOld.text;
                 }
             }
-            
+
             Debug.Log ($"Finished import of legacy text database to new format | Sectors: {sectorCount} | Entries: {entryCount}");
             DataManagerText.SaveLibrary ();
         }
-        
+
         /*
         [TabGroup (tgUtilities)]
         [Button ("Convert collections to sectors", ButtonSizes.Large)]
@@ -1073,7 +1210,7 @@ namespace PhantomBrigade.Data
 
     public static class Txt
     {
-        public static string Get (string sectorKey, string textKey, bool suppressWarning = false) => 
+        public static string Get (string sectorKey, string textKey, bool suppressWarning = false) =>
             DataManagerText.GetText (sectorKey, textKey, suppressWarning);
 
         public static string Wrap (this string content, string prefix, string suffix)
@@ -1082,5 +1219,3 @@ namespace PhantomBrigade.Data
         }
     }
 }
-
-

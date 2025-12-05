@@ -27,6 +27,7 @@ namespace PhantomBrigade.SDK.ModTools
         public ConfigChecksums.ConfigDirectory ChecksumsRoot;
         public Dictionary<Type, ConfigChecksums.ConfigDirectory> MultiLinkerChecksumMap;
         public Dictionary<Type, ConfigChecksums.ConfigFile> LinkerChecksumMap;
+        public Dictionary<string, ConfigChecksums.ConfigEntry> TextLibraryMap;
     }
 
     public enum EnsureResult
@@ -194,6 +195,7 @@ namespace PhantomBrigade.SDK.ModTools
                     ChecksumsRoot = result.Root,
                     MultiLinkerChecksumMap = result.MultiLinkerMap,
                     LinkerChecksumMap = result.LinkerMap,
+                    TextLibraryMap = result.TextLibraryMap,
                 };
                 return (true, DataManagerMod.sdkChecksumData.ChecksumsRoot.Checksum);
             }
@@ -928,6 +930,7 @@ namespace PhantomBrigade.SDK.ModTools
         {
             yield return uds.SaveAllChildrenInheritingOpenGenericTypeIE (typeof(DataLinker<>), forceLoad: false);
             yield return uds.SaveAllChildrenInheritingOpenGenericTypeIE (typeof(DataMultiLinker<>), forceLoad: false);
+            DataManagerText.SaveLibrary ();
             yield return GenerateModFilesIE (modData, multiLinkerTypeMap, onCompletion);
         }
 
