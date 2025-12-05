@@ -92,7 +92,12 @@ namespace PhantomBrigade.SDK.ModTools
         };
         const string checksumsFileName = "checksums.bin";
 
+        const string DataDirectoryName = "Data";
+        const string TextLibraryDirectoryName = "TextLibrary";
+
         public const string DataDecomposedDirectoryName = "DataDecomposed";
+        public const string TextSectorsDirectoryName = "Sectors";
+        public const string TextLibraryCoreName = "core";
 
         public sealed class Serializer
         {
@@ -405,6 +410,7 @@ namespace PhantomBrigade.SDK.ModTools
                     result.Root = root;
                     result.MultiLinkerMap = new Dictionary<Type, ConfigDirectory> (multiLinkerMap);
                     result.LinkerMap = new Dictionary<Type, ConfigFile> (linkerMap);
+                    result.TextLibraryMap = new Dictionary<string, ConfigEntry> (textLibraryMap);
                 }
 
                 if (result.Code != ResultCode.Upgrade)
@@ -510,7 +516,18 @@ namespace PhantomBrigade.SDK.ModTools
                     fileQueue.Enqueue ((entry, fileCount));
                     entries.Add (entry);
 
-                    if (entry.RelativePath.StartsWith (DataDecomposedDirectoryName))
+                    if (entry.RelativePath.StartsWith (TextLibraryDirectoryName))
+                    {
+                        if (entry.RelativePath.EndsWith (TextSectorsDirectoryName))
+                        {
+                            textLibraryMap["//"] = entry;
+                        }
+                        else
+                        {
+                            textLibraryMap["/"] = entry;
+                        }
+                    }
+                    else if (entry.RelativePath.StartsWith (DataDecomposedDirectoryName))
                     {
                         var cleanedPath = entry.RelativePath + "/";
                         var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath, fallbackAllowed: false);
@@ -589,24 +606,34 @@ namespace PhantomBrigade.SDK.ModTools
                     entries.Add (entry);
 
                     var ext = Path.GetExtension (entry.RelativePath);
-                    if (!entry.RelativePath.StartsWith (DataDecomposedDirectoryName) && ext == ".yaml")
+                    if (ext == ".yaml")
                     {
-                        var cleanedPath = entry.RelativePath;
-                        cleanedPath = cleanedPath.Substring (0, cleanedPath.Length - ext.Length);
-                        var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath, fallbackAllowed: false);
-                        if (typeName != null)
+                        if (entry.RelativePath.StartsWith (TextLibraryDirectoryName))
                         {
-                            var t = FieldReflectionUtility.GetTypeByName (typeName);
-                            if (t == null)
+                            var rp = entry.RelativePath;
+                            rp = rp.Substring (TextLibraryDirectoryName.Length + 1);
+                            rp = rp.Substring (0, rp.Length - ext.Length);
+                            textLibraryMap[rp] = entry;
+                        }
+                        else if (entry.RelativePath.StartsWith (DataDirectoryName) && !entry.RelativePath.StartsWith (DataDecomposedDirectoryName))
+                        {
+                            var cleanedPath = entry.RelativePath;
+                            cleanedPath = cleanedPath.Substring (0, cleanedPath.Length - ext.Length);
+                            var typeName = DataPathUtility.GetDataTypeFromPath (cleanedPath, fallbackAllowed: false);
+                            if (typeName != null)
                             {
-                                if (logPathResolution)
+                                var t = FieldReflectionUtility.GetTypeByName (typeName);
+                                if (t == null)
                                 {
-                                    Debug.Log ("Unable to resolve name to type (file): " + typeName);
+                                    if (logPathResolution)
+                                    {
+                                        Debug.Log ("Unable to resolve name to type (file): " + typeName);
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                linkerMap[t] = entry;
+                                else
+                                {
+                                    linkerMap[t] = entry;
+                                }
                             }
                         }
                     }
@@ -621,6 +648,7 @@ namespace PhantomBrigade.SDK.ModTools
             readonly Queue<(ConfigDirectory, int)> fileQueue = new Queue<(ConfigDirectory, int)> ();
             readonly Dictionary<Type, ConfigDirectory> multiLinkerMap = new Dictionary<Type, ConfigDirectory> ();
             readonly Dictionary<Type, ConfigFile> linkerMap = new Dictionary<Type, ConfigFile> ();
+            readonly Dictionary<string, ConfigEntry> textLibraryMap = new Dictionary<string, ConfigEntry> ();
 
             public sealed class Result
             {
@@ -631,6 +659,7 @@ namespace PhantomBrigade.SDK.ModTools
                 public ConfigDirectory Root;
                 public Dictionary<Type, ConfigDirectory> MultiLinkerMap;
                 public Dictionary<Type, ConfigFile> LinkerMap;
+                public Dictionary<string, ConfigEntry> TextLibraryMap;
             }
 
             public enum ResultCode
@@ -897,6 +926,14 @@ namespace PhantomBrigade.SDK.ModTools
                     }
                 }
             }
+        }
+
+        public sealed class TextLibrary
+        {
+            public (ConfigDirectory SDK, ConfigDirectory Mod) LibraryDirectory;
+            public (ConfigDirectory SDK, ConfigDirectory Mod) SectorsDirectory;
+            public (ConfigFile SDK, ConfigFile Mod) Core;
+            public Dictionary<string, (ConfigFile SDK, ConfigFile Mod)> Sectors;
         }
     }
 }
