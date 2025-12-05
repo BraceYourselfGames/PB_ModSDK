@@ -48,7 +48,7 @@ namespace PhantomBrigade.Data
             var col = Color.HSVToRGB (Mathf.Abs (hueStart - (float)index / 12f) % 1f, 0.25f, b).WithAlpha (alpha);
             return col;
         }
-        
+
         public static Color GetColorFromElementIndexBright (int index, float hueStart = 0.6f, float saturation = 0.25f)
         {
             var col = Color.HSVToRGB (Mathf.Abs (hueStart - (float)index / 12f) % 1f, saturation, 1f).WithAlpha (1f);
@@ -479,7 +479,7 @@ namespace PhantomBrigade.Data
         private Color GetColor () =>
             Color.HSVToRGB (collision ? 0f : 0.55f, 0.5f, 1f);
     }
-    
+
     [HideReferenceObjectPicker, DisableContextMenu]
     public class DataFilterKeyValuePair<T> where T : DataContainer, new()
     {
@@ -519,7 +519,7 @@ namespace PhantomBrigade.Data
             }
             parent.DeleteEntry (key);
         }
-        
+
         #endif
 
         [VerticalGroup ("value", Order = 2)]
@@ -566,7 +566,7 @@ namespace PhantomBrigade.Data
             parent.ReplaceKey (keyLast, key);
             keyLast = key;
         }
-        
+
         #endif
     }
 
@@ -857,8 +857,8 @@ namespace PhantomBrigade.Data
             }
             else
             {
-                var sdkPath = Path.Combine (DataPathHelper.GetApplicationFolder (), "Configs", pair.SDK.RelativePath);
-                var modPath = Path.Combine (configsPath, pair.Mod.RelativePath);
+                var sdkPath = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), "Configs", pair.SDK.RelativePath);
+                var modPath = DataPathHelper.GetCombinedCleanPath (configsPath, pair.Mod.RelativePath);
                 Directory.Delete (modPath, true);
                 Directory.CreateDirectory (modPath);
                 ModToolsHelper.CopyConfigDB (new DirectoryInfo (sdkPath), modPath);
@@ -908,7 +908,7 @@ namespace PhantomBrigade.Data
         [FoldoutGroup (OdinGroup.Name.Settings)]
         [OnInspectorGUI ("AppendedInspectorGUI")]
         public bool log = false;
-        
+
         [ShowInInspector]
         [FoldoutGroup (OdinGroup.Name.Settings)]
         [ShowIf (nameof(IsDisplayIsolated))]
@@ -1113,7 +1113,7 @@ namespace PhantomBrigade.Data
         {
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.update -= UpdateInEditor;
-            
+
             filterRequested = false;
             filterRequestedFromLoad = false;
             #endif
@@ -1406,8 +1406,8 @@ namespace PhantomBrigade.Data
             dataInternal.Add (keyNew, entry);
             if (IsUsingDirectories ())
             {
-                var pathOld = Path.Combine (pathLocal, keyOld);
-                var pathNew = Path.Combine (pathLocal, keyNew);
+                var pathOld = DataPathHelper.GetCombinedCleanPath (pathLocal, keyOld);
+                var pathNew = DataPathHelper.GetCombinedCleanPath (pathLocal, keyNew);
                 Directory.Move (pathOld, pathNew);
                 #if PB_MODSDK
                 LoadDataIsolated (keyNew);
@@ -1563,7 +1563,7 @@ namespace PhantomBrigade.Data
         {
             if (data == null)
                 return null;
-            
+
             return data.Keys;
         }
 
@@ -1879,7 +1879,7 @@ namespace PhantomBrigade.Data
             #if PB_MODSDK
 
             ModTextHelper.GenerateTextChangesToSectors (textSectorKeys);
-            
+
             #endif
         }
 
@@ -1950,8 +1950,8 @@ namespace PhantomBrigade.Data
 
             if (IsUsingDirectories ())
             {
-                var sourcePath = Path.Combine (pathLocal, key);
-                var destPath = Path.Combine (pathLocal, keyNew);
+                var sourcePath = DataPathHelper.GetCombinedCleanPath (pathLocal, key);
+                var destPath = DataPathHelper.GetCombinedCleanPath (pathLocal, keyNew);
                 CopyDirectoryContents (new DirectoryInfo (sourcePath), destPath);
                 LoadDataIsolated (keyNew);
             }
@@ -1995,7 +1995,7 @@ namespace PhantomBrigade.Data
                     return;
                 }
 
-                var folderPath = Path.Combine (pathLocal, key);
+                var folderPath = DataPathHelper.GetCombinedCleanPath (pathLocal, key);
                 Directory.Delete (folderPath, true);
             }
             dataInternal.Remove (key);
@@ -2016,12 +2016,12 @@ namespace PhantomBrigade.Data
             Directory.CreateDirectory (dest);
             foreach (var f in source.EnumerateFiles ())
             {
-                var destPath = Path.Combine (dest, f.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, f.Name);
                 f.CopyTo (destPath);
             }
             foreach (var d in source.EnumerateDirectories ())
             {
-                var destPath = Path.Combine (dest, d.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, d.Name);
                 CopyDirectoryContents (d, destPath);
             }
         }
@@ -2076,7 +2076,7 @@ namespace PhantomBrigade.Data
                 foreach (var key in dataInternal.Keys)
                 {
                     var fileName = key + ".yaml";
-                    var filePath = Path.Combine (path, fileName);
+                    var filePath = DataPathHelper.GetCombinedCleanPath (path, fileName);
                     try
                     {
                         entries.Add ((fileName, File.ReadAllText (filePath)));
@@ -2148,7 +2148,7 @@ namespace PhantomBrigade.Data
         {
             if (!IsModdableStatic ())
                 return;
-            
+
             UpdateChecksums ();
             ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
         }

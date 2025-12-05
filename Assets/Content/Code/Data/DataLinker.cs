@@ -156,8 +156,8 @@ namespace PhantomBrigade.Data
             }
             else
             {
-                var sdkPath = Path.Combine (DataPathHelper.GetApplicationFolder (), "Configs", pair.SDK.RelativePath);
-                var modPath = Path.Combine (configsPath, pair.Mod.RelativePath);
+                var sdkPath = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), "Configs", pair.SDK.RelativePath);
+                var modPath = DataPathHelper.GetCombinedCleanPath (configsPath, pair.Mod.RelativePath);
                 File.Copy (sdkPath, modPath, true);
                 LoadData ();
             }

@@ -113,7 +113,7 @@ namespace PhantomBrigade.SDK.ModTools
             var currentTags = new HashSet<string> (tagMappings.Keys);
 
             var sdkDirectory = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
-            var userDLLDirectory = new DirectoryInfo (Path.Combine (sdkDirectory.FullName, "Assets\\User"));
+            var userDLLDirectory = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (sdkDirectory.FullName, "Assets\\User"));
             if (!userDLLDirectory.Exists)
             {
                 return;
@@ -354,12 +354,12 @@ namespace PhantomBrigade.SDK.ModTools
         {
             foreach (var f in source.EnumerateFiles ())
             {
-                var destPath = Path.Combine (dest, f.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, f.Name);
                 f.CopyTo (destPath, true);
             }
             foreach (var d in source.EnumerateDirectories ())
             {
-                var destPath = Path.Combine (dest, d.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, d.Name);
                 Directory.CreateDirectory (destPath);
                 CopyConfigDB (d, destPath);
             }
@@ -369,7 +369,7 @@ namespace PhantomBrigade.SDK.ModTools
         {
             yield return null;
 
-            var source = new DirectoryInfo (Path.Combine (root.FullName, dirNameConfigs));
+            var source = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (root.FullName, dirNameConfigs));
             var (topLevel, dataDecomposed) = GetConfigSubdirectories (source);
             copyCount = 1 + topLevel.Count + dataDecomposed.Count;
             copyItem = 0;
@@ -383,7 +383,7 @@ namespace PhantomBrigade.SDK.ModTools
             ReportCopyProgress (dest);
             foreach (var file in source.EnumerateFiles ().OrderBy(fi => fi.Name, StringComparer.InvariantCultureIgnoreCase))
             {
-                var destPath = Path.Combine (dest, file.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, file.Name);
                 file.CopyTo (destPath);
                 if (buildChecksums)
                 {
@@ -443,7 +443,7 @@ namespace PhantomBrigade.SDK.ModTools
             }
             directories.Add (configsPath);
 
-            var overridesPath = Path.Combine (DataContainerModData.selectedMod.GetModPathProject (), DataContainerModData.overridesFolderName);
+            var overridesPath = DataPathHelper.GetCombinedCleanPath (DataContainerModData.selectedMod.GetModPathProject (), DataContainerModData.overridesFolderName);
             if (Directory.Exists (overridesPath))
             {
                 var overrides = Directory.GetDirectories (overridesPath);
@@ -476,7 +476,7 @@ namespace PhantomBrigade.SDK.ModTools
 
         public static IEnumerator ChecksumSDKConfigsIE (DirectoryInfo root)
         {
-            var source = new DirectoryInfo (Path.Combine (root.FullName, dirNameConfigs));
+            var source = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (root.FullName, dirNameConfigs));
             var (topLevel, dataDecomposed) = GetConfigSubdirectories (source);
             checksums = new ConfigChecksums.Serializer (source, ConfigChecksums.EntrySource.SDK);
             copyCount = 1 + topLevel.Count + dataDecomposed.Count;
@@ -574,7 +574,7 @@ namespace PhantomBrigade.SDK.ModTools
 
         static IEnumerator UpdateModConfigsIE (DirectoryInfo sdkRoot, DataContainerModData modData)
         {
-            var dirSDKConfigs = new DirectoryInfo (Path.Combine (sdkRoot.FullName, dirNameConfigs));
+            var dirSDKConfigs = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (sdkRoot.FullName, dirNameConfigs));
             var dirModConfigs = new DirectoryInfo (modData.GetModPathConfigs ());
             yield return UpdateModConfigsLinkerIE (dirSDKConfigs, dirModConfigs, modData);
             yield return UpdateModConfigsMultilinkerIE (dirSDKConfigs, dirModConfigs, modData);
@@ -596,7 +596,7 @@ namespace PhantomBrigade.SDK.ModTools
             }
 
             buildStarted = true;
-            var source = new DirectoryInfo (Path.Combine (sdkDirectory.FullName, dirNameConfigs));
+            var source = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (sdkDirectory.FullName, dirNameConfigs));
             var serializer = new ConfigChecksums.Serializer (source, ConfigChecksums.EntrySource.SDK);
             yield return ChecksumConfigsQuietIE (source, serializer);
             UtilityDatabaseSerialization.LoadSDKChecksums ();
@@ -667,13 +667,13 @@ namespace PhantomBrigade.SDK.ModTools
         {
             foreach (var f in source.EnumerateFiles ())
             {
-                var destPath = Path.Combine (dest, f.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, f.Name);
                 f.CopyTo (destPath, true);
             }
             yield return null;
             foreach (var d in source.EnumerateDirectories ())
             {
-                var destPath = Path.Combine (dest, d.Name);
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, d.Name);
                 Directory.CreateDirectory (destPath);
                 CopyConfigDB (d, destPath);
                 yield return null;
@@ -712,7 +712,7 @@ namespace PhantomBrigade.SDK.ModTools
             Directory.CreateDirectory (dest);
             foreach (var file in source.EnumerateFiles ().OrderBy(fi => fi.FullName, StringComparer.InvariantCultureIgnoreCase))
             {
-                var filePath = Path.Combine (dest, file.Name);
+                var filePath = DataPathHelper.GetCombinedCleanPath (dest, file.Name);
                 file.CopyTo (filePath);
                 if (buildChecksums)
                 {
@@ -950,8 +950,13 @@ namespace PhantomBrigade.SDK.ModTools
                 var textHeader = string.Format ("Generate configs {0}/{1} - {2:P0}", item, total, pct);
                 EditorUtility.DisplayProgressBar (textHeader, pair.Mod.RelativePath, pct);
                 item += 1;
-                var sourcePath = Path.Combine (sourcePathPrefix, pair.Mod.RelativePath);
-                var destPath = Path.Combine (destPathPrefix, pair.Mod.RelativePath);
+                var sourcePath = DataPathHelper.GetCombinedCleanPath (sourcePathPrefix, pair.Mod.RelativePath);
+                var destPath = DataPathHelper.GetCombinedCleanPath (destPathPrefix, pair.Mod.RelativePath);
+                if (!File.Exists (sourcePath))
+                {
+                    Debug.LogWarningFormat ("Missing source file: {0}", sourcePath);
+                    continue;
+                }
                 Directory.CreateDirectory (Path.GetDirectoryName (destPath));
                 if (pair.SDK == null)
                 {
@@ -992,15 +997,20 @@ namespace PhantomBrigade.SDK.ModTools
 
         static IEnumerator CopyChangedFilesIE (string sourcePathPrefix, string destPathPrefix, (ConfigChecksums.ConfigDirectory SDK, ConfigChecksums.ConfigDirectory Mod) pair)
         {
-            var dirPath = Path.Combine (destPathPrefix, pair.Mod.RelativePath);
+            var dirPath = DataPathHelper.GetCombinedCleanPath (destPathPrefix, pair.Mod.RelativePath);
             Directory.CreateDirectory (dirPath);
             var sourceFiles = pair.SDK != null
                 ? pair.SDK.Entries.OfType<ConfigChecksums.ConfigFile> ().ToDictionary (e => Path.GetFileName (e.RelativePath), e => e)
                 : new Dictionary<string, ConfigChecksums.ConfigFile> ();
             foreach (var entry in pair.Mod.Entries.OfType<ConfigChecksums.ConfigFile> ())
             {
-                var sourcePath = Path.Combine (sourcePathPrefix, entry.RelativePath);
-                var destPath = Path.Combine (destPathPrefix, entry.RelativePath);
+                var sourcePath = DataPathHelper.GetCombinedCleanPath (sourcePathPrefix, entry.RelativePath);
+                var destPath = DataPathHelper.GetCombinedCleanPath (destPathPrefix, entry.RelativePath);
+                if (!File.Exists (sourcePath))
+                {
+                    Debug.LogWarningFormat ("Missing source file: {0}", sourcePath);
+                    continue;
+                }
                 if (sourceFiles.TryGetValue (Path.GetFileName (entry.RelativePath), out var sdk) && !ConfigChecksums.ChecksumEqual (sdk, entry))
                 {
                     // XXX generate ConfigEdit when that's implemented
@@ -1026,12 +1036,12 @@ namespace PhantomBrigade.SDK.ModTools
 
         static IEnumerator WalkModDirectoryIE (string sourcePathPrefix, string destPathPrefix, ConfigChecksums.ConfigDirectory mod)
         {
-            var dirPath = Path.Combine (destPathPrefix, mod.RelativePath);
+            var dirPath = DataPathHelper.GetCombinedCleanPath (destPathPrefix, mod.RelativePath);
             Directory.CreateDirectory (dirPath);
             foreach (var entry in mod.Entries.OfType<ConfigChecksums.ConfigFile> ())
             {
-                var sourcePath = Path.Combine (sourcePathPrefix, entry.RelativePath);
-                var destPath = Path.Combine (destPathPrefix, entry.RelativePath);
+                var sourcePath = DataPathHelper.GetCombinedCleanPath (sourcePathPrefix, entry.RelativePath);
+                var destPath = DataPathHelper.GetCombinedCleanPath (destPathPrefix, entry.RelativePath);
                 File.Copy (sourcePath, destPath, true);
                 yield return null;
             }
@@ -1087,8 +1097,8 @@ namespace PhantomBrigade.SDK.ModTools
                 if (!modData.linkerChecksumMap.TryGetValue (kvp.Key, out var pair))
                 {
                     item = ReportUpdateProgress (total, item, kvp.Value.RelativePath);
-                    var filePathSDKNew = Path.Combine (dirSDKConfigs.FullName, kvp.Value.RelativePath);
-                    var filePathModNew = Path.Combine (dirModConfigs.FullName, kvp.Value.RelativePath);
+                    var filePathSDKNew = DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, kvp.Value.RelativePath);
+                    var filePathModNew = DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, kvp.Value.RelativePath);
                     File.Copy (filePathSDKNew, filePathModNew, true);
                     yield return null;
                     continue;
@@ -1098,14 +1108,14 @@ namespace PhantomBrigade.SDK.ModTools
                     continue;
                 }
 
-                var filePathMod = Path.Combine (dirModConfigs.FullName, pair.Mod.RelativePath);
+                var filePathMod = DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, pair.Mod.RelativePath);
                 pair.Mod.Update (ConfigChecksums.EntrySource.SDK, File.ReadAllBytes(filePathMod));
                 if (ConfigChecksums.ChecksumEqual (kvp.Value.Checksum, pair.Mod.Checksum))
                 {
                     pair.Mod.Source = ConfigChecksums.EntrySource.SDK;
                     continue;
                 }
-                var filePathSDK = Path.Combine (dirSDKConfigs.FullName, kvp.Value.RelativePath);
+                var filePathSDK = DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, kvp.Value.RelativePath);
                 File.Copy (filePathSDK, filePathMod, true);
                 yield return null;
             }
@@ -1119,7 +1129,7 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     continue;
                 }
-                var fileMod = new FileInfo (Path.Combine (dirModConfigs.FullName, kvp.Value.Mod.RelativePath));
+                var fileMod = new FileInfo (DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, kvp.Value.Mod.RelativePath));
                 fileMod.Delete ();
             }
 
@@ -1154,8 +1164,8 @@ namespace PhantomBrigade.SDK.ModTools
                 item = ReportUpdateProgress (total, item, kvp.Value.RelativePath);
                 if (!modData.multiLinkerChecksumMap.TryGetValue (kvp.Key, out var pair))
                 {
-                    var source = new DirectoryInfo (Path.Combine (dirSDKConfigs.FullName, kvp.Value.RelativePath));
-                    var pathDest = Path.Combine (dirModConfigs.FullName, kvp.Value.RelativePath);
+                    var source = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, kvp.Value.RelativePath));
+                    var pathDest = DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, kvp.Value.RelativePath);
                     Directory.CreateDirectory (pathDest);
                     yield return CopyConfigIE (source, pathDest);
                     continue;
@@ -1177,15 +1187,15 @@ namespace PhantomBrigade.SDK.ModTools
                     {
                         if (directoryMode)
                         {
-                            var source = new DirectoryInfo (Path.Combine (dirSDKConfigs.FullName, entrySDK.Value.RelativePath));
-                            var pathDest = Path.Combine (dirModConfigs.FullName, entrySDK.Value.RelativePath);
+                            var source = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, entrySDK.Value.RelativePath));
+                            var pathDest = DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, entrySDK.Value.RelativePath);
                             Directory.CreateDirectory (pathDest);
                             yield return CopyConfigIE (source, pathDest);
                         }
                         else
                         {
-                            var filePathSDKNew = Path.Combine (dirSDKConfigs.FullName, entrySDK.Value.RelativePath);
-                            var filePathModNew = Path.Combine (dirModConfigs.FullName, entrySDK.Value.RelativePath);
+                            var filePathSDKNew = DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, entrySDK.Value.RelativePath);
+                            var filePathModNew = DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, entrySDK.Value.RelativePath);
                             File.Copy (filePathSDKNew, filePathModNew, true);
                         }
                         continue;
@@ -1201,15 +1211,15 @@ namespace PhantomBrigade.SDK.ModTools
                     }
                     if (directoryMode)
                     {
-                        var dirEntryMod = new DirectoryInfo (Path.Combine (dirModConfigs.FullName, entryMod.RelativePath));
+                        var dirEntryMod = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, entryMod.RelativePath));
                         dirEntryMod.Delete (true);
                         dirEntryMod.Create ();
-                        var source = new DirectoryInfo (Path.Combine (dirSDKConfigs.FullName, entrySDK.Value.RelativePath));
+                        var source = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, entrySDK.Value.RelativePath));
                         yield return CopyConfigIE (source, dirEntryMod.FullName);
                         continue;
                     }
-                    var filePathSDK = Path.Combine (dirSDKConfigs.FullName, entrySDK.Value.RelativePath);
-                    var filePathMod = Path.Combine (dirModConfigs.FullName, entryMod.RelativePath);
+                    var filePathSDK = DataPathHelper.GetCombinedCleanPath (dirSDKConfigs.FullName, entrySDK.Value.RelativePath);
+                    var filePathMod = DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, entryMod.RelativePath);
                     File.Copy (filePathSDK, filePathMod, true);
                 }
                 foreach (var entryMod in entriesMod)
@@ -1224,12 +1234,12 @@ namespace PhantomBrigade.SDK.ModTools
                     }
                     if (directoryMode)
                     {
-                        var dirEntry = new DirectoryInfo (Path.Combine (dirModConfigs.FullName, entryMod.Value.RelativePath));
+                        var dirEntry = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, entryMod.Value.RelativePath));
                         dirEntry.Delete (true);
                         yield return null;
                         continue;
                     }
-                    var fileEntry = new FileInfo (Path.Combine (dirModConfigs.FullName, entryMod.Value.RelativePath));
+                    var fileEntry = new FileInfo (DataPathHelper.GetCombinedCleanPath (dirModConfigs.FullName, entryMod.Value.RelativePath));
                     fileEntry.Delete ();
                 }
             }
@@ -1261,7 +1271,7 @@ namespace PhantomBrigade.SDK.ModTools
             EditorUtility.DisplayProgressBar ("Updating mod checksums", "Working...", progress);
             yield return null;
 
-            var dir = new DirectoryInfo (Path.Combine (source.FullName, configDirectory.RelativePath));
+            var dir = new DirectoryInfo (DataPathHelper.GetCombinedCleanPath (source.FullName, configDirectory.RelativePath));
             var files = new HashSet<string> (dir.EnumerateFiles ().Select (fi => fi.Name));
             var fileEntries = configDirectory.Entries.OfType<ConfigChecksums.ConfigFile> ().ToDictionary (entry => Path.GetFileName (entry.RelativePath), entry => entry.Locator.Last ());
             var removed = new List<int> ();
@@ -1273,7 +1283,7 @@ namespace PhantomBrigade.SDK.ModTools
                     continue;
                 }
                 var entry = (ConfigChecksums.ConfigFile)configDirectory.Entries[kvp.Value];
-                var filePath = Path.Combine (source.FullName, entry.RelativePath);
+                var filePath = DataPathHelper.GetCombinedCleanPath (source.FullName, entry.RelativePath);
                 entry.Update (entry.Source, File.ReadAllBytes (filePath));
             }
 
@@ -1337,7 +1347,7 @@ namespace PhantomBrigade.SDK.ModTools
                     Locator = configDirectory.Locator.Append (0).ToArray (),
                     RelativePath = Path.Combine (configDirectory.RelativePath, n),
                 };
-                var filePath = Path.Combine (source.FullName, entry.RelativePath);
+                var filePath = DataPathHelper.GetCombinedCleanPath (source.FullName, entry.RelativePath);
                 entry.Update (ConfigChecksums.EntrySource.SDK, File.ReadAllBytes (filePath));
                 configDirectory.Entries.Add (entry);
             }
