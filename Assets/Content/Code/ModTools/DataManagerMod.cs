@@ -554,6 +554,42 @@ namespace PhantomBrigade.SDK.ModTools
                 if (modData != null)
                     modData.ExportToArchive ();
             }
+            
+            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
+            [FoldoutGroup("Experimental")]
+            [HorizontalGroup ("Experimental/Bt3")]
+            [Button (SdfIconType.FileEarmarkBreakFill, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to source")]
+            [PropertyTooltip ("Experimental mode bypassing the checksum system. Use at your own risk!\n\nExport the mod files into the mod project folder.")]
+            public static void ExperimentalExport ()
+            {
+                var modData = modSelected;
+                if (modData != null)
+                    ModToolsExperimental.GenerateModFiles (modSelected, null);
+            }
+            
+            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
+            [FoldoutGroup("Experimental")]
+            [HorizontalGroup ("Experimental/Bt3")]
+            [Button (SdfIconType.Boxes, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to user")]
+            [PropertyTooltip ("Experimental mode bypassing the checksum system. Use at your own risk!\n\nExport the mod into the user folder, allowing you to test it the next time you start the game.")]
+            public static void ExperimentalExportUser ()
+            {
+                var modData = modSelected;
+                if (modData != null)
+                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToUserFolderFinalize);
+            }
+            
+            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
+            [FoldoutGroup("Experimental")]
+            [HorizontalGroup ("Experimental/Bt3")]
+            [Button (SdfIconType.BoxSeam, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to archive")]
+            [PropertyTooltip ("Experimental mode bypassing the checksum system. Use at your own risk!\n\nPackage the mod into a .zip file, allowing you to share it with other players.")]
+            public static void ExperimentalExportArchive ()
+            {
+                var modData = modSelected;
+                if (modData != null)
+                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToArchiveFinalize);
+            }
 
             public void OnSelectionChange ()
             {

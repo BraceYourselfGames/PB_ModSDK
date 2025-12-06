@@ -781,7 +781,7 @@ namespace PhantomBrigade.SDK.ModTools
             });
         }
 
-        static void GenerateConfigEdits (DataContainerModData modData)
+        public static void GenerateConfigEdits (DataContainerModData modData)
         {
             if (modData?.configEdits == null)
                 return;
@@ -789,7 +789,7 @@ namespace PhantomBrigade.SDK.ModTools
             modData.configEdits.SaveToMod (modData);
         }
 
-        static void GenerateTextEdits (DataContainerModData modData)
+        public static void GenerateTextEdits (DataContainerModData modData)
         {
             if (modData?.textEdits == null)
                 return;
@@ -797,7 +797,7 @@ namespace PhantomBrigade.SDK.ModTools
             modData.textEdits.SaveToMod (modData);
         }
 
-        static void GenerateAssetBundles (DataContainerModData modData)
+        public static void GenerateAssetBundles (DataContainerModData modData)
         {
             if (modData?.assetBundles?.bundleDefinitions == null || modData.assetBundles.bundleDefinitions.Count == 0)
                 return;
@@ -822,7 +822,7 @@ namespace PhantomBrigade.SDK.ModTools
         }
 
         #if UNITY_EDITOR
-        static void GenerateLibraries (DataContainerModData modData)
+        public static void GenerateLibraries (DataContainerModData modData)
         {
             if (modData == null)
             {
