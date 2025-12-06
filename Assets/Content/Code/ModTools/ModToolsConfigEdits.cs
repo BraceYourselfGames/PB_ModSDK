@@ -348,14 +348,11 @@ namespace PhantomBrigade.ModTools
                     foreach (var configEdit in entry.edits)
                     {
                         if (configEdit == null || string.IsNullOrEmpty (configEdit.key))
-                        {
                             continue;
-                        }
+                        
                         var editsSource = configEdit.edits;
-                        if (editsSource == null || (editsSource.Count == 0 && !configEdit.removed))
-                        {
+                        if (!configEdit.removed && (editsSource == null || editsSource.Count == 0))
                             continue;
-                        }
 
                         var key = configEdit.key;
                         var config = new ModConfigEditSerialized ()
