@@ -47,7 +47,7 @@ public class CombatSceneHelper : MonoBehaviour
         initialized = true;
         ins = this;
         
-        if (Application.isPlaying)
+        if (Application.isPlaying && background != null)
             background.Setup ();
     }
 
