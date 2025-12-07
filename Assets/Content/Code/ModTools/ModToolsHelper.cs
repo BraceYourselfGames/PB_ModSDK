@@ -20,6 +20,7 @@ namespace PhantomBrigade.SDK.ModTools
     {
         public const string unityVersionExpectedMajor = "2020.3";
         public const string unityVersionExpected = "2020.3.49f1";
+        public const string dirNameConfigs = "Configs";
 
         public static bool IsUnityVersionSupported (bool strict = true)
         {
@@ -123,22 +124,19 @@ namespace PhantomBrigade.SDK.ModTools
             UtilitiesYAML.RebuildSerializer ();
         }
 
-        static int OrderByFullName (DirectoryInfo lhs, DirectoryInfo rhs) => StringComparer.InvariantCultureIgnoreCase.Compare (lhs.FullName, rhs.FullName);
-
-        public static void GenerateConfigEdits (DataContainerModData modData)
+        public static void CopyConfigDB (DirectoryInfo source, string dest)
         {
-            if (modData?.configEdits == null)
-                return;
-
-            modData.configEdits.SaveToMod (modData);
-        }
-
-        public static void GenerateTextEdits (DataContainerModData modData)
-        {
-            if (modData?.textEdits == null)
-                return;
-
-            modData.textEdits.SaveToMod (modData);
+            foreach (var f in source.EnumerateFiles ())
+            {
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, f.Name);
+                f.CopyTo (destPath, true);
+            }
+            foreach (var d in source.EnumerateDirectories ())
+            {
+                var destPath = DataPathHelper.GetCombinedCleanPath (dest, d.Name);
+                Directory.CreateDirectory (destPath);
+                CopyConfigDB (d, destPath);
+            }
         }
 
         public static void GenerateAssetBundles (DataContainerModData modData)
@@ -164,8 +162,7 @@ namespace PhantomBrigade.SDK.ModTools
             Debug.Log ($"Building asset bundles:\n- Temp folder:{buildPathTemp}\n- Final folder: {buildPathFinal}");
             ModToolsAssetBundles.BuildAllAssetBundlesFromList (buildPathTemp, modData.assetBundles.bundleDefinitions, buildPathFinal);
         }
-
-        #if UNITY_EDITOR
+        
         public static void GenerateLibraries (DataContainerModData modData)
         {
             if (modData == null)
@@ -210,7 +207,6 @@ namespace PhantomBrigade.SDK.ModTools
                 File.Copy (dll.path, pathDest, true);
             }
         }
-        #endif
     }
 
     #endif

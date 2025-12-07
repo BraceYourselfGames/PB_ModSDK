@@ -819,12 +819,76 @@ namespace PhantomBrigade.Data
 
         static bool isSaveAvailable => DataContainerModData.hasSelectedConfigs || typeof(T) == typeof(DataContainerModToolsPage);
         static bool hasSelectedMod => DataContainerModData.hasSelectedConfigs;
+        static Color colorSepia => ModToolsColors.HighlightNeonSepia;
 
         [ShowIf (nameof(IsModdable))]
         [ShowInInspector, PropertyOrder (-100), HideReferenceObjectPicker, HideLabel, HideDuplicateReferenceBox]
         private static ModConfigStatus status = new ModConfigStatus ();
 
         public static string configsPath => DataContainerModData.selectedMod.GetModPathConfigs ();
+
+        [PropertyOrder (OdinGroup.Order.RestoreButtons)]
+        [ShowIf(nameof(hasSelectedMod))]
+        [GUIColor (nameof(colorSepia))]
+        [PropertyTooltip ("Reset all entries in config DB to match SDK. This will undo all your changes.")]
+        [Button ("Restore All From SDK", ButtonHeight = 32, Icon = SdfIconType.BoxArrowInRight, IconAlignment = IconAlignment.LeftOfText)]
+        public void RestoreFromSDK ()
+        {
+            var pathRelative = DataPathUtility.GetPath (typeof(T));
+            if (string.IsNullOrEmpty (pathRelative))
+            {
+                Debug.LogWarning ($"Failed to restore configs for type {typeof (T).Name}: no relative path found");
+                return;
+            }
+            
+            if (!hasSelectedMod || !IsModdable ())
+                return;
+            
+            var pathModRoot = DataContainerModData.selectedMod.GetModPathProject ();
+            var pathMod = Path.Combine (pathModRoot, pathRelative);
+            var dirMod = new DirectoryInfo (pathMod);
+            
+            var pathSDKRoot = DataPathHelper.GetApplicationFolder ();
+            var pathSDK = Path.Combine (pathSDKRoot, pathRelative);
+            var dirSDK = new DirectoryInfo (pathSDK);
+            if (!dirSDK.Exists)
+            {
+                Debug.LogWarning ($"Failed to restore configs for type {typeof (T).Name}: SDK path not found at {pathSDK}");
+                return;
+            }
+            
+            if (!EditorUtility.DisplayDialog 
+                (
+                    "Restore from SDK?", 
+                    "Are you sure you'd like to overwrite all of your changes to this config? This operation can not be reverted. Back up your changes if you are not sure." + 
+                    "\n\nPath: \n" + 
+                    pathRelative, 
+                    "Confirm", 
+                    "Cancel")
+               )
+            {
+                return;
+            }
+            
+            Debug.Log ($"Restoring:\nSDK: {pathSDK}\nMod: {pathMod}");
+
+            try
+            {
+                if (dirMod.Exists)
+                {
+                    dirMod.Delete (true);
+                    Debug.LogWarning ($"Deleting existing config folder...");
+                }
+                
+                Directory.CreateDirectory (pathMod);
+                ModToolsHelper.CopyConfigDB (dirSDK, pathMod);
+                LoadData ();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException (e);
+            }
+        }
         #endif
 
         [NonSerialized]
@@ -1239,7 +1303,7 @@ namespace PhantomBrigade.Data
                 return;
 
             #if PB_MODSDK && UNITY_EDITOR
-            if (!isSaveAvailable || !unsavedChangesPossible)
+            if (!isSaveAvailable)
             {
                 return;
             }
@@ -1953,7 +2017,9 @@ namespace PhantomBrigade.Data
             }
         }
 
-        public static bool isEntryKeyChanging;
         #endif
+
+
+        public static bool isEntryKeyChanging;
     }
 }

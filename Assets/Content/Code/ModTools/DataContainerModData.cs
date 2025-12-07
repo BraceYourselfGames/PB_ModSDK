@@ -237,25 +237,14 @@ namespace PhantomBrigade.SDK.ModTools
 
         public void EnableConfigs ()
         {
-            EditorCoroutineUtility.StartCoroutineOwnerless (EnableConfigsIE (GUIHelper.CurrentWindow));
-        }
-
-        IEnumerator EnableConfigsIE (EditorWindow inspectorWindow)
-        {
-            var dest = GetModPathConfigs ();
-            Directory.CreateDirectory (dest);
+            ModToolsExperimental.CopyConfigsFromSDK (this);
+            
             metadata.isConfigEnabled = true;
             metadata.includesConfigOverrides = true;
             ModToolsHelper.SaveMod (this);
-            if (inspectorWindow != null)
-            {
-                inspectorWindow.Repaint ();
-            }
-            yield return null;
-        }
 
-        public void ExportToUserFolder ()
-        {
+            if (GUIHelper.CurrentWindow != null)
+                GUIHelper.CurrentWindow.Repaint ();
         }
 
         public void ExportToUserFolderFinalize ()
@@ -302,10 +291,6 @@ namespace PhantomBrigade.SDK.ModTools
             }
 
             return success;
-        }
-
-        public void ExportToArchive ()
-        {
         }
 
         public void ExportToArchiveFinalize ()
@@ -562,25 +547,16 @@ namespace PhantomBrigade.SDK.ModTools
         {
             var configOverridesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), overridesFolderName);
             if (Directory.Exists (configOverridesPath))
-            {
                 Directory.Delete (configOverridesPath, true);
-            }
+            
             var configEditsPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), editsFolderName);
             if (Directory.Exists (configEditsPath))
-            {
                 Directory.Delete (configEditsPath, true);
-            }
+            
             var assetBundlesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), assetBundlesFolderName);
             if (Directory.Exists (assetBundlesPath))
-            {
                 Directory.Delete (assetBundlesPath, true);
-            }
         }
-
-        [HideInInspector]
-        [YamlIgnore]
-        public byte dataVersion;
-        [HideInInspector]
 
         public string defaultWorkingPath => DataPathHelper.GetCombinedCleanPath (defaultWorkingPathParent, id);
 
@@ -647,20 +623,6 @@ namespace PhantomBrigade.SDK.ModTools
                 // Folder for content must exist if metadata says mod has that content, even if the folder is empty.
                 // Otherwise the game will display a warning.
                 Directory.CreateDirectory (dirTo);
-            }
-        }
-
-        void CleanUpOverrideHierarchy(string projectPath, string overridePath)
-        {
-            overridePath = Path.GetDirectoryName (overridePath);
-            while (overridePath != projectPath && Directory.Exists (overridePath))
-            {
-                if (Directory.GetFileSystemEntries (overridePath).Length != 0)
-                {
-                    break;
-                }
-                Directory.Delete (overridePath);
-                overridePath = Path.GetDirectoryName (overridePath);
             }
         }
 

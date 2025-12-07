@@ -123,6 +123,63 @@ namespace PhantomBrigade.Data
             data = null;
             reloadData = true;
         }
+        
+        private Color colorSepia => ModToolsColors.HighlightNeonSepia;
+
+        [PropertyOrder (-10f)]
+        [ShowIf(nameof(hasSelectedMod))]
+        [GUIColor (nameof(colorSepia))]
+        [PropertyTooltip ("Reset config to match SDK. This will undo all your changes.")]
+        [Button ("Restore from SDK", ButtonHeight = 32, Icon = SdfIconType.BoxArrowInRight, IconAlignment = IconAlignment.LeftOfText)]
+        public void RestoreFromSDK ()
+        {
+            var pathRelative = DataPathUtility.GetPath (typeof(T));
+            if (string.IsNullOrEmpty (pathRelative))
+            {
+                Debug.LogWarning ($"Failed to restore configs for type {typeof (T).Name}: no file path found");
+                return;
+            }
+            
+            if (!hasSelectedMod)
+                return;
+            
+            var pathModRoot = DataContainerModData.selectedMod.GetModPathProject ();
+            var pathMod = Path.Combine (pathModRoot, pathRelative) + ".yaml";
+
+            var pathSDKRoot = DataPathHelper.GetApplicationFolder ();
+            var pathSDK = Path.Combine (pathSDKRoot, pathRelative) + ".yaml";
+            var fileSDK = new FileInfo (pathSDK);
+            if (!fileSDK.Exists)
+            {
+                Debug.LogWarning ($"Failed to restore configs for type {typeof (T).Name}: SDK file not found at {pathSDK}");
+                return;
+            }
+            
+            if (!EditorUtility.DisplayDialog 
+                (
+                    "Restore from SDK?", 
+                    "Are you sure you'd like to overwrite all of your changes to this config? This operation can not be reverted. Back up your changes if you are not sure." + 
+                    "\n\nPath: \n" + 
+                    pathRelative, 
+                    "Confirm", 
+                    "Cancel")
+               )
+            {
+                return;
+            }
+            
+            Debug.Log ($"Restoring:\nSDK: {pathSDK}\nMod: {pathMod}");
+            
+            try
+            {
+                File.Copy (pathSDK, pathMod, true);
+                LoadData ();
+            }
+            catch (Exception e)
+            {
+                Debug.LogException (e);
+            }
+        }
         #endif
 
         protected static bool CheckPathResolved (bool isUser = false)
@@ -188,10 +245,8 @@ namespace PhantomBrigade.Data
             }
 
             #if PB_MODSDK
-            if (!DataContainerModData.hasSelectedConfigs || !unsavedChangesPossible)
-            {
+            if (!DataContainerModData.hasSelectedConfigs)
                 return;
-            }
             #endif
 
             dataInternal.OnBeforeSerialization ();

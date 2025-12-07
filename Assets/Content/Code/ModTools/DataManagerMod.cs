@@ -470,17 +470,7 @@ namespace PhantomBrigade.SDK.ModTools
             [PropertyTooltip ("Switches all databases to config files copied into your mod project folder, enabling config editing")]
             public static void SelectForEditing ()
             {
-                var modData = modSelected;
-                if (modData == null)
-                {
-                    return;
-                }
-                ResetForEditing (modData);
-            }
-
-            static void ResetForEditing (DataContainerModData modData)
-            {
-                DataContainerModData.selectedMod = modData;
+                DataContainerModData.selectedMod = modSelected;
                 ResetArea ();
                 ResetDBs ();
             }
@@ -506,6 +496,7 @@ namespace PhantomBrigade.SDK.ModTools
                                                           modSelected.hasProjectFolder &&
                                                           Directory.Exists (modSelected.GetModPathConfigs ());
 
+            // [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
             [HorizontalGroup ("Bt2", 0.3333f)]
             [Button (SdfIconType.Boxes, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to user")]
             [PropertyTooltip ("Export the mod into the user folder, allowing you to test it the next time you start the game.\n\nBefore the export, the original data will be compared to the data in the mod project folder: only the modified files will be exported. Make sure to check the appropriate metadata fields.")]
@@ -513,9 +504,10 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 var modData = modSelected;
                 if (modData != null)
-                    modData.ExportToUserFolder ();
+                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToUserFolderFinalize);
             }
 
+            // [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
             [HorizontalGroup ("Bt2")]
             [Button (SdfIconType.BoxSeam, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to archive")]
             [PropertyTooltip ("Package the mod into a .zip file, allowing you to share it with other players.\n\nBefore the export, the original data will be compared to the data in the mod project folder: only the modified files will be exported. Make sure to check the appropriate metadata fields.")]
@@ -523,49 +515,81 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 var modData = modSelected;
                 if (modData != null)
-                    modData.ExportToArchive ();
+                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToArchiveFinalize);
             }
-
-            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
-            [FoldoutGroup ("Experimental")]
-            public static bool experimentalExportMode = false;
             
-            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
-            [FoldoutGroup("Experimental")]
-            [HorizontalGroup ("Experimental/Bt3")]
-            [Button (SdfIconType.FileEarmarkBreakFill, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to source")]
-            [PropertyTooltip ("Experimental mode bypassing the checksum system. Use at your own risk!\n\nExport the mod files into the mod project folder.")]
-            public static void ExperimentalExport ()
+            [FoldoutGroup("Utilities")]
+            [HorizontalGroup ("Utilities/Bt3")]
+            [EnableIf (nameof(IsConfigEntryAllowed))]
+            [Button (SdfIconType.FileEarmarkBreakFill, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Reset all configs")]
+            [PropertyTooltip ("Replace the Configs folder with the original files from the SDK. Equivalent to setting up config editing for the first time.")]
+            public static void ResetConfigs ()
+            {
+                var modData = modSelected;
+                if (modData == null)
+                    return;
+
+                var projectPath = modData.GetModPathProject (); 
+                if (!EditorUtility.DisplayDialog 
+                (
+                    "Reset configs from SDK", 
+                    $"Are you sure you'd like to replace the Configs folder in the selected mod (ID {modData.id}) with the original files from the SDK? This operation can not be reverted. Back up your changes if you are not sure.\n\nProject folder: \n{projectPath}", 
+                    "Confirm", 
+                    "Cancel")
+                )
+                {
+                    return;
+                }
+                
+                ModToolsExperimental.CopyConfigsFromSDK (modData);
+                DeselectForEditing ();
+            }
+            
+            // [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
+            [FoldoutGroup("Utilities")]
+            [HorizontalGroup ("Utilities/Bt3")]
+            [Button (SdfIconType.Box, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to source")]
+            [PropertyTooltip ("Export the mod files into the mod project folder without taking any additional step (no export to user folder, archive or Workshop).")]
+            public static void ExportSimple ()
             {
                 var modData = modSelected;
                 if (modData != null)
                     ModToolsExperimental.GenerateModFiles (modSelected, null);
             }
             
-            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
-            [FoldoutGroup("Experimental")]
-            [HorizontalGroup ("Experimental/Bt3")]
-            [Button (SdfIconType.Boxes, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to user")]
-            [PropertyTooltip ("Experimental mode bypassing the checksum system. Use at your own risk!\n\nExport the mod into the user folder, allowing you to test it the next time you start the game.")]
-            public static void ExperimentalExportUser ()
+            [FoldoutGroup("Utilities")]
+            [HorizontalGroup ("Utilities/Bt3")]
+            [Button (SdfIconType.Files, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Import from mod")]
+            [PropertyTooltip ("Import files from an exported mod into this mod project. An inverse of the standard export operations.")]
+            public static void ImportFromFolder ()
             {
                 var modData = modSelected;
-                if (modData != null)
-                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToUserFolderFinalize);
+                if (modData == null)
+                   return;
+                
+                var pathProject = modData.GetModPathProject ();
+                var pathSelected = EditorUtility.OpenFolderPanel ("Select Folder", pathProject, "");
+                var dirSelected = new DirectoryInfo (pathSelected);
+                if (!dirSelected.Exists)
+                {
+                    Debug.LogWarning ($"Can't import, no folder selected");
+                    return;
+                }
+                
+                if (!EditorUtility.DisplayDialog 
+                (
+                    "Import files?", 
+                    $"Are you sure you'd like to overwrite the contents of the Configs folder in the selected mod project (ID {modData.id}) with the original files from the SDK?\n\nProject folder: \n{pathProject}\n\nImported folder: \n{pathSelected}", 
+                    "Confirm", 
+                    "Cancel")
+                )
+                {
+                    return;
+                }
+
+                ModToolsExperimental.CopyConfigsFromExportedMod (modData, pathSelected);
             }
             
-            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
-            [FoldoutGroup("Experimental")]
-            [HorizontalGroup ("Experimental/Bt3")]
-            [Button (SdfIconType.BoxSeam, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to archive")]
-            [PropertyTooltip ("Experimental mode bypassing the checksum system. Use at your own risk!\n\nPackage the mod into a .zip file, allowing you to share it with other players.")]
-            public static void ExperimentalExportArchive ()
-            {
-                var modData = modSelected;
-                if (modData != null)
-                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToArchiveFinalize);
-            }
-
             public void OnSelectionChange ()
             {
                 // Reset inputs

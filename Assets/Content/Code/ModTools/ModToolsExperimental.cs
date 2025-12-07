@@ -99,7 +99,7 @@ namespace PhantomBrigade.SDK.ModTools
                 EditorUtility.DisplayProgressBar ("Exporting mod", "Checking text edits...", 0.95f);
                 DataManagerText.LoadLibrary ();
                 ModTextHelper.GenerateTextChanges (modData);
-                ModToolsHelper.GenerateTextEdits (modData);
+                modData.textEdits.SaveToMod (modData);
             }
             
             yield return new EditorWaitForSeconds (0.1f);
@@ -158,11 +158,13 @@ namespace PhantomBrigade.SDK.ModTools
         private static IEnumerator GenerateConfigFolders (DataContainerModData modData)
         {
             // TODO: For non-yaml content like area files: invalidate and copy entire root folder if any subfile is different
+            // TODO: Skip unsupported folders like Configs/Behaviours
 
             if (modData == null)
             {
-                Debug.Log ($"Can't generate mod config overrides: mod data is null");
+                Debug.Log ($"Can't generate mod config files: mod data is null");
                 CancelExport ();
+                yield break;
             }
 
             var pathSDK = DataPathHelper.GetApplicationFolder ();
@@ -384,6 +386,86 @@ namespace PhantomBrigade.SDK.ModTools
                 yield return new EditorWaitForSeconds (0.1f);
                 EditorUtility.DisplayProgressBar ("Exporting mod", $"Saving config edits...", 0.55f);
                 configEditsTemp.SaveToMod (modData);
+            }
+        }
+
+        public static void CopyConfigsFromSDK (DataContainerModData modData)
+        {
+            if (modData == null)
+            {
+                Debug.Log ($"Can't generate mod config overrides: mod data is null");
+                return;
+            }
+            
+            var pathSDK = DataPathHelper.GetApplicationFolder ();
+            var pathSDKConfigs = Path.Combine (pathSDK, "Configs");
+            DirectoryInfo dirSDKConfigs = new DirectoryInfo (pathSDKConfigs);
+            
+            var pathMod = modData.GetModPathProject ();
+            var pathModConfigs = Path.Combine (pathMod, "Configs");
+            DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
+            
+            if (dirModConfigs.Exists)
+            {
+                Debug.Log ($"Deleting the Configs folder in the mod project: {pathModConfigs}");
+                dirModConfigs.Delete (true);
+            }
+            
+            try
+            {
+                UtilitiesYAML.CopyDirectory (pathSDKConfigs, pathModConfigs, true);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException (e);
+            }
+        }
+        
+        public static void CopyConfigsFromExportedMod (DataContainerModData modData, string pathSelected)
+        {
+            if (modData == null)
+            {
+                Debug.Log ($"Can't import files: mod data is null");
+                return;
+            }
+            
+            if (string.IsNullOrEmpty (pathSelected))
+            {
+                Debug.Log ($"Can't import files: no import path provided");
+                return;
+            }
+
+
+            var pathMod = modData.GetModPathProject ();
+            var pathModConfigs = Path.Combine (pathMod, "Configs");
+            DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
+            
+            if (!dirModConfigs.Exists)
+            {
+                Debug.Log ($"Can't import files: mod doesn't contain a Configs folder.\n- {pathModConfigs}");
+                return;
+            }
+            
+            var pathSelectedConfigs = Path.Combine (pathSelected, "ConfigOverrides");
+            DirectoryInfo dirSelectedConfigs = new DirectoryInfo (pathSelectedConfigs);
+            
+            if (!dirSelectedConfigs.Exists)
+            {
+                Debug.Log ($"Can't import files: selected import path doesn't contain a ConfigOverrides folder.\n- {pathSelectedConfigs}");
+                return;
+            }
+            
+            Debug.Log ($"Copying configs from selected folder ConfigOverrides to mod folder Configs...\nMod: {pathModConfigs}\nSource: {pathSelectedConfigs}");
+            
+            try
+            {
+                // Doesn't work, clears destination, assumes you want destClear: true from depth 1
+                // Swap for another method or implement non clearing path
+                UtilitiesYAML.CopyDirectory (pathSelectedConfigs, pathModConfigs, false);
+            }
+            catch (Exception e)
+            {
+                Debug.LogException (e);
             }
         }
     }

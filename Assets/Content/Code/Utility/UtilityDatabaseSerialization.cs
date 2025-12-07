@@ -308,24 +308,6 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         }
     }
 
-    [VerticalGroup (OdinGroup.Name.Mod)]
-    [ShowIf (nameof(hasSelectedMod))]
-    [GUIColor ("lightorange")]
-    [PropertyTooltip ("Replaces all config DBs in mod with the SDK config DBs. This will also delete any ConfigOverrides you may have created.")]
-    [Button ("Restore all configs from SDK", ButtonSizes.Large, Icon = SdfIconType.ExclamationTriangle, IconAlignment = IconAlignment.LeftOfText)]
-    public void RestoreAllFromSDK ()
-    {
-        var modData = DataContainerModData.selectedMod;
-        if (modData == null)
-            return;
-
-        var projectPath = modData.GetModPathProject ();
-        if (!EditorUtility.DisplayDialog ("Restore Configs from SDK", $"Are you sure you'd like to restore all the config DBs in this project (ID {modData.id}) from the SDK? This will delete any ConfigOverrides you have created.\n\nProject folder: \n{projectPath}", "Confirm", "Cancel"))
-        {
-            return;
-        }
-    }
-
     void OnEnable ()
     {
         if (!initialized)
@@ -390,13 +372,12 @@ public class UtilityDatabaseSerialization : MonoBehaviour
     static Type ResolveContainerType (IDataMultiLinker dml)
     {
         var t = dml.GetType ();
-        if (!t.IsConstructedGenericType)
-        {
+        if (!t.IsConstructedGenericType && t.BaseType != null)
             t = t.BaseType;
-        }
+        
         return t.GetGenericArguments ()[0];
     }
-
+    
     static readonly Dictionary<Type, Component> dataTypeToLinkerComponentLookup = new Dictionary<Type, Component> ();
     static readonly Dictionary<Type, Component> dataTypeToMultiLinkerComponentLookup = new Dictionary<Type, Component> ();
 
@@ -407,8 +388,6 @@ public class UtilityDatabaseSerialization : MonoBehaviour
     static readonly Dictionary<Type, IDataMultiLinker> containerLookup = new Dictionary<Type, IDataMultiLinker> ();
 
     static readonly object[] emptyParams = {};
-
-    const string checksumSDKConfigsRootFileName = "checksumConfigsRoot.txt";
     #endif
 
     static class OdinGroup
