@@ -258,7 +258,6 @@ namespace PhantomBrigade.ModTools
             }
             #if PB_MODSDK
             ModToolsHelper.LoadUserDLLTypeHints ();
-            ModToolsHelper.EnsureSDKChecksums ();
             #endif
         }
 

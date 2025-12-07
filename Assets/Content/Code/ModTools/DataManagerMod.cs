@@ -46,8 +46,6 @@ namespace PhantomBrigade.SDK.ModTools
                 LoadAll ();
         }
 
-        public static SDKChecksumData sdkChecksumData;
-
         [Title ("Mod project manager", TitleAlignment = TitleAlignments.Centered)]
         [ShowInInspector, PropertyOrder (-1)]
         [PropertyTooltip ("The folder where mod projects are stored. If this folder does not exist, it will be created when you add your first mod.")]
@@ -477,34 +475,7 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     return;
                 }
-                var (result, upgrade) = ModToolsHelper.EnsureModChecksums (modData);
-                switch (result)
-                {
-                    case EnsureResult.Error:
-                        EditorUtility.DisplayDialog
-                        (
-                            "Config Editing Unavailable",
-                            "A technical error is preventing you from editing the config DBs. Please check the Unity log console for details.",
-                            "Dismiss"
-                        );
-                        return;
-                    case EnsureResult.Break:
-                        Debug.Log ("Cancelled config editing");
-                        return;
-                }
-                if (upgrade == null)
-                {
-                    ResetForEditing (modData);
-                    return;
-                }
-                EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
-                return;
-
-                IEnumerator UpgradeAndContinue ()
-                {
-                    yield return upgrade ();
-                    ResetForEditing (modData);
-                }
+                ResetForEditing (modData);
             }
 
             static void ResetForEditing (DataContainerModData modData)
