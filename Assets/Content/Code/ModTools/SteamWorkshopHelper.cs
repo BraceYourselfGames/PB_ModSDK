@@ -108,41 +108,13 @@ namespace PhantomBrigade.SDK.ModTools
                 return;
             }
 
-            var (result, upgrade) = ModToolsHelper.EnsureModChecksums (mod);
-            switch (result)
-            {
-                case EnsureResult.Error:
-                    EditorUtility.DisplayDialog
-                    (
-                        "Upload to Steam Workshop Unavailable",
-                        "A technical error is preventing you from uploading this mod. Please check the Unity log console for details.",
-                        "Dismiss"
-                    );
-                    return;
-                case EnsureResult.Break:
-                    Debug.Log ("Cancelled upload to Steam Workshop: " + mod.id);
-                    return;
-            }
-
             var modID = mod.id;
             if (!EditorUtility.DisplayDialog ("Start upload", $"Are you sure you'd like to upload the mod {modID}?", "Confirm", "Cancel"))
             {
                 return;
             }
 
-            if (upgrade == null)
-            {
-                utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (UploadSelectedWithProgressIE (mod));
-                return;
-            }
-            utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
-            return;
-
-            IEnumerator UpgradeAndContinue ()
-            {
-                yield return upgrade ();
-                yield return UploadSelectedWithProgressIE (mod);
-            }
+            utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (UploadSelectedWithProgressIE (mod));
         }
 
         static IEnumerator GetInstallStateIE (DataContainerModData mod)
@@ -243,7 +215,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 texPreviewSharedLoaded = true;
                 var texPathFallback = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), texPathFallbackLocal);
-                
+
                 if (File.Exists (texPathFallback))
                 {
                     var pngBytes = File.ReadAllBytes (texPathFallback);
@@ -254,7 +226,7 @@ namespace PhantomBrigade.SDK.ModTools
                         filterMode = FilterMode.Bilinear,
                         anisoLevel = 2,
                     };
-                    
+
                     texPreviewShared.LoadImage (pngBytes);
                 }
                 else
@@ -262,10 +234,10 @@ namespace PhantomBrigade.SDK.ModTools
                     Debug.LogWarning ($"Failed to find fallback preview texture at: \n{texPathFallback}");
                 }
             }
-            
+
             return texPreviewShared;
         }
-        
+
         public static Texture2D GetPreviewTexUnique ()
         {
             var texPathFallback = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), texPathFallbackLocal);
@@ -425,7 +397,7 @@ namespace PhantomBrigade.SDK.ModTools
                     }
                     tagsProcessed.Add (tagCandidate);
                 }
-                
+
                 // Allow easy filtering of Workshop for mods compatible with 2.x
                 // We could potentially update tagCompatibleCurrent every time SDK is brought up to a new release like 2.1
                 if (!string.IsNullOrEmpty (mod.metadata.gameVersionMin) && mod.metadata.gameVersionMin.StartsWith ("2."))

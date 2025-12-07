@@ -123,48 +123,6 @@ namespace PhantomBrigade.Data
             data = null;
             reloadData = true;
         }
-
-        bool hasChanges => hasSelectedMod && (unsavedChangesPossible || ModToolsHelper.HasChanges (DataContainerModData.selectedMod, typeof(T)));
-        private Color colorSepia => ModToolsColors.HighlightNeonSepia;
-
-        [PropertyOrder (-10f)]
-        [ShowIf(nameof(hasSelectedMod))]
-        [EnableIf (nameof(hasChanges))]
-        [GUIColor (nameof(colorSepia))]
-        [PropertyTooltip ("Reset config to match SDK. This will undo all your changes.")]
-        [Button ("Restore from SDK", ButtonHeight = 32, Icon = SdfIconType.BoxArrowInRight, IconAlignment = IconAlignment.LeftOfText)]
-        public void RestoreFromSDK ()
-        {
-            if (DataContainerModData.selectedMod.linkerChecksumMap == null)
-            {
-                return;
-            }
-            if (!DataContainerModData.selectedMod.linkerChecksumMap.TryGetValue (typeof(T), out var pair))
-            {
-                return;
-            }
-            if (!EditorUtility.DisplayDialog ("Restore From SDK", $"Are you sure you'd like to overwrite all of your changes to this config?\n\nConfig file: \n{path}", "Confirm", "Cancel"))
-            {
-                return;
-            }
-
-            DataContainerModData.selectedMod.DeleteConfigOverride (pair.Mod);
-            if (pair.SDK == null)
-            {
-                // This shouldn't happen because linker DBs can't be added through the SDK.
-                Debug.LogErrorFormat ("Linker DB mod file that isn't present in SDK | type: {0} | path: {1}", typeof(T).Name, pair.Mod.RelativePath);
-            }
-            else
-            {
-                var sdkPath = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), "Configs", pair.SDK.RelativePath);
-                var modPath = DataPathHelper.GetCombinedCleanPath (configsPath, pair.Mod.RelativePath);
-                File.Copy (sdkPath, modPath, true);
-                LoadData ();
-            }
-            SaveChecksums ();
-
-            unsavedChangesPossible = false;
-        }
         #endif
 
         protected static bool CheckPathResolved (bool isUser = false)
@@ -210,10 +168,6 @@ namespace PhantomBrigade.Data
 
             if (dataInternal != null)
                 dataInternal.OnAfterDeserialization ();
-
-            #if PB_MODSDK && UNITY_EDITOR
-            UpdateChecksum ();
-            #endif
         }
 
         [ButtonGroup ("LoadSave")]
@@ -243,10 +197,6 @@ namespace PhantomBrigade.Data
             dataInternal.OnBeforeSerialization ();
             UtilitiesYAML.SaveDataToFile (path + ".yaml", dataInternal, appendApplicationPath: appendApplicationPath);
             unsavedChangesPossible = false;
-
-            #if PB_MODSDK && UNITY_EDITOR
-            SaveChecksums ();
-            #endif
         }
 
         public void ValidateData ()
@@ -298,56 +248,6 @@ namespace PhantomBrigade.Data
                 return Color.HSVToRGB (Mathf.Cos ((float) UnityEditor.EditorApplication.timeSinceStartup + 1f) * 0.225f + 0.325f, 1f, 1f);
             else
                 return GUI.color;
-        }
-        #endif
-
-        #if PB_MODSDK && UNITY_EDITOR
-        static void UpdateChecksum ()
-        {
-            if (!DataContainerModData.hasSelectedConfigs)
-            {
-                return;
-            }
-            var selectedMod = DataContainerModData.selectedMod;
-            if (selectedMod.linkerChecksumMap == null)
-            {
-                return;
-            }
-            if (!selectedMod.linkerChecksumMap.TryGetValue (typeof(T), out var pair))
-            {
-                return;
-            }
-            try
-            {
-                var checksum = pair.Mod.Checksum;
-                pair.Mod.Update (ConfigChecksums.EntrySource.Mod, File.ReadAllBytes(path + ".yaml"));
-                if (!ConfigChecksums.ChecksumEqual (checksum, pair.Mod.Checksum))
-                {
-                    Debug.LogFormat
-                    (
-                        "{0}: on-disk changes detected in mod config -- refreshing checksum\nold: {1:x16}{2:x16}\nnew: {3:x16}{4:x16}",
-                        typeof(T).Name,
-                        checksum.HalfSum2,
-                        checksum.HalfSum1,
-                        pair.Mod.Checksum.HalfSum2,
-                        pair.Mod.Checksum.HalfSum1);
-                }
-                if (pair.SDK != null && ConfigChecksums.ChecksumEqual (pair.SDK.Checksum, pair.Mod.Checksum))
-                {
-                    pair.Mod.Source = ConfigChecksums.EntrySource.SDK;
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError ("Error during checksum operation | path: " + path + ".yaml");
-                Debug.LogException (ex);
-            }
-        }
-
-        static void SaveChecksums ()
-        {
-            UpdateChecksum ();
-            ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
         }
         #endif
     }

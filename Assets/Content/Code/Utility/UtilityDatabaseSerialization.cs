@@ -288,47 +288,6 @@ public class UtilityDatabaseSerialization : MonoBehaviour
 
     public Dictionary<Type, IDataMultiLinker> FindAllMultiLinkers () => containerLookup;
 
-    public static bool checksumsLoaded;
-    public static ConfigChecksums.Checksum checksumSDKConfigsRoot;
-
-    public static bool AnySDKConfigsChecksumChanges ()
-    {
-        if (!checksumsLoaded)
-        {
-            Debug.Log ("Checksums not loaded");
-            return false;
-        }
-
-        var checksumPath = Path.Combine (DataPathHelper.GetApplicationFolder (), checksumSDKConfigsRootFileName);
-        try
-        {
-            var checksumString = File.ReadAllText (checksumPath);
-            if (checksumString.Length != 32)
-            {
-                Debug.Log ("Checksum length <> 32 : " + checksumString);
-                return false;
-            }
-            var cksum = new ConfigChecksums.Checksum ();
-            if (!long.TryParse (checksumString.Substring(0, 16), System.Globalization.NumberStyles.AllowHexSpecifier, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out cksum.HalfSum2))
-            {
-                Debug.Log ("Parse error HalfSum1");
-                return false;
-            }
-            if (!long.TryParse (checksumString.Substring(16), System.Globalization.NumberStyles.AllowHexSpecifier, System.Globalization.CultureInfo.InvariantCulture.NumberFormat, out cksum.HalfSum1))
-            {
-                Debug.Log ("Parse error HalfSum2");
-                return false;
-            }
-            return !ConfigChecksums.ChecksumEqual (cksum, checksumSDKConfigsRoot);
-        }
-        catch (IOException ioe)
-        {
-            Debug.LogError ("Failed to read SDK configs root checksum: " + checksumPath);
-            Debug.LogException (ioe);
-            return false;
-        }
-    }
-
     [VerticalGroup (OdinGroup.Name.Mod, Order = OdinGroup.Order.Mod)]
     [PropertySpace (8f)]
     [Button ("Reset loadedOnce for all\nloaded linkers & multilinkers", ButtonHeight = 40)]
@@ -350,63 +309,7 @@ public class UtilityDatabaseSerialization : MonoBehaviour
     }
 
     [VerticalGroup (OdinGroup.Name.Mod)]
-    [EnableIf (nameof(IsUtilityOperationAvailable))]
-    [PropertyTooltip ("Creates checksum file for SDK config DBs. This file is used to detect config changes in mods. The restore from SDK functionality expects this file to exist.")]
-    [Button ("Create checksums for SDK config DBs", ButtonSizes.Large)]
-    public void ChecksumSDKConfigs ()
-    {
-        utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (ChecksumSDKConfigsIE ());
-    }
-
-    [VerticalGroup (OdinGroup.Name.Mod)]
-    [Button (ButtonSizes.Large)]
-    public static void LoadSDKChecksums () => (checksumsLoaded, checksumSDKConfigsRoot) = ModToolsHelper.LoadSDKChecksums (force: true);
-
-    [VerticalGroup (OdinGroup.Name.Mod)]
-    [EnableIf (nameof(enableSaveChecksum))]
-    [Button ("Save root checksum for SDK configs", ButtonSizes.Large)]
-    public void SaveRootChecksum ()
-    {
-        if (!checksumsLoaded)
-        {
-            return;
-        }
-        // In text format, the checksum goes from MSB to LSB.
-        var checksum = string.Format ("{0:x16}{1:x16}", checksumSDKConfigsRoot.HalfSum2, checksumSDKConfigsRoot.HalfSum1);
-        var checksumPath = Path.Combine (DataPathHelper.GetApplicationFolder (), checksumSDKConfigsRootFileName);
-        try
-        {
-            File.WriteAllText (checksumPath, checksum);
-        }
-        catch (IOException ioe)
-        {
-            Debug.LogError ("Failed to save SDK root checksum to file: " + checksumPath);
-            Debug.LogException (ioe);
-        }
-    }
-
-    [VerticalGroup (OdinGroup.Name.Mod)]
-    [EnableIf (nameof(enableConfigUpdates))]
-    [PropertyTooltip ("Update config DBs in all mods. New or changed config entries from the SDK will be copied to the mod. This may take a while.")]
-    [Button (ButtonSizes.Large)]
-    public void UpdateAllFromSDK ()
-    {
-        if (!EditorUtility.DisplayDialog
-        (
-            "Update Mods from SDK",
-            "Are you sure you'd like to update the config DBs in all your mods with the latest values from the SDK? This will take a long time. Proceed?",
-            "Proceed",
-            "Cancel"
-        ))
-        {
-            return;
-        }
-        utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (UpdateAllModConfigsIE ());
-    }
-
-    [VerticalGroup (OdinGroup.Name.Mod)]
     [ShowIf (nameof(hasSelectedMod))]
-    [EnableIf (nameof(enableRestore))]
     [GUIColor ("lightorange")]
     [PropertyTooltip ("Replaces all config DBs in mod with the SDK config DBs. This will also delete any ConfigOverrides you may have created.")]
     [Button ("Restore all configs from SDK", ButtonSizes.Large, Icon = SdfIconType.ExclamationTriangle, IconAlignment = IconAlignment.LeftOfText)]
@@ -421,7 +324,6 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         {
             return;
         }
-        utilityCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless (RestoreAllIE ());
     }
 
     void OnEnable ()
@@ -485,27 +387,6 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateAllModConfigsIE ()
-    {
-        yield return ModToolsHelper.UpdateAllModConfigsIE (checksumSDKConfigsRoot);
-        OnUtilityCoroutineEnd ();
-    }
-
-    IEnumerator RestoreAllIE ()
-    {
-        yield return ModToolsHelper.DeleteModConfigsIE (configsPath);
-        yield return CopyConfigsIE ();
-        OnUtilityCoroutineEnd ();
-    }
-
-    static IEnumerator CopyConfigsIE ()
-    {
-        Directory.CreateDirectory (configsPath);
-        yield return null;
-        var root = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
-        yield return ModToolsHelper.CopyConfigsIE (root, configsPath);
-    }
-
     static Type ResolveContainerType (IDataMultiLinker dml)
     {
         var t = dml.GetType ();
@@ -515,25 +396,6 @@ public class UtilityDatabaseSerialization : MonoBehaviour
         }
         return t.GetGenericArguments ()[0];
     }
-
-    IEnumerator ChecksumSDKConfigsIE ()
-    {
-        var root = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
-        yield return ModToolsHelper.ChecksumSDKConfigsIE (root);
-        LoadSDKChecksums ();
-        OnUtilityCoroutineEnd ();
-    }
-
-    bool enableRestore => IsUtilityOperationAvailable && hasSelectedMod && ModToolsHelper.HasChanges (DataContainerModData.selectedMod);
-    bool enableSaveChecksum
-    {
-        get
-        {
-            var sdkRootDirectory = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
-            return ConfigChecksums.ChecksumsExist (sdkRootDirectory);
-        }
-    }
-    bool enableConfigUpdates => IsUtilityOperationAvailable && checksumsLoaded;
 
     static readonly Dictionary<Type, Component> dataTypeToLinkerComponentLookup = new Dictionary<Type, Component> ();
     static readonly Dictionary<Type, Component> dataTypeToMultiLinkerComponentLookup = new Dictionary<Type, Component> ();
