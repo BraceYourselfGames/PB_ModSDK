@@ -446,15 +446,15 @@ namespace PhantomBrigade.SDK.ModTools
             
             var pathSelectedConfigs = Path.Combine (pathSelected, overridesFolderName);
             DirectoryInfo dirSelectedConfigs = new DirectoryInfo (pathSelectedConfigs);
-            FileInfo[] filesSelected = dirSelectedConfigs.GetFiles ("*", SearchOption.AllDirectories);
-            
+
             if (!dirSelectedConfigs.Exists)
             {
                 Debug.Log ($"Can't import files: selected import path doesn't contain a ConfigOverrides folder.\n- {pathSelectedConfigs}");
                 return;
             }
             
-            Debug.Log ($"Copying configs from selected folder ConfigOverrides to mod folder Configs...\nMod: {pathModConfigs}\nSource: {pathSelectedConfigs}");
+            FileInfo[] filesSelected = dirSelectedConfigs.GetFiles ("*", SearchOption.AllDirectories);
+            Debug.Log ($"Copying configs from selected folder ConfigOverrides to mod folder Configs. Potential files: {filesSelected.Length}\nMod: {pathModConfigs}\nSource: {pathSelectedConfigs}");
             
             try
             {
