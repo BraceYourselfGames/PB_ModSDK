@@ -1808,12 +1808,6 @@ namespace PhantomBrigade.Data
                 DataMultiLinkerUtility.callbacksOnAfterTextExport[dataTypeStatic]?.Invoke ();
 
             DataManagerText.SaveLibrary ();
-
-            #if PB_MODSDK
-
-            ModTextHelper.GenerateTextChangesToSectors (textSectorKeys);
-
-            #endif
         }
 
         private static bool processInProgress = false;

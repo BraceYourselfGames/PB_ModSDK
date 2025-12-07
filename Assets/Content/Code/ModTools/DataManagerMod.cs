@@ -525,6 +525,10 @@ namespace PhantomBrigade.SDK.ModTools
                 if (modData != null)
                     modData.ExportToArchive ();
             }
+
+            [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
+            [FoldoutGroup ("Experimental")]
+            public static bool experimentalExportMode = false;
             
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
             [FoldoutGroup("Experimental")]

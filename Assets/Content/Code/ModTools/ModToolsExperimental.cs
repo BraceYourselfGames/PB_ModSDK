@@ -43,6 +43,8 @@ namespace PhantomBrigade.SDK.ModTools
                 return pathLocal;
             }
         }
+        
+        public static bool disableChecksumSystem = true;
 
         private static Dictionary<string, FileRecord> fileRecords = new Dictionary<string, FileRecord> ();
         private static List<FileRecord> fileRecordsDeleted = new List<FileRecord> ();
@@ -57,11 +59,7 @@ namespace PhantomBrigade.SDK.ModTools
         
         public static void GenerateModFiles (DataContainerModData modData, Action onCompletion)
         {
-            if (modData == null)
-                return;
-    
-            var dirProject = new DirectoryInfo (modData.GetModPathProject ());
-            if (!dirProject.Exists)
+            if (modData == null || !modData.hasProjectFolder)
                 return;
             
             CancelExport ();
@@ -70,28 +68,43 @@ namespace PhantomBrigade.SDK.ModTools
 
         private static void CancelExport ()
         {
+            disableChecksumSystem = false;
+            DataContainerModData.selectedMod = null;
             EditorUtility.ClearProgressBar ();
+            
             if (coroutine != null)
                 EditorCoroutineUtility.StopCoroutine (coroutine);
         }
 
         private static IEnumerator GenerateModFilesIE (DataContainerModData modData, Action onCompletion)
         {
+            disableChecksumSystem = true;
+            DataContainerModData.selectedMod = modData;
+            Debug.Log ($"Exporting mod {modData.id} | Has project folder: {modData.hasProjectFolder} | Path configs: {modData.GetModPathConfigs ()}");
+            
             EditorUtility.DisplayProgressBar ("Exporting mod", "Deleting export folders...", 0f);
             modData.DeleteOutputDirectories ();
 
-            // Set up ConfigOverrides and ConfigEdits
-            yield return new EditorWaitForSeconds (0.1f);
-            EditorUtility.DisplayProgressBar ("Exporting mod", "Generating config files...", 0f);
-            yield return GenerateConfigFolders (modData);
-
+            bool modConfigsUsed = Directory.Exists (modData.GetModPathConfigs ());
+            if (!modConfigsUsed)
+                Debug.LogWarning ("Skipping config processing, the mod is not using configs...");
+            else
+            {
+                // Set up ConfigOverrides and ConfigEdits
+                yield return new EditorWaitForSeconds (0.1f);
+                EditorUtility.DisplayProgressBar ("Exporting mod", "Generating config files...", 0f);
+                yield return GenerateConfigFolders (modData);
+                
+                yield return new EditorWaitForSeconds (0.1f);
+                EditorUtility.DisplayProgressBar ("Exporting mod", "Checking text edits...", 0.95f);
+                DataManagerText.LoadLibrary ();
+                ModTextHelper.GenerateTextChanges (modData);
+                ModToolsHelper.GenerateTextEdits (modData);
+            }
+            
             yield return new EditorWaitForSeconds (0.1f);
             EditorUtility.DisplayProgressBar ("Exporting mod", "Checking asset bundles...", 0.95f);
             ModToolsHelper.GenerateAssetBundles (modData);
-            
-            yield return new EditorWaitForSeconds (0.1f);
-            EditorUtility.DisplayProgressBar ("Exporting mod", "Checking text edits...", 0.95f);
-            ModToolsHelper.GenerateTextEdits (modData);
             
             yield return new EditorWaitForSeconds (0.1f);
             EditorUtility.DisplayProgressBar ("Exporting mod", "Checking libraries...", 0.95f);

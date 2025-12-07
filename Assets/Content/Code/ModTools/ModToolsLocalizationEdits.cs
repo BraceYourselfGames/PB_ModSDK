@@ -254,51 +254,74 @@ namespace PhantomBrigade.ModTools
 
     public static class ModTextHelper
     {
-        public static void GenerateTextChangesToSectors (List<string> textSectorKeys)
+        public static void GenerateTextChanges (DataContainerModData modData)
         {
             #if UNITY_EDITOR
             bool modConfigsUsed =
-                DataManagerMod.modSelected != null && 
-                DataContainerModData.selectedMod != null && 
-                DataContainerModData.selectedMod.hasProjectFolder && 
-                Directory.Exists (DataContainerModData.selectedMod.GetModPathConfigs ());
+                modData != null && 
+                modData.hasProjectFolder && 
+                Directory.Exists (modData.GetModPathConfigs ());
             
             if (!modConfigsUsed)
                 return;
             
-            if (textSectorKeys == null || textSectorKeys.Count == 0)
+            DataManagerText.LoadLibrary ();
+            
+            var sectorsSource = DataManagerText.librarySourceData.sectors;
+            if (sectorsSource == null)
             {
-                Debug.LogWarning ($"Can't process text changes for sectors: no keys received");
+                Debug.LogWarning ("Can't generate text edits: SDK text library not found");
                 return;
             }
             
-            var mod = DataManagerMod.modSelected;
-            var languageKey = "English";
-            
-            foreach (var sectorKey in textSectorKeys)
+            var sectorsWorking = DataManagerText.libraryData.sectors;
+            if (sectorsWorking == null)
             {
-                var sectorWorkingFound = DataManagerText.libraryData.sectors.TryGetValue (sectorKey, out var sectorWorking);
+                Debug.LogWarning ("Can't generate text edits: SDK text library not found");
+                return;
+            }
+            
+            if (modData.textEdits == null)
+                modData.textEdits = new ModConfigLocEdit ();
+
+            if (modData.textEdits.languages == null)
+                modData.textEdits.languages = new SortedDictionary<string, ModConfigLocEditLanguage> ();
+
+            var languageKey = "English";
+            if (!modData.textEdits.languages.ContainsKey (languageKey))
+                modData.textEdits.languages.Add (languageKey, new ModConfigLocEditLanguage ());
+                            
+            var language = modData.textEdits.languages[languageKey];
+            if (language.sectors == null)
+                language.sectors = new SortedDictionary<string, ModConfigLocSector> ();
+            else
+                language.sectors.Clear ();
+            
+            Debug.Log ($"Iterating over {sectorsSource.Count} text sectors to find text changes...");
+            foreach (var kvp in sectorsSource)
+            {
+                var sectorKey = kvp.Key;
+                var sectorSource = kvp.Value;
+                if (sectorSource == null || sectorSource.entries == null)
+                {
+                    Debug.LogWarning ($"Skipping comparison of sector {sectorKey}, no entries in the source text library");
+                    continue;
+                }
+                
+                var sectorWorkingFound = sectorsWorking.TryGetValue (sectorKey, out var sectorWorking);
                 if (!sectorWorkingFound || sectorWorking.entries == null)
                 {
-                    Debug.LogWarning ($"Skipping comparison of sector {sectorKey}, it couldn't be found in the working text library");
+                    Debug.LogWarning ($"Skipping comparison of sector {sectorKey}, it couldn't be found in the mod text library");
                     continue;
                 }
                 
-                var sectorSourceFound = DataManagerText.librarySourceData.sectors.TryGetValue (sectorKey, out var sectorSource);
-                if (!sectorSourceFound || sectorSource.entries == null)
-                {
-                    Debug.LogWarning ($"Skipping comparison of sector {sectorKey}, it couldn't be found in the source text library");
-                    continue;
-                }
-                
-                Debug.Log ($"Saving text changes for sectors {textSectorKeys.ToStringFormatted ()}");
                 int textEditsCount = 0;
                 SortedDictionary<string, ModConfigLocText> textEditsCollection = null;
 
-                foreach (var kvp in sectorWorking.entries)
+                foreach (var kvp2 in sectorWorking.entries)
                 {
-                    var textKey = kvp.Key;
-                    string textWorking = kvp.Value.text;
+                    var textKey = kvp2.Key;
+                    string textWorking = kvp2.Value.text;
 
                     string textSource = null;
                     if (sectorSource.entries.TryGetValue (textKey, out var textSourceEntry))
@@ -312,19 +335,6 @@ namespace PhantomBrigade.ModTools
                         // Initialize the English text edits and/or reset them
                         if (textEditsCollection == null)
                         {
-                            if (mod.textEdits == null)
-                                mod.textEdits = new ModConfigLocEdit ();
-
-                            if (mod.textEdits.languages == null)
-                                mod.textEdits.languages = new SortedDictionary<string, ModConfigLocEditLanguage> ();
-
-                            if (!mod.textEdits.languages.ContainsKey (languageKey))
-                                mod.textEdits.languages.Add (languageKey, new ModConfigLocEditLanguage ());
-                            
-                            var language = mod.textEdits.languages[languageKey];
-                            if (language.sectors == null)
-                                language.sectors = new SortedDictionary<string, ModConfigLocSector> ();
-                            
                             if (!language.sectors.ContainsKey (sectorKey))
                                 language.sectors.Add (sectorKey, new ModConfigLocSector ());
                             
@@ -336,7 +346,7 @@ namespace PhantomBrigade.ModTools
 
                             textEditsCollection = sector.text;
                             textEditsCollection.Clear ();
-                            mod.textEdits.UpdateChildren ();
+                            modData.textEdits.UpdateChildren ();
                         }
 
                         textEditsCollection[textKey] = new ModConfigLocText
@@ -346,22 +356,9 @@ namespace PhantomBrigade.ModTools
                         };
                     }
                 }
-                
-                if 
-                (
-                    textEditsCount == 0 && 
-                    mod.textEdits?.languages != null && 
-                    mod.textEdits.languages.TryGetValue (languageKey, out var l) && 
-                    l?.sectors != null &&
-                    l.sectors.ContainsKey (sectorKey)
-                )
-                {
-                    Debug.Log ($"No text edits found for sector {sectorKey}, deleting the override from the mod config");
-                    l.sectors.Remove (sectorKey);
-                }
             }
             
-            DataManagerMod.SaveMod (mod);
+            // DataManagerMod.SaveMod (mod);
             #endif
         }
     }
