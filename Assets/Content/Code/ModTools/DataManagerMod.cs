@@ -569,6 +569,9 @@ namespace PhantomBrigade.SDK.ModTools
                 
                 var pathProject = modData.GetModPathProject ();
                 var pathSelected = EditorUtility.OpenFolderPanel ("Select Folder", pathProject, "");
+                if (string.IsNullOrEmpty (pathSelected))
+                    return;
+                
                 var dirSelected = new DirectoryInfo (pathSelected);
                 if (!dirSelected.Exists)
                 {
@@ -579,7 +582,9 @@ namespace PhantomBrigade.SDK.ModTools
                 if (!EditorUtility.DisplayDialog 
                 (
                     "Import files?", 
-                    $"Are you sure you'd like to overwrite the contents of the Configs folder in the selected mod project (ID {modData.id}) with the original files from the SDK?\n\nProject folder: \n{pathProject}\n\nImported folder: \n{pathSelected}", 
+                    $"Are you sure you'd like to overwrite the contents of the Configs folder in the selected mod project (ID {modData.id}) with the original files from the SDK?"+ 
+                    $"\n\nFrom folder: \n{pathSelected}/ConfigOverrides" + 
+                    $"\n\nTo project folder: \n{pathProject}/Configs",
                     "Confirm", 
                     "Cancel")
                 )

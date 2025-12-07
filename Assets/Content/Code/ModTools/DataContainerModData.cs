@@ -649,6 +649,7 @@ namespace PhantomBrigade.SDK.ModTools
         public static readonly Color colorSelected = new Color (0.8f, 1f, 0.9f);
 
         public const string assetBundlesFolderName = "AssetBundles";
+        public const string configsFolderName = "Configs";
         public const string overridesFolderName = "ConfigOverrides";
         public const string editsFolderName = "ConfigEdits";
         public const string librariesFolderName = "Libraries";

@@ -43,8 +43,6 @@ namespace PhantomBrigade.SDK.ModTools
                 return pathLocal;
             }
         }
-        
-        public static bool disableChecksumSystem = true;
 
         private static Dictionary<string, FileRecord> fileRecords = new Dictionary<string, FileRecord> ();
         private static List<FileRecord> fileRecordsDeleted = new List<FileRecord> ();
@@ -68,7 +66,6 @@ namespace PhantomBrigade.SDK.ModTools
 
         private static void CancelExport ()
         {
-            disableChecksumSystem = false;
             DataContainerModData.selectedMod = null;
             EditorUtility.ClearProgressBar ();
             
@@ -78,7 +75,6 @@ namespace PhantomBrigade.SDK.ModTools
 
         private static IEnumerator GenerateModFilesIE (DataContainerModData modData, Action onCompletion)
         {
-            disableChecksumSystem = true;
             DataContainerModData.selectedMod = modData;
             Debug.Log ($"Exporting mod {modData.id} | Has project folder: {modData.hasProjectFolder} | Path configs: {modData.GetModPathConfigs ()}");
             
@@ -265,7 +261,7 @@ namespace PhantomBrigade.SDK.ModTools
             configEditsTemp.OnAfterDeserialization ();
 
             var dataTypeCollection = typeof (DataContainer);
-            var configFolderName = "Configs";
+            var configFolderName = DataContainerModData.configsFolderName;
             var overridesFolderName = DataContainerModData.overridesFolderName;
 
             // Final iteration (not strictly necessary, but it feels nicer to neatly log everything before the steps below
@@ -435,9 +431,11 @@ namespace PhantomBrigade.SDK.ModTools
                 return;
             }
 
+            var configFolderName = DataContainerModData.configsFolderName;
+            var overridesFolderName = DataContainerModData.overridesFolderName;
 
             var pathMod = modData.GetModPathProject ();
-            var pathModConfigs = Path.Combine (pathMod, "Configs");
+            var pathModConfigs = Path.Combine (pathMod, configFolderName);
             DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
             
             if (!dirModConfigs.Exists)
@@ -446,8 +444,9 @@ namespace PhantomBrigade.SDK.ModTools
                 return;
             }
             
-            var pathSelectedConfigs = Path.Combine (pathSelected, "ConfigOverrides");
+            var pathSelectedConfigs = Path.Combine (pathSelected, overridesFolderName);
             DirectoryInfo dirSelectedConfigs = new DirectoryInfo (pathSelectedConfigs);
+            FileInfo[] filesSelected = dirSelectedConfigs.GetFiles ("*", SearchOption.AllDirectories);
             
             if (!dirSelectedConfigs.Exists)
             {
@@ -461,7 +460,21 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 // Doesn't work, clears destination, assumes you want destClear: true from depth 1
                 // Swap for another method or implement non clearing path
-                UtilitiesYAML.CopyDirectory (pathSelectedConfigs, pathModConfigs, false);
+                // UtilitiesYAML.CopyDirectory (pathSelectedConfigs, pathModConfigs, false);
+
+                foreach (var file in filesSelected)
+                {
+                    var pathFull = file.FullName;
+                    var pathLocal = pathFull.Substring (pathSelectedConfigs.Length + 1);
+                    var pathDest = Path.Combine (pathModConfigs, pathLocal);
+                    
+                    string pathDirName = Path.GetDirectoryName (pathDest);
+                    if (pathDirName != null)
+                        Directory.CreateDirectory (pathDirName);
+                        
+                    file.CopyTo (pathDest, true);
+                    Debug.Log ($"Copied file: {file.Name}\nLocal path: {pathLocal}\nFrom: {pathFull}\nTo: {pathDest}"); 
+                }
             }
             catch (Exception e)
             {
