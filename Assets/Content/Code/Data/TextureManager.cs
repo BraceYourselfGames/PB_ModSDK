@@ -314,8 +314,8 @@ namespace PhantomBrigade.Data
                 // Build lookup
                 if (!groupKeysFromFolders.ContainsKey (group.folderName))
                     groupKeysFromFolders.Add (group.folderName, groupKey);
-                else
-                    Debug.LogWarning ($"Group {groupKey} is using path {group.folderName} already used by another group {groupKeysFromFolders[group.folderName]}");
+                // else
+                //     Debug.LogWarning ($"Group {groupKey} is using path {group.folderName} already used by another group {groupKeysFromFolders[group.folderName]}");
 
                 // Clear collections
                 if (group.textures == null)

@@ -20,7 +20,7 @@ public class AreaSegmentHelper : MonoBehaviour
             var segment = segments[i];
             if (segment == null || segment.prefab == null)
             {
-                Debug.LogWarning ($"Skipping environment segment {i} that is null or has a null prefab reference");
+                // Debug.LogWarning ($"Skipping environment segment {i} that is null or has a null prefab reference");
                 continue;
             }
                 
