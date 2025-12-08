@@ -56,14 +56,38 @@ namespace PhantomBrigade.ModTools
         
         public void SaveToMod (DataContainerModData modData)
         {
-            if (languages == null || languages.Count == 0)
-                return;
-            
             if (modData == null)
             {
                 Debug.LogWarning ("Can't save text edits, parent mod not provided");
                 return;
             }
+            
+            if (languages == null || languages.Count == 0)
+                return;
+
+            bool anyDataPresent = false;
+            foreach (var kvp in languages)
+            {
+                var language = kvp.Value;
+                if (language == null || language.sectors == null)
+                    continue;
+
+                foreach (var kvp2 in language.sectors)
+                {
+                    var sector = kvp2.Value;
+                    if (sector == null || sector.text == null)
+                        continue;
+
+                    anyDataPresent = true;
+                    break;
+                }
+                
+                if (anyDataPresent)
+                    break;
+            }
+            
+            if (!anyDataPresent)
+                return;
 
             var rootPath = modData.GetModPathProject ();
             if (!Directory.Exists (rootPath))
@@ -280,22 +304,8 @@ namespace PhantomBrigade.ModTools
                 Debug.LogWarning ("Can't generate text edits: SDK text library not found");
                 return;
             }
-            
-            if (modData.textEdits == null)
-                modData.textEdits = new ModConfigLocEdit ();
 
-            if (modData.textEdits.languages == null)
-                modData.textEdits.languages = new SortedDictionary<string, ModConfigLocEditLanguage> ();
-
-            var languageKey = "English";
-            if (!modData.textEdits.languages.ContainsKey (languageKey))
-                modData.textEdits.languages.Add (languageKey, new ModConfigLocEditLanguage ());
-                            
-            var language = modData.textEdits.languages[languageKey];
-            if (language.sectors == null)
-                language.sectors = new SortedDictionary<string, ModConfigLocSector> ();
-            else
-                language.sectors.Clear ();
+            bool rootInitialized = false;
             
             Debug.Log ($"Iterating over {sectorsSource.Count} text sectors to find text changes...");
             foreach (var kvp in sectorsSource)
@@ -317,6 +327,7 @@ namespace PhantomBrigade.ModTools
                 
                 int textEditsCount = 0;
                 SortedDictionary<string, ModConfigLocText> textEditsCollection = null;
+                ModConfigLocEditLanguage languageEn = null;
 
                 foreach (var kvp2 in sectorWorking.entries)
                 {
@@ -335,10 +346,37 @@ namespace PhantomBrigade.ModTools
                         // Initialize the English text edits and/or reset them
                         if (textEditsCollection == null)
                         {
-                            if (!language.sectors.ContainsKey (sectorKey))
-                                language.sectors.Add (sectorKey, new ModConfigLocSector ());
+                            if (!rootInitialized)
+                            {
+                                // Root is initialized this late in case we never encounter an actual edit
+                                rootInitialized = true;
+                                
+                                if (modData.textEdits == null)
+                                    modData.textEdits = new ModConfigLocEdit ();
+
+                                if (modData.textEdits.languages == null)
+                                    modData.textEdits.languages = new SortedDictionary<string, ModConfigLocEditLanguage> ();
+
+                                var languageKey = "English";
+                                if (!modData.textEdits.languages.TryGetValue (languageKey, out languageEn))
+                                {
+                                    languageEn = new ModConfigLocEditLanguage ();
+                                    modData.textEdits.languages.Add (languageKey, languageEn);
+                                }
                             
-                            var sector = language.sectors[sectorKey];
+                                languageEn = modData.textEdits.languages[languageKey];
+                                if (languageEn.sectors == null)
+                                    languageEn.sectors = new SortedDictionary<string, ModConfigLocSector> ();
+                                else
+                                    languageEn.sectors.Clear ();
+                            }
+                            
+                            if (!languageEn.sectors.TryGetValue (sectorKey, out var sector))
+                            {
+                                sector = new ModConfigLocSector ();
+                                languageEn.sectors.Add (sectorKey, sector);
+                            }
+                            
                             if (sector.text == null)
                                 sector.text = new SortedDictionary<string, ModConfigLocText> ();
                             else
@@ -355,6 +393,39 @@ namespace PhantomBrigade.ModTools
                             textSource = textSource
                         };
                     }
+                }
+            }
+            
+            if (modData.textEdits != null)
+            {
+                bool anyDataPresent = false;
+                if (modData.textEdits.languages != null)
+                {
+                    foreach (var kvp in modData.textEdits.languages)
+                    {
+                        var language1 = kvp.Value;
+                        if (language1 == null || language1.sectors == null)
+                            continue;
+
+                        foreach (var kvp2 in language1.sectors)
+                        {
+                            var sector = kvp2.Value;
+                            if (sector == null || sector.text == null)
+                                continue;
+
+                            anyDataPresent = true;
+                            break;
+                        }
+
+                        if (anyDataPresent)
+                            break;
+                    }
+                }
+                
+                if (!anyDataPresent)
+                {
+                    Debug.Log ($"No text edits detected, removing text edit object...");
+                    modData.textEdits = null;
                 }
             }
             
