@@ -57,6 +57,14 @@ namespace PhantomBrigade.SDK.ModTools
         
         private static string pathPrefixDataUnique = "Data";
         private static string pathPrefixDataDecomposed = "DataDecomposed";
+
+        private static List<string> pathPrefixesDirBased = new List<string>
+        {
+            "DataDecomposed/Combat/Areas"
+        };
+
+        private static HashSet<string> pathsToDirsInvalidatedFull = new HashSet<string> ();
+        private static List<string> pathsToDirsInvalidatedLocal = new List<string> ();
         
         public static void GenerateModFiles (DataContainerModData modData, Action onCompletion)
         {
@@ -98,7 +106,8 @@ namespace PhantomBrigade.SDK.ModTools
                 EditorUtility.DisplayProgressBar ("Exporting mod", "Checking text edits...", 0.95f);
                 DataManagerText.LoadLibrary ();
                 ModTextHelper.GenerateTextChanges (modData);
-                modData.textEdits.SaveToMod (modData);
+                if (modData.textEdits != null)
+                    modData.textEdits.SaveToMod (modData);
             }
             
             yield return new EditorWaitForSeconds (0.1f);
@@ -168,15 +177,15 @@ namespace PhantomBrigade.SDK.ModTools
 
             var pathSDK = DataPathHelper.GetApplicationFolder ();
             var pathSDKConfigs = Path.Combine (pathSDK, "Configs");
+            int pathSDKConfigsLength = pathSDKConfigs.Length;
             DirectoryInfo dirSDKConfigs = new DirectoryInfo (pathSDKConfigs);
-            FileInfo[] filesSDK = dirSDKConfigs.GetFiles ("*.yaml", SearchOption.AllDirectories);
-            // string[] filesSDK = Directory.GetFiles (pathSDKConfigs, "*.yaml", SearchOption.AllDirectories);
-            
+            FileInfo[] filesSDK = dirSDKConfigs.GetFiles ("*", SearchOption.AllDirectories);
+
             var pathMod = modData.GetModPathProject ();
             var pathModConfigs = Path.Combine (pathMod, "Configs");
+            int pathModConfigsLength = pathModConfigs.Length;
             DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
-            FileInfo[] filesMod = dirModConfigs.GetFiles ("*.yaml", SearchOption.AllDirectories);
-            // string[] filesMod = Directory.GetFiles (pathModConfigs, "*.yaml", SearchOption.AllDirectories);
+            FileInfo[] filesMod = dirModConfigs.GetFiles ("*", SearchOption.AllDirectories);
             
             Debug.LogWarning ($"Scanning files...\nSDK ({filesSDK.Length}): {pathSDKConfigs}\nMod ({filesMod.Length}): {pathModConfigs}");
             EditorUtility.DisplayProgressBar ("Exporting mod", $"Scanning mod files ({filesMod.Length})...", 0.25f);
@@ -189,12 +198,15 @@ namespace PhantomBrigade.SDK.ModTools
             fileRecordsModified.Clear ();
             fileRecordsAdded.Clear ();
             
+            pathsToDirsInvalidatedFull.Clear ();
+            pathsToDirsInvalidatedLocal.Clear ();
+            
             // Check initial set using the mod folder
             for (int i = 0; i < filesMod.Length; i++)
             {
                 var fileMod = filesMod[i];
                 var pathFull = fileMod.FullName;
-                var pathLocal = pathFull.Substring (pathModConfigs.Length + 1);
+                var pathLocal = DataPathHelper.GetCleanPath (pathFull.Substring (pathModConfigsLength + 1));
                 if (!pathLocal.StartsWith (pathPrefixDataDecomposed) || !pathLocal.StartsWith (pathPrefixDataUnique))
                     continue;
                 
@@ -213,7 +225,7 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 var fileSDK = filesSDK[i];
                 var pathFull = fileSDK.FullName;
-                var pathLocal = pathFull.Substring (pathSDKConfigs.Length + 1);
+                var pathLocal = DataPathHelper.GetCleanPath (pathFull.Substring (pathSDKConfigsLength + 1));
                 if (!pathLocal.StartsWith (pathPrefixDataDecomposed) || !pathLocal.StartsWith (pathPrefixDataUnique))
                     continue;
                 
@@ -249,6 +261,53 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     fc.status = FileStatus.Added;
                     fileRecordsAdded.Add (fc); // Just for nice logging, not used for copying
+                }
+            }
+            
+            // Iterate over the directory based DBs to identify if any have modified files
+            // Any modified file should lead to entire directory for a given data key being exported
+            int pathPrefixesCount = pathPrefixesDirBased.Count;
+            foreach (var kvp in fileRecords)
+            {
+                var fc = kvp.Value;
+                if (fc.status == FileStatus.Added || fc.status == FileStatus.Modified)
+                {
+                    for (int i = 0; i < pathPrefixesCount; i++)
+                    {
+                        var prefixDatabase = pathPrefixesDirBased[i];
+                        if (!fc.pathLocal.StartsWith (prefixDatabase))
+                            continue;
+
+                        var pathDirFull = fc.fileMod.DirectoryName;
+                        if (pathDirFull == null || pathsToDirsInvalidatedFull.Contains (pathDirFull))
+                            continue;
+                        
+                        var pathDirLocal = DataPathHelper.GetCleanPath (pathDirFull.Substring (pathModConfigsLength + 1));
+                        pathsToDirsInvalidatedFull.Add (pathDirFull); // Makes rejections above easy without prettifying each candidate path
+                        pathsToDirsInvalidatedLocal.Add (pathDirLocal); // Makes invalidations in next loop easier (same format as fc.pathLocal)
+                        Debug.Log ($"File {fc.fileMod.Name} invalidates directory under dir-based DB: {pathDirLocal}");
+                        break;
+                    }
+                }
+            }
+            
+            // Apply identified invalidations
+            int pathsToDirsInvalidationCount = pathsToDirsInvalidatedLocal.Count;
+            foreach (var kvp in fileRecords)
+            {
+                var fc = kvp.Value;
+                if (fc.status != FileStatus.Unmodified)
+                    continue;
+                
+                for (int i = 0; i < pathsToDirsInvalidationCount; i++)
+                {
+                    var prefixDataKey = pathsToDirsInvalidatedLocal[i];
+                    if (!fc.pathLocal.StartsWith (prefixDataKey))
+                        continue;
+                    
+                    Debug.Log ($"File {fc.fileMod.Name} invalidated based on path prefix: {prefixDataKey}");
+                    fc.status = FileStatus.Modified;
+                    break;
                 }
             }
             
