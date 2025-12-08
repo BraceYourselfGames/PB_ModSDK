@@ -19,6 +19,39 @@ namespace PhantomBrigade.SDK.ModTools
 {
     using Data;
     using Mods;
+    
+    [Serializable, InlineProperty, HideReferenceObjectPicker]
+    public class ConfigsVersion
+    {
+        public const string versionExpected = "2.0.3-b7910";
+        
+        [HideInInspector]
+        public string version;
+        
+        [GUIColor ("$" + nameof (GetColor))]
+        [InfoBox ("$" + nameof (GetWarningText), InfoMessageType.Warning, VisibleIf = nameof (IsWarningVisible))]
+        [HideLabel, SuffixLabel ("Configs version", true), ShowInInspector]
+        private string versionVisible
+        {
+            get => version;
+            set { }
+        }
+
+        private bool IsWarningVisible ()
+        {
+            return string.IsNullOrEmpty (version) || version != versionExpected;
+        }
+
+        private string GetWarningText ()
+        {
+            return $"{versionExpected} is the current version of the Configs folder in the SDK. The Configs folder might be outdated or might otherwise not match the current state of the game. This can cause incorrect mod exports and lead to ingame bugs. We recommend resetting configs to the latest state from the SDK.";
+        }
+
+        private Color GetColor ()
+        {
+            return IsWarningVisible () ? ModToolsColors.HighlightNeonSepia : ModToolsColors.HighlightNeonGreen;
+        }
+    }
 
     [Serializable, HideDuplicateReferenceBox]
     public class ModAssetBundles
@@ -352,6 +385,29 @@ namespace PhantomBrigade.SDK.ModTools
                 Debug.LogWarning ("Failed to delete user mod folder -- encountered an exception | path: " + dirPathUser + "\n" + ioe);
             }
         }
+        
+        [ShowIf (nameof(IsConfigsVersionVisible))]
+        [HideLabel]
+        public ConfigsVersion configsVersion;
+
+        public void RefreshConfigsVersion ()
+        {
+            var pathConfigs = GetModPathConfigs ();
+            configsVersion = null;
+            
+            if (hasProjectFolder && Directory.Exists (pathConfigs))
+            {
+                var configsVersionPath = DataPathHelper.GetCombinedCleanPath (pathConfigs, "dataVersion.yaml");
+                configsVersion = UtilitiesYAML.LoadDataFromFile<ConfigsVersion> (configsVersionPath, false, false);
+                if (configsVersion == null)
+                    configsVersion = new ConfigsVersion ();
+            }
+        }
+
+        private bool IsConfigsVersionVisible ()
+        {
+            return hasProjectFolder && Directory.Exists (GetModPathConfigs ());
+        }
 
         // Metadata is not embedded directly into this config, to ensure there is only
         // one source of truth on disk: metadata.yaml in the mod directory. It's easy to
@@ -434,7 +490,11 @@ namespace PhantomBrigade.SDK.ModTools
             var pathConfigs = GetModPathConfigs ();
             // Debug.Log ($"Loaded mod {key}\n- Project path: {GetModPathProject ()}\n- Configs path: {pathConfigs}");
 
-            metadata.isConfigEnabled = Directory.Exists (GetModPathConfigs ());
+            metadata.isConfigEnabled = Directory.Exists (pathConfigs);
+
+            configsVersion = null;
+            if (metadata.isConfigEnabled)
+                RefreshConfigsVersion ();
 
             if (workshop != null)
                 workshop.parent = this;

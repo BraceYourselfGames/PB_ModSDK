@@ -20,7 +20,6 @@ namespace PhantomBrigade.SDK.ModTools
     {
         public const string unityVersionExpectedMajor = "2020.3";
         public const string unityVersionExpected = "2020.3.49f1";
-        public const string dirNameConfigs = "Configs";
 
         public static bool IsUnityVersionSupported (bool strict = true)
         {

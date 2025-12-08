@@ -470,9 +470,14 @@ namespace PhantomBrigade.SDK.ModTools
             [PropertyTooltip ("Switches all databases to config files copied into your mod project folder, enabling config editing")]
             public static void SelectForEditing ()
             {
-                DataContainerModData.selectedMod = modSelected;
-                ResetArea ();
-                ResetDBs ();
+                var modData = modSelected;
+                if (modData != null)
+                {
+                    modData.RefreshConfigsVersion ();
+                    DataContainerModData.selectedMod = modSelected;
+                    ResetArea ();
+                    ResetDBs ();
+                }
             }
 
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightSelectedMod))]
@@ -482,9 +487,14 @@ namespace PhantomBrigade.SDK.ModTools
             [PropertyTooltip ("Disables database editing, switching the editor back to reading backed up canonical Configs from the SDK folder.")]
             public static void DeselectForEditing ()
             {
-                DataContainerModData.selectedMod = null;
-                ResetArea ();
-                ResetDBs ();
+                var modData = modSelected;
+                if (modData != null)
+                {
+                    modData.RefreshConfigsVersion ();
+                    DataContainerModData.selectedMod = null;
+                    ResetArea ();
+                    ResetDBs ();
+                }
             }
 
             private static bool IsConfigSetupAllowed () => modSelected != null &&

@@ -54,7 +54,7 @@ namespace PhantomBrigade.SDK.ModTools
         private static readonly byte[] bufferA = new byte[64 * 1024];
         private static readonly byte[] bufferB = new byte[64 * 1024];
         private static EditorCoroutine coroutine = null;
-
+        
         private static string pathPrefixDataUnique = "Data";
         private static string pathPrefixDataDecomposed = "DataDecomposed";
         
@@ -422,6 +422,11 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 Debug.LogException (e);
             }
+
+            var configsVersion = new ConfigsVersion { version = ConfigsVersion.versionExpected };
+            var configsVersionPath = DataPathHelper.GetCombinedCleanPath (pathModConfigs, "dataVersion.yaml");
+            UtilitiesYAML.SaveToFile (configsVersionPath, configsVersion);
+            modData.configsVersion = configsVersion;
         }
         
         public static void CopyConfigsFromExportedMod (DataContainerModData modData, string pathSelected)
