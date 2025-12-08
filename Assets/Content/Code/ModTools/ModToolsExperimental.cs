@@ -54,6 +54,9 @@ namespace PhantomBrigade.SDK.ModTools
         private static readonly byte[] bufferA = new byte[64 * 1024];
         private static readonly byte[] bufferB = new byte[64 * 1024];
         private static EditorCoroutine coroutine = null;
+
+        private static string pathPrefixDataUnique = "Data";
+        private static string pathPrefixDataDecomposed = "DataDecomposed";
         
         public static void GenerateModFiles (DataContainerModData modData, Action onCompletion)
         {
@@ -192,7 +195,9 @@ namespace PhantomBrigade.SDK.ModTools
                 var fileMod = filesMod[i];
                 var pathFull = fileMod.FullName;
                 var pathLocal = pathFull.Substring (pathModConfigs.Length + 1);
-
+                if (!pathLocal.StartsWith (pathPrefixDataDecomposed) || !pathLocal.StartsWith (pathPrefixDataUnique))
+                    continue;
+                
                 var fc = new FileRecord ();
                 fc.pathLocal = pathLocal;
                 fc.status = FileStatus.Unknown;
@@ -209,7 +214,9 @@ namespace PhantomBrigade.SDK.ModTools
                 var fileSDK = filesSDK[i];
                 var pathFull = fileSDK.FullName;
                 var pathLocal = pathFull.Substring (pathSDKConfigs.Length + 1);
-
+                if (!pathLocal.StartsWith (pathPrefixDataDecomposed) || !pathLocal.StartsWith (pathPrefixDataUnique))
+                    continue;
+                
                 FileRecord fc = null;
                 if (!fileRecords.TryGetValue (pathLocal, out fc))
                 {
