@@ -713,6 +713,7 @@ namespace PhantomBrigade.SDK.ModTools
         public const string overridesFolderName = "ConfigOverrides";
         public const string editsFolderName = "ConfigEdits";
         public const string librariesFolderName = "Libraries";
+        public const string localizationEditsFolderName = "LocalizationEdits";
 
         static class OdinGroup
         {

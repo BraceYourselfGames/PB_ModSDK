@@ -144,32 +144,53 @@ namespace PhantomBrigade.ModTools
         }
 
         // [Button ("Load from folder")]
-        public void LoadFromMod (DataContainerModData mod)
+        public static void LoadFromMod (DataContainerModData modData, bool showWarning = true, string pathCustom = null)
         {
-            if (mod == null)
+            if (modData == null)
             {
                 Debug.LogWarning ("Can't load text edits, parent mod not provided");
                 return;
             }
 
-            var rootPath = mod.GetModPathProject ();
-            var editPath = DataPathHelper.GetCombinedCleanPath (rootPath, "LocalizationEdits");
-
-            if (!EditorUtility.DisplayDialog ("Load text edits", $"Are you sure you'd like to load text edits for mod {mod.id}? They might overwrite or replace the text edit you have already entered through the inspector or databases, so only use this option if you are trying to import data from an old non-SDK mod. Path: {editPath}", "Confirm", "Cancel"))
-                return;
-
-            if (!Directory.Exists (editPath))
+            var rootPath = modData.GetModPathProject ();
+            var pathImport = DataPathHelper.GetCombinedCleanPath (rootPath, DataContainerModData.localizationEditsFolderName);
+            
+            if (!string.IsNullOrEmpty (pathCustom))
+                pathImport = DataPathHelper.GetCleanPath (pathCustom);
+            
+            DirectoryInfo dirImport = new DirectoryInfo (pathImport);
+            if (!dirImport.Exists)
             {
-                Debug.LogWarning ($"Can't load text edits, mod {mod.id} doesn't have a text edit folder: {editPath}");
+                Debug.LogWarning ($"Can't load config edits, import path {pathImport} doesn't exist");
                 return;
             }
             
-            string[] filePaths = Directory.GetFiles (editPath, "*.yaml", SearchOption.AllDirectories);
-
-            for (int i = 0; i < filePaths.Length; ++i)
+            FileInfo[] filesTextEdits = dirImport.GetFiles ("*.yaml", SearchOption.AllDirectories);
+            if (filesTextEdits.Length == 0)
             {
-                var filePath = DataPathHelper.GetCleanPath (filePaths[i]);
-                var filePathTrimmed = filePath.Replace (editPath, string.Empty);
+                Debug.LogWarning ($"Can't load config edits, import path {pathImport} contains no .yaml files");
+                return;
+            }
+            
+            if (showWarning)
+            {
+                if (!EditorUtility.DisplayDialog
+                    (
+                        "Import LocalizationEdits?",
+                        $"Would you like to text edits into the selected mod project (ID {modData.id})? The imported edits might overwrite existing edits." +
+                        $"\n\nFrom folder: \n{pathImport}",
+                        "Import LocalizationEdits",
+                        "Cancel")
+                   )
+                {
+                    return;
+                }
+            }
+
+            for (int i = 0; i < filesTextEdits.Length; ++i)
+            {
+                var filePath = DataPathHelper.GetCleanPath (filesTextEdits[i].FullName);
+                var filePathTrimmed = filePath.Replace (pathImport, string.Empty);
 
                 if (filePathTrimmed.StartsWith ("/"))
                     filePathTrimmed = filePathTrimmed.Substring (1, filePathTrimmed.Length - 1);
@@ -180,7 +201,7 @@ namespace PhantomBrigade.ModTools
                 var split = filePathTrimmed.Split ('/');
                 if (split.Length != 2)
                 {
-                    Debug.LogWarning ($"Skipping file {filePathTrimmed}: wrong hierarchy");
+                    Debug.LogWarning ($"Skipping file {filePathTrimmed}: wrong hierarchy\n{filePath}\n{pathImport}");
                     continue;
                 }
 
@@ -195,16 +216,16 @@ namespace PhantomBrigade.ModTools
                 var sectorKey = split[1];
                 Debug.Log ($"Edit {i} | Language: {languageKey} | Sector: {sectorKey} | Edits: {editsSerialized.edits.ToStringFormattedKeys ()}");
 
-                if (mod.textEdits == null)
-                    mod.textEdits = new ModConfigLocEdit ();
+                if (modData.textEdits == null)
+                    modData.textEdits = new ModConfigLocEdit ();
 
-                if (mod.textEdits.languages == null)
-                    mod.textEdits.languages = new SortedDictionary<string, ModConfigLocEditLanguage> ();
+                if (modData.textEdits.languages == null)
+                    modData.textEdits.languages = new SortedDictionary<string, ModConfigLocEditLanguage> ();
 
-                if (!mod.textEdits.languages.ContainsKey (languageKey))
-                    mod.textEdits.languages.Add (languageKey, new ModConfigLocEditLanguage ());
+                if (!modData.textEdits.languages.ContainsKey (languageKey))
+                    modData.textEdits.languages.Add (languageKey, new ModConfigLocEditLanguage ());
                             
-                var language = mod.textEdits.languages[languageKey];
+                var language = modData.textEdits.languages[languageKey];
                 if (language.sectors == null)
                     language.sectors = new SortedDictionary<string, ModConfigLocSector> ();
                             
@@ -228,7 +249,8 @@ namespace PhantomBrigade.ModTools
                 }
             }
             
-            mod.textEdits.UpdateChildren ();
+            if (modData.textEdits != null)
+                modData.textEdits.UpdateChildren ();
         }
 
         #endif
@@ -427,6 +449,8 @@ namespace PhantomBrigade.ModTools
                     Debug.Log ($"No text edits detected, removing text edit object...");
                     modData.textEdits = null;
                 }
+                else
+                    modData.textEdits.UpdateChildren ();
             }
             
             // DataManagerMod.SaveMod (mod);

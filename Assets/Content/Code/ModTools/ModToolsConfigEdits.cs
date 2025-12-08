@@ -474,7 +474,7 @@ namespace PhantomBrigade.ModTools
             var pathImport = DataPathHelper.GetCombinedCleanPath (rootPath, DataContainerModData.editsFolderName);
             
             if (!string.IsNullOrEmpty (pathCustom))
-                pathImport = pathCustom;
+                pathImport = DataPathHelper.GetCleanPath (pathCustom);
             
             DirectoryInfo dirImport = new DirectoryInfo (pathImport);
             if (!dirImport.Exists)

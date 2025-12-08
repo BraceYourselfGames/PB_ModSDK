@@ -578,6 +578,28 @@ namespace PhantomBrigade.SDK.ModTools
                     Debug.LogException (e);
                 }
             }
+            
+            var pathImportTextEdits = Path.Combine (pathSelected, DataContainerModData.localizationEditsFolderName);
+            DirectoryInfo dirImportTextEdits = new DirectoryInfo (pathImportTextEdits);
+            if (dirImportTextEdits.Exists && EditorUtility.DisplayDialog 
+                (
+                    "Import LocalizationEdits?", 
+                    $"Discovered the LocalizationEdits (text modifications) folder in the selected import folder. Would you like to load its contents into the selected mod project (ID {modData.id})? The imported text edits might overwrite existing text edits."+ 
+                    $"\n\nFrom folder: \n{pathSelected}/LocalizationEdits" + 
+                    $"\n\nTo project metadata: \n(Edits are stored in the project metadata, no per-edit files used until export)",
+                    "Import LocalizationEdits", 
+                    "Skip")
+               )
+            {
+                try
+                {
+                    ModConfigLocEdit.LoadFromMod (modData, false, pathImportTextEdits);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException (e);
+                }
+            }
         }
     }
 
