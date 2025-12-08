@@ -282,7 +282,7 @@ namespace PhantomBrigade.SDK.ModTools
 
             // Export contents of the mod to the temp subfolder
             var dirPathWorkshopTemp = mod.GetModPathWorkshopTemp ();
-            bool exportSuccess = mod.TryExportToFolderShared (dirPathWorkshopTemp, "Steam Workshop staging folder", false);
+            bool exportSuccess = mod.TryExportToFolderShared (dirPathWorkshopTemp, "Steam Workshop staging folder", false); 
 
             yield return new EditorWaitForSeconds (0.5f);
             if (!exportSuccess)

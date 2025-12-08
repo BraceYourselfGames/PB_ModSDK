@@ -430,12 +430,17 @@ namespace PhantomBrigade.SDK.ModTools
                 Debug.Log ($"Can't import files: no import path provided");
                 return;
             }
+            
+            var dirSelected = new DirectoryInfo (pathSelected);
+            if (!dirSelected.Exists)
+            {
+                Debug.LogWarning ($"Can't import, no folder selected");
+                return;
+            }
 
-            var configFolderName = DataContainerModData.configsFolderName;
-            var overridesFolderName = DataContainerModData.overridesFolderName;
 
             var pathMod = modData.GetModPathProject ();
-            var pathModConfigs = Path.Combine (pathMod, configFolderName);
+            var pathModConfigs = Path.Combine (pathMod, DataContainerModData.configsFolderName);
             DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
             
             if (!dirModConfigs.Exists)
@@ -444,41 +449,63 @@ namespace PhantomBrigade.SDK.ModTools
                 return;
             }
             
-            var pathSelectedConfigs = Path.Combine (pathSelected, overridesFolderName);
-            DirectoryInfo dirSelectedConfigs = new DirectoryInfo (pathSelectedConfigs);
-
-            if (!dirSelectedConfigs.Exists)
+            var pathImportConfigOverrides = Path.Combine (pathSelected, DataContainerModData.overridesFolderName);
+            DirectoryInfo dirImportConfigOverrides = new DirectoryInfo (pathImportConfigOverrides);
+            if (dirImportConfigOverrides.Exists && EditorUtility.DisplayDialog 
+            (
+                "Import ConfigOverrides?", 
+                $"Discovered the ConfigOverrides folder in the selected import folder. Would you like to copy its contents over the Configs folder in the selected mod (ID {modData.id})? The imported files might overwrite existing files."+ 
+                $"\n\nFrom folder: \n{pathSelected}/ConfigOverrides" + 
+                $"\n\nTo project folder: \n{pathMod}/Configs",
+                "Import ConfigOverrides", 
+                "Skip")
+            )
             {
-                Debug.Log ($"Can't import files: selected import path doesn't contain a ConfigOverrides folder.\n- {pathSelectedConfigs}");
-                return;
-            }
+                FileInfo[] filesConfigOverrides = dirImportConfigOverrides.GetFiles ("*", SearchOption.AllDirectories);
+                Debug.Log ($"Copying configs from selected folder ConfigOverrides to mod folder Configs. Potential files: {filesConfigOverrides.Length}\nMod: {pathModConfigs}\nSource: {pathImportConfigOverrides}");
             
-            FileInfo[] filesSelected = dirSelectedConfigs.GetFiles ("*", SearchOption.AllDirectories);
-            Debug.Log ($"Copying configs from selected folder ConfigOverrides to mod folder Configs. Potential files: {filesSelected.Length}\nMod: {pathModConfigs}\nSource: {pathSelectedConfigs}");
-            
-            try
-            {
-                // Doesn't work, clears destination, assumes you want destClear: true from depth 1
-                // Swap for another method or implement non clearing path
-                // UtilitiesYAML.CopyDirectory (pathSelectedConfigs, pathModConfigs, false);
-
-                foreach (var file in filesSelected)
+                try
                 {
-                    var pathFull = file.FullName;
-                    var pathLocal = pathFull.Substring (pathSelectedConfigs.Length + 1);
-                    var pathDest = Path.Combine (pathModConfigs, pathLocal);
+                    foreach (var file in filesConfigOverrides)
+                    {
+                        var pathFull = file.FullName;
+                        var pathLocal = pathFull.Substring (pathImportConfigOverrides.Length + 1);
+                        var pathDest = Path.Combine (pathModConfigs, pathLocal);
                     
-                    string pathDirName = Path.GetDirectoryName (pathDest);
-                    if (pathDirName != null)
-                        Directory.CreateDirectory (pathDirName);
+                        string pathDirName = Path.GetDirectoryName (pathDest);
+                        if (pathDirName != null)
+                            Directory.CreateDirectory (pathDirName);
                         
-                    file.CopyTo (pathDest, true);
-                    Debug.Log ($"Copied file: {file.Name}\nLocal path: {pathLocal}\nFrom: {pathFull}\nTo: {pathDest}"); 
+                        file.CopyTo (pathDest, true);
+                        Debug.Log ($"Copied to Configs: {file.Name}\nLocal path: {pathLocal}\nFrom: {pathFull}\nTo: {pathDest}"); 
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException (e);
                 }
             }
-            catch (Exception e)
+            
+            var pathImportConfigEdits = Path.Combine (pathSelected, DataContainerModData.editsFolderName);
+            DirectoryInfo dirImportConfigEdits = new DirectoryInfo (pathImportConfigEdits);
+            if (dirImportConfigEdits.Exists && EditorUtility.DisplayDialog 
+            (
+                "Import ConfigEdits?", 
+                $"Discovered the ConfigEdits folder in the selected import folder. Would you like to load its contents into the selected mod project (ID {modData.id})? The imported edits might overwrite existing edits."+ 
+                $"\n\nFrom folder: \n{pathSelected}/ConfigEdits" + 
+                $"\n\nTo project metadata: \n(Edits are stored in the project metadata, no per-edit files used until export)",
+                "Import ConfigEdits", 
+                "Skip")
+            )
             {
-                Debug.LogException (e);
+                try
+                {
+                    ModConfigEditSource.LoadFromMod (modData, false, pathImportConfigEdits);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException (e);
+                }
             }
         }
     }

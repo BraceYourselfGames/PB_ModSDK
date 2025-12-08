@@ -456,9 +456,9 @@ namespace PhantomBrigade.ModTools
         private const char editSeparator = ':';
 
         // [Button ("Load from folder")]
-        public void LoadFromMod (DataContainerModData mod)
+        public static void LoadFromMod (DataContainerModData modData, bool showWarning = true, string pathCustom = null)
         {
-            if (mod == null)
+            if (modData == null)
             {
                 Debug.LogWarning ("Can't load config edits, parent mod not provided");
                 return;
@@ -470,40 +470,57 @@ namespace PhantomBrigade.ModTools
                 return;
             }
 
-            var rootPath = mod.GetModPathProject ();
-            var editPath = DataPathHelper.GetCombinedCleanPath (rootPath, "ConfigEdits");
-
-            if (!EditorUtility.DisplayDialog ("Load config edits", $"Are you sure you'd like to load config edits for mod {mod.id}? They might overwrite or replace the config edits you have already entered through the inspector or databases, so only use this option if you are trying to import data from an old non-SDK mod. Path: {editPath}", "Confirm", "Cancel"))
-                return;
-
-            if (!Directory.Exists (editPath))
+            var rootPath = modData.GetModPathProject ();
+            var pathImport = DataPathHelper.GetCombinedCleanPath (rootPath, DataContainerModData.editsFolderName);
+            
+            if (!string.IsNullOrEmpty (pathCustom))
+                pathImport = pathCustom;
+            
+            DirectoryInfo dirImport = new DirectoryInfo (pathImport);
+            if (!dirImport.Exists)
             {
-                Debug.LogWarning ($"Can't load text edits, mod {mod.id} doesn't have a config edit folder: {editPath}");
+                Debug.LogWarning ($"Can't load config edits, import path {pathImport} doesn't exist");
                 return;
             }
             
+            FileInfo[] filesConfigEdits = dirImport.GetFiles ("*.yaml", SearchOption.AllDirectories);
+            if (filesConfigEdits.Length == 0)
+            {
+                Debug.LogWarning ($"Can't load config edits, import path {pathImport} contains no .yaml files");
+                return;
+            }
+
+            if (showWarning)
+            {
+                if (!EditorUtility.DisplayDialog
+                (
+                    "Import ConfigEdits?",
+                    $"Would you like to config edits into the selected mod project (ID {modData.id})? The imported edits might overwrite existing edits." +
+                    $"\n\nFrom folder: \n{pathImport}",
+                    "Import ConfigEdits",
+                    "Cancel")
+                )
+                {
+                    return;
+                }
+            }
+            
+            Debug.Log ($"Loading edits from ConfigEdits folder. Potential files: {filesConfigEdits.Length}\nMod: {modData.id}\nSource: {pathImport}");
+
             var dataTypeGlobal = typeof (DataContainerUnique);
             var dataTypeCollection = typeof (DataContainer);
             ModUtilities.Initialize (false);
             
-            string[] filePaths = Directory.GetFiles (editPath, "*.yaml", SearchOption.AllDirectories);
-            if (filePaths.Length == 0)
+            if (modData.configEdits == null)
+                modData.configEdits = new ModConfigEditSource ();
+
+            modData.configEdits.dataLinkers = null;
+            modData.configEdits.dataMultiLinkers = null;
+
+            for (int i = 0; i < filesConfigEdits.Length; ++i)
             {
-                Debug.LogWarning ($"Can't load text edits, mod {mod.id} doesn't contain any YAML files under the path: {editPath}");
-                return;
-            }
-            
-            if (mod.configEdits == null)
-                mod.configEdits = new ModConfigEditSource ();
-
-            mod.configEdits.dataLinkers = null;
-            mod.configEdits.dataMultiLinkers = null;
-
-
-            for (int i = 0; i < filePaths.Length; ++i)
-            {
-                var filePath = DataPathHelper.GetCleanPath (filePaths[i]);
-                var filePathTrimmed = filePath.Replace (editPath, string.Empty);
+                var filePath = DataPathHelper.GetCleanPath (filesConfigEdits[i].FullName);
+                var filePathTrimmed = filePath.Replace (pathImport, string.Empty);
 
                 if (filePathTrimmed.StartsWith ("/"))
                     filePathTrimmed = filePathTrimmed.Substring (1, filePathTrimmed.Length - 1);
@@ -554,11 +571,11 @@ namespace PhantomBrigade.ModTools
                     Debug.Log ($"Collection edit {i} | File name: {fileName}\n- Path trimmed: {filePathTrimmed}\n- Path full: {filePath}\n- Data component: {componentTypeName}\n- Data type ({dataTypeCollection.Name}): {dataType.Name}\n- Edits: {dataSerialized.edits.ToStringFormatted ()}");
 
                     ModConfigEditMultiLinker multiLinkerEdits = null;
-                    if (mod.configEdits.dataMultiLinkers == null)
-                        mod.configEdits.dataMultiLinkers = new List<ModConfigEditMultiLinker> ();
+                    if (modData.configEdits.dataMultiLinkers == null)
+                        modData.configEdits.dataMultiLinkers = new List<ModConfigEditMultiLinker> ();
                     else
                     {
-                        foreach (var multiLinkerEditsCandidate in dataMultiLinkers)
+                        foreach (var multiLinkerEditsCandidate in modData.configEdits.dataMultiLinkers)
                         {
                             if (multiLinkerEditsCandidate == null)
                                 continue;
@@ -571,7 +588,7 @@ namespace PhantomBrigade.ModTools
                     if (multiLinkerEdits == null)
                     {
                         multiLinkerEdits = new ModConfigEditMultiLinker { type = component.GetType ().Name };
-                        mod.configEdits.dataMultiLinkers.Add (multiLinkerEdits);
+                        modData.configEdits.dataMultiLinkers.Add (multiLinkerEdits);
                     }
 
                     ModConfigEditSourceFileMultiLinker fileEdits = null;
@@ -635,11 +652,11 @@ namespace PhantomBrigade.ModTools
                     Debug.Log ($"Global edit {i} | File name: {fileName}\n- Path trimmed: {filePathTrimmed}\n- Path full: {filePath}\n- Data component: {componentTypeName}\n- Data type ({dataTypeGlobal.Name}): {dataType.Name}\n- Edits: {dataSerialized.edits.ToStringFormatted ()}");
 
                     ModConfigEditLinker linkerEdits = null;
-                    if (mod.configEdits.dataLinkers == null)
-                        mod.configEdits.dataLinkers = new List<ModConfigEditLinker> ();
+                    if (modData.configEdits.dataLinkers == null)
+                        modData.configEdits.dataLinkers = new List<ModConfigEditLinker> ();
                     else
                     {
-                        foreach (var linkerEditsCandidate in mod.configEdits.dataLinkers)
+                        foreach (var linkerEditsCandidate in modData.configEdits.dataLinkers)
                         {
                             if (linkerEditsCandidate == null)
                                 continue;
@@ -652,7 +669,7 @@ namespace PhantomBrigade.ModTools
                     if (linkerEdits == null)
                     {
                         linkerEdits = new ModConfigEditLinker { type = component.GetType ().Name, file = new ModConfigEditSourceFile { edits = new List<ModConfigEditSourceLine> () } };
-                        mod.configEdits.dataLinkers.Add (linkerEdits);
+                        modData.configEdits.dataLinkers.Add (linkerEdits);
                     }
 
                     for (int e = 0; e < dataSerialized.edits.Count; ++e)
@@ -681,7 +698,7 @@ namespace PhantomBrigade.ModTools
                 }
             }
             
-            mod.configEdits.OnAfterDeserialization ();
+            modData.configEdits.OnAfterDeserialization ();
         }
         
         #endif
