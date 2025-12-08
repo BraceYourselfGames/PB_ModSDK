@@ -306,6 +306,7 @@ namespace PhantomBrigade.ModTools
             }
 
             bool rootInitialized = false;
+            ModConfigLocEditLanguage languageEn = null;
             
             Debug.Log ($"Iterating over {sectorsSource.Count} text sectors to find text changes...");
             foreach (var kvp in sectorsSource)
@@ -327,8 +328,7 @@ namespace PhantomBrigade.ModTools
                 
                 int textEditsCount = 0;
                 SortedDictionary<string, ModConfigLocText> textEditsCollection = null;
-                ModConfigLocEditLanguage languageEn = null;
-
+                
                 foreach (var kvp2 in sectorWorking.entries)
                 {
                     var textKey = kvp2.Key;
