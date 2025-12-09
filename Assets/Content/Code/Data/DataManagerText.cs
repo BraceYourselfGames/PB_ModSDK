@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using PhantomBrigade.Data.UI;
 using PhantomBrigade.Mods;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 #if PB_MODSDK
-using System.Linq;
 using PhantomBrigade.SDK.ModTools;
 #endif
 
@@ -155,21 +153,6 @@ namespace PhantomBrigade.Data
             );
 
             libraryDataInternal.OnAfterDeserialization ();
-
-            #if PB_MODSDK && UNITY_EDITOR
-            if (IsModOverrideUsed())
-            {
-                // Check for disk changes that happened offline.
-                var modData = DataContainerModData.selectedMod;
-                var checksum = modData.textLibrary.LibraryDirectory.Mod.Checksum;
-                UpdateChecksums ();
-                if (!ConfigChecksums.ChecksumEqual (checksum, modData.textLibrary.LibraryDirectory.Mod.Checksum))
-                {
-                    Debug.Log ("TextLibrary: offline or format changes detected in mod configs -- refreshing checksums on disk");
-                    ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
-                }
-            }
-            #endif
         }
 
         #if PB_MODSDK
@@ -269,128 +252,7 @@ namespace PhantomBrigade.Data
             }
 
             libraryUnsaved = false;
-
-            #if PB_MODSDK && UNITY_EDITOR
-            SaveChecksums ();
-            #endif
         }
-
-        #if PB_MODSDK && UNITY_EDITOR
-        static void SaveChecksums ()
-        {
-            if (!IsModOverrideUsed ())
-            {
-                return;
-            }
-            UpdateChecksums ();
-            ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
-        }
-
-        static void UpdateChecksums ()
-        {
-            var modData = DataContainerModData.selectedMod;
-            var modPath = modData.GetModPathProject ();
-            var pathLibrary = DataPathHelper.GetCombinedCleanPath (modPath, libraryPath);
-            var pathCore = DataPathHelper.GetCombinedCleanPath (pathLibrary, "core.yaml");
-            var modLibraryChecksum = modData.textLibrary.LibraryDirectory.Mod;
-            var entryCore = modLibraryChecksum.Entries.SingleOrDefault (e => e.RelativePath.EndsWith ("core.yaml"));
-            if (entryCore != null)
-            {
-                try
-                {
-                    ((ConfigChecksums.ConfigFile)entryCore).Update (ConfigChecksums.EntrySource.Mod, File.ReadAllText (pathCore));
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogErrorFormat ("Error during checksum operation | mod: {0} | key: {1} | path: {2}", modData.id, "core", pathCore);
-                    Debug.LogException (ex);
-                }
-            }
-
-            var pathSectors = DataPathHelper.GetCombinedCleanPath (pathLibrary, "Sectors");
-            var sectorsChecksum = modData.textLibrary.SectorsDirectory;
-            var modSectorsChecksums = new ConfigChecksums.ConfigDirectory (ConfigChecksums.EntryType.Directory)
-            {
-                Source = ConfigChecksums.EntrySource.Mod,
-                Locator = sectorsChecksum.Mod.Locator,
-                RelativePath = sectorsChecksum.Mod.RelativePath,
-            };
-            var errorKeys = new List<string> ();
-            var entries = new List<(string, string)> ();
-            foreach (var key in libraryData.sectors.Keys)
-            {
-                var fileName = key + ".yaml";
-                var filePath = DataPathHelper.GetCombinedCleanPath (pathSectors, fileName);
-                try
-                {
-                    entries.Add ((fileName, File.ReadAllText (filePath)));
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogErrorFormat ("Error during checksum operation | mod: {0} | key: {1} | path: {2}", modData.id, key, filePath);
-                    Debug.LogException (ex);
-                    errorKeys.Add (key);
-                }
-            }
-            modSectorsChecksums.AddFiles (ConfigChecksums.EntrySource.Mod, entries);
-            UpdateChecksumSource (sectorsChecksum.SDK, modSectorsChecksums);
-            RemoveErrors (sectorsChecksum.SDK, errorKeys);
-            modData.textLibrary.SectorsDirectory = (sectorsChecksum.SDK, modSectorsChecksums);
-
-            modData.checksumsRoot.Patch (modSectorsChecksums);
-            ConfigChecksums.UpdateChecksums (ConfigChecksums.EntrySource.Mod, modData.checksumsRoot, modSectorsChecksums);
-        }
-
-        static void UpdateChecksumSource (ConfigChecksums.ConfigDirectory sdk, ConfigChecksums.ConfigDirectory mod)
-        {
-            if (sdk == null)
-            {
-                return;
-            }
-
-            var sdkKeyMap = ModToolsHelper.GetEntriesByKey (sdk, false);
-            var modKeyMap = ModToolsHelper.GetEntriesByKey (mod, false);
-            foreach (var kvp in modKeyMap)
-            {
-                if (!sdkKeyMap.TryGetValue (kvp.Key, out var sdkEntry))
-                {
-                    continue;
-                }
-                if (!ConfigChecksums.ChecksumEqual (sdkEntry.Checksum, kvp.Value.Checksum))
-                {
-                    continue;
-                }
-                kvp.Value.Source = ConfigChecksums.EntrySource.SDK;
-            }
-        }
-
-        static void RemoveErrors (ConfigChecksums.ConfigDirectory sdk, List<string> errorKeys)
-        {
-            if (errorKeys.Any ())
-            {
-                var sdkKeyMap = ModToolsHelper.GetEntriesByKey (sdk, false);
-                var errorIndexes = errorKeys
-                    .Where (k => sdkKeyMap.ContainsKey (k))
-                    .Select (k => -sdkKeyMap[k].Locator.Last ())
-                    .ToList ();
-
-                if (sdk != null)
-                {
-                    errorIndexes.Sort ();
-                    foreach (var idx in errorIndexes)
-                    {
-                        sdk.Entries.RemoveAt (-idx);
-                    }
-                    sdk.FixLocators ();
-                }
-
-                foreach (var key in errorKeys)
-                {
-                    libraryData.sectors.Remove (key);
-                }
-            }
-        }
-        #endif
 
         public static void MarkLibraryChanged ()
         {

@@ -80,7 +80,7 @@ public class AreaFieldHelper : MonoBehaviour
             
             if (string.IsNullOrEmpty (field.type) || !prefabLookup.TryGetValue (field.type, out var prefab))
             {
-                Debug.LogWarning ($"Skipping area field {i} due to invalid field type key: {field.type} | Registered keys: {prefabLookup.ToStringFormattedKeys ()}");
+                // Debug.LogWarning ($"Skipping area field {i} due to invalid field type key: {field.type} | Registered keys: {prefabLookup.ToStringFormattedKeys ()}");
                 continue;
             }
 

@@ -46,8 +46,6 @@ namespace PhantomBrigade.SDK.ModTools
                 LoadAll ();
         }
 
-        public static SDKChecksumData sdkChecksumData;
-
         [Title ("Mod project manager", TitleAlignment = TitleAlignments.Centered)]
         [ShowInInspector, PropertyOrder (-1)]
         [PropertyTooltip ("The folder where mod projects are stored. If this folder does not exist, it will be created when you add your first mod.")]
@@ -473,45 +471,13 @@ namespace PhantomBrigade.SDK.ModTools
             public static void SelectForEditing ()
             {
                 var modData = modSelected;
-                if (modData == null)
+                if (modData != null)
                 {
-                    return;
+                    modData.RefreshConfigsVersion ();
+                    DataContainerModData.selectedMod = modSelected;
+                    ResetArea ();
+                    ResetDBs ();
                 }
-                var (result, upgrade) = ModToolsHelper.EnsureModChecksums (modData);
-                switch (result)
-                {
-                    case EnsureResult.Error:
-                        EditorUtility.DisplayDialog
-                        (
-                            "Config Editing Unavailable",
-                            "A technical error is preventing you from editing the config DBs. Please check the Unity log console for details.",
-                            "Dismiss"
-                        );
-                        return;
-                    case EnsureResult.Break:
-                        Debug.Log ("Cancelled config editing");
-                        return;
-                }
-                if (upgrade == null)
-                {
-                    ResetForEditing (modData);
-                    return;
-                }
-                EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
-                return;
-
-                IEnumerator UpgradeAndContinue ()
-                {
-                    yield return upgrade ();
-                    ResetForEditing (modData);
-                }
-            }
-
-            static void ResetForEditing (DataContainerModData modData)
-            {
-                DataContainerModData.selectedMod = modData;
-                ResetArea ();
-                ResetDBs ();
             }
 
             [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightSelectedMod))]
@@ -521,9 +487,14 @@ namespace PhantomBrigade.SDK.ModTools
             [PropertyTooltip ("Disables database editing, switching the editor back to reading backed up canonical Configs from the SDK folder.")]
             public static void DeselectForEditing ()
             {
-                DataContainerModData.selectedMod = null;
-                ResetArea ();
-                ResetDBs ();
+                var modData = modSelected;
+                if (modData != null)
+                {
+                    modData.RefreshConfigsVersion ();
+                    DataContainerModData.selectedMod = null;
+                    ResetArea ();
+                    ResetDBs ();
+                }
             }
 
             private static bool IsConfigSetupAllowed () => modSelected != null &&
@@ -535,6 +506,7 @@ namespace PhantomBrigade.SDK.ModTools
                                                           modSelected.hasProjectFolder &&
                                                           Directory.Exists (modSelected.GetModPathConfigs ());
 
+            // [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
             [HorizontalGroup ("Bt2", 0.3333f)]
             [Button (SdfIconType.Boxes, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to user")]
             [PropertyTooltip ("Export the mod into the user folder, allowing you to test it the next time you start the game.\n\nBefore the export, the original data will be compared to the data in the mod project folder: only the modified files will be exported. Make sure to check the appropriate metadata fields.")]
@@ -542,9 +514,10 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 var modData = modSelected;
                 if (modData != null)
-                    modData.ExportToUserFolder ();
+                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToUserFolderFinalize);
             }
 
+            // [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
             [HorizontalGroup ("Bt2")]
             [Button (SdfIconType.BoxSeam, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to archive")]
             [PropertyTooltip ("Package the mod into a .zip file, allowing you to share it with other players.\n\nBefore the export, the original data will be compared to the data in the mod project folder: only the modified files will be exported. Make sure to check the appropriate metadata fields.")]
@@ -552,9 +525,63 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 var modData = modSelected;
                 if (modData != null)
-                    modData.ExportToArchive ();
+                    ModToolsExperimental.GenerateModFiles (modSelected, modData.ExportToArchiveFinalize);
             }
+            
+            [FoldoutGroup("Utilities")]
+            [HorizontalGroup ("Utilities/Bt3")]
+            [EnableIf (nameof(IsConfigEntryAllowed))]
+            [Button (SdfIconType.FileEarmarkBreakFill, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Reset all configs")]
+            [PropertyTooltip ("Replace the Configs folder with the original files from the SDK. Equivalent to setting up config editing for the first time.")]
+            public static void ResetConfigs ()
+            {
+                var modData = modSelected;
+                if (modData == null)
+                    return;
 
+                var projectPath = modData.GetModPathProject (); 
+                if (!EditorUtility.DisplayDialog 
+                (
+                    "Reset configs from SDK", 
+                    $"Are you sure you'd like to replace the Configs folder in the selected mod (ID {modData.id}) with the original files from the SDK? This operation can not be reverted. Back up your changes if you are not sure.\n\nProject folder: \n{projectPath}", 
+                    "Confirm", 
+                    "Cancel")
+                )
+                {
+                    return;
+                }
+                
+                ModToolsExperimental.CopyConfigsFromSDK (modData);
+                DeselectForEditing ();
+            }
+            
+            // [GUIColor ("@ModToolsColors." + nameof (ModToolsColors.HighlightNeonRed))]
+            [FoldoutGroup("Utilities")]
+            [HorizontalGroup ("Utilities/Bt3")]
+            [Button (SdfIconType.Box, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Export to source")]
+            [PropertyTooltip ("Export the mod files into the mod project folder without taking any additional step (no export to user folder, archive or Workshop).")]
+            public static void ExportSimple ()
+            {
+                var modData = modSelected;
+                if (modData != null)
+                    ModToolsExperimental.GenerateModFiles (modSelected, null);
+            }
+            
+            [FoldoutGroup("Utilities")]
+            [HorizontalGroup ("Utilities/Bt3")]
+            [Button (SdfIconType.Files, IconAlignment.LeftEdge, ButtonHeight = 32, Name = "Import from mod")]
+            [PropertyTooltip ("Import files from an exported mod into this mod project. An inverse of the standard export operations.")]
+            public static void ImportFromFolder ()
+            {
+                var modData = modSelected;
+                if (modData == null)
+                   return;
+                
+                var pathProject = modData.GetModPathProject ();
+                var pathSelected = EditorUtility.OpenFolderPanel ("Select Folder", pathProject, "");
+                ModToolsExperimental.CopyConfigsFromExportedMod (modData, pathSelected);
+            }
+            
             public void OnSelectionChange ()
             {
                 // Reset inputs

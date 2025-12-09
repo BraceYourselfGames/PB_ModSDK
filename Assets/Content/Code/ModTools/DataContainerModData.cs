@@ -19,6 +19,39 @@ namespace PhantomBrigade.SDK.ModTools
 {
     using Data;
     using Mods;
+    
+    [Serializable, InlineProperty, HideReferenceObjectPicker]
+    public class ConfigsVersion
+    {
+        public const string versionExpected = "2.0.3-b7910";
+        
+        [HideInInspector]
+        public string version;
+        
+        [GUIColor ("$" + nameof (GetColor))]
+        [InfoBox ("$" + nameof (GetWarningText), InfoMessageType.Warning, VisibleIf = nameof (IsWarningVisible))]
+        [HideLabel, SuffixLabel ("Configs version", true), ShowInInspector]
+        private string versionVisible
+        {
+            get => version;
+            set { }
+        }
+
+        private bool IsWarningVisible ()
+        {
+            return string.IsNullOrEmpty (version) || version != versionExpected;
+        }
+
+        private string GetWarningText ()
+        {
+            return $"{versionExpected} is the current version of the Configs folder in the SDK. The Configs folder might be outdated or might otherwise not match the current state of the game. This can cause incorrect mod exports and lead to ingame bugs. We recommend resetting configs to the latest state from the SDK.";
+        }
+
+        private Color GetColor ()
+        {
+            return IsWarningVisible () ? ModToolsColors.HighlightNeonSepia : ModToolsColors.HighlightNeonGreen;
+        }
+    }
 
     [Serializable, HideDuplicateReferenceBox]
     public class ModAssetBundles
@@ -237,50 +270,14 @@ namespace PhantomBrigade.SDK.ModTools
 
         public void EnableConfigs ()
         {
-            EditorCoroutineUtility.StartCoroutineOwnerless (EnableConfigsIE (GUIHelper.CurrentWindow));
-        }
-
-        IEnumerator EnableConfigsIE (EditorWindow inspectorWindow)
-        {
-            var root = new DirectoryInfo (DataPathHelper.GetApplicationFolder ());
-            var dest = GetModPathConfigs ();
-            Directory.CreateDirectory (dest);
-            yield return ModToolsHelper.CopyConfigsIE (root, dest);
+            ModToolsExperimental.CopyConfigsFromSDK (this);
+            
             metadata.isConfigEnabled = true;
             metadata.includesConfigOverrides = true;
             ModToolsHelper.SaveMod (this);
-            if (inspectorWindow != null)
-            {
-                inspectorWindow.Repaint ();
-            }
-        }
 
-        public void ExportToUserFolder ()
-        {
-            var (result, upgrade) = ModToolsHelper.EnsureModChecksums (this);
-            switch (result)
-            {
-                case EnsureResult.Error:
-                    EditorUtility.DisplayDialog ("Config Editing Unavailable", "A technical error is preventing you from exporting this mod. Please check the Unity log console for details.", "Dismiss");
-                    return;
-                case EnsureResult.Break:
-                    Debug.Log ("Cancelled export to user folder: " + id);
-                    return;
-            }
-
-            if (upgrade == null)
-            {
-                ModToolsHelper.GenerateModFiles (this, ExportToUserFolderFinalize);
-                return;
-            }
-            EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
-            return;
-
-            IEnumerator UpgradeAndContinue ()
-            {
-                yield return upgrade ();
-                ModToolsHelper.GenerateModFiles (this, ExportToUserFolderFinalize);
-            }
+            if (GUIHelper.CurrentWindow != null)
+                GUIHelper.CurrentWindow.Repaint ();
         }
 
         public void ExportToUserFolderFinalize ()
@@ -327,34 +324,6 @@ namespace PhantomBrigade.SDK.ModTools
             }
 
             return success;
-        }
-
-        public void ExportToArchive ()
-        {
-            var (result, upgrade) = ModToolsHelper.EnsureModChecksums (this);
-            switch (result)
-            {
-                case EnsureResult.Error:
-                    EditorUtility.DisplayDialog ("Config Editing Unavailable", "A technical error is preventing you from exporting this mod. Please check the Unity log console for details.", "Dismiss");
-                    return;
-                case EnsureResult.Break:
-                    Debug.Log ("Cancelled export to archive: " + id);
-                    return;
-            }
-
-            if (upgrade == null)
-            {
-                ModToolsHelper.GenerateModFiles (this, ExportToArchiveFinalize);
-                return;
-            }
-            EditorCoroutineUtility.StartCoroutineOwnerless (UpgradeAndContinue ());
-            return;
-
-            IEnumerator UpgradeAndContinue ()
-            {
-                yield return upgrade ();
-                ModToolsHelper.GenerateModFiles (this, ExportToArchiveFinalize);
-            }
         }
 
         public void ExportToArchiveFinalize ()
@@ -415,6 +384,29 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 Debug.LogWarning ("Failed to delete user mod folder -- encountered an exception | path: " + dirPathUser + "\n" + ioe);
             }
+        }
+        
+        [ShowIf (nameof(IsConfigsVersionVisible))]
+        [HideLabel]
+        public ConfigsVersion configsVersion;
+
+        public void RefreshConfigsVersion ()
+        {
+            var pathConfigs = GetModPathConfigs ();
+            configsVersion = null;
+            
+            if (hasProjectFolder && Directory.Exists (pathConfigs))
+            {
+                var configsVersionPath = DataPathHelper.GetCombinedCleanPath (pathConfigs, "dataVersion.yaml");
+                configsVersion = UtilitiesYAML.LoadDataFromFile<ConfigsVersion> (configsVersionPath, false, false);
+                if (configsVersion == null)
+                    configsVersion = new ConfigsVersion ();
+            }
+        }
+
+        private bool IsConfigsVersionVisible ()
+        {
+            return hasProjectFolder && Directory.Exists (GetModPathConfigs ());
         }
 
         // Metadata is not embedded directly into this config, to ensure there is only
@@ -498,7 +490,11 @@ namespace PhantomBrigade.SDK.ModTools
             var pathConfigs = GetModPathConfigs ();
             // Debug.Log ($"Loaded mod {key}\n- Project path: {GetModPathProject ()}\n- Configs path: {pathConfigs}");
 
-            metadata.isConfigEnabled = Directory.Exists (GetModPathConfigs ());
+            metadata.isConfigEnabled = Directory.Exists (pathConfigs);
+
+            configsVersion = null;
+            if (metadata.isConfigEnabled)
+                RefreshConfigsVersion ();
 
             if (workshop != null)
                 workshop.parent = this;
@@ -607,142 +603,20 @@ namespace PhantomBrigade.SDK.ModTools
             return string.IsNullOrEmpty (projectPath) ? null : DataPathHelper.GetCombinedCleanPath (projectPath, "Configs");
         }
 
-        public bool LoadChecksums (SDKChecksumData sdkChecksumData, bool errorOnUpgrade = true)
-        {
-            if (sdkChecksumData == null)
-            {
-                Debug.LogWarning ("Missing checksum data for SDK. Build the data manually by clicking the Create checksums for SDK config DBs button in the DataModel game object.");
-                return false;
-            }
-
-            var checksumsDeserializer = new ConfigChecksums.Deserializer (new DirectoryInfo (GetModPathProject ()));
-            var result = checksumsDeserializer.Load ();
-            switch (result.Code)
-            {
-                case ConfigChecksums.Deserializer.ResultCode.Upgrade:
-                    if (errorOnUpgrade)
-                    {
-                        Debug.LogWarning ("Mod checksums: " + result.ErrorMessage);
-                        return false;
-                    }
-                    break;
-                case ConfigChecksums.Deserializer.ResultCode.Error:
-                    Debug.LogError (result.ErrorMessage);
-                    return false;
-            }
-            dataVersion = result.DataVersion;
-            originChecksum = result.OriginChecksum;
-            checksumsRoot = result.Root;
-            multiLinkerChecksumMap = result.MultiLinkerMap.Keys
-                .Select (k =>
-                {
-                    sdkChecksumData.MultiLinkerChecksumMap.TryGetValue (k, out var sdk);
-                    return new
-                    {
-                        Key = k,
-                        Pair = (sdk, result.MultiLinkerMap[k]),
-                    };
-                })
-                .ToDictionary (x => x.Key, x => x.Pair);
-            linkerChecksumMap = result.LinkerMap.Keys
-                .Select (k =>
-                {
-                    sdkChecksumData.LinkerChecksumMap.TryGetValue (k, out var sdk);
-                    return new
-                    {
-                        Key = k,
-                        Pair = (sdk, result.LinkerMap[k]),
-                    };
-                })
-                .ToDictionary (x => x.Key, x => x.Pair);
-            if (result.TextLibraryMap.TryGetValue (ConfigChecksums.TextLibraryCoreName, out var textLibraryCore))
-            {
-                var sdkLibDir = sdkChecksumData.TextLibraryMap["/"] as ConfigChecksums.ConfigDirectory;
-                var modLibDir = result.TextLibraryMap["/"] as ConfigChecksums.ConfigDirectory;
-                var sdkSectorsDir = sdkChecksumData.TextLibraryMap["//"] as ConfigChecksums.ConfigDirectory;
-                var modSectorsDir = result.TextLibraryMap["//"] as ConfigChecksums.ConfigDirectory;
-                sdkChecksumData.TextLibraryMap.TryGetValue (ConfigChecksums.TextLibraryCoreName, out var sdkCore);
-                textLibrary = new ConfigChecksums.TextLibrary
-                {
-                    LibraryDirectory = (sdkLibDir, modLibDir),
-                    SectorsDirectory = (sdkSectorsDir, modSectorsDir),
-                    Core = (sdkCore as ConfigChecksums.ConfigFile, textLibraryCore as ConfigChecksums.ConfigFile),
-                    Sectors = result.TextLibraryMap.Keys
-                        .Where (k => k.StartsWith (ConfigChecksums.TextSectorsDirectoryName))
-                        .Select (k =>
-                        {
-                            sdkChecksumData.TextLibraryMap.TryGetValue (k, out var sdk);
-                            return new
-                            {
-                                Key = k.Substring (ConfigChecksums.TextSectorsDirectoryName.Length + 1),
-                                Pair = (sdk as ConfigChecksums.ConfigFile, result.TextLibraryMap[k] as ConfigChecksums.ConfigFile),
-                            };
-                        })
-                        .ToDictionary (x => x.Key, x => x.Pair),
-                };
-            }
-
-            return true;
-        }
-
-        public void UnloadChecksums ()
-        {
-            textLibrary = null;
-            linkerChecksumMap = null;
-            multiLinkerChecksumMap = null;
-            checksumsRoot = null;
-            originChecksum = default;
-        }
-
         public void DeleteOutputDirectories ()
         {
             var configOverridesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), overridesFolderName);
             if (Directory.Exists (configOverridesPath))
-            {
                 Directory.Delete (configOverridesPath, true);
-            }
+            
             var configEditsPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), editsFolderName);
             if (Directory.Exists (configEditsPath))
-            {
                 Directory.Delete (configEditsPath, true);
-            }
+            
             var assetBundlesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), assetBundlesFolderName);
             if (Directory.Exists (assetBundlesPath))
-            {
                 Directory.Delete (assetBundlesPath, true);
-            }
         }
-
-        public void DeleteConfigOverride (ConfigChecksums.ConfigEntry entry)
-        {
-            switch (entry)
-            {
-                case ConfigChecksums.ConfigFile cfgFile:
-                    DeleteConfigOverrideFile (cfgFile);
-                    break;
-                case ConfigChecksums.ConfigDirectory cfgDir:
-                    DeleteConfigOverrideDirectory (cfgDir);
-                    break;
-            }
-        }
-
-        [HideInInspector]
-        [YamlIgnore]
-        public byte dataVersion;
-        [HideInInspector]
-        [YamlIgnore]
-        public ConfigChecksums.Checksum originChecksum;
-        [HideInInspector]
-        [YamlIgnore]
-        public ConfigChecksums.ConfigDirectory checksumsRoot;
-        [HideInInspector]
-        [YamlIgnore]
-        public Dictionary<Type, (ConfigChecksums.ConfigDirectory SDK, ConfigChecksums.ConfigDirectory Mod)> multiLinkerChecksumMap;
-        [HideInInspector]
-        [YamlIgnore]
-        public Dictionary<Type, (ConfigChecksums.ConfigFile SDK, ConfigChecksums.ConfigFile Mod)> linkerChecksumMap;
-        [YamlIgnore]
-        public ConfigChecksums.TextLibrary textLibrary;
 
         public string defaultWorkingPath => DataPathHelper.GetCombinedCleanPath (defaultWorkingPathParent, id);
 
@@ -812,44 +686,6 @@ namespace PhantomBrigade.SDK.ModTools
             }
         }
 
-        void DeleteConfigOverrideFile (ConfigChecksums.ConfigFile cfgFile)
-        {
-            var projectPath = GetModPathProject ();
-            var overridePath = Path.Combine (projectPath, overridesFolderName, cfgFile.RelativePath);
-            if (!File.Exists (overridePath))
-            {
-                return;
-            }
-            File.Delete (overridePath);
-            CleanUpOverrideHierarchy (projectPath, overridePath);
-        }
-
-        void DeleteConfigOverrideDirectory (ConfigChecksums.ConfigDirectory cfgDir)
-        {
-            var projectPath = GetModPathProject ();
-            var overridePath = Path.Combine (projectPath, overridesFolderName, cfgDir.RelativePath);
-            if (!Directory.Exists (overridePath))
-            {
-                return;
-            }
-            Directory.Delete (overridePath, true);
-            CleanUpOverrideHierarchy (projectPath, overridePath);
-        }
-
-        void CleanUpOverrideHierarchy(string projectPath, string overridePath)
-        {
-            overridePath = Path.GetDirectoryName (overridePath);
-            while (overridePath != projectPath && Directory.Exists (overridePath))
-            {
-                if (Directory.GetFileSystemEntries (overridePath).Length != 0)
-                {
-                    break;
-                }
-                Directory.Delete (overridePath);
-                overridePath = Path.GetDirectoryName (overridePath);
-            }
-        }
-
         bool showDefaultPath => hasProjectFolder && useDefaultWorkingPath;
         bool showWorkingPath => hasProjectFolder && !useDefaultWorkingPath;
         bool spaceAfterWorkingPath => !showUserModFolder;
@@ -873,9 +709,11 @@ namespace PhantomBrigade.SDK.ModTools
         public static readonly Color colorSelected = new Color (0.8f, 1f, 0.9f);
 
         public const string assetBundlesFolderName = "AssetBundles";
+        public const string configsFolderName = "Configs";
         public const string overridesFolderName = "ConfigOverrides";
         public const string editsFolderName = "ConfigEdits";
         public const string librariesFolderName = "Libraries";
+        public const string localizationEditsFolderName = "LocalizationEdits";
 
         static class OdinGroup
         {

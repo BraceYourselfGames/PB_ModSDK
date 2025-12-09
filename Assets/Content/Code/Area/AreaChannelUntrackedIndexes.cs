@@ -9,7 +9,7 @@ namespace Area
     {
         private class Content
         {
-            [BinaryData ("untrackedIndexes")]
+            [BinaryData ("untrackedIndexes", false)]
             public int[] indexes;
         }
         

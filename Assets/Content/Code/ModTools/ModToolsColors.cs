@@ -26,6 +26,7 @@ namespace PhantomBrigade.ModTools
         public static readonly Color HighlightNeonGreen = new Color (0.78f, 1f, 0.48f) * 1.5f;
         public static readonly Color HighlightNeonBlue = new Color (0.3f, 0.76f, 1f) * 1.5f;
         public static readonly Color HighlightNeonSepia = new Color (1f, 0.8f, 0.6f) * 1.5f;
+        public static readonly Color HighlightNeonRed = new Color (1f, 0.6f, 0.6f) * 1.5f;
         
         public static readonly Color HighlightValid = new Color (0.3f, 0.76f, 1f);
         public static readonly Color HighlightWarning = darkMode ? new Color(1f, 0.75686276f, 0.02745098f) : new Color(0.7882353f, 0.5921569f, 0.0f, 1f);

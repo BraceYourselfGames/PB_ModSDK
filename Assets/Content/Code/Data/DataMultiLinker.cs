@@ -819,7 +819,6 @@ namespace PhantomBrigade.Data
 
         static bool isSaveAvailable => DataContainerModData.hasSelectedConfigs || typeof(T) == typeof(DataContainerModToolsPage);
         static bool hasSelectedMod => DataContainerModData.hasSelectedConfigs;
-        static bool hasChanges => hasSelectedMod && (unsavedChangesPossible || ModToolsHelper.HasChanges (DataContainerModData.selectedMod, typeof(T)));
         static Color colorSepia => ModToolsColors.HighlightNeonSepia;
 
         [ShowIf (nameof(IsModdable))]
@@ -830,42 +829,65 @@ namespace PhantomBrigade.Data
 
         [PropertyOrder (OdinGroup.Order.RestoreButtons)]
         [ShowIf(nameof(hasSelectedMod))]
-        [EnableIf (nameof(hasChanges))]
         [GUIColor (nameof(colorSepia))]
         [PropertyTooltip ("Reset all entries in config DB to match SDK. This will undo all your changes.")]
         [Button ("Restore All From SDK", ButtonHeight = 32, Icon = SdfIconType.BoxArrowInRight, IconAlignment = IconAlignment.LeftOfText)]
         public void RestoreFromSDK ()
         {
-            if (DataContainerModData.selectedMod.multiLinkerChecksumMap == null)
+            var pathRelative = DataPathUtility.GetPath (typeof(T));
+            if (string.IsNullOrEmpty (pathRelative))
+            {
+                Debug.LogWarning ($"Failed to restore configs for type {typeof (T).Name}: no relative path found");
+                return;
+            }
+            
+            if (!hasSelectedMod || !IsModdable ())
+                return;
+            
+            var pathModRoot = DataContainerModData.selectedMod.GetModPathProject ();
+            var pathMod = Path.Combine (pathModRoot, pathRelative);
+            var dirMod = new DirectoryInfo (pathMod);
+            
+            var pathSDKRoot = DataPathHelper.GetApplicationFolder ();
+            var pathSDK = Path.Combine (pathSDKRoot, pathRelative);
+            var dirSDK = new DirectoryInfo (pathSDK);
+            if (!dirSDK.Exists)
+            {
+                Debug.LogWarning ($"Failed to restore configs for type {typeof (T).Name}: SDK path not found at {pathSDK}");
+                return;
+            }
+            
+            if (!EditorUtility.DisplayDialog 
+                (
+                    "Restore from SDK?", 
+                    "Are you sure you'd like to overwrite all of your changes to this config? This operation can not be reverted. Back up your changes if you are not sure." + 
+                    "\n\nPath: \n" + 
+                    pathRelative, 
+                    "Confirm", 
+                    "Cancel")
+               )
             {
                 return;
             }
-            if (!DataContainerModData.selectedMod.multiLinkerChecksumMap.TryGetValue (typeof(T), out var pair))
-            {
-                return;
-            }
-            if (!EditorUtility.DisplayDialog ("Restore From SDK", "Are you sure you'd like to overwrite all of your changes to this config DB?\n\nConfig path: \n" + path, "Confirm", "Cancel"))
-            {
-                return;
-            }
+            
+            Debug.Log ($"Restoring:\nSDK: {pathSDK}\nMod: {pathMod}");
 
-            DataContainerModData.selectedMod.DeleteConfigOverride (pair.Mod);
-            if (pair.SDK == null)
+            try
             {
-                // This shouldn't happen because multilinker DBs can't be added through the SDK.
-                Debug.LogErrorFormat ("MultLinker DB that isn't present in SDK | type: {0} | path: {1}", typeof(T).Name, pair.Mod.RelativePath);
-            }
-            else
-            {
-                var sdkPath = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetApplicationFolder (), "Configs", pair.SDK.RelativePath);
-                var modPath = DataPathHelper.GetCombinedCleanPath (configsPath, pair.Mod.RelativePath);
-                Directory.Delete (modPath, true);
-                Directory.CreateDirectory (modPath);
-                ModToolsHelper.CopyConfigDB (new DirectoryInfo (sdkPath), modPath);
+                if (dirMod.Exists)
+                {
+                    dirMod.Delete (true);
+                    Debug.LogWarning ($"Deleting existing config folder...");
+                }
+                
+                Directory.CreateDirectory (pathMod);
+                ModToolsHelper.CopyConfigDB (dirSDK, pathMod);
                 LoadData ();
             }
-
-            unsavedChangesPossible = false;
+            catch (Exception e)
+            {
+                Debug.LogException (e);
+            }
         }
         #endif
 
@@ -1228,23 +1250,6 @@ namespace PhantomBrigade.Data
             }
 
             #endif
-
-            #if PB_MODSDK && UNITY_EDITOR
-            if (hasSelectedMod
-                && DataContainerModData.selectedMod.multiLinkerChecksumMap != null
-                && DataContainerModData.selectedMod.multiLinkerChecksumMap.TryGetValue (typeof(T), out var pair))
-            {
-                // Check for disk changes that happened offline.
-                var checksum = pair.Mod.Checksum;
-                UpdateChecksums ();
-                pair = DataContainerModData.selectedMod.multiLinkerChecksumMap[typeof(T)];
-                if (!ConfigChecksums.ChecksumEqual (checksum, pair.Mod.Checksum))
-                {
-                    Debug.Log (typeof(T).Name + ": offline or format changes detected in mod configs -- refreshing checksums on disk");
-                    ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
-                }
-            }
-            #endif
         }
 
         public static T LoadDataIsolated (string key)
@@ -1298,7 +1303,7 @@ namespace PhantomBrigade.Data
                 return;
 
             #if PB_MODSDK && UNITY_EDITOR
-            if (!isSaveAvailable || !unsavedChangesPossible)
+            if (!isSaveAvailable)
             {
                 return;
             }
@@ -1323,10 +1328,6 @@ namespace PhantomBrigade.Data
 
             foreach (var kvp in dataInternal)
                 kvp.Value.OnAfterSerialization ();
-
-            #if PB_MODSDK && UNITY_EDITOR
-            SaveChecksums ();
-            #endif
         }
 
         public static void SaveDataIsolated (string key)
@@ -1352,10 +1353,6 @@ namespace PhantomBrigade.Data
                 UtilitiesYAML.SaveDecomposedEntryIsolated (path, key, entry, directoryMode: directoryMode, appendApplicationPath: false);
 
                 entry.OnAfterSerialization ();
-
-                #if PB_MODSDK && UNITY_EDITOR
-                SaveChecksums ();
-                #endif
             }
             else
             {
@@ -1875,12 +1872,6 @@ namespace PhantomBrigade.Data
                 DataMultiLinkerUtility.callbacksOnAfterTextExport[dataTypeStatic]?.Invoke ();
 
             DataManagerText.SaveLibrary ();
-
-            #if PB_MODSDK
-
-            ModTextHelper.GenerateTextChangesToSectors (textSectorKeys);
-
-            #endif
         }
 
         private static bool processInProgress = false;
@@ -2028,132 +2019,7 @@ namespace PhantomBrigade.Data
 
         #endif
 
-        #if PB_MODSDK && UNITY_EDITOR
-        static void UpdateChecksums ()
-        {
-            if (isEntryKeyChanging)
-            {
-                return;
-            }
-            if (!hasSelectedMod)
-            {
-                return;
-            }
-
-            var modData = DataContainerModData.selectedMod;
-            if (modData.checksumsRoot == null)
-            {
-                return;
-            }
-            if (modData.multiLinkerChecksumMap == null)
-            {
-                return;
-            }
-            if (!modData.multiLinkerChecksumMap.TryGetValue (typeof(T), out var pair))
-            {
-                return;
-            }
-
-            var rootDirectory = new DirectoryInfo (configsPath);
-            var directoryMode = ins != null && ins.IsUsingDirectories ();
-            var modChecksums = new ConfigChecksums.ConfigDirectory (ConfigChecksums.EntryType.Directory)
-            {
-                Source = ConfigChecksums.EntrySource.Mod,
-                Locator = pair.Mod.Locator,
-                RelativePath = pair.Mod.RelativePath,
-            };
-
-            List<string> errorKeys;
-            if (directoryMode)
-            {
-                var keySet = new HashSet<string> (dataInternal.Keys);
-                errorKeys = modChecksums.Upsert (rootDirectory, ConfigChecksums.EntrySource.Mod, keySet);
-            }
-            else
-            {
-                errorKeys = new List<string> ();
-                var entries = new List<(string, string)> ();
-                foreach (var key in dataInternal.Keys)
-                {
-                    var fileName = key + ".yaml";
-                    var filePath = DataPathHelper.GetCombinedCleanPath (path, fileName);
-                    try
-                    {
-                        entries.Add ((fileName, File.ReadAllText (filePath)));
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogErrorFormat ("Error during checksum operation | mod: {0} | key: {1} | path: {2}", modData.id, key, path);
-                        Debug.LogException (ex);
-                        errorKeys.Add (key);
-                    }
-                }
-                modChecksums.AddFiles (ConfigChecksums.EntrySource.Mod, entries);
-            }
-            UpdateChecksumSource (pair.SDK, modChecksums, directoryMode);
-
-            if (errorKeys.Any ())
-            {
-                var sdkKeyMap = ModToolsHelper.GetEntriesByKey (pair.SDK, directoryMode);
-                var errorIndexes = errorKeys
-                    .Where (k => sdkKeyMap.ContainsKey (k))
-                    .Select (k => -sdkKeyMap[k].Locator.Last ())
-                    .ToList ();
-
-                if (pair.SDK != null)
-                {
-                    errorIndexes.Sort ();
-                    foreach (var idx in errorIndexes)
-                    {
-                        pair.SDK.Entries.RemoveAt (-idx);
-                    }
-                    pair.SDK.FixLocators ();
-                }
-
-                foreach (var key in errorKeys)
-                {
-                    dataInternal.Remove (key);
-                }
-            }
-
-            modData.multiLinkerChecksumMap[typeof(T)] = (pair.SDK, modChecksums);
-            modData.checksumsRoot.Patch (modChecksums);
-            ConfigChecksums.UpdateChecksums (ConfigChecksums.EntrySource.Mod, modData.checksumsRoot, modChecksums);
-        }
-
-        static void UpdateChecksumSource (ConfigChecksums.ConfigDirectory sdk, ConfigChecksums.ConfigDirectory mod, bool directoryMode)
-        {
-            if (sdk == null)
-            {
-                return;
-            }
-
-            var sdkKeyMap = ModToolsHelper.GetEntriesByKey (sdk, directoryMode);
-            var modKeyMap = ModToolsHelper.GetEntriesByKey (mod, directoryMode);
-            foreach (var kvp in modKeyMap)
-            {
-                if (!sdkKeyMap.TryGetValue (kvp.Key, out var sdkEntry))
-                {
-                    continue;
-                }
-                if (!ConfigChecksums.ChecksumEqual (sdkEntry.Checksum, kvp.Value.Checksum))
-                {
-                    continue;
-                }
-                kvp.Value.Source = ConfigChecksums.EntrySource.SDK;
-            }
-        }
-
-        static void SaveChecksums ()
-        {
-            if (!IsModdableStatic ())
-                return;
-
-            UpdateChecksums ();
-            ModToolsHelper.SaveChecksums (DataContainerModData.selectedMod);
-        }
 
         public static bool isEntryKeyChanging;
-        #endif
     }
 }
