@@ -565,12 +565,8 @@ namespace PhantomBrigade.Data
                         
             if (!Application.isPlaying)
             {
-                #if !PB_MODSDK
-
                 if (OverworldSceneHelper.ins != null)
                     OverworldSceneHelper.ins.SetActiveDirectly (true);
-
-                #endif
 
                 if (CombatSceneHelper.ins != null)
                     CombatSceneHelper.ins.DestroyTerrainMeshes ();

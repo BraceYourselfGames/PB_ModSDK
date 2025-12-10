@@ -1851,12 +1851,8 @@ namespace PhantomBrigade.Data
 
             if (applyToScene)
             {
-                #if !PB_MODSDK
-
                 if (!Application.isPlaying && OverworldSceneHelper.ins != null)
                     OverworldSceneHelper.ins.SetActiveDirectly (false);
-
-                #endif
 
                 bool success = TryApplyLevelContentToScene ();
                 if (!success)
@@ -1878,12 +1874,8 @@ namespace PhantomBrigade.Data
             if (sceneHelper != null)
                 sceneHelper.areaManager.UnloadArea (false);
 
-            #if !PB_MODSDK
-
             if (OverworldSceneHelper.ins != null)
                 OverworldSceneHelper.ins.SetActiveDirectly (true);
-
-            #endif
 
             if (sceneHelper != null)
             {
