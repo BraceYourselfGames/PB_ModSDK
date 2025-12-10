@@ -3,14 +3,15 @@
 ## Overview
 
 Phantom Brigade Mod SDK is a mod development suite created in collaboration with our valued community. Based on the tools we used to develop the game, it is a free Unity project that includes:
+
 - Mod project manager: simplifies mod metadata setup, manages mod source files and helps you manage different mod tools. Facilitates export of completed mods to the local user folder, to a distributable archive or to Steam Workshop.
 - Config editors: powerful inspectors putting every database underpinning the game at your fingertips. Modify everything from game balance to enemy squad compositions and from mission logic to combat abilities. Take advantage of data validation, reactive inspectors, value dropdowns and specialized editors for complex data types like curves to create what would take hours to set up through manual text editing in minutes. Preview kitbashed weapons, put together bosses with complex behaviors, create new status effects and more.
 - Level editor: enables you to create new combat arenas for new and existing missions. Our voxel-based level system and an array of specialized editing tools allow you to quickly create intricate architecture and complex natural terrains.
 - Asset builder: enables you to include custom 3D assets into your mods, unlocking modding of weapons and armor with custom models.
 
-While Phantom Brigade supported mods for a while and is underpinned by easily editable YAML files, modding was by no means an easy process. It is time consuming to define complex data through a text editor, easy to make mistakes and hard to visualize what you're building. A small balance tweak can be reasonably straightforward, but building an entire scenario or a missile guidance program is anything but. With the release of this SDK, we hope to change that.
+While Phantom Brigade is underpinned by easily editable YAML files and supports modding without the SDK, it can be challenging to mod many aspects of the game without developer tools. Defining complex data through a text editor can be time consuming and error prone, and it can be hard to visualize what you're building. A small balance tweak can be reasonably straightforward, but making an entire scenario or a missile guidance program is anything but. We hope that releasing our internal tools through this SDK will help everyone interested in tinkering with the game.
 
-We can't wait to see what you create!
+If you get stuck or experience a bug, please don't hesitate to ask questions in the #phantom-modding channel of the official Discord server. We can't wait to see what you create!
 
 ## Installation
 
@@ -20,11 +21,19 @@ Quick setup overview:
 - Install git and make sure it is in your `PATH`. If you're using a GUI client, you might not have standalone git.exe installed or might not have `PATH` set up. [Download Git here](https://www.git-scm.com/download).
 - Download the project from this repository. We strongly recommend downloading (cloning) through Git to facilitate easy updating.
 - In Unity Hub, navigate to the **Projects** tab and choose **Open**, selecting the folder with the project. Wait for the project to import.
+- We strongly recommend installing the option
 
-
-> Pick a drive with at least 10Gb of free space and select a location with a short path, such as **C:/Work/Unity Projects/PB_ModSDK**. The core repository is a fairly small download, but an optional asset package totals around 4Gb. Full import of the project with the optional asset package installed might create up to 5Gb of temporary files, hence our recommendation to reserve up to 10Gb.
+Pick a drive with at least 10Gb of free space and select a location with a short path, such as **C:/Work/Unity Projects/PB_ModSDK**. The core repository is a fairly small download, but an optional asset package totals around 4Gb. Full import of the project with the optional asset package installed might create up to 5Gb of temporary files, hence our recommendation to reserve up to 10Gb.
 
 > If you're not familiar with Git and are unsure how to download the SDK project from GitHub, try installing the [GitHub Desktop](https://desktop.github.com/) client and [following this tutorial](https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop). You can find the list alternative Windows GUI clients [here](https://www.git-scm.com/download/gui/windows).
+
+## Optional assets
+
+We strongly recommend installing the optional asset package to unlock full functionality of the SDK. [Downloading the package](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_V20B.unitypackage) (~3.7Gb) in the background while you set up the main project and follow the initial tutorials. The assets were separated into an optional download to keep this repository lightweight and easy to update. They include 3D models of mech items, levels, props, textures, landscapes and some other art assets. These files are not required for most of the tools included in the SDK, but they unlock ability to view and edit levels, items, landscape metadata etc.
+
+![desc_getting_started.png](/ModWindowImages/repo/desc_optional_assets.png)
+
+Follow the instructions in the Getting Started window to install this optional asset package.
 
 ## Getting started
 
@@ -38,14 +47,6 @@ Click the Tutorials button at the bottom of the Getting Started window to learn 
 - Install the optional asset package to unlock item previews & level editing
 - Export your mods through the Steam Workshop
 - And more!
-
-## Optional assets
-
-We separated some assets into an optional download to keep the repository lightweight and easy to update. These include 3D models of mech items, levels, textures and some other art assets. These files are not required for most of the tools included in the SDK, but we recommend downloading and installing the optional asset package to unlock every feature. This includes ability to edit levels and ability to display items in the 3D viewport.
-
-![desc_getting_started.png](/ModWindowImages/repo/desc_optional_assets.png)
-
-Follow the instructions in the Getting Started window to install this optional asset package. To save time, we recommend [downloading the file](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_V20A.unitypackage) in the background while you set up the main project and follow the initial tutorials.
 
 ## Documentation
 
