@@ -735,7 +735,14 @@ namespace PhantomBrigade.Data
 
         private static StringBuilder sb = new StringBuilder ();
 
-        [ButtonGroup ("A"), Button ("Select"), PropertyOrder (-3), HideIf (nameof(IsSelectedInInspector))]
+        #if PB_MODSDK
+
+        private string GetVisualWarning () => AssetPackageHelper.landscapeAssetWarning;
+        private bool AreVisualsUnavailable () => !AssetPackageHelper.AreLandscapeAssetsInstalled ();
+        
+        [InfoBox ("$GetVisualWarning", InfoMessageType.Warning, VisibleIf = "$AreVisualsUnavailable")]
+        #endif
+        [Button ("Select"), PropertyOrder (-3), HideIf (nameof(IsSelectedInInspector))]
         public void SelectToInspector ()
         {
             DataMultiLinkerOverworldLandscape.selection = this;
@@ -749,7 +756,7 @@ namespace PhantomBrigade.Data
             );
         }
         
-        [ButtonGroup ("A"), Button ("Deselect"), PropertyOrder (-3), ShowIf (nameof(IsSelectedInInspector))]
+        [Button ("Deselect"), PropertyOrder (-3), ShowIf (nameof(IsSelectedInInspector))]
         public void DeselectInInspector ()
         {
             DataMultiLinkerOverworldLandscape.selection = null;
