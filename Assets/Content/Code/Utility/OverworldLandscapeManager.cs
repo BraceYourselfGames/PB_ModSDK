@@ -279,6 +279,43 @@ public class OverworldLandscapeManager : MonoBehaviour
                 // asset.scaleVertical = Mathf.Clamp (asset.scaleVertical, 0.25f, 2f);
             }
         }
+        
+        /*
+        // Allow mods to inject additional visuals
+        if (Application.isPlaying && ModManager.AreModsActive ())
+        {
+            var prefabExtension = ".prefab";
+            foreach (var modLoadedData in ModManager.loadedMods)
+            {
+                if (modLoadedData.assetBundles == null || !modLoadedData.metadata.includesAssetBundles)
+                    continue;
+                
+                foreach (var assetBundle in modLoadedData.assetBundles)
+                {
+                    var assetPaths = assetBundle.GetAllAssetNames ();
+                    foreach (var assetPath in assetPaths)
+                    {
+                        if (!assetPath.EndsWith (prefabExtension))
+                            continue;
+
+                        var asset = assetBundle.LoadAsset (assetPath);
+                        if (asset == null || asset is GameObject == false)
+                            continue;
+
+                        var prefab = (GameObject)asset;
+                        var component = prefab.GetComponent<OverworldLandscapeRoot> ();
+                        if (component == null)
+                            continue;
+
+                        var visualKey = $"{assetBundle.name}/{prefab.name}";
+                        var link = new OverworldLandscapeRootLink { prefab = component };
+                        assetLookup[visualKey] = link;
+                        Debug.Log ($"Mod {modLoadedData.metadata.id} | Loaded new landscape from asset bundle {assetBundle.name}: {prefab.name}");
+                    }
+                }
+            }
+        }
+        */
 
         if (terrain != null && terrain.gameObject != null)
         {
@@ -718,6 +755,16 @@ public class OverworldLandscapeManager : MonoBehaviour
 
         if (!reloadIfLast && IsVisualLoaded (key))
             return true;
+        
+        #if PB_MODSDK
+        if (ins == null)
+        {
+            Debug.LogWarning ($"Failed to find the OverworldLandscapeManager component. Make sure you install the optional asset package and open the extended scene (game_extended_sdk).");
+            return false;
+        }
+        
+        ins.UpdateAssets ();
+        #endif
         
         if (ins.rootHolder == null)
             return false;
