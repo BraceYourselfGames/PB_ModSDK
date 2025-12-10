@@ -152,13 +152,13 @@ namespace PhantomBrigade.SDK.ModTools
             var buildPathFinal = Path.Combine (modData.GetModPathProject (), DataContainerModData.assetBundlesFolderName);
             var buildPathTemp = "Temp/AssetBundleBuilds";
 
-            if (IsUnityVersionSupported (true))
+            if (!IsUnityVersionSupported (true))
             {
                 Debug.LogError ($"Warning! Exported assets will only be loaded by the game if your Editor version exactly matches the engine version of the game. Game engine version: {unityVersionExpected}. Editor engine version: {Application.unityVersion}");
                 // return; // Probably best not to return on this so that folks can catch additional errors and learn how the whole process executes
             }
 
-            Debug.Log ($"Building asset bundles:\n- Temp folder:{buildPathTemp}\n- Final folder: {buildPathFinal}");
+            Debug.Log ($"Building asset bundles | Unity version: {Application.unityVersion}:\n- Temp folder:{buildPathTemp}\n- Final folder: {buildPathFinal}");
             ModToolsAssetBundles.BuildAllAssetBundlesFromList (buildPathTemp, modData.assetBundles.bundleDefinitions, buildPathFinal);
         }
         

@@ -8,6 +8,7 @@ namespace PhantomBrigade.Data
     [ExecuteInEditMode]
     public class DataManagerLevelSnippet : MonoBehaviour
     {
+        #if UNITY_EDITOR
         public static bool unsavedChangesPossible = false;
         
         [LabelText ("Folder")][FolderPath][ShowInInspector, ReadOnly]
@@ -210,8 +211,6 @@ namespace PhantomBrigade.Data
             return keyList;
         }
 
-        #if UNITY_EDITOR
-        
         private Color GetSaveButtonColor ()
         {
             if (unsavedChangesPossible)
