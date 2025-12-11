@@ -20,10 +20,8 @@ public class OverworldLandscapeRootLink
     
     private void Load ()
     {
-        if (prefab == null || string.IsNullOrEmpty (prefab.key))
-            return;
-
-        OverworldLandscapeManager.TryLoadingVisual (prefab.key);
+        if (prefab != null)
+            OverworldLandscapeManager.TryLoadingVisual (prefab.key);
     }
 }
 
@@ -258,6 +256,37 @@ public class OverworldLandscapeManager : MonoBehaviour
         }
     }
 
+    private static OverworldLandscapeRoot rootInjected = null;
+
+    public static void TryInjectingVisual (OverworldLandscapeRoot root)
+    {
+        rootInjected = null;
+        
+        if (root == null)
+        {
+            Debug.Log ($"Visual can't be injected: no prefab provided");
+            return;
+        }
+        
+        if (string.IsNullOrEmpty (root.key))
+        {
+            Debug.Log ($"Visual can't be injected: no key provided");
+            return;
+        }
+
+        if (ins == null)
+        {
+            Debug.Log ($"Visual can't be injected: the scene has no OverworldLandscapeManager object. Check if you're in the right scene (game_extended_sdk).");
+            return;
+        }
+        
+        rootInjected = root;
+        ins.UpdateAssets ();
+        
+        Debug.Log ($"Visual injected: prefab {root.name} with key {root.key}");
+        TryLoadingVisual (root.key, true);
+    }
+
     private void UpdateAssets ()
     {
         assetLookup.Clear ();
@@ -266,22 +295,16 @@ public class OverworldLandscapeManager : MonoBehaviour
         {
             foreach (var link in assets)
             {
-                if (link.prefab == null || string.IsNullOrEmpty (link.prefab.key))
-                    continue;
-
-                assetLookup[link.prefab.key] = link;
-
-                // if (asset == null || string.IsNullOrEmpty (asset.key))
-                //     continue;
-
-                // assetLookup[asset.key] = asset;
-                // asset.scaleHorizonal = Mathf.Clamp (asset.scaleHorizonal, 0.25f, 8f);
-                // asset.scaleVertical = Mathf.Clamp (asset.scaleVertical, 0.25f, 2f);
+                if (link.prefab != null && !string.IsNullOrEmpty (link.prefab.key))
+                    assetLookup[link.prefab.key] = link;
             }
         }
-        
-        /*
+
+        if (rootInjected != null && !string.IsNullOrEmpty (rootInjected.key))
+            assetLookup[rootInjected.key] = new OverworldLandscapeRootLink { prefab = rootInjected };
+
         // Allow mods to inject additional visuals
+        #if !PB_MODSDK
         if (Application.isPlaying && ModManager.AreModsActive ())
         {
             var prefabExtension = ".prefab";
@@ -304,18 +327,17 @@ public class OverworldLandscapeManager : MonoBehaviour
 
                         var prefab = (GameObject)asset;
                         var component = prefab.GetComponent<OverworldLandscapeRoot> ();
-                        if (component == null)
+                        if (component == null || string.IsNullOrEmpty (component.key))
                             continue;
 
-                        var visualKey = $"{assetBundle.name}/{prefab.name}";
                         var link = new OverworldLandscapeRootLink { prefab = component };
-                        assetLookup[visualKey] = link;
-                        Debug.Log ($"Mod {modLoadedData.metadata.id} | Loaded new landscape from asset bundle {assetBundle.name}: {prefab.name}");
+                        assetLookup[component.key] = link;
+                        Debug.Log ($"Mod {modLoadedData.metadata.id} | Loaded new landscape from asset bundle {assetBundle.name}: {component.key}");
                     }
                 }
             }
         }
-        */
+        #endif
 
         if (terrain != null && terrain.gameObject != null)
         {

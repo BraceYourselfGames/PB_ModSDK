@@ -14,8 +14,9 @@ namespace PhantomBrigade.Data
 {
     public class DataBlockLandscapePointGroup
     {
-        [YamlIgnore]
+        [YamlIgnore, HideInInspector]
         public string key;
+        
         public List<Vector3> points = new List<Vector3> ();
         
         
@@ -178,7 +179,6 @@ namespace PhantomBrigade.Data
 
         private void OnGroupChange ()
         {
-            #if !PB_MODSDK
             if (pointGroups != null)
             {
                 foreach (var kvp in pointGroups)
@@ -196,7 +196,6 @@ namespace PhantomBrigade.Data
                     keysToFill.Clear ();
                 }
             }
-            #endif
         }
 
         [PropertyOrder (-1)]

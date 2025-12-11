@@ -40,9 +40,12 @@ public class OverworldLandscapeRoot : MonoBehaviour
     [Button, PropertyOrder (-1), DisableIn (PrefabKind.PrefabInstance)]
     private void Load ()
     {
-        if (string.IsNullOrEmpty (key))
-            return;
-
         OverworldLandscapeManager.TryLoadingVisual (key);
+    }
+    
+    [Button, PropertyOrder (-1), DisableIn (PrefabKind.PrefabInstance)]
+    private void InjectToLandscapeManager ()
+    {
+        OverworldLandscapeManager.TryInjectingVisual (this);
     }
 }
