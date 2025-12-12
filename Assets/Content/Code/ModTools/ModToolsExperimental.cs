@@ -58,6 +58,12 @@ namespace PhantomBrigade.SDK.ModTools
         private static string pathPrefixDataUnique = "Data";
         private static string pathPrefixDataDecomposed = "DataDecomposed";
 
+        private static List<string> pathExtensionBlocklist = new List<string>
+        {
+            ".blend",
+            ".png"
+        };
+
         private static List<string> pathPrefixesDirBased = new List<string>
         {
             "DataDecomposed/Combat/Areas"
@@ -200,6 +206,8 @@ namespace PhantomBrigade.SDK.ModTools
             
             pathsToDirsInvalidatedFull.Clear ();
             pathsToDirsInvalidatedLocal.Clear ();
+
+            int pathExtensionBlocklistSize = pathExtensionBlocklist.Count;
             
             // Check initial set using the mod folder
             for (int i = 0; i < filesMod.Length; i++)
@@ -208,6 +216,20 @@ namespace PhantomBrigade.SDK.ModTools
                 var pathFull = fileMod.FullName;
                 var pathLocal = DataPathHelper.GetCleanPath (pathFull.Substring (pathModConfigsLength + 1));
                 if (!pathLocal.StartsWith (pathPrefixDataDecomposed) || !pathLocal.StartsWith (pathPrefixDataUnique))
+                    continue;
+
+                var extension = Path.GetExtension (pathLocal);
+                bool extensionBlocked = false;
+                for (int e = 0; e < pathExtensionBlocklistSize; ++e)
+                {
+                    if (string.Equals (extension, pathExtensionBlocklist[e]))
+                    {
+                        extensionBlocked = true;
+                        break;
+                    }
+                }
+                
+                if (extensionBlocked)
                     continue;
                 
                 var fc = new FileRecord ();
@@ -227,6 +249,20 @@ namespace PhantomBrigade.SDK.ModTools
                 var pathFull = fileSDK.FullName;
                 var pathLocal = DataPathHelper.GetCleanPath (pathFull.Substring (pathSDKConfigsLength + 1));
                 if (!pathLocal.StartsWith (pathPrefixDataDecomposed) || !pathLocal.StartsWith (pathPrefixDataUnique))
+                    continue;
+                
+                var extension = Path.GetExtension (pathLocal);
+                bool extensionBlocked = false;
+                for (int e = 0; e < pathExtensionBlocklistSize; ++e)
+                {
+                    if (string.Equals (extension, pathExtensionBlocklist[e]))
+                    {
+                        extensionBlocked = true;
+                        break;
+                    }
+                }
+                
+                if (extensionBlocked)
                     continue;
                 
                 FileRecord fc = null;
