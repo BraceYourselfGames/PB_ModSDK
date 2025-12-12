@@ -58,6 +58,7 @@ namespace PhantomBrigade.Data
         public const string OverworldEventsBlur2X = "overworldEventsBlur2X";
         public const string OverworldEventsBlur4X = "overworldEventsBlur4X";
         public const string OverworldEntities = "overworldEntities";
+        public const string OverworldMapBackgrounds = "overworldMapBackgrounds";
         public const string Sprites = "sprites";
     }
 
@@ -137,6 +138,14 @@ namespace PhantomBrigade.Data
                 {
                     folderName = "UI/OverworldLandscapes",
                     requiredDimensions = new Vector2Int (512, 256)
+                }
+            },
+            {
+                TextureGroupKeys.OverworldMapBackgrounds,
+                new TextureGroup
+                {
+                    folderName = "UI/OverworldMapBackgrounds",
+                    // requiredDimensions = new Vector2Int (2048, 2048)
                 }
             },
             {

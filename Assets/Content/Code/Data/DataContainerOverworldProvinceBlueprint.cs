@@ -246,12 +246,9 @@ namespace PhantomBrigade.Data
 
         private void DrawMapPreview ()
         {
-            if (!mapTexLoaded)
-            {
-                mapTexLoaded = true;
-                mapTex = Resources.Load<Texture2D> ("Content/UI/Textures/map_overworld_02");
-                mapTexFound = mapTex != null;
-            }
+            var texKey = DataMultiLinkerOverworldProvinceBlueprints.Presentation.mapBackground;
+            mapTex = TextureManager.GetTexture (TextureGroupKeys.OverworldMapBackgrounds, texKey);
+            mapTexFound = mapTex != null;
 
             if (!mapTexFound)
                 return;

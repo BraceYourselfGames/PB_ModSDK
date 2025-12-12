@@ -18,6 +18,11 @@ namespace PhantomBrigade.Data
         public class Presentation
         {
             [ShowInInspector]
+            [ValueDropdown ("@TextureManager.GetExposedTextureKeys (TextureGroupKeys.OverworldMapBackgrounds)")]
+            [OnInspectorGUI ("@DropdownUtils.DrawTexturePreview ($value, TextureGroupKeys.OverworldMapBackgrounds, 128)", false)]
+            public static string mapBackground = "map_default";
+            
+            [ShowInInspector]
             public static bool testSpawnGeneral = false;
             
             [ShowInInspector, ShowIf (nameof(testSpawnGeneral))]
