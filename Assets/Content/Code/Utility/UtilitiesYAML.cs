@@ -898,6 +898,7 @@ public static class UtilitiesYAML
     }
 
     private const string yamlExtension = ".yaml";
+    private const string gitFolderName = ".git";
 
     public static SortedDictionary<string, T> LoadDecomposedDictionary <T>
     (
@@ -925,6 +926,9 @@ public static class UtilitiesYAML
                 for (int i = 0; i < dirs.Length; ++i)
                 {
                     string dirPath = dirs[i];
+                    if (dirPath.EndsWith (gitFolderName))
+                        continue;
+                    
                     var key = Path.GetFileName (dirPath);
                     if (forceLowerCase)
                         key = key.ToLowerInvariant ();
@@ -935,7 +939,6 @@ public static class UtilitiesYAML
                     var filePath = Path.Combine (dirPath, filenameMain);
                     try
                     {
-
                         T dataObject = ReadFromFile<T> (filePath);
                         if (dataObject != null)
                             result.Add (key, dataObject);
