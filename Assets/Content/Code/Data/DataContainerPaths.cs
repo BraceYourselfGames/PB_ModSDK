@@ -19,7 +19,7 @@ namespace PhantomBrigade.Data
             #if !PB_MODSDK
             { typeof (DataContainerSave), "Saves/" }, 
             #else
-            { typeof (DataContainerModToolsPage), "../ConfigsModTools/" },
+            { typeof (DataContainerModToolsPage), "../ConfigsModTools/Pages/" },
             { typeof (DataContainerModData), "../ModConfigs/" },
             #endif
         };
