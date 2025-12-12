@@ -236,7 +236,7 @@ namespace PhantomBrigade.SDK.ModTools
         [VerticalGroup (OdinGroup.Name.Project)]
         [ConditionalSpace (0f, 4f, nameof(spaceAfterWorkingPath))]
         [PropertyTooltip ("$" + nameof(projectPath))]
-        [LabelText ("Project path"), ElidedPath, ReadOnly]
+        [LabelText ("Project path"), ElidedPath]
         public string projectPath;
 
         [ShowInInspector]
