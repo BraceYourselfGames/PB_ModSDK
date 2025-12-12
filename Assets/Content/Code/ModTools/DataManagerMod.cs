@@ -45,13 +45,45 @@ namespace PhantomBrigade.SDK.ModTools
             if (!loadedOnce)
                 LoadAll ();
         }
+        
+        [HideReferenceObjectPicker]
+        public class ModToolsSourcePath
+        {
+            [InlineButton ("OpenPath", "→")]
+            [HideLabel, FolderPath (UseBackslashes = false, RequireExistingPath = true, AbsolutePath = true)]
+            public string path;
 
+            private bool IsPathValid () => !string.IsNullOrEmpty(path) && Directory.Exists (path);
+
+            private void OpenPath ()
+            {
+                if (IsPathValid ()) 
+                    Application.OpenURL ("file://" + path);
+            }
+        }
+        
+        public class ModToolsSettings
+        {
+            [LabelText ("Custom project folders")]
+            [PropertyTooltip ("Use this list to save directories where you store mod source files. By default, the game only loads mod projects from PhantomBrigade/ModsSource.")]
+            [ListDrawerSettings (ShowPaging = false, CustomAddFunction = "@new ModToolsSourcePath ()")] 
+            public List<ModToolsSourcePath> customSourceDirectories = new List<ModToolsSourcePath> ();
+        }
+        
         [Title ("Mod project manager", TitleAlignment = TitleAlignments.Centered)]
-        [ShowInInspector, PropertyOrder (-1)]
+        [ShowInInspector, PropertyOrder (-110)]
         [PropertyTooltip ("The folder where mod projects are stored. If this folder does not exist, it will be created when you add your first mod.")]
         [PropertySpace (0f, 3f)]
-        [LabelText ("Source folder"), LabelWidth (160f), ReadOnly, ElidedPath]
-        public static string folderPathProjects;
+        [LabelText ("Default source folder"), LabelWidth (160f), ReadOnly, ElidedPath]
+        public static string folderPathProjectsDefault;
+        
+        [PropertyOrder (-90)]
+        [ShowInInspector, FoldoutGroup ("Settings"), HideReferenceObjectPicker, HideDuplicateReferenceBox, HideLabel]
+        private static ModToolsSettings settings = null;
+        
+        private static List<string> folderPathsProjects = new List<string> ();
+        
+        
 
         // Parts providing a way to add a new mod
         // Wrapped in a subclass to separate utility fields like error strings, reduce the need for top level grouping attributes etc.
@@ -78,7 +110,7 @@ namespace PhantomBrigade.SDK.ModTools
                 var modData = new DataContainerModData ()
                 {
                     key = id,
-                    useDefaultWorkingPath = true,
+                    projectPath = $"{folderPathProjectsDefault}/{id}",
                     metadata = new ModMetadata
                     {
                         id = id,
@@ -119,6 +151,7 @@ namespace PhantomBrigade.SDK.ModTools
         // Parts backing and displaying the selected mod
         #region ModSelected
 
+        private static readonly SortedDictionary<string, string> modsLoadedPaths = new SortedDictionary<string, string> ();
         private static readonly SortedDictionary<string, DataContainerModData> mods = new SortedDictionary<string, DataContainerModData> ();
 
         public static string GetModCountText () => (mods != null ? mods.Count : 0).ToString ();
@@ -195,12 +228,20 @@ namespace PhantomBrigade.SDK.ModTools
             {
                 if (string.IsNullOrEmpty (id))
                 {
-                    Debug.LogWarning ($"");
+                    Debug.LogWarning ($"Failed to load mod: no ID provided");
+                    return;
                 }
 
-                var projectPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, id);
-                var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, filenameMain + extensionYAML);
+                var projectPathFound = modsLoadedPaths.TryGetValue (id, out var projectPath);
+                if (!projectPathFound)
+                {
+                    Debug.LogWarning ($"Failed to load mod {id}: no recorded path exists, try to Load All again...");
+                    return;
+                }
 
+                var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, filenameMain + extensionYAML);
+                Debug.Log ($"Loading project {id} | Cached project file path: {filePath}");
+                
                 var modData = UtilitiesYAML.LoadDataFromFile<DataContainerModData> (filePath, true, false);
                 if (modData == null)
                 {
@@ -208,6 +249,7 @@ namespace PhantomBrigade.SDK.ModTools
                     return;
                 }
 
+                modData.projectPath = projectPath;
                 modData.OnAfterDeserialization (id);
 
                 if (mods.ContainsKey (id))
@@ -239,6 +281,13 @@ namespace PhantomBrigade.SDK.ModTools
                     return;
                 }
 
+                var projectPath = modData.projectPath;
+                if (string.IsNullOrEmpty (projectPath))
+                {
+                    Debug.LogWarning ($"Can't save project {modData.id}: project path doesn't exist");
+                    return;
+                }
+                
                 var id = modData.key;
                 if (!ModToolsHelper.ValidateModID (id, modData, mods, out var idError))
                 {
@@ -248,13 +297,30 @@ namespace PhantomBrigade.SDK.ModTools
                         Debug.LogWarning ($"Can't save project: \"{id}\" {idError}");
                     return;
                 }
-
-                Debug.Log ($"Saving mod {id}: {modData.GetModPathProject ()}");
+                
+                if (!Directory.Exists (projectPath))
+                {
+                    if (projectPath.Contains (folderPathProjectsDefault))
+                    {
+                        // If a user is using the default project path, the path would be inside PhantomBrigade user folder.
+                        // It should be ok to auto-create one: if something goes wrong with the operation, the consequences might be limited
+                        UtilitiesYAML.PrepareClearDirectory (projectPath, true, false);
+                        Debug.Log ("Created mod project folder: " + projectPath);
+                    }
+                    else
+                    {
+                        // I'm fairly uncomfortable with the idea of ever automatically creating folder outside of PB user folder.
+                        // Someone unfamiliar with the tools can accidentally create folders in unintended places or worse.
+                        // If a user is using a custom path, they likely used a picker UI and directory already exists (e.g. for a Git repo).
+                        Debug.LogWarning ("Couldn't save metadata.yaml, project folder doesn't exist: " + projectPath);
+                        return;
+                    }
+                }
+                
                 modData.OnBeforeSerialization ();
 
-                var projectPath = modData.GetModPathProject ();
-                var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, filenameMain + extensionYAML);
-
+                var filePath = DataPathHelper.GetCombinedCleanPath (modData.projectPath, filenameMain + extensionYAML);
+                Debug.Log ($"Saving mod {id}: {modData.projectPath}\n{filePath}");
                 UtilitiesYAML.SaveToFile (filePath, modData);
             }
 
@@ -359,11 +425,11 @@ namespace PhantomBrigade.SDK.ModTools
                 }
 
                 var idOld = modData.key;
-                var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idOld);
+                var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjectsDefault, idOld);
 
                 if (Directory.Exists (sourcePath))
                 {
-                    var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idNew);
+                    var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjectsDefault, idNew);
                     if (Directory.Exists (targetPath))
                     {
                         Debug.LogWarning ($"Can't rename project from \"{idOld}\" to \"{idNew}\": directory with the same name discovered on disk | Full path: {sourcePath}");
@@ -419,8 +485,8 @@ namespace PhantomBrigade.SDK.ModTools
                 }
 
                 var idOld = modData.key;
-                var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idOld);
-                var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjects, idNew);
+                var sourcePath = DataPathHelper.GetCombinedCleanPath (folderPathProjectsDefault, idOld);
+                var targetPath = DataPathHelper.GetCombinedCleanPath (folderPathProjectsDefault, idNew);
 
                 if (!Directory.Exists (sourcePath))
                 {
@@ -598,32 +664,115 @@ namespace PhantomBrigade.SDK.ModTools
 
         #endregion
 
+        [PropertyOrder (-100)]
+        [FoldoutGroup("Settings"), HorizontalGroup ("Settings/Bg")]
+        [Button (SdfIconType.ArrowUpCircle, IconAlignment.LeftOfText, ButtonHeight = 32, Name = "Load settings")]
+        private static void LoadSettings ()
+        {
+            folderPathProjectsDefault = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetUserFolder (), "ModsSource");
+            
+            folderPathsProjects.Clear ();
+            folderPathsProjects.Add (folderPathProjectsDefault);
 
+            var settingsPath = $"{DataPathHelper.GetApplicationFolder ()}ConfigsModTools/";
+            settings = UtilitiesYAML.LoadDataFromFile<ModToolsSettings> (settingsPath, "user_settings.yaml", false, false);
 
-        [PropertyOrder (-1)]
+            if (settings != null)
+            {
+                if (settings.customSourceDirectories == null)
+                    settings.customSourceDirectories = new List<ModToolsSourcePath> ();
+            }
+            
+            if (settings == null)
+            {
+                settings = new ModToolsSettings
+                {
+                    customSourceDirectories = new List<ModToolsSourcePath> ()
+                };
+            }
+
+            if (settings.customSourceDirectories != null && settings.customSourceDirectories.Count > 0)
+            {
+                foreach (var p in settings.customSourceDirectories)
+                {
+                    if (p == null || string.IsNullOrEmpty (p.path))
+                        continue;
+                    
+                    if (!Directory.Exists (p.path))
+                        continue;
+                    
+                    folderPathsProjects.Add (p.path);
+                }
+            }
+        }
+
+        [PropertyOrder (-100)]
+        [FoldoutGroup("Settings"), HorizontalGroup ("Settings/Bg")]
+        [Button (SdfIconType.ArrowDownCircle, IconAlignment.LeftOfText, ButtonHeight = 32, Name = "Save settings")]
+        private static void SaveSettings ()
+        {
+            if (settings == null)
+            {
+                settings = new ModToolsSettings
+                {
+                    customSourceDirectories = new List<ModToolsSourcePath> ()
+                };
+            }
+            
+            var settingsPath = $"{DataPathHelper.GetApplicationFolder ()}ConfigsModTools/";
+            UtilitiesYAML.SaveToFile (settingsPath, "user_settings.yaml", settings);
+        }
+
+        private static bool warnAboutInvalidFolders = false;
+
+        [PropertyOrder (-100)]
         [HorizontalGroup ("BgGlobal")]
         [Button (SdfIconType.JournalArrowUp, IconAlignment.LeftOfText, ButtonHeight = 32, Name = "Load all")]
         private static void LoadAll ()
         {
-            folderPathProjects = DataPathHelper.GetCombinedCleanPath (DataPathHelper.GetUserFolder (), "ModsSource");
-            var modsLoaded = UtilitiesYAML.LoadDecomposedDictionary<DataContainerModData>
-            (
-                folderPathProjects,
-                logExceptions: true,
-                appendApplicationPath: false,
-                directoryMode: true,
-                directoryModeFilename: filenameMain,
-                forceLowerCase: false
-            );
+            if (settings == null)
+                LoadSettings ();
 
             loadedOnce = true;
             mods.Clear ();
-
-            foreach (var kvp in modsLoaded)
+            modsLoadedPaths.Clear ();
+            
+            foreach (var path in folderPathsProjects)
             {
-                var id = kvp.Key;
-                var mod = kvp.Value;
-                mods.Add (id, mod);
+                var modsLoaded = UtilitiesYAML.LoadDecomposedDictionary<DataContainerModData>
+                (
+                    path,
+                    logExceptions: true,
+                    appendApplicationPath: false,
+                    directoryMode: true,
+                    directoryModeFilename: filenameMain,
+                    forceLowerCase: false
+                );
+
+                foreach (var kvp in modsLoaded)
+                {
+                    var id = kvp.Key;
+                    bool valid = ModToolsHelper.ValidateModID (id, null, null, out var errorDesc);
+                    if (!valid)
+                    {
+                        if (warnAboutInvalidFolders)
+                            Debug.LogWarning ($"Mod {id} at path {path} couldn't be loaded due to invalid folder name (ID): {errorDesc}");
+                        continue;
+                    }
+                    
+                    var mod = kvp.Value;
+
+                    if (mods.ContainsKey (id))
+                    {
+                        Debug.LogWarning ($"Mod {id} at path {path} hides existing mod from another path. Consider changing ID of one of the mods...");
+                        continue;
+                    }
+
+                    var projectPath = $"{path}/{id}";
+                    mod.projectPath = projectPath;
+                    mods[id] = mod;
+                    modsLoadedPaths[id] = projectPath;
+                }
             }
 
             Debug.Log ($"Loaded {mods.Count} mod projects");
@@ -637,7 +786,7 @@ namespace PhantomBrigade.SDK.ModTools
             // Debug.LogWarning ($"Discovered project files: {modsLoaded.ToStringFormattedKeyValuePairs (true, toStringOverride: (x) => $"ID: {x.id} / Key: {x.key}")}");
         }
 
-        [PropertyOrder (-1)]
+        [PropertyOrder (-100)]
         [HorizontalGroup ("BgGlobal")]
         [Button (SdfIconType.JournalArrowDown, IconAlignment.LeftOfText, ButtonHeight = 32, Name = "Save all")]
         [PropertySpace (0f, 3f)]

@@ -230,34 +230,14 @@ namespace PhantomBrigade.SDK.ModTools
         [LabelText ("ID")]
         public string id => key;
 
-        [VerticalGroup (OdinGroup.Name.Project)]
-        // [ShowIf (nameof(hasProjectFolder))]
-        [PropertyTooltip ("Use the default assigned folder for this mod's project files.\nUncheck if you want change the folder used to store the project files.")]
-        [OnValueChanged (nameof(InitializeWorkingPath))]
-        [LabelText ("Default project path")]
-        public bool useDefaultWorkingPath = true;
-
         // Actual mod data folder (separated from where these YAML configs are saved)
         // The field is here to make it easy to display where mod folders are located.
-        [ShowInInspector]
+        [YamlIgnore] // Not serialized, set from DataManagerMod load method
         [VerticalGroup (OdinGroup.Name.Project)]
-        [ShowIf (nameof (showDefaultPath))]
-        [ConditionalSpace (0f, 4f, nameof (spaceAfterWorkingPath))]
-        [PropertyTooltip ("$" + nameof (displayWorkingPath))]
-        [HideLabel, ElidedPath]
-        public string displayWorkingPath
-        {
-            get => GetModPathProject ();
-            set { }
-        }
-
-        // Let the modder override where the project files are stored for this particular mod.
-        [VerticalGroup (OdinGroup.Name.Project)]
-        [ShowIf (nameof(showWorkingPath))]
         [ConditionalSpace (0f, 4f, nameof(spaceAfterWorkingPath))]
-        [PropertyTooltip ("$" + nameof(workingPath))]
-        [LabelText ("Custom project path"), ElidedPath]
-        public string workingPath;
+        [PropertyTooltip ("$" + nameof(projectPath))]
+        [LabelText ("Project path"), ElidedPath, ReadOnly]
+        public string projectPath;
 
         [ShowInInspector]
         [VerticalGroup (OdinGroup.Name.Project)]
@@ -473,8 +453,7 @@ namespace PhantomBrigade.SDK.ModTools
         public override void OnAfterDeserialization (string key)
         {
             base.OnAfterDeserialization (key);
-
-            var projectPath = GetModPathProject ();
+            
             if (!string.IsNullOrEmpty (projectPath))
             {
                 var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, "metadata.yaml");
@@ -516,8 +495,7 @@ namespace PhantomBrigade.SDK.ModTools
         {
             base.OnBeforeSerialization ();
             SyncMetadata ();
-
-            var projectPath = GetModPathProject ();
+            
             if (string.IsNullOrEmpty (projectPath))
             {
                 Debug.LogWarning ("Couldn't save metadata.yaml, project folder path is null or empty!");
@@ -526,21 +504,8 @@ namespace PhantomBrigade.SDK.ModTools
 
             if (!Directory.Exists (projectPath))
             {
-                if (useDefaultWorkingPath)
-                {
-                    // If a user is using the default project path, the path would be inside PhantomBrigade user folder.
-                    // It should be ok to auto-create one: if something goes wrong with the operation, the consequences might be limited
-                    UtilitiesYAML.PrepareClearDirectory (projectPath, true, false);
-                    Debug.Log ("Created mod project folder: " + projectPath);
-                }
-                else
-                {
-                    // I'm fairly uncomfortable with the idea of ever automatically creating folder outside of PB user folder.
-                    // Someone unfamiliar with the tools can accidentally create folders in unintended places or worse.
-                    // If a user is using a custom path, they likely used a picker UI and directory already exists (e.g. for a Git repo).
-                    Debug.LogWarning ("Couldn't save metadata.yaml, project folder doesn't exist: " + projectPath);
-                    return;
-                }
+                Debug.LogWarning ("Couldn't save metadata.yaml, project folder doesn't exist: " + projectPath);
+                return;
             }
 
             UtilitiesYAML.SaveToFile (projectPath, "metadata.yaml", metadata);
@@ -566,22 +531,12 @@ namespace PhantomBrigade.SDK.ModTools
 
         public string GetModPathProject ()
         {
-            if (!useDefaultWorkingPath && !string.IsNullOrEmpty (workingPath))
-            {
-                return workingPath;
-            }
-
-            return defaultWorkingPath;
+            return projectPath;
         }
 
         public string GetModPathWorkshopTemp ()
         {
-            if (!useDefaultWorkingPath && !string.IsNullOrEmpty (workingPath))
-            {
-                return workingPath + dirWorkshopTemp;
-            }
-
-            return defaultWorkingPath + dirWorkshopTemp;
+            return projectPath + dirWorkshopTemp;
         }
 
         public string GetModPathUser ()
@@ -616,19 +571,6 @@ namespace PhantomBrigade.SDK.ModTools
             var assetBundlesPath = DataPathHelper.GetCombinedCleanPath (GetModPathProject (), assetBundlesFolderName);
             if (Directory.Exists (assetBundlesPath))
                 Directory.Delete (assetBundlesPath, true);
-        }
-
-        public string defaultWorkingPath => DataPathHelper.GetCombinedCleanPath (defaultWorkingPathParent, id);
-
-        private void InitializeWorkingPath ()
-        {
-            if (useDefaultWorkingPath || !string.IsNullOrEmpty (workingPath))
-            {
-                return;
-            }
-
-            workingPath = defaultWorkingPath;
-            Debug.Log ($"Set working path to {workingPath}");
         }
 
         void CopyContents (string projectPath, string destPath)
@@ -685,9 +627,7 @@ namespace PhantomBrigade.SDK.ModTools
                 Directory.CreateDirectory (dirTo);
             }
         }
-
-        bool showDefaultPath => hasProjectFolder && useDefaultWorkingPath;
-        bool showWorkingPath => hasProjectFolder && !useDefaultWorkingPath;
+        
         bool spaceAfterWorkingPath => !showUserModFolder;
         bool showUserModFolder => Directory.Exists (userModFolder);
         bool spaceAfterUserModFolder => showUserModFolder;
