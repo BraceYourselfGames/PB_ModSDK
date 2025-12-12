@@ -240,7 +240,7 @@ namespace PhantomBrigade.SDK.ModTools
                 }
 
                 var filePath = DataPathHelper.GetCombinedCleanPath (projectPath, filenameMain + extensionYAML);
-                Debug.Log ($"Loading project {id} | Cached project file path: {filePath}");
+                // Debug.Log ($"Loading project {id} | Cached project file path: {filePath}");
                 
                 var modData = UtilitiesYAML.LoadDataFromFile<DataContainerModData> (filePath, true, false);
                 if (modData == null)

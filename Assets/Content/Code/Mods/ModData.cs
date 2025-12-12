@@ -291,7 +291,7 @@ namespace PhantomBrigade.Mods
             var modPath = parent != null ? parent.GetModPathProject () : null;
             if (string.IsNullOrEmpty (modPath) || !Directory.Exists (modPath))
             {
-                Debug.LogWarning ($"Failed to find mod project directory, can't save the preview");
+                Debug.LogWarning ($"Failed to find mod project directory {modPath}, can't save the preview");
                 return;
             }
             
