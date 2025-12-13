@@ -172,12 +172,6 @@ namespace PhantomBrigade.Data
 
 				    sb.Append ("\n");
 				    sb.Append (section.description);
-
-				    if (!string.IsNullOrEmpty (section.hint))
-				    {
-					    sb.Append ("\n\n> ");
-					    sb.Append (section.hint);
-				    }
 			    }
 		    }
 

@@ -7,7 +7,7 @@ sections:
   image: 
   hint: External download
   header: Optional Assets
-  description: Downloading optional assets will unlock tools for editing levels. Additionally, the part preset, subsystem and unit composite database editors will unlock item previews.
+  description: Learn how to install the optional asset package to unlock the full functionality of the SDK. The package includes models, textures and other assets, unlocking ability to view and edit levels, items, landscape metadata etc.
   conditionsVisible: 
   conditionsEnabled: 
   conditionsComplete: 
@@ -17,19 +17,19 @@ sections:
     buttonLabel: ''
     titleIcon: Archive
     titleHeader: Installing optional assets
-    titleDesc: Downloading optional assets will unlock tools for editing levels. Additionally, the part preset, subsystem and unit composite database editors will unlock item previews.
+    titleDesc: We strongly recommend installing the optional asset package to unlock the full functionality of the SDK. The package includes 3D models of mech items, levels, props, textures, landscapes and some other art assets. These files are not required for most of the tools included in the SDK, but they unlock ability to view and edit levels, items, landscape metadata etc.
     sections:
     - icon: CloudDownload
       image: 
       hint: 1
-      header: Download the archive
-      description: The archive contains level tilesets, props, equipment 3D models and other assets necessary to support the functinoality above. These assets are not included in the core SDK to reduce its size and allow lightweight code updates.
+      header: Download the package
+      description: 'The package was separated from the SDK into an optional download to keep the repository lightweight and easy to update. You can download it here:'
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
       actionsOnClick: 
       buttons:
-      - label: Download (3.4Gb)
+      - label: Download (3.7Gb)
         actionsOnClick:
         - !ModToolsFunctionOpenLinkAssets {}
       childPage: 
@@ -79,7 +79,7 @@ sections:
       image: 
       hint: 5
       header: Restart the Editor
-      description: Some of the imported assets might need a restart to start working. To ensure everything is loaded properly, it's best to restart the Unity Editor.
+      description: Some of the imported assets might need a restart to start working. To ensure everything is loaded properly, it's best to restart the Unity Editor after completing all previous steps.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
@@ -87,10 +87,10 @@ sections:
       buttons: 
       childPage: 
     - icon: PinMap
-      image: 
+      image: t4_03_scene
       hint: 6
       header: Check the scene
-      description: Open the ContentOptional/Scenes/game_extended_sdk scene file in the "Project" tab. Alternatively, press "Open main scene" in the Getting Started window.
+      description: To switch to the full toolkit, open the extended scene. Open the game_extended_sdk scene located in the ContentOptional/Scenes folder using the Project tab. Alternatively, press "Open main scene" in the Getting Started window. You should see new objects in the Hierarchy tab, like on the screenshot above.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete:
