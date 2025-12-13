@@ -13,31 +13,11 @@ While Phantom Brigade is underpinned by easily editable YAML files and supports 
 
 If you get stuck or experience a bug, please don't hesitate to ask questions in the #phantom-modding channel of the official Discord server. We can't wait to see what you create!
 
-## Installation
-
-Quick setup overview:
-- Download & install [Unity Hub](https://unity.com/download)
-- Open the download page for [Unity 2020.3.49f1 LTS](https://unity.com/releases/editor/whats-new/2020.3.49f1). Click **Install** on top of the page to begin installation through Unity Hub. If this doesn't work, try downloading a Windows installer through links at the bottom of that page. It is very important to download the exact version of Unity Editor to avoid problems in the SDK.
-- Install git and make sure it is in your `PATH`. If you're using a GUI client, you might not have standalone git.exe installed or might not have `PATH` set up. [Download Git here](https://www.git-scm.com/download).
-- Download the project from this repository. We strongly recommend downloading (cloning) through Git to facilitate easy updating.
-- In Unity Hub, navigate to the **Projects** tab and choose **Open**, selecting the folder with the project. Wait for the project to import.
-- We strongly recommend installing the option
-
-Pick a drive with at least 10Gb of free space and select a location with a short path, such as **C:/Work/Unity Projects/PB_ModSDK**. The core repository is a fairly small download, but an optional asset package totals around 4Gb. Full import of the project with the optional asset package installed might create up to 5Gb of temporary files, hence our recommendation to reserve up to 10Gb.
-
-> If you're not familiar with Git and are unsure how to download the SDK project from GitHub, try installing the [GitHub Desktop](https://desktop.github.com/) client and [following this tutorial](https://docs.github.com/en/desktop/adding-and-cloning-repositories/cloning-a-repository-from-github-to-github-desktop). You can find the list alternative Windows GUI clients [here](https://www.git-scm.com/download/gui/windows).
-
-## Optional assets
-
-We strongly recommend installing the optional asset package to unlock full functionality of the SDK. [Downloading the package](https://cdn.braceyourselfgames.com/PB/PB_ModSDK_AssetPackage_V20B.unitypackage) (~3.7Gb) in the background while you set up the main project and follow the initial tutorials. The assets were separated into an optional download to keep this repository lightweight and easy to update. They include 3D models of mech items, levels, props, textures, landscapes and some other art assets. These files are not required for most of the tools included in the SDK, but they unlock ability to view and edit levels, items, landscape metadata etc.
-
-![desc_getting_started.png](/ModWindowImages/repo/desc_optional_assets.png)
-
-Follow the instructions in the Getting Started window to install this optional asset package.
-
 ## Getting started
 
-Once the project is open, click **PB Mod SDK/Getting Started** in the top menu of the Unity Editor window to get additional guidance. The Getting Started window is the central point of the SDK: it can help you check the status of different components, navigate to important links and scenes and guide you through creating your own mods.
+Please refer to this wiki page for detailed installation instructions: [Installing the SDK](../../wiki/Installing-the-SDK)
+
+Once the SDK is set up and the Unity Project is open, click **PB Mod SDK/Getting Started** in the top menu of the Unity Editor window to get additional guidance. The Getting Started window is the central point of the SDK: it can help you check the status of different components, navigate to important links and scenes and guide you through creating your own mods.
 
 ![desc_getting_started.png](/ModWindowImages/repo/desc_getting_started.png)
 
