@@ -145,9 +145,9 @@ sections:
     - icon: InputCursorText
       image: t1_01_create
       hint: ''
-      header: Mod ID
+      header: Creating a new mod
       description: >-
-        Start by opening the "New mod" foldout in the project manager. You will see the grayed out button reading "Create" and an empty field asking for a "Unique ID". Let's choose that ID and it is used as a project folder name and a unique identifier helping the game track your mod. The name is subject to a few rules, but it's fairly straightforward: try typing something and the field will tell you if there's anything wrong.
+        Start by opening the "New mod" foldout in the project manager. You will see the grayed out button reading "Create" and an empty field asking for a "Unique ID". That ID and is used as the project folder name and a unique identifier helping the game track your mod. The name is subject to a few rules, but it's fairly straightforward: must be a valid folder name, can't contain special characters, etc. Try typing something and the field will tell you if there's anything wrong.
 
 
         A few examples:
@@ -157,18 +157,7 @@ sections:
         - <b>MyName.Balance.ArmorPlateRework</b>
 
 
-        Your players will not see this name, so there's no need to add spaces and make it overly descriptive - just make sure it's unique. You'll have an opportunity to enter a player facing name and description in a bit.
-      conditionsVisible: 
-      conditionsEnabled: 
-      conditionsComplete: 
-      actionsOnClick: 
-      buttons: 
-      childPage: 
-    - icon: JournalPlus
-      image: 
-      hint: ''
-      header: Create the mod
-      description: With the ID filled, you'll the "Create" button unlocked. Press it, and you'll see your ID appear further down, under the "Selected mod" header.
+        Your players will not see this name in-game, so there's no need to add spaces and make it overly descriptive - just make sure it's unique. You'll have an opportunity to enter a player facing name and description in a bit. Once a valid ID is filled, the "Create" button to the right would unlock. Press it, and the new mod project will be created. You'll see your ID appear further down, under the "Selected mod" header.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 
@@ -246,6 +235,81 @@ sections:
 
 
         Now that you know the basics, it's time to make your mod do something. For now, it's just a metadata file, which has no effects on its own. To change the game, you'll need to include some content. Mods support quite a lot of different content types so check out the rest of the tutorials to learn how to add some of these content types to your mod.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+- icon: FolderSymlink
+  image: 
+  hint: ''
+  header: External projects
+  description: Learn how to set up a mod project that is located outside the default directory. This is useful for version controlling your mod projects with Git and other advanced cases.
+  conditionsVisible: 
+  conditionsEnabled: 
+  conditionsComplete: 
+  actionsOnClick: 
+  buttons: 
+  childPage:
+    buttonLabel: ''
+    titleIcon: Book
+    titleHeader: External projects
+    titleDesc: By default, mod projects are stored next to other user data for Phantom Brigade, at AppData/Local/PhantomBrigade/ModsSources. Often times, you might want to set up a mod project located outside that default directory. This is useful for version controlling your mod projects with Git and other advanced cases.
+    sections:
+    - icon: PlayCircle
+      image: t8_01_settings
+      hint: ''
+      header: Custom project folders
+      description: >-
+        To start using external project folders, you need to adjust the SDK user settings. They are available on top of the Mod manager inspector, as shown on the image below. Inside them, you can set any number of additional directories that the SDK should scan to locate mod projects. Make sure you select a root folder above any individual mod project, not mod project folders themselves - as in, a folder similar to ModsSource.
+
+
+        Once you are done selecting a folder, make sure to click "Save settings". Your user settings are stored in the SDK folder (under ConfigsModTools/user_settings.yaml), but they are excluded from version control, so don't worry about accidentally modifying the SDK repository when you edit these settings.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: t8_02_folder_ext_root
+      hint: ''
+      header: Folder structure
+      description: 'The most common use case is linking a local Git repository to the SDK. This allows you to use all the SDK tools while having a perfect overview of every single file change in your mod. This makes updating to Configs from new versions of Phantom Brigade a breeze, makes it easy to revert changes that went wrong, etc. Refer to the image above for an example of the target folder. As we mentioned above, it should be a root folder: a location one level above project.yaml and metadata.yaml files.'
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: t8_02_folder_ext_mod
+      hint: ''
+      header: Mod project subfolder
+      description: Here is how a mod project subfolder under a custom mod folder usually looks like. If you see project.yaml and metadata.yaml, you're in the right place.
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: t8_03_relations
+      hint: ''
+      header: Mod project subfolder
+      description: "The typical way to set this up is:\n\n- Make an empty GitHub repository. In case of this example, we named the repository `PB_ModSDK_Samples`\n- Clone it to your machine, creating a local repostory folder, like `D:/Work/UnityProjects/PB_ModSDK_Samples`\n- Add that folder to the SDK user settings and save them\n- Create a new mod, which will appear under the default `AppData/Local/PhantomBrigade/ModsSource` folder\n- Move that mod to your repository folder, push the changes to Git\n- Reload mods in the mod manager. \n\nOnce everything is set up, your mod should be selectable in the mod manager dropdown, and you should see the path above the metadata reflect your custom project folder, like on the image above."
+      conditionsVisible: 
+      conditionsEnabled: 
+      conditionsComplete: 
+      actionsOnClick: 
+      buttons: 
+      childPage: 
+    - icon: PlayCircle
+      image: 
+      hint: ''
+      header: Setting up .gitignore
+      description: One of the common questions about setting up a Git repository is the contents of .gitignore file. Without that file, Git version control might get bloated, tracking unimportant changes to temporary files. We provide a template that could serve as a starting point. You can find the template file at `Tools/Templates/template_gitignore.txt` in your SDK folder. Move it to your local Git repository, rename it to `.gitignore` and you should have a good starting point. Make sure to check its contents in case it excludes some files you do need to track.
       conditionsVisible: 
       conditionsEnabled: 
       conditionsComplete: 

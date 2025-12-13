@@ -1,0 +1,1 @@
+Rename this file to .gitignore and place it in the root of your mod project repository to avoid tracking temporary files.
