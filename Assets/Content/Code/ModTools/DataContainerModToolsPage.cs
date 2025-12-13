@@ -167,7 +167,7 @@ namespace PhantomBrigade.Data
 					    sb.Append (section.image);
 					    sb.Append (".png](https://github.com/BraceYourselfGames/PB_ModSDK/blob/main/ModWindowImages/");
 						sb.Append (section.image);
-						sb.Append (".png)");
+						sb.Append (".png)\n");
 				    }
 
 				    sb.Append ("\n");
