@@ -39,6 +39,9 @@ namespace PhantomBrigade.Data
         public Vector4 materialTertiary = new Vector4 (0.0f, 0.2f, 0.5f, 0f);
         
         public Vector4 effect = new Vector4 (0.0f, 0.0f, 0.0f, 0.0f);
+
+        public string contentSource;
+        public Vector4 contentParameters = new Vector4 (0.0f, 0.0f, 0.0f, 0.0f);
         
         #if UNITY_EDITOR
         private void ClearPattern (string value) => pattern = null;

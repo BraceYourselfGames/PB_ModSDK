@@ -17,50 +17,9 @@ namespace PhantomBrigade
 
             string textName = string.Empty;
 
-            if (project.textSourceName != null)
-                textName = project.textSourceName.GetText ();
-
-            /*
-            if (!string.IsNullOrEmpty (project.textFromPartPreset))
-            {
-                var partPreset = DataMultiLinkerPartPreset.GetEntry (project.textFromPartPreset, false);
-                if (partPreset != null)
-                {
-                    partPreset = DataHelperEquipment.GetLastInheritor (partPreset);
-                    textName = partPreset.GetPartModelName ();
-                }
-            }
-            else if (!string.IsNullOrEmpty (project.textFromSubsystem))
-            {
-                var subsystem = DataMultiLinkerSubsystem.GetEntry (project.textFromSubsystem, false);
-                if (subsystem != null)
-                {
-                    textName = subsystem.textNameProcessed?.s;
-                }
-            }
-            else if (!string.IsNullOrEmpty (project.textFromGroup))
-            {
-                var group = DataMultiLinkerEquipmentGroup.GetEntry (project.textFromGroup, false);
-                if (group != null)
-                {
-                    if (!string.IsNullOrEmpty (group.textName))
-                        textName = group.textName;
-                }
-            }
-            else if (!string.IsNullOrEmpty (project.textFromHardpoint))
-            {
-                var hardpoint = DataMultiLinkerSubsystemHardpoint.GetEntry (project.textFromHardpoint, false);
-                if (hardpoint != null)
-                {
-                    if (!string.IsNullOrEmpty (hardpoint.textName))
-                        textName = hardpoint.textName;
-                }
-            }
-            */
-
-            if (string.IsNullOrEmpty (textName))
-                textName = project.textName;
-
+            if (project.textLinkName != null)
+                textName = project.textLinkName.GetText ();
+            
             return textName;
         }
 
@@ -70,41 +29,13 @@ namespace PhantomBrigade
                 return string.Empty;
 
             string textSubtitle = string.Empty;
-
-            if (project.textSourceSubtitle != null)
-                textSubtitle = project.textSourceSubtitle.GetText ();
-
-            /*
-            if (!string.IsNullOrEmpty (project.textFromPartPreset))
-            {
-                var partPreset = DataMultiLinkerPartPreset.GetEntry (project.textFromPartPreset, false);
-                if (partPreset != null)
-                {
-                    partPreset = DataHelperEquipment.GetLastInheritor (partPreset);
-                    if (!string.IsNullOrEmpty (partPreset.groupMainKey))
-                    {
-                        var group = DataMultiLinkerEquipmentGroup.GetEntry (partPreset.groupMainKey, false);
-                        if (group != null && !string.IsNullOrEmpty (group.textName))
-                            textSubtitle = group.textName;
-                    }
-                }
-            }
-            if (!string.IsNullOrEmpty (project.textFromSubsystem))
-            {
-                var subsystem = DataMultiLinkerSubsystem.GetEntry (project.textFromSubsystem, false);
-                if (subsystem != null)
-                {
-                    // subsystem = DataHelperEquipment.GetLastInheritor (subsystem);
-                    var hardpointInfo = EquipmentUtility.GetHardpointInfoForSubsystem (subsystem);
-                    if (hardpointInfo != null)
-                        textSubtitle = hardpointInfo.textName;
-                }
-            }
-            */
+            
+            if (project.textLinkSubtitle != null)
+                textSubtitle = project.textLinkSubtitle.GetText ();
 
             return textSubtitle;
         }
-
+        
         public static string GetProjectDescription (DataContainerWorkshopProject project)
         {
             if (project == null)
@@ -112,54 +43,8 @@ namespace PhantomBrigade
 
             var textDesc = string.Empty;
 
-            if (project.textSourceDesc != null)
-                textDesc = project.textSourceDesc.GetText ();
-
-            /*
-            if (!string.IsNullOrEmpty (project.textFromPartPreset))
-            {
-                var partPreset = DataMultiLinkerPartPreset.GetEntry (project.textFromPartPreset, false);
-                if (partPreset != null)
-                {
-                    var desc = DataHelperEquipment.GetPartModelDesc (partPreset);
-                    if (!string.IsNullOrEmpty (desc))
-                        sb.Append (desc);
-                }
-            }
-            else if (!string.IsNullOrEmpty (project.textFromSubsystem))
-            {
-                var subsystem = DataMultiLinkerSubsystem.GetEntry (project.textFromSubsystem, false);
-                if (subsystem != null)
-                {
-                    // subsystem = DataHelperEquipment.GetLastInheritor (subsystem);
-                    var hardpointInfo = EquipmentUtility.GetHardpointInfoForSubsystem (subsystem);
-                    if (hardpointInfo != null && !string.IsNullOrEmpty (hardpointInfo.textDesc))
-                        sb.Append (hardpointInfo.textDesc);
-                }
-            }
-            else if (!string.IsNullOrEmpty (project.textFromGroup))
-            {
-                var group = DataMultiLinkerEquipmentGroup.GetEntry (project.textFromGroup, false);
-                if (group != null)
-                {
-                    if (!string.IsNullOrEmpty (group.textDesc))
-                        sb.Append (group.textDesc);
-                }
-            }
-            else if (!string.IsNullOrEmpty (project.textFromHardpoint))
-            {
-                var hardpoint = DataMultiLinkerSubsystemHardpoint.GetEntry (project.textFromHardpoint, false);
-                if (hardpoint != null)
-                {
-                    if (!string.IsNullOrEmpty (hardpoint.textDesc))
-                        sb.Append (hardpoint.textDesc);
-                }
-            }
-            */
-
-            // Only pull workshop specific description if none of the above produced a description
-            if (string.IsNullOrEmpty (textDesc))
-                textDesc = project.textDesc;
+            if (project.textLinkDesc != null)
+                textDesc = project.textLinkDesc.GetText ();
 
             return textDesc;
         }

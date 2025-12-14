@@ -1410,64 +1410,6 @@ namespace PhantomBrigade.Data
                 obj.SetFilter (true, parent, false);
         }
         
-        [ShowIf ("IsWorkshopVisible")]
-        [Button ("Generate workshop project"), PropertyOrder (-10)]
-        private void ToWorkshop ()
-        {
-            string hardpointKeySelected = null;
-            if (hardpointsProcessed != null)
-            {
-                foreach (var hardpointKey in hardpointsProcessed)
-                {
-                    var hardpointInfo = DataMultiLinkerSubsystemHardpoint.GetEntry (hardpointKey);
-                    if (hardpointInfo != null && hardpointInfo.editable)
-                    {
-                        hardpointKeySelected = hardpointKey;
-                        break;
-                    }
-                }
-            }
-
-            if (string.IsNullOrEmpty (hardpointKeySelected))
-            {
-                Debug.LogWarning ($"Can't generate a workshop project: no editable hardpoints found");
-                return;
-            }
-            
-            var data = DataMultiLinkerWorkshopProject.data;
-            var keyWorkshop = key.Replace ("internal_", "sub_");
-
-            if (data.ContainsKey (keyWorkshop))
-            {
-                Debug.LogWarning ($"Workshop project with key {keyWorkshop} already present: ");
-                return;
-            }
-            
-            var p = new DataContainerWorkshopProject ();
-            p.hidden = false;
-            p.textSourceName = new DataBlockWorkshopTextSourceName { key = key, source = WorkshopTextSource.Subsystem };
-            p.textSourceSubtitle = new DataBlockWorkshopTextSourceSubtitle { key = hardpointKeySelected, source = WorkshopTextSource.Hardpoint };
-            p.textSourceDesc = new DataBlockWorkshopTextSourceDesc { key = key, source = WorkshopTextSource.Hardpoint };
-            
-            p.tags = new HashSet<string> { "group_utility", "type_subsystem" };
-            p.icon = DataMultiLinkerEquipmentGroup.GetEntry (groupMainKey)?.icon;
-            p.duration = new DataBlockFloat { f = 1f };
-            p.inputResources = new List<DataBlockResourceCost>
-            {
-                new DataBlockResourceCost { key = ResourceKeys.supplies, amount = 1 },
-                new DataBlockResourceCost { key = ResourceKeys.componentsR2, amount = 1 },
-                new DataBlockResourceCost { key = ResourceKeys.componentsR3, amount = 1 }
-            };
-
-            p.outputSubsystems = new List<DataBlockWorkshopSubsystem> { new DataBlockWorkshopSubsystem { count = 1, key = key, tags = null } };
-            
-            data.Add (keyWorkshop, p);
-            
-            var linker = GameObject.FindObjectOfType<DataMultiLinkerWorkshopProject> ();
-            if (linker != null)
-                linker.SetFilterAndSelect (keyWorkshop);
-        }
-        
         #endif
         #endregion
     }

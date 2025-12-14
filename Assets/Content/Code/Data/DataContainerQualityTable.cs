@@ -9,42 +9,21 @@ using Random = UnityEngine.Random;
 [Serializable][LabelWidth (180f)]
 public class DataContainerQualityTable : DataContainer
 {
-	public struct QualityRecordString
-	{
-		//[InfoBox(@"@"""" + chance.ToString(""P"")")]
-		[HorizontalGroup]
-		[HideLabel]
-		[GUIColor ("GetQualityColor")]
-
-		[ValueDropdown ("GetQualityKeys")]
-		public string qualityName;
-
-		[YamlIgnore]
-		[HideInInspector]
-		public int qualityIndex;
-
-		[HorizontalGroup]
-		[HideLabel]
-		public float weight;
-
-		[HorizontalGroup]
-		[YamlIgnore]
-		[ReadOnly]
-		[HideLabel]
-		public string chance;
-
-		private static IEnumerable<string> GetQualityKeys => UnitEquipmentQuality.text;
-
-		private Color GetQualityColor => qualityIndex.IsValidIndex (UnitEquipmentQuality.colors) ? UnitEquipmentQuality.colors[qualityIndex] : Color.white;
-	}
-
 	public struct QualityRecordInt
 	{
+		[GUIColor("$GetQualityColor"), SuffixLabel ("$GetRatingText", true)]
+		[HideLabel, HorizontalGroup]
 		public int qualityIndex;
+		
+		[HideLabel, HorizontalGroup, SuffixLabel ("$GetChanceText", true)]
 		public float weight;
 
-		[YamlIgnore]
+		[HideInInspector, YamlIgnore]
 		public float weightNormalized;
+
+		private string GetRatingText => qualityIndex.IsValidIndex (UnitEquipmentQuality.text) ? UnitEquipmentQuality.text[qualityIndex] : "?";
+		private string GetChanceText => Mathf.RoundToInt (Mathf.Clamp01 (weightNormalized) * 100f).ToString () + "%";
+		private Color GetQualityColor => qualityIndex.IsValidIndex (UnitEquipmentQuality.colors) ? UnitEquipmentQuality.colors[qualityIndex] : Color.white;
 	}
 
 	public Color uiColor = Color.white;
@@ -52,12 +31,7 @@ public class DataContainerQualityTable : DataContainer
 	public float threatOffset = 0f;
 	public string liveryGrade = "";
 
-	[YamlIgnore]
-	[LabelText("Weights")]
 	[OnValueChanged ("OnWeightsChanged", true)]
-	public List<QualityRecordString> weightsVisible = new List<QualityRecordString>();
-
-	[ReadOnly]
 	public List<QualityRecordInt> weightsInternal = new List<QualityRecordInt>();
 
 	public int RollRandomQuality ()
@@ -76,72 +50,30 @@ public class DataContainerQualityTable : DataContainer
 		int result = weightsInternal[weightsInternal.Count - 1].qualityIndex;
 		return Mathf.Clamp (result, 0, 4);
 	}
-
-	static Dictionary<int, float> tmpWeightBuffer = new Dictionary<int, float>();
-
-	void OnWeightsChanged ()
+	
+	private void OnWeightsChanged ()
 	{
-		weightsInternal.Clear();
-		tmpWeightBuffer.Clear();
-
 		float totalWeight = 0f;
-		for (int i = 0; i < weightsVisible.Count; ++i)
-		{
-			var rec = weightsVisible[i];
-			var index = Array.FindIndex (UnitEquipmentQuality.text, s => s == rec.qualityName);
-			if (index < 0)
-				continue;
-
-			rec.weight = Mathf.Max (0f, rec.weight);
-
-			rec.qualityIndex = index;
-			weightsVisible[i] = rec;
-
-			if(tmpWeightBuffer.ContainsKey (index))
-				tmpWeightBuffer[index] += rec.weight;
-			else
-				tmpWeightBuffer.Add (index, rec.weight);
-
-			totalWeight += rec.weight;
-		}
-
+		if (weightsInternal == null || weightsInternal.Count == 0)
+			return;
 		
-		if(totalWeight > 0f)
+		for (int i = 0; i < weightsInternal.Count; ++i)
 		{
-			foreach(var kv in tmpWeightBuffer)
-			{
-				weightsInternal.Add (new QualityRecordInt { qualityIndex = kv.Key, weight = kv.Value, weightNormalized = kv.Value / totalWeight });
-			}
+			var entry = weightsInternal[i];
+			totalWeight += entry.weight;
 		}
-
-		for (int i = 0; i < weightsVisible.Count; ++i)
+		
+		for (int i = 0; i < weightsInternal.Count; ++i)
 		{
-			var rec = weightsVisible[i];
-			var index = Array.FindIndex (UnitEquipmentQuality.text, s => s == rec.qualityName);
-			
-			if (totalWeight > 0f && tmpWeightBuffer.TryGetValue (index, out var weight))
-				rec.chance = (weight / totalWeight).ToString ("P");
-			else
-				rec.chance = "N/A";
-
-			weightsVisible[i] = rec;
-		}
-	}
-
-	void UpdateVisibleWeights ()
-	{
-		weightsVisible.Clear ();
-		foreach (var record in weightsInternal)
-		{
-			var name = record.qualityIndex >= 0 && record.qualityIndex < UnitEquipmentQuality.text.Length ? UnitEquipmentQuality.text[record.qualityIndex] : "???";
-			weightsVisible.Add (new QualityRecordString { qualityName = name, weight = record.weight });
+			var entry = weightsInternal[i];
+			entry.weightNormalized = entry.weight / totalWeight;
+			weightsInternal[i] = entry;
 		}
 	}
 
 	public override void OnAfterDeserialization (string key)
 	{
 		base.OnAfterDeserialization (key);
-		UpdateVisibleWeights ();
 		OnWeightsChanged ();
 	}
 }

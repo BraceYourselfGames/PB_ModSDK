@@ -35,6 +35,9 @@ namespace PhantomBrigade.Data
         public bool enableAnalyticsInDevMode = false;
 
         public bool debugAudioEvents = false;
+        public bool debugAudioDevices = false;
+        public bool debugAudioComms = false;
+        
         public bool debugOptions = false;
         public bool debugWeapons = false;
         public bool debugInteractions = false;

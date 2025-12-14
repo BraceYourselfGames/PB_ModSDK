@@ -165,7 +165,7 @@ namespace PhantomBrigade.Data
 
 		    return passed;
 	    }
-		#endif
+	    #endif
 	    
 	    #region Editor
 	    #if UNITY_EDITOR
@@ -589,8 +589,8 @@ namespace PhantomBrigade.Data
 
 		    return stepChildValid;
 	    }
-
-		#endif
+	    
+	    #endif
 	    
 	    public void OnDataChanges ()
 	    {

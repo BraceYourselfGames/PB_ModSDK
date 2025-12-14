@@ -416,6 +416,9 @@ namespace PhantomBrigade.Data
         [DropdownReference]
         public List<DataBlockUnitGenerationModifier> unitGenModifiers;
         
+        [DropdownReference]
+        public SortedDictionary<string, float> customValues;
+        
         // [DropdownReference, PropertyOrder (5)]
         // [LabelText ("Effects on events")]
         // public List<DataBlockOverworldQuestEffectGroupContextual> effectsOnEvents;

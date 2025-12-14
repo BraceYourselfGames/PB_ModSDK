@@ -8,6 +8,8 @@ namespace PhantomBrigade.Data
     [ExecuteInEditMode]
     public class DataMultiLinkerOverworldInteraction : DataMultiLinker<DataContainerOverworldInteraction>
     {
+        public override bool IsDeserializedOnCopy () => true;
+        
         public DataMultiLinkerOverworldInteraction ()
         {
             DataMultiLinkerUtility.RegisterOnAfterDeserialization (dataType, OnAfterDeserialization);

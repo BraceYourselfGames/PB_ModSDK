@@ -64,16 +64,17 @@ namespace PhantomBrigade.Data
             "Common",
             "Uncommon",
             "Rare",
-            "Legendary"
         };
 
         public static Color[] colors =
         {
             Color.gray,
             Color.white,
-            new Color (0.53f, 0.83f, 0.53f, 1f), 
-            new Color (0.53f, 0.53f, 0.83f, 1f),
-            new Color (1f, 0.75f, 0.03f, 1f)
+            new Color (0.85f, 1f, 0.8f), 
+            new Color (0.76f, 1f, 1f),
+            new Color (0.63f, 0.68f, 1f),
+            new Color (0.93f, 0.55f, 1f),
+            new Color (1f, 0.52f, 0.71f)
         };
 
         public const string tagPrefix = "rating_";

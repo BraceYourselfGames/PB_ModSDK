@@ -7,6 +7,8 @@ namespace PhantomBrigade.Data
     [ExecuteInEditMode]
     public class DataMultiLinkerPilotType : DataMultiLinker<DataContainerPilotType>
     {
+        public override bool IsDeserializedOnCopy () => true;
+        
         public DataMultiLinkerPilotType ()
         {
             DataMultiLinkerUtility.RegisterStandardTextHandling (dataType, ref textSectorKeys, TextLibs.pilotTypes); 

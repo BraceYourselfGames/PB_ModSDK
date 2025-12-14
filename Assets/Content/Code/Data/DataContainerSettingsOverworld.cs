@@ -108,6 +108,7 @@ namespace PhantomBrigade.Data
     [Serializable]
     public class DataContainerSettingsOverworld : DataContainerUnique
     {
+        public bool customStartAllowed = false;
         public int pointLimit = 3;
         public float pointCountdownDisplayThreshold = 6f;
         public Vector2 pointSpawnRangeDefault = new Vector2 (75f, 150f);
@@ -131,7 +132,14 @@ namespace PhantomBrigade.Data
 
         [DictionaryKeyDropdown ("@DataMultiLinkerResource.data.Keys")]
         public SortedDictionary<string, int> pilotRecruitCostsRookie = new SortedDictionary<string, int> { { ResourceKeys.supplies, 100 } };
+        
+        [DictionaryKeyDropdown ("@DataMultiLinkerResource.data.Keys")]
+        public SortedDictionary<string, int> pilotRecruitCostsVeteran = new SortedDictionary<string, int> { { ResourceKeys.supplies, 100 } };
+        
+        [DictionaryKeyDropdown ("@DataMultiLinkerResource.data.Keys")]
         public SortedDictionary<string, int> pilotRecruitCostsPerLevel = new SortedDictionary<string, int> { { ResourceKeys.supplies, 100 } };
+        
+        public SortedDictionary<int, int> pilotQuickStartPromotions = new SortedDictionary<int, int> { { 2, 2 } };
 
         public int pilotRecruitPromotionHistory = 2;
         public float pilotRecruitRefreshInterval = 24f;
@@ -264,8 +272,6 @@ namespace PhantomBrigade.Data
         public int campCostIncreased = 2;
         
         public float timeSkipDurationRealtime = 3;
-        public float timeSkipDurationCamp = 12;
-        public float timeSkipDurationResupply = 24;
         public float timeSkipDurationRetreat = 32;
         public bool tutorialOnQuickStart = true;
         public bool campaignProgressTopRight = false;

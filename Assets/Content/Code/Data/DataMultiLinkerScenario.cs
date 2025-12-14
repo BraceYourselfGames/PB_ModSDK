@@ -9,6 +9,8 @@ namespace PhantomBrigade.Data
     [ExecuteInEditMode]
     public class DataMultiLinkerScenario : DataMultiLinker<DataContainerScenario>
     {
+        public override bool IsDeserializedOnCopy () => true;
+        
         public DataMultiLinkerScenario ()
         {
             DataMultiLinkerUtility.RegisterOnAfterDeserialization (dataType, OnAfterDeserialization);

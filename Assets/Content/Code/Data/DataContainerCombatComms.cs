@@ -39,6 +39,12 @@ namespace PhantomBrigade.Data
         [ShowIf ("priority")]
         public float duration = 0f;
         
+        [DropdownReference (true)]
+        public DataBlockFloat01 audioPitch;
+        
+        [DropdownReference]
+        public DataBlockFloat01 audioSpeed;
+        
         [DropdownReference]
         [ShowIf ("priority")]
         public string audioKey;
