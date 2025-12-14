@@ -86,7 +86,7 @@ entries:
   audio_volume_voice__text:
     noteDev: 
     temp: false
-    text: Control cutscene voiceover.
+    text: ''
   display_fps_limit__header:
     noteDev: 
     temp: false
@@ -175,6 +175,22 @@ entries:
     noteDev: 
     temp: false
     text: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    noteDev: 
+    temp: false
+    text: Combat saves
+  exp_combat_saves__text:
+    noteDev: 
+    temp: false
+    text: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    noteDev: 
+    temp: false
+    text: Full replay
+  exp_replay_extended__text:
+    noteDev: 
+    temp: false
+    text: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     noteDev: 
     temp: false
@@ -191,6 +207,34 @@ entries:
     noteDev: 
     temp: false
     text: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    noteDev: 
+    temp: false
+    text: Damage scrolling
+  game_base_damage_duration__text:
+    noteDev: 
+    temp: false
+    text: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    noteDev: 
+    temp: false
+    text: Damage priority
+  game_base_damage_priority__lv_action:
+    noteDev: 
+    temp: false
+    text: Damage per action
+  game_base_damage_priority__lv_dps:
+    noteDev: 
+    temp: false
+    text: Damage per second
+  game_base_damage_priority__lv_hit:
+    noteDev: 
+    temp: false
+    text: Damage per hit
+  game_base_damage_priority__text:
+    noteDev: 
+    temp: false
+    text: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     noteDev: 
     temp: false
@@ -206,7 +250,7 @@ entries:
   game_base_preserve_colors__text:
     noteDev: 
     temp: false
-    text: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    text: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
   game_combat_damage_numbers__header:
     noteDev: 
     temp: false
@@ -303,18 +347,26 @@ entries:
     noteDev: 
     temp: false
     text: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
+  game_ent_sp_logo__header:
     noteDev: 
     temp: false
-    text: Test setting 1
-  game_ent_sp__prefix:
+    text: Change menu logo
+  game_ent_sp_logo__text:
     noteDev: 
     temp: false
-    text: Content
-  game_ent_sp__text:
+    text: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
     noteDev: 
     temp: false
-    text: Description for the setting goes here.
+    text: Change mobile base
+  game_ent_sp_skin__prefix:
+    noteDev: 
+    temp: false
+    text: Supporter upgrade
+  game_ent_sp_skin__text:
+    noteDev: 
+    temp: false
+    text: Enable the alternative appearance for the mobile base.
   game_language__header:
     noteDev: 
     temp: false
