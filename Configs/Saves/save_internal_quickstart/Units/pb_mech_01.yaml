@@ -1,9 +1,11 @@
 id:
-  nameSerial: -1
-  nameIndex: -1
-  nameOverride: Longbow
   role: 
-identifiable: 
+  nameSerial: 0
+  nameLoc:
+    textSector: 
+    textKey: 
+  nameOverride: Longbow
+  nameIndex: 0
 preset: 
 blueprint: unit_mech
 pilotName: 
@@ -14,14 +16,15 @@ salvageable: false
 wrecked: false
 defects: 0
 combatStatus: 
-frameIntegrity: 
+frameIntegrity:
+  f: 1
 eventMemory: 
 customMemory: 
 parts:
   core:
     version: 3
-    serial: 10
-    rating: 1
+    serial: 206
+    rating: 2
     level: 2
     levelOriginal: 2
     preset: body_set_knox_medium_top
@@ -40,29 +43,31 @@ parts:
     - external_top_head
     - external_top_pelvis
     - external_top_torso
+    - internal_aux_offense
     - rarity
     - perk_1
+    - internal_aux_pilot
     systems:
       internal_aux_top_core:
-        serial: 290
+        serial: 506
         blueprint: internal_aux_core_standard
         livery: 
         destroyed: false
-        fused: true
+        fused: false
         salvageable: false
         inventoryAdded: false
         favorite: false
       internal_aux_top_thrusters:
-        serial: 291
-        blueprint: internal_aux_thruster_standard
+        serial: 507
+        blueprint: internal_aux_thruster_heavy
         livery: 
         destroyed: false
-        fused: true
+        fused: false
         salvageable: false
         inventoryAdded: false
         favorite: false
       external_top_head:
-        serial: 292
+        serial: 508
         blueprint: armor_knox_m_head
         livery: 
         destroyed: false
@@ -71,7 +76,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_top_pelvis:
-        serial: 293
+        serial: 509
         blueprint: armor_knox_m_pelvis
         livery: 
         destroyed: false
@@ -80,7 +85,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_top_torso:
-        serial: 294
+        serial: 510
         blueprint: armor_knox_m_torso
         livery: 
         destroyed: false
@@ -88,9 +93,18 @@ parts:
         salvageable: false
         inventoryAdded: false
         favorite: false
+      internal_aux_offense:
+        serial: 511
+        blueprint: internal_aux_booster_sink
+        livery: 
+        destroyed: false
+        fused: false
+        salvageable: false
+        inventoryAdded: false
+        favorite: false
       rarity:
-        serial: 295
-        blueprint: rarity_1
+        serial: 512
+        blueprint: rarity_2
         livery: 
         destroyed: false
         fused: true
@@ -98,8 +112,8 @@ parts:
         inventoryAdded: false
         favorite: false
       perk_1:
-        serial: 296
-        blueprint: perk_mass_pos_r1
+        serial: 513
+        blueprint: perk_integrity_pos_r2
         livery: 
         destroyed: false
         fused: true
@@ -108,7 +122,7 @@ parts:
         favorite: false
   secondary:
     version: 3
-    serial: 11
+    serial: 139
     rating: 1
     level: 2
     levelOriginal: 2
@@ -131,7 +145,7 @@ parts:
     - perk_1
     systems:
       external_bottom_left_lower:
-        serial: 297
+        serial: 326
         blueprint: armor_knox_m_leg
         livery: 
         destroyed: false
@@ -140,7 +154,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_bottom_left_upper:
-        serial: 298
+        serial: 327
         blueprint: armor_knox_m_thigh
         livery: 
         destroyed: false
@@ -149,7 +163,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_bottom_right_lower:
-        serial: 299
+        serial: 328
         blueprint: armor_knox_m_leg
         livery: 
         destroyed: false
@@ -158,7 +172,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_bottom_right_upper:
-        serial: 300
+        serial: 329
         blueprint: armor_knox_m_thigh
         livery: 
         destroyed: false
@@ -167,7 +181,7 @@ parts:
         inventoryAdded: false
         favorite: false
       rarity:
-        serial: 301
+        serial: 330
         blueprint: rarity_1
         livery: 
         destroyed: false
@@ -176,7 +190,7 @@ parts:
         inventoryAdded: false
         favorite: false
       perk_1:
-        serial: 302
+        serial: 331
         blueprint: perk_integrity_pos_r1
         livery: 
         destroyed: false
@@ -186,7 +200,7 @@ parts:
         favorite: false
   optional_left:
     version: 3
-    serial: 12
+    serial: 161
     rating: 1
     level: 2
     levelOriginal: 2
@@ -208,7 +222,7 @@ parts:
     - perk_1
     systems:
       external_arm_lower:
-        serial: 303
+        serial: 396
         blueprint: armor_knox_m_forearm
         livery: 
         destroyed: false
@@ -217,7 +231,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_arm_upper:
-        serial: 304
+        serial: 397
         blueprint: armor_knox_m_shoulder
         livery: 
         destroyed: false
@@ -226,7 +240,7 @@ parts:
         inventoryAdded: false
         favorite: false
       rarity:
-        serial: 305
+        serial: 398
         blueprint: rarity_1
         livery: 
         destroyed: false
@@ -235,8 +249,8 @@ parts:
         inventoryAdded: false
         favorite: false
       perk_1:
-        serial: 306
-        blueprint: perk_dissipation_pos_r1
+        serial: 399
+        blueprint: perk_mass_pos_r1
         livery: 
         destroyed: false
         fused: true
@@ -245,7 +259,7 @@ parts:
         favorite: false
   optional_right:
     version: 3
-    serial: 13
+    serial: 160
     rating: 1
     level: 2
     levelOriginal: 2
@@ -267,7 +281,7 @@ parts:
     - perk_1
     systems:
       external_arm_lower:
-        serial: 307
+        serial: 392
         blueprint: armor_knox_m_forearm
         livery: 
         destroyed: false
@@ -276,7 +290,7 @@ parts:
         inventoryAdded: false
         favorite: false
       external_arm_upper:
-        serial: 308
+        serial: 393
         blueprint: armor_knox_m_shoulder
         livery: 
         destroyed: false
@@ -285,7 +299,7 @@ parts:
         inventoryAdded: false
         favorite: false
       rarity:
-        serial: 309
+        serial: 394
         blueprint: rarity_1
         livery: 
         destroyed: false
@@ -294,8 +308,8 @@ parts:
         inventoryAdded: false
         favorite: false
       perk_1:
-        serial: 310
-        blueprint: perk_dissipation_pos_r1
+        serial: 395
+        blueprint: perk_mass_pos_r1
         livery: 
         destroyed: false
         fused: true
@@ -304,11 +318,11 @@ parts:
         favorite: false
   equipment_right:
     version: 3
-    serial: 14
-    rating: 2
+    serial: 109
+    rating: 0
     level: 2
     levelOriginal: 2
-    preset: wpn_rifle_marksman_01
+    preset: wpn_rifle_assault_02
     livery: 
     integrity: 1
     barrier: 1
@@ -320,40 +334,10 @@ parts:
     - equipment_right
     hardpoints:
     - internal_main_equipment
-    - rarity
-    - perk_1
-    - internal_aux_weapon
     systems:
       internal_main_equipment:
-        serial: 311
-        blueprint: wpn_main_marksman_01
-        livery: 
-        destroyed: false
-        fused: true
-        salvageable: false
-        inventoryAdded: false
-        favorite: false
-      rarity:
-        serial: 312
-        blueprint: rarity_2
-        livery: 
-        destroyed: false
-        fused: true
-        salvageable: false
-        inventoryAdded: false
-        favorite: false
-      perk_1:
-        serial: 313
-        blueprint: perk_scatter_idle_pos_r2
-        livery: 
-        destroyed: false
-        fused: true
-        salvageable: false
-        inventoryAdded: false
-        favorite: false
-      internal_aux_weapon:
-        serial: 314
-        blueprint: internal_aux_count_r2
+        serial: 247
+        blueprint: wpn_main_assault_02
         livery: 
         destroyed: false
         fused: true
@@ -362,11 +346,11 @@ parts:
         favorite: false
   equipment_left:
     version: 3
-    serial: 22
+    serial: 208
     rating: 1
     level: 2
-    levelOriginal: 1
-    preset: wpn_ml_sidearm_03
+    levelOriginal: 2
+    preset: wpn_handgun_semi_01
     livery: 
     integrity: 1
     barrier: 1
@@ -383,8 +367,8 @@ parts:
     - perk_1
     systems:
       internal_main_equipment:
-        serial: 346
-        blueprint: wpn_main_ml_sidearm_03
+        serial: 517
+        blueprint: wpn_main_handgun_04
         livery: 
         destroyed: false
         fused: true
@@ -392,7 +376,7 @@ parts:
         inventoryAdded: false
         favorite: false
       rarity:
-        serial: 347
+        serial: 518
         blueprint: rarity_1
         livery: 
         destroyed: false
@@ -401,7 +385,7 @@ parts:
         inventoryAdded: false
         favorite: false
       perk_1:
-        serial: 348
+        serial: 519
         blueprint: perk_duration_pos_r1
         livery: 
         destroyed: false

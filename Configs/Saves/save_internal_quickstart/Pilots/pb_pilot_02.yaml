@@ -1,9 +1,18 @@
 id:
-  callsignIndex: 17
+  callsignLoc:
+    textSector: xc_pilot_names_callsigns_01
+    textKey: 17
   callsignOverride: 
-  nameIndexPrimary: 51
-  nameIndexSecondary: 19
+  callsignIndex: -1
+  namePrimaryLoc:
+    textSector: xc_pilot_names_given_01
+    textKey: 51
+  nameSecondaryLoc:
+    textSector: xc_pilot_names_family_01
+    textKey: 19
   nameOverride: 
+  nameIndexPrimary: -1
+  nameIndexSecondary: -1
 deathStatus: 
 bio: 
 version: 3
@@ -12,7 +21,7 @@ level: 1
 prestigeLevel: 0
 prestigeThreshold: 5
 traitPoints: 0
-typeKey: brawler
+typeKey: support
 knockedOut: false
 ejected: false
 faction: Phantoms
@@ -60,12 +69,12 @@ appearance:
   blendShapes: 
   portrait: 
   portraitVariant: 
-  cameraAnglePreset: 04
+  cameraAnglePreset: 01
 traitLayout:
 statValues:
 statRanges:
 statOffsets: 
-eventHistory: 
+eventHistory:
 eventMemory:
   pilot_internal_bio_index: 2
   pronoun: 2

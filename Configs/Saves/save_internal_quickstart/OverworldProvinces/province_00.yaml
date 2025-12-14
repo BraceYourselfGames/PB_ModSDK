@@ -2,22 +2,121 @@ faction: Phantoms
 factionBranch: branch_trainingreserves
 provinceLevel: 1
 visited: true
-modifiers: []
+modifiers:
+- sp_tutorial_intro
 properties:
   pilotExperienceMultiplier: 1
   campaignLinkIndex: 0
   campaignStepKey: 00_tutorial
   provinceKeyOrigin: 
 eventMemory:
+  province_audio_escalation_override: 0
   province_auto_escalation_level: 0
   province_auto_visited: 1
   province_auto_war_victory: 1
   province_tutorial: 1
   province_tutorial_first: 0
-pointSpawnsPerPresetKey: {}
-pointSpawnsPerPresetTag: {}
-pointCompletionsPerPresetKey: {}
-pointCompletionsPerPresetTag: {}
-pointCompletionRecords: []
-interactionsEncountered: []
-spawnLocationHistory: {}
+pointSpawnsPerPresetKey:
+  ftue_01_mountainbase: 1
+  ftue_02_liberation: 1
+  ev_general_unique_ftue_01: 1
+  ftue_03_demolition: 1
+  ftue_04_convoy: 1
+  ftue_05_showdown: 1
+pointSpawnsPerPresetTag:
+  flag_pilot_mechanics_disabled: 1
+  flag_force_site_info: 2
+  flag_preserve_on_victory: 3
+  flag_preserve_on_defeat: 4
+  flag_resupply_base: 1
+  flag_skip_recording: 1
+  flag_weather_clear: 3
+  flag_force_expanded_overlay: 1
+  flag_interactive_friendly: 1
+pointCompletionsPerPresetKey:
+  internal_hidden: 1
+  ftue_01_mountainbase: 1
+  ftue_02_liberation: 1
+  ftue_03_demolition: 1
+  ftue_04_convoy: 1
+  ftue_05_showdown: 1
+pointCompletionsPerPresetTag:
+  flag_preserve_on_defeat: 5
+  flag_preserve_on_victory: 4
+  type_hidden_internal: 1
+  flag_pilot_mechanics_disabled: 1
+  flag_force_site_info: 2
+  flag_resupply_base: 1
+  flag_skip_recording: 1
+  flag_weather_clear: 3
+pointCompletionRecords:
+- time: 55
+  victory: true
+  presetKey: internal_hidden
+  scenarioKey: unique_intro
+  areaKey: unique_demo
+- time: 56.69712
+  victory: true
+  presetKey: ftue_01_mountainbase
+  scenarioKey: unique_mountainbase
+  areaKey: unique_mountainbase
+- time: 61.89417
+  victory: true
+  presetKey: ftue_02_liberation
+  scenarioKey: unique_tutorial_liberation
+  areaKey: main_settlement_village_02
+- time: 74.03948
+  victory: true
+  presetKey: ftue_03_demolition
+  scenarioKey: unique_tutorial_demolition
+  areaKey: main_military_camp_02
+- time: 76.14182
+  victory: true
+  presetKey: ftue_04_convoy
+  scenarioKey: unique_tutorial_intercept_swarm
+  areaKey: main_wilderness_mountain_01
+- time: 79.77856
+  victory: true
+  presetKey: ftue_05_showdown
+  scenarioKey: unique_tutorial_base
+  areaKey: main_military_outpost_01_ftue
+interactionsEncountered:
+- prequel_01
+- ftue_00_intro
+- ftue_01_mountainbase_combat
+- ftue_02_mountainbase_exit
+- ftue_09_liberation_notification
+- ev_unique_ftue_01
+- ftue_10_liberation_combat
+- ftue_11_liberation_exit
+- ftue_21_demolition_combat
+- ftue_22_convoy_combat
+- ftue_30_showdown_notification
+- ftue_31_showdown_combat
+- ftue_32_showdown_exit
+- ftue_33_frontline_notification
+- hg_base_exit
+spawnLocationHistory:
+  f1_mountain:
+  - x: 60.14432
+    y: 34.35868
+    z: 137.5981
+  f2_village:
+  - x: -179.4941
+    y: 25.75102
+    z: 94.69679
+  poi_01:
+  - x: -82.49962
+    y: 38.8008
+    z: 67.51898
+  f3_choice:
+  - x: 102.2782
+    y: 14.57647
+    z: -33.88205
+  - x: 67.31422
+    y: 13.03099
+    z: -161.1591
+  f4_final:
+  - x: -151.3941
+    y: 8.216636
+    z: -134.1706
