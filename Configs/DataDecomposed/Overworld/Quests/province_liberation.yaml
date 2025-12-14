@@ -725,7 +725,7 @@ effectsShared:
     - !Comment
       comment: 'First, delete all points that are not part of core set: raids and incursions. 1'
     - !QuestDeletePoints
-      onlyCombat: false
+      onlyCombat: true
       onlyHostile: false
       checks:
       - !OverworldValidateMemory
@@ -824,7 +824,7 @@ effectsShared:
         questKey: 
       functionsElse: 
     - !OverworldChanceBranchGroup
-      chance: 0
+      chance: 0.25
       functions:
       - !Comment
         comment: If chance roll succeeds, spawn a patrol
@@ -852,9 +852,6 @@ effectsShared:
         - !OverworldEntityMemorySet
           value: 8
           memoryKey: campaign_countdown_offset
-        - !OverworldEntityEscalation
-          offset: false
-          level: 1
         - !OverworldEntityExpiration
           duration: 6
         - !OverworldEntityQuestUnlink {}

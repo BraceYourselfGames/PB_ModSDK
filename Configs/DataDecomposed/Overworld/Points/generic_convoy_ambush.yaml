@@ -45,6 +45,12 @@ combat:
         - sub_reactor_r1
         - sub_thruster
         tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_lr
+        tags: 
     obj_tier1:
       type: CombatConditional
       collapsed: true
@@ -77,6 +83,5 @@ combat:
         tagsUsed: false
         keys:
         - res_r3
-        - res_token
         - part_backpack
         tags: 

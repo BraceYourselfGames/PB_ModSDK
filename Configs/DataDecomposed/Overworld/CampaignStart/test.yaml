@@ -1,0 +1,32 @@
+hidden: false
+color:
+  r: 1
+  g: 0
+  b: 0
+  a: 1
+stepKey: 40_postgame_start
+provinceKey: province_breakthrough_line
+position:
+  x: 0
+  y: 0
+  z: 0
+branchKey: 
+functionsGlobal:
+- !Comment
+  comment: Sample set of start functions. Most of functionality like that should be placed into the entry block under the campaign step, but putting functions here is a quick shortcut.
+- !CreateUnit
+  levelOffset: 0
+  qualityTable: unitgroup_q3_rare
+  factionBranch: 
+  presetKey: vhc_mech_w1_mr_ar_shield
+  presetTags: 
+  memory: 
+- !CreatePilot
+  identification: 
+  bio: 
+  appearanceOverlay: 
+  appearanceCustom: 
+  appearancePresets:
+  - unique_intro_pc
+  memory: 
+functionsBase: 

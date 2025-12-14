@@ -17,18 +17,17 @@ ui:
 unlock: 
 cost:
   resources:
-    components_r2: 40
-    components_r3: 20
+    components_r2: 100
+    components_r3: 55
     supplies: 2000
+    unit_token: 1
 effect:
   stats:
-  - key: workshop_speed
-    modifier: Offset
-    value: 0.5
   - key: unit_repair_jobs
     modifier: Offset
     value: 1
-  functions:
+  functions: 
+  functionsOnLoad:
   - !CreateWorkshopProjects
     projects:
     - countMin: 1
@@ -37,7 +36,12 @@ effect:
       tagsUsed: false
       key: utl_res_convert_r3
       tags: 
-  functionsOnLoad: 
+    - countMin: 1
+      countMax: 1
+      countRandom: false
+      tagsUsed: false
+      key: utl_res_convert_r1_from_r3
+      tags: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

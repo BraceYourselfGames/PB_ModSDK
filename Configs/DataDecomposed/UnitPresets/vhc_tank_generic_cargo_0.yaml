@@ -6,7 +6,7 @@ bodyTagPinningExempted: false
 parents: []
 blueprint: unit_tank_modular
 textType: 
-livery: default
+livery: neutral_color_030_orange_b
 aiBehavior: DumbDestination
 aiTargeting: defensive
 tags: []
@@ -36,7 +36,8 @@ parts:
     rating: 
     systems: 
   secondary:
-    livery: 
+    livery:
+      livery: cargo_a
     preset: !PartResolverKeys
       keys:
       - vhc_tank_body_turret_cargo

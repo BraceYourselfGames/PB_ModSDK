@@ -1,0 +1,35 @@
+parents:
+- key: salvage_budget_03
+  priority: 3
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 4
+  positionY: 2
+  endpoint: false
+  group: 
+  icon: s_icon_l32_star5
+unlock: 
+cost:
+  resources:
+    components_r2: 190
+    components_r3: 130
+    supplies: 2200
+    unit_token: 3
+effect:
+  stats:
+  - key: salvage_bonus
+    modifier: Offset
+    value: 10
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_reactor

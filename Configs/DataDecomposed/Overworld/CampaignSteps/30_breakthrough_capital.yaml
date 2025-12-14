@@ -8,6 +8,10 @@ ui:
   textNavDesc: {}
   iconNav: 
   textFromQuest: province_breakthrough_capital
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
 travelInteraction: 
 entry:
   functionsGlobal:
@@ -36,9 +40,13 @@ branches:
     checksGlobal: 
     checksBase: 
     stepKey: 40_postgame_start
-    direction: 0
     levelOffset: 
     branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 
@@ -59,9 +67,13 @@ branches:
     checksGlobal: 
     checksBase: 
     stepKey: 40_postgame_start
-    direction: 0
     levelOffset: 
     branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 
