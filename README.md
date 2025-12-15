@@ -15,7 +15,7 @@ If you get stuck or experience a bug, please don't hesitate to ask questions in 
 
 ## Getting started
 
-Please refer to this wiki page for detailed installation instructions: [Installing the SDK](../../wiki/Installing-the-SDK)
+Please refer to the wiki for detailed installation instructions: [Installing the SDK](../../wiki/Installing-the-SDK)
 
 Once the SDK is set up and the Unity Project is open, click **PB Mod SDK/Getting Started** in the top menu of the Unity Editor window to get additional guidance. The Getting Started window is the central point of the SDK: it can help you check the status of different components, navigate to important links and scenes and guide you through creating your own mods.
 
@@ -30,24 +30,16 @@ Click the Tutorials button at the bottom of the Getting Started window to learn 
 
 ## Documentation
 
-Outside of this repository and the embedded tutorials, we recommend checking a few additional pages. General info:
-- [Modding intro](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding)
-- [Detailed modding overview](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystem)
-- [Modding guidelines](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModGuidelines)
-- [SDK overview mirror](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSDK)
+Check the [Mod SDK Wiki](https://github.com/BraceYourselfGames/PB_ModSDK/wiki) for additional information about the modding system, SDK and variety of tutorials. At a minimum, consider checking the following articles besides [Installing the SDK](../../wiki/Installing-the-SDK):
+- [Installing the optional assets](../../wiki/Installing-the-optional-assets)
+- [Mod projects](../../wiki/Mod-projects)
+- [Mod system overview](../../wiki/Mod-system-overview)
 
-Change logs:
-- [Mod system changelog](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/ModSystemChanges)
-- [Game changelog](https://braceyourselfgames.com/phantom-brigade/updates/)
-
-Tutorials:
-- [Creating mech armor](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-mech-armor-modding)
-- [Creating weapons](https://wiki.braceyourselfgames.com/en/PhantomBrigade/Modding/official-custom-weapon-assets)
-
-If you get stuck or experience a bug, please don't hesitate to ask questions in the #phantom-modding channel of [the official Discord server](https://discord.com/invite/braceyourselfgames).
+If you get stuck or experience a bug, please don't hesitate to ask questions in the `#phantom-modding` channel of [the official Discord server](https://discord.com/invite/braceyourselfgames).
 
 ## Dependencies
 
+- The current SDK release is intended to be used with Phantom Brigade 2.1.
 - [Odin Inspector](https://odininspector.com): Used for all custom inspectors and drawers. This dependency is licensed for redistribution only as a part of the Phantom Brigade modding SDK and can not be used in other Unity projects. A standalone version of this library can be acquired [here](https://odininspector.com/pricing).
 - YAML serialization used in this project depends on heavily modified old release of YAML.NET. The original project is available [here](https://github.com/aaubry/YamlDotNet). We do not recommend upgrading this dependency.
 - [Steamworks.NET]([https://steamworks.github.io/](https://github.com/rlabrecque/Steamworks.NET)): Used for Steam Workshop uploads. Important: This is an external package downloaded through Git and your project might not import if you do not have Git installed.
