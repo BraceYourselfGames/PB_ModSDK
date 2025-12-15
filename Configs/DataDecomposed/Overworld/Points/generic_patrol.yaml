@@ -16,7 +16,7 @@ core:
     path: Content/Overworld/Site_Battlefield_Inactive
   observer: 
   movement:
-    speed: 4
+    speed: 3.5
     rotateToFacing: false
   rangeVision:
     f: 45
@@ -41,7 +41,7 @@ effectsOnEvents:
     functionsBase: 
     functionsSelf:
     - !OverworldEntityMoveToBase
-      speed: 4
+      speed: 2.8
       pointRange:
         x: 5
         y: 25
@@ -50,7 +50,7 @@ effectsOnEvents:
     functionsBase: 
     functionsSelf:
     - !OverworldEntityMoveToBase
-      speed: 4
+      speed: 2.8
       pointRange:
         x: 20
         y: 40

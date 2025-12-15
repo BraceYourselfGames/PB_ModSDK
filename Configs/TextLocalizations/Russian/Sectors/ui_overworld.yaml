@@ -70,7 +70,7 @@ entries:
     textEng: Follow the active objectives to progress to the next region.
   campaign_info_stat_capital:
     id: 1
-    text: Шаги до столицы
+    text: Продвижение к столице
     textEng: Steps to capital
   campaign_info_stat_liberated:
     id: 1
@@ -280,6 +280,10 @@ entries:
     id: 1
     text: Применить
     textEng: Apply
+  general_label_error:
+    id: 2
+    text: Ошибка!
+    textEng: Error!
   general_label_exit:
     id: 1
     text: Выйти
@@ -292,6 +296,10 @@ entries:
     id: 1
     text: Назад
     textEng: Return
+  general_label_warning:
+    id: 2
+    text: Внимание!
+    textEng: Warning!
   hotbar_ability_header_effect:
     id: 1
     text: Эффект
@@ -382,7 +390,7 @@ entries:
     textEng: Confirm camp
   lock_camp_review_hint_last_supplies:
     id: 1
-    text: Это последние припасы в инвентаре. Без их пополнения дальнейшие остановки будут невозможны.
+    text: Это последние лагерные припасы в инвентаре. Без их пополнения дальнейшие остановки будут невозможны.
     textEng: This is the last set of camp supplies in your inventory. No further stops would be possible until you find more.
   lock_camp_review_hint_pilots_free:
     id: 1
@@ -406,11 +414,11 @@ entries:
     textEng: The mech repair bay was not filled to capacity.
   lock_camp_review_hint_units_none:
     id: 1
-    text: В ремонтном отсеке нет ни одного робота.
+    text: В ремонтном отсеке нет ни одного меха.
     textEng: No mechs were assigned to the repair bay.
   lock_camp_review_hint_units_total:
     id: 1
-    text: Всего роботов, требующих ремонта
+    text: Всего мехов, требующих ремонта
     textEng: Total mechs with repairable damage
   lock_camp_selection_header:
     id: 1
@@ -418,11 +426,11 @@ entries:
     textEng: Preparing camp
   lock_camp_selection_hint:
     id: 1
-    text: У вас достаточно припасов, чтобы разбить лагерь. За одну остановку можно обслужить лишь ограниченное число роботов и пилотов. Внимательно осмотрите и решите, кого отправить в медицинский отсек, а какие роботы нуждаются в ремонте.
+    text: У вас достаточно припасов, чтобы разбить лагерь. За одну остановку можно обслужить лишь ограниченное число мехов и пилотов. Внимательно осмотрите и решите, кого отправить в медицинский отсек, а какие мехи нуждаются в ремонте.
     textEng: You have the supplies to set up camp. A limited number of mechs and pilots can be attended to in one stop. Carefully review which pilots should be sent to the medical bay and which mechs should be repaired.
   lock_camp_selection_numbers:
     id: 1
-    text: Выбрано роботов и пилотов
+    text: Выбрано мехов и пилотов
     textEng: Mechs & pilots selected
   lock_camp_selection_start:
     id: 1
@@ -450,7 +458,7 @@ entries:
     textEng: This is a standard outcome of assigning a pilot to the medical bay.
   lock_effect_tag_camp_unit:
     id: 1
-    text: Обычный результат назначения робота в ремонтный отсек.
+    text: Обычный результат назначения меха в ремонтный отсек.
     textEng: This is a standard outcome of assigning a mech to the repair bay.
   lock_effect_tag_resupply_general:
     id: 1
@@ -466,7 +474,7 @@ entries:
     textEng: Move out
   lock_hint_camp:
     id: 1
-    text: Экипаж оказывает помощь раненым, чинит роботов и отдыхает. Но стоянка недолгая — оптический камуфляж скоро рассеется.
+    text: Экипаж оказывает помощь раненым, чинит мехов и отдыхает. Но стоянка недолгая — оптический камуфляж скоро рассеется.
     textEng: "The crew attends to the injured, repairs the mechs and rests. This is but a short stop: the optical camo won't last long."
   lock_hint_generic:
     id: 1
@@ -474,7 +482,7 @@ entries:
     textEng: The base is waiting in place.
   lock_hint_resupply:
     id: 1
-    text: Пока мобильная база пополняет запасы, механики из Сил Свободы Фирланда берутся за ремонт ваших роботов. Экипаж отдыхает и восстанавливается.
+    text: Пока мобильная база пополняет запасы, механики из Сил Свободы Фирланда берутся за ремонт ваших мехов. Экипаж отдыхает и восстанавливается.
     textEng: While the mobile base is getting restocked, the mechanics from Fyrland Freedom Forces get to work on your mechs. The crew rests & recovers.
   lock_hint_travel:
     id: 1
@@ -486,7 +494,7 @@ entries:
     textEng: Confirm retreat
   lock_retreat_hint_camp_possible:
     id: 1
-    text: У мобильной базы еще остались лагерные припасы. Если нужно починить роботов или вылечить пилотов, возможно, стоит разбить лагерь.
+    text: У мобильной базы еще остались лагерные припасы. Если нужно починить мехов или вылечить пилотов, возможно, стоит разбить лагерь.
     textEng: The mobile base still has some camp supplies. If you need to repair mechs or treat pilot injuries, it might be optimal to set up a camp instead.
   lock_retreat_hint_start:
     id: 1
@@ -718,11 +726,11 @@ entries:
     textEng: Province liberated!
   mission_eta_prefix:
     id: 1
-    text: Время прибытия
+    text: РВ
     textEng: ETA
   mission_eta_suffix:
     id: 1
-    text: назад
+    text: ''
     textEng: away
   nav_button_base:
     id: 1
@@ -818,7 +826,7 @@ entries:
     textEng: Overheated!
   overdrive_hit_mech:
     id: 1
-    text: Робот поврежден из-за высокой скорости
+    text: Мех поврежден из-за высокой скорости
     textEng: Mech damaged due to high speed
   overdrive_hit_pilot:
     id: 1
@@ -1214,7 +1222,7 @@ entries:
     textEng: Option unavailable, participate in combat to unlock. [cc]You already stopped to camp or resupply recently and it is too risky to stop again without securing the area.[ff]
   roster_camp_enter_tooltip_effects:
     id: 1
-    text: "- [b]Займет время. Срок некоторых заданий может истечь.[/b]\n- Выбранные роботы будут отремонтированы. \n- Выбранные пилоты будут вылечены. \n- Уровень усталости всех пилотов немного снизится."
+    text: "- [b]Займет время. Срок некоторых заданий может истечь.[/b]\n- Выбранные мехи будут отремонтированы. \n- Выбранные пилоты будут вылечены. \n- Уровень усталости всех пилотов немного снизится."
     textEng: "- [b]Takes time. Missions might expire.[/b] \n- Selected mechs will be repaired. \n- Selected pilots will be healed. \n- All pilots will have slightly reduced fatigue."
   roster_camp_enter_tooltip_inventory:
     id: 1
@@ -1270,7 +1278,7 @@ entries:
     textEng: Overdrive
   roster_overdrive_button_text:
     id: 2
-    text: 'Переключает режим форсажа, позволяющий базе двигаться быстрее. Используйте с осторожностью: пилоты и роботы могут со временем получать урон.'
+    text: 'Переключает режим форсажа, позволяющий базе двигаться быстрее. Используйте с осторожностью: пилоты и мехи могут со временем получать урон.'
     textEng: 'Toggles the overdrive mode, allowing the base to move faster. Use sparingly: your pilots and mechs might suffer damage over time.'
   roster_pilot_enemy_hint:
     id: 1
@@ -1330,7 +1338,17 @@ entries:
     textEng: Retreat
   roster_return_enter_tooltip:
     id: 1
-    text: "Возвращение на дружественную базу — крайняя мера. Прибегните к ней, если припасы закончились и других вариантов нет. \n\n- Займет много времени. Срок заданий истечет.\n- Припасы пополнятся, если закончились.\n- Все юниты будут отремонтированы.\n- Пилоты будут вылечены, но полностью не избавятся от усталости."
+    text: >-
+      Возвращение на дружественную базу — крайняя мера. Прибегните к ней, если лагерные припасы закончились и других вариантов нет.
+
+
+      - Займет много времени. Срок заданий истечет.
+
+      - Припасы пополнятся, если закончились.
+
+      - Все юниты будут отремонтированы.
+
+      - Пилоты будут вылечены, но полностью не избавятся от усталости.
     textEng: >-
       Returning to a friendly base is a last resort. Use it when you run out of camp supplies and have no other options to proceed.
 
@@ -1404,11 +1422,11 @@ entries:
     textEng: Equipment
   roster_unit_tooltip6_join:
     id: 1
-    text: '&'
+    text: +
     textEng: '&'
   selection_branch_tooltip_header:
     id: 1
-    text: Ветка
+    text: Вид войск
     textEng: Branch
   selection_branch_tooltip_prefix:
     id: 1
@@ -1472,7 +1490,7 @@ entries:
     textEng: The scout squad dispatched by the Brigade. Worn down by a long journey and in need of maintenance.
   selection_early_mech_count:
     id: 1
-    text: 2 активных робота
+    text: 2 активных меха
     textEng: 2 active mechs
   selection_early_squad:
     id: 1
@@ -1582,6 +1600,14 @@ entries:
     id: 1
     text: Этот захваченный регион уязвим для атаки и обозначен Силами Свободы Фирланда как приоритетный.
     textEng: This occupied region is vulnerable to an attack and has been designated a priority target by Fyrland Freedom Forces.
+  selection_province_type_recaptured_header:
+    id: 2
+    text: Контратака
+    textEng: Counterattack
+  selection_province_type_recaptured_text:
+    id: 2
+    text: Ранее освобожденная провинция атакована.
+    textEng: This previously liberated province is under attack.
   selection_province_type_unreachable_hint:
     id: 1
     text: Этот регион пока недоступен. Возможность попасть сюда появится после освобождения соседних территорий.
@@ -1732,5 +1758,5 @@ entries:
     textEng: Exit
   world_travel_return_text:
     id: 2
-    text: Вернуться к настройкам передовой базы
+    text: Вернуться к исходным вариантам
     textEng: Return to frontline options

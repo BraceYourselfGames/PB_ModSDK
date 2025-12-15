@@ -205,6 +205,10 @@ entries:
     id: 1
     text: 难度
     textEng: Difficulty
+  difficulty_screen_preset_custom:
+    id: 2
+    text: 自定义
+    textEng: Custom
   difficulty_screen_preset_easy:
     id: 1
     text: 简单
@@ -285,6 +289,14 @@ entries:
     id: 1
     text: 加入社区
     textEng: Join the community
+  footer_button_faq:
+    id: 2
+    text: FAQ
+    textEng: FAQ
+  footer_button_faq_ext:
+    id: 2
+    text: 常见问题
+    textEng: Frequently asked questions
   footer_button_forum:
     id: 1
     text: Reddit论坛
@@ -317,6 +329,10 @@ entries:
     id: 1
     text: 更新
     textEng: Update
+  footer_button_website:
+    id: 2
+    text: 网站
+    textEng: Website
   footer_button_wishlist:
     id: 1
     text: 立刻加入愿望单
@@ -493,6 +509,14 @@ entries:
     id: 2
     text: 鼠标滚轮
     textEng: Mouse Wheel
+  load_notice_experimental:
+    id: 2
+    text: 此存档源自启用了战斗存档等实验性功能的战役。可以加载，但不受官方支持。
+    textEng: This save originates from a campaign with experimental features like combat saves. It can be loaded, but is not officially supported.
+  load_notice_mods:
+    id: 2
+    text: 此存档源自使用了模组的战役。可以加载，但不受官方支持。
+    textEng: This save originates from a campaign with mods. It can be loaded, but is not officially supported.
   load_warning_incompatible:
     id: 2
     text: 该存档与当前游戏版本不兼容。
@@ -663,11 +687,14 @@ entries:
     textEng: Start with Tutorial
   newgame_tooltip_new_game_text:
     id: 1
-    text: "从头开始，并在开始战役之前轻松掌握游戏内的战斗基础。"
+    text: 从头开始，并在开始战役之前轻松掌握游戏内的战斗基础。
     textEng: Start at the beginning and ease into the basics of combat before taking on the campaign.
   newgame_tooltip_quick_start_text:
     id: 1
-    text: "从占领的第一个省份开始，\n所有教程已完成。直接投入战斗吧！"
+    text: >-
+      从占领的第一个省份开始，
+
+      所有教程已完成。直接投入战斗吧！
     textEng: Start with the first province captured and all tutorials completed. Jump straight into the fight!
   options_button_apply:
     id: 1
@@ -677,6 +704,22 @@ entries:
     id: 1
     text: 重置
     textEng: Reset
+  options_exp_confirmation_header:
+    id: 2
+    text: 实验性功能
+    textEng: Experimental features
+  options_exp_confirmation_text:
+    id: 2
+    text: 您选择启用一个实验性功能。再次提醒：[b]这可能会影响游戏稳定性，并使您的战役面临风险。[/b][ffd588]您确定要继续吗？
+    textEng: 'You have selected to enable an experimental feature. Once again: [b]this could compromise game stability and puts your campaign at risk.[/b] [ffd588]Are you sure you want to proceed?'
+  options_exp_notice:
+    id: 2
+    text: '[fff1d8]“实验性”绝非戏言。启用任何此类选项时，我们无法保证游戏稳定性或存档安全。[ffd589]强烈建议您先手动保存游戏，以便在出现问题时能够回退。'
+    textEng: "[fff1d8]The word \"experimental\" isn't a joke. We can't guarantee game stability or the safety of game saves when any of these options are active. [ffd589]We highly recommend that you manually save your game first, so you have a fallback in case things go south."
+  options_exp_notice_suffix:
+    id: 2
+    text: 启用这些功能需自行承担风险！
+    textEng: Enable these features at your own risk!
   options_header_unsaved_changes:
     id: 1
     text: 未保存的更改
@@ -791,6 +834,10 @@ entries:
     id: 1
     text: 返回
     textEng: Back
+  root_button_continue:
+    id: 2
+    text: 继续
+    textEng: Continue
   root_button_credits:
     id: 1
     text: 制作人员
@@ -831,6 +878,10 @@ entries:
     id: 1
     text: 保存
     textEng: Save
+  root_button_skip:
+    id: 2
+    text: 跳过教程
+    textEng: Skip tutorial
   save_button_create_hint:
     id: 2
     text: 新建存档名称
@@ -1119,3 +1170,11 @@ entries:
 
 
       Immediately stop playing and consult a doctor if you experience any of these symptoms. If you or any of your relatives have a history of seizures or epilepsy, it is recommended that you consult a doctor before playing.
+  tutorial_skip_header:
+    id: 2
+    text: 确定跳过教程？
+    textEng: Skip the tutorial?
+  tutorial_skip_text:
+    id: 2
+    text: 教程区域涵盖了大量游戏机制，包括2.0版本更新的多项内容及额外的背景故事。即使您是回归玩家，我们也建议完成教程。您确定要跳过吗？
+    textEng: The tutorial region covers a large number of mechanics, including many added with the 2.0 update; as well as additional backstory. We recommend completing the tutorials even if you are a returning player. Are you sure you want to skip forward?

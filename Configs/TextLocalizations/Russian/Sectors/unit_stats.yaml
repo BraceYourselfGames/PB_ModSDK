@@ -142,7 +142,7 @@ entries:
     textEng: Speed
   drv_weight_class__desc:
     id: 1
-    text: 'Определяется классом отдельных бронепластин (верхняя и нижняя части корпуса, руки). Влияет на исход столкновений: робот более тяжелого класса не потеряет равновесие при столкновении с более легким.'
+    text: 'Определяется классом отдельных бронепластин (верхняя и нижняя части корпуса, руки). Влияет на исход столкновений: мех более тяжелого класса не потеряет равновесие при столкновении с более легким.'
     textEng: 'Depends on the class of individual armor parts (upper and lower body, arms). Determines collision outcomes: a mech with a higher weight class will not crash in a collision against a lower weight class.'
   drv_weight_class__name:
     id: 1
@@ -158,7 +158,7 @@ entries:
     textEng: Weight points
   frame_fractures__desc:
     id: 1
-    text: Последствия вывода робота из строя во время боя. Каждый корпус выдерживает лишь ограниченное число таких повреждений.
+    text: Последствия вывода меха из строя во время боя. Каждый корпус выдерживает лишь ограниченное число таких повреждений.
     textEng: Lasting damage from the mech being taken down in combat. Each mech frame can only withstand a limited number of these events.
   frame_fractures__name:
     id: 1
@@ -166,7 +166,7 @@ entries:
     textEng: Frame fractures
   frame_health__desc:
     id: 1
-    text: Общее состояние робота после боя.
+    text: Общее состояние меха после боя.
     textEng: Overall state of the mech after combat.
   frame_health__name:
     id: 1
@@ -274,7 +274,7 @@ entries:
     textEng: Damage taken by pilots. Too much concussive damage will knock them out. Useful to ensure that enemy units are intact for salvage.
   wpn_concussion__name:
     id: 1
-    text: Урон [aa]пилоту
+    text: Урон пилоту
     textEng: Pilot [aa]damage
   wpn_damage__desc:
     id: 1
@@ -282,7 +282,7 @@ entries:
     textEng: Direct damage to unit integrity and barrier.
   wpn_damage__name:
     id: 1
-    text: Урон [aa]юниту
+    text: Урон юниту
     textEng: Unit [aa]damage
   wpn_damage_buildup__desc:
     id: 1
@@ -330,7 +330,7 @@ entries:
     textEng: Damage to structures. Useful for destroying cover.
   wpn_impact__name:
     id: 1
-    text: Урон [aa]постройке
+    text: Урон постройкам
     textEng: Structure [aa]damage
   wpn_impact_radius__desc:
     id: 1

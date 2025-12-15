@@ -76,10 +76,6 @@ entries:
     id: 1
     text: 음성 볼륨
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: 컷신 보이스오버를 제어합니다.
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: 프레임레이트 제한
@@ -156,10 +152,6 @@ entries:
     id: 1
     text: 50% (2160px)
     textEng: 50% (2160px)
-  display_ui_scale__lv_900:
-    id: 1
-    text: 120% (900px)
-    textEng: 120% (900px)
   display_ui_scale__lv_936:
     id: 1
     text: 115% (936px)
@@ -172,6 +164,22 @@ entries:
     id: 1
     text: 사용자 인터페이스의 해상도입니다. 화면 해상도와는 독립되어 있습니다. 증가시켜서 텍스트를 확대할 수 있습니다.
     textEng: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    id: 2
+    text: 전투 저장
+    textEng: Combat saves
+  exp_combat_saves__text:
+    id: 2
+    text: 실험 기능입니다. 전투 중에 게임을 저장하고 전투 저장 파일을 불러올 수 있게 합니다. 이 기능으로 인해 비주얼 아티팩트, 부정확한 자세, 임무 법칙 문제, 더 넓은 캠페인 상의 잠재적인 부작용이 일어날 수 있습니다. 이 기능을 활성화하면 저장 파일에 실험 표시가 됩니다.
+    textEng: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    id: 2
+    text: 완전한 리플레이
+    textEng: Full replay
+  exp_replay_extended__text:
+    id: 2
+    text: "실험 기능입니다. 게임에서 한 턴 대신 전체 전투를 기록하고 리플레이할 수 있도록 합니다. 이로 인해 성능이 크게 저하되고, 리플레이 모드와 실행 모두에서 전투 시 메모리 사용이 증가할 수 있습니다. \n\n완전한 리플레이는 원본 실행을 시각적으로 정확하게 재현하지 않을 수 있습니다. 레벨 디스트럭션, 특수 효과, 유닛 애니메이션에 단일 턴 리플레이에 나타나지 않는 아티팩트가 생길 수 있습니다."
+    textEng: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     id: 1
     text: 분석 정보
@@ -188,6 +196,34 @@ entries:
     id: 2
     text: 분대를 전투로 배치하기 전, 위험한 상태의 메카 및 조종사에 관한 경고를 표시합니다.
     textEng: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    id: 2
+    text: 대미지 스크롤링
+    textEng: Damage scrolling
+  game_base_damage_duration__text:
+    id: 2
+    text: 무기를 확인할 때 (가능하다면) 게임이 다양한 대미지 유형을 스크롤하는 속도입니다.
+    textEng: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    id: 2
+    text: 대미지 우선 사항
+    textEng: Damage priority
+  game_base_damage_priority__lv_action:
+    id: 2
+    text: 작업당 대미지
+    textEng: Damage per action
+  game_base_damage_priority__lv_dps:
+    id: 2
+    text: 초당 대미지
+    textEng: Damage per second
+  game_base_damage_priority__lv_hit:
+    id: 2
+    text: 명중당 대미지
+    textEng: Damage per hit
+  game_base_damage_priority__text:
+    id: 2
+    text: 게임에서 무기를 확인할 때 어떤 대미지 값을 먼저 표시할지 설정합니다.
+    textEng: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     id: 1
     text: 비교 패널 두 개
@@ -300,18 +336,26 @@ entries:
     id: 1
     text: 이 설정은 활동하지 않는 기간 이후에 예측 시간을 턴의 맨 앞으로 되돌릴지 여부를 결정합니다.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
-    id: 1
-    text: 테스트 설정 1
-    textEng: Test setting 1
-  game_ent_sp__prefix:
-    id: 1
-    text: 콘텐츠
-    textEng: Content
-  game_ent_sp__text:
-    id: 1
-    text: 설정에 대한 설명은 여기에 표시됩니다.
-    textEng: Description for the setting goes here.
+  game_ent_sp_logo__header:
+    id: 2
+    text: 메뉴 로고 변경
+    textEng: Change menu logo
+  game_ent_sp_logo__text:
+    id: 2
+    text: 메인 메뉴 내 다른 로고를 활성화합니다.
+    textEng: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
+    id: 2
+    text: 이동식 기지 변경
+    textEng: Change mobile base
+  game_ent_sp_skin__prefix:
+    id: 2
+    text: 서포터 업그레이드
+    textEng: Supporter upgrade
+  game_ent_sp_skin__text:
+    id: 2
+    text: 이동식 기지의 다른 외형을 활성화합니다.
+    textEng: Enable the alternative appearance for the mobile base.
   game_language__header:
     id: 1
     text: 언어

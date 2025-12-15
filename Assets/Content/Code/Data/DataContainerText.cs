@@ -18,6 +18,7 @@ namespace PhantomBrigade.Data
         public const string equipmentHardpoints = "equipment_hardpoints";
         
         public const string overworldCampaign = "overworld_campaign";
+        public const string overworldStart = "overworld_start";
         public const string overworldPoints = "overworld_points";
         public const string overworldProvinces = "overworld_provinces";
         public const string overworldModifiers = "overworld_modifiers";

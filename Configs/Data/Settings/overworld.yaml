@@ -1,3 +1,4 @@
+customStartAllowed: false
 pointLimit: 3
 pointCountdownDisplayThreshold: 9
 pointSpawnRangeDefault:
@@ -19,9 +20,17 @@ partsForWorkshopLevel:
   secondary: 3
 pilotRecruitCostsRookie:
   supplies: -150
-pilotRecruitCostsPerLevel:
-  supplies: -100
+pilotRecruitCostsVeteran:
+  components_r2: -20
+  supplies: -50
   unit_token: -1
+pilotRecruitCostsPerLevel:
+  components_r2: -10
+  components_r3: -5
+  supplies: -100
+pilotQuickStartPromotions:
+  2: 1
+  3: 2
 pilotRecruitPromotionHistory: 2
 pilotRecruitRefreshInterval: 24
 pilotRecruitCountBase:
@@ -62,7 +71,7 @@ zoomDefault: 0.15
 zoomDistanceDefault: 385
 cameraRotationYDefault: 57
 cameraRotationXDefault: 26
-deltaTimeProtection: true
+deltaTimeProtection: false
 deltaTimeMin: 0.008333334
 deltaTimeMax: 0.06666667
 overworldTimeProgression: 0.5
@@ -239,10 +248,8 @@ travelDurationSim: 12
 campCostBase: 1
 campCostIncreased: 2
 timeSkipDurationRealtime: 3
-timeSkipDurationCamp: 6
-timeSkipDurationResupply: 18
 timeSkipDurationRetreat: 24
-tutorialOnQuickStart: true
+tutorialOnQuickStart: false
 campaignProgressTopRight: false
 liberationSpawnVariants:
   s1_refresh:

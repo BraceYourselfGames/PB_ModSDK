@@ -8,6 +8,10 @@ ui:
   textNavDesc: {}
   iconNav: 
   textFromQuest: 
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
 travelInteraction:
   tagsUsed: false
   keys:
@@ -76,9 +80,13 @@ branches:
     checksGlobal: 
     checksBase: 
     stepKey: 10_breakthrough_line
-    direction: 180
     levelOffset: 
-    branchKey: 
+    branchKey: branch_reserves
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: false
       keys:

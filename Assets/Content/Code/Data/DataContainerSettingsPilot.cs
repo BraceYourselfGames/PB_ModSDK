@@ -138,19 +138,16 @@ namespace PhantomBrigade.Data
 
     public class DataContainerResourceAsset<T> : DataContainer where T : UnityEngine.Object // Changed from ScriptableObject to generic Object to support more asset types
     {
-        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         [InlineButton ("OnBeforeSerialization", "Update path")]
         // [GUIColor ("GetPrefabColor")]
         public T asset;
-        #endif
         
         [ReadOnly][GUIColor ("GetPathColor")]
         public string path;
         
         public override void OnBeforeSerialization ()
         {
-            #if !PB_MODSDK
             base.OnBeforeSerialization ();
         
             #if UNITY_EDITOR
@@ -167,12 +164,10 @@ namespace PhantomBrigade.Data
             fullPath = fullPath.Substring(0, fullPath.Length - extension.Length);
             path = fullPath;
             #endif
-            #endif
         }
 
         public override void OnAfterDeserialization (string key)
         {
-            #if !PB_MODSDK
             base.OnAfterDeserialization (key);
             
             asset = !string.IsNullOrEmpty (path) ? Resources.Load<T> (path) : null;
@@ -181,7 +176,6 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Failed to load asset {typeof (T).Name} from path [{path}]");
                 return;
             }
-            #endif
         }
         
         #if UNITY_EDITOR
@@ -1273,8 +1267,9 @@ namespace PhantomBrigade.Data
             */
         }
 
-
         private List<string> filteredKeys = new List<string> ();
+
+
         
         public List<string> GetFilteredResourceKeys<T> 
             (int factionFilter, string modelFilter, IDictionary<string, DataContainerResourceAssetPilot<T>> collection, bool includeEmpty = false, float interpolantFilter = -1f) where T : UnityEngine.Object
@@ -1316,8 +1311,6 @@ namespace PhantomBrigade.Data
 
             return filteredKeys;
         }
-        
-        #if !PB_MODSDK
         
         public DataContainerResourceAssetPilot<T> GetRandomResource<T> 
             (int factionFilter, string modelFilter, float interpolantFilter, IDictionary<string, DataContainerResourceAssetPilot<T>> collection) where T : UnityEngine.Object // Changed from ScriptableObject to generic Object to support more asset types
@@ -2071,6 +2064,5 @@ namespace PhantomBrigade.Data
             }
         }
         */
-        #endif
     }
 }

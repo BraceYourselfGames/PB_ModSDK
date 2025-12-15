@@ -6,7 +6,7 @@ entries:
     textEng: Blocked
   briefing_deploy_incomplete:
     id: 1
-    text: Как минимум в одной ячейке находится только пилот или только робот. В бой можно отправить только полноценные юниты.
+    text: Как минимум в одной ячейке находится только пилот или только мех. В бой можно отправить только полноценные юниты.
     textEng: At least one slot has only a pilot or only a mech. Only complete units can be deployed.
   briefing_deploy_issues_critical:
     id: 1
@@ -134,19 +134,19 @@ entries:
     textEng: These pilots are at maximum fatigue and will continuously lose health. Consider a rest stop or swapping them for this mission.
   briefing_review_frame_damage_header:
     id: 2
-    text: Поврежденные роботы
+    text: Поврежденные мехи
     textEng: Damaged mechs
   briefing_review_frame_damage_text:
     id: 2
-    text: Эти роботы долго в бою не протянут. Лучше отремонтировать их во время привала.
+    text: Эти мехи долго в бою не протянут. Лучше отремонтировать их во время привала.
     textEng: These mechs will not last as long in protracted combat. Consider a rest stop to repair them.
   briefing_review_frame_loss_header:
     id: 2
-    text: Ослабленные корпуса роботов
+    text: Ослабленные корпуса мехов
     textEng: Compromised mech frames
   briefing_review_frame_loss_text:
     id: 2
-    text: Этих роботов слишком часто уничтожали. В следующий раз вы потеряете их навсегда, вместе со всеми установленными деталями.
+    text: Этих мехов слишком часто уничтожали. В следующий раз вы потеряете их навсегда, вместе со всеми установленными деталями.
     textEng: These mechs were destroyed too many times. They will be permanently lost along with every equipped part if destroyed again.
   briefing_review_header:
     id: 2
@@ -182,7 +182,7 @@ entries:
     textEng: Invalid loadout detected
   briefing_review_weapon_removal_text:
     id: 2
-    text: Как минимум у одного робота отсутствует оружие из-за потери руки. Хотя сражаться можно и без нее, использовать оружие без соответствующей детали невозможно. Внимательно проверьте выкладку своего отряда.
+    text: Как минимум у одного меха отсутствует оружие из-за потери руки. Хотя сражаться можно и без нее, использовать оружие без соответствующей детали невозможно. Внимательно проверьте выкладку своего отряда.
     textEng: At least one mech had a weapon removed due to a missing arm. While deploying without an arm is possible, a weapon can't be used without a corresponding arm part. Carefully review the loadouts in your squad.
   briefing_scenario_header:
     id: 2
@@ -206,7 +206,7 @@ entries:
     textEng: Fill slots
   briefing_squad_autofill_text:
     id: 1
-    text: Отряд будет собран из боеспособных пилотов и юнитов — с максимальным уровнем и в наилучшем состоянии. Однако выбранные роботы и пилоты могут не сочетаться между собой или не подходить для предстоящего задания. Внимательно проверьте состав отряда перед отправкой.
+    text: Отряд будет собран из боеспособных пилотов и юнитов — с максимальным уровнем и в наилучшем состоянии. Однако выбранные мехи и пилоты могут не сочетаться между собой или не подходить для предстоящего задания. Внимательно проверьте состав отряда перед отправкой.
     textEng: The squad will be filled with combat ready pilots and mechs with the highest level and best condition. The selected mechs and pilots might not synergize or might not be the best fit for the upcoming mission. Carefully review your squad before deploying.
   briefing_squad_edit_cant_desc:
     id: 1
@@ -222,11 +222,11 @@ entries:
     textEng: Move to unit customization screen to edit the selected unit. Long press or double click to confirm.
   briefing_squad_edit_header:
     id: 1
-    text: Редактировать юнит
+    text: Редактировать
     textEng: Edit unit
   briefing_squad_edit_pilot:
     id: 2
-    text: Редактировать пилота
+    text: Редактировать
     textEng: Edit pilot
   briefing_squad_header:
     id: 2
@@ -366,7 +366,7 @@ entries:
     textEng: Intact
   debriefing_item_lost_desc:
     id: 1
-    text: Этот предмет принадлежал одному из ваших роботов, но был сбит во время боя. Он будет утерян, если не забрать его!
+    text: Этот предмет принадлежал одному из ваших мехов, но был сбит во время боя. Он будет утерян, если не забрать его!
     textEng: This item belonged to one of your mechs, but was detached in battle. It will be lost if not retrieved!
   debriefing_item_lost_name:
     id: 1
@@ -518,7 +518,7 @@ entries:
     textEng: Recover
   debriefing_salvage_button_take_text:
     id: 1
-    text: Собрать снаряжение, которое можно использовать на ваших роботах. Полученные предметы появятся в вашем инвентаре.
+    text: Собрать снаряжение, которое можно использовать на ваших мехах. Полученные предметы появятся в вашем инвентаре.
     textEng: Collect the equipment to use on your mechs. Recovered items will appear in your inventory.
   debriefing_salvage_dialog_start_desc:
     id: 1
@@ -1152,6 +1152,10 @@ entries:
     id: 1
     text: Качество
     textEng: Quality
+  item_equip_hint:
+    id: 2
+    text: Нажмите на новый предмет, чтобы его установить.
+    textEng: Equip a new item by clicking it.
   item_info_rating_0:
     id: 1
     text: Простой
@@ -1206,7 +1210,7 @@ entries:
     textEng: Applied effect
   pilot_bio_builtin_01:
     id: 1
-    text: Проверенный лидер отряда, один из первоначальных членов ССФ.
+    text: Проверенный лидер отряда, одна из первоначальных членов ССФ.
     textEng: Trusted squad leader, one of the original members of the 3F.
   pilot_bio_builtin_02:
     id: 1
@@ -1218,7 +1222,7 @@ entries:
     textEng: Excellent marksman. One of the few survivors of the Regattal Bombing, owing to a chance assignment to a lookout post away from the base.
   pilot_bio_builtin_04:
     id: 1
-    text: Опытный пилот-испытатель холлисского института. Имеет практический опыт работы с десятками конфигураций роботов. До вторжения служил связным Института при военных силах Фирланда, а теперь отвечает за обучение пилотов использованию систем прогнозирования.
+    text: Опытный пилот-испытатель холлисского института. Имеет практический опыт работы с десятками конфигураций мехов. До вторжения служила связной Института при военных силах Фирланда, а теперь отвечает за обучение пилотов использованию систем прогнозирования.
     textEng: Veteran test pilot from the Hollis Institute. Has hands-on experience with dozens of mech configurations. Had worked as the Institue's liaison with Fyrland's military prior to the invasion, now responsible for training pilots in the use of prediction tech.
   pilot_button_customize:
     id: 2
@@ -1238,11 +1242,11 @@ entries:
     textEng: Killed in action
   pilot_death_short:
     id: 2
-    text: Погиб в бою
+    text: Убит
     textEng: KIA
   pilot_dismiss_deceased_header:
     id: 1
-    text: Подтвердить удаление
+    text: Подтвердить увольнение
     textEng: Confirm removal
   pilot_dismiss_deceased_text:
     id: 1
@@ -1482,7 +1486,7 @@ entries:
     textEng: 'Personality: '
   pilot_info_xp:
     id: 1
-    text: XP
+    text: Очки опыта
     textEng: XP
   pilot_info_xp_header:
     id: 1
@@ -1506,7 +1510,7 @@ entries:
     textEng: to next level
   pilot_linked_mech:
     id: 2
-    text: Пилотирует робота
+    text: Пилотирует меха
     textEng: Piloting mech
   pilot_list_active_empty:
     id: 2
@@ -1522,11 +1526,11 @@ entries:
     textEng: Currently available roster
   pilot_list_counter_injured:
     id: 2
-    text: Ранен
+    text: Ранены
     textEng: Injured
   pilot_list_counter_rested:
     id: 2
-    text: Отдохнул
+    text: Отдохнули
     textEng: Rested
   pilot_list_counter_total:
     id: 2
@@ -1534,7 +1538,7 @@ entries:
     textEng: Total
   pilot_list_counter_trauma:
     id: 2
-    text: Травмирован
+    text: Травмированы
     textEng: Traumatized
   pilot_list_empty_desc:
     id: 1
@@ -1610,11 +1614,11 @@ entries:
     textEng: To proceed, select a trait you'd like to preserve.
   pilot_recruit_hint:
     id: 2
-    text: Наем пилота
+    text: Нанять пилота
     textEng: Recruit pilot
   pilot_report_ejected:
     id: 2
-    text: Катапультировался из робота во время задания.
+    text: Катапультировался из меха во время задания.
     textEng: Ejected from the mech during the mission.
   pilot_report_hp_high:
     id: 2
@@ -1654,7 +1658,7 @@ entries:
     textEng: Traits
   pilot_status_kia:
     id: 1
-    text: Погиб в бою
+    text: Убит
     textEng: KIA
   pilot_tooltip_health_concussion:
     id: 1
@@ -1806,7 +1810,7 @@ entries:
     textEng: Blocked
   unit_list_subtitle:
     id: 2
-    text: Роботы на борту
+    text: Мехи на борту
     textEng: Mechs on board
   unit_list_tooltip_capacity_header:
     id: 1
@@ -1902,7 +1906,7 @@ entries:
     textEng: Confirm destruction
   unit_remove_text:
     id: 2
-    text: Вы точно хотите разрушить этого робота? Это действие нельзя отменить. Все установленные предметы будут возвращены в инвентарь.
+    text: Вы точно хотите разрушить этого меха? Это действие нельзя отменить. Все установленные предметы будут возвращены в инвентарь.
     textEng: Are you sure you want to destroy this mech? This can not be undone. Every equipped item will be returned to inventory.
   units_livery_full_body:
     id: 1
@@ -1974,7 +1978,7 @@ entries:
     textEng: Storage & capabilities
   workshop_button_build:
     id: 1
-    text: Телосложение
+    text: Создать
     textEng: Build
   workshop_button_hint_available:
     id: 1

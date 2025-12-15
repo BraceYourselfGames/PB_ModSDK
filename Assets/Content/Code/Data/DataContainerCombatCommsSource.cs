@@ -11,6 +11,8 @@ namespace PhantomBrigade.Data
         [HideLabel]
         public string image;
 
+        public bool audioEnemy = false;
+
         public Color color = new Color (1f, 1f, 1f, 1f);
         
         [YamlIgnore]

@@ -745,7 +745,10 @@ namespace PhantomBrigade.Data
         public void SelectToInspector ()
         {
             DataMultiLinkerOverworldLandscape.selection = this;
-
+            
+            if (OverworldLandscapeManager.ins == null)
+                return;
+            
             OverworldLandscapeManager.TryLoadingVisual 
             (
                 assetKey, 

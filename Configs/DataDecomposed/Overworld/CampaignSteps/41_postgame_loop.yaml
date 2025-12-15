@@ -1,5 +1,5 @@
 comment:
-  comment: Postgame loop.
+  comment: Postgame loop start. Two closest unvisited provinces. One has level offset of 0 and weakened modifier to allow for easier time.
 ui:
   textName: {}
   textDesc: {}
@@ -8,6 +8,10 @@ ui:
   textNavDesc: {}
   iconNav: 
   textFromQuest: 
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
 travelInteraction: 
 entry:
   functionsGlobal:
@@ -31,22 +35,36 @@ liberation:
       value: 1
       valueFromMemory: false
       valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: true
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
   functionsBase: 
 progressDisplay: 
 effects: 
 branches:
 - comment: 
-  preferences: 
+  preferences:
+    branchActiveExcluded: true
+    modifiersUnique: true
+    modifierVisitsTracked: false
   checksGlobal: 
   checksBase: 
   links:
   - comment: 
     checksGlobal: 
     checksBase: 
-    stepKey: 40_postgame_start
-    direction: 0
-    levelOffset: 
+    stepKey: 41_postgame_loop
+    levelOffset:
+      i: 0
     branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 
@@ -66,10 +84,14 @@ branches:
   - comment: 
     checksGlobal: 
     checksBase: 
-    stepKey: 40_postgame_start
-    direction: 0
+    stepKey: 41_postgame_loop
     levelOffset: 
     branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 
@@ -81,5 +103,37 @@ branches:
     - tagsUsed: true
       keys: 
       tags:
-        type_positive: true
+        type_mixed: true
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_negative: true
+- comment: 
+  preferences:
+    branchActiveExcluded: true
+    modifiersUnique: true
+    modifierVisitsTracked: false
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment:
+      comment: This branch is reached if there are no unvisited provinces to link to.
+    checksGlobal: 
+    checksBase: 
+    stepKey: 42_postgame_recapture
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Visited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers: 
 tags: 

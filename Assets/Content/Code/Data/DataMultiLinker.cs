@@ -700,6 +700,7 @@ namespace PhantomBrigade.Data
     {
         public bool IsUsingDirectories ();
         public bool IsDisplayIsolated ();
+        public bool IsDeserializedOnCopy ();
         public DataContainer GetDisplayIsolatedOverride ();
         public bool IsModdable ();
 
@@ -1170,6 +1171,7 @@ namespace PhantomBrigade.Data
         #endif
 
         public virtual bool IsUsingDirectories () => false;
+        public virtual bool IsDeserializedOnCopy () => false;
         public virtual bool IsDisplayIsolated () => false;
         public virtual DataContainer GetDisplayIsolatedOverride () => null;
         public virtual bool IsModdable () => true;
@@ -1949,6 +1951,11 @@ namespace PhantomBrigade.Data
             else
             {
                 var copy = UtilitiesYAML.CloneThroughYaml (value);
+                copy.key = keyNew;
+                
+                if (IsDeserializedOnCopy ())
+                    copy.OnAfterDeserialization (key);
+                
                 dataInternal.Add (keyNew, copy);
             }
 

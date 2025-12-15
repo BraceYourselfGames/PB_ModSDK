@@ -76,10 +76,6 @@ entries:
     id: 1
     text: 语音音量
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: 控制过场语音音量。
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: 帧速率限制
@@ -156,10 +152,6 @@ entries:
     id: 1
     text: 50% （2160px）
     textEng: 50% (2160px)
-  display_ui_scale__lv_900:
-    id: 1
-    text: 120% （900px）
-    textEng: 120% (900px)
   display_ui_scale__lv_936:
     id: 1
     text: 115%（936px）
@@ -172,6 +164,26 @@ entries:
     id: 1
     text: 用户界面的分辨率，独立于屏幕分辨率。可以放大文本。
     textEng: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    id: 2
+    text: 战斗存档
+    textEng: Combat saves
+  exp_combat_saves__text:
+    id: 2
+    text: 允许您在战斗中保存并加载战斗存档的实验性功能。它可能会导致显示异常、姿势错误、任务逻辑问题，并对整体战役产生潜在影响。启用后，您的存档将被标记为实验性。
+    textEng: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    id: 2
+    text: 完整战斗回放
+    textEng: Full replay
+  exp_replay_extended__text:
+    id: 2
+    text: >-
+      允许您在游戏中记录并回放整场战斗（而非单回合）的实验性功能。这可能会大幅降低性能，并增加战斗和回放时的内存使用。
+
+
+      完整回放可能与实际战斗画面存在差异。场景破坏、特效和单位动画可能会出现单回合回放中不存在的异常。
+    textEng: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     id: 1
     text: 分析
@@ -188,6 +200,34 @@ entries:
     id: 2
     text: 在部署小队进入战斗前，显示机甲与驾驶员的危险状态警告。
     textEng: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    id: 2
+    text: 伤害滚动显示
+    textEng: Damage scrolling
+  game_base_damage_duration__text:
+    id: 2
+    text: 设置检查武器时，不同伤害类型显示的滚动速度（或关闭滚动）。
+    textEng: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    id: 2
+    text: 伤害优先级
+    textEng: Damage priority
+  game_base_damage_priority__lv_action:
+    id: 2
+    text: 每次动作伤害
+    textEng: Damage per action
+  game_base_damage_priority__lv_dps:
+    id: 2
+    text: 每秒伤害
+    textEng: Damage per second
+  game_base_damage_priority__lv_hit:
+    id: 2
+    text: 每次命中伤害
+    textEng: Damage per hit
+  game_base_damage_priority__text:
+    id: 2
+    text: 设置检查武器时优先显示的伤害数值类型。
+    textEng: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     id: 1
     text: 双重对比面板
@@ -304,18 +344,26 @@ entries:
     id: 1
     text: 该设置决定预测时间是否在一段时间不活动后回到回合的开始。
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
-    id: 1
-    text: Test setting 1
-    textEng: Test setting 1
-  game_ent_sp__prefix:
-    id: 1
-    text: Content
-    textEng: Content
-  game_ent_sp__text:
-    id: 1
-    text: Description for the setting goes here.
-    textEng: Description for the setting goes here.
+  game_ent_sp_logo__header:
+    id: 2
+    text: 更改菜单徽标
+    textEng: Change menu logo
+  game_ent_sp_logo__text:
+    id: 2
+    text: 启用主菜单的替代徽标。
+    textEng: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
+    id: 2
+    text: 更改移动基地外观
+    textEng: Change mobile base
+  game_ent_sp_skin__prefix:
+    id: 2
+    text: 支持者包
+    textEng: Supporter upgrade
+  game_ent_sp_skin__text:
+    id: 2
+    text: 启用移动基地的替代外观。
+    textEng: Enable the alternative appearance for the mobile base.
   game_language__header:
     id: 1
     text: 语言

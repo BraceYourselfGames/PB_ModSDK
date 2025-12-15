@@ -1,9 +1,18 @@
 id:
-  callsignIndex: 5
+  callsignLoc:
+    textSector: xc_pilot_names_callsigns_01
+    textKey: 05
   callsignOverride: 
-  nameIndexPrimary: 75
-  nameIndexSecondary: 65
+  callsignIndex: -1
+  namePrimaryLoc:
+    textSector: xc_pilot_names_given_01
+    textKey: 75
+  nameSecondaryLoc:
+    textSector: xc_pilot_names_family_01
+    textKey: 65
   nameOverride: 
+  nameIndexPrimary: -1
+  nameIndexSecondary: -1
 deathStatus: 
 bio: 
 version: 3
@@ -12,7 +21,7 @@ level: 1
 prestigeLevel: 0
 prestigeThreshold: 5
 traitPoints: 0
-typeKey: sharpshooter
+typeKey: brawler
 knockedOut: false
 ejected: false
 faction: Phantoms

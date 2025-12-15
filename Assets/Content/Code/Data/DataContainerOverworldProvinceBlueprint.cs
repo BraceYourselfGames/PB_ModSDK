@@ -152,6 +152,7 @@ namespace PhantomBrigade.Data
     public class DataContainerOverworldProvinceBlueprint : DataContainerWithText, IDataContainerTagged
     {
         public bool hidden = false;
+        public bool hiddenUntilSpawned = false;
         
         public HashSet<string> tags = new HashSet<string> ();
         

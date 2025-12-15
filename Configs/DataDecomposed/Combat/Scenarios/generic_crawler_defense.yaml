@@ -1083,7 +1083,7 @@ states:
             filterDistanceVolume: 
             filterDistanceState:
               key: drone_trigger
-              check: Less
+              check: Greater
               value: 100
             filterDistanceRetreat: 
             sorting: !UnitSlotSortingState
@@ -1124,7 +1124,7 @@ steps:
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 0
+      baseGrade: 1
       maxGrade: 2
       cloneable: true
       functions: 
@@ -1164,7 +1164,7 @@ steps:
       spawnOrderRandom: true
       factionBranchOverride: false
       factionBranchKey: 
-      baseGrade: 1
+      baseGrade: 0
       maxGrade: 2
       cloneable: true
       functions: 

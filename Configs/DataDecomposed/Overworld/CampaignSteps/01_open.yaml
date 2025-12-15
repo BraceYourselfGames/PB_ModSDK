@@ -8,6 +8,10 @@ ui:
   textNavDesc: {}
   iconNav: 
   textFromQuest: 
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
 travelInteraction:
   tagsUsed: false
   keys:
@@ -69,7 +73,9 @@ branches:
 - comment:
     comment: This branch allows you to go to breakthrough or (if condition is satisfied) to a sidequest province.
   preferences:
+    branchActiveExcluded: true
     modifiersUnique: false
+    modifierVisitsTracked: true
   checksGlobal:
   - !OverworldValidateResolvedInt
     resolver: !OverworldIntValueMemory
@@ -83,9 +89,13 @@ branches:
     checksGlobal: 
     checksBase: 
     stepKey: 10_breakthrough_line
-    direction: 180
     levelOffset: 
-    branchKey: 
+    branchKey: branch_reserves
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: false
       keys:
@@ -107,10 +117,14 @@ branches:
           valueCheck: Less
           value: 1
     stepKey: 02_side
-    direction: 240
     levelOffset:
       i: 0
     branchKey: branch_reserves
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 

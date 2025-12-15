@@ -205,6 +205,10 @@ entries:
     id: 1
     text: 難易度
     textEng: Difficulty
+  difficulty_screen_preset_custom:
+    id: 2
+    text: カスタム
+    textEng: Custom
   difficulty_screen_preset_easy:
     id: 1
     text: イージー
@@ -227,7 +231,10 @@ entries:
     textEng: Reset
   footer_announcement_header:
     id: 2
-    text: "2.0 アップデートがリリー\nスされました！"
+    text: >-
+      2.0 アップデートがリリー
+
+      スされました！
     textEng: The 2.0 update is here!
   footer_announcement_text:
     id: 2
@@ -281,6 +288,14 @@ entries:
     id: 1
     text: コミュニティに参加する
     textEng: Join the community
+  footer_button_faq:
+    id: 2
+    text: Q&A
+    textEng: FAQ
+  footer_button_faq_ext:
+    id: 2
+    text: よくある質問
+    textEng: Frequently asked questions
   footer_button_forum:
     id: 1
     text: Reddit
@@ -313,6 +328,10 @@ entries:
     id: 1
     text: アップデート
     textEng: Update
+  footer_button_website:
+    id: 2
+    text: ウェブサイト
+    textEng: Website
   footer_button_wishlist:
     id: 1
     text: 今欲しいものリスト
@@ -489,6 +508,14 @@ entries:
     id: 2
     text: マウスホイール
     textEng: Mouse Wheel
+  load_notice_experimental:
+    id: 2
+    text: このセーブデータは、戦闘セーブなど実験的機能を含むキャンペーンから作成されました。読み込みは可能ですが、公式にはサポートされていません。
+    textEng: This save originates from a campaign with experimental features like combat saves. It can be loaded, but is not officially supported.
+  load_notice_mods:
+    id: 2
+    text: このセーブデータは、MODを使用したキャンペーンから作成されました。読み込みは可能ですが、公式にはサポートされていません。
+    textEng: This save originates from a campaign with mods. It can be loaded, but is not officially supported.
   load_warning_incompatible:
     id: 2
     text: この保存データは、現在のゲームバージョンと互換性がありません。
@@ -659,11 +686,17 @@ entries:
     textEng: Start with Tutorial
   newgame_tooltip_new_game_text:
     id: 1
-    text: "キャンペーンに参加する前に、\n最初から戦闘の基本を学ぼう。"
+    text: >-
+      キャンペーンに参加する前に、
+
+      最初から戦闘の基本を学ぼう。
     textEng: Start at the beginning and ease into the basics of combat before taking on the campaign.
   newgame_tooltip_quick_start_text:
     id: 1
-    text: "最初に占領された県から始めて、すべてのチュートリアルが完了した！\nさあ、参戦しよう！"
+    text: >-
+      最初に占領された県から始めて、すべてのチュートリアルが完了した！
+
+      さあ、参戦しよう！
     textEng: Start with the first province captured and all tutorials completed. Jump straight into the fight!
   options_button_apply:
     id: 1
@@ -673,6 +706,22 @@ entries:
     id: 1
     text: リセット
     textEng: Reset
+  options_exp_confirmation_header:
+    id: 2
+    text: 実験的機能
+    textEng: Experimental features
+  options_exp_confirmation_text:
+    id: 2
+    text: 実験的機能の有効化を選択しました。再度警告します。[b]ゲームの安定性が損なわれて、キャンペーンに危険を招く可能性があります。[/b][ffd588]続行してもよろしいですか？
+    textEng: 'You have selected to enable an experimental feature. Once again: [b]this could compromise game stability and puts your campaign at risk.[/b] [ffd588]Are you sure you want to proceed?'
+  options_exp_notice:
+    id: 2
+    text: '[fff1d8]「実験的」という言葉はそのままの意味です。このオプションのいずれかが有効な場合、ゲームの安定性やセーブデータの安全性を保証することはできません。[ffd589]万が一に備えて、先に手動でゲームを保存することを強く推奨します。'
+    textEng: "[fff1d8]The word \"experimental\" isn't a joke. We can't guarantee game stability or the safety of game saves when any of these options are active. [ffd589]We highly recommend that you manually save your game first, so you have a fallback in case things go south."
+  options_exp_notice_suffix:
+    id: 2
+    text: こちらの機能は自己責任でご使用ください！
+    textEng: Enable these features at your own risk!
   options_header_unsaved_changes:
     id: 1
     text: 保存されていない変更
@@ -787,6 +836,10 @@ entries:
     id: 1
     text: 戻る
     textEng: Back
+  root_button_continue:
+    id: 2
+    text: コンティニュー
+    textEng: Continue
   root_button_credits:
     id: 1
     text: クレジット
@@ -827,6 +880,10 @@ entries:
     id: 1
     text: 保存
     textEng: Save
+  root_button_skip:
+    id: 2
+    text: チュートリアルをスキップ
+    textEng: Skip tutorial
   save_button_create_hint:
     id: 2
     text: 新しい保存名
@@ -1115,3 +1172,11 @@ entries:
 
 
       Immediately stop playing and consult a doctor if you experience any of these symptoms. If you or any of your relatives have a history of seizures or epilepsy, it is recommended that you consult a doctor before playing.
+  tutorial_skip_header:
+    id: 2
+    text: チュートリアルをスキップしますか？
+    textEng: Skip the tutorial?
+  tutorial_skip_text:
+    id: 2
+    text: チュートリアルエリアでは、2.0アップデートで追加されたものを含む、多数のゲームシステムや追加の背景ストーリーの説明があります。復帰プレイヤーでも、チュートリアルを完了することをおすすめしています。本当にスキップしますか？
+    textEng: The tutorial region covers a large number of mechanics, including many added with the 2.0 update; as well as additional backstory. We recommend completing the tutorials even if you are a returning player. Are you sure you want to skip forward?

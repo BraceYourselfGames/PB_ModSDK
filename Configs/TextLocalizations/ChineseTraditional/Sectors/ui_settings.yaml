@@ -76,10 +76,6 @@ entries:
     id: 1
     text: 人聲音量
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: 設定過場畫面音量。
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: 幀率上限
@@ -156,10 +152,6 @@ entries:
     id: 1
     text: 50%（2160像素）
     textEng: 50% (2160px)
-  display_ui_scale__lv_900:
-    id: 1
-    text: 120%（900像素）
-    textEng: 120% (900px)
   display_ui_scale__lv_936:
     id: 1
     text: 115%（936像素）
@@ -172,6 +164,26 @@ entries:
     id: 1
     text: 使用者介面的解析度，不受螢幕解析度影響。調高解析度可以按比例放大字體。
     textEng: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    id: 2
+    text: 戰鬥存檔
+    textEng: Combat saves
+  exp_combat_saves__text:
+    id: 2
+    text: 實驗性功能。可以在戰鬥中存檔並讀取戰鬥存檔。這可能會導致圖像錯誤、動作不正確、任務邏輯問題，或是在深入劇情戰役時引發副作用。開啟這項功能會把你的存檔標記為實驗性。
+    textEng: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    id: 2
+    text: 全場重播
+    textEng: Full replay
+  exp_replay_extended__text:
+    id: 2
+    text: >-
+      實驗性功能。讓遊戲不只錄製並重播一個回合，而是整場戰鬥。這有可能會在使重播模式和執行期間大幅降低戰鬥時的效能，並提高記憶體使用量。
+
+
+      全場重播可能不會在視覺上完全重現原來的執行過程。關卡中的破壞、特殊效果和單位動畫可能會出現單回合重播中沒有的錯誤。
+    textEng: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     id: 1
     text: 數據分析
@@ -188,6 +200,34 @@ entries:
     id: 2
     text: 在派出小隊進入戰鬥前，顯示機甲與駕駛員是否處於危急狀態的警告。
     textEng: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    id: 2
+    text: 傷害捲動
+    textEng: Damage scrolling
+  game_base_damage_duration__text:
+    id: 2
+    text: 檢視武器時，不同傷害類型間的捲動速度。
+    textEng: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    id: 2
+    text: 傷害優先順序
+    textEng: Damage priority
+  game_base_damage_priority__lv_action:
+    id: 2
+    text: 每動作傷害
+    textEng: Damage per action
+  game_base_damage_priority__lv_dps:
+    id: 2
+    text: 每秒傷害
+    textEng: Damage per second
+  game_base_damage_priority__lv_hit:
+    id: 2
+    text: 每擊傷害
+    textEng: Damage per hit
+  game_base_damage_priority__text:
+    id: 2
+    text: 檢視武器時首先看到的傷害數值。
+    textEng: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     id: 1
     text: 雙重比較面板
@@ -304,18 +344,26 @@ entries:
     id: 1
     text: 這個設定決定預測時間是否在一段時間不活動後跳回到一回合開始時。
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
-    id: 1
-    text: 測試設定1
-    textEng: Test setting 1
-  game_ent_sp__prefix:
-    id: 1
-    text: 內容
-    textEng: Content
-  game_ent_sp__text:
-    id: 1
-    text: 此設定的說明將顯示於此。
-    textEng: Description for the setting goes here.
+  game_ent_sp_logo__header:
+    id: 2
+    text: 變更選單標誌
+    textEng: Change menu logo
+  game_ent_sp_logo__text:
+    id: 2
+    text: 在主選單啟用替代標誌。
+    textEng: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
+    id: 2
+    text: 變更移動基地
+    textEng: Change mobile base
+  game_ent_sp_skin__prefix:
+    id: 2
+    text: 支援者禮包
+    textEng: Supporter upgrade
+  game_ent_sp_skin__text:
+    id: 2
+    text: 啟用移動基地的替代外觀。
+    textEng: Enable the alternative appearance for the mobile base.
   game_language__header:
     id: 1
     text: 語言

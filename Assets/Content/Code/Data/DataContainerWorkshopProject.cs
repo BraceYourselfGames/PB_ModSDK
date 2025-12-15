@@ -445,23 +445,13 @@ namespace PhantomBrigade.Data
         private string textDescriptionPreview => WorkshopUtility.GetProjectDescription (this);
 
         [DropdownReference (true)]
-        public DataBlockWorkshopTextSourceName textSourceName;
+        public DataBlockTextTrimodal textLinkName = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
         
         [DropdownReference (true)]
-        public DataBlockWorkshopTextSourceSubtitle textSourceSubtitle;
+        public DataBlockTextTrimodal textLinkSubtitle = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
         
         [DropdownReference (true)]
-        public DataBlockWorkshopTextSourceDesc textSourceDesc;
-        
-        [YamlIgnore]
-        [LabelText ("Header / Desc.")]
-        [DisableIf ("@textSourceName != null")]
-        public string textName;
-        
-        [YamlIgnore]
-        [HideLabel, TextArea (1, 10)]
-        [DisableIf ("@textSourceDesc != null")]
-        public string textDesc;
+        public DataBlockTextTrimodal textLinkDesc = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
 
         [ShowIf ("IsCoreVisible")]
         [DataEditor.SpriteNameAttribute (false, 180f)]
@@ -538,11 +528,20 @@ namespace PhantomBrigade.Data
             // textSubtitle = !string.IsNullOrEmpty (textSubtitleKey) ? 
             //     DataManagerText.GetText (TextLibs.workshopShared, textSubtitleKey, true) : string.Empty;
 
-            if (textSourceName == null)
-                textName = DataManagerText.GetText (TextLibs.workshopEmbedded, $"{key}_header", true);
+            // if (textSourceName == null)
+            //     textName = DataManagerText.GetText (TextLibs.workshopEmbedded, $"{key}_header", true);
             
-            if (textSourceDesc == null)
-                textDesc = DataManagerText.GetText (TextLibs.workshopEmbedded, $"{key}_text", true);
+            // if (textSourceDesc == null)
+            //     textDesc = DataManagerText.GetText (TextLibs.workshopEmbedded, $"{key}_text", true);
+            
+            if (textLinkName != null)
+                textLinkName.ResolveText (TextLibs.workshopEmbedded, $"{key}_header");
+            
+            if (textLinkSubtitle != null)
+                textLinkSubtitle.ResolveText (TextLibs.workshopEmbedded, $"{key}_sub");
+            
+            if (textLinkDesc != null)
+                textLinkDesc.ResolveText (TextLibs.workshopEmbedded, $"{key}_text");
         }
         
         public HashSet<string> GetTags (bool processed) => 
@@ -600,15 +599,14 @@ namespace PhantomBrigade.Data
 
         public override void SaveText ()
         {
-            if (textSourceName == null)
-            {
-                DataManagerText.TryAddingTextToLibrary (TextLibs.workshopEmbedded, $"{key}_header", textName);
-            }
-
-            if (textSourceDesc == null)
-            {
-                DataManagerText.TryAddingTextToLibrary (TextLibs.workshopEmbedded, $"{key}_text", textDesc);
-            }
+            if (textLinkName != null)
+                textLinkName.SaveText (TextLibs.workshopEmbedded, $"{key}_header");
+            
+            if (textLinkSubtitle != null)
+                textLinkSubtitle.SaveText (TextLibs.workshopEmbedded, $"{key}_sub");
+            
+            if (textLinkDesc != null)
+                textLinkDesc.SaveText (TextLibs.workshopEmbedded, $"{key}_text");
         }
 
         private bool IsCoreVisible => DataMultiLinkerWorkshopProject.Presentation.showCore;

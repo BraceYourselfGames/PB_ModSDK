@@ -76,10 +76,6 @@ entries:
     id: 1
     text: 音声音量
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: カットシーンの吹き替えを制御します。
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: フレームレート制限
@@ -156,10 +152,6 @@ entries:
     id: 1
     text: 50% (2160px)
     textEng: 50% (2160px)
-  display_ui_scale__lv_900:
-    id: 1
-    text: 120% (900px)
-    textEng: 120% (900px)
   display_ui_scale__lv_936:
     id: 1
     text: 115% (936px)
@@ -172,6 +164,26 @@ entries:
     id: 1
     text: ユーザーインターフェースの解像度。画面解像度から独立したもの。テキストを拡大するために大きくすることができます。
     textEng: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    id: 2
+    text: 戦闘セーブ
+    textEng: Combat saves
+  exp_combat_saves__text:
+    id: 2
+    text: 実験的機能です。戦闘中にセーブファイルを作成して、戦闘セーブを読み込めるようにします。これにより、ビジュアルアーティファクト、不自然なポーズ、任務ロジックの問題、キャンペーン全体への潜在的な影響が発生する可能性があります。この機能を有効にすると、セーブファイルは「実験的」とマークされます。
+    textEng: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    id: 2
+    text: フルリプレイ
+    textEng: Full replay
+  exp_replay_extended__text:
+    id: 2
+    text: >-
+      実験的機能です。1ターンではなく、戦闘全体を記録・リプレイ可能にします。これにより、リプレイモードでも実行中でも、戦闘時のパフォーマンスが大幅に低下して、メモリ使用量が増加する可能性があります。
+
+
+      フルリプレイでは、本来の実行内容を視覚面で正確に再現しない場合があります。ステージ破壊、特殊効果、ユニットアニメーションに、1ターン再生では発生しないアーティファクトが生じる可能性があります。
+    textEng: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     id: 1
     text: アナリティクス
@@ -188,6 +200,34 @@ entries:
     id: 2
     text: 部隊を戦闘に出撃させる前に、危険な状態にあるメカやパイロットの警告を表示します。
     textEng: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    id: 2
+    text: ダメージのスクロール
+    textEng: Damage scrolling
+  game_base_damage_duration__text:
+    id: 2
+    text: 武器をチェックするときに、ゲームで異なるダメージタイプをスクロールする際の速度（ある場合）。
+    textEng: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    id: 2
+    text: ダメージ優先度
+    textEng: Damage priority
+  game_base_damage_priority__lv_action:
+    id: 2
+    text: 1行動あたりのダメージ
+    textEng: Damage per action
+  game_base_damage_priority__lv_dps:
+    id: 2
+    text: 1秒あたりのダメージ
+    textEng: Damage per second
+  game_base_damage_priority__lv_hit:
+    id: 2
+    text: 1ヒットあたりのダメージ
+    textEng: Damage per hit
+  game_base_damage_priority__text:
+    id: 2
+    text: 武器をチェックするときに、ゲームで最初に表示したいダメージの値。
+    textEng: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     id: 1
     text: 2つの比較パネル
@@ -304,18 +344,26 @@ entries:
     id: 1
     text: この設定により、一定時間操作が行われなかった後、予測時間がターンの最初にスナップバックするかどうかを決定します。
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
-    id: 1
-    text: テスト設定 1
-    textEng: Test setting 1
-  game_ent_sp__prefix:
-    id: 1
-    text: コンテンツ
-    textEng: Content
-  game_ent_sp__text:
-    id: 1
-    text: 設定の説明をここに記入します。
-    textEng: Description for the setting goes here.
+  game_ent_sp_logo__header:
+    id: 2
+    text: メニューロゴの変更
+    textEng: Change menu logo
+  game_ent_sp_logo__text:
+    id: 2
+    text: メインメニューで別のロゴを使えるようにする。
+    textEng: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
+    id: 2
+    text: 移動基地の変更
+    textEng: Change mobile base
+  game_ent_sp_skin__prefix:
+    id: 2
+    text: サポーターアップグレード
+    textEng: Supporter upgrade
+  game_ent_sp_skin__text:
+    id: 2
+    text: 移動基地を別の見た目にできるようにする。
+    textEng: Enable the alternative appearance for the mobile base.
   game_language__header:
     id: 1
     text: 言語

@@ -54,15 +54,43 @@ entries:
     textEng: Optimized recovery
   camp_slots__text:
     id: 1
-    text: Улучшения медицинского отсека и ремонтного оборудования позволяют восстановить за время стоянки еще одного пилота или робота.
+    text: Улучшения медицинского отсека и ремонтного оборудования позволяют восстановить за время стоянки еще одного пилота или меха.
     textEng: Improvements to the medbay and mech repair equipment allow one more mech or pilot to be recovered during a camp stop.
+  camp_speed__name:
+    id: 2
+    text: Ускоренное развертывание
+    textEng: Expedited setup
+  camp_speed__text:
+    id: 2
+    text: >
+      Оптимизация процессов развертывания и разборки лагеря позволяет мобильной базе быстрее справляться с операциями в лагере.
+    textEng: >
+      Streamlining of camp setup and teardown processes allow the mobile base to complete camp operations faster
+  camp_speed_02__name:
+    id: 2
+    text: Ускоренное развертывание II
+    textEng: Expedited setup II
+  camp_speed_02__text:
+    id: 2
+    text: >
+      Оптимизация процессов развертывания и разборки лагеря позволяет мобильной базе быстрее справляться с операциями в лагере.
+    textEng: >
+      Streamlining of camp setup and teardown processes allow the mobile base to complete camp operations faster
+  camp_speed_03__name:
+    id: 2
+    text: Ускоренное развертывание III
+    textEng: Expedited setup III
+  camp_speed_03__text:
+    id: 2
+    text: Установка выдвижного навеса и улучшения кухни позволяют мобильной базе справляться с операциями в лагере еще быстрее.
+    textEng: Installing a retractable canopy and improvements to the kitchen allows the mobile base to complete camp operations even faster
   core__name:
     id: 1
     text: Базовые операции
     textEng: Basic operations
   core__text:
     id: 1
-    text: Шасси, гидравлика и энергосистемы функционируют. Складской отсек в порядке и способен вместить запчасти для роботов и другие припасы.
+    text: Шасси, гидравлика и энергосистемы функционируют. Складской отсек в порядке и способен вместить запчасти для мехов и другие припасы.
     textEng: The chassis, hydraulics and power systems are operational. The storage bay is in decent shape and can accomodate mech parts and other supplies.
   core_storage_camp__name:
     id: 1
@@ -70,16 +98,44 @@ entries:
     textEng: Camp supply storage
   core_storage_camp__text:
     id: 1
-    text: Улучшения складского отсека позволяют транспортировать больше припасов для лагеря.
+    text: Улучшения складского отсека позволяют транспортировать больше лагерных припасов.
     textEng: Upgrades the storage bay to allow carrying additional camp supplies.
+  crawler_speed_upgrade__name:
+    id: 2
+    text: Крейсерская скорость
+    textEng: Cruise Speed
+  crawler_speed_upgrade__text:
+    id: 2
+    text: Улучшает работу трансмиссии, что позволяет держать более высокую крейсерскую скорость.
+    textEng: Improves transmission, which supports a higher cruise speed.
+  crawler_speed_upgrade_02__name:
+    id: 2
+    text: Крейсерская скорость II
+    textEng: Cruise Speed II
+  crawler_speed_upgrade_02__text:
+    id: 2
+    text: Дальнейшее улучшение работы трансмиссии позволяет держать более высокую крейсерскую скорость.
+    textEng: Further improves transmission, which supports a higher cruise speed.
+  crawler_speed_upgrade_03__name:
+    id: 2
+    text: Крейсерская скорость III
+    textEng: Cruise Speed III
+  crawler_speed_upgrade_03__text:
+    id: 2
+    text: Улучшение осей позволяет базе держать более высокую крейсерскую скорость.
+    textEng: Upgrades to the axels allows the base to support a higher cruise speed
+  crawler_speed_upgrade_04__name:
+    id: 2
+    text: Крейсерская скорость IV
+    textEng: Cruise Speed IV
+  crawler_speed_upgrade_04__text:
+    id: 2
+    text: Улучшение главного двигателя позволяет базе развивать еще более высокую крейсерскую скорость.
+    textEng: Improvements to the main engine allow the base to achieve even higher cruising speeds.
   group_core__name:
     id: 1
     text: Ядро
     textEng: Core
-  group_mm_core__name:
-    id: 1
-    text: Движение
-    textEng: Movement
   group_pilots__name:
     id: 1
     text: Пилоты
@@ -100,14 +156,6 @@ entries:
     id: 1
     text: Мастерская
     textEng: Workshop
-  mm_core__name:
-    id: 1
-    text: Полная скорость
-    textEng: Unlocked Movement
-  mm_core__text:
-    id: 1
-    text: Снимает гражданские ограничения с трансмиссии, увеличивая скорость движения базы.
-    textEng: Increases base's speed by removing civilian speed limitations from the drivetrain.
   mm_cruise__name:
     id: 1
     text: Крейсерский режим
@@ -204,6 +252,46 @@ entries:
     id: 1
     text: Оружие с поверженного вражеского исполина. Эффективная дальность — до трех километров.
     textEng: A weapon salvaged from an enemy behemoth. Effective range of three kilometers.
+  overdrive_cooldown__name:
+    id: 2
+    text: Улучшенное рассеивание
+    textEng: Improved Dissipation
+  overdrive_cooldown__text:
+    id: 2
+    text: Установка охлаждающих ребер на реактор улучшает эффективность рассеивания тепла, выделяемого при работе в режиме форсажа.
+    textEng: Installing cooling fins on the reactor improves the rate it can dissipate the heat generated from using overdrive mode.
+  overdrive_cooldown_02__name:
+    id: 2
+    text: Улучшенное рассеивание II
+    textEng: Improved Dissipation II
+  overdrive_cooldown_02__text:
+    id: 2
+    text: Установка дополнительных охлаждающих ребер на реактор еще сильнее улучшает эффективность рассеивания тепла, выделяемого при работе в режиме форсажа.
+    textEng: Installing additional cooling fins on the reactor further improves the rate it can dissipate the heat generated from using overdrive mode.
+  overdrive_cooldown_03__name:
+    id: 2
+    text: Улучшенное рассеивание III
+    textEng: Improved Dissipation III
+  overdrive_cooldown_03__text:
+    id: 2
+    text: Улучшение системы жидкостного охлаждения реактора дополнительно улучшает способность базы рассеивать тепло в режиме форсажа.
+    textEng: Improvements to the reactor's liquid cooling system further improves the base's ability to dissipate heat from overdrive mode.
+  overdrive_speed_upgrade__name:
+    id: 2
+    text: Обход ограничителя
+    textEng: Limiter Override
+  overdrive_speed_upgrade__text:
+    id: 2
+    text: Перепрошивка реактора мобильной базы позволяет быстрее двигаться в режиме форсажа.
+    textEng: Jailbreak the mobile base's reactor to get more speed out of overdrive mode
+  overdrive_speed_upgrade_02__name:
+    id: 2
+    text: Обход ограничителя II
+    textEng: Limiter Override II
+  overdrive_speed_upgrade_02__text:
+    id: 2
+    text: Отключение еще большей части защитных механизмов реактора позволяет еще больше увеличить скорость в режиме форсажа.
+    textEng: Overriding more reactor safeties allows additional gains to movement speed while using overdrive mode.
   pilots__name:
     id: 1
     text: Базовый экипаж
@@ -268,13 +356,45 @@ entries:
     id: 1
     text: Увеличивает объем запасаемой энергии. Можно установить до трех дополнительных конденсаторов.
     textEng: Expands the energy storage capacity. Up to three auxiliary capacitors can be installed.
+  salvage_budget__name:
+    id: 2
+    text: Улучшенная добыча
+    textEng: Improved Salvage
+  salvage_budget__text:
+    id: 2
+    text: Установка дополнительных грузовых тележек позволяет увеличить бюджет добычи после заданий.
+    textEng: Adding additional carrying carts allows for in increased salvage budget after missions
+  salvage_budget_02__name:
+    id: 2
+    text: Улучшенная добыча II
+    textEng: Improved Salvage II
+  salvage_budget_02__text:
+    id: 2
+    text: Улучшение внутренних сортировочных систем и оптимизация доступа к инвентарю позволяют еще больше увеличить бюджет добычи после заданий.
+    textEng: Improving internal sorting systems and streamlined inventory access further increases the salvage budget after missions
+  salvage_budget_03__name:
+    id: 2
+    text: Улучшенная добыча III
+    textEng: Improved Salvage III
+  salvage_budget_03__text:
+    id: 2
+    text: Установка автоматизированных грузовых тележек позволяет еще больше увеличить бюджет добычи после заданий.
+    textEng: Adding automated carrying carts allows for even more salvage budget after missions
+  salvage_budget_04__name:
+    id: 2
+    text: Улучшенная добыча IV
+    textEng: Improved Salvage IV
+  salvage_budget_04__text:
+    id: 2
+    text: Замена грузовых тележек команд добычи на экзоскелеты с электроприводом значительно увеличивает бюджет добычи после заданий.
+    textEng: Replacing carrying carts with powered exosuits for salvage crews significantly improves salvage budget after missions
   sensor__name:
     id: 1
     text: Армейские сенсоры
     textEng: Military-Grade Sensors
   sensor__text:
     id: 1
-    text: Увеличивает дальность действия и разблокирует серьезные улучшения, используя компоненты для роботов.
+    text: Увеличивает дальность действия и разблокирует серьезные улучшения, используя компоненты для мехов.
     textEng: Improves vision range and unlocks powerful upgrades by using salvaged components from mechs.
   sensor_rain__name:
     id: 1
@@ -282,7 +402,7 @@ entries:
     textEng: Rain Optimization
   sensor_rain__text:
     id: 1
-    text: Позволяет базе практически беспрепятственно видеть даже в условиях сильнейших ливней благодаря пробивающим воду сенсорам, снятым с вражеских роботов. Вам будут завидовать все водители в стране.
+    text: Позволяет базе практически беспрепятственно видеть даже в условиях сильнейших ливней благодаря пробивающим воду сенсорам, снятым с вражеских мехов. Вам будут завидовать все водители в стране.
     textEng: Allows the base to see practically unimpeded through even the heaviest rain using salvaged water penetrating sensors from enemy mechs. Envy of every driver in the country.
   sensor_scan_speed__name:
     id: 1
@@ -306,7 +426,7 @@ entries:
     textEng: Unlocked Bay
   unit_bay__text:
     id: 1
-    text: Убирает промышленное оборудование из отсека базы, что открывает новый ангар и позволяет ремонтировать роботов во время движения.
+    text: Убирает промышленное оборудование из отсека базы, что открывает новый ангар и позволяет ремонтировать мехов во время движения.
     textEng: Opens up a new bay and enables mech repairs on the go by clearing out an industrial equipment compartment on the base.
   unit_bay_repair_lines__name:
     id: 1
@@ -314,7 +434,7 @@ entries:
     textEng: Parallel Repair
   unit_bay_repair_lines__text:
     id: 1
-    text: Использует редкие компоненты роботов для улучшения манипуляторов ангара, что позволяет одновременно ремонтировать несколько машин.
+    text: Использует редкие компоненты мехов для улучшения манипуляторов ангара, что позволяет одновременно ремонтировать несколько машин.
     textEng: Utilizes rare components from mechs to upgrade the mech bay manipulators, allowing multiple units to be repaired in parallel.
   unit_bay_repair_speed__name:
     id: 1
@@ -330,7 +450,7 @@ entries:
     textEng: High speed repairs
   unit_repair_amount_l1__text:
     id: 1
-    text: Усовершенствованные полимерные принтеры и сборочные системы ангара позволяют команде ремонтировать больше повреждений роботов во время стоянок.
+    text: Усовершенствованные полимерные принтеры и сборочные системы ангара позволяют команде ремонтировать больше повреждений мехов во время стоянок.
     textEng: Improved polymer printers and assembly equipment in the mech bay allow your crew to repair more mech damage during camp stops.
   unit_repair_amount_l2__name:
     id: 1
@@ -338,7 +458,7 @@ entries:
     textEng: Express Restoration
   unit_repair_amount_l2__text:
     id: 1
-    text: Высокоскоростные инжекторы полимерной брони и автоматизированный сборочный отсек позволяют восстановить почти уничтоженного робота до идеального состояния за одну стоянку.
+    text: Высокоскоростные инжекторы полимерной брони и автоматизированный сборочный отсек позволяют восстановить почти уничтоженного меха до идеального состояния за одну стоянку.
     textEng: High-speed polymer armor injectors and robotic assembly bay allow your crew to rebuild nearly totaled mechs back to perfect condition in one camp stop.
   unit_storage_l1__name:
     id: 1
@@ -362,7 +482,7 @@ entries:
     textEng: Stacked Storage
   unit_storage_l3__text:
     id: 1
-    text: Увеличивает вместимость за счет штабелирования роботов.
+    text: Увеличивает вместимость за счет штабелирования мехов.
     textEng: Allows for more room by stacking mechs on top of each other.
   unit_storage_l4__name:
     id: 1
@@ -370,7 +490,7 @@ entries:
     textEng: Maximized Storage
   unit_storage_l4__text:
     id: 1
-    text: Штабелирование и чередование роботов позволяет базе перевозить большое количество юнитов, но значительно снижает ее скорость.
+    text: Штабелирование и чередование мехов позволяет базе перевозить большое количество юнитов, но значительно снижает ее скорость.
     textEng: Stacking and interleaving mechs allows the base to fit a large number of units at a high cost to speed.
   workshop__name:
     id: 1
@@ -380,6 +500,22 @@ entries:
     id: 1
     text: Восстанавливает композитные принтеры и сборочные манипуляторы, что позволяет базе производить снаряжение и новые юниты, если имеется достаточно ресурсов.
     textEng: Restores the composite printers and assembly manipulators, allowing the base to produce equipment and new units if sufficient resources are available.
+  workshop_combat__name:
+    id: 2
+    text: Улучшение принтера
+    textEng: Printer Upgrade
+  workshop_combat__text:
+    id: 2
+    text: Улучшение принтера мастерской позволяет завершать проекты во время боевых заданий и операций по добыче.
+    textEng: Improvements to the workshop's printers allows for completing projects during combat mission salvage operations.
+  workshop_combat_02__name:
+    id: 2
+    text: Улучшение принтера II
+    textEng: Printer Upgrade II
+  workshop_combat_02__text:
+    id: 2
+    text: Дальнейшее улучшение принтера мастерской позволяет завершать проекты во время отправки в бой, позволяя создавать детали и корпуса даже в случае поражения в бою.
+    textEng: Further improvements to the workshop printers let them complete projects during combat deployment, allowing parts and frames to be built even in the event of a combat loss
   workshop_lines__name:
     id: 1
     text: Параллельная печать
@@ -402,5 +538,5 @@ entries:
     textEng: Experimental Assembly
   workshop_tech_r3__text:
     id: 1
-    text: Значительно улучшает производительность мастерской при работе с добытыми экзотическими компонентами, что разблокирует копирование редчайших деталей и позволяет мастерской участвовать в ремонте роботов.
+    text: Значительно улучшает производительность мастерской при работе с добытыми экзотическими компонентами, что разблокирует копирование редчайших деталей и позволяет мастерской участвовать в ремонте мехов.
     textEng: Substantially increases workshop performance with salvaged exotic components, unlocking replication of rarest parts and allowing the workshop to contribute to unit repairs.

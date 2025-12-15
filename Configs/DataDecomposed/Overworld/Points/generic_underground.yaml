@@ -59,10 +59,11 @@ combat:
       rewards:
       - chance: 1
         repeats: 1
-        tagsUsed: true
-        keys: []
-        tags:
-          part_res_rare: true
+        tagsUsed: false
+        keys:
+        - res_camp
+        - res_r3
+        tags: 
       - chance: 1
         repeats: 1
         tagsUsed: true
@@ -74,3 +75,9 @@ combat:
         tags:
           blueprint: false
           part_res: false
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: 
+        tags:
+          part_weapon: true

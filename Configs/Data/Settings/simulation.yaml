@@ -44,13 +44,13 @@ salvageCostsPart:
   2:
     costTakeIntact: 15
     costTakeDamaged: 20
-    costDismantleIntact: 10
-    costDismantleDamaged: 10
+    costDismantleIntact: 5
+    costDismantleDamaged: 5
   3:
     costTakeIntact: 20
     costTakeDamaged: 25
-    costDismantleIntact: 15
-    costDismantleDamaged: 15
+    costDismantleIntact: 5
+    costDismantleDamaged: 5
 costDismantlePartIntact: 5
 costDismantlePartDamaged: 10
 costTakePartIntact: 15
@@ -341,6 +341,7 @@ crashingGroundDecelerationRate: 10
 crashingSlopeGroundingThreshold: 0.95
 crashingSteepSlopeThreshold: 0.75
 crashingGroundOnEnd: false
+crashingPuppetSeparation: 1.25
 crumpleDuration: 3.5
 crashingDuration: 4
 crashingAngularVelocityMax: 80
@@ -370,6 +371,7 @@ mechLinearDamping: 1.5
 environmentalDamageCooldown: 0.3
 unitCrashDamageCooldown: 1
 unitCrashCollisionCooldown: 0.3
+environmentCollisionCooldown: 0.5
 meleeFallbackVariantsUsed: false
 meleeRangeFromDash: true
 meleeProjectileCollision: true

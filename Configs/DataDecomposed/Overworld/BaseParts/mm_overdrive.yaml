@@ -1,19 +1,23 @@
 parents:
-- key: mm_core
-  priority: 1
-  offsetStart: 30
+- key: mobilebase
+  priority: -1
+  offsetStart: 0
   offsetEnd: -10
-hidden: true
+hidden: false
 hiddenUntilInstalled: false
 removable: false
-preinstalled: false
+preinstalled: true
 limit: 1
 ui:
-  positionX: 1
-  positionY: -1
+  positionX: 0
+  positionY: -3
   endpoint: false
-  group: 
-  icon: s_icon_l32_upgrade_mm_overdrive1
+  group:
+    positionX: 0
+    positionY: 0
+    sizeX: 0
+    sizeY: 0
+  icon: s_icon_l32_hotbar_move_fast
 unlock: 
 cost:
   resources:

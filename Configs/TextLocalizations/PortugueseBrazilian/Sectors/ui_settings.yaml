@@ -76,10 +76,6 @@ entries:
     id: 1
     text: Volume das vozes
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: Controla o volume das dublagens nas cenas.
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: Limite da taxa de frames
@@ -156,10 +152,6 @@ entries:
     id: 1
     text: 50% (2160 px)
     textEng: 50% (2160px)
-  display_ui_scale__lv_900:
-    id: 1
-    text: 120% (900 px)
-    textEng: 120% (900px)
   display_ui_scale__lv_936:
     id: 1
     text: 115% (936 px)
@@ -172,6 +164,26 @@ entries:
     id: 1
     text: Resolução da interface de usuário, independente da resolução de tela. Pode ser expandida para aumentar a proporção do texto.
     textEng: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    id: 2
+    text: Jogo salvo em combate
+    textEng: Combat saves
+  exp_combat_saves__text:
+    id: 2
+    text: Recurso experimental. Permite salvar durante o combate e carregar jogos salvos em combate. Isso pode levar a artefatos visuais, poses incorretas, problemas com a lógica da missão e possíveis efeitos colaterais na campanha geral. Habilitar este recurso marcará o seu arquivo salvo como experimental.
+    textEng: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    id: 2
+    text: Replay completo
+    textEng: Full replay
+  exp_replay_extended__text:
+    id: 2
+    text: >-
+      Recurso experimental. Permite que o jogo grave e reproduza a batalha inteira em vez de apenas um turno. Isso pode reduzir muito o desempenho e aumentar o uso de memória em combate, tanto no modo replay quanto durante a execução.
+
+
+      O replay completo pode não representar visualmente a execução original. A destruição do ambiente, os efeitos especiais e a animação das unidades podem conter artefatos que não aparecem no modo de replay de um turno.
+    textEng: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     id: 1
     text: Coleta de dados
@@ -188,6 +200,34 @@ entries:
     id: 2
     text: Exibir avisos sobre mekas e mekanautas em condições críticas antes de mobilizar um esquadrão para combate.
     textEng: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    id: 2
+    text: Navegação por danos
+    textEng: Damage scrolling
+  game_base_damage_duration__text:
+    id: 2
+    text: A velocidade de navegação pelos diferentes tipos de dano ao inspecionar armas.
+    textEng: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    id: 2
+    text: Prioridade de dano
+    textEng: Damage priority
+  game_base_damage_priority__lv_action:
+    id: 2
+    text: Dano por ação
+    textEng: Damage per action
+  game_base_damage_priority__lv_dps:
+    id: 2
+    text: Dano por segundo
+    textEng: Damage per second
+  game_base_damage_priority__lv_hit:
+    id: 2
+    text: Dano por acerto
+    textEng: Damage per hit
+  game_base_damage_priority__text:
+    id: 2
+    text: Quais dos valores de dano devem ser exibidos primeiro ao inspecionar armas.
+    textEng: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     id: 1
     text: Dois painéis de comparação
@@ -304,18 +344,26 @@ entries:
     id: 1
     text: Esta configuração determina se o tempo de previsão volta ao início de um turno depois de um período de inatividade.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
-    id: 1
-    text: Configuração de teste 1
-    textEng: Test setting 1
-  game_ent_sp__prefix:
-    id: 1
-    text: Conteúdo
-    textEng: Content
-  game_ent_sp__text:
-    id: 1
-    text: Descrição para a configuração.
-    textEng: Description for the setting goes here.
+  game_ent_sp_logo__header:
+    id: 2
+    text: Alterar logotipo do menu
+    textEng: Change menu logo
+  game_ent_sp_logo__text:
+    id: 2
+    text: Habilita o logotipo alternativo no menu principal.
+    textEng: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
+    id: 2
+    text: Alterar base móvel
+    textEng: Change mobile base
+  game_ent_sp_skin__prefix:
+    id: 2
+    text: Melhoria de apoiador
+    textEng: Supporter upgrade
+  game_ent_sp_skin__text:
+    id: 2
+    text: Habilita a aparência alternativa da base móvel.
+    textEng: Enable the alternative appearance for the mobile base.
   game_language__header:
     id: 1
     text: Idioma

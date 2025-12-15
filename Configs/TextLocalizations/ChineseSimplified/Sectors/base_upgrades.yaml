@@ -56,6 +56,33 @@ entries:
     id: 1
     text: 改良医疗舱与机甲维修设备，使每次扎营停驻期间可额外多修复一台机甲或治疗一名驾驶员。
     textEng: Improvements to the medbay and mech repair equipment allow one more mech or pilot to be recovered during a camp stop.
+  camp_speed__name:
+    id: 2
+    text: 快速部署
+    textEng: Expedited setup
+  camp_speed__text:
+    id: 2
+    text: 简化营地搭建与拆除流程，使移动基地能更快速地完成营地作业。
+    textEng: >
+      Streamlining of camp setup and teardown processes allow the mobile base to complete camp operations faster
+  camp_speed_02__name:
+    id: 2
+    text: 快速部署 II
+    textEng: Expedited setup II
+  camp_speed_02__text:
+    id: 2
+    text: >
+      简化营地搭建与拆除流程，使移动基地能更快速地完成营地作业。
+    textEng: >
+      Streamlining of camp setup and teardown processes allow the mobile base to complete camp operations faster
+  camp_speed_03__name:
+    id: 2
+    text: 快速部署 III
+    textEng: Expedited setup III
+  camp_speed_03__text:
+    id: 2
+    text: 安装可伸缩顶棚并改进厨房设施，进一步加快移动基地完成营地作业的速度。
+    textEng: Installing a retractable canopy and improvements to the kitchen allows the mobile base to complete camp operations even faster
   core__name:
     id: 1
     text: 基本运行
@@ -72,14 +99,42 @@ entries:
     id: 1
     text: 升级储藏间，使基地能携带更多营地补给。
     textEng: Upgrades the storage bay to allow carrying additional camp supplies.
+  crawler_speed_upgrade__name:
+    id: 2
+    text: 巡航速度
+    textEng: Cruise Speed
+  crawler_speed_upgrade__text:
+    id: 2
+    text: 改进变速系统，提高巡航速度。
+    textEng: Improves transmission, which supports a higher cruise speed.
+  crawler_speed_upgrade_02__name:
+    id: 2
+    text: 巡航速度 II
+    textEng: Cruise Speed II
+  crawler_speed_upgrade_02__text:
+    id: 2
+    text: 进一步改进变速系统，提高巡航速度。
+    textEng: Further improves transmission, which supports a higher cruise speed.
+  crawler_speed_upgrade_03__name:
+    id: 2
+    text: 巡航速度 III
+    textEng: Cruise Speed III
+  crawler_speed_upgrade_03__text:
+    id: 2
+    text: 升级车轴，使基地能够支持更高的巡航速度。
+    textEng: Upgrades to the axels allows the base to support a higher cruise speed
+  crawler_speed_upgrade_04__name:
+    id: 2
+    text: 巡航速度 IV
+    textEng: Cruise Speed IV
+  crawler_speed_upgrade_04__text:
+    id: 2
+    text: 改进主引擎，使基地能达到更高的巡航速度。
+    textEng: Improvements to the main engine allow the base to achieve even higher cruising speeds.
   group_core__name:
     id: 1
     text: 堆芯
     textEng: Core
-  group_mm_core__name:
-    id: 1
-    text: 移动
-    textEng: Movement
   group_pilots__name:
     id: 1
     text: 驾驶员
@@ -100,14 +155,6 @@ entries:
     id: 1
     text: 车间
     textEng: Workshop
-  mm_core__name:
-    id: 1
-    text: 未锁定移动
-    textEng: Unlocked Movement
-  mm_core__text:
-    id: 1
-    text: 从动力传动系统中移除民用速度限制，以提高基地的速度。
-    textEng: Increases base's speed by removing civilian speed limitations from the drivetrain.
   mm_cruise__name:
     id: 1
     text: 巡航模式
@@ -204,6 +251,46 @@ entries:
     id: 1
     text: 从敌方巨兽机体上回收的武器，有效射程三公里。
     textEng: A weapon salvaged from an enemy behemoth. Effective range of three kilometers.
+  overdrive_cooldown__name:
+    id: 2
+    text: 强化散热
+    textEng: Improved Dissipation
+  overdrive_cooldown__text:
+    id: 2
+    text: 在反应堆上安装散热片，提高超速模式下的散热速度。
+    textEng: Installing cooling fins on the reactor improves the rate it can dissipate the heat generated from using overdrive mode.
+  overdrive_cooldown_02__name:
+    id: 2
+    text: 强化散热 II
+    textEng: Improved Dissipation II
+  overdrive_cooldown_02__text:
+    id: 2
+    text: 在反应堆上安装更多散热片，进一步提高超速模式下的散热速度。
+    textEng: Installing additional cooling fins on the reactor further improves the rate it can dissipate the heat generated from using overdrive mode.
+  overdrive_cooldown_03__name:
+    id: 2
+    text: 强化散热 III
+    textEng: Improved Dissipation III
+  overdrive_cooldown_03__text:
+    id: 2
+    text: 改进反应堆冷却系统，进一步提高基地在超速模式下的散热能力。
+    textEng: Improvements to the reactor's liquid cooling system further improves the base's ability to dissipate heat from overdrive mode.
+  overdrive_speed_upgrade__name:
+    id: 2
+    text: 限制解除
+    textEng: Limiter Override
+  overdrive_speed_upgrade__text:
+    id: 2
+    text: 破解移动基地反应堆，提高超速模式下的移动速度
+    textEng: Jailbreak the mobile base's reactor to get more speed out of overdrive mode
+  overdrive_speed_upgrade_02__name:
+    id: 2
+    text: 限制解除 II
+    textEng: Limiter Override II
+  overdrive_speed_upgrade_02__text:
+    id: 2
+    text: 解除更多反应堆安全限制，进一步提高超速模式下的移动速度。
+    textEng: Overriding more reactor safeties allows additional gains to movement speed while using overdrive mode.
   pilots__name:
     id: 1
     text: 乘员基础设施
@@ -268,6 +355,38 @@ entries:
     id: 1
     text: 扩大储能容量。最多可以安装三个辅助电容器。
     textEng: Expands the energy storage capacity. Up to three auxiliary capacitors can be installed.
+  salvage_budget__name:
+    id: 2
+    text: 强化回收
+    textEng: Improved Salvage
+  salvage_budget__text:
+    id: 2
+    text: 增加运载拖车，提高任务后的回收预算。
+    textEng: Adding additional carrying carts allows for in increased salvage budget after missions
+  salvage_budget_02__name:
+    id: 2
+    text: 强化回收 II
+    textEng: Improved Salvage II
+  salvage_budget_02__text:
+    id: 2
+    text: 改进内部分类系统、简化库存访问流程，进一步提高任务后的回收预算。
+    textEng: Improving internal sorting systems and streamlined inventory access further increases the salvage budget after missions
+  salvage_budget_03__name:
+    id: 2
+    text: 强化回收 III
+    textEng: Improved Salvage III
+  salvage_budget_03__text:
+    id: 2
+    text: 增加自动运载拖车，更进一步提高任务后的回收预算。
+    textEng: Adding automated carrying carts allows for even more salvage budget after missions
+  salvage_budget_04__name:
+    id: 2
+    text: 强化回收 IV
+    textEng: Improved Salvage IV
+  salvage_budget_04__text:
+    id: 2
+    text: 为回收小组装备动力外骨骼以替代运载拖车，显著提升任务后的回收预算。
+    textEng: Replacing carrying carts with powered exosuits for salvage crews significantly improves salvage budget after missions
   sensor__name:
     id: 1
     text: 军用级传感器
@@ -380,6 +499,22 @@ entries:
     id: 1
     text: 恢复复合打印机和装配机械手，只要有足够的资源，基地就能生产装备和新单位。
     textEng: Restores the composite printers and assembly manipulators, allowing the base to produce equipment and new units if sufficient resources are available.
+  workshop_combat__name:
+    id: 2
+    text: 打印装置升级
+    textEng: Printer Upgrade
+  workshop_combat__text:
+    id: 2
+    text: 改进车间打印装置，使其能在战斗任务的回收阶段完成项目。
+    textEng: Improvements to the workshop's printers allows for completing projects during combat mission salvage operations.
+  workshop_combat_02__name:
+    id: 2
+    text: 打印装置升级 II
+    textEng: Printer Upgrade II
+  workshop_combat_02__text:
+    id: 2
+    text: 进一步改进车间打印装置，使其能在战斗部署期间完成项目，即便发生战损也能继续制造部件和支架。
+    textEng: Further improvements to the workshop printers let them complete projects during combat deployment, allowing parts and frames to be built even in the event of a combat loss
   workshop_lines__name:
     id: 1
     text: 同时打印

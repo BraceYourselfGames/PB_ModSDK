@@ -415,6 +415,8 @@ namespace PhantomBrigade.Data
         public float crashingSlopeGroundingThreshold = 0.95f;
         public float crashingSteepSlopeThreshold = 0.75f;
         public bool crashingGroundOnEnd = false;
+        [Tooltip ("A multiplier factor of the impact collider radius to determine how far outside the collider the puppet can spill before the crashing logic syncs position to the puppet")]
+        public float crashingPuppetSeparation = 1.25f;
 
         public float crumpleDuration = 3.5f;
         public float crashingDuration = 5.0f;
@@ -453,6 +455,8 @@ namespace PhantomBrigade.Data
         public float unitCrashDamageCooldown = 1f;
         [Tooltip ("A small cooldown to prevent bumping and jostling between units in contact from triggering new collision FX")]
         public float unitCrashCollisionCooldown = 0.3f;
+        [Tooltip ("A cooldown to suppress collision trigger events when units are in contact with environment blocks that can't be destroyed for reasons")]
+        public float environmentCollisionCooldown = 0.5f;
 
         [Header ("Melee")]
         public bool meleeFallbackVariantsUsed = false;

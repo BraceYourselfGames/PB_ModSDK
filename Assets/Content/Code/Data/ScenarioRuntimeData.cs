@@ -45,6 +45,9 @@ namespace PhantomBrigade
 
         // Rewards
         public SortedDictionary<string, CombatRewardGroupCollapsed> rewardGroupsCollapsed;
+
+        [YamlIgnore]
+        public bool ignoreNextReset = false;
         
         #if !PB_MODSDK
 
@@ -131,6 +134,10 @@ namespace PhantomBrigade
             
             // This fills detailed scenario data that can't be saved/loaded
             ScenarioSetupUtility.RegenerateScenario (this, targetOverworld);
+
+            // Another fix to PB-16928 (Scenario data in briefing saves is ignored, combat is randomized on each load)
+            // Required because the fix to PB-16879 (Escalation does not correctly apply to scenario squads) has a side effect of triggering on load, resetting everything
+            ignoreNextReset = true;
         }
         
         #endif

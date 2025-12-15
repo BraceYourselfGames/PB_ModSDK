@@ -8,6 +8,10 @@ ui:
   textNavDesc: {}
   iconNav: 
   textFromQuest: province_breakthrough_central
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
 travelInteraction:
   tagsUsed: false
   keys:
@@ -35,7 +39,10 @@ progressDisplay:
 effects: 
 branches:
 - comment: 
-  preferences: 
+  preferences:
+    branchActiveExcluded: false
+    modifiersUnique: true
+    modifierVisitsTracked: true
   checksGlobal: 
   checksBase: 
   links:
@@ -43,9 +50,13 @@ branches:
     checksGlobal: 
     checksBase: 
     stepKey: 21_open_start
-    direction: 180
     levelOffset: 
     branchKey: branch_specops
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 
@@ -60,9 +71,13 @@ branches:
     checksGlobal: 
     checksBase: 
     stepKey: 21_open_start
-    direction: 160
     levelOffset: 
     branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
     filter:
       tagsUsed: true
       keys: 

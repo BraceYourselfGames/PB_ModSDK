@@ -17,14 +17,12 @@ ui:
 unlock: 
 cost:
   resources:
-    components_r2: 20
+    components_r2: 55
     supplies: 1000
 effect:
-  stats:
-  - key: workshop_speed
-    modifier: Offset
-    value: 0.25
-  functions:
+  stats: 
+  functions: 
+  functionsOnLoad:
   - !CreateWorkshopProjects
     projects:
     - countMin: 1
@@ -33,7 +31,12 @@ effect:
       tagsUsed: false
       key: utl_res_convert_r2
       tags: 
-  functionsOnLoad: 
+    - countMin: 1
+      countMax: 1
+      countRandom: false
+      tagsUsed: false
+      key: utl_res_convert_r1_from_r2
+      tags: 
 effectPerInstance: 
 visual: 
 visualPerInstance: 

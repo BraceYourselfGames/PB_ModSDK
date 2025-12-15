@@ -76,10 +76,6 @@ entries:
     id: 1
     text: Громкость голоса
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: Управление громкостью голосов в роликах.
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: Лимит частоты кадров
@@ -156,10 +152,6 @@ entries:
     id: 1
     text: 50% (2160 пикс.)
     textEng: 50% (2160px)
-  display_ui_scale__lv_900:
-    id: 1
-    text: 120% (900 пикс.)
-    textEng: 120% (900px)
   display_ui_scale__lv_936:
     id: 1
     text: 115% (936 пикс.)
@@ -172,6 +164,22 @@ entries:
     id: 1
     text: Разрешение пользовательского интерфейса, не зависит от разрешения экрана. Может быть увеличено, чтобы увеличить размер текста.
     textEng: Resolution of the user interface, independent from the screen resolution. Can be increased to scale up the text.
+  exp_combat_saves__header:
+    id: 2
+    text: Сохранения в бою
+    textEng: Combat saves
+  exp_combat_saves__text:
+    id: 2
+    text: Экспериментальная функция. Открывает возможность сохранения и загрузки в бою. Может вызвать визуальные артефакты, неверные позы, проблемы с логикой миссий и потенциальные побочные эффекты для всей кампании. Активация функции отметит ваше сохранение как «экспериментальное».
+    textEng: Experimental feature. Unlocks saving files during combat and loading of combat saves. This can lead to visual artifacts, incorrect poses, issues with mission logic and potential side effects on the broader campaign. Enabling this feature will flag your save file as experimental.
+  exp_replay_extended__header:
+    id: 2
+    text: Полный повтор
+    textEng: Full replay
+  exp_replay_extended__text:
+    id: 2
+    text: "Экспериментальная функция. Позволяет записывать и воспроизводить весь бой, а не один ход. Может значительно ухудшить производительность и увеличить затраты памяти в бою как во время боя, так и во время выполнения ходов. \n\nПолный повтор может не отображать оригинальные ходы. Разрушение уровня, особые эффекты и анимации юнитов могут содержать артефакты, отсутствующие в повторе одного хода."
+    textEng: "Experimental feature. Allows the game to record and replay the entire battle instead of one turn. This can greatly reduce performance and increase memory use in combat, both in replay mode and during execution. \n\nFull replay might not be visually representative of the original execution. Level destruction, special effects and unit animation might have artifacts not present in single-turn replay."
   game_analytics__header:
     id: 1
     text: Аналитика
@@ -182,27 +190,55 @@ entries:
     textEng: We use analytics to make decisions on how to best balance and further develop the game. We do not collect any personal information in our analytics, only what happens within the game, i.e. popular graphic settings, narrative events encountered, battle data etc.
   game_base_briefing_review__header:
     id: 2
-    text: Предупреждения об отряде
+    text: Предупреждения отряда
     textEng: Squad warnings
   game_base_briefing_review__text:
     id: 2
-    text: Показывать уведомления о критическом состоянии роботов и пилотов перед отправкой отряда в бой.
+    text: Показывать уведомления о критическом состоянии мехов и пилотов перед отправкой отряда в бой.
     textEng: Display warnings about mechs & pilots in a critical condition before deploying a squad into combat.
+  game_base_damage_duration__header:
+    id: 2
+    text: Прокрутка урона
+    textEng: Damage scrolling
+  game_base_damage_duration__text:
+    id: 2
+    text: Как быстро (и нужно ли вообще) игре переключать разные типы урона при осмотре оружия.
+    textEng: How quickly (if at all) the game should scroll through different damage types when inspecting weapons.
+  game_base_damage_priority__header:
+    id: 2
+    text: Приоритет урона
+    textEng: Damage priority
+  game_base_damage_priority__lv_action:
+    id: 2
+    text: Урон за действие
+    textEng: Damage per action
+  game_base_damage_priority__lv_dps:
+    id: 2
+    text: Урон в секунду
+    textEng: Damage per second
+  game_base_damage_priority__lv_hit:
+    id: 2
+    text: Урон за попадание
+    textEng: Damage per hit
+  game_base_damage_priority__text:
+    id: 2
+    text: Какой из видов урона игра должна показывать первым при осмотре оружия.
+    textEng: Which of the damage values the game should show first when inspecting weapons.
   game_base_display_equipped_comparison__header:
     id: 1
     text: Две панели сравнения
     textEng: Two comparison panels
   game_base_display_equipped_comparison__text:
     id: 1
-    text: Если выбран этот параметр, в игре будет отображаться отдельная панель с информацией об используемом на данный момент предмете вместе с предварительным просмотром выбранного предмета в меню настройки робота. Панель выбранного предмета сравнивает его с установленным — этого может быть достаточно для некоторых игроков.
+    text: Если выбран этот параметр, в игре будет отображаться отдельная панель с информацией об используемом на данный момент предмете вместе с предварительным просмотром выбранного предмета в меню настройки меха. Панель выбранного предмета сравнивает его с установленным — этого может быть достаточно для некоторых игроков.
     textEng: If enabled, the game will separately display information about a currently equipped item in addition to previewing a hovered item in mech customization. The hovered item panel makes comparisons to the currently equipped item and can be sufficient for comparing items to some players.
   game_base_preserve_colors__header:
     id: 1
-    text: Сохранять ливрею робота
+    text: Сохранять цвета меха
     textEng: Preserve mech colors
   game_base_preserve_colors__text:
     id: 1
-    text: Если выбран этот параметр, сохраненные цвета робота будут иметь приоритет над цветами новых деталей. Например, если робот окрашен в серый, а новое оружие — красное, то после установки оружие будет перекрашено в серый.
+    text: Если выбран этот параметр, сохраненные цвета меха будут иметь приоритет над цветами новых деталей. Например, если мех окрашен в серый, а новое оружие — красное, то после установки оружие будет перекрашено в серый.
     textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
   game_combat_damage_numbers__header:
     id: 1
@@ -246,7 +282,7 @@ entries:
     textEng: Display cones visualizing effective range and scatter of unit attacks in an upcoming turn. Might be redundant if per-projectile prediction is enabled.
   game_combat_prediction_postfx__header:
     id: 1
-    text: Искажения экрана при прогнозировании
+    text: Эффекты прогнозирования
     textEng: Display prediction effect
   game_combat_prediction_postfx__text:
     id: 1
@@ -300,18 +336,26 @@ entries:
     id: 1
     text: Эта настройка определяет, возвращается ли время предсказания в начало хода после периода простоя.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
-  game_ent_sp__header:
-    id: 1
-    text: Тестовая настройка 1
-    textEng: Test setting 1
-  game_ent_sp__prefix:
-    id: 1
-    text: Содержимое
-    textEng: Content
-  game_ent_sp__text:
-    id: 1
-    text: Здесь будет добавлено описание для этой настройки.
-    textEng: Description for the setting goes here.
+  game_ent_sp_logo__header:
+    id: 2
+    text: Изменить логотип в меню
+    textEng: Change menu logo
+  game_ent_sp_logo__text:
+    id: 2
+    text: Включить альтернативный логотип в главном меню.
+    textEng: Enable the alternative logo in the main menu.
+  game_ent_sp_skin__header:
+    id: 2
+    text: Изменить мобильную базу
+    textEng: Change mobile base
+  game_ent_sp_skin__prefix:
+    id: 2
+    text: Набор поддержки
+    textEng: Supporter upgrade
+  game_ent_sp_skin__text:
+    id: 2
+    text: Включить альтернативный внешний вид мобильной базы.
+    textEng: Enable the alternative appearance for the mobile base.
   game_language__header:
     id: 1
     text: Язык
@@ -334,7 +378,7 @@ entries:
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
   game_screenshots_lossless__header:
     id: 1
-    text: Скриншоты без сжатия
+    text: Скриншоты без потерь
     textEng: Lossless screenshots
   game_screenshots_lossless__text:
     id: 1

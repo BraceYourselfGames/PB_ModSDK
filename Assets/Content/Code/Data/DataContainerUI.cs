@@ -367,7 +367,7 @@ namespace PhantomBrigade.Data.UI
 
         [TabGroup ("Other")] 
         [Space (4f)]
-        public Dictionary<CombatUIModes, CombatUIModeConfig> modeConfigs;
+        public Dictionary<string, CombatUIModeConfig> modeConfigs;
         
         [TabGroup ("Colors")]
         public Color fallbackColor = Color.white.WithAlpha (1f);

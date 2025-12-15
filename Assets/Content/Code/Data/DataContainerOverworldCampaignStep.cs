@@ -7,9 +7,17 @@ using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
+    [LabelWidth (160f)]
     public class CampaignStepBranchPrefs
     {
+        [ToggleLeft]
+        public bool branchActiveExcluded = true;
+        
+        [ToggleLeft]
         public bool modifiersUnique = true;
+        
+        [ToggleLeft]
+        public bool modifierVisitsTracked = true;
     }
     
     public class CampaignStepBranch
@@ -17,6 +25,7 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         public DataBlockComment comment;
 
+        [DropdownReference (true)]
         public CampaignStepBranchPrefs preferences;
 
         [DropdownReference]
@@ -42,6 +51,13 @@ namespace PhantomBrigade.Data
         #endregion
     }
     
+    public enum ProvinceSearchMode
+    {
+        Any = 0,
+        Visited = 1,
+        Unvisited = 2
+    }
+    
     public class CampaignStepLink
     {
         [DropdownReference (true)]
@@ -56,16 +72,22 @@ namespace PhantomBrigade.Data
         [GUIColor ("$GetStepKeyColor")]
         [ValueDropdown("@DataMultiLinkerOverworldCampaignStep.data.Keys")]
         public string stepKey;
-        
-        [PropertyRange (0, 360)]
-        public int direction = 0;
-        
+
         [DropdownReference (true)]
         public DataBlockInt levelOffset;
         
         [DropdownReference (true)]
         [ValueDropdown ("@DataMultiLinkerOverworldFactionBranch.data.Keys")]
         public string branchKey;
+        
+        [BoxGroup ("Province search"), LabelText ("Range")]
+        public Vector2 searchRange = new Vector2 (0, 0);	
+        
+        [BoxGroup ("Province search"), LabelText ("Priority")]
+        public PointDistancePriority searchPriority = PointDistancePriority.None;
+
+        [BoxGroup ("Province search"), LabelText ("Mode")]
+        public ProvinceSearchMode searchMode = ProvinceSearchMode.Unvisited;
         
         [DropdownReference (true)]
         public DataBlockOverworldProvinceFilter filter;
@@ -215,6 +237,48 @@ namespace PhantomBrigade.Data
 
         public int target;
     }
+
+    public class DataBlockCampaignMapBackground
+    {
+        [ValueDropdown ("@TextureManager.GetExposedTextureKeys (TextureGroupKeys.OverworldMapBackgrounds)")]
+        [OnInspectorGUI ("@DropdownUtils.DrawTexturePreview ($value, TextureGroupKeys.OverworldMapBackgrounds, 256)", false)]
+        [HideLabel]
+        public string image;
+
+        [InlineButton ("ReloadTextureGroup", "Reload")]
+        public Vector2 size = new Vector2 (2048, 2048);
+        public Color color = Color.white.WithAlpha (0.7f);
+        
+        private static void ReloadTextureGroup ()
+        {
+            TextureManager.LoadGroup (TextureGroupKeys.OverworldMapBackgrounds);
+        }
+    }
+
+    public class DataBlockCampaignMapLabel : DataBlockTextTrimodal
+    {
+        [PropertyOrder (-1), HorizontalGroup]
+        public Vector2 position = Vector2.zero;
+        
+        [PropertyOrder (-1), HideLabel, HorizontalGroup (0.2f)]
+        public Color color = new Color (1f, 1f, 1f, 1f);
+        
+        [PropertyOrder (-1), ValueDropdown ("styleKeysBuiltin")]
+        public string style = "m";
+
+        private static List<string> styleKeysBuiltin = new List<string>
+        {
+            "s",
+            "m",
+            "l"
+        };
+    }
+    
+    public class DataBlockCampaignMapHeader : DataBlockTextTrimodal
+    {
+        [PropertyOrder (-1), HideLabel, HorizontalGroup (0.2f)]
+        public Color color = new Color (1f, 1f, 1f, 1f);
+    }
     
     public class DataBlockCampaignStepUI
     {       
@@ -240,6 +304,18 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         [ValueDropdown ("@DataMultiLinkerOverworldQuest.GetKeys ()")]
         public string textFromQuest;
+        
+        [DropdownReference (true)]
+        public DataBlockCampaignMapHeader mapHeader;
+
+        [DropdownReference (true)]
+        public DataBlockCampaignMapBackground mapBackground;
+        
+        [DropdownReference (true)]
+        public List<DataBlockCampaignMapLabel> mapLabels;
+        
+        [DropdownReference (true)]
+        public DataBlockOverworldProvinceFilter mapProvinceFilter;
         
         #region Editor
         #if UNITY_EDITOR
@@ -301,6 +377,19 @@ namespace PhantomBrigade.Data
                 
                 if (ui.textNavDesc != null)
                     ui.textNavDesc.s = DataManagerText.GetText (TextLibs.overworldCampaign, $"{key}__nav_text");
+                
+                if (ui.mapHeader != null)
+                    ui.mapHeader.ResolveText (TextLibs.overworldCampaign, $"{key}__map_header");
+                
+                if (ui.mapLabels != null)
+                {
+                    for (int i = 0; i < ui.mapLabels.Count; i++)
+                    {
+                        var l = ui.mapLabels[i];
+                        if (l != null)
+                            l.ResolveText (TextLibs.overworldCampaign, $"{key}__map_label_{i}");
+                    }
+                }
             }
         }
 
@@ -344,6 +433,19 @@ namespace PhantomBrigade.Data
                 
                 if (ui.textNavDesc != null)
                     DataManagerText.TryAddingTextToLibrary (TextLibs.overworldCampaign, $"{key}__nav_text", ui.textNavDesc.s);
+                
+                if (ui.mapHeader != null)
+                    ui.mapHeader.SaveText (TextLibs.overworldCampaign, $"{key}__map_header");
+                
+                if (ui.mapLabels != null)
+                {
+                    for (int i = 0; i < ui.mapLabels.Count; i++)
+                    {
+                        var l = ui.mapLabels[i];
+                        if (l != null)
+                            l.SaveText (TextLibs.overworldCampaign, $"{key}__map_label_{i}");
+                    }
+                }
             }
         }
 

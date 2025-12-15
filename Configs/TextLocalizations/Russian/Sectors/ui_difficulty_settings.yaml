@@ -32,6 +32,14 @@ entries:
     id: 2
     text: Множитель урона, получаемого вашими пилотами.
     textEng: A multiplier for damage taken by your pilots.
+  combat_pilot_fatigue__header:
+    id: 2
+    text: Шанс усталости пилотов
+    textEng: Pilot fatigue chance
+  combat_pilot_fatigue__text:
+    id: 2
+    text: Настройте шанс пилотов заработать усталость в бою. Изначально 100%, но можно уменьшить для более легкой игры.
+    textEng: Adjust the chance of pilots gaining fatigue in combat. Intended to at 100% but can be lowered for an easier experience.
   combat_pilot_xp__header:
     id: 2
     text: Прирост опыта пилотов
@@ -58,11 +66,11 @@ entries:
     textEng: A toggle determining whether destroyed mech parts are eligible for salvage. Disabling this option makes the game harder, requiring carefully knocking out enemy pilots to obtain loot.
   combat_salvage_allows_frames__header:
     id: 1
-    text: Забрать корпуса роботов
+    text: Забрать корпуса мехов
     textEng: Salvage mech frames
   combat_salvage_allows_frames__text:
     id: 1
-    text: Настройка определяет, можно ли забрать корпуса роботов. Включив эту настройку, вы сделаете игру проще, так как получите дополнительный источник роботов, помимо мастерской.
+    text: Настройка определяет, можно ли забрать корпуса мехов. Включив эту настройку, вы сделаете игру проще, так как получите дополнительный источник мехов, помимо мастерской.
     textEng: A toggle determining whether mech frames are eligible for salvage. Enabling this option makes the game easier, providing an alternative to building units through the workshop.
   combat_salvage_budget_defeat__header:
     id: 1
@@ -102,7 +110,7 @@ entries:
     textEng: Baseline camp recovery
   overworld_camp_recovery_amount__text:
     id: 2
-    text: Определяет, сколько здоровья пилотов и прочности роботов восстанавливается во время привала.
+    text: Определяет, сколько здоровья пилотов и прочности мехов восстанавливается во время привала.
     textEng: This setting lets you adjust the pilot health and mech integrity restored while camping.
   overworld_camp_supplies__header:
     id: 1
@@ -110,7 +118,7 @@ entries:
     textEng: Camp resupply
   overworld_camp_supplies__text:
     id: 1
-    text: Количество припасов, получаемых от дружественных баз при пополнении запасов. Уменьшение этого параметра делает кампанию сложнее — вы сможете реже лечить пилотов и чинить юнитов.
+    text: Количество лагерных припасов, получаемых от дружественных баз при пополнении запасов. Уменьшение этого параметра делает кампанию сложнее — вы сможете реже лечить пилотов и чинить юнитов.
     textEng: The amount of camp supplies provided by friendly bases when resupplying. Decreasing this option can make the campaign more difficult, reducing the number of times you can heal your pilots and repair your units.
   overworld_modifiers_negative__header:
     id: 2

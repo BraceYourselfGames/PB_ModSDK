@@ -1043,45 +1043,6 @@ namespace PhantomBrigade.Data
         [Button ("Generate"), PropertyOrder (20)]
         [ShowInInspector, InlineButtonClear, BoxGroup ("Generated", false), HideLabel, DisplayAsString (false)]
         private string generatedOutput;
-        
-        [ShowIf ("@!hidden && IsWorkshopVisible")]
-        [Button ("Generate workshop project"), PropertyOrder (-2)]
-        private void ToWorkshop ()
-        {
-            var data = DataMultiLinkerWorkshopProject.data;
-            var keyWorkshop = key.Replace ("wpn_", "prt_item_");
-
-            if (data.ContainsKey (keyWorkshop))
-            {
-                Debug.LogWarning ($"Key already present!");
-                return;
-            }
-            
-            var p = new DataContainerWorkshopProject ();
-            p.hidden = false;
-            p.textSourceName = new DataBlockWorkshopTextSourceName { key = key, source = WorkshopTextSource.Part };
-            p.textSourceSubtitle = new DataBlockWorkshopTextSourceSubtitle { key = groupMainKey, source = WorkshopTextSource.Group };
-            p.textSourceDesc = new DataBlockWorkshopTextSourceDesc { key = key, source = WorkshopTextSource.Part };
-            
-            p.tags = new HashSet<string> { "group_item" };
-            p.icon = DataMultiLinkerEquipmentGroup.GetEntry (groupMainKey)?.icon;
-            p.duration = new DataBlockFloat { f = 1f };
-            p.inputResources = new List<DataBlockResourceCost>
-            {
-                new DataBlockResourceCost { key = ResourceKeys.supplies, amount = 1 },
-                new DataBlockResourceCost { key = ResourceKeys.componentsR2, amount = 1 },
-                new DataBlockResourceCost { key = ResourceKeys.componentsR3, amount = 1 }
-            };
-
-            p.outputParts = new List<DataBlockWorkshopPart> { new DataBlockWorkshopPart { count = 1, key = key, tags = null } };
-            p.variantLinkSecondary = new DataBlockWorkshopVariantLink { key = "prt_item_ratings_01" };
-            
-            data.Add (keyWorkshop, p);
-            
-            var linker = GameObject.FindObjectOfType<DataMultiLinkerWorkshopProject> ();
-            if (linker != null)
-                linker.ApplyFilter ();
-        }
 
         #endif
     }
