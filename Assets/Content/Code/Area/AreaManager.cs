@@ -27,7 +27,6 @@ namespace Area
             set;
         }
 
-
         public bool collisionsUsed = true;
         public bool visualizeCollisions = false;
         public bool bakeReflections = false;
@@ -37,13 +36,21 @@ namespace Area
         public bool logTilesetSearch = false;
         public bool resetOffsetOnLoad = false;
         public bool showSlopeDetection = false;
-        
-        public static bool displayOnlyVolume = false;
-        public static bool displayProps = true;
-        
-        public static bool sliceEnabled = false;
-        public static int sliceDepth = 0;
-        public static float sliceColliderHeightBias = -1.5f;
+
+        public bool displayOnlyVolume = false;
+        public bool displayProps = true;
+
+        public Mesh fallbackMesh;
+        public Material fallbackMaterial;
+
+        [NonSerialized]
+        public bool sliceEnabled = false;
+
+        [NonSerialized]
+        public int sliceDepth = 0;
+
+        [NonSerialized]
+        public float sliceColliderHeightBias = -1.5f;
 
         // Area data
 
@@ -73,13 +80,16 @@ namespace Area
         [NonSerialized]
         public Dictionary<int, AreaDataNavOverride> navOverrides = new Dictionary<int, AreaDataNavOverride> ();
 
+        [NonSerialized]
+        public Dictionary<int, AreaDataNavOverride> navOverridesSaved = new Dictionary<int, AreaDataNavOverride> ();
+
         public const string blockTag = "SceneHolder";
         public TilesetVertexProperties vertexPropertiesSelected = new TilesetVertexProperties ();
-        
-        public TilesetVertexProperties vertexPropertiesDebug = 
+
+        public TilesetVertexProperties vertexPropertiesDebug =
             new TilesetVertexProperties (0f, 0f, 0.5f, 0f, 0f, 0.5f, 0f, 0f);
 
-        public TilesetVertexProperties vertexPropertiesDebugTerrain = 
+        public TilesetVertexProperties vertexPropertiesDebugTerrain =
             new TilesetVertexProperties (0.25f, 0.4f, 0.25f, 0.25f, 0.4f, 0.25f, -5f, 0f);
 
 
@@ -108,8 +118,8 @@ namespace Area
         private static EntityArchetype propChildArchetype;
         private static EntityArchetype simulationRootArchetype;
 
-        public static Entity[] pointEntitiesMain;
-        public static Entity[] pointEntitiesInterior;
+        private static Entity[] pointEntitiesMain;
+        private static Entity[] pointEntitiesInterior;
 
         private static ComponentType componentTypeModel;
         private static ComponentType componentTypeSimulated;
@@ -220,6 +230,7 @@ namespace Area
             componentTypeModel = typeof (InstancedMeshRenderer);
             componentTypeSimulated = typeof (ECS.BlockSimulated);
             //Remove frozen, not here anymore
+            componentTypeFrozen = typeof (Frozen);
             componentTypeStatic = typeof (Static);
             componentTypeParent = typeof (Parent);
             componentTypeAnimatingTag = typeof (AnimatingTag);
@@ -254,6 +265,10 @@ namespace Area
 
             if (instance == null)
                 instance = this;
+
+            #if !PB_MODSDK
+            distanceSort += SortByDistance;
+            #endif
         }
 
         private void OnEnable ()
@@ -293,8 +308,10 @@ namespace Area
             UnloadArea (false);
 
             DestroyImmediate (GetHolderColliders ().gameObject);
+            #if !PB_MODSDK
             DestroyImmediate (GetHolderSimulatedParent ().gameObject);
             DestroyImmediate (GetHolderSimulatedLeftovers ().gameObject);
+            #endif
 
             // Clear statics for correct mode transfer
             ecsInitialized = false;
@@ -323,7 +340,13 @@ namespace Area
             if (!IsECSSafe ())
                 return;
 
-
+            #if !PB_MODSDK
+            if (isolatedStructureSimRequested)
+            {
+                isolatedStructureSimRequested = false;
+                SimulateIsolatedStructures ();
+            }
+            #endif
         }
 
         //public static int pointTestIndex = -1;
@@ -351,14 +374,6 @@ namespace Area
             terrainUsed = false;
             rebuildCount += 1;
 
-            /*
-            if (rebuildCount > 10)
-            {
-                Debug.Log ("AM | Exiting rebuild due to rebuild call count being at " + rebuildCount);
-                return;
-            }
-            */
-
             UpdateVolume (false);
 
             UpdateAllSpots (false);
@@ -373,15 +388,39 @@ namespace Area
 
             RebuildCollisions ();
 
-            UpdateStructureAnalysis ();
+            UpdateDestructionFlags ();
 
-            RecheckNavOverrides ();
+            // UpdateStructureAnalysis ();
+
+            GenerateNavOverrides ();
 
             UpdateShaderGlobals ();
 
             UpdateTerrain (terrainUsed, true);
 
             UpdateDestructionCounters ();
+        }
+
+        private void UpdateDestructionFlags ()
+        {
+            // Refresh indirect damage flags
+            for (var i = 0; i < points.Count; i += 1)
+            {
+                var point = points[i];
+                if (point == null)
+                    continue;
+
+                var check = point.pointState != AreaVolumePointState.Empty | point.blockTileset != 0;
+                point.indestructibleIndirect = check && IsPointIndestructible
+                (
+                    point,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true
+                );
+            }
         }
 
         public void UpdateDestructionCounters ()
@@ -392,12 +431,9 @@ namespace Area
                 var point = points[i];
                 if (point == null)
                     continue;
-
                 if (point.pointState == AreaVolumePointState.Empty)
                     continue;
-
-                bool indestructible = IsPointIndestructible (point, true, true, true, true, true);
-                if (indestructible)
+                if (point.indestructibleAny)
                     continue;
 
                 destructiblePointCount += 1;
@@ -413,22 +449,15 @@ namespace Area
         public void UpdateTerrain (bool rebuildRequired, bool activationAllowed)
         {
             var sceneHelper = CombatSceneHelper.ins;
-            if (sceneHelper == null)
+            if (sceneHelper != null)
             {
-                return;
-            }
+                var terrain = sceneHelper.terrain;
 
-            var terrain = sceneHelper.terrain;
-            if (activationAllowed && terrainUsed != terrain.gameObject.activeSelf)
-            {
-                terrain.gameObject.SetActive (terrainUsed);
-            }
-            if (rebuildRequired)
-            {
-                #if PB_MODSDK
-                Debug.Log ("Rebuilding terrain for combat area " + areaName);
-                #endif
-                terrain.Rebuild ();
+                if (activationAllowed && terrainUsed != terrain.gameObject.activeSelf)
+                    terrain.gameObject.SetActive (terrainUsed);
+
+                if (rebuildRequired)
+                    terrain.Rebuild ();
             }
         }
 
@@ -441,8 +470,8 @@ namespace Area
         public void UpdateVolume (bool forceReset)
         {
             // Since a volume below 2x2x2 won't contain any Spots, we have to limit the minimum size
-            boundsFull = new Vector3Int ((int)Mathf.Max (boundsFull.x, 2), (int)Mathf.Max (boundsFull.y, 2), (int)Mathf.Max (boundsFull.z, 2));
-            int volumeLength = boundsFull.x * boundsFull.y * boundsFull.z;
+            boundsFull = new Vector3Int (Mathf.Max (boundsFull.x, 2), Mathf.Max (boundsFull.y, 2), Mathf.Max (boundsFull.z, 2));
+            var volumeLength = boundsFull.x * boundsFull.y * boundsFull.z;
 
             if
             (
@@ -455,45 +484,45 @@ namespace Area
                 if (points != null && points.Count != 0)
                     ResetVolumeDamage ();
 
-                points = new List<AreaVolumePoint> (new AreaVolumePoint[volumeLength]);
-				++areaChangeTracker;
+                points = new List<AreaVolumePoint> (volumeLength);
+                areaChangeTracker += 1;
 
-                for (int i = 0; i < points.Count; ++i)
+                var instanceOffset = -AreaUtility.spotOffset;
+                for (var i = 0; i < volumeLength; i += 1)
                 {
-                    AreaVolumePoint point = new AreaVolumePoint ();
+                    var point = new AreaVolumePoint ()
+                    {
+                        spotIndex = i,
+                        pointPositionIndex = TilesetUtility.GetVolumePositionFromIndex (i, boundsFull),
+                    };
+                    point.pointPositionLocal = new Vector3
+                    (
+                        point.pointPositionIndex.x,
+                        -point.pointPositionIndex.y,
+                        point.pointPositionIndex.z
+                    ) * TilesetUtility.blockAssetSize;
+                    point.instancePosition = point.pointPositionLocal + instanceOffset;
+                    point.pointState = point.pointPositionIndex.y < boundsFull.y - 2
+                        ? point.pointState = AreaVolumePointState.Empty
+                        : point.pointState = AreaVolumePointState.Full;
 
-                    point.spotIndex = i;
-                    point.pointPositionIndex = AreaUtility.GetVolumePositionFromIndex (i, boundsFull, log: false);
-                    point.pointPositionLocal =
-                        new Vector3 (point.pointPositionIndex.x, -point.pointPositionIndex.y, point.pointPositionIndex.z) *
-                        TilesetUtility.blockAssetSize;
-
-                    point.instancePosition = point.pointPositionLocal + new Vector3 (1f, -1f, 1f) * (TilesetUtility.blockAssetSize / 2f);
-
-                    if (point.pointPositionIndex.y >= boundsFull.y - 2)
-                        point.pointState = AreaVolumePointState.Full;
-                    else
-                        point.pointState = AreaVolumePointState.Empty;
-
-                    point.terrainOffset = 0f;
-                    point.integrityForDestructionAnimation = 1f;
-
-                    points[i] = point;
+                    points.Add (point);
                 }
 
-                for (int i = 0; i < points.Count; ++i)
+                for (var i = 0; i < points.Count; i += 1)
                 {
-                    AreaVolumePoint scenePoint = points[i];
+                    var scenePoint = points[i];
                     var neighbourIndexes = AreaUtility.GetNeighbourIndexesInXxYxZ (i, Vector3Int.size2x2x2, Vector3Int.size0x0x0, boundsFull);
                     if (scenePoint.pointsInSpot == null)
                     {
                         scenePoint.pointsInSpot = new AreaVolumePoint[8];
-                        scenePoint.pointsInSpot[0] = scenePoint;
+                        scenePoint.pointsInSpot[WorldSpace.Compass.PointSelf] = scenePoint;
                     }
-                    for (int n = 1; n < 8; ++n)
+                    var stop = scenePoint.pointsInSpot.Length;
+                    for (var n = 1; n < stop; n += 1)
                     {
-                        int neighbourIndex = neighbourIndexes[n];
-                        if (neighbourIndex != -1)
+                        var neighbourIndex = neighbourIndexes[n];
+                        if (neighbourIndex != AreaUtility.invalidIndex)
                             scenePoint.pointsInSpot[n] = points[neighbourIndex];
                         else
                         {
@@ -506,12 +535,13 @@ namespace Area
                     if (scenePoint.pointsWithSurroundingSpots == null)
                     {
                         scenePoint.pointsWithSurroundingSpots = new AreaVolumePoint[8];
-                        scenePoint.pointsWithSurroundingSpots[7] = scenePoint;
+                        scenePoint.pointsWithSurroundingSpots[WorldSpace.Compass.SpotSelf] = scenePoint;
                     }
-                    for (int n = 0; n < 7; ++n)
+                    stop = scenePoint.pointsWithSurroundingSpots.Length - 1;
+                    for (var n = 0; n < stop; n += 1)
                     {
-                        int neighbourIndex = neighbourIndexes[n];
-                        scenePoint.pointsWithSurroundingSpots[n] = neighbourIndex != -1 ? points[neighbourIndex] : null;
+                        var neighbourIndex = neighbourIndexes[n];
+                        scenePoint.pointsWithSurroundingSpots[n] = neighbourIndex != AreaUtility.invalidIndex ? points[neighbourIndex] : null;
                     }
                 }
             }
@@ -526,6 +556,7 @@ namespace Area
                 UpdateSpotAtPoint (points[i], triggerNavigationUpdate);
         }
 
+        #if UNITY_EDITOR
         public void UpdateSpotsAroundIndex (int index, bool triggerNavigationUpdate, bool log = false)
         {
             if (!index.IsValidIndex (points))
@@ -536,7 +567,17 @@ namespace Area
             }
 
             var point = points[index];
-            for (int i = 0; i < point.pointsWithSurroundingSpots.Length; ++i)
+            for (int i = 0; i < 8; ++i)
+            {
+                var pointAround = point.pointsWithSurroundingSpots[i];
+                UpdateSpotAtPoint (pointAround, triggerNavigationUpdate);
+            }
+        }
+        #endif
+
+        private void UpdateSpotsAroundPoint (AreaVolumePoint point, bool triggerNavigationUpdate)
+        {
+            for (int i = 0; i < 8; ++i)
             {
                 var pointAround = point.pointsWithSurroundingSpots[i];
                 UpdateSpotAtPoint (pointAround, triggerNavigationUpdate);
@@ -559,92 +600,79 @@ namespace Area
         public void UpdateSpotAtPoint (AreaVolumePoint point, bool triggerNavigationUpdate, bool log = false, bool resetSubtypeOnChange = false)
         {
             if (point == null)
-            {
                 return;
-            }
 
             if (log)
-            {
-                Debug.LogFormat
-                (
-                    "AM | UpdateSpotAtIndex | Starting spot update on point {0} with current configuration {1}",
-                    point.spotIndex,
-                    point.spotConfiguration
-                );
-            }
-
-            // We want to avoid starting the evaluation on last levels on X, Y and Z axes, since we are evaluating two levels deep
-            // if (points.Count <= index || index < 0 || position.x == boundsFull.x - 1 || position.y == boundsFull.y - 1 || position.z == boundsFull.z - 1)
-            //     return;
+                Debug.Log ($"AM | UpdateSpotAtIndex | Starting spot update on point {point.spotIndex} with current configuration {point.spotConfiguration}");
 
             if (!point.spotPresent)
             {
                 if (log)
-                {
                     Debug.Log ("AM | UpdateSpotAtIndex | Point has no spot, aborting");
-                }
                 return;
             }
 
-            // Move this to direct modification of a byte with bitwise operations, per-spot bool arrays should not be used at all costs
-            // Noticed this comment, and decided to change it while I was looking for other things [AJ] (Insert Hal gif here)
-
             var configurationOld = point.spotConfiguration;
-            var configuration = 0;
-            var configurationWithDamage = 0;
+            var configurationWithDamageLast = point.spotConfigurationWithDamage;
+            byte configurationByte = 0;
+            byte configurationDamaged = 0;
+            int damagedNeighbours = 0;
 
-            for (var i = 0; i < point.pointsInSpot.Length; ++i)
+            for (var i = 0; i < point.pointsInSpot.Length; i += 1)
             {
+                configurationByte <<= 1;
+                configurationDamaged <<= 1;
+
                 var pointInSpot = point.pointsInSpot[AreaUtility.configurationIndexRemapping[i]];
                 if (pointInSpot == null)
-                {
                     continue;
-                }
-                if (pointInSpot.pointState == AreaVolumePointState.Empty)
-                {
-                    continue;
-                }
 
-                // Dealing with bytes is a bit tricky (pun intended), any non bit operations will cause them to convert to ints
-                // If we use a bitshift, we can shift 1 << i number of spaces, so we get a 1 in the correct bit position. Since the order is actually reversed, I'm going from the right index to the left (7 - i)
-                // Finally if we use logical OR, we can combine the result with our existing byte data, if either is 1 in each byte, the result will be 1 in that index
-                var bit = 1 << (7 - i);
-                configuration |= bit;
+                var psi = (int)pointInSpot.pointState;
+                var damaged = psi & (int)AreaVolumePointState.FullDestroyed;
+                var full = psi / (int)AreaVolumePointState.Full;
+                configurationByte |= (byte)(damaged | full);
+                configurationDamaged |= (byte)full;
 
-                if (pointInSpot.pointState == AreaVolumePointState.FullDestroyed)
-                {
-                    continue;
-                }
-
-                configurationWithDamage |= bit;
+                damagedNeighbours += damaged;
             }
 
-            // Update primary configuration
-            point.spotConfiguration = (byte)(configuration & 0xFF);
-
-            // Determine if spot has damaged points, but do not write it to point just yet, to allow for comparison a bit later
-            // Before that, for some additional filtering at the trigger point, update configuration with damage
-            var spotHasDamagedPoints = configuration != configurationWithDamage;
-            point.spotConfigurationWithDamage = spotHasDamagedPoints
-                ? (byte)(configurationWithDamage & 0xFF)
-                : point.spotConfiguration;
-
-            // If the spot only just became damaged, record this
+            var spotHasDamagedPoints = damagedNeighbours > 0;
             if (spotHasDamagedPoints && !point.spotHasDamagedPoints)
             {
                 point.instanceVisibilityInterior = 1f;
+
+                // if (point.spotConfiguration == AreaNavUtility.configFull)
+                //     Debug.LogWarning ($"Point {point.spotIndex} has detected damage on spot");
+
+                #if !PB_MODSDK
+                if (Application.isPlaying && IDUtility.IsGameState (GameStates.combat))
+                    CombatReplayHelper.OnLevelInteriorReveal (point.spotIndex);
+                #endif
             }
 
-            // Overwrite point field now that comparison is done
+            point.spotConfiguration = configurationByte;
+            point.spotConfigurationWithDamage = spotHasDamagedPoints ? configurationDamaged : point.spotConfiguration;
             point.spotHasDamagedPoints = spotHasDamagedPoints;
 
-            if (resetSubtypeOnChange && point.spotConfiguration != configurationOld)
+            if (resetSubtypeOnChange && configurationByte != configurationOld)
             {
                 point.blockFlippedHorizontally = false;
                 point.blockGroup = 0;
                 point.blockSubtype = 0;
             }
+
+            if (!triggerNavigationUpdate)
+                return;
+            if (!Application.isPlaying)
+                return;
+            #if !PB_MODSDK
+            Contexts.sharedInstance.combat.isPathRescanRequest = configurationWithDamageLast == AreaNavUtility.configFloor
+                & configurationWithDamageLast != point.spotConfigurationWithDamage;
+            #endif
         }
+
+
+
 
         public void RebuildAllBlocks ()
         {
@@ -654,18 +682,33 @@ namespace Area
             for (int i = 0; i < points.Count; ++i)
             {
                 if (points[i] != null)
-                    RebuildBlock (points[i], false);
+                    RebuildBlock (points[i]);
             }
         }
 
+        #if UNITY_EDITOR
         public void RebuildBlocksAroundIndex (int index)
         {
+            if (!index.IsValidIndex (points))
+                return;
+
             var point = points[index];
             for (int i = 0; i < point.pointsWithSurroundingSpots.Length; ++i)
             {
                 var pointNearby = point.pointsWithSurroundingSpots[i];
                 if (pointNearby != null)
-                    RebuildBlock (pointNearby, false);
+                    RebuildBlock (pointNearby);
+            }
+        }
+        #endif
+
+        private void RebuildBlocksAroundPoint (AreaVolumePoint point)
+        {
+            for (int i = 0; i < point.pointsWithSurroundingSpots.Length; ++i)
+            {
+                var pointNearby = point.pointsWithSurroundingSpots[i];
+                if (pointNearby != null)
+                    RebuildBlock (pointNearby);
             }
         }
 
@@ -722,8 +765,8 @@ namespace Area
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        public static bool IsPointTerrain (AreaVolumePoint point)
-        { 
+        public bool IsPointTerrain (AreaVolumePoint point)
+        {
             if (point == null || displayOnlyVolume)
                 return false;
             return point.blockTileset == AreaTilesetHelper.idOfTerrain;
@@ -741,16 +784,16 @@ namespace Area
             {
                 return Vector3.zero;
             }
-            var offset = point.terrainOffset * TilesetUtility.blockAssetSize;
+
+            float offset = point.terrainOffset * TilesetUtility.blockAssetSize;
+
             return new Vector3
             (
-                point.pointPositionLocal.x,
+                point.instancePosition.x - TilesetUtility.blockAssetHalfSize,
                 point.instancePosition.y + offset,
-                point.pointPositionLocal.z
+                point.instancePosition.z - TilesetUtility.blockAssetHalfSize
             );
         }
-
-
 
         private GameObject r_RB_InteriorObject;
         private GameObject r_RB_MainObject;
@@ -760,19 +803,17 @@ namespace Area
         private Vector3 r_RB_FixedScale = Vector3.one;
 
 
-        public void RebuildBlock (AreaVolumePoint point, bool log)
+        public void RebuildBlock (AreaVolumePoint point, bool log = false, bool applyShaderProperties = true)
         {
             var tilesets = AreaTilesetHelper.database.tilesets;
             if (tilesets == null || tilesets.Count == 0)
             {
                 if (log)
-                {
                     Debug.Log ("AM | RebuildBlockAtIndex | Aborting due to tilesets not being found");
-                }
                 return;
             }
 
-            var tilesetMain = !tilesets.ContainsKey (point.blockTileset) || displayOnlyVolume ? AreaTilesetHelper.database.tilesetFallback : tilesets[point.blockTileset]; 
+            var tilesetMain = !tilesets.ContainsKey (point.blockTileset) || displayOnlyVolume ? AreaTilesetHelper.database.tilesetFallback : tilesets[point.blockTileset];
             if (tilesetMain == null)
             {
                 if (log)
@@ -783,8 +824,8 @@ namespace Area
             if (IsPointTerrain (point))
             {
                 terrainUsed = true;
-                ClearInstancedModel (pointEntitiesInterior, point);
-                ClearInstancedModel (pointEntitiesMain, point);
+                ClearInstancedModel (pointEntitiesInterior[point.spotIndex]);
+                ClearInstancedModel (pointEntitiesMain[point.spotIndex]);
                 return;
             }
 
@@ -798,7 +839,6 @@ namespace Area
             {
                 var tilesetInterior = tilesetMain.interior;
                 var configurationDataWithDamage = AreaTilesetHelper.database.configurationDataForBlocks[point.spotConfigurationWithDamage];
-                var definitionWithDamage = tilesetInterior.blocks[point.spotConfigurationWithDamage];
 
                 UpdatePointTransform
                 (
@@ -826,7 +866,7 @@ namespace Area
             }
             else
             {
-                ClearInstancedModel (pointEntitiesInterior, point);
+                ClearInstancedModel (pointEntitiesInterior[point.spotIndex]);
                 point.instanceVisibilityInterior = 0f;
             }
 
@@ -843,7 +883,7 @@ namespace Area
                 int tilesetSafe = point.blockTileset;
                 byte groupSafe = point.blockGroup;
                 byte subtypeSafe = point.blockSubtype;
-                
+
                 byte group = point.blockGroup;
                 byte subtype = point.blockSubtype;
 
@@ -853,50 +893,30 @@ namespace Area
                     groupSafe = group = 0;
                     subtypeSafe = subtype = 0;
 
-                    if (cfg == AreaNavUtility.configRoofEdgeZNeg || 
-                        cfg == AreaNavUtility.configRoofEdgeZPos || 
-                        cfg == AreaNavUtility.configRoofEdgeXNeg || 
+                    if (cfg == AreaNavUtility.configRoofEdgeZNeg ||
+                        cfg == AreaNavUtility.configRoofEdgeZPos ||
+                        cfg == AreaNavUtility.configRoofEdgeXNeg ||
                         cfg == AreaNavUtility.configRoofEdgeXPos)
                     {
                         subtypeSafe = subtype = 3;
                     }
                 }
-                
-                var definitionFound = definition != null;
-                if (definitionFound && definition.subtypeGroups != null)
+
+                bool definitionFound = definition != null;
+                if (definitionFound)
                 {
-                    var groupPresent = definition.subtypeGroups.ContainsKey (group);
-                    if (!groupPresent)
+                    bool groupPresent = definition.subtypeGroups.ContainsKey (group);
+                    if (!groupPresent && definition.subtypeGroups != null)
                     {
                         groupSafe = definition.subtypeGroups.Keys.First ();
-                        if (log)
-                        {
-                            Debug.LogFormat
-                            (
-                                "Group swapped from {0} to {1} which is first group key out of {2} | index: {3}",
-                                group,
-                                groupSafe,
-                                definition.subtypeGroups.Count,
-                                point.spotIndex
-                            );
-                        }
+                        Debug.Log ($"Group swapped from {group} to {groupSafe} which is first group key out of {definition.subtypeGroups.Count}");
                     }
 
-                    var subtypePresent = groupPresent && definition.subtypeGroups[groupSafe].ContainsKey (subtype);
-                    if (!subtypePresent)
+                    bool subtypePresent = groupPresent && definition.subtypeGroups[group].ContainsKey (subtype);
+                    if (!subtypePresent && definition.subtypeGroups != null && definition.subtypeGroups.ContainsKey (group))
                     {
-                        subtypeSafe = definition.subtypeGroups[groupSafe].Keys.First ();
-                        if (log)
-                        {
-                            Debug.LogFormat
-                            (
-                                "Subtype swapped from {0} to {1} which is first subtype key out of {2} | index: {3}",
-                                subtype,
-                                subtypeSafe,
-                                definition.subtypeGroups[groupSafe].Count,
-                                point.spotIndex
-                            );
-                        }
+                        subtypeSafe = groupPresent ? definition.subtypeGroups[group].Keys.First () : (byte)0;
+                        Debug.Log ($"Subtype swapped from {subtype} to {subtypeSafe} which is first group key out of {definition.subtypeGroups[group].Count}");
                     }
                 }
                 else
@@ -904,15 +924,7 @@ namespace Area
                     tilesetSafe = AreaTilesetHelper.database.tilesetFallback.id;
                     groupSafe = 0;
                     subtypeSafe = 0;
-                    Debug.LogWarningFormat
-                    (
-                        "Definition for config {0} ({1}) was null in tileset {2}, fallback tileset {3} | index: {4}",
-                        point.spotConfiguration,
-                        TilesetUtility.GetStringFromConfiguration (point.spotConfiguration),
-                        tilesetMain.name,
-                        AreaTilesetHelper.idOfFallback,
-                        point.spotIndex
-                    );
+                    Debug.LogWarning ($"Definition for config {cfg} ({TilesetUtility.GetStringFromConfiguration (cfg)}) was null in tileset {tilesetMain.name}, fallback tileset {AreaTilesetHelper.idOfFallback}");
 
                     point.blockTileset = AreaTilesetHelper.database.tilesetFallback.id;
                     point.blockGroup = 0;
@@ -935,8 +947,8 @@ namespace Area
                     tilesetSafe,
                     AreaTilesetHelper.assetFamilyBlock,
                     cfg,
-                    groupSafe, 
-                    subtypeSafe, 
+                    groupSafe,
+                    subtypeSafe,
                     point.instanceMainRotation,
                     point,
                     pointMainArchetype,
@@ -946,27 +958,17 @@ namespace Area
 
                 if (!definitionFound)
                 {
-                    Debug.LogWarningFormat
-                    (
-                        "Definition for config {0} ({1}) was null in tileset {2}, fallback used | index: {3}",
-                        point.spotConfiguration,
-                        TilesetUtility.GetStringFromConfiguration (point.spotConfiguration),
-                        tilesetMain.name,
-                        point.spotIndex
-                    );
+                    Debug.LogWarning ($"Definition for config {cfg} ({TilesetUtility.GetStringFromConfiguration (cfg)}) was null in tileset {tilesetMain.name}, fallback used");
                     // ClearInstancedModel (pointEntitiesMain, point);
 
-                    #if UNITY_EDITOR
                     DrawHighlightSpot (point);
-                    #endif
                 }
             }
             else
-            {
-                ClearInstancedModel (pointEntitiesMain, point);
-            }
+                ClearInstancedModel (pointEntitiesMain[point.spotIndex]);
 
-            ApplyShaderPropertiesAtPoint (point, ShaderOverwriteMode.None, true, true, true);
+            if (applyShaderProperties)
+                ApplyShaderPropertiesAtPoint (point, true, true, true);
         }
 
 
@@ -1071,14 +1073,12 @@ namespace Area
             if (!IsECSSafe ())
             {
                 if (log)
-                {
-                    Debug.Log ("Skipping point due to ECS safety check");
-                }
+                    Debug.Log ($"Skipping point due to ECS safety check");
                 return;
             }
 
-            var entityManager = world.EntityManager;
-            var entity = entityList[point.spotIndex];
+            EntityManager entityManager = world.EntityManager;
+            Entity entity = entityList[point.spotIndex];
 
             if (entity == Entity.Null)
             {
@@ -1086,7 +1086,15 @@ namespace Area
                 entityList[point.spotIndex] = CreatePointInteriorEntity (entityManager, archetype, point.instancePosition, quaternion.identity, point.spotIndex);
                 entity = entityList[point.spotIndex];
                 point.instanceVisibilityInterior = 1f;
+
+                #if !PB_MODSDK
+                if (Application.isPlaying && IDUtility.IsGameState (GameStates.combat))
+                    CombatReplayHelper.OnLevelInteriorReveal (point.spotIndex);
+                #endif
             }
+
+            bool invalidVariantDetected = false;
+            bool verticalFlip = false;
 
             var model = AreaTilesetHelper.GetInstancedModel
             (
@@ -1097,34 +1105,16 @@ namespace Area
                 subtype,
                 true,
                 true,
-                out var invalidVariantDetected,
-                out var verticalFlip,
+                out invalidVariantDetected,
+                out verticalFlip,
                 out var lightData
             );
-
-            // Not sure why this is here
-            // TODO: Investigate why this is needed at all when GetInstancedModel already includes checks for invalid variants and null mesh/material
 
             if (invalidVariantDetected)
             {
                 point.blockFlippedHorizontally = false;
                 point.blockGroup = 0;
                 point.blockSubtype = 0;
-
-                model = AreaTilesetHelper.GetInstancedModel
-                (
-                    tileset,
-                    family,
-                    configuration,
-                    group,
-                    subtype,
-                    true,
-                    true,
-                    out invalidVariantDetected,
-                    out verticalFlip,
-                    out lightData
-                );
-
                 Debug.LogWarning ("Detected invalid customization indexes on point " + point.spotIndex + ", recovered by setting group/subtype to 0-0");
             }
 
@@ -1159,15 +1149,15 @@ namespace Area
 
             entityManager.SetComponentData (entity, new Rotation { Value = rotation });
 
-            if (point.simulatedHelper != null)
-            {
+            #if !PB_MODSDK
+            if (point.simulatedChunkPresent)
                 FreeEntityForSimulation (ref entityManager, entity, point);
-            }
-            else
-            {
-                if (entityManager.HasComponent (entity, componentTypeFrozen))
-                    entityManager.RemoveComponent (entity, componentTypeFrozen);
-            }
+            else if (entityManager.HasComponent (entity, componentTypeFrozen))
+                entityManager.RemoveComponent (entity, componentTypeFrozen);
+            #else
+            if (entityManager.HasComponent (entity, componentTypeFrozen))
+                entityManager.RemoveComponent (entity, componentTypeFrozen);
+            #endif
 
             // if (!Application.isPlaying)
             // {
@@ -1185,16 +1175,7 @@ namespace Area
             UtilityECS.ScheduleUpdate ();
         }
 
-        private void ClearInstancedModel (Entity[] entityList, AreaVolumePoint point)
-        {
-            if (!IsECSSafe ())
-                return;
-
-            Entity entity = entityList[point.spotIndex];
-            ClearInstancedModel (entity);
-        }
-
-        private void ClearInstancedModel (Entity entity)
+        private static void ClearInstancedModel (Entity entity)
         {
             if (!IsECSSafe ())
                 return;
@@ -1209,9 +1190,27 @@ namespace Area
             UtilityECS.ScheduleUpdate ();
         }
 
+        #if UNITY_EDITOR
+        public static bool InstancedModelExists (int index, bool interior = false)
+        {
+            if (world == null)
+                return false;
+            var entityManager = world.EntityManager;
+            if (entityManager == null)
+                return false;
+
+            var entityList = interior ? pointEntitiesInterior : pointEntitiesMain;
+            if (!index.IsValidIndex((entityList)))
+                return false;
+            var entity = entityList[index];
+            return entity != Entity.Null && entityManager.HasComponent<InstancedMeshRenderer> (entity);
+        }
+        #endif
+
+        #if !PB_MODSDK
         private void FreeEntityForSimulation (ref EntityManager entityManager, Entity entity, AreaVolumePoint point)
         {
-            if (point.simulatedHelper == null)
+            if (!point.simulatedChunkPresent)
                 return;
 
             if (!entityManager.HasComponent (entity, componentTypeModel))
@@ -1220,7 +1219,7 @@ namespace Area
             AddPropertyAnimation (point);
 
             // Tag component just in case we'll want to filter to check these out
-            var blockSimulated = new ECS.BlockSimulated { indexOfHelper = point.simulatedHelper.id };
+            var blockSimulated = new ECS.BlockSimulated { indexOfHelper = point.simulatedChunkComponent.id };
             if (!entityManager.HasComponent (entity, componentTypeSimulated))
                 entityManager.AddComponentData (entity, blockSimulated);
             else
@@ -1234,17 +1233,17 @@ namespace Area
                 entityManager.RemoveComponent (entity, componentTypeStatic);
 
             // Since parenting would treat position as local, we have to change it to desired in-chunk local position
-            Vector3 positionOfHelperCurrent = point.simulatedHelper.transform.position;
-            Vector3 positionOfHelperInitial = point.simulatedHelper.initialPosition;
+            Vector3 positionOfHelperCurrent = point.simulatedChunkComponent.transform.position;
+            Vector3 positionOfHelperInitial = point.simulatedChunkComponent.initialPosition;
             Vector3 positionOfPointInitial = point.pointPositionLocal;
-            Vector3 positionDifferenceInitial = point.pointPositionLocal - point.simulatedHelper.initialPosition;
+            Vector3 positionDifferenceInitial = point.pointPositionLocal - point.simulatedChunkComponent.initialPosition;
             // Vector3 positionDifferenceLocalToWorld = point.simulatedHelper.transform.TransformPoint (positionDifferenceInitial);
             // Vector3 positionDifferenceWorldToLocal = point.simulatedHelper.transform.InverseTransformPoint (positionDifferenceInitial);
 
             if (entityManager.HasComponent (entity, componentTypeParent))
             {
                 Entity parent = entityManager.GetComponentData<Parent> (entity).Value;
-                if (parent.Index == point.simulatedHelper.entityRoot.Index)
+                if (parent.Index == point.simulatedChunkComponent.entityRoot.Index)
                     return;
 
                 entityManager.RemoveComponent (entity, componentTypeParent);
@@ -1269,9 +1268,9 @@ namespace Area
             SetEntityAnimation (entity, true);
 
             if (entityManager.HasComponent (entity, typeof (Parent)))
-                entityManager.SetComponentData (entity, new Parent { Value = point.simulatedHelper.entityRoot });
+                entityManager.SetComponentData (entity, new Parent { Value = point.simulatedChunkComponent.entityRoot });
             else
-                entityManager.AddComponentData (entity, new Parent { Value = point.simulatedHelper.entityRoot });
+                entityManager.AddComponentData (entity, new Parent { Value = point.simulatedChunkComponent.entityRoot });
 
             if (!entityManager.HasComponent (entity, typeof (LocalToParent)))
                 entityManager.AddComponent (entity, typeof (LocalToParent));
@@ -1298,10 +1297,20 @@ namespace Area
                 // Debug.Log (string.Format ("Updated helper {0} position to {1}", r_UIP_Helper.id, r_UIP_Helper.transform.position));
                 entityManager.SetComponentData (entityRoot, new Translation { Value = simulatedHelper.transform.position });
                 entityManager.SetComponentData (entityRoot, new Rotation { Value = simulatedHelper.transform.rotation });
+
+                CombatReplayHelper.OnSimulatedStructures
+                (
+                    simulatedHelper.id,
+                    simulatedHelper.transform.position,
+                    simulatedHelper.transform.rotation,
+                    simulatedHelper.pointsAffected
+                );
             }
 
             UtilityECS.ScheduleUpdate ();
         }
+
+        #endif
 
         private readonly List<AreaVolumePoint> pointsDestroyedAll = new List<AreaVolumePoint> ();
 
@@ -1328,55 +1337,180 @@ namespace Area
 
                 point.RecheckDamage ();
             }
+
+            CheckScenePointsDestroyed (pointsDestroyedAll);
         }
 
-
+        #if UNITY_EDITOR
         public void UpdateDamageAroundIndex (int index)
         {
+            if (!index.IsValidIndex (points))
+                return;
+            var pointOrigin = points[index];
+            UpdateDamageAroundPoint (pointOrigin);
+        }
+        #endif
+
+        private List<AreaVolumePoint> pointsDestroyedLocal = new List<AreaVolumePoint> (8);
+
+        private void UpdateDamageAroundPoint (AreaVolumePoint pointOrigin)
+        {
             if (AreaTilesetHelper.database.tilesets == null || AreaTilesetHelper.database.tilesets.Count == 0)
-            {
                 return;
-            }
+
             if (!IsECSSafe ())
-            {
                 return;
-            }
 
             // First, we remove previously instantiated damage objects and update the damage related field on each point
             // If a spot linked to a point has at least one participating point that is damaged, we'll want to redraw that spot
 
-            var pointOrigin = points[index];
-            foreach (var point in pointOrigin.pointsWithSurroundingSpots)
+            pointsDestroyedLocal.Clear ();
+
+            for (int i = 0; i < 8; ++i)
             {
+                var point = pointOrigin.pointsWithSurroundingSpots[i];
                 if (point == null)
-                {
                     continue;
-                }
+
                 point.RecheckRubbleHosting ();
+
+                if (point.pointState == AreaVolumePointState.FullDestroyed)
+                    pointsDestroyedLocal.Add (point);
+
                 if (!point.spotPresent)
-                {
                     continue;
-                }
+
                 point.RecheckDamage ();
             }
 
-            foreach (var point in pointOrigin.pointsWithSurroundingSpots)
+            for (int i = 0; i < 8; ++i)
             {
+                var point = pointOrigin.pointsWithSurroundingSpots[i];
                 if (point == null || !point.spotPresent)
-                {
                     continue;
-                }
+
                 ApplyShaderPropertiesAtPoint (point, ShaderOverwriteMode.None, false, false, true);
-                if (!indexesOccupiedByProps.TryGetValue (point.spotIndex, out var placements))
+                if (indexesOccupiedByProps.TryGetValue (point.spotIndex, out var placements))
                 {
-                    continue;
-                }
-                foreach (var placement in placements)
-                {
-                    AreaAnimationSystem.OnRemoval (placement, point.spotHasDamagedPoints);
+                    for (int p = 0; p < placements.Count; ++p)
+                    {
+                        var placement = placements[p];
+                        AreaAnimationSystem.OnRemoval (placement, point.spotHasDamagedPoints);
+                    }
                 }
             }
+
+            CheckScenePointsDestroyed (pointsDestroyedLocal);
         }
+
+        private void CheckScenePointsDestroyed (List<AreaVolumePoint> scenePointsDestroyed)
+        {
+            if (scenePointsDestroyed == null)
+                return;
+
+            for (int p = 0; p < scenePointsDestroyed.Count; ++p)
+            {
+                AreaVolumePoint pointDestroyed = scenePointsDestroyed[p];
+                if (pointDestroyed == null)
+                    continue;
+
+                AreaVolumePoint pointForRubble = AreaUtility.GetRubblePointBelow (pointDestroyed.instancePosition, points, boundsFull); // AreaUtility.GetRubblePointBelow (pointDestroyed, 0);
+                OnEnvironmentDestruction (pointDestroyed, pointForRubble);
+            }
+        }
+
+        public void OnEnvironmentDestruction (AreaVolumePoint pointDestroyed, AreaVolumePoint pointBelow)
+        {
+            if (!Application.isPlaying)
+                return;
+
+            if (pointDestroyed == null || pointBelow == null)
+                return;
+
+            if (pointBelow.propsRubble != null)
+                return;
+
+            pointBelow.propsRubble = new List<int> (2);
+            var dominantTileset = GetClosestTileset (pointDestroyed);
+            if (logTilesetSearch)
+                Debug.Log ($"Destruction of point {pointDestroyed.spotIndex} would use props {dominantTileset.propIDDebrisClumps.ToStringFormatted ()} (clump) and {dominantTileset.propIDDebrisPile} (pile) from tileset {dominantTileset.name}");
+
+            int randomIndex = UnityEngine.Random.Range (0, dominantTileset.propIDDebrisClumps.Count);
+            int propIDDebrisClump = dominantTileset.propIDDebrisClumps[randomIndex];
+            var prototypeDebrisClump = AreaAssetHelper.GetPropPrototype (propIDDebrisClump);
+            if (prototypeDebrisClump != null)
+            {
+                var placement = new AreaPlacementProp ();
+
+                placement.id = prototypeDebrisClump.id;
+                placement.pivotIndex = pointBelow.spotIndex;
+
+                if (!indexesOccupiedByProps.ContainsKey (pointBelow.spotIndex))
+                    indexesOccupiedByProps.Add (pointBelow.spotIndex, new List<AreaPlacementProp> ());
+
+                indexesOccupiedByProps[pointBelow.spotIndex].Add (placement);
+                placementsProps.Add (placement);
+                ExecutePropPlacement (placement, true, true, false);
+
+                var position = pointBelow.pointPositionLocal + new Vector3 (UnityEngine.Random.Range (-1f, 1f), 2.1f, UnityEngine.Random.Range (-1f, 1f));
+                Debug.DrawLine (pointBelow.pointPositionLocal, position, Color.cyan);
+                Debug.DrawLine (pointBelow.pointPositionLocal, pointBelow.instancePosition, pointBelow.spotPresent ? Color.green : Color.red);
+
+                var rotation = UnityEngine.Random.rotationUniform;
+                var scale = Vector3.one * UnityEngine.Random.Range (1.6f, 1.9f);
+
+                placement.OverrideAndApplyTransformations (position, rotation, scale);
+                AreaAnimationSystem.OnReveal (placement, true, 0.5f, Vector3.up);
+            }
+            else
+                Debug.LogWarning ($"Failed to find a debris clump prop with ID {propIDDebrisClump} for tileset {dominantTileset.name} destruction");
+
+            var prototypeDebrisPile = AreaAssetHelper.GetPropPrototype (dominantTileset.propIDDebrisPile);
+            if (prototypeDebrisPile != null)
+            {
+                var placement = new AreaPlacementProp ();
+
+                placement.id = prototypeDebrisPile.id;
+                placement.pivotIndex = pointBelow.spotIndex;
+
+                if (!indexesOccupiedByProps.ContainsKey (pointBelow.spotIndex))
+                    indexesOccupiedByProps.Add (pointBelow.spotIndex, new List<AreaPlacementProp> ());
+
+                indexesOccupiedByProps[pointBelow.spotIndex].Add (placement);
+                placementsProps.Add (placement);
+                ExecutePropPlacement (placement, true, true, false);
+
+                var position = pointBelow.pointPositionLocal + new Vector3 (UnityEngine.Random.Range (-1f, 1f), 1.51f, UnityEngine.Random.Range (-1f, 1f));
+                var rotation = Quaternion.Euler (0f, UnityEngine.Random.Range (0f, 360f), 0f);
+                var scale = Vector3.one * UnityEngine.Random.Range (0.9f, 1.2f);
+
+                placement.OverrideAndApplyTransformations (position, rotation, scale);
+                AreaAnimationSystem.OnReveal (placement, true, 0.5f, Vector3.down);
+            }
+            else
+                Debug.LogWarning ($"Failed to find a debris pile prop with ID {dominantTileset.propIDDebrisPile} for tileset {dominantTileset.name} destruction");
+
+            #if !PB_MODSDK
+            var fxEnvironmentFireChance = DataShortcuts.sim.environmentFireChance;
+            if (fxEnvironmentFireChance > 0f && pointBelow.instanceFire == null)
+            {
+                float fxEnvironmentFireRoll = UnityEngine.Random.Range (0f, 1f);
+                if (fxEnvironmentFireRoll < fxEnvironmentFireChance)
+                {
+                    var fxPosOffset = new Vector3 (UnityEngine.Random.Range (-0.75f, 0.75f), 1.51f, UnityEngine.Random.Range (-0.75f, 0.75f));
+                    var fxPos = pointBelow.pointPositionLocal + fxPosOffset;
+                    var fxDir = Vector3.up;
+                    var fx = AssetPoolUtility.ActivateInstance (DataShortcuts.sim.environmentFireAsset, fxPos, fxDir);
+                    pointBelow.instanceFire = fx;
+                }
+            }
+            #endif
+        }
+
+
+
+
+
 
         // This is a region concerned with Collisions
 
@@ -1406,7 +1540,7 @@ namespace Area
             }
         }
 
-        private static readonly Vector3 colliderSize = new Vector3 (3.1f, 3.1f, 3.1f);
+        private static readonly Vector3 colliderSize = Vector3.one * (TilesetUtility.blockAssetSize + AreaUtility.pointColliderInflation);
 
         public void RebuildCollisionForPoint (AreaVolumePoint avp)
         {
@@ -1416,7 +1550,11 @@ namespace Area
             if (avp == null)
                 return;
 
-            bool boxColliderUsed = avp.pointState == AreaVolumePointState.Full && avp.simulatedHelper == null;
+            #if !PB_MODSDK
+            bool boxColliderUsed = avp.pointState == AreaVolumePointState.Full && !avp.simulatedChunkPresent;
+            #else
+            bool boxColliderUsed = avp.pointState == AreaVolumePointState.Full;
+            #endif
             if (boxColliderUsed && Application.isPlaying)
             {
                 // See if it's possible to skip collisions on terrain exclusive blocks (only at runtime to avoid level editor issues)
@@ -1428,7 +1566,7 @@ namespace Area
                     if (pointWithNeighbourSpot == null)
                         continue;
 
-                    if (pointWithNeighbourSpot.spotConfiguration == AreaNavUtility.configEmpty || pointWithNeighbourSpot.spotConfiguration == AreaNavUtility.configFull)
+                    if (pointWithNeighbourSpot.spotConfiguration == AreaNavUtility.configEmpty || pointWithNeighbourSpot.spotConfigurationWithDamage == AreaNavUtility.configFull)
                         continue;
 
                     if (pointWithNeighbourSpot.blockTileset != AreaTilesetHelper.idOfTerrain)
@@ -1446,11 +1584,12 @@ namespace Area
             {
                 if (avp.instanceCollider == null)
                 {
-                    GameObject go = new GameObject ("ColliderForPoint");
+                    var ppi = avp.pointPositionIndex;
+                    GameObject go = new GameObject ($"PC_Y{ppi.y:00}_X{ppi.x:000}_Z{ppi.z:000}");
                     go.hideFlags = HideFlags.DontSave;
                     go.transform.parent = GetHolderColliders ();
                     go.transform.localPosition = avp.pointPositionLocal;
-                    go.layer = Constants.environmentLayer;
+                    go.layer = Constants.EnvironmentLayer;
                     avp.instanceCollider = go;
 
                     BoxCollider bc = go.AddComponent<BoxCollider> ();
@@ -1459,10 +1598,10 @@ namespace Area
                     if (visualizeCollisions && avp.pointPositionIndex.y < damageRestrictionDepth)
                     {
                         GameObject vis = PrimitiveHelper.CreatePrimitive (PrimitiveType.Cube, false);
-                        vis.name = "ColliderForPointVisual";
+                        vis.name = go.name + "_Vis";
                         vis.hideFlags = HideFlags.DontSave;
                         vis.transform.parent = go.transform;
-                        vis.transform.localScale = Vector3.one * 2.5f;
+                        vis.transform.localScale = Vector3.one * (TilesetUtility.blockAssetSize - 0.5f);
                         vis.transform.localPosition = Vector3.zero;
 
                         if (visualCollisionMaterial == null)
@@ -1498,6 +1637,27 @@ namespace Area
             if (points == null)
                 return;
 
+            #if !PB_MODSDK
+            if (Application.isPlaying)
+            {
+                var combat = Contexts.sharedInstance.combat;
+                combat.ReplaceDestructionCount (0);
+
+                simulatedHelperCounter = 0;
+                if (simulatedHelpers != null)
+                {
+                    foreach (var sim in simulatedHelpers)
+                    {
+                        if (sim != null)
+                            DestroyImmediate (sim.gameObject);
+                    }
+                    simulatedHelpers.Clear ();
+                }
+            }
+
+            pointsToAnimate.Clear ();
+            #endif
+
             for (int i = 0; i < points.Count; ++i)
             {
                 var point = points[i];
@@ -1509,10 +1669,24 @@ namespace Area
                 if (point.pointState == AreaVolumePointState.FullDestroyed)
                     point.pointState = AreaVolumePointState.Full;
 
-                point.RecheckRubbleHosting ();
+                #if !PB_MODSDK
+                if (Application.isPlaying)
+                {
+                    point.simulatedChunkComponent = null;
+                    point.simulatedChunkPresent = false;
+                    point.simulationRequested = false;
+                    RemovePropertyAnimation (point);
+                }
+                #endif
+
                 point.integrity = 1f;
                 point.integrityForDestructionAnimation = 1f;
+                point.RecheckRubbleHosting ();
             }
+
+            #if !PB_MODSDK
+            crashSpotIndexes.Clear ();
+            #endif
 
             RebuildEverything ();
         }
@@ -1703,32 +1877,42 @@ namespace Area
 
         public void ApplyShaderPropertiesEverywhere ()
         {
+            if (!IsECSSafe ())
+                return;
+
             if (logShaderUpdates)
-                Debug.Log ($"Applying shader properties everywhere...");
+                Debug.Log ("Applying shader properties everywhere...");
 
-            for (int i = 0, count = points.Count; i < count; ++i)
+            for (var i = 0; i < points.Count; i += 1)
             {
-                AreaVolumePoint avp = points[i];
-                if (avp == null || avp.spotConfiguration == AreaNavUtility.configEmpty || avp.spotConfiguration == AreaNavUtility.configFull)
+                AreaVolumePoint point = points[i];
+                if (point == null)
                     continue;
-
-                ApplyShaderPropertiesAtPoint (avp, ShaderOverwriteMode.None, true, true, true);
+                if (!point.spotPresent)
+                    continue;
+                if (point.spotConfiguration == AreaNavUtility.configEmpty | point.spotConfiguration == AreaNavUtility.configFull)
+                    continue;
+                ApplyShaderPropertiesAtPoint (point, true, true, true);
             }
         }
 
         public void ApplyShaderPropertiesToIndexes (List<int> indexes)
         {
+            if (!IsECSSafe ())
+                return;
+
             if (logShaderUpdates)
                 Debug.Log ($"Applying shader properties to {indexes.Count} indexes...");
 
             for (int i = 0, count = indexes.Count; i < count; ++i)
             {
                 var index = indexes[i];
-                AreaVolumePoint avp = points[index];
-                if (avp == null || avp.spotConfiguration == AreaNavUtility.configEmpty || avp.spotConfiguration == AreaNavUtility.configFull)
+                AreaVolumePoint point = points[index];
+                if (point == null)
                     continue;
-
-                ApplyShaderPropertiesAtPoint (avp, ShaderOverwriteMode.None, true, true, true);
+                if (!point.spotPresent)
+                    continue;
+                ApplyShaderPropertiesAtPoint (point, true, true, true);
             }
         }
 
@@ -1759,25 +1943,25 @@ namespace Area
             bool updateDamage
         )
         {
-	        if (point == null || !point.spotPresent)
-		        return;
+            if (point == null || !point.spotPresent)
+                return;
 
-	        if (!IsECSSafe ())
-		        return;
+            if (!IsECSSafe ())
+                return;
 
-			TilesetVertexProperties vertexProps = point.customization;
-
-			if (overwriteMode == ShaderOverwriteMode.All)
-				vertexProps = vertexPropertiesSelected;
-			else if (overwriteMode == ShaderOverwriteMode.AllExceptOverrideIndex)
-			{
-				vertexProps = vertexPropertiesSelected;
-				vertexProps.overrideIndex = point.customization.overrideIndex;
-			}
-
-			ApplyShaderPropertiesAtPoint (point, vertexProps, updateCore, updateIntegrity, updateDamage);
+            var vertexProps = point.customization;
+            if (overwriteMode == ShaderOverwriteMode.All)
+                vertexProps = vertexPropertiesSelected;
+            else if (overwriteMode == ShaderOverwriteMode.AllExceptOverrideIndex)
+            {
+                vertexProps = vertexPropertiesSelected;
+                vertexProps.overrideIndex = point.customization.overrideIndex;
+            }
+            point.customization = vertexProps;
+            ApplyShaderPropertiesAtPoint (point, updateCore, updateIntegrity, updateDamage);
 	    }
 
+        #if UNITY_EDITOR
         public void ApplyShaderPropertiesAtPoint
         (
             AreaVolumePoint point,
@@ -1789,17 +1973,25 @@ namespace Area
         {
             if (point == null || !point.spotPresent)
                 return;
-
             if (!IsECSSafe ())
                 return;
+            point.customization = customization;
+            ApplyShaderPropertiesAtPoint (point, updateCore, updateIntegrity, updateDamage);
+        }
+        #endif
 
-            int pointCount = pointEntitiesMain.Length;
-            int pointIndex = point.spotIndex;
-            bool pointIndexValid = pointIndex >= 0 && pointIndex < pointCount;
-            if (!pointIndexValid)
+        private void ApplyShaderPropertiesAtPoint
+        (
+            AreaVolumePoint point,
+            bool updateCore,
+            bool updateIntegrity,
+            bool updateDamage
+        )
+        {
+            if (!point.spotIndex.IsValidIndex (pointEntitiesMain))
                 return;
 
-            point.customization = customization;
+            var customization = point.customization;
             if (displayOnlyVolume)
             {
                 customization = vertexPropertiesDebug;
@@ -1989,19 +2181,13 @@ namespace Area
                 GetShaderDamageForPoint (point.pointsInSpot[7])
             );
 
-            var animatedIntegrityLowest = 1f;
+            float animatedIntegrityLowest = 1f;
 
-            for (var i = 0; i < point.pointsInSpot.Length; ++i)
+            for (var i = 0; i < point.pointsInSpot.Length; i += 1)
             {
                 var pointInSpot = point.pointsInSpot[i];
-                if (pointInSpot == null)
-                {
+                if (pointInSpot == null || pointInSpot.pointState == AreaVolumePointState.Empty)
                     continue;
-                }
-                if (pointInSpot.pointState == AreaVolumePointState.Empty)
-                {
-                    continue;
-                }
 
                 if (pointInSpot.pointState == AreaVolumePointState.Full || pointInSpot.integrityForDestructionAnimation >= 1f)
                 {
@@ -2122,128 +2308,133 @@ namespace Area
 
             bool displayEnabled = displayProps && !displayOnlyVolume;
             var entityManager = world.EntityManager;
-            
+
             bool prototypePresent = placement.prototype != null;
             bool prototypePresentAndWrong = prototypePresent && placement.id != placement.prototype.id;
-            
+
             bool entityDeletionRequired = prototypePresentAndWrong || !displayEnabled;
             bool entityCreationRequired = displayEnabled && (prototypePresentAndWrong || !entityManager.ExistsNonNull (placement.entityRoot));
 
-            // Destroy entities from wrong prototype
-            if (entityDeletionRequired)
+            // Handling of entity creation and clearing of mismatched entities
+            if (entityCreationRequired || entityDeletionRequired)
             {
-                if (placement.entitiesChildren != null)
+                // Destroy entities from wrong prototype
+                if (entityDeletionRequired)
                 {
-                    if (entityManager.ExistsNonNull (placement.entityRoot))
-                        entityManager.DestroyEntity (placement.entityRoot);
-                    for (int e = 0; e < placement.entitiesChildren.Count; ++e)
+                    if (placement.entitiesChildren != null)
                     {
-                        if (entityManager.ExistsNonNull (placement.entitiesChildren[e]))
-                            entityManager.DestroyEntity (placement.entitiesChildren[e]);
+                        if (entityManager.ExistsNonNull (placement.entityRoot))
+                            entityManager.DestroyEntity (placement.entityRoot);
+                        for (int e = 0; e < placement.entitiesChildren.Count; ++e)
+                        {
+                            if (entityManager.ExistsNonNull (placement.entitiesChildren[e]))
+                                entityManager.DestroyEntity (placement.entitiesChildren[e]);
+                        }
+
+                        placement.entitiesChildren.Clear ();
                     }
-                    
-                    placement.entitiesChildren.Clear ();
+
+                    if (placement.instanceCollision != null)
+                    {
+                        int colliderID = placement.instanceCollision.GetInstanceID ();
+                        if (propLookupByColliderID.ContainsKey (placement.instanceCollision.GetInstanceID ()))
+                            propLookupByColliderID.Remove (colliderID);
+                        Destroy (placement.instanceCollision);
+                        placement.instanceCollision = null;
+                    }
                 }
 
-                if (placement.instanceCollision != null)
+                if (entityCreationRequired)
                 {
-                    int colliderID = placement.instanceCollision.GetInstanceID ();
-                    if (propLookupByColliderID.ContainsKey (placement.instanceCollision.GetInstanceID ()))
-                        propLookupByColliderID.Remove (colliderID);
-                    Destroy (placement.instanceCollision);
-                    placement.instanceCollision = null;
+                    placement.prototype = AreaAssetHelper.GetPropPrototype (placement.id);
+                    if (placement.prototype == null)
+                    {
+                        Debug.Log ($"Failed to find find prop prototype with ID {placement.id} for placement at point {placement.pivotIndex}");
+                        return;
+                    }
+
+                    // Abort if configuration mask doesn't work
+                    var configurationMask = AreaAssetHelper.GetPropMask (placement.prototype.prefab.compatibility);
+                    if (point.spotPresent && !ignoreConfiguration && !configurationMask.Contains (point.spotConfiguration))
+                    {
+                        if (log)
+                            Debug.Log ($"Bailing due to config incompatibility {placement.id}");
+                        return;
+                    }
+
+                    // Proceed to creating new entities now that all the checks are done
+                    int subObjectCount = placement.prototype.subObjects.Count;
+                    if (placement.entitiesChildren == null)
+                        placement.entitiesChildren = new List<Entity> (subObjectCount);
+                    else
+                        placement.entitiesChildren.Clear ();
+
+                    Entity entityRoot = entityManager.CreateEntity (propRootArchetype);
+                    entityManager.SetComponentData (entityRoot, new ECS.PropRoot { id = placement.id, pivotIndex = placement.pivotIndex });
+                    placement.entityRoot = entityRoot;
+
+                    // if (log)
+                    //     Debug.Log ($"Sub-objects spawned: {subObjectCount}");
+
+                    for (int s = 0; s < subObjectCount; ++s)
+                    {
+                        AreaPropSubObject subObject = placement.prototype.subObjects[s];
+                        Entity entityChild = entityManager.CreateEntity (propChildArchetype);
+                        placement.entitiesChildren.Add (entityChild);
+
+                        entityManager.SetComponentData (entityChild, new ECS.PropChild { id = placement.id, pivotIndex = placement.prototype.id, subObjectIndex = s });
+                        entityManager.AddSharedComponentData (entityChild, AreaAssetHelper.GetInstancedModel (subObject.modelID));
+
+                        entityManager.SetComponentData (entityChild, new ScaleShaderProperty { property = new HalfVector4 (1, 1, 1, 1) });
+                        entityManager.SetComponentData (entityChild, new HSBOffsetProperty { property = new HalfVector8 (new HalfVector4 (0f, 0.5f, 0.5f, 1), new HalfVector4 (0f, 0.5f, 0.5f, 1)) });
+                        entityManager.SetComponentData (entityChild, new PackedPropShaderProperty { property = new HalfVector4 (1, 0, 1, 0) });
+                        entityManager.SetComponentData (entityChild, new PropertyVersion { version = 1 });
+
+                        if (!Application.isPlaying)
+                            SetEntityAnimation (entityChild, true);
+                        else
+                        {
+                            MarkEntityDirty (entityChild);
+                        }
+
+                        if (entityManager.HasComponent (entityChild, typeof (Parent)))
+                        {
+                            entityManager.SetComponentData (entityChild, new Parent { Value = entityRoot });
+                        }
+                        else
+                        {
+                            entityManager.AddComponentData (entityChild, new Parent { Value = entityRoot });
+                            entityManager.AddComponent (entityChild, typeof (LocalToParent));
+                        }
+
+                        //Entity entityAttachment = entityManager.CreateEntity (attachEntityArchetype);
+                        //EntityManager.SetComponentData (entityAttachment, new Attach { Parent = entityRoot, Child = entityChild });
+                    }
+
+                    // Prop collider is a basic GameObject hosting only a collider for registering impacts (no legacy prop component, meshes etc.)
+                    // Probably not worth pooling these since we only need to do this on level loading
+                    // and pre-generating 2-5k of each collider type used on props would be wasteful
+
+                    if (placement.prototype.prefabCollider != null && Application.isPlaying)
+                    {
+                        placement.instanceCollision = Instantiate (placement.prototype.prefabCollider, GetHolderColliders (), true);
+                        placement.instanceCollision.name = "ColliderForProp";
+                        placement.instanceCollision.name = placement.prototype.prefabCollider.name;
+                        placement.instanceCollision.gameObject.layer = Constants.propLayer;
+                        placement.instanceCollision.gameObject.SetFlags (HideFlags.DontSave);
+                        propLookupByColliderID.Add (placement.instanceCollision.GetInstanceID (), placement);
+                    }
+
+                    // Time for other changes which are done regardless of whether new entities had to be generated
+                    // First we need to check rotation byte since certain position calculations use transformations dependent on rotation
+                    // if (point.spotPresent && placement.prototype.prefab.linkRotationToConfiguration)
+                    //     placement.rotation = (byte)configurationMask.IndexOf (point.spotConfiguration);
                 }
             }
 
-            if (entityCreationRequired)
-            {
-                placement.prototype = AreaAssetHelper.GetPropPrototype (placement.id);
-                if (placement.prototype == null)
-                {
-                    Debug.Log ($"Failed to find find prop prototype with ID {placement.id} for placement at point {placement.pivotIndex}");
-                    return;
-                }
-
-                // Abort if configuration mask doesn't work
-                var configurationMask = AreaAssetHelper.GetPropMask (placement.prototype.prefab.compatibility);
-                if (point.spotPresent && !ignoreConfiguration && !configurationMask.Contains (point.spotConfiguration))
-                {
-                    if (log)
-                        Debug.Log ($"Bailing due to config incompatibility {placement.id}");
-                    return;
-                }
-
-                // Proceed to creating new entities now that all the checks are done
-                int subObjectCount = placement.prototype.subObjects.Count;
-                if (placement.entitiesChildren == null)
-                    placement.entitiesChildren = new List<Entity> (subObjectCount);
-                else
-                    placement.entitiesChildren.Clear ();
-
-                Entity entityRoot = entityManager.CreateEntity (propRootArchetype);
-                entityManager.SetComponentData (entityRoot, new ECS.PropRoot { id = placement.id, pivotIndex = placement.pivotIndex });
-                placement.entityRoot = entityRoot;
-
-                // if (log)
-                //     Debug.Log ($"Sub-objects spawned: {subObjectCount}");
-
-                for (int s = 0; s < subObjectCount; ++s)
-                {
-                    AreaPropSubObject subObject = placement.prototype.subObjects[s];
-                    Entity entityChild = entityManager.CreateEntity (propChildArchetype);
-                    placement.entitiesChildren.Add (entityChild);
-
-                    entityManager.SetComponentData (entityChild, new ECS.PropChild { id = placement.id, pivotIndex = placement.prototype.id, subObjectIndex = s });
-                    entityManager.AddSharedComponentData (entityChild, AreaAssetHelper.GetInstancedModel (subObject.modelID));
-
-                    entityManager.SetComponentData (entityChild, new ScaleShaderProperty { property = new HalfVector4 (1, 1, 1, 1) });
-                    entityManager.SetComponentData (entityChild, new HSBOffsetProperty { property = new HalfVector8 (new HalfVector4 (0f, 0.5f, 0.5f, 1), new HalfVector4 (0f, 0.5f, 0.5f, 1)) });
-                    entityManager.SetComponentData (entityChild, new PackedPropShaderProperty { property = new HalfVector4 (1, 0, 1, 0) });
-                    entityManager.SetComponentData (entityChild, new PropertyVersion { version = 1 });
-
-                    if (!Application.isPlaying)
-                        SetEntityAnimation (entityChild, true);
-                    else
-                    {
-                        MarkEntityDirty (entityChild);
-                    }
-
-                    if (entityManager.HasComponent (entityChild, typeof (Parent)))
-                    {
-                        entityManager.SetComponentData (entityChild, new Parent { Value = entityRoot });
-                    }
-                    else
-                    {
-                        entityManager.AddComponentData (entityChild, new Parent { Value = entityRoot });
-                        entityManager.AddComponent (entityChild, typeof (LocalToParent));
-                    }
-
-                    //Entity entityAttachment = entityManager.CreateEntity (attachEntityArchetype);
-                    //EntityManager.SetComponentData (entityAttachment, new Attach { Parent = entityRoot, Child = entityChild });
-                }
-
-                // Prop collider is a basic GameObject hosting only a collider for registering impacts (no legacy prop component, meshes etc.)
-                // Probably not worth pooling these since we only need to do this on level loading 
-                // and pre-generating 2-5k of each collider type used on props would be wasteful
-
-                if (placement.prototype.prefabCollider != null && Application.isPlaying)
-                {
-                    placement.instanceCollision = Instantiate (placement.prototype.prefabCollider, GetHolderColliders (), true);
-                    placement.instanceCollision.name = "ColliderForProp";
-                    placement.instanceCollision.name = placement.prototype.prefabCollider.name;
-                    placement.instanceCollision.gameObject.layer = Constants.propLayer;
-                    placement.instanceCollision.gameObject.SetFlags (HideFlags.DontSave);
-                    propLookupByColliderID.Add (placement.instanceCollision.GetInstanceID (), placement);
-                }
-
-                // Time for other changes which are done regardless of whether new entities had to be generated
-                // First we need to check rotation byte since certain position calculations use transformations dependent on rotation
-                // if (point.spotPresent && placement.prototype.prefab.linkRotationToConfiguration)
-                //     placement.rotation = (byte)configurationMask.IndexOf (point.spotConfiguration);
-                
-                // Next we tell the placement to finish setting up the prop (no point/config info needed further)
+            // Next we tell the placement to finish setting up the prop (no point/config info needed further)
+            if (!entityDeletionRequired)
                 placement.Setup (this, point);
-            }
 
             UtilityECS.ScheduleUpdate ();
         }
@@ -2254,7 +2445,11 @@ namespace Area
             var point = points[placement.pivotIndex];
 
             if (point.spotPresent && placement.prototype.prefab.linkRotationToConfiguration)
+            {
                 placement.rotation = (byte)configurationMask.IndexOf (point.spotConfiguration);
+                if (placement.flipped)
+                    placement.rotation = (byte)((placement.rotation + 2) % 4);
+            }
 
             placement.Setup (this, point);
         }
@@ -2327,6 +2522,8 @@ namespace Area
             return UtilityGameObjects.GetTransformSafely (ref holderColliders, holderCollidersName, HideFlags.DontSave, transform.localPosition);
         }
 
+        #if !PB_MODSDK
+
         public Transform GetHolderSimulatedLeftovers ()
         {
             return UtilityGameObjects.GetTransformSafely (ref holderSimulatedLeftovers, holderSimulatedLeftoversName, HideFlags.DontSave, transform.localPosition, "SceneHolder");
@@ -2337,100 +2534,177 @@ namespace Area
             return UtilityGameObjects.GetTransformSafely (ref holderSimulatedParent, holderSimulatedParentName, HideFlags.DontSave, transform.localPosition, "SceneHolder");
         }
 
-
-        public void ApplyDamageToPosition (Vector3 position, float impact, bool forceOverkillEffect = false)
+        public void ApplyDamageToPosition (Vector3 position, float impact, bool forceOverkillEffect = false, bool forceDestructible = false)
         {
             var point = GetPoint (position);
             if (point != null)
-				ApplyDamageToPoint (point, impact, forceOverkillEffect);
+				ApplyDamageToPoint (point, impact, forceOverkillEffect, forceDestructible);
         }
 
-        public void ApplyDamageUniformlyToGroup (Vector3 position, float impact, int reach)
+        private Collider[] overlapColliders = new Collider[256];
+        private List<ColliderDistanceSqr> collidersByDistance = new List<ColliderDistanceSqr> ();
+        private Comparison<ColliderDistanceSqr> distanceSort;
+
+        private struct ColliderDistanceSqr
         {
-	        if (impact <= 0 || reach <= 0)
-		        return;
-
-            float reachSqr = reach * reach;
-            for (int z = -reach; z <= reach; ++z)
-	        {
-		        for (int y = -reach; y <= reach; ++y)
-		        {
-			        for (int x = -reach; x <= reach; ++x)
-			        {
-				        var delta = new Vector3 (x, y, z) * TilesetUtility.blockAssetSize;
-                        if (delta.sqrMagnitude > reachSqr)
-							continue;
-
-						var point = GetPoint (position + delta);
-						if (point == null)
-							continue;
-
-						ApplyDamageToPoint (point, impact);
-			        }
-		        }
-	        }
+            public Collider collider;
+            public float sqrDist;
         }
 
-        private Collider[] overlapColliders = new Collider[64];
+        private List<(AreaVolumePoint, float)> pointsImpactRadius = new List<(AreaVolumePoint, float)> ();
+        private Dictionary<int, AreaVolumePoint> pointsDamaged = new Dictionary<int, AreaVolumePoint> ();
+        private Dictionary<int, AreaVolumePoint> pointsDestructionUpdate = new Dictionary<int, AreaVolumePoint> ();
+        private Dictionary<int, AreaVolumePoint> pointsDestroyedRadius = new Dictionary<int, AreaVolumePoint> ();
 
-        public void ApplyDamageToRadius (Vector3 origin, float impactDamage, float radius, float exponent, out int overlapCount)
+        private static int SortByDistance (ColliderDistanceSqr a, ColliderDistanceSqr b) => a.sqrDist.CompareTo (b.sqrDist);
+
+        public int ApplyDamageToRadius (Vector3 origin, float impactDamage, float radius, float exponent, bool forceDestructible = false)
         {
-            overlapCount = Physics.OverlapSphereNonAlloc (origin, radius, overlapColliders, LayerMasks.environmentMask);
+            if (impactDamage <= 0f)
+                return 0;
+
+            var overlapCount = Physics.OverlapSphereNonAlloc (origin, radius, overlapColliders, LayerMasks.environmentMask);
             if (overlapCount == 0)
-                return;
+                return 0;
 
-            if (radius <= 0)
+            if (radius <= 0f)
             {
                 Debug.LogWarning ($"Radius of projectile splash impact was set to 0, make sure to correct this in the data");
                 radius = 1f;
             }
 
-            // if (overlapCount > 50)
+            const int limit = 50;
+            // if (overlapCount > limit)
             //     Debug.LogWarning ($"More than 50 points ({overlapCount}) damaged at once, consider reducing environment splash impact radius");
 
-            var originMin = origin;
-            var originMax = origin;
-
-            originMin.y -= radius;
-            originMax.y += radius;
-
+            float radiusSqr = radius * radius;
             bool draw = DataShortcuts.sim.environmentCollisionDebug;
 
-            // Debug.Log ($"Splash impact reached {overlapCount} environment points");
-            for (int a = 0; a < overlapCount; ++a)
+            // Sorting overlaps by distance
+            collidersByDistance.Clear ();
+            for (var i = 0; i < overlapCount; i += 1)
             {
-                var col = overlapColliders[a];
-                if (col == null)
-                    continue;
+                var col = overlapColliders[i];
+                var hitPosition = col.transform.position;
+                var sqrDist = (hitPosition - origin).sqrMagnitude;
+                collidersByDistance.Add (new ColliderDistanceSqr { collider = col, sqrDist = sqrDist });
 
+                if (draw)
+                    Debug.DrawLine (origin, hitPosition, Color.gray.WithAlpha (0.5f), 5);
+            }
+
+            collidersByDistance.Sort (distanceSort);
+            if (overlapCount > limit)
+                overlapCount = limit;
+
+            for (var i = 0; i < overlapCount; i += 1)
+                overlapColliders[i] = collidersByDistance[i].collider;
+
+            pointsImpactRadius.Clear ();
+            pointsDamaged.Clear ();
+            pointsDestructionUpdate.Clear ();
+            for (var i = 0; i < overlapCount; i += 1)
+            {
+                var col = overlapColliders[i];
                 var hitPosition = col.transform.position;
                 var hitPoint = GetPoint (hitPosition);
 
-                // Exponent allows us to make the bulk of the splash area to be hit fairly uniformly, removing some unpredictability of AoE
-                var distanceNormalized = Vector3.Distance (origin, hitPosition) / radius;
-                distanceNormalized = Mathf.Pow (distanceNormalized, exponent);
+                var distanceSqr = Vector3.SqrMagnitude (origin - hitPosition);
+                if (distanceSqr >= radiusSqr)
+                    continue;
+
+                var distanceNormalizedSqr = distanceSqr / radiusSqr;
+                if (distanceNormalizedSqr >= 0.95f)
+                    continue;
+
+                var damageScaling = 1f - distanceNormalizedSqr;
+                var impact = damageScaling * impactDamage;
 
                 if (draw)
-                    Debug.DrawLine (origin, hitPosition, Color.green, 5);
+                {
+                    var color = Color.Lerp (Color.yellow, Color.red, damageScaling);
+                    Debug.DrawLine (origin, hitPosition, color, 5f);
+                    DebugExtensions.DrawCube (hitPosition, Vector3.one * 0.25f, color, 5f);
+                    var impactScale = DataLinkerSettingsArea.data.damageScalar;
+                    Debug.Log ($"AOE {i:00}/{overlapCount} | Point: {hitPoint.spotIndex} ({hitPoint.integrity:0.##}) | Distance/radius (sqr.): {distanceSqr:0.##}/{radiusSqr:0.##} | Damage: x{damageScaling:0.##} ({impact:F0}/{impactDamage:F0}) | Norm. damage: -{(impact * impactScale):0.##}");
+                }
 
-                var impact = DataLinkerSettingsSimulation.data.impactDamageFalloff.GetCurveSample (distanceNormalized) * impactDamage;
-                ApplyDamageToPoint (hitPoint, impact);
+                if (!TryUpdatePointIntegrity (hitPoint, impact, forceDestructible))
+                    continue;
+
+                if (hitPoint.integrity == 0f)
+                {
+                    pointsImpactRadius.Add ((hitPoint, impact));
+                    pointsToAnimate.Add (hitPoint);
+                }
+                var neighbours = hitPoint.pointsWithSurroundingSpots;
+                for (var j = 0; j < neighbours.Length; j += 1)
+                {
+                    var neighbour = neighbours[j];
+                    if (neighbour == null)
+                        continue;
+                    var map = hitPoint.integrity > 0f ? pointsDamaged : pointsDestructionUpdate;
+                    map[neighbour.spotIndex] = neighbour;
+                }
             }
+
+            // Two passes on destruction candidates.
+            // First pass evaluates all the spots to determine what has been damaged.
+            // Second pass rebuilds all the blocks with updated damage info.
+            pointsDestroyedRadius.Clear ();
+            foreach (var k in pointsDestructionUpdate.Keys)
+            {
+                var point = pointsDestructionUpdate[k];
+                AddPropertyAnimation (point);
+                UpdateSpotAtPoint (point, false);
+                point.RecheckRubbleHosting ();
+                if (point.pointState == AreaVolumePointState.FullDestroyed)
+                    pointsDestroyedRadius[point.spotIndex] = point;
+                if (point.spotPresent)
+                    point.RecheckDamage ();
+            }
+
+            foreach (var k in pointsDestructionUpdate.Keys)
+            {
+                var point = pointsDestructionUpdate[k];
+                if (point.spotPresent && indexesOccupiedByProps.TryGetValue (point.spotIndex, out var placements))
+                {
+                    for (var p = 0; p < placements.Count; p += 1)
+                    {
+                        var placement = placements[p];
+                        AreaAnimationSystem.OnRemoval (placement, point.spotHasDamagedPoints);
+                    }
+                }
+                RebuildBlock (point);
+                pointsDamaged.Remove (point.spotIndex);
+            }
+
+            foreach (var k in pointsDestroyedRadius.Keys)
+            {
+                var point = pointsDestroyedRadius[k];
+                var pointForRubble = AreaUtility.GetRubblePointBelow (point.instancePosition, points, boundsFull);
+                OnEnvironmentDestruction (point, pointForRubble);
+            }
+
+            for (var i = 0; i < pointsImpactRadius.Count; i += 1)
+            {
+                var (point, impact) = pointsImpactRadius[i];
+                ApplyDestructionToPoint (point, impact, false, audioFX: i == 0);
+                ScanForDisconnect (point);
+            }
+
+            foreach (var k in pointsDamaged.Keys)
+            {
+                var point = pointsDamaged[k];
+                ApplyShaderPropertiesAtPoint (point, ShaderOverwriteMode.None, false, true, false);
+            }
+
+            return overlapCount;
         }
 
-        public bool IsDamageCriticalToPosition (Vector3 position, int hitDamage)
-        {
-            AreaVolumePoint point = GetPoint (position);
+        #endif
 
-            if (point == null)
-                return false;
-
-            float finalDamage = hitDamage * DataLinkerSettingsArea.data.damageScalar;
-            float finalIntegrity = Mathf.Clamp01 (point.integrity - finalDamage);
-            return finalIntegrity > 0f;
-        }
-
-        private AreaVolumePoint GetPoint (Vector3 position)
+        public AreaVolumePoint GetPoint (Vector3 position)
         {
             int index = AreaUtility.GetIndexFromWorldPosition (position, GetHolderColliders ().position, boundsFull);
             if (index < 0 || index > points.Count - 1)
@@ -2440,30 +2714,6 @@ namespace Area
             }
 
             return points[index];
-        }
-
-        public float GetPointIntegrity (Vector3 position)
-        {
-            var point = GetPoint (position);
-
-            if (point == null)
-                return 0;
-
-            return point.integrity;
-        }
-
-        public static bool IsPointIndestructible
-        (
-            Vector3 position,
-            bool checkFlag = true,
-            bool checkHeight = true,
-            bool checkEdges = true,
-            bool checkTilesets = true,
-            bool checkFullSurroundings = true
-        )
-        {
-            var point = instance.GetPoint (position);
-            return IsPointIndestructible (point, checkFlag, checkHeight, checkEdges, checkTilesets, checkFullSurroundings);
         }
 
         public static bool IsPointIndestructible
@@ -2479,7 +2729,7 @@ namespace Area
             if (point == null)
                 return true;
 
-            if (checkFlag && (!point.destructible || point.indestructibleIndirect))
+            if (checkFlag && point.indestructibleAny)
                 return true;
 
             if (checkHeight && point.pointPositionIndex.y >= instance.damageRestrictionDepth)
@@ -2497,7 +2747,9 @@ namespace Area
             if (checkTilesets && IsPointInvolvingIndestructibleTilesets (point))
                 return true;
 
-            if (checkFullSurroundings && point.pointPositionIndex.y >= instance.damagePenetrationDepth && IsPointSurroundedBySpotConfiguration (point, AreaNavUtility.configFull))
+            if (checkFullSurroundings
+                && point.pointPositionIndex.y >= instance.damagePenetrationDepth
+                && IsPointSurroundedBySpotConfiguration (point, AreaNavUtility.configFull))
                 return true;
 
             return false;
@@ -2533,12 +2785,14 @@ namespace Area
             return pointInvolvesIndestructibleTilesets;
         }
 
-        public static bool IsPointInvolvingTileset (AreaVolumePoint point, int tilesetID)
+        public static bool IsPointInvolvingTileset (AreaVolumePoint point, int tilesetID, int groupIDRequired = -1)
         {
             if (point == null)
                 return false;
 
             bool pointInvolvesTileset = false;
+            bool groupIDUnchecked = groupIDRequired == -1;
+
             if (point.pointsWithSurroundingSpots != null)
             {
                 for (int i = 0; i < 8; ++i)
@@ -2551,7 +2805,8 @@ namespace Area
                     (
                         pointOther.spotConfiguration != AreaNavUtility.configEmpty &&
                         pointOther.spotConfiguration != AreaNavUtility.configFull &&
-                        pointOther.blockTileset == tilesetID
+                        pointOther.blockTileset == tilesetID &&
+                        (groupIDUnchecked || pointOther.blockGroup == groupIDRequired)
                     )
                     {
                         pointInvolvesTileset = true;
@@ -2591,13 +2846,312 @@ namespace Area
             return pointSurroundedByConfiguration;
         }
 
-
-        private List<int> tilesetsIndexesEncountered = new List<int> (8);
-
-        public void ApplyDamageToPoint (AreaVolumePoint point, float hitDamage, bool forceOverkillEffect = false)
+        public (bool, int) IsSamePoint (Vector3 position1, Vector3 position2)
         {
+            var chPos = GetHolderColliders ().position;
+            var index1 = AreaUtility.GetIndexFromWorldPosition (position1, chPos, boundsFull);
+            var index2 = AreaUtility.GetIndexFromWorldPosition (position2, chPos, boundsFull);
+            return (index1 == index2, index2);
+        }
+
+        public static bool IsPointInterior (AreaVolumePoint point) =>
+            point != null
+            && point.spotPresent
+            && point.pointState == AreaVolumePointState.Full
+            && point.spotConfiguration == TilesetUtility.configurationFull
+            && point.blockTileset == 0;
+
+        #if !PB_MODSDK
+
+        public enum VoxelCheck
+        {
+            Invalid = 0,
+            Full,
+            Empty,
+            Slot,
+            Bottom,
+        }
+
+        private static readonly Collider[] voxelOverlapBuffer = new Collider[7];
+        private static readonly List<Vector3> tempHits = new List<Vector3> ();
+
+        public VoxelCheck InspectVoxelAtPoint (int indexPoint)
+        {
+            if (!indexPoint.IsValidIndex (points))
+                return VoxelCheck.Invalid;
+
+            var point = points[indexPoint];
+            var bottomPoint = point.pointPositionIndex.y == boundsFull.y - 1;
+            if (bottomPoint)
+                return VoxelCheck.Bottom;
+
+            var positionCenter = point.pointPositionLocal;
+            positionCenter.y -= TilesetUtility.blockAssetSize;
+
+            var hits = Physics.OverlapSphereNonAlloc
+            (
+                positionCenter,
+                TilesetUtility.blockAssetHalfSize,
+                voxelOverlapBuffer,
+                LayerMasks.environmentAndDebrisMask
+            );
+
+            var result = VoxelCheck.Empty;
+            tempHits.Clear ();
+            for (var i = 0; i < hits; i += 1)
+            {
+                var colliderHit = voxelOverlapBuffer[i];
+                var positionHit = colliderHit.bounds.center;
+                if (positionHit == positionCenter)
+                    return VoxelCheck.Full;
+                if (positionHit.y != positionCenter.y)
+                    continue;
+                for (var j = 0; j < tempHits.Count; j += 1)
+                {
+                    var pos = tempHits[j];
+                    var dx = Mathf.Abs (positionHit.x - pos.x);
+                    if (dx.RoughlyEqual (TilesetUtility.blockAssetSize * 2f))
+                        result = VoxelCheck.Slot;
+                    var dz = Mathf.Abs (positionHit.z - pos.z);
+                    if (dz.RoughlyEqual (TilesetUtility.blockAssetSize * 2f))
+                        result = VoxelCheck.Slot;
+                }
+                tempHits.Add (positionHit);
+            }
+
+            return result;
+        }
+
+        private static readonly HashSet<int> crashSpotIndexes = new HashSet<int> ();
+        private static int[] resolvedSpotIndexes = new int[3];
+
+        public (bool, int[]) ResolveCrashSpotIndexes (Vector3[] positions, int length)
+        {
+            // Positive integers : indexes of destroyed spots
+            // Negative integers : indexes of undestroyed spots
+            // Indexes for undestroyed spots are shifted up by one so that an undestroyed spot at index 0 is represented
+            // as -1. This means -1 can't be used as a sentinel for an invalid index as it usually is.
+            var invalidIndex = -(points.Count + 1);
+            var crashable = false;
+            length = Mathf.Clamp (length, 0, positions.Length);
+            if (length > resolvedSpotIndexes.Length)
+                resolvedSpotIndexes = new int[length];
+            var chPos = GetHolderColliders ().position;
+            var len = Mathf.Min (resolvedSpotIndexes.Length, length);
+            for (var i = 0; i < len; i += 1)
+            {
+                var index = AreaUtility.GetIndexFromWorldPosition (positions[i], chPos, boundsFull);
+                if (index == -1)
+                {
+                    resolvedSpotIndexes[i] = invalidIndex;
+                    continue;
+                }
+                if (crashSpotIndexes.Contains (index))
+                {
+                    resolvedSpotIndexes[i] = index;
+                    crashable = true;
+                    continue;
+                }
+                resolvedSpotIndexes[i] = -(index + 1);
+            }
+            for (var i = len; i < resolvedSpotIndexes.Length; i += 1)
+                resolvedSpotIndexes[i] = invalidIndex;
+            return (crashable, resolvedSpotIndexes);
+        }
+
+        public void ApplyDamageToPoint (AreaVolumePoint point, float hitDamage, bool forceOverkillEffect = false, bool forceDestructible = false)
+        {
+            if (!TryUpdatePointIntegrity (point, hitDamage, forceDestructible))
+                return;
+
+            if (point.integrity > 0f)
+            {
+                /*
+                if (DataShortcuts.sim.environmentCollisionDebug)
+                {
+                    Debug.DrawLine (point.pointPositionLocal, point.pointPositionLocal + Vector3.up * (1.5f * point.integrity), Color.white, 5);
+                    Debug.DrawLine (point.pointPositionLocal + Vector3.up * (1.5f * point.integrity), point.pointPositionLocal + Vector3.up * 1.5f, Color.yellow, 5);
+                }
+                */
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    var pointAffected = point.pointsWithSurroundingSpots[i];
+                    if (pointAffected != null)
+                        ApplyShaderPropertiesAtPoint (pointAffected, ShaderOverwriteMode.None, false, true, false);
+                }
+                return;
+            }
+
+            // if (DataShortcuts.sim.environmentCollisionDebug)
+            //     Debug.DrawLine (point.pointPositionLocal, point.pointPositionLocal + Vector3.up * 1.5f, Color.red, 5);
+
+            // Debug.Log ("AM | ApplyDamageToPosition | Integrity of volume point " + avp.spotIndex + " (" + positionIndex + ") has reached 0, redrawing the surrounding area");
+
+            UpdatePointForDestruction (point);
+            ApplyDestructionToPoint (point, hitDamage, forceOverkillEffect);
+            ScanForDisconnect (point);
+        }
+
+        private bool TryUpdatePointIntegrity (AreaVolumePoint point, float hitDamage, bool forceDestructible = false)
+        {
+            if (!Application.isPlaying)
+                return false;
+            if (hitDamage <= 0.01f)
+                return false;
+            if (point == null)
+                return false;
+            if (point.pointState != AreaVolumePointState.Full)
+                return false;
+            if (point.integrity <= 0)
+                return false;
+
+            // Point is indestructible either based on designer input or based on height, tileset or level edge
+            // Option to override indestructibility set by designer input
+            if (point.indestructibleAny & !forceDestructible)
+                return false;
+
+            if (forceDestructible && IsPointInvolvingIndestructibleTilesets (point))
+                return false;
+
+            // if (point.simulatedHelper != null)
+            //     return;
+
+            var integrity = Mathf.Clamp01 (point.integrity - hitDamage * DataLinkerSettingsArea.data.damageScalar);
+            point.integrity = integrity;
+            if (integrity == 0f)
+            {
+                point.pointState = AreaVolumePointState.FullDestroyed;
+                point.integrityForDestructionAnimation = 1f;
+                crashSpotIndexes.Add (point.spotIndex);
+            }
+
+            CombatReplayHelper.OnLevelDamageChange (point.spotIndex, integrity);
+
+            return true;
+        }
+
+        private void UpdatePointForDestruction (AreaVolumePoint point)
+        {
+            StartDestructionAnimation (point);
+            UpdateSpotsAroundPoint (point, false);
+            UpdateDamageAroundPoint (point);
+            RebuildBlocksAroundPoint (point);
+        }
+
+        private static readonly List<AreaVolumePoint> pointsToDestroy = new List<AreaVolumePoint> ();
+
+        private void ScanForDisconnect (AreaVolumePoint point)
+        {
+            if (point.simulatedChunkPresent)
+                return;
+
+            pointsToDestroy.Clear ();
+            AreaUtility.ScanNeighborsDisconnectedOnDestruction (point, points, pointsToDestroy: pointsToDestroy);
+            foreach (var p in pointsToDestroy)
+            {
+                p.pointState = AreaVolumePointState.FullDestroyed;
+                p.integrity = 0f;
+                p.integrityForDestructionAnimation = 1f;
+                crashSpotIndexes.Add (p.spotIndex);
+                CombatReplayHelper.OnLevelDamageChange (p.spotIndex, p.integrity);
+                UpdatePointForDestruction (p);
+                ApplyDestructionToPoint (p, 0f, false, audioFX: false);
+            }
+        }
+
+        private void ApplyDestructionToPoint (AreaVolumePoint point, float hitDamage, bool forceOverkillEffect, bool audioFX = true)
+        {
+            if (pointsDestroyedSinceLastSimulation == null)
+                pointsDestroyedSinceLastSimulation = new List<AreaVolumePoint> ();
+            pointsDestroyedSinceLastSimulation.Add (point);
+
+            RebuildCollisionForPoint (point);
+
+            // Destruction event position
+            var fxPos = point.simulatedChunkPresent
+                ? point.simulatedChunkComponent.transform.TransformPoint (point.pointPositionLocal - point.simulatedChunkComponent.initialPosition)
+                : point.pointPositionLocal;
+
+            var damageExtreme = hitDamage > 50 || forceOverkillEffect;
+            if (audioFX)
+            {
+                var audioKey = damageExtreme ? PhantomBrigade.Game.AudioEvents.BuildingExplosionLarge : PhantomBrigade.Game.AudioEvents.BuildingCrumble;
+                AudioUtility.CreateAudioEvent (audioKey, fxPos);
+            }
+
+            var dominantTileset = GetClosestTileset (point);
+            var fxKey = dominantTileset.fxNameExplosion; // damageExtreme ? DataShortcuts.sim.environmentExplosionAsset : dominantTileset.fxNameExplosion;
+            if (logTilesetSearch)
+                Debug.Log ($"Spawning explosion effect {dominantTileset.fxNameExplosion} at position {fxPos} for point {point.spotIndex}");
+            AssetPoolUtility.ActivateInstance (fxKey, fxPos, Vector3.forward);
+            if (damageExtreme)
+                AssetPoolUtility.ActivateInstance (DataShortcuts.sim.environmentExplosionAsset, fxPos, Vector3.forward);
+
+            OverlapUtility.CheckUnitsOnDestroyedPoint (point.pointPositionLocal);
+
+            if (point.destructionUntracked)
+                return;
+
+            var combat = Contexts.sharedInstance.combat;
+            int destructionCount = combat.hasDestructionCount ? combat.destructionCount.i : 0;
+            combat.ReplaceDestructionCount (destructionCount + 1);
+        }
+
+        public void ApplyDamageFromList (List<DataBlockAreaIntegrity> integrities)
+        {
+            if (points == null || integrities == null)
+                return;
+
+            if (logShaderUpdates)
+                Debug.Log ($"Applying damage from list ({integrities.Count})");
+
+            if (pointsDestroyedSinceLastSimulation == null)
+                pointsDestroyedSinceLastSimulation = new List<AreaVolumePoint> ();
+            else
+                pointsDestroyedSinceLastSimulation.Clear ();
+
+            for (int i = 0; i < integrities.Count; ++i)
+            {
+                DataBlockAreaIntegrity integrityLoaded = integrities[i];
+                if (!integrityLoaded.i.IsValidIndex (points))
+                    continue;
+
+                AreaVolumePoint point = points[integrityLoaded.i];
+                if (point.pointState == AreaVolumePointState.Empty)
+                    continue;
+
+                point.integrity = integrityLoaded.v;
+                if (point.integrity <= 0f)
+                {
+                    point.integrityForDestructionAnimation = 0f;
+                    point.pointState = AreaVolumePointState.FullDestroyed;
+                    pointsDestroyedSinceLastSimulation.Add (point);
+
+                    UpdateSpotsAroundPoint (point, false);
+                    UpdateDamageAroundPoint (point);
+                    RebuildBlocksAroundPoint (point);
+                    RebuildCollisionForPoint (point);
+                }
+                else
+                {
+                    for (int p = 0; p < 8; ++p)
+                    {
+                        var pointNeighbor = point.pointsWithSurroundingSpots[p];
+                        if (pointNeighbor != null)
+                            ApplyShaderPropertiesAtPoint (pointNeighbor, ShaderOverwriteMode.None, true, true, true);
+                    }
+                }
+            }
+
+            ApplyShaderPropertiesEverywhere ();
+
 
         }
+
+        #endif
+
+        private List<int> tilesetsIndexesEncountered = new List<int> (8);
 
         public AreaTileset GetClosestTileset (AreaVolumePoint point)
         {
@@ -2722,6 +3276,8 @@ namespace Area
             return result;
         }
 
+        #if !PB_MODSDK
+
         private List<AreaVolumePoint> pointsToAnimate = new List<AreaVolumePoint> ();
         private float destructionAnimationRate = 0.20f;
 
@@ -2731,6 +3287,8 @@ namespace Area
             for (int n = 0; n < point.pointsWithSurroundingSpots.Length; ++n)
             {
                 var pointNeighbour = point.pointsWithSurroundingSpots[n];
+                if (pointNeighbour == null)
+                    continue;
                 AddPropertyAnimation (pointNeighbour);
             }
         }
@@ -2823,338 +3381,110 @@ namespace Area
             }
         }
 
+        private static readonly List<List<AreaVolumePoint>> isolatedStructureGroups = new List<List<AreaVolumePoint>> ();
+        private static bool isolatedStructureSimRequested;
 
-
-
-        public void ForceStructureUpdate ()
+        public static void OnIsolatedStructureDiscovery (List<AreaVolumePoint> pointsIsolated)
         {
-            UpdateStructureAnalysis ();
-            SimulateIsolatedStructures ();
-        }
+            if (pointsIsolated == null || pointsIsolated.Count == 0)
+                return;
 
-        private List<List<AreaVolumePoint>> structureGroups = new List<List<AreaVolumePoint>> ();
-        private Queue<AreaVolumePoint> structurePointsQueue = new Queue<AreaVolumePoint> ();
-        private List<AreaVolumePoint> structurePointsIsolated = new List<AreaVolumePoint> ();
-
-        public void UpdateStructureAnalysis ()
-        {
-            // Debug.Log ("Updating structural analysis");
-
-            structurePointsQueue.Clear ();
-            structurePointsQueue.Enqueue (points[points.Count - 1]);
-
-            int iterations = 0;
-            int limit = points.Count + 1000;
-            int defaultValue = -1;
-
-            for (int i = 0; i < points.Count; ++i)
+            foreach (var point in pointsIsolated)
             {
-                var point = points[i];
-                if (point.simulatedHelper != null)
-                    continue;
-
-                point.structuralGroup = 0;
-                point.structuralValue = defaultValue;
-                point.structuralParentCandidate = null;
-                point.structuralParent = null;
+                point.simulationRequested = true;
+                crashSpotIndexes.Add (point.spotIndex);
             }
 
-            ProcessQueue (structurePointsQueue, ref iterations, limit, defaultValue);
+            var pointsIsolatedCopy = new List<AreaVolumePoint> (pointsIsolated);
+            isolatedStructureGroups.Add (pointsIsolatedCopy);
+            isolatedStructureSimRequested = true;
 
-            structurePointsIsolated.Clear ();
-            if (structureGroups == null)
-                structureGroups = new List<List<AreaVolumePoint>> ();
+            if (DataShortcuts.sim.debugCombatStructureAnalysis)
+                Debug.Log ($"New isolated structure group consisting of {pointsIsolated.Count} points requests simulation");
 
-            for (int i = 0; i < points.Count; ++i)
-            {
-                var point = points[i];
-                if (point.structuralValue == -1 && point.pointState == AreaVolumePointState.Full)
-                    structurePointsIsolated.Add (point);
-            }
-
-            if (structurePointsIsolated.Count > 0)
-            {
-                int isolationIterations = 0;
-                while (structurePointsIsolated.Count > 0)
-                {
-                    if (isolationIterations > 100)
-                    {
-                        // Debug.Log ("Isolated point search passes crossed 100, something is wrong");
-                        break;
-                    }
-
-                    var point = structurePointsIsolated[structurePointsIsolated.Count - 1];
-                    if (point.simulatedHelper != null)
-                        continue;
-
-                    point.structuralGroup = isolationIterations + 1;
-                    var isolatedGroup = new List<AreaVolumePoint> ();
-                    structureGroups.Add (isolatedGroup);
-
-                    // Debug.Log ("Attempting to fill remaining " + isolatedPoints.Count + " isolated points; iteration " + isolationIterations + ", point group: " + point.structuralGroup);
-                    iterations = 0;
-                    structurePointsQueue.Enqueue (structurePointsIsolated[structurePointsIsolated.Count - 1]);
-                    ProcessQueue (structurePointsQueue, ref iterations, limit, defaultValue, structurePointsIsolated, isolatedGroup);
-                    isolationIterations++;
-                }
-            }
-
-            // Debug.Log ("Isolation resolution iterations done: " + iterations + " | Isolated groups found: " + isolatedGroups.Count);
-        }
-
-        private void ProcessQueue (Queue<AreaVolumePoint> q, ref int iterations, int limit, int defaultValue, List<AreaVolumePoint> listToTrim = null, List<AreaVolumePoint> listToFill = null)
-        {
-            while (q.Count > 0)
-            {
-                var point = q.Dequeue ();
-
-                if (q.Count > limit)
-                {
-                    throw new Exception ("The algorithm is probably looping. Queue size: " + q.Count);
-                }
-
-                if (point.simulatedHelper != null)
-                    continue;
-
-                if (point.structuralValue != defaultValue)
-                    continue;
-
-                point.structuralValue = iterations;
-                point.structuralParent = point.structuralParentCandidate;
-                point.structuralChildrenPresent = false;
-
-                if (point.structuralParentCandidate != null)
-                    point.structuralParentCandidate.structuralChildrenPresent = true;
-
-                if (point.structuralParent != null)
-                    point.structuralGroup = point.structuralParent.structuralGroup;
-
-                if (listToFill != null)
-                    listToFill.Add (point);
-
-                if (listToTrim != null)
-                {
-                    if (listToTrim.Contains (point))
-                        listToTrim.Remove (point);
-                }
-
-                // spotpoints: 1 (X+) 2 (Z+) 4 (Y+)
-                // spotsAroundThisPoint: 3 (Y-), 5 (Z-), 6 (X-)
-
-                var pointYPos = point.pointsInSpot[4];
-                if (CheckValidity (pointYPos, point))
-                    q.Enqueue (pointYPos);
-
-                var pointXPos = point.pointsInSpot[1];
-                if (CheckValidity (pointXPos, point))
-                    q.Enqueue (pointXPos);
-
-                var pointXNeg = point.pointsWithSurroundingSpots[6];
-                if (CheckValidity (pointXNeg, point))
-                    q.Enqueue (pointXNeg);
-
-                var pointZPos = point.pointsInSpot[2];
-                if (CheckValidity (pointZPos, point))
-                    q.Enqueue (pointZPos);
-
-                var pointZNeg = point.pointsWithSurroundingSpots[5];
-                if (CheckValidity (pointZNeg, point))
-                    q.Enqueue (pointZNeg);
-
-                var pointYNeg = point.pointsWithSurroundingSpots[3];
-                if (CheckValidity (pointYNeg, point))
-                    q.Enqueue (pointYNeg);
-
-                iterations++;
-            }
-        }
-
-        private bool CheckValidity (AreaVolumePoint point, AreaVolumePoint structuralParentCandidate)
-        {
-            if (point == null || point.simulatedHelper != null)
-            {
-                return false;
-            }
-            else
-            {
-                bool result = point.structuralValue == -1 && point.pointState == AreaVolumePointState.Full;
-                point.structuralParentCandidate = structuralParentCandidate;
-                return result;
-            }
         }
 
         public List<AreaSimulatedChunk> simulatedHelpers = null;
         public List<AreaVolumePoint> pointsDestroyedSinceLastSimulation = null;
         private int simulatedHelperCounter = 0;
 
+        private List<GameObject> simObjectsToReparent = new List<GameObject> ();
+
         public void SimulateIsolatedStructures ()
         {
-            if (structureGroups == null || structureGroups.Count == 0)
+            if (isolatedStructureGroups.Count == 0)
                 return;
 
             if (!IsECSSafe ())
                 return;
 
-            //Debug.Log (string.Format ("Starting simulation of {0} isolated groups", isolatedGroups.Count));
+            var logSimulation = DataShortcuts.sim.debugCombatStructureAnalysis;
+            if (!Application.isPlaying)
+            {
+                if (logSimulation)
+                    Debug.LogWarning ($"Attempted to start simulation of {isolatedStructureGroups.Count} isolated groups, not supported in edit mode");
+                isolatedStructureGroups.Clear ();
+                return;
+            }
+
+            if (logSimulation)
+                Debug.Log ($"Starting simulation of {isolatedStructureGroups.Count} isolated groups");
 
             if (simulatedHelpers == null)
                 simulatedHelpers = new List<AreaSimulatedChunk> ();
 
-            // ECS preparation
-
-            EntityManager entityManager = world.EntityManager;
-
-            for (int i = structureGroups.Count - 1; i >= 0; --i)
+            var entityManager = world.EntityManager;
+            for (var i = isolatedStructureGroups.Count - 1; i >= 0; i -= 1)
             {
-                List<AreaVolumePoint> group = structureGroups[i];
-                structureGroups.RemoveAt (i);
+                var group = isolatedStructureGroups[i];
+                isolatedStructureGroups.RemoveAt (i);
 
-                List<GameObject> objectsInGroup = new List<GameObject> (group.Count);
-
-                GameObject simulatedHolder = new GameObject ("!SimulatedHolder_" + i);
+                var simulatedHolder = new GameObject ("!SimulatedHolder_" + i);
                 simulatedHolder.transform.position = group[0].pointPositionLocal;
                 simulatedHolder.layer = Constants.debrisLayer;
-
-                Transform simulatedParent = GetHolderSimulatedParent ();
+                var simulatedParent = GetHolderSimulatedParent ();
                 simulatedHolder.transform.parent = simulatedParent;
+                var simulatedHelper = CreateSimulatedHelper (entityManager, simulatedHolder, group.Count);
 
-                AreaSimulatedChunk simulatedHelper = simulatedHolder.AddComponent<AreaSimulatedChunk> ();
-                simulatedHelper.colliderToPointMap = new Dictionary<Collider, AreaVolumePoint> ();
-                simulatedHelper.initialPosition = simulatedHolder.transform.position;
-                simulatedHelpers.Add (simulatedHelper);
-                simulatedHelper.pointsAffected = new List<AreaVolumePoint> (group.Count);
-
-                simulatedHelper.id = simulatedHelperCounter;
-                simulatedHelperCounter += 1;
-
-                // var pos = simulatedHelper.gameObject.AddComponent<TranslationProxy> ();
-                // pos.Value = new Translation { Value = simulatedHelper.transform.position };
-
-                // var rot = simulatedHelper.gameObject.AddComponent<RotationProxy> ();
-                // rot.Value = new Rotation { Value = simulatedHelper.transform.rotation };
-
-                Entity entityRoot = entityManager.CreateEntity (simulationRootArchetype);
-                entityManager.SetComponentData (entityRoot, new ECS.SimulatedChunkRoot { id = simulatedHelper.id });
-                entityManager.SetComponentData (entityRoot, new Translation { Value = simulatedHelper.transform.position });
-                entityManager.SetComponentData (entityRoot, new Rotation { Value = simulatedHelper.transform.rotation });
-                simulatedHelper.entityRoot = entityRoot;
-
-                List<AreaVolumePoint> neighbours = new List<AreaVolumePoint> ();
-
-                for (int g = 0; g < group.Count; ++g)
+                var countNeighbours = 0;
+                var positionNeighbour = Vector3.zero;
+                for (var g = 0; g < group.Count; g += 1)
                 {
-                    AreaVolumePoint point = group[g];
-
-                    if (pointsDestroyedSinceLastSimulation != null)
-                    {
-                        for (int a = 0; a < pointsDestroyedSinceLastSimulation.Count; ++a)
-                        {
-                            AreaVolumePoint potentialNeighbour = pointsDestroyedSinceLastSimulation[a];
-                            if (potentialNeighbour.IsNeighbor (point))
-                                neighbours.Add (potentialNeighbour);
-                        }
-                    }
-
-                    if (point.instanceCollider != null)
-                        point.instanceCollider.SetActive (false);
-
-                    GameObject simulatedPoint = new GameObject ("!SimulatedPoint_" + g);
-                    simulatedPoint.transform.position = point.pointPositionLocal;
-                    simulatedPoint.transform.parent = simulatedHolder.transform;
-                    simulatedPoint.transform.localScale = Vector3.one * 3f;
-                    simulatedPoint.layer = Constants.debrisLayer;
-
-                    SphereCollider simulatedCollider = simulatedPoint.AddComponent<SphereCollider> ();
-                    simulatedCollider.radius = 0.5f;
-                    simulatedHelper.colliderToPointMap.Add (simulatedCollider, point);
-
-                    if (visualizeCollisions)
-                    {
-                        GameObject vis = PrimitiveHelper.CreatePrimitive (PrimitiveType.Cube, false);
-                        vis.name = "ColliderForSimulatedPointVisual";
-                        vis.hideFlags = HideFlags.DontSave;
-                        vis.transform.parent = simulatedPoint.transform;
-                        vis.transform.localScale = Vector3.one * 0.5f;
-                        vis.transform.localPosition = Vector3.zero;
-
-                        if (visualSimulationMaterial == null)
-                            visualSimulationMaterial = Resources.Load<Material> ("Content/Debug/AreaCollisionSimulated");
-
-                        MeshRenderer mr = vis.GetComponent<MeshRenderer> ();
-                        mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-                        mr.sharedMaterial = visualSimulationMaterial;
-                    }
-
-                    for (int a = 0; a < 8; ++a)
-                    {
-                        AreaVolumePoint pointAround = point.pointsWithSurroundingSpots[a];
-                        if (pointAround == null || !pointAround.spotPresent)
-                            continue;
-
-                        // This is very sub-optimal, optimize in the future if possible - we really don't want to iterate through all helper points
-                        if (simulatedHelper.pointsAffected.Contains (pointAround))
-                            continue;
-
-                        simulatedHelper.pointsAffected.Add (pointAround);
-                        pointAround.simulatedHelper = simulatedHelper;
-
-                        if (indexesOccupiedByProps.ContainsKey (pointAround.spotIndex))
-                        {
-                            List<AreaPlacementProp> placements = indexesOccupiedByProps[pointAround.spotIndex];
-                            for (int p = 0; p < placements.Count; ++p)
-                                AreaAnimationSystem.OnRemoval (placements[p], true);
-                        }
-
-                        FreeEntityForSimulation (ref entityManager, pointEntitiesMain[pointAround.spotIndex], pointAround);
-                        FreeEntityForSimulation (ref entityManager, pointEntitiesInterior[pointAround.spotIndex], pointAround);
-                    }
+                    var point = group[g];
+                    countNeighbours = CreateSimulatedPoint
+                    (
+                        ref entityManager,
+                        simulatedHolder.transform,
+                        simulatedHelper,
+                        g,
+                        point,
+                        countNeighbours,
+                        ref positionNeighbour
+                    );
                 }
 
-                Rigidbody simulatedRigidbody = simulatedHolder.AddComponent<Rigidbody> ();
+                CreateSimulatedRigidbody (simulatedHolder, simulatedHelper);
 
-                simulatedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-                simulatedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+                CombatReplayHelper.OnSimulatedStructures
+                (
+                    simulatedHelper.id,
+                    simulatedHelper.transform.position,
+                    simulatedHelper.transform.rotation,
+                    simulatedHelper.pointsAffected,
+                    simulatedHelper.initialPosition
+                );
 
-                simulatedHelper.simulatedRigidbody = simulatedRigidbody;
-                simulatedHelper.UpdateRigidbody ();
-                simulatedHelper.initialPointCount = simulatedHelper.colliderToPointMap.Count;
-                // entityManager.AddComponent (entityRoot, typeof (Rigidbody));
-
-                if (visualizeCollisions)
+                if (countNeighbours > 0)
                 {
-                    GameObject vis = PrimitiveHelper.CreatePrimitive (PrimitiveType.Cube, false);
-                    vis.name = "SimulatedHolderVisual";
-                    vis.hideFlags = HideFlags.DontSave;
-                    vis.transform.parent = simulatedHolder.transform;
-                    vis.transform.localScale = Vector3.one * 3f;
-                    vis.transform.localPosition = simulatedRigidbody.centerOfMass;
-
-                    if (visualHolderMaterial == null)
-                        visualHolderMaterial = Resources.Load<Material> ("Content/Debug/AreaCollisionHolder");
-
-                    MeshRenderer mr = vis.GetComponent<MeshRenderer> ();
-                    mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-                    mr.sharedMaterial = visualHolderMaterial;
-                }
-
-                for (int o = 0; o < objectsInGroup.Count; ++o)
-                {
-                    GameObject go = objectsInGroup[o];
-                    objectsInGroup[o].transform.parent = simulatedHolder.transform;
-                }
-
-                if (neighbours.Count > 0)
-                {
-                    //Debug.LogWarning ("Simulated group " + i + " has " + neighbours.Count + " neighbours out of recently destroyed " + pointsDestroyedSinceLastSimulation.Count + " points");
-                    Vector3 positionCenter = simulatedHolder.transform.TransformPoint (simulatedRigidbody.centerOfMass);
-                    Vector3 positionNeighbor = neighbours[0].pointPositionLocal;
-
-                    Vector3 difference = positionCenter - positionNeighbor;
-                    Vector3 direction = Vector3.Normalize (difference);
+                    if (logSimulation)
+                        Debug.Log ($"Simulated group {i} has {countNeighbours} neighbours out of recently destroyed {pointsDestroyedSinceLastSimulation.Count} points");
+                    var positionCenter = simulatedHolder.transform.TransformPoint (simulatedHelper.simulatedRigidbody.centerOfMass);
+                    var difference = positionCenter - positionNeighbour;
+                    var direction = Vector3.Normalize (difference);
 
                     /*
                     List<Vector3> linePoints = new List<Vector3> ();
-                    linePoints.Add (positionNeighbor);
+                    linePoints.Add (positionNeighbour);
                     linePoints.Add (positionCenter);
 
                     Vectrosity.VectorLine line = new Vectrosity.VectorLine ("Line_Neighbor", linePoints, 6f, Vectrosity.LineType.Continuous);
@@ -3166,22 +3496,158 @@ namespace Area
                     */
 
                     // Vector3 push = new Vector3 (difference.x, 0f, difference.z);
-                    // simulatedRigidbody.centerOfMass = positionNeighbor;
+                    // simulatedHelper.simulatedRigidbody.centerOfMass = positionNeighbour;
 
                     simulatedHelper.timerForForce = simulatedHelper.durationForForce = 3f;
-                    simulatedHelper.positionForForce = positionNeighbor;
+                    simulatedHelper.positionForForce = positionNeighbour;
                     simulatedHelper.useVerticalForce = true;
 
                     // Vector3 push = new Vector3 (0f, new Vector2 (difference.x, difference.z).magnitude * Tweakables.data.areaSystem.crashPushForceMultiplier * group.Count, 0f);
-                    // simulatedRigidbody.AddForceAtPosition (push, positionNeighbor, ForceMode.Impulse);
+                    // simulatedHelper.simulatedRigidbody.AddForceAtPosition (push, positionNeighbour, ForceMode.Impulse);
                 }
-                else
-                {
-                    //Debug.Log ("Simulated group " + i + " has no neighbours out of recently destroyed " + pointsDestroyedSinceLastSimulation.Count + " points");
-                }
+                else if (logSimulation)
+                    Debug.Log ($"Simulated group {i} has no neighbours out of recently destroyed {pointsDestroyedSinceLastSimulation.Count} points");
             }
 
             UtilityECS.ScheduleUpdate ();
+        }
+
+        private AreaSimulatedChunk CreateSimulatedHelper (EntityManager entityManager, GameObject simulatedHolder, int groupCount)
+        {
+            var simulatedHelper = simulatedHolder.AddComponent<AreaSimulatedChunk> ();
+            simulatedHelper.colliderToPointMap = new Dictionary<Collider, AreaVolumePoint> ();
+            simulatedHelper.initialPosition = simulatedHolder.transform.position;
+            simulatedHelpers.Add (simulatedHelper);
+            simulatedHelper.pointsAffected = new HashSet<int> ();
+
+            simulatedHelper.id = simulatedHelperCounter;
+            simulatedHelperCounter += 1;
+
+            // var pos = simulatedHelper.gameObject.AddComponent<TranslationProxy> ();
+            // pos.Value = new Translation { Value = simulatedHelper.transform.position };
+
+            // var rot = simulatedHelper.gameObject.AddComponent<RotationProxy> ();
+            // rot.Value = new Rotation { Value = simulatedHelper.transform.rotation };
+
+            var entityRoot = entityManager.CreateEntity (simulationRootArchetype);
+            entityManager.SetComponentData (entityRoot, new ECS.SimulatedChunkRoot { id = simulatedHelper.id });
+            entityManager.SetComponentData (entityRoot, new Translation { Value = simulatedHelper.transform.position });
+            entityManager.SetComponentData (entityRoot, new Rotation { Value = simulatedHelper.transform.rotation });
+            simulatedHelper.entityRoot = entityRoot;
+
+            return simulatedHelper;
+        }
+
+        private int CreateSimulatedPoint
+        (
+            ref EntityManager entityManager,
+            Transform holder,
+            AreaSimulatedChunk simulatedHelper,
+            int indexGroup,
+            AreaVolumePoint point,
+            int countNeighbours,
+            ref Vector3 positionNeighbour
+        )
+        {
+            if (pointsDestroyedSinceLastSimulation != null)
+            {
+                for (var i = 0; i < pointsDestroyedSinceLastSimulation.Count; i += 1)
+                {
+                    var potentialNeighbour = pointsDestroyedSinceLastSimulation[i];
+                    if (potentialNeighbour.IsNeighbor (point))
+                    {
+                        if (countNeighbours == 0)
+                            positionNeighbour = potentialNeighbour.pointPositionLocal;
+                        countNeighbours += 1;
+                    }
+                }
+            }
+
+            if (point.instanceCollider != null)
+                point.instanceCollider.SetActive (false);
+
+            OverlapUtility.CheckUnitsOnDestroyedPoint (point.pointPositionLocal);
+
+            var simulatedPoint = new GameObject ("!SimulatedPoint_" + indexGroup);
+            simulatedPoint.transform.position = point.pointPositionLocal;
+            simulatedPoint.transform.parent = holder;
+            simulatedPoint.transform.localScale = Vector3.one * 3f;
+            simulatedPoint.layer = Constants.debrisLayer;
+
+            var simulatedCollider = simulatedPoint.AddComponent<SphereCollider> ();
+            simulatedCollider.radius = 0.5f;
+            simulatedHelper.colliderToPointMap.Add (simulatedCollider, point);
+
+            if (visualizeCollisions)
+            {
+                var vis = PrimitiveHelper.CreatePrimitive (PrimitiveType.Cube, false);
+                vis.name = "ColliderForSimulatedPointVisual";
+                vis.hideFlags = HideFlags.DontSave;
+                vis.transform.parent = simulatedPoint.transform;
+                vis.transform.localScale = Vector3.one * 0.5f;
+                vis.transform.localPosition = Vector3.zero;
+
+                if (visualSimulationMaterial == null)
+                    visualSimulationMaterial = Resources.Load<Material> ("Content/Debug/AreaCollisionSimulated");
+
+                var mr = vis.GetComponent<MeshRenderer> ();
+                mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                mr.sharedMaterial = visualSimulationMaterial;
+            }
+
+            for (var i = 0; i < 8; i += 1)
+            {
+                var pointAround = point.pointsWithSurroundingSpots[i];
+                if (pointAround == null || !pointAround.spotPresent)
+                    continue;
+                if (!simulatedHelper.pointsAffected.Add (pointAround.spotIndex))
+                    continue;
+
+                pointAround.simulatedChunkComponent = simulatedHelper;
+                pointAround.simulatedChunkPresent = true;
+                pointAround.simulationRequested = false;
+
+                if (indexesOccupiedByProps.ContainsKey (pointAround.spotIndex))
+                {
+                    var placements = indexesOccupiedByProps[pointAround.spotIndex];
+                    for (var p = 0; p < placements.Count; p += 1)
+                        AreaAnimationSystem.OnRemoval (placements[p], true);
+                }
+
+                FreeEntityForSimulation (ref entityManager, pointEntitiesMain[pointAround.spotIndex], pointAround);
+                FreeEntityForSimulation (ref entityManager, pointEntitiesInterior[pointAround.spotIndex], pointAround);
+            }
+
+            return countNeighbours;
+        }
+
+        private void CreateSimulatedRigidbody (GameObject simulatedHolder, AreaSimulatedChunk simulatedHelper)
+        {
+            var simulatedRigidbody = simulatedHolder.AddComponent<Rigidbody> ();
+            simulatedRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+            simulatedRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+
+            simulatedHelper.simulatedRigidbody = simulatedRigidbody;
+            simulatedHelper.UpdateRigidbody ();
+            simulatedHelper.initialPointCount = simulatedHelper.colliderToPointMap.Count;
+            // entityManager.AddComponent (entityRoot, typeof (Rigidbody));
+
+            if (visualizeCollisions)
+            {
+                var vis = PrimitiveHelper.CreatePrimitive (PrimitiveType.Cube, false);
+                vis.name = "SimulatedHolderVisual";
+                vis.hideFlags = HideFlags.DontSave;
+                vis.transform.parent = simulatedHolder.transform;
+                vis.transform.localScale = Vector3.one * 3f;
+                vis.transform.localPosition = simulatedRigidbody.centerOfMass;
+
+                if (visualHolderMaterial == null)
+                    visualHolderMaterial = Resources.Load<Material> ("Content/Debug/AreaCollisionHolder");
+
+                var mr = vis.GetComponent<MeshRenderer> ();
+                mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                mr.sharedMaterial = visualHolderMaterial;
+            }
         }
 
         public void OnSimulatedHelperFinish (AreaSimulatedChunk simulatedHelper)
@@ -3191,6 +3657,7 @@ namespace Area
 
             if (simulatedHelpers.Contains (simulatedHelper))
             {
+                CombatReplayHelper.OnSimulatedStructuresEnd (simulatedHelper.id);
                 simulatedHelpers.Remove (simulatedHelper);
             }
         }
@@ -3200,7 +3667,9 @@ namespace Area
             return simulatedHelpers != null && simulatedHelpers.Count > 0;
         }
 
-        private static Vector3 spotShiftVertical = Vector3.up * (TilesetUtility.blockAssetSize * 0.5f);
+        #endif
+
+        private static Vector3 spotShiftVertical = Vector3.up * TilesetUtility.blockAssetHalfSize;
         private static float slopeOffsetThresholdPos = 0.3f;
         private static float slopeOffsetThresholdNeg = -0.3f;
 
@@ -3234,10 +3703,16 @@ namespace Area
             );
         }
 
-        [ContextMenu ("Navigation override test")]
-        public void RecheckNavOverrides ()
+        [ContextMenu ("Generate combined navigation overrides")]
+        public void GenerateNavOverrides ()
         {
-            AreaNavUtility.GenerateNavOverrides (navOverrides, points, showSlopeDetection);
+            AreaNavUtility.GenerateNavOverrides (navOverrides, points, showSlopeDetection, navOverridesSaved, false);
+        }
+
+        [ContextMenu ("Clear conflicting navigation overrides")]
+        public void ClearConflictingNavOverrides ()
+        {
+            AreaNavUtility.GenerateNavOverrides (navOverrides, points, showSlopeDetection, navOverridesSaved, true);
         }
 
 
@@ -3246,22 +3721,22 @@ namespace Area
             GetHolderColliders ().gameObject.SetActive (visible);
             // GetHolderBackgrounds ().gameObject.SetActive (visible);
         }
-        
-        public void SetVolumeDisplayMode (bool value)
+
+        public void SetVolumeDisplayMode (bool displayOnlyVolume)
         {
             if (Application.isPlaying)
                 return;
-            
+
             var area = DataMultiLinkerCombatArea.selectedArea;
             if (area == null)
             {
                 Debug.LogWarning ($"Can't update display mode, no selected area available");
                 return;
             }
-            
-            displayOnlyVolume = value;
+
+            this.displayOnlyVolume = displayOnlyVolume;
             RebuildEverything ();
-            
+
             if (CombatSceneHelper.ins != null)
             {
                 var cs = CombatSceneHelper.ins;
@@ -3273,7 +3748,7 @@ namespace Area
 
                 if (cs.segmentHelper != null)
                     cs.segmentHelper.gameObject.SetActive (!displayOnlyVolume);
-                
+
                 if (cs.materialHelper != null)
                 {
                     var biomeKey = "mossy_neutral";
@@ -3289,7 +3764,7 @@ namespace Area
                 }
             }
         }
-        
+
         private void ResetEditingModes ()
         {
             if (CombatSceneHelper.ins != null && CombatSceneHelper.ins.materialHelper != null)
@@ -3305,7 +3780,7 @@ namespace Area
         {
             if (Application.isPlaying || CombatSceneHelper.ins == null || CombatSceneHelper.ins.materialHelper == null)
                 return;
-            
+
             var m = CombatSceneHelper.ins.materialHelper;
             m.SetupSlicingForLevelEditor (sliceEnabled, sliceDepth);
 
@@ -3314,7 +3789,7 @@ namespace Area
                 float yMax = sliceEnabled ? (-sliceDepth * 3f + sliceColliderHeightBias) : 1000f;
                 var configEmpty = AreaNavUtility.configEmpty;
                 var configFull = AreaNavUtility.configFull;
-                
+
                 for (int i = 0, iLimit = points.Count; i < iLimit; ++i)
                 {
                     var point = points[i];
@@ -3323,7 +3798,7 @@ namespace Area
                         var col = point.instanceCollider;
                         var y = point.instanceCollider.transform.position.y;
                         bool active = true;
-                        
+
                         if (sliceEnabled)
                         {
                             active = y < yMax;
@@ -3335,7 +3810,7 @@ namespace Area
                                     var pointAround = point.pointsWithSurroundingSpots[p];
                                     if (pointAround == null)
                                         continue;
-                                    
+
                                     if (pointAround.spotConfiguration != configEmpty && pointAround.spotConfiguration != configFull)
                                     {
                                         surfaceNear = true;
@@ -3347,7 +3822,7 @@ namespace Area
                                     active = false;
                             }
                         }
-                        
+
                         if (col.activeSelf != active)
                             col.SetActive (active);
                     }
@@ -3360,6 +3835,7 @@ namespace Area
         public void LoadArea (string key, AreaDataCore core, AreaDataContainer data)
         {
             rebuildCount = 0;
+
             ResetEditingModes ();
             UnloadArea (false);
 
@@ -3378,7 +3854,7 @@ namespace Area
                 return;
             }
 
-            Debug.Log ("Loading combat area " + key);
+            Debug.Log ($"Loading combat area {key}");
 
             areaName = key;
             boundsFull = core.bounds;
@@ -3390,6 +3866,8 @@ namespace Area
             AreaAssetHelper.CheckResources ();
 
             #if !PB_MODSDK
+            AreaUtility.structureAnalysisCounter = 0;
+
             if (Application.isPlaying)
             {
                 var game = Contexts.sharedInstance.game;
@@ -3427,7 +3905,7 @@ namespace Area
 
             UpdateAllSpots (false);
 
-            HashSet<int> detectedMissingTilesets = new HashSet<int> ();
+            List<int> detectedMissingTilesets = new List<int> ();
             for (int i = 0; i < data.spots.Count; ++i)
             {
                 AreaDataSpot spotLoaded = data.spots[i];
@@ -3460,24 +3938,16 @@ namespace Area
 
                 if (!AreaTilesetHelper.database.tilesets.ContainsKey (point.blockTileset))
                 {
-                    #if PB_MODSDK && UNITY_EDITOR
-                    if (ignoreUnresolvedTilesetOnLoad)
-                    {
-                        continue;
-                    }
-                    #endif
-
                     Debug.Log (string.Format ("AM | LoadArea | Resetting tileset, group and subtype on point {0} due to missing tileset {1}", point.spotIndex, point.blockTileset));
-                    #if UNITY_EDITOR
                     DrawHighlightSpot (point);
-                    #endif
 
                     point.blockTileset = AreaTilesetHelper.database.tilesetFallback.id;
                     point.blockFlippedHorizontally = false;
                     point.blockGroup = 0;
                     point.blockSubtype = 0;
 
-                    detectedMissingTilesets.Add (point.blockTileset);
+                    if (!detectedMissingTilesets.Contains (point.blockTileset))
+                        detectedMissingTilesets.Add (point.blockTileset);
                 }
                 else // if (point.spotConfiguration != AreaNavUtility.configEmpty && point.spotConfiguration != AreaNavUtility.configFull)
                     ValidateBlockSubtypes (point, AreaTilesetHelper.database.tilesets[point.blockTileset].blocks[point.spotConfiguration], AreaTilesetHelper.database.tilesets[point.blockTileset]);
@@ -3617,13 +4087,22 @@ namespace Area
                     Debug.LogWarning ("AM | LoadArea | Found " + detectedMissingProps + " missing prop IDs");
             }
 
-            navOverrides = new Dictionary<int, AreaDataNavOverride> (navOverrides.Count);
+            navOverrides.Clear ();
+            navOverridesSaved.Clear ();
+            int pointsCountTotal = points.Count;
+
             if (data.navOverrides != null)
             {
+                // Debug.Log ($"Applying loaded nav overrides: {data.navOverrides.Count}");
                 for (int i = 0; i < data.navOverrides.Count; ++i)
                 {
                     var navOverrideLoaded = data.navOverrides[i];
-                    if (navOverrides.ContainsKey (navOverrideLoaded.pivotIndex))
+
+                    if (navOverrideLoaded.pivotIndex < 0 || navOverrideLoaded.pivotIndex >= pointsCountTotal)
+                        continue;
+
+                    var point = points[navOverrideLoaded.pivotIndex];
+                    if (point.spotConfiguration == AreaNavUtility.configEmpty)
                         continue;
 
                     var navOverride = new AreaDataNavOverride
@@ -3631,7 +4110,10 @@ namespace Area
                         pivotIndex = navOverrideLoaded.pivotIndex,
                         offsetY = navOverrideLoaded.offsetY
                     };
-                    navOverrides.Add (navOverrideLoaded.pivotIndex, navOverride);
+
+                    // Nav overrides loaded from the data only go into navOverridesSaved collection.
+                    // On nav rebuild, navOverrides collection is filled with autogenerated overrides (based on terrain & tilesets) + these saved overrides.
+                    navOverridesSaved[navOverrideLoaded.pivotIndex] = navOverride;
                 }
             }
 
@@ -3660,8 +4142,7 @@ namespace Area
                     if
                     (
                         pointAbove.blockGroup == 1 ||
-
-                        (pointAbove.blockGroup > 50 && pointAbove.blockGroup < 100)
+                        pointAbove.blockGroup > 50
                     )
                     {
                         clear = false;
@@ -3676,33 +4157,11 @@ namespace Area
                     point.terrainOffset = 0f;
             }
 
-            // Allocating new reused collection for damage algo
-            structurePointsQueue = new Queue<AreaVolumePoint> (points.Count);
-
             SetupPointEntities ();
             RebuildEverything ();
+            #if !PB_MODSDK
             UpdateBoundsInSystems ();
-
-            // Refresh indirect damage flags
-            for (int i = 0; i < points.Count; ++i)
-            {
-                var point = points[i];
-
-                // Skip empty volume
-                if (point.pointState == AreaVolumePointState.Empty)
-                    continue;
-
-                // Set flag based on height, edges and adjacency to indestructible tilesets
-                point.indestructibleIndirect = IsPointIndestructible
-                (
-                    point,
-                    false,
-                    true,
-                    true,
-                    true,
-                    true
-                );
-            }
+            #endif
 
             if (Application.isPlaying)
             {
@@ -3710,20 +4169,217 @@ namespace Area
                 ApplyShaderPropertiesEverywhere ();
             }
 
-            #if PB_MODSDK && UNITY_EDITOR
-            var combatArea = DataMultiLinkerCombatArea.data[key];
-            if (combatArea != null)
-            {
-                combatArea.errorsCorrectedOnLoad = !ignoreUnresolvedTilesetOnLoad;
-            }
-            #endif
-
             OnAfterAreaLoaded ();
         }
 
         private void OnAfterAreaLoaded ()
         {
+
         }
+
+        public void LoadAreaSnippet (string key, AreaDataCore core, AreaDataContainer dataLoaded)
+        {
+            if (dataLoaded == null || core == null || string.IsNullOrEmpty (key))
+            {
+                Debug.LogWarning ("AM | LoadArea | Failed to load area snippet from container, null reference received");
+                return;
+            }
+
+            if (clipboard == null)
+                clipboard = new AreaClipboard ();
+
+            if (clipboard.clipboardPointsSaved == null)
+                clipboard.clipboardPointsSaved = new List<AreaVolumePoint> ();
+            else
+                clipboard.clipboardPointsSaved.Clear ();
+
+            if (clipboard.clipboardPropsSaved == null)
+                clipboard.clipboardPropsSaved = new List<AreaPlacementProp> ();
+            else
+                clipboard.clipboardPropsSaved.Clear ();
+
+            clipboard.name = key;
+            clipboard.clipboardBoundsSaved = core.bounds;
+            clipboardBoundsRequested = core.bounds;
+
+            ShaderGlobalHelper.CheckGlobals ();
+            AreaTilesetHelper.CheckResources ();
+            AreaAssetHelper.CheckResources ();
+
+            // Base data
+
+            for (int i = 0; i < dataLoaded.points.Length; ++i)
+            {
+                AreaVolumePoint point = new AreaVolumePoint ();
+                clipboard.clipboardPointsSaved.Add (point);
+
+                point.pointState = dataLoaded.points[i] == true ? AreaVolumePointState.Full : AreaVolumePointState.Empty;
+                if (point.pointState == AreaVolumePointState.FullDestroyed)
+                {
+                    point.integrity = 0;
+                    point.integrityForDestructionAnimation = 0f;
+                }
+            }
+
+            for (int i = 0; i < clipboard.clipboardPointsSaved.Count; ++i)
+            {
+                AreaVolumePoint point = clipboard.clipboardPointsSaved[i];
+
+                point.spotIndex = i;
+                point.pointPositionIndex = TilesetUtility.GetVolumePositionFromIndex (i, clipboard.clipboardBoundsSaved);
+                point.pointPositionLocal = new Vector3 (point.pointPositionIndex.x, -point.pointPositionIndex.y, point.pointPositionIndex.z) * TilesetUtility.blockAssetSize;
+                point.instancePosition = point.pointPositionLocal + new Vector3 (1f, -1f, 1f) * (TilesetUtility.blockAssetSize / 2f);
+
+                if (point.pointPositionIndex.y >= boundsFull.y - 2)
+                    point.pointState = AreaVolumePointState.Full;
+                else
+                    point.pointState = AreaVolumePointState.Empty;
+
+                clipboard.clipboardPointsSaved[i] = point;
+            }
+
+            for (int i = 0; i < dataLoaded.spots.Count; ++i)
+            {
+                AreaDataSpot spotLoaded = dataLoaded.spots[i];
+                AreaVolumePoint point = clipboard.clipboardPointsSaved[spotLoaded.index];
+
+                point.blockTileset = spotLoaded.tileset;
+                point.blockGroup = spotLoaded.group;
+                point.blockSubtype = spotLoaded.subtype;
+                point.blockRotation = spotLoaded.rotation;
+                point.blockFlippedHorizontally = spotLoaded.flip;
+
+                //  0     1       2   3   4      5   6   (byte)
+                // -3    -2      -1   0   1      2   3   (shifted int)
+                // -1   -0.66  -0.33  0  0.33  0.66  1   (final float)
+                // point.terrainOffset = ((int)spotLoaded.offset - 3) / 3f;
+
+                // 253 (byte) -> (253 - 256) = -3 (int)
+                // 254 (byte) -> (254 - 256) = -2 (int)
+                // 255 (byte) -> (255 - 256) = -1 (int)
+                // 0   (byte) ->                0 (int)
+                // 1   (byte) ->                1 (int)
+                // 2   (byte) ->                2 (int)
+                // 2   (byte) ->                3 (int)
+
+                byte offsetByte = spotLoaded.offset;
+                int offsetInt = (int) offsetByte;
+                if (offsetByte >= terrainOffsetByteThreshold)
+                    offsetInt = offsetInt - 256;
+                point.terrainOffset = (offsetInt / 3f);
+            }
+
+            for (int i = 0; i < dataLoaded.customizations.Count; ++i)
+            {
+                AreaDataCustomization customizationLoaded = dataLoaded.customizations[i];
+                AreaVolumePoint point = clipboard.clipboardPointsSaved[customizationLoaded.index];
+
+                point.customization = new TilesetVertexProperties
+                (
+                    customizationLoaded.h1,
+                    customizationLoaded.s1,
+                    customizationLoaded.b1,
+                    customizationLoaded.h2,
+                    customizationLoaded.s2,
+                    customizationLoaded.b2,
+                    customizationLoaded.emission,
+                    0f
+                );
+            }
+
+            if (dataLoaded.indestructibleIndexes != null)
+            {
+                int pointsCount = clipboard.clipboardPointsSaved.Count;
+                for (int i = 0; i < dataLoaded.indestructibleIndexes.Count; ++i)
+                {
+                    var index = dataLoaded.indestructibleIndexes[i];
+                    if (index >= 0 && index < pointsCount)
+                    {
+                        var point = clipboard.clipboardPointsSaved[index];
+                        if (point != null)
+                            point.destructible = false;
+                    }
+                }
+            }
+
+            /*
+            if (dataLoaded.untrackedIndexes != null)
+            {
+                int pointsCount = clipboard.clipboardPointsSaved.Count;
+                for (int i = 0; i < dataLoaded.untrackedIndexes.Count; ++i)
+                {
+                    var index = dataLoaded.untrackedIndexes[i];
+                    if (index >= 0 && index < pointsCount)
+                    {
+                        var point = clipboard.clipboardPointsSaved[index];
+                        if (point != null)
+                            point.destructionUntracked = true;
+                    }
+                }
+            }
+            */
+
+            for (int i = 0; i < dataLoaded.integrities.Count; ++i)
+            {
+                AreaDataIntegrity integrityLoaded = dataLoaded.integrities[i];
+                AreaVolumePoint point = clipboard.clipboardPointsSaved[integrityLoaded.index];
+
+                if (point.pointState == AreaVolumePointState.Empty)
+                    continue;
+
+                point.integrity = integrityLoaded.integrity;
+                if (point.destructible && point.integrity <= 0f)
+                {
+                    point.integrityForDestructionAnimation = 0f;
+                    point.pointState = AreaVolumePointState.FullDestroyed;
+                }
+            }
+
+            int detectedMissingProps = 0;
+            placementsProps = new List<AreaPlacementProp> (dataLoaded.props.Count);
+            for (int i = 0; i < dataLoaded.props.Count; ++i)
+            {
+                AreaDataProp placementLoaded = dataLoaded.props[i];
+                AreaPropPrototypeData prototype = AreaAssetHelper.GetPropPrototype (placementLoaded.id);
+
+                if (prototype == null)
+                    ++detectedMissingProps;
+
+                if
+                (
+                    placementLoaded.pivotIndex.IsValidIndex (clipboard.clipboardPointsSaved) &&
+                    prototype != null
+                )
+                {
+                    AreaPlacementProp placement = new AreaPlacementProp ();
+                    placementsProps.Add (placement);
+
+                    placement.id = placementLoaded.id;
+
+                    placement.pivotIndex = placementLoaded.pivotIndex;
+                    placement.rotation = placementLoaded.rotation;
+                    placement.flipped = placementLoaded.flip;
+                    placement.offsetX = placementLoaded.offsetX;
+                    placement.offsetZ = placementLoaded.offsetZ;
+
+                    placement.hsbPrimary = new Vector4 (placementLoaded.h1, placementLoaded.s1, placementLoaded.b1, 0f);
+                    placement.hsbSecondary = new Vector4 (placementLoaded.h2, placementLoaded.s2, placementLoaded.b2, 0f);
+
+                    placement.state = new AreaPropState ();
+                    placement.destroyed = placementLoaded.status != 0;
+                    placement.destructionTime = -100f;
+                    if (placement.destroyed)
+                        placementsPropsDestroyed.Add (placement);
+                }
+                else
+                    Debug.LogWarning ("AM | LoadAreaSnippet | Skipping prop placement " + i + " with ID " + placementLoaded.id + " | Prototype is " + prototype.ToStringNullCheck ());
+            }
+
+            if (detectedMissingProps > 0)
+                Debug.LogWarning ("AM | LoadAreaSnippet | Found " + detectedMissingProps + " missing prop IDs");
+        }
+
+        #if !PB_MODSDK
 
         public float boundsBoostForCamera = 20f;
         public float boundsBoostForGrid = -1f;
@@ -3732,29 +4388,20 @@ namespace Area
         [ContextMenu ("Update bounds in systems")]
         public void UpdateBoundsInSystems ()
         {
-            Bounds boundsForCamera = new Bounds (GetBoundsCenter (), GetBoundsExtents (boundsBoostForCamera));
-            Bounds boundsForGrid = new Bounds (GetBoundsCenter (), GetBoundsExtents (boundsBoostForGrid));
-            Bounds boundsForCursor = new Bounds (GetBoundsCenter (), GetBoundsExtents (boundsBoostForCursor));
-
-            // Debug.Log ("AM | UpdateBoundsInSystems | Camera: " + boundsForCamera + " | Grid: " + boundsForGrid + " | Cursor: " + boundsForCursor);
+            if (Contexts.sharedInstance == null)
+                return;
+            var center = new Vector3 ((boundsFull.x - 1) / 2f, -(boundsFull.y - 1) / 2f, (boundsFull.z - 1) / 2f) * TilesetUtility.blockAssetSize;
+            var boundsForGrid = new Bounds (center, GetBoundsExtents (boundsFull, boundsBoostForGrid));
+            Contexts.sharedInstance.combat.ReplaceMapBounds (boundsForGrid);
         }
 
-        private Vector3 GetBoundsCenter ()
-        {
-            return new Vector3 ((float)(boundsFull.x - 1) / 2f, -(float)(boundsFull.y - 1) / 2f, (float)(boundsFull.z - 1) / 2f) * TilesetUtility.blockAssetSize;
-        }
-
-        private Vector3 GetPositionForBackground ()
-        {
-            return new Vector3 ((float)(boundsFull.x - 1) / 2f, -boundsFull.y, (float)(boundsFull.z - 1) / 2f) * TilesetUtility.blockAssetSize;
-        }
-
-        public Vector3 GetBoundsExtents (float offset)
+        private static Vector3 GetBoundsExtents (Vector3Int bounds, float offset)
         {
             // Debug.Log ("AM | GetBoundsExtents | Offset: " + offset + " | X: " + boundsFull.x + " | After offset: " + (boundsFull.x + offset * 2) + " | After sizing: " + (Mathf.Max (4, boundsFull.x + offset * 2) * TilesetUtility.blockAssetSize));
-            Vector3 result = new Vector3 (boundsFull.x + offset * 2, boundsFull.y + offset * 2, boundsFull.z + offset * 2) * TilesetUtility.blockAssetSize;
-            result = new Vector3 (Mathf.Max (3f, result.x), Mathf.Max (3f, result.y), Mathf.Max (3f, result.z));
-            return result;
+            var x = Mathf.Max (bounds.x + offset * 2f, 1f) * TilesetUtility.blockAssetSize;
+            var y = Mathf.Max (bounds.y + offset, 1f) * TilesetUtility.blockAssetSize;
+            var z = Mathf.Max (bounds.z + offset * 2f, 1f) * TilesetUtility.blockAssetSize;
+            return new Vector3 (x, y, z);
         }
 
         private List<int> GetIndexesToCheck (AreaProp prefab, int rotation, bool flipped, Vector3Int pivotPosition)
@@ -3767,12 +4414,14 @@ namespace Area
                 Vector3Int offsetFlipped = flipped ? (prefab.mirrorOnZAxis ? offsetRotated.FlipOnZ () : offsetRotated.FlipOnX ()) : offsetRotated;
                 Vector3Int internalPosition = pivotPosition + offsetFlipped;
 
-                int indexToCheck = AreaUtility.GetIndexFromVolumePosition (internalPosition, boundsFull);
+                int indexToCheck = AreaUtility.GetIndexFromInternalPosition (internalPosition, boundsFull);
                 indexesToCheck.Add (indexToCheck);
             }
 
             return indexesToCheck;
         }
+
+        #endif
 
         public void UpdateReflections ()
         {
@@ -3791,26 +4440,32 @@ namespace Area
         {
             ResetEditingModes ();
             UnloadEntities (forDestruction);
+            AreaNavUtility.OnLevelUnload ();
 
             ++areaChangeTracker;
 
             points = new List<AreaVolumePoint> ();
             placementsProps = new List<AreaPlacementProp> ();
             navOverrides = new Dictionary<int, AreaDataNavOverride> ();
+            #if !PB_MODSDK
             pointsToAnimate.Clear ();
+            crashSpotIndexes.Clear ();
+            collidersByDistance.Clear ();
+            #endif
 
             UtilityGameObjects.ClearChildren (GetHolderColliders ());
 
+            #if !PB_MODSDK
             if (Application.isPlaying)
             {
+                var game = Contexts.sharedInstance.game;
+                if (game.hasAreaActive)
+                    game.RemoveAreaActive ();
+
                 simulatedHelpers.Clear();
                 UtilityGameObjects.ClearChildren (GetHolderSimulatedParent ());
                 UtilityGameObjects.ClearChildren (GetHolderSimulatedLeftovers ());
             }
-
-            #if UNITY_EDITOR
-            Debug.Log ("Unloaded combat area " + areaName);
-            areaName = "";
             #endif
         }
 
@@ -3912,95 +4567,12 @@ namespace Area
             UpdateVolume (true);
             UpdateAllSpots (false);
 
-            structurePointsQueue = new Queue<AreaVolumePoint> (points.Count);
-
             SetupPointEntities ();
             RebuildEverything ();
+            #if !PB_MODSDK
             UpdateBoundsInSystems ();
+            #endif
             ShaderGlobalHelper.SetOcclusionShift (boundsFull.y * 3f + 4.5f);
-
-
-            /*
-            UnloadEntities (false);
-            Debug.LogWarning ("AM | RemapArea | Starting new volume mapping with new bounds " + boundsFullNew);
-            List<AreaVolumePoint> pointsNew = new List<AreaVolumePoint> (new AreaVolumePoint[volumeLengthNew]);
-            for (int i = 0; i < pointsNew.Count; ++i)
-            {
-                AreaVolumePoint pointNew = new AreaVolumePoint ();
-                pointsNew[i] = pointNew;
-
-                pointNew.pointPositionIndex = TilesetUtility.GetVolumePositionFromIndex (i, boundsFullNew);
-                pointNew.pointPositionLocal = AreaUtility.GetLocalPositionFromGridPosition (pointNew.pointPositionIndex);
-                pointNew.pointsInSpot = new AreaVolumePoint[8];
-                pointNew.pointsInSpot[0] = pointNew;
-                pointNew.pointsWithSurroundingSpots = new AreaVolumePoint[8];
-                pointNew.pointsWithSurroundingSpots[7] = pointNew;
-
-                if (pointNew.pointPositionIndex.y >= boundsFullNew.y - 2) pointNew.pointState = AreaVolumePointState.Full;
-                else pointNew.pointState = AreaVolumePointState.Empty;
-            }
-
-            for (int i = 0; i < points.Count; ++i)
-            {
-                AreaVolumePoint pointOld = points[i];
-                Vector3Int positionOld = pointOld.pointPositionIndex;
-                for (int a = 0; a < pointsNew.Count; ++a)
-                {
-                    AreaVolumePoint pointNew = pointsNew[a];
-                    Vector3Int positionNew = pointNew.pointPositionIndex;
-                    if (positionNew == positionOld)
-                    {
-                        pointsNew[a] = pointOld;
-                        pointOld.pointsInSpot = new AreaVolumePoint[8];
-                        pointOld.pointsInSpot[0] = pointNew;
-                        pointOld.pointsWithSurroundingSpots = new AreaVolumePoint[8];
-                        pointOld.pointsWithSurroundingSpots[7] = pointNew;
-                    }
-                }
-            }
-
-            r_IntArray_UpdateVolume = new int[8];
-            for (int i = 0; i < pointsNew.Count; ++i)
-            {
-                AreaVolumePoint pointNew = pointsNew[i];
-
-                Array.Copy (AreaUtility.GetNeighbourIndexesInXxYxZ (i, Vector3Int.size2x2x2, Vector3Int.size0x0x0, boundsFullNew), r_IntArray_UpdateVolume, 8);
-                for (int n = 1; n < 8; ++n)
-                {
-                    int neighbourIndex = r_IntArray_UpdateVolume[n];
-                    if (neighbourIndex != -1)
-                    {
-                        if (!neighbourIndex.IsValidIndex (pointsNew))
-                        {
-                            Debug.LogWarning ("AM | RemapArea | Encountered invalid neighbour index for point " + i + " with coords " + pointNew.pointPositionIndex + ": " + neighbourIndex);
-                            return;
-                        }
-
-                        AreaVolumePoint pointToAdd = pointsNew[neighbourIndex];
-                        pointNew.pointsInSpot[n] = pointToAdd;
-                    }
-                    else
-                    {
-                        pointNew.spotPresent = false;
-                        pointNew.pointsInSpot[n] = null;
-                    }
-                }
-
-                Array.Copy (AreaUtility.GetNeighbourIndexesInXxYxZ (i, Vector3Int.size2x2x2, Vector3Int.size1x1x1Neg, boundsFullNew), r_IntArray_UpdateVolume, 8);
-                for (int n = 0; n < 7; ++n)
-                {
-                    int neighbourIndex = r_IntArray_UpdateVolume[n];
-                    pointNew.pointsWithSurroundingSpots[n] = neighbourIndex != -1 ? pointsNew[neighbourIndex] : null;
-                }
-            }
-
-            points = pointsNew;
-            boundsFull = boundsFullNew;
-
-            UpdateAllSpots (false);
-            SetupPointEntities ();
-            RebuildEverything ();
-            */
         }
 
 
@@ -4112,39 +4684,147 @@ namespace Area
             return entity;
         }
 
-        public AreaPlacementProp GetPropFromColliderID (int colliderID)
+        #if !PB_MODSDK
+
+        public static void OnPropImpactFromUnit (int colliderID, Vector3 position, Vector3 direction, float damage, float speed)
         {
-            if (propLookupByColliderID.ContainsKey (colliderID))
-            {
-                // Debug.Log ($"Located a prop collider for prop {propLookupByColliderID[colliderID].prototype.name} using ID {colliderID}");
-                return propLookupByColliderID[colliderID];
-            }
-            else
-            {
-                // Debug.LogWarning ($"Failed to find a prop collider using ID {colliderID}");
-                return null;
-            }
+            if (instance == null)
+                return;
+
+            var prop = instance.GetPropFromColliderID (colliderID);
+            if (prop == null)
+                return;
+
+            AreaAnimationSystem.OnDestruction (prop, true, position, direction, damage, speed);
         }
 
-        #region Editor
-        #if UNITY_EDITOR
-        public readonly AreaClipboard clipboard =  new AreaClipboard();
+        public static void OnPropImpactFromProjectile (int colliderID, Vector3 position, Vector3 direction, float damage, float force)
+        {
+            if (instance == null)
+                return;
+
+            var prop = instance.GetPropFromColliderID (colliderID);
+            AreaAnimationSystem.OnDestruction (prop, true, position, direction, damage, force);
+        }
+
+        #endif
+
+        public AreaPlacementProp GetPropFromColliderID (int colliderID)
+        {
+            if (propLookupByColliderID != null && propLookupByColliderID.TryGetValue (colliderID, out var prop))
+            {
+                // Debug.Log ($"Located a prop collider for prop {propLookupByColliderID[colliderID].prototype.name} using ID {colliderID}");
+                return prop;
+            }
+
+            return null;
+        }
+
+
+        public AreaClipboard clipboard =  new AreaClipboard();
 
         public Vector3Int clipboardOrigin;
         public Vector3Int clipboardBoundsRequested;
         public Vector3Int targetOrigin;
 
-        public bool transferVolume = true;
-        public bool transferProps;
-        public bool combineExports;
+		public (int topY,int bottomY) GetShrinkwrapBounds(Vector3Int cornerA, Vector3Int cornerB)
+		{
+			cornerA.y = 0;
+			cornerB.y = boundsFull.y-1;
 
-        [NonSerialized]
-        public bool debugPasteDrawHighlights;
+			int topY = int.MaxValue;
+			int bottomY = int.MaxValue;
+
+			for(int y = cornerA.y;y <= cornerB.y;++y)
+			{
+				bool allFull = true;
+				bool allEmpty = true;
+
+				for(int z = cornerA.z;z <= cornerB.z;++z)
+				{
+					for(int x = cornerA.x;x <= cornerB.x;++x)
+					{
+						var coord = new Vector3Int(x,y,z);
+
+						int sourcePointIndex = AreaUtility.GetIndexFromInternalPosition (coord, boundsFull);
+						var sourcePoint = points[sourcePointIndex];
+
+						if(sourcePoint.pointState != AreaVolumePointState.Empty)
+							allEmpty = false;
+
+						if(sourcePoint.pointState != AreaVolumePointState.Full)
+							allFull = false;
+
+						if(!allFull && !allEmpty)
+							break;
+					}
+
+					if(!allFull && !allEmpty)
+						break;
+				}
+
+				if(!allEmpty)
+					topY = Mathf.Min(y-1, topY);
+
+				if(allFull)
+					bottomY = Mathf.Min(y, bottomY);
+			}
+
+			if(topY < cornerA.y || topY > cornerB.y)
+				topY = cornerA.y;
+
+			if(bottomY < cornerA.y || bottomY > cornerB.y)
+				bottomY = cornerB.y;
+
+			return (topY, bottomY);
+		}
+
+        public void CopyVolume (Vector3Int cornerA, Vector3Int cornerB)
+        {
+            int indexA = AreaUtility.GetIndexFromInternalPosition (cornerA, boundsFull);
+            int indexB = AreaUtility.GetIndexFromInternalPosition (cornerB, boundsFull);
+
+            if (indexA == -1 || indexB == -1)
+            {
+                Debug.LogWarning (string.Format
+                (
+                    "CopyVolume | Failed to copy due to specified corners {0} and {1} falling outside of source level bounds {2}",
+                    cornerA,
+                    cornerB,
+                    boundsFull
+                ));
+                return;
+            }
+
+            // Bounds are limits, like array sizes - so they will be bigger by 1 than just pure position difference
+            // For example, a set of points [(0,0);(1,0);(0,1);(1;1)] has bounds of 2x2, not 1x1!
+            var size = cornerB - cornerA + Vector3Int.size1x1x1;
+
+            if (size.x < 2 || size.y < 2 || size.z < 2)
+            {
+                Debug.LogWarning (string.Format
+                (
+                    "CopyVolume | Failed to copy due to specified corners not creating valid clip bounds | B - A: {0} - {1} = {2}",
+                    cornerB,
+                    cornerA,
+                    (cornerB - cornerA)
+                ));
+                return;
+            }
+
+
+            clipboard.CopyFromArea(this, cornerA, size);
+	    }
+
+
+        public bool combineExports = false;
+		public bool transferProps = false;
+        public bool transferVolume = true;
 
         public void ExportVolume (Vector3Int cornerA, Vector3Int cornerB)
         {
-            int indexA = AreaUtility.GetIndexFromVolumePosition (cornerA, boundsFull);
-            int indexB = AreaUtility.GetIndexFromVolumePosition (cornerB, boundsFull);
+            int indexA = AreaUtility.GetIndexFromInternalPosition (cornerA, boundsFull);
+            int indexB = AreaUtility.GetIndexFromInternalPosition (cornerB, boundsFull);
 
             if (indexA == -1 || indexB == -1)
             {
@@ -4185,7 +4865,7 @@ namespace Area
             {
                 Vector3Int clipboardPointPosition = AreaUtility.GetVolumePositionFromIndex (i, clipboardBoundsRequested);
                 Vector3Int sourcePointPosition = clipboardPointPosition + cornerA;
-                int pointIndex = AreaUtility.GetIndexFromVolumePosition (sourcePointPosition, boundsFull);
+                int pointIndex = AreaUtility.GetIndexFromInternalPosition (sourcePointPosition, boundsFull);
                 var point = points[pointIndex];
 
                 /*
@@ -4246,6 +4926,238 @@ namespace Area
                     mr.sharedMaterial = UtilityMaterial.GetDefaultMaterial ();
                 #endif
             }
+
+            if (!combineExports)
+                return;
+
+            #if !PB_MODSDK
+            var combiner = new DigitalOpus.MB.Core.MB3_MeshCombinerSingle ();
+            combiner.doNorm = true;
+            combiner.doTan = true;
+            combiner.doUV = true;
+            combiner.renderType = DigitalOpus.MB.Core.MB_RenderType.meshRenderer;
+
+            combiner.AddDeleteGameObjects (objectsAdded.ToArray (), null, true);
+            combiner.Apply ();
+            combiner.resultSceneObject.name = "AreaExport_" + areaName;
+            #endif
+
+            DestroyImmediate (holder);
+        }
+
+        public enum BrushApplicationMode
+        {
+            Overwrite,
+            Additive,
+            Subtractive
+        }
+
+        public BrushApplicationMode brushApplicationMode = BrushApplicationMode.Overwrite;
+
+        public void PasteVolume (Vector3Int cornerA, BrushApplicationMode mode)
+        {
+            if (!clipboard.IsValid)
+            {
+                Debug.Log ("PasteVolume | Clipboard is empty");
+                return;
+            }
+
+            // Bounds are not positions, they are limits, like array sizes - so we need to subtract 1 from bounds axes to get second corner
+            Vector3Int cornerB = cornerA + clipboard.clipboardBoundsSaved + Vector3Int.size1x1x1Neg;
+
+            int indexA = AreaUtility.GetIndexFromInternalPosition (cornerA, boundsFull);
+            int indexB = AreaUtility.GetIndexFromInternalPosition (cornerB, boundsFull);
+
+            if (indexA == -1 || indexB == -1)
+            {
+                Debug.LogWarning (string.Format
+                (
+                    "PasteVolume | Failed to paste due to specified corner {0} or calculated corner {1} falling outside of target level bounds {2}",
+                    cornerA,
+                    cornerB,
+                    boundsFull
+                ));
+                return;
+            }
+
+            // Since we are directly modifying boundary points, some spots outside of captured area would be affected - time to collect all points
+            int affectedOriginX = Mathf.Max (0, cornerA.x - 1);
+            int affectedOriginY = Mathf.Max (0, cornerA.y - 1);
+            int affectedOriginZ = Mathf.Max (0, cornerA.z - 1);
+            var cornerAShifted = new Vector3Int (affectedOriginX, affectedOriginY, affectedOriginZ);
+
+            // Bounds are limits, like array sizes - so they will be bigger by 1 than just pure position difference
+            // For example, a set of points [(0,0);(1,0);(0,1);(1;1)] has bounds of 2x2, not 1x1!
+            int affectedBoundsX = cornerB.x - cornerAShifted.x + 1;
+            int affectedBoundsY = cornerB.y - cornerAShifted.y + 1;
+            int affectedBoundsZ = cornerB.z - cornerAShifted.z + 1;
+            int affectedVolumeLength = affectedBoundsX * affectedBoundsY * affectedBoundsZ;
+            var affectedBounds = new Vector3Int (affectedBoundsX, affectedBoundsY, affectedBoundsZ);
+            var affectedPoints = new List<AreaVolumePoint> (affectedVolumeLength);
+
+            for (int i = 0; i < affectedVolumeLength; ++i)
+            {
+                Vector3Int affectedPointPosition = AreaUtility.GetVolumePositionFromIndex (i, affectedBounds);
+                Vector3Int sourcePointPosition = affectedPointPosition + cornerAShifted;
+                int sourcePointIndex = AreaUtility.GetIndexFromInternalPosition (sourcePointPosition, boundsFull);
+                var sourcePoint = points[sourcePointIndex];
+                affectedPoints.Add (sourcePoint);
+                // Debug.DrawLine (sourcePoint.pointPositionLocal, sourcePoint.instancePosition, Color.white, 10f);
+            }
+
+            Debug.Log (string.Format
+            (
+                "Pasting volume | Target corner/bounds/points: {0}/{1}/{2} | Affected origin/bounds/points: {3}/{4}/{5}",
+                cornerA,
+                clipboard.clipboardBoundsSaved,
+                clipboard.clipboardPointsSaved.Count,
+                cornerAShifted,
+                affectedBounds,
+                affectedPoints.Count
+            ));
+
+            int pointsCountTotal = points.Count;
+
+            if (transferVolume)
+            {
+                // First, override only point state - we want to update all the configurations before looking into applying other spot-related data
+                for (int i = 0; i < clipboard.clipboardPointsSaved.Count; ++i)
+                {
+                    var clipboardPoint = clipboard.clipboardPointsSaved[i];
+                    var targetPointPosition = clipboardPoint.pointPositionIndex + cornerA;
+                    int targetPointIndex = AreaUtility.GetIndexFromInternalPosition (targetPointPosition, boundsFull);
+
+                    if (targetPointIndex < 0 || targetPointIndex >= pointsCountTotal)
+                    {
+                        Debug.LogWarning ($"Failed to apply clipboard point {i} to area point {targetPointIndex}: out of bounds | Point position: {clipboardPoint.pointPositionIndex}");
+                        continue;
+                    }
+
+                    var targetPoint = points[targetPointIndex];
+
+                    // if (clipboardPoint.pointState != AreaVolumePointState.Empty)
+                    //     DrawHighlightBox (targetPoint.pointPositionLocal, Color.cyan, 10f);
+
+                    if (mode == BrushApplicationMode.Additive)
+                    {
+                        if (targetPoint.pointState == AreaVolumePointState.Empty && clipboardPoint.pointState != AreaVolumePointState.Empty)
+                            targetPoint.pointState = clipboardPoint.pointState;
+                    }
+                    else if (mode == BrushApplicationMode.Subtractive)
+                    {
+                        if (targetPoint.pointState != AreaVolumePointState.Empty && clipboardPoint.pointState == AreaVolumePointState.Empty)
+                            targetPoint.pointState = clipboardPoint.pointState;
+                    }
+                    else
+                        targetPoint.pointState = clipboardPoint.pointState;
+                }
+
+                // Update all spots
+                for (int i = 0; i < affectedPoints.Count; ++i)
+                {
+                    UpdateSpotAtIndex (affectedPoints[i].spotIndex, false, false, true);
+                    // DrawHighlightBox (affectedPoints[i].instancePosition, Color.red, 10f, 0.5f);
+                }
+
+                // Now we can take a look at where spot data can be overwritten
+                for (int i = 0; i < clipboard.clipboardPointsSaved.Count; ++i)
+                {
+                    var clipboardPoint = clipboard.clipboardPointsSaved[i];
+                    var targetPointPosition = clipboardPoint.pointPositionIndex + cornerA;
+                    int targetPointIndex = AreaUtility.GetIndexFromInternalPosition (targetPointPosition, boundsFull);
+
+                    if (targetPointIndex < 0 || targetPointIndex >= pointsCountTotal)
+                    {
+                        // Debug.LogWarning ($"Failed to apply clipboard point {i} to area point {targetPointIndex}: out of bounds");
+                        continue;
+                    }
+
+                    var targetPoint = points[targetPointIndex];
+
+                    // We don't want to affect areas outside of clipboard bounds
+                    // (points on positive edges of bounds cube control spots that lie outside of our volume)
+                    bool inside =
+                        clipboardPoint.pointPositionIndex.x < (clipboard.clipboardBoundsSaved.x - 1) &&
+                        clipboardPoint.pointPositionIndex.y < (clipboard.clipboardBoundsSaved.y - 1) &&
+                        clipboardPoint.pointPositionIndex.z < (clipboard.clipboardBoundsSaved.z - 1);
+
+                    // We also don't want to write to empty points or points with different configurations
+                    bool overwriteSpot =
+                        inside &&
+                        targetPoint.spotPresent &&
+                        clipboardPoint.spotConfiguration == targetPoint.spotConfiguration;
+
+                    if (!overwriteSpot)
+                    {
+                        // DrawHighlightBox (targetPoint.instancePosition, Color.yellow, 10f, 1.5f);
+                        continue;
+                    }
+
+                    targetPoint.blockFlippedHorizontally = clipboardPoint.blockFlippedHorizontally;
+                    targetPoint.blockGroup = clipboardPoint.blockGroup;
+                    targetPoint.blockRotation = clipboardPoint.blockRotation;
+                    targetPoint.blockSubtype = clipboardPoint.blockSubtype;
+                    targetPoint.blockTileset = clipboardPoint.blockTileset;
+                    targetPoint.customization = clipboardPoint.customization;
+                    targetPoint.terrainOffset = clipboardPoint.terrainOffset;
+
+                    // Debug.DrawLine (targetPoint.pointPositionLocal, targetPoint.instancePosition, Color.white, 10f);
+                }
+
+                // Finally, it's time to push full updates
+                for (int i = 0; i < affectedPoints.Count; ++i)
+                {
+                    RebuildBlock (affectedPoints[i]);
+                    RebuildCollisionsAroundIndex (affectedPoints[i].spotIndex);
+                }
+            }
+
+			if (transferProps && (mode == BrushApplicationMode.Overwrite || mode == BrushApplicationMode.Additive))
+			{
+				if (mode == BrushApplicationMode.Overwrite)
+				{
+					for (int i = 0; i < affectedPoints.Count; ++i)
+					{
+						var index = affectedPoints[i].spotIndex;
+						RemovePropPlacement(index);
+					}
+				}
+
+				for (int i = 0; i < clipboard.clipboardPropsSaved.Count; ++i)
+				{
+					var savedProp = clipboard.clipboardPropsSaved[i];
+                    var targetPointPosition = savedProp.clipboardPosition + cornerA;
+					int targetPointIndex = AreaUtility.GetIndexFromInternalPosition (targetPointPosition, boundsFull);
+
+					AreaPlacementProp placement = new AreaPlacementProp();
+					AreaVolumePoint pointTargeted = points[targetPointIndex];
+					AreaPropPrototypeData prototype = AreaAssetHelper.GetPropPrototype (savedProp.id);
+
+					placement.id = savedProp.id;
+					placement.pivotIndex = targetPointIndex;
+					placement.rotation = savedProp.rotation;
+					placement.flipped = savedProp.flipped;
+					placement.offsetX = savedProp.offsetX;
+					placement.offsetZ = savedProp.offsetZ;
+					placement.hsbPrimary = savedProp.hsbPrimary;
+					placement.hsbSecondary = savedProp.hsbSecondary;
+
+					if (IsPropPlacementValid (placement, pointTargeted, prototype, false))
+					{
+						if (!indexesOccupiedByProps.ContainsKey (targetPointIndex))
+						{
+							indexesOccupiedByProps.Add (targetPointIndex, new List<AreaPlacementProp> ());
+						}
+
+						indexesOccupiedByProps[targetPointIndex].Add (placement);
+						placementsProps.Add (placement);
+						ExecutePropPlacement (placement);
+					}
+				}
+			}
+
+            var sceneHelper = CombatSceneHelper.ins;
+            sceneHelper.terrain.Rebuild (true);
         }
 
         public void DrawHighlightSpot (AreaVolumePoint point)
@@ -4324,7 +5236,7 @@ namespace Area
                 {
                     for (int z = 0; z < sizeZ; z++)
                     {
-                        var index = AreaUtility.GetIndexFromVolumePosition (new Vector3Int (x, sizeY - 1 - y, z), boundsFull);
+                        var index = AreaUtility.GetIndexFromInternalPosition (new Vector3Int (x, sizeY - 1 - y, z), boundsFull);
                         var point = points[index];
                         var color = point != null && point.pointState == AreaVolumePointState.Full ? Color.black.WithAlpha (0f) : Color.white.WithAlpha (1f);
                         colorArray[x + (y * sizeX) + (z * sizeX * sizeY)] = color;
@@ -4354,399 +5266,302 @@ namespace Area
         }
 
         [NonSerialized]
-        public readonly List<DepthColorLink> heightfieldPalette = new List<DepthColorLink> ();
-        readonly HashSet<int> colorValues = new HashSet<int> ();
-        Color32[] colorArray;
-        int maxDepthScaled;
+        public List<DepthColorLink> heightfieldPalette = new List<DepthColorLink> ();
+        public HashSet<int> colorValues = new HashSet<int> ();
 
-        public const string standardHeightmapFileName = "heightmap.png";
-        const byte minDepthScaled = 10;
-        const float terrainOffsetTopRamp = -1f / 3f;
-
-        public class HeightmapSpec
-        {
-            public int SizeX;
-            public int SizeZ;
-            public int MaxDepth;
-            public int[,] Heightfield;
-            public List<AreaVolumePoint> Points;
-            public Vector3Int Bounds;
-            public StoreHeightmapInfo Store;
-        }
-
-        public delegate void StoreHeightmapInfo (int x, int z, int depthProcessed, byte slopeInfo, byte roadInfo);
-        public delegate void ProcessDepthValues (HeightmapSpec spec);
-
-        #if !PB_MODSDK
         [ContextMenu ("Save depth to texture (R)")][Button]
         public void ExportToHeightmap ()
         {
             var folderPath = DataMultiLinkerCombatArea.GetCurrentUnpackedLevelPath ();
             if (folderPath == null)
             {
-                Debug.Log ("Failed to save heightmap, couldn't get current unpacked level path");
+                Debug.Log ($"Failed to save heightmap, couldn't get current unpacked level path");
                 return;
             }
 
-            var filePath = DataPathHelper.GetCombinedCleanPath (folderPath, standardHeightmapFileName);
-            CreateHeightmap (CalculateStandardHeightmapValues, filePath);
-        }
-        #endif
+            var sizeX = boundsFull.x;
+            var sizeY = boundsFull.y;
+            var sizeZ = boundsFull.z;
 
-        public void CalculateStandardHeightmapValues (HeightmapSpec spec)
-        {
-            for (var x = 0; x < spec.SizeX; x += 1)
+            if (heightfield == null || (heightfield.GetLength (0) != sizeX && heightfield.GetLength (1) != sizeZ))
+                heightfield = new int[sizeX, sizeZ];
+
+            ProceduralMeshUtilities.CollectSurfacePoints (this, heightfield);
+
+            heightfieldPalette.Clear ();
+
+            Color32[] colorArray = new Color32[heightfield.Length];
+            textureDepthmap = new Texture2D (sizeX, sizeZ, TextureFormat.RGB24, false);
+
+            float terrainOffsetTopRamp = -1f / 3f;
+
+            int sizeYMinusOne = sizeY - 1;
+            for (int x = 0; x < sizeX; x++)
             {
-                for (var z = 0; z < spec.SizeZ; z += 1)
+                for (int z = 0; z < sizeZ; z++)
                 {
-                    var depth = heightfield[x, z];
-                    var sizeY = boundsFull.y;
-                    var slopeInfo = byte.MinValue;
-                    var roadInfo = byte.MinValue;
+                    var colorIndex = z * sizeX + x;
+
+                    int depth = heightfield[x, z];
+                    byte depthScaled = (byte)(255 - Mathf.Clamp (depth * 10, 0, 255) - (255 - sizeYMinusOne * 10));
+
+                    byte slopeInfo = (byte)0;
+                    byte roadInfo = (byte)0;
 
                     // Try to hit a surface point
                     var posIndex = new Vector3Int (x, 0, z);
-                    var pointIndex = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull, skipBoundsCheck: true);
+                    var pointIndex = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
                     var pointCurrent = points[pointIndex];
-                    for (var iteration = 0; iteration <= sizeY; iteration += 1)
+                    int iteration = 0;
+
+                    while (true)
                     {
                         if (pointCurrent == null)
-                        {
                             break;
-                        }
 
                         var pointStateCurrent = pointCurrent.pointState;
                         if (pointStateCurrent == AreaVolumePointState.Full)
                         {
-                            var pointAboveStartEmpty = pointCurrent.pointsWithSurroundingSpots[3];
-                            if (pointAboveStartEmpty == null)
-                            {
-                                continue;
-                            }
-                            if (pointAboveStartEmpty.terrainOffset.RoughlyEqual (terrainOffsetTopRamp))
-                            {
-                                slopeInfo = byte.MaxValue;
-                            }
+                            var pointAboveStartEmpty = pointCurrent?.pointsWithSurroundingSpots[3];
+                            if (pointAboveStartEmpty != null && pointAboveStartEmpty.terrainOffset.RoughlyEqual (terrainOffsetTopRamp))
+                                slopeInfo = (byte)255;
+
                             if (pointCurrent.road)
-                            {
-                                roadInfo = byte.MaxValue;
-                            }
+                                roadInfo = (byte)255;
+
                             break;
                         }
 
                         // Get point below
                         pointCurrent = pointCurrent.pointsInSpot[4];
+                        iteration += 1;
+
+                        if (iteration > sizeY)
+                            break;
                     }
-                    spec.Store (x, z, depth, slopeInfo, roadInfo);
+
+                    var color = new Color32 (depthScaled, slopeInfo, roadInfo, (byte)255);
+                    colorArray[colorIndex] = color;
+
+                    if (!colorValues.Contains (depthScaled))
+                    {
+                        colorValues.Add (depthScaled);
+                        heightfieldPalette.Add (new DepthColorLink
+                        {
+                            color = color,
+                            depth = depth,
+                            depthScaled = depthScaled
+                        });
+                    }
                 }
             }
-        }
 
-        public void CreateHeightmap(ProcessDepthValues processDepthValues, string filePath)
-        {
-            var sizeX = boundsFull.x;
-            var sizeZ = boundsFull.z;
-            if (heightfield == null || (heightfield.GetLength (0) != sizeX && heightfield.GetLength (1) != sizeZ))
-            {
-                heightfield = new int[sizeX, sizeZ];
-            }
-
-            ProceduralMeshUtilities.CollectSurfacePoints (this, heightfield);
-
-            heightfieldPalette.Clear ();
-            colorValues.Clear ();
-
-            colorArray = new Color32[heightfield.Length];
-
-            var sizeY = boundsFull.y;
-            var maxDepth = Mathf.Min (sizeY - 1, byte.MaxValue);
-            maxDepthScaled = maxDepth * 10;
-
-            // Points on north (sizeZ - 1) and east (sizeX - 1) borders don't have spots so exclude them.
-            var spec = new HeightmapSpec ()
-            {
-                SizeX = sizeX - 1,
-                SizeZ = sizeZ - 1,
-                MaxDepth = maxDepth,
-                Heightfield = heightfield,
-                Points = points,
-                Bounds = boundsFull,
-                Store = StoreHeightmapInfoInternal,
-            };
-            processDepthValues (spec);
             heightfieldPalette.Sort ((x, y) => x.depth.CompareTo (y.depth));
 
-            var zMax = sizeZ - 1;
-            for (var x = 0; x < sizeX; x += 1)
+            /*
+            for (int i = 0; i < sizeY; ++i)
             {
-                var index = zMax * boundsFull.z + x;
-                colorArray[index] = Color.black;
+                int depth = i;
+                var depthNormalized = 1f - Mathf.Clamp01 ((float)depth / sizeYMinusOne);
+                var color = new Color (depthNormalized, depthNormalized, depthNormalized, 1f);
+                heightfieldPalette.Add (new DepthColorLink
+                {
+                    color = color,
+                    depth = depth
+                });
             }
-            var xMax = sizeX - 1;
-            for (var z = 0; z < sizeZ; z += 1)
-            {
-                var index = z * boundsFull.z + xMax;
-                colorArray[index] = Color.black;
-            }
+            */
 
-            textureDepthmap = new Texture2D (sizeX, sizeZ, TextureFormat.RGB24, false);
-            textureDepthmap.name = areaName + "_heightmap";
+            textureDepthmap.name = $"{areaName}_heightmap";
             textureDepthmap.SetPixels32 (colorArray);
             textureDepthmap.Apply ();
             textureDepthmap.filterMode = FilterMode.Point;
             textureDepthmap.wrapMode = TextureWrapMode.Clamp;
 
+            var texturePath = $"{folderPath}/heightmap.png";
+
             try
             {
-                var png = textureDepthmap.EncodeToPNG ();
-                System.IO.File.WriteAllBytes (filePath, png);
+                byte[] png = textureDepthmap.EncodeToPNG ();
+                System.IO.File.WriteAllBytes ($"{texturePath}", png);
             }
             catch (Exception e)
             {
-                Debug.LogWarningFormat ("Area manager | Encountered an exception while saving heightmap {0}\n{1}", filePath, e);
+                Debug.LogWarningFormat ($"Area manager | Encountered an exception while saving heightmap {texturePath}\n{0}", e);
             }
         }
 
-        void StoreHeightmapInfoInternal(int x, int z, int depthProcessed, byte slopeInfo, byte roadInfo)
-        {
-            var depthScaled = (byte)Mathf.Max (maxDepthScaled - depthProcessed * 10, minDepthScaled);
-            var color = new Color32 (depthScaled, slopeInfo, roadInfo, byte.MaxValue);
-            var colorIndex = z * boundsFull.z + x;
-
-            colorArray[colorIndex] = color;
-            if (!colorValues.Add (depthScaled))
-            {
-                return;
-            }
-            heightfieldPalette.Add (new DepthColorLink ()
-            {
-                color = color,
-                depth = depthProcessed,
-                depthScaled = depthScaled,
-            });
-        }
-
-        #if !PB_MODSDK
-        [ContextMenu ("Import height from tex. (R depth)")]
-        [Button]
-        public void ImportHeightFromStandardTexture ()
+        [ContextMenu ("Import height from tex. (R depth)")][Button]
+        public void ImportHeightFromTexture ()
         {
             var folderPath = DataMultiLinkerCombatArea.GetCurrentUnpackedLevelPath ();
             if (folderPath == null)
             {
-                Debug.Log ("Failed to load heightmap, couldn't get current unpacked level path");
-                return;
-            }
-            var filePath = System.IO.Path.Combine(folderPath, standardHeightmapFileName);
-            ImportHeightFromTexture (filePath);
-        }
-        #endif
-
-        public void ImportHeightFromTexture (string filePath)
-        {
-            if (!LoadHeightmapFromFile (filePath))
-            {
+                Debug.Log ($"Failed to import height, couldn't get current unpacked level path");
                 return;
             }
 
             var sizeX = boundsFull.x;
             var sizeY = boundsFull.y;
             var sizeZ = boundsFull.z;
+            var texturePath = $"{folderPath}/heightmap.png";
 
-            // To ensure that the new terrain matches the existing area segments without any visible seams,
-            // don't remove any terrain offsets on the border spots.
-            const int fringe = 1;
-
-            colorArray = textureDepthmap.GetPixels32 ();
-            var maxDepthScaled = Mathf.Min ((sizeY - 1) * 10, byte.MaxValue);
-            // The points on the north (sizeZ - 1) and east (sizeX - 1) borders don't have spots. Shrink the
-            // bounds by one to exclude those points.
-            var lastX = sizeX - 1;
-            var lastZ = sizeZ - 1;
-
-            for (var y = 0; y < sizeY; y += 1)
+            if (!System.IO.File.Exists (texturePath))
             {
-                for (var z = 0; z < lastZ; z += 1)
-                {
-                    for (var x = 0; x < lastX; x += 1)
-                    {
-                        var colorIndex = z * sizeX + x;
-                        var color = colorArray[colorIndex];
-                        var depthSample = color.r;
-                        var depthRestored = Mathf.RoundToInt (Mathf.Clamp (maxDepthScaled - depthSample, 0, maxDepthScaled) * 0.1f);
-                        var posIndex = new Vector3Int (x, y, z);
-                        var index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull, skipBoundsCheck: true);
-                        var spot = points[index];
-
-                        if (x > fringe && x < lastX - fringe && z > fringe && z < lastZ - fringe)
-                        {
-                            spot.terrainOffset = 0f;
-                        }
-
-                        if (y < depthRestored)
-                        {
-                            ClearSpot (spot);
-                        }
-                        else if (y == depthRestored)
-                        {
-                            ChangeSpotToTerrain (spot);
-                        }
-                        else
-                        {
-                            ChangeSpotToInterior (spot);
-                        }
-                        RemovePropPlacement (index);
-                    }
-                }
+                Debug.LogWarning ($"Area manager | File doesn't exist: {texturePath}");
+                return;
             }
 
-            RebuildEverything ();
-
-            // Terrain undergoes a smoothing process that may cause a slope to go through an empty or interior
-            // spot. The tileset is 0 for these spots and they're displayed with the fallback tileset. Change
-            // the tileset to terrain so they are displayed correctly.
-
-            var fixup = false;
-            for (var y = 0; y < sizeY; y += 1)
-            {
-                for (var z = 0; z < lastZ; z += 1)
-                {
-                    for (var x = 0; x < lastX; x += 1)
-                    {
-                        var posIndex = new Vector3Int (x, y, z);
-                        var index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull, skipBoundsCheck: true);
-                        var spot = points[index];
-                        if (spot.pointState == AreaVolumePointState.Full
-                            && spot.spotConfiguration != TilesetUtility.configurationFull
-                            && spot.blockTileset != AreaTilesetHelper.idOfTerrain)
-                        {
-                            spot.blockTileset = AreaTilesetHelper.idOfTerrain;
-                            fixup = true;
-                            continue;
-                        }
-                        if (spot.pointState == AreaVolumePointState.Empty
-                            && spot.spotConfiguration != TilesetUtility.configurationEmpty
-                            && spot.blockTileset != AreaTilesetHelper.idOfTerrain)
-                        {
-                            spot.blockTileset = AreaTilesetHelper.idOfTerrain;
-                            fixup = true;
-                        }
-                    }
-                }
-            }
-            if (fixup)
-            {
-                RebuildEverything ();
-            }
-        }
-
-        bool LoadHeightmapFromFile (string filePath)
-        {
-            if (!System.IO.File.Exists (filePath))
-            {
-                Debug.LogWarning ("Area manager | File doesn't exist: " + filePath);
-                return false;
-            }
-
-            var sizeX = boundsFull.x;
-            var sizeZ = boundsFull.z;
             try
             {
-                var pngBytes = System.IO.File.ReadAllBytes (filePath);
-                textureDepthmap = new Texture2D (sizeX, sizeZ, TextureFormat.RGB24, false, false)
-                {
-                    name = areaName + "_heightmap",
-                    filterMode = FilterMode.Point,
-                    wrapMode = TextureWrapMode.Clamp,
-                };
+                byte[] pngBytes = System.IO.File.ReadAllBytes (texturePath);
+                textureDepthmap = new Texture2D (sizeX, sizeZ, TextureFormat.RGB24, false, false);
+                textureDepthmap.name = $"{areaName}_heightmap";
+                textureDepthmap.filterMode = FilterMode.Point;
+                textureDepthmap.wrapMode = TextureWrapMode.Clamp;
                 textureDepthmap.LoadImage (pngBytes);
             }
             catch (Exception e)
             {
-                Debug.LogWarningFormat ("Area manager | Encountered an exception while loading heightmap {0}\n{1}", filePath, e);
-                return false;
+                Debug.LogWarningFormat ($"Area manager | Encountered an exception while loading heightmap {texturePath}\n{0}", e);
             }
 
             if (textureDepthmap.width != sizeX || textureDepthmap.height != sizeZ)
             {
-                Debug.LogErrorFormat
-                (
-                    "Area manager | Unexpected heightmap resolution {0}x{1} (expected {2}x{3}) at {4}",
-                    textureDepthmap.width,
-                    textureDepthmap.height,
-                    sizeX,
-                    sizeZ,
-                    filePath
-                );
-                return false;
+                Debug.LogError ($"Area manager | Unexpected heightmap resolution {textureDepthmap.width}x{textureDepthmap.height} (expected {sizeX}x{sizeZ}) at {texturePath}\n{0}");
+                return;
             }
-            return true;
+
+            Color32[] colorArray = textureDepthmap.GetPixels32 ();
+            StringBuilder sb = new StringBuilder ();
+            List<int> pointIndexesModified = new List<int> (points.Count);
+            int sizeYMinusOne = sizeY - 1;
+
+            for (int x = 0; x < sizeX; x++)
+            {
+                for (int z = 0; z < sizeZ; z++)
+                {
+                    var colorIndex = z * sizeX + x;
+                    var color = colorArray[colorIndex];
+                    int depthSample = color.r;
+                    int depthSampleShifted = depthSample + (255 - sizeYMinusOne * 10);
+                    var depthRestored = Mathf.RoundToInt ((255 - depthSampleShifted) * 0.1f);
+
+                    var posIndex = new Vector3Int (x, 0, z);
+                    var index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
+                    var pointCurrent = points[index];
+                    int iteration = 0;
+
+                    bool surfacePointChecked = false;
+                    while (true)
+                    {
+                        if (pointCurrent == null)
+                            break;
+
+                        int depthCurrent = pointCurrent.pointPositionIndex.y;
+                        bool aboveHeightmap = depthCurrent <= depthRestored;
+                        var pointStateExpected = aboveHeightmap ? AreaVolumePointState.Empty : AreaVolumePointState.Full;
+                        var pointStateCurrent = pointCurrent.pointState;
+
+                        if (pointStateCurrent != pointStateExpected)
+                        {
+                            pointIndexesModified.Add (pointCurrent.spotIndex);
+                            pointCurrent.pointState = pointStateExpected;
+                            sb.Append ($"\n- {iteration} | Depth: {depthCurrent} | Above heightmap: {aboveHeightmap} | State expected: {pointStateExpected}");
+                        }
+                        else if (pointStateExpected == AreaVolumePointState.Full)
+                        {
+                            sb.Append ($"\n- {iteration} | Depth: {depthCurrent} | Full point at expected depth, no need to proceed further");
+                            break;
+                        }
+                        else
+                        {
+                            sb.Append ($"\n- {iteration} | Depth: {depthCurrent} | Empty point at expected depth");
+                        }
+
+                        // Get point below
+                        pointCurrent = pointCurrent.pointsInSpot[4];
+                        iteration += 1;
+
+                        if (iteration > sizeY)
+                        {
+                            sb.Append ($"\n- {iteration} | Depth: {depthCurrent} | Depth exceeded limit of {sizeY}, breaking out");
+                            break;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < pointIndexesModified.Count; ++i)
+            {
+                int index = pointIndexesModified[i];
+                AreaVolumePoint point = points[index];
+
+                if (point == null)
+                    continue;
+
+                for (int s = 0; s < 8; ++s)
+                {
+                    AreaVolumePoint pointWithNeighbourSpot = point.pointsWithSurroundingSpots[s];
+                    if (pointWithNeighbourSpot == null)
+                        continue;
+
+                    pointWithNeighbourSpot.blockFlippedHorizontally = false;
+                    pointWithNeighbourSpot.blockRotation = 0;
+                    pointWithNeighbourSpot.blockGroup = 0;
+                    pointWithNeighbourSpot.blockSubtype = 0;
+                    pointWithNeighbourSpot.blockTileset = AreaTilesetHelper.idOfTerrain;
+
+                    RemovePropPlacement (pointWithNeighbourSpot.spotIndex);
+                }
+            }
+
+            RebuildEverything ();
+            Debug.Log ($"Height import completed. Points altered based on height (R): {pointIndexesModified.Count}");
         }
 
-        public static void ClearSpot (AreaVolumePoint spot)
-        {
-            spot.pointState = AreaVolumePointState.Empty;
-            spot.spotConfiguration = TilesetUtility.configurationEmpty;
-            spot.spotConfigurationWithDamage = spot.spotConfiguration;
-            spot.road = false;
-            spot.terrainOffset = 0f;
-            ClearTileData (spot);
-        }
-
-        public static void ClearTileData (AreaVolumePoint spot)
-        {
-            spot.blockFlippedHorizontally = false;
-            spot.blockRotation = 0;
-            spot.blockGroup = 0;
-            spot.blockSubtype = 0;
-            spot.blockTileset = 0;
-            spot.customization = TilesetVertexProperties.defaults;
-        }
-
-        public static void ChangeSpotToTerrain (AreaVolumePoint spot)
-        {
-            spot.pointState = AreaVolumePointState.Empty;
-            spot.road = false;
-            ClearTileData (spot);
-            spot.blockTileset = AreaTilesetHelper.idOfTerrain;
-        }
-
-        public static void ChangeSpotToInterior (AreaVolumePoint spot)
-        {
-            spot.pointState = AreaVolumePointState.Full;
-            spot.spotConfiguration = TilesetUtility.configurationFull;
-            spot.spotConfigurationWithDamage = spot.spotConfiguration;
-            spot.road = false;
-            ClearTileData (spot);
-        }
-
-        #if !PB_MODSDK
         [ContextMenu ("Import slopes from tex. (G=127 remove, G=255 add)")][Button]
         public void ImportRampsFromTexture ()
         {
             var folderPath = DataMultiLinkerCombatArea.GetCurrentUnpackedLevelPath ();
             if (folderPath == null)
             {
-                Debug.Log ("Failed to load heightmap, couldn't get current unpacked level path");
-                return;
-            }
-            var filePath = System.IO.Path.Combine(folderPath, standardHeightmapFileName);
-            ImportRampsFromTexture (filePath);
-        }
-        #endif
-
-        public void ImportRampsFromTexture (string filePath)
-        {
-            if (!LoadHeightmapFromFile (filePath))
-            {
+                Debug.Log ($"Failed to import slopes, couldn't get current unpacked level path");
                 return;
             }
 
             var sizeX = boundsFull.x;
             var sizeY = boundsFull.y;
             var sizeZ = boundsFull.z;
+            var texturePath = $"{folderPath}/heightmap.png";
 
-            colorArray = textureDepthmap.GetPixels32 ();
+            if (!System.IO.File.Exists (texturePath))
+            {
+                Debug.LogWarning ($"Area manager | File doesn't exist: {texturePath}");
+                return;
+            }
+
+            try
+            {
+                byte[] pngBytes = System.IO.File.ReadAllBytes (texturePath);
+                textureDepthmap = new Texture2D (sizeX, sizeZ, TextureFormat.RGB24, false, false);
+                textureDepthmap.name = $"{areaName}_heightmap";
+                textureDepthmap.filterMode = FilterMode.Point;
+                textureDepthmap.wrapMode = TextureWrapMode.Clamp;
+                textureDepthmap.LoadImage (pngBytes);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarningFormat ($"Area manager | Encountered an exception while loading heightmap {texturePath}\n{0}", e);
+            }
+
+            if (textureDepthmap.width != sizeX || textureDepthmap.height != sizeZ)
+            {
+                Debug.LogError ($"Area manager | Unexpected heightmap resolution {textureDepthmap.width}x{textureDepthmap.height} (expected {sizeX}x{sizeZ}) at {texturePath}\n{0}");
+                return;
+            }
+
+            Color32[] colorArray = textureDepthmap.GetPixels32 ();
             int slopeAdditionsFound = 0;
             int slopeRemovalsFound = 0;
 
@@ -4765,7 +5580,7 @@ namespace Area
                         continue;
 
                     var posIndex = new Vector3Int (x, 0, z);
-                    var index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull, skipBoundsCheck: true);
+                    var index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
                     var pointCurrent = points[index];
                     int iteration = 0;
 
@@ -4803,32 +5618,48 @@ namespace Area
             Debug.Log ($"Slope import completed. Slope additions requested (G=255): {slopeAdditionsFound} | Slope removals requested (G=127): {slopeRemovalsFound}");
         }
 
-        #if !PB_MODSDK
         [ContextMenu ("Import roads from tex. (B)")][Button]
-        public void ImportRoadsFromStandardTexture ()
+        public void ImportRoadsFromTexture ()
         {
             var folderPath = DataMultiLinkerCombatArea.GetCurrentUnpackedLevelPath ();
             if (folderPath == null)
             {
-                Debug.Log ("Failed to load heightmap, couldn't get current unpacked level path");
+                Debug.Log ($"Failed to import roads, couldn't get current unpacked level path");
                 return;
             }
-            var filePath = System.IO.Path.Combine(folderPath, standardHeightmapFileName);
-            ImportRoadsFromTexture (filePath);
-        }
-        #endif
 
-        public void ImportRoadsFromTexture(string filePath)
-        {
-            if (!LoadHeightmapFromFile (filePath))
-            {
-                return;
-            }
             var sizeX = boundsFull.x;
             var sizeY = boundsFull.y;
             var sizeZ = boundsFull.z;
+            var texturePath = $"{folderPath}/heightmap.png";
 
-            colorArray = textureDepthmap.GetPixels32 ();
+            if (!System.IO.File.Exists (texturePath))
+            {
+                Debug.LogWarning ($"Area manager | File doesn't exist: {texturePath}");
+                return;
+            }
+
+            try
+            {
+                byte[] pngBytes = System.IO.File.ReadAllBytes (texturePath);
+                textureDepthmap = new Texture2D (sizeX, sizeZ, TextureFormat.RGB24, false, false);
+                textureDepthmap.name = $"{areaName}_heightmap";
+                textureDepthmap.filterMode = FilterMode.Point;
+                textureDepthmap.wrapMode = TextureWrapMode.Clamp;
+                textureDepthmap.LoadImage (pngBytes);
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarningFormat ($"Area manager | Encountered an exception while loading heightmap {texturePath}\n{0}", e);
+            }
+
+            if (textureDepthmap.width != sizeX || textureDepthmap.height != sizeZ)
+            {
+                Debug.LogError ($"Area manager | Unexpected heightmap resolution {textureDepthmap.width}x{textureDepthmap.height} (expected {sizeX}x{sizeZ}) at {texturePath}\n{0}");
+                return;
+            }
+
+            Color32[] colorArray = textureDepthmap.GetPixels32 ();
             List<AreaVolumePoint> pointsModified = new List<AreaVolumePoint> ();
 
             int roadAdditions = 0;
@@ -4844,7 +5675,7 @@ namespace Area
                     bool roadDesired = color.b == (byte)255;
 
                     var posIndex = new Vector3Int (x, 0, z);
-                    var index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull, skipBoundsCheck: true);
+                    var index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
                     var pointCurrent = points[index];
                     int iteration = 0;
 
@@ -4907,83 +5738,122 @@ namespace Area
             Point,
             Square2x2,
             Square3x3,
-            Circle,
-            //Sphere,
-            //Cube3x3x3
+            Circle3x3,
+            Circle5x5
         }
 
-        private static readonly List<AreaVolumePoint> pointsToEdit = new List<AreaVolumePoint> ();
+        private static List<AreaVolumePoint> pointsToEdit = new List<AreaVolumePoint> ();
 
-        public static List<AreaVolumePoint> CollectPointsInBrush (AreaVolumePoint pointStart, EditingVolumeBrush brush)
+        private static void TryAddingPointInRange (AreaVolumePoint p, Vector2Int depthRange)
         {
-            pointsToEdit.Clear ();
-            pointsToEdit.Add (pointStart);
+            if (p == null)
+                return;
 
-            if (brush == EditingVolumeBrush.Circle || brush == EditingVolumeBrush.Square3x3)
+            bool depthChecked = depthRange.y > depthRange.x;
+            if (depthChecked)
             {
-                // X+ : east
-                if (pointStart.pointsInSpot[1] != null)
-                    pointsToEdit.Add (pointStart.pointsInSpot[1]);
-
-                // Z+ : north
-                if (pointStart.pointsInSpot[2] != null)
-                    pointsToEdit.Add (pointStart.pointsInSpot[2]);
-
-                // X- : west
-                if (pointStart.pointsWithSurroundingSpots[6] != null)
-                    pointsToEdit.Add (pointStart.pointsWithSurroundingSpots[6]);
-
-                // Z- : south
-                if (pointStart.pointsWithSurroundingSpots[5] != null)
-                    pointsToEdit.Add (pointStart.pointsWithSurroundingSpots[5]);
+                if (p.pointPositionIndex.y < depthRange.x || p.pointPositionIndex.y > depthRange.y)
+                    return;
             }
 
-            if (brush == EditingVolumeBrush.Square3x3)
+            pointsToEdit.Add (p);
+        }
+
+        public static List<AreaVolumePoint> CollectPointsInBrush (AreaVolumePoint pointStart, EditingVolumeBrush brush, int depth = 1, bool depthUp = false, Vector2Int depthRange = default)
+        {
+            pointsToEdit.Clear ();
+            TryAddingPointInRange (pointStart, depthRange);
+
+            depth = Mathf.Clamp (depth, 1, 20);
+
+            if (brush == EditingVolumeBrush.Circle3x3 || brush == EditingVolumeBrush.Square3x3 || brush == EditingVolumeBrush.Circle5x5)
             {
-                // X+ & Z+ : northeast
-                if (pointStart.pointsInSpot[3] != null)
-                    pointsToEdit.Add (pointStart.pointsInSpot[3]);
+                // X+
+                TryAddingPointInRange (pointStart.pointsInSpot[1], depthRange);
 
-                // X- & Z+ : northwest
-                var nw = pointStart.pointsWithSurroundingSpots[6]?.pointsInSpot[2];
-                if (nw != null)
-                    pointsToEdit.Add (nw);
+                // Z+
+                TryAddingPointInRange (pointStart.pointsInSpot[2], depthRange);
 
-                // X- & Z- : southwest
-                if (pointStart.pointsWithSurroundingSpots[4] != null)
-                    pointsToEdit.Add (pointStart.pointsWithSurroundingSpots[4]);
+                // X-
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[6], depthRange);
 
-                // X+ & Z- : southeast
-                var se = pointStart.pointsInSpot[1]?.pointsWithSurroundingSpots[5];
-                if (se != null)
-                    pointsToEdit.Add (se);
+                // Z-
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[5], depthRange);
+            }
+
+            if (brush == EditingVolumeBrush.Square3x3 || brush == EditingVolumeBrush.Circle5x5)
+            {
+                // X+ & Z+
+                TryAddingPointInRange (pointStart.pointsInSpot[1]?.pointsInSpot[2], depthRange);
+
+                // X- & Z+
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[6]?.pointsInSpot[2], depthRange);
+
+                // X- & Z-
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[6]?.pointsWithSurroundingSpots[5], depthRange);
+
+                // X+ & Z-
+                TryAddingPointInRange (pointStart.pointsInSpot[1]?.pointsWithSurroundingSpots[5], depthRange);
+            }
+
+            if (brush == EditingVolumeBrush.Circle5x5)
+            {
+                // 2X+
+                var p1 = pointStart.pointsInSpot[1]?.pointsInSpot[1];
+                TryAddingPointInRange (p1, depthRange);
+                TryAddingPointInRange (p1?.pointsInSpot[2], depthRange);
+                TryAddingPointInRange (p1?.pointsWithSurroundingSpots[5], depthRange);
+
+                // 2Z+
+                var p2 = pointStart.pointsInSpot[2]?.pointsInSpot[2];
+                TryAddingPointInRange (p2, depthRange);
+                TryAddingPointInRange (p2?.pointsInSpot[1], depthRange);
+                TryAddingPointInRange (p2?.pointsWithSurroundingSpots[6], depthRange);
+
+                // 2X-
+                var p3 = pointStart.pointsWithSurroundingSpots[6]?.pointsWithSurroundingSpots[6];
+                TryAddingPointInRange (p3, depthRange);
+                TryAddingPointInRange (p3?.pointsInSpot[2], depthRange);
+                TryAddingPointInRange (p3?.pointsWithSurroundingSpots[5], depthRange);
+
+                // 2Z-
+                var p4 = pointStart.pointsWithSurroundingSpots[5]?.pointsWithSurroundingSpots[5];
+                TryAddingPointInRange (p4, depthRange);
+                TryAddingPointInRange (p4?.pointsInSpot[1], depthRange);
+                TryAddingPointInRange (p4?.pointsWithSurroundingSpots[6], depthRange);
             }
 
             if (brush == EditingVolumeBrush.Square2x2)
             {
-                // X- : west
-                if (pointStart.pointsWithSurroundingSpots[6] != null)
-                    pointsToEdit.Add (pointStart.pointsWithSurroundingSpots[6]);
+                // X-
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[6], depthRange);
 
-                // Z- : south
-                if (pointStart.pointsWithSurroundingSpots[5] != null)
-                    pointsToEdit.Add (pointStart.pointsWithSurroundingSpots[5]);
+                // Z-
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[5], depthRange);
 
-                // X- & Z- : southwest
-                if (pointStart.pointsWithSurroundingSpots[4] != null)
-                    pointsToEdit.Add (pointStart.pointsWithSurroundingSpots[4]);
+                // X- & Z-
+                TryAddingPointInRange (pointStart.pointsWithSurroundingSpots[6]?.pointsWithSurroundingSpots[5], depthRange);
             }
 
-            #if PB_MODSDK
-            pointsToEdit.Sort (OrderPointsToEditByIndex);
-            #endif
+            if (depth > 1)
+            {
+                for (int p = 0, pLimit = pointsToEdit.Count; p < pLimit; ++p)
+                {
+                    var pointTop = pointsToEdit[p];
+                    for (int i = 0, iLimit = depth - 1; i < iLimit; ++i)
+                    {
+                        var pointBelow = depthUp ? pointTop.pointsWithSurroundingSpots[3] : pointTop.pointsInSpot[4];
+                        if (pointBelow == null)
+                            break;
+
+                        TryAddingPointInRange (pointBelow, depthRange);
+                        pointTop = pointBelow;
+                    }
+                }
+            }
 
             return pointsToEdit;
         }
-
-        #if PB_MODSDK
-        static int OrderPointsToEditByIndex (AreaVolumePoint x, AreaVolumePoint y) => x.spotIndex.CompareTo (y.spotIndex);
-        #endif
 
         public bool rampImportOnGeneration = false;
         public bool propImportOverrides = false;
@@ -5024,53 +5894,46 @@ namespace Area
             return groupFromColor;
         }
 
-        public const string standardPropMaskVegetationFileName = "mask_vegetation.png";
-
-        #if !PB_MODSDK
         [ContextMenu ("Import props from texture")][Button]
         public void ImportPropsFromTexture ()
         {
             var folderPath = DataMultiLinkerCombatArea.GetCurrentUnpackedLevelPath ();
             if (folderPath == null)
             {
-                Debug.Log ($"Failed to load props, couldn't get current unpacked level path");
+                Debug.Log ($"Failed to import props, couldn't get current unpacked level path");
                 return;
             }
-            var filePath = DataPathHelper.GetCombinedCleanPath (folderPath, standardPropMaskVegetationFileName);
-            ImportPropsFromTexture (filePath);
-        }
-        #endif
 
-        public void ImportPropsFromTexture (string filePath)
-        {
             var sizeX = boundsFull.x;
+            var sizeY = boundsFull.y;
             var sizeZ = boundsFull.z;
             var sizeXDouble = sizeX * 2;
             var sizeZDouble = sizeZ * 2;
+            var texturePath = $"{folderPath}/mask_vegetation.png";
 
-            if (!System.IO.File.Exists (filePath))
+            if (!System.IO.File.Exists (texturePath))
             {
-                Debug.LogWarning ("Area manager | File doesn't exist: " + filePath);
+                Debug.LogWarning ($"Area manager | File doesn't exist: {texturePath}");
                 return;
             }
 
             try
             {
-                var pngBytes = System.IO.File.ReadAllBytes (filePath);
+                byte[] pngBytes = System.IO.File.ReadAllBytes (texturePath);
                 textureMaskVegetation = new Texture2D (sizeXDouble, sizeZDouble, TextureFormat.RGB24, false, false);
-                textureMaskVegetation.name = areaName + "_mask_vegetation";
+                textureMaskVegetation.name = $"{areaName}_mask_vegetation";
                 textureMaskVegetation.filterMode = FilterMode.Point;
                 textureMaskVegetation.wrapMode = TextureWrapMode.Clamp;
                 textureMaskVegetation.LoadImage (pngBytes);
             }
             catch (Exception e)
             {
-                Debug.LogWarningFormat ($"Area manager | Encountered an exception while loading vegetation mask {filePath}\n{0}", e);
+                Debug.LogWarningFormat ($"Area manager | Encountered an exception while loading vegetation mask {texturePath}\n{0}", e);
             }
 
             if (textureMaskVegetation.width != sizeXDouble || textureMaskVegetation.height != sizeZDouble)
             {
-                Debug.LogError ($"Area manager | Unexpected heightmap resolution {textureMaskVegetation.width}x{textureMaskVegetation.height} (expected {sizeXDouble}x{sizeZDouble}) at {filePath}\n{0}");
+                Debug.LogError ($"Area manager | Unexpected heightmap resolution {textureMaskVegetation.width}x{textureMaskVegetation.height} (expected {sizeXDouble}x{sizeZDouble}) at {texturePath}\n{0}");
                 return;
             }
 
@@ -5174,21 +6037,7 @@ namespace Area
             RebuildEverything ();
         }
 
-        #if !PB_MODSDK
         public void SetRampsEverywhere (SlopeProximityCheck proximityCheck)
-        {
-            var folderPath = DataMultiLinkerCombatArea.GetCurrentUnpackedLevelPath ();
-            if (folderPath == null)
-            {
-                Debug.Log ("Failed to load heightmap, couldn't get current unpacked level path");
-                return;
-            }
-            var filePath = System.IO.Path.Combine (folderPath, standardHeightmapFileName);
-            SetRampsEverywhere (filePath, proximityCheck);
-        }
-        #endif
-
-        public void SetRampsEverywhere (string filePath, SlopeProximityCheck proximityCheck)
         {
             bool IsPointOnSurface (AreaVolumePoint point)
             {
@@ -5212,11 +6061,9 @@ namespace Area
             }
 
             if (rampImportOnGeneration)
-            {
-                ImportRampsFromTexture (filePath);
-                return;
-            }
-            RebuildEverything ();
+                ImportRampsFromTexture ();
+            else
+                RebuildEverything ();
         }
 
         private List<AreaVolumePoint> slopePointNeighbors = new List<AreaVolumePoint> ();
@@ -5486,13 +6333,13 @@ namespace Area
                         if (selectiveUpdates)
                         {
                             UpdateSpotAtIndex (pointWithNeighbourSpot.spotIndex, false);
-                            RebuildBlock (pointWithNeighbourSpot, false);
+                            RebuildBlock (pointWithNeighbourSpot);
                             RebuildCollisionForPoint (pointWithNeighbourSpot);
                         }
                     }
 
                     if (selectiveUpdates)
-                        UpdateDamageAroundIndex (pointStartFull.spotIndex);
+                        UpdateDamageAroundPoint (pointStartFull);
                 }
 
                 if (selectiveUpdates)
@@ -5503,32 +6350,21 @@ namespace Area
             }
         }
 
-        public void EditRoad (int indexStart, RoadEditingOperation operation)
+        public void EditRoad (int indexStart, RoadEditingOperation operation, EditingVolumeBrush editingVolumeBrush)
         {
             var pointStart = points[indexStart];
-            CollectPointsInBrush (pointStart, editingVolumeBrush);
-            EditRoadPoints (operation);
-        }
+            var pointsToEdit = CollectPointsInBrush (pointStart, editingVolumeBrush);
 
-        public void EditRoadPoints (List<AreaVolumePoint> roadPoints, RoadEditingOperation operation)
-        {
-            pointsToEdit.Clear ();
-            pointsToEdit.AddRange (roadPoints);
-            EditRoadPoints (operation);
-        }
-
-        void EditRoadPoints (RoadEditingOperation operation)
-        {
-            var terrainModified = false;
-            var roadAdded = operation == RoadEditingOperation.Add;
-            var roadRemoved = operation == RoadEditingOperation.Remove;
-            var roadFloodFill = operation == RoadEditingOperation.FloodFill;
-            var roadSubtypeNext = operation == RoadEditingOperation.SubtypeNext;
-            var roadSubtypePrev = operation == RoadEditingOperation.SubtypePrev;
+            bool terrainModified = false;
+            bool roadAdded = operation == RoadEditingOperation.Add;
+            bool roadRemoved = operation == RoadEditingOperation.Remove;
+            bool roadFloodFill = operation == RoadEditingOperation.FloodFill;
+            bool roadSubtypeNext = operation == RoadEditingOperation.SubtypeNext;
+            bool roadSubtypePrev = operation == RoadEditingOperation.SubtypePrev;
 
             if (roadAdded || roadRemoved)
             {
-                for (var i = 0; i < pointsToEdit.Count; i += 1)
+                for (int i = 0; i < pointsToEdit.Count; ++i)
                 {
                     var point = pointsToEdit[i];
                     if (point.pointState != AreaVolumePointState.Full)
@@ -5537,9 +6373,9 @@ namespace Area
                         return;
                     }
 
-                    for (var a = 0; a < 4; a += 1)
+                    for (int a = 0; a < 4; ++a)
                     {
-                        var pointAbove = point.pointsWithSurroundingSpots[a];
+                        var pointAbove = pointStart.pointsWithSurroundingSpots[a];
                         if (pointAbove == null)
                         {
                             Debug.Log ("AM (I) | EditRoad | One of the surface points (" + a + ") above the starting one is null, aborting");
@@ -5555,13 +6391,12 @@ namespace Area
 
                     if (!terrainModified)
                     {
-                        for (var s = 0; s < 8; s += 1)
+                        for (int s = 0; s < 8; ++s)
                         {
                             AreaVolumePoint pointWithNeighbourSpot = point.pointsWithSurroundingSpots[s];
                             if (pointWithNeighbourSpot == null)
-                            {
                                 continue;
-                            }
+
                             if (pointWithNeighbourSpot.blockTileset == AreaTilesetHelper.idOfTerrain)
                             {
                                 terrainModified = true;
@@ -5574,43 +6409,36 @@ namespace Area
 
             if (roadAdded)
             {
-                for (var i = 0; i < pointsToEdit.Count; i += 1)
-                {
+                for (int i = 0; i < pointsToEdit.Count; ++i)
                     pointsToEdit[i].road = true;
-                }
-                for (var i = 0; i < pointsToEdit.Count; i += 1)
-                {
+
+                for (int i = 0; i < pointsToEdit.Count; ++i)
                     UpdateRoadConfigurations (pointsToEdit[i], roadSubtype);
-                }
             }
             else if (roadRemoved)
             {
-                for (var i = 0; i < pointsToEdit.Count; i += 1)
-                {
+                for (int i = 0; i < pointsToEdit.Count; ++i)
                     pointsToEdit[i].road = false;
-                }
-                for (var i = 0; i < pointsToEdit.Count; i += 1)
-                {
+
+                for (int i = 0; i < pointsToEdit.Count; ++i)
                     UpdateRoadConfigurations (pointsToEdit[i], roadSubtype);
-                }
             }
             else if (roadFloodFill)
             {
                 FloodFillRoadSubtype (pointsToEdit, roadSubtype);
                 terrainModified = true;
             }
+
             else if (roadSubtypeNext || roadSubtypePrev)
             {
-                var roadSubtypeInt = (int)roadSubtype;
+                int roadSubtypeInt = (int)roadSubtype;
                 roadSubtypeInt += roadSubtypeNext ? 10 : -10;
+
                 if (roadSubtypeInt > 30)
-                {
                     roadSubtypeInt = 0;
-                }
                 else if (roadSubtypeInt < 0)
-                {
                     roadSubtypeInt = 30;
-                }
+
                 roadSubtype = (RoadSubtype)roadSubtypeInt;
             }
 
@@ -5845,7 +6673,7 @@ namespace Area
 							anyModified |= modified;
 
 							if(modified)
-								RebuildBlock (pointInfo.pt, false);
+								RebuildBlock (pointInfo.pt);
 						}
 
 						if(anyModified)
@@ -5894,7 +6722,7 @@ namespace Area
 						break;
 
 					pointAbove.blockSubtype = (byte)(int)roadSubtype;
-					RebuildBlock (pointAbove, false);
+					RebuildBlock (pointAbove);
 				}
 			}
 		}
@@ -6148,59 +6976,9 @@ namespace Area
                     pointAbove.blockSubtype = (byte)(int)subType;
                     pointAbove.blockFlippedHorizontally = false;
                     pointAbove.blockRotation = data.usedRotation;
-                    RebuildBlock (pointAbove, false);
+                    RebuildBlock (pointAbove);
                 }
             }
         }
-
-        #if PB_MODSDK
-        public static bool IsSpotInterior (AreaVolumePoint spot) =>
-            spot != null
-            && spot.spotPresent
-            && spot.pointState == AreaVolumePointState.Full
-            && spot.spotConfiguration == TilesetUtility.configurationFull
-            && spot.blockTileset == 0;
-
-        public static bool IsSpotRoad (AreaVolumePoint spot) => spot != null && spot.blockTileset == AreaTilesetHelper.idOfRoad;
-
-        public void ApplyPropVisibilityEverywhere (int cutoffLayer)
-        {
-            // This is the counterpart for props to hiding/showing blocks during layer editing.
-            // Any props above layer will be hidden, those on or below layer will be shown.
-
-            var hideStop = boundsFull.x * boundsFull.z * cutoffLayer;
-            for (var i = 0; i < points.Count; i += 1)
-            {
-                if (!indexesOccupiedByProps.TryGetValue (i, out var placements))
-                {
-                    continue;
-                }
-
-                var visible = i >= hideStop;
-                var halfValues = visible ? propVisible : propInvisible;
-                foreach (var placement in placements)
-                {
-                    if (AreaAssetHelper.propsHiddenWithECS.Contains (placement.prototype.id))
-                    {
-                        placement.UpdateVisibilityWithECS (visible, componentTypeModel);
-                        continue;
-                    }
-                    placement.UpdateVisibility(halfValues);
-                }
-            }
-        }
-
-        static readonly HalfVector4 propVisible = new HalfVector4(1f, 0f, 1f, 1f);
-        static readonly HalfVector4 propInvisible = new HalfVector4(0f, 1f, 1f, 1f);
-        
-        public static bool ignoreUnresolvedTilesetOnLoad;
-        #endif
-
-        #endif // UNITY_EDITOR
-        #endregion // Editor
-        
-        // Toggle to quickly switch between the old and the new terrain mesh algorithms.
-        [NonSerialized]
-        public bool useNewTerrainMeshAlgorithm = true;
     }
 }

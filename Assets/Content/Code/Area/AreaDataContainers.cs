@@ -38,7 +38,7 @@ namespace Area
                 if
                 (
                     pointSource.spotConfiguration != AreaNavUtility.configEmpty &&
-                    (pointSource.spotHasDamagedPoints ? pointSource.spotConfigurationWithDamage : pointSource.spotConfiguration) != AreaNavUtility.configFull
+                    pointSource.spotConfigurationWithDamage != AreaNavUtility.configFull
                 )
                 {
                     // 253 (byte) <- -3 (int)
@@ -93,7 +93,7 @@ namespace Area
                     };
                     integrities.Add (integrity);
                 }
-
+                
                 if (!pointSource.destructible)
                     indestructibleIndexes.Add (pointIndex);
             }
@@ -122,8 +122,8 @@ namespace Area
                 props.Add (prop);
             }
 
-            navOverrides = new List<AreaDataNavOverride> (am.navOverrides.Count);
-            foreach (var kvp in am.navOverrides)
+            navOverrides = new List<AreaDataNavOverride> (am.navOverridesSaved.Count);
+            foreach (var kvp in am.navOverridesSaved)
             {
                 var navOverride = new AreaDataNavOverride
                 {
@@ -132,6 +132,115 @@ namespace Area
                 };
                 navOverrides.Add (navOverride);
             }
+        }
+        
+        public AreaDataContainer (AreaClipboard clipboard)
+        {
+            if (clipboard == null || clipboard.clipboardPointsSaved == null || clipboard.clipboardPointsSaved.Count == 0)
+            {
+                Debug.LogWarning ("Aborted attempt to construct area data container, since there is no clipboard data available");
+                return;
+            }
+
+            points = new bool[clipboard.clipboardPointsSaved.Count];
+            spots = new List<AreaDataSpot> ();
+            customizations = new List<AreaDataCustomization> ();
+            integrities = new List<AreaDataIntegrity> ();
+            indestructibleIndexes = new List<int> ();
+
+            for (int pointIndex = 0; pointIndex < clipboard.clipboardPointsSaved.Count; ++pointIndex)
+            {
+                AreaVolumePoint pointSource = clipboard.clipboardPointsSaved[pointIndex];
+                points[pointIndex] = pointSource.pointState == AreaVolumePointState.Full || pointSource.pointState == AreaVolumePointState.FullDestroyed;
+
+                if
+                (
+                    pointSource.spotConfiguration != AreaNavUtility.configEmpty &&
+                    pointSource.spotConfigurationWithDamage != AreaNavUtility.configFull
+                )
+                {
+                    // 253 (byte) <- -3 (int)
+                    // 254 (byte) <- -2 (int)
+                    // 255 (byte) <- -1 (int)
+                    // 0   (byte) <-  0 (int)
+                    // 1   (byte) <-  1 (int)
+                    // 2   (byte) <-  2 (int)
+                    // 2   (byte) <-  3 (int)
+
+                    float offsetFloat = pointSource.terrainOffset;
+                    int offsetInt = Mathf.RoundToInt (offsetFloat * 3f);
+                    byte offsetByte = (byte)offsetInt;
+
+                    AreaDataSpot spot = new AreaDataSpot
+                    {
+                        index = pointIndex,
+                        tileset = pointSource.blockTileset,
+                        group = pointSource.blockGroup,
+                        subtype = pointSource.blockSubtype,
+                        rotation = pointSource.blockRotation,
+                        flip = pointSource.blockFlippedHorizontally,
+                        offset = offsetByte
+                    };
+                    spots.Add (spot);
+
+                    AreaDataCustomization customization = new AreaDataCustomization
+                    {
+                        index = pointIndex,
+                        h1 = pointSource.customization.huePrimary,
+                        s1 = pointSource.customization.saturationPrimary,
+                        b1 = pointSource.customization.brightnessPrimary,
+                        h2 = pointSource.customization.hueSecondary,
+                        s2 = pointSource.customization.saturationSecondary,
+                        b2 = pointSource.customization.brightnessSecondary,
+                        emission = pointSource.customization.overrideIndex
+                    };
+                    customizations.Add (customization);
+                }
+
+                if
+                (
+                    pointSource.pointState != AreaVolumePointState.Empty &&
+                    pointSource.integrity < 1f
+                )
+                {
+                    AreaDataIntegrity integrity = new AreaDataIntegrity
+                    {
+                        index = pointIndex,
+                        integrity = pointSource.integrity,
+                        destructible = pointSource.destructible
+                    };
+                    integrities.Add (integrity);
+                }
+                
+                if (!pointSource.destructible)
+                    indestructibleIndexes.Add (pointIndex);
+            }
+
+            props = new List<AreaDataProp> (clipboard.clipboardPropsSaved.Count);
+            for (int i = 0; i < clipboard.clipboardPropsSaved.Count; ++i)
+            {
+
+                AreaPlacementProp propSource = clipboard.clipboardPropsSaved[i];
+                AreaDataProp prop = new AreaDataProp
+                {
+                    id = propSource.id,
+                    pivotIndex = propSource.pivotIndex,
+                    rotation = propSource.rotation,
+                    flip = propSource.flipped,
+                    status = 0,
+                    offsetX = propSource.offsetX,
+                    offsetZ = propSource.offsetZ,
+                    h1 = propSource.hsbPrimary.x,
+                    s1 = propSource.hsbPrimary.y,
+                    b1 = propSource.hsbPrimary.z,
+                    h2 = propSource.hsbSecondary.x,
+                    s2 = propSource.hsbSecondary.y,
+                    b2 = propSource.hsbSecondary.z
+                };
+                props.Add (prop);
+            }
+
+            navOverrides = null;
         }
 
         public AreaDataContainer (AreaDataContainerSerialized dataCollections)
@@ -144,7 +253,7 @@ namespace Area
 
             int pointsCount = dataCollections.points.Length;
             points = new bool[pointsCount];
-
+            
             for (int i = 0; i < pointsCount; ++i)
             {
                 var pointFull = dataCollections.points[i];
@@ -160,7 +269,7 @@ namespace Area
             {
                 int index = dataCollections.spotIndexes[i];
                 int tileset = dataCollections.spotTilesets[i];
-
+                
                 byte group = dataCollections.spotGroups[i];
                 byte subtype = dataCollections.spotSubtypes[i];
                 byte transform = dataCollections.spotTransforms[i];
@@ -168,7 +277,7 @@ namespace Area
 
                 byte rotation = (byte)(transform % 4);
                 bool flip = transform > flipThreshold;
-
+                
                 spots.Add (new AreaDataSpot
                 {
                     index        = index,
@@ -182,7 +291,7 @@ namespace Area
 
                 var materialPrimary = dataCollections.spotMaterialsPrimary[i];
                 var materialSecondary = dataCollections.spotMaterialsSecondary[i];
-
+                
                 customizations.Add (new AreaDataCustomization
                 {
                     index = index,
@@ -195,18 +304,18 @@ namespace Area
                     b2 = materialSecondary.z
                 });
             }
-
+            
             if (dataCollections.indestructibleIndexes != null)
                 indestructibleIndexes = new List<int> (dataCollections.indestructibleIndexes);
 
             int damageCount = dataCollections.damageIndexes.Length;
             integrities = new List<AreaDataIntegrity> ();
-
+            
             for (int i = 0; i < damageCount; ++i)
             {
                 var index = dataCollections.damageIndexes[i];
                 var value = dataCollections.damageValues[i];
-
+                
                 integrities.Add (new AreaDataIntegrity
                 {
                     index = index,
@@ -216,7 +325,7 @@ namespace Area
 
             int propsCount = dataCollections.propIndexes.Length;
             props = new List<AreaDataProp> (propsCount);
-
+            
             for (int i = 0; i < propsCount; ++i)
             {
                 int index = dataCollections.propIndexes[i];
@@ -225,7 +334,7 @@ namespace Area
                 Vector3 offset = dataCollections.propOffsets[i];
                 Vector3 materialPrimary = dataCollections.propMaterialsPrimary[i];
                 Vector3 materialSecondary = dataCollections.propMaterialsSecondary[i];
-
+                
                 byte rotation = (byte)(transform % 4);
                 bool flip = transform > flipThreshold;
 
@@ -251,6 +360,9 @@ namespace Area
             {
                 int navOverridesCount = dataCollections.navOverrideIndexes.Length;
                 navOverrides = new List<AreaDataNavOverride> (navOverridesCount);
+                
+                // if (navOverridesCount > 0)
+                //     Debug.Log ($"Loading nav overrides | Indexes: {dataCollections.navOverrideIndexes.Length} | Offsets: {dataCollections.navOverrideOffsets.Length}");
 
                 for (int i = 0; i < navOverridesCount; ++i)
                 {
@@ -266,11 +378,11 @@ namespace Area
             }
         }
     }
-
+    
     public class AreaDataContainerSerialized
     {
         [BinaryData] public bool[] points;
-
+        
         [BinaryData] public int[] spotIndexes;
         [BinaryData] public int[] spotTilesets;
         [BinaryData] public byte[] spotGroups;
@@ -283,8 +395,8 @@ namespace Area
         [BinaryData] public int[] damageIndexes;
         [BinaryData] public float[] damageValues;
 
-        [BinaryData] public int[] navOverrideIndexes;
-        [BinaryData] public float[] navOverrideOffsets;
+        [BinaryData (logIfMissing = false)] public int[] navOverrideIndexes;
+        [BinaryData (logIfMissing = false)] public float[] navOverrideOffsets;
 
         [BinaryData] public int[] propIndexes;
         [BinaryData] public int[] propIDs;
@@ -292,21 +404,19 @@ namespace Area
         [BinaryData] public float3[] propOffsets;
         [BinaryData] public float3[] propMaterialsPrimary;
         [BinaryData] public float3[] propMaterialsSecondary;
-
-        [BinaryData] public int[] indestructibleIndexes;
+        
+        [BinaryData (logIfMissing = false)] public int[] indestructibleIndexes;
 
         public AreaDataContainerSerialized () { }
-
+        
         public AreaDataContainerSerialized (AreaDataContainer dataUnpacked)
         {
             if (dataUnpacked == null || dataUnpacked.points == null || dataUnpacked.points.Length == 0)
-            {
                 return;
-            }
 
-            var pointCount = dataUnpacked.points.Length;
-            var flipShift = (byte)4;
-
+            int pointCount = dataUnpacked.points.Length;
+            byte flipShift = (byte)4;
+            
             points = new bool[pointCount];
 
             var spotIndexesList = new List<int> ();
@@ -322,20 +432,20 @@ namespace Area
             var damageIndexesList = new List<int> ();
             var damageValuesList = new List<float> ();
 
-            for (var i = 0; i < dataUnpacked.points.Length; i += 1)
+            for (int i = 0; i < dataUnpacked.points.Length; ++i)
             {
-                points[i] = dataUnpacked.points[i];
+                bool pointFull = dataUnpacked.points[i] == true;
+                points[i] = pointFull;
             }
-
-            for (var i = 0; i < dataUnpacked.spots.Count; i += 1)
+            
+            for (int i = 0; i < dataUnpacked.spots.Count; ++i)
             {
                 var spotSource = dataUnpacked.spots[i];
-                var transformByte = spotSource.rotation;
-                if (spotSource.flip)
-                {
-                    transformByte += flipShift;
-                }
 
+                byte transformByte = spotSource.rotation;
+                if (spotSource.flip)
+                    transformByte += flipShift;
+                
                 spotIndexesList.Add (spotSource.index);
                 spotTilesetsList.Add (spotSource.tileset);
                 spotGroupsList.Add (spotSource.group);
@@ -344,9 +454,12 @@ namespace Area
                 spotOffsetsList.Add (spotSource.offset);
             }
 
-            indestructibleIndexes = dataUnpacked.indestructibleIndexes != null ? dataUnpacked.indestructibleIndexes.ToArray () : Array.Empty<int> ();
+            if (dataUnpacked.indestructibleIndexes != null)
+                indestructibleIndexes = dataUnpacked.indestructibleIndexes.ToArray ();
+            else
+                indestructibleIndexes = Array.Empty<int> ();
 
-            for (var i = 0; i < dataUnpacked.customizations.Count; i += 1)
+            for (int i = 0; i < dataUnpacked.customizations.Count; ++i)
             {
                 var materialSource = dataUnpacked.customizations[i];
 
@@ -354,26 +467,26 @@ namespace Area
                 (
                     materialSource.h1,
                     materialSource.s1,
-                    materialSource.b1,
+                    materialSource.b1, 
                     materialSource.emission
                 ));
-
-                spotMaterialsSecondaryList.Add (new float3
+                    
+                spotMaterialsSecondaryList.Add (new float3 
                 (
                     materialSource.h2,
                     materialSource.s2,
                     materialSource.b2
                 ));
             }
-
-            for (var i = 0; i < dataUnpacked.integrities.Count; i += 1)
+            
+            for (int i = 0; i < dataUnpacked.integrities.Count; ++i)
             {
                 var integritySource = dataUnpacked.integrities[i];
-
+                
                 damageIndexesList.Add (integritySource.index);
                 damageValuesList.Add (integritySource.integrity);
             }
-
+            
             spotIndexes = spotIndexesList.ToArray ();
             spotTilesets = spotTilesetsList.ToArray ();
             spotGroups = spotGroupsList.ToArray ();
@@ -386,7 +499,7 @@ namespace Area
 
             damageIndexes = damageIndexesList.ToArray ();
             damageValues = damageValuesList.ToArray ();
-
+            
             var propIndexesList = new List<int> ();
             var propIDsList = new List<int> ();
             var propTransformsList = new List<byte> ();
@@ -394,35 +507,34 @@ namespace Area
             var propMaterialsPrimaryList = new List<float3> ();
             var propMaterialsSecondaryList = new List<float3> ();
 
-            for (var i = 0; i < dataUnpacked.props.Count; i += 1)
+            for (int i = 0; i < dataUnpacked.props.Count; ++i)
             {
                 var propSource = dataUnpacked.props[i];
-                var transformByte = propSource.rotation;
+                
+                byte transformByte = propSource.rotation;
                 if (propSource.flip)
-                {
                     transformByte += flipShift;
-                }
-
+                
                 propIndexesList.Add (propSource.pivotIndex);
                 propIDsList.Add (propSource.id);
                 propTransformsList.Add (transformByte);
                 propOffsetsList.Add (new float3 (propSource.offsetX, 0f, propSource.offsetZ));
-
-                propMaterialsPrimaryList.Add (new float3
+                
+                propMaterialsPrimaryList.Add (new float3 
                 (
                     propSource.h1,
                     propSource.s1,
                     propSource.b1
                 ));
-
-                propMaterialsSecondaryList.Add (new float3
+                
+                propMaterialsSecondaryList.Add (new float3 
                 (
                     propSource.h2,
                     propSource.s2,
                     propSource.b2
                 ));
             }
-
+            
             var navOverrideIndexList = new List<int> ();
             var navOverrideOffsetList = new List<float> ();
             for (var i = 0; i < dataUnpacked.navOverrides.Count; i += 1)
@@ -431,7 +543,7 @@ namespace Area
                 navOverrideIndexList.Add (navOverrideSource.pivotIndex);
                 navOverrideOffsetList.Add (navOverrideSource.offsetY);
             }
-
+            
             propIndexes = propIndexesList.ToArray ();
             propIDs = propIDsList.ToArray ();
             propTransforms = propTransformsList.ToArray ();

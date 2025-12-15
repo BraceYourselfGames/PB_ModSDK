@@ -7,7 +7,7 @@ public static class DebugExtensions
     {
         DrawCube (origin, Vector3.forward, Vector3.up, Vector3.right, halfExtents, color, time);
     }
-    
+
     public static void DrawCube (Vector3 origin, Vector3 dirForward, Vector3 dirUp, Vector3 dirRight, Vector3 halfExtents, Color color = default, float time = 0f)
     {
         var offsetRight = dirRight * halfExtents.x;
@@ -36,12 +36,12 @@ public static class DebugExtensions
         Debug.DrawLine (c2, c6, color, time);
         Debug.DrawLine (c3, c7, color, time);
         Debug.DrawLine (c4, c8, color, time);
-                            
+
         Debug.DrawLine (c1, c3, color, time);
         Debug.DrawLine (c2, c4, color, time);
         Debug.DrawLine (c5, c7, color, time);
         Debug.DrawLine (c6, c8, color, time);
-                            
+
         Debug.DrawLine (origin - dirForward, origin + dirForward, color, time);
         Debug.DrawLine (origin - dirRight, origin + dirRight, color, time);
     }
@@ -61,7 +61,7 @@ public static class UtilityGameObjects
             return physicsScene.Raycast (start, direction, out hit, 400f, mask);
         }
     }
-    
+
     public static Transform GetTransformSafely (ref Transform t, string name, HideFlags hideFlags, Vector3 scenePosition, string tag = null)
     {
         if (t == null)
@@ -86,10 +86,10 @@ public static class UtilityGameObjects
     {
         if (transform == null)
             return null;
-        
+
         var childCount = transform.childCount;
         var results = new List<T> ();
-        
+
         for (int i = 0; i < childCount; ++i)
         {
             var child = transform.GetChild (i);
@@ -100,7 +100,7 @@ public static class UtilityGameObjects
 
         return results;
     }
-    
+
     public static void CheckEmptyObjectExistence (ref GameObject gameObject, string name, Vector3 position)
     {
         if (gameObject == null)
@@ -134,7 +134,7 @@ public static class UtilityGameObjects
     {
         if (parent == null)
             return;
-        
+
         bool parentWasHidden = parent.gameObject.activeSelf == false;
         if (parentWasHidden) parent.gameObject.SetActive (true);
 
@@ -149,7 +149,7 @@ public static class UtilityGameObjects
         if (parentWasHidden)
             parent.gameObject.SetActive (false);
     }
-    
+
     public static T AddChildWithComponent<T> (this GameObject parent, string name = null) where T : Component
     {
         var go = new GameObject();
@@ -167,7 +167,7 @@ public static class UtilityGameObjects
             go.name = name;
         else
             go.name = typeof (T).Name;
-        
+
         var comp = go.AddComponent<T> ();
         return comp;
     }
@@ -193,7 +193,7 @@ public static class UtilityGameObjects
 	{
 		var o = component;
 		#if UNITY_EDITOR
-		UnityEditor.EditorApplication.delayCall += () => 
+		UnityEditor.EditorApplication.delayCall += () =>
         {
             if (o)
             {
@@ -204,9 +204,9 @@ public static class UtilityGameObjects
             }
         };
 		#else
-		if (withGameObject) 
-            GameObject.Destroy (o.gameObject); 
-        else 
+		if (withGameObject)
+            GameObject.Destroy (o.gameObject);
+        else
             GameObject.Destroy (o);
 		#endif
 	}
@@ -223,4 +223,33 @@ public static class UtilityGameObjects
             }
         }
     }
+
+    #if PB_MODSDK
+    public static T AddChild<T> (this GameObject parent) where T : Component
+    {
+        var go = new GameObject();
+        #if UNITY_EDITOR
+        if (!Application.isPlaying)
+            UnityEditor.Undo.RegisterCreatedObjectUndo(go, "Create Object");
+        #endif
+        if (parent != null)
+        {
+            var t = go.transform;
+            t.parent = parent.transform;
+            t.localPosition = Vector3.zero;
+            t.localRotation = Quaternion.identity;
+            t.localScale = Vector3.one;
+            go.layer = parent.layer;
+        }
+
+        var name = typeof(T).ToString();
+        if (name.StartsWith("UI"))
+            name = name.Substring(2);
+        else if (name.StartsWith("UnityEngine."))
+            name = name.Substring(12);
+
+        go.name = name;
+        return go.AddComponent<T>();
+    }
+    #endif
 }

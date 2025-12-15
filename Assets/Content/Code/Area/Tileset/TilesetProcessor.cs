@@ -49,6 +49,9 @@ namespace Area
             [FoldoutGroup (fgOther)]
             public MaterialSerializationHelper materialHelper;
             
+            [ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false)]
+            public List<string> materialOrder = new List<string> ();
+            
             [FoldoutGroup (fgOther)]
             public Transform holderRootSplit;
             
@@ -455,7 +458,7 @@ namespace Area
                         if (cellPrefab != null)
                         {
                             GameObject cellObject = Instantiate (cellPrefab);
-                            cellObject.hideFlags = HideFlags.HideAndDontSave;
+                            cellObject.hideFlags = HideFlags.None;
                             cellObject.layer = 15;
                             cellObject.transform.parent = GetHolderTilesetsCells ();
                             cellObject.transform.localScale = Vector3.one;
@@ -561,17 +564,22 @@ namespace Area
 
 
 
+        private TilesetProcessorData tilesetCurrent = null;
 
         // [ResponsiveButtonGroup ("Process", DefaultButtonSize = ButtonSizes.Medium, UniformLayout = true)]
         [Button ("Generate shared materials", ButtonSizes.Medium)]
         private void GenerateSharedMaterials ()
         {
+            tilesetCurrent = null;
+            
             for (int t = 0; t < tilesets.Count; ++t)
             {
                 var tileset = tilesets[t];
-
-                if (tileset.holderRootSplit == null || (!tileset.loadBlocks))
+                if (tileset.holderRootSplit == null || !tileset.loadBlocks)
                     continue;
+                
+                Debug.Log ($"Generating shared materials for tileset {tileset.name}...");
+                tilesetCurrent = tileset;
 
                 MeshFilter[] filters = tileset.holderRootSplit.GetComponentsInChildren<MeshFilter> (true);
                 List<Material> materialsForArrayCollapse = new List<Material> ();
@@ -600,6 +608,20 @@ namespace Area
 
                         if (string.Equals (sharedMaterial.shader.name, texArraySourceShaderName))
                         {
+                            var textureAH = sharedMaterial.GetTexture ("_MainTex") as Texture2D;
+                            if (textureAH == null)
+                            {
+                                Debug.LogError ($"Shared material {m} on filter {f} ({filter.gameObject.name}) has no AH texture (_MainTex), ineligible for array", filter.gameObject);
+                                continue;
+                            }
+                            
+                            var textureMSEO = sharedMaterial.GetTexture ("_MSEO") as Texture2D;
+                            if (textureMSEO == null)
+                            {
+                                Debug.LogError ($"Shared material {m} on filter {f} ({filter.gameObject.name}) has no MSEO texture, ineligible for array", filter.gameObject);
+                                continue;
+                            }
+                            
                             if (!materialsForArrayCollapse.Contains (sharedMaterial))
                             {
                                 Debug.Log ("Tileset " + t + ": " + tileset.name + " | Material " + sharedMaterial.name + 
@@ -624,9 +646,10 @@ namespace Area
                     return;
                 }
 
-                Debug.Log ("Tileset " + t + ": " + tileset.name + " | Proceeding to generate material " + 
-                    " | Materials found suitable for array collapse: " + materialsForArrayCollapse.Count + 
-                    " | Materials with custom shaders: " + materialsWithCustomShaders.Count);
+                if (materialsForArrayCollapse.Count > 1)
+                    materialsForArrayCollapse.Sort (CompareMaterialsForArray);
+
+                Debug.Log ($"Tileset {t}: {tileset.name} | Proceeding to generate material  | Materials found suitable for array collapse: {materialsForArrayCollapse.Count} | Materials with custom shaders: {materialsWithCustomShaders.Count} | Materials in array (sorted):\n{materialsForArrayCollapse.ToStringFormatted (true, toStringOverride: (x) => $"- {x.name}")}");
 
                 // We delay instantitation of these objects until we encounter a texture - so that we can copy its format
                 Texture2DArray textureArrayAH = null;
@@ -718,9 +741,30 @@ namespace Area
 
                 Debug.Log ("Successfully created a combined material from " + materialsForArrayCollapse.Count + " source materials | Helper data generated", tileset.materialHelper);
             }
+            
+            tilesetCurrent = null;
         }
 
+        private int CompareMaterialsForArray (Material x, Material y)
+        {
+            if (tilesetCurrent != null && tilesetCurrent.materialOrder != null)
+            {
+                int xIndexCustom = tilesetCurrent.materialOrder.IndexOf (x.name);
+                if (xIndexCustom < 0)
+                    xIndexCustom = 10000;
+                
+                int yIndexCustom = tilesetCurrent.materialOrder.IndexOf (y.name);
+                if (yIndexCustom < 0)
+                    yIndexCustom = 10000;
 
+                int indexComparison = yIndexCustom.CompareTo (xIndexCustom);
+                if (indexComparison != 0)
+                    return indexComparison;
+            }
+
+            var idComparison = string.Compare (y.name, x.name, StringComparison.Ordinal);
+            return idComparison;
+        }
 
 
         // [ResponsiveButtonGroup ("Process", DefaultButtonSize = ButtonSizes.Medium, UniformLayout = true)]
@@ -1155,9 +1199,9 @@ namespace Area
         [HideInInspector] public string holderTilesetsSplitName = "GeneratorHolder_SplitBlocks";
         [HideInInspector] public string holderTilesetsMergedName = "GeneratorHolder_MergedBlocks";
 
-        public Transform GetHolderTilesetsCells () { return UtilityGameObjects.GetTransformSafely (ref holderTilesetsCells, holderTilesetsCellsName, HideFlags.DontSave, transform.localPosition); }
-        public Transform GetHolderTilesetsSplit () { return UtilityGameObjects.GetTransformSafely (ref holderTilesetsSplit, holderTilesetsSplitName, HideFlags.DontSave, transform.localPosition); }
-        public Transform GetHolderTilesetsMerged () { return UtilityGameObjects.GetTransformSafely (ref holderTilesetsMerged, holderTilesetsMergedName, HideFlags.DontSave, transform.localPosition); }
+        public Transform GetHolderTilesetsCells () { return UtilityGameObjects.GetTransformSafely (ref holderTilesetsCells, holderTilesetsCellsName, HideFlags.None, transform.localPosition); }
+        public Transform GetHolderTilesetsSplit () { return UtilityGameObjects.GetTransformSafely (ref holderTilesetsSplit, holderTilesetsSplitName, HideFlags.None, transform.localPosition); }
+        public Transform GetHolderTilesetsMerged () { return UtilityGameObjects.GetTransformSafely (ref holderTilesetsMerged, holderTilesetsMergedName, HideFlags.None, transform.localPosition); }
 
         #endif
     }

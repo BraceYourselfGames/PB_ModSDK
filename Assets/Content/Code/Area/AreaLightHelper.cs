@@ -27,7 +27,7 @@ public class AreaLightNode
 {
     [PropertyOrder (-1)]
     public Vector3 pos;
-    
+
     [PropertyOrder (1), ListDrawerSettings (DefaultExpandedState = false)]
     public List<AreaLightContribution> contributions;
 }
@@ -36,11 +36,17 @@ public class AreaLightNode
 public class AreaLightSource : AreaLightNode
 {
     public Vector3 posAverage;
-    
+
     public Color color;
     public float intensity;
     public bool lightNeeded;
     public bool lightAdded;
+    public Light light;
+}
+
+[Serializable]
+public class AreaLightSourceFromInstance
+{
     public Light light;
 }
 
@@ -51,10 +57,19 @@ public class AreaTilesetLight
     public float intensity = 1f;
 }
 
+public enum AreaLightingMode
+{
+    None,
+    AverageGrid,
+    PerInstance
+}
 
 public class AreaLightHelper : MonoBehaviour
 {
     public AreaManager am;
+
+    public AreaLightingMode mode = AreaLightingMode.None;
+
     public int elevationSteps = 2;
     public float falloffPower = 1;
     public float falloffMultiplier = 1;
@@ -63,46 +78,153 @@ public class AreaLightHelper : MonoBehaviour
     public float lightRadius = 12;
     public float lightSeparation = 6;
     public bool lightPositionAveraging = true;
-    
+
     public Color pointEmissionColor = Color.yellow;
     public float pointSourceRange = 12f;
     public float pointSourceIntensity = 1f;
-    
+
+    [NonSerialized]
+    [ShowInInspector, DictionaryDrawerSettings]
+    private Dictionary<int, Light> lightsPerInstance = new Dictionary<int, Light> ();
+
+    [NonSerialized]
     [ShowInInspector, ListDrawerSettings (ShowPaging = true, DefaultExpandedState = false)]
     private List<AreaLightNode> ambientLightNodes = new List<AreaLightNode> ();
-    
+
+    [NonSerialized]
     [ShowInInspector, ListDrawerSettings (ShowPaging = true, DefaultExpandedState = false)]
     private List<AreaLightSource> ambientLightNodesFiltered = new List<AreaLightSource> ();
-    
+
+    [NonSerialized]
     [ShowInInspector, ListDrawerSettings (ShowPaging = true, DefaultExpandedState = false)]
     private List<AreaLightSource> ambientLightNodesFinalized = new List<AreaLightSource> ();
-    
+
+    [NonSerialized]
     [ShowInInspector, ListDrawerSettings (ShowPaging = true, DefaultExpandedState = false)]
     private List<AreaLightSource> ambientLightNodesUpdated = new List<AreaLightSource> ();
 
     private Dictionary<int, AreaLightSource> lookupNodesFromPoints = new Dictionary<int, AreaLightSource> ();
     private Dictionary<int, AreaLightSource> lookupNodesFromProps = new Dictionary<int, AreaLightSource> ();
 
-    private static bool featureEnabled = false;
-
     public void Setup ()
     {
-        
-    }
-    
-    [Button (ButtonSizes.Large), PropertyOrder (-1)]
-    public void Rebuild ()
-    {
-        if (!featureEnabled)
-            return;
-        
-        ambientLightNodes.Clear ();
 
+    }
+
+    [Button (ButtonSizes.Large), PropertyOrder (-1)]
+    public void OnLevelLoad ()
+    {
+        OnLevelUnload ();
+
+        if (am == null || am.points.Count < 8)
+            return;
+
+        var props = am.placementsProps;
+        if (props == null || props.Count <= 0)
+            return;
+
+        var holderTransform = transform;
+
+        for (int i = 0, limit = props.Count; i < limit; ++i)
+        {
+            var prop = props[i];
+            if (prop == null || prop.prototype == null)
+            {
+                continue;
+            }
+
+            var prefab = prop.prototype.prefab;
+            if (prefab.activeLights == null || prefab.activeLights.Count == 0)
+            {
+                continue;
+            }
+
+            var sky = SkyManagerSimple.ins;
+            var night = sky != null && sky.IsNight ();
+            if (prefab.activeLightsOnlyAtNight & night)
+            {
+                continue;
+            }
+
+            var propPosition = (Vector3)prop.state.cachedRootPosition;
+            var propRotation = (Quaternion)prop.state.cachedRootRotation;
+
+            // Only one light is supported
+            var lightPrefab = prefab.activeLights[0];
+            if (lightPrefab == null || lightPrefab.intensity < 0.1f || lightPrefab.range < 1f)
+            {
+                continue;
+            }
+
+            var lightObject = new GameObject ($"{prefab.name}_{i}");
+            var lightTransform = lightObject.transform;
+            lightTransform.parent = holderTransform;
+            lightTransform.position = propPosition + propRotation * lightPrefab.transform.localPosition;
+            lightTransform.rotation = propRotation * lightPrefab.transform.localRotation;
+
+            var lightInstance = lightObject.AddComponent<Light> ();
+            lightInstance.color = lightPrefab.color;
+            lightInstance.shadows = LightShadows.None;
+            lightInstance.intensity = lightPrefab.intensity;
+            lightInstance.range = lightPrefab.range;
+            lightInstance.type = lightPrefab.type;
+            lightInstance.spotAngle = lightPrefab.spotAngle;
+            lightInstance.cookie = lightPrefab.cookie;
+
+            lightsPerInstance.Add (i, lightInstance);
+        }
+    }
+
+    [Button (ButtonSizes.Large), PropertyOrder (-1)]
+    public void OnLevelRefresh () => OnLevelRefresh (0f);
+
+    public void OnLevelRefresh (float timeCurrent)
+    {
+        if (am == null || am.points.Count < 8)
+            return;
+
+        var props = am.placementsProps;
+        if (props == null || props.Count <= 0)
+        {
+            return;
+        }
+
+        var propsCount = props.Count;
+        var holderTransform = transform;
+
+        foreach (var kvp in lightsPerInstance)
+        {
+            var i = kvp.Key;
+            var lightInstance = kvp.Value;
+            var prop = props[i];
+            var lightEnabled = prop != null && (!prop.destroyed || prop.destructionTime > timeCurrent);
+            if (lightInstance.enabled != lightEnabled)
+            {
+                lightInstance.enabled = lightEnabled;
+            }
+        }
+    }
+
+    [Button (ButtonSizes.Large), PropertyOrder (-1)]
+    public void OnLevelUnload ()
+    {
+        UtilityGameObjects.ClearChildren (gameObject);
+        lightsPerInstance.Clear ();
+    }
+
+
+
+    [Button (ButtonSizes.Large), PropertyOrder (-1)]
+    public void RebuildAveragedGrid (bool clear)
+    {
+        ambientLightNodes.Clear ();
         lookupNodesFromPoints.Clear ();
         lookupNodesFromProps.Clear ();
-        
         UtilityGameObjects.ClearChildren (gameObject);
-        
+
+        if (mode == AreaLightingMode.None)
+            return;
+
         if (am == null || am.points.Count < 8)
         {
             Debug.LogWarning ($"Failed to load background for area due to no manager reference or points");
@@ -110,7 +232,7 @@ public class AreaLightHelper : MonoBehaviour
         }
 
         elevationSteps = Mathf.Clamp (elevationSteps, 1, 5);
-        
+
         var points = am.points;
         for (int i = 0, limit = points.Count; i < limit; ++i)
         {
@@ -129,10 +251,10 @@ public class AreaLightHelper : MonoBehaviour
                     break;
                 }
             }
-            
+
             if (!valid)
                 continue;
-            
+
             ambientLightNodes.Add (new AreaLightNode
             {
                 pos = pe.instancePosition
@@ -140,7 +262,6 @@ public class AreaLightHelper : MonoBehaviour
         }
 
         var nodeCount = ambientLightNodes.Count;
-        
         var props = am.placementsProps;
         for (int i = 0, limit = props.Count; i < limit; ++i)
         {
@@ -151,20 +272,20 @@ public class AreaLightHelper : MonoBehaviour
             var prefab = prop.prototype.prefab;
             if (prefab.activeLights == null || prefab.activeLights.Count == 0)
                 continue;
-            
+
             var propPosition = (Vector3)prop.state.cachedRootPosition;
             var propRotation = (Quaternion)prop.state.cachedRootRotation;
-            
+
             for (int l = 0, lLimit = prefab.activeLights.Count; l < lLimit; ++l)
             {
                 var source = prefab.activeLights[l];
                 if (source == null || source.intensity < 0.1f || source.range < 1f)
                     continue;
-                
+
                 var sourcePosition = propPosition + propRotation * source.transform.localPosition;
                 var sourceRangeSqr = source.range;
                 sourceRangeSqr *= sourceRangeSqr;
-                
+
                 for (int s = 0; s < nodeCount; ++s)
                 {
                     var node = ambientLightNodes[s];
@@ -176,8 +297,8 @@ public class AreaLightHelper : MonoBehaviour
                         node.contributions = new List<AreaLightContribution> ();
 
                     var distance = Vector3.Distance (node.pos, sourcePosition);
-                    var divisor = Mathf.Pow (distance, falloffPower); 
-                    
+                    var divisor = Mathf.Pow (distance, falloffPower);
+
                     node.contributions.Add (new AreaLightContribution
                     {
                         pos = sourcePosition,
@@ -193,38 +314,38 @@ public class AreaLightHelper : MonoBehaviour
 
         // Consider config on tileset blocks
         var pointSourceRangeSqr = pointSourceRange * pointSourceRange;
-        
+
         for (int i = 0, limit = points.Count; i < limit; ++i)
         {
             var point = points[i];
             if (point == null)
                 continue;
-            
+
             // Skip empty points
             if (point.spotConfiguration == AreaNavUtility.configEmpty || point.spotConfiguration == AreaNavUtility.configFull)
                 continue;
-            
+
             // Skip damaged points
             if (point.integrity < 1f || point.spotHasDamagedPoints)
                 continue;
-            
+
             // Skip points not painted to emit
             if (point.customization == null || point.customization.overrideIndex < 1)
                 continue;
-            
+
             if (point.lightData == null)
                 continue;
 
             var source = point.lightData;
             if (source.intensity < 0.1f)
                 continue;
-            
+
             var direction = AreaAssetHelper.GetSurfaceDirection (point.spotConfiguration);
             var sourcePosition = point.instancePosition + direction * source.offset;
             var sourceIntensity = source.intensity * pointSourceIntensity;
-            
+
             Debug.DrawLine (point.instancePosition, sourcePosition, Color.white, 5f);
-            
+
             for (int s = 0; s < nodeCount; ++s)
             {
                 var node = ambientLightNodes[s];
@@ -236,8 +357,8 @@ public class AreaLightHelper : MonoBehaviour
                     node.contributions = new List<AreaLightContribution> ();
 
                 var distance = Vector3.Distance (node.pos, sourcePosition);
-                var divisor = Mathf.Pow (distance, falloffPower); 
-                    
+                var divisor = Mathf.Pow (distance, falloffPower);
+
                 node.contributions.Add (new AreaLightContribution
                 {
                     pos = sourcePosition,
@@ -249,10 +370,10 @@ public class AreaLightHelper : MonoBehaviour
                 });
             }
         }
-        
-        
-        
-        
+
+
+
+
         // Clear filtered list
         ambientLightNodesFiltered.Clear ();
 
@@ -270,13 +391,13 @@ public class AreaLightHelper : MonoBehaviour
             });
         }
 
-        
-        
-        
+
+
+
         // Count promoted nodes, initialize final collection
         int filteredCount = ambientLightNodesFiltered.Count;
         ambientLightNodesFinalized.Clear ();
-        
+
         // Update average position, color and intensity under filtered nodes
         // Promote nodes with sufficient intensity to final list
         for (int s = 0; s < filteredCount; ++s)
@@ -287,17 +408,17 @@ public class AreaLightHelper : MonoBehaviour
             node.posAverage = node.pos;
             node.color = Color.black;
             node.intensity = 0f;
-            
+
             // This count will not start at 0, but might drop to 0 from one-by-one invalidations on destruction
             if (contributionCount == 0)
             {
                 node.lightNeeded = false;
                 continue;
             }
-            
+
             var colorVector = Vector3.zero;
             var posAverage = Vector3.zero;
-            
+
             for (int c = 0; c < contributionCount; ++c)
             {
                 var contribution = node.contributions[c];
@@ -308,13 +429,13 @@ public class AreaLightHelper : MonoBehaviour
 
             var colorVectorNormalized = colorVector.normalized;
             var intensity = colorVector.magnitude;
-            
+
             if (intensity < intensityMinimum)
             {
                 node.lightNeeded = false;
                 continue;
             }
-            
+
             var color = new Color (colorVectorNormalized.x, colorVectorNormalized.y, colorVectorNormalized.z);
             posAverage /= contributionCount;
 
@@ -322,7 +443,7 @@ public class AreaLightHelper : MonoBehaviour
             node.color = color;
             node.intensity = intensity;
             node.lightNeeded = true;
-            
+
             ambientLightNodesFinalized.Add (node);
         }
 
@@ -336,17 +457,17 @@ public class AreaLightHelper : MonoBehaviour
             {
                 if (s2 == s1)
                     continue;
-                
+
                 var lightActive2 = ambientLightNodesFinalized[s2];
                 var posDelta = lightActive1.pos - lightActive2.pos;
                 var distanceSqr = posDelta.sqrMagnitude;
-                
+
                 if (distanceSqr > distanceLimitSqr)
                     continue;
 
                 if (lightActive2.intensity < lightActive1.intensity)
                     continue;
-                
+
                 ambientLightNodesFinalized.RemoveAt (s1);
                 break;
             }
@@ -354,46 +475,6 @@ public class AreaLightHelper : MonoBehaviour
 
         ApplyNodes (ambientLightNodesFinalized);
     }
-
-    /*
-    public void OnPointStateChange (AreaVolumePoint point)
-    {
-        int index = point.spotIndex;
-        OnSourceChange (index, AreaLightContributionType.Point);
-    }
-    
-    public void OnPropChange (int index)
-    {
-        OnSourceChange (index, AreaLightContributionType.Prop);
-    }
-    
-    public void OnSourceChange (int index, AreaLightContributionType type)
-    {
-        ambientLightNodesUpdated.Clear ();
-
-        for (int i = 0, iLimit = ambientLightNodesFinalized.Count; i < iLimit; ++i)
-        {
-            var node = ambientLightNodesFinalized[i];
-            if (node == null || node.contributions == null)
-                continue;
-            
-            for (int c = 0, cLimit = node.contributions.Count; c < cLimit; ++c)
-            {
-                var contribution = node.contributions[c];
-                if (contribution.sourceType != type)
-                    continue;
-
-                if (contribution.sourceIndex != index)
-                    continue;
-                
-                ambientLightNodesUpdated.Add (node);
-                break;
-            }
-        }
-
-        ApplyNodes (ambientLightNodesUpdated);
-    }
-    */
 
     private void ApplyNodes (List<AreaLightSource> nodes)
     {
@@ -403,9 +484,9 @@ public class AreaLightHelper : MonoBehaviour
         int nodeCount = nodes.Count;
         if (nodeCount == 0)
             return;
-        
+
         var rootTransform = transform;
-        
+
         for (int s = 0; s < nodeCount; ++s)
         {
             var node = nodes[s];
@@ -443,7 +524,7 @@ public class AreaLightHelper : MonoBehaviour
                     if (lightComponent.enabled)
                         node.light.enabled = false;
                 }
-                    
+
             }
         }
     }

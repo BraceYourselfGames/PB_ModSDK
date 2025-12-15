@@ -22,8 +22,10 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
     public AreaManager am;
     public ProceduralMeshTerrainV2 terrain;
     
-    [OnValueChanged ("ApplyCollidersUsed")]
-    public bool collidersUsed = false;
+    [SerializeField, HideInInspector]
+    private bool collidersUsedInternal = false;
+    [ShowInInspector]
+    public bool collidersUsed { get { return collidersUsedInternal; } set { collidersUsedInternal = value; SetCollidersUsed (value); } }
     
     public float innerSkirtSize = 30;
     public float outerSkirtSize;
@@ -34,14 +36,16 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
     public PlanarCurves interpolationCurves;
     public AnimationCurve innerSkirtSmoothingCurve;
 
+    public List<Collider> collidersRuntime = new List<Collider> ();
+
     //public AnimationCurve skirtBlendingCurve;
     
     [FoldoutGroup (referenceGroup)] 
-    [Header("Terrain Floor Skirt Mesh Filters")] 
-    public MeshFilter terrainFloorSkirt;
+    //[Header("Terrain Floor Skirt Mesh Filters")] 
+    //public MeshFilter terrainFloorSkirt;
     
-    [FoldoutGroup (referenceGroup)] 
-    public MeshFilter terrainInnerSkirt;
+    //[FoldoutGroup (referenceGroup)] 
+    //public MeshFilter terrainInnerSkirt;
     
     [FoldoutGroup (referenceGroup)] 
     [Header("Edge Skirt Mesh Filters")]
@@ -159,17 +163,12 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
 
     [Button ("Toggle Colliders", ButtonSizes.Medium), ButtonGroup ("A")]
     private void ToggleCollidersUsed () =>
-        SetCollidersUsed (!collidersUsed);
-
-    private void ApplyCollidersUsed () =>
-        SetCollidersUsed (collidersUsed);
+        collidersUsed = !collidersUsed;
     
     private void SetCollidersUsed (bool collidersUsed)
-    {
-        this.collidersUsed = collidersUsed;
-    
-        SetColliderUsed (terrainFloorSkirt, collidersUsed);
-        SetColliderUsed (terrainInnerSkirt, collidersUsed);
+    {    
+        //SetColliderUsed (terrainFloorSkirt, collidersUsed);
+        //SetColliderUsed (terrainInnerSkirt, collidersUsed);
         
         SetColliderUsed (northSkirt, collidersUsed);
         SetColliderUsed (southSkirt, collidersUsed);
@@ -200,8 +199,8 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
     
     private void RefreshColliders ()
     {
-        RefreshCollider (terrainFloorSkirt);
-        RefreshCollider (terrainInnerSkirt);
+        //RefreshCollider (terrainFloorSkirt);
+        //RefreshCollider (terrainInnerSkirt);
         
         RefreshCollider (northSkirt);
         RefreshCollider (southSkirt);
@@ -235,8 +234,8 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
 
     public void DestroyMeshes ()
     {
-        DestroyMeshFilterContent (terrainFloorSkirt);
-        DestroyMeshFilterContent (terrainInnerSkirt);
+        //DestroyMeshFilterContent (terrainFloorSkirt);
+        //DestroyMeshFilterContent (terrainInnerSkirt);
         
         DestroyMeshFilterContent (northSkirt);
         DestroyMeshFilterContent (southSkirt);
@@ -279,6 +278,18 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
     {
         GenerateHeightfieldFromArea ();
         TestSkirtPointCreation ();
+    }
+
+    public void SetRuntimeCollidersActive (bool active)
+    {
+        if (collidersRuntime != null)
+        {
+            foreach (var col in collidersRuntime)
+            {
+                if (col != null)
+                    col.enabled = active;
+            }
+        }
     }
 
     [Button("Update Bounds", ButtonSizes.Medium), ButtonGroup ("A")]
@@ -1019,6 +1030,7 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
 
     private void GenerateInnerTerrainSkirts(float innerSkirtDepth, float blockSize)
     {
+        /*
         // -- Creation of interior skirts
         
         //For the sake of simplicity, I'm just generating this quickly by going around the interior in a clockwise fashion
@@ -1072,10 +1084,13 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
         ProceduralMeshUtilities.CreateMeshPatch(terrainInnerSkirt, tempLines, 2);
         tempLines.Clear();
         //-- End Mesh Creation --
+
+        */
     }
 
     private void GenerateTerrainFloorSkirt(float innerSkirtDepth, float blockSize)
     {
+        /*
         // -- Construction of Terrain Floor Skirt
         
         //Really quick, make some bounding lines to construct the terrain floor skirt with
@@ -1087,7 +1102,8 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
         //-- Create a mesh from this Patch --
         ProceduralMeshUtilities.CreateMeshPatch(terrainFloorSkirt, tempLines, 2);
         tempLines.Clear();
-        //-- End Mesh Creation --    
+        //-- End Mesh Creation --
+        */
     }
 
     private List<BoundingLine> tempLines = new List<BoundingLine>();
@@ -1115,8 +1131,8 @@ public class ProceduralMeshBoundaryV2 : MonoBehaviour
         float innerSkirtDepth = (am.boundsFull.y + 1) * -blockSize;
         
         //Interior Hiding meshes
-        GenerateInnerTerrainSkirts(innerSkirtDepth, blockSize);
-        GenerateTerrainFloorSkirt(innerSkirtDepth, blockSize);
+        //GenerateInnerTerrainSkirts(innerSkirtDepth, blockSize);
+        //GenerateTerrainFloorSkirt(innerSkirtDepth, blockSize);
         
         GenerateTerrainSkirts();
     }

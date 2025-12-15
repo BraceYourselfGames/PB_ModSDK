@@ -7,7 +7,7 @@ namespace Area
     // [System.Serializable]
     public class AreaVolumePoint
     {
-        // Every volume point is, at the same time, responsible for a specific point in space (which can be full/empty/destroyed), 
+        // Every volume point is, at the same time, responsible for a specific point in space (which can be full/empty/destroyed),
         // and a so-called spot - information about 2x2x2 group of points (which determines the shape of level geometry)
 
         // Some operations require knowing the state of volume points comprising a spot group with the current point - instead of calculating their indexes and fetching them every time,
@@ -19,7 +19,7 @@ namespace Area
         //  | |    | |
         //  | YX --|YXZ
         //  |/     |/
-        //  Y ---> YZ 
+        //  Y ---> YZ
 
         //        0    1   2   3    4   5    6     7
         // [8]: this, +X, +Z, +XZ, +Y, +YX, +YZ, +XYZ
@@ -34,13 +34,13 @@ namespace Area
         //  | |    | |
         //  | Z <--| 0
         //  |/     |/
-        // XZ <--- X 
+        // XZ <--- X
 
         //        0    1    2    3   4    5   6   7
         // [8]: -XYZ, -YZ, -XY, -Y, -XZ, -Z, -X, this
         public AreaVolumePoint[] pointsWithSurroundingSpots;
 
-        public AreaVolumePointState pointState = AreaVolumePointState.Empty; 
+        public AreaVolumePointState pointState = AreaVolumePointState.Empty;
         public Vector3Int pointPositionIndex = new Vector3Int (-1, -1, -1);
         public Vector3 pointPositionLocal = Vector3.zero;
 
@@ -59,21 +59,26 @@ namespace Area
         public bool destructible = true;
         public bool indestructibleIndirect = false;
         public bool indestructibleAny => indestructibleIndirect | !destructible;
-        
+
         public bool destructionUntracked = false;
-        
+
         public float integrity = 1f;
         public float integrityForDestructionAnimation = 1f;
 
         public float terrainOffset = 0f;
-        
-        public int structuralValue = 0;
-        public int structuralGroup = 0;
-        public AreaVolumePoint structuralParent = null;
-        public AreaVolumePoint structuralParentCandidate = null;
-        public bool structuralChildrenPresent = false;
+
+        // public int structuralValue = 0;
+        // public int structuralGroup = 0;
+        // public AreaVolumePoint structuralParent = null;
+        // public AreaVolumePoint structuralParentCandidate = null;
+        // public int structureScanIndex = 0;
 
         public GameObject instanceCollider = null;
+        #if !PB_MODSDK
+        public AssetLinker instanceFire = null;
+        #endif
+        public List<GameObject> instancesRubble = null;
+        public List<int> propsRubble = null;
 
         public Vector3 instancePosition;
         public AreaTilesetLight lightData = null;
@@ -85,11 +90,17 @@ namespace Area
         public Vector4 instanceMainScaleAndSpin = Vector4.one;
         public Vector4 instanceInteriorScaleAndSpin = Vector4.one;
 
-        public float instanceVisibilityInterior = 1f;
-        
+        public float instanceVisibilityInterior = 0f;
+
         public TilesetVertexProperties customization = TilesetVertexProperties.defaults;
 
-        public AreaSimulatedChunk simulatedHelper;
+        #if !PB_MODSDK
+        public bool simulationRequested = false;
+        public bool simulatedChunkPresent = false;
+        public AreaSimulatedChunk simulatedChunkComponent;
+        #endif
+
+        public AreaNavNode node;
         public bool road = false;
 
         public AreaVolumePoint ()
@@ -117,7 +128,22 @@ namespace Area
 
         public void RecheckRubbleHosting ()
         {
-            
+            if (instancesRubble != null)
+            {
+                AreaVolumePoint neighbourAbove = pointsWithSurroundingSpots[3];
+                if ((neighbourAbove != null && neighbourAbove.pointState == AreaVolumePointState.Full) || pointState != AreaVolumePointState.Full)
+                {
+                    for (int i = 0; i < instancesRubble.Count; ++i)
+                        instancesRubble[i].SetActive (false);
+
+                    instancesRubble = null;
+                }
+            }
+
+            #if !PB_MODSDK
+            if (instanceFire != null)
+                instanceFire.ReturnToPool ();
+            #endif
         }
 
         public AreaVolumePointConfiguration GetConfigurationStruct ()
@@ -150,7 +176,7 @@ namespace Area
                 (pointNeighbourZNeg == null || pointNeighbourZNeg.pointState == AreaVolumePointState.Full)
             );
         }
-        
-        
+
+
     }
 }

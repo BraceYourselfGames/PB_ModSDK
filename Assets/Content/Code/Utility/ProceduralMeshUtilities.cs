@@ -34,7 +34,7 @@ public static class ProceduralMeshUtilities
                 int iteration = 0;
                 
                 var posIndex = new Vector3Int (x, 0, z);
-                var index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
+                var index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
 
                 while (true)
                 {
@@ -44,7 +44,7 @@ public static class ProceduralMeshUtilities
                         // Backing up one step
                         
                         posIndex = new Vector3Int (x, posIndex.y - 1, z);
-                        index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
+                        index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
                         
                         pointFull = dataUnpacked.points[index];
                         height = Mathf.Max (0, posIndex.y - 1);
@@ -53,7 +53,7 @@ public static class ProceduralMeshUtilities
                         
                     // Get point below
                     posIndex = new Vector3Int (x, Mathf.Clamp (posIndex.y + 1, 0, boundsFull.y - 1), z);
-                    index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
+                    index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
                     pointFull = dataUnpacked.points[index];
 
                     iteration += 1;
@@ -68,7 +68,7 @@ public static class ProceduralMeshUtilities
             }
         }
     }
-
+    
     public static Vector3 GetScaledPositionFromHeightField (int x, int z, float blockSize, int[,] heightfield)
     {
         //Replace this with your fancy code that gets points in more detail maybe?
@@ -84,7 +84,8 @@ public static class ProceduralMeshUtilities
         }
 
         var boundsFull = am.boundsFull;
-        var maxDepth = am.boundsFull.y;
+        int size = boundsFull.x * boundsFull.z;
+        int maxDepth = am.boundsFull.y;
 
         if (heightField == null || (heightField.GetLength (0) != boundsFull.x && heightField.GetLength (1) != boundsFull.z))
         {
@@ -96,8 +97,8 @@ public static class ProceduralMeshUtilities
             volumePoints = null;
         }
 
-        var heightFieldAvailable = heightField != null;
-        var volumePointsAvailable = volumePoints != null;
+        bool heightFieldAvailable = heightField != null;
+        bool volumePointsAvailable = volumePoints != null;
 
         if (!heightFieldAvailable && !volumePointsAvailable)
         {
@@ -106,52 +107,54 @@ public static class ProceduralMeshUtilities
         }
 
         // Debug.Log("Size: " + size + " | Bounds: " + boundsFull);
-        var depthMinusOne = boundsFull.y - 1;
-
-        for (var x = 0; x < boundsFull.x; ++x)
+        int depthMinusOne = boundsFull.y - 1;
+        
+        for (int x = 0; x < boundsFull.x; ++x)
         {
-            for (var z = 0; z < boundsFull.z; ++z)
+            for (int z = 0; z < boundsFull.z; ++z)
             {
                 var posIndex = new Vector3Int (x, 0, z);
                 var height = depthMinusOne;
-                var index = AreaUtility.GetIndexFromVolumePosition (posIndex, boundsFull, skipBoundsCheck: true);
-                var pointCurrent = am.points[index];
                 AreaVolumePoint pointSurface = null;
 
-                for (var iteration = 0; iteration <= maxDepth; iteration += 1)
+                var index = TilesetUtility.GetIndexFromVolumePosition (posIndex, boundsFull);
+                var pointCurrent = am.points[index];
+                int iteration = 0;
+                    
+                while (true)
                 {
-                    var full = pointCurrent.pointState != AreaVolumePointState.Empty;
+                    bool full = pointCurrent.pointState != AreaVolumePointState.Empty;
                     if (full)
                     {
                         // Backing up one step
                         pointCurrent = pointCurrent.pointsWithSurroundingSpots[3];
                         if (pointCurrent != null)
-                        {
-                            pointSurface = pointCurrent;
-                        }
+	                        pointSurface = pointCurrent;
+	                    
                         break;
                     }
-
+                        
                     // Get point above
                     pointCurrent = pointCurrent.pointsInSpot[4];
                     if (pointCurrent == null)
+                        break;
+
+                    iteration += 1;
+                    if (iteration > maxDepth)
                     {
+                        // Debug.Log ("Breaking out of while loop, something is wrong");
                         break;
                     }
                 }
 
                 if (pointSurface != null)
-                {
                     height = pointSurface.pointPositionIndex.y;
-                }
+
                 if (heightFieldAvailable)
-                {
                     heightField[posIndex.x, posIndex.z] = height;
-                }
+
                 if (volumePointsAvailable && pointSurface != null)
-                {
                     volumePoints[posIndex.x, posIndex.z] = pointSurface;
-                }
             }
         }
     }
@@ -171,7 +174,7 @@ public static class ProceduralMeshUtilities
                 continue;
             }
         }
-
+        
         return terrainTilesetDetected;
     }
 
@@ -192,7 +195,7 @@ public static class ProceduralMeshUtilities
 
         //Create the mesh
         Mesh convertedMesh = ConvertGridToMesh (tempGrid, lines.Count, subdivisionCount + 1, targetFilter.sharedMesh);
-
+        
         //Assign the mesh
         targetFilter.sharedMesh = convertedMesh;
 
@@ -244,7 +247,7 @@ public static class ProceduralMeshUtilities
     }
 
     /// <summary>
-    /// Given a series of bounding points, we'll create a regular grid of sub divisions with interpolation
+    /// Given a series of bounding points, we'll create a regular grid of sub divisions with interpolation 
     /// </summary>
     public static void SubdivideBoundingLines (List<BoundingLine> source, List<Vector3> output, int subdivisions = 1, AnimationCurve innerInterpolationCurve = null)
     {
@@ -357,9 +360,9 @@ public static class ProceduralMeshUtilities
 
         //Given a 1 dimensional array arranged by column ordered grid points, create a quad mesh patch from it
         /*   col row ----->
-         *    |  A - C
-         *    |  | / |
-         *    |  B - D
+         *    |  A - C  
+         *    |  | / | 
+         *    |  B - D 
          */
 
         //Go by Column -> to row
@@ -456,7 +459,7 @@ public static class ProceduralMeshUtilities
             tempColors.Clear ();
             for (int i = 0; i < vertexCount; ++i)
                 tempColors.Add (colorFallback);
-
+                
             targetMesh.SetColors (tempColors);
         }
 
@@ -468,78 +471,6 @@ public static class ProceduralMeshUtilities
         f = Mathf.Floor (f >= 1.0f ? 255f : f * 256.0f);
 
         return (byte) f;
-    }
-    
-    public static Mesh GenerateCutMesh
-    (
-        Mesh targetMesh,
-        List<Vector3> verts,
-        List<int> tris,
-        int vertCount,
-        int triCount,
-        List<Vector4> vertexData = null
-    )
-    {
-        if (verts == null)
-        {
-            return targetMesh;
-        }
-        if (tris == null)
-        {
-            return targetMesh;
-        }
-
-        var vertexCount = Mathf.Min(verts.Count, vertCount);
-        if (vertexCount <= 3)
-        {
-            return targetMesh;
-        }
-
-        var indexCount = Mathf.Min (tris.Count, triCount);
-        if (indexCount == 0)
-        {
-            return targetMesh;
-        }
-
-        if (targetMesh == null)
-        {
-            targetMesh = new Mesh ();
-        }
-        targetMesh.Clear ();
-        targetMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
-
-        targetMesh.SetVertices (verts, 0, vertCount);
-        targetMesh.SetIndices (tris, 0, indexCount, MeshTopology.Triangles, 0);
-        targetMesh.RecalculateNormals ();
-        targetMesh.RecalculateTangents ();
-
-        if (vertexData != null && vertexData.Count >= vertexCount)
-        {
-            tempColors.Clear ();
-            for (var i = 0; i < vertexCount; ++i)
-            {
-                var color = vertexData[i];
-                tempColors.Add (new Color32
-                (
-                    color.x.GetByte (),
-                    color.y.GetByte (),
-                    color.z.GetByte (),
-                    color.w.GetByte ()
-                ));
-            }
-            targetMesh.SetColors (tempColors);
-        }
-        else
-        {
-            tempColors.Clear ();
-            for (var i = 0; i < vertexCount; ++i)
-            {
-                tempColors.Add (colorFallback);
-            }
-            targetMesh.SetColors (tempColors);
-        }
-
-        return targetMesh;
     }
 }
 

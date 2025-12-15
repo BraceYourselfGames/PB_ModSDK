@@ -7,7 +7,7 @@ public static class Constants
     public static uint gridSize = 3;
 
     //If you change the layers you have to change it here too! 8 is the layer in the tags and layers manager for environment
-    public const int environmentLayer = 8;
+    public const int EnvironmentLayer = 8;
     #if PB_MODSDK
     public const int volumeCollidersLayer = 11;
     #endif

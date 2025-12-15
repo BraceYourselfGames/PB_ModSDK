@@ -1,10 +1,8 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System;
 using PhantomBrigade;
 using PhantomBrigade.Data;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Area
 {
@@ -108,51 +106,6 @@ namespace Area
         public const byte configRoofCornerOutXNegZPos = 4;
         public const byte configRoofCornerOutXPosZPos = 8;
 
-
-        // This class is used to store additional per-AreaVolumePoint data that has no place in the main point data class
-        // Cached neighbour references allow us to traverse the volume faster and node index allows us to complete the graph build
-
-        public class PointData
-        {
-            public AreaVolumePoint point;
-            public int nodeIndex;
-
-            // This dictionary is keyed to integers and not PointNeighbourDirection enums
-            // because enum-keyed dictionaries cause boxing on every single fetch or check
-            // public Dictionary<int, PointData> neighbours;
-
-            public PointData neighbourXPos;     // = 0
-            public PointData neighbourXNeg;     // = 2
-            public PointData neighbourYPos;     // = 4
-            public PointData neighbourYNeg;     // = 5
-            public PointData neighbourZPos;     // = 3
-            public PointData neighbourZNeg;     // = 1
-            public PointData neighbourXPosZPos; // = 6
-            public PointData neighbourXPosZNeg; // = 7
-            public PointData neighbourXNegZPos; // = 8
-            public PointData neighbourXNegZNeg; // = 9
-
-            public PointData this [int index]
-            {
-                get
-                {
-                    switch (index)
-                    {
-                        case 0: return neighbourXPos;
-                        case 1: return neighbourZNeg;
-                        case 2: return neighbourXNeg;
-                        case 3: return neighbourZPos;
-                        case 4: return neighbourYPos;
-                        case 5: return neighbourYNeg;
-                        case 6: return neighbourXPosZPos;
-                        case 7: return neighbourXPosZNeg;
-                        case 8: return neighbourXNegZPos;
-                        case 9: return neighbourXNegZNeg;
-                        default: return null;
-                    }
-                }
-            }
-        }
 
         // This class represents a step in the sequence of point-to-point transitions performed to search for valid links
         // Each step tells the algorithm where to go next and what spot configuration mask to use to reject unsuitable neighbours
@@ -553,10 +506,14 @@ namespace Area
 
 
 
-        private static List<PointData> pointSearchData;
-        public static List<AreaNavNode> graph;
+        private static List<int> pointSearchData;
         private static Queue<PointData> queue;
-        private static int defaultNodeIndex = -1;
+        #if !PB_MODSDK
+        private static List<AreaNavNode> graph;
+        #else
+        public static List<IAreaNavNode> graph;
+        #endif
+        private const int defaultNodeIndex = -1;
         private static int lastLevelID;
 
         private static Color colorAxisXPos = new Color (1f, 0.45f, 0.4f, 1f);
@@ -579,6 +536,8 @@ namespace Area
         private static Vector3 navOverrideShiftVertical = Vector3.up * (TilesetUtility.blockAssetSize * 0.5f);
         private static float navOverrideOffsetThresholdPos = 0.3f;
         private static float navOverrideOffsetThresholdNeg = -0.3f;
+        private static List<int> navIndexesRemoved = new List<int> ();
+
         private static bool IsPointUsableAsNavOverrideCenter (AreaVolumePoint point)
         {
             return
@@ -598,7 +557,14 @@ namespace Area
                 point.spotConfiguration == configFloor;
         }
 
-        public static void GenerateNavOverrides (Dictionary<int, AreaDataNavOverride> navOverrides, List<AreaVolumePoint> points, bool draw)
+        public static void GenerateNavOverrides
+        (
+            Dictionary<int, AreaDataNavOverride> navOverrides,
+            List<AreaVolumePoint> points,
+            bool draw,
+            Dictionary<int, AreaDataNavOverride> navOverridesSaved,
+            bool navOverridesSavedClearConflicts
+        )
         {
             if (points == null || navOverrides == null)
                 return;
@@ -607,7 +573,7 @@ namespace Area
             for (int i = 0, count = points.Count; i < count; ++i)
             {
                 var point = points[i];
-                if (point.spotHasDamagedPoints || point.spotConfiguration == configEmpty || point.spotConfiguration == configFull)
+                if (point.spotHasDamagedPoints || point.spotConfiguration == AreaNavUtility.configEmpty || point.spotConfiguration == AreaNavUtility.configFull)
                     continue;
 
                 bool navOverrideFound = AreaTilesetHelper.GetNavOverrideData
@@ -985,6 +951,41 @@ namespace Area
                 //TryAddNavOverride (navOverrides, pointBottomSpotA, offsetYBottomNeighbour);
                 // TryAddNavOverride (navOverrides, pointBottomSpotB, offsetYBottomNeighbour);
             }
+
+            if (navOverridesSaved != null)
+            {
+                if (navOverridesSavedClearConflicts)
+                {
+                    navIndexesRemoved.Clear ();
+                    foreach (var kvp in navOverridesSaved)
+                    {
+                        int index = kvp.Key;
+                        var navOverride = kvp.Value;
+                        if (navOverrides.ContainsKey (index))
+                            navIndexesRemoved.Add (index);
+                        else
+                            navOverrides[index] = navOverride;
+                    }
+
+                    if (navIndexesRemoved.Count > 0)
+                    {
+                        // Removals have to happen in a separate loop to avoid breaking the navOverridesSaved iterator above
+                        foreach (var index in navIndexesRemoved)
+                            navOverridesSaved.Remove (index);
+
+                        Debug.LogWarning ($"Removed {navIndexesRemoved.Count} saved nav overrides due to conflict with autogenerated nav overrides");
+                    }
+                }
+                else
+                {
+                    foreach (var kvp in navOverridesSaved)
+                    {
+                        int index = kvp.Key;
+                        var navOverride = kvp.Value;
+                        navOverrides[index] = navOverride;
+                    }
+                }
+            }
         }
 
         private static void TryAddNavOverride (Dictionary<int, AreaDataNavOverride> navOverrides, AreaVolumePoint point, float offset)
@@ -1007,107 +1008,22 @@ namespace Area
             );
         }
 
-
         public static void RebuildPointSearchData (AreaManager am)
         {
-	        AreaVolumePoint pointXPos;
-	        AreaVolumePoint pointXNeg;
-	        AreaVolumePoint pointYPos;
-	        AreaVolumePoint pointYNeg;
-	        AreaVolumePoint pointZPos;
-	        AreaVolumePoint pointZNeg;
-	        AreaVolumePoint pointXPosZPos;
-	        AreaVolumePoint pointXNegZPos;
-	        AreaVolumePoint pointXPosZNeg;
-	        AreaVolumePoint pointXNegZNeg;
-	        Vector3 nodeOffset = new Vector3 (1, -1, 1) * (TilesetUtility.blockAssetSize / 2f);
-
-	        pointSearchData = new List<PointData> (am.points.Count);
+            PointData.SetBounds (am.boundsFull);
+	        pointSearchData = new List<int> (am.points.Count);
 	        for (int i = 0; i < am.points.Count; ++i)
 	        {
-		        PointData pd = new PointData ();
-	            pd.point = am.points[i];
-	            pointSearchData.Add (pd);
-	        }
-
-	        for (int i = 0; i < pointSearchData.Count; ++i)
-	        {
-		        PointData pd = pointSearchData[i];
-
-	            pointYPos = pd.point.pointsInSpot[4];
-	            if (pointYPos != null && pointYPos.spotPresent)
-                {
-                    // pd.neighbours.Add ((int)PointNeighbourDirection.YPos, pointSearchData[pointYPos.spotIndex]);
-                    pd.neighbourYPos = pointSearchData[pointYPos.spotIndex];
-                }
-
-	            pointXPos = pd.point.pointsInSpot[1];
-	            if (pointXPos != null && pointXPos.spotPresent)
-	            {
-	                // pd.neighbours.Add ((int)PointNeighbourDirection.XPos, pointSearchData[pointXPos.spotIndex]);
-                    pd.neighbourXPos = pointSearchData[pointXPos.spotIndex];
-
-	                pointXPosZPos = pointXPos.pointsInSpot[2];
-	                if (pointXPosZPos != null && pointXPosZPos.spotPresent)
-                    {
-                        // pd.neighbours.Add ((int)PointNeighbourDirection.XPosZPos, pointSearchData[pointXPosZPos.spotIndex]);
-                        pd.neighbourXPosZPos = pointSearchData[pointXPosZPos.spotIndex];
-                    }
-
-	                pointXPosZNeg = pointXPos.pointsWithSurroundingSpots[5];
-	                if (pointXPosZNeg != null && pointXPosZNeg.spotPresent)
-                    {
-                        // pd.neighbours.Add ((int)PointNeighbourDirection.XPosZNeg, pointSearchData[pointXPosZNeg.spotIndex]);
-                        pd.neighbourXPosZNeg = pointSearchData[pointXPosZNeg.spotIndex];
-                    }
-	            }
-
-	            pointXNeg = pd.point.pointsWithSurroundingSpots[6];
-	            if (pointXNeg != null && pointXNeg.spotPresent)
-	            {
-	                // Debug.Log (pd.neighbours.Count + " in dictionary for PD " + pd.point.spotIndex + " | Present keys: " + pd.neighbours.ToStringFormattedKeys () + " | XNeg present: " + pd.neighbours.ContainsKey (PointNeighbourDirection.XNeg));
-	                // pd.neighbours.Add ((int)PointNeighbourDirection.XNeg, pointSearchData[pointXNeg.spotIndex]);
-                    pd.neighbourXNeg = pointSearchData[pointXNeg.spotIndex];
-
-	                pointXNegZPos = pointXNeg.pointsInSpot[2];
-	                if (pointXNegZPos != null && pointXNegZPos.spotPresent)
-                    {
-                        // pd.neighbours.Add ((int)PointNeighbourDirection.XNegZPos, pointSearchData[pointXNegZPos.spotIndex]);
-                        pd.neighbourXNegZPos = pointSearchData[pointXNegZPos.spotIndex];
-                    }
-
-	                pointXNegZNeg = pointXNeg.pointsWithSurroundingSpots[5];
-	                if (pointXNegZNeg != null && pointXNegZNeg.spotPresent)
-                    {
-                        // pd.neighbours.Add ((int)PointNeighbourDirection.XNegZNeg, pointSearchData[pointXNegZNeg.spotIndex]);
-                        pd.neighbourXNegZNeg = pointSearchData[pointXNegZNeg.spotIndex];
-                    }
-	            }
-
-	            pointZPos = pd.point.pointsInSpot[2];
-	            if (pointZPos != null && pointZPos.spotPresent)
-                {
-                    // pd.neighbours.Add ((int)PointNeighbourDirection.ZPos, pointSearchData[pointZPos.spotIndex]);
-                    pd.neighbourZPos = pointSearchData[pointZPos.spotIndex];
-                }
-
-	            pointZNeg = pd.point.pointsWithSurroundingSpots[5];
-	            if (pointZNeg != null && pointZNeg.spotPresent)
-                {
-                    // pd.neighbours.Add ((int)PointNeighbourDirection.ZNeg, pointSearchData[pointZNeg.spotIndex]);
-                    pd.neighbourZNeg = pointSearchData[pointZNeg.spotIndex];
-                }
-
-	            pointYNeg = pd.point.pointsWithSurroundingSpots[3];
-	            if (pointYNeg != null && pointYNeg.spotPresent)
-                {
-                    // pd.neighbours.Add ((int)PointNeighbourDirection.YNeg, pointSearchData[pointYNeg.spotIndex]);
-                    pd.neighbourYNeg = pointSearchData[pointYNeg.spotIndex];
-                }
+                pointSearchData.Add (defaultNodeIndex);
 	        }
         }
 
-        public static void GetNavigationNodes (AreaManager am = null)
+        public static void OnLevelUnload ()
+        {
+            pointSearchData = null;
+        }
+
+        public static void GetNavigationNodes (ref List<IAreaNavNode> externalGraph, AreaManager am = null)
         {
             if (am == null)
                 am = CombatSceneHelper.ins.areaManager;
@@ -1120,7 +1036,7 @@ namespace Area
 
             // Debug.Log ("AN | GetNavigationNodes | Starting graph generation");
 
-            Stopwatch timer = new Stopwatch ();
+            System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch ();
             timer.Start ();
 
             int areaNameHash = am.areaName.GetHashCode ();
@@ -1136,34 +1052,33 @@ namespace Area
                 RebuildPointSearchData (am);
             }
 
-            if (graph == null)
+            if (externalGraph == null)
             {
-                var approximateCapacity = am.boundsFull.x * am.boundsFull.z + 100;
-                graph = new List<AreaNavNode> (approximateCapacity);
+                var appoximateCapacity = am.boundsFull.x * am.boundsFull.z + 100;
+                externalGraph = new List<IAreaNavNode> (appoximateCapacity);
             }
             else
-                graph.Clear ();
+                externalGraph.Clear ();
 
             var overrides = am.navOverrides;
             int linkIndex = 0;
 
             for (int i = pointSearchData.Count - 1; i >= 0; --i)
             {
-	            PointData pd = pointSearchData[i];
-                var point = pd.point;
+                var point = am.points[i];
 
                 // if (point.spotConfiguration != point.spotConfigurationWithDamage)
                 //     Debug.Log ($"{point.spotIndex} | SC != SCD: {point.spotConfiguration}, {point.spotConfigurationWithDamage}");
 
                 // Overrides are only valid if there is no damage to involved volume
                 bool overridePresentAndValid =
-                    overrides.ContainsKey (pd.point.spotIndex) &&
-                    !pd.point.spotHasDamagedPoints;
+                    overrides.ContainsKey (point.spotIndex) &&
+                    !point.spotHasDamagedPoints;
 
                 // Only floors can house nodes, and only if they are not neighbored by tall walls
                 bool configValidAndClear =
-                    pd.point.spotConfigurationWithDamage == configFloor &&
-                    IsNotNeighbouringWalls (pd);
+                    point.spotConfigurationWithDamage == configFloor &&
+                    IsNotNeighbouringWalls (point.spotIndex, am.points);
 
                 // If tileset defines restriction for a given group/subtype, take this back
                 if (configValidAndClear)
@@ -1181,80 +1096,84 @@ namespace Area
 
                 bool nodeNeeded = overridePresentAndValid || configValidAndClear;
 
-                if (nodeNeeded)
+                if (!nodeNeeded)
                 {
-                    float offset = 0f;
-                    if (overridePresentAndValid)
-                        offset = am.navOverrides[pd.point.spotIndex].offsetY;
-
-                    var pointPosition = pd.point.instancePosition;
-                    int nodeIndex = graph.Count;
-                    int pointIndex = pd.point.spotIndex;
-
-                    var node = new AreaNavNode ();
-                    graph.Add (node);
-
-                    node.SetPointIndex (pointIndex);
-                    node.SetPosition (offset != 0f ? pointPosition + Vector3.up * offset : pointPosition);
-                    node.SetNodeIndex (nodeIndex);
-                    pd.nodeIndex = nodeIndex;
+                    pointSearchData[i] = defaultNodeIndex;
+                    continue;
                 }
-                else
-                    pd.nodeIndex = defaultNodeIndex;
+
+                float offset = 0f;
+                if (overridePresentAndValid)
+                    offset = am.navOverrides[point.spotIndex].offsetY;
+
+                var node = new AreaNavNode ();
+                node.SetPointIndex (point.spotIndex);
+                node.SetPosition (offset != 0f ? point.instancePosition + Vector3.up * offset : point.instancePosition);
+                node.SetNodeIndex (externalGraph.Count);
+
+                pointSearchData[i] = node.GetNodeIndex ();
+                externalGraph.Add (node);
             }
 
             // Debug.Log ("Graph size: " + graph.Count);
 
-            for (int i = 0; i < graph.Count; ++i)
+            int nodeCount = externalGraph.Count;
+            linkCount = 0;
+
+            for (int i = 0; i < nodeCount; ++i)
             {
-	            IAreaNavNode node = graph[i];
+	            IAreaNavNode node = externalGraph[i];
 	            var pointIndex = node.GetPointIndex ();
-	            PointData pd = pointSearchData[pointIndex];
 
-	            SearchForLink (searchPresetStraight, pd, graph, overrides);
-	            SearchForLink (searchPresetDiagonal, pd, graph, overrides);
+	            SearchForLink (am, searchPresetStraight, pointIndex, externalGraph, overrides);
+	            SearchForLink (am, searchPresetDiagonal, pointIndex, externalGraph, overrides);
 
-                SearchForLink (searchPresetOverrideUp, pd, graph, overrides);
-                SearchForLink (searchPresetOverrideUpCorner, pd, graph, overrides);
-                SearchForLink (searchPresetOverrideDown, pd, graph, overrides);
+                SearchForLink (am, searchPresetOverrideUp, pointIndex, externalGraph, overrides);
+                SearchForLink (am, searchPresetOverrideUpCorner, pointIndex, externalGraph, overrides);
+                SearchForLink (am, searchPresetOverrideDown, pointIndex, externalGraph, overrides);
 
-	            SearchForLink (searchPresetJumpUp, pd, graph, overrides);
-	            SearchForLink (searchPresetJumpDown, pd, graph, overrides);
-	            SearchForLink (searchPresetJumpOverDrop, pd, graph, overrides);
-	            SearchForLink (searchPresetJumpOverClimb, pd, graph, overrides);
+	            SearchForLink (am, searchPresetJumpUp, pointIndex, externalGraph, overrides);
+	            SearchForLink (am, searchPresetJumpDown, pointIndex, externalGraph, overrides);
+	            SearchForLink (am, searchPresetJumpOverDrop, pointIndex, externalGraph, overrides);
+	            SearchForLink (am, searchPresetJumpOverClimb, pointIndex, externalGraph, overrides);
             }
 
             timer.Stop ();
-            // Debug.Log ("AN | GetNavigationNodes | Graph rebuild completed in " + timer.Elapsed.Milliseconds + " ms");
+
+            if (nodeCount != nodeCountLast || linkCount != linkCountLast)
+                Debug.Log ($"AN | GetNavigationNodes | Graph rebuild completed in {timer.Elapsed.Milliseconds} ms | Node count: {nodeCountLast} > {nodeCount} | Link count: {linkCountLast} > {linkCount}");
+            else
+                Debug.Log ($"AN | GetNavigationNodes | Graph rebuild completed in {timer.Elapsed.Milliseconds} ms | No changes to node/link count: {nodeCount}/{linkCount}");
+
+            nodeCountLast = nodeCount;
+            linkCountLast = linkCount;
         }
+
+        private static int linkCount = 0;
+
+        private static int nodeCountLast = 0;
+        private static int linkCountLast = 0;
 
         private static LinkSearchStep[] searchSequence;
         private static LinkSearchStep searchStep;
-        private static PointData searchOrigin;
-        private static PointData searchNeighbour;
-        private static PointData searchNeighbourAboveA;
-        private static PointData searchNeighbourAboveB;
-
+        private static AreaNavNode nodeRuntime;
         private static List<AreaNavLink> reusedLinks;
 
-        private static bool searchSequenceSuccessful;
-        private static bool searchStepSuccessful;
-
-        private static int searchIndexOfSequence = 0;
-        private static int searchIndexOfStep = 0;
-        private static int searchDirectionYNeg = 5;
-
-        private static int searchLinkIndex;
-        private static bool searchLinkValidated;
-
-        private static void SearchForLink (LinkSearchPreset preset, PointData origin, List<AreaNavNode> graphUsed, Dictionary<int, AreaDataNavOverride> overrides)
+        private static void SearchForLink
+        (
+            AreaManager am,
+            LinkSearchPreset preset,
+            int indexOrigin,
+            List<IAreaNavNode> graphUsed,
+            Dictionary<int, AreaDataNavOverride> overrides
+        )
         {
-            searchOrigin = origin;
+            var searchNeighbour = indexOrigin;
 
             var overridePolicyStart = preset.overridePolicyStart;
             if (overridePolicyStart == OverridePolicy.OverrideProhibited || overridePolicyStart == OverridePolicy.OverrideRequired)
             {
-                bool startIsOverride = overrides.ContainsKey (origin.point.spotIndex);
+                bool startIsOverride = overrides.ContainsKey (indexOrigin);
                 bool startOverrideRequired = overridePolicyStart == OverridePolicy.OverrideRequired;
 
                 // Bail if we don't satisfy start policy
@@ -1263,7 +1182,7 @@ namespace Area
             }
 
             // Each search preset contains multiple search sequences, so we iterate through preset.steps to get each
-            for (searchIndexOfSequence = 0; searchIndexOfSequence < preset.sequences.Length; ++searchIndexOfSequence)
+            for (var searchIndexOfSequence = 0; searchIndexOfSequence < preset.sequences.Length; searchIndexOfSequence += 1)
             {
                 // We retrieve the sequence to a reused variable to avoid getting the element from preset.sequences every time
                 // A search sequence is an array of step objects each containing a direction and a configuration mask
@@ -1271,41 +1190,42 @@ namespace Area
 
                 // It's important to reset the origin at each step, since it's modified in the process of sequence evaluation
                 // Each individual step is using it to continue to neighbours, so it's changed in each subsequent step to progress the chain
-                searchOrigin = origin;
-                searchSequenceSuccessful = false;
+                var searchOrigin = indexOrigin;
+                var searchSequenceSuccessful = false;
 
                 // We'll iterate through the steps until we're through
-                for (searchIndexOfStep = 0; searchIndexOfStep < searchSequence.Length; ++searchIndexOfStep)
+                for (var searchIndexOfStep = 0; searchIndexOfStep < searchSequence.Length; searchIndexOfStep += 1)
                 {
                     // We retrieve the step to a reused variable to avoid getting the element from searchSequence every time
                     searchStep = searchSequence[searchIndexOfStep];
                     bool lastStep = searchIndexOfStep == searchSequence.Length - 1;
 
                     // The step is considered successful when we encounter a match for configuration mask and verify vertical clearance
-                    searchStepSuccessful = false;
+                    var searchStepSuccessful = false;
 
                     // Origin point might not have a neighbour in a direction our step requires
                     // If neighbour is present, we retrieve it to a reused variable to avoid getting the element from searchOrigin.neighbours every time
-                    searchNeighbour = searchOrigin[searchStep.direction];
-                    if (searchNeighbour != null)
+                    var point = PointData.GetNeighbourPoint (searchOrigin, searchStep.direction, am.points);
+                    if (point != null)
                     {
+                        searchNeighbour = point.spotIndex;
                         // We need to verify if we have a match to currently examined neighbour configuration
-                        bool match = searchNeighbour.point.spotConfigurationWithDamage == searchStep.mask;
+                        bool match = point.spotConfigurationWithDamage == searchStep.mask;
                         if (match || (lastStep && !preset.strictDestination))
                         {
                             // Got a match! Next, we need to verify that the point has enough vertical clearance for the mechs: two empty spots above the examined one
                             // We take over the reused variable, since current step won't have any further use for it in it's original context
-                            searchNeighbourAboveA = searchNeighbour[searchDirectionYNeg];
-                            if (searchNeighbourAboveA != null)
+                            point = PointData.GetNeighbourPoint (searchNeighbour, (int)PointNeighbourDirection.YNeg, am.points);
+                            if (point != null)
                             {
-                                if (searchNeighbourAboveA.point.spotConfigurationWithDamage == configEmpty)
+                                if (point.spotConfigurationWithDamage == configEmpty)
                                 {
                                     // Great, we verified that we have 1 empty spot above the potential link destination - time to verify we have second half of empty space further up
                                     // We take over the reused variable yet again (originally it was at the floor, then it was in an empty cell above it, now it's 1 step up again)
-                                    searchNeighbourAboveB = searchNeighbourAboveA[searchDirectionYNeg];
-                                    if (searchNeighbourAboveB != null)
+                                    point = PointData.GetNeighbourPoint (point.spotIndex, (int)PointNeighbourDirection.YNeg, am.points);
+                                    if (point != null)
                                     {
-                                        if (searchNeighbourAboveB.point.spotConfigurationWithDamage == configEmpty)
+                                        if (point.spotConfigurationWithDamage == configEmpty)
                                         {
                                             // Awesome - we're not on top of the level, but we had two empty cells above the floor point in this step - vertical clearance is guaranteed
                                             searchStepSuccessful = true;
@@ -1332,7 +1252,7 @@ namespace Area
                         var overridePolicyDestination = searchStep.overridePolicy;
                         if (overridePolicyDestination == OverridePolicy.OverrideProhibited || overridePolicyDestination == OverridePolicy.OverrideRequired)
                         {
-                            bool destinationIsOverride = overrides.ContainsKey (searchNeighbour.point.spotIndex);
+                            bool destinationIsOverride = overrides.ContainsKey (searchNeighbour);
                             bool destinationOverrideRequired = overridePolicyDestination == OverridePolicy.OverrideRequired;
 
                             // Bail if we don't satisfy destination policy
@@ -1362,13 +1282,13 @@ namespace Area
                     }
                 }
 
-                if (searchSequenceSuccessful && searchNeighbour.nodeIndex != defaultNodeIndex)
+                var nodeIndexNeighbour = pointSearchData[searchNeighbour];
+                if (searchSequenceSuccessful && nodeIndexNeighbour != defaultNodeIndex)
                 {
                     // Next, we fetch the start and destination nodes to prepare for last checks
-                    var nodeDestination = graphUsed[searchNeighbour.nodeIndex];
-                    var nodeStart = graphUsed[origin.nodeIndex];
-
-                    searchLinkValidated = true;
+                    var nodeDestination = graphUsed[nodeIndexNeighbour];
+                    var nodeStart = graphUsed[pointSearchData[indexOrigin]];
+                    var searchLinkValidated = true;
 
                     // If the starting node (one attached to search origin point) has no link collection, we're safe to add a new node to newly created collection
                     if (nodeStart.GetLinks () == null)
@@ -1378,7 +1298,7 @@ namespace Area
                     else
                     {
                         reusedLinks = nodeStart.GetLinks ();
-                        for (searchLinkIndex = 0; searchLinkIndex < reusedLinks.Count; ++searchLinkIndex)
+                        for (var searchLinkIndex = 0; searchLinkIndex < reusedLinks.Count; searchLinkIndex += 1)
                         {
                             var searchLinkExamined = reusedLinks[searchLinkIndex];
                             if (searchLinkExamined.type == preset.type && searchLinkExamined.destinationIndex == nodeDestination.GetNodeIndex ())
@@ -1394,6 +1314,8 @@ namespace Area
                         reusedLinks = nodeStart.GetLinks ();
                         reusedLinks.Add (new AreaNavLink (preset.type, nodeDestination.GetNodeIndex ()));
                     }
+
+                    linkCount += 1;
                 }
             }
         }
@@ -1429,77 +1351,36 @@ namespace Area
 
 
 
-        private static int[] wallCheckDirections = new int[]
+        private static readonly int[] wallCheckDirections = new int[]
         {
-        (int)PointNeighbourDirection.XPos,
-        (int)PointNeighbourDirection.XNeg,
-        (int)PointNeighbourDirection.ZPos,
-        (int)PointNeighbourDirection.ZNeg
+            (int)PointNeighbourDirection.XPos,
+            (int)PointNeighbourDirection.XNeg,
+            (int)PointNeighbourDirection.ZPos,
+            (int)PointNeighbourDirection.ZNeg
         };
 
-
-
-        private static bool IsTopEmpty (byte b)
+        private static bool IsNotNeighbouringWalls (int index, List<AreaVolumePoint> points)
         {
-            return (b & 240) == 0;
-        }
-
-
-        //private static int count;
-
-        private static bool IsNotNeighbouringWalls (PointData wallCheckOrigin)
-        {
-            // Initially we assume that a given origin has no problematic neighbours
-            var wallCheckResult = true;
-
             for (int i = 0; i < wallCheckDirections.Length; ++i)
             {
                 // We grab a horizontal direction from a list of used directions (contains 4 for now, but subject to change, maybe some cases will need diagonals)
                 var wallCheckDirection = wallCheckDirections[i];
 
                 // Retrieving a horizontal neighbour into a temporary variable - we'll check whether it houses the bottom of some wall
-                var wallCheckNeighbourBottom = wallCheckOrigin[wallCheckDirection];
-                if (wallCheckNeighbourBottom != null)
+                var point = PointData.GetNeighbourPoint (index, wallCheckDirection, points);
+                if (point != null)
                 {
-                    var wallCheckNeighborTop = wallCheckNeighbourBottom[searchDirectionYNeg];
-                    if (wallCheckNeighborTop != null)
+                    point = PointData.GetNeighbourPoint (point.spotIndex, (int)PointNeighbourDirection.YNeg, points);
+                    if (point != null)
                     {
-                        if (!IsTopEmpty (wallCheckNeighborTop.point.spotConfigurationWithDamage))
-                        {
-                            wallCheckResult = false;
-                            break;
-                        }
+                        var topEmpty = (point.spotConfigurationWithDamage & TilesetUtility.configurationTopMask) == 0;
+                        if (!topEmpty)
+                            return false;
                     }
                 }
             }
 
-            return wallCheckResult;
-        }
-
-
-
-
-
-        public static byte[] maskForFloorTermination_XPos = new byte[] { 1, 9, 8, 17, 153, 136 };
-        public static byte[] maskForFloorTermination_ZPos = new byte[] { 8, 12, 4, 136, 204, 68 };
-        public static byte[] maskForFloorTermination_XNeg = new byte[] { 4, 6, 2, 68, 102, 34 };
-        public static byte[] maskForFloorTermination_ZNeg = new byte[] { 2, 3, 1, 34, 51, 17 };
-
-        public static bool IsNodeVisible (IAreaNavNode nodeA, IAreaNavNode nodeB, float floorOffsetA, float floorOffsetB, float maxRange, int layerMask)
-        {
-            Vector3 sourcePosition = nodeA.GetPosition () + new Vector3 (0f, floorOffsetA, 0f);
-            Vector3 targetPosition = nodeB.GetPosition () + new Vector3 (0f, floorOffsetB, 0f);
-
-            bool visible = false;
-            float distance = Vector3.Distance (sourcePosition, targetPosition);
-            if (distance < maxRange)
-            {
-                RaycastHit hit;
-                if (!Physics.Raycast (sourcePosition, (targetPosition - sourcePosition), out hit, distance + 1f, layerMask, QueryTriggerInteraction.UseGlobal))
-                    visible = true;
-            }
-
-            return visible;
+            return true;
         }
     }
 

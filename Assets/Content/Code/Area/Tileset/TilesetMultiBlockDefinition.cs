@@ -49,7 +49,7 @@ namespace Area
 
             Vector3Int boundsTransformed = bounds;
             Vector3Int pivotPositionTransformed = pivotPosition;
-            int pivotIndexTransformed = AreaUtility.GetIndexFromVolumePosition (pivotPosition, bounds, skipBoundsCheck: true);
+            int pivotIndexTransformed = TilesetUtility.GetIndexFromVolumePosition (pivotPosition, bounds);
 
             for (int r = 0; r < rotation; ++r)
             {
@@ -76,7 +76,7 @@ namespace Area
                 }
             }
 
-            pivotPositionTransformed = AreaUtility.GetVolumePositionFromIndex (pivotIndexTransformed, boundsTransformed, log: false);
+            pivotPositionTransformed = TilesetUtility.GetVolumePositionFromIndex (pivotIndexTransformed, boundsTransformed);
 
             return new TransformedData
             (
