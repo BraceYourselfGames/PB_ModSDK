@@ -73,7 +73,9 @@ branches:
 - comment:
     comment: This branch allows you to go to breakthrough or (if condition is satisfied) to a sidequest province.
   preferences:
+    branchActiveExcluded: true
     modifiersUnique: false
+    modifierVisitsTracked: true
   checksGlobal:
   - !OverworldValidateResolvedInt
     resolver: !OverworldIntValueMemory
