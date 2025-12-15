@@ -136,11 +136,19 @@ namespace PhantomBrigade.ModTools
         }
 
         [PropertyOrder (-1)]
-        [Button ("Load from files")]
+        [Button ("Load from files"), ButtonGroup]
         private void LoadFromModSelected ()
         {
             if (DataManagerMod.modSelected != null)
                 LoadFromMod (DataManagerMod.modSelected);
+        }
+        
+        [PropertyOrder (-1)]
+        [Button ("Apply to Configs"), ButtonGroup]
+        private void ApplyToConfigs ()
+        {
+            if (DataManagerMod.modSelected != null)
+                ModTextHelper.ApplyTextChangesToConfigs (DataManagerMod.modSelected);
         }
 
         // [Button ("Load from folder")]
@@ -226,6 +234,12 @@ namespace PhantomBrigade.ModTools
                     modData.textEdits.languages.Add (languageKey, new ModConfigLocEditLanguage ());
                             
                 var language = modData.textEdits.languages[languageKey];
+                if (language == null)
+                {
+                    language = new ModConfigLocEditLanguage ();
+                    modData.textEdits.languages[languageKey] = language;
+                }
+                
                 if (language.sectors == null)
                     language.sectors = new SortedDictionary<string, ModConfigLocSector> ();
                             
@@ -323,7 +337,7 @@ namespace PhantomBrigade.ModTools
             var sectorsWorking = DataManagerText.libraryData.sectors;
             if (sectorsWorking == null)
             {
-                Debug.LogWarning ("Can't generate text edits: SDK text library not found");
+                Debug.LogWarning ("Can't generate text edits: mod text library not found");
                 return;
             }
 
@@ -452,6 +466,97 @@ namespace PhantomBrigade.ModTools
                 else
                     modData.textEdits.UpdateChildren ();
             }
+            
+            // DataManagerMod.SaveMod (mod);
+            #endif
+        }
+        
+        public static void ApplyTextChangesToConfigs (DataContainerModData modData)
+        {
+            #if UNITY_EDITOR
+            bool modConfigsUsed =
+                modData != null && 
+                modData.hasProjectFolder && 
+                Directory.Exists (modData.GetModPathConfigs ());
+            
+            if (!modConfigsUsed)
+            {
+                Debug.LogWarning ("Can't apply text edits: mod config folder not found");
+                return;
+            }
+            
+            if (modData.textEdits == null || modData.textEdits.languages == null)
+            {
+                Debug.LogWarning ("Can't apply text edits: mod config has no edits");
+                return;
+            }
+            
+            modData.RefreshConfigsVersion ();
+            DataContainerModData.selectedMod = modData;
+            Debug.Log ($"Config editing entered with mod {modData.id}");
+            
+            DataManagerText.LoadLibrary ();
+            
+            var sectorsWorking = DataManagerText.libraryData.sectors;
+            if (sectorsWorking == null)
+            {
+                Debug.LogWarning ("Can't apply text edits: mod text library not found");
+                return;
+            }
+
+            foreach (var kvp in modData.textEdits.languages)
+            {
+                if (!string.Equals (kvp.Key, "English"))
+                {
+                    Debug.LogWarning ($"Skipping language {kvp.Key}, forced import into Configs not supported for now...");
+                    continue;
+                }
+
+                var language = kvp.Value;
+                if (language == null || language.sectors == null)
+                    continue;
+
+                foreach (var kvp2 in language.sectors)
+                {
+                    var sectorKey = kvp2.Key;
+                    var sectorEdits = kvp2.Value;
+                    if (sectorEdits == null || sectorEdits.text == null || sectorEdits.text.Count == 0)
+                        continue;
+
+                    foreach (var kvp3 in sectorEdits.text)
+                    {
+                        var entryKey = kvp3.Key;
+                        var entryEdit = kvp3.Value;
+                        if (entryEdit == null || entryEdit.text == null)
+                            continue;
+                        
+                        var sectorWorking = sectorsWorking.TryGetValue (sectorKey, out var v) ? v : null;
+                        if (sectorWorking == null)
+                        {
+                            Debug.LogWarning ($"Failed to apply text edit to key {sectorKey}/{entryKey}: sector not found in working library");
+                            continue;
+                        }
+
+                        var entriesWorking = sectorWorking.entries;
+                        if (entriesWorking == null)
+                            entriesWorking = new SortedDictionary<string, DataBlockTextEntryMain> ();
+                        
+                        var entryWorking = entriesWorking.TryGetValue (entryKey, out var v2) ? v2 : null;
+                        if (entryWorking == null)
+                        {
+                            entryWorking = new DataBlockTextEntryMain ();
+                            entryWorking.temp = false;
+                            entryWorking.text = entryEdit.text;
+                        }
+                            
+                        Debug.LogWarning ($"Applied text edit to key {sectorKey}/{entryKey}:\n{entryEdit.text}");
+                        entryWorking.text = entryEdit.text;
+                        entriesWorking[entryKey] = entryWorking;
+                    }
+                }
+            }
+            
+            DataManagerText.SaveLibrary ();
             
             // DataManagerMod.SaveMod (mod);
             #endif

@@ -618,14 +618,14 @@ namespace PhantomBrigade.SDK.ModTools
             var pathImportTextEdits = Path.Combine (pathSelected, DataContainerModData.localizationEditsFolderName);
             DirectoryInfo dirImportTextEdits = new DirectoryInfo (pathImportTextEdits);
             if (dirImportTextEdits.Exists && EditorUtility.DisplayDialog 
-                (
-                    "Import LocalizationEdits?", 
-                    $"Discovered the LocalizationEdits (text modifications) folder in the selected import folder. Would you like to load its contents into the selected mod project (ID {modData.id})? The imported text edits might overwrite existing text edits."+ 
-                    $"\n\nFrom folder: \n{pathSelected}/LocalizationEdits" + 
-                    $"\n\nTo project metadata: \n(Edits are stored in the project metadata, no per-edit files used until export)",
-                    "Import LocalizationEdits", 
-                    "Skip")
-               )
+            (
+                "Import LocalizationEdits?", 
+                $"Discovered the LocalizationEdits (text modifications) folder in the selected import folder. Would you like to load its contents into the selected mod project (ID {modData.id})? The imported text edits might overwrite existing text edits."+ 
+                $"\n\nFrom folder: \n{pathSelected}/LocalizationEdits" + 
+                $"\n\nTo project metadata: \n(Edits are stored in the project metadata, no per-edit files used until export)",
+                "Import LocalizationEdits", 
+                "Skip")
+            )
             {
                 try
                 {
@@ -635,6 +635,18 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     Debug.LogException (e);
                 }
+            }
+
+            bool textEditsPresent = dirImportTextEdits.Exists && modData.textEdits?.languages != null && modData.textEdits.languages.Count > 0;
+            if (EditorUtility.DisplayDialog
+            (
+                "Apply text edits to Configs?",
+                $"The mod has imported text edits. Would you like to apply them directly to Configs so that they show up in data editors?",
+                "Apply to Configs",
+                "Skip")
+            )
+            {
+                ModTextHelper.ApplyTextChangesToConfigs (modData);
             }
         }
     }
