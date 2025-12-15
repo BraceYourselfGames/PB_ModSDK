@@ -357,6 +357,7 @@ namespace PhantomBrigade.Data
         public bool trackVisitUniqueness = true;
         public bool trackBranchUniqueness = true;
         
+        public string group;
         public int priority = 0;
         public bool tinted = false;
         

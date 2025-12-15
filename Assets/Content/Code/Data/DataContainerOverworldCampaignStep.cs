@@ -7,9 +7,17 @@ using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
+    [LabelWidth (160f)]
     public class CampaignStepBranchPrefs
     {
+        [ToggleLeft]
+        public bool branchActiveExcluded = true;
+        
+        [ToggleLeft]
         public bool modifiersUnique = true;
+        
+        [ToggleLeft]
+        public bool modifierVisitsTracked = true;
     }
     
     public class CampaignStepBranch
@@ -17,6 +25,7 @@ namespace PhantomBrigade.Data
         [DropdownReference (true)]
         public DataBlockComment comment;
 
+        [DropdownReference (true)]
         public CampaignStepBranchPrefs preferences;
 
         [DropdownReference]

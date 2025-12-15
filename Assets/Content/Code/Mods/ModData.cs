@@ -388,7 +388,9 @@ namespace PhantomBrigade.Mods
         [ReadOnly, PropertyTooltip ("Add asset bundles via the bottom right component menu to enable this flag")]
         public bool includesAssetBundles;
 
-        [InfoBox ("This mod might not load in PB 2.0 if you leave this field empty or do not enter \"2.0\" into it.", InfoMessageType.Warning, VisibleIf = "IsVersionWarningVisible")]
+        [InfoBox ("This mod might not load in PB 2.x if you leave this unchecked or do not enter \"2.0\" into gameVersionMin.", InfoMessageType.Warning, VisibleIf = "IsVersionWarningVisible")]
+        public bool gameVersion2Compatible;
+        
         public string gameVersionMin;
 
         [YamlIgnore, ReadOnly, HideInInspector]
@@ -412,7 +414,7 @@ namespace PhantomBrigade.Mods
 
         private bool IsVersionWarningVisible ()
         {
-            return string.IsNullOrEmpty (gameVersionMin) || !gameVersionMin.StartsWith ("2.");
+            return !gameVersion2Compatible && (string.IsNullOrEmpty (gameVersionMin) || !gameVersionMin.StartsWith ("2."));
         }
 
         public void OnAfterDeserialization (string directory, string path)
