@@ -115,6 +115,32 @@ namespace Area
         XNegZNeg = 9
     }
 
+    public static class WorldSpace
+    {
+        public static class Compass
+        {
+            // AVP pointsInSpot
+            public const int PointSelf = 0;
+            public const int East = 1;
+            public const int North = 2;
+            public const int NorthEast = 3;
+            public const int Down = 4;
+            public const int DownEast = 5;
+            public const int DownNorth = 6;
+            public const int DownNorthEast = 7;
+
+            // AVP pointsWithSurroundingSpots
+            public const int UpSouthWest = 0;
+            public const int UpSouth = 1;
+            public const int UpWest = 2;
+            public const int Up = 3;
+            public const int SouthWest = 4;
+            public const int South = 5;
+            public const int West = 6;
+            public const int SpotSelf = 7;
+        }
+    }
+
     public class AreaVolumePointSearchData
     {
         public AreaVolumePoint point;

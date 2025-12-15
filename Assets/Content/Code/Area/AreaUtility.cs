@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using PhantomBrigade;
 using PhantomBrigade.Data;
 
@@ -7,12 +9,12 @@ namespace Area
 {
     public static class AreaUtility
     {
-        public static readonly Vector3 spotOffset = new Vector3 (-1.5f, 1.5f, -1.5f);
-        static readonly Vector3Int invalidVolumePosition = Vector3Int.size1x1x1Neg;
+        public const float pointColliderInflation = 0.1f;
+        public static readonly Vector3 spotOffset = new Vector3 (-1f, 1f, -1f) * TilesetUtility.blockAssetHalfSize;
         public const int invalidIndex = -1;
 
-        private static readonly Dictionary<int, int[]> reusedExternalIndexes = new Dictionary<int, int[]> ();
-        private static int[] reusedIntegerArray8;
+        private static Dictionary<int, int[]> reusedExternalIndexes = new Dictionary<int, int[]> ();
+        private static int[] reusedIntegerArray8 = new int[8];
 
         private static int reusedInteger = 0;
         private static int reusedExternalIndex = -1;
@@ -33,102 +35,9 @@ namespace Area
                 return "(null)";
         }
 
-        public enum Direction
-        {
-            XPos = 0,
-            XNeg = 1,
-            YPos = 2,
-            YNeg = 3,
-            ZPos = 4,
-            ZNeg = 5,
-        }
-
         public static void ClearCache ()
         {
             reusedExternalIndexes.Clear ();
-        }
-
-        public static int GetNeighbourIndexFromDirection (int externalStartIndex, Direction direction, Vector3Int boundsArea)
-        {
-            if (externalStartIndex == invalidIndex)
-                return invalidIndex;
-
-            reusedPositionStart = GetVolumePositionFromIndex (externalStartIndex, boundsArea);
-
-            if (direction == Direction.XPos)
-                reusedPositionFinal = new Vector3Int (reusedPositionStart.x + 1, reusedPositionStart.y, reusedPositionStart.z);
-            else if (direction == Direction.XNeg)
-                reusedPositionFinal = new Vector3Int (reusedPositionStart.x - 1, reusedPositionStart.y, reusedPositionStart.z);
-            else if (direction == Direction.YPos)
-                reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y + 1, reusedPositionStart.z);
-            else if (direction == Direction.YNeg)
-                reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y - 1, reusedPositionStart.z);
-            else if (direction == Direction.ZPos)
-                reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y, reusedPositionStart.z + 1);
-            else if (direction == Direction.ZNeg)
-                reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y, reusedPositionStart.z - 1);
-            else
-                reusedPositionFinal = invalidVolumePosition;
-
-            reusedExternalIndex = invalidIndex;
-            if
-            (
-                reusedPositionFinal.x >= 0 &&
-                reusedPositionFinal.y >= 0 &&
-                reusedPositionFinal.z >= 0 &&
-                reusedPositionFinal.x < boundsArea.x &&
-                reusedPositionFinal.y < boundsArea.y &&
-                reusedPositionFinal.z < boundsArea.z
-            )
-                reusedExternalIndex = GetIndexFromVolumePosition (reusedPositionFinal, boundsArea);
-
-            return reusedExternalIndex;
-        }
-
-        public static int[] GetNeighbourIndexesFromDirections (int externalStartIndex, Direction[] directions, Vector3Int boundsArea)
-        {
-            int size = directions.Length;
-            if (!reusedExternalIndexes.ContainsKey (size))
-                reusedExternalIndexes.Add (size, new int[size]);
-
-            reusedPositionStart = GetVolumePositionFromIndex (externalStartIndex, boundsArea);
-            int[] externalIndexes = reusedExternalIndexes[size];
-
-            for (int i = 0; i < directions.Length; ++i)
-            {
-                Direction direction = directions[i];
-
-                if (direction == Direction.XPos)
-                    reusedPositionFinal = new Vector3Int (reusedPositionStart.x + 1, reusedPositionStart.y, reusedPositionStart.z);
-                else if (direction == Direction.XNeg)
-                    reusedPositionFinal = new Vector3Int (reusedPositionStart.x - 1, reusedPositionStart.y, reusedPositionStart.z);
-                else if (direction == Direction.YPos)
-                    reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y + 1, reusedPositionStart.z);
-                else if (direction == Direction.YNeg)
-                    reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y - 1, reusedPositionStart.z);
-                else if (direction == Direction.ZPos)
-                    reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y, reusedPositionStart.z + 1);
-                else if (direction == Direction.ZNeg)
-                    reusedPositionFinal = new Vector3Int (reusedPositionStart.x, reusedPositionStart.y, reusedPositionStart.z - 1);
-                else
-                    reusedPositionFinal = invalidVolumePosition;
-
-                reusedExternalIndex = invalidIndex;
-                if
-                (
-                    reusedPositionFinal.x >= 0 &&
-                    reusedPositionFinal.y >= 0 &&
-                    reusedPositionFinal.z >= 0 &&
-                    reusedPositionFinal.x < boundsArea.x &&
-                    reusedPositionFinal.y < boundsArea.y &&
-                    reusedPositionFinal.z < boundsArea.z
-                )
-                    reusedExternalIndex = GetIndexFromVolumePosition (reusedPositionFinal, boundsArea);
-
-                externalIndexes[i] = reusedExternalIndex;
-            }
-
-            return externalIndexes;
         }
 
         public static void GetNeighbourIndexesInXxYxZ (int externalStartIndex, Vector3Int boundsNeighbourhood, Vector3Int pivotPosition, Vector3Int boundsArea, int[] indexes)
@@ -154,7 +63,7 @@ namespace Area
                             reusedPositionFinal.y < boundsArea.y &&
                             reusedPositionFinal.z < boundsArea.z
                         )
-                            reusedExternalIndex = GetIndexFromVolumePosition (reusedPositionFinal, boundsArea);
+                            reusedExternalIndex = GetIndexFromInternalPosition (reusedPositionFinal, boundsArea);
 
                         indexes[reusedInternalIndex] = reusedExternalIndex;
                     }
@@ -173,7 +82,7 @@ namespace Area
 
         public static int[] GetNeighbourIndexesInXxYxZ (int externalStartIndex, Vector3Int boundsNeighbourhood, Vector3Int pivotPosition, Vector3Int boundsArea)
         {
-            int size = boundsNeighbourhood.x * boundsNeighbourhood.y * boundsNeighbourhood.z;
+            var size = boundsNeighbourhood.x * boundsNeighbourhood.y * boundsNeighbourhood.z;
             if (!reusedExternalIndexes.ContainsKey (size))
             {
                 // Debug.Log ("Attempting to add new size to reused external indexes: " + size + " | Total size count: " + reusedExternalIndexes.Count);
@@ -181,36 +90,22 @@ namespace Area
             }
 
             reusedPositionStart = GetVolumePositionFromIndex (externalStartIndex, boundsArea);
-            int[] externalIndexes = reusedExternalIndexes[size];
+            var externalIndexes = reusedExternalIndexes[size];
 
-            for (int y = 0; y < boundsNeighbourhood.y; ++y)
+            for (var y = 0; y < boundsNeighbourhood.y; y += 1)
             {
-                for (int z = 0; z < boundsNeighbourhood.z; ++z)
+                for (var z = 0; z < boundsNeighbourhood.z; z += 1)
                 {
-                    for (int x = 0; x < boundsNeighbourhood.x; ++x)
+                    for (var x = 0; x < boundsNeighbourhood.x; x += 1)
                     {
-                        Vector3Int externalFinalPosition = new Vector3Int
+                        var externalFinalPosition = new Vector3Int
                         (
                             reusedPositionStart.x + x + pivotPosition.x,
                             reusedPositionStart.y + y + pivotPosition.y,
                             reusedPositionStart.z + z + pivotPosition.z
                         );
-
-                        int internalIndex = x + boundsNeighbourhood.x * z + boundsNeighbourhood.x * boundsNeighbourhood.z * y;
-                        int externalIndex = -1;
-
-                        if
-                        (
-                            externalFinalPosition.x >= 0 &&
-                            externalFinalPosition.y >= 0 &&
-                            externalFinalPosition.z >= 0 &&
-                            externalFinalPosition.x < boundsArea.x &&
-                            externalFinalPosition.y < boundsArea.y &&
-                            externalFinalPosition.z < boundsArea.z
-                        )
-                            externalIndex = GetIndexFromVolumePosition (externalFinalPosition, boundsArea);
-
-                        externalIndexes[internalIndex] = externalIndex;
+                        var internalIndex = x + boundsNeighbourhood.x * z + boundsNeighbourhood.x * boundsNeighbourhood.z * y;
+                        externalIndexes[internalIndex] = GetIndexFromInternalPosition (externalFinalPosition, boundsArea);
                     }
                 }
             }
@@ -222,6 +117,9 @@ namespace Area
 
         public static int[] GetNeighbourIndexesIn2x2x2 (int index, Vector3Int pivotPosition, Vector3Int boundsFull)
         {
+            if (reusedIntegerArray8 == null || reusedIntegerArray8.Length != 8)
+                reusedIntegerArray8 = new int[8];
+
             reusedIntegerArray8 = GetNeighbourIndexesInXxYxZ (index, Vector3Int.size2x2x2, pivotPosition, boundsFull);
 
             reusedInteger = reusedIntegerArray8[2];
@@ -263,32 +161,35 @@ namespace Area
                 ? position.x + position.z * bounds.x + position.y * bounds.x * bounds.z
                 : invalidIndex;
 
-        public static int GetIndexFromInternalPosition (int x, int z, int boundsX, int boundsZ)
-        {
-            var boundsFit =
-                x >= 0 && x < boundsX &&
-                z >= 0 && z < boundsZ;
-            return boundsFit ? x + z * boundsX : invalidIndex;
-        }
-        
         public static int GetIndexFromInternalPosition (Vector3Int position, Vector3Int bounds)
         {
             // Debug.Log ("AU | GetIndexFromInternalPosition | " + position);
             if (GetIsInBounds (position, bounds))
             {
                 return position.x
-                       + position.z * bounds.x
-                       + position.y * bounds.x * bounds.z;
+                     + position.z * bounds.x
+                     + position.y * bounds.x * bounds.z;
             }
             return invalidIndex;
         }
 
-        public static Vector3Int GetInternalSpotPositionFromWorld (Vector3 positionInWorld, Vector3 positionOfVolume)
+        public static int GetIndexFromInternalPosition (int x, int z, int boundsX, int boundsZ)
         {
-	        var positionCorrected = Vector3.Scale ((positionInWorld - positionOfVolume), new Vector3 (1f, -1f, 1f)) / TilesetUtility.blockAssetSize;
-	        var positionFinal = new Vector3Int (Mathf.FloorToInt (positionCorrected.x), Mathf.FloorToInt (positionCorrected.y), Mathf.FloorToInt (positionCorrected.z));
+            bool boundsFit =
+                x >= 0 && x < boundsX &&
+                z >= 0 && z < boundsZ;
 
-	        return positionFinal;
+            // Debug.Log ("AU | GetIndexFromInternalPosition | " + position);
+            if (boundsFit)
+            {
+                return
+                (
+                    x +
+                    z * boundsX
+                );
+            }
+            else
+                return invalidIndex;
         }
 
         public static Vector3Int GetInternalPointPositionFromWorld (Vector3 positionInWorld, Vector3 positionOfVolume)
@@ -299,30 +200,25 @@ namespace Area
 	        return positionFinal;
         }
 
-        public static bool GetIsInBounds (Vector3Int pos, Vector3Int bounds) =>
-	        pos.x >= 0 &&
-	               pos.x < bounds.x &&
-	               pos.y >= 0 &&
-	               pos.y < bounds.y &&
-	               pos.z >= 0 &&
+        public static bool GetIsInBounds (Vector3Int pos, Vector3Int bounds)
+        {
+	        return pos.x >= 0 &
+	               pos.x < bounds.x &
+	               pos.y >= 0 &
+	               pos.y < bounds.y &
+	               pos.z >= 0 &
 	               pos.z < bounds.z;
-
+        }
         public static int GetIndexFromWorldPosition (Vector3 positionInWorld, Vector3 positionOfVolume, Vector3Int bounds)
         {
             // Debug.Log ("AU | GetIndexFromWorldPosition | PW: " + positionInWorld + " | PC: " + reusedPositionCorrected + " | PF: " + reusedPositionFinal);
-            return GetIndexFromVolumePosition (GetInternalPointPositionFromWorld(positionInWorld, positionOfVolume), bounds);
+            return GetIndexFromInternalPosition (GetInternalPointPositionFromWorld(positionInWorld, positionOfVolume), bounds);
         }
 
-        public static Vector3Int GetVolumePositionFromIndex (int index, Vector3Int bounds, bool log = true)
+        public static Vector3Int GetVolumePositionFromIndex (int index, Vector3Int bounds)
         {
             if (bounds.x == 0 || bounds.z == 0)
-            {
-                if (log)
-                {
-                    Debug.LogError ("Division by zero in bounds " + bounds);
-                }
-                return invalidVolumePosition;
-            }
+                Debug.LogError ("Division by zero in bounds " + bounds);
             return new Vector3Int (index % bounds.x, index / (bounds.z * bounds.x), (index / bounds.x) % bounds.z);
         }
 
@@ -497,6 +393,26 @@ namespace Area
             return result;
         }
 
+        public static void RecheckColumnForRubble (AreaVolumePoint pointCurrent, bool destroyedPointPresent)
+        {
+            if (!destroyedPointPresent && pointCurrent.instancesRubble != null)
+            {
+                for (int i = 0; i < pointCurrent.instancesRubble.Count; ++i)
+                    pointCurrent.instancesRubble[i].SetActive (false);
+                pointCurrent.instancesRubble = null;
+            }
+
+            if (pointCurrent.pointState == AreaVolumePointState.Full)
+                destroyedPointPresent = false;
+
+            if (pointCurrent.pointsInSpot != null)
+            {
+                AreaVolumePoint pointBelow = pointCurrent.pointsInSpot[4];
+                if (pointBelow != null)
+                    RecheckColumnForRubble (pointBelow, destroyedPointPresent);
+            }
+        }
+
         public static int[] configurationIndexRemapping = new int[] { 0, 1, 3, 2, 4, 5, 7, 6 };
 
         public static Vector3 GetPropOffsetAsVector (AreaPropPrototypeData prototype, float offsetX, float offsetZ, int rotation, Quaternion rootRotation)
@@ -554,6 +470,637 @@ namespace Area
 
             if (Physics.Raycast (groundingRay, out var groundingHit, 200f, LayerMasks.environmentMask))
                 return groundingHit.point;
+            return point;
+        }
+
+        #if !PB_MODSDK
+        public static void SaveIntegrityToList (AreaManager am, List<DataBlockAreaIntegrity> integrities)
+        {
+            if (am == null || am.points == null || integrities == null)
+                return;
+
+            for (int pointIndex = 0; pointIndex < am.points.Count; ++pointIndex)
+            {
+                AreaVolumePoint pointSource = am.points[pointIndex];
+                if
+                (
+                    pointSource.pointState != AreaVolumePointState.Empty &&
+                    pointSource.integrity < 1f
+                )
+                {
+                    var integrity = new DataBlockAreaIntegrity
+                    {
+                        i = pointIndex,
+                        v = pointSource.integrity
+                    };
+
+                    integrities.Add (integrity);
+                }
+            }
+        }
+        #endif
+
+        public static float GetNearestFloorHeight (float y) =>
+            Mathf.Round ((y + TilesetUtility.blockAssetHalfSize) / TilesetUtility.blockAssetSize)
+                * TilesetUtility.blockAssetSize
+                - TilesetUtility.blockAssetHalfSize;
+
+
+        #if !PB_MODSDK
+        private static readonly List<AreaVolumePoint> pointOriginsForStructureRescan = new List<AreaVolumePoint> ();
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void TryAddingScanOrigin (AreaVolumePoint p)
+        {
+            if (p == null)
+                return;
+            if (p.pointState == AreaVolumePointState.Full & !p.simulatedChunkPresent & !p.indestructibleAny)
+                pointOriginsForStructureRescan.Add (p);
+        }
+
+        public static void ScanNeighborsDisconnectedOnDestruction
+        (
+            AreaVolumePoint pointDestroyed,
+            List<AreaVolumePoint> points,
+            bool scheduleSimulation = true,
+            List<AreaVolumePoint> pointsToDestroy = null
+        )
+        {
+            if (points == null)
+                return;
+
+            var pointsCount = points.Count;
+            if (pointsCount == 0)
+                return;
+
+            pointOriginsForStructureRescan.Clear ();
+            TryAddingScanOrigin (pointDestroyed.pointsInSpot[WorldSpace.Compass.Down]);
+            TryAddingScanOrigin (pointDestroyed.pointsInSpot[WorldSpace.Compass.East]);
+            TryAddingScanOrigin (pointDestroyed.pointsWithSurroundingSpots[WorldSpace.Compass.West]);
+            TryAddingScanOrigin (pointDestroyed.pointsInSpot[WorldSpace.Compass.North]);
+            TryAddingScanOrigin (pointDestroyed.pointsWithSurroundingSpots[WorldSpace.Compass.South]);
+            TryAddingScanOrigin (pointDestroyed.pointsWithSurroundingSpots[WorldSpace.Compass.Up]);
+
+            var log = DataShortcuts.sim.debugCombatStructureAnalysis;
+            if (log)
+                Debug.Log ($"After damage at point {pointDestroyed.spotIndex}, there are {pointOriginsForStructureRescan.Count} surrounding points requiring structure connection check");
+
+            if (pointOriginsForStructureRescan.Count == 0)
+                return;
+
+            var countDisconnected = 0;
+            foreach (var pointOrigin in pointOriginsForStructureRescan)
+            {
+                var pointsIsolated = BuildIsolatedPointListFromOrigin (pointOrigin, points, false, pointsToDestroy);
+                if (pointsIsolated.Count == 0)
+                    continue;
+
+                countDisconnected += 1;
+                if (log)
+                {
+                    Debug.Log ($"New isolated set discovered | Origin: {pointOrigin.spotIndex} | Points: {pointsIsolated.Count} | Detaching...");
+                    #if UNITY_EDITOR
+                    DebugExtensions.DrawCube (pointOrigin.pointPositionLocal, Vector3.one * 1.5f, Color.white, 5f);
+                    foreach (var pointIsolated in pointsIsolated)
+                    {
+                        Debug.DrawLine (pointIsolated.pointPositionLocal, pointIsolated.pointPositionLocal + new Vector3 (0f, 1f, 0f), Color.red, 5f);
+                    }
+                    #endif
+                }
+
+                if (scheduleSimulation)
+                    AreaManager.OnIsolatedStructureDiscovery (pointsIsolated);
+            }
+
+            if (countDisconnected != 0 & log)
+                Debug.Log ($"Out of {pointOriginsForStructureRescan.Count} surrounding points checked, {countDisconnected} points were confirmed disconnected");
+        }
+
+
+
+        public static int structureAnalysisCounter = 0;
+        private static bool debugReachability = false;
+
+        private static int pointStackIterations = 0;
+        private static int pointStackSize = 0;
+        private static AreaVolumePoint[] pointStack = null;
+        private static readonly HashSet<int> pointsVisited = new HashSet<int> ();
+        private static readonly List<AreaVolumePoint> pointsAccumulated = new List<AreaVolumePoint> ();
+        private static AreaVolumePoint pointIndestructibleFirst = null;
+
+        public enum ScanResult
+        {
+            StopIndestructible = 0,
+            StopDestroyed,
+            Stop,
+            SavedForNextStep,
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static ScanResult ScanNeighborStructure (AreaVolumePoint pointStart, AreaVolumePoint pointNeighbour)
+        {
+            if (pointNeighbour == null)
+                return ScanResult.Stop;
+            if (pointNeighbour.pointState == AreaVolumePointState.Empty)
+                return ScanResult.Stop;
+            if (pointsVisited.Contains (pointNeighbour.spotIndex))
+                return ScanResult.Stop;
+            if (pointNeighbour.pointState == AreaVolumePointState.FullDestroyed)
+                return ScanResult.StopDestroyed;
+
+            if (!pointNeighbour.simulatedChunkPresent & pointNeighbour.indestructibleAny)
+            {
+                pointIndestructibleFirst = pointNeighbour;
+                return ScanResult.StopIndestructible;
+            }
+
+            pointStack[pointStackSize] = pointNeighbour;
+            pointStackSize += 1;
+
+            #if UNITY_EDITOR
+            if (debugReachability)
+            {
+                var progress = (float)pointStackIterations;
+                var hue = (progress * 0.0002f) % 1f;
+                var lum = Mathf.Clamp (1f - progress * 0.0001f, 0.2f, 0.95f);
+                var sat = 1f - Mathf.Max (0f, 0.8f - progress * 0.0002f);
+                Debug.DrawLine (pointStart.pointPositionLocal, pointNeighbour.pointPositionLocal, Color.HSVToRGB (hue, sat, lum), 5f);
+            }
+            #endif
+
+            return ScanResult.SavedForNextStep;
+        }
+
+        public static List<AreaVolumePoint> BuildIsolatedPointListFromOrigin
+        (
+            AreaVolumePoint pointOrigin,
+            List<AreaVolumePoint> points,
+            bool debug,
+            List<AreaVolumePoint> pointsToDestroy
+        )
+        {
+            pointsAccumulated.Clear ();
+            if (points == null)
+                return pointsAccumulated;
+
+            var count = points.Count;
+            if (count == 0)
+                return pointsAccumulated;
+
+            if (pointOrigin == null)
+                return pointsAccumulated;
+            if (pointOrigin.simulationRequested | pointOrigin.simulatedChunkPresent)
+                return pointsAccumulated;
+
+            if (pointStack == null || pointStack.Length < count)
+                pointStack = new AreaVolumePoint[count];
+
+            debugReachability = debug && DataShortcuts.sim.debugCombatStructureAnalysis;
+            if (debugReachability)
+            {
+                Debug.Log ($"Checking if structure rescan is needed on change at point {pointOrigin.spotIndex}");
+                #if UNITY_EDITOR
+                Debug.DrawLine (pointOrigin.pointPositionLocal, pointOrigin.pointPositionLocal + new Vector3 (3f, 3f, 3f), Color.yellow, 5f);
+                #endif
+            }
+
+            var countDestroyInitial = pointsToDestroy != null ? pointsToDestroy.Count : 0;
+            pointsVisited.Clear ();
+            pointIndestructibleFirst = null;
+            pointStack[0] = pointOrigin;
+            pointStackSize = 1;
+
+            const int iterationLimit = 1000000;
+            for (pointStackIterations = 0; pointStackSize > 0 & pointStackIterations < iterationLimit; pointStackIterations += 1)
+            {
+                pointStackSize -= 1;
+                var point = pointStack[pointStackSize];
+
+                int pointIndex = point.spotIndex;
+                if (pointsVisited.Contains (pointIndex))
+                    continue;
+
+                pointsVisited.Add (pointIndex);
+                pointsAccumulated.Add (point);
+
+                // Start by attempting to add Y+ point to stack (TryAddingToStack returns a bool to confirm if this succeeds)
+                var pointVerticalStart = point;
+                var pointVerticalNext = pointVerticalStart.pointsInSpot[WorldSpace.Compass.Down];
+                var scanResult = ScanNeighborStructure (pointVerticalStart, pointVerticalNext);
+
+                // If that succeeds, keep trying to go down and expand stack while possible
+                while (scanResult == ScanResult.SavedForNextStep)
+                {
+                    pointVerticalStart = pointVerticalNext;
+                    pointVerticalNext = pointVerticalStart.pointsInSpot[WorldSpace.Compass.Down];
+                    scanResult = ScanNeighborStructure (pointVerticalStart, pointVerticalNext);
+                }
+
+                if (scanResult == ScanResult.StopIndestructible)
+                    break;
+
+                if (ScanNeighborStructure (point, point.pointsInSpot[WorldSpace.Compass.East]) == ScanResult.StopIndestructible)
+                    break;
+                if (ScanNeighborStructure (point, point.pointsInSpot[WorldSpace.Compass.North]) == ScanResult.StopIndestructible)
+                    break;
+                if (ScanNeighborStructure (point, point.pointsWithSurroundingSpots[WorldSpace.Compass.West]) == ScanResult.StopIndestructible)
+                    break;
+                if (ScanNeighborStructure (point, point.pointsWithSurroundingSpots[WorldSpace.Compass.South]) == ScanResult.StopIndestructible)
+                    break;
+                if (ScanNeighborStructure (point, point.pointsWithSurroundingSpots[WorldSpace.Compass.Up]) == ScanResult.StopIndestructible)
+                    break;
+
+                if (pointsToDestroy == null)
+                    continue;
+
+                if (scanResult != ScanResult.StopDestroyed | pointVerticalStart != point)
+                    continue;
+
+                var forceDestroy = false;
+                for (var i = WorldSpace.Compass.East; !forceDestroy & i <= WorldSpace.Compass.NorthEast; i += 1)
+                {
+                    var pointNeighbour = pointVerticalNext.pointsInSpot[i];
+                    if (pointNeighbour == null || pointNeighbour.pointState != AreaVolumePointState.Full)
+                        continue;
+                    forceDestroy = true;
+                }
+                for (var i = WorldSpace.Compass.SouthWest; !forceDestroy & i <= WorldSpace.Compass.West; i += 1)
+                {
+                    var pointNeighbour = pointVerticalNext.pointsWithSurroundingSpots[i];
+                    if (pointNeighbour == null || pointNeighbour.pointState != AreaVolumePointState.Full)
+                        continue;
+                    forceDestroy = true;
+                }
+
+                if (!forceDestroy)
+                    continue;
+
+                pointsAccumulated.RemoveAt (pointsAccumulated.Count - 1);
+                pointsToDestroy.Add (point);
+            }
+
+            // Stop going if this point already belongs to an older sim chunk
+            if (pointIndestructibleFirst != null)
+            {
+                if (debugReachability)
+                {
+                    var point = pointIndestructibleFirst;
+                    Debug.Log ($"Point {pointOrigin.spotIndex} is connected to indestructible point {point.spotIndex} within {pointStackIterations} iterations");
+                    #if UNITY_EDITOR
+                    Debug.DrawLine (point.pointPositionLocal, point.instancePosition + new Vector3 (-3f, -3f, -3f), Color.cyan, 5f);
+                    #endif
+                }
+                pointsAccumulated.Clear ();
+                if (pointsToDestroy != null && pointsToDestroy.Count > countDestroyInitial)
+                    pointsToDestroy.RemoveRange (countDestroyInitial, pointsToDestroy.Count - countDestroyInitial);
+            }
+            else if (debugReachability)
+                Debug.Log ($"Point {pointOrigin.spotIndex} is not connected to any indestructible points - no matches after {pointStackIterations} iterations");
+
+            return pointsAccumulated;
+        }
+
+        #endif
+
+
+
+        /*
+        public static bool IsStructureRescanOnPointChange (List<AreaVolumePoint> points, AreaVolumePoint pointOrigin)
+        {
+            if (points == null || points.Count == 0)
+                return false;
+
+            if (pointOrigin == null)
+                return false;
+
+            int pointLoopLimitConservative = points.Count + 1000;
+            int iterationIndex = 0;
+            int uniqueVisitID = 0;
+
+            structureScanIndex += 1;
+
+            if (debugStructureAnalysis)
+            {
+                Debug.Log ($"Checking if structure rescan is needed on change at point {pointOrigin.spotIndex}");
+                Debug.DrawLine (pointOrigin.pointPositionLocal, pointOrigin.pointPositionLocal + new Vector3 (0f, 12f, 0f), Color.yellow, 5f);
+            }
+
+            structurePointsQueue.Clear ();
+            var q = structurePointsQueue;
+            q.Clear ();
+            q.Enqueue (pointOrigin);
+
+            while (q.Count > 0)
+            {
+                var point = q.Dequeue ();
+
+                if (q.Count > pointLoopLimitConservative)
+                {
+                    Debug.LogWarning ($"Failed to exit structure analysis algorithm | Remaining queue: {q.Count} | Iterations: {iterationIndex}");
+                    break;
+                }
+
+                // Stop going if this point already belongs to an older sim chunk
+                if (point.simulatedChunkPresent)
+                    continue;
+
+                // Stop going if you hit a point that's already been reached
+                if (point.structuralValue != structureValueDefault)
+                    continue;
+
+                // If this is an indestructible point, break - we found a link to an indestructible point, we're done
+                if (point.indestructibleIndirect || !point.destructible)
+                {
+                    Debug.Log ($"Structure rescan is not needed on change at point {pointOrigin.spotIndex}: it is connected to indestructible point {point.spotIndex} within {iterationIndex} iterations");
+                    return false;
+                }
+
+                // This point is part of the connected sequence, give it the generation index
+                point.structuralValue = iterationIndex;
+                point.structuralParent = point.structuralParentCandidate;
+
+                if (point.structuralParent != null)
+                    point.structuralGroup = point.structuralParent.structuralGroup;
+
+                // spotPoints: 1 (X+) 2 (Z+) 4 (Y+)
+                // spotsAroundThisPoint: 3 (Y-), 5 (Z-), 6 (X-)
+
+                var pointYPos = point.pointsInSpot[4];
+                if (TryLinkingStructureToNeighbor (pointYPos, point))
+                    q.Enqueue (pointYPos);
+
+                var pointXPos = point.pointsInSpot[1];
+                if (TryLinkingStructureToNeighbor (pointXPos, point))
+                    q.Enqueue (pointXPos);
+
+                var pointXNeg = point.pointsWithSurroundingSpots[6];
+                if (TryLinkingStructureToNeighbor (pointXNeg, point))
+                    q.Enqueue (pointXNeg);
+
+                var pointZPos = point.pointsInSpot[2];
+                if (TryLinkingStructureToNeighbor (pointZPos, point))
+                    q.Enqueue (pointZPos);
+
+                var pointZNeg = point.pointsWithSurroundingSpots[5];
+                if (TryLinkingStructureToNeighbor (pointZNeg, point))
+                    q.Enqueue (pointZNeg);
+
+                var pointYNeg = point.pointsWithSurroundingSpots[3];
+                if (TryLinkingStructureToNeighbor (pointYNeg, point))
+                    q.Enqueue (pointYNeg);
+
+                iterationIndex++;
+            }
+
+            // If we're here, we failed to find an indestructible point reachable from origin: full rescan might be needed
+            Debug.Log ($"Structure rescan might be needed on change at point {pointOrigin.spotIndex}: didn't find a connected indestructible point after {iterationIndex} iterations");
+            return true;
+        }
+        */
+
+        /*
+        public static void UpdateStructureAnalysis (List<AreaVolumePoint> points)
+        {
+            if (points == null || points.Count == 0)
+                return;
+
+            debugReachability = DataShortcuts.sim.debugCombatStructureAnalysis;
+            structureAnalysisCounter += 1;
+
+            if (debugReachability)
+                Debug.Log ($"Updating structural analysis | Run {structureAnalysisCounter}");
+
+            int pointsCount = points.Count;
+            int pointLoopLimitConservative = points.Count + 1000;
+
+            // Go over every single point in the level and clear temp values used for structural analysis - unless those points are already detached
+            for (int i = 0; i < pointsCount; ++i)
+            {
+                var point = points[i];
+                if (point.simulatedChunkPresent)
+                    continue;
+
+                point.structuralGroup = 0;
+                point.structuralValue = structureValueDefault;
+                point.structuralParentCandidate = null;
+                point.structuralParent = null;
+            }
+
+            var pointOrigin = SelectOriginPointForStructure (points);
+            if (pointOrigin == null)
+                return;
+
+            // Try to iterate from origin point and see how many points get marked up
+            var pointsGatheredFirst = GatherConnectedPointsFromOrigin
+            (
+                pointOrigin,
+                pointLoopLimitConservative,
+                out int iterationsPassed,
+                out int pointsIndestructible
+            );
+
+            structurePointsIsolated.Clear ();
+            for (int i = 0; i < points.Count; ++i)
+            {
+                var point = points[i];
+                if (point == null)
+                    continue;
+
+                if (!point.destructible || point.indestructibleIndirect)
+                    continue;
+
+                if (point.simulatedChunkPresent || point.structuralValue != structureValueDefault || point.pointState != AreaVolumePointState.Full)
+                    continue;
+
+                structurePointsIsolated.Add (point);
+            }
+
+            Debug.Log ($"Selected point {pointOrigin.spotIndex}/{pointsCount} as indestructible origin | Origin connects to {pointsGatheredFirst.Count} points | Iterations: {iterationsPassed} | Indestructible points reached: {pointsIndestructible} | {structurePointsIsolated.Count} destructible points not checked yet.");
+        }
+
+        private static AreaVolumePoint SelectOriginPointForStructure (List<AreaVolumePoint> points)
+        {
+            // But for exotic cases like levels without edges, we can start elsewhere
+            int pointsCount = points.Count;
+            for (int i = pointsCount - 1; i >= 0; --i)
+            {
+                var point = points[i];
+
+                // Points that are already detached or points that are empty are not suitable origins
+                if (point.simulatedChunkPresent || point.pointState != AreaVolumePointState.Full)
+                    continue;
+
+                // Points that are destructible are not suitable
+                if (!point.indestructibleIndirect && point.destructible)
+                    continue;
+
+                return point;
+            }
+
+            return null;
+        }
+
+        private static List<AreaVolumePoint> pointsGathered = new List<AreaVolumePoint> ();
+
+        private static List<AreaVolumePoint> GatherConnectedPointsFromOrigin
+        (
+            AreaVolumePoint pointOrigin,
+            int limit,
+            out int iterationIndex,
+            out int pointsIndestructible
+        )
+        {
+            iterationIndex = 0;
+            pointsIndestructible = 0;
+            pointsGathered.Clear ();
+
+            if (pointOrigin == null)
+                return null;
+
+            if (debugReachability)
+            {
+                DebugExtensions.DrawCube (pointOrigin.pointPositionLocal, Vector3.one, Color.white, 5f);
+                Debug.DrawLine (pointOrigin.pointPositionLocal, pointOrigin.pointPositionLocal + new Vector3 (0f, 12f, 0f), Color.white, 5f);
+            }
+
+            var q = structurePointsQueue;
+            q.Clear ();
+            q.Enqueue (pointOrigin);
+
+            while (q.Count > 0)
+            {
+                var point = q.Dequeue ();
+
+                if (q.Count > limit)
+                {
+                    Debug.LogWarning ($"Failed to exit structure analysis algorithm | Remaining queue: {q.Count} | Iterations: {iterationIndex}");
+                    break;
+                }
+
+                // Stop going if this point already belongs to an older sim chunk
+                if (point.simulatedChunkPresent)
+                    continue;
+
+                // Stop going if you hit a point that's already been reached
+                if (point.structuralValue != structureValueDefault)
+                    continue;
+
+                // If this is an indestructible point, do not cancel iteration, but register that fact
+                if (point.indestructibleIndirect || !point.destructible)
+                    pointsIndestructible += 1;
+
+                // This point is part of the connected sequence, give it the generation index
+                point.structuralValue = iterationIndex;
+                point.structuralParent = point.structuralParentCandidate;
+
+                if (point.structuralParent != null)
+                    point.structuralGroup = point.structuralParent.structuralGroup;
+
+                pointsGathered.Add (point);
+
+                // spotPoints: 1 (X+) 2 (Z+) 4 (Y+)
+                // spotsAroundThisPoint: 3 (Y-), 5 (Z-), 6 (X-)
+
+                var pointYPos = point.pointsInSpot[4];
+                if (TryLinkingStructureToNeighbor (pointYPos, point))
+                    q.Enqueue (pointYPos);
+
+                var pointXPos = point.pointsInSpot[1];
+                if (TryLinkingStructureToNeighbor (pointXPos, point))
+                    q.Enqueue (pointXPos);
+
+                var pointXNeg = point.pointsWithSurroundingSpots[6];
+                if (TryLinkingStructureToNeighbor (pointXNeg, point))
+                    q.Enqueue (pointXNeg);
+
+                var pointZPos = point.pointsInSpot[2];
+                if (TryLinkingStructureToNeighbor (pointZPos, point))
+                    q.Enqueue (pointZPos);
+
+                var pointZNeg = point.pointsWithSurroundingSpots[5];
+                if (TryLinkingStructureToNeighbor (pointZNeg, point))
+                    q.Enqueue (pointZNeg);
+
+                var pointYNeg = point.pointsWithSurroundingSpots[3];
+                if (TryLinkingStructureToNeighbor (pointYNeg, point))
+                    q.Enqueue (pointYNeg);
+
+                iterationIndex++;
+            }
+
+            return pointsGathered;
+        }
+
+        private static bool TryLinkingStructureToNeighbor (AreaVolumePoint pointNeighbor, AreaVolumePoint pointParentCandidate)
+        {
+            if (pointNeighbor == null || pointNeighbor.simulatedChunkPresent)
+                return false;
+
+            bool linkable = pointNeighbor.structuralValue == structureValueDefault && pointNeighbor.pointState == AreaVolumePointState.Full;
+            pointNeighbor.structuralParentCandidate = pointParentCandidate;
+
+            if (debugReachability)
+            {
+                var hue = (pointParentCandidate.structuralValue * 0.0002f) % 1f;
+                var lum = Mathf.Clamp (1f - pointParentCandidate.structuralValue * 0.0001f, 0.2f, 0.95f);
+                var sat = 1f - Mathf.Max (0f, 0.8f - pointParentCandidate.structuralValue * 0.0002f);
+                Debug.DrawLine (pointNeighbor.pointPositionLocal, pointParentCandidate.pointPositionLocal, Color.HSVToRGB (hue, sat, lum), 5f);
+            }
+
+            return linkable;
+        }
+
+        */
+    }
+
+    public class PointData
+    {
+        public static int boundsX;
+        public static int boundsZ;
+        public static int layerXZ;
+        public static readonly (int x, int y, int z)[] offsets = new []
+        {
+            (1, 0, 0),
+            (0, 0, -1),
+            (-1, 0, 0),
+            (0, 0, 1),
+            (0, 1, 0),
+            (0, -1, 0),
+            (1, 0, 1),
+            (1, 0, -1),
+            (-1, 0, 1),
+            (-1, 0, -1),
+        };
+
+        public static void SetBounds (Vector3Int bounds)
+        {
+            boundsX = bounds.x;
+            boundsZ = bounds.z;
+            layerXZ = bounds.x * bounds.z;
+        }
+
+        public static AreaVolumePoint GetNeighbourPoint (int indexPoint, int direction, List<AreaVolumePoint> points)
+        {
+            var index = indexPoint;
+            var offset = offsets[direction];
+
+            // Row and column checks to prevent unintended wrap around.
+            var x = index % boundsX + offset.x;
+            var z = index / boundsX % boundsZ + offset.z;
+            if (x < 0 | z < 0)
+                return null;
+            if (x >= boundsX | z >= boundsZ)
+                return null;
+
+            index += offset.y * layerXZ;
+            index += offset.z * boundsX;
+            index += offset.x;
+            if (!index.IsValidIndex (points))
+                return null;
+
+            var point = points[index];
+            if (!point.spotPresent)
+                return null;
             return point;
         }
     }

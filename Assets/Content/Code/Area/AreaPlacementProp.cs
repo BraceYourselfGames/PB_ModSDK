@@ -138,7 +138,7 @@ namespace Area
 
         public void Setup (AreaManager am, AreaVolumePoint point)
         {
-            if (point == null || entitiesChildren == null)
+            if (point == null || entitiesChildren == null || prototype == null || prototype.subObjects == null)
                 return;
 
             var rootRotation = Quaternion.Euler (new Vector3 (0f, -90f * rotation, 0f));

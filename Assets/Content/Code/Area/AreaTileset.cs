@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using CustomRendering;
 using PhantomBrigade.Data;
 using Sirenix.OdinInspector;
@@ -55,10 +54,8 @@ namespace Area
     [System.Serializable]
     public class AreaTilesetDatabase
     {
-        [ListDrawerSettings (DraggableItems = false, HideAddButton = true, HideRemoveButton = true, IsReadOnly = true)]
-        [LabelText ("Configurations")]
+        [FoldoutGroup ("Configurations", false)]
         public AreaConfigurationData[] configurationDataForBlocks;
-
         public SortedDictionary<int, AreaTileset> tilesets;
 
         [HideInInspector]
@@ -264,6 +261,7 @@ namespace Area
 
         public const int idOfNull = -1;
         public const int idOfFallback = 10;
+        public const int idOfCargo = 70;
         public const int idOfForest = 100;
         public const int idOfTerrain = 150;
         public const int idOfRoad = 200;
@@ -281,9 +279,13 @@ namespace Area
 
         private static List<MaterialSerializationHelper> materialHelpers;
         private static Dictionary<long, InstancedModelContainer> instancedModels;
+
+        private static Mesh instancedMeshFallback;
+        private static Material instancedMaterialFallback;
+
         private static InstancedMeshRenderer instancedModelFallback;
 
-        public static List<long> instancedIDFailures = new List<long> ();
+        private static readonly HashSet<long> instancedIDFailures = new HashSet<long> ();
         private static Dictionary<long, AreaTilesetLight> lightDefinitions;
 
         /// <summary>
@@ -349,22 +351,23 @@ namespace Area
 
 
 
+        #if PB_MODSDK
+        public static bool AreAssetsPresent ()
+        {
+            return database?.tilesets != null && database.tilesets.Count > 0 && database.tilesetFallback != null;
+        }
+        #endif
 
         public static void CheckResources ()
         {
             if (!autoloadAttempted)
             {
-                autoloadAttempted = true;
                 if (database == null)
                 {
+                    autoloadAttempted = true;
                     LoadDatabase ();
                 }
             }
-        }
-
-        public static bool AreAssetsPresent ()
-        {
-            return database?.tilesets != null && database.tilesets.Count > 0 && database.tilesetFallback != null;
         }
 
         public static void ReapplyMaterialOverrides ()
@@ -385,6 +388,43 @@ namespace Area
                 return database.tilesetFallback;
         }
 
+        private static Mesh CreateCubeMesh (float scale)
+        {
+            Vector3[] vertices = {
+                new Vector3 (0, 0, 0) * scale,
+                new Vector3 (1, 0, 0) * scale,
+                new Vector3 (1, 1, 0) * scale,
+                new Vector3 (0, 1, 0) * scale,
+                new Vector3 (0, 1, 1) * scale,
+                new Vector3 (1, 1, 1) * scale,
+                new Vector3 (1, 0, 1) * scale,
+                new Vector3 (0, 0, 1) * scale,
+            };
+
+            int[] triangles = {
+                0, 2, 1, //face front
+                0, 3, 2,
+                2, 3, 4, //face top
+                2, 4, 5,
+                1, 2, 5, //face right
+                1, 5, 6,
+                0, 7, 4, //face left
+                0, 4, 3,
+                5, 4, 7, //face back
+                5, 7, 6,
+                0, 6, 7, //face bottom
+                0, 1, 6
+            };
+
+            Mesh mesh = new Mesh ();
+            mesh.Clear ();
+            mesh.vertices = vertices;
+            mesh.triangles = triangles;
+            mesh.Optimize ();
+            mesh.RecalculateNormals ();
+            return mesh;
+        }
+
         public static void LoadDatabase ()
         {
             databaseSerialized = UtilitiesYAML.LoadDataFromFile<AreaTilesetDatabaseSerialized> (configPath, configName);
@@ -394,27 +434,27 @@ namespace Area
             database = new AreaTilesetDatabase (databaseSerialized);
             CalculateConfigurationData ();
 
+            instancedMeshFallback = CreateCubeMesh (0.1f);
+            instancedMaterialFallback = new Material (Shader.Find("Standard"));
+
             instancedModels = new Dictionary<long, InstancedModelContainer> ();
-            instancedIDFailures = new List<long> ();
+            instancedIDFailures.Clear ();
             instancedModelFallback = new InstancedMeshRenderer
             {
-                mesh = PrimitiveHelper.GetPrimitiveMesh (PrimitiveType.Cube),
-                material = PrimitiveHelper.GetDefaultMaterial (),
+                mesh = instancedMeshFallback,
+                material = instancedMaterialFallback,
                 instanceLimit = DataLinkerRendering.data.defaultComputeBufferSize,
                 subMesh = 0,
                 castShadows = UnityEngine.Rendering.ShadowCastingMode.On,
-                receiveShadows = true
+                receiveShadows = true,
+                id = -1
             };
 
             lightDefinitions = new Dictionary<long, AreaTilesetLight> ();
 
             string tilesetTerrainExcepted = "tileset_terrain";
             string pathToTilesetFolder = "Content/Objects/Tilesets";
-
             ResourceDatabaseContainer resourceDatabase = ResourceDatabaseManager.GetDatabase ();
-            if (!ResourceDatabaseManager.IsDatabaseAvailable ())
-                return;
-
             foreach (KeyValuePair<int, AreaTileset> kvp in database.tilesets)
             {
                 AreaTileset tileset = kvp.Value;
@@ -503,44 +543,49 @@ namespace Area
             database.configurationDataForBlocks = new AreaConfigurationData[256];
             configurationCollapseMap = new Dictionary<byte, byte> (256);
 
-            for (var i = 0; i < configurationOrder.Length; ++i)
+            for (int i = 0; i < configurationOrder.Length; ++i)
             {
-                var configurationAsByte = configurationOrder[i];
-                var customRotationPossible = TilesetUtility.IsConfigurationRotationPossible (configurationAsByte);
-                var customFlippingMode = TilesetUtility.GetConfigurationFlippingAxis (configurationAsByte);
+                byte configurationAsByte = configurationOrder[i];
+                bool[] configurationAsArray = TilesetUtility.GetConfigurationFromByte (configurationAsByte);
+
+                bool customRotationPossible = TilesetUtility.IsConfigurationRotationPossible (configurationAsArray);
+                int customFlippingMode = TilesetUtility.GetConfigurationFlippingAxis (configurationAsByte);
 
                 // Now we need to do 8 transformations of the configuration
                 // Essentially, we're creating a lookup table for all 256 configurations possible to encounter
                 // (instead of doing an expensive fitting step to determine which of the 57 blocks fits and how it should be rotated/flipped on every spot operation)
 
-                for (var r = 0; r < 8; ++r)
+                for (int r = 0; r < 8; ++r)
                 {
                     // Easy way to get a sequence of 4 non-flipped and 4 flipped transformations
-                    var requiredRotation = r % 4;
-                    var requiredFlipping = r > 3;
+                    int requiredRotation = r % 4;
+                    bool requiredFlipping = r > 3;
 
                     // Key is configuration as integer (along the lines of "01011000"), and there are 256 possible configurations
                     // We get it by transforming the configuration through 8 possible scenarios (4 rotations x 2 scale states)
-                    var configurationTransformed = TilesetUtility.GetConfigurationTransformed (configurationAsByte, requiredRotation, requiredFlipping);
-                    // I have absolutely no idea why it's necessary to overwrite already existing results, but not doing so breaks all rotations on horizontal planes
-                    var data = database.configurationDataForBlocks[configurationTransformed];
-                    if (data == null)
+                    byte configurationTransformed = TilesetUtility.GetConfigurationTransformed (configurationAsByte, requiredRotation, requiredFlipping);
+                    int configurationIndex = configurationTransformed;
+
+                    AreaConfigurationData data = null;
+                    if (database.configurationDataForBlocks[configurationIndex] == null)
                     {
                         data = new AreaConfigurationData ();
-                        database.configurationDataForBlocks[configurationTransformed] = data;
+                        database.configurationDataForBlocks[configurationIndex] = data;
                     }
 
+                    // I have absolutely no idea why it's necessary to overwrite already existing results, but not doing so breaks all rotations on horizontal planes
+                    else
+                        data = database.configurationDataForBlocks[configurationIndex];
+
                     data.configuration = configurationTransformed;
-                    data.configurationAsString = TilesetUtility.GetStringFromConfiguration (data.configuration);
+                    data.configurationAsString = TilesetUtility.GetStringFromConfiguration (TilesetUtility.GetConfigurationFromByte (data.configuration));
                     data.requiredRotation = requiredRotation;
                     data.requiredFlippingZ = requiredFlipping;
                     data.customRotationPossible = customRotationPossible;
                     data.customFlippingMode = customFlippingMode;
 
                     if (!configurationCollapseMap.ContainsKey (configurationTransformed))
-                    {
                         configurationCollapseMap.Add (configurationTransformed, configurationAsByte);
-                    }
                 }
             }
         }
@@ -550,17 +595,15 @@ namespace Area
             // First we reset the BlockDefinitions array - and we know for sure that will need the length of 256, since that's the number of possible configurations for a 2x2x2 bool array (or a byte)
             tileset.blocks = new AreaBlockDefinition[256];
 
-            var fileInfoPrefabs = folderInfo.GetChildrenOfType (ResourceDatabaseEntrySerialized.Filetype.Prefab);
+            List<ResourceDatabaseEntryRuntime> fileInfoPrefabs = folderInfo.GetChildrenOfType (ResourceDatabaseEntrySerialized.Filetype.Prefab);
 
-            var materialDataContainerFound = false;
-            for (var i = 0; i < fileInfoPrefabs.Count; ++i)
+            bool materialDataContainerFound = false;
+            for (int i = 0; i < fileInfoPrefabs.Count; ++i)
             {
-                var entry = fileInfoPrefabs[i];
-                var prefab = entry.GetContent<GameObject> ();
+                ResourceDatabaseEntryRuntime entry = fileInfoPrefabs[i];
+                GameObject prefab = entry.GetContent<GameObject> ();
                 if (prefab == null)
-                {
                     continue;
-                }
 
                 if (!unifiedMaterialDataFound)
                 {
@@ -573,11 +616,9 @@ namespace Area
                             //isMaterialDataContainer = true;
 
                             if (log)
-                            {
                                 Debug.Log ("ATH | LoadTilesetBlocks | Successfully found the block material data container prefab for tileset " + tileset.name);
-                            }
 
-                            var dataContainer = prefab.GetComponent<AreaTilesetContainer> ();
+                            AreaTilesetContainer dataContainer = prefab.GetComponent<AreaTilesetContainer> ();
                             if (dataContainer != null)
                             {
                                 // Debug.Log ("ATH | LoadTilesetBlocks | Successfully retrieved the data container component");
@@ -585,41 +626,43 @@ namespace Area
                                 {
                                     dataContainer.materialWithArrays.SetVectorArray (Shader.PropertyToID ("_PropertyArray"), dataContainer.propertyArray);
                                     if (log)
-                                    {
                                         Debug.Log ("ATH | LoadTilesetBlocks | Successfully retrieved the array-based material and property vectors");
-                                    }
                                 }
                                 else
-                                {
                                     Debug.LogWarning ("ATH | LoadTilesetBlocks | Failed to retrieve array-based material and/or property vectors for tileset " + tileset.name);
-                                }
                             }
                             else
-                            {
                                 Debug.LogWarning ("ATH | LoadTilesetBlocks | Failed to retrieve the data container component for tileset " + tileset.name);
-                            }
                         }
                     }
                 }
 
-                var attributes = entry.name.Split ('_');
+                string[] attributes = entry.name.Split ('_');
 
                 // Filename can contain anything in the end, but must start with two blocks - configuration and subtype index (e.g. "01011000_1_window.fbx")
 
                 if (attributes.Length == 2)
-                {
-                    attributes = new[] { attributes[0], attributes[1], "0" };
-                }
+                    attributes = new string[] { attributes[0], attributes[1], "0" };
 
                 if (attributes.Length < 3)
                 {
-                    //var attributesDebug = "\"" + string.Join("\", \"", attributes) + ", \"\"";
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder ();
+                    sb.Append ("\"");
+                    for (int s = 0; s < attributes.Length; ++s)
+                    {
+                        sb.Append (attributes[s]);
+                        sb.Append ("\", \"");
+                    }
+                    sb.Append ("\"");
+                    string attributesDebug = sb.ToString ();
+
                     // Debug.LogWarning ("ATH | LoadTilesetBlocks | Tileset: " + tileset.name + " | Filename " + fileInfoPrefab.name + " is incorrectly formatted and can't be parsed, check your tileset export code | Attributes found: " + attributesDebug);
                     continue;
                 }
 
-                var group = byte.Parse (attributes[1]);
-                var subtype = byte.Parse (attributes[2]);
+                var configurationString = attributes[0];
+                byte group = byte.Parse (attributes[1]);
+                byte subtype = byte.Parse (attributes[2]);
 
                 // Light suffix
                 AreaTilesetLight lightData = null;
@@ -628,18 +671,23 @@ namespace Area
                     var lightInfoString = attributes[3];
                     if (lightInfoString.StartsWith ("l"))
                     {
-                        var lightIntensity = 1f;
-                        var lightOffset = 1f;
+                        float lightOffset = 1f;
+                        float lightIntensity = 1f;
+
                         if (lightInfoString.Length > 1)
                         {
                             var lightInfoStringSplit = lightInfoString.Substring (1, lightInfoString.Length - 1).Split ('-');
-                            if (lightInfoStringSplit.Length >= 1 && float.TryParse (lightInfoStringSplit[0], out var lightOffsetParsed))
+
+                            if (lightInfoStringSplit.Length >= 1)
                             {
-                                lightOffset = lightOffsetParsed;
+                                if (float.TryParse (lightInfoStringSplit[0], out var lightOffsetParsed))
+                                    lightOffset = lightOffsetParsed;
                             }
-                            if (lightInfoStringSplit.Length >= 2 && float.TryParse (lightInfoStringSplit[1], out var lightIntensityParsed))
+
+                            if (lightInfoStringSplit.Length >= 2)
                             {
-                                lightIntensity = lightIntensityParsed;
+                                if (float.TryParse (lightInfoStringSplit[1], out var lightIntensityParsed))
+                                    lightIntensity = lightIntensityParsed;
                             }
                         }
 
@@ -650,20 +698,16 @@ namespace Area
 
                 // Now that we're sure filename follows the format we need, we extract the properties
 
-                var configuration = TilesetUtility.GetConfigurationFromString (attributes[0]);
+                byte configuration = TilesetUtility.GetConfigurationFromString (attributes[0]);
+                bool[] configurationAsArray = TilesetUtility.GetConfigurationFromByte (configuration);
+                bool customRotationPossible = TilesetUtility.IsConfigurationRotationPossible (configurationAsArray);
+
                 if (log)
-                {
-                    var customRotationPossible = TilesetUtility.IsConfigurationRotationPossible (configuration);
-                    var customFlippingMode = TilesetUtility.GetConfigurationFlippingAxis (configuration);
-                    Debug.LogFormat
-                    (
-                        "ATH | LoadTilesetBlocks | Tileset: {0} | Configuration: {1} | Rotation possible: {2} | Flipping mode: {3}",
-                        tileset.name,
-                        attributes[0],
-                        customRotationPossible,
-                        customFlippingMode
-                    );
-                }
+                    Debug.Log ("ATH | LoadTilesetBlocks | Tileset: " + tileset.name + " | Configuration: " + TilesetUtility.GetStringFromConfiguration (configurationAsArray) + " | Rotation possible: " + customRotationPossible);
+
+                int customFlippingMode = TilesetUtility.GetConfigurationFlippingAxis (configuration);
+
+
 
                 // Instanced rendering setup
                 RegisterInstancedModel (prefab, tileset, assetFamilyBlock, configuration, group, subtype, true, lightData);
@@ -672,40 +716,38 @@ namespace Area
                 // Essentially, we're creating a lookup table for all 256 configurations possible to encounter
                 // (instead of doing an expensive fitting step to determine which of the 57 blocks fits and how it should be rotated/flipped on every spot operation)
 
-                for (var r = 0; r < 8; ++r)
+                for (int r = 0; r < 8; ++r)
                 {
                     // Easy way to get a sequence of 4 non-flipped and 4 flipped transformations
-                    var requiredRotation = r % 4;
-                    var requiredFlipping = r > 3;
+                    int requiredRotation = r % 4;
+                    bool requiredFlipping = r > 3;
 
                     // Key is configuration as integer (along the lines of "01011000"), and there are 256 possible configurations
                     // We get it by transforming the configuration through 8 possible scenarios (4 rotations x 2 scale states)
-                    var configurationBasedIndex = TilesetUtility.GetConfigurationTransformed (configuration, requiredRotation, requiredFlipping);
-                    var block = tileset.blocks[configurationBasedIndex];
-                    if (block == null)
+                    int configurationBasedIndex = TilesetUtility.GetConfigurationTransformed (configuration, requiredRotation, requiredFlipping);
+
+                    // Time to create block definition and add it to the dictionary
+                    AreaBlockDefinition block = null;
+
+                    if (tileset.blocks[configurationBasedIndex] == null)
                     {
-                        // Time to create block definition and add it to the dictionary
                         block = new AreaBlockDefinition ();
                         tileset.blocks[configurationBasedIndex] = block;
                     }
+                    else
+                        block = tileset.blocks[configurationBasedIndex];
 
                     // Simple stuff with the subtype array - it has to fit the index we want to write to, and indexes
                     // must be enforced since we don't know the order of files
 
                     if (block.subtypeGroups == null)
-                    {
                         block.subtypeGroups = new SortedDictionary<byte, SortedDictionary<byte, GameObject>> ();
-                    }
 
                     if (!block.subtypeGroups.ContainsKey (group))
-                    {
                         block.subtypeGroups.Add (group, new SortedDictionary<byte, GameObject> ());
-                    }
 
                     if (!block.subtypeGroups[group].ContainsKey (subtype))
-                    {
                         block.subtypeGroups[group].Add (subtype, prefab);
-                    }
                 }
             }
         }
@@ -718,8 +760,6 @@ namespace Area
                 UtilitiesYAML.SaveDataToFile (configPath, configName, databaseSerialized);
             }
         }
-
-        static readonly List<int> tilesetKeys = new List<int> ();
 
         public static int OffsetBlockTileset (int tilesetKeyCurrent, bool forward)
         {
@@ -735,27 +775,24 @@ namespace Area
                 tilesetKeyCurrent = database.tilesetFallback.id;
             }
 
-            tilesetKeys.Clear ();
-            tilesetKeys.AddRange (database.tilesets.Keys);
-            for (var i = tilesetKeys.Count - 1; i >= 0; i -= 1)
+            List<int> tilesetKeys = new List<int> (database.tilesets.Keys);
+            for (int i = tilesetKeys.Count - 1; i >= 0; --i)
             {
-                var tileset = database.tilesets[tilesetKeys[i]];
+                AreaTileset tileset = database.tilesets[tilesetKeys[i]];
                 if (tileset.usedAsInterior)
-                {
                     tilesetKeys.RemoveAt (i);
-                }
             }
 
-            var tilesetIndexCurrent = tilesetKeys.IndexOf (tilesetKeyCurrent);
-            var tilesetIndexOffset = tilesetIndexCurrent.OffsetAndWrap (forward, 0, tilesetKeys.Count - 1);
-            var tilesetKeyNew = tilesetKeys[tilesetIndexOffset];
+            int tilesetIndexCurrent = tilesetKeys.IndexOf (tilesetKeyCurrent);
+            int tilesetIndexOffset = tilesetIndexCurrent.OffsetAndWrap (forward, 0, tilesetKeys.Count - 1);
+            int tilesetKeyNew = tilesetKeys[tilesetIndexOffset];
 
             // Debug.Log ("ATH | OffsetBlockTileset | Current key: " + tilesetKeyCurrent + " | Keys: " + tilesetKeys.Count + " | Index of current key: " + tilesetIndexCurrent + " | Index offset: " + tilesetIndexOffset + " | New key: " + tilesetKeyNew);
 
             return tilesetKeyNew;
         }
 
-        static readonly List<byte> r_OBG_groupKeys = new List<byte> ();
+        private static List<byte> r_OBG_groupKeys;
 
         public static byte OffsetBlockGroup (AreaBlockDefinition definition, byte groupKeyCurrent, bool forward)
         {
@@ -771,11 +808,10 @@ namespace Area
                 groupKeyCurrent = 0;
             }
 
-            r_OBG_groupKeys.Clear ();
-            r_OBG_groupKeys.AddRange (definition.subtypeGroups.Keys);
-            var groupIndexCurrent = r_OBG_groupKeys.IndexOf (groupKeyCurrent);
-            var groupIndexOffset = groupIndexCurrent.OffsetAndWrap (forward, 0, r_OBG_groupKeys.Count - 1);
-            var groupKeyNew = r_OBG_groupKeys[groupIndexOffset];
+            r_OBG_groupKeys = new List<byte> (definition.subtypeGroups.Keys);
+            int groupIndexCurrent = r_OBG_groupKeys.IndexOf (groupKeyCurrent);
+            int groupIndexOffset = groupIndexCurrent.OffsetAndWrap (forward, 0, r_OBG_groupKeys.Count - 1);
+            byte groupKeyNew = r_OBG_groupKeys[groupIndexOffset];
 
             /*
             Debug.Log
@@ -791,21 +827,20 @@ namespace Area
             return groupKeyNew;
         }
 
-        static readonly List<byte> r_OBS_subtypeKeys = new List<byte> ();
+        private static List<byte> r_OBS_subtypeKeys;
 
         public static byte OffsetBlockSubtype (AreaBlockDefinition definition, byte groupKeyCurrent, byte subtypeKeyCurrent, bool forward)
         {
             if (definition == null || definition.subtypeGroups == null)
-            {
                 return 0;
-            }
+
             if (!definition.subtypeGroups.ContainsKey (groupKeyCurrent))
             {
                 // Debug.Log ("AreaTilesetHelper | OffsetBlockSubtype | Current group key could not be found, switching to 0");
                 return 0;
             }
 
-            var subtypes = definition.subtypeGroups[groupKeyCurrent];
+            SortedDictionary<byte, GameObject> subtypes = definition.subtypeGroups[groupKeyCurrent];
             if (subtypes.Count == 1)
             {
                 // Debug.Log ("AreaTilesetHelper | OffsetBlockSubtype | No point in offsetting, subtype count is just 1, returning index 0");
@@ -818,33 +853,16 @@ namespace Area
                 subtypeKeyCurrent = 0;
             }
 
-            r_OBS_subtypeKeys.Clear ();
-            r_OBS_subtypeKeys.AddRange (subtypes.Keys);
-            var subtypeIndexCurrent = r_OBS_subtypeKeys.IndexOf (subtypeKeyCurrent);
-            var subtypeIndexOffset = subtypeIndexCurrent.OffsetAndWrap (forward, 0, r_OBS_subtypeKeys.Count - 1);
-            return r_OBS_subtypeKeys[subtypeIndexOffset];
+            r_OBS_subtypeKeys = new List<byte> (subtypes.Keys);
+            int subtypeIndexCurrent = r_OBS_subtypeKeys.IndexOf (subtypeKeyCurrent);
+            int subtypeIndexOffset = subtypeIndexCurrent.OffsetAndWrap (forward, 0, r_OBS_subtypeKeys.Count - 1);
+            byte subtypeKeyNew = r_OBS_subtypeKeys[subtypeIndexOffset];
+
+            return subtypeKeyNew;
         }
 
-        #if UNITY_EDITOR
-        public static byte EnsureSubtypeInGroup (AreaBlockDefinition definition, byte groupKeyCurrent, byte subtypeKeyCurrent)
-        {
-            if (definition == null || definition.subtypeGroups == null)
-            {
-                return 0;
-            }
-            if (!definition.subtypeGroups.ContainsKey (groupKeyCurrent))
-            {
-                return 0;
-            }
 
-            var subtypes = definition.subtypeGroups[groupKeyCurrent];
-            if (subtypes.Count == 1)
-            {
-                return subtypes.Keys.OrderBy(k => k).First ();
-            }
-            return subtypes.ContainsKey (subtypeKeyCurrent) ? subtypeKeyCurrent : subtypes.Keys.OrderBy(k => k).First ();
-        }
-        #endif
+
 
         [System.Serializable]
         public class InstancedModelContainer
@@ -1031,29 +1049,24 @@ namespace Area
             invalidVariantDetected = false;
             var configurationProcessed = configurationCollapse ? configurationCollapseMap[configuration] : configuration;
             var id = GetInstancedModelID (tileset, family, configurationProcessed, group, subtype, false);
-            if (!instancedModels.ContainsKey (id))
+            if (!instancedModels.TryGetValue (id, out var container))
             {
                 // There is a benign scenario where this might happen - invalid group or subtype ID on a given point; so we'll try a 0-0 variant before bailing
                 id = GetInstancedModelID (tileset, family, configurationProcessed, 0, 0, false);
-                if (!instancedModels.ContainsKey (id))
+                if (!instancedModels.TryGetValue (id, out container))
                 {
-                    if (!instancedIDFailures.Contains (id))
-                    {
-                        instancedIDFailures.Add (id);
-                        Debug.LogWarningFormat
+                    if (instancedIDFailures.Add (id))
+                        Debug.LogWarning (string.Format
                         (
                             "Failed to find mesh ID {0} | Tileset: {1} | Family {2} | Original config: {3} ({4}) | Collapsed config: {5} ({6}) | Group/subtype: {7}/{8} | Total fails: {9}",
                             id, tileset, family,
                             configuration, TilesetUtility.GetStringFromConfiguration (configuration),
-                            configurationProcessed, TilesetUtility.GetStringFromConfiguration (configurationProcessed),
+                            configurationCollapseMap[configuration], TilesetUtility.GetStringFromConfiguration (configurationCollapseMap[configuration]),
                             group, subtype, instancedIDFailures.Count
-                        );
-                    }
+                        ));
 
                     if (tileset == 101)
-                    {
                         renderer = GetInstancedModel (11, family, configuration, group, subtype, checkFailures, configurationCollapse, out invalidVariantDetected, out verticalFlip, out lightData);
-                    }
                     else
                     {
                         renderer = instancedModelFallback;
@@ -1063,37 +1076,26 @@ namespace Area
                 else
                 {
                     invalidVariantDetected = true;
-                    var container = instancedModels[id];
                     renderer = container.renderer;
                     verticalFlip = container.verticalFlip;
                 }
             }
             else
             {
-                var container = instancedModels[id];
                 renderer = container.renderer;
                 verticalFlip = container.verticalFlip;
             }
 
             if (renderer.mesh == null || renderer.material == null)
             {
-                Debug.LogWarningFormat
-                (
-                    "Detected null mesh ({0}) or material ({1}), swapping for fallback | Fallback mesh {2}, material {3} | Input: {4} / {5}_{6}_{7}",
-                    renderer.mesh == null,
-                    renderer.material == null,
-                    instancedModelFallback.mesh.ToStringNullCheck (),
-                    instancedModelFallback.material.ToStringNullCheck (),
-                    tileset,
-                    configuration,
-                    group,
-                    subtype
-                );
+                // Currently the checkFailures flag is not used anywhere in this method, so it is utilized here to suppress the log warning message when using an empty tileset
+                if (!checkFailures)
+                    Debug.LogWarning ($"Detected null mesh ({renderer.mesh == null}) or material ({renderer.material == null}), swapping for fallback | Fallback mesh {instancedModelFallback.mesh.ToStringNullCheck ()}, material {instancedModelFallback.material.ToStringNullCheck ()} | Input: {tileset} / {configuration}_{group}_{subtype}");
                 renderer = instancedModelFallback;
                 verticalFlip = false;
             }
 
-            var lightDataFound = lightDefinitions.TryGetValue (id, out lightData);
+            bool lightDataFound = lightDefinitions.TryGetValue (id, out lightData);
 
             return renderer;
         }

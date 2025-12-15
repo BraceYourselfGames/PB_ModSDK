@@ -49,6 +49,8 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
     public Color terrainSpotEmptyColor;
     public Color terrainSpotFlatColor;
     public Vector4 vertexDataDefault = new Vector4 (0f, 1f, 0f, 0.5f);
+    
+    public static bool firstTileCollectPolicy;
 
     [NonSerialized] private Vector3 previousNormalA;
     [NonSerialized] private Vector3 previousNormalB;
@@ -84,19 +86,8 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
             return;
         }
         gameObject.layer = LayerMask.NameToLayer ("Environment");
-        #if PB_MODSDK
-        if (am.useNewTerrainMeshAlgorithm)
-        {
-            CollectSurfacePointsNewAlgo ();
-        }
-        else
-        {
-            // XXX keeping around for comparison until I'm more certain about the new algorithm.
-            CollectSurfacePoints ();
-        }
-        #else
+
         CollectSurfacePoints ();
-        #endif
         RebuildSurfaceMesh (fastMode);
     }
 
@@ -171,7 +162,7 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
                 var surfaceD = surfacePoints[c + 1, r];
 
                 //Determine if this spot is empty or not,
-                newSpot.empty = !AreaManager.IsPointTerrain (surfaceA);
+                newSpot.empty = !am.IsPointTerrain (surfaceA);
 
                 //Determine if this is flat or not, we're looking at the indices for now, and not anything to do with offsets, that might get a little bit tricky?
                 //Need to discuss this a bit more with Artyom
@@ -598,24 +589,6 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
     private void CollectSurfacePoints ()
     {
         if (am == null)
-            return;
-
-        if (heightfield == null ||
-            (heightfield.GetLength(0) != am.boundsFull.x && heightfield.GetLength(1) != am.boundsFull.z))
-            heightfield = new int[am.boundsFull.x, am.boundsFull.z];
-
-        if (surfacePoints == null || (surfacePoints.GetLength(0) != am.boundsFull.x &&
-            surfacePoints.GetLength(1) != am.boundsFull.z))
-            surfacePoints = new AreaVolumePoint[am.boundsFull.x, am.boundsFull.z];
-
-        ProceduralMeshUtilities.CollectSurfacePoints(am, heightfield, surfacePoints);
-    }
-
-    #if PB_MODSDK
-    public static bool firstTileCollectPolicy;
-    private void CollectSurfacePointsNewAlgo ()
-    {
-        if (am == null)
         {
             return;
         }
@@ -716,7 +689,7 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
                         continue;
                     }
 
-                    var isTerrain = AreaManager.IsPointTerrain(point);
+                    var isTerrain = am.IsPointTerrain (point);
                     if (!isTerrain && (grid[gridIndex] & (terrainBit | surfaceBit)) != 0)
                     {
                         continue;
@@ -745,27 +718,27 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
 
                 if (northAccessible)
                 {
-                    TryPairNeighbor (spot.pointsInSpot[2], x, z + 1, h);
+                    TryPairNeighbor (am, spot.pointsInSpot[2], x, z + 1, h);
                 }
                 if (eastAccessible)
                 {
-                    TryPairNeighbor (spot.pointsInSpot[1], x + 1, z, h);
+                    TryPairNeighbor (am, spot.pointsInSpot[1], x + 1, z, h);
                 }
                 if (northAccessible && eastAccessible)
                 {
-                    TryPairNeighbor (spot.pointsInSpot[3], x + 1, z + 1, h);
+                    TryPairNeighbor (am, spot.pointsInSpot[3], x + 1, z + 1, h);
                 }
             }
         }
     }
 
-    void TryPairNeighbor (AreaVolumePoint neighbor, int x, int z, int h)
+    void TryPairNeighbor (AreaManager am, AreaVolumePoint neighbor, int x, int z, int h)
     {
         if (neighbor == null)
         {
             return;
         }
-        if (AreaManager.IsPointTerrain(neighbor))
+        if (am.IsPointTerrain(neighbor))
         {
             return;
         }
@@ -788,7 +761,6 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
         heightfield[x, z] = neighbor.pointPositionIndex.y;
         surfacePoints[x, z] = neighbor;
     }
-    #endif
 
     private void DrawHeightFieldGizmos()
     {
@@ -814,7 +786,7 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
 
     private void DrawSurfacePoints()
     {
-        if (surfacePoints == null)
+        if (surfacePoints == null || am == null)
             return;
 
         Gizmos.color = surfacePointsColor;
@@ -829,7 +801,7 @@ public class ProceduralMeshTerrainV2 : MonoBehaviour
 
                 var surfacePoint = surfacePoints[x, z];
 
-                if (AreaManager.IsPointTerrain(surfacePoint))
+                if (am.IsPointTerrain(surfacePoint))
                 {
                     Gizmos.color = surfacePointsColor;
                 }

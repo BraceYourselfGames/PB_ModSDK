@@ -89,7 +89,7 @@ namespace Area
 
             for (int i = 0; i < data.volumeTransformed.Length; ++i)
             {
-                Vector3Int pointPosition = AreaUtility.GetVolumePositionFromIndex (i, data.boundsTransformed, log: false);
+                Vector3Int pointPosition = TilesetUtility.GetVolumePositionFromIndex (i, data.boundsTransformed);
                 bool full = data.volumeTransformed[i];
 
                 GameObject pointObject = GameObject.CreatePrimitive (PrimitiveType.Cube);
