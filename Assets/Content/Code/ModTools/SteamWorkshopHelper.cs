@@ -173,7 +173,7 @@ namespace PhantomBrigade.SDK.ModTools
             modTargetedLast = mod;
             utilityCoroutineCompleted = false;
 
-            if (!SteamManagerStatic.initAttempted)
+            if (!SteamManagerStatic.initAttempted || !SteamManagerStatic.initSuccessful)
             {
                 Debug.LogWarning ("Steam Workshop | Steam API not initialized yet, starting up...");
                 SteamManagerStatic.Initialize ();
@@ -184,7 +184,7 @@ namespace PhantomBrigade.SDK.ModTools
                 yield break;
             }
 
-            Debug.LogWarning ("Steam Workshop | Steam API failed to initialize, can't proceed");
+            Debug.LogWarning ("Steam Workshop | Steam API failed to initialize, can't proceed. Make sure that Steam is running!");
             OnUtilityCoroutineEnd ();
         }
 
