@@ -409,7 +409,7 @@ namespace PhantomBrigade.ModTools
                     if (!string.Equals (textWorking, textSource))
                     {
                         textEditsCount += 1;
-                        Debug.Log ($"Text change {textEditsCount}: {sectorKey}/{textKey}");
+                        Debug.Log ($"Text change {textEditsCount}: {sectorKey}/{textKey}\n- {textWorking}");
                         
                         // Initialize the English text edits and/or reset them
                         if (textEditsCollection == null)

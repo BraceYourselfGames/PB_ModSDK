@@ -23,21 +23,23 @@ public static class AttributeExpressionUtility
     private static List<string> typeSequence = new List<string> ();
 
     public static IEnumerable<string> GetStringsFromParentProperty (InspectorProperty propertyRoot, string propertyName) =>
-        GetStringsFromParentProperty (propertyRoot, propertyName, 1, false);
+        GetStringsFromParentProperty (propertyRoot, propertyName, 1, false);    
 
     public static IEnumerable<string> GetStringsFromParentProperty (InspectorProperty propertyRoot, string propertyName, int depth) =>
-        GetStringsFromParentProperty (propertyRoot, propertyName, depth, false);
-
+        GetStringsFromParentProperty (propertyRoot, propertyName, depth, false);    
+    
     public static IEnumerable<string> GetStringsFromParentProperty (InspectorProperty propertyRoot, string propertyName, int depth, bool isPublic)
     {
         return GetStringsFromParentMethod (propertyRoot, "get_" + propertyName, depth, isPublic);
     }
-
-    public static IEnumerable<string> GetStringsFromParentMethod (InspectorProperty propertyRoot, string propertyName) =>
-        GetStringsFromParentMethod (propertyRoot, propertyName, 1, false);
-
-    public static IEnumerable<string> GetStringsFromParentMethod (InspectorProperty propertyRoot, string propertyName, int depth) =>
-        GetStringsFromParentMethod (propertyRoot, propertyName, depth, false);
+    
+    
+    
+    public static IEnumerable<string> GetStringsFromParentMethod (InspectorProperty propertyRoot, string methodName) =>
+        GetStringsFromParentMethod (propertyRoot, methodName, 1, false);
+    
+    public static IEnumerable<string> GetStringsFromParentMethod (InspectorProperty propertyRoot, string methodName, int depth) =>
+        GetStringsFromParentMethod (propertyRoot, methodName, depth, false);    
 
     public static IEnumerable<string> GetStringsFromParentMethod (InspectorProperty propertyRoot, string methodName, int depth, bool isPublic)
     {
@@ -63,13 +65,13 @@ public static class AttributeExpressionUtility
 
         var valueType = propertyTarget.ParentType;
         var value = Convert.ChangeType (propertyTarget.ParentValueProperty.ValueEntry.WeakSmartValue, valueType);
-
+        
         if (value == null)
         {
             Debug.LogWarning ($"Failed to resolve typed object above property {propertyTarget.Name} using type {valueType}, {depth} levels up from root property {propertyRoot.Name}");
             return null;
         }
-
+        
         Dictionary<string, MethodInfo> methodCache = null;
         bool methodCacheExists = methodCaches.ContainsKey (valueType);
         if (methodCacheExists)
@@ -119,37 +121,125 @@ public static class AttributeExpressionUtility
 
         return outputTyped;
     }
+    
+    
 
+    
+    private static Dictionary<string, Type> typesInDefaultAssembly = new Dictionary<string, Type> ();
+    
+    public static Type GetFirstTypeByName (string className)
+    {
+        if (string.IsNullOrEmpty (className))
+            return null;
 
+        if (typesInDefaultAssembly.TryGetValue (className, out var v))
+            return v;
+        
+        var defaultAssembly = typeof (DataContainer).Assembly;
+        Type typeMatched = defaultAssembly.GetType (className, false, true);
+        if (typeMatched != null)
+        {
+            typesInDefaultAssembly[className] = typeMatched;
+            return typeMatched;
+        }
 
+        var assemblyTypes = defaultAssembly.GetTypes ();
+        for (int j = 0; j < assemblyTypes.Length; j++)
+        {
+            var typeCandidate = assemblyTypes[j];
+            if (string.Equals (typeCandidate.Name, className, StringComparison.InvariantCultureIgnoreCase))
+            {
+                typeMatched = typeCandidate;
+                typesInDefaultAssembly[className] = typeMatched;
+                return typeMatched;
+            }
+        }
 
-
-
-
-    public static IEnumerable<string> GetStringsFromParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName) =>
-        GetStringsFromParentTypeProperty (propertyRoot, typeName, methodName, false);
-
-    public static IEnumerable<string> GetStringsFromParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic) =>
-        GetStringsFromParentTypeMethod (propertyRoot, typeName, "get_" + methodName, isPublic);
-
+        Debug.LogWarning ($"Failed to find type {className} for inspector operation!");
+        return null;
+    }
+    
+    
+    
     public static IEnumerable<string> GetStringsFromParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName) =>
         GetStringsFromParentTypeMethod (propertyRoot, typeName, methodName, false);
-
+    
     public static IEnumerable<string> GetStringsFromParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic)
+    {
+        var output = GetValueFromParentTypeMethod (propertyRoot, typeName, methodName, isPublic);
+        if (output == null)
+            return null;
+        
+        var outputTyped = output as IEnumerable<string>;
+        if (outputTyped == null)
+        {
+            Debug.LogWarning ($"Failed cast output from {typeName}/get_{methodName} to IEnumerable<string>");
+            return null;
+        }
+        
+        return outputTyped;
+    }
+    
+    
+    
+    public static IEnumerable<string> GetStringsFromParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName) =>
+        GetStringsFromParentTypeProperty (propertyRoot, typeName, methodName, false);    
+
+    public static IEnumerable<string> GetStringsFromParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic)
+    {
+        var output = GetValueFromParentTypeMethod (propertyRoot, typeName, "get_" + methodName, isPublic);
+        if (output == null)
+            return null;
+        
+        var outputTyped = output as IEnumerable<string>;
+        if (outputTyped == null)
+        {
+            Debug.LogWarning ($"Failed cast output from {typeName}/get_{methodName} to IEnumerable<string>");
+            return null;
+        }
+        
+        return outputTyped;
+    }
+    
+    
+    
+    public static object GetValueFromParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName)
+    {
+        var output = GetValueFromParentTypeMethod (propertyRoot, typeName, methodName, false);
+        return output;
+    }
+    
+    public static object GetValueFromParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic)
+    {
+        var output = GetValueFromParentTypeMethod (propertyRoot, typeName, "get_" + methodName, isPublic);
+        return output;
+    }
+    
+    public static object GetValueFromParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName)
+    {
+        var output = GetValueFromParentTypeMethod (propertyRoot, typeName, "get_" + methodName, false);
+        return output;
+    }
+    
+    
+    
+    
+    public static object GetValueFromParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic)
     {
         if (propertyRoot == null || string.IsNullOrEmpty (typeName) || string.IsNullOrEmpty (methodName))
             return null;
 
         var propertyTarget = propertyRoot.Parent;
         Type valueType = null;
-
+        var typeConstructed = GetFirstTypeByName (typeName);
+        
         typeSequence.Clear ();
         int depth = 0;
         while (true)
         {
             propertyTarget = propertyTarget.Parent;
             depth += 1;
-
+            
             if (propertyTarget == null)
             {
                 Debug.LogWarning ($"Failed search for type {typeName} method {methodName} | Couldn't find parent property {depth} levels above root property {propertyRoot.Name} | Type chain:\n{typeSequence.ToStringFormatted (true)}");
@@ -161,18 +251,25 @@ public static class AttributeExpressionUtility
                 Debug.LogWarning ($"Failed search for type {typeName} method {methodName} | Exceeded maximum iteration depth of 50 | Type chain:\n{typeSequence.ToStringFormatted (true)}");
                 return null;
             }
-
+            
             if (propertyTarget.ParentType == null || propertyTarget.ParentValueProperty == null)
             {
                 // Debug.LogWarning ($"Failed search for type {typeName} method {methodName} | Property {propertyTarget.Name} has no parent type | Type chain:\n{typeSequence.ToStringFormatted (true)}");
                 return null;
             }
-
+            
             // Break if we finally encounter the target type
             valueType = propertyTarget.ParentType;
             typeSequence.Add (valueType.Name);
 
-            if (valueType.Name == typeName)
+            bool typeMatch = valueType.Name == typeName;
+            if (!typeMatch && typeConstructed != null)
+            {
+                typeMatch = typeConstructed.IsAssignableFrom (valueType);
+                valueType = typeConstructed;
+            }
+            
+            if (typeMatch)
                 break;
         }
 
@@ -180,14 +277,15 @@ public static class AttributeExpressionUtility
         if (valueType == null)
             return null;
 
-        var value = Convert.ChangeType (propertyTarget.ParentValueProperty.ValueEntry.WeakSmartValue, valueType);
-
-        if (value == null)
+        var value1 = propertyTarget.ParentValueProperty.ValueEntry.WeakSmartValue;
+        // var value = Convert.ChangeType (propertyTarget.ParentValueProperty.ValueEntry.WeakSmartValue, valueType);
+        
+        if (value1 == null)
         {
             Debug.LogWarning ($"Failed search for type {typeName} method {methodName} | Type match depth: {depth} | Couldn't convert property {propertyTarget.Name} using type {valueType}");
             return null;
         }
-
+        
         Dictionary<string, MethodInfo> methodCache = null;
         bool methodCacheExists = methodCaches.ContainsKey (valueType);
         if (methodCacheExists)
@@ -221,55 +319,45 @@ public static class AttributeExpressionUtility
         if (!methodInfoExists)
             methodCache.Add (methodName, methodInfo);
 
-        var output = methodInfo.Invoke (value, null);
+        var output = methodInfo.Invoke (value1, null);
         if (output == null)
         {
             // Debug.LogWarning ($"Failed search for type {typeName} method {methodName} ({bindingFlags}) | Type match depth: {depth} | Received null output from the target method");
             return null;
         }
 
-        var outputTyped = output as IEnumerable<string>;
-        if (outputTyped == null)
-        {
-            Debug.LogWarning ($"Failed search for type {typeName} method {methodName} ({bindingFlags}) | Type match depth: {depth} | Failed to cast output of the target method to IEnumerable<string>");
-            return null;
-        }
-
-        return outputTyped;
+        return output;
     }
 }
 
 public static class DropdownUtils
 {
     public static IEnumerable<string> ParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName) =>
-        AttributeExpressionUtility.GetStringsFromParentTypeProperty (propertyRoot, typeName, methodName, false);
-
+        AttributeExpressionUtility.GetStringsFromParentTypeProperty (propertyRoot, typeName, methodName, false);    
+    
     public static IEnumerable<string> ParentTypeProperty (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic) =>
         AttributeExpressionUtility.GetStringsFromParentTypeMethod (propertyRoot, typeName, "get_" + methodName, isPublic);
-
+    
     public static IEnumerable<string> ParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName) =>
-        AttributeExpressionUtility.GetStringsFromParentTypeMethod (propertyRoot, typeName, methodName, false);
-
-    public static IEnumerable<string> ParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic) =>
+        AttributeExpressionUtility.GetStringsFromParentTypeMethod (propertyRoot, typeName, methodName, false);    
+    
+    public static IEnumerable<string> ParentTypeMethod (InspectorProperty propertyRoot, string typeName, string methodName, bool isPublic) => 
         AttributeExpressionUtility.GetStringsFromParentTypeMethod (propertyRoot, typeName, methodName, isPublic);
 
     public static void DrawTexturePreview (string textureKey, string textureGroup, int previewHeight)
     {
-        if (!TextureManager.AreAssetsPresent ())
-            return;
-
         if (string.IsNullOrEmpty (textureKey))
             return;
-
-        var texture = TextureManager.GetTexture (textureGroup, textureKey);
+        
+        var texture = TextureManager.GetTexture (textureGroup, textureKey, false);
         if (texture == null)
             return;
-
+        
         previewHeight = Mathf.Clamp (previewHeight, 16, 512);
         var width = Mathf.Min (GUIHelper.ContextWidth - 88f - 15f, previewHeight);
         var shrink = width / (float) texture.width;
         var height = texture.height * shrink;
-
+            
         using (var horizontalScope = new GUILayout.HorizontalScope ())
         {
             GUILayout.Space (15f);
@@ -692,15 +780,16 @@ public class DropdownReferenceResolver<T> : OdinAttributeProcessor<T> where T : 
 
         if (source.addBoxGroup)
         {
+            string groupName = fieldName;
             if (!string.IsNullOrEmpty (source.boxGroupPrefix))
+                groupName = $"{source.boxGroupPrefix}/{groupName}";
+            if (attributes.HasAttribute<TabGroupAttribute> ())
             {
-                var groupName = $"{source.boxGroupPrefix}/{fieldName}";
-                attributes.Add (new BoxGroupAttribute (groupName, false));
+                var tabGroupAttribute = attributes.GetAttribute<TabGroupAttribute> ();
+                groupName = $"{tabGroupAttribute.GroupID}/{groupName}";
             }
-            else
-            {
-                attributes.Add (new BoxGroupAttribute (fieldName, false));
-            }
+            
+            attributes.Add (new BoxGroupAttribute (groupName, false));
         }
 
         attributes.Add (new InlineButtonAttribute ($"@{fieldName} = null", "×"));
