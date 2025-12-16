@@ -474,6 +474,8 @@ public class CombatMaterialHelper : MonoBehaviour
         
         Shader.SetGlobalVector (propertyID_ParamsBlendOffset, parametersBlendOffset);
         
+        #if !PB_MODSDK
+        
         var l1 = DataLinkerCombatBiomes.GetLayerData (s1.layerKey);
         if (l1 != null)
         {
@@ -521,6 +523,8 @@ public class CombatMaterialHelper : MonoBehaviour
             if (texDetail4NormalHeight != null)
                 Shader.SetGlobalTexture (propertyID_CombatTerrainTex4NH, texDetail4NormalHeight);
         }
+
+        #endif
     }
 
     [BoxGroup ("Isolines"), Button, HideInEditorMode]

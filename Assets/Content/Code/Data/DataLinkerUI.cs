@@ -7,11 +7,15 @@ namespace PhantomBrigade.Data.UI
     {
         public static Texture2D GetTexture (string key)
         {
+            #if !PB_MODSDK
             return 
                 data != null && 
                 data.textures != null && 
                 !string.IsNullOrEmpty (key) && 
                 data.textures.ContainsKey (key) ? data.textures[key].texture : null;
+            #else
+            return null;
+            #endif
         }
 
         /*

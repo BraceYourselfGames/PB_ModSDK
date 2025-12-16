@@ -12,6 +12,7 @@ public class AreaSegmentHelper : MonoBehaviour
         UtilityGameObjects.ClearChildren (holder);
         gameObject.SetActive (true);
         
+        #if !PB_MODSDK
         if (segments == null)
             return;
 
@@ -43,6 +44,7 @@ public class AreaSegmentHelper : MonoBehaviour
                     batchLinker.MarkDirty ();
             }
         }
+        #endif
     }
 
     public void ClearSegments ()

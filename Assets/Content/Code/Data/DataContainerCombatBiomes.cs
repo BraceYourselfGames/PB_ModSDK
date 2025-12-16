@@ -115,6 +115,8 @@ namespace PhantomBrigade.Data
 
         private void DrawLayerPreview ()
         {
+            #if !PB_MODSDK
+            
             if (layerKeyResolvedLast != layerKey)
             {
                 var layerData = DataLinkerCombatBiomes.GetLayerData (layerKey);
@@ -140,6 +142,8 @@ namespace PhantomBrigade.Data
                     EditorGUI.DrawPreviewTexture (rect, layerTexture, null, ScaleMode.ScaleAndCrop, 1, 0, ColorWriteMask.All);
                 }
             }
+
+            #endif
         }
 
         private IEnumerable<string> GetLayerKeys ()
