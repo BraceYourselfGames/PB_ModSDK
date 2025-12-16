@@ -37,11 +37,16 @@ namespace PhantomBrigade.Data
     [Serializable][HideReferenceObjectPicker][LabelWidth (160f)]
     public class DataContainerCutsceneVideo : DataContainerWithText
     {
+        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         [InlineButton ("OnBeforeSerialization", "Update path")]
         public VideoClip clip;
+        #endif
         
-        [ReadOnly][GUIColor ("GetPathColor")]
+        #if !PB_MODSDK
+        [ReadOnly]
+        #endif
+        [GUIColor ("GetPathColor")]
         public string path;
 
         public Vector2 audioFadeOnStart = new Vector2 (0f, 0f);

@@ -136,10 +136,14 @@ namespace PhantomBrigade.Data
     
     public class DataBlockResourceReference<T> where T : Object
     {
+        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         public T resource;
+        #endif
         
+        #if !PB_MODSDK
         [ReadOnly]
+        #endif
         public string path;
 
         public void OnBeforeSerialization ()

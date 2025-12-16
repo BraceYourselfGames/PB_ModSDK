@@ -22,11 +22,16 @@ namespace PhantomBrigade.Data
         public bool loop = false;
         public float contentDelay = 2f;
         
+        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("UpdatePath")]
         [InlineButton ("UpdatePath", "Update path")]
         public VideoClip clip;
+        #endif
     
-        [ReadOnly][GUIColor ("GetPathColor")]
+        #if !PB_MODSDK
+        [ReadOnly]
+        #endif
+        [GUIColor ("GetPathColor")]
         public string path;
 
         public void OnBeforeSerialization (string context)
@@ -53,6 +58,7 @@ namespace PhantomBrigade.Data
         private Color GetPathColor () => 
             Color.HSVToRGB (!string.IsNullOrEmpty (path) ? 0.55f : 0f, 0.5f, 1f);
         
+        #if !PB_MODSDK
         public void UpdatePath ()
         {
             if (clip == null)
@@ -68,6 +74,7 @@ namespace PhantomBrigade.Data
             fullPath = fullPath.Substring (0, fullPath.Length - extension.Length);
             path = fullPath;
         }
+        #endif
         
         #endif
     }

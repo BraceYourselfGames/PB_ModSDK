@@ -389,6 +389,7 @@ namespace PhantomBrigade.Mods
         public bool includesAssetBundles;
 
         [InfoBox ("This mod might not load in PB 2.x if you leave this unchecked or do not enter \"2.0\" into gameVersionMin.", InfoMessageType.Warning, VisibleIf = "IsVersionWarningVisible")]
+        [LabelText ("2.0 Compatible")]
         public bool gameVersion2Compatible;
         
         public string gameVersionMin;

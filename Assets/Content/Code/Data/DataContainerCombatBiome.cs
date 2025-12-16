@@ -9,11 +9,15 @@ namespace PhantomBrigade.Data
     [Serializable][LabelWidth (70f)][HideReferenceObjectPicker]
     public class DataBlockResourceTexture
     {
+        #if !PB_MODSDK
         [PreviewField (96f, ObjectFieldAlignment.Left)]
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         public Texture2D texture;
+        #endif
         
+        #if !PB_MODSDK
         [ReadOnly]
+        #endif
         public string path;
 
         public void OnBeforeSerialization ()

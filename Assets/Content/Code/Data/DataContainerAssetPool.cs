@@ -16,7 +16,10 @@ namespace PhantomBrigade.Data
         public AssetLinker prefab;
         #endif
         
-        [ReadOnly][GUIColor ("GetPathColor")]
+        #if !PB_MODSDK
+        [ReadOnly]
+        #endif
+        [GUIColor ("GetPathColor")]
         public string path;
         
         [InfoBox ("When limit is set to 0, the object will only be available for direct instantiation via GetInstanceStandalone method - no pool would be created", InfoMessageType.Warning, "IsLimitInvalid")]

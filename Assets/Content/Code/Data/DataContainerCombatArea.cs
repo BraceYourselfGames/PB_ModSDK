@@ -1088,11 +1088,15 @@ namespace PhantomBrigade.Data
     [Serializable, HideReferenceObjectPicker]
     public class DataBlockEnvironmentSegment
     {
+        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         [AssetsOnly]
         public GameObject prefab;
+        #endif
         
+        #if !PB_MODSDK
         [ReadOnly]
+        #endif
         public string path;
 
         public void OnBeforeSerialization ()

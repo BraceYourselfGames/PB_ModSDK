@@ -86,12 +86,17 @@ namespace PhantomBrigade.Data
     
     public class DataContainerResourcePrefab : DataContainer
     {
+        #if !PB_MODSDK
         [YamlIgnore, HideReferenceObjectPicker, OnValueChanged ("OnBeforeSerialization")]
         [InlineButton ("OnBeforeSerialization", "Update path")]
         // [GUIColor ("GetPrefabColor")]
         public GameObject asset;
+        #endif
         
-        [ReadOnly][GUIColor ("GetPathColor")]
+        #if !PB_MODSDK
+        [ReadOnly]
+        #endif
+        [GUIColor ("GetPathColor")]
         public string path;
         
         public override void OnBeforeSerialization ()
