@@ -171,26 +171,55 @@ namespace PhantomBrigade.SDK.ModTools
 
         private static IEnumerator GenerateConfigFolders (DataContainerModData modData)
         {
-            // TODO: For non-yaml content like area files: invalidate and copy entire root folder if any subfile is different
-            // TODO: Skip unsupported folders like Configs/Behaviours
-
             if (modData == null)
             {
                 Debug.Log ($"Can't generate mod config files: mod data is null");
                 CancelExport ();
                 yield break;
             }
-
+            
             var pathSDK = DataPathHelper.GetApplicationFolder ();
             var pathSDKConfigs = Path.Combine (pathSDK, "Configs");
-            int pathSDKConfigsLength = pathSDKConfigs.Length;
+            
+            bool modConfigsVersioned = !string.IsNullOrEmpty (modData.configsVersion?.version);
+            if (modConfigsVersioned && !string.Equals (modData.configsVersion.version, ConfigsVersion.versionExpected))
+            {
+                var ver = modData.configsVersion.version;
+                var pathSDKConfigsFolderOld = $"ConfigsOld/{ver}";
+                var pathSDKConfigsOld = Path.Combine (pathSDK, pathSDKConfigsFolderOld);
+                DirectoryInfo dirSDKConfigsOld = new DirectoryInfo (pathSDKConfigsOld);
+                if (dirSDKConfigsOld.Exists)
+                {
+                    Debug.LogWarning ($"Mod Configs folder version is {ver} instead of {ConfigsVersion.versionExpected}, falling back to reading the old configs folder {pathSDKConfigsOld}");
+                    pathSDKConfigs = pathSDKConfigsOld;
+                }
+            }
+            
             DirectoryInfo dirSDKConfigs = new DirectoryInfo (pathSDKConfigs);
-            FileInfo[] filesSDK = dirSDKConfigs.GetFiles ("*", SearchOption.AllDirectories);
+            if (!dirSDKConfigs.Exists)
+            {
+                Debug.Log ($"Can't generate mod config files: SDK configs folder at path {pathSDKConfigs} is not found");
+                CancelExport ();
+                yield break;
+            }
 
             var pathMod = modData.GetModPathProject ();
             var pathModConfigs = Path.Combine (pathMod, "Configs");
-            int pathModConfigsLength = pathModConfigs.Length;
+
             DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
+            if (!dirModConfigs.Exists)
+            {
+                Debug.Log ($"Can't generate mod config files: mod configs folder at path {pathModConfigs} is not found");
+                CancelExport ();
+                yield break;
+            }
+            
+            // For resolving local paths
+            int pathSDKConfigsLength = pathSDKConfigs.Length;
+            int pathModConfigsLength = pathModConfigs.Length;
+            
+            // Files we'll iterate on
+            FileInfo[] filesSDK = dirSDKConfigs.GetFiles ("*", SearchOption.AllDirectories);
             FileInfo[] filesMod = dirModConfigs.GetFiles ("*", SearchOption.AllDirectories);
             
             Debug.LogWarning ($"Scanning files...\nSDK ({filesSDK.Length}): {pathSDKConfigs}\nMod ({filesMod.Length}): {pathModConfigs}");
