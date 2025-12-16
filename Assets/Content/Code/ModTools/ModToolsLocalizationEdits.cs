@@ -325,19 +325,51 @@ namespace PhantomBrigade.ModTools
             if (!modConfigsUsed)
                 return;
             
+            // Load mod library
             DataManagerText.LoadLibrary ();
-            
-            var sectorsSource = DataManagerText.librarySourceData.sectors;
-            if (sectorsSource == null)
-            {
-                Debug.LogWarning ("Can't generate text edits: SDK text library not found");
-                return;
-            }
             
             var sectorsWorking = DataManagerText.libraryData.sectors;
             if (sectorsWorking == null)
             {
                 Debug.LogWarning ("Can't generate text edits: mod text library not found");
+                return;
+            }
+            
+            // Load library from version appropriate location, without overwriting main library in memory
+            var pathSDK = DataPathHelper.GetApplicationFolder ();
+            var pathSDKConfigs = DataPathHelper.GetCombinedCleanPath (pathSDK, "Configs");
+            
+            bool modConfigsVersioned = !string.IsNullOrEmpty (modData.configsVersion?.version);
+            if (modConfigsVersioned && !string.Equals (modData.configsVersion.version, ConfigsVersion.versionExpected))
+            {
+                var ver = modData.configsVersion.version;
+                var pathSDKConfigsFolderOld = $"ConfigsOld/{ver}";
+                var pathSDKConfigsOld = DataPathHelper.GetCombinedCleanPath (pathSDK, pathSDKConfigsFolderOld);
+                DirectoryInfo dirSDKConfigsOld = new DirectoryInfo (pathSDKConfigsOld);
+                if (dirSDKConfigsOld.Exists)
+                {
+                    Debug.LogWarning ($"Mod Configs folder version is {ver} instead of {ConfigsVersion.versionExpected}, falling back to reading the old configs folder {pathSDKConfigsOld}");
+                    pathSDKConfigs = pathSDKConfigsOld;
+                }
+            }
+            
+            var pathSDKLibrary = DataPathHelper.GetCombinedCleanPath (pathSDKConfigs, "TextLibrary");
+            var dirSDKLibrary = new DirectoryInfo (pathSDKLibrary);
+            if (!dirSDKLibrary.Exists)
+            {
+                Debug.Log ($"Can't generate text changes: failed to find SDK text library folder at {pathSDKLibrary}");
+                return;
+            }
+            
+            var librarySource = new DataContainerTextLibrary ();
+            librarySource.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> (pathSDKLibrary, "core.yaml", appendApplicationPath: false);
+            librarySource.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorMain> (pathSDKLibrary + "/Sectors", appendApplicationPath: false);
+            librarySource.OnAfterDeserialization ();
+
+            var sectorsSource = librarySource.sectors;
+            if (sectorsSource == null)
+            {
+                Debug.LogWarning ("Can't generate text edits: SDK text library not found");
                 return;
             }
 

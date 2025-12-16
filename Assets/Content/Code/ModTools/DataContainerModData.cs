@@ -254,6 +254,7 @@ namespace PhantomBrigade.SDK.ModTools
             
             metadata.isConfigEnabled = true;
             metadata.includesConfigOverrides = true;
+            
             ModToolsHelper.SaveMod (this);
 
             if (GUIHelper.CurrentWindow != null)
@@ -367,7 +368,7 @@ namespace PhantomBrigade.SDK.ModTools
         }
         
         [ShowIf (nameof(IsConfigsVersionVisible))]
-        [HideLabel]
+        [HideLabel, YamlIgnore]
         public ConfigsVersion configsVersion;
 
         public void RefreshConfigsVersion ()

@@ -110,7 +110,6 @@ namespace PhantomBrigade.SDK.ModTools
                 
                 yield return new EditorWaitForSeconds (0.1f);
                 EditorUtility.DisplayProgressBar ("Exporting mod", "Checking text edits...", 0.95f);
-                DataManagerText.LoadLibrary ();
                 ModTextHelper.GenerateTextChanges (modData);
                 if (modData.textEdits != null)
                     modData.textEdits.SaveToMod (modData);
@@ -179,14 +178,14 @@ namespace PhantomBrigade.SDK.ModTools
             }
             
             var pathSDK = DataPathHelper.GetApplicationFolder ();
-            var pathSDKConfigs = Path.Combine (pathSDK, "Configs");
+            var pathSDKConfigs = DataPathHelper.GetCombinedCleanPath (pathSDK, "Configs");
             
             bool modConfigsVersioned = !string.IsNullOrEmpty (modData.configsVersion?.version);
             if (modConfigsVersioned && !string.Equals (modData.configsVersion.version, ConfigsVersion.versionExpected))
             {
                 var ver = modData.configsVersion.version;
                 var pathSDKConfigsFolderOld = $"ConfigsOld/{ver}";
-                var pathSDKConfigsOld = Path.Combine (pathSDK, pathSDKConfigsFolderOld);
+                var pathSDKConfigsOld = DataPathHelper.GetCombinedCleanPath (pathSDK, pathSDKConfigsFolderOld);
                 DirectoryInfo dirSDKConfigsOld = new DirectoryInfo (pathSDKConfigsOld);
                 if (dirSDKConfigsOld.Exists)
                 {
@@ -204,7 +203,7 @@ namespace PhantomBrigade.SDK.ModTools
             }
 
             var pathMod = modData.GetModPathProject ();
-            var pathModConfigs = Path.Combine (pathMod, "Configs");
+            var pathModConfigs = DataPathHelper.GetCombinedCleanPath (pathMod, "Configs");
 
             DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
             if (!dirModConfigs.Exists)
@@ -370,7 +369,7 @@ namespace PhantomBrigade.SDK.ModTools
                     if (!fc.pathLocal.StartsWith (prefixDataKey))
                         continue;
                     
-                    Debug.Log ($"File {fc.fileMod.Name} invalidated based on path prefix: {prefixDataKey}");
+                    Debug.Log ($"→ File {fc.fileMod.Name} invalidated based on path prefix: {prefixDataKey}");
                     fc.status = FileStatus.Modified;
                     break;
                 }
@@ -525,11 +524,11 @@ namespace PhantomBrigade.SDK.ModTools
             }
             
             var pathSDK = DataPathHelper.GetApplicationFolder ();
-            var pathSDKConfigs = Path.Combine (pathSDK, "Configs");
+            var pathSDKConfigs = DataPathHelper.GetCombinedCleanPath (pathSDK, "Configs");
             DirectoryInfo dirSDKConfigs = new DirectoryInfo (pathSDKConfigs);
             
             var pathMod = modData.GetModPathProject ();
-            var pathModConfigs = Path.Combine (pathMod, "Configs");
+            var pathModConfigs = DataPathHelper.GetCombinedCleanPath (pathMod, "Configs");
             DirectoryInfo dirModConfigs = new DirectoryInfo (pathModConfigs);
             
             if (dirModConfigs.Exists)
