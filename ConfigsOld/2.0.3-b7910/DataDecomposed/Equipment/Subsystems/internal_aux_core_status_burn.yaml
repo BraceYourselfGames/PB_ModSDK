@@ -1,0 +1,100 @@
+hidden: false
+parent: internal_aux_core
+rating: 3
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName:
+  split: true
+textDescFromPreset: 
+textDesc:
+  split: true
+hardpoints:
+- internal_aux_top_core
+tags:
+- internal_aux_drop_boss
+- core_utility
+- stat_dissipation
+- stat_power
+- stat_regeneration
+- rating_3
+- spec_heat
+statDistribution: ''
+stats:
+  barrier_regeneration:
+    value: 0.956
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp2_value:
+    value: 1.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp3_value:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  heat_dissipation:
+    value: 0.735
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_buffer:
+    value: 2.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_limit:
+    value: 1.36
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  power:
+    value: 1.1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 35
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_offset:
+    value: 0.25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- reactor
+attachments: 
+activation: 
+projectile: 
+beam: 
+custom: 
+functions:
+  general:
+  - context: on_overheat
+    checks: 
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatUnitStatusAdd
+        key: timed_burn
+        durationOverride: -1
+        source: Function
+  targeted: 
+  action: 
+workshopInfo:
+  progressLimit:
+    i: 3
+  inputResourcesViaStats:
+    f: 1
+  inputResources:
+  - key: supplies
+    amount: 700
+  - key: components_r2
+    amount: 8
+  - key: components_r3
+    amount: 6
+  basePartRequirements: 

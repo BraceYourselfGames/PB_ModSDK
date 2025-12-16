@@ -1,0 +1,4226 @@
+pilotAnimationSpeedBase: 1
+pilotAnimationSpeedEditor: 0
+pilotAnimationSpeedCombat: 1
+pilotPersonalityOverrideEditing: 
+accessoryHeadTopChanceFriendly: 0.8
+accessoryHeadTopChanceHostile: 1
+accessoryHeadFrontChanceFriendly: 0.5
+accessoryHeadFrontChanceHostile: 0
+facialHairChance: 0.35
+makeupChance: 0.3
+blendPresetBuildChance: 0.35
+blendPresetFaceVariationEyesChance: 0.65
+blendPresetFaceVariationNoseChance: 0.5
+blendPresetFaceVariationCheeksChance: 0.45
+blendPresetFaceVariationLipsChance: 0.5
+blendPresetFaceVariationJawChance: 0.5
+blendPresetFaceVariationEarsChance: 0.85
+overlaySupport: true
+cameraAnglePresets:
+  01:
+    angle:
+      x: 0
+      y: 0
+      z: 0
+    offset:
+      x: 0
+      y: 0
+      z: 0
+    fov: 35
+    dolly: 0
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0
+        y: -0.02
+        z: 0
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: 0
+        y: 0
+        z: 0.125
+  02:
+    angle:
+      x: 7.5
+      y: 8.464
+      z: -5.838
+    offset:
+      x: 0.01
+      y: 0.01
+      z: 0.015
+    fov: 40
+    dolly: 0.1
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0.02
+        y: -0.03
+        z: 0
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: 0
+        y: -0.01
+        z: 0.08
+  03:
+    angle:
+      x: 0
+      y: -10.485
+      z: -5.739
+    offset:
+      x: -0.015
+      y: 0.01
+      z: 0
+    fov: 25
+    dolly: -0.25
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0.03
+        y: -0.04
+        z: 0
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: -0.02
+        y: 0
+        z: 0.05
+    - personalityKey: pilot_personality_cocky
+      additionalOffset:
+        x: 0.02
+        y: 0.02
+        z: 0.04
+  04:
+    angle:
+      x: -11.31
+      y: 16
+      z: -5.739
+    offset:
+      x: 0
+      y: 0.01
+      z: 0.02
+    fov: 26
+    dolly: -0.2
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0
+        y: -0.03
+        z: -0.03
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: 0
+        y: -0.01
+        z: 0.08
+  05:
+    angle:
+      x: -21.109
+      y: 7.54
+      z: 5.42
+    offset:
+      x: 0.08
+      y: 0.035
+      z: 0.1
+    fov: 35
+    dolly: 0.1
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0
+        y: -0.03
+        z: -0.02
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: -0.02
+        y: -0.015
+        z: 0.09
+  06:
+    angle:
+      x: 6.56
+      y: 14.5
+      z: -18
+    offset:
+      x: 0
+      y: 0.01
+      z: 0.03
+    fov: 35
+    dolly: -0.02
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0.02
+        y: -0.02
+        z: -0.02
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: 0
+        y: 0
+        z: 0.08
+  07:
+    angle:
+      x: -11.55
+      y: 0
+      z: 16.2
+    offset:
+      x: 0
+      y: 0.01
+      z: 0
+    fov: 35
+    dolly: 0
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0
+        y: -0.02
+        z: -0.02
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: 0.0125
+        y: 0
+        z: 0.125
+  08:
+    angle:
+      x: -7.2
+      y: -14
+      z: 18.43
+    offset:
+      x: 0.008
+      y: 0.01
+      z: 0.03
+    fov: 25
+    dolly: -0.25
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0
+        y: -0.03
+        z: -0.02
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: -0.02
+        y: 0
+        z: 0.05
+  09:
+    angle:
+      x: -10
+      y: 25
+      z: -12
+    offset:
+      x: 0
+      y: 0.02
+      z: 0.03
+    fov: 12
+    dolly: -1.45
+    enemiesOnly: false
+    additionalOffsetPerPersonality:
+    - personalityKey: pilot_personality_sneaky
+      additionalOffset:
+        x: 0
+        y: -0.03
+        z: -0.03
+    - personalityKey: pilot_personality_aggressive
+      additionalOffset:
+        x: 0
+        y: 0
+        z: 0.08
+blendshapesFacePresets:
+  a_01:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_01
+      value: 100
+  a_02:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_02
+      value: 100
+  a_03:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_03
+      value: 100
+  a_04:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_04
+      value: 100
+  a_05:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_05
+      value: 100
+  a_06:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_06
+      value: 100
+  a_07:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_07
+      value: 100
+  a_08:
+    blendShapes:
+    - key: PB_C_Face_Preset_A_08
+      value: 100
+  e_01:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_01
+      value: 100
+  e_02:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_02
+      value: 100
+  e_03:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_03
+      value: 100
+  e_04:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_04
+      value: 100
+  e_05:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_05
+      value: 100
+  e_06:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_06
+      value: 100
+  e_07:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_07
+      value: 100
+  e_08:
+    blendShapes:
+    - key: PB_C_Face_Preset_E_08
+      value: 100
+  w_01:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_01
+      value: 100
+  w_02:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_02
+      value: 100
+  w_03:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_03
+      value: 100
+  w_04:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_04
+      value: 100
+  w_05:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_05
+      value: 100
+  w_06:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_06
+      value: 100
+  w_07:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_07
+      value: 100
+  w_08:
+    blendShapes:
+    - key: PB_C_Face_Preset_W_08
+      value: 100
+blendshapesForCustomization:
+  body_musculature:
+    blendShape: PB_C_Body_Size_Proportions
+    influenceMin: -50
+    influenceMax: 100
+  body_neck_size:
+    blendShape: PB_C_Body_NeckSize
+    influenceMin: -50
+    influenceMax: 100
+  body_size:
+    blendShape: PB_C_Body_Size_Big
+    influenceMin: 0
+    influenceMax: 100
+  face_cheekbones_size:
+    blendShape: PB_C_Face_CheekbonesSize
+    influenceMin: -50
+    influenceMax: 100
+  face_cheeks_size:
+    blendShape: PB_C_Face_CheeksSize
+    influenceMin: -80
+    influenceMax: 100
+  face_chin_depth:
+    blendShape: PB_C_Face_ChinDepth
+    influenceMin: -100
+    influenceMax: 100
+  face_chin_width:
+    blendShape: PB_C_Face_ChinWidth
+    influenceMin: -100
+    influenceMax: 100
+  face_ears_height:
+    blendShape: PB_C_Face_EarHeight
+    influenceMin: -100
+    influenceMax: 100
+  face_ears_width:
+    blendShape: PB_C_Face_EarWidth
+    influenceMin: -100
+    influenceMax: 100
+  face_eyebrows_height:
+    blendShape: PB_C_Face_BrowHeight
+    influenceMin: -60
+    influenceMax: 60
+  face_eyebrows_size:
+    blendShape: PB_C_Face_BrowSize
+    influenceMin: -100
+    influenceMax: 100
+  face_eyelids_fold:
+    blendShape: PB_C_Face_EyelidsFoldDown
+    influenceMin: 0
+    influenceMax: 100
+  face_eyes_angle:
+    blendShape: PB_C_Face_EyesAngled
+    influenceMin: -50
+    influenceMax: 80
+  face_eyes_depth:
+    blendShape: PB_C_Face_EyesDepth
+    influenceMin: -100
+    influenceMax: 100
+  face_eyes_distance:
+    blendShape: PB_C_Face_EyesDistance
+    influenceMin: -60
+    influenceMax: 60
+  face_eyes_height:
+    blendShape: PB_C_Face_EyesHeight
+    influenceMin: -60
+    influenceMax: 70
+  face_eyes_size:
+    blendShape: PB_C_Face_EyesSize
+    influenceMin: -60
+    influenceMax: 80
+  face_jaw_size:
+    blendShape: PB_C_Face_JawSize
+    influenceMin: -100
+    influenceMax: 100
+  face_lips_depth:
+    blendShape: PB_C_Face_MouthDepth
+    influenceMin: -50
+    influenceMax: 50
+  face_lips_height:
+    blendShape: PB_C_Face_MouthHeight
+    influenceMin: -100
+    influenceMax: 100
+  face_lips_width:
+    blendShape: PB_C_Face_MouthWidth
+    influenceMin: -80
+    influenceMax: 80
+  face_nose_bump:
+    blendShape: PB_C_Face_NoseBump
+    influenceMin: -50
+    influenceMax: 100
+  face_nose_depth:
+    blendShape: PB_C_Face_NoseDepth
+    influenceMin: -100
+    influenceMax: 100
+  face_nose_height:
+    blendShape: PB_C_Face_NoseHeight
+    influenceMin: -100
+    influenceMax: 100
+  face_nose_tip_height:
+    blendShape: PB_C_Face_NoseTipHeight
+    influenceMin: -100
+    influenceMax: 100
+  face_nose_tip_width:
+    blendShape: PB_C_Face_NoseTipWidth
+    influenceMin: -100
+    influenceMax: 100
+  face_nose_width:
+    blendShape: PB_C_Face_NoseWidth
+    influenceMin: -100
+    influenceMax: 100
+blendPresetsFaceVariationEyes:
+  eyes_brows_0:
+  - key: face_eyebrows_height
+    influence: 10
+  - key: face_eyebrows_size
+    influence: 20
+  - key: face_eyes_depth
+    influence: -10
+  - key: face_eyes_distance
+    influence: 15
+  - key: face_eyes_size
+    influence: 20
+  eyes_brows_1:
+  - key: face_eyebrows_height
+    influence: -15
+  - key: face_eyebrows_size
+    influence: -25
+  - key: face_eyelids_fold
+    influence: 30
+  - key: face_eyes_angle
+    influence: 15
+  - key: face_eyes_depth
+    influence: 35
+  - key: face_eyes_distance
+    influence: -20
+  - key: face_eyes_height
+    influence: 25
+  - key: face_eyes_size
+    influence: 15
+  eyes_brows_2:
+  - key: face_eyebrows_height
+    influence: 25
+  - key: face_eyebrows_size
+    influence: -20
+  - key: face_eyelids_fold
+    influence: 30
+  - key: face_eyes_angle
+    influence: 20
+  - key: face_eyes_depth
+    influence: 15
+  - key: face_eyes_height
+    influence: 15
+  - key: face_eyes_size
+    influence: -10
+  eyes_brows_3:
+  - key: face_eyebrows_height
+    influence: -25
+  - key: face_eyebrows_size
+    influence: 25
+  - key: face_eyes_angle
+    influence: -10
+  - key: face_eyes_depth
+    influence: -20
+  - key: face_eyes_distance
+    influence: 30
+  - key: face_eyes_height
+    influence: 35
+  - key: face_eyes_size
+    influence: -10
+  eyes_brows_4:
+  - key: face_eyebrows_height
+    influence: 25
+  - key: face_eyebrows_size
+    influence: 25
+  - key: face_eyes_depth
+    influence: -35
+  - key: face_eyes_distance
+    influence: 20
+  - key: face_eyes_height
+    influence: -15
+  - key: face_eyes_size
+    influence: 20
+  eyes_brows_5:
+  - key: face_eyebrows_height
+    influence: -25
+  - key: face_eyebrows_size
+    influence: -25
+  - key: face_eyes_angle
+    influence: 10
+  - key: face_eyes_depth
+    influence: 35
+  - key: face_eyes_distance
+    influence: -20
+  - key: face_eyes_height
+    influence: 45
+  - key: face_eyes_size
+    influence: 25
+  eyes_brows_6:
+  - key: face_eyebrows_size
+    influence: 25
+  - key: face_eyes_angle
+    influence: -10
+  - key: face_eyes_depth
+    influence: -35
+  - key: face_eyes_distance
+    influence: 25
+  - key: face_eyes_height
+    influence: -25
+  - key: face_eyes_size
+    influence: -25
+  eyes_brows_7:
+  - key: face_eyebrows_size
+    influence: -30
+  - key: face_eyelids_fold
+    influence: 30
+  - key: face_eyes_depth
+    influence: -25
+  - key: face_eyes_distance
+    influence: -10
+  - key: face_eyes_size
+    influence: 20
+blendPresetsFaceVariationNose:
+  n0_w0:
+  - key: face_nose_bump
+    influence: 80
+  - key: face_nose_width
+    influence: -25
+  - key: face_nose_tip_height
+    influence: -25
+  n0_w1:
+  - key: face_nose_bump
+    influence: 80
+  - key: face_nose_tip_height
+    influence: -35
+  n0_w2:
+  - key: face_nose_bump
+    influence: 80
+  - key: face_nose_width
+    influence: 15
+  - key: face_nose_tip_height
+    influence: -25
+  - key: face_nose_tip_width
+    influence: 15
+  - key: face_nose_height
+    influence: 15
+  n1_w0:
+  - key: face_nose_bump
+    influence: -15
+  - key: face_nose_width
+    influence: -25
+  - key: face_nose_tip_height
+    influence: 35
+  n1_w1:
+  - key: face_nose_bump
+    influence: -15
+  - key: face_nose_tip_height
+    influence: 25
+  - key: face_nose_tip_width
+    influence: 15
+  n1_w2:
+  - key: face_nose_bump
+    influence: -10
+  - key: face_nose_width
+    influence: 15
+  - key: face_nose_tip_height
+    influence: 35
+  - key: face_nose_tip_width
+    influence: 10
+  n2_w0:
+  - key: face_nose_width
+    influence: -15
+  - key: face_nose_height
+    influence: -25
+  n2_w1:
+  - key: face_nose_width
+    influence: 0
+  - key: face_nose_height
+    influence: 15
+  n2_w2:
+  - key: face_nose_width
+    influence: 15
+  - key: face_nose_tip_width
+    influence: 10
+  - key: face_nose_height
+    influence: 35
+blendPresetsFaceVariationCheeks:
+  c0_s0:
+  - key: face_cheekbones_size
+    influence: 30
+  - key: face_cheeks_size
+    influence: -30
+  c0_s1:
+  - key: face_cheeks_size
+    influence: 30
+  c0_s2:
+  - key: face_cheekbones_size
+    influence: 20
+  - key: face_cheeks_size
+    influence: -15
+  c0_s3:
+  - key: face_cheekbones_size
+    influence: 15
+  - key: face_cheeks_size
+    influence: 5
+  c0_s4:
+  - key: face_cheekbones_size
+    influence: -15
+  - key: face_cheeks_size
+    influence: 5
+blendPresetsFaceVariationLips:
+  l0_s0:
+  - key: face_lips_depth
+    influence: -25
+  - key: face_lips_height
+    influence: 25
+  - key: face_lips_width
+    influence: -45
+  l0_s1:
+  - key: face_lips_depth
+    influence: -15
+  - key: face_lips_height
+    influence: 15
+  - key: face_lips_width
+    influence: -30
+  l0_s2:
+  - key: face_lips_depth
+    influence: -5
+  - key: face_lips_height
+    influence: 5
+  - key: face_lips_width
+    influence: -15
+  l0_s3:
+  - key: face_lips_depth
+    influence: 5
+  - key: face_lips_height
+    influence: -5
+  - key: face_lips_width
+    influence: 15
+  l0_s4:
+  - key: face_lips_depth
+    influence: 5
+  - key: face_lips_height
+    influence: -15
+  - key: face_lips_width
+    influence: 35
+  l0_s5:
+  - key: face_lips_depth
+    influence: 15
+  - key: face_lips_height
+    influence: -25
+  - key: face_lips_width
+    influence: 45
+blendPresetsFaceVariationJaw:
+  n0_w0:
+  - key: face_chin_width
+    influence: -25
+  - key: face_cheeks_size
+    influence: -5
+  - key: face_jaw_size
+    influence: -5
+  n0_w1:
+  - key: face_chin_width
+    influence: -50
+  - key: face_cheeks_size
+    influence: -35
+  - key: face_jaw_size
+    influence: -35
+  n0_w2:
+  - key: face_chin_width
+    influence: 15
+  - key: face_cheeks_size
+    influence: 5
+  - key: face_jaw_size
+    influence: 5
+  n0_w3:
+  - key: face_chin_width
+    influence: 35
+  - key: face_cheeks_size
+    influence: 15
+  - key: face_jaw_size
+    influence: 5
+  n1_w0:
+  - key: face_chin_width
+    influence: 5
+  - key: face_chin_depth
+    influence: 5
+  - key: face_cheekbones_size
+    influence: 20
+  n1_w1:
+  - key: face_chin_width
+    influence: 25
+  - key: face_chin_depth
+    influence: -25
+  - key: face_jaw_size
+    influence: -5
+  - key: face_cheekbones_size
+    influence: 45
+blendPresetsFaceVariationEars:
+  ears0:
+  - key: face_ears_height
+    influence: -50
+  ears1:
+  - key: face_ears_height
+    influence: -100
+  - key: face_ears_width
+    influence: 100
+  ears2:
+  - key: face_ears_height
+    influence: 45
+  - key: face_ears_width
+    influence: -20
+  ears3:
+  - key: face_ears_height
+    influence: -100
+  - key: face_ears_width
+    influence: -100
+  ears4:
+  - key: face_ears_height
+    influence: 60
+  - key: face_ears_width
+    influence: 80
+blendPresetsBuilds:
+  w00_m05:
+  - key: body_musculature
+    influence: 40
+  - key: body_neck_size
+    influence: 20
+  w00_m10:
+  - key: body_musculature
+    influence: 100
+  - key: body_neck_size
+    influence: 25
+  w05_m00:
+  - key: body_musculature
+    influence: 65
+  - key: body_neck_size
+    influence: 25
+  - key: body_size
+    influence: 20
+  w05_m05:
+  - key: body_musculature
+    influence: 30
+  - key: body_neck_size
+    influence: 15
+  - key: body_size
+    influence: 30
+  w10_m00:
+  - key: body_neck_size
+    influence: 5
+  - key: body_size
+    influence: 50
+models:
+  model_f:
+    enabled: true
+    viewKey: pilot_body_female
+    blendShapeKeys:
+    - PB_C_Body_HidePilotGear
+    - PB_C_Body_NeckSize
+    - PB_C_Body_Size_Big
+    - PB_C_Body_Size_Proportions
+    - PB_C_Body_Size_Thin
+    - PB_C_Face_BrowHeight
+    - PB_C_Face_BrowSize
+    - PB_C_Face_CheekbonesSize
+    - PB_C_Face_CheeksSize
+    - PB_C_Face_ChinDepth
+    - PB_C_Face_ChinWidth
+    - PB_C_Face_EarHeight
+    - PB_C_Face_EarWidth
+    - PB_C_Face_EyelidsFoldDown
+    - PB_C_Face_EyesAngled
+    - PB_C_Face_EyesDepth
+    - PB_C_Face_EyesDistance
+    - PB_C_Face_EyesHeight
+    - PB_C_Face_EyesSize
+    - PB_C_Face_JawSize
+    - PB_C_Face_MouthDepth
+    - PB_C_Face_MouthHeight
+    - PB_C_Face_MouthWidth
+    - PB_C_Face_NoseBump
+    - PB_C_Face_NoseDepth
+    - PB_C_Face_NoseHeight
+    - PB_C_Face_NoseTipHeight
+    - PB_C_Face_NoseTipWidth
+    - PB_C_Face_NoseWidth
+    - PB_C_Face_Preset_A_01
+    - PB_C_Face_Preset_A_02
+    - PB_C_Face_Preset_A_03
+    - PB_C_Face_Preset_A_04
+    - PB_C_Face_Preset_A_05
+    - PB_C_Face_Preset_A_06
+    - PB_C_Face_Preset_A_07
+    - PB_C_Face_Preset_A_08
+    - PB_C_Face_Preset_E_01
+    - PB_C_Face_Preset_E_02
+    - PB_C_Face_Preset_E_03
+    - PB_C_Face_Preset_E_04
+    - PB_C_Face_Preset_E_05
+    - PB_C_Face_Preset_E_06
+    - PB_C_Face_Preset_E_07
+    - PB_C_Face_Preset_E_08
+    - PB_C_Face_Preset_W_01
+    - PB_C_Face_Preset_W_02
+    - PB_C_Face_Preset_W_03
+    - PB_C_Face_Preset_W_04
+    - PB_C_Face_Preset_W_05
+    - PB_C_Face_Preset_W_06
+    - PB_C_Face_Preset_W_07
+    - PB_C_Face_Preset_W_08
+  model_m:
+    enabled: true
+    viewKey: pilot_body_male
+    blendShapeKeys:
+    - PB_C_Body_HidePilotGear
+    - PB_C_Body_NeckSize
+    - PB_C_Body_Size_Big
+    - PB_C_Body_Size_Proportions
+    - PB_C_Body_Size_Thin
+    - PB_C_Face_BrowHeight
+    - PB_C_Face_BrowSize
+    - PB_C_Face_CheekbonesSize
+    - PB_C_Face_CheeksSize
+    - PB_C_Face_ChinDepth
+    - PB_C_Face_ChinWidth
+    - PB_C_Face_EyelidsFoldDown
+    - PB_C_Face_EyesAngled
+    - PB_C_Face_EyesDepth
+    - PB_C_Face_EyesDistance
+    - PB_C_Face_EyesHeight
+    - PB_C_Face_EyesSize
+    - PB_C_Face_JawSize
+    - PB_C_Face_MouthDepth
+    - PB_C_Face_MouthHeight
+    - PB_C_Face_MouthWidth
+    - PB_C_Face_NoseBump
+    - PB_C_Face_NoseDepth
+    - PB_C_Face_NoseHeight
+    - PB_C_Face_NoseTipHeight
+    - PB_C_Face_NoseTipWidth
+    - PB_C_Face_NoseWidth
+    - PB_C_Face_Preset_A_01
+    - PB_C_Face_Preset_A_02
+    - PB_C_Face_Preset_A_03
+    - PB_C_Face_Preset_A_04
+    - PB_C_Face_Preset_A_05
+    - PB_C_Face_Preset_A_06
+    - PB_C_Face_Preset_A_07
+    - PB_C_Face_Preset_A_08
+    - PB_C_Face_Preset_E_01
+    - PB_C_Face_Preset_E_02
+    - PB_C_Face_Preset_E_03
+    - PB_C_Face_Preset_E_04
+    - PB_C_Face_Preset_E_05
+    - PB_C_Face_Preset_E_06
+    - PB_C_Face_Preset_E_07
+    - PB_C_Face_Preset_E_08
+    - PB_C_Face_Preset_W_01
+    - PB_C_Face_Preset_W_02
+    - PB_C_Face_Preset_W_03
+    - PB_C_Face_Preset_W_04
+    - PB_C_Face_Preset_W_05
+    - PB_C_Face_Preset_W_06
+    - PB_C_Face_Preset_W_07
+    - PB_C_Face_Preset_W_08
+  model_pup:
+    enabled: false
+    viewKey: pilot_body_dog
+    blendShapeKeys: 
+hairMain:
+  01_short:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_01_short
+  02_curly_short:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.25
+      y: 0.99
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_02_curly_short
+  03_short:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_03_short
+  04_shaved:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_04_shaved
+  05_bald:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.01
+      y: 0.4
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_05_bald
+  06_bun:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_06_bun
+  07_curls:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.75
+      y: 0.99
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_07_curls
+  08_ghost:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.01
+      y: 0.2
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_08_ghost
+  09_bun_bangs:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_09_bun_bangs
+  10_long:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_10_long
+  11_long:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.6
+      y: 0.99
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_11_long
+  12_long:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_12_long
+  13_curly_updo:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.01
+      y: 0.5
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_13_curly_updo
+  14_afro_crop:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0.01
+      y: 0.7
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_14_afro_crop
+  15_long:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/HairHead/hair_15_long
+  16_short:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_16_short
+  17_receding:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_17_receding
+  99_helmet_mechanic_friendly_01_shadow:
+    priority: 0
+    usableByFriendly: false
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Mechanic_Friendly_01_shadow
+  99_helmet_pilot_friendly_01_shadow:
+    priority: 0
+    usableByFriendly: false
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Friendly_01_shadow
+  99_helmet_pilot_friendly_commander_01_shadow:
+    priority: 0
+    usableByFriendly: false
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Friendly_Commander_01_shadow
+  99_shadow_for_hats:
+    priority: 0
+    usableByFriendly: false
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_99_shadow_for_hats
+  99_short_for_hats:
+    priority: 0
+    usableByFriendly: false
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/HairHead/hair_99_short_for_hats
+hairFacial:
+  01_stubble:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_01_stubble
+  02_stubble_trim:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_02_patch
+  03_moustache:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_03_goatee
+  04_moustache_stubble:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_04_moustache
+  05_beard_short:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_05_circle
+  06_anchor:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_06_anchor
+  07_horseshoe:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_07_horseshoe
+  08_short_beard:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_m
+    path: Content/Objects/Characters/HairFace/hair_face_08_short_beard
+accessoriesHeadTop:
+  hat_beanie1:
+    holderOverride: hat
+    hairOverride: 99_short_for_hats
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0.1
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0.2
+          y: 0.25
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.35
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.96
+          y: 0.5
+          z: 0.35
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Hat_Beanie_01
+  hat_beret1:
+    holderOverride: hat
+    hairOverride: 99_short_for_hats
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0.5
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0.05
+          z: 0.15
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.4
+          y: 0.7
+          z: 0.25
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Hat_Beret_HomeArmy_01
+  hat_cap1:
+    holderOverride: hat
+    hairOverride: 99_short_for_hats
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0.6
+          z: 0.5
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0.1
+          z: 0.25
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.6
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0.35
+          y: 1
+          z: 0.5
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0.6
+          y: 0.7
+          z: 0.5
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Hat_Cap_01
+  hat_headscarf1:
+    holderOverride: hat
+    hairOverride: 99_short_for_hats
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0.2
+          z: 0.5
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.7
+          y: 0.3
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0.15
+          y: 0.35
+          z: 0.35
+        hsvSecondary:
+          x: 0
+          y: 0.5
+          z: 0.5
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/hat_headscarf_01
+  helmet_enemy_pilot_commander1:
+    holderOverride: helmet
+    hairOverride: 99_shadow_for_hats
+    variants: {}
+    priority: 0
+    generated: true
+    usableByFriendly: false
+    usableByHostile: true
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Enemy_Commander_01
+  helmet_enemy_pilot1:
+    holderOverride: helmet
+    hairOverride: 99_shadow_for_hats
+    variants: {}
+    priority: 0
+    generated: true
+    usableByFriendly: false
+    usableByHostile: true
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Enemy_01
+  helmet_friendly_pilot_commander1:
+    holderOverride: helmet
+    hairOverride: 99_helmet_pilot_friendly_commander_01_shadow
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.04
+          y: 0.4
+          z: 0.55
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0.45
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.3
+          y: 0.2
+          z: 0.3
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.75
+          y: 0.3
+          z: 0.35
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0.04
+          y: 0.35
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0.35
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0.3
+          y: 0.1
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0.75
+          y: 0.15
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      11:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0.9
+      12:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0.95
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Friendly_Commander_01
+  helmet_friendly_pilot1:
+    holderOverride: helmet
+    hairOverride: 99_helmet_pilot_friendly_01_shadow
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.04
+          y: 0.4
+          z: 0.55
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0.45
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.3
+          y: 0.2
+          z: 0.3
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.75
+          y: 0.3
+          z: 0.35
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0.04
+          y: 0.35
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0.35
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0.3
+          y: 0.1
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0.75
+          y: 0.15
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      11:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0.9
+      12:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0.95
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Friendly_01
+  helmet_friendly_pilot2:
+    holderOverride: helmet
+    hairOverride: 99_helmet_pilot_friendly_01_shadow
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.15
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.15
+        hsvSecondary:
+          x: 0.04
+          y: 0.4
+          z: 0.55
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.15
+        hsvSecondary:
+          x: 0
+          y: 0.45
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.15
+        hsvSecondary:
+          x: 0.3
+          y: 0.2
+          z: 0.3
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.15
+        hsvSecondary:
+          x: 0.75
+          y: 0.3
+          z: 0.35
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.15
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.125
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0.04
+          y: 0.35
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.125
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0.35
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.125
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0.3
+          y: 0.1
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.125
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0.75
+          y: 0.15
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.125
+        glassOpacityOverride: 0
+      11:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.125
+        glassOpacityOverride: 0.9
+      12:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.125
+        glassOpacityOverride: 0.95
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Friendly_02
+  helmet_friendly_pilot3:
+    holderOverride: helmet
+    hairOverride: 99_helmet_pilot_friendly_01_shadow
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0.35
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.04
+          y: 0.4
+          z: 0.55
+        glassOpacityOverride: 0.35
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0
+          y: 0.45
+          z: 0.5
+        glassOpacityOverride: 0.35
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.3
+          y: 0.2
+          z: 0.3
+        glassOpacityOverride: 0.35
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.75
+          y: 0.3
+          z: 0.35
+        glassOpacityOverride: 0.35
+      06:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0.35
+      07:
+        hsvPrimary:
+          x: 0.04
+          y: 0.35
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0.35
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0.35
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0.35
+      09:
+        hsvPrimary:
+          x: 0.3
+          y: 0.1
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0.35
+      10:
+        hsvPrimary:
+          x: 0.75
+          y: 0.15
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0.35
+      11:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0.9
+      12:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0.95
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Pilot_Friendly_03
+  helmet_mechanic_pilot1:
+    holderOverride: helmet
+    hairOverride: 99_helmet_mechanic_friendly_01_shadow
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.04
+          y: 0.4
+          z: 0.55
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0.45
+          z: 0.5
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.3
+          y: 0.2
+          z: 0.3
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.75
+          y: 0.3
+          z: 0.35
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0.04
+          y: 0.35
+          z: 0.4
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0.35
+          z: 0.3
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0.3
+          y: 0.1
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0.75
+          y: 0.15
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0
+      11:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.2
+        hsvSecondary:
+          x: 0.6
+          y: 0.6
+          z: 0.4
+        glassOpacityOverride: 0.9
+      12:
+        hsvPrimary:
+          x: 0.6
+          y: 0.2
+          z: 0.2
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.15
+        glassOpacityOverride: 0.95
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Helmet_Mechanic_Friendly_01
+accessoriesHeadFront:
+  eye_glasses1:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot3
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0.05
+          y: 0.6
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.3
+          y: 0.2
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0.6
+          y: 0.3
+          z: 0.06
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.08
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_01
+  eye_glasses2:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot3
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.5
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.05
+          y: 0.15
+          z: 0.5
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.08
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_02
+  eye_glasses3:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot3
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.5
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.05
+          y: 0.15
+          z: 0.5
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.08
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_03
+  eye_glasses4:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot3
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.5
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.05
+          y: 0.15
+          z: 0.5
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.08
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_04
+  eye_glasses5:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot3
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0.05
+          y: 0.6
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.3
+          y: 0.2
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0.6
+          y: 0.25
+          z: 0.06
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.25
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.08
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_05
+  eye_glasses6:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot1
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.45
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0.1
+          y: 0.8
+          z: 0.06
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.45
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0.3
+          y: 0.3
+          z: 0.04
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.45
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0.6
+          y: 0.1
+          z: 0.06
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.45
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.1
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.45
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.08
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.5
+        glassOpacityOverride: 0
+      08:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+      09:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+      10:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.04
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_06
+  eye_glasses7:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot1
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.03
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.03
+        hsvSecondary:
+          x: 0.1
+          y: 1
+          z: 0.5
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.03
+        hsvSecondary:
+          x: 0.015
+          y: 0.6
+          z: 0.9
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.03
+        hsvSecondary:
+          x: 0.3
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.03
+        hsvSecondary:
+          x: 0.55
+          y: 0.3
+          z: 0.3
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.03
+        hsvSecondary:
+          x: 0.8
+          y: 0.3
+          z: 0.4
+        glassOpacityOverride: 0
+    priority: 0
+    generated: false
+    usableByFriendly: true
+    usableByHostile: false
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_07
+  eye_glasses8:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - helmet_friendly_pilot1
+    - helmet_friendly_pilot3
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.6
+          y: 0.1
+          z: 0.2
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.1
+          y: 0.5
+          z: 0.4
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.55
+          y: 0.5
+          z: 0.3
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.8
+          y: 0.5
+          z: 0.4
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0.3
+          z: 0.08
+        hsvSecondary:
+          x: 0.1
+          y: 1
+          z: 0.4
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.55
+          y: 0.4
+          z: 0.08
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.3
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0.8
+          y: 0.1
+          z: 0.08
+        hsvSecondary:
+          x: 0.4
+          y: 0.3
+          z: 0.2
+        glassOpacityOverride: 0
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: true
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_08
+  eye_glasses9:
+    holderOverride: glasses
+    variantDefault: 01
+    accessoriesHeadTopIncompatible:
+    - helmet_enemy_pilot1
+    - hat_cap1
+    - helmet_friendly_pilot1
+    - helmet_friendly_pilot3
+    - helmet_friendly_pilot2
+    - helmet_friendly_pilot_commander1
+    - helmet_mechanic_pilot1
+    variants:
+      01:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.6
+          y: 0.025
+          z: 0.3
+        glassOpacityOverride: 0
+      02:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.08
+          y: 0.5
+          z: 0.3
+        glassOpacityOverride: 0
+      03:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.55
+          y: 0.5
+          z: 0.3
+        glassOpacityOverride: 0
+      04:
+        hsvPrimary:
+          x: 0
+          y: 0
+          z: 0.05
+        hsvSecondary:
+          x: 0.8
+          y: 0.5
+          z: 0.3
+        glassOpacityOverride: 0
+      05:
+        hsvPrimary:
+          x: 0
+          y: 0.3
+          z: 0.08
+        hsvSecondary:
+          x: 0.1
+          y: 1
+          z: 0.3
+        glassOpacityOverride: 0
+      06:
+        hsvPrimary:
+          x: 0.55
+          y: 0.4
+          z: 0.08
+        hsvSecondary:
+          x: 0
+          y: 0
+          z: 0.1
+        glassOpacityOverride: 0
+      07:
+        hsvPrimary:
+          x: 0.8
+          y: 0.2
+          z: 0.08
+        hsvSecondary:
+          x: 0.4
+          y: 0.4
+          z: 0.2
+        glassOpacityOverride: 0
+    priority: 0
+    generated: true
+    usableByFriendly: true
+    usableByHostile: true
+    path: Content/Objects/Characters/AccessoriesHead/Accessory_Glasses_09
+skinsMain:
+  skin_a:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/SkinMain/PBCharacter_Skin_A
+  skin_a_alt:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/SkinMain/PBCharacter_Skin_A_Alt
+  skin_b:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/SkinMain/PBCharacter_Skin_B
+  skin_b_alt:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/SkinMain/PBCharacter_Skin_B_Alt
+skinsOverlays:
+  suit_pilot_covered:
+    priority: 0
+    usableByFriendly: false
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/SkinOverlay/Clothing_Layer_Invader
+  suit_pilot_default:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/SkinOverlay/Clothing_Layer_Pilot
+pilotSuitColorVariants:
+  suit_0:
+    hsvPrimary:
+      x: 0
+      y: 0.5
+      z: 0.5
+    generated: true
+    backgroundFog:
+      r: 0
+      g: 0.6401706
+      b: 1
+      a: 1
+    reflectionTint:
+      r: 0
+      g: 0.65
+      b: 1
+      a: 1
+  suit_1:
+    hsvPrimary:
+      x: 0
+      y: 0
+      z: 0.4
+    generated: true
+    backgroundFog:
+      r: 0.6282353
+      g: 0.6565759
+      b: 0.6980392
+      a: 1
+    reflectionTint:
+      r: 0.4141153
+      g: 0.6947674
+      b: 0.8867924
+      a: 1
+  suit_2:
+    hsvPrimary:
+      x: 0
+      y: 0
+      z: 0.15
+    generated: true
+    backgroundFog:
+      r: 0.56
+      g: 0.6027723
+      b: 0.8
+      a: 1
+    reflectionTint:
+      r: 0.5118588
+      g: 0.539616
+      b: 0.8588235
+      a: 1
+  suit_3:
+    hsvPrimary:
+      x: 0.45
+      y: 0.6
+      z: 0.4
+    generated: true
+    backgroundFog:
+      r: 0.8773585
+      g: 0.7001308
+      b: 0.1779548
+      a: 1
+    reflectionTint:
+      r: 0.8396226
+      g: 0.6483026
+      b: 0.4475347
+      a: 1
+  suit_4:
+    hsvPrimary:
+      x: 0.72
+      y: 0.4
+      z: 0.35
+    generated: true
+    backgroundFog:
+      r: 0.5777816
+      g: 0.8117647
+      b: 0.09411763
+      a: 1
+    reflectionTint:
+      r: 0.7343102
+      g: 0.7647059
+      b: 0.4784314
+      a: 1
+  suit_5:
+    hsvPrimary:
+      x: 0.4
+      y: 1.4
+      z: 0.4
+    generated: true
+    backgroundFog:
+      r: 0.8113208
+      g: 0.1597623
+      b: 0.0956746
+      a: 1
+    reflectionTint:
+      r: 0.6509434
+      g: 0.3191677
+      b: 0.3101193
+      a: 1
+  suit_6:
+    hsvPrimary:
+      x: 0.15
+      y: 0.5
+      z: 0.5
+    generated: true
+    backgroundFog:
+      r: 0.5818689
+      g: 0.2802598
+      b: 0.8867924
+      a: 1
+    reflectionTint:
+      r: 0.7521662
+      g: 0.5936276
+      b: 0.8679245
+      a: 1
+hairEyebrows:
+  arch_med:
+    eyebrowsStyle: 1
+    eyebrowsThickness: 0.5
+  arch_thick:
+    eyebrowsStyle: 1
+    eyebrowsThickness: 1
+  arch_thin:
+    eyebrowsStyle: 1
+    eyebrowsThickness: 0
+  curved_med:
+    eyebrowsStyle: 0
+    eyebrowsThickness: 0.5
+  curved_thick:
+    eyebrowsStyle: 0
+    eyebrowsThickness: 1
+  curved_thin:
+    eyebrowsStyle: 0
+    eyebrowsThickness: 0
+  straight_med:
+    eyebrowsStyle: 2
+    eyebrowsThickness: 0.5
+  straight_thick:
+    eyebrowsStyle: 2
+    eyebrowsThickness: 1
+  straight_thin:
+    eyebrowsStyle: 2
+    eyebrowsThickness: 0
+  upward_med:
+    eyebrowsStyle: 3
+    eyebrowsThickness: 0.5
+  upward_thick:
+    eyebrowsStyle: 3
+    eyebrowsThickness: 1
+  upward_thin:
+    eyebrowsStyle: 3
+    eyebrowsThickness: 0
+makeupPatterns:
+  pattern_makeup_00:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_makeup_00
+  pattern_makeup_01:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_01
+  pattern_makeup_02:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_02
+  pattern_makeup_03:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_03
+  pattern_makeup_04:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_04
+  pattern_makeup_05:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_05
+  pattern_makeup_06:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_06
+  pattern_makeup_07:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_07
+  pattern_makeup_08:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    path: Content/Objects/Characters/Makeup/pattern_makeup_08
+  pattern_paint_01:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_paint_01
+  pattern_paint_02:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_paint_02
+  pattern_paint_03:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility: []
+    path: Content/Objects/Characters/Makeup/pattern_paint_03
+  pattern_paint_04:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: false
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility: []
+    path: Content/Objects/Characters/Makeup/pattern_paint_04
+  pattern_scar_01:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_scar_01
+  pattern_scar_02:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_scar_02
+  pattern_scar_03:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_scar_03
+  pattern_scar_04:
+    priority: 0
+    usableByFriendly: true
+    usableByHostile: true
+    interpolantRange:
+      x: 0
+      y: 1
+    modelCompatibility:
+    - model_f
+    - model_m
+    path: Content/Objects/Characters/Makeup/pattern_scar_04
+skinTints:
+  00:
+    color:
+      r: 0.9
+      g: 0.8
+      b: 0.8
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0
+    genY: 0
+    generated: true
+    selectable: true
+  00b:
+    color:
+      r: 0.9
+      g: 0.8
+      b: 0.8
+      a: 1
+    alphaRd: 0.1
+    alphaDk: 0.3
+    genX: 0.076
+    genY: 0
+    generated: true
+    selectable: true
+  01:
+    color:
+      r: 0.77
+      g: 0.68
+      b: 0.74
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0.153
+    genY: 0
+    generated: true
+    selectable: true
+  01b:
+    color:
+      r: 0.77
+      g: 0.68
+      b: 0.74
+      a: 1
+    alphaRd: 0.1
+    alphaDk: 0.3
+    genX: 0.23
+    genY: 0
+    generated: true
+    selectable: true
+  02:
+    color:
+      r: 0.8
+      g: 0.72
+      b: 0.72
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0.307
+    genY: 0
+    generated: true
+    selectable: true
+  02b:
+    color:
+      r: 0.8
+      g: 0.72
+      b: 0.72
+      a: 1
+    alphaRd: 0.1
+    alphaDk: 0.3
+    genX: 0.384
+    genY: 0
+    generated: true
+    selectable: true
+  03:
+    color:
+      r: 0.7
+      g: 0.64
+      b: 0.63
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0.461
+    genY: 0
+    generated: true
+    selectable: true
+  03b:
+    color:
+      r: 0.7
+      g: 0.64
+      b: 0.63
+      a: 1
+    alphaRd: 0.08
+    alphaDk: 0.3
+    genX: 0.538
+    genY: 0
+    generated: true
+    selectable: true
+  04:
+    color:
+      r: 0.6
+      g: 0.54
+      b: 0.5
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0.615
+    genY: 0
+    generated: true
+    selectable: true
+  04b:
+    color:
+      r: 0.6
+      g: 0.54
+      b: 0.5
+      a: 1
+    alphaRd: 0.08
+    alphaDk: 0.3
+    genX: 0.692
+    genY: 0
+    generated: true
+    selectable: true
+  05:
+    color:
+      r: 0.5
+      g: 0.46
+      b: 0.45
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0.769
+    genY: 0
+    generated: true
+    selectable: true
+  05b:
+    color:
+      r: 0.5
+      g: 0.46
+      b: 0.45
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.3
+    genX: 0.846
+    genY: 0
+    generated: true
+    selectable: true
+  06:
+    color:
+      r: 0.36
+      g: 0.32
+      b: 0.3
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.08
+    genX: 0.923
+    genY: 0
+    generated: true
+    selectable: true
+  06b:
+    color:
+      r: 0.36
+      g: 0.32
+      b: 0.3
+      a: 1
+    alphaRd: 0.05
+    alphaDk: 0.3
+    genX: 1
+    genY: 0
+    generated: true
+    selectable: true
+overlayVariants:
+  01_default:
+    filterColor:
+      r: 1
+      g: 1
+      b: 1
+      a: 0
+    filterInputs:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+  02_hue_00:
+    filterColor:
+      r: 1
+      g: 0.25
+      b: 0.25
+      a: 1
+    filterInputs:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+  02_hue_05:
+    filterColor:
+      r: 1
+      g: 0.4778
+      b: 0.254
+      a: 1
+    filterInputs:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+  02_hue_40:
+    filterColor:
+      r: 0.25
+      g: 1
+      b: 0.5500001
+      a: 1
+    filterInputs:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+  02_hue_55:
+    filterColor:
+      r: 0.25
+      g: 0.7749999
+      b: 1
+      a: 1
+    filterInputs:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+hairTints:
+  00:
+    color:
+      r: 0.45
+      g: 0.2636718
+      b: 0.2039062
+      a: 1
+    genX: 0
+    genY: 0.127
+    generated: true
+    selectable: true
+  01:
+    color:
+      r: 0.4
+      g: 0.4
+      b: 0.4
+      a: 1
+    genX: 0.03
+    genY: 0
+    generated: true
+    selectable: true
+  02:
+    color:
+      r: 0.47
+      g: 0.4442968
+      b: 0.4002343
+      a: 1
+    genX: 0.1
+    genY: 0
+    generated: true
+    selectable: true
+  03:
+    color:
+      r: 0.55
+      g: 0.4690566
+      b: 0.385
+      a: 1
+    genX: 0.17
+    genY: 0
+    generated: true
+    selectable: true
+  04:
+    color:
+      r: 0.5019608
+      g: 0.4
+      b: 0.3411765
+      a: 1
+    genX: 0.24
+    genY: 0
+    generated: true
+    selectable: true
+  05:
+    color:
+      r: 0.3686
+      g: 0.2957
+      b: 0.2396
+      a: 1
+    genX: 0.32
+    genY: 0
+    generated: true
+    selectable: true
+  06:
+    color:
+      r: 0.31
+      g: 0.2717
+      b: 0.2449
+      a: 1
+    genX: 0.42
+    genY: 0
+    generated: true
+    selectable: true
+  07:
+    color:
+      r: 0.254717
+      g: 0.2252316
+      b: 0.2198736
+      a: 1
+    genX: 0.69
+    genY: 0
+    generated: true
+    selectable: true
+  08:
+    color:
+      r: 0.18
+      g: 0.1623529
+      b: 0.1552941
+      a: 1
+    genX: 1
+    genY: 0
+    generated: true
+    selectable: true
+  09:
+    color:
+      r: 0.45
+      g: 0.2225077
+      b: 0.2115
+      a: 1
+    genX: 0
+    genY: 1
+    generated: false
+    selectable: true
+  10:
+    color:
+      r: 0.256
+      g: 0.32
+      b: 0.2676364
+      a: 1
+    genX: 0.25
+    genY: 1
+    generated: false
+    selectable: true
+  11:
+    color:
+      r: 0.28
+      g: 0.2982609
+      b: 0.35
+      a: 1
+    genX: 0.5
+    genY: 1
+    generated: false
+    selectable: true
+  12:
+    color:
+      r: 0.35
+      g: 0.2863636
+      b: 0.35
+      a: 1
+    genX: 0.75
+    genY: 1
+    generated: false
+    selectable: true
+  13:
+    color:
+      r: 0.3466346
+      g: 0.35
+      b: 0.2625
+      a: 1
+    genX: 1
+    genY: 1
+    generated: false
+    selectable: true
+eyeTints:
+  01:
+    colorMain:
+      r: 0.2358491
+      g: 0.2223446
+      b: 0.2147117
+      a: 0
+    colorSecondary:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+    genX: 0
+    generated: true
+    selectable: true
+  02:
+    colorMain:
+      r: 0.3
+      g: 0.2425
+      b: 0.21
+      a: 0
+    colorSecondary:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+    genX: 0.85
+    generated: true
+    selectable: true
+  03:
+    colorMain:
+      r: 0.245
+      g: 0.2882353
+      b: 0.35
+      a: 0
+    colorSecondary:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+    genX: 0.9
+    generated: true
+    selectable: true
+  04:
+    colorMain:
+      r: 0.266087
+      g: 0.3
+      b: 0.24
+      a: 0
+    colorSecondary:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+    genX: 0.95
+    generated: true
+    selectable: true
+  05:
+    colorMain:
+      r: 0.3120652
+      g: 0.33
+      b: 0.3120652
+      a: 0
+    colorSecondary:
+      r: 0
+      g: 0
+      b: 0
+      a: 0
+    genX: 1
+    generated: true
+    selectable: true
+eyeIrisPresets:
+  00:
+    irisSize: 0.25
+    pupilDilation: 0.15
+    generated: false
+    selectable: true
+  01:
+    irisSize: 0.25
+    pupilDilation: -0.05
+    generated: true
+    selectable: true
+  02:
+    irisSize: 0.25
+    pupilDilation: -0.35
+    generated: false
+    selectable: true
+  10:
+    irisSize: 0.3
+    pupilDilation: 0.15
+    generated: false
+    selectable: true
+  11:
+    irisSize: 0.3
+    pupilDilation: -0.05
+    generated: false
+    selectable: true
+  12:
+    irisSize: 0.3
+    pupilDilation: -0.35
+    generated: false
+    selectable: true
+  20:
+    irisSize: 0.15
+    pupilDilation: -0.05
+    generated: false
+    selectable: true
+  21:
+    irisSize: 0.15
+    pupilDilation: -0.15
+    generated: false
+    selectable: true
+  30:
+    irisSize: 0.2
+    pupilDilation: -0.1
+    generated: false
+    selectable: true
+  31:
+    irisSize: 0.2
+    pupilDilation: -0.2
+    generated: false
+    selectable: true
+lipsTints:
+  01a:
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 0
+    genX: 0
+    generated: true
+    selectable: true
+  01b:
+    color:
+      r: 0.9
+      g: 0.9
+      b: 0.9
+      a: 0.015
+    genX: 0.5
+    generated: true
+    selectable: true
+  01c:
+    color:
+      r: 0.9
+      g: 0.9
+      b: 0.9
+      a: 0
+    genX: 1
+    generated: true
+    selectable: true
+  02:
+    color:
+      r: 1
+      g: 0.7028673
+      b: 0.4103774
+      a: 0.1019608
+    genX: 0
+    generated: false
+    selectable: true
+  03:
+    color:
+      r: 0.8679245
+      g: 0.487184
+      b: 0.487184
+      a: 0.1019608
+    genX: 0
+    generated: false
+    selectable: true
+  04:
+    color:
+      r: 0.6
+      g: 0.8
+      b: 0.5
+      a: 0.15
+    genX: 0
+    generated: false
+    selectable: true
+  05:
+    color:
+      r: 0.48
+      g: 0.8
+      b: 0.6905264
+      a: 0.1019608
+    genX: 0
+    generated: false
+    selectable: true
+  06:
+    color:
+      r: 0.5
+      g: 0.75
+      b: 0.8
+      a: 0.1
+    genX: 0
+    generated: false
+    selectable: true
+  07:
+    color:
+      r: 0.6
+      g: 0.6649351
+      b: 0.8
+      a: 0.1019608
+    genX: 0
+    generated: false
+    selectable: true
+  08:
+    color:
+      r: 0.5
+      g: 0.5
+      b: 0.5
+      a: 0.5
+    genX: 0
+    generated: false
+    selectable: true
+  09:
+    color:
+      r: 0.4
+      g: 0.4
+      b: 0.4
+      a: 0.1
+    genX: 0
+    generated: false
+    selectable: true
+makeupColors:
+  makeup_eyes:
+    01:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.2641509
+        g: 0.2074582
+        b: 0.1831613
+        a: 1
+      generated: true
+      selectable: true
+    02:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.4056604
+        g: 0.2929495
+        b: 0.2468405
+        a: 1
+      generated: true
+      selectable: true
+    03:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.5
+        g: 0.4009434
+        b: 0.3584906
+        a: 1
+      generated: true
+      selectable: true
+    04:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.6509804
+        g: 0.2431373
+        b: 0.1254902
+        a: 1
+      generated: false
+      selectable: true
+    05:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.7058824
+        g: 0.3921569
+        b: 0.01176471
+        a: 1
+      generated: false
+      selectable: true
+    06:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.3372549
+        g: 0.4039216
+        b: 0.2235294
+        a: 1
+      generated: false
+      selectable: true
+    07:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.2475
+        g: 0.3677344
+        b: 0.45
+        a: 1
+      generated: false
+      selectable: true
+    08:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.3607843
+        g: 0.2705882
+        b: 0.3960784
+        a: 1
+      generated: false
+      selectable: true
+  makeup_facepaint:
+    01:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.1668298
+        g: 0.1788705
+        b: 0.2169811
+        a: 1
+      generated: true
+      selectable: true
+    02:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.5
+        g: 0.5
+        b: 0.5
+        a: 1
+      generated: true
+      selectable: true
+    03:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.2495049
+        g: 0.3698019
+        b: 0.45
+        a: 1
+      generated: false
+      selectable: true
+    04:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.6509804
+        g: 0.2431373
+        b: 0.1254902
+        a: 1
+      generated: false
+      selectable: true
+    05:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.7058824
+        g: 0.3921569
+        b: 0.01176471
+        a: 1
+      generated: false
+      selectable: true
+    06:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.3372549
+        g: 0.4039216
+        b: 0.2235294
+        a: 1
+      generated: false
+      selectable: true
+    07:
+      colorPrimary:
+        r: 0.1686275
+        g: 0.1686275
+        b: 0.1686275
+        a: 1
+      colorSecondary:
+        r: 0.3607843
+        g: 0.2705882
+        b: 0.3960784
+        a: 1
+      generated: false
+      selectable: true
+  makeup_scars:
+    01:
+      colorPrimary:
+        r: 0.3584906
+        g: 0
+        b: 0
+        a: 0.5019608
+      colorSecondary:
+        r: 0.7735849
+        g: 0.6862166
+        b: 0.6166785
+        a: 0.05098039
+      generated: true
+      selectable: true
+    02:
+      colorPrimary:
+        r: 0.1415094
+        g: 0.04939479
+        b: 0.03404235
+        a: 0.6
+      colorSecondary:
+        r: 0.8867924
+        g: 0.7347208
+        b: 0.6818262
+        a: 0.05098039
+      generated: true
+      selectable: true
+  makeup_shadows_highlights:
+    01:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.9137255
+        g: 0.8167747
+        b: 0.6352941
+        a: 0.5019608
+      generated: true
+      selectable: true
+    02:
+      colorPrimary:
+        r: 0.2641509
+        g: 0.2058334
+        b: 0.1881452
+        a: 1
+      colorSecondary:
+        r: 0.9137255
+        g: 0.8167747
+        b: 0.6352941
+        a: 0.5019608
+      generated: true
+      selectable: true
+    03:
+      colorPrimary:
+        r: 0.1698113
+        g: 0.1698113
+        b: 0.1698113
+        a: 1
+      colorSecondary:
+        r: 0.9339623
+        g: 0.77077
+        b: 0.7004717
+        a: 0.5019608
+      generated: true
+      selectable: true
+    04:
+      colorPrimary:
+        r: 0.2641509
+        g: 0.2058334
+        b: 0.1881452
+        a: 1
+      colorSecondary:
+        r: 0.9339623
+        g: 0.77077
+        b: 0.7004717
+        a: 0.5019608
+      generated: true
+      selectable: true
+    05:
+      colorPrimary:
+        r: 0.3679245
+        g: 0.2391288
+        b: 0.1787558
+        a: 1
+      colorSecondary:
+        r: 1
+        g: 0.6529307
+        b: 0.5707547
+        a: 0.5019608
+      generated: true
+      selectable: true

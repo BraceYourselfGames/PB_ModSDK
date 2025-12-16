@@ -1,0 +1,188 @@
+comment: 
+hidden: false
+listed: true
+factionAllied: false
+factionBranchDefault: branch_reserves
+tags:
+- branch_reserves
+- weight_medium
+- range_medium
+- type_attacker
+- type_main
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w2_mr_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_mr_ar_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w1_mr_mls_res
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w2_mr_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g2_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_mr_mg_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: vanguard
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_drone_exp_01
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: DumbAdvance
+    aiTargeting: default
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_standard_mr_cannon
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w2_mr_full_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g3_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w2_mr_backonly_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_mr_cannon_res
+    countMin: 2
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_attacker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w3_adapter_mr_mg_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+unitPresets:
+  mech_striker: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_ultraheavy: false
+      role_striker: true
+      type_mech: true
+  mech_vanguard: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_ultraheavy: false
+      role_vanguard: true
+      type_mech: true
+  tank_striker: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      role_striker: true
+      type_tank_standard: true
+  tank_vanguard: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      role_vanguard: true
+      type_tank_standard: true

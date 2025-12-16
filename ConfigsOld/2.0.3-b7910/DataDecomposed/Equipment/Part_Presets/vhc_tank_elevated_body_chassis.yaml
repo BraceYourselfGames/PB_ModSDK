@@ -1,0 +1,70 @@
+hidden: false
+parents:
+- key: vhc_tank_elevated_body
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- core
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - vhc_vis_tank_elevated_body_01
+  pickRandom: false
+  hardpointsTargeted:
+  - vhc_vis_core
+  priority: -2
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_vhc_tank_elevated_core_v01_set01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_chassis
+  priority: -1
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_aux_core_elevated
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_core
+  priority: 0
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: true
+  hardpointsTargeted:
+  - internal_aux_offense
+  - internal_aux_defense
+  - internal_aux_mobility
+  priority: 1
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 1
+    ratingMax: 3
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - perk_1
+  priority: 2
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3

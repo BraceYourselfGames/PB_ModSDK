@@ -1,0 +1,48 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_combat_type_assassination2
+tags:
+- level_4
+- bonus
+- type_brawler
+- type_sharpshooter
+- type_special
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes: 
+  filterEventEntity:
+    eventType: CombatUnitDamageIncoming
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf:
+  - !PilotValidateStatValue
+    key: hp
+    normalized: true
+    check: Less
+    value: 0.75
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitStatusBuildup
+    key: timed_buff_damage
+    value: 1
+    source: Trait
+  functionsSelf: 
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

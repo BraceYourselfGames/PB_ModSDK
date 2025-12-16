@@ -1,0 +1,30 @@
+textDescInTooltips: false
+hidden: false
+icon: s_icon_l32_socket_upperbody
+severity: Hint
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireAll
+  subsystemsMethod: RequireOne
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts: []
+  subsystems:
+  - socket: core
+    hardpoint: external_top_head
+    not: true
+    requirement: Present
+  - socket: core
+    hardpoint: external_top_torso
+    not: true
+    requirement: Present
+  - socket: core
+    hardpoint: external_top_pelvis
+    not: true
+    requirement: Present
+  stats: []
+  pilot: []
+functions: 

@@ -1,0 +1,51 @@
+icon: s_icon_l32_mnf_organic2
+color:
+  r: 0.8113208
+  g: 0.3559096
+  b: 0.3559096
+  a: 1
+hidden: false
+debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.9
+  velocityDecayTime: 1
+  key: fx_status_meltdown_oneshot
+  scale:
+    x: 1
+    y: 1
+    z: 1
+durationFull:
+  f: 5
+durationUpdate: 
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio:
+  audioOnStart: status_meltdown_loop
+  audioOnStop: status_meltdown_loop_stop
+effectsOnStart: 
+effectsOnUpdate: 
+effectsOnEnd:
+- triggerOnCompletion: true
+  triggerOnCancel: false
+  enabled: true
+  triggerCheckUnit: 
+  triggerCheckPilot: 
+  comment: 
+  functionsOnHost:
+  - !CombatUnitDestroy {}
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+statOffsets: 

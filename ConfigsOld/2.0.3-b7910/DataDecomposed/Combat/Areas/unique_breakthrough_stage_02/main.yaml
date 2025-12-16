@@ -1,0 +1,982 @@
+hidden: false
+parents: []
+image: 
+core:
+  backgroundTerrainUsed: true
+  sliceShadingUsed: false
+  sliceShadingInputs:
+    x: 1
+    y: 1
+    z: 1
+    w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
+content: {}
+atmosphere:
+  groundHeight: -28.5
+  destructionMapping:
+    x: 150
+    y: 800
+    z: 0
+    w: 0
+tags: []
+spawnGroups:
+  center:
+    tags:
+    - perimeter_center
+    - direction_center
+    - context_defended
+    points:
+    - point:
+        x: 199.5
+        y: -16.5
+        z: 148.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 97.5
+        y: -16.5
+        z: 148.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 88.5
+        y: -16.5
+        z: 157.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 76.5
+        y: -16.5
+        z: 172.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 223.5
+        y: -16.5
+        z: 172.5
+      rotation:
+        x: 0
+        y: 5.008956E-06
+        z: 0
+  outer_perimeter_e:
+    tags:
+    - context_undefended
+    - direction_e
+    - perimeter_outer
+    points:
+    - point:
+        x: 268.5
+        y: -16.5
+        z: 148.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 250.863
+        y: -16.5
+        z: 161.6233
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 250.5
+        y: -7.5
+        z: 199.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 292.5
+        y: -7.5
+        z: 238.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 289.5
+        y: -7.5
+        z: 253.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  outer_perimeter_n:
+    tags:
+    - direction_n
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 145.5
+        y: -16.5
+        z: 292.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 82.5
+        y: -16.5
+        z: 292.5
+      rotation:
+        x: 0
+        y: 150
+        z: 0
+    - point:
+        x: 115.5
+        y: -16.5
+        z: 289.5
+      rotation:
+        x: 0
+        y: 210
+        z: 0
+    - point:
+        x: 175.5
+        y: -16.5
+        z: 289.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 208.5
+        y: -16.5
+        z: 289.5
+      rotation:
+        x: 0
+        y: 210
+        z: 0
+  outer_perimeter_s:
+    tags:
+    - direction_s
+    - perimeter_outer
+    points:
+    - point:
+        x: 233.9319
+        y: -31.5
+        z: 68.30932
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 166.5
+        y: -31.5
+        z: 52.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 219.0037
+        y: -31.5
+        z: 68.50964
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 232.5
+        y: -31.5
+        z: 34.5
+      rotation:
+        x: 0
+        y: 300
+        z: 0
+    - point:
+        x: 199.5
+        y: -31.5
+        z: 52.5
+      rotation:
+        x: 0
+        y: 300
+        z: 0
+  outer_perimeter_se:
+    tags:
+    - context_undefended
+    - direction_se
+    - perimeter_outer
+    points:
+    - point:
+        x: 109.5
+        y: -16.5
+        z: 133.5
+      rotation:
+        x: 0
+        y: 44.99999
+        z: 0
+    - point:
+        x: 127.5
+        y: -16.5
+        z: 121.5
+      rotation:
+        x: 0
+        y: 30
+        z: 0
+    - point:
+        x: 127.5
+        y: -16.5
+        z: 106.5
+      rotation:
+        x: 0
+        y: -3.155136E-06
+        z: 0
+    - point:
+        x: 168.4068
+        y: -16.45
+        z: 106.7233
+      rotation:
+        x: 0
+        y: -3.155136E-06
+        z: 0
+    - point:
+        x: 190.5
+        y: -16.5
+        z: 130.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+  outer_perimeter_sw:
+    tags:
+    - context_undefended
+    - direction_sw
+    - perimeter_outer
+    points:
+    - point:
+        x: 52.5
+        y: -16.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 55.5
+        y: -16.5
+        z: 151.5
+      rotation:
+        x: 0
+        y: 0.0001870499
+        z: 0
+    - point:
+        x: 34.5
+        y: -16.5
+        z: 151.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 28.5
+        y: -16.5
+        z: 124.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 28.5
+        y: -16.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 44.66147
+        z: 0
+  outer_perimeter_w:
+    tags:
+    - context_undefended
+    - direction_w
+    - perimeter_outer
+    points:
+    - point:
+        x: 43.5
+        y: -16.5
+        z: 157.5
+      rotation:
+        x: 0
+        y: 60
+        z: 0
+    - point:
+        x: 52.5
+        y: -16.5
+        z: 178.5
+      rotation:
+        x: 0
+        y: 90.00001
+        z: 0
+    - point:
+        x: 55.5
+        y: -16.5
+        z: 229.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 40.5
+        y: -16.5
+        z: 259.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 55.5
+        y: -16.5
+        z: 286.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+  player:
+    tags:
+    - player
+    points:
+    - point:
+        x: 55.5
+        y: -31.45
+        z: 19.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 37.5
+        y: -31.45
+        z: 19.5
+      rotation:
+        x: 0
+        y: 1.001791E-05
+        z: 0
+    - point:
+        x: 22.5
+        y: -31.45
+        z: 19.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 31.5
+        y: -31.45
+        z: 31.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 46.5
+        y: -31.45
+        z: 31.5
+      rotation:
+        x: 0
+        y: 5.008956E-06
+        z: 0
+  sp_generator_gate:
+    tags: []
+    points:
+    - point:
+        x: 229.72
+        y: -22.6
+        z: 82.36
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+  sp_generator_sat_01:
+    tags: []
+    points:
+    - point:
+        x: 216.0578
+        y: -13.5
+        z: 252.0578
+      rotation:
+        x: 0
+        y: -135
+        z: 0
+  sp_generator_sat_02:
+    tags: []
+    points:
+    - point:
+        x: 148.5733
+        y: -13.5
+        z: 133.4472
+      rotation:
+        x: 0
+        y: -3.155136E-06
+        z: 0
+  sp_generator_sat_03:
+    tags: []
+    points:
+    - point:
+        x: 81.04046
+        y: -13.5
+        z: 251.9595
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+  turret_group:
+    tags:
+    - utility_turret
+    points:
+    - point:
+        x: 101.8474
+        y: -19.45
+        z: 84.24032
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 198.0141
+        y: -19.45
+        z: 84.09779
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 229.5
+        y: -13.45
+        z: 94.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 78.6624
+        y: -13.45
+        z: 95.61758
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 147.7414
+        y: -16.45
+        z: 95.512
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+locations:
+  obj_boss_origin:
+    tags:
+    - obj_boss_origin
+    data: !AreaLocation
+      point:
+        x: 145.9493
+        y: -23.75
+        z: 224.1912
+      rotation: 165
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_breakin:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 265.5
+        y: -31.5
+        z: 40.5
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_satellite_tower_a_strike:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 224.8847
+        y: -16.5
+        z: 226.0376
+      rotation: -10.59888
+      sizeX: 6
+      sizeY: 9
+      rect: false
+  obj_satellite_tower_b_strike:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 150.3436
+        y: -16.5
+        z: 106.9806
+      rotation: 0
+      sizeX: 6
+      sizeY: 9
+      rect: false
+  obj_satellite_tower_c_strike:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 72.04552
+        y: -16.5
+        z: 226.2537
+      rotation: 13.05146
+      sizeX: 6
+      sizeY: 9
+      rect: false
+volumes:
+  alarm_00:
+    tags:
+    - obj_alarm
+    data: !AreaVolume
+      origin:
+        x: 37
+        y: 1
+        z: 62
+      size:
+        x: 3
+        y: 1
+        z: 3
+  structure_00:
+    tags:
+    - obj_structure
+    data: !AreaVolume
+      origin:
+        x: 37
+        y: 1
+        z: 62
+      size:
+        x: 8
+        y: 1
+        z: 5
+fields:
+- type: kill
+  visible: false
+  origin:
+    x: 146.1974
+    y: -23.51331
+    z: 224.4861
+  size:
+    x: 65
+    y: 9
+    z: 85
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  rotation: -10
+waypointGroups: 
+briefingGroupsInjected: 
+intro:
+  cameraInputsFinal: 
+  shots:
+  - duration: 4.5
+    easing: easeOutQuad
+    fadeOnEnd: true
+    fadeDuration: 0.5
+    from:
+      position:
+        x: 246.88
+        y: -27.52
+        z: 35.32
+      rotation:
+        x: 351.07
+        y: 325.63
+        z: 0
+      fov: 40
+    to:
+      position:
+        x: 242.15
+        y: 11.87
+        z: 43.51
+      rotation:
+        x: 9.63
+        y: 327.69
+        z: 0
+      fov: 40
+  - duration: 4
+    easing: linear
+    fadeOnEnd: true
+    fadeDuration: 0.3
+    from:
+      position:
+        x: 247.76
+        y: 124.52
+        z: 207.85
+      rotation:
+        x: 60.14
+        y: 278.51
+        z: 2.34
+      fov: 35
+    to:
+      position:
+        x: 204.51
+        y: 126.56
+        z: 294.23
+      rotation:
+        x: 59.45
+        y: 224.14
+        z: 2.29
+      fov: 35
+  - duration: 5
+    easing: linear
+    fadeOnEnd: true
+    fadeDuration: 0.3
+    from:
+      position:
+        x: 29.83
+        y: -12.43
+        z: 36.03
+      rotation:
+        x: 357.79
+        y: 43.47
+        z: 0
+      fov: 40
+    to:
+      position:
+        x: 171.8
+        y: -17.9
+        z: 45.24
+      rotation:
+        x: 356.76
+        y: 45.02
+        z: 0
+      fov: 40
+  - duration: 4
+    easing: easeInQuad
+    fadeOnEnd: false
+    fadeDuration: 0.5
+    from:
+      position:
+        x: 2.501923
+        y: -24.61029
+        z: 5.604448
+      rotation:
+        x: 1.179422
+        y: 59.01717
+        z: 5.337216E-08
+      fov: 45
+    to:
+      position:
+        x: 0
+        y: 0
+        z: 0
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+      fov: 0
+boundary:
+  groundHeight: -29
+  innerSkirtSize: 40
+  curveBoundsOffset: 0
+  curveBoundsHeight: 30
+  north:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.7004861
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.2507645
+        y: 0.4003646
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.5361876
+        y: 0.4003646
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.7726809
+        y: 0.7004861
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 1
+        y: 0.7004861
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  south:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.1522653
+        y: 0.001159668
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.300193
+        y: 0.4771355
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.9844919
+      m: {}
+    - tv_tg:
+        x: 0.3397057
+        y: 0.4770463
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.496751
+        y: 0.1206665
+        z: -0.006030615
+        w: -0.006030615
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.6066412
+        y: 0.4762502
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.6630538
+        y: 0.4761355
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.804507
+        y: 0
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 1
+        y: 0
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  east:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.006072998
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.1376101
+        y: 0.7794664
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.2446513
+        y: 0.7794631
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.3102179
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.3944954
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.4628446
+        y: 0.5704684
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.4936295
+        y: 0.5710751
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.5749196
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.9531091
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 1
+      m: {}
+    - tv_tg:
+        x: 0.9928589
+        y: 0.575943
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  west:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.1620795
+        y: 0.5
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.2731998
+        y: 0.4999977
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.44446
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.8628265
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 1
+        y: 0.5
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+segments:
+- path: Content/AreaSegments/area_seg_unique_breakthrough_stage_02
+biomeFilter:
+  tagsUsed: false
+  keys:
+  - mossy_dry
+  tags: 
+scenarioChanges: 

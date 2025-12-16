@@ -1,0 +1,539 @@
+tilesets:
+- id: 10
+  idOfInterior: 11
+  name: tileset_industrial
+  destructible: true
+  hardness: 0.9
+  sfxNameImpact: impact_bullet_metal
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 101
+  - 102
+  - 103
+  materialOverlays:
+    4: grass
+    6: roof
+  groupIdentifiers:
+    0: standard
+    1: other
+    2: other
+    3: other
+    4: pipes
+    10: multi-windows
+    20: multi-stairs
+    100: retaining-wall-1x
+    101: retaining-wall-2x
+  navOverrides: 
+  navRestrictions:
+    0:
+      subtypes:
+      - 3
+      - 5
+    4:
+      subtypes: 
+  primaryColor:
+    x: 0.663
+    y: 0.271
+    z: 0.231
+    w: 1
+  secondaryColor:
+    x: 0.663
+    y: 0.271
+    z: 0.231
+    w: 1
+- id: 11
+  idOfInterior: -1
+  name: tileset_interior
+  destructible: false
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_rock
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_explosion
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 20
+  idOfInterior: 11
+  name: tileset_rural-a
+  destructible: true
+  hardness: 0.1
+  sfxNameImpact: impact_bullet_building
+  fxNameHit: fx_impact_wood
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_wood
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 104
+  - 105
+  - 106
+  materialOverlays:
+    3: grass
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 0.827
+    y: 0.38
+    z: 0.337
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 30
+  idOfInterior: 11
+  name: tileset_city-brick
+  destructible: true
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_building
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_bricks
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 107
+  - 108
+  - 109
+  materialOverlays:
+    5: grass
+    6: concrete
+  groupIdentifiers:
+    0: base
+    1: high-door
+    2: low-door
+    3: low-window
+    4: balconies
+    20: square-base
+    21: square-high-door
+    22: square-low-door
+    23: square-low-windows
+    30: gate
+    31: gate-room
+    40: roof-main
+    41: roof-alt
+    42: roof-top-mid
+    43: roof-top-end
+    44: roof-top-turn
+    45: roof-steep
+    46: roof-slight
+    50: mb-window-ribbon
+    55: mb-bump
+    60: mb-stair
+    100: wall-retaining
+    110: wall-road
+  navOverrides:
+  - config: 3
+    group: 110
+    subtype: 1
+    offsetY: -1.5
+  - config: 15
+    group: 110
+    subtype: 2
+    offsetY: 0.5
+  navRestrictions:
+    0:
+      subtypes:
+      - 2
+    42:
+      subtypes: 
+    43:
+      subtypes: 
+    44:
+      subtypes: 
+    46:
+      subtypes: 
+    110:
+      subtypes: 
+  primaryColor:
+    x: 0.933
+    y: 0.553
+    z: 0.318
+    w: 1
+  secondaryColor:
+    x: 0.502
+    y: 0.655
+    z: 0.529
+    w: 1
+- id: 40
+  idOfInterior: 11
+  name: tileset_market
+  destructible: true
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_building
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 101
+  - 102
+  - 103
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 0.741
+    y: 0.71
+    z: 0.667
+    w: 1
+  secondaryColor:
+    x: 0.553
+    y: 0.459
+    z: 0.349
+    w: 1
+- id: 50
+  idOfInterior: 11
+  name: tileset_military
+  destructible: true
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_metal
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_bricks
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 107
+  - 108
+  - 109
+  materialOverlays:
+    4: grass
+    5: concrete
+    6: roof
+  groupIdentifiers:
+    0: base
+    20: mb-window-ribbon
+    80: diagonal
+    100: separator
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+  secondaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+- id: 60
+  idOfInterior: 11
+  name: tileset_capital-gates
+  destructible: true
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_building
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_bricks
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 107
+  - 108
+  - 109
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+  secondaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+- id: 70
+  idOfInterior: 11
+  name: tileset_cargo
+  destructible: true
+  hardness: 0.5
+  sfxNameImpact: impact_bullet_metal
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_bricks
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 107
+  - 108
+  - 109
+  materialOverlays:
+    3: concrete
+  groupIdentifiers:
+    0: base
+    10: foundation
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+  secondaryColor:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+- id: 100
+  idOfInterior: 101
+  name: tileset_forest
+  destructible: true
+  hardness: 1
+  sfxNameImpact: impact_bullet_dirt
+  fxNameHit: fx_impact_soil
+  fxNameStep: fx_mech_footstep_soil
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers:
+    0: basic
+    10: isolated-slope-top/bottom
+    11: isolated-slope-mid
+    20: full-slope-side-top/bottom
+    21: full-slope-side-mid
+    30: full-slope-core-top/bottom
+    31: full-slope-core-mid
+    40: ramp-mid
+    41: ramp-boundary-out-flat
+    42: ramp-boundary-in-flat
+    43: ramp-boundary-in-wall
+    44: ramp-boundary-out-wall
+  navOverrides:
+  - config: 15
+    group: 40
+    subtype: 1
+    offsetY: 1
+  - config: 15
+    group: 40
+    subtype: 2
+    offsetY: 0
+  - config: 15
+    group: 40
+    subtype: 3
+    offsetY: 0
+  - config: 3
+    group: 40
+    subtype: 0
+    offsetY: -1
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 101
+  idOfInterior: -1
+  name: tileset_forest-interior
+  destructible: false
+  hardness: 1
+  sfxNameImpact: impact_bullet_rock
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_explosion
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 150
+  idOfInterior: 101
+  name: tileset_terrain
+  destructible: false
+  hardness: 1
+  sfxNameImpact: impact_bullet_dirt
+  fxNameHit: fx_impact_soil
+  fxNameStep: fx_mech_footstep_soil
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 200
+  idOfInterior: 101
+  name: tileset_road
+  destructible: false
+  hardness: 0
+  sfxNameImpact: impact_bullet_rock
+  fxNameHit: fx_impact_soil
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers:
+    0: road
+    1: surfaces
+    2: roadside-straight
+    3: corner-out-diagonal
+    4: corner-in-diagonal
+    5: corner-in-square
+    6: corner-out-square
+    7: corner-out-round
+    8: corner-in-round
+    9: bicorner-diagonal
+    10: turn-45deg-out-2x-a
+    11: turn-45deg-out-2x-b
+    12: turn-45deg-in-2x-a
+    13: turn-45deg-in-2x-b
+    20: turn-90deg-in-2x-a
+    21: turn-90deg-in-2x-b
+    30: turn-90deg-in-3x-a
+    31: turn-90deg-in-3x-b
+    32: turn-90deg-in-3x-c
+    40: turn-90deg-in-4x-a
+    41: turn-90deg-in-4x-b
+    42: turn-90deg-in-4x-c
+    43: turn-90deg-in-4x-d
+    50: path-roadside-straight
+    51: path-roadside-corner-in-square
+    52: path-straight
+    53: path-t-junction
+    54: path-x-junction
+    55: path-diagonal
+    56: path-turn-round
+    57: path-turn-2x-a
+    58: path-turn-2x-b
+    59: path-shifted-1x-edge
+    100: slope-mid
+    101: slope-side
+    102: slope-wall
+  navOverrides:
+  - config: 3
+    group: 100
+    subtype: 0
+    offsetY: -1.5
+  - config: 3
+    group: 101
+    subtype: 0
+    offsetY: -1.5
+  - config: 3
+    group: 101
+    subtype: 20
+    offsetY: -1.5
+  - config: 3
+    group: 101
+    subtype: 30
+    offsetY: -1.5
+  - config: 15
+    group: 100
+    subtype: 0
+    offsetY: -0.5
+  - config: 15
+    group: 101
+    subtype: 0
+    offsetY: -0.5
+  - config: 15
+    group: 101
+    subtype: 20
+    offsetY: -0.5
+  - config: 15
+    group: 101
+    subtype: 30
+    offsetY: -0.5
+  - config: 15
+    group: 100
+    subtype: 1
+    offsetY: 0.5
+  - config: 15
+    group: 101
+    subtype: 1
+    offsetY: 0.5
+  - config: 15
+    group: 101
+    subtype: 21
+    offsetY: 0.5
+  - config: 15
+    group: 101
+    subtype: 31
+    offsetY: 0.5
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+- id: 250
+  idOfInterior: -1
+  name: tileset_empty
+  destructible: false
+  hardness: 0
+  sfxNameImpact: impact_bullet_building
+  fxNameHit: fx_impact_concrete
+  fxNameStep: fx_mech_footstep_concrete
+  fxNameExplosion: fx_environment_destruction_concrete
+  propIDDebrisPile: 100
+  propIDDebrisClumps:
+  - 103
+  materialOverlays: 
+  groupIdentifiers: 
+  navOverrides: 
+  navRestrictions: 
+  primaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1
+  secondaryColor:
+    x: 1
+    y: 1
+    z: 1
+    w: 1

@@ -1,0 +1,173 @@
+dataUI:
+  icon: s_icon_res_item_drone2
+  color:
+    r: 0.3294118
+    g: 0.6901961
+    b: 0.4737256
+    a: 1
+  colorOverride:
+    r: 0
+    g: 1
+    b: 0.4000001
+    a: 1
+  sortingPriority: 1000
+  hidden: true
+  irreversible: true
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 3
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation:
+  - !CombatActionCreateAirlift
+    blueprintKey: aircraft_airlift
+    angle: 0
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd:
+  - !CombatActionFunctionOwner
+    functions:
+    - !CombatUnitFunctionsChecked
+      unitCheck:
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      functions:
+      - !CombatUnitRetreat {}
+      functionsElse: 
+  functionsOnDispose: 
+  check: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed:
+- timeNormalized: 0.2
+  repeat: 
+  functions:
+  - !CombatAreaOfEffect
+    offset:
+      x: 0
+      y: 0
+      z: 0
+    radius: 15
+    exponent: 2
+    dispersed: true
+    integrity:
+      normalized: false
+      leveled: true
+      f: 5
+    concussion: 
+    heat: 
+    stagger: 
+    statusBuildup: 
+    crash: 
+    targetCheck: 
+    functionsOnHit: 
+    impactUnitSelf: false
+    impactUnitAllies: false
+    impactUnitHostiles: false
+    impactUnitComposites: false
+    impactProjectiles: false
+    impactProps: true
+    fxDetonation: 
+    fxDetonationScale: 1
+    fxArea: fx_aoe_volume_01
+    fxHit: 
+    audioDetonation: 
+- timeNormalized: 0.3
+  repeat: 
+  functions:
+  - !CombatUnitEffectSpawn
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    centered: true
+    asset:
+      key: fx_boss_shockwave
+      scale:
+        x: 2
+        y: 2
+        z: 2
+- timeNormalized: 0.65
+  repeat: 
+  functions:
+  - !CombatAreaOfEffect
+    offset:
+      x: 0
+      y: 0
+      z: 0
+    radius: 15
+    exponent: 2
+    dispersed: true
+    integrity:
+      normalized: false
+      leveled: true
+      f: 5
+    concussion: 
+    heat: 
+    stagger: 
+    statusBuildup: 
+    crash: 
+    targetCheck: 
+    functionsOnHit: 
+    impactUnitSelf: false
+    impactUnitAllies: false
+    impactUnitHostiles: false
+    impactUnitComposites: false
+    impactProjectiles: false
+    impactProps: true
+    fxDetonation: 
+    fxDetonationScale: 1
+    fxArea: fx_aoe_volume_01
+    fxHit: 
+    audioDetonation: 
+  - !CombatUnitTagChange
+    tagChanges:
+      flag_no_concussion_in: true
+      flag_reduced_damage_in: true
+      flag_uncollideable: true
+      flag_untargetable: true

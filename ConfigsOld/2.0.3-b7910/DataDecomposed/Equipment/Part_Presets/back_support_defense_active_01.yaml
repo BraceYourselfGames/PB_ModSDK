@@ -1,0 +1,27 @@
+hidden: false
+parents:
+- key: back_support_status
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- range_short
+- back_drop_boss
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - back_support_defense_active_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

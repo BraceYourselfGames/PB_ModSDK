@@ -1,0 +1,227 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: wave
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: true
+  tagFilter:
+    context_facility: true
+    type_main: true
+  keys: 
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      perimeter_outer: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Greater
+      value: 80
+    sorting: !UnitSlotSortingRetreat
+      key: default
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- context_facility
+- context_generic
+- listed
+- type_liberation
+- type_industry_liberation
+- flag_escalation_squads
+states:
+  retreat_default:
+    comment: 
+    textNameKey: retreat_general_header
+    textDescKey: retreat_general_text
+    textOnCompletion: 
+    evaluated: false
+    visible: true
+    startInScope: false
+    priorityGeneration: 100
+    priority: 100
+    priorityDisplay: 100
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_retreat: true
+        filters: 
+      visual: 
+    locationRetreat:
+      commsUsed: false
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  wave:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: generic_eliminate_nonspecific_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_medium: true
+        type_main: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 1
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        context_defended: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        type_main: true
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        context_defended: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: generic_industry_liberation_start
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

@@ -1,0 +1,5316 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: 00_intro
+  timeLocked: true
+  time: 6
+  scalingUsed: false
+  loadImmediately: true
+  externalBranchUsed: false
+  externalLevelUsed: false
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: false
+  lootingUsed: false
+  musicDynamic: true
+  introUsed: false
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist:
+  - melee_secondary
+  - melee_primary
+  - dash
+  - melee_fallback_shieldonly
+  - melee_fallback_shield
+  - melee_fallback_secondary
+  - melee_fallback_primary
+  - melee_fallback_none
+  - melee_fallback
+  - eject
+  customExitBehaviour:
+    victory:
+      lootUsed: false
+      debriefingUsed: false
+      ejectionsUsed: false
+    defeat:
+      lootUsed: false
+      debriefingUsed: false
+      ejectionsUsed: false
+    functions: 
+    calls:
+    - OnEndTutorialIntro
+  weatherOverridePrecipitation:
+    f: 0
+  weatherOverrideTemperature:
+    f: 1
+  introSettings:
+    blurUsed: false
+    textReadyUsed: false
+    durationOverride: 7
+  textIntroPrimary: {}
+  textIntroLocation: {}
+  textIntroThreat: {}
+  textIntroReady: {}
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_demo
+entry:
+  squadUsed: false
+  squadSize: 0
+  squadSlotCustom: 
+generationInjection: 
+tags:
+- block_save_after
+- block_focus_events
+- listed
+- unique_intro
+states:
+  encounter_act_attack_count:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name:
+        nameInternal: unit_friendly_mech_pc
+      faction: 
+      state: 
+      actionPlanned:
+        key: attack_primary
+        actionCount:
+          i: 2
+        targetUnit: 
+        targetPosition: 
+        targetVisibleModes: 
+        targetVisibleStateValues: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  encounter_act_attack_targeted:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name:
+        nameInternal: unit_friendly_mech_pc
+      faction: 
+      state: 
+      actionPlanned:
+        key: attack_primary
+        actionCount: 
+        targetUnit:
+          nameInternal: unit_enemy_tank_first
+        targetPosition: 
+        targetVisibleModes:
+        - Targeting_Units
+        - Unit_Selection
+        targetVisibleStateValues:
+          encounter_act_attack_targeted: false
+          encounter_act_move: true
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  encounter_act_move:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name:
+        nameInternal: unit_friendly_mech_pc
+      faction: 
+      state: 
+      actionPlanned:
+        key: move_run
+        actionCount: 
+        targetUnit: 
+        targetPosition:
+          position:
+            x: 250.5
+            y: -19.5
+            z: 202.5
+          radius: 6
+        targetVisibleModes:
+        - Path_Drawing
+        - Unit_Selection
+        targetVisibleStateValues:
+          encounter_act_move: false
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  flank_act_move:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name:
+        nameInternal: unit_friendly_mech_pc
+      faction: 
+      state: 
+      actionPlanned:
+        key: move_run
+        actionCount: 
+        targetUnit: 
+        targetPosition:
+          position:
+            x: 202.5
+            y: -19.5
+            z: 202.5
+          radius: 6
+        targetVisibleModes:
+        - Unit_Selection
+        - Path_Drawing
+        targetVisibleStateValues: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  prediction_active:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: false
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  retreat_act_move:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name:
+        nameInternal: unit_friendly_mech_pc
+      faction: 
+      state: 
+      actionPlanned:
+        key: move_run
+        actionCount: 
+        targetUnit: 
+        targetPosition:
+          position:
+            x: 188.5
+            y: -19.5
+            z: 223.5
+          radius: 9
+        targetVisibleModes: 
+        targetVisibleStateValues: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  siege_end_enemy:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: end_victory
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  siege_end_squad:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: end_victory
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !Log
+            message: Ending the scenario due to player squad defeat...
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  siege_end_timed:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: GreaterEqual
+      value: 3
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      siege_end_squad: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: end_victory
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !Log
+            message: Ending the scenario due to timer expiring...
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  siege_end_wave:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: GreaterEqual
+      value: 0
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            siege_end_enemy: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: trainingreserves_guardian_mech_0
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: 
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: 
+              custom: 
+            - keyExternal: true
+              key: vhc_tank_elevated_generic_medium_0
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: 
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: 
+              custom: 
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: wave_final_01
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  startup_act_move:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name:
+        nameInternal: unit_friendly_mech_pc
+      faction: 
+      state: 
+      actionPlanned:
+        key: move_run
+        actionCount: 
+        targetUnit: 
+        targetPosition:
+          position:
+            x: 163.5
+            y: -19.5
+            z: 220.5
+          radius: 9
+        targetVisibleModes: 
+        targetVisibleStateValues: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  00_intro:
+    comment: 
+    core:
+      color:
+        r: 0.4716981
+        g: 0.4716981
+        b: 0.4716981
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: custom_tutorial_mech_cadet
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 3
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_friendly_mech_cadet
+          id: {}
+          idReused: 
+          idPilot: 
+          role: custom_26
+          spawn:
+            index: 2
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed:
+            libraryUsed: false
+            speed: 16
+          uncrewed: 
+          pilotAppearance:
+            presetKey: unique_intro_cadet
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_reduced_damage_in
+          - hide_disposable_status
+      - keyExternal: true
+        key: custom_tutorial_mech_commander
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 3
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_friendly_mech_commander
+          id: {}
+          idReused: 
+          idPilot: 
+          role: custom_24
+          spawn:
+            index: 0
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed:
+            libraryUsed: false
+            speed: 22
+          uncrewed: 
+          pilotAppearance:
+            presetKey: unique_intro_commander
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - hide_disposable_status
+          - flag_reduced_damage_in
+      - keyExternal: true
+        key: custom_tutorial_mech_pc
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 3
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_friendly_mech_pc
+          id: {}
+          idReused: 
+          idPilot: 
+          role: custom_09
+          spawn:
+            index: 1
+          landing: 
+          flags:
+            controlByPlayer: true
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed:
+            libraryUsed: false
+            speed: 18
+          uncrewed: 
+          pilotAppearance:
+            presetKey: unique_intro_pc
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - hide_disposable_status
+          - flag_reduced_damage_in
+      - keyExternal: true
+        key: custom_tutorial_mech_reserve
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 3
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_friendly_mech_reserve
+          id: {}
+          idReused: 
+          idPilot: {}
+          role: custom_25
+          spawn:
+            index: 12
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed:
+            libraryUsed: false
+            speed: 10
+          uncrewed: 
+          pilotAppearance:
+            presetKey: unique_intro_reserve
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - hide_disposable_status
+          - flag_reduced_damage_in
+      check: 
+      combatTags: 
+      spawnGroupOccupied: false
+      spawnCountStrict: false
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: custom
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart:
+      fogTarget: 0.7
+      fogSpeed: 1
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: optimism
+      executionAllowed: false
+    musicIntensity:
+      f: 0
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCameraChange
+      smoothed: false
+      positionOverride: true
+      position:
+        x: 108.9378
+        y: -19.5
+        z: 248.7984
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 32.01964
+      rotationYOverride: true
+      rotationY: 153.509
+      zoomOverride: true
+      zoom: 0.6686842
+      delay: 0
+    - !Log
+      message: Delay start
+    - !CombatDelayGroup
+      unscaled: true
+      delayMin: 1
+      delayMax: 1
+      repeats: 1
+      functions:
+      - !Log
+        message: Delay end
+      - !CombatToOverworldGroup
+        functions:
+        - !OverworldDisplayTitle
+          hue: 0.972
+          textPrimary:
+            textSector: ui_overworld
+            textKey: campaign_title_01_s1
+          textSecondary:
+            textSector: ui_overworld
+            textKey: campaign_title_01_s2
+          textTertiary:
+            textSector: ui_overworld
+            textKey: campaign_title_01_s3
+      - !PlayCutscene
+        key: tutorial_intro
+        instant: true
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: 
+      transitionTimeBased:
+        time: 1
+        stepKey: 01_greeting
+  01_greeting:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 0
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: optimism
+      executionAllowed: false
+    musicIntensity:
+      f: 0
+    musicReactive: 
+    commsOnStart:
+    - time: 0.5
+      hidden: false
+      key: unique_tutorial_intro_01_greeting_c0
+    - time: 8
+      hidden: false
+      key: unique_tutorial_intro_01_greeting_c1
+    - time: 19
+      hidden: false
+      key: unique_tutorial_intro_01_greeting_c2
+    - time: 29
+      hidden: false
+      key: unique_tutorial_intro_01_greeting_c3
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: 
+      transitionTimeBased:
+        time: 14
+        stepKey: 02_move1
+  02_move1:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_friendly_mech_commander
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions:
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 190.5
+              y: -19.5
+              z: 232.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys:
+      - move_run
+      keysDisabled:
+      - move_run
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional:
+    - hidden: false
+      data:
+        color:
+          r: 0.25198
+          g: 0.3584906
+          b: 0.1944642
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 304
+        frameSizeY: 304
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_friendly_mech_pc
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom:
+          offset:
+            x: 152
+            y: 0
+          rotation: 0
+        frameHighlight:
+          offsets:
+            x: -96
+            y: -96
+            z: -96
+            w: -96
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu:
+        present: false
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.2745098
+          g: 0.4980392
+          b: 0.8313726
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 68
+        framePositionY: 0
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: BottomLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_friendly_mech_pc
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu:
+        present: true
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.2784314
+          g: 0.5607843
+          b: 0.6980392
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 260
+        frameSizeY: 260
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: 
+          stateName: startup_act_move
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom:
+          offset:
+            x: 130
+            y: 0
+          rotation: 0
+        frameHighlight:
+          offsets:
+            x: -96
+            y: -96
+            z: -96
+            w: -96
+        textInputActions: 
+      inputMode: Path_Drawing
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.3536969
+          g: 0.55
+          b: 0.2475
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 236
+        framePositionY: 0
+        frameSizeX: 128
+        frameSizeY: 128
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: 0
+            y: 0
+            z: 0
+            w: 0
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection: 
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_intro_01
+      allowRepeat: true
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionStart
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          startup_act_move: true
+        stepKey: 03_move1_execution
+      transitionTimeBased: 
+  03_move1_execution:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 2
+      hidden: false
+      key: unique_tutorial_intro_03_move2_c0
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: false
+      transitionLocksExecution: false
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: false
+        stateRequirements: {}
+        stepKey: 04_discovery
+      transitionTimeBased: 
+  04_discovery:
+    comment: 
+    core:
+      color:
+        r: 0.4
+        g: 1
+        b: 0.7607844
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: optimism
+      executionAllowed: true
+    musicIntensity:
+      f: 10
+    musicReactive: 
+    commsOnStart:
+    - time: 1.5
+      hidden: false
+      key: unique_tutorial_intro_04_discovery_c1
+    - time: 11
+      hidden: false
+      key: unique_tutorial_intro_04_discovery_c2
+    - time: 17
+      hidden: false
+      key: unique_tutorial_intro_04_discovery_c3
+    - time: 24
+      hidden: false
+      key: unique_tutorial_intro_04_discovery_c4
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 214.7594
+        y: -19.5
+        z: 228.2342
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 45.01928
+      rotationYOverride: true
+      rotationY: 23.98117
+      zoomOverride: true
+      zoom: 0.8456566
+      delay: 0
+    - !CombatUnitsClearActions
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: 
+      transitionTimeBased:
+        time: 16
+        stepKey: 05_prediction_boot
+  05_prediction_boot:
+    comment: 
+    core:
+      color:
+        r: 0.6078432
+        g: 1
+        b: 0.4745098
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      prediction_active: true
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys:
+      - move_run
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_intro_02
+      allowRepeat: true
+    outcome: 
+    transitions:
+      transitionMode: OnStateChange
+      transitionBasedScope: false
+      transitionLocksExecution: true
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          prediction_active: true
+        stepKey: 07_wait_and_move
+      transitionTimeBased: 
+  07_wait_and_move:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.8078432
+        b: 0.2784314
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_friendly_mech_commander
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions:
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 244.5
+              y: -19.5
+              z: 274.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 262.5
+              y: -19.5
+              z: 274.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: wait
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 264.97
+              y: -19.5
+              z: 267.95
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys:
+      - move_run
+      keysDisabled:
+      - move_run
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional:
+    - hidden: false
+      data:
+        color:
+          r: 0.1607843
+          g: 0.4588236
+          b: 0.6117647
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 254
+        framePositionY: 202
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: RightTop
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu:
+        present: false
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.1607843
+          g: 0.4588236
+          b: 0.6117647
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 68
+        framePositionY: 0
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: RightTop
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_friendly_mech_pc
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu:
+        present: true
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.1590869
+          g: 0.4597021
+          b: 0.6132076
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 260
+        frameSizeY: 260
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: 
+          stateName: flank_act_move
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom:
+          offset:
+            x: 130
+            y: 0
+          rotation: 0
+        frameHighlight:
+          offsets:
+            x: -96
+            y: -96
+            z: -96
+            w: -96
+        textInputActions: 
+      inputMode: Path_Drawing
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.2117647
+          g: 0.4588236
+          b: 0.5647059
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 234
+        framePositionY: 0
+        frameSizeX: 874
+        frameSizeY: 128
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopRight
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom:
+          offset:
+            x: -64
+            y: 0
+          rotation: 0
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.4
+          g: 0.4
+          b: 0.4
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 938
+        framePositionY: 124
+        frameSizeX: 684
+        frameSizeY: 122
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopRight
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: ''
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_commander
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.2470588
+          g: 0.448366
+          b: 0.5490196
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 260
+        frameSizeY: 260
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_friendly_mech_pc
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_commander
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts: 
+      actionContextMenu:
+        present: false
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_07_prediction_flank_c1
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 181.0622
+        y: -19.5
+        z: 211.0451
+      positionFromEntityName: ''
+      rotationXOverride: true
+      rotationX: 41.17453
+      rotationYOverride: true
+      rotationY: 43.0296
+      zoomOverride: true
+      zoom: 0.8456566
+      delay: 1
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          flank_act_move: true
+        stepKey: 08_tank_appears
+      transitionTimeBased: 
+  08_tank_appears:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.3921569
+        b: 0.2862745
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags: 
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank_first
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 9
+          landing:
+            landingUsed: false
+            landingData: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: false
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers:
+            drv_speed: 0.75
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_reduced_heat
+          - flag_reduced_damage_in
+      check: 
+      combatTags: 
+      spawnGroupOccupied: false
+      spawnCountStrict: false
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: custom
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: uncertainty
+      executionAllowed: true
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_08_tank_appears_c1
+    - time: 10
+      hidden: false
+      key: unique_tutorial_intro_08_tank_appears_c2
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 271.8675
+        y: -19.5
+        z: 244.3975
+      positionFromEntityName: unit_enemy_tank_first
+      rotationXOverride: true
+      rotationX: 46.9711
+      rotationYOverride: true
+      rotationY: 38.5727
+      zoomOverride: true
+      zoom: 0.7403888
+      delay: 0
+    - !CombatUnitsClearActions
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: 
+      transitionTimeBased:
+        time: 19
+        stepKey: 09_tank_plans
+  09_tank_plans:
+    comment: 
+    core:
+      color:
+        r: 0.754717
+        g: 0.2812389
+        b: 0.2812389
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_enemy_tank_first
+      check: 
+      flags: 
+      destruction:
+        delay: 4
+      transform: 
+      actions:
+      - key: move_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 244.5
+              y: -19.5
+              z: 241.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_vehicle
+        startTime: 0.5
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: Unit
+          name: unit_friendly_mech_commander
+          center: false
+          modifiersDirectional: false
+          modifiers: 
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_friendly_mech_commander
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions:
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 223.5
+              y: -19.5
+              z: 265.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 232.5
+              y: -19.5
+              z: 241.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: wait
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 250.5
+              y: -19.5
+              z: 241.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_primary
+        startTime: 3
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: Unit
+          name: unit_enemy_tank_first
+          center: false
+          modifiersDirectional: false
+          modifiers: 
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys:
+      - move_run
+      - attack_primary
+      - wait
+      keysDisabled:
+      - attack_primary
+      - move_run
+      - wait
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional:
+    - hidden: false
+      data:
+        color:
+          r: 0.1607843
+          g: 0.3411764
+          b: 0.6117647
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 312
+        framePositionY: 202
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: BottomLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount:
+          check: Equal
+          value: 0
+        actionCountsRequireAll: true
+        actionCounts: 
+      actionContextMenu:
+        present: false
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.1607843
+          g: 0.3411764
+          b: 0.6117647
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 126
+        framePositionY: 0
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: BottomLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_friendly_mech_pc
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount:
+          check: Equal
+          value: 0
+        actionCountsRequireAll: true
+        actionCounts: 
+      actionContextMenu:
+        present: true
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.1590869
+          g: 0.4597021
+          b: 0.6132076
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 260
+        frameSizeY: 260
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: BottomLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: 
+          stateName: encounter_act_move
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom:
+          offset:
+            x: 130
+            y: 0
+          rotation: 0
+        frameHighlight:
+          offsets:
+            x: -96
+            y: -96
+            z: -96
+            w: -96
+        textInputActions: 
+      inputMode: Path_Drawing
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection: 
+        actionTotalCount:
+          check: Equal
+          value: 0
+        actionCountsRequireAll: true
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 370
+        framePositionY: 202
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: RightTop
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 0
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu:
+        present: false
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - attack_primary
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 154
+        framePositionY: 0
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: RightTop
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_friendly_mech_pc
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: true
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 0
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu:
+        present: true
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - attack_primary
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 234
+        framePositionY: 0
+        frameSizeX: 684
+        frameSizeY: 178
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Time_Placement
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 0
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 260
+        frameSizeY: 260
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: BottomLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: unit_enemy_tank_first
+          stateName: 
+          position:
+            x: 0
+            y: 0
+            z: 0
+          entityPrediction: false
+        arrowCustom:
+          offset:
+            x: 130
+            y: 0
+          rotation: 0
+        frameHighlight:
+          offsets:
+            x: -96
+            y: -96
+            z: -96
+            w: -96
+        textInputActions: 
+      inputMode: Targeting_Units
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 0
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 234
+        framePositionY: 0
+        frameSizeX: 684
+        frameSizeY: 128
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopRight
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 1
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - attack_primary
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 980
+        framePositionY: 0
+        frameSizeX: 128
+        frameSizeY: 128
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopRight
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: 0
+            y: 0
+            z: 0
+            w: 0
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 2
+          move_run:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.4
+          g: 0.4
+          b: 0.4
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 938
+        framePositionY: 124
+        frameSizeX: 684
+        frameSizeY: 122
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopRight
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: 
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_commander
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 1
+          wait:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.1603774
+          g: 0.110866
+          b: 0.1051531
+          a: 0
+        frameLocation: BottomLeft
+        frameGradientMode: Bottom
+        framePositionX: 234
+        framePositionY: 0
+        frameSizeX: 706
+        frameSizeY: 181
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: 
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions:
+          spriteWrap: true
+          actions:
+          - combat_next_unit
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_enemy_tank_first
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: false
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_09_tank_plans_c1
+    - time: 11
+      hidden: false
+      key: unique_tutorial_intro_09_tank_plans_c2
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 231.2
+        y: -19.5
+        z: 202.8119
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 47.94526
+      rotationYOverride: true
+      rotationY: 20.30497
+      zoomOverride: true
+      zoom: 0.8498934
+      delay: 0
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_action_drag
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CombatUnitsClearActions
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          encounter_act_attack_count: true
+          encounter_act_attack_targeted: true
+          encounter_act_move: true
+        stepKey: 10_skirmish_reaction
+      transitionTimeBased: 
+  10_skirmish_reaction:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.4196079
+        b: 0.682353
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_10_skirmish_reaction_c1
+    - time: 6
+      hidden: false
+      key: unique_tutorial_intro_10_skirmish_reaction_c2
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: 
+      transitionTimeBased:
+        time: 13
+        stepKey: 11_skirmish_cover
+  11_skirmish_cover:
+    comment: 
+    core:
+      color:
+        r: 0.7686275
+        g: 0.2980392
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: unique_tutorial_contact_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank_mid1
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 10
+          landing:
+            landingUsed: false
+            landingData: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: false
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_reduced_damage_in
+          - flag_reduced_heat
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank_mid2
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 11
+          landing:
+            landingUsed: false
+            landingData: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: false
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - flag_reduced_heat
+          - flag_reduced_damage_in
+      check: 
+      combatTags: 
+      spawnGroupOccupied: false
+      spawnCountStrict: false
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: custom
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_friendly_mech_commander
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions:
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 256.5
+              y: -19.5
+              z: 232.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 241.5
+              y: -19.5
+              z: 217.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 190.5
+              y: -19.5
+              z: 244.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_primary
+        startTime: 0.4
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 311.5
+              y: -17.5
+              z: 240.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_secondary
+        startTime: 2.75
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 311.5
+              y: -17.5
+              z: 240.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank_mid1
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions:
+      - key: attack_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: Unit
+          name: unit_friendly_mech_commander
+          center: false
+          modifiersDirectional: false
+          modifiers: 
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_vehicle
+        startTime: 2.5
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 255
+              y: -13.5
+              z: 288
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank_mid2
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions:
+      - key: attack_vehicle
+        startTime: 1
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: Unit
+          name: unit_friendly_mech_commander
+          center: false
+          modifiersDirectional: false
+          modifiers: 
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_friendly_mech_pc
+      check: 
+      flags: 
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys:
+      - move_run
+      - attack_primary
+      - wait
+      keysDisabled:
+      - attack_primary
+      - move_run
+      - wait
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional:
+    - hidden: false
+      data:
+        color:
+          r: 0.2745098
+          g: 0.4980392
+          b: 0.8313726
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 312
+        framePositionY: 202
+        frameSizeX: 64
+        frameSizeY: 64
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: BottomLeft
+        buttonLocation: None
+        textWidth: 256
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight:
+          offsets:
+            x: -8
+            y: -8
+            z: -8
+            w: -8
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+      actionContextMenu:
+        present: false
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
+    - hidden: false
+      data:
+        color:
+          r: 0.1590869
+          g: 0.4597021
+          b: 0.6132076
+          a: 1
+        frameLocation: Center
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 260
+        frameSizeY: 260
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 212
+        textReused: 
+        icon: icon_input_mouse_left
+        worldAnchor:
+          entityName: 
+          stateName: 
+          position:
+            x: 190.5
+            y: -19.5
+            z: 226.5
+          entityPrediction: false
+        arrowCustom:
+          offset:
+            x: 130
+            y: 0
+          rotation: 0
+        frameHighlight:
+          offsets:
+            x: -96
+            y: -96
+            z: -96
+            w: -96
+        textInputActions: 
+      inputMode: Path_Drawing
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection: 
+        actionTotalCount:
+          check: Equal
+          value: 0
+        actionCountsRequireAll: true
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity:
+      f: 20
+    musicReactive: 
+    commsOnStart: []
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: []
+    functions:
+    - !CombatSelectUnit
+      nameInternal: unit_friendly_mech_pc
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 230.6279
+        y: -19.5
+        z: 213.3237
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 38.51654
+      rotationYOverride: true
+      rotationY: 0.07233842
+      zoomOverride: true
+      zoom: 1
+      delay: 0
+    - !CombatUnitsClearActions
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+    - !CombatCreateStrike
+      delay: 1
+      blueprintKey: aircraft_ml_01
+      target:
+        type: None
+        name: 
+        center: true
+        modifiersDirectional: true
+        modifiers:
+        - !TargetModifierOffsetGlobal
+          offset:
+            x: 280
+            y: -19.5
+            z: 280
+        - !TargetModifierRotateDirection
+          rotationRange:
+            x: -135
+            y: -135
+    - !CombatCreateStrike
+      delay: 2
+      blueprintKey: aircraft_ml_01
+      target:
+        type: None
+        name: 
+        center: true
+        modifiersDirectional: true
+        modifiers:
+        - !TargetModifierOffsetGlobal
+          offset:
+            x: 246.11
+            y: -19.5
+            z: 208.48
+        - !TargetModifierRotateDirection
+          rotationRange:
+            x: -145
+            y: -145
+    - !CombatCreateStrike
+      delay: 3
+      blueprintKey: aircraft_cannon_01
+      target:
+        type: None
+        name: 
+        center: true
+        modifiersDirectional: true
+        modifiers:
+        - !TargetModifierOffsetGlobal
+          offset:
+            x: 70
+            y: -19.5
+            z: 230
+        - !TargetModifierRotateDirection
+          rotationRange:
+            x: -90
+            y: -90
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionStart
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          retreat_act_move: true
+        stepKey: 12_skirmish_final
+      transitionTimeBased: 
+  12_skirmish_final:
+    comment: 
+    core:
+      color:
+        r: 0.5137255
+        g: 0.5333334
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity:
+      f: 20
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_12_skirmish_final_c1
+    - time: 9
+      hidden: false
+      key: unique_tutorial_intro_12_skirmish_final_c2
+    - time: 18
+      hidden: false
+      key: unique_tutorial_intro_12_skirmish_final_c3
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateProjectile
+      delay: 0.48
+      unitNameInternal: unit_enemy_tank_mid1
+      weaponPrimary: true
+      rangeOptimized: true
+      positionTargeted:
+        x: 274.16
+        y: -13.66
+        z: 257.62
+      originOffset:
+        x: 60
+        y: 12
+        z: 0
+    - !CombatCreateProjectile
+      delay: 2.87
+      unitNameInternal: unit_enemy_tank_mid1
+      weaponPrimary: true
+      rangeOptimized: true
+      positionTargeted:
+        x: 274.25
+        y: -16.15
+        z: 262.09
+      originOffset:
+        x: 60
+        y: 12
+        z: -2
+    - !CombatCreateProjectile
+      delay: 1.44
+      unitNameInternal: unit_enemy_tank_mid1
+      weaponPrimary: true
+      rangeOptimized: true
+      positionTargeted:
+        x: 274.21
+        y: -14.95
+        z: 267.48
+      originOffset:
+        x: 60
+        y: 12
+        z: -5
+    - !CombatCreateProjectile
+      delay: 4.18
+      unitNameInternal: unit_enemy_tank_mid1
+      weaponPrimary: true
+      rangeOptimized: true
+      positionTargeted:
+        x: 274.02
+        y: -18.01
+        z: 287.85
+      originOffset:
+        x: 60
+        y: 12
+        z: -10
+    - !CombatCreateProjectile
+      delay: 3.68
+      unitNameInternal: unit_enemy_tank_mid1
+      weaponPrimary: true
+      rangeOptimized: true
+      positionTargeted:
+        x: 273.1
+        y: -16.65
+        z: 291.38
+      originOffset:
+        x: 60
+        y: 12
+        z: -15
+    - !CombatCreateProjectile
+      delay: 1.9
+      unitNameInternal: unit_enemy_tank_mid1
+      weaponPrimary: true
+      rangeOptimized: true
+      positionTargeted:
+        x: 256.24
+        y: -6.36
+        z: 287.64
+      originOffset:
+        x: 60
+        y: 12
+        z: -20
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: false
+      transitionLocksExecution: false
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: false
+        stateRequirements: 
+        stepKey: 13_mid_cutscene
+      transitionTimeBased:
+        time: 22
+        stepKey: 13_mid_cutscene
+  13_mid_cutscene:
+    comment: 
+    core:
+      color:
+        r: 0.5137255
+        g: 0.8216994
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_friendly_mech_commander
+      check: 
+      flags:
+        visible: false
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions:
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_untargetable: false
+    - nameInternal: unit_friendly_mech_pc
+      check: 
+      flags: 
+      destruction: 
+      transform:
+        position:
+          x: 160.5
+          y: -19.5
+          z: 142.5
+        rotation: 90
+      actions: 
+      functions: 
+    - nameInternal: unit_friendly_mech_cadet
+      check: 
+      flags:
+        visible: true
+        playerControllable: true
+        aiControllable: false
+        aiControllableNextTurn: false
+      destruction: 
+      transform:
+        position:
+          x: 169.5
+          y: -19.5
+          z: 124.5
+        rotation: 90
+      actions: 
+      functions: 
+    - nameInternal: unit_friendly_mech_reserve
+      check: 
+      flags:
+        visible: true
+        playerControllable: true
+        aiControllable: false
+        aiControllableNextTurn: false
+      destruction: 
+      transform:
+        position:
+          x: 169.5
+          y: -19.5
+          z: 74
+        rotation: 90
+      actions: 
+      functions: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: fear
+      executionAllowed: true
+    musicIntensity:
+      f: 10
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatUnitsClearActions
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 178.6896
+        y: -19.5
+        z: 114.9661
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 40.05659
+      rotationYOverride: true
+      rotationY: 102.4054
+      zoomOverride: true
+      zoom: 1
+      delay: 0
+    - !CombatForceExecution
+      turnsAdvanced: 1
+      timeScaleForced: 8
+    - !PlayCutscene
+      key: tutorial_mid
+      instant: false
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: false
+      transitionLocksExecution: false
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: false
+        stateRequirements: 
+        stepKey: 13_mid_cutscene_aftermath
+      transitionTimeBased:
+        time: 1
+        stepKey: 13_mid_cutscene_aftermath
+  13_mid_cutscene_aftermath:
+    comment: 
+    core:
+      color:
+        r: 0.5137255
+        g: 0.8216994
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: false
+      visible: false
+    tags: 
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: custom_tutorial_mech_enemy
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_mech1
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 3
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank1
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 4
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed:
+            libraryUsed: true
+            speed: 0
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank2
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 5
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank3
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 6
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank4_aa
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 7
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name:
+            name: unit_enemy_tank5_aa
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn:
+            index: 8
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: false
+      spawnCountStrict: false
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions:
+      - !CombatUnitControlChange
+        ai: false
+        player: false
+      - !CombatUnitTagChange
+        tagChanges:
+          purpose_objective_01: true
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: custom
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_enemy_mech1
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: true
+      destruction: 
+      transform:
+        position:
+          x: 289.5
+          y: -19.5
+          z: 139.5
+        rotation: 270
+      actions:
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 277.5
+              y: -19.5
+              z: 139.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: move_run
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 245.5
+              y: -19.5
+              z: 108.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_primary
+        startTime: 3.25
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 184.5
+              y: -13.5
+              z: 124.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank1
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: true
+      destruction: 
+      transform:
+        position:
+          x: 289.5
+          y: -19.5
+          z: 151.5
+        rotation: 270
+      actions:
+      - key: move_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 259.5
+              y: -19.5
+              z: 130.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank2
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: true
+      destruction: 
+      transform:
+        position:
+          x: 286.5
+          y: -19.5
+          z: 34.5
+        rotation: 315
+      actions:
+      - key: move_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 256.5
+              y: -19.5
+              z: 64.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_vehicle
+        startTime: 3.5
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 184.5
+              y: -14.5
+              z: 97.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank3
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: true
+      destruction: 
+      transform:
+        position:
+          x: 268.5
+          y: -19.5
+          z: 16.5
+        rotation: 315
+      actions:
+      - key: move_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 235.5
+              y: -19.5
+              z: 28.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: attack_vehicle
+        startTime: 3
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 155.5
+              y: -13.5
+              z: 105.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank4_aa
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: true
+      destruction: 
+      transform:
+        position:
+          x: 289.5
+          y: -19.5
+          z: 127.5
+        rotation: 270
+      actions:
+      - key: move_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 258.5
+              y: -19.5
+              z: 106.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank5_aa
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: true
+      destruction: 
+      transform:
+        position:
+          x: 289.5
+          y: -19.5
+          z: 25.5
+        rotation: 270
+      actions:
+      - key: move_vehicle
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 238.5
+              y: -19.5
+              z: 55.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    - nameInternal: unit_enemy_tank_mid1
+      check: 
+      flags:
+        visible: false
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: false
+      destruction:
+        delay: 0
+      transform: 
+      actions: 
+      functions: 
+    - nameInternal: unit_enemy_tank_mid2
+      check: 
+      flags:
+        visible: false
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: false
+      destruction:
+        delay: 0
+      transform: 
+      actions: 
+      functions: 
+    retreat: 
+    actionRestrictions:
+      inverted: false
+      keys: []
+      keysDisabled: []
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: fear
+      executionAllowed: true
+    musicIntensity:
+      f: 10
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 178.6896
+        y: -19.5
+        z: 114.9661
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 40.05659
+      rotationYOverride: true
+      rotationY: 102.4054
+      zoomOverride: true
+      zoom: 1
+      delay: 0
+    - !CombatUnitsClearActions
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: []
+      transitionTimeBased:
+        time: 1
+        stepKey: 14_siege_start
+  14_siege_start:
+    comment: 
+    core:
+      color:
+        r: 0.4386792
+        g: 1
+        b: 0.866686
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: fear
+      executionAllowed: true
+    musicIntensity:
+      f: 20
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_14_siege_hints_c1
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_loadout
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: true
+      transitionsStateBased: []
+      transitionTimeBased:
+        time: 10
+        stepKey: 15_siege_hints
+  15_siege_hints:
+    comment: 
+    core:
+      color:
+        r: 0.4
+        g: 1
+        b: 0.9
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      units_defeated_enemy: true
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional:
+    - hidden: false
+      data:
+        color:
+          r: 0.2927643
+          g: 0.4183429
+          b: 0.4811321
+          a: 0
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 238
+        frameSizeY: 382
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: Top
+        textWidth: 256
+        textReused: 
+        icon: 
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: false
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.2927643
+          g: 0.4183429
+          b: 0.4811321
+          a: 0
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 238
+        frameSizeY: 382
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: Top
+        textWidth: 256
+        textReused: 
+        icon: 
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_cadet
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: false
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.2927643
+          g: 0.4183429
+          b: 0.4811321
+          a: 0
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 0
+        framePositionY: 0
+        frameSizeX: 238
+        frameSizeY: 382
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: Top
+        textWidth: 256
+        textReused: 
+        icon: 
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_reserve
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: false
+        actionCounts: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: []
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_intro_03
+      allowRepeat: true
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: false
+      transitionLocksExecution: true
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: false
+        stateRequirements: 
+        stepKey: 16_siege_freeform
+      transitionTimeBased: 
+  16_siege_freeform:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges:
+    - nameInternal: unit_enemy_mech1
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: true
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    - nameInternal: unit_enemy_tank1
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: true
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    - nameInternal: unit_enemy_tank2
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: true
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    - nameInternal: unit_enemy_tank3
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: true
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    - nameInternal: unit_enemy_tank4_aa
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: true
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    - nameInternal: unit_enemy_tank5_aa
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: true
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions: 
+      functions: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: fear
+      executionAllowed: true
+    musicIntensity:
+      f: 10
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_intro_04
+      allowRepeat: true
+    - !CombatCreateStrike
+      delay: 2
+      blueprintKey: aircraft_cannon_01
+      target:
+        type: None
+        name: 
+        center: true
+        modifiersDirectional: true
+        modifiers:
+        - !TargetModifierOffsetGlobal
+          offset:
+            x: 60
+            y: -19.5
+            z: 230
+        - !TargetModifierRotateDirection
+          rotationRange:
+            x: -90
+            y: -90
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionStart
+      transitionBasedScope: false
+      transitionLocksExecution: false
+      transitionsStateBased:
+      - priority: 2
+        stateCleanupOnUse: false
+        stateRequirements: {}
+        stepKey: 17_siege_end
+      transitionTimeBased: 
+  17_siege_end:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      siege_end_enemy: true
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+  end_victory:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: unique_tutorial_intro_14_siege_wave_c0
+    - time: 8
+      hidden: false
+      key: unique_tutorial_intro_14_siege_wave_c1
+    - time: 16
+      hidden: false
+      key: unique_tutorial_intro_14_siege_wave_c2
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateStrikeTargeted
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_reserve
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      blueprintKeys:
+      - standalone_cannon_01
+      delayRange:
+        x: 0.1
+        y: 0.1
+      modifiers:
+      - !TargetModifierOffsetGlobal
+        offset:
+          x: 12
+          y: 0
+          z: 0
+      - !TargetModifierRotateDirection
+        rotationRange:
+          x: 180
+          y: 180
+    - !CombatCreateStrikeTargeted
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      blueprintKeys:
+      - standalone_cannon_01
+      delayRange:
+        x: 0.2
+        y: 0.2
+      modifiers:
+      - !TargetModifierOffsetGlobal
+        offset:
+          x: 12
+          y: 0
+          z: 0
+      - !TargetModifierRotateDirection
+        rotationRange:
+          x: 180
+          y: 180
+    outcome: 
+    transitions:
+      transitionMode: OnRealTime
+      transitionBasedScope: true
+      transitionLocksExecution: false
+      transitionsStateBased: 
+      transitionTimeBased:
+        time: 26
+        stepKey: end_victory_exit
+  end_victory_exit:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: false
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome:
+      type: Victory
+      early: true
+      instant: true
+    transitions: 
+unitPresets: 
+unitGenerators: 

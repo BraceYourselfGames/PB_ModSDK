@@ -1,0 +1,80 @@
+dataUI:
+  icon: s_icon_l32_pilot_escape3
+  color:
+    r: 0.6901961
+    g: 0.5699347
+    b: 0.3294118
+    a: 1
+  colorOverride:
+    r: 0.8
+    g: 0.6650981
+    b: 0.4047059
+    a: 1
+  sortingPriority: 1000
+  hidden: false
+  irreversible: true
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 1
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart:
+  - On_Ejection
+  - Crash_Unit
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation:
+  - !CombatActionValidationEject {}
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: turret
+      not: true
+    blueprints: 
+    parts: 
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI:
+  actionEndsPlanning: true
+  possibleActionTypes:
+  - aiActionType: Eject
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

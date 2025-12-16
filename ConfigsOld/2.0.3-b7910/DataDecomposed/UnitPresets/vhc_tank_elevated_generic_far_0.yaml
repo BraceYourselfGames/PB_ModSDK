@@ -1,0 +1,37 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_tank_elevated_generic
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: 
+tags:
+- range_far
+- range_long
+- role_leader
+- role_scout
+- role_sharpshooter
+partTagPreferences: 
+parts:
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_vhc_tank_cannon_02
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_elevated_body_turret_02
+    rating:
+      i: 0
+    systems: 
+animationOverrides: 
+effects: 

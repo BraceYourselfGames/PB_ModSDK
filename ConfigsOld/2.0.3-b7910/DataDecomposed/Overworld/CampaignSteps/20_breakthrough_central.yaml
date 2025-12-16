@@ -1,0 +1,82 @@
+comment:
+  comment: Special quest leading back to open gameplay.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: province_breakthrough_central
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_20_breakthrough
+  tags: 
+entry:
+  functionsGlobal:
+  - !ApplyProvinceArrivalEffects {}
+  - !QuestStart
+    questKey: province_breakthrough_central
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_progress_breakthrough
+      value: 0
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !UnlockAchievement
+    key: homeguard_win
+  functionsBase: 
+progressDisplay: 
+effects: 
+branches:
+- comment: 
+  preferences: 
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 21_open_start
+    direction: 180
+    levelOffset: 
+    branchKey: branch_specops
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03_start: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_mixed: true
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 21_open_start
+    direction: 160
+    levelOffset: 
+    branchKey: 
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03_start: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_negative: true
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_positive: true
+tags:
+- priority
+- branch_hidden

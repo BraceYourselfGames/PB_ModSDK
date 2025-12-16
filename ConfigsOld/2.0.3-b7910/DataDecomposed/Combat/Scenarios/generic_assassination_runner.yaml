@@ -1,0 +1,363 @@
+hidden: false
+parents:
+- key: generic_assassination
+core: 
+areas: 
+entry: 
+generationInjection: 
+tags: 
+states:
+  01_elite_damage_reaction:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 1
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_vip: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized:
+        ehp:
+          check: Less
+          value: 0.95
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.1
+            hidden: false
+            key: generic_assassination_reaction_panic
+          - time: 6
+            hidden: false
+            key: generic_assassination_reaction_panic_hq
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions:
+            - !CombatStateScopeChange
+              key: elite_escape
+              scoped: true
+            functionsTargeted:
+            - !CombatUnitTagChange
+              tagChanges:
+                flag_boss_state_enrage_active: true
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: elite_escape
+                center: true
+                modifiersDirectional: false
+                modifiers:
+                - !TargetModifierGround
+                  groundOffset: 0
+            - !CombatUnitBehaviorChange
+              behaviourName: DefensiveDestination
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  elite_escape:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 102
+    priority: 102
+    priorityDisplay: 0
+    mood: -1
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_elite_escape: true
+        purpose_vip: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions:
+      - !CombatValidateUnitCrashing
+        present: false
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_retreat: true
+        filters:
+        - !CombatPositionValidationByStateDistance
+          stateKey: elite_spawn_reference
+          checkDistance:
+            check: Greater
+            value: 150
+        - !CombatPositionValidationByStateDistance
+          stateKey: retreat_default
+          checkDistance:
+            check: Greater
+            value: 200
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.1
+            hidden: false
+            key: generic_assassination_target_airlift
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions: 
+            functionsTargeted:
+            - !CombatUnitControlChange
+              ai: false
+              player: false
+            - !CombatUnitActionsCreate
+              discardExisting: true
+              actions:
+              - key: retreat_airlift
+                startTime: 1.5
+                startTimeIsLocal: true
+                locked: true
+                durationVariable: 
+                targetLocal: 
+                target: 
+                targetSecondary: 
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom: 
+                functionsTimed: 
+                functionsOnAction: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core: 
+    tags: 
+    unitGroups:
+    - !UnitGroupLink
+      key: special_elite_runner
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: true
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: false
+        utility_turret: false
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: elite_spawn_reference
+        check: Less
+        value: 100
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: elite_spawn_reference
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_short: true
+        type_main: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: false
+        utility_turret: false
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: elite_spawn_reference
+        check: Less
+        value: 100
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: elite_spawn_reference
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_medium: true
+        type_main: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: false
+        utility_turret: false
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: elite_spawn_reference
+        check: Less
+        value: 100
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: elite_spawn_reference
+        invert: true
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_vip: true
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

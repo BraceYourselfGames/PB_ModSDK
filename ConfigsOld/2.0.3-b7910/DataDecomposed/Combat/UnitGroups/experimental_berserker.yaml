@@ -1,0 +1,156 @@
+comment: 
+hidden: false
+listed: true
+factionAllied: false
+factionBranchDefault: branch_experimental
+tags:
+- branch_experimental
+- weight_heavy
+- range_long
+- type_berserker
+- type_main
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w3_lr_backpack_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
+    aiTargeting: juggernaut
+    liveryPreset: inv_exp_g1_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w3_lr_harasser_ew
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: grenadier
+    liveryPreset: inv_exp_g1_berserker
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w3_lr_backpack_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: juggernaut
+    liveryPreset: inv_exp_g2_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w3_uh_ew
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: StandoffAttack
+    aiTargeting: juggernaut
+    liveryPreset: inv_exp_g1_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_far_0
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: artillery
+    liveryPreset: inv_exp_g1_berserker
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w3_lr_backpack_ew
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: juggernaut
+    liveryPreset: inv_exp_g3_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w3_uh_backpack_ew
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: StandoffAttack
+    aiTargeting: juggernaut
+    liveryPreset: inv_exp_g2_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_elevated_generic_far_0
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: artillery
+    liveryPreset: inv_exp_g1_berserker
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w2_lr_harasser_ew
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: 
+    aiBehavior: StandoffAttack
+    aiTargeting: support
+    liveryPreset: 
+    custom: 
+unitPresets:
+  mech_juggernaught: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_ultraheavy: false
+      role_juggernaut: true
+      type_mech: true
+  tank_grenadier_standard_hybrid: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_hybrid: true
+      role_grenadier: true
+      type_tank_standard: true
+  tank_vanguard_eleavted: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      role_vanguard: true
+      type_tank_elevated: true

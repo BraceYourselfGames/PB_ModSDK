@@ -1,0 +1,86 @@
+dataUI:
+  icon: s_icon_l32_nav_speed1
+  color:
+    r: 0.3294118
+    g: 0.5333334
+    b: 0.8392158
+    a: 1
+  colorOverride:
+    r: 0
+    g: 0.3999997
+    b: 1
+    a: 1
+  sortingPriority: 100
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Primary
+  paintingType: Path
+  heatType: DataConstant
+  durationType: Variable
+  duration: 0
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: tank
+      not: false
+    blueprints: 
+    parts:
+    - socket: optional_left
+      not: true
+      requirement: Destroyed
+      tags: 
+    - socket: optional_right
+      not: true
+      requirement: Destroyed
+      tags: 
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement:
+  movementSpeedScalar: 1
+dataEquipment: 
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: Move
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

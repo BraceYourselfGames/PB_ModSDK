@@ -1,0 +1,421 @@
+hidden: false
+parent: back_wpn
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- activation_targeted
+- category_wpn_launcher_primary
+- type_force_root_rotation
+- type_range_strict
+- activation_is_attack
+- spec_guided
+- spec_concussion
+statDistribution: ''
+stats:
+  act_charges:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_count:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1.8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 200
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  hp:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 35
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 6
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 100
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 14
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 60
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 14
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 200
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 70
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_radius:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 20
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments:
+  main:
+    key: part_backpack_ml_heavy_quad
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+activation:
+  visual:
+    local:
+      key: fx_muzzle_launcher_04
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: 
+    localHardpointOverride: 
+    localTransformOverride: 
+  audio: 
+  light:
+    shared: true
+    key: wpn_sniper
+    custom: 
+  recoil:
+    key: recoil_projectile_missile
+  timing: 
+  hitReaction:
+    force: 1
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_missile_01_regular
+      keyEnemy: 
+      scale:
+        x: 2.5
+        y: 2.5
+        z: 2.5
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact:
+      key: fx_projectile_pop
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    deactivation:
+      key: fx_projectile_pop
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed:
+    count: 3
+    time: 10
+    angle: 15
+    angleMin: 2
+    scatterUniformity: 1
+    addedSpeed: 50
+    generationLimit: 1
+    lifetimeReset: true
+    damageSplit: true
+    fxKey: fx_podejection_shaft
+    subsystemOverride: back_wpn_ml_fragment_02
+    subsystemOverridesDamage: true
+    targetUnitFiltered: 
+    rotationToTarget:
+      rotationLimit: 60
+  falloff: 
+  falloffGlobal: 
+  animationFade:
+    speed: 10
+    distance: 3
+  ballistics: 
+  fuseProximity:
+    distance: 25
+    targetExclusive: true
+    inertBeforeHit: false
+    inertPrimingDelay: 1
+    triggerWithoutEntity: true
+  hitResponse: 
+  splashDamage:
+    exponent: 2
+    fxDetonation: fx_aoe_explosion_01_large
+    fxDetonationScale: 2
+    fxArea: fx_aoe_volume_01
+    fxHit: fx_aoe_hit_01
+  splashImpact:
+    exponent: 2
+    triggerOnDamage: true
+  guidanceData:
+    rigidbodyMass: 1
+    rigidbodyDrag: 2
+    rigidbodyDriftDrag: 4
+    rigidbodyAngularDrag: 2
+    rigidbodyLift: 1
+    driverSteeringForce: 30
+    driverPitchForce: 45
+    driverAccelerationForce: 75
+    driverAccelerationMin: 1
+    inputProgressFromTarget: true
+    inputTargetHeightScale: 36
+    inputTargetOffsetPower: 1
+    inputThrottleDotPowerScale: 1
+    inputTargetPointLateralMode: Interleaved
+    steeringPID:
+      proportionalGain: 6
+      derivativeGain: 0
+      integralGain: 0
+    pitchPID:
+      proportionalGain: 6
+      derivativeGain: 0
+      integralGain: 0
+    inputTargetPointLateral: 
+    inputTargetHeight: !DataBlockGuidanceInputConstant
+      value: 1
+    inputTargetBlend: !DataBlockGuidanceInputCurve
+      curve:
+        modePostWrap: ClampForever
+        modePreWrap: ClampForever
+        keys:
+        - tv_tg:
+            x: 0.2886598
+            y: 0
+            z: -0.02377451
+            w: 2.311339
+          w:
+            x: 0
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.7213095
+            y: 1
+            z: 2.311339
+            w: 0.1942072
+          w:
+            x: 0.3333333
+            y: 0
+          m: {}
+    inputTargetUpdate: !DataBlockGuidanceInputCurve
+      curve:
+        modePostWrap: ClampForever
+        modePreWrap: ClampForever
+        keys:
+        - tv_tg:
+            x: 0.2218094
+            y: 1
+            z: 0
+            w: -6.682712
+          w:
+            x: 0
+            y: 0
+          m: {}
+        - tv_tg:
+            x: 0.3714492
+            y: 0
+            z: -6.682712
+            w: 0
+          w:
+            x: 0
+            y: 0
+          m: {}
+    inputTargetOffset: !DataBlockGuidanceInputConstant
+      value: 1
+    inputSteering: !DataBlockGuidanceInputConstant
+      value: 1
+    inputThrottle: !DataBlockGuidanceInputConstant
+      value: 1
+    inputThrottleDotPower: 
+    directionCheck: 
+    velocityCompensation: 
+  guidanceAudio:
+    soundOnLaunch: weapon_missile_seeker_fire
+    soundOnPriming: weapon_missile_seeker_prime
+    soundOnExpiration: weapon_missile_seeker_explode
+    syncProximityRange:
+      x: 12
+      y: 24
+    syncPowerAngularVelocity: 1
+    syncSize: 1
+  statusBuildup: 
+  uiTrajectory:
+    scale: 36
+    fixedAreaDistance: 10
+    fixedAreaTime: 0.3
+    arrivalTimes:
+      x: 2.3
+      y: 3.4
+      z: 4.3
+    curve:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+      - tv_tg:
+          x: 0.05076062
+          y: 0
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+      - tv_tg:
+          x: 0.1481468
+          y: 0.4716977
+          z: 7.916122
+          w: 7.916122
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.3
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0
+          z: -2.765408
+          w: -2.765408
+        w:
+          x: 0.04060915
+          y: 0
+        m: {}
+  uiSpeedAverage:
+    f: 28
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom: 
+functions:
+  general: 
+  targeted:
+  - context: on_wpn_fired
+    checks: 
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatUnitFunctionsChecked
+        unitCheck:
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags: 
+          name: 
+          faction: 
+          state: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform: 
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions:
+          - !CombatValidateUnitWithPilotProfile
+            present: false
+        functions:
+        - !CombatUnitStatusBuildup
+          key: timed_unstable
+          value: 0.45
+          source: Function
+        functionsElse: 
+  action: 
+workshopInfo: 

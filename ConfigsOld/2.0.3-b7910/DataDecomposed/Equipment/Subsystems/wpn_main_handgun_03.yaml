@@ -1,0 +1,249 @@
+hidden: false
+parent: wpn_main_handgun
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints:
+- internal_main_equipment
+tags:
+- mnf_05
+- spec_stabilized
+- spec_impact
+statDistribution: ''
+stats:
+  act_count:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 0.9
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 75
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 1.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_heat:
+    value: 15
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 80
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_ricochet:
+    value: 0.1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 55
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 180
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_energy_03_back_a
+- wpn_energy_03_bottom
+- wpn_energy_03b_front_e
+- wpn_energy_03b_top_c
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_mg_sub_blue
+      keyEnemy: fx_muzzle_mg_sub_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_shotgun_semiauto
+    onActivationMid: weapon_shotgun_semiauto
+    onActivationLast: weapon_shotgun_semiauto
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_handgun
+    custom: 
+  recoil:
+    key: recoil_sidearm
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_firebullet_blue_short_no_core
+      keyEnemy: fx_projectile_firebullet_red_short_no_core
+      scale:
+        x: 0.5
+        y: 0.5
+        z: 2
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact:
+      key: fx_impact_projectile_thermal
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    deactivation:
+      key: fx_projectile_pop
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.998582
+          z: -0.002821684
+          w: -0.002821684
+        w:
+          x: 0.3333333
+          y: 1
+        m: {}
+      - tv_tg:
+          x: 0.2756166
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.5618318
+          y: 1
+          z: 0.007910742
+          w: 0.007910742
+        w:
+          x: 0.9979232
+          y: 0.9973046
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0.125113
+          z: -0.008274017
+          w: -0.008274017
+        w:
+          x: 0.3288348
+          y: 0.3333333
+        m: {}
+  falloffGlobal: 
+  animationFade:
+    speed: 10
+    distance: 3
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup:
+    key: timed_burn
+    statMultiplier: 
+    amount: 1
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom:
+  flags:
+  - damage_dispersed
+  ints: 
+  floats: 
+  vectors: 
+  strings: 
+functions: 
+workshopInfo: 

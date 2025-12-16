@@ -1,0 +1,39 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: sharpshooter
+tags:
+- branch_army
+- role_sharpshooter
+- type_mech
+- branch_reserves
+- branch_specops
+- branch_experimental
+partTagPreferences:
+  body:
+  - tags:
+      weight_light: true
+  equipment_left:
+  - tags:
+      part_ml: false
+      range_short: true
+      wpn_secondary: true
+  equipment_right:
+  - tags:
+      part_ml: false
+      range_long: true
+      wpn_primary: true
+  - tags:
+      part_ml: false
+      range_long: true
+      wpn_primary: true
+parts: 
+animationOverrides: 
+effects: 

@@ -1,0 +1,31 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 0
+rating: 0
+mood: -1
+group: 
+hue: 1
+icon: s_icon_l32_pilot_injury
+textFromFunctions: FunctionTextInTooltip
+textSource:
+  tagAssociated: ''
+  pilotEventAssociated: combat_unit_damage_outgoing_ally
+tags:
+- camp_pilot_bespoke
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: CombatUnitDamageOutgoingAlly
+    check: GreaterEqual
+    value: 1
+  functionsPilot:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: -0.1
+unit: 

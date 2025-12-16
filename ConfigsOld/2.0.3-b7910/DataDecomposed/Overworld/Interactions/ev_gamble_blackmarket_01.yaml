@@ -1,0 +1,394 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit: 
+tags:
+- ev_general
+check:
+  repeat: UniquePerCampaign
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_camp_01
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties:
+      displayResources: true
+      optionLimitRandom: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !UnlockAchievement
+        key: first_black_market
+      functionsLocal: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: true
+          priority: 5
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+      trade1:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4573113
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal:
+        - !OverworldValidateBaseResources
+          checks:
+            supplies:
+              check: GreaterEqual
+              value: 100
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: -100
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: trade1_outro
+      trade2:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4573113
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal:
+        - !OverworldValidateBaseResources
+          checks:
+            components_r2:
+              check: GreaterEqual
+              value: 10
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: components_r2
+              check: false
+              checkStrict: false
+              offset: true
+              value: -10
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: trade2_outro
+      trade3:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4573113
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal:
+        - !OverworldValidateBaseResources
+          checks:
+            camp_supplies:
+              check: GreaterEqual
+              value: 1
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: camp_supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: -1
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: trade3_intro
+    optionsReused: 
+  trade1_outro:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: false
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                subsystem: true
+          functionsLocal: 
+    optionsReused: 
+  trade2_outro:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused:
+          textSector: ui_overworld
+          textKey: int_sh_effect_pilots_fatigue_reduced
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyPilots
+            pilots: 0
+            deployed: false
+            checks:
+            - !PilotValidateStatValueRounded
+              key: fatigue
+              check: Greater
+              value: 0
+            functions:
+            - !PilotStatOffset
+              key: fatigue
+              normalized: false
+              value: -1
+          functionsLocal: 
+    optionsReused: 
+  trade3_intro:
+    comment: 
+    image: event_camp_01
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: true
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_continue_text
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: trade3_outro
+    optionsReused: 
+  trade3_outro:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: unit_token
+              check: false
+              checkStrict: false
+              offset: true
+              value: 1
+          functionsLocal: 
+    optionsReused: 

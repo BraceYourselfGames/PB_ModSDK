@@ -1,0 +1,33 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_role_generic_r3
+tags:
+- type_defender
+- type_prestige
+group: 
+existingTraitTagsFilter:
+  defender_shield: true
+prestigeRank:
+  check: Equal
+  value: 2
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_barrier_shield:
+    mode: Offset
+    value: 0.3
+  unit_hp_shield:
+    mode: Offset
+    value: 0.3
+statRangesMin: 
+statRangesMax:
+  trauma:
+    mode: Offset
+    value: 1
+effectsOnEvents: 
+effectsShared: 

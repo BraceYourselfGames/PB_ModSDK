@@ -1,0 +1,26 @@
+hidden: false
+parents:
+- key: vhc_tank_body_track
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: []
+tags:
+- vhc_basic
+- branch_trainingarmy
+- branch_trainingreserves
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_vhc_tank_side_v01_set00
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_side
+  priority: 0
+  comment: 
+  checks: 

@@ -1,0 +1,32 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags: 
+workshopInfo: 
+genSteps:
+- !TrimSystemsByTagFilter
+  requireAll: true
+  filter:
+    perk_occurrence_melee: true
+  hardpointsTargeted:
+  - perk_1
+  priority: 50
+  comment: 
+  checks: 
+- !TrimSystemsByStats
+  statsDesired: false
+  statKeys:
+  - wpn_range_max
+  - wpn_range_min
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 51
+  comment: 
+  checks: 

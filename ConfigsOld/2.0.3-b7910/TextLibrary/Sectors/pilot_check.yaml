@@ -1,0 +1,41 @@
+timeLastSync: 63811496048
+localized: true
+exportMode: LinePerKeySplit
+name: Pilots (Checks)
+description: This text is associated with checks used to determine whether a pilot can be used in combat. Checks can range from minor to critical. When a check is failed, the text defined here is displayed to the player, e.g. during briefing before combat.
+splits: []
+tags: 
+groups: 
+entries:
+  critical_hp__desc:
+    noteDev: 
+    temp: false
+    text: This pilot has no health points left. They can not be deployed.
+  critical_hp__name:
+    noteDev: 
+    temp: false
+    text: Unfit
+  warning_death__desc:
+    noteDev: 
+    temp: false
+    text: This pilot has too many permanent traumas. They will die if they are knocked out on the battlefield.
+  warning_death__name:
+    noteDev: 
+    temp: false
+    text: Risk of death
+  warning_fatigue_max__desc:
+    noteDev: 
+    temp: false
+    text: This pilot is at maximum fatigue. They will continuously lose health if deployed in combat.
+  warning_fatigue_max__name:
+    noteDev: 
+    temp: false
+    text: Exhausted
+  warning_hp__desc:
+    noteDev: 
+    temp: false
+    text: This pilot is not at maximum health. They will be easier to knock out in combat.
+  warning_hp__name:
+    noteDev: 
+    temp: false
+    text: Bruised

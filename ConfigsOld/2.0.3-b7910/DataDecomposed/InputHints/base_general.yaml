@@ -1,0 +1,53 @@
+extended: true
+lines:
+- mode: All
+  text: World map
+  actions:
+  - action: overworld_tab_nav1_overworld
+    newline: false
+- mode: All
+  text: Pilot list
+  actions:
+  - action: overworld_tab_nav2_pilots
+    newline: false
+- mode: All
+  text: Unit list
+  actions:
+  - action: overworld_tab_nav3_units
+    newline: false
+- mode: All
+  text: Inventory
+  actions:
+  - action: overworld_tab_nav4_inventory
+    newline: false
+- mode: All
+  text: Workshop
+  actions:
+  - action: overworld_tab_nav5_workshop
+    newline: false
+- mode: All
+  text: Upgrades
+  actions:
+  - action: overworld_tab_nav6_upgrades
+    newline: false
+- mode: All
+  text: Briefing
+  actions:
+  - action: overworld_tab_nav7_briefing
+    newline: false
+- mode: All
+  text: Inventory multi-select
+  actions:
+  - action: overworld_inventory_multiselect
+    newline: false
+- mode: All
+  text: Customization camera
+  actions:
+  - action: global_camera_vertical_pos
+    newline: false
+  - action: global_camera_horizontal_neg
+    newline: false
+  - action: global_camera_vertical_neg
+    newline: false
+  - action: global_camera_horizontal_pos
+    newline: false

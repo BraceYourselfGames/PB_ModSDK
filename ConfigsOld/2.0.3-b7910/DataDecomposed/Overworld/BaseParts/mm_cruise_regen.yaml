@@ -1,0 +1,38 @@
+parents:
+- key: mm_cruise
+  priority: 0
+  offsetStart: 10
+  offsetEnd: 394
+- key: reactor_expanded
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 211
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 4
+  positionY: 2
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_reactor6
+unlock: 
+cost:
+  resources:
+    components_r2: 15
+    components_r3: 5
+    supplies: 2000
+effect:
+  stats:
+  - key: mm_normal_energy_change
+    modifier: Multiply
+    value: 1.15
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

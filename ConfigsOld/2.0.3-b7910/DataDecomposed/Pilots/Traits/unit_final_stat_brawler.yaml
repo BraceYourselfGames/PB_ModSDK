@@ -1,0 +1,47 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_combat_trait_monument2
+tags:
+- level_5
+- prestige_unpickable
+- type_brawler
+- type_special
+group: 
+existingTraitTagsFilter:
+  brawler_tackle: true
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags:
+- type_special
+statValues:
+  unit_offset_speed:
+    mode: Offset
+    value: 6
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes: 
+  filterEventEntity:
+    eventType: CombatUnitCrashWon
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.25
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

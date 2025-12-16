@@ -1,0 +1,45 @@
+parents:
+- key: workshop_tech_r2
+  priority: 1
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 2
+  positionY: 5
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_workshop3
+unlock: 
+cost:
+  resources:
+    components_r2: 40
+    components_r3: 20
+    supplies: 2000
+effect:
+  stats:
+  - key: workshop_speed
+    modifier: Offset
+    value: 0.5
+  - key: unit_repair_jobs
+    modifier: Offset
+    value: 1
+  functions:
+  - !CreateWorkshopProjects
+    projects:
+    - countMin: 1
+      countMax: 1
+      countRandom: false
+      tagsUsed: false
+      key: utl_res_convert_r3
+      tags: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_workshop

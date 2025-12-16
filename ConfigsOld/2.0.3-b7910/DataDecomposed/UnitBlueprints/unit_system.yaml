@@ -1,0 +1,51 @@
+classTag: system
+classIcon: s_icon_l32_world_objective3
+asset: Content/Objects/Units/unit_system_overhaul
+assetPreview: Content/Objects/Units/unit_system_body
+audioEventOnMovementStart: 
+audioEventOnMovementStop: 
+audioSyncOnMovementElevation: 
+audioSyncOnMovementTilt: 
+movementSpeedBase: 16
+movementSpeedMin: 4
+movementSpeedMax: 28
+dashDistanceBase: 0
+dashDistanceMin: 0
+dashDistanceMax: 0
+rotationSpeed: 1000
+secondaryRotationSpeedLimit: 1000
+secondaryRotationSpeedK: 500
+hitTableKey: simple_table
+movementRestricted: false
+crashSpin: false
+crashPossible: false
+centerPoint:
+  x: 0
+  y: 1
+  z: 0
+bodyTagPinningExempted: true
+salvageExempted: true
+salvageBudgetBonus: 0
+heatMax: 100
+heatOverloadConstant: 0.4
+partPresetFilter: 
+sockets:
+  core:
+    presetDefault: ''
+    presetFiltered: true
+    critical: true
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_tank_core_aa
+      textOverride: false
+    statOffsetsOnAbsence: 
+dependencies: 
+destructionFragments: 
+crashFunctions: 
+destructionFunctions: 
+uncrewed: 
+weightClassOverride:
+  i: 4
+aiBehavior: Flanker
+aiCollisionRadius: 5
+aiCollisionHeight: 10

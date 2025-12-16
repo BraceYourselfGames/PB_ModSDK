@@ -1,0 +1,32 @@
+hidden: false
+unique: false
+quickIntro: false
+priority: 2
+rating: 0
+mood: 1
+group: ''
+hue: 0.45
+icon: s_icon_l32_pilot_escape
+textFromFunctions: FunctionTextInSecondary
+textSource: 
+tags:
+- camp_pilot
+- camp_pilot_hope
+- hope
+checksGlobal:
+- !OverworldValidateBaseResources
+  checks:
+    hope:
+      check: Equal
+      value: 2
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot: 
+  functionsPilot:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.25
+unit: 

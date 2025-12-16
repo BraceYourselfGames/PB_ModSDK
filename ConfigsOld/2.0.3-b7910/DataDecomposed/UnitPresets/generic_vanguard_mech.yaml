@@ -1,0 +1,34 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: vanguard
+tags:
+- branch_army
+- role_vanguard
+- type_mech
+- branch_specops
+- branch_reserves
+- branch_experimental
+partTagPreferences:
+  body:
+  - tags:
+      weight_medium: true
+  equipment_left:
+  - tags:
+      range_short: true
+      wpn_secondary: true
+  equipment_right:
+  - tags:
+      part_ml: false
+      range_medium: true
+      wpn_primary: true
+parts: 
+animationOverrides: 
+effects: 

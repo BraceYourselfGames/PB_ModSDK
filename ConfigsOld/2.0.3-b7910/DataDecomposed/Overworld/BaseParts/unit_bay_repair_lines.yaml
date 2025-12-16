@@ -1,0 +1,33 @@
+parents:
+- key: unit_storage_l2
+  priority: 0
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 3
+  positionY: -6
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_units6
+unlock: 
+cost:
+  resources:
+    components_r3: 30
+    supplies: 1000
+effect:
+  stats:
+  - key: unit_repair_jobs
+    modifier: Offset
+    value: 1
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

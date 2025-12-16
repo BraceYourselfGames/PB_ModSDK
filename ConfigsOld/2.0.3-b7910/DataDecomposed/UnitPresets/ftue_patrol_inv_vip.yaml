@@ -1,0 +1,40 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_officer_a
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_knox: true
+      weight_medium: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_sidearm_02
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_mg_heavy_01
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

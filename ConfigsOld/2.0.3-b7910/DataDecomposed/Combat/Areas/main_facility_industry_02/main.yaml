@@ -1,0 +1,1659 @@
+hidden: false
+parents: []
+image: 
+core:
+  backgroundTerrainUsed: true
+  sliceShadingUsed: false
+  sliceShadingInputs:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
+content: {}
+atmosphere:
+  groundHeight: -19.5
+  destructionMapping:
+    x: 20
+    y: 150
+    z: 0
+    w: 1
+tags:
+- size_large
+- size_medium
+- context_facility
+- type_main
+spawnGroups:
+  center:
+    tags:
+    - perimeter_center
+    - direction_center
+    - player
+    - context_defended
+    points:
+    - point:
+        x: 130.5
+        y: -19.5
+        z: 127.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 130.5
+        y: -19.5
+        z: 154.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 145.5
+        y: -19.5
+        z: 136.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 130.5
+        y: -19.5
+        z: 139.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 160.5
+        y: -19.5
+        z: 136.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  center_perimeter_e:
+    tags:
+    - perimeter_center
+    - direction_e
+    - player
+    - context_defended
+    points:
+    - point:
+        x: 205.5
+        y: -19.5
+        z: 127.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 193.5
+        y: -19.5
+        z: 136.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 223.5
+        y: -19.5
+        z: 169.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 196.5
+        y: -19.5
+        z: 169.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 217.5
+        y: -19.5
+        z: 136.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  center_perimeter_n:
+    tags:
+    - perimeter_center
+    - direction_n
+    - player
+    - context_defended
+    points:
+    - point:
+        x: 160.5
+        y: -19.5
+        z: 190.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 172.5
+        y: -19.5
+        z: 202.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 187.5
+        y: -19.5
+        z: 190.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 160.5
+        y: -19.5
+        z: 172.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 130.5
+        y: -19.5
+        z: 199.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  center_perimeter_s:
+    tags:
+    - perimeter_center
+    - direction_s
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 160.5
+        y: -19.5
+        z: 91.5
+      rotation:
+        x: 0
+        y: 360
+        z: 0
+    - point:
+        x: 145.5
+        y: -19.5
+        z: 91.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 172.5
+        y: -13.5
+        z: 112.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 172.5
+        y: -16.5
+        z: 97.5
+      rotation:
+        x: 0
+        y: 360
+        z: 0
+    - point:
+        x: 151.5
+        y: -16.5
+        z: 106.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+  center_perimeter_w:
+    tags:
+    - perimeter_center
+    - direction_w
+    - player
+    - context_defended
+    points:
+    - point:
+        x: 100.5
+        y: -19.5
+        z: 181.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 91.5
+        y: -19.5
+        z: 157.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 94.5
+        y: -19.5
+        z: 133.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 100.5
+        y: -19.5
+        z: 145.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 97.5
+        y: -19.5
+        z: 121.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+  inner_perimeter_ene:
+    tags:
+    - direction_e
+    - direction_ne
+    - perimeter_inner
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 235.5
+        y: -19.5
+        z: 211.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 262.5
+        y: -19.5
+        z: 211.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 247.5
+        y: -19.5
+        z: 202.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 241.5
+        y: -16.5
+        z: 178.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 256.5
+        y: -16.5
+        z: 187.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+  inner_perimeter_ese:
+    tags:
+    - direction_e
+    - direction_se
+    - perimeter_inner
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 253.5
+        y: -16.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 268.5
+        y: -16.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 244.5
+        y: -19.5
+        z: 115.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 259.5
+        y: -16.5
+        z: 82.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 238.5
+        y: -19.5
+        z: 94.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+  inner_perimeter_nne:
+    tags:
+    - direction_n
+    - direction_ne
+    - perimeter_inner
+    - player
+    - context_defended
+    points:
+    - point:
+        x: 121.5
+        y: -19.5
+        z: 223.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 124.5
+        y: -19.5
+        z: 238.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 130.5
+        y: -19.5
+        z: 250.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 112.5
+        y: -19.5
+        z: 247.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 109.5
+        y: -19.5
+        z: 232.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+  inner_perimeter_nnw:
+    tags:
+    - direction_n
+    - direction_nw
+    - context_defended
+    - perimeter_inner
+    - player
+    points:
+    - point:
+        x: 196.5
+        y: -16.5
+        z: 223.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 193.5
+        y: -19.5
+        z: 238.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 178.5
+        y: -19.5
+        z: 229.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 178.5
+        y: -16.5
+        z: 247.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 208.5
+        y: -19.5
+        z: 241.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+  inner_perimeter_sse:
+    tags:
+    - direction_se
+    - direction_s
+    - perimeter_inner
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 211.5
+        y: -16.5
+        z: 64.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 208.5
+        y: -16.5
+        z: 46.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 190.5
+        y: -19.5
+        z: 73.5
+      rotation:
+        x: 0
+        y: 360
+        z: 0
+    - point:
+        x: 193.5
+        y: -16.5
+        z: 58.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 178.5
+        y: -16.5
+        z: 58.5
+      rotation:
+        x: 0
+        y: 360
+        z: 0
+  inner_perimeter_ssw:
+    tags:
+    - direction_s
+    - direction_sw
+    - perimeter_inner
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 103.5
+        y: -16.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 112.5
+        y: -16.5
+        z: 52.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 118.5
+        y: -16.5
+        z: 64.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 127.5
+        y: -16.5
+        z: 52.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 118.5
+        y: -16.5
+        z: 79.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+  inner_perimeter_wnw:
+    tags:
+    - direction_nw
+    - direction_w
+    - perimeter_inner
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 67.5
+        y: -19.5
+        z: 199.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 79.5
+        y: -19.5
+        z: 202.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 64.5
+        y: -16.5
+        z: 214.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 52.5
+        y: -19.5
+        z: 196.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 76.5
+        y: -19.5
+        z: 190.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+  inner_perimeter_wsw:
+    tags:
+    - direction_w
+    - direction_sw
+    - perimeter_inner
+    - player
+    - context_undefended
+    points:
+    - point:
+        x: 55.5
+        y: -13.5
+        z: 106.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 37.5
+        y: -10.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 64.5
+        y: -10.5
+        z: 85.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 52.5
+        y: -10.5
+        z: 88.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 67.5
+        y: -13.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+  outer_perimeter_e:
+    tags:
+    - direction_e
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 289.5
+        y: -16.5
+        z: 160.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 283.5
+        y: -19.5
+        z: 142.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 289.5
+        y: -19.5
+        z: 127.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 274.5
+        y: -19.5
+        z: 157.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 268.5
+        y: -19.5
+        z: 136.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  outer_perimeter_n:
+    tags:
+    - direction_n
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 127.5
+        y: -10.5
+        z: 274.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 106.5
+        y: -10.5
+        z: 289.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 145.5
+        y: -4.5
+        z: 283.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 127.5
+        y: -7.5
+        z: 289.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 163.5
+        y: -7.5
+        z: 286.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  outer_perimeter_ne:
+    tags:
+    - direction_ne
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 250.5
+        y: -16.5
+        z: 259.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 268.5
+        y: -19.5
+        z: 253.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 244.5
+        y: -13.5
+        z: 247.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 244.5
+        y: -19.5
+        z: 271.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+    - point:
+        x: 265.5
+        y: -22.5
+        z: 268.5
+      rotation:
+        x: 0
+        y: 225
+        z: 0
+  outer_perimeter_nw:
+    tags:
+    - direction_nw
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 49.5
+        y: -13.5
+        z: 262.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 31.5
+        y: -16.5
+        z: 235.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 13.5
+        y: -16.5
+        z: 235.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 31.5
+        y: -13.5
+        z: 268.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+    - point:
+        x: 34.5
+        y: -10.5
+        z: 253.5
+      rotation:
+        x: 0
+        y: 135
+        z: 0
+  outer_perimeter_s:
+    tags:
+    - direction_s
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 136.5
+        y: -16.5
+        z: 25.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 145.5
+        y: -16.5
+        z: 10.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 127.5
+        y: -16.5
+        z: 13.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 154.5
+        y: -13.5
+        z: 28.5
+      rotation:
+        x: 0
+        y: 360
+        z: 0
+    - point:
+        x: 172.5
+        y: -10.5
+        z: 31.5
+      rotation:
+        x: 0
+        y: 360
+        z: 0
+  outer_perimeter_se:
+    tags:
+    - direction_se
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 247.5
+        y: -13.5
+        z: 25.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 256.5
+        y: -10.5
+        z: 37.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 274.5
+        y: -13.5
+        z: 31.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 283.5
+        y: -13.5
+        z: 46.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+    - point:
+        x: 274.5
+        y: -16.5
+        z: 64.5
+      rotation:
+        x: 0
+        y: 315
+        z: 0
+  outer_perimeter_sw:
+    tags:
+    - direction_sw
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 40.5
+        y: -13.5
+        z: 31.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 67.5
+        y: -16.5
+        z: 34.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 58.5
+        y: -16.5
+        z: 25.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 28.5
+        y: -16.5
+        z: 22.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 25.5
+        y: -19.5
+        z: 40.5
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+  outer_perimeter_w:
+    tags:
+    - direction_w
+    - perimeter_outer
+    - context_undefended
+    points:
+    - point:
+        x: 16.5
+        y: -16.5
+        z: 151.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 10.5
+        y: -19.5
+        z: 172.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 46.5
+        y: -13.5
+        z: 142.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 25.5
+        y: -19.5
+        z: 169.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 31.5
+        y: -13.5
+        z: 145.5
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+locations:
+  obj_loot_center_00:
+    tags:
+    - obj_loot
+    - perimeter_center
+    - direction_w
+    - direction_sw
+    - direction_se
+    - direction_s
+    - direction_nw
+    - direction_ne
+    - direction_n
+    - direction_e
+    data: !AreaLocation
+      point:
+        x: 130.6439
+        y: -19.45
+        z: 190.6341
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_center_01:
+    tags:
+    - obj_loot
+    - perimeter_center
+    - direction_w
+    - direction_sw
+    - direction_se
+    - direction_s
+    - direction_nw
+    - direction_ne
+    - direction_n
+    - direction_e
+    data: !AreaLocation
+      point:
+        x: 97.49323
+        y: -19.45
+        z: 134.9827
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_center_02:
+    tags:
+    - obj_loot
+    - perimeter_center
+    - direction_w
+    - direction_sw
+    - direction_se
+    - direction_s
+    - direction_nw
+    - direction_ne
+    - direction_n
+    - direction_e
+    data: !AreaLocation
+      point:
+        x: 182.3176
+        y: -19.45
+        z: 141.6788
+      rotation: 0
+      sizeX: 9
+      sizeY: 17
+      rect: false
+  obj_loot_inner_ene:
+    tags:
+    - direction_e
+    - direction_ne
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 250.2201
+        y: -19.45
+        z: 130.604
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_ese:
+    tags:
+    - direction_e
+    - direction_se
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 220.9594
+        y: -19.45
+        z: 168.667
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_nne:
+    tags:
+    - direction_n
+    - direction_ne
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 216.6254
+        y: -19.45
+        z: 227.9903
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_nnw:
+    tags:
+    - direction_n
+    - direction_nw
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 52.50311
+        y: -19.45
+        z: 193.9451
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_sse:
+    tags:
+    - direction_s
+    - direction_se
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 185.1612
+        y: -19.45
+        z: 82.81753
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_ssw:
+    tags:
+    - direction_s
+    - direction_sw
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 109.0957
+        y: -16.45
+        z: 64.36928
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_wnw:
+    tags:
+    - direction_nw
+    - direction_w
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 82.19171
+        y: -16.45
+        z: 239.3673
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_loot_inner_wsw:
+    tags:
+    - direction_sw
+    - direction_w
+    - obj_loot
+    - perimeter_inner
+    data: !AreaLocation
+      point:
+        x: 32.24604
+        y: -19.45
+        z: 129.5723
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+  obj_retreat_outer_e_00:
+    tags:
+    - obj_retreat
+    - perimeter_outer
+    - direction_e
+    data: !AreaLocation
+      point:
+        x: 292.5
+        y: -16.45
+        z: 194.8959
+      rotation: 0
+      sizeX: 14
+      sizeY: 72.9
+      rect: true
+  obj_retreat_outer_e_01:
+    tags:
+    - obj_retreat
+    - perimeter_outer
+    - direction_e
+    data: !AreaLocation
+      point:
+        x: 292.5
+        y: -16.45
+        z: 89.48553
+      rotation: 0
+      sizeX: 14
+      sizeY: 55.5
+      rect: true
+  obj_retreat_outer_n_00:
+    tags:
+    - direction_n
+    - obj_retreat
+    - perimeter_outer
+    data: !AreaLocation
+      point:
+        x: 226.1792
+        y: -19.45
+        z: 278
+      rotation: 0
+      sizeX: 22
+      sizeY: 42
+      rect: true
+  obj_retreat_outer_s_00:
+    tags:
+    - direction_s
+    - obj_retreat
+    - perimeter_outer
+    data: !AreaLocation
+      point:
+        x: 94.91567
+        y: -16.45
+        z: 7.5
+      rotation: 0
+      sizeX: 80
+      sizeY: 14
+      rect: true
+  obj_retreat_outer_s_01:
+    tags:
+    - direction_s
+    - obj_retreat
+    - perimeter_outer
+    data: !AreaLocation
+      point:
+        x: 181.2117
+        y: -16.45
+        z: 7.5
+      rotation: 0
+      sizeX: 80
+      sizeY: 14
+      rect: true
+  obj_retreat_outer_w_00:
+    tags:
+    - direction_w
+    - obj_retreat
+    - perimeter_outer
+    data: !AreaLocation
+      point:
+        x: 7.5
+        y: -16.45
+        z: 123.8339
+      rotation: 0
+      sizeX: 14
+      sizeY: 70
+      rect: true
+  obj_retreat_outer_w_01:
+    tags:
+    - direction_w
+    - obj_retreat
+    - perimeter_outer
+    data: !AreaLocation
+      point:
+        x: 7.5
+        y: -16.45
+        z: 248.8538
+      rotation: 0
+      sizeX: 14
+      sizeY: 80
+      rect: true
+volumes:
+  alarm_00:
+    tags:
+    - obj_alarm
+    data: !AreaVolume
+      origin:
+        x: 37
+        y: 1
+        z: 62
+      size:
+        x: 3
+        y: 1
+        z: 3
+  structure_00:
+    tags:
+    - obj_structure
+    data: !AreaVolume
+      origin:
+        x: 37
+        y: 1
+        z: 62
+      size:
+        x: 8
+        y: 1
+        z: 5
+fields: 
+waypointGroups: 
+briefingGroupsInjected: 
+intro:
+  cameraInputsFinal: 
+  shots:
+  - duration: 5
+    easing: easeInOutQuad
+    fadeOnEnd: true
+    fadeDuration: 0.35
+    from:
+      position:
+        x: 19.24
+        y: -11.76
+        z: 99.09
+      rotation:
+        x: 359.63
+        y: 49.28
+        z: 0
+      fov: 35
+    to:
+      position:
+        x: -0.52
+        y: 28.34
+        z: 82.59
+      rotation:
+        x: 13.38
+        y: 50.82
+        z: 0
+      fov: 35
+  - duration: 5
+    easing: linear
+    fadeOnEnd: true
+    fadeDuration: 0.25
+    from:
+      position:
+        x: 230.24
+        y: -18.25
+        z: 193.46
+      rotation:
+        x: 350.35
+        y: 233.27
+        z: 0
+      fov: 45
+    to:
+      position:
+        x: 180
+        y: -18.67
+        z: 193.46
+      rotation:
+        x: 345
+        y: 294.46
+        z: 0
+      fov: 45
+  - duration: 5
+    easing: linear
+    fadeOnEnd: true
+    fadeDuration: 0.25
+    from:
+      position:
+        x: 105.87
+        y: -17.53
+        z: 116.53
+      rotation:
+        x: 345.86
+        y: 304.43
+        z: 0
+      fov: 45
+    to:
+      position:
+        x: 103.09
+        y: -16.81
+        z: 202.65
+      rotation:
+        x: 354.11
+        y: 224.33
+        z: 0
+      fov: 45
+  - duration: 5
+    easing: linear
+    fadeOnEnd: true
+    fadeDuration: 0.4
+    from:
+      position:
+        x: 111.39
+        y: 0.83
+        z: 118.86
+      rotation:
+        x: 18
+        y: 321.96
+        z: 0
+      fov: 50
+    to:
+      position:
+        x: 114.86
+        y: 0.83
+        z: 118.86
+      rotation:
+        x: 18
+        y: 35
+        z: 0
+      fov: 50
+  - duration: 4
+    easing: easeInOutQuad
+    fadeOnEnd: false
+    fadeDuration: 0.5
+    from:
+      position:
+        x: 4.05
+        y: 40.28
+        z: 66.79
+      rotation:
+        x: 18
+        y: 48.09
+        z: 0
+      fov: 35
+    to:
+      position:
+        x: 0
+        y: 0
+        z: 0
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+      fov: 0
+boundary:
+  groundHeight: -32
+  innerSkirtSize: 30
+  curveBoundsOffset: 0
+  curveBoundsHeight: 30
+  north:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.5633803
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.1258678
+        y: 0.5633803
+        z: 0.4286768
+        w: 0.4286768
+      w:
+        x: 0.3333333
+        y: 0.2696006
+      m: {}
+    - tv_tg:
+        x: 0.2296064
+        y: 0.7981215
+        z: 6.883619
+        w: 6.883619
+      w:
+        x: 0.182485
+        y: 0.1073054
+      m: {}
+    - tv_tg:
+        x: 0.6399616
+        y: 1
+        z: -4.337383
+        w: -4.337383
+      w:
+        x: 0.3333333
+        y: 0.07322738
+      m: {}
+    - tv_tg:
+        x: 0.7437732
+        y: 0.5312058
+        z: -1.206149
+        w: -1.206149
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.8226113
+        y: 0.5211267
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.9987754
+        y: 0.3004694
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  south:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0.005528271
+        y: 0.2910798
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.9969288
+        y: 0.4929536
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  east:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.8403847
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.2050242
+        y: 0.8851056
+        z: -0.6815709
+        w: -0.6815709
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.4520651
+        y: 0.5739433
+        z: 0.415835
+        w: 0.415835
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.628045
+        y: 0.8726034
+        z: -0.4617245
+        w: -0.4617245
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.7159166
+        y: 0.754728
+        z: -3.220783
+        w: -3.220783
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 1
+        y: 0.4037476
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  west:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.4976571
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 0.2363906
+        y: 0.549871
+        z: 0.38242
+        w: 0.38242
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.3906889
+        y: 0.7699547
+        z: 0.4947837
+        w: 0.4947837
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.5671237
+        y: 0.5334104
+        z: 0.5059034
+        w: 0.5059034
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.9987793
+        y: 0.5868469
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+segments:
+- path: Content/AreaSegments/area_seg_main_facility_industry_02
+biomeFilter: 
+scenarioChanges: 

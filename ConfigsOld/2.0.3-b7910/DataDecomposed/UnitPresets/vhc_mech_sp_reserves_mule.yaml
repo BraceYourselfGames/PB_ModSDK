@@ -1,0 +1,57 @@
+hidden: true
+listed: false
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: true
+parents:
+- key: vhc_mech
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: artillery
+tags: 
+partTagPreferences:
+  body:
+  - tags:
+      armor_hakobu: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 7.5
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

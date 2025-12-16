@@ -1,0 +1,86 @@
+hidden: false
+parent: internal_aux_core
+rating: 2
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName:
+  split: true
+textDescFromPreset: 
+textDesc:
+  split: true
+hardpoints:
+- internal_aux_top_core
+tags:
+- core_utility
+- rating_2
+- stat_dissipation
+- stat_power
+- stat_regeneration
+statDistribution: ''
+stats:
+  barrier_regeneration:
+    value: 0.864
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp2_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp3_value:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  heat_dissipation:
+    value: 0.665
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_buffer:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_limit:
+    value: 1.12
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  power:
+    value: 1.025
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 20
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_offset:
+    value: 0.15
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- reactor
+attachments: 
+activation: 
+projectile: 
+beam: 
+custom: 
+functions: 
+workshopInfo:
+  progressLimit:
+    i: 2
+  inputResourcesViaStats:
+    f: 1
+  inputResources:
+  - key: supplies
+    amount: 400
+  - key: components_r2
+    amount: 6
+  - key: components_r3
+    amount: 4
+  basePartRequirements: 

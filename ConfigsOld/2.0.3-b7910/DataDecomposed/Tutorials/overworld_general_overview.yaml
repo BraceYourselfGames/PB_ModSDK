@@ -1,0 +1,121 @@
+depthBackground: 100
+depthForeground: 100
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.8
+  center:
+    textImage: event_mountain_base
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+      - overworld_time_toggle
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1490196
+  center: 
+  hint:
+    color:
+      r: 0.514151
+      g: 1
+      b: 0.6699893
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 32
+    frameSizeX: 832
+    frameSizeY: 112
+    frameBlocksInput: true
+    frameBoundary: true
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_move_vertical_pos
+      - global_move_horizontal_neg
+      - global_move_vertical_neg
+      - global_move_horizontal_pos
+      - global_camera_horizontal_pos
+      - global_camera_horizontal_neg
+      - global_camera_vertical_pos
+      - global_camera_vertical_neg
+      - global_mouse_middle
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_mouse_secondary
+      - overworld_selection_reset
+  hint: 
+  effectsOverworld:
+    functions:
+    - !UpdateCampaignOnProvinceArrival {}
+    - !QuestStart
+      questKey: province_selection
+  effectsCombat: 
+effectsOnEnd: 

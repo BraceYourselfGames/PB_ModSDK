@@ -1,0 +1,82 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+core:
+  textIdentifierGroup: 
+  textName: {}
+  textDesc: {}
+  image: 
+  icon: s_icon_overlay_type_squad6
+  visionColor: 
+  visual:
+    path: Content/Overworld/Squad_Army_Resupplied
+  visualLiberated:
+    path: Content/Overworld/Site_Battlefield_Inactive
+  observer: 
+  movement:
+    speed: 4
+    rotateToFacing: false
+  rangeVision:
+    f: 45
+  rangeInteraction:
+    f: 45
+  detection: 
+tags:
+- flag_preserve_on_victory
+- combat_exit_blocked
+- flag_battlesite_on_defeat
+- flag_force_site_info
+- log_id_squad
+- role_patrol
+generation:
+  spawnPrefs: 
+  checksBase: 
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents:
+  Spawn:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveToBase
+      speed: 4
+      pointRange:
+        x: 5
+        y: 25
+  Arrival:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveToBase
+      speed: 4
+      pointRange:
+        x: 20
+        y: 40
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_crawler_defense: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget:
+    f: 10
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_supplies
+        tags:
+          part_res: true

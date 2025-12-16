@@ -1,0 +1,27 @@
+hidden: false
+parents:
+- key: back_root
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- back_drop_boss
+- range_short
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - back_wpn_miner_02
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

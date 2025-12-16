@@ -1,0 +1,40 @@
+comment: 
+hidden: true
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_base_mid
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Base_Large
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_preserve_on_victory
+- contest_s2
+- military
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByTag
+    tagChecked: military
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 2
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat: 

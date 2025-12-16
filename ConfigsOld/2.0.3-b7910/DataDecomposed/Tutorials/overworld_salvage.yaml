@@ -1,0 +1,568 @@
+depthBackground: 90
+depthForeground: 91
+pages:
+- depthForeground: 1
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: true
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.9843137
+  center:
+    textImage: event_salvage
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3176471
+      b: 0.3411765
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 80
+    frameSizeX: 840
+    frameSizeY: 520
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 0
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3176471
+      b: 0.3411765
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 440
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopRight
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 1
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.5330188
+      g: 0.8132075
+      b: 1
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 930
+    frameSizeY: 620
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftBottom
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 2
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.2954248
+      b: 0.3411765
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: Bottom
+    framePositionX: 0
+    framePositionY: 80
+    frameSizeX: 352
+    frameSizeY: 199
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 3
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.3176471
+      b: 0.3411765
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 440
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftBottom
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.2917647
+      b: 0.3411765
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: Bottom
+    framePositionX: 0
+    framePositionY: -80
+    frameSizeX: 432
+    frameSizeY: 980
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 4
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.3559096
+      g: 0.5685648
+      b: 0.5849056
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 430
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopRight
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.3411765
+      g: 0.2771242
+      b: 0.2313726
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: Bottom
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 432
+    frameSizeY: 980
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 5
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.3411765
+      g: 0.2313726
+      b: 0.2313726
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: -96
+    frameSizeX: 432
+    frameSizeY: 420
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions: []
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2679738
+      g: 0.3411765
+      b: 0.2313726
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: -96
+    frameSizeX: 160
+    frameSizeY: 420
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 6
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2679738
+      g: 0.3411765
+      b: 0.2313726
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -270
+    framePositionY: 0
+    frameSizeX: 178
+    frameSizeY: 120
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: TopRight
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 7
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center: 
+  hint:
+    color:
+      r: 0.2313726
+      g: 0.2972549
+      b: 0.3411765
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 96
+    frameSizeX: 620
+    frameSizeY: 220
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopRight
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 8
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.03529412
+  center: 
+  hint:
+    color:
+      r: 0.5137255
+      g: 1
+      b: 0.7058824
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 438
+    frameSizeY: 146
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopRight
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldDebriefing
+      methodName: OnTutorialStep
+      argument: 9
+      frameDelay: 0
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions: []
+  effectsCombat: 

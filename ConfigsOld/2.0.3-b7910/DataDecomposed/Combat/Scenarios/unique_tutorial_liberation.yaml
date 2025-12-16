@@ -1,0 +1,449 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation:
+    f: 0
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - main_settlement_village_02
+entry:
+  squadUsed: true
+  squadSize: 2
+  squadSlotCustom:
+    spawnTagsUsed: false
+    spawnTags: 
+    spawnGroupKey: custom_ftue_pb
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- difficulty_normal
+- listed
+- trait_entrenched
+- type_civilian_liberation
+- unique_tutorial_liberation
+- block_exit_on_defeat
+- block_save_after
+states:
+  destruction_warning:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: -1
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: true
+      progressHiddenAtZero: true
+      moodIntensityNormal: 
+      moodIntensityProgress:
+        f: 0.8
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: s_icon_l16_context_point2
+    evaluationContext: OnExecutionEnd, OnLevelDestruction
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_level_destruction
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 15
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.1
+            hidden: false
+            key: generic_pb_friendlystructure_destroyed
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  reinforcements_hg:
+    comment: 
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: generic_enemy_reinforcements_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 9
+    priority: 9
+    priorityDisplay: 9
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: radio_home_guard_active
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: ftue_settlement_pb_ml
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 1
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: unitgroup_q0_training
+              aiBehavior: Flanker
+              aiTargeting: sharpshooter
+              liveryPreset: hg_main_g1
+              custom:
+                name:
+                  name: pb_ml
+                id: {}
+                idReused: 
+                idPilot: 
+                role: special_homeguard
+                spawn: 
+                landing: 
+                flags:
+                  controlByPlayer: true
+                  controlledByAI: true
+                  uncrewed: false
+                faction:
+                  faction: Phantoms
+                speed: 
+                uncrewed: 
+                pilotAppearance:
+                  presetKey: generic_hg_01
+                pilotStats: 
+                predictionLimit: 
+                animationOverrides: 
+                statMultipliers: 
+                hitDirectionModifiers: 
+                functions: 
+                combatTags: 
+            check: 
+            combatTags:
+            - custom_homeguard
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: true
+            factionBranchKey: branch_army
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              custom_ftue_homeguard: true
+            spawnGroupKey: custom_ftue_hg
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  reinforcements_hg_tutorial:
+    comment: 
+    textNameKey: reinforcements_friendly_header
+    textDescKey: reinforcements_friendly_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 9
+    priority: 9
+    priorityDisplay: 9
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 2
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !StartTutorial
+            key: combat_liberation_00
+            allowRepeat: true
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: true
+      threatRatingPercentage: 1
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: ftue_settlement_inv_a
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: artillery
+        liveryPreset: inv_army_g1
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: artillery
+        liveryPreset: inv_army_g1
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: artillery
+        liveryPreset: inv_army_g1
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        custom_ftue_inv_w1: true
+      spawnGroupKey: custom_ftue_inv_w1
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 1
+      hidden: false
+      key: generic_civilian_defense_start
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_liberation
+      allowRepeat: true
+    - !ModifyMemoryCombat
+      data:
+        context: Target
+        provinceKey: 
+        changes:
+        - change: Set
+          key: world_destruction
+          value: 0
+          valueFromMemory: false
+          valueFromMemoryKey: 
+    outcome: 
+    transitions:
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: true
+      transitionLocksExecution: false
+      transitionsStateBased:
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          alarm: false
+          wave_2: true
+        stepKey: reinforcements
+      - priority: 0
+        stateCleanupOnUse: true
+        stateRequirements:
+          alarm: true
+          wave_2: false
+        stepKey: cleanup
+      transitionTimeBased: 
+unitPresets:
+  inv_reinforcement: !UnitPresetLink
+    preset: ftue_settlement_inv_reinforce
+unitGenerators: 

@@ -1,0 +1,246 @@
+timeLastSync: 0
+entries:
+  crit_chance_offset__header:
+    id: 1
+    text: Bonus de chances de critiques
+    textEng: Crit chance bonus
+  crit_chance_offset__text:
+    id: 1
+    text: Une augmentation de la probabilité d'infliger des dégâts critiques. Elle permet aussi au pilote d'infliger des coups critiques sans utiliser une de ses armes de prédilection.
+    textEng: An increase to the base critical hit chance. Can allow the pilot to make critical hits even when using a weapon not matching their preference.
+  crit_multiplier_offset__header:
+    id: 1
+    text: Multiplicateur de critiques
+    textEng: Crit multiplier offset
+  crit_multiplier_offset__text:
+    id: 1
+    text: Une augmentation du multiplicateur de dégâts critiques. Chaque coup critique inflige ainsi davantage de dégâts.
+    textEng: An increase to the base critical damage multiplier. Allows each critical hit to be more damaging.
+  fatigue__header:
+    id: 1
+    text: Fatigue
+    textEng: Fatigue
+  fatigue__header_max:
+    id: 2
+    text: Limite de fatigue
+    textEng: Fatigue limit
+  fatigue__hint:
+    id: 1
+    text: L'épuisement dû au combat. La fatigue provoque des effets indésirables quand son niveau est trop élevé.
+    textEng: Exhaustion from combat. Triggers adverse effects if maxed.
+  fatigue__max_effect:
+    id: 1
+    text: Ce pilote a atteint ses limites. S'il est déployé au combat, il perdra des points de vie à chaque tour et risque de ne pas suivre les ordres.
+    textEng: This pilot is at their limit. If deployed into combat, they will lose health every turn and could randomly fail to perform their orders.
+  fatigue__text:
+    id: 1
+    text: L'épuisement dû au combat. La fatigue provoque des effets indésirables quand son niveau est trop élevé. Elle revient progressivement à la normale lorsque les pilotes ne sont pas déployés au combat. La fatigue d'un pilote ne peut être complètement enrayée qu'en l'affectant à l'infirmerie lors d'un arrêt au campement.
+    textEng: Exhaustion from combat. Triggers adverse effects if maxed. Reduced towards neutral every time a pilot is not deployed into combat. Can only be fully cleared by assigning the pilot to the medbay during a camp stop.
+  hp__header:
+    id: 1
+    text: Points de vie
+    textEng: Health
+  hp__header_max:
+    id: 2
+    text: Points de vie maximum
+    textEng: Max health
+  hp__text:
+    id: 1
+    text: La santé physique et mentale du pilote. Lorsqu'un pilote au combat se retrouve à court de points de vie, il perd conscience et souffre d'un traumatisme. Affectez le pilote à l'infirmerie lors d'un arrêt au campement pour qu'il regagne ses points de vie.
+    textEng: Mental and physical health of the pilot. Running out of health in combat will knock out the pilot and trigger trauma. Health can be restored by assigning the pilot to the medbay during a camp stop.
+  hp_recovery__header:
+    id: 1
+    text: Récupération de points de vie
+    textEng: Health recovery
+  hp_recovery__text:
+    id: 1
+    text: La quantité de points de vie récupérés lorsqu'un pilote se soigne à l'infirmerie. La valeur par défaut est de 100 %, mais celle-ci peut varier selon les traits des pilotes.
+    textEng: How much health is restored when a pilot is treated in the medbay. Defaults to 100% but can differ as an effect of some traits.
+  score__header:
+    id: 1
+    text: Série de combats
+    textEng: Combat streak
+  score__text:
+    id: 1
+    text: Accroît la probabilité d'infliger des dégâts critiques et le gain d'expérience. Elle augmente pour chaque mission de combat et diminue à chaque arrêt au campement. Elle se réinitialise complètement si le pilote perd tous ses points de vie ou s'il se repose au campement.
+    textEng: Increases critical chance and experience gain. Incremented with every combat mission, reduced with each camp. Will completely reset to 0 if pilot loses all health in combat, or is selected to rest during camp.
+  self_offset_exp__header:
+    id: 1
+    text: Ajustement de l'expérience
+    textEng: Experience offset
+  self_offset_exp__text:
+    id: 1
+    text: Un ajustement de l'expérience acquise. Il peut être positif comme négatif.
+    textEng: Offset to acquired experience. Can be positive or negative.
+  support_salvage_budget__header:
+    id: 1
+    text: Bonus de récupération
+    textEng: Salvage bonus
+  support_salvage_budget__text:
+    id: 1
+    text: Une augmentation du budget de récupération.
+    textEng: Increase to the salvage budget.
+  support_scramble_range__header:
+    id: 1
+    text: Portée du brouillage
+    textEng: Scramble range
+  support_scramble_range__text:
+    id: 1
+    text: Une augmentation de la portée de brouillage des projectiles guidés lors de la poussée.
+    textEng: Increase to the range in which guided munitions are blinded on dash.
+  trauma__header:
+    id: 1
+    text: Traumatisme
+    textEng: Trauma
+  trauma__header_max:
+    id: 2
+    text: Limite de traumatismes
+    textEng: Trauma limit
+  trauma__hint:
+    id: 1
+    text: Perdre conscience au combat engendre un traumatisme permanent.
+    textEng: Permanent trauma from knockouts combat.
+  trauma__max_effect:
+    id: 1
+    text: Ce pilote ne peut tolérer davantage de blessures graves. S'il perd conscience au combat, il mourra.
+    textEng: This pilot can not tolerate more critical injuries. They will die if they are knocked out in combat.
+  trauma__text:
+    id: 1
+    text: Perdre conscience au combat engendre un traumatisme permanent. Chaque pilote ne peut supporter qu'un certain nombre de traumatismes au-delà duquel il mourra. Chaque traumatisme confère un nouveau trait au pilote.
+    textEng: Permanent trauma from getting knocked out in combat. Each pilot can only tolerate a set number of traumas before death. Each acquired trauma adds a new trait to the pilot.
+  unit_barrier_body__header:
+    id: 1
+    text: Cuirasse corporelle
+    textEng: Body Barrier
+  unit_barrier_shield__header:
+    id: 1
+    text: Cuirasse de bouclier
+    textEng: Shield Barrier
+  unit_charges_back__header:
+    id: 1
+    text: Paquetage
+    textEng: Backpack
+  unit_charges_back__text:
+    id: 1
+    text: Modifie le nombre de charges des armes du paquetage.
+    textEng: Modifies the charges available to backpack weapons.
+  unit_damage__header:
+    id: 1
+    text: Dégâts d'arme
+    textEng: Weapon damage
+  unit_damage__text:
+    id: 1
+    text: Modifie les dégâts infligés par les armes du mech.
+    textEng: Modified damage output of the piloted mech weapons.
+  unit_damage_backpack__header:
+    id: 1
+    text: Dégâts de paquetage
+    textEng: Backpack damage
+  unit_damage_backpack__text:
+    id: 1
+    text: Modifie les dégâts infligés par les armes du paquetage.
+    textEng: Modifies the damage dealt by backpack based weapons.
+  unit_damage_lr__header:
+    id: 1
+    text: Dégâts à longue portée
+    textEng: Long range damage
+  unit_damage_lr__text:
+    id: 1
+    text: Modifie la quantité de dégâts infligés par les armes cinétiques à longue portée du mech.
+    textEng: Modified damage output of long range ballistic weapons on the piloted mech.
+  unit_damage_ml__header:
+    id: 2
+    text: Dégâts des lance-missiles
+    textEng: Missile launcher damage
+  unit_damage_ml__text:
+    id: 2
+    text: Modifie la quantité de dégâts infligés par les lance-missiles du mech.
+    textEng: Modified damage output of the missile launcher weapons on the piloted mech.
+  unit_damage_sr__header:
+    id: 1
+    text: Dégâts à courte portée
+    textEng: Short range damage
+  unit_damage_sr__text:
+    id: 1
+    text: Modifie les dégâts infligés par les armes à courte portée du mech.
+    textEng: Modified damage output of the short range weapons on the piloted mech.
+  unit_duration_shield_act__header:
+    id: 1
+    text: Bouclier
+    textEng: Shield
+  unit_duration_shield_act__text:
+    id: 1
+    text: Modifie la durée des actions liées au bouclier au combat.
+    textEng: Modifies duration of shield actions in combat.
+  unit_hp_body__header:
+    id: 1
+    text: Blindage corporel
+    textEng: Body armor
+  unit_hp_body__text:
+    id: 1
+    text: Ce pilote contrôle le blindage corporel de son mech à la perfection, ce qui lui permet d'absorber davantage de dégâts.
+    textEng: This pilot carefully controls mech body armor, allowing it to absorb more damage.
+  unit_hp_shield__header:
+    id: 1
+    text: Bouclier blindé
+    textEng: Shield armor
+  unit_hp_shield__text:
+    id: 1
+    text: Ce pilote utilise son bouclier avec beaucoup d'efficacité, ce qui lui permet d'absorber davantage de dégâts avec la cuirasse.
+    textEng: This pilot can use the shield more effectively, allowing it to absorb more damage with barrier.
+  unit_mass__header:
+    id: 1
+    text: Masse de l'unité
+    textEng: Unit mass
+  unit_mass__text:
+    id: 1
+    text: Un changement de la masse de l'unité occasionné par l'un des traits du pilote.
+    textEng: A change in unit mass caused by the pilot traits.
+  unit_mass_back__header:
+    id: 1
+    text: Paquetage
+    textEng: Backpack
+  unit_mass_back__text:
+    id: 1
+    text: Modifie la masse du paquetage équipé sur le mech.
+    textEng: Modifies the mass of the backpack equipped on the mech.
+  unit_mass_shield__header:
+    id: 1
+    text: Bouclier
+    textEng: Shield
+  unit_mass_shield__text:
+    id: 1
+    text: Modifie la masse du bouclier équipé sur le mech.
+    textEng: Modifies the mass of the shield equipped on the mech.
+  unit_offset_damage__header:
+    id: 1
+    text: Puissance d'arme
+    textEng: Weapon boost
+  unit_offset_damage__text:
+    id: 1
+    text: Augmente les dégâts infligés par l'arme au moment du tir.
+    textEng: Increases weapon damage at the moment of firing.
+  unit_offset_overheat_damage__header:
+    id: 1
+    text: Dégâts de surchauffe
+    textEng: Unit overheat damage
+  unit_offset_overheat_damage__text:
+    id: 1
+    text: Ajustement des dégâts de surchauffe subis par l'unité.
+    textEng: Adjustment to the overheat damage taken by the piloted unit.
+  unit_offset_speed__header:
+    id: 1
+    text: Vitesse de l'unité
+    textEng: Unit speed
+  unit_offset_speed__text:
+    id: 1
+    text: Ajustement de la vitesse de l'unité en mètres par seconde.
+    textEng: Adjustment to the speed of the piloted unit, in meters per second.
+  unit_shield_resist_buildup__header:
+    id: 1
+    text: Résistance aux statuts du bouclier
+    textEng: Shield status resistance
+  unit_shield_resist_buildup__text:
+    id: 1
+    text: Détermine la résistance à l'accumulation d'effets de statut lorsque le bouclier du mech prend un coup. À 100 %, l'accumulation d'effets de statut est complètement annulée.
+    textEng: Determines the resistance to status effect buildup when the mech takes a hit to its shield. A value of 100% entirely negates status effect buildup on shield hits.

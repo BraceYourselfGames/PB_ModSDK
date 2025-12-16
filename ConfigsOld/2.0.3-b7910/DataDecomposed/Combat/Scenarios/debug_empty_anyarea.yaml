@@ -1,0 +1,225 @@
+hidden: true
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: false
+  time: 0
+  scalingUsed: false
+  loadImmediately: true
+  externalBranchUsed: false
+  externalLevelUsed: false
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - debug_range_empty
+entry:
+  squadUsed: false
+  squadSize: 4
+  squadSlotCustom: 
+generationInjection: 
+tags:
+- listed
+states: {}
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 0.2688679
+        b: 0.2688679
+        a: 0
+      textCurrentPrimaryKey: generic_unknown_header
+      textCurrentSecondaryKey: generic_unknown_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: false
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: test_mech_loadout_heaviest
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r3_rare
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: true
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: test_mech_loadout_average
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r3_rare
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: true
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: test_mech_loadout_lightest
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r3_rare
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: true
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        player: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      in_field_water: true
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

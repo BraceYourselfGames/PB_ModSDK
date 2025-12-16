@@ -1,0 +1,99 @@
+dataUI:
+  icon: s_icon_l32_cross
+  color:
+    r: 0.7176471
+    g: 0.254902
+    b: 0.4477124
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0.4166667
+    a: 1
+  sortingPriority: 175
+  hidden: false
+  irreversible: false
+  heating: true
+  offensive: true
+  modes:
+    Targeting_Locations: {}
+dataCore:
+  locking: false
+  trackType: Double
+  paintingType: Melee
+  heatType: DataConstant
+  durationType: Data
+  duration: 1.3333
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: mech
+      not: false
+    blueprints: 
+    parts:
+    - socket: equipment_left
+      not: true
+      requirement: Destroyed
+      tags: 
+    - socket: equipment_left
+      not: false
+      requirement: Tags
+      tags:
+        type_melee: true
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: equipment_left
+dataAI: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom:
+  flags: 
+  ints: 
+  floats:
+    distance_cancel_threshold: 4
+  vectors: 
+  strings: 
+functionsTimed:
+- timeNormalized: 0.25
+  repeat: 
+  functions:
+  - !CombatUnitScrambleGuidance
+    fxKey: fx_thruster_flash
+    offset:
+      x: 0
+      y: 2
+      z: 0

@@ -1,0 +1,173 @@
+classTag: mech
+classIcon: s_icon_m_unit_mech2
+asset: Content/Objects/Units/unit_mech_overhaul
+assetPreview: 
+audioEventOnMovementStart: 
+audioEventOnMovementStop: 
+audioSyncOnMovementElevation: 
+audioSyncOnMovementTilt: 
+movementSpeedBase: 16
+movementSpeedMin: 4
+movementSpeedMax: 28
+dashDistanceBase: 30
+dashDistanceMin: 12
+dashDistanceMax: 48
+rotationSpeed: 200
+secondaryRotationSpeedLimit: 200
+secondaryRotationSpeedK: 500
+hitTableKey: mech_table
+movementRestricted: false
+crashSpin: true
+crashPossible: true
+centerPoint:
+  x: 0
+  y: 4.5
+  z: 0
+bodyTagPinningExempted: false
+salvageExempted: false
+salvageBudgetBonus: 20
+heatMax: 100
+heatOverloadConstant: 0.4
+partPresetFilter:
+  back: false
+  part_energy: false
+  part_melee: false
+  part_ultraheavy: false
+  tank_part: false
+  tank_part_elevated: false
+  turret_part: false
+  type_incompatible: false
+sockets:
+  back:
+    presetDefault: 
+    presetFiltered: false
+    critical: false
+    stabilizing: false
+    ui:
+      blueprintSpriteName: mech_tpose_200_head_outline
+      textOverride: false
+    statOffsetsOnAbsence: 
+  core:
+    presetDefault: body_set_elbrus_medium_top
+    presetFiltered: true
+    critical: true
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_mech_upperbody
+      textOverride: false
+    statOffsetsOnAbsence:
+      heat_dissipation: 5
+      mass: 1
+      power: 5
+  equipment_left:
+    presetDefault: 
+    presetFiltered: true
+    critical: false
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_mech_weapon_long
+      textOverride: true
+    statOffsetsOnAbsence: 
+  equipment_right:
+    presetDefault: wpn_rifle_assault_02
+    presetFiltered: true
+    critical: false
+    stabilizing: false
+    ui: 
+    statOffsetsOnAbsence: 
+  optional_left:
+    presetDefault: body_set_elbrus_medium_arm
+    presetFiltered: true
+    critical: false
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_mech_arm
+      textOverride: false
+    statOffsetsOnAbsence:
+      heat_dissipation: 3
+      mass: 1
+  optional_right:
+    presetDefault: body_set_elbrus_medium_arm
+    presetFiltered: true
+    critical: false
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_mech_arm
+      textOverride: false
+    statOffsetsOnAbsence:
+      heat_dissipation: 3
+      mass: 1
+  secondary:
+    presetDefault: body_set_elbrus_medium_bottom
+    presetFiltered: true
+    critical: false
+    stabilizing: true
+    ui:
+      blueprintSpriteName: s_icon_l_unit_mech_lowerbody
+      textOverride: false
+    statOffsetsOnAbsence: 
+dependencies:
+  optional_left: equipment_left
+  optional_right: equipment_right
+destructionFragments:
+  key: prj_debris_01
+  count: 8
+  lifetime: 2
+  speed: 30
+  gravity: 0.66
+  damage: 0.1
+  impact: 10
+  scatterVertical: 0.2
+crashFunctions:
+- !CombatUnitEffectSpawn
+  position:
+    x: 0
+    y: 0
+    z: 0
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+  centered: false
+  asset:
+    key: fx_podejection_shockwave
+    scale:
+      x: 1
+      y: 1
+      z: 1
+destructionFunctions:
+- !CombatAreaOfEffect
+  offset:
+    x: 0
+    y: 0
+    z: 0
+  radius: 12
+  exponent: 2
+  dispersed: true
+  integrity:
+    normalized: true
+    leveled: false
+    f: 0.2
+  concussion: 
+  heat: 
+  stagger: 
+  statusBuildup: 
+  crash: 
+  targetCheck: 
+  functionsOnHit: 
+  impactUnitSelf: true
+  impactUnitAllies: true
+  impactUnitHostiles: true
+  impactUnitComposites: true
+  impactProjectiles: false
+  impactProps: true
+  fxDetonation: 
+  fxDetonationScale: 1
+  fxArea: fx_aoe_volume_01
+  fxHit: fx_aoe_hit_01
+  audioDetonation: 
+uncrewed: 
+weightClassOverride: 
+aiBehavior: Flanker
+aiCollisionRadius: 5
+aiCollisionHeight: 10

@@ -1,0 +1,34 @@
+parents:
+- key: unit_storage_l3
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 0
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 4
+  positionY: -1
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_units5
+unlock: 
+cost:
+  resources:
+    components_r2: 60
+    components_r3: 20
+    supplies: 3000
+effect:
+  stats:
+  - key: unit_slots
+    modifier: Offset
+    value: 3
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

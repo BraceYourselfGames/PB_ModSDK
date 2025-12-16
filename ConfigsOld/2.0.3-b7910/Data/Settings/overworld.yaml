@@ -1,0 +1,346 @@
+pointLimit: 3
+pointCountdownDisplayThreshold: 9
+pointSpawnRangeDefault:
+  x: 200
+  y: 300
+pointSeparationDefault: 50
+navGraphAssetPath: Content/Overworld/OverworldTerrainGraph
+navRestrictionOrigin:
+  x: -835
+  y: -630
+navRestrictionRadius: 72.5
+simulationStartTime: 6
+workshopStripsUnfusedSystems: true
+partsForWorkshopLevel:
+  core: 3
+  equipment_left: 3
+  equipment_right: 3
+  optional_right: 6
+  secondary: 3
+pilotRecruitCostsRookie:
+  supplies: -150
+pilotRecruitCostsPerLevel:
+  supplies: -100
+  unit_token: -1
+pilotRecruitPromotionHistory: 2
+pilotRecruitRefreshInterval: 24
+pilotRecruitCountBase:
+  min: 3
+  max: 4
+pilotRecruitCountLimited:
+  min: 2
+  max: 2
+destroyInRangeOnLiberation: true
+logWorkshopLeveling: false
+eventEvaluationCooldownDelta:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+entityEffectsOverTime: true
+entityEffectsOnEntry: true
+skyRenderTimeThreshold: 0.1
+debugMovementOnSelections: false
+zoomDefault: 0.15
+zoomDistanceDefault: 385
+cameraRotationYDefault: 57
+cameraRotationXDefault: 26
+deltaTimeProtection: true
+deltaTimeMin: 0.008333334
+deltaTimeMax: 0.06666667
+overworldTimeProgression: 0.5
+weatherChangeMultiplier: 0.25
+weatherLevels:
+  l025:
+    threshold: 0.25
+    visionMultiplierEnemy: 1
+    visionMultiplierPlayer: 1
+    icon: s_icon_l32_weather_clear
+  l050:
+    threshold: 0.5
+    visionMultiplierEnemy: 1
+    visionMultiplierPlayer: 1
+    icon: s_icon_l32_weather_cloud1
+  l066:
+    threshold: 0.66
+    visionMultiplierEnemy: 1
+    visionMultiplierPlayer: 1
+    icon: s_icon_l32_weather_rain1
+  l083:
+    threshold: 0.83
+    visionMultiplierEnemy: 0.725
+    visionMultiplierPlayer: 0.6
+    icon: s_icon_l32_weather_rain2
+  l100:
+    threshold: 1
+    visionMultiplierEnemy: 0.45
+    visionMultiplierPlayer: 0.2
+    icon: s_icon_l32_weather_rain3
+skyBestTimesOfDay:
+- 0
+- 1
+- 2
+- 3.5
+- 4
+- 5.35
+- 6
+- 6.5
+- 7
+- 7.5
+- 8
+- 10
+- 14
+- 15
+- 16
+- 17
+- 17.55
+- 18.35
+- 18.65
+- 18.8
+- 21
+- 22
+- 23
+viewBlipAnimationCurve:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 22.74195
+      w: 22.74195
+    w:
+      x: 0
+      y: 0.2743833
+    m: {}
+  - tv_tg:
+      x: 0.1248592
+      y: 1.624451
+      z: 7.12113
+      w: 7.12113
+    w:
+      x: 0.5458801
+      y: 0.2637175
+    m: {}
+  - tv_tg:
+      x: 0.3479117
+      y: 1.769457
+      z: -3.326046
+      w: -3.326046
+    w:
+      x: 0.3333333
+      y: 0.3046832
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+viewBlipAnimationDuration: 0.35
+viewFlareAnimationCurve:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 6.117429
+      w: 6.117429
+    w:
+      x: 0
+      y: 0.2521912
+    m: {}
+  - tv_tg:
+      x: 0.09393135
+      y: 0.6580182
+      z: 5.551433
+      w: 5.551433
+    w:
+      x: 0.26144
+      y: 0.2637175
+    m: {}
+  - tv_tg:
+      x: 0.3479117
+      y: 0.7216691
+      z: -3.326046
+      w: -3.326046
+    w:
+      x: 0.3333333
+      y: 0.3046832
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0.00116998
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+viewFlareAnimationDuration: 0.35
+pingDuration: 0.25
+movementSpeedMultiplier: 12
+movementSpeedMultiplierOverdrive: 3
+movementPredictedTimeMultiplier: 5
+movementPredictedTimeDisplay: true
+movementDistanceDisplayScale: 1
+directionDampSmoothTime: 0.02
+directionDampMaxSpeed: 500
+overdriveHeatBuildupSpeed: 0.5
+overdriveHeatDissipationSpeed: 0.15
+overdriveHeatDamageFrequency: 1
+overdriveHeatDamageLimit: 0.25
+overdriveHeatDamagePerHit: 0.1
+pathMovementWaypointApproachDistance: 1
+pathMovementLookaheadTime: 1
+pathVisualEnemy: true
+positionUpdatesUnconditional: true
+playerRecognitionDelay: 1
+visionClippingDisabled: true
+visionTweenRate: 2.25
+saveBeforeCombat: true
+saveAfterCombat: true
+autoSaveAtInterval: true
+autoSaveTimerSeconds: 600
+autoSaveSlotCount: 2
+aiMaxUnitResponseRange: 300
+aiRecoveryDuration: 4
+aiRecoveryDurationStatic: 1
+aiPatrolUpdateInterval: 5
+aiSearchMinRadius: 20
+aiSearchMaxRadius: 70
+aiInvestigationEnabled: true
+seed: 1524376141
+createNewSeed: true
+abilityRainSensorDuration: 5
+travelDurationRealtime: 3
+travelDurationSim: 12
+campCostBase: 1
+campCostIncreased: 2
+timeSkipDurationRealtime: 3
+timeSkipDurationCamp: 6
+timeSkipDurationResupply: 18
+timeSkipDurationRetreat: 24
+tutorialOnQuickStart: true
+campaignProgressTopRight: false
+liberationSpawnVariants:
+  s1_refresh:
+    comment:
+      comment: Used when refreshing missions in raid phases. 2 possible rolls, 1 spawn.
+    limit: 1
+    variants:
+    - escalationValue: 0
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 10
+    - escalationValue: 1
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 10
+        y: 12
+  s1_reset:
+    comment:
+      comment: Used when resetting missions in raid phases. 3 possible rolls, 3 spawns.
+    limit: 3
+    variants:
+    - escalationValue: 0
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 0
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 1
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 11
+        y: 12
+  s2_refresh:
+    comment:
+      comment: Used when refreshing missions in contest phases. 3 possible rolls, 2 spawns.
+    limit: 2
+    variants:
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 3
+      progressMemoryValue: 3
+      countdownOffset:
+        x: 11
+        y: 12
+  s2_reset:
+    comment:
+      comment: Used when resetting missions in contest phases. 3 possible rolls, 3 spawns.
+    limit: 3
+    variants:
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 8
+        y: 9
+    - escalationValue: 1
+      progressMemoryValue: 1
+      countdownOffset:
+        x: 9
+        y: 11
+    - escalationValue: 2
+      progressMemoryValue: 2
+      countdownOffset:
+        x: 11
+        y: 12
+threatEscalationStrings:
+- '[55]★★★[ff]★'
+- '[55]★★[ff]★★'
+- '[55]★[ff]★★★'
+- ★★★★
+threatComparisonLevels:
+- threshold: -35
+  textName: selection_difficulty_level_0
+  icon: s_icon_l32_star1
+- threshold: 0
+  textName: selection_difficulty_level_1
+  icon: s_icon_l32_star2
+- threshold: 35
+  textName: selection_difficulty_level_2
+  icon: s_icon_l32_star3
+- threshold: 75
+  textName: selection_difficulty_level_3
+  icon: s_icon_l32_star4
+- threshold: 150
+  textName: selection_difficulty_level_4
+  icon: s_icon_l32_star5
+- threshold: 5000
+  textName: selection_difficulty_level_5
+  icon: s_icon_l32_pilot_death

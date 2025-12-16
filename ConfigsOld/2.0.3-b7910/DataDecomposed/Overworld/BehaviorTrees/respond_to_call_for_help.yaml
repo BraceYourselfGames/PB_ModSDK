@@ -1,0 +1,13 @@
+behaviorTree:
+  m_treeRoot: !PhantomBrigade.AIOverworld.BT.Nodes.BTComposite_Sequence
+    m_dynamic: false
+    m_children:
+    - !BTDecorator_ForceResult
+      m_overrideResultSuccess: true
+      m_taskChild: !BTAction_MoveToDestination
+        destinationKey: player_position
+        allowRepath: false
+    - !BTAction_Delay
+      delayAmount: 0.1666667
+    - !BTAction_MessageFSM
+      msg: on_finish

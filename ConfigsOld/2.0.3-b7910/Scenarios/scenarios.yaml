@@ -1,0 +1,1265 @@
+scenarios:
+- nameInternal: scenario_01
+  name: Bjorn-Stromm R&D Facility
+  nameOfRegion: Strike Circuit
+  nameOfSubregion: Outskirts of Halfsund
+  nameOfLocation: R&D Center
+  nameOfAuthority: Bjorn Stromm Arnaments
+  descriptionOfIntel: >-
+    3-5 heat signatures on site close to LZ, expecting immediate engagement on arrival.
+
+
+    Cramped environment with low number of options for maneuvering.
+
+
+    Recommended loadouts: short range, heavy armor.
+  descriptionOfObjectives: Eliminate all security forces stationed at the research center.
+  area: industrial_scene4
+  areaBackground: square_80x80_facility1
+  previewImage: scenario_preview_industrial1
+  squadFriendlyMaxSize: 4
+  squadEnemyMaxSize: 4
+  timeOfDay: 7.88
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_CITY
+  introScenes:
+  - duration: 5
+    easing: easeInSine
+    positionFrom:
+      x: 123.9465
+      y: -10.67735
+      z: 54.73552
+    positionTo:
+      x: 42.56497
+      y: -15.44162
+      z: 70.36951
+    rotationFrom:
+      x: 341.6115
+      y: 151.8904
+      z: 0.0005308311
+    rotationTo:
+      x: 355.1906
+      y: 136.9362
+      z: 0.0005067915
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 6.488922
+      y: -21.60611
+      z: 154.628
+    positionTo:
+      x: 121.5125
+      y: -17.97802
+      z: 130.8986
+    rotationFrom:
+      x: 350.0339
+      y: 22.45928
+      z: 0.0005131776
+    rotationTo:
+      x: 341.4396
+      y: 19.88094
+      z: 0.0005329396
+  - duration: 5
+    easing: easeOutSine
+    positionFrom:
+      x: 127.7911
+      y: -9.649
+      z: 138.9772
+    positionTo:
+      x: -6.798893
+      y: 47.0543
+      z: 176.009
+    rotationFrom:
+      x: 348.8307
+      y: 158.3181
+      z: 0.0005215015
+    rotationTo:
+      x: 43.6628
+      y: 121.191
+      z: 0.0006821546
+- nameInternal: scenario_02
+  name: Erst Settlement
+  nameOfRegion: Ilheim Lowlands
+  nameOfSubregion: Trident Road
+  nameOfLocation: Erst Settlement
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    2-3 heat signatures on site close to LZ, expecting immediate engagement on arrival.
+
+
+    Cover is spread out and limited by small apartment complexes.
+
+
+    Recommended loadouts: medium range, light high mobility armor.
+  descriptionOfObjectives: "Eliminate all occupation forces on site. \n\nAvoid damaging the structures as much as possible."
+  area: city_destruction_test1
+  areaBackground: square_33x33_city1
+  previewImage: scenario_preview_city2
+  squadFriendlyMaxSize: 1
+  squadEnemyMaxSize: 1
+  timeOfDay: 7.88
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_SETTLEMENT
+  introScenes:
+  - duration: 5
+    easing: easeInSine
+    positionFrom:
+      x: 18.39672
+      y: -1.298866
+      z: 45.9917
+    positionTo:
+      x: 39.62209
+      y: -19.1574
+      z: 5.709059
+    rotationFrom:
+      x: 350.3746
+      y: 327.8248
+      z: 6.473086E-05
+    rotationTo:
+      x: 341.9521
+      y: 339.5131
+      z: 7.902002E-05
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 79.77615
+      y: -13.70785
+      z: 88.50237
+    positionTo:
+      x: 46.89355
+      y: -1.627087
+      z: 5.303728
+    rotationFrom:
+      x: 21.48623
+      y: 16.70888
+      z: 7.89082E-05
+    rotationTo:
+      x: 17.18904
+      y: 144.765
+      z: 8.981588E-05
+  - duration: 5
+    easing: easeOutSine
+    positionFrom:
+      x: 23.36133
+      y: -18.64599
+      z: 2.334806
+    positionTo:
+      x: 118.6521
+      y: 12.10534
+      z: -24.37477
+    rotationFrom:
+      x: 330.4357
+      y: 116.8509
+      z: 9.030463E-05
+    rotationTo:
+      x: 14.26693
+      y: 314.0736
+      z: 7.091596E-05
+- nameInternal: scenario_03
+  name: Ilheim Logistic Center
+  nameOfRegion: Ilheim Lowlands
+  nameOfSubregion: Forst Valley
+  nameOfLocation: Logistic Center
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    5-6 heat signatures spread around the site at significant distance from projected LZ.
+
+
+    Cover is spread out and limited to low number of buildings around the station.
+
+
+    Recommended loadouts: long range, light high mobility armor.
+  descriptionOfObjectives: "Eliminate all occupation forces on site. \n\nAvoid damaging the structures as much as possible."
+  area: rail_test1
+  areaBackground: square_65x65_cliffside
+  previewImage: scenario_preview_rail1
+  squadFriendlyMaxSize: 3
+  squadEnemyMaxSize: 3
+  timeOfDay: 7.1
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_FOREST
+  introScenes:
+  - duration: 5
+    easing: easeInCubic
+    positionFrom:
+      x: 460.7326
+      y: -17.1825
+      z: 97.30036
+    positionTo:
+      x: 64.01283
+      y: -11.99744
+      z: 94.14178
+    rotationFrom:
+      x: 349.6899
+      y: 93.313
+      z: 0.0005102578
+    rotationTo:
+      x: 0.6907035
+      y: 89.87533
+      z: 0.0005009347
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 56.12701
+      y: -12.7182
+      z: 91.39525
+    positionTo:
+      x: 133.95
+      y: -12.6136
+      z: -22.73621
+    rotationFrom:
+      x: 359.6594
+      y: 58.83165
+      z: 0.0005141542
+    rotationTo:
+      x: 2.065835
+      y: 13.79719
+      z: 0.00051484
+  - duration: 5
+    easing: easeOutCubic
+    positionFrom:
+      x: 216.585
+      y: -6.261378
+      z: 44.83041
+    positionTo:
+      x: 229.117
+      y: 27.34132
+      z: 115.3624
+    rotationFrom:
+      x: 358.8
+      y: 280.1185
+      z: 0.0005166997
+    rotationTo:
+      x: 33.86522
+      y: 317.6582
+      z: 0.0006076711
+- nameInternal: scenario_04
+  name: Undarlegt Forest
+  nameOfRegion: Ilheim Lowlands
+  nameOfSubregion: Forst Valley
+  nameOfLocation: Undarlegt Forest
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    2 heat signatures detected close to LZ.
+
+
+    Dense vegetation might provide some cover at initial stages of engagement. Other cover very limited.
+
+
+    Recommended loadouts: short range, heavy armor.
+  descriptionOfObjectives: Eliminate all occupation forces on site.
+  area: forest_test3
+  areaBackground: square_33x33_wilderness1
+  previewImage: scenario_preview_forest1
+  squadFriendlyMaxSize: 2
+  squadEnemyMaxSize: 2
+  timeOfDay: 16
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_FOREST
+  introScenes:
+  - duration: 5
+    easing: easeInCubic
+    positionFrom:
+      x: -4.436965
+      y: 9.553938
+      z: -240.5237
+    positionTo:
+      x: 271.9964
+      y: 3.705261
+      z: -231.2552
+    rotationFrom:
+      x: 343.3322
+      y: 1.389481
+      z: 0.0006021301
+    rotationTo:
+      x: 348.4888
+      y: 327.6996
+      z: 0.0005913943
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 259.9841
+      y: 3.686954
+      z: -8.734623
+    positionTo:
+      x: 73.71722
+      y: -5.167773
+      z: 133.6946
+    rotationFrom:
+      x: 350.3795
+      y: 243.3029
+      z: 0.0005849506
+    rotationTo:
+      x: 359.3177
+      y: 194.1433
+      z: 0.0005730227
+  - duration: 5
+    easing: easeOutSine
+    positionFrom:
+      x: -11.23264
+      y: -3.567667
+      z: 91.96036
+    positionTo:
+      x: 45.71148
+      y: 1.157943
+      z: -1.513741
+    rotationFrom:
+      x: 0.3489964
+      y: 106.3088
+      z: 0.0005694509
+    rotationTo:
+      x: 7.224536
+      y: 18.64632
+      z: 0.0005940333
+- nameInternal: scenario_05
+  name: Capstone Forest
+  nameOfRegion: Strike Circuit
+  nameOfSubregion: Trent Valley
+  nameOfLocation: Capstone Forest
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    4 heat signatures detected patrolling the area.
+
+
+    Cover is spread out and limited.
+
+
+    Recommended loadouts: long range, light high mobility armor.
+  descriptionOfObjectives: Eliminate all occupation forces on site.
+  area: forest_scene1
+  areaBackground: square_65x65_cliffside2
+  previewImage: scenario_preview_forest3
+  squadFriendlyMaxSize: 3
+  squadEnemyMaxSize: 3
+  timeOfDay: 7.88
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_FOREST
+  introScenes: []
+- nameInternal: scenario_06
+  name: Helfur Fuel Plant
+  nameOfRegion: Ilheim Lowlands
+  nameOfSubregion: Trident Road
+  nameOfLocation: Olsen Fuel Plant
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    2-3 heat signatures on site close to LZ, expecting immediate engagement on arrival.
+
+
+    Cover is very limited.
+
+
+    Recommended loadouts: medium range, light high mobility armor.
+  descriptionOfObjectives: "Eliminate all occupation forces on site. \n\nAvoid damaging the structures as much as possible."
+  area: city_tower_test2
+  areaBackground: square_33x33_city2
+  previewImage: scenario_preview_plant1
+  squadFriendlyMaxSize: 2
+  squadEnemyMaxSize: 2
+  timeOfDay: 7.88
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_FOREST
+  introScenes:
+  - duration: 5
+    easing: easeInSine
+    positionFrom:
+      x: 122.5811
+      y: -50.0623
+      z: 129.0829
+    positionTo:
+      x: 94.67042
+      y: -49.15572
+      z: 45.58086
+    rotationFrom: &o0
+      x: 343.671
+      y: 286.4681
+      z: 7.29521E-05
+    rotationTo: *o0
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 81.43194
+      y: -50.3177
+      z: 33.26942
+    positionTo:
+      x: -23.73273
+      y: -47.77001
+      z: 5.590994
+    rotationFrom:
+      x: 2.062943
+      y: 39.39796
+      z: 7.507401E-05
+    rotationTo:
+      x: 351.9216
+      y: 46.44531
+      z: 7.674744E-05
+  - duration: 5
+    easing: easeOutSine
+    positionFrom:
+      x: -36.31329
+      y: -34.01471
+      z: 77.21593
+    positionTo:
+      x: 132.3223
+      y: -10.50895
+      z: 193.1281
+    rotationFrom:
+      x: 3.438023
+      y: 143.2179
+      z: 8.25377E-05
+    rotationTo:
+      x: 7.21955
+      y: 213.8636
+      z: 7.809913E-05
+- nameInternal: scenario_07
+  name: Telmur Settlement
+  nameOfRegion: Ilheim Lowlands
+  nameOfSubregion: Forst Valley
+  nameOfLocation: Telmur Settlement
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    3 heat signatures spread around the site at significant distance from projected LZ.
+
+
+    Cover is spread out and limited to small civilian structures.
+
+
+    Recommended loadouts: long range, light high mobility armor.
+  descriptionOfObjectives: "Eliminate all occupation forces on site. \n\nAvoid damaging the structures as much as possible."
+  area: village_scene2
+  areaBackground: square_65x65_city3
+  previewImage: scenario_preview_forest3
+  squadFriendlyMaxSize: 2
+  squadEnemyMaxSize: 2
+  timeOfDay: 7.1
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -2
+  ambience: AMBIENCE_FOREST
+  introScenes:
+  - duration: 5
+    easing: easeInCubic
+    positionFrom:
+      x: 62.99982
+      y: -19.29087
+      z: 82.52656
+    positionTo:
+      x: 55.55791
+      y: -12.01845
+      z: 86.78085
+    rotationFrom:
+      x: 339.7182
+      y: 246.1784
+      z: -0.0001583761
+    rotationTo:
+      x: 10.65793
+      y: 109.6997
+      z: -0.0001455174
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 119.3752
+      y: -6.140539
+      z: 201.5345
+    positionTo:
+      x: 137.9469
+      y: -12.17022
+      z: 82.62383
+    rotationFrom:
+      x: 15.81457
+      y: 247.8971
+      z: -0.0001490767
+    rotationTo:
+      x: 5.845114
+      y: 240.8498
+      z: -0.0001448273
+  - duration: 5
+    easing: easeOutCubic
+    positionFrom:
+      x: -13.93543
+      y: -12.66012
+      z: 134.1318
+    positionTo:
+      x: 141.528
+      y: 24.16677
+      z: 196.9765
+    rotationFrom:
+      x: 3.094924
+      y: 146.4837
+      z: -0.0001428419
+    rotationTo:
+      x: 30.25316
+      y: 218.3325
+      z: -0.0001620949
+- nameInternal: scenario_08
+  name: Halland Fusion Plant
+  nameOfRegion: Strike Circuit
+  nameOfSubregion: Impact Site 7
+  nameOfLocation: Halland Fusion Plant
+  nameOfAuthority: Occupation Forces
+  descriptionOfIntel: >-
+    2 heat signatures spread around the site at significant distance from projected LZ.
+
+
+    Cover is spread out and limited to small structures.
+
+
+    Recommended loadouts: long range, light high mobility armor.
+  descriptionOfObjectives: 'Eliminate all occupation forces on site. '
+  area: plant_scene1
+  areaBackground: square_65x65_plant1
+  previewImage: scenario_preview_fusionplant1
+  squadFriendlyMaxSize: 2
+  squadEnemyMaxSize: 2
+  timeOfDay: 7.1
+  weather: Clear
+  weatherFogDensity: 0.0004
+  weatherFogFalloff: 0.02
+  weatherFogHeight: -60
+  ambience: AMBIENCE_CITY
+  introScenes:
+  - duration: 5
+    easing: easeInCubic
+    positionFrom:
+      x: -933.0717
+      y: 30.72212
+      z: -1313.992
+    positionTo:
+      x: 327.1951
+      y: -12.80297
+      z: -186.4146
+    rotationFrom:
+      x: 1.583029
+      y: 13.85181
+      z: -0.0002687344
+    rotationTo:
+      x: 2.958128
+      y: 9.210862
+      z: -0.0002678816
+  - duration: 5
+    easing: linear
+    positionFrom:
+      x: 377.3925
+      y: -1.051936
+      z: -133.1357
+    positionTo:
+      x: 315.4833
+      y: 2.456223
+      z: 278.318
+    rotationFrom:
+      x: 1.754978
+      y: 259.6508
+      z: -0.0002570531
+    rotationTo:
+      x: 7.599148
+      y: 229.3987
+      z: -0.0002547408
+  - duration: 5
+    easing: easeOutCubic
+    positionFrom:
+      x: -79.7952
+      y: -12.51599
+      z: -114.2217
+    positionTo:
+      x: 273.5278
+      y: 58.41161
+      z: 404.3303
+    rotationFrom:
+      x: 357.2861
+      y: 265.6671
+      z: -0.0002190251
+    rotationTo:
+      x: 11.72462
+      y: 204.9908
+      z: -0.0002225695
+unitsEnemy:
+- description:
+    nameInternal: unit_enemy_generated_01
+    name: Tango-8
+    loadout:
+      ArmorHead: armor_head_asgard_pv1
+      ArmorTorso: armor_torso_asgard_pv1
+      ArmorPelvis: armor_pelvis_helge_b12
+      ArmorLeftShoulder: armor_shoulder_asgard_pv1
+      ArmorRightShoulder: armor_shoulder_asgard_pv1
+      ArmorLeftForearm: armor_forearm_helge_b12
+      ArmorRightForearm: armor_forearm_helge_b12
+      ArmorLeftThigh: armor_thigh_asgard_pv1
+      ArmorRightThigh: armor_thigh_asgard_pv1
+      ArmorLeftLeg: armor_leg_asgard_pv1
+      ArmorRightLeg: armor_leg_asgard_pv1
+      ArmorLeftFoot: armor_foot_helge_b12
+      ArmorRightFoot: armor_foot_helge_b12
+      WeaponLeft: wpn_pistol_stingray
+      WeaponRight: wpn_rifle_orth
+      InternalHead: internal_head_c1
+      InternalReactor: internal_reactor_f1
+      InternalPod: internal_pod_p1
+      InternalLeftArm: internal_arm_c1l
+      InternalRightArm: internal_arm_c1l
+      InternalLeftLeg: internal_leg_ld1
+      InternalRightLeg: internal_leg_ld1
+      InternalMagazine: internal_magazine_m1
+      ArmorPod: armor_standard_pod
+    customization:
+      pattern: 4
+      blocks:
+        0: &o1 
+          c1: 101
+          c2: 1101
+          c3: 1501
+          m1: 0
+          m2: 0
+          m3: 0
+          s1: 1
+          s2: 1
+          s3: 1
+          p1: 2
+          p2: 2
+          p3: 1
+        1: *o1
+        2: *o1
+        3: &o2 
+          c1: 101
+          c2: 1101
+          c3: 1501
+          m1: 0
+          m2: 0
+          m3: 0
+          s1: 2
+          s2: 1
+          s3: 1
+          p1: 2
+          p2: 2
+          p3: 1
+        4: *o1
+        5: *o2
+        6: *o1
+        7: *o1
+        8: *o1
+        9: *o1
+        10: *o1
+        11: *o1
+        12: *o1
+        13: *o1
+        14: *o1
+        15: *o1
+        16: *o1
+        17: *o1
+        18: *o1
+        19: *o1
+        20: *o1
+        21: *o1
+        22: *o1
+        23: *o1
+        24: *o1
+        25: *o1
+        26: *o1
+        27: *o1
+        28: *o2
+        29: *o1
+        50: *o1
+  unitData:
+    dataParameters: []
+  partData:
+    CorePrimary: 
+      status: Functional
+    CoreSecondary: 
+      status: Functional
+    LeftOptional: 
+      status: Functional
+    RightOptional: 
+      status: Functional
+  subsystemData:
+    ArmorHead: 
+      integrity: 100
+      status: Functional
+    ArmorTorso: 
+      integrity: 100
+      status: Functional
+    ArmorPelvis: 
+      integrity: 100
+      status: Functional
+    ArmorLeftShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorRightShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorLeftForearm: 
+      integrity: 100
+      status: Functional
+    ArmorRightForearm: 
+      integrity: 100
+      status: Functional
+    ArmorLeftThigh: 
+      integrity: 100
+      status: Functional
+    ArmorRightThigh: 
+      integrity: 100
+      status: Functional
+    ArmorLeftLeg: 
+      integrity: 100
+      status: Functional
+    ArmorRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorLeftFoot: 
+      integrity: 100
+      status: Functional
+    ArmorRightFoot: 
+      integrity: 100
+      status: Functional
+    WeaponLeft: 
+      integrity: 100
+      status: Functional
+    WeaponRight: 
+      integrity: 100
+      status: Functional
+    InternalHead: 
+      integrity: 100
+      status: Functional
+    InternalReactor: 
+      integrity: 100
+      status: Functional
+    InternalPod: 
+      integrity: 75
+      status: Functional
+    InternalLeftArm: 
+      integrity: 100
+      status: Functional
+    InternalRightArm: 
+      integrity: 100
+      status: Functional
+    InternalLeftLeg: 
+      integrity: 100
+      status: Functional
+    InternalRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorPod: 
+      integrity: 100
+      status: Functional
+    InternalMagazine: 
+      integrity: 100
+      status: Functional
+  weaponData:
+    WeaponLeft: 
+      clip:
+        current: 5
+    WeaponRight: 
+      clip:
+        current: 5
+- description:
+    nameInternal: unit_enemy_generated_02
+    name: Jackal
+    loadout:
+      ArmorHead: armor_head_asgard_pv1
+      ArmorTorso: armor_torso_asgard_pv1
+      ArmorPelvis: armor_pelvis_helge_b12
+      ArmorLeftShoulder: armor_shoulder_asgard_pv1
+      ArmorRightShoulder: armor_shoulder_asgard_pv1
+      ArmorLeftForearm: armor_forearm_asgard_pv1
+      ArmorRightForearm: armor_forearm_asgard_pv1
+      ArmorLeftThigh: armor_thigh_asgard_pv1
+      ArmorRightThigh: armor_thigh_asgard_pv1
+      ArmorLeftLeg: armor_leg_asgard_pv1
+      ArmorRightLeg: armor_leg_asgard_pv1
+      ArmorLeftFoot: armor_foot_helge_b12
+      ArmorRightFoot: armor_foot_helge_b12
+      WeaponLeft: wpn_smg_ingrid
+      WeaponRight: wpn_smg_ingrid
+      InternalHead: internal_head_c1
+      InternalReactor: internal_reactor_f1
+      InternalPod: internal_pod_p1
+      InternalLeftArm: internal_arm_c1l
+      InternalRightArm: internal_arm_c1l
+      InternalLeftLeg: internal_leg_ld1
+      InternalRightLeg: internal_leg_ld1
+      InternalMagazine: internal_magazine_m1
+      ArmorPod: armor_standard_pod
+    customization:
+      pattern: 2
+      blocks:
+        0: &o3 
+          c1: 100
+          c2: 1101
+          c3: 1101
+          m1: 0
+          m2: 0
+          m3: 1
+          s1: 0
+          s2: 1
+          s3: 1
+          p1: 2
+          p2: 0
+          p3: 0
+        1: *o3
+        2: *o3
+        3: *o3
+        4: *o3
+        5: *o3
+        6: *o3
+        7: *o3
+        8: *o3
+        9: *o3
+        10: *o3
+        11: *o3
+        12: *o3
+        13: *o3
+        14: *o3
+        15: *o3
+        16: *o3
+        17: *o3
+        18: *o3
+        19: *o3
+        20: *o3
+        21: *o3
+        22: *o3
+        23: *o3
+        24: *o3
+        25: *o3
+        26: *o3
+        27: *o3
+        28: *o3
+        29: *o3
+        50: *o3
+  unitData:
+    dataParameters: []
+  partData:
+    CorePrimary: 
+      status: Functional
+    CoreSecondary: 
+      status: Functional
+    LeftOptional: 
+      status: Functional
+    RightOptional: 
+      status: Functional
+  subsystemData:
+    ArmorHead: 
+      integrity: 100
+      status: Functional
+    ArmorTorso: 
+      integrity: 100
+      status: Functional
+    ArmorPelvis: 
+      integrity: 100
+      status: Functional
+    ArmorLeftShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorRightShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorLeftForearm: 
+      integrity: 100
+      status: Functional
+    ArmorRightForearm: 
+      integrity: 100
+      status: Functional
+    ArmorLeftThigh: 
+      integrity: 100
+      status: Functional
+    ArmorRightThigh: 
+      integrity: 100
+      status: Functional
+    ArmorLeftLeg: 
+      integrity: 100
+      status: Functional
+    ArmorRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorLeftFoot: 
+      integrity: 100
+      status: Functional
+    ArmorRightFoot: 
+      integrity: 100
+      status: Functional
+    WeaponLeft: 
+      integrity: 100
+      status: Functional
+    WeaponRight: 
+      integrity: 100
+      status: Functional
+    InternalHead: 
+      integrity: 100
+      status: Functional
+    InternalReactor: 
+      integrity: 100
+      status: Functional
+    InternalPod: 
+      integrity: 75
+      status: Functional
+    InternalLeftArm: 
+      integrity: 100
+      status: Functional
+    InternalRightArm: 
+      integrity: 100
+      status: Functional
+    InternalLeftLeg: 
+      integrity: 100
+      status: Functional
+    InternalRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorPod: 
+      integrity: 100
+      status: Functional
+    InternalMagazine: 
+      integrity: 100
+      status: Functional
+  weaponData:
+    WeaponLeft: 
+      clip:
+        current: 3
+    WeaponRight: 
+      clip:
+        current: 3
+- description:
+    nameInternal: unit_enemy_generated_03
+    name: Longsword
+    loadout:
+      ArmorHead: armor_head_halvard_mk2
+      ArmorTorso: armor_torso_helge_b12
+      ArmorPelvis: armor_pelvis_helge_b12
+      ArmorLeftShoulder: armor_shoulder_asgard_pv1
+      ArmorRightShoulder: armor_shoulder_asgard_pv1
+      ArmorLeftForearm: armor_forearm_asgard_pv1
+      ArmorRightForearm: armor_forearm_asgard_pv1
+      ArmorLeftThigh: armor_thigh_asgard_pv1
+      ArmorRightThigh: armor_thigh_asgard_pv1
+      ArmorLeftLeg: armor_leg_asgard_pv1
+      ArmorRightLeg: armor_leg_asgard_pv1
+      ArmorLeftFoot: armor_foot_helge_b12
+      ArmorRightFoot: armor_foot_helge_b12
+      WeaponLeft: wpn_pistol_stingray
+      WeaponRight: wpn_shotgun_cleaver
+      InternalHead: internal_head_c1
+      InternalReactor: internal_reactor_f1
+      InternalPod: internal_pod_p1
+      InternalLeftArm: internal_arm_c1l
+      InternalRightArm: internal_arm_c1l
+      InternalLeftLeg: internal_leg_ld1
+      InternalRightLeg: internal_leg_ld1
+      InternalMagazine: internal_magazine_m1
+      ArmorPod: armor_standard_pod
+    customization:
+      pattern: 4
+      blocks:
+        0: &o4 
+          c1: 1100
+          c2: 102
+          c3: 1601
+          m1: 0
+          m2: 0
+          m3: 0
+          s1: 1
+          s2: 1
+          s3: 1
+          p1: 2
+          p2: 0
+          p3: 0
+        1: *o4
+        2: *o4
+        3: *o4
+        4: *o4
+        5: *o4
+        6: *o4
+        7: *o4
+        8: *o4
+        9: *o4
+        10: *o4
+        11: *o4
+        12: *o4
+        13: *o4
+        14: *o4
+        15: *o4
+        16: *o4
+        17: *o4
+        18: *o4
+        19: *o4
+        20: *o4
+        21: *o4
+        22: *o4
+        23: *o4
+        24: *o4
+        25: *o4
+        26: *o4
+        27: *o4
+        28: *o4
+        29: *o4
+        50: *o4
+  unitData:
+    dataParameters: []
+  partData:
+    CorePrimary: 
+      status: Functional
+    CoreSecondary: 
+      status: Functional
+    LeftOptional: 
+      status: Functional
+    RightOptional: 
+      status: Functional
+  subsystemData:
+    ArmorHead: 
+      integrity: 100
+      status: Functional
+    ArmorTorso: 
+      integrity: 100
+      status: Functional
+    ArmorPelvis: 
+      integrity: 100
+      status: Functional
+    ArmorLeftShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorRightShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorLeftForearm: 
+      integrity: 100
+      status: Functional
+    ArmorRightForearm: 
+      integrity: 100
+      status: Functional
+    ArmorLeftThigh: 
+      integrity: 100
+      status: Functional
+    ArmorRightThigh: 
+      integrity: 100
+      status: Functional
+    ArmorLeftLeg: 
+      integrity: 100
+      status: Functional
+    ArmorRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorLeftFoot: 
+      integrity: 100
+      status: Functional
+    ArmorRightFoot: 
+      integrity: 100
+      status: Functional
+    WeaponLeft: 
+      integrity: 100
+      status: Functional
+    WeaponRight: 
+      integrity: 100
+      status: Functional
+    InternalHead: 
+      integrity: 100
+      status: Functional
+    InternalReactor: 
+      integrity: 100
+      status: Functional
+    InternalPod: 
+      integrity: 75
+      status: Functional
+    InternalLeftArm: 
+      integrity: 100
+      status: Functional
+    InternalRightArm: 
+      integrity: 100
+      status: Functional
+    InternalLeftLeg: 
+      integrity: 100
+      status: Functional
+    InternalRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorPod: 
+      integrity: 100
+      status: Functional
+    InternalMagazine: 
+      integrity: 100
+      status: Functional
+  weaponData:
+    WeaponLeft: 
+      clip:
+        current: 5
+    WeaponRight: 
+      clip:
+        current: 3
+- description:
+    nameInternal: unit_enemy_generated_04
+    name: Tester
+    loadout:
+      ArmorHead: armor_head_helge_b12
+      ArmorTorso: armor_torso_helge_b12
+      ArmorPelvis: armor_pelvis_helge_b12
+      ArmorLeftShoulder: armor_shoulder_helge_b12
+      ArmorRightShoulder: armor_shoulder_helge_b12
+      ArmorLeftForearm: armor_forearm_helge_b12
+      ArmorRightForearm: armor_forearm_helge_b12
+      ArmorLeftThigh: armor_thigh_helge_b12
+      ArmorRightThigh: armor_thigh_helge_b12
+      ArmorLeftLeg: armor_leg_helge_b12
+      ArmorRightLeg: armor_leg_helge_b12
+      ArmorLeftFoot: armor_foot_helge_b12
+      ArmorRightFoot: armor_foot_helge_b12
+      WeaponLeft: wpn_pistol_stingray
+      WeaponRight: wpn_shotgun_cleaver
+      InternalHead: internal_head_c1
+      InternalReactor: internal_reactor_f1
+      InternalPod: internal_pod_p1
+      InternalLeftArm: internal_arm_c1l
+      InternalRightArm: internal_arm_c1l
+      InternalLeftLeg: internal_leg_ld1
+      InternalRightLeg: internal_leg_ld1
+      InternalMagazine: internal_magazine_m1
+      ArmorPod: armor_standard_pod
+    customization:
+      pattern: 1
+      blocks:
+        0: &o5 
+          c1: 101
+          c2: 100
+          c3: 102
+          m1: 0
+          m2: 0
+          m3: 0
+          s1: 1
+          s2: 1
+          s3: 1
+          p1: 0
+          p2: 0
+          p3: 0
+        1: *o5
+        2: *o5
+        3: *o5
+        4: *o5
+        5: *o5
+        6: *o5
+        7: *o5
+        8: *o5
+        9: *o5
+        10: *o5
+        11: *o5
+        12: *o5
+        13: *o5
+        14: *o5
+        15: *o5
+        16: *o5
+        17: *o5
+        18: *o5
+        19: *o5
+        20: *o5
+        21: *o5
+        22: *o5
+        23: *o5
+        24: *o5
+        25: *o5
+        26: *o5
+        27: *o5
+        28: *o5
+        29: *o5
+        50: *o5
+  unitData:
+    dataParameters: []
+  partData:
+    CorePrimary: 
+      status: Functional
+    CoreSecondary: 
+      status: Functional
+    LeftOptional: 
+      status: Functional
+    RightOptional: 
+      status: Functional
+  subsystemData:
+    ArmorHead: 
+      integrity: 100
+      status: Functional
+    ArmorTorso: 
+      integrity: 100
+      status: Functional
+    ArmorPelvis: 
+      integrity: 100
+      status: Functional
+    ArmorLeftShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorRightShoulder: 
+      integrity: 100
+      status: Functional
+    ArmorLeftForearm: 
+      integrity: 100
+      status: Functional
+    ArmorRightForearm: 
+      integrity: 100
+      status: Functional
+    ArmorLeftThigh: 
+      integrity: 100
+      status: Functional
+    ArmorRightThigh: 
+      integrity: 100
+      status: Functional
+    ArmorLeftLeg: 
+      integrity: 100
+      status: Functional
+    ArmorRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorLeftFoot: 
+      integrity: 100
+      status: Functional
+    ArmorRightFoot: 
+      integrity: 100
+      status: Functional
+    WeaponLeft: 
+      integrity: 100
+      status: Functional
+    WeaponRight: 
+      integrity: 100
+      status: Functional
+    InternalHead: 
+      integrity: 100
+      status: Functional
+    InternalReactor: 
+      integrity: 100
+      status: Functional
+    InternalPod: 
+      integrity: 75
+      status: Functional
+    InternalLeftArm: 
+      integrity: 100
+      status: Functional
+    InternalRightArm: 
+      integrity: 100
+      status: Functional
+    InternalLeftLeg: 
+      integrity: 100
+      status: Functional
+    InternalRightLeg: 
+      integrity: 100
+      status: Functional
+    ArmorPod: 
+      integrity: 100
+      status: Functional
+    InternalMagazine: 
+      integrity: 100
+      status: Functional
+  weaponData:
+    WeaponLeft: 
+      clip:
+        current: 5
+    WeaponRight: 
+      clip:
+        current: 3

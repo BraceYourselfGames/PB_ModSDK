@@ -1,0 +1,99 @@
+cameraTelemetrySmoothing: 7.5
+heightMultiplierForListenerTakeoff: 0.02
+disableCombatCameraHeightSensor: false
+shadowDistanceOverworld: 200
+shadowDistanceCombat: 300
+shadowDistanceBase: 80
+shadowDistanceBasePerCamera: {}
+shadowOffsetOverworld: -60
+shadowOffsetCombat: -60
+shadowOffsetBase: -10
+mechMountedCameraPresets:
+  torso_back_left:
+    target: Torso
+    followMode: Orbital
+    FOV: 80
+    offset:
+      x: -2
+      y: 3
+      z: -3
+    movementDamping: 0.3
+    aimDamping: 1
+    orbitalAngle: 0
+  torso_back_right:
+    target: Torso
+    followMode: Orbital
+    FOV: 80
+    offset:
+      x: 2
+      y: 3
+      z: -3
+    movementDamping: 0.3
+    aimDamping: 1
+    orbitalAngle: 0
+  torso_front:
+    target: Torso
+    followMode: Orbital
+    FOV: 80
+    offset:
+      x: 0
+      y: 2
+      z: 5
+    movementDamping: 0.3
+    aimDamping: 1
+    orbitalAngle: 0
+  torso_front_left:
+    target: Torso
+    followMode: Orbital
+    FOV: 80
+    offset:
+      x: 2
+      y: 2
+      z: 5
+    movementDamping: 0.3
+    aimDamping: 1
+    orbitalAngle: 0
+  torso_front_low:
+    target: Torso
+    followMode: Orbital
+    FOV: 80
+    offset:
+      x: 2
+      y: -1
+      z: 5
+    movementDamping: 0.3
+    aimDamping: 1
+    orbitalAngle: 0
+  torso_front_right:
+    target: Torso
+    followMode: Orbital
+    FOV: 80
+    offset:
+      x: -2
+      y: 2
+      z: 5
+    movementDamping: 0.3
+    aimDamping: 1
+    orbitalAngle: 0
+  weapon_left:
+    target: WeaponLeft
+    followMode: Locked
+    FOV: 70
+    offset:
+      x: -2
+      y: 1
+      z: -2
+    movementDamping: 0
+    aimDamping: 0
+    orbitalAngle: 0
+  weapon_right:
+    target: WeaponRight
+    followMode: Locked
+    FOV: 70
+    offset:
+      x: 2
+      y: 1
+      z: -2
+    movementDamping: 0
+    aimDamping: 0
+    orbitalAngle: 0

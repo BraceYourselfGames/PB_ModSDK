@@ -1,0 +1,2157 @@
+timeLastSync: 63817554536
+entries:
+  briefing_deploy_blocked:
+    id: 1
+    text: Non disponibile
+    textEng: Blocked
+  briefing_deploy_incomplete:
+    id: 1
+    text: C'è almeno uno spazio occupato soltanto da un pilota o soltanto da un mech. Puoi schierare solo unità complete.
+    textEng: At least one slot has only a pilot or only a mech. Only complete units can be deployed.
+  briefing_deploy_issues_critical:
+    id: 1
+    text: Problemi critici rilevati nella squadra. Impossibile schierare l'unità fino alla loro risoluzione.
+    textEng: Critical issues detected in squad. Cannot deploy until resolved.
+  briefing_deploy_issues_note:
+    id: 1
+    text: Ci sono note disponibili per la squadra. Lo schieramento è comunque disponibile.
+    textEng: Hints available for squad. Does not block deployment.
+  briefing_deploy_issues_warning:
+    id: 1
+    text: Ci sono avvisi disponibili per la squadra. Lo schieramento è comunque disponibile, ma sconsigliato.
+    textEng: Warnings available for this squad. Does not block deployment, but highly recommended.
+  briefing_deploy_no_pilots:
+    id: 1
+    text: Nessun pilota selezionato per lo schieramento. Aggiungi un pilota ad almeno uno spazio per procedere.
+    textEng: No pilots selected for deployment. Add a pilot to at least one slot to proceed.
+  briefing_deploy_no_units:
+    id: 1
+    text: Nessuna unità selezionata per lo schieramento. Aggiungi un'unità ad almeno uno spazio per procedere.
+    textEng: No units selected for deployment. Add a unit to at least one slot to proceed.
+  briefing_deploy_ready:
+    id: 1
+    text: Pronto
+    textEng: Ready
+  briefing_deploy_slot_critical:
+    id: 1
+    text: Ci sono problemi critici da risolvere prima dello schieramento.
+    textEng: Critical issues that must be resolved before deployment.
+  briefing_deploy_slots_ready:
+    id: 1
+    text: Nessun problema critico impedisce lo schieramento.
+    textEng: No critical issues blocking deployment.
+  briefing_deploy_squad_status:
+    id: 1
+    text: Stato della squadra
+    textEng: Squad status
+  briefing_dialog_deploy_desc:
+    id: 1
+    text: Questo è un punto di non ritorno. Proseguendo, avvierai il combattimento.
+    textEng: This is a point of no return. Continuing will start combat.
+  briefing_dialog_deploy_header:
+    id: 1
+    text: Avvio combattimento
+    textEng: Starting combat
+  briefing_dialog_exit_desc:
+    id: 1
+    text: Vuoi davvero uscire da questo campo di battaglia?
+    textEng: Are you sure you want to disengage from this combat site?
+  briefing_dialog_exit_header:
+    id: 1
+    text: Conferma uscita
+    textEng: Confirm exit
+  briefing_dialog_exit_smoke_desc:
+    id: 1
+    text: Vuoi davvero usare questo fumogeno per fuggire?
+    textEng: Are you sure you want to use the smoke charge to escape?
+  briefing_exit_leave_desc:
+    id: 1
+    text: Il nemico non inseguirà la base mobile. Possiamo annullare lo schieramento.
+    textEng: The enemy here will not pursue the mobile base. We can cancel the deployment.
+  briefing_exit_leave_header:
+    id: 1
+    text: Vai via
+    textEng: Leave
+  briefing_exit_no_smoke_desc:
+    id: 1
+    text: Senza più fumogeni, non resta altro che combattere!
+    textEng: With no charges left, there is no choice but to fight!
+  briefing_exit_no_smoke_header:
+    id: 1
+    text: Fumogeni esauriti
+    textEng: No smoke charges
+  briefing_exit_smoke_desc:
+    id: 1
+    text: Stordisci il nemico per permetterci di fuggire. Sarà utilizzato un fumogeno.
+    textEng: Stun the enemy, allowing us to escape from this mobile enemy. One charge will be used.
+  briefing_info_enemy:
+    id: 1
+    text: Nemico
+    textEng: Enemy
+  briefing_info_incoming_header:
+    id: 1
+    text: Missione in arrivo
+    textEng: Incoming mission
+  briefing_info_level_prefix:
+    id: 1
+    text: L
+    textEng: L
+  briefing_info_prediction:
+    id: 1
+    text: Predizione per la squadra
+    textEng: Prediction for squad
+  briefing_info_threat_prefix:
+    id: 1
+    text: Minaccia
+    textEng: Threat
+  briefing_nav_button_cant_deploy:
+    id: 1
+    text: Schieramento impossibile
+    textEng: Can't deploy
+  briefing_nav_button_deploy:
+    id: 1
+    text: Schieramento
+    textEng: Deploy
+  briefing_nav_button_mission:
+    id: 1
+    text: Missione
+    textEng: Mission
+  briefing_nav_button_squad:
+    id: 1
+    text: Squadra
+    textEng: Squad
+  briefing_pilots_header:
+    id: 1
+    text: Piloti
+    textEng: Pilots
+  briefing_review_fatigue_header:
+    id: 2
+    text: Piloti affaticati
+    textEng: Fatigued pilots
+  briefing_review_fatigue_text:
+    id: 2
+    text: Questi piloti sono al massimo dell'affaticamento e perderanno gradualmente salute. Valuta di sostituirli o di fare una sosta di accampamento.
+    textEng: These pilots are at maximum fatigue and will continuously lose health. Consider a rest stop or swapping them for this mission.
+  briefing_review_frame_damage_header:
+    id: 2
+    text: Mech danneggiati
+    textEng: Damaged mechs
+  briefing_review_frame_damage_text:
+    id: 2
+    text: Questi mech dureranno meno in un combattimento prolungato. Valuta di fare una sosta di accampamento per ripararli.
+    textEng: These mechs will not last as long in protracted combat. Consider a rest stop to repair them.
+  briefing_review_frame_loss_header:
+    id: 2
+    text: Scheletri compromessi
+    textEng: Compromised mech frames
+  briefing_review_frame_loss_text:
+    id: 2
+    text: Questi mech sono stati distrutti troppe volte. Se succederà di nuovo, andranno persi del tutto, insieme alle parti equipaggiate.
+    textEng: These mechs were destroyed too many times. They will be permanently lost along with every equipped part if destroyed again.
+  briefing_review_header:
+    id: 2
+    text: 'Vuoi davvero schierare questa squadra? Questo è un punto di non ritorno. Prendi in considerazione questi avvisi:'
+    textEng: 'Are you certain you wish to deploy this squad? This is a point of no return. Consider the following:'
+  briefing_review_pilot_health_header:
+    id: 2
+    text: Piloti feriti
+    textEng: Injured pilots
+  briefing_review_pilot_health_text:
+    id: 2
+    text: A questi piloti manca più della metà della salute.
+    textEng: These pilots have less than half of their health remaining.
+  briefing_review_squad_size:
+    id: 2
+    text: Dimensione squadra
+    textEng: Squad size
+  briefing_review_squad_xp_hint:
+    id: 2
+    text: Con una squadra più piccola, i piloti riceveranno più esperienza.
+    textEng: Using a smaller squad will net your pilots more experience.
+  briefing_review_trauma_header:
+    id: 2
+    text: Traumi gravi
+    textEng: Severely traumatized
+  briefing_review_trauma_text:
+    id: 2
+    text: Questi piloti moriranno se esauriranno la salute. Valuta di non schierarli.
+    textEng: These pilots will die if their health is depleted. Carefully weigh their deployment.
+  briefing_review_weapon_removal_header:
+    id: 2
+    text: Equipaggiamento non valido
+    textEng: Invalid loadout detected
+  briefing_review_weapon_removal_text:
+    id: 2
+    text: C'è almeno un mech a cui manca un'arma perché privo di un braccio. Potrà essere schierato comunque, ma non potrà usare l'arma che corrisponde al braccio mancante. Controlla l'equipaggiamento della squadra.
+    textEng: At least one mech had a weapon removed due to a missing arm. While deploying without an arm is possible, a weapon can't be used without a corresponding arm part. Carefully review the loadouts in your squad.
+  briefing_scenario_header:
+    id: 2
+    text: Briefing della missione
+    textEng: Mission briefing
+  briefing_scenario_subtitle:
+    id: 2
+    text: Area, guarnigione e obiettivi
+    textEng: Location, garrison, objectives
+  briefing_squad_add_pilot:
+    id: 1
+    text: Nessun pilota
+    textEng: No pilot
+  briefing_squad_add_unit:
+    id: 1
+    text: Nessuna unità
+    textEng: No unit
+  briefing_squad_autofill_header:
+    id: 1
+    text: Riempi gli spazi
+    textEng: Fill slots
+  briefing_squad_autofill_text:
+    id: 1
+    text: La squadra sarà automaticamente formata con i piloti e le unità dotati dell'equipaggiamento del livello più alto e pronti a combattere. I mech e i piloti selezionati potrebbero non essere in sintonia ottimale, o potrebbero non essere la scelta migliore per la prossima missione. Valuta attentamente la tua squadra prima di schierarla.
+    textEng: The squad will be filled with combat ready pilots and mechs with the highest level and best condition. The selected mechs and pilots might not synergize or might not be the best fit for the upcoming mission. Carefully review your squad before deploying.
+  briefing_squad_edit_cant_desc:
+    id: 1
+    text: L'unità è danneggiata. Necessita di riparazioni prima di poter subire modifiche.
+    textEng: This unit is damaged. Must be repaired before making changes.
+  briefing_squad_edit_cant_header:
+    id: 1
+    text: Impossibile modificare l'unità
+    textEng: Can't edit unit
+  briefing_squad_edit_desc:
+    id: 1
+    text: Vai alla schermata di personalizzazione delle unità per modificare l'unità selezionata. Premi a lungo o fai doppio clic per confermare.
+    textEng: Move to unit customization screen to edit the selected unit. Long press or double click to confirm.
+  briefing_squad_edit_header:
+    id: 1
+    text: Modifica unità
+    textEng: Edit unit
+  briefing_squad_edit_pilot:
+    id: 2
+    text: Modifica pilota
+    textEng: Edit pilot
+  briefing_squad_header:
+    id: 2
+    text: Squadra
+    textEng: Squad
+  briefing_squad_issues_critical_desc:
+    id: 1
+    text: I seguenti problemi critici devono essere risolti prima che l'unità possa essere schierata.
+    textEng: The following critical issues must be resolved before unit can be deployed
+  briefing_squad_issues_critical_desc_pilot:
+    id: 1
+    text: Pilota non prontə al combattimento a causa dei seguenti problemi critici.
+    textEng: This pilot cannot participate in combat due to following critical issues
+  briefing_squad_issues_critical_header:
+    id: 1
+    text: Problemi critici
+    textEng: Critical issues
+  briefing_squad_issues_notes_desc:
+    id: 1
+    text: Unità pronta al combattimento. Note di bassa priorità.
+    textEng: This unit is combat ready. Low-priority notes
+  briefing_squad_issues_notes_desc_pilot:
+    id: 1
+    text: Pilota prontə al combattimento. Note di bassa priorità.
+    textEng: This pilot is combat ready. Low-priority notes
+  briefing_squad_issues_notes_header:
+    id: 1
+    text: Note
+    textEng: Notes
+  briefing_squad_issues_warning_desc:
+    id: 1
+    text: Unità pronta al combattimento, ma con avvisi da considerare.
+    textEng: This unit can be deployed, but there are some warnings to consider
+  briefing_squad_issues_warning_desc_pilot:
+    id: 1
+    text: Pilota prontə al combattimento, ma con avvisi da considerare.
+    textEng: This pilot is combat ready, but there are some warnings to consider
+  briefing_squad_issues_warning_header:
+    id: 1
+    text: Avvisi
+    textEng: Warnings
+  briefing_squad_pilot:
+    id: 1
+    text: Pilota
+    textEng: Pilot
+  briefing_squad_remove_pilot_header:
+    id: 1
+    text: Rimuovi pilota
+    textEng: Remove pilot
+  briefing_squad_remove_pilot_text:
+    id: 1
+    text: Rimuovi lə pilota dallo spazio attualmente selezionato. Premi a lungo o fai doppio clic per confermare.
+    textEng: Clear the pilot from the currently selected slot. Long press or double click to confirm.
+  briefing_squad_slots:
+    id: 2
+    text: Spazi riempiti
+    textEng: Slots filled
+  briefing_squad_subtitle:
+    id: 2
+    text: Unità e piloti schierati
+    textEng: Deployed units & pilots
+  briefing_squad_unit:
+    id: 1
+    text: Unità
+    textEng: Unit
+  briefing_units_empty_desc:
+    id: 1
+    text: Non ci sono unità disponibili nella base, oppure ogni unità è già stata aggiunta alla squadra.
+    textEng: The base has no units available or every unit is already added to the squad
+  briefing_units_empty_header:
+    id: 1
+    text: Nessuna unità
+    textEng: No units
+  briefing_units_header:
+    id: 1
+    text: Unità
+    textEng: Units
+  brieing_squad_remove_unit_header:
+    id: 1
+    text: Rimuovi unità
+    textEng: Remove unit
+  brieing_squad_remove_unit_text:
+    id: 1
+    text: Rimuovi l'unità dallo spazio attualmente selezionato. Premi a lungo o fai doppio clic per confermare.
+    textEng: Clear the unit from the currently selected slot. Long press or double click to confirm.
+  debriefing_group_desc_intact:
+    id: 1
+    text: I nostri droni hanno recuperato dell'equipaggiamento intatto durante il combattimento. Per impostazione predefinita, l'equipaggiamento intatto viene destinato al recupero gratuitamente.
+    textEng: Some equipment were retrieved intact by our drones during the fight. They are marked for recovery by default, at no salvage cost.
+  debriefing_group_destroyed:
+    id: 1
+    text: Distrutto
+    textEng: Destroyed
+  debriefing_group_intact:
+    id: 1
+    text: Intatto
+    textEng: Intact
+  debriefing_group_label_intact:
+    id: 1
+    text: Intatto
+    textEng: Intact
+  debriefing_group_label_packaged:
+    id: 1
+    text: Oggetti imballati
+    textEng: Packaged items
+  debriefing_group_label_quality:
+    id: 1
+    text: Livello / Qualità equipaggiamento
+    textEng: Level / Equipment quality
+  debriefing_group_salvageable_equipment:
+    id: 1
+    text: Equipaggiamento recuperabile
+    textEng: Salvageable equipment
+  debriefing_item_damaged_desc:
+    id: 1
+    text: Questo sottosistema presenta costi di recupero più alti a causa dei danni subiti.
+    textEng: This subsystem has increased salvage cost due to damage it sustained.
+  debriefing_item_damaged_name:
+    id: 1
+    text: Unità danneggiata
+    textEng: Damaged
+  debriefing_item_high_level:
+    id: 1
+    text: Livello superiore
+    textEng: Higher level
+  debriefing_item_high_quality:
+    id: 1
+    text: Qualità superiore
+    textEng: Higher quality
+  debriefing_item_intact_desc:
+    id: 1
+    text: Questo oggetto non è stato danneggiato in battaglia, e presenta quindi costi di recupero più bassi.
+    textEng: This item was not damaged in battle and so has a reduced salvage cost.
+  debriefing_item_intact_name:
+    id: 1
+    text: Intatto
+    textEng: Intact
+  debriefing_item_lost_desc:
+    id: 1
+    text: Questo oggetto apparteneva a uno dei tuoi mech, ma si è staccato durante la battaglia. Andrà perso se non lo recuperi!
+    textEng: This item belonged to one of your mechs, but was detached in battle. It will be lost if not retrieved!
+  debriefing_item_lost_name:
+    id: 1
+    text: Perso
+    textEng: Lost
+  debriefing_item_new:
+    id: 1
+    text: Novità
+    textEng: New
+  debriefing_outcome_allies_lost_desc:
+    id: 1
+    text: Non siete riusciti a eliminare la squadra nemica. La tua ritirata le ha permesso di sopraffare la Forza di Liberazione del Fyrland. L'equilibrio nella provincia contesa pende in favore del nemico.
+    textEng: You have failed to eliminate the enemy squad. Our retreat allowed them to overwhelm Fyrland Freedom Forces. The balance in the contested province shifts in the enemy favor.
+  debriefing_outcome_allies_lost_header:
+    id: 1
+    text: Alleati persi
+    textEng: Allies lost
+  debriefing_outcome_allies_saved_desc:
+    id: 1
+    text: Siete riusciti ad allontanare il nemico dal campo di battaglia, salvando le unità alleate. Questo vi permetterà di mantenere più a lungo la contesa della provincia.
+    textEng: You have successfully driven the enemy away from this battle site, saving the allied units. This will let us contest the province longer.
+  debriefing_outcome_allies_saved_header:
+    id: 1
+    text: Alleati salvati
+    textEng: Allies saved
+  debriefing_outcome_escalation_drop_desc:
+    id: 1
+    text: Il nemico non ti considera più una minaccia e riduce quindi il livello di tensione nella provincia. Puoi ritirarti e fare rifornimento, oppure sfruttare la diminuzione del numero di pattuglie.
+    textEng: The enemy no longer considers you a threat and drops the escalation in this province. You can retreat and resupply to take advantage of reduced patrols.
+  debriefing_outcome_escalation_drop_desc_defeat:
+    id: 1
+    text: In seguito alla tua totale disfatta, il nemico non ti considera più una minaccia e azzera la tensione nella provincia. Ritirati fino a un punto di rifornimento per ottenere più unità e piloti.
+    textEng: Due to your total defeat, the enemy no longer considers you a threat and drops all escalation in this province. Retreat to a resupply point to acquire more units and pilots.
+  debriefing_outcome_escalation_drop_desc_losses:
+    id: 1
+    text: Il nemico ti considera ora una minaccia inferiore e riduce di un livello la tensione nella provincia. Puoi ritirarti e fare rifornimento, oppure sfruttare la diminuzione del numero di pattuglie.
+    textEng: The enemy now considers you less of a threat and drops the escalation in this province by a level. You can retreat and resupply to take advantage of reduced patrols.
+  debriefing_outcome_escalation_drop_header:
+    id: 1
+    text: Tensione ridotta
+    textEng: Escalation drops
+  debriefing_outcome_escalation_gain_desc:
+    id: 1
+    text: Il nemico è allarmato da questo attacco e aumenta il livello di tensione in questa provincia. Quando la tensione raggiunge determinate soglie, più unità vengono inviate in zona e i combattimenti si fanno più difficili. Puoi abbandonare la provincia per ridurre il livello di tensione.
+    textEng: The enemy is alarmed by this attack and increases the escalation level in this province. When escalation reaches certain thresholds, more units will be committed to this province and fights will get harder. You can leave the province to decrease the escalation level.
+  debriefing_outcome_escalation_gain_header:
+    id: 1
+    text: Tensione aumentata
+    textEng: Escalation gained
+  debriefing_outcome_homeguard_improve:
+    id: 1
+    text: Vincere su questo campo di battaglia era molto importante per la Forza di Liberazione del Fyrland.
+    textEng: Victory at this battle site was important for Fyrland Freedom Forces.
+  debriefing_outcome_homeguard_intact:
+    id: 1
+    text: Tutte le unità alleate sono uscite indenni dal combattimento.
+    textEng: All allied units survived the battle unscathed.
+  debriefing_outcome_reputation_gain_desc:
+    id: 1
+    text: Reputazione aumentata. Se disponi della miglioria Collegamento radio, potrai chiamare più unità in tuo aiuto.
+    textEng: Reputation increased. If you have the radio uplink upgrade, this can enable you to call more units for help.
+  debriefing_outcome_reputation_gain_header:
+    id: 1
+    text: Reputazione acquisita
+    textEng: Reputation gain
+  debriefing_outcome_weakened_desc:
+    id: 1
+    text: Hai eliminato una squadra nemica in una provincia contesa, indebolendo leggermente le forze degli invasori. Ti consigliamo di attaccare obiettivi critici se desideri velocizzare il processo e liberare la provincia più rapidamente.
+    textEng: You've taken out an enemy in a contested province, slightly weakening their forces. It's recommended to attack critical objectives if you'd like to speed up the process and liberate the province more quickly.
+  debriefing_outcome_weakened_desc_objective:
+    id: 1
+    text: Hai eliminato un obiettivo nemico, indebolendo significativamente la pressione ostile sulla provincia. Continua ad attaccare bersagli per liberarla!
+    textEng: You've successfully taken out an enemy objective, significantly weakening their hold on the province. Keep attacking objectives to liberate it!
+  debriefing_outcome_weakened_header:
+    id: 1
+    text: Nemico indebolito
+    textEng: Enemy weakened
+  debriefing_pilot_empty:
+    id: 2
+    text: Nessun evento degno di nota.
+    textEng: No notable events recorded
+  debriefing_pilot_header:
+    id: 2
+    text: Pilota
+    textEng: Pilot
+  debriefing_pilot_header2:
+    id: 2
+    text: Prestazioni della squadra
+    textEng: Squad performance
+  debriefing_rewards_empty:
+    id: 2
+    text: Nessuna ricompensa disponibile in questo luogo.
+    textEng: No rewards available at this location
+  debriefing_rewards_header:
+    id: 2
+    text: Ricompense
+    textEng: Rewards
+  debriefing_rewards_header2:
+    id: 2
+    text: Equipaggiamento e materiali presenti
+    textEng: Stored equipment & materials
+  debriefing_salvage_budget_header:
+    id: 1
+    text: Budget di recupero
+    textEng: Salvage budget
+  debriefing_salvage_budget_label:
+    id: 1
+    text: Budget
+    textEng: Budget
+  debriefing_salvage_budget_mission:
+    id: 1
+    text: Bonus missione
+    textEng: Mission bonus
+  debriefing_salvage_budget_text:
+    id: 1
+    text: La quantità di parti recuperabili dopo questo combattimento. Il valore dipende dal tipo di missione, dalle unità sconfitte e dai tratti dei piloti.
+    textEng: The amount of salvage you can retrieve after this fight. Depends on mission type, defeated units and pilot traits.
+  debriefing_salvage_button_abandon_header:
+    id: 1
+    text: Abbandona
+    textEng: Abandon
+  debriefing_salvage_button_abandon_text:
+    id: 1
+    text: Abbandona l'equipaggiamento sul campo di battaglia.
+    textEng: Leave the item on the battlefield.
+  debriefing_salvage_button_confirm:
+    id: 1
+    text: Conferma
+    textEng: Confirm
+  debriefing_salvage_button_continue:
+    id: 1
+    text: Continua
+    textEng: Continue
+  debriefing_salvage_button_dismantle_header:
+    id: 1
+    text: Rottama
+    textEng: Scrap
+  debriefing_salvage_button_dismantle_text:
+    id: 1
+    text: Rottama un oggetto e convertilo in risorse. L'operazione presenta costi inferiori rispetto al recupero completo.
+    textEng: Dismantle the item for resources. Lower salvage cost than recovery.
+  debriefing_salvage_button_max_supply:
+    id: 1
+    text: Risorse massime
+    textEng: Max supplies
+  debriefing_salvage_button_take_header:
+    id: 1
+    text: Recupera
+    textEng: Recover
+  debriefing_salvage_button_take_text:
+    id: 1
+    text: Raccogli l'equipaggiamento per utilizzarlo sui tuoi mech. Gli oggetti recuperati appariranno nel tuo inventario.
+    textEng: Collect the equipment to use on your mechs. Recovered items will appear in your inventory.
+  debriefing_salvage_dialog_start_desc:
+    id: 1
+    text: Vuoi procedere con il recupero degli oggetti selezionati?
+    textEng: Would you like to proceed with salvaging the selected items?
+  debriefing_salvage_dialog_start_header:
+    id: 1
+    text: Recupero avviato
+    textEng: Starting salvage
+  debriefing_salvage_empty:
+    id: 2
+    text: Nessuna unità con equipaggiamento recuperabile.
+    textEng: No units with salvageable equipment detected
+  debriefing_salvage_finish:
+    id: 1
+    text: Conferma recupero
+    textEng: Confirm salvage
+  debriefing_salvage_finish_blocked:
+    id: 1
+    text: Budget insufficiente
+    textEng: Insufficient budget
+  debriefing_salvage_frame_content:
+    id: 1
+    text: Recupera lo scheletro di un mech per aggiungere una nuova unità personalizzabile alla base. Estrarre lo scheletro è molto costoso e costringe a sacrificare tutte le parti che altrimenti sarebbe possibile recuperare.
+    textEng: Retrieve the frame of a unit, adding a new customizable unit to the base. Extracting the frame comes at significant cost and sacrifices all the parts that could be salvaged otherwise.
+  debriefing_salvage_frame_header:
+    id: 1
+    text: Recupera scheletro mech
+    textEng: Salvage Mech Frame
+  debriefing_salvage_header:
+    id: 1
+    text: Recupero
+    textEng: Salvage
+  debriefing_salvage_header_no_salvage:
+    id: 1
+    text: Nessun recupero
+    textEng: No salvage
+  debriefing_salvage_header2:
+    id: 2
+    text: Equipaggiamento sul campo
+    textEng: Unit equipment on the field
+  debriefing_salvage_hint:
+    id: 1
+    text: Decidi cosa vuoi recuperare, smontare o abbandonare del bottino conquistato sul campo di battaglia. Abbiamo un budget limitato e gli oggetti hanno costi di recupero molto diversi; fai una scelta oculata.
+    textEng: Decide what to recover, dismantle or skip from the loot found on the battlefield. We have a limited budget and items vary in salvage cost, so choose wisely.
+  debriefing_salvage_hint_budget:
+    id: 1
+    text: Costi e budget
+    textEng: Cost & budget
+  debriefing_salvage_hint_dismantled:
+    id: 1
+    text: Smontati
+    textEng: Dismantled
+  debriefing_salvage_hint_enemy_no_loss:
+    id: 1
+    text: Con le forze nemiche di pattuglia, non possiamo arrischiarci in un'operazione di recupero. Nessun equipaggiamento è stato perso da unità alleate.
+    textEng: With the enemy forces on patrol, we cannot risk retrieving salvage here. No equipment was lost by friendly units.
+  debriefing_salvage_hint_enemy_present:
+    id: 1
+    text: Con le forze nemiche di pattuglia, non possiamo arrischiarci in un'operazione di recupero. Il massimo che possiamo fare è recuperare qualche parte persa dalle nostre unità.
+    textEng: With the enemy forces on patrol, we cannot risk retrieving salvage here. Most we can do is recover some of the parts lost by our units.
+  debriefing_salvage_hint_no_items:
+    id: 1
+    text: Nessun oggetto recuperabile né equipaggiamenti rilevati dai nostri scanner.
+    textEng: No salvageable items or lost equipment found on our scanners this time.
+  debriefing_salvage_hint_recovered:
+    id: 1
+    text: Recuperati
+    textEng: Recovered
+  debriefing_salvage_hint_skipped:
+    id: 1
+    text: Abbandonati
+    textEng: Skipped
+  debriefing_salvage_hint_unit_page:
+    id: 1
+    text: Di più alla pagina successiva
+    textEng: More on next page
+  debriefing_salvage_label_base:
+    id: 1
+    text: Base
+    textEng: Base
+  debriefing_salvage_label_emergency:
+    id: 1
+    text: Emergenza
+    textEng: Emergency
+  debriefing_salvage_list_category_unknown:
+    id: 1
+    text: Categoria sconosciuta
+    textEng: Unknown category
+  debriefing_salvage_list_header_nocost:
+    id: 1
+    text: Nessun costo
+    textEng: No cost
+  debriefing_salvage_list_header_rewards:
+    id: 1
+    text: Ricompense e oggetti imballati
+    textEng: Rewards & stored Items
+  debriefing_salvage_list_header_unit:
+    id: 1
+    text: Unità
+    textEng: Unit
+  debriefing_salvage_list_header_unit_tooltip:
+    id: 1
+    text: Questa unità presenta equipaggiamento recuperabile. Fai clic su questo titolo per decidere cosa farne in blocco, oppure fai clic sui singoli elementi qui sotto.
+    textEng: This unit has some salvageable equipment. You can click this header to decide about all of them, or click individual items down below.
+  debriefing_salvage_list_part_unknown:
+    id: 1
+    text: Parte sconosciuta
+    textEng: Unknown part
+  debriefing_salvage_list_resource:
+    id: 1
+    text: Risorsa
+    textEng: Resource
+  debriefing_salvage_list_status_destroyed:
+    id: 1
+    text: Distrutto
+    textEng: Destroyed
+  debriefing_salvage_list_status_intact:
+    id: 1
+    text: Intatto
+    textEng: Intact
+  debriefing_salvage_list_subsystem_unknown:
+    id: 1
+    text: Sottosistema sconosciuto
+    textEng: Unknown subsystem
+  debriefing_salvage_list_tooltip_salvage:
+    id: 1
+    text: Questo luogo conteneva oggetti di equipaggiamento pronti per essere prelevati. Li puoi recuperare senza alcun costo, se lo desideri.
+    textEng: This site stored some equipment ready for pickup. This equipment can be picked up at no salvage cost, if you so choose.
+  debriefing_salvage_list_workshop_charge:
+    id: 1
+    text: Carica per officina
+    textEng: Workshop charge
+  debriefing_salvage_resources_extracted:
+    id: 1
+    text: Risorse estratte
+    textEng: Extracted resources
+  debriefing_units_defeated:
+    id: 1
+    text: Unità sconfitte
+    textEng: Units defeated
+  inventory_button_deselect_header:
+    id: 1
+    text: Deseleziona
+    textEng: Deselect
+  inventory_button_deselect_text:
+    id: 1
+    text: Deseleziona tutti gli oggetti.
+    textEng: Deselect all items
+  inventory_button_detach_header:
+    id: 1
+    text: Smonta
+    textEng: Detach
+  inventory_button_detach_text:
+    id: 1
+    text: Smonta tutti i sottosistemi personalizzabili dalle parti selezionate. Ad esempio, puoi rimuovere i nuclei del reattore dalle parti del corpo superiori.
+    textEng: Detach all customizable subsystems from selected parts. For example, take our reactor cores from the upper body parts.
+  inventory_button_invert_header:
+    id: 1
+    text: Inverti
+    textEng: Invert
+  inventory_button_invert_text:
+    id: 1
+    text: Inverti tutti gli oggetti selezionati.
+    textEng: Invert all selected items
+  inventory_button_scrap_detach_header:
+    id: 1
+    text: Rottama e smonta
+    textEng: Scrap & detach
+  inventory_button_scrap_detach_text:
+    id: 1
+    text: "Smonta tutti i sottosistemi personalizzabili, quindi rottama il pezzo di equipaggiamento selezionato per ottenerne risorse. Attenzione: l'operazione è irreversibile!"
+    textEng: 'Detach all customizable subsystems, then dismantle the selected piece of equipment into supplies. Warning: you can not undo this operation!'
+  inventory_button_scrap_fully_header:
+    id: 1
+    text: Rottama completamente
+    textEng: Scrap fully
+  inventory_button_scrap_fully_text:
+    id: 1
+    text: "Rottama il pezzo di equipaggiamento selezionato per ottenerne risorse, inclusi tutti i sottosistemi personalizzabili che vi sono montati. Attenzione: l'operazione è irreversibile!"
+    textEng: 'Dismantle the selected piece of equipment into supplies, including all customizable subsystems currently attached to it. Warning: you can not undo this operation!'
+  inventory_button_select_all_header:
+    id: 1
+    text: Seleziona tutto
+    textEng: Select all
+  inventory_button_select_all_text:
+    id: 1
+    text: Seleziona tutti gli oggetti.
+    textEng: Select all items
+  inventory_category_all:
+    id: 1
+    text: Tutte le parti
+    textEng: All parts
+  inventory_category_all_subsystems:
+    id: 1
+    text: Tutti i sottosistemi
+    textEng: All subsystems
+  inventory_category_all_subsystems_tooltip_text:
+    id: 1
+    text: Mostra tutti i sottosistemi presenti nell'inventario della base. Seleziona un alloggiamento più sotto, quindi seleziona un sottosistema specifico al suo interno per affinare l'elenco in base alla posizione.
+    textEng: Display every subsystem in the base inventory. Select a specific socket further down, then select a specific subsystem under it to narrow the list down by location.
+  inventory_category_all_tooltip_text:
+    id: 1
+    text: Mostra tutte le parti presenti nell'inventario della base. Seleziona un alloggiamento più sotto per affinare l'elenco delle parti in base alla posizione.
+    textEng: Display every part in the base inventory. Select a specific socket further down to narrow parts by location.
+  inventory_group_all:
+    id: 1
+    text: Tutto
+    textEng: All
+  inventory_hardpoint_armor:
+    id: 1
+    text: Armatura
+    textEng: Armor
+  inventory_hardpoint_internal:
+    id: 1
+    text: Interno
+    textEng: Internal
+  inventory_hint_filter:
+    id: 1
+    text: Filtra
+    textEng: Filter
+  inventory_hint_sort:
+    id: 1
+    text: Ordina
+    textEng: Sort
+  inventory_info_action_cooldown:
+    id: 1
+    text: Ogni azione disponibile per l'unità presenta una durata e un intervallo ottimali (tempo di ricarica). Un intervallo ottimale non è una limitazione obbligatoria, ma rispettandolo eviterai il surriscaldamento.
+    textEng: Each action available to the unit has a duration and optimal interval (cooldown). An optimal interval is not a hard restriction, but following it will avoid heat buildup.
+  inventory_info_action_peak_heat:
+    id: 1
+    text: Picco di calore
+    textEng: Peak heat
+  inventory_info_barrier:
+    id: 1
+    text: Barriera
+    textEng: Barrier
+  inventory_info_beam_width_desc:
+    id: 1
+    text: "Le armi a raggio non hanno dispersione: l'energia di quest'arma è concentrata in linea retta."
+    textEng: Beam weapons have no scatter. Energy from this weapon is focused in a straight line.
+  inventory_info_beam_width_name:
+    id: 1
+    text: Ampiezza raggio
+    textEng: Beam width
+  inventory_info_column_action:
+    id: 1
+    text: Per attacco
+    textEng: Per attack
+  inventory_info_column_hit:
+    id: 1
+    text: Per colpo
+    textEng: Per hit
+  inventory_info_column_second:
+    id: 1
+    text: Per secondo (DPS)
+    textEng: Per second (DPS)
+  inventory_info_context_comparison:
+    id: 1
+    text: Confronto
+    textEng: Comparison
+  inventory_info_context_equipped:
+    id: 1
+    text: In uso
+    textEng: Equipped
+  inventory_info_dismantle_confirmation_header:
+    id: 1
+    text: Conferma rottamazione
+    textEng: Confirm scrapping
+  inventory_info_dismantle_confirmation_text:
+    id: 1
+    text: Vuoi davvero rottamare questo oggetto? L'azione è definitiva. L'oggetto scomparirà dal tuo inventario. Se contiene sottosistemi rimovibili, questi saranno collocati nel tuo inventario. I progressi in officina di questo oggetto aumenteranno.
+    textEng: Are you sure you'd like to disassamble this item? This can not be undone. The item will disappear from your inventory. If there are removable subsystems, they will be placed in your inventory. The workshop progress for this item will increase.
+  inventory_info_dismantle_workshop_header:
+    id: 1
+    text: Rottama per l'officina
+    textEng: Scrap for workshop
+  inventory_info_dismantle_workshop_hint_multiprogress:
+    id: 1
+    text: Rottamare una parte di questa qualità farà progredire anche la ricerca su versioni di qualità inferiore.
+    textEng: Dismantling the part at this quality will also progress research for lower quality versions.
+  inventory_info_dismantle_workshop_hint_multistep:
+    id: 1
+    text: Questa parte va rottamata più volte per poterla sbloccare nell'officina.
+    textEng: This part needs to be dismantled multiple times to become unlocked in the workshop.
+  inventory_info_dismantle_workshop_progress:
+    id: 1
+    text: Progressi in officina
+    textEng: Workshop progress
+  inventory_info_dismantle_workshop_resources:
+    id: 1
+    text: Componenti utilizzabili
+    textEng: Usable components
+  inventory_info_dismantle_workshop_text:
+    id: 1
+    text: Puoi rottamare questo oggetto per sbloccarne la produzione in officina.
+    textEng: You can dismantle this item to unlock construction in the workshop.
+  inventory_info_hint_classification_header:
+    id: 1
+    text: Classificazione
+    textEng: Classification
+  inventory_info_hint_classification_text:
+    id: 1
+    text: >-
+      Indica il tipo (la classe generica di appartenenza) e il modello (la forma e caratteristiche specifiche) di una parte.
+
+
+      Il colore indica la rarità della parte, ovvero quant'è insolita e pregevole. L'equipaggiamento di maggior rarità è dotato di bonus migliori e più numerosi e, in alcuni casi, anche di agganci per sottosistemi, per un livello di personalizzazione più elevato.
+    textEng: >-
+      This text indicates part type (what general class this part belongs to) and model (which specific design of a given type this is).
+
+
+      The color indicates rarity: how uncommon and well-built the part is. Equipment of higher rarity includes more and higher quality perks and can include unlocked subsystem slots, enabling deeper customization.
+  inventory_info_hint_damage_type:
+    id: 1
+    text: Tipo di danno
+    textEng: Damage type
+  inventory_info_hint_favorite_header:
+    id: 1
+    text: Preferiti
+    textEng: Favorite
+  inventory_info_hint_favorite_text:
+    id: 1
+    text: Aggiungi questo oggetto ai Preferiti. Verrà contrassegnato nell'inventario, e sarà più facile da trovare.
+    textEng: Mark this item as a favorite. This highlights it in inventory lists, making it easier to find.
+  inventory_info_hint_level_header:
+    id: 1
+    text: Livello
+    textEng: Level
+  inventory_info_hint_level_text:
+    id: 1
+    text: >-
+      Il livello indica la potenza di una parte. Integrità, barriera e danni inflitti aumentano in proporzione a esso.
+
+
+      Cerca di usare parti di livello sempre più alto, in modo che le tue unità possano affrontare nemici sempre più forti!
+    textEng: >-
+      Level determines how powerful a given part is. Integrity, barrier and damage scale with level.
+
+
+      Always keep an eye out for parts with a higher level to ensure your units are ready to face ever more challenging enemies!
+  inventory_info_hint_range_header:
+    id: 1
+    text: Portata
+    textEng: Range
+  inventory_info_hint_range_text:
+    id: 1
+    text: >-
+      La massima distanza da cui è possibile usare un'arma. Il grafico mostra se l'arma mantiene la stessa efficacia per l'intera portata consigliata o se la sua potenza cambia in base a distanza e dispersione.
+
+
+      La maggior parte degli scontri ha luogo in quadranti larghi 300 metri.
+    textEng: >-
+      The range in which this weapon is effective. The graph reflects whether the weapon remains effective throughout the recommended range, or if it changes potency depending on distance and scatter.
+
+
+      Most combat engagements take place in quadrants 300 meters across.
+  inventory_info_hint_serial_header:
+    id: 1
+    text: Numero di serie
+    textEng: Serial Number
+  inventory_info_hint_serial_text:
+    id: 1
+    text: Numero identificativo univoco usato per distinguere esemplari dello stesso modello. Ogni parte può avere caratteristiche diverse, come bonus e sottosistemi differenti.
+    textEng: Unique number identifying a part among others of the same model. Every part can differ, offering different perks and subsystems.
+  inventory_info_hint_stat_modified:
+    id: 1
+    text: Questo parametro è stato modificato da uno o più sottosistemi intercambiabili. Controlla le informazioni sui sottosistemi sulla destra per saperne di più.
+    textEng: This stat is modified by one or more swappable subsystems. Check subsystem information on the right to learn more.
+  inventory_info_hit_width_desc:
+    id: 1
+    text: 'Le armi da corpo a corpo non hanno proiettili che si disperdono: i danni vengono inflitti tramite contatto diretto. Sono armi di varie dimensioni, in base alle quali può essere più o meno facile colpire il bersaglio.'
+    textEng: Melee weapons have no scattering projectiles — the damage is inflicted on direct contact. Melee weapons can vary in size, affecting how easy it is to land hits on targets.
+  inventory_info_hit_width_name:
+    id: 1
+    text: Ampiezza colpo
+    textEng: Hit width
+  inventory_info_integrity:
+    id: 1
+    text: Integrità
+    textEng: Integrity
+  inventory_info_levelup_counter:
+    id: 1
+    text: Numero di miglioramenti
+    textEng: Times upgraded
+  inventory_info_levelup_dialog_header:
+    id: 1
+    text: Conferma aumento livello
+    textEng: Confirm level upgrade
+  inventory_info_levelup_dialog_text:
+    id: 1
+    text: Vuoi davvero migliorare questa parte portandola al livello superiore?
+    textEng: Are you sure you'd like to upgrade this part to the next level?
+  inventory_info_levelup_header_available:
+    id: 1
+    text: Migliorabile
+    textEng: Upgradeable
+  inventory_info_levelup_header_blocked:
+    id: 1
+    text: Miglioria bloccata
+    textEng: Upgrade blocked
+  inventory_info_levelup_header_max:
+    id: 1
+    text: Miglioria max
+    textEng: Upgraded to limit
+  inventory_info_levelup_header_unsupported:
+    id: 1
+    text: Non migliorabile
+    textEng: Non-upgradeable
+  inventory_info_levelup_locked:
+    id: 1
+    text: Questo oggetto non può essere migliorato alla base mobile.
+    textEng: This item can't be upgraded at the mobile base.
+  inventory_info_levelup_resources_header_insufficient:
+    id: 1
+    text: Risorse insufficienti
+    textEng: Insufficient resources
+  inventory_info_levelup_resources_header_valid:
+    id: 1
+    text: Risorse necessarie
+    textEng: Resources required
+  inventory_info_levelup_text_available:
+    id: 1
+    text: Se tutte le condizioni sono rispettate, questa parte può essere migliorata aumentandone il livello e incrementandone i parametri.
+    textEng: If the requirements are met, this part can be upgraded to a higher level, increasing its stats.
+  inventory_info_levelup_text_max:
+    id: 1
+    text: Le prestazioni di questa parte sono sfruttate al massimo. Non puoi aumentarne ulteriormente il livello.
+    textEng: "This part has reached its performance limits: its level can't be upgraded further."
+  inventory_info_levelup_text_unsupported:
+    id: 1
+    text: Non è possibile migliorare questa parte per aumentarne il livello. Ciò si verifica solitamente nel caso di rari equipaggiamenti sperimentali o di equipaggiamenti semplici, destinati all'addestramento.
+    textEng: This part can not be upgraded to a higher level. This is usually the case for rare experimental equipment or low-quality training equipment.
+  inventory_info_levelup_workshop:
+    id: 1
+    text: Livello dell'officina
+    textEng: Workshop level
+  inventory_info_levelup_workshop_low:
+    id: 1
+    text: Livello superiore dell'officina necessario
+    textEng: Higher workshop level needed
+  inventory_info_no_description:
+    id: 1
+    text: Nessuna descrizione disponibile.
+    textEng: No description available
+  inventory_info_part_category:
+    id: 1
+    text: Categoria
+    textEng: Category
+  inventory_info_part_feature:
+    id: 1
+    text: Funzionalità
+    textEng: Feature
+  inventory_info_part_manufacturer:
+    id: 1
+    text: Produttore
+    textEng: Manufacturer
+  inventory_info_part_trait:
+    id: 1
+    text: Tratto
+    textEng: Trait
+  inventory_info_postfix_meters:
+    id: 1
+    text: m
+    textEng: m
+  inventory_info_postfix_seconds:
+    id: 1
+    text: s
+    textEng: s
+  inventory_info_scatter_desc:
+    id: 1
+    text: Questo display indica l'angolo di dispersione dell'arma. Un angolo più ampio disperde i proiettili all'interno di un cono più ampio, rendendo più difficile colpire i bersagli.
+    textEng: This display indicates weapon scatter angle. Wider angle spreads projectiles over a wider cone, making targets harder to hit.
+  inventory_info_scatter_name:
+    id: 1
+    text: Dispersione
+    textEng: Scatter
+  inventory_info_scatter_stat_hint:
+    id: 1
+    text: Dispersione (sul posto — in movimento)
+    textEng: Scatter (idle — moving)
+  inventory_info_scatter_wide_desc:
+    id: 1
+    text: Quest'arma è meno stabile se l'unità è in movimento. Nota l'angolo di dispersione più ampio.
+    textEng: This weapon is less stable when the unit is moving. Note the greater scatter angle.
+  inventory_info_serial_none:
+    id: 1
+    text: Nessun N° di serie
+    textEng: No S/N
+  inventory_info_stat_action_duration:
+    id: 1
+    text: Durata azione
+    textEng: Action duration
+  inventory_info_stat_optimal_frequency:
+    id: 1
+    text: Frequenza ottimale
+    textEng: Optimal frequency
+  inventory_info_stat_optimal_range:
+    id: 1
+    text: Portata ottimale
+    textEng: Optimal range
+  inventory_info_stat_shots_desc:
+    id: 1
+    text: Numero di proiettili sparati da quest'arma in un'azione d'attacco.
+    textEng: Number of projectiles fired by this weapon in one attack action.
+  inventory_info_stat_shots_fragments_desc:
+    id: 1
+    text: Numero di proiettili sparati da quest'arma in un'azione d'attacco. Ogni proiettile si divide in una serie di frammenti.
+    textEng: Number of projectiles fired by this weapon in one attack action. Each projectile splits into a number of fragments.
+  inventory_info_stat_shots_fragments_name:
+    id: 1
+    text: Spari e frammenti
+    textEng: Shots & fragments
+  inventory_info_stat_shots_name:
+    id: 1
+    text: Spari
+    textEng: Shots
+  inventory_info_status_buildup_desc:
+    id: 1
+    text: Quest'arma accumula un effetto di stato quando colpisce un bersaglio. Una volta raggiunta la soglia di 100, lo stato seguente viene inflitto al bersaglio.
+    textEng: This weapon builds up a status effect on hit. Once it reaches 100, the following status is applied to the target.
+  inventory_info_status_buildup_header:
+    id: 1
+    text: Accumulo
+    textEng: Buildup
+  inventory_info_subsystem_customizable_desc:
+    id: 1
+    text: Questo sottosistema può essere sostituito o rimosso.
+    textEng: This subsystem can be replaced or removed.
+  inventory_info_subsystem_customizable_name:
+    id: 1
+    text: Personalizzabile
+    textEng: Customizable
+  inventory_info_subsystem_fused_desc:
+    id: 1
+    text: Questo sottosistema è saldato alla parte e non può essere sostituito.
+    textEng: This subsystem is welded into the part and can't be replaced.
+  inventory_info_subsystem_fused_name:
+    id: 1
+    text: Saldato
+    textEng: Fused
+  inventory_info_subsystem_missing_desc:
+    id: 1
+    text: Nessun sottosistema installato su questo aggancio.
+    textEng: There is no subsystem installed into this hardpoint.
+  inventory_info_subsystem_missing_name:
+    id: 1
+    text: Mancante
+    textEng: Missing
+  inventory_info_subsystem_obscured:
+    id: 1
+    text: Sottosistema casuale
+    textEng: Randomized subsystem
+  inventory_info_timeline_hint_duration_header:
+    id: 1
+    text: Durata azione
+    textEng: Action duration
+  inventory_info_timeline_hint_duration_text:
+    id: 1
+    text: Quanto ci mette l'arma a sparare. Una durata breve è importante per le armi con cui è necessario cogliere in fretta l'occasione di sparare, come i fucili, ma che generano rapidamente calore.
+    textEng: How long it takes for a weapon to fire. Short action durations are valuable for weapons with narrow windows of opportunity, such as shotguns, but quickly spike heat.
+  inventory_info_timeline_hint_optimal_excess:
+    id: 1
+    text: Raffreddamento eccessivo
+    textEng: Excess cooling
+  inventory_info_timeline_hint_optimal_header:
+    id: 1
+    text: Tempo di ricarica min.
+    textEng: Min. cooldown
+  inventory_info_timeline_hint_optimal_perfect:
+    id: 1
+    text: Nessun tempo di ricarica
+    textEng: No cooldown
+  inventory_info_timeline_hint_optimal_text:
+    id: 1
+    text: La cadenza di utilizzo sostenibile. Il limite inferiore di questo intervallo corrisponde alla durata dell'azione, perché gli attacchi non possono sovrapporsi. Il valore ottimale, tuttavia, è generalmente più alto per far sì che l'accumulo di calore sia pari a zero. A determinare questo valore sono la durata dell'azione e la generazione di calore dell'arma, controbilanciate dalla dissipazione di calore del reattore del mech.
+    textEng: The sustainable rate this weapon can be used at. The lower bound is action duration, as attacks can't be overlapped, but the interval is usually higher to allow net zero heat accumulation. Varies depending on action duration and heat generation of the weapon counteracted by heat dissipation in the reactor core of the mech.
+  inventory_info_trajectory_desc:
+    id: 1
+    text: >-
+      Questa è un'arma guidata, e quindi priva di dispersione: i proiettili convergono sul bersaglio.
+
+
+      Una traiettoria diretta richiede un percorso privo di ostacoli, mentre una traiettoria ad arco permette di superare ostacoli e coperture, e colpire il bersaglio dall'alto.
+    textEng: >-
+      This is a guided weapon, so there is no scatter: projectiles converge on targets.
+
+
+      The trajectory determines how the weapon can be used. Direct trajectory requires a clear path to target, while an arcing trajectory allows firing over cover, with projectiles descending from above.
+  inventory_info_trajectory_range_arc:
+    id: 1
+    text: m di arco
+    textEng: m Arc
+  inventory_info_trajectory_text:
+    id: 1
+    text: Traiettoria
+    textEng: Trajectory
+  inventory_info_unknown:
+    id: 1
+    text: Sconosciuto
+    textEng: Unknown
+  inventory_socket_suffix_arm:
+    id: 1
+    text: Braccio
+    textEng: Arm
+  inventory_socket_suffix_legs:
+    id: 1
+    text: Gambe
+    textEng: Legs
+  inventory_socket_suffix_torso:
+    id: 1
+    text: Torso
+    textEng: Torso
+  inventory_sort_group:
+    id: 1
+    text: Gruppo
+    textEng: Group
+  inventory_sort_items:
+    id: 1
+    text: oggetti
+    textEng: Items
+  inventory_sort_level:
+    id: 1
+    text: Livello
+    textEng: Level
+  inventory_sort_no_selections:
+    id: 1
+    text: Nessuna selezione
+    textEng: No selections
+  inventory_sort_quality:
+    id: 1
+    text: Qualità
+    textEng: Quality
+  item_info_rating_0:
+    id: 1
+    text: Standard
+    textEng: Basic
+  item_info_rating_1:
+    id: 1
+    text: Comune
+    textEng: Common
+  item_info_rating_1_text:
+    id: 1
+    text: Prestazioni medie con variazione minima. Parte prodotta in serie, con sottosistemi saldati direttamente sulle parti per risparmiare sui costi.
+    textEng: Average performance with minor variation. Mass-produced, with subsystems welded on directly to save costs.
+  item_info_rating_2:
+    id: 1
+    text: Non comune
+    textEng: Uncommon
+  item_info_rating_2_text:
+    id: 1
+    text: Equipaggiamento di più alta qualità. Maggior variazione dei bonus, con effetti più pronunciati. Alcuni moduli potrebbero essere personalizzabili.
+    textEng: Higher quality equipment. Greater perk variation with more pronounced effects. Some modules might be customizable.
+  item_info_rating_3:
+    id: 1
+    text: Rara
+    textEng: Rare
+  item_info_rating_3_text:
+    id: 1
+    text: Equipaggiamento della massima qualità. Ampie variazioni dei bonus, con effetti estremamente pronunciati. Altamente personalizzabile.
+    textEng: Highest quality equipment. High perk variation with very pronounced effects. Highly customizable.
+  item_info_rating_4:
+    id: 1
+    text: Leggendaria
+    textEng: Legendary
+  item_info_rating_5:
+    id: 1
+    text: Apogeo
+    textEng: Pinnacle
+  item_info_rating_missing:
+    id: 1
+    text: Qualità mancante
+    textEng: Missing rating
+  pilot_ability_hint:
+    id: 1
+    text: Abilità di combattimento. Utilizzabile un numero limitato di volte per combattimento.
+    textEng: Combat ability. Can be used a limited number of times per fight.
+  pilot_ability_prefix:
+    id: 1
+    text: Abilità
+    textEng: Ability
+  pilot_ability_status_effect:
+    id: 1
+    text: Effetto applicato
+    textEng: Applied effect
+  pilot_bio_builtin_01:
+    id: 1
+    text: Caposquadra che gode di grande stima; tra i membri originari della FLF.
+    textEng: Trusted squad leader, one of the original members of the 3F.
+  pilot_bio_builtin_02:
+    id: 1
+    text: Specialista delle demolizioni proveniente dal Kongensland. Ha una vasta conoscenza delle vecchie infrastrutture minerarie, e ha suggerito l'idea di utilizzare Langset come obiettivo potenziale per la FLF.
+    textEng: Demolitions expert from Kongensland. Has a wealth of knowledge on old mining infrastructure, came up with the idea to investigate Langset as a potential target for the 3F.
+  pilot_bio_builtin_03:
+    id: 1
+    text: Pilota dalla mira eccezionale. Grazie alla fortuita assegnazione a un posto di vedetta lontano dalla base, ha avuto la rara fortuna di sopravvivere al bombardamento del Regattal.
+    textEng: Excellent marksman. One of the few survivors of the Regattal Bombing, owing to a chance assignment to a lookout post away from the base.
+  pilot_bio_builtin_04:
+    id: 1
+    text: Pilota dalla grandissima esperienza nei collaudi all'Istituto dello Hollis. Ha pilotato personalmente decine di modelli di mech. Poco prima dell'invasione, ha lavorato come rappresentante dell'Istituto per le armate del Fyrland, ed è ora responsabile dell'addestramento dei piloti all'uso del sistema predittivo.
+    textEng: Veteran test pilot from the Hollis Institute. Has hands-on experience with dozens of mech configurations. Had worked as the Institue's liaison with Fyrland's military prior to the invasion, now responsible for training pilots in the use of prediction tech.
+  pilot_button_customize:
+    id: 2
+    text: Personalizza
+    textEng: Customize
+  pilot_button_dismiss:
+    id: 2
+    text: Congeda
+    textEng: Dismiss
+  pilot_death_cause:
+    id: 2
+    text: Causa della morte
+    textEng: Cause of death
+  pilot_death_header:
+    id: 2
+    text: Mortə in battaglia
+    textEng: Killed in action
+  pilot_death_short:
+    id: 2
+    text: Mortə
+    textEng: KIA
+  pilot_dismiss_deceased_header:
+    id: 1
+    text: Conferma rimozione
+    textEng: Confirm removal
+  pilot_dismiss_deceased_text:
+    id: 1
+    text: Rimozione pilota dalla lista in effetto.
+    textEng: This pilot will be removed from the list.
+  pilot_dismiss_living_header:
+    id: 1
+    text: Conferma congedo pilota
+    textEng: Confirm pilot dismissal
+  pilot_dismiss_living_text:
+    id: 1
+    text: Vuoi davvero congedare questa persona? Abbandonerà la base e non sarà più disponibile per lo schieramento in futuro. L'ordine non può essere revocato.
+    textEng: Are you sure you would like to dismiss this pilot? They will leave the base and will not be available for deployment going forward. This order can not be reverted.
+  pilot_edit_button_cancel:
+    id: 1
+    text: Annulla
+    textEng: Cancel
+  pilot_edit_button_save:
+    id: 1
+    text: Salva
+    textEng: Save
+  pilot_edit_hint_callsign:
+    id: 1
+    text: Nominativo
+    textEng: Callsign
+  pilot_edit_hint_name:
+    id: 1
+    text: Nome
+    textEng: Name
+  pilot_edit_hint_notes:
+    id: 1
+    text: Note
+    textEng: Notes
+  pilot_edit_label_body:
+    id: 1
+    text: Corpo
+    textEng: Body
+  pilot_edit_label_build:
+    id: 1
+    text: Corporatura
+    textEng: Build
+  pilot_edit_label_eye_color:
+    id: 1
+    text: Colore occhi
+    textEng: Eye color
+  pilot_edit_label_eyebrows:
+    id: 1
+    text: Sopracciglia
+    textEng: Eyebrows
+  pilot_edit_label_face_preset:
+    id: 1
+    text: Volto predefinito
+    textEng: Face preset
+  pilot_edit_label_facial_hair:
+    id: 1
+    text: Barba e baffi
+    textEng: Facial hair
+  pilot_edit_label_facial_hair_color:
+    id: 1
+    text: Colore barba e baffi
+    textEng: Facial hair color
+  pilot_edit_label_glasses:
+    id: 1
+    text: Occhiali
+    textEng: Glasses
+  pilot_edit_label_glasses_variant:
+    id: 1
+    text: Variante occhiali
+    textEng: Glasses variant
+  pilot_edit_label_hair:
+    id: 1
+    text: Capelli
+    textEng: Hair
+  pilot_edit_label_hair_color:
+    id: 1
+    text: Colore capelli
+    textEng: Hair color
+  pilot_edit_label_headgear:
+    id: 1
+    text: Copricapo
+    textEng: Headgear
+  pilot_edit_label_headgear_variant:
+    id: 1
+    text: Variante copricapo
+    textEng: Headgear variant
+  pilot_edit_label_lip_color:
+    id: 1
+    text: Colore labbra
+    textEng: Lip color
+  pilot_edit_label_lower_face:
+    id: 1
+    text: Variante viso inferiore
+    textEng: Lower face variant
+  pilot_edit_label_overlay:
+    id: 1
+    text: Sovrimpressione
+    textEng: Overlay
+  pilot_edit_label_overlay_variant:
+    id: 1
+    text: Sovrimpressione alt.
+    textEng: Overlay variant
+  pilot_edit_label_pronouns:
+    id: 1
+    text: Pronome
+    textEng: Pronouns
+  pilot_edit_label_skin:
+    id: 1
+    text: Tipo di pelle
+    textEng: Skin type
+  pilot_edit_label_skin_tone:
+    id: 1
+    text: Tonalità della pelle
+    textEng: Skin tone
+  pilot_edit_label_upper_face:
+    id: 1
+    text: Variante viso superiore
+    textEng: Upper face variant
+  pilot_edit_pronouns_he:
+    id: 1
+    text: Lui
+    textEng: He
+  pilot_edit_pronouns_she:
+    id: 1
+    text: Lei
+    textEng: She
+  pilot_edit_pronouns_they:
+    id: 1
+    text: Ləi
+    textEng: They
+  pilot_edit_reset_callsign_text:
+    id: 1
+    text: Nominativo casuale
+    textEng: Randomize callsign
+  pilot_edit_reset_name_text:
+    id: 1
+    text: Nome casuale
+    textEng: Randomize name
+  pilot_edit_tooltip_randomize_header:
+    id: 1
+    text: Casuale
+    textEng: Randomize
+  pilot_edit_tooltip_randomize_text:
+    id: 1
+    text: Ogni parametro sarà scelto in modo casuale.
+    textEng: Every parameter will be chosen randomly.
+  pilot_edit_value_a:
+    id: 1
+    text: A
+    textEng: A
+  pilot_edit_value_b:
+    id: 1
+    text: B
+    textEng: B
+  pilot_events_empty:
+    id: 1
+    text: Nessun evento registrato
+    textEng: No events recorded
+  pilot_exp_name:
+    id: 1
+    text: Esperienza
+    textEng: Experience
+  pilot_exp_short:
+    id: 1
+    text: PE
+    textEng: XP
+  pilot_health_descriptor_0:
+    id: 1
+    text: Danni critici
+    textEng: Critically injured
+  pilot_health_descriptor_1:
+    id: 1
+    text: Danni seri
+    textEng: Seriously injured
+  pilot_health_descriptor_2:
+    id: 1
+    text: Danni moderati
+    textEng: Moderately injured
+  pilot_health_descriptor_3:
+    id: 1
+    text: Danni leggeri
+    textEng: Lightly injured
+  pilot_health_descriptor_4:
+    id: 1
+    text: Danni minimi
+    textEng: Shaken up
+  pilot_health_descriptor_5:
+    id: 1
+    text: Piena salute
+    textEng: Full health
+  pilot_info_button_edit:
+    id: 1
+    text: Modifica
+    textEng: Edit
+  pilot_info_death_destruction:
+    id: 1
+    text: Distruzione unità
+    textEng: Unit destruction
+  pilot_info_death_trauma:
+    id: 1
+    text: Trauma
+    textEng: Trauma
+  pilot_info_header_selected:
+    id: 1
+    text: Selezionatə
+    textEng: Selected
+  pilot_info_header_squad:
+    id: 1
+    text: Assegnatə
+    textEng: Assigned
+  pilot_info_level_header:
+    id: 1
+    text: Livello
+    textEng: Level
+  pilot_info_level_text:
+    id: 1
+    text: Grado che aumenta con l'esperienza, permettendo di accedere a nuovi tratti.
+    textEng: Pilot rank. Increases with experience and unlocks access to new traits.
+  pilot_info_missing:
+    id: 1
+    text: Seleziona un pilota per visualizzare le relative informazioni.
+    textEng: Select a pilot to display info
+  pilot_info_stats_header:
+    id: 2
+    text: Parametri pilota
+    textEng: Pilot stats
+  pilot_info_stats_home:
+    id: 1
+    text: 'Provenienza:'
+    textEng: 'Home:'
+  pilot_info_stats_join:
+    id: 1
+    text: ','
+    textEng: ','
+  pilot_info_stats_personality:
+    id: 1
+    text: 'Personalità: '
+    textEng: 'Personality: '
+  pilot_info_xp:
+    id: 1
+    text: PE
+    textEng: XP
+  pilot_info_xp_header:
+    id: 1
+    text: Esperienza
+    textEng: Experience
+  pilot_info_xp_max:
+    id: 1
+    text: PE max
+    textEng: Max XP
+  pilot_info_xp_reset_hint:
+    id: 1
+    text: azzeramento disponibile
+    textEng: reset available
+  pilot_info_xp_text:
+    id: 1
+    text: Esperienza che aumenta nel corso degli schieramenti ed eseguendo specifiche azioni in combattimento, come ad esempio abbattere unità nemiche. Acquisendone a sufficienza è possibile salire di livello e ottenere nuovi tratti.
+    textEng: Pilot experience. Increases with deployments and specific actions in combat, such as taking down enemy units. Acquiring sufficient experience allows leveling up and acquiring new traits.
+  pilot_info_xp_to_next_level:
+    id: 1
+    text: al prossimo livello
+    textEng: to next level
+  pilot_linked_mech:
+    id: 2
+    text: Mech pilotato
+    textEng: Piloting mech
+  pilot_list_active_empty:
+    id: 2
+    text: Nessun pilota disponibile. Reclutane di nuovi o fai rifornimento.
+    textEng: No pilots available. Recruit new pilots or resupply.
+  pilot_list_active_header:
+    id: 2
+    text: Piloti attivi
+    textEng: Active pilots
+  pilot_list_active_text:
+    id: 2
+    text: Elenco dei piloti disponibili
+    textEng: Currently available roster
+  pilot_list_counter_injured:
+    id: 2
+    text: Feriti
+    textEng: Injured
+  pilot_list_counter_rested:
+    id: 2
+    text: Riposati
+    textEng: Rested
+  pilot_list_counter_total:
+    id: 2
+    text: In totale
+    textEng: Total
+  pilot_list_counter_trauma:
+    id: 2
+    text: Traumatizzati
+    textEng: Traumatized
+  pilot_list_empty_desc:
+    id: 1
+    text: >-
+      Non ci sono piloti disponibili nella base. Reclutane
+
+      alcuni negli insediamenti liberati.
+    textEng: "The base has no pilots available, consider \nrecruiting at liberated settlements"
+  pilot_list_empty_header:
+    id: 1
+    text: Nessun pilota disponibile
+    textEng: No pilots available
+  pilot_list_memorial_empty:
+    id: 2
+    text: Questa sezione elencherà i nomi dei piloti caduti.
+    textEng: Records of pilots killed in action will be preserved here.
+  pilot_list_memorial_header:
+    id: 2
+    text: In memoria
+    textEng: Memorial
+  pilot_list_memorial_text:
+    id: 2
+    text: Elenco dei piloti caduti
+    textEng: Records of fallen pilots
+  pilot_no_bio:
+    id: 1
+    text: Nessuna biografia disponibile.
+    textEng: No bio available
+  pilot_prestige_hint:
+    id: 1
+    text: Azzera livello
+    textEng: Reset level
+  pilot_prestige_hint_rookie:
+    id: 1
+    text: Rivela specializzazione
+    textEng: Reveal specialization
+  pilot_prestige_prefix:
+    id: 1
+    text: Prestigio
+    textEng: Prestige
+  pilot_prestige_prefix_rookie:
+    id: 1
+    text: Promuovi
+    textEng: Promote
+  pilot_prestige_review_start:
+    id: 2
+    text: Vuoi davvero azzerare i PE di questa persona? Otterrà un nuovo livello di prestigio.
+    textEng: Are you sure you'd like to reset pilot level? The pilot will acquire a new rank.
+  pilot_prestige_review_trait_remove:
+    id: 2
+    text: Il tratto negativo selezionato sarà [b]rimosso[/b].
+    textEng: The acquired negative trait you have selected will be [b]removed[/b]
+  pilot_prestige_review_trait_save:
+    id: 2
+    text: Il tratto positivo selezionato sarà [b]conservato[/b].
+    textEng: The trait you have selected will be [b]preserved[/b]
+  pilot_prestige_tooltip_general:
+    id: 1
+    text: >-
+      Questa persona ha raggiunto il massimo livello, sbloccando tutti i tratti disponibili.
+
+
+      Puoi promuoverla al grado successivo. Ciò preserverà in modo permanente un tratto da te selezionato, azzererà i PE e sbloccherà un nuovo set di tratti da ottenere.
+    textEng: >-
+      This pilot reached maximum level and unlocked all available traits.
+
+
+      You can promote the pilot to the next rank. This will permanently preserve one trait you select, reset the experience points and open a new set of traits to unlock.
+  pilot_prestige_tooltip_rookie:
+    id: 1
+    text: Questa recluta può essere promossa al grado successivo. In questo modo, rivelerai la sua specializzazione e i tratti sbloccabili.
+    textEng: This rookie pilot can be promoted to the next rank. This will reveal their specialization and unlockable traits.
+  pilot_prestige_tooltip_trait_select:
+    id: 1
+    text: Per procedere, seleziona il tratto che desideri conservare.
+    textEng: To proceed, select a trait you'd like to preserve.
+  pilot_recruit_hint:
+    id: 2
+    text: Recluta pilota
+    textEng: Recruit pilot
+  pilot_report_ejected:
+    id: 2
+    text: Eiezione effettuata durante la missione.
+    textEng: Ejected from the mech during the mission.
+  pilot_report_hp_high:
+    id: 2
+    text: Missione superata con qualche graffio.
+    textEng: A few scratches, survived the mission.
+  pilot_report_hp_low:
+    id: 2
+    text: Missione superata con ferite gravi.
+    textEng: Critical health, survived the mission.
+  pilot_report_hp_max:
+    id: 2
+    text: Missione superata senza danni.
+    textEng: Survived the mission unscathed.
+  pilot_report_hp_mid:
+    id: 2
+    text: Missione superata con ferite non gravi.
+    textEng: Wounded, survived the mission.
+  pilot_report_knockout:
+    id: 2
+    text: Salute esaurita, perdita di sensi.
+    textEng: Lost all health, knocked out.
+  pilot_stat_detail_max:
+    id: 2
+    text: Max.
+    textEng: Max.
+  pilot_stat_detail_min:
+    id: 2
+    text: Min.
+    textEng: Min.
+  pilot_stat_detail_temp:
+    id: 2
+    text: Modificatori temporanei
+    textEng: Temporary modifiers
+  pilot_stat_detail_traits:
+    id: 2
+    text: Tratti
+    textEng: Traits
+  pilot_status_kia:
+    id: 1
+    text: Mortə in combattimento
+    textEng: KIA
+  pilot_tooltip_health_concussion:
+    id: 1
+    text: Punto di contusione
+    textEng: Concussion point
+  pilot_tooltip_health_description:
+    id: 1
+    text: Ogni pilota ha una certa resistenza alle contusioni. Questo valore indica la quantità di danni che possono ricevere prima di svenire. I piloti che vengono schierati in battaglia quando la loro salute è inferiore a questa soglia rischiano di morire.
+    textEng: Each pilot has their own resistance to concussion, which determines how much damage they can sustain before being knocked out. Pilots entering combat with health below concussion resistance risk death.
+  pilot_tooltip_health_header:
+    id: 1
+    text: Salute pilota
+    textEng: Pilot health
+  pilot_tooltip_health_low1:
+    id: 1
+    text: A rischio di morte!
+    textEng: At risk of death!
+  pilot_tooltip_health_low2:
+    id: 1
+    text: Salute troppo bassa
+    textEng: Health too low
+  pilot_tooltip_health_max:
+    id: 1
+    text: Salute massima
+    textEng: Maximum health
+  pilot_tooltip_health_resistance:
+    id: 1
+    text: Resistenza alla contusione
+    textEng: Concussion resistance
+  pilot_tooltip_issue_blocked_desc:
+    id: 1
+    text: 'Pilota non prontə al combattimento a causa dei seguenti problemi critici:'
+    textEng: 'This pilot can not participate in combat due to following critical issues:'
+  pilot_tooltip_issue_note_desc:
+    id: 1
+    text: 'Pilota prontə al combattimento. Note di bassa priorità:'
+    textEng: 'This pilot is combat ready. Low-priority notes:'
+  pilot_tooltip_issue_note_header:
+    id: 1
+    text: Note
+    textEng: Notes
+  pilot_tooltip_issue_warning_desc:
+    id: 1
+    text: 'Pilota prontə al combattimento, ma con avvisi da considerare:'
+    textEng: 'This pilot is combat ready, but there are some warnings to consider:'
+  pilot_tooltip_issue_warning_header:
+    id: 1
+    text: Avvisi
+    textEng: Warnings
+  pilot_trait_fatigue_lowrange:
+    id: 1
+    text: Pilota che può tollerare un solo punto affaticamento. Non può raggiungere lo stato "Ben riposatə" nemmeno se raggiunge gli 0 punti affaticamento.
+    textEng: This pilot can only tolerate one fatigue point. They can not acquire a "Well rested" status even if they are at 0 fatigue.
+  pilot_trait_personal:
+    id: 1
+    text: Tratto personale
+    textEng: Personal trait
+  pilot_trait_term:
+    id: 1
+    text: Tratto
+    textEng: Trait
+  pilot_trait_type_acquired:
+    id: 2
+    text: Acquisito
+    textEng: Acquired
+  pilot_trait_type_acquired_desc:
+    id: 2
+    text: Questo è un tratto acquisito per aver vissuto un certo evento.
+    textEng: This is an acquired trait. The pilot received it as a result of going through a certain event.
+  pilot_trait_type_choice:
+    id: 2
+    text: Scelto
+    textEng: Choice
+  pilot_trait_type_conditional:
+    id: 2
+    text: Condizionale
+    textEng: Conditional
+  pilot_trait_type_conditional_desc:
+    id: 2
+    text: Questo è un tratto che si attiverà soltanto dopo averne rispettato le condizioni.
+    textEng: This is a conditional trait. It will become active once the pilot achieves the requirements.
+  pilot_trait_type_fixed:
+    id: 2
+    text: Fisso
+    textEng: Fixed
+  pilot_trait_type_prestige_desc:
+    id: 2
+    text: Questo è un tratto di prestigio salvato. È stato selezionato durante l'ultima promozione.
+    textEng: This is a saved prestige trait. It was selected to be retained when the pilot was last promoted.
+  pilot_trait_type_prestige_effect_desc:
+    id: 2
+    text: Il livello di prestigio accorda dei vantaggi speciali.
+    textEng: This experienced pilot has a prestige rank and gains special benefits.
+  pilot_trait_type_starter:
+    id: 2
+    text: Intrinseco
+    textEng: Starting
+  pilot_trait_type_starter_desc:
+    id: 2
+    text: Questo è un tratto presente fin dall'inizio, senza che sia necessario sbloccarlo.
+    textEng: This is an intrinsic trait. It is active from the start and doesn't need to be unlocked.
+  pilot_trait_unlock_confirmation:
+    id: 2
+    text: Vuoi davvero sbloccare questo tratto?
+    textEng: Are you sure you'd like to unlock the following trait?
+  stat_label_total:
+    id: 1
+    text: Totale
+    textEng: Total
+  stats_desc:
+    id: 1
+    text: Dati relativi alle capacità e alle prestazioni della base mobile. Variano in base all'equipaggiamento installato.
+    textEng: Data about capabilities and performance of the mobile base. Depends on installed equipment.
+  stats_header:
+    id: 1
+    text: Parametri
+    textEng: Stats
+  unit_info_header_selected:
+    id: 1
+    text: Unità selezionata
+    textEng: Selected unit
+  unit_info_header_squad:
+    id: 1
+    text: Unità nella squadra
+    textEng: Unit in squad
+  unit_list_button_damaged:
+    id: 1
+    text: Unità danneggiata
+    textEng: Damaged
+  unit_list_button_edit:
+    id: 1
+    text: Modifica
+    textEng: Edit
+  unit_list_empty_desc:
+    id: 1
+    text: Base mobile in pericolo. È consigliabile produrre nuove unità.
+    textEng: Mobile base in danger, consider manufacturing new units
+  unit_list_empty_header:
+    id: 1
+    text: Nessuna unità disponibile
+    textEng: No units available
+  unit_list_header:
+    id: 2
+    text: Unità attive
+    textEng: Active units
+  unit_list_issues_blocked_header:
+    id: 1
+    text: Bloccato
+    textEng: Blocked
+  unit_list_subtitle:
+    id: 2
+    text: Mech a bordo
+    textEng: Mechs on board
+  unit_list_tooltip_capacity_header:
+    id: 1
+    text: Capacità unità
+    textEng: Unit capacity
+  unit_list_tooltip_capacity_text:
+    id: 1
+    text: Il numero di unità che la base può immagazzinare e mantenere. Vai alla schermata Migliorie per aumentare questo valore.
+    textEng: Number of units the base can store and service. Visit the upgrade screen to increase the capacity.
+  unit_list_tooltip_damaged_text:
+    id: 1
+    text: Questa unità non può essere personalizzata per via dei danni subiti in battaglia. Sarà gradualmente riparata se la base ha risorse a sufficienza. Passa alla mappa principale di gioco per far avanzare le riparazioni.
+    textEng: This unit cannot be customized due to damage sustained in combat. It will be repaired over time if the base has enough resources in store. Switch to overworld to progress repairs.
+  unit_list_tooltip_edit_text:
+    id: 1
+    text: Accedi alla schermata di modifica dell'unità, in cui potrai cambiare parti, sottosistemi e livrea del mech.
+    textEng: Enter unit customization screen, where you'll be able to change unit parts, subsystems and livery.
+  unit_list_tooltip_hp_header:
+    id: 1
+    text: PS totali
+    textEng: Total HP
+  unit_list_tooltip_hp_text:
+    id: 1
+    text: La somma di tutti i punti salute dell'unità. Include barriera e integrità di ogni parte installata.
+    textEng: This is a total of all health points of a unit. It includes barrier and integrity from every part installed on the unit.
+  unit_loadout_hint_action_cooldown:
+    id: 1
+    text: Tempo di ricarica azioni
+    textEng: Action cooldowns
+  unit_loadout_hint_action_dissipation:
+    id: 1
+    text: Dissipazione
+    textEng: Dissipation
+  unit_loadout_hint_barrier:
+    id: 1
+    text: Barriera
+    textEng: Barrier
+  unit_loadout_hint_dash:
+    id: 1
+    text: Scatta
+    textEng: Dash
+  unit_loadout_hint_integrity:
+    id: 1
+    text: Integrità
+    textEng: Integrity
+  unit_loadout_hint_level:
+    id: 1
+    text: Livello
+    textEng: Level
+  unit_loadout_hint_mass:
+    id: 1
+    text: Massa
+    textEng: Mass
+  unit_loadout_hint_name:
+    id: 1
+    text: Nome
+    textEng: Name
+  unit_loadout_hint_power:
+    id: 1
+    text: Energia
+    textEng: Power
+  unit_loadout_hint_role:
+    id: 1
+    text: Ruolo
+    textEng: Role
+  unit_loadout_hint_select:
+    id: 1
+    text: Seleziona uno spazio sulla sinistra per personalizzare questa unità.
+    textEng: Select a slot on the left to customize this unit
+  unit_loadout_hint_select_unit:
+    id: 1
+    text: Seleziona uno spazio sulla sinistra per personalizzare questa unità.
+    textEng: Select a slot on the left to customize this unit
+  unit_loadout_hint_speed:
+    id: 1
+    text: Velocità
+    textEng: Speed
+  unit_loadout_hint_thrust:
+    id: 1
+    text: Propulsore
+    textEng: Thrust
+  unit_loadout_hint_weight:
+    id: 1
+    text: Classe
+    textEng: Class
+  unit_loadout_socket_empty:
+    id: 1
+    text: 'Alloggiamento vuoto: nessuna parte installata.'
+    textEng: 'Empty socket: no installed part.'
+  unit_remove_header:
+    id: 2
+    text: Conferma distruzione
+    textEng: Confirm destruction
+  unit_remove_text:
+    id: 2
+    text: Vuoi davvero distruggere questo mech? L'azione non può essere annullata. Ogni elemento installato sarà riposto nell'inventario.
+    textEng: Are you sure you want to destroy this mech? This can not be undone. Every equipped item will be returned to inventory.
+  units_livery_full_body:
+    id: 1
+    text: Corpo completo
+    textEng: Full Body
+  upgrades_desc_blocking:
+    id: 1
+    text: Blocco
+    textEng: Blocking
+  upgrades_desc_buildable:
+    id: 1
+    text: Costruibile
+    textEng: Buildable
+  upgrades_desc_cost:
+    id: 1
+    text: Costo
+    textEng: Cost
+  upgrades_desc_effect:
+    id: 1
+    text: Effetto
+    textEng: Effect
+  upgrades_desc_installed:
+    id: 1
+    text: Installata
+    textEng: Installed
+  upgrades_desc_installed_fully:
+    id: 1
+    text: Completamente installata
+    textEng: Installed fully
+  upgrades_desc_installed_partially:
+    id: 1
+    text: Parzialmente installata
+    textEng: Installed partially
+  upgrades_desc_locked:
+    id: 1
+    text: Bloccata
+    textEng: Locked
+  upgrades_desc_needed:
+    id: 1
+    text: Necessaria
+    textEng: Needed
+  upgrades_desc_no_cost:
+    id: 1
+    text: Nessun costo di installazione
+    textEng: No cost to install
+  upgrades_desc_not_buildable:
+    id: 1
+    text: Non costruibile
+    textEng: Not buildable
+  upgrades_desc_unlock_requirements:
+    id: 1
+    text: Requisiti di sblocco
+    textEng: Unlock requirements
+  upgrades_hint_navigation1:
+    id: 1
+    text: 'Per spostarti:'
+    textEng: 'To navigate:'
+  upgrades_hint_navigation2:
+    id: 1
+    text: '{0}{1}{2}{3} oppure clicca e trascina'
+    textEng: '{0}{1}{2}{3} or click and drag'
+  upgrades_top_header:
+    id: 2
+    text: Migliorie della base
+    textEng: Base upgrades
+  upgrades_top_subtitle:
+    id: 2
+    text: Funzionalità e capienza
+    textEng: Storage & capabilities
+  workshop_button_build:
+    id: 1
+    text: Costruisci
+    textEng: Build
+  workshop_button_hint_available:
+    id: 1
+    text: Questo oggetto può essere costruito in officina. Le risorse necessarie saranno spese immediatamente. L'oggetto sarà completato alla prossima sosta (accampamento o rifornimento).
+    textEng: The item can be built at the workshop. Required resources will be spent immediately. The item will be finished at the next stop (camp or resupply).
+  workshop_button_hint_blocked:
+    id: 1
+    text: Al momento non è possibile costruire questo oggetto.
+    textEng: The item can't be built at the moment.
+  workshop_button_hint_blocked_fullqueue:
+    id: 1
+    text: Ci sono troppi progetti in corso. Completa i progetti esistenti per avviarne degli altri.
+    textEng: There are too many ongoing projects. Complete existing projects to build more.
+  workshop_button_hint_blocked_fullres:
+    id: 1
+    text: Questo progetto genera risorse che sono già al completo. Dovrai spendere delle risorse per poter continuare.
+    textEng: This project generates resources that are already full. Spend some resources to proceed.
+  workshop_button_hint_blocked_fullunits:
+    id: 1
+    text: Spazio insufficiente per immagazzinare unità aggiuntive. Rimuovi una delle unità esistenti oppure migliora il magazzino.
+    textEng: There is no space to store additional units. Remove one of the existing units or upgrade the storage bay.
+  workshop_button_hint_blocked_resources:
+    id: 1
+    text: Risorse insufficienti per costruire questo oggetto. Ottieni risorse dalle missioni oppure rottamando oggetti nel tuo inventario.
+    textEng: You do not have enough resources to build this item. Acquire resources from missions or scrap items in your inventory.
+  workshop_button_hint_blocked_upgrade:
+    id: 1
+    text: Per costruire questo progetto, è necessario migliorare le capacità della base. Ricontrolla le migliorie disponibili.
+    textEng: This project can not be built without upgrading base capabilities. Review the available upgrades.
+  workshop_cancel_header:
+    id: 2
+    text: Annullare la costruzione?
+    textEng: Cancel build?
+  workshop_cancel_text:
+    id: 2
+    text: Vuoi annullare questo progetto dell'officina? Le risorse impiegate ti saranno restituite.
+    textEng: Would you like to cancel this workshop project? The resources committed to it will be refunded.
+  workshop_cost:
+    id: 1
+    text: Costo
+    textEng: Cost
+  workshop_cost_charges:
+    id: 1
+    text: Cariche
+    textEng: Charges
+  workshop_cost_duration:
+    id: 1
+    text: Durata
+    textEng: Duration
+  workshop_desc_charges_complete:
+    id: 1
+    text: 'Numero sufficiente di campioni raccolto: progetto sbloccato.'
+    textEng: Sufficient samples collected, project unlocked.
+  workshop_desc_charges_insufficient:
+    id: 1
+    text: Raccogli altri campioni per sbloccare questo progetto.
+    textEng: Collect additional samples to unlock this project.
+  workshop_desc_requires_slot:
+    id: 1
+    text: Questo progetto richiede uno spazio vuoto per unità. Gli spazi vengono occupati sia dalle unità immagazzinate, sia da quelle in costruzione. Per aumentare gli spazi disponibili, vai alla schermata Migliorie.
+    textEng: This project requires a free unit slot. Slots are taken by stored units and in-progress unit construction. To increase the number of available slots, visit the upgrade screen.
+  workshop_desc_stats_equal:
+    id: 1
+    text: uguale a
+    textEng: equal to
+  workshop_desc_stats_greater:
+    id: 1
+    text: più di
+    textEng: greater than
+  workshop_desc_stats_less_than:
+    id: 1
+    text: meno di
+    textEng: less than
+  workshop_desc_stats_not_equal:
+    id: 1
+    text: non uguale a
+    textEng: not equal to
+  workshop_desc_stats_required:
+    id: 1
+    text: Parametri della base necessari
+    textEng: Base stats required
+  workshop_desc_upgrades_required:
+    id: 1
+    text: Migliorie della base necessarie
+    textEng: Base upgrades required
+  workshop_empty_desc:
+    id: 1
+    text: L'Officina al momento non dispone di progetti. Questa è una situazione insolita.
+    textEng: The workshop has no available projects at the moment. This is unusual.
+  workshop_empty_desc_parts:
+    id: 1
+    text: L'officina non ha mai riprodotto parti di questa categoria. Rottama parti presenti nel tuo inventario, oppure durante un recupero, per sbloccare i relativi progetti nell'officina.
+    textEng: The workshop has no record of reverse engineered parts in this category. Scrap parts from your inventory or during salvage to unlock their workshop projects.
+  workshop_empty_desc_projects:
+    id: 1
+    text: L'officina non possiede progetti di questa categoria.
+    textEng: The workshop has no projects in this category.
+  workshop_empty_desc_systems:
+    id: 1
+    text: L'officina non ha mai riprodotto sottosistemi di questa categoria. Rottama sottosistemi presenti nel tuo inventario, oppure durante un recupero, per sbloccare i relativi progetti nell'officina.
+    textEng: The workshop has no record of reverse engineered subsystems in this category. Scrap subsystems from your inventory or during salvage to unlock their workshop projects.
+  workshop_empty_header:
+    id: 1
+    text: Nessun progetto
+    textEng: No projects
+  workshop_header:
+    id: 1
+    text: Progetti
+    textEng: Projects
+  workshop_info_status_absent_header:
+    id: 1
+    text: Nessun dato
+    textEng: No data
+  workshop_info_status_absent_text:
+    id: 1
+    text: L'officina non possiede dati relativi a questo oggetto. Smontalo per sbloccarlo nell'officina.
+    textEng: The workshop has no data about this item. Dismantle the item unlock it in the workshop.
+  workshop_info_status_absent_text_rating:
+    id: 1
+    text: L'officina non possiede dati su questo livello di qualità. Smonta le parti recuperate dello stesso tipo e qualità per sbloccare la produzione in officina.
+    textEng: The workshop has no data about this quality tier. Dismantle salvaged parts of the same type and quality to unlock workshop builds.
+  workshop_info_status_incomplete_header:
+    id: 1
+    text: Incompleta
+    textEng: Incomplete
+  workshop_info_status_incomplete_text:
+    id: 1
+    text: La riproduzione di questa parte è incompleta. Smonta altre parti recuperate sul campo per sbloccare la parte relativa in officina.
+    textEng: Reverse engineering of this part is incomplete. Dismantle additional parts salvaged in the field to unlock this part in the workshop.
+  workshop_info_status_incomplete_text_rating:
+    id: 1
+    text: La riproduzione di questo livello di qualità è incompleta. Smonta altre parti della stessa qualità per sbloccarla in officina. Una versione di qualità inferiore di questo oggetto è disponibile per la costruzione.
+    textEng: Reverse engineering of this quality tier is incomplete. Dismantle additional parts of this quality to unlock it in the workshop. A lower quality version of this item is available to build.
+  workshop_info_status_unlocked_header:
+    id: 1
+    text: Sbloccata
+    textEng: Unlocked
+  workshop_info_status_unlocked_text:
+    id: 1
+    text: Questa parte è stata completamente studiata e riprodotta, ed è ora possibile ricrearla in officina.
+    textEng: This part has been fully reverse engineered and can be built by the workshop.
+  workshop_label_level:
+    id: 1
+    text: Livello
+    textEng: Level
+  workshop_level_prefix_blocked:
+    id: 1
+    text: L'officina può essere migliorata per raggiungere un livello superiore una volta ottenute (o rottamate) parti sufficienti di un livello più alto.
+    textEng: The workshop can be upgraded to a higher level once you acquire (or scrap) enough parts with a higher level.
+  workshop_level_prefix_upgradeable:
+    id: 1
+    text: L'officina può essere migliorata a un livello superiore. L'inventario, i mech a bordo e i registri di rottamazione contengono un numero sufficiente di parti di più alto livello.
+    textEng: The workshop can be upgraded to a higher level. The inventory, the mechs onboard and scrap records have enough higher level parts.
+  workshop_level_scrap_header:
+    id: 1
+    text: Contributo di rottamazione
+    textEng: Scrap contribution
+  workshop_level_scrap_text:
+    id: 1
+    text: In passato hai rottamato un certo numero di parti di livello superiore. Sebbene non si trovino più nel tuo inventario, contribuiscono ancora allo sblocco di un nuovo livello dell'officina.
+    textEng: A number of parts with a higher level was scrapped in the past. While you no longer have these parts in the inventory, they still contribute to unlocking a higher workshop level.
+  workshop_tooltip_level_text:
+    id: 1
+    text: Il livello dell'officina dipende dal livello delle parti raccolte o rottamate. Per aumentarlo, recupera o rottama parti di avversari di livello superiore.
+    textEng: The workshop level is determined by the level of parts collected or scrapped. Salvage or scrap parts from higher level opponents to add progress towards the next level.
+  workshop_top_header:
+    id: 2
+    text: Officina
+    textEng: Workshop
+  workshop_top_subtitle:
+    id: 2
+    text: Costruzione di equipaggiamento
+    textEng: Equipment crafting
+  workshop_upgrade_button:
+    id: 2
+    text: Migliora
+    textEng: Upgrade

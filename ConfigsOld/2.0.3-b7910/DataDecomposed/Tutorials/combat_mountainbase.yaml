@@ -1,0 +1,185 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 100
+  depthBackground: 100
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 128.6553
+        y: -19.44927
+        z: 222.7947
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 35.11586
+      rotationYOverride: true
+      rotationY: -34.06136
+      zoomOverride: true
+      zoom: 0.5045891
+      delay: 0
+    - !CombatSelectUnit
+      nameInternal: 
+      select: true
+      focus: true
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 1
+      g: 0.4292453
+      b: 0.4292453
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 410
+    frameSizeY: 224
+    frameBlocksInput: true
+    frameBoundary: true
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 1
+      g: 0.4292453
+      b: 0.4292453
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: -140
+    frameSizeX: 410
+    frameSizeY: 80
+    frameBlocksInput: true
+    frameBoundary: true
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 117.5655
+        y: -0.8872182
+        z: 144.1369
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 33.34976
+      rotationYOverride: true
+      rotationY: -41.17337
+      zoomOverride: true
+      zoom: 1
+      delay: 0

@@ -1,0 +1,128 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main_02
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_celebration
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.4874022
+        g: 1
+        b: 0.3726415
+        a: 0
+      image: bg_blur_squad
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5561273
+            g: 0.8207547
+            b: 0.4994215
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main_02
+    optionsReused: 
+  main_02:
+    comment: 
+    image: event_hologram_map
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.2877358
+        g: 0.7589988
+        b: 1
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.2862745
+            g: 0.7607844
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !UpdateCampaignOnProvinceArrival {}
+          - !RebuildTravelPoints
+            questMain: false
+            questKey: core_ftue
+          - !StartTutorial
+            key: overworld_frontline
+            allowRepeat: true
+          functionsLocal:
+          - !InteractionOptionExit {}
+    optionsReused: 

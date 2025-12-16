@@ -1,0 +1,138 @@
+hidden: false
+parents:
+- key: sh_core_basic
+- key: sh_option_main_leave
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags:
+- context_forward_base
+check:
+  repeat: Enabled
+  checksGlobal:
+  - !OverworldValidateProvinceFaction
+    present: false
+  checksBase:
+  - !Comment
+    comment: To enter this interaction, the base should either not be in the feature-checked mode (FTUE), or should be at a point where roster has been unlocked.
+  - !OverworldValidateGroup
+    type: RequireOne
+    checks:
+    - !OverworldValidateMemory
+      check:
+        method: RequireAll
+        checks:
+        - key: feature_check
+          presenceDesired: false
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+    - !OverworldValidateMemory
+      check:
+        method: RequireAll
+        checks:
+        - key: feature_base_roster
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: NoValueCheck
+          value: 0
+    present: true
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_recruit
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget:
+      - !OverworldEntityChecked
+        conditions:
+        - !OverworldValidateQuestLink
+          questMain: false
+          questKey: core_ftue
+        functions:
+        - !Log
+          message: Entering FTUE exit frontline
+        - !OverworldEntityGlobal
+          function: !StartTutorial
+            key: overworld_pilot_recruit
+            allowRepeat: false
+        functionsElse: 
+      functionsGlobal: 
+      functionsLocal: 
+    options:
+      01_resupply:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 2
+          color:
+            r: 0.3537736
+            g: 0.789126
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal:
+        - !OverworldValidateResupplyPossible {}
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !StartSimLock
+            duration: 12
+            type: resupply
+          functionsLocal: 
+      02_recruit:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 3
+          color:
+            r: 0.801
+            g: 0.9720505
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterRecruitment {}
+    optionsReused: 

@@ -1,0 +1,49 @@
+parents:
+- key: workshop_tech_r3
+  priority: 1
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 3
+  positionY: 6
+  endpoint: false
+  group: 
+  icon: s_icon_l32_spec_guided
+unlock: 
+cost:
+  resources:
+    components_r2: 30
+    components_r3: 15
+    supplies: 700
+effect: 
+effectPerInstance:
+  1:
+    stats:
+    - key: item_drone_decoy_limit
+      modifier: Offset
+      value: 1
+    functions: []
+    functionsOnLoad: 
+  2:
+    stats:
+    - key: item_drone_decoy_limit
+      modifier: Offset
+      value: 1
+    functions: []
+    functionsOnLoad: 
+  3:
+    stats:
+    - key: item_drone_decoy_limit
+      modifier: Offset
+      value: 1
+    functions: []
+    functionsOnLoad: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

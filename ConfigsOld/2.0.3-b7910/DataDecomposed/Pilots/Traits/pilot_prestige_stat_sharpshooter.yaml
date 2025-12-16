@@ -1,0 +1,27 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_role_custom4
+tags:
+- type_prestige
+- type_sharpshooter
+group: 
+existingTraitTagsFilter:
+  sharpshooter_damage: true
+prestigeRank:
+  check: Equal
+  value: 1
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_damage_lr:
+    mode: Offset
+    value: 0.2
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

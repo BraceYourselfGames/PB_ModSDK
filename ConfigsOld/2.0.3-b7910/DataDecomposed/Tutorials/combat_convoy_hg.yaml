@@ -1,0 +1,281 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.3294118
+      g: 0.7568628
+      b: 0.4627451
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 256
+    frameSizeY: 256
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: pb_homeguard1
+      stateName: 
+      position:
+        x: 239.5
+        y: -20
+        z: 44.5
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: ''
+      select: true
+      focus: false
+      delay: 0
+    - !SetCameraStable
+      stable: true
+      offset: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 231.3882
+        y: -10.45
+        z: 63.47765
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 26.93034
+      rotationYOverride: true
+      rotationY: -114.4834
+      zoomOverride: true
+      zoom: 0.4440514
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.7490196
+      g: 0.2980392
+      b: 0.5803922
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 380
+    frameSizeX: 236
+    frameSizeY: 64
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_homeguard1
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 253.7492
+        y: -10.45
+        z: 59.77977
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 67.99954
+      rotationYOverride: true
+      rotationY: -135.9117
+      zoomOverride: true
+      zoom: 0
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.6705883
+      g: 0.2745098
+      b: 0.8313726
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 376
+    framePositionY: 208
+    frameSizeX: 52
+    frameSizeY: 52
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopLeft
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_homeguard1
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 249.9049
+        y: -10.45
+        z: 65.70892
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 40.27357
+      rotationYOverride: true
+      rotationY: -126.4385
+      zoomOverride: true
+      zoom: 0.1732471
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !SetGameplayUIActive
+      active: false
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_homeguard1
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 252.136
+        y: -10.45
+        z: 78.4752
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 20.32754
+      rotationYOverride: true
+      rotationY: -118.538
+      zoomOverride: true
+      zoom: 0.2395842
+      delay: 0.1
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !SetGameplayUIActive
+      active: true
+  effectsCombat:
+    functions:
+    - !SetCameraStable
+      stable: false
+      offset: 0

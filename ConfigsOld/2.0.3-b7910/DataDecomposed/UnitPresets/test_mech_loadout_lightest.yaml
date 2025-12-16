@@ -1,0 +1,39 @@
+hidden: true
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: 
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- type_mech
+partTagPreferences:
+  body:
+  - tags:
+      armor_tsubasa: true
+parts:
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_top_core:
+        livery: inv_army_field_c
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_core_overdrive
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_handgun_auto_01
+    rating:
+      i: 2
+    systems: 
+animationOverrides: 
+effects: 

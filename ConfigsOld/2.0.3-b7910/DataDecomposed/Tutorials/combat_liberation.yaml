@@ -1,0 +1,186 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: ''
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 144.7166
+        y: -10.45
+        z: 252.3286
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 34.96944
+      rotationYOverride: true
+      rotationY: -156.8782
+      zoomOverride: true
+      zoom: 0.7488562
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.6415094
+      g: 0.2474484
+      b: 0.1845852
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 300
+    frameSizeY: 358
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: 
+      stateName: 
+      position:
+        x: 118.09
+        y: -11.2
+        z: 196.7
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 105.59
+        y: -19.5
+        z: 194.716
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 30
+      rotationYOverride: true
+      rotationY: -145
+      zoomOverride: true
+      zoom: 0.75
+      delay: 0
+    - !CombatSelectUnit
+      nameInternal: 
+      select: true
+      focus: true
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 180.2501
+        y: -10.45
+        z: 196.3023
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 34.93035
+      rotationYOverride: true
+      rotationY: -159.5012
+      zoomOverride: true
+      zoom: 0.75
+      delay: 0
+    - !CombatSelectUnit
+      nameInternal: 
+      select: true
+      focus: true
+      delay: 0
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0

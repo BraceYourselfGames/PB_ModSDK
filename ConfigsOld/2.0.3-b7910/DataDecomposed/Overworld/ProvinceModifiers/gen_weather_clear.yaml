@@ -1,0 +1,34 @@
+hidden: false
+positive: true
+trackVisitUniqueness: false
+trackBranchUniqueness: true
+priority: 0
+tinted: false
+hue: 0
+icon: s_icon_l32_weather_cloud0
+tags:
+- type_mixed
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry: 
+effectsOnCompletion: 
+effectsOnSpawn:
+- checks:
+  - !OverworldValidateWeather
+    check:
+      required: true
+      min: 0.2
+      max: 1
+  functionsTargeted:
+  - !OverworldEntityChance
+    chance: 0.8
+    function: !OverworldEntityWeather
+      precipitation: 0
+      temperature: 1
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

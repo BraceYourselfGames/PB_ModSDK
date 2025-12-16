@@ -1,0 +1,104 @@
+parents: []
+hidden: true
+core: 
+ui: 
+tags: 
+layout:
+  units: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 300
+    name: Utilities
+    color: 
+    comment:
+      comment: Maintain audio syncs and do other looping utility tasks.
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatAudioSyncFromStat
+        statKey: ehp
+        audioSyncKey: music_combat_linear_intensity
+        inputRange:
+          x: 0.2
+          y: 0.8
+        outputRange:
+          x: 1
+          y: 0
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable:
+    weakpoint_core:
+      unitCount: 
+      ui:
+        icon: s_icon_l24_inv_repeat3
+        iconEmbedded: true
+      functions:
+      - !CombatCreateCommsMessage
+        time: 0
+        key: boss_evt_weakpoint_core_destroyed
+      functionsTargeted:
+      - !CombatUnitEffectSpawn
+        position:
+          x: 0
+          y: 0
+          z: 0
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        centered: true
+        asset:
+          key: fx_prop_destruction_vehicle_mid
+          scale:
+            x: 1
+            y: 1
+            z: 1
+      - !CombatUnitTargetCompositeConnected
+        unitKey: a_core
+        functionsTargeted:
+        - !CombatUnitDamageEvent
+          delay: 0
+          splash: true
+          dispersed: true
+          sourceInternal: true
+          integrity:
+            normalized: true
+            leveled: false
+            f: 0.2
+          concussion: 
+          heat: 
+          stagger: 
+          statusBuildup: 
+        - !CombatUnitEffectSpawn
+          position:
+            x: 0
+            y: 5
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          centered: true
+          asset:
+            key: fx_prop_destruction_vehicle_large
+            scale:
+              x: 1
+              y: 1
+              z: 1

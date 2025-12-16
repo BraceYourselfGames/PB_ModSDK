@@ -1,0 +1,205 @@
+hidden: false
+parent: vhc_system_wpn_arch_primary
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- category_wpn_capital_beam
+statDistribution: ''
+stats:
+  act_count:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 296
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 21
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_buildup:
+    value: 0.05
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 3.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_heat:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 9
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 300
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 1400
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_stagger:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments:
+  main:
+    key: comp_boss_weapon_main_beam_01
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+activation:
+  visual:
+    local:
+      key: fx_beam_impact
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy:
+        f: 0.5
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: 
+    onActivationMid: 
+    onActivationLast: 
+    onActivationStart: boss_spider_weapon_beam
+    onActivationEnd: boss_spider_weapon_beam_end
+  light:
+    shared: true
+    key: default
+    custom: 
+  recoil:
+    key: recoil_beam
+  timing: 
+  hitReaction: 
+projectile: 
+beam:
+  reflectionAngleLimit: 30
+  body:
+    key: fx_beam_large_friendly
+    keyEnemy: 
+    scale:
+      x: 1
+      y: 1
+      z: 1
+    colorOverride: 
+    colorOverrideEnemy:
+      colorFrom:
+        r: 1
+        g: 0.08333334
+        b: 0
+        a: 1
+      colorTo:
+        r: 1
+        g: 0.627451
+        b: 0.4117647
+        a: 1
+  impact:
+    key: fx_beam_impact_large
+    keyEnemy: 
+    scale:
+      x: 2
+      y: 2
+      z: 2
+    hueOffset: 
+    hueOffsetEnemy:
+      f: 0.5
+  reflection:
+    key: fx_beam_reflection
+    keyEnemy: 
+    scale:
+      x: 4
+      y: 4
+      z: 4
+    hueOffset: 
+    hueOffsetEnemy:
+      f: 0.5
+  statusBuildup: 
+custom:
+  flags:
+  - reaction_los_check
+  ints: 
+  floats:
+    reaction_angle_threshold: 90
+    reaction_rotation_speed: 0.5
+  vectors: 
+  strings: 
+functions: 
+workshopInfo: 

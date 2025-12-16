@@ -1,0 +1,44 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_sentry
+textType: 
+livery: default
+aiBehavior: Turret
+aiTargeting: default
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- type_turret
+- branch_trainingarmy
+- range_medium
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_sentry_body_base
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_vhc_sentry_ml_01
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_sentry_body_top_ml
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

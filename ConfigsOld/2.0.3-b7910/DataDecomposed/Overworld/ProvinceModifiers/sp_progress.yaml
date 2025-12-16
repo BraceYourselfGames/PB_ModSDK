@@ -1,0 +1,31 @@
+hidden: false
+positive: false
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: true
+hue: 35
+icon: s_icon_l32_add_clone
+tags: []
+levelOffset:
+  i: 1
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry: 
+effectsOnCompletion:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_breakthrough
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsBase: 
+effectsOnSpawn: 
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

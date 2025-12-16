@@ -1,0 +1,26 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags: 
+workshopInfo: 
+genSteps:
+- !TrimSystemsByStats
+  statsDesired: false
+  statKeys:
+  - barrier
+  - barrier_regeneration
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  - perk_1
+  priority: 60
+  comment: 
+  checks: 

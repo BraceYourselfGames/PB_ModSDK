@@ -1,0 +1,27 @@
+textDescInTooltips: true
+hidden: true
+icon: s_icon_l32_socket_arm
+severity: Critical
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireAll
+  subsystemsMethod: RequireAll
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts:
+  - socket: equipment_right
+    not: true
+    requirement: Present
+    tags: 
+  - socket: equipment_left
+    not: false
+    requirement: Tags
+    tags:
+      type_defensive: true
+  subsystems: []
+  stats: []
+  pilot: []
+functions: 

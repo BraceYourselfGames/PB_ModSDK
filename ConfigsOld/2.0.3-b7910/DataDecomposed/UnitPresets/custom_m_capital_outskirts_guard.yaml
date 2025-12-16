@@ -1,0 +1,59 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_city_b
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      weight_heavy: true
+parts:
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems: 
+  equipment_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_shield: true
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_energy: false
+          part_melee: false
+          part_ml: false
+          range_short: true
+          wpn_primary: true
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: 
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: 
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: 
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

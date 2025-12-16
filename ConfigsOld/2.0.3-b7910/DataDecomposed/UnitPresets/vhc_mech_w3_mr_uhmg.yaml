@@ -1,0 +1,67 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: true
+parents:
+- key: vhc_mech
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: juggernaut
+tags:
+- range_medium
+partTagPreferences:
+  body:
+  - tags:
+      armor_knox: true
+  - tags:
+      armor_arrow: true
+parts:
+  core:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_medium: true
+    rating: 
+    systems: 
+  equipment_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ultraheavy_mg_01
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_light: true
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_light: true
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_heavy: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

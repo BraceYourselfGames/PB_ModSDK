@@ -1,0 +1,634 @@
+timeLastSync: 63811496084
+localized: true
+exportMode: LinePerKeySplit
+name: Scenarios (Embedded)
+description: All text unique to specific scenarios. Core header/text are only visible in developer menus for the time being. States are akin to objectives, their header/text usually describe what needs to be done or consequences of something happening. Steps are similar to narrative event steps, but can include a lot more data - aside from standard header/text strings, they can also include strings for tutorial intermissions, contextual hints etc. State/step text that repeats more than oncecan be found in scenario_states_shared or scenario_steps_shared sectors.
+splits:
+- displayName: Scenario
+  prefix: core_header
+tags: 
+groups: 
+entries:
+  boss__state_boss_defeated_0c_header:
+    noteDev: 
+    temp: false
+    text: Destroy the enemy
+  boss__state_boss_defeated_0c_text:
+    noteDev: 
+    temp: false
+    text: Evade the onboard weapons and destroy the core of the platform to permanently neutralize it.
+  generic_assassination__state_04_elite_eliminated_0c_header:
+    noteDev: 
+    temp: false
+    text: Eliminate the target
+  generic_assassination__state_04_elite_eliminated_0c_text:
+    noteDev: 
+    temp: false
+    text: Take out the designated unit. Do not let the target escape.
+  generic_assassination__step_main_0c_header:
+    noteDev: 
+    temp: false
+    text: Assassination
+  generic_assassination__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: Eliminate the high-ranking officer in command of the local forces.
+  generic_assassination_runner__state_elite_escape_0c_header:
+    noteDev: 
+    temp: false
+    text: Target escaping
+  generic_assassination_runner__state_elite_escape_0c_text:
+    noteDev: 
+    temp: false
+    text: The target is making their way to an evac point. Stop them.
+  generic_assault_alarm__state_alarm_0c_header:
+    noteDev: 
+    temp: false
+    text: Side Objective
+  generic_assault_alarm__state_alarm_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy alarm tower to prevent deployment of reserve units.
+  generic_assault_alarm__state_wave_2_0c_header:
+    noteDev: 
+    temp: false
+    text: Reserve Reinforcements
+  generic_assault_alarm__state_wave_2_0c_text:
+    noteDev: 
+    temp: false
+    text: Reserve Reinforcements will be alerted and deployed if the Alarm tower is not destroyed.
+  generic_breakin__state_obj_timer_fail_0c_text:
+    noteDev: 
+    temp: true
+    text: ''
+  generic_civilian_liberation__state_destruction_critical_0c_header:
+    noteDev: 
+    temp: false
+    text: Minimize damage
+  generic_civilian_liberation__state_destruction_critical_0c_text:
+    noteDev: 
+    temp: false
+    text: Avoid further destruction. We'll have to abandon the fight if too many structures are lost.
+  generic_civilian_liberation__state_destruction_early_0c_header:
+    noteDev: 
+    temp: false
+    text: Avoid damage
+  generic_civilian_liberation__state_destruction_early_0c_text:
+    noteDev: 
+    temp: false
+    text: Keep destruction to a minimum.
+  generic_civilian_liberation__state_reinforcements_hg_0c_header:
+    noteDev: 
+    temp: false
+    text: Incoming help
+  generic_civilian_liberation__state_reinforcements_hg_0c_text:
+    noteDev: 
+    temp: false
+    text: Fyrland Freedom Forces will arrive to help soon.
+  generic_crawler_defense__state_escape_timer_0c_header:
+    noteDev: 
+    temp: false
+    text: Time to repair
+  generic_crawler_defense__state_escape_timer_0c_text:
+    noteDev: 
+    temp: false
+    text: Once repairs are complete, we'll be able to extract.
+  generic_crawler_defense__step_main_0c_header:
+    noteDev: 
+    temp: false
+    text: Protect the base
+  generic_crawler_defense__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: The crews need time to get the base running again. Protect it from damage until the repairs are completed.
+  generic_elimination_delayed__state_delayed_start_0c_header:
+    noteDev: 
+    temp: false
+    text: Contact imminent
+  generic_elimination_delayed__state_delayed_start_0c_text:
+    noteDev: 
+    temp: false
+    text: The main force is quickly approaching the site.
+  generic_elimination_delayed__step_early_arrival_0c_header:
+    noteDev: 
+    temp: false
+    text: Early arrival
+  generic_elimination_delayed__step_early_arrival_0c_text:
+    noteDev: 
+    temp: false
+    text: 'Our base has outmaneuvered the enemy and caught a small squad off guard. Take advantage: eliminate the stragglers and take advantageous position before the main fight breaks out.'
+  generic_military_demolition__state_demolition_t1_0c_header:
+    noteDev: 
+    temp: false
+    text: Tier 1
+  generic_military_demolition__state_demolition_t1_0c_text:
+    noteDev: 
+    temp: false
+    text: Damage the enemy structures.
+  generic_military_demolition__state_demolition_t2_0c_header:
+    noteDev: 
+    temp: false
+    text: Tier 2
+  generic_military_demolition__state_demolition_t2_0c_text:
+    noteDev: 
+    temp: false
+    text: Damage more enemy structures.
+  generic_military_demolition__state_demolition_t3_0c_header:
+    noteDev: 
+    temp: false
+    text: Tier 3
+  generic_military_demolition__state_demolition_t3_0c_text:
+    noteDev: 
+    temp: false
+    text: Damage the majority of the base.
+  generic_military_demolition__state_timer_escape_victory_0c_header:
+    noteDev: 
+    temp: false
+    text: Time remaining
+  generic_military_demolition__state_timer_escape_victory_0c_text:
+    noteDev: 
+    temp: false
+    text: The enemy is scrambling ground forces and air support. Your units will be forced to retreat soon.
+  generic_military_demolition__step_main_0c_header:
+    noteDev: 
+    temp: false
+    text: Demolition
+  generic_military_demolition__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: Prioritize destroying structures, inflict as much damage as possible. The local garrison is a threat, but it won't have a reason to stick around if there is nothing of use is left standing.
+  generic_raid__step_main_0c_header:
+    noteDev: 
+    temp: false
+    text: Raid
+  generic_raid__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: The cargo crates have tracking devices. They'll be airlifted once the enemy aircraft gets a lock on the signal. Move your mechs to the crates to scramble the signal and delay the pickup.
+  unique_breakthrough_stage_01__state_cargo_destruction_threshold_0c_header:
+    noteDev: 
+    temp: false
+    text: Cargo damage
+  unique_breakthrough_stage_01__state_cargo_destruction_threshold_0c_text:
+    noteDev: 
+    temp: false
+    text: A potential reward could be lost every time enough containers are destroyed.
+  unique_breakthrough_stage_01__state_reinforcements_spawn_0c_text:
+    noteDev: 
+    temp: false
+    text: Enemy forces are gaining on the carrier.
+  unique_breakthrough_stage_01__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: Reach every engine and destroy them to stop the carrier. Exercise caution; undetected units might be on board.
+  unique_breakthrough_stage_02__intro_primary:
+    noteDev: 
+    temp: false
+    text: Stronghold Siege
+  unique_breakthrough_stage_02__state_obj_breakin_0c_header:
+    noteDev: 
+    temp: false
+    text: Explosive entrance
+  unique_breakthrough_stage_02__state_obj_breakin_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy the generator next to the gates to blast a way in.
+  unique_breakthrough_stage_02__state_obj_satellite_tower_01_0c_header:
+    noteDev: 
+    temp: false
+    text: Overload tower A
+  unique_breakthrough_stage_02__state_obj_satellite_tower_01_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy generator under the tower
+  unique_breakthrough_stage_02__state_obj_satellite_tower_02_0c_header:
+    noteDev: 
+    temp: false
+    text: Overload tower B
+  unique_breakthrough_stage_02__state_obj_satellite_tower_02_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy generator under the tower
+  unique_breakthrough_stage_02__state_obj_satellite_tower_03_0c_header:
+    noteDev: 
+    temp: false
+    text: Overload tower C
+  unique_breakthrough_stage_02__state_obj_satellite_tower_03_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy generator under the tower
+  unique_breakthrough_stage_02__step_final_0c_header:
+    noteDev: 
+    temp: false
+    text: Cleaning up
+  unique_breakthrough_stage_02__step_final_0c_text:
+    noteDev: 
+    temp: false
+    text: Eliminate all hostiles remaining.
+  unique_breakthrough_stage_02__step_main_0c_header:
+    noteDev: 
+    temp: false
+    text: Gatekeeping
+  unique_breakthrough_stage_02__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy the gate blocking the way into the enemy stronghold.
+  unique_breakthrough_stage_02__step_towers_0c_header:
+    noteDev: 
+    temp: false
+    text: Shielded enemy
+  unique_breakthrough_stage_02__step_towers_0c_text:
+    noteDev: 
+    temp: false
+    text: Overload the Behemoth's shields by destroying the surrounding generators.
+  unique_breakthrough_stage_02_prep__state_demolition_antenna_0c_header:
+    noteDev: 
+    temp: false
+    text: Destroy the antenna
+  unique_breakthrough_stage_02_prep__state_demolition_antenna_0c_text:
+    noteDev: 
+    temp: false
+    text: Damage the highlighted structure.
+  unique_breakthrough_stage_02_prep__step_cleanup_0c_text:
+    noteDev: 
+    temp: false
+    text: Our forces need to regroup before the final assault. Take out the remaining enemy units or extract to complete the mission.
+  unique_capital_center__state_charge_progress_0c_header:
+    noteDev: 
+    temp: false
+    text: Charging the weapon
+  unique_capital_center__state_charge_progress_0c_text:
+    noteDev: 
+    temp: false
+    text: Do not let the enemy approach the base to avoid losing charge.
+  unique_capital_center__state_sequence1_countermeasures_destroyed_0c_header:
+    noteDev: 
+    temp: false
+    text: Priority targets
+  unique_capital_center__state_sequence1_countermeasures_destroyed_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy the field generators
+  unique_capital_center__step_01_city_hall_0c_header:
+    noteDev: 
+    temp: false
+    text: Interference
+  unique_capital_center__step_01_city_hall_0c_text:
+    noteDev: 
+    temp: false
+    text: Enemy countermeasures are interfering with the weapon. Take down the field generators on top of the City Hall.
+  unique_capital_center__step_02_charge_0c_header:
+    noteDev: 
+    temp: false
+    text: Current
+  unique_capital_center__step_02_charge_0c_text:
+    noteDev: 
+    temp: false
+    text: Wait for the the gun to build up a charge. Keep the enemy away from the base.
+  unique_capital_center__step_03_firing_0c_header:
+    noteDev: 
+    temp: false
+    text: Aftermath
+  unique_capital_center__step_03_firing_0c_text:
+    noteDev: 
+    temp: false
+    text: Main objectile complete. Clear the remaining hostiles to end the operation.
+  unique_capital_outskirts__state_objective_elimination_0c_header:
+    noteDev: 
+    temp: false
+    text: Clear the field
+  unique_capital_outskirts__state_objective_elimination_0c_text:
+    noteDev: 
+    temp: false
+    text: Eliminate enough enemy units to break through.
+  unique_capital_outskirts__state_objective_escape_0c_header:
+    noteDev: 
+    temp: false
+    text: Escape north
+  unique_capital_outskirts__state_objective_escape_0c_text:
+    noteDev: 
+    temp: false
+    text: Get every unit to the escape point behind the defensive line. Keep the enemy numbers under 5 to ensure safe exit.
+  unique_capital_outskirts__state_reinforcements_perimeter_0c_header:
+    noteDev: 
+    temp: false
+    text: Line reinforcements
+  unique_capital_outskirts__state_reinforcements_perimeter_0c_text:
+    noteDev: 
+    temp: false
+    text: More enemy units will be deployed as soon as you cross the defense line.
+  unique_capital_outskirts__state_reinforcements_timed_0c_header:
+    noteDev: 
+    temp: false
+    text: Timed reinforcements
+  unique_capital_outskirts__state_reinforcements_timed_0c_text:
+    noteDev: 
+    temp: false
+    text: An additional squad is en route from the north.
+  unique_capital_outskirts__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: Provoke the enemy to pull forces from other parts of the Capital.
+  unique_intro__intro_location:
+    noteDev: 
+    temp: false
+    text: Fyrland Republic Border
+  unique_intro__intro_primary:
+    noteDev: 
+    temp: false
+    text: Boundary Falls
+  unique_intro__intro_ready:
+    noteDev: 
+    temp: false
+    text: Incoming transmission...
+  unique_intro__intro_threat:
+    noteDev: 
+    temp: false
+    text: Three years ago
+  unique_intro__step_00_intro_g0_u0_unit:
+    noteDev: 
+    temp: false
+    text: Lieutenant
+  unique_intro__step_00_intro_g0_u1_unit:
+    noteDev: 
+    temp: false
+    text: Major
+  unique_intro__step_00_intro_g0_u2_unit:
+    noteDev: 
+    temp: false
+    text: Cadet
+  unique_intro__step_00_intro_g0_u3_pilot_callsign:
+    noteDev: 
+    temp: false
+    text: Beam
+  unique_intro__step_00_intro_g0_u3_pilot_name:
+    noteDev: 
+    temp: false
+    text: Charlie
+  unique_intro__step_00_intro_g0_u3_unit:
+    noteDev: 
+    temp: false
+    text: Corporal
+  unique_intro__step_02_move1_1hc_0_text:
+    noteDev: 
+    temp: false
+    text: Left click the unit to open the action list.
+  unique_intro__step_02_move1_1hc_1_text:
+    noteDev: 
+    temp: false
+    text: Left click the "Run" action.
+  unique_intro__step_02_move1_1hc_2_text:
+    noteDev: 
+    temp: false
+    text: Left click in the world to confirm your movement.
+  unique_intro__step_02_move1_1hc_3_text:
+    noteDev: 
+    temp: false
+    text: Click this button to execute plan.
+  unique_intro__step_07_wait_and_move_1hc_0_text:
+    noteDev: 
+    temp: false
+    text: >-
+      This is the action bar. Click the "Run" action to see how prediction helps with planning.
+
+
+      Hovering over the timeline will also show the prediction.
+  unique_intro__step_07_wait_and_move_1hc_1_text:
+    noteDev: 
+    temp: false
+    text: Click the "Run" action.
+  unique_intro__step_07_wait_and_move_1hc_2_text:
+    noteDev: 
+    temp: false
+    text: This point should provide a clear view. Note how the distance to it changes the predicted arrival time.
+  unique_intro__step_07_wait_and_move_1hc_3_text:
+    noteDev: 
+    temp: false
+    text: "Movement time is determined by distance. You can move any number of times. \n\nActions can be cancelled with two right clicks. If you're happy with the plan, execute it!"
+  unique_intro__step_07_wait_and_move_1hc_4_text:
+    noteDev: 
+    temp: false
+    text: "This is the Commander's timeline. It shows the actions he'll take over the next five seconds. \n\nRemember: you can check the timeline of any unit, including hostiles, before executing your plan!"
+  unique_intro__step_07_wait_and_move_1hc_5_text:
+    noteDev: 
+    temp: false
+    text: Select the controllable unit.
+  unique_intro__step_09_tank_plans_1hc_0_text:
+    noteDev: 
+    temp: false
+    text: The tank is about to attack! You will need to get closer to engage it. Click the "Run" action.
+  unique_intro__step_09_tank_plans_1hc_1_text:
+    noteDev: 
+    temp: false
+    text: Click the "Run" action.
+  unique_intro__step_09_tank_plans_1hc_10_text:
+    noteDev: 
+    temp: false
+    text: >-
+      [ff9999]This is the timeline of the hostile tank. It's predicted to move forward and fire.[-]
+
+
+      You can return to your unit by clicking the blue icon below or pressing:
+
+
+      {0}
+  unique_intro__step_09_tank_plans_1hc_2_text:
+    noteDev: 
+    temp: false
+    text: Moving here will place the target into optimal range.
+  unique_intro__step_09_tank_plans_1hc_3_text:
+    noteDev: 
+    temp: false
+    text: Click the "Attack" action next.
+  unique_intro__step_09_tank_plans_1hc_4_text:
+    noteDev: 
+    temp: false
+    text: Click the "Attack" action.
+  unique_intro__step_09_tank_plans_1hc_5_text:
+    noteDev: 
+    temp: false
+    text: >-
+      First, choose [b]when[/b] the attack should happen by hovering over the timeline.
+
+
+      The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
+  unique_intro__step_09_tank_plans_1hc_6_text:
+    noteDev: 
+    temp: false
+    text: >-
+      Finish the attack by clicking the targeted unit or its prediction.
+
+
+      The % displayed is the predicted effectiveness of your weapon at this range.
+  unique_intro__step_09_tank_plans_1hc_7_text:
+    noteDev: 
+    temp: false
+    text: >-
+      You can drag the movements and attacks on the timeline to adjust the time and place of every step.
+
+
+      [b]More than one attack can be planned.[/b] Try creating another attack.
+  unique_intro__step_09_tank_plans_1hc_8_text:
+    noteDev: 
+    temp: false
+    text: You've now planned two attacks in a row. Try executing your plan!
+  unique_intro__step_09_tank_plans_1hc_9_text:
+    noteDev: 
+    temp: false
+    text: This the commander's timeline. He's planning to block the path of the tank.
+  unique_intro__step_11_skirmish_cover_1hc_0_text:
+    noteDev: 
+    temp: false
+    text: There are multiple incoming attacks and enemies out of your range. Try taking cover to avoid damage.
+  unique_intro__step_11_skirmish_cover_1hc_1_text:
+    noteDev: 
+    temp: false
+    text: Move here to avoid incoming fire.
+  unique_intro__step_15_siege_hints_0c_text:
+    noteDev: 
+    temp: false
+    text: Protect the town against the invading enemy forces.
+  unique_intro__step_15_siege_hints_1hc_0_text:
+    noteDev: 
+    temp: false
+    text: >-
+      ■ This light mech is carrying an assault rifle and a submachine gun.
+
+
+      ■ It is best equipped for medium range. Circle the enemy and take advantage of its speed to avoid hits.
+  unique_intro__step_15_siege_hints_1hc_1_text:
+    noteDev: 
+    temp: false
+    text: >-
+      ■ This mech has a shotgun, which inflicts high damage at close range.
+
+
+      ■ You can use the "Shield" action to block attacks while closing the distance.
+  unique_intro__step_15_siege_hints_1hc_2_text:
+    noteDev: 
+    temp: false
+    text: >-
+      ■ This mech carries a heavy beam weapon. It is slow, but powerful.
+
+
+      ■ Beams can cut through cover and hit multiple units at once.
+  unique_intro__step_16_siege_freeform_0c_text:
+    noteDev: 
+    temp: false
+    text: Protect the town against the invading enemy forces.
+  unique_intro__step_17_siege_end_0c_text:
+    noteDev: 
+    temp: false
+    text: Protect the town against the invading enemy forces.
+  unique_mountainbase__step_wave_00_guard_0c_text:
+    noteDev: 
+    temp: false
+    text: Recapture Langset to secure the mobile base.
+  unique_mountainbase__step_wave_00_guard_1hc_0_text:
+    noteDev: 
+    temp: false
+    text: Attacks generate heat. Keep an eye on the timeline and the heat indicator. Space attacks to let the heat dissipate and avoid damage.
+  unique_mountainbase__step_wave_01_alarm_0c_text:
+    noteDev: 
+    temp: false
+    text: An additional unit just joined the fight. Eliminate all hostiles before they report your presence.
+  unique_tutorial_base__state_wave_02_trigger_0c_text:
+    noteDev: 
+    temp: false
+    text: Take out every hostile unit on the field to proceed to the next phase.
+  unique_tutorial_base__step_wave_01_0c_header:
+    noteDev: 
+    temp: false
+    text: Mission Status
+  unique_tutorial_base__step_wave_01_0c_text:
+    noteDev: 
+    temp: false
+    text: Take over the base with the help of Fyrland Freedom Forces.
+  unique_tutorial_base__step_wave_01_g0_u0_unit:
+    noteDev: 
+    temp: false
+    text: Beam
+  unique_tutorial_base__step_wave_01_g0_u1_unit:
+    noteDev: 
+    temp: false
+    text: Slicer
+  unique_tutorial_base__step_wave_02_0c_text:
+    noteDev: 
+    temp: false
+    text: Eliminate all hostiles and capture the enemy stronghold.
+  unique_tutorial_battlesite__state_homeguard_0c_header:
+    noteDev: 
+    temp: false
+    text: Main Objective
+  unique_tutorial_battlesite__state_homeguard_0c_text:
+    noteDev: 
+    temp: false
+    text: Keep your allies alive.
+  unique_tutorial_battlesite__step_wave_01_0c_text:
+    noteDev: 
+    temp: false
+    text: An allied unit is pinned down. Eliminate all hostiles while protecting your allies.
+  unique_tutorial_battlesite__step_wave_01_g0_u0_unit:
+    noteDev: 
+    temp: false
+    text: Guard-1
+  unique_tutorial_battlesite__step_wave_01_g0_u1_unit:
+    noteDev: 
+    temp: false
+    text: Guard-2
+  unique_tutorial_battlesite__step_wave_01_g1_u0_unit:
+    noteDev: 
+    temp: false
+    text: Sniper
+  unique_tutorial_demolition__state_approach_target_destruction_0c_header:
+    noteDev: 
+    temp: false
+    text: Destroy enemy mech
+  unique_tutorial_demolition__state_approach_target_destruction_0c_text:
+    noteDev: 
+    temp: false
+    text: Take out the enemy mech next to the hangar.
+  unique_tutorial_demolition__state_main_demolition_0c_header:
+    noteDev: 
+    temp: false
+    text: Destroy structures
+  unique_tutorial_demolition__state_main_demolition_0c_text:
+    noteDev: 
+    temp: false
+    text: Inflict enough damage to the outpost.
+  unique_tutorial_demolition__step_approach_0c_text:
+    noteDev: 
+    temp: false
+    text: Approach the outpost and destroy the inactive mech.
+  unique_tutorial_demolition__step_main_0c_text:
+    noteDev: 
+    temp: false
+    text: Take advantage of the situation. Demolish as much as possible while the enemy garrison is away from the base.
+  unique_tutorial_demolition__step_retreat_0c_text:
+    noteDev: 
+    temp: false
+    text: Retreat from the area to avoid the fight with the main enemy force.
+  unique_tutorial_elimination__step_wave_01_g0_u1_pilot_callsign:
+    noteDev: 
+    temp: false
+    text: Guard
+  unique_tutorial_elimination__step_wave_01_g0_u1_pilot_name:
+    noteDev: 
+    temp: false
+    text: ''
+  unique_tutorial_intercept_swarm__state_objective_tier1_0c_header:
+    noteDev: 
+    temp: false
+    text: Interception
+  unique_tutorial_intercept_swarm__state_objective_tier1_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy or immobilize a vehicle carrying cargo.
+  unique_tutorial_intercept_swarm__state_objective_tier2_0c_header:
+    noteDev: 
+    temp: false
+    text: Interception
+  unique_tutorial_intercept_swarm__state_objective_tier2_0c_text:
+    noteDev: 
+    temp: false
+    text: Destroy or immobilize enough tanks carrying cargo.

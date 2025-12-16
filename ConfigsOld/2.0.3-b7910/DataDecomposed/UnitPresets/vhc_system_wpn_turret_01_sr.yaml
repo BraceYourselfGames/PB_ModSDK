@@ -1,0 +1,28 @@
+hidden: false
+listed: false
+branchIndependent: false
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_system
+textType: 
+livery: inv_system_component_white
+aiBehavior: 
+aiTargeting: 
+tags:
+- type_system
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_system_wpn_turret_01_sr
+    rating: 
+    systems: 
+animationOverrides:
+  primaryRotationSpeed: 0
+  secondaryRotationSpeed: 1000
+  secondaryYawLimit: 60
+  secondaryPitchLimit: 45
+effects: 

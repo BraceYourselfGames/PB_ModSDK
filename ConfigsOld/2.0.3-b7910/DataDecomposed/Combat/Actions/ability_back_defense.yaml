@@ -1,0 +1,80 @@
+dataUI:
+  icon: s_icon_l32_mnf_hightech2
+  color:
+    r: 0.4156863
+    g: 0.764706
+    b: 0.5333334
+    a: 1
+  colorOverride:
+    r: 0.4156863
+    g: 0.764706
+    b: 0.5333334
+    a: 1
+  sortingPriority: 750
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Equipment
+  duration: 1
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck:
+    exportCountToMemory: 
+    exportEntitiesToBlackboard: 
+    tags: 
+    name: 
+    faction: 
+    state: 
+    actionPlanned: 
+    locationOccupied: 
+    locationOccupiedUnlinked: 
+    relativeTransform: 
+    blueprints: 
+    classes: 
+    stats: 
+    statsNormalized: 
+    actionsInProgress: 
+    functions:
+    - !CombatValidateUnitPart
+      socket: back
+      preset: 
+      tags:
+        ability_defense: true
+      present: true
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: back
+dataAI: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

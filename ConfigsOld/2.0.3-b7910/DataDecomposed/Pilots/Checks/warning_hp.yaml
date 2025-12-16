@@ -1,0 +1,11 @@
+textDescInTooltips: true
+hidden: false
+displayInCombat: false
+icon: 
+severity: Warning
+checks:
+- !PilotValidateStatValue
+  key: hp
+  normalized: true
+  check: Less
+  value: 0.9

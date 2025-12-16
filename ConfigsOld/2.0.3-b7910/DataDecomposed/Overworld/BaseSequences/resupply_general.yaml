@@ -1,0 +1,23 @@
+comment:
+  comment: General logic for resupply state. Covers main global effect + bonus effects like workshop.
+hidden: false
+stopOnEmptyStep: false
+tags:
+- resupply_general
+steps:
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - resupply_general_base
+  tags:
+    camp_general: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_general: true

@@ -1,0 +1,119 @@
+icon: s_icon_l32_mnf_hightech2
+color:
+  r: 0.4145159
+  g: 0.764151
+  b: 0.5317346
+  a: 1
+hidden: false
+debug: true
+showOverlay: true
+showNotifications: true
+showTutorial: false
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated: 
+durationFull:
+  f: 4
+durationUpdate:
+  f: 0.05
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio: 
+effectsOnStart: 
+effectsOnUpdate:
+- triggerRemoval: false
+  triggerInStack: false
+  applyMissedUpdates: false
+  enabled: true
+  triggerCheckUnit:
+  - !CombatValidateUnitNeighborProjectiles
+    radius: 24
+    offset:
+      x: 0
+      y: 4
+      z: 1
+    factionFilter: Hostiles
+    filter:
+      candidateSort: Distance
+      candidateLimit: 1
+      candidateRepeats: false
+      guided: 
+      speed: 
+      relativeTransform:
+        origin: 
+        directionOriginRotation:
+          x: 0
+          y: 0
+          z: 0
+        directionDot:
+          check: Greater
+          value: 0.1
+        directionDotFlat: 
+        directionAngle: 
+        distance: 
+    effect:
+      destroy: true
+      scrambling: 
+      fxAudio: weapon_active_defense_shot
+      fxTransformSocket: back
+      fxTransformModifiers:
+      - !TargetModifierOffsetLocal
+        offset:
+          x: 0
+          y: 0
+          z: 0
+      fx:
+      - distance: 0
+        offsetLocal: 0
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        scaleFromDistance: 0
+        delay: 0
+        key: fx_status_defense_intercept
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      - distance: 1
+        offsetLocal: 0
+        rotation:
+          x: 180
+          y: 0
+          z: 0
+        scaleFromDistance: 0
+        delay: 0
+        key: fx_hit_unit_integrity
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      - distance: 0
+        offsetLocal: 0
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        scaleFromDistance: 1
+        delay: 0
+        key: fx_status_defense_intercept_beam
+        scale:
+          x: 1
+          y: 1
+          z: 0
+    present: true
+  triggerCheckPilot: 
+  comment: 
+  functionsOnHost: 
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+effectsOnEnd: 
+statOffsets: 

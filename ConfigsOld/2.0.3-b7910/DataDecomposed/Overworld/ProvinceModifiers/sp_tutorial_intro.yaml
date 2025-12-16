@@ -1,0 +1,48 @@
+hidden: false
+positive: true
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+priority: 0
+tinted: false
+hue: 0
+icon: s_icon_l32_face1
+tags:
+- type_special
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry:
+  functionsGlobal: 
+  functionsBase:
+  - !ModifyMemory
+    changes:
+    - change: Set
+      key: world_auto_salvage_offset
+      value: 25
+      valueFromMemory: false
+      valueFromMemoryKey: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit:
+  - !CombatValidateUnitAllied
+    present: false
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatUnitSetStatMultipliers
+    multipliers:
+      barrier: 0.65
+      hp: 0.65
+      wpn_concussion: 0.5
+      wpn_damage: 0.8
+  functionsPilot: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 

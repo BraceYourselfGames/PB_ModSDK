@@ -1,0 +1,263 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.3607843
+      g: 0.1843137
+      b: 0.1686275
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 180
+    frameSizeY: 194
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: vip
+      stateName: 
+      position:
+        x: 177.3
+        y: -10.6
+        z: 133.09
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 165.9297
+        y: -10.6
+        z: 145.809
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 30.80423
+      rotationYOverride: true
+      rotationY: -122.5543
+      zoomOverride: true
+      zoom: 0.6955295
+      delay: 0.1
+    - !CombatSelectUnit
+      nameInternal: ''
+      select: true
+      focus: false
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.9254903
+      g: 0.454902
+      b: 0.4039216
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 102
+    frameSizeX: 176
+    frameSizeY: 220
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -14
+        y: -130
+        z: -78
+        w: -76
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_pilot_health
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: vip
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 166.0782
+        y: -10.6
+        z: 140.3772
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 40.34253
+      rotationYOverride: true
+      rotationY: -139.7075
+      zoomOverride: true
+      zoom: 1
+      delay: 0.1
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 1
+      g: 0.5520315
+      b: 0.3803922
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 180
+    frameSizeY: 160
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: 
+      stateName: 
+      position:
+        x: 251.48
+        y: -11.5
+        z: 7.73
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 172.4357
+        y: -1.45
+        z: 162.6309
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 22.26802
+      rotationYOverride: true
+      rotationY: -171.5469
+      zoomOverride: true
+      zoom: 0.85
+      delay: 0.1
+    - !CombatSelectUnit
+      nameInternal: 
+      select: true
+      focus: true
+      delay: 0
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: pb_mech_01
+      select: true
+      focus: true
+      delay: 0
+    - !CombatUnitsApplyChanges
+      unitFilter:
+        sort: None
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited: 
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags:
+          purpose_vip: true
+        name: 
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      change:
+        flags:
+          visible: true
+          playerControllable: false
+          aiControllable: false
+          aiControllableNextTurn: true
+        destruction: 
+        transform: 
+        actions: 
+        functions: 

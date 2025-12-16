@@ -1,0 +1,45 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: neutral_color_030_orange
+aiBehavior: DefensiveDestination
+aiTargeting: defensive
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_hakobu: true
+  equipment_left:
+  - tags:
+      category_shield: true
+  equipment_right:
+  - tags:
+      part_ml: false
+      range_short: true
+      wpn_primary: false
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_cargo
+    rating: 
+    systems: 
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_defense:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_plating_heavy
+animationOverrides: 
+effects: 

@@ -1,0 +1,33 @@
+parents:
+- key: unit_bay
+  priority: 3
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 1
+  positionY: -1
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_units2
+unlock: 
+cost:
+  resources:
+    supplies: 300
+    unit_token: 1
+effect:
+  stats:
+  - key: unit_slots
+    modifier: Offset
+    value: 2
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

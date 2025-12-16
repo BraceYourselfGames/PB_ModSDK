@@ -1,0 +1,31 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_officer_a
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_bein: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_handgun_semi_01
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

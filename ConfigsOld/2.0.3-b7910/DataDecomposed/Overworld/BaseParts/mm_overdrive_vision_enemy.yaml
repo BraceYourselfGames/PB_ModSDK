@@ -1,0 +1,36 @@
+parents:
+- key: mm_overdrive
+  priority: 1
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 2
+  positionY: -2
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_mm_overdrive2
+unlock: 
+cost:
+  resources:
+    components_r3: 15
+    supplies: 500
+effect:
+  stats:
+  - key: mm_fast_vision_enemy
+    modifier: Offset
+    value: -0.25
+  - key: sensor_scan_time_enemy
+    modifier: Offset
+    value: 0.2
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_sensors

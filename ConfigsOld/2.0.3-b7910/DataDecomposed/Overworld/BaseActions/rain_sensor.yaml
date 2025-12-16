@@ -1,0 +1,23 @@
+icon: s_icon_l32_weather_rain3
+priority: 11
+color:
+  r: 0
+  g: 0.6698372
+  b: 0.7169812
+  a: 0
+inputKey: 
+group: 
+groupActivationBlock: false
+instant: true
+dialog: false
+textDialogHeader: 
+textDialogContent: 
+resourceKeyLinked: item_rain_sensor
+targeting: 
+callsForUnlock:
+- IsRainSensorUnlocked
+callsForAvailability:
+- IsRainSensorAvailable
+callsOnStart:
+- OnRainSensor
+callsOnEnd: 

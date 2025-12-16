@@ -1,0 +1,237 @@
+depthBackground: 60
+depthForeground: 60
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.6980392
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_move_vertical_pos
+      - global_move_horizontal_neg
+      - global_move_vertical_neg
+      - global_move_horizontal_pos
+      - global_camera_horizontal_pos
+      - global_camera_horizontal_neg
+      - global_camera_vertical_pos
+      - global_camera_vertical_neg
+      - global_mouse_middle
+  hint: 
+  effectsOverworld:
+    functions:
+    - !SelectEntity
+      nameInternal: internal_mobilebase
+      delay: 0
+      select: false
+      focus: false
+    - !OverworldCameraChange
+      delay: 0.3
+      positionOverride: true
+      position:
+        x: 145.0933
+        y: 38.2615
+        z: 189.3555
+      positionFromEntityName: ''
+      rotationXOverride: true
+      rotationX: 39.60318
+      rotationYOverride: true
+      rotationY: 169.6708
+      zoomOverride: true
+      zoom: 1
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 1
+      g: 0.4243063
+      b: 0.3726415
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Bottom
+    framePositionX: 0
+    framePositionY: -64
+    frameSizeX: 352
+    frameSizeY: 380
+    frameBlocksInput: true
+    frameBoundary: true
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 282
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !SelectEntity
+      nameInternal: internal_mobilebase
+      delay: 0
+      select: false
+      focus: true
+    - !OverworldCameraChange
+      delay: 0.3
+      positionOverride: false
+      position:
+        x: 145.0933
+        y: 38.2615
+        z: 189.3555
+      positionFromEntityName: ''
+      rotationXOverride: false
+      rotationX: 39.60318
+      rotationYOverride: false
+      rotationY: 169.6708
+      zoomOverride: true
+      zoom: 0.75
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.6980392
+  center: 
+  hint:
+    color:
+      r: 0.3915094
+      g: 0.9094732
+      b: 1
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 512
+    frameSizeY: 512
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: mountainbase
+      stateName: 
+      position:
+        x: 853
+        y: 53
+        z: -625
+      entityPrediction: false
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_mouse_secondary
+      - overworld_selection_reset
+  effectsOverworld:
+    functions:
+    - !SelectEntity
+      nameInternal: mountainbase
+      delay: 0
+      select: false
+      focus: true
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_ui
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_action_drag
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_classes
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_loadout
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_pilot_identifiers
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_pilot_health
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_replay
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_event_log
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_prediction
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !UnlockCodex
+      key: history_invasion
+    - !CallMethodStatic
+      typeName: DataHelperLoading
+      methodName: OnAfterCombatSaveCustom
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 

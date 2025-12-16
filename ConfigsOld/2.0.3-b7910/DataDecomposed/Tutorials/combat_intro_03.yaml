@@ -1,0 +1,112 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_unit_classes
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_unit_loadout
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_unit_tabs
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: unit_friendly_mech_pc
+      select: true
+      focus: false
+      delay: 0
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 178.6896
+        y: -19.5
+        z: 114.9661
+      positionFromEntityName: 
+      rotationXOverride: true
+      rotationX: 40.05659
+      rotationYOverride: true
+      rotationY: 102.4054
+      zoomOverride: true
+      zoom: 1
+      delay: 0
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_loadout
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_tabs
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_unit_classes
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_scenario_status
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 

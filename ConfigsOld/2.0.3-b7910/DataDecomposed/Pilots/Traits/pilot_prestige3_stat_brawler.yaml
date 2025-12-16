@@ -1,0 +1,33 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_combat_trait_monument2
+tags:
+- type_prestige
+- type_brawler
+group: 
+existingTraitTagsFilter:
+  brawler_tackle: true
+prestigeRank:
+  check: Equal
+  value: 3
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_offset_speed:
+    mode: Offset
+    value: 6
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: 1
+  trauma:
+    mode: Offset
+    value: 1
+effectsOnEvents: 
+effectsShared: 

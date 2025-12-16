@@ -1,0 +1,34 @@
+parents:
+- key: workshop
+  priority: 5
+  offsetStart: 30
+  offsetEnd: -10
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 1
+  positionY: 4
+  endpoint: false
+  group: 
+  icon: icon_data_05
+unlock: 
+cost:
+  resources:
+    components_r2: 20
+    components_r3: 5
+    supplies: 700
+effect:
+  stats:
+  - key: workshop_jobs
+    modifier: Offset
+    value: 1
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_workshop

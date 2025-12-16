@@ -1,0 +1,74 @@
+dataUI:
+  icon: s_icon_l32_action_attack2
+  color:
+    r: 1
+    g: 0.4575472
+    b: 0.4575472
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  sortingPriority: 300
+  hidden: false
+  irreversible: false
+  heating: true
+  offensive: true
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Targeting
+  heatType: DataConstant
+  durationType: Equipment
+  duration: 0
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: system
+      not: false
+    blueprints: 
+    parts: 
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: core
+dataAI: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom: 
+functionsTimed: 

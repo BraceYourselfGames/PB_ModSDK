@@ -1,0 +1,188 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_move_vertical_pos
+      - global_move_horizontal_neg
+      - global_move_vertical_neg
+      - global_move_horizontal_pos
+      - global_camera_horizontal_pos
+      - global_camera_horizontal_neg
+      - global_camera_vertical_pos
+      - global_camera_vertical_neg
+      - global_mouse_middle
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_ui
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Remove
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatSelectUnit
+      nameInternal: 
+      select: true
+      focus: true
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.1960784
+      g: 0.4549019
+      b: 0.5843138
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 304
+    frameSizeY: 304
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: TopLeft
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor:
+      entityName: unit_friendly_mech_pc
+      stateName: 
+      position:
+        x: 0
+        y: 0
+        z: 0
+      entityPrediction: false
+    arrowCustom:
+      offset:
+        x: 152
+        y: 0
+      rotation: 0
+    frameHighlight: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_mouse_primary
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_unit_selection
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_ui
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat:
+    functions:
+    - !CombatCameraChange
+      smoothed: true
+      positionOverride: true
+      position:
+        x: 119.5014
+        y: -19.5
+        z: 252.2205
+      positionFromEntityName: ''
+      rotationXOverride: true
+      rotationX: 45.01928
+      rotationYOverride: true
+      rotationY: 153.5189
+      zoomOverride: true
+      zoom: 0.8456566
+      delay: 0
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.1411765
+      g: 0.1843137
+      b: 0.2196079
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 238
+    frameSizeY: 332
+    frameBlocksInput: true
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Top
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_ui
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_ui
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 

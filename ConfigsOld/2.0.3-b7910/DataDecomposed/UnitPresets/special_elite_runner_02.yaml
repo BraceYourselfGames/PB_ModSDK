@@ -1,0 +1,36 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: juggernaut
+tags:
+- role_elite_runner
+partTagPreferences:
+  body:
+  - tags:
+      weight_medium: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_ml: true
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_mg: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

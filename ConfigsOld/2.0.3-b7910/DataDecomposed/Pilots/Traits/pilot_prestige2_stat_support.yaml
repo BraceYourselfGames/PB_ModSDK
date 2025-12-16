@@ -1,0 +1,30 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_inventory
+tags:
+- type_prestige
+- type_support
+group: 
+existingTraitTagsFilter:
+  support_backpack: true
+prestigeRank:
+  check: Equal
+  value: 2
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_mass_back:
+    mode: Offset
+    value: -3
+statRangesMin: 
+statRangesMax:
+  trauma:
+    mode: Offset
+    value: 1
+effectsOnEvents: 
+effectsShared: 

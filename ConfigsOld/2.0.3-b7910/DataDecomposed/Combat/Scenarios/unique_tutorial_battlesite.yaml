@@ -1,0 +1,810 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: wave_01
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - main_facility_industry_01
+entry:
+  squadUsed: true
+  squadSize: 2
+  squadSlotCustom:
+    spawnTagsUsed: false
+    spawnTags:
+      context_undefended: true
+      perimeter_outer: false
+    spawnGroupKey: custom_ftue_pb
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Greater
+      value: 50
+    sorting: !UnitSlotSortingRetreat
+      key: default
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- difficulty_normal
+- tutorial_pilot_progression
+- listed
+- type_assisted
+- unique_tutorial_battlesite
+- block_exit_on_defeat
+states:
+  comms_hg_lost:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_homeguard: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_pb_unitlost_hg
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  comms_inv_beamunitlost:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 1
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_beam: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead:
+          present: true
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 2
+            hidden: false
+            key: ftue_battlesite_inv_beamunitkilled_00
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  comms_pb_lost:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_homeguard: false
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive:
+          present: false
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: ftue_battlesite_pb_unitlost_pb
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  homeguard:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: -2
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: LessEqual
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        custom_homeguard: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: homeguard_lost
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_hg_unitlost_hg
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Defeat
+            early: true
+            instant: false
+  outcome_effects:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 3
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: true
+            outcomeDefeat: true
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards:
+            ftue: 1
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+        2:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: true
+            outcomeDefeat: true
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: []
+          memoryChanges:
+          - context: Source
+            provinceKey: 
+            changes:
+            - change: Add
+              key: world_core_battlesite_victory
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+        3:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: false
+            outcomeDefeat: true
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges:
+          - context: Source
+            provinceKey: 
+            changes:
+            - change: Add
+              key: world_core_battlesite_defeat
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  retreat_default:
+    comment: 
+    textNameKey: retreat_general_header
+    textDescKey: retreat_general_text
+    textOnCompletion: 
+    evaluated: false
+    visible: true
+    startInScope: false
+    priorityGeneration: 100
+    priority: 100
+    priorityDisplay: 100
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_retreat: true
+        filters: 
+      visual: 
+    locationRetreat:
+      commsUsed: false
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  wave_01:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: ftue_battlesite_pb_a
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: artillery
+        liveryPreset: hg_main_g1
+        custom:
+          name:
+            name: pb_homeguard1
+          id: {}
+          idReused: 
+          idPilot: 
+          role: special_homeguard
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: true
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed: 
+          uncrewed: 
+          pilotAppearance:
+            presetKey: generic_hg_01
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions:
+          - !CombatUnitStatusAdd
+            key: pilot_fatigue_damage
+            durationOverride: -1
+            source: Fatigue
+          - !CombatUnitPilotEffect
+            functions:
+            - !PilotStatSet
+              key: fatigue
+              normalized: true
+              value: 1
+            - !PilotStatModifierReplace
+              statKey: hp
+              modifierKey: test
+              value: 15
+          combatTags: 
+      - keyExternal: true
+        key: ftue_battlesite_pb_a
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: artillery
+        liveryPreset: hg_main_g1
+        custom:
+          name:
+            name: pb_homeguard2
+          id: {}
+          idReused: 
+          idPilot: 
+          role: special_homeguard
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: true
+            controlledByAI: false
+            uncrewed: false
+          faction:
+            faction: Phantoms
+          speed: 
+          uncrewed: 
+          pilotAppearance:
+            presetKey: generic_hg_02
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions:
+          - !CombatUnitPilotEffect
+            functions:
+            - !PilotStatSet
+              key: fatigue
+              normalized: true
+              value: 0.5
+            - !PilotStatModifierReplace
+              statKey: hp
+              modifierKey: test
+              value: 15
+          combatTags: 
+      check: 
+      combatTags:
+      - custom_homeguard
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        custom_ftue_homeguard: true
+      spawnGroupKey: custom_ftue_hg
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: ftue_battlesite_inv_long
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: sharpshooter
+        liveryPreset: inv_army_g1
+        custom:
+          name:
+            name: inv_sniper
+          id: {}
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: ftue_battlesite_inv_guard_a
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: striker
+        liveryPreset: inv_army_g1
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r0_training
+        aiBehavior: Flanker
+        aiTargeting: sharpshooter
+        liveryPreset: 
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r0_training
+        aiBehavior: Flanker
+        aiTargeting: sharpshooter
+        liveryPreset: 
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        custom_ftue_inv_w1: true
+      spawnGroupKey: custom_ftue_inv_w1
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 2
+      hidden: false
+      key: ftue_battlesite_pb_intro_00
+    - time: 12
+      hidden: false
+      key: ftue_battlesite_hg_intro_01
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_battlesite
+      allowRepeat: true
+    outcome: 
+    transitions: 
+unitPresets:
+  tank_short: !UnitPresetLink
+    preset: vhc_tank_training_cannon_0
+unitGenerators: 

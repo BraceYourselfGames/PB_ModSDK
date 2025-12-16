@@ -1,0 +1,472 @@
+hidden: false
+parent: vhc_system_wpn_arch_secondary
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- category_wpn_capital_launcher
+statDistribution: ''
+stats:
+  act_count:
+    value: 8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 50
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  barrier:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  hp:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 75
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 60
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 6
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 300
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 50
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_radius:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 50
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments:
+  main:
+    key: comp_boss_weapon_launcher_horizontal_01
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+activation:
+  visual:
+    local:
+      key: fx_muzzle_launcher_03_blue
+      keyEnemy: fx_muzzle_launcher_03_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: 
+    localHardpointOverride: 
+    localTransformOverride: 
+  audio:
+    onActivationFirst: boss_spider_weapon_launcher_fire
+    onActivationMid: boss_spider_weapon_launcher_fire
+    onActivationLast: boss_spider_weapon_launcher_fire
+    onActivationStart: ''
+    onActivationEnd: ''
+  light:
+    shared: true
+    key: wpn_sniper
+    custom: 
+  recoil:
+    key: recoil_projectile_missile_cluster
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_missile_01_regular
+      keyEnemy: 
+      scale:
+        x: 1.25
+        y: 1.25
+        z: 1.25
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact:
+      key: fx_projectile_pop
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    deactivation:
+      key: fx_projectile_pop
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff: 
+  falloffGlobal: 
+  animationFade:
+    speed: 10
+    distance: 3
+  ballistics: 
+  fuseProximity:
+    distance: 6
+    targetExclusive: false
+    inertBeforeHit: false
+    inertPrimingDelay: 1
+    triggerWithoutEntity: false
+  hitResponse: 
+  splashDamage:
+    exponent: 2
+    fxDetonation: fx_aoe_explosion_01_large
+    fxDetonationScale: 1
+    fxArea: fx_aoe_volume_01
+    fxHit: fx_aoe_hit_01
+  splashImpact:
+    exponent: 2
+    triggerOnDamage: true
+  guidanceData:
+    rigidbodyMass: 1
+    rigidbodyDrag: 0.5
+    rigidbodyDriftDrag: 10
+    rigidbodyAngularDrag: 0.3
+    rigidbodyLift: 0.75
+    driverSteeringForce: 550
+    driverPitchForce: 500
+    driverAccelerationForce: 900
+    driverAccelerationMin: 0.1
+    inputProgressFromTarget: true
+    inputTargetHeightScale: 20
+    inputTargetOffsetPower: 2
+    inputThrottleDotPowerScale: 8
+    inputTargetPointLateralMode: Interleaved
+    steeringPID:
+      proportionalGain: 0.5
+      derivativeGain: 0.2
+      integralGain: 0.1
+    pitchPID:
+      proportionalGain: 0.5
+      derivativeGain: 0.2
+      integralGain: 0.1
+    inputTargetPointLateral: !DataBlockGuidanceInputCurve
+      curve:
+        modePostWrap: ClampForever
+        modePreWrap: ClampForever
+        keys:
+        - tv_tg:
+            x: 0
+            y: 0.25
+            z: 0
+            w: 0
+          w:
+            x: 0
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.2
+            y: 0.4033019
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.716738
+          m: {}
+        - tv_tg:
+            x: 0.4
+            y: 0.25
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.6
+            y: 0.4033019
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.8
+            y: 0.25
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 1
+            y: 0.4033019
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0
+          m: {}
+    inputTargetHeight: !DataBlockGuidanceInputCurve
+      curve:
+        modePostWrap: ClampForever
+        modePreWrap: ClampForever
+        keys:
+        - tv_tg:
+            x: 0.1244635
+            y: 0.8938679
+            z: 0
+            w: 0
+          w:
+            x: 0
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.2463036
+            y: 1
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.3725834
+            y: 0.8938679
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.4988633
+            y: 1
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.6251431
+            y: 0.8938679
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+    inputTargetBlend: !DataBlockGuidanceInputCurve
+      curve:
+        modePostWrap: ClampForever
+        modePreWrap: ClampForever
+        keys:
+        - tv_tg:
+            x: 0
+            y: 0
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.5794392
+          m: {}
+        - tv_tg:
+            x: 0.2460118
+            y: 0
+            z: 0
+            w: 0
+          w:
+            x: 0.3333333
+            y: 0.3333333
+          m: {}
+        - tv_tg:
+            x: 0.2740415
+            y: 1
+            z: 0
+            w: 0
+          w:
+            x: 1
+            y: 1
+          m: {}
+        - tv_tg:
+            x: 1
+            y: 1
+            z: 0
+            w: 0
+          w:
+            x: 1
+            y: 0.3333333
+          m: {}
+    inputTargetUpdate: 
+    inputTargetOffset: !DataBlockGuidanceInputConstant
+      value: 1
+    inputSteering: 
+    inputThrottle: !DataBlockGuidanceInputConstant
+      value: 1
+    inputThrottleDotPower: !DataBlockGuidanceInputConstant
+      value: 1
+    directionCheck:
+      distance: 15
+      dotThreshold: 0.9
+    velocityCompensation:
+      rangeLimit:
+        x: 30
+        y: 60
+      timeLimit: 1
+      iterations: 1
+      targetVelocityCompensation: 0.8
+      selfVelocityCompensation: 0
+      selfVelocityProjection: 0
+  guidanceAudio:
+    soundOnLaunch: weapon_missile_seeker_fire_short
+    soundOnPriming: weapon_missile_seeker_prime
+    soundOnExpiration: weapon_missile_seeker_explode
+    syncProximityRange:
+      x: 12
+      y: 24
+    syncPowerAngularVelocity: 1
+    syncSize: 1
+  statusBuildup: 
+  uiTrajectory:
+    scale: 12
+    fixedAreaDistance: 30
+    fixedAreaTime: 0.3
+    arrivalTimes:
+      x: 1.05
+      y: 1.12
+      z: 1.5
+    curve:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0
+          z: 8.314286
+          w: 8.314286
+        w:
+          x: 0
+          y: 0.1202749
+        m: {}
+      - tv_tg:
+          x: 0.3
+          y: 1
+          z: -0.009502748
+          w: -0.009502748
+        w:
+          x: 0.641286
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0
+          z: -1.530622
+          w: -1.530622
+        w:
+          x: 0.05801303
+          y: 0
+        m: {}
+  uiSpeedAverage:
+    f: 25
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom:
+  flags:
+  - reaction_los_check
+  ints: 
+  floats:
+    reaction_angle_threshold: 90
+    reaction_rotation_speed: 0.5
+  vectors: 
+  strings: 
+functions: 
+workshopInfo: 

@@ -1,0 +1,32 @@
+hidden: true
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: 
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- type_mech
+partTagPreferences:
+  body:
+  - tags:
+      armor_blackbird: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_rifle_assault_01
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

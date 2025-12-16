@@ -1,0 +1,116 @@
+parents: []
+hidden: true
+core: 
+ui: 
+tags: 
+layout:
+  units: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 100
+    name: Enrage-CloseAirSupport
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups: 
+    childMode: ExecuteOneRandomValid
+    children:
+    - name: AirSupport-Missile
+      color: 
+      comment: 
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted: 
+        functionsGlobal:
+        - !CombatCreateStrikeTargeted
+          unitFilter:
+            sort: DistanceInv
+            unitLimit: 1
+            unitRepeats: false
+            exportEntitiesToBlackboardLimited: 
+            exportCountToMemoryLimited: 
+            exportCountToMemory: 
+            exportEntitiesToBlackboard: 
+            tags: 
+            name: 
+            faction:
+              key: Phantoms
+            state: 
+            actionPlanned: 
+            locationOccupied: 
+            locationOccupiedUnlinked: 
+            relativeTransform: 
+            blueprints: 
+            classes: 
+            stats: 
+            statsNormalized: 
+            actionsInProgress: 
+            functions: 
+          blueprintKeys:
+          - aircraft_ml_01
+          - aircraft_ml_02
+          delayRange:
+            x: 0.75
+            y: 1.5
+          modifiers:
+          - !TargetModifierOffsetLocal
+            offset:
+              x: 0
+              y: 0
+              z: -6
+          - !TargetModifierOffsetUnitCircle
+            offset: 6
+          - !TargetModifierRotateDirection
+            rotationRange:
+              x: -30
+              y: 30
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_bt_enrage_cas_ml
+      childMode: ExecuteAll
+      children: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_boss_state_enrage_active: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized:
+        ehp:
+          check: Less
+          value: 0.4
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable: 

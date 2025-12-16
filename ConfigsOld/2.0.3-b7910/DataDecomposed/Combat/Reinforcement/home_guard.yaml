@@ -1,0 +1,33 @@
+unitGroups:
+- !UnitGroupLink
+  key: special_hg_berserker
+  check: 
+  combatTags:
+  - custom_homeguard
+  spawnGroupOccupied: true
+  spawnCountStrict: true
+  spawnOrderRandom: true
+  factionBranchOverride: false
+  factionBranchKey: 
+  baseGrade: 0
+  maxGrade: 2
+  cloneable: true
+  functions: 
+  spawnTagsUsed: true
+  spawnTags:
+    context_undefended: true
+  spawnGroupKey: 
+  filterDistancePlayer:
+    check: Greater
+    value: 0
+  filterDistanceEnemy:
+    check: Greater
+    value: 80
+  filterDistanceSpawn: 
+  filterDistanceLocation: 
+  filterDistanceVolume: 
+  filterDistanceState: 
+  filterDistanceRetreat: 
+  sorting: !UnitSlotSortingPlayer
+    invert: true
+  spawnRegistration: 

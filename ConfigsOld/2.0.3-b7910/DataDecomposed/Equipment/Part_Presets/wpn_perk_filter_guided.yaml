@@ -1,0 +1,36 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags: 
+workshopInfo: 
+genSteps:
+- !TrimSystemsByTagFilter
+  requireAll: true
+  filter:
+    perk_occurrence_gun: true
+  hardpointsTargeted:
+  - perk_1
+  priority: 50
+  comment: 
+  checks: 
+- !TrimSystemsByStats
+  statsDesired: false
+  statKeys:
+  - wpn_scatter_angle
+  - wpn_speed
+  - wpn_penetration_charges
+  - wpn_scatter_angle_moving
+  - wpn_turnrate_limit
+  hardpointsTargeted:
+  - perk_1
+  - internal_aux_weapon
+  priority: 51
+  comment: 
+  checks: 

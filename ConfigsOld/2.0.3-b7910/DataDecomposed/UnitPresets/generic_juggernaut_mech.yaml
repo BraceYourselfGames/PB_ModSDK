@@ -1,0 +1,39 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: juggernaut
+tags:
+- branch_army
+- type_mech
+- role_juggernaut
+- branch_experimental
+- branch_reserves
+- branch_specops
+partTagPreferences:
+  body:
+  - tags:
+      weight_heavy: true
+  equipment_left:
+  - tags:
+      category_shield: false
+      range_medium: true
+      wpn_secondary: true
+  - tags:
+      category_shield: false
+      range_long: true
+      wpn_secondary: true
+  equipment_right:
+  - tags:
+      part_ml: false
+      range_short: true
+      wpn_primary: true
+parts: 
+animationOverrides: 
+effects: 

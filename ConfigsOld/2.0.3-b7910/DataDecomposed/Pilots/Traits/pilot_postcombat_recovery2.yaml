@@ -1,0 +1,46 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_pilot_escape3
+tags:
+- level_2
+- bonus
+- type_brawler
+- type_sharpshooter
+group: active_healing
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionExit
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf:
+  - !PilotValidateEventCount
+    type: CombatUnitTakedownEnemy
+    check: GreaterEqual
+    value: 1
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.5
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

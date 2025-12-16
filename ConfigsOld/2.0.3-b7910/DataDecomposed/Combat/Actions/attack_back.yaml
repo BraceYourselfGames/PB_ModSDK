@@ -1,0 +1,92 @@
+dataUI:
+  icon: s_icon_l32_action_attack1
+  color:
+    r: 1
+    g: 0.4117647
+    b: 0.5098041
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0.166667
+    a: 1
+  sortingPriority: 410
+  hidden: false
+  irreversible: false
+  heating: true
+  offensive: true
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Targeting
+  heatType: DataConstant
+  durationType: Equipment
+  duration: 0
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck:
+    exportCountToMemory: 
+    exportEntitiesToBlackboard: 
+    tags: 
+    name: 
+    faction: 
+    state: 
+    actionPlanned: 
+    locationOccupied: 
+    locationOccupiedUnlinked: 
+    relativeTransform: 
+    blueprints: 
+    classes:
+      mech: true
+    stats: 
+    statsNormalized: 
+    actionsInProgress: 
+    functions:
+    - !CombatValidateUnitPart
+      socket: back
+      preset: 
+      tags:
+        activation_targeted: true
+        activation_untargeted: false
+        activation_is_attack: true
+      present: true
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: back
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: AttackMain
+    weightType: DataConstant
+    weightConstant: 10
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom: 
+functionsTimed: 

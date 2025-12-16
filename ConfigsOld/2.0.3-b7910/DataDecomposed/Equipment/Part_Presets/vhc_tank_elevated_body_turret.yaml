@@ -1,0 +1,28 @@
+hidden: true
+parents:
+- key: vhc_tank_elevated_body
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- secondary
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_vhc_tank_elevated_turret_v01_set01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_turret
+  priority: 0
+  comment: 
+  checks: 

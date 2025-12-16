@@ -1,0 +1,84 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_settlement_small
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Factory_Large
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_preserve_on_victory
+- contest_s1
+- contest_s2
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByKey
+    keyChecked: generic_industry
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 2
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_industry_liberation: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_r2
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_camp
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_thruster
+        - sub_r1
+        tags: 
+      - chance: 0.5
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_armor_w1
+        - part_armor_w2
+        - part_armor_w3
+        tags: 

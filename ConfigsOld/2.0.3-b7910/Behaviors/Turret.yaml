@@ -1,0 +1,29 @@
+!BehaviorTree
+m_treeRoot: !BTComposite_Sequence
+  m_dynamic: false
+  m_children:
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Sequence
+      m_dynamic: false
+      m_children:
+      - !BTCondition_CheckUtilityCounter
+        m_checkType: LessOrEqualTo
+        m_checkThreshold: 0
+        Comment: ''
+      - !BTAction_IdleWithinTurn
+        m_threshold: !VariableSource_IndividualTimeOffset
+          m_actionTypeTimeBuffer: ReactiveAttackMain
+        Comment: ''
+      - !BTAction_ChangeUtilityCounter
+        m_change: 1
+        Comment: ''
+      - !BTAction_UseEquipment
+        m_actionType: ReactiveAttackMain
+        m_targetIDSource: 
+        Comment: ''
+      Comment: ''
+    Comment: Fire control
+  Comment: ''

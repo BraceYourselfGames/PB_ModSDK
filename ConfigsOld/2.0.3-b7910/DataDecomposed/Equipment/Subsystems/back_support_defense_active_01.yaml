@@ -1,0 +1,97 @@
+hidden: false
+parent: back_wpn
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- ability_defense
+statDistribution: ''
+stats:
+  act_charges:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_count:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 95
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  barrier:
+    value: 150
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  hp:
+    value: 1.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments:
+  main:
+    key: part_backpack_active_defense
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+activation:
+  visual: 
+  audio: 
+  light: 
+  recoil: 
+  timing: 
+  hitReaction: 
+projectile: 
+beam: 
+custom: 
+functions:
+  general: 
+  targeted: 
+  action:
+  - context: on_action_start
+    actionKeys:
+    - ability_back_defense
+    checks: 
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatUnitStatusAdd
+        key: timed_defense_active
+        durationOverride: 4
+        source: Function
+workshopInfo: 

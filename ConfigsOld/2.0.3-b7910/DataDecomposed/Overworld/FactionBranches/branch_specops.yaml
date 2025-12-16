@@ -1,0 +1,29 @@
+liveryPrefix: inv_specops
+training: false
+unitGroupTags:
+  branch_specops: true
+unitPresetTags:
+  branch_specops: true
+unitPartFilters:
+  mech:
+    filters:
+      body:
+      - tags:
+          branch_specops: true
+      - tags:
+          branch_army: true
+      equipment:
+      - tags:
+          branch_specops: true
+      - tags:
+          branch_army: true
+  tank:
+    filters:
+      body:
+      - tags:
+          branch_specops: true
+      equipment_right:
+      - tags:
+          branch_specops: true
+      - tags:
+          branch_army: true

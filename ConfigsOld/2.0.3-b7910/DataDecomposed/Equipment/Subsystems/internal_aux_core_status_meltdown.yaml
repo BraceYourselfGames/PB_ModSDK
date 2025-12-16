@@ -1,0 +1,199 @@
+hidden: false
+parent: internal_aux_core
+rating: 3
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName:
+  split: true
+textDescFromPreset: 
+textDesc:
+  split: true
+hardpoints:
+- internal_aux_top_core
+tags:
+- internal_aux_drop_boss
+- core_utility
+- stat_dissipation
+- stat_power
+- stat_regeneration
+- rating_3
+statDistribution: ''
+stats:
+  barrier_regeneration:
+    value: 0.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp2_value:
+    value: 1.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp3_value:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  heat_dissipation:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_buffer:
+    value: 1.75
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  overheat_limit:
+    value: 0.87
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  power:
+    value: 1.35
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 35
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- reactor
+attachments: 
+activation: 
+projectile: 
+beam: 
+custom: 
+functions:
+  general:
+  - context: on_overheat
+    checks: 
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatUnitStatusAdd
+        key: timed_meltdown
+        durationOverride: -1
+        source: Function
+  - context: on_collision
+    checks:
+    - !CombatValidateUnitStateActive
+      present: true
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatUnitStatusAdd
+        key: timed_meltdown
+        durationOverride: -1
+        source: Function
+  - context: on_part_destruction
+    checks: 
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatAreaOfEffect
+        offset:
+          x: 0
+          y: 0
+          z: 0
+        radius: 30
+        exponent: 2
+        dispersed: true
+        integrity:
+          normalized: false
+          leveled: true
+          f: 350
+        concussion: 
+        heat: 
+        stagger: 
+        statusBuildup:
+          key: timed_burn
+          amount: 1
+        crash: 
+        targetCheck: 
+        functionsOnHit: 
+        impactUnitSelf: false
+        impactUnitAllies: true
+        impactUnitHostiles: true
+        impactUnitComposites: true
+        impactProjectiles: false
+        impactProps: true
+        fxDetonation: fx_aoe_explosion_01_large
+        fxDetonationScale: 2
+        fxArea: fx_aoe_volume_01
+        fxHit: fx_aoe_hit_01
+        audioDetonation: 
+      - !CombatUnitEffectSpawnSequence
+        position:
+          x: 0
+          y: 0
+          z: 0
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        asset:
+          key: fx_impact_general_caliber_01
+          scale:
+            x: 4
+            y: 4
+            z: 4
+        sequence:
+        - delay: 0.1
+          position:
+            x: 1
+            y: 0
+            z: 1
+          rotation:
+            x: 0
+            y: 45
+            z: 0
+        - delay: 0.2
+          position:
+            x: -2
+            y: 0
+            z: -0.5
+          rotation:
+            x: 0
+            y: -75
+            z: 0
+        - delay: 0.3
+          position:
+            x: -0.75
+            y: 0
+            z: -1.5
+          rotation:
+            x: 0
+            y: 160
+            z: 0
+  targeted: 
+  action:
+  - context: on_action_start
+    actionKeys:
+    - dash
+    - melee_primary
+    - melee_secondary
+    - melee_fallback
+    checks: 
+    functions:
+    - !SubsystemFunctionModifyOwner
+      functions:
+      - !CombatUnitStatusRemove
+        key: timed_meltdown
+        limit: 1
+        fxAudio: 
+workshopInfo:
+  progressLimit:
+    i: 3
+  inputResourcesViaStats:
+    f: 1
+  inputResources:
+  - key: supplies
+    amount: 700
+  - key: components_r2
+    amount: 8
+  - key: components_r3
+    amount: 6
+  basePartRequirements: 

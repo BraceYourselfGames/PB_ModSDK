@@ -1,0 +1,454 @@
+depthBackground: 60
+depthForeground: 60
+pages:
+- depthForeground: 0
+  depthBackground: -20
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center:
+    textImage: bg_blur_crawler
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint:
+    color:
+      r: 0
+      g: 1
+      b: 1
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 320
+    framePositionY: 0
+    frameSizeX: 80
+    frameSizeY: 84
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomLeft
+    buttonLocation: Bottom
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyUnitHealth
+      units: 4
+      value: 1
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_base_available
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 10
+  depthBackground: 10
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.4078432
+      g: 0.5490196
+      b: 0.3568628
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 694
+    framePositionY: 0
+    frameSizeX: 180
+    frameSizeY: 124
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: TopLeft
+    buttonLocation: Top
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -16
+        y: -16
+        z: -16
+        w: -16
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseLoadout
+      methodName: OnTutorial
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseLoadoutSidebar
+      methodName: OnTutorial
+      argument: ''
+      frameDelay: 0
+    - !CallMethodStatic
+      typeName: CIViewBaseCustomizationInfo
+      methodName: OnTutorial
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.4078432
+      g: 0.5490196
+      b: 0.3568628
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 16
+    framePositionY: -82
+    frameSizeX: 280
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Top
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -4
+        y: -4
+        z: -4
+        w: -4
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.1960784
+      g: 0.3411765
+      b: 0.4901961
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Bottom
+    framePositionX: 632
+    framePositionY: -154
+    frameSizeX: 360
+    frameSizeY: 620
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.4156863
+      g: 0.3568628
+      b: 0.2980392
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Bottom
+    framePositionX: 312
+    framePositionY: -76
+    frameSizeX: 320
+    frameSizeY: 512
+    frameBlocksInput: true
+    frameBoundary: true
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.09803922
+  center: 
+  hint:
+    color:
+      r: 0.4156863
+      g: 0.3293047
+      b: 0.2980392
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Bottom
+    framePositionX: 312
+    framePositionY: -170
+    frameSizeX: 326
+    frameSizeY: 812
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 240
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: -16
+        y: -400
+        z: -64
+        w: -646
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.4470589
+      g: 0.6862745
+      b: 0.3568628
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 512
+    framePositionY: 120
+    frameSizeX: 952
+    frameSizeY: 278
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomLeft
+    buttonLocation: Bottom
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom:
+      offset:
+        x: 142
+        y: 0
+      rotation: 0
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseCustomizationSelector
+      methodName: OnTutorialHeaderHide
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.2
+  center: 
+  hint:
+    color:
+      r: 0.5921569
+      g: 0.854902
+      b: 0.9803922
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 50
+    framePositionY: 0
+    frameSizeX: 52
+    frameSizeY: 68
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: BottomLeft
+    buttonLocation: Bottom
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseCustomizationSelector
+      methodName: OnTutorialHeaderShow
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.2
+  center: 
+  hint:
+    color:
+      r: 0
+      g: 1
+      b: 1
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 50
+    frameSizeY: 66
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: BottomLeft
+    buttonLocation: Bottom
+    textWidth: 280
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseCustomizationSelector
+      methodName: OnTutorialHeaderShow
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: history_base
+    - !CallMethodStatic
+      typeName: DataHelperLoading
+      methodName: OnAfterCombatSaveCustom
+      argument: ''
+      frameDelay: 0
+  effectsCombat: 

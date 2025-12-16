@@ -1,0 +1,63 @@
+icon: s_icon_l32_spec_stagger
+color:
+  r: 0.7490196
+  g: 0.5502648
+  b: 0.2980392
+  a: 1
+hidden: false
+debug: false
+showOverlay: true
+showNotifications: false
+showTutorial: true
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated: 
+durationFull:
+  f: 4
+durationUpdate:
+  f: 0.1
+buildupDecayRate:
+  f: 0.25
+  compMultiplier: 10
+buildupThreshold:
+  f: 1
+  compMultiplier: 10
+buildupOverflow: 
+buildupShieldMultiplier:
+  f: 0
+stackable:
+  limit: 2
+  composite: false
+audio: 
+effectsOnStart: 
+effectsOnUpdate:
+- triggerRemoval: true
+  triggerInStack: false
+  applyMissedUpdates: false
+  enabled: true
+  triggerCheckUnit:
+  - !CombatValidateUnitStatusCount
+    key: timed_unstable
+    check:
+      check: GreaterEqual
+      value: 2
+  - !CombatValidateUnitWithPilotProfile
+    present: false
+  triggerCheckPilot: 
+  comment:
+    comment: If the second stack of this effect is acquired, crash the unit and remove one of the copies.
+  functionsOnHost:
+  - !CombatUnitCrash {}
+  - !CombatUnitStatusRemove
+    key: timed_unstable
+    limit: 2
+    fxAudio: 
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+effectsOnEnd: 
+statOffsets:
+  drv_weight_class: -1

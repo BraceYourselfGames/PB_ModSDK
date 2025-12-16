@@ -1,0 +1,200 @@
+hidden: false
+parents: 
+core: 
+areas: 
+entry: 
+generationInjection:
+  enabled: true
+  group: weather
+  tagFilter: 
+  functionsOverworld: 
+  functionsBase:
+  - !OverworldValidateWeather
+    check:
+      required: true
+      min: 0.8
+      max: 1
+  functionsSite: 
+tags:
+- trait_inj_thunderstorm
+states:
+  inj_weather_recurring:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: -2
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatDelayGroup
+            unscaled: false
+            delayMin: 2.5
+            delayMax: 4.5
+            repeats: 3
+            functions:
+            - !CombatChanceGroup
+              chance: 0.5
+              functions:
+              - !CombatUnitsApplyChanges
+                unitFilter:
+                  sort: None
+                  unitLimit: 1
+                  unitRepeats: false
+                  exportEntitiesToBlackboardLimited: 
+                  exportCountToMemoryLimited: 
+                  exportCountToMemory: 
+                  exportEntitiesToBlackboard: 
+                  tags: 
+                  name: 
+                  faction: 
+                  state: 
+                  actionPlanned: 
+                  locationOccupied: 
+                  locationOccupiedUnlinked: 
+                  relativeTransform: 
+                  blueprints: 
+                  classes: 
+                  stats: 
+                  statsNormalized:
+                    ehp:
+                      check: Greater
+                      value: 0.5
+                  actionsInProgress: 
+                  functions:
+                  - !CombatValidateUnitStatus
+                    key: timed_charged_cooldown
+                    present: false
+                change:
+                  flags: 
+                  destruction: 
+                  transform: 
+                  actions: 
+                  functions:
+                  - !CombatUnitEffectSpawn
+                    position:
+                      x: 0
+                      y: 0
+                      z: 0
+                    rotation:
+                      x: 0
+                      y: 0
+                      z: 0
+                    centered: true
+                    asset:
+                      key: fx_lightning_arc
+                      scale:
+                        x: 1
+                        y: 1
+                        z: 1
+                  - !CombatAudioEvent
+                    offset:
+                      x: 0
+                      y: 0
+                      z: 0
+                    audio: lightning_strike
+                    delayScaled: 0
+                  - !CombatUnitDelay
+                    unscaled: false
+                    delayMin: 0.2
+                    delayMax: 0.2
+                    repeats: 1
+                    function: !CombatUnitFunctionsChecked
+                      unitCheck:
+                        exportCountToMemory: 
+                        exportEntitiesToBlackboard: 
+                        tags: 
+                        name: 
+                        faction: 
+                        state: 
+                        actionPlanned: 
+                        locationOccupied: 
+                        locationOccupiedUnlinked: 
+                        relativeTransform: 
+                        blueprints: 
+                        classes: 
+                        stats: 
+                        statsNormalized: 
+                        actionsInProgress: 
+                        functions:
+                        - !CombatValidateUnitStatus
+                          key: timed_charged
+                          present: true
+                      functions:
+                      - !CombatUnitStatusRemove
+                        key: timed_charged
+                        limit: 10
+                        fxAudio: 
+                      - !CombatUnitDamageEvent
+                        delay: 0
+                        splash: true
+                        dispersed: true
+                        sourceInternal: false
+                        integrity:
+                          normalized: false
+                          leveled: true
+                          f: 100
+                        concussion: 
+                        heat: 
+                        stagger: 
+                        statusBuildup: 
+                      functionsElse:
+                      - !CombatUnitStatusAdd
+                        key: timed_charged
+                        durationOverride: -1
+                        source: Function
+                  - !CombatUnitStatusAdd
+                    key: timed_charged_cooldown
+                    durationOverride: -1
+                    source: Function
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps: 
+unitPresets: 
+unitGenerators: 

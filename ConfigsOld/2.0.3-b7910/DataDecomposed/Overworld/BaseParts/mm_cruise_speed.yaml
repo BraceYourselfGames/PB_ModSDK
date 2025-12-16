@@ -1,0 +1,36 @@
+parents:
+- key: mm_cruise
+  priority: -2
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 2
+  positionY: 0
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_mm_cruise2
+unlock: 
+cost:
+  resources:
+    components_r3: 15
+    supplies: 500
+effect:
+  stats:
+  - key: mm_normal_speed
+    modifier: Multiply
+    value: 1.15
+  - key: mm_normal_vision_enemy
+    modifier: Multiply
+    value: 1.15
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

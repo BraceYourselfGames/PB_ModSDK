@@ -1,0 +1,27 @@
+hidden: false
+parents:
+- key: wpn_rifle_sniper
+livery: 
+ratingRange: 
+comment:
+  comment: This part preset defines only what makes specifically model 01 unique. It should never include sniper rifle wide tags, sockets, etc. It only defines an early-running generation step for main internal, a manufacturer tag, user facing name. The rest comes from parent preset.
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- branch_specops
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_sniper_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

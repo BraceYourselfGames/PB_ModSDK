@@ -1,0 +1,44 @@
+hidden: false
+parents:
+- key: body_set_knox_medium
+- key: body_arm
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags: 
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - armor_knox_m_forearm
+  pickRandom: false
+  hardpointsTargeted:
+  - external_arm_lower
+  priority: 0
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - armor_knox_m_shoulder
+  pickRandom: false
+  hardpointsTargeted:
+  - external_arm_upper
+  priority: 1
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  priority: 2
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3

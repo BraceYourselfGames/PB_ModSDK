@@ -1,0 +1,77 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_role_generic_r3
+tags:
+- level_5
+- type_defender
+- prestige_unpickable
+group: 
+existingTraitTagsFilter:
+  defender_shield: true
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_barrier_shield:
+    mode: Offset
+    value: 0.2
+  unit_hp_shield:
+    mode: Offset
+    value: 0.2
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatActionShieldDeflect
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.05
+  - !PilotLogTraitActivation
+    key: pilot_starter_stat_defender3
+  functionsEventUnit: 
+  linkedEffectKeys: 
+- filterEventTypes:
+  - CombatMissionDefeatEarly
+  - CombatMissionVictoryEarly
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !CombatValidateUnitPart
+    socket: 
+    preset: 
+    tags:
+      category_shield: true
+    present: true
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitIntegrityChange
+    value: 0.5
+    offset: true
+    sockets:
+    - equipment_left
+  functionsSelf: 
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

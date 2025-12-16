@@ -1,0 +1,91 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_celebration
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.4481132
+        g: 1
+        b: 0.6501432
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !CallMethodStatic
+        typeName: DataHelperLoading
+        methodName: OnAfterCombatSaveUnchecked
+        argument: ''
+        frameDelay: 0
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5561273
+            g: 0.8207547
+            b: 0.4994215
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !OverworldGroupConditional
+            checksGlobal:
+            - !OverworldValidateModeDemo
+              present: false
+            checksBase: 
+            checksBaseValues: 
+            functions:
+            - !StartTutorial
+              key: overworld_camp
+              allowRepeat: true
+            functionsElse:
+            - !CallMethodStatic
+              typeName: DataHelperLoading
+              methodName: TryExitDemo
+              argument: ''
+              frameDelay: 0
+          functionsLocal: 
+    optionsReused: 

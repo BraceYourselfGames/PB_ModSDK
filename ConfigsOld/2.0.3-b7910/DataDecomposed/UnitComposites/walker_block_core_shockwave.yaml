@@ -1,0 +1,139 @@
+parents: []
+hidden: true
+core: 
+ui: 
+tags: 
+layout:
+  units: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes:
+  - looping: true
+    durationInTurns: 2
+    priority: 0
+    name: Core-Shockwave
+    color: 
+    comment:
+      comment: Create shockwaves crashing nearby units.
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted: 
+      functionsGlobal:
+      - !CombatCreateCommsMessage
+        time: 0
+        key: boss_bt_shockwave_near
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitActionsCreate
+        discardExisting: true
+        actions:
+        - key: system_equipment_core
+          startTime: 0.75
+          startTimeIsLocal: true
+          locked: false
+          durationVariable:
+            f: 1
+          targetLocal: 
+          target: 
+          targetSecondary: 
+          targetUnitFiltered: 
+          targetUnitLocalOffsets: 
+          movementCustom: 
+          functionsTimed:
+          - timeNormalized: 0.1
+            repeat: 
+            functions:
+            - !CombatAreaOfEffect
+              offset:
+                x: 0
+                y: -10
+                z: 0
+              radius: 35
+              exponent: 2
+              dispersed: true
+              integrity:
+                normalized: true
+                leveled: false
+                f: 0.05
+              concussion: 
+              heat: 
+              stagger: 
+              statusBuildup: 
+              crash:
+                f: 50000
+              targetCheck: 
+              functionsOnHit: 
+              impactUnitSelf: false
+              impactUnitAllies: false
+              impactUnitHostiles: true
+              impactUnitComposites: true
+              impactProjectiles: false
+              impactProps: true
+              fxDetonation: fx_boss_shockwave
+              fxDetonationScale: 5
+              fxArea: 
+              fxHit: fx_mech_melee_impact
+              audioDetonation: boss_spider_phase_change_2
+          functionsOnAction: 
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck: 
+    unitConnectedCheck: 
+    unitFilterCheck:
+      sort: None
+      unitLimit: 1
+      unitRepeats: false
+      exportEntitiesToBlackboardLimited: 
+      exportCountToMemoryLimited: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform:
+        origin: 
+        directionOriginRotation:
+          x: 0
+          y: 0
+          z: 0
+        directionDot: 
+        directionDotFlat: 
+        directionAngle: 
+        distance:
+          socketStatSource: 
+          range:
+            x: 0
+            y: 60
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable: 

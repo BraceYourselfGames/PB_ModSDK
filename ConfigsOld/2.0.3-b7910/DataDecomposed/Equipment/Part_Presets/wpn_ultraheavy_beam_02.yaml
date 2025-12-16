@@ -1,0 +1,31 @@
+hidden: false
+parents:
+- key: wpn_root_primary
+- key: wpn_perk_filter_beam
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: []
+tags:
+- range_long
+- branch_experimental
+- part_beam
+- part_energy
+- part_ultraheavy
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_heavy_beam_02
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

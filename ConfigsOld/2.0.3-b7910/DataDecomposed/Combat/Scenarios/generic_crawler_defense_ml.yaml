@@ -1,0 +1,332 @@
+hidden: false
+parents:
+- key: generic_crawler_defense
+core: 
+areas: 
+entry: 
+generationInjection: 
+tags: 
+states:
+  drone_missile_flight:
+    comment:
+      comment: This state gives missile drones a move action every turn.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 30
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_flying: true
+        purpose_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationFromState
+        stateKey: drone_trigger
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions: 
+            functionsTargeted:
+            - !CombatUnitActionsCreate
+              discardExisting: true
+              actions:
+              - key: move_system
+                startTime: 0
+                startTimeIsLocal: true
+                locked: false
+                durationVariable: 
+                targetLocal: 
+                target:
+                  type: State
+                  name: drone_trigger
+                  center: false
+                  modifiersDirectional: false
+                  modifiers: 
+                targetSecondary: 
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom:
+                  align: true
+                  raycast: true
+                  raycastDrop: false
+                  raycastOffset: 0
+                  raycastPitch: 45
+                functionsTimed: 
+                functionsOnAction: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  drone_spawn:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 2
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_spawned
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupLink
+            key: special_defense_missiles
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: false
+            functions:
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: drone_trigger
+                center: false
+                modifiersDirectional: false
+                modifiers: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState:
+              key: drone_trigger
+              check: Greater
+              value: 220
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          unitGeneratorKeys: 
+          outcome: 
+  drone_spawn_callout:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_crawler_defense_incoming_missiles
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core: 
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateUnitComposite
+      tagsUsed: false
+      tags: 
+      blueprintKeys:
+      - crawler
+      instanceNameOverride: crawler
+      target:
+        type: State
+        name: crawler_origin
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      levelOffset: 0
+      friendly: true
+      controllable: false
+      navigationSampled: false
+    - !CombatEffectSpawn
+      target:
+        type: State
+        name: crawler_origin
+        center: true
+        modifiersDirectional: false
+        modifiers:
+        - !TargetModifierOffsetLocal
+          offset:
+            x: 0
+            y: 13.2
+            z: 1.6
+      asset:
+        key: fx_tank_destruction_full
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      delay: 0
+    - !ClearBaseCombatMemory {}
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: combat_sc_targets_goal
+        value: 6
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

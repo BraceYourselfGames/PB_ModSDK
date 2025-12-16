@@ -1,0 +1,97 @@
+dataUI:
+  icon: s_icon_l32_target2
+  color:
+    r: 0.9529412
+    g: 0.5323529
+    b: 0.3921569
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0.25
+    b: 0
+    a: 1
+  sortingPriority: 400
+  hidden: false
+  irreversible: false
+  heating: true
+  offensive: true
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Targeting
+  heatType: DataConstant
+  durationType: Equipment
+  duration: 0
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: mech
+      not: false
+    blueprints: 
+    parts:
+    - socket: equipment_left
+      not: true
+      requirement: Destroyed
+      tags: 
+    - socket: equipment_left
+      not: false
+      requirement: Tags
+      tags:
+        type_defensive: false
+        type_melee: false
+        wpn_main: true
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: equipment_left
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: AttackSecondary
+    weightType: DataConstant
+    weightConstant: 10
+    partSocket: 
+    statUsed: 
+  - aiActionType: AttackMain
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom: 
+functionsTimed: 

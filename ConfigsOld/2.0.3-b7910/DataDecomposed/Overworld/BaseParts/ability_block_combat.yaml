@@ -1,0 +1,47 @@
+parents:
+- key: workshop
+  priority: 2
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 1
+  positionY: 6
+  endpoint: false
+  group: 
+  icon: s_icon_l32_weather_cloud2
+unlock: 
+cost:
+  resources:
+    supplies: 400
+effect: 
+effectPerInstance:
+  1:
+    stats:
+    - key: item_block_combat_limit
+      modifier: Offset
+      value: 1
+    functions: []
+    functionsOnLoad: 
+  2:
+    stats:
+    - key: item_block_combat_limit
+      modifier: Offset
+      value: 1
+    functions: []
+    functionsOnLoad: 
+  3:
+    stats:
+    - key: item_block_combat_limit
+      modifier: Offset
+      value: 1
+    functions: []
+    functionsOnLoad: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

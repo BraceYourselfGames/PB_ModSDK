@@ -1,0 +1,36 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_tank_generic_adapter
+blueprint: unit_tank_modular
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: artillery
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- filter_hybrid
+- role_artillery
+- type_tank_standard
+partTagPreferences:
+  body:
+  - tags:
+      mnf_vhc_03: true
+  equipment_right:
+  - tags:
+      part_ml: true
+      range_far: true
+      tank_part: false
+  - tags:
+      part_ml: true
+      range_long: true
+      tank_part: false
+parts: 
+animationOverrides: 
+effects: 

@@ -1,0 +1,22 @@
+textDescInTooltips: false
+hidden: false
+icon: s_icon_l32_socket_arm
+severity: Warning
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireAll
+  subsystemsMethod: RequireAll
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts:
+  - socket: optional_left
+    not: true
+    requirement: Present
+    tags: 
+  subsystems: []
+  stats: []
+  pilot: []
+functions: 

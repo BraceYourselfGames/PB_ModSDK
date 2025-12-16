@@ -1,0 +1,210 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- core
+tags:
+- body_part
+- part_top
+workshopInfo:
+  1:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 350
+    basePartRequirements: 
+  2:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 450
+    - key: components_r2
+      amount: 20
+    basePartRequirements:
+      workshop_tech_r2: 1
+  3:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 600
+    - key: components_r2
+      amount: 20
+    - key: components_r3
+      amount: 10
+    basePartRequirements:
+      workshop_tech_r3: 1
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_aux_core_standard
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_top_core
+  priority: -2
+  comment:
+    comment: Install standard reactor model at R0-R1.
+  checks:
+  - !CheckPartRating
+    ratingMin: 0
+    ratingMax: 1
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_top_core
+  priority: -2
+  comment:
+    comment: Install random reactor model at R2-R3.
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !TrimSystemsByRating
+  ratingMin: 1
+  ratingMax: 1
+  relative: false
+  hardpointsTargeted:
+  - internal_aux_top_core
+  priority: -1
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_aux_thruster_standard
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_top_thrusters
+  priority: -1
+  comment:
+    comment: Install standard thruster at R1
+  checks:
+  - !CheckPartRating
+    ratingMin: 1
+    ratingMax: 1
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_top_thrusters
+  priority: -1
+  comment:
+    comment: Install random thruster at R2/R3
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - rarity
+  - perk_1
+  priority: 10
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 1
+    ratingMax: 3
+- !TrimSystemsByRating
+  ratingMin: 0
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - rarity
+  priority: 20
+  comment: 
+  checks: 
+- !TrimSystemsByRating
+  ratingMin: -1
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - perk_1
+  priority: 30
+  comment: 
+  checks: 
+- !TrimSystemsByTagFilter
+  requireAll: true
+  filter:
+    perk_occurrence_body: true
+  hardpointsTargeted:
+  - perk_1
+  priority: 31
+  comment: 
+  checks: 
+- !TrimSystemsByRating
+  ratingMin: -2
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  priority: 40
+  comment:
+    comment: Offset by -2 not -1 since some system types only exist at common quality and aux hardpoints could go empty at R3 otherwise.
+  checks: 
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  - internal_aux_top_core
+  priority: 50
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !AddHardpoints
+  subsystemsInitial:
+  - ''
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_pilot
+  priority: 49
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_top_thrusters
+  - internal_aux_pilot
+  priority: 50
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 3
+    ratingMax: 3
+- !TrimSystemsByChance
+  difficultyUsed: true
+  difficultyKey: combat_system_spawn_chance
+  chance: 0.5
+  individual: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  priority: 500
+  comment:
+    comment: This generation step will remove all content from the following hardpoints with a chance. The "individual" flag set to false makes this chance apply to entire set of candidates (so, passing this check clears everything).
+  checks: 

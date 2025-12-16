@@ -1,0 +1,86 @@
+hidden: false
+parents: []
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart:
+    value: Standard
+  devSkipStep: 
+effectsOnExit:
+- functionsBase: 
+  functionsTarget: 
+  functionsGlobal:
+  - !SelectEntity
+    nameInternal: internal_mobilebase
+    delay: 0
+    select: true
+    focus: true
+  - !SetScreenFade
+    active: true
+    instant: true
+  - !SetScreenFade
+    active: false
+    instant: false
+  functionsLocal: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 0.882
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      exit:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.2311321
+            g: 0.7889382
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !UnlockAchievement
+            key: country_liberated
+          - !CallMethodStatic
+            typeName: PhantomBrigade.Data.SettingUtility
+            methodName: OnCampaignExitWithoutSave
+            argument: ''
+            frameDelay: 1
+          functionsLocal: 
+    optionsReused: 

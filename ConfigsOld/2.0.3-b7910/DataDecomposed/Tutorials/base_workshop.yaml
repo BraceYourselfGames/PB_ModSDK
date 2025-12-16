@@ -1,0 +1,532 @@
+depthBackground: 90
+depthForeground: 90
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.4117647
+      g: 0.7333333
+      b: 0.8745099
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Bottom
+    framePositionX: 480
+    framePositionY: 0
+    frameSizeX: 80
+    frameSizeY: 70
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomLeft
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_base_workshop
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_base_upgrades
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: event_empty_base
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: world_internal_cta_workshop
+        value: 3
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CallMethodStatic
+      typeName: CIViewBaseParts
+      methodName: OnTutorialFocus
+      argument: unit_bay
+      frameDelay: 1
+    - !UnlockCodex
+      key: base_upgrades
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0
+      g: 1
+      b: 1
+      a: 1
+    frameLocation: Center
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 380
+    frameSizeY: 380
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: LeftTop
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseParts
+      methodName: OnTutorialFocus
+      argument: workshop
+      frameDelay: 1
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: false
+        checkStrict: false
+        offset: true
+        value: 100
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.4117647
+      g: 0.7333333
+      b: 0.8745099
+      a: 1
+    frameLocation: TopLeft
+    frameGradientMode: Bottom
+    framePositionX: 480
+    framePositionY: 0
+    frameSizeX: 80
+    frameSizeY: 70
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: BottomLeft
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_base_workshop
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: base_workshop
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 1
+      g: 0.7332667
+      b: 0.3632075
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: -8
+    framePositionY: -48
+    frameSizeX: 504
+    frameSizeY: 356
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: supplies
+        check: false
+        checkStrict: false
+        offset: true
+        value: 300
+      - key: unit_token
+        check: false
+        checkStrict: false
+        offset: true
+        value: 1
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.7051735
+      g: 1
+      b: 0.3647059
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Top
+    framePositionX: -416
+    framePositionY: 80
+    frameSizeX: 392
+    frameSizeY: 560
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseWorkshopV2
+      methodName: SelectProjectForced
+      argument: utl_unit_frame
+      frameDelay: 1
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.5381566
+      g: 1
+      b: 0.3647059
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: None
+    framePositionX: -416
+    framePositionY: 0
+    frameSizeX: 392
+    frameSizeY: 96
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1843137
+  center: 
+  hint:
+    color:
+      r: 0.5518868
+      g: 0.8476415
+      b: 1
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: None
+    framePositionX: -416
+    framePositionY: -116
+    frameSizeX: 96
+    frameSizeY: 286
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: BottomRight
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseWorkshopV2
+      methodName: SelectCategoryForced
+      argument: parts_body
+      frameDelay: 1
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1843137
+  center: 
+  hint:
+    color:
+      r: 0.5518868
+      g: 0.7809223
+      b: 1
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Top
+    framePositionX: -420
+    framePositionY: 4
+    frameSizeX: 744
+    frameSizeY: 468
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 312
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseWorkshopV2
+      methodName: SelectCategoryForced
+      argument: parts_body
+      frameDelay: 1
+    - !CallMethodStatic
+      typeName: CIViewBaseWorkshopV2
+      methodName: SelectProjectForced
+      argument: body_set_elbrus_medium_arm
+      frameDelay: 1
+    - !UnlockCodex
+      key: base_workshop_unlocks
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1843137
+  center: 
+  hint:
+    color:
+      r: 0.5518868
+      g: 0.7809223
+      b: 1
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Top
+    framePositionX: -794
+    framePositionY: 4
+    frameSizeX: 375
+    frameSizeY: 416
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: LeftTop
+    buttonLocation: Bottom
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1843137
+  center: 
+  hint:
+    color:
+      r: 0.511748
+      g: 0.8679245
+      b: 0.511748
+      a: 1
+    frameLocation: TopRight
+    frameGradientMode: Top
+    framePositionX: -500
+    framePositionY: -64
+    frameSizeX: 316
+    frameSizeY: 308
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: BottomLeft
+    buttonLocation: Bottom
+    textWidth: 275
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: base_workshop_level
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1843137
+  center:
+    textImage: 
+    textHeaderReused: 
+    textContentReused: 
+    textInputActions: 
+  hint: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewBaseWorkshopV2
+      methodName: SelectProjectForced
+      argument: empty
+      frameDelay: 1
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld: 
+  effectsCombat: 

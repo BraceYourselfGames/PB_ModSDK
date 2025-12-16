@@ -1,0 +1,120 @@
+comment: 
+hidden: true
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: squad_invader_convoy
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Squad_Convoy
+  visualLiberated:
+    path: Content/Overworld/Site_Battlefield_Inactive
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction:
+    f: 15
+  detection: 
+tags:
+- flag_battlesite_on_defeat
+- contest_s1
+- convoy
+- flag_preserve_on_victory
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByTag
+    tagChecked: convoy
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 2
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents:
+  Spawn:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveRandom
+      speed: 2
+      pointRange:
+        x: 100
+        y: 250
+      pointPriority: Closest
+  Arrival:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveRandom
+      speed: 2
+      pointRange:
+        x: 100
+        y: 250
+      pointPriority: Closest
+combat:
+  scenarioKeys: 
+  scenarioFilter: 
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget:
+    f: 30
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 2
+        tagsUsed: true
+        keys: []
+        tags:
+          part_res_rare: true
+    obj_tier1:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: 
+        tags:
+          part_res: true
+          part_res_rare: false
+    obj_tier2:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 2
+        tagsUsed: true
+        keys: 
+        tags:
+          part_armor: true
+    obj_tier3:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: 
+        tags:
+          part_weapon: true
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys:
+        - res_r3
+        tags:
+          part_res_rare: true

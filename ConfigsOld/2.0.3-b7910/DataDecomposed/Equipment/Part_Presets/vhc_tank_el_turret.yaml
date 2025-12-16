@@ -1,0 +1,24 @@
+hidden: false
+parents:
+- key: vhc_tank_el
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- secondary
+tags: 
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - vhc_tank_el_turret
+  pickRandom: false
+  hardpointsTargeted:
+  - vhc_main_combined
+  priority: 0
+  comment: 
+  checks: 

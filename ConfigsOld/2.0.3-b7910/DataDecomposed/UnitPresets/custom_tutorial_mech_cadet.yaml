@@ -1,0 +1,77 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: pb_arctic_sky
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_helge: true
+parts:
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_defense:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_old_helge
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_shield_05
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_shotgun_heavy_01
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_defense:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_old_helge
+  optional_right:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_defense:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_old_helge
+  secondary:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_defense:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_old_helge
+animationOverrides: 
+effects: 

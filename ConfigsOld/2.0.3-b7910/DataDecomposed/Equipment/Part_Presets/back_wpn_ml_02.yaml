@@ -1,0 +1,67 @@
+hidden: false
+parents:
+- key: back_root
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- reward_special
+- part_ml
+- range_long
+- unguided
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - back_wpn_ml_02
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 21
+  comment:
+    comment: Add hardpoint for aux modules. Before adding, check if generated part rating is 3 or higher.
+  checks:
+  - !CheckPartRating
+    ratingMin: 3
+    ratingMax: 3
+- !TrimSystemsByStats
+  statsDesired: false
+  statKeys:
+  - wpn_penetration_charges
+  - wpn_scatter_angle
+  - wpn_scatter_angle_moving
+  - wpn_speed
+  - wpn_turnrate_limit
+  - wpn_damage_buildup
+  - wpn_scatter_radius
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 70
+  comment: 
+  checks: 
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 111
+  comment:
+    comment: Make second aux module component customizable at rating 3.
+  checks:
+  - !CheckPartRating
+    ratingMin: 3
+    ratingMax: 3

@@ -1,0 +1,88 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_settlement_city
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Battlefield
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- contest_s2
+generation:
+  spawnPrefs:
+    groupOverride: settlement
+    groupReusable: false
+    rangeIgnored: false
+    rangeOverride:
+      v:
+        x: 80
+        y: 1000
+    distancePriority: Closest
+  checksBase:
+  - !OverworldValidatePointUseByKey
+    keyChecked: generic_civilian_liberation
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 2
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_civilian_liberation: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_hope
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_camp
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_r1
+        - res_supplies
+        tags: 
+      - chance: 0.4
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_r2
+        tags: 

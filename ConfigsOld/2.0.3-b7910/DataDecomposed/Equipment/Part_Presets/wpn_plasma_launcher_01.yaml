@@ -1,0 +1,35 @@
+hidden: false
+parents:
+- key: wpn_root_primary
+- key: wpn_perk_filter_gun
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- branch_experimental
+- difficulty_hard
+- mnf_wpn_01
+- mnf_wpn_02
+- mnf_wpn_03
+- part_concussion
+- part_energy
+- range_long
+- guided
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_plasma_launcher_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 
