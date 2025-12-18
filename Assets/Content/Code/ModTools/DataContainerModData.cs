@@ -121,7 +121,6 @@ namespace PhantomBrigade.SDK.ModTools
         public void OnAfterDeserialization (DataContainerModData parent)
         {
             this.parent = parent;
-            UpdatePathFromInput (path);
         }
 
         private void UpdatePathFromInput (string pathInput)

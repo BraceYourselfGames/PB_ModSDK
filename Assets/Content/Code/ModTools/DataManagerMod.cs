@@ -7,6 +7,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 #if UNITY_EDITOR
+using System;
+using System.Reflection;
 using PhantomBrigade.ModTools;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
@@ -541,6 +543,7 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     modData.RefreshConfigsVersion ();
                     DataContainerModData.selectedMod = modSelected;
+                    InitializeExternalAssemblies ();
                     ResetArea ();
                     ResetDBs ();
                 }
@@ -558,6 +561,7 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     modData.RefreshConfigsVersion ();
                     DataContainerModData.selectedMod = null;
+                    CheckLoadedExternalAssemblies ();
                     ResetArea ();
                     ResetDBs ();
                 }
@@ -733,7 +737,9 @@ namespace PhantomBrigade.SDK.ModTools
             if (settings == null)
                 LoadSettings ();
 
+            bool firstLoad = !loadedOnce;
             loadedOnce = true;
+
             mods.Clear ();
             modsLoadedPaths.Clear ();
             
@@ -784,6 +790,101 @@ namespace PhantomBrigade.SDK.ModTools
             }
 
             // Debug.LogWarning ($"Discovered project files: {modsLoaded.ToStringFormattedKeyValuePairs (true, toStringOverride: (x) => $"ID: {x.id} / Key: {x.key}")}");
+        }
+        
+        private static Dictionary<string, List<Assembly>> assembliesPerMod = new Dictionary<string, List<Assembly>> ();
+        private static int assembliesExternalLoaded = 0;
+        private static bool assembliesExternalInitialized = false;
+        private static bool assembliesExternalWarned = false;
+
+        public static void CheckLoadedExternalAssemblies ()
+        {
+            if (assembliesExternalInitialized && assembliesExternalLoaded > 0 && !assembliesExternalWarned)
+            {
+                assembliesExternalWarned = false;
+                Debug.LogWarning ($"Warning! All external assemblies remain loaded and can't be unloaded for now. Recompile the project or restart it if you need to unlock external .dlls");
+            }
+        }
+
+        public static void InitializeExternalAssemblies ()
+        {
+            if (assembliesExternalInitialized)
+                return;
+
+            assembliesExternalInitialized = true;
+            if (mods == null || mods.Count == 0)
+                return;
+
+            foreach (var kvp in mods)
+            {
+                var modData = kvp.Value;
+                if (modData?.libraryDLLs?.files == null || modData.libraryDLLs.files.Count == 0)
+                    continue;
+                
+                var id = kvp.Key;
+                var assemblyList = new List<Assembly> ();
+                assembliesPerMod[id] = assemblyList;
+                    
+                foreach (var file in modData.libraryDLLs.files)
+                {
+                    var filePath = file.GetFinalPath ();
+                    if (!File.Exists (filePath))
+                        continue;
+
+                    var filename = Path.GetFileName (filePath);
+                    try
+                    {
+                        var assembly = Assembly.LoadFrom (filePath);
+                        assemblyList.Add (assembly);
+                        Debug.Log ($"{id} | Attempted loading assembly from {filename} | Success: {assembly.Location}");
+                        assembliesExternalLoaded += 1;
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError ($"{id} | Attempted loading assembly from {filename} | Failed with exception: {e}");
+                    }
+                }
+            }
+
+            if (assembliesPerMod != null && assembliesPerMod.Count > 0)
+            {
+                var tagMappings = UtilitiesYAML.GetTagMappings ();
+                var tagsPrevious = new HashSet<string> (tagMappings.Keys);
+                bool tagsChanged = false;
+                Debug.Log ($"Scanning for new YAML tags | Mods with assemblies: {assembliesPerMod.Count} | Initial tags: {tagMappings.Count}");
+                
+                foreach (var kvp in assembliesPerMod)
+                {
+                    string id = kvp.Key;
+                    var assemblyList = kvp.Value;
+                    if (assemblyList != null && assemblyList.Count > 0)
+                    {
+                        foreach (var assembly in assemblyList)
+                        {
+                            UtilitiesYAML.AddTagMappingsHintedInAssembly (assembly, useNamespaceAsPrefix: true);
+                            
+                            var tagsAfter = new HashSet<string> (tagMappings.Keys);
+                            tagsAfter.ExceptWith (tagsPrevious);
+                            if (tagsAfter.Count == 0)
+                            {
+                                Debug.Log ($"No tag changes found after scanning assembly {assembly.FullName}");
+                                continue;
+                            }
+                            
+                            Debug.Log ($"Loaded tags from {id} assembly {assembly.FullName}\n{tagsAfter.ToStringMultilineDash ()}");
+                            tagsPrevious.UnionWith (tagsAfter);
+                            tagsChanged = true;
+                        }
+                    }
+                }
+                
+                if (tagsChanged)
+                {
+                    Debug.Log ($"Rebuilding YAML serialization...");
+                    UtilitiesYAML.RebuildDeserializer ();
+                    UtilitiesYAML.RebuildSerializer ();
+                }
+            }
         }
 
         [PropertyOrder (-100)]
