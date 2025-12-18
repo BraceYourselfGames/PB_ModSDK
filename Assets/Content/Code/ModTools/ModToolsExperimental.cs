@@ -111,9 +111,10 @@ namespace PhantomBrigade.SDK.ModTools
                 yield return new EditorWaitForSeconds (0.1f);
                 EditorUtility.DisplayProgressBar ("Exporting mod", "Checking text edits...", 0.95f);
                 ModTextHelper.GenerateTextChanges (modData);
-                if (modData.textEdits != null)
-                    modData.textEdits.SaveToMod (modData);
             }
+            
+            if (modData.textEdits != null)
+                modData.textEdits.SaveToMod (modData);
             
             yield return new EditorWaitForSeconds (0.1f);
             EditorUtility.DisplayProgressBar ("Exporting mod", "Checking asset bundles...", 0.95f);

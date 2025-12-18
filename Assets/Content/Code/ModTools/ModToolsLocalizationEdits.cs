@@ -274,16 +274,16 @@ namespace PhantomBrigade.ModTools
     [HideDuplicateReferenceBox]
     public class ModConfigLocEditLanguage
     {
-        [InfoBox ("$hintLocked", VisibleIf = nameof(IsEntryLocked))]
-        [DisableIf (nameof(IsEntryLocked))]
+        // [InfoBox ("$hintLocked", VisibleIf = nameof(IsEntryLocked))]
+        // [DisableIf (nameof(IsEntryLocked))]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.Foldout)]
         public SortedDictionary<string, ModConfigLocSector> sectors = new SortedDictionary<string, ModConfigLocSector> ();
 
         [YamlIgnore, HideInInspector]
         public string language;
         
-        private string hintLocked = "These text edits can't be modified and are generated automatically when you modify text in databases and press \"Save Text\" in their inspectors.";
-        private bool IsEntryLocked => !string.IsNullOrEmpty (language) && string.Equals (language, "English", StringComparison.Ordinal);
+        // private string hintLocked = "These text edits can't be modified and are generated automatically when you modify text in databases and press \"Save Text\" in their inspectors.";
+        // private bool IsEntryLocked => !string.IsNullOrEmpty (language) && string.Equals (language, "English", StringComparison.Ordinal);
     }
     
     [HideReferenceObjectPicker, HideDuplicateReferenceBox]
