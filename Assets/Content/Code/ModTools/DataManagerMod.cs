@@ -861,7 +861,7 @@ namespace PhantomBrigade.SDK.ModTools
                     {
                         foreach (var assembly in assemblyList)
                         {
-                            UtilitiesYAML.AddTagMappingsHintedInAssembly (assembly, useNamespaceAsPrefix: true);
+                            UtilitiesYAML.AddTagMappingsHintedInAssembly (assembly);
                             
                             var tagsAfter = new HashSet<string> (tagMappings.Keys);
                             tagsAfter.ExceptWith (tagsPrevious);

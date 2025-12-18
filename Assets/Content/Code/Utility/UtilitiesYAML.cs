@@ -127,12 +127,8 @@ public static class UtilitiesYAML
         var assemblyBuiltin = Assembly.GetAssembly (typeof (TypeHintedAttribute));
         AddTagMappingsHintedInAssembly (assemblyBuiltin);
     }
-
-    #if PB_MODSDK
-    public static void AddTagMappingsHintedInAssembly (Assembly assembly, bool useNamespaceAsPrefix = false)
-    #else
+    
     public static void AddTagMappingsHintedInAssembly (Assembly assembly)
-    #endif
     {
         if (assembly == null)
             return;
@@ -161,10 +157,6 @@ public static class UtilitiesYAML
             var typeHintedPrefix = type.GetCustomAttribute<TypeHintedPrefixAttribute> (true);
             if (typeHintedPrefix != null && !string.IsNullOrEmpty (typeHintedPrefix.prefix))
                 alias = $"!{typeHintedPrefix.prefix}.{alias.TrimStart ('!')}";
-            #if PB_MODSDK
-            else if (useNamespaceAsPrefix)
-                alias = $"!{type.Namespace}.{alias.TrimStart ('!')}";
-            #endif
 
             if (tagMappings.TryGetValue (alias, out var typeConflicting))
             {
