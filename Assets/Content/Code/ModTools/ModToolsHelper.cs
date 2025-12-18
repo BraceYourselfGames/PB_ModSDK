@@ -193,17 +193,23 @@ namespace PhantomBrigade.SDK.ModTools
             }
             foreach (var dll in modData.libraryDLLs.files)
             {
-                if (!dll.enabled)
+                if (dll == null || string.IsNullOrEmpty (dll.path) || !dll.enabled)
+                    continue;
+                
+                var pathSource = dll.GetFinalPath ();
+                var fileSource = new FileInfo (pathSource);
+                
+                if (!fileSource.Exists)
                 {
+                    Debug.Log ($"External library file doesn't exist: {pathSource}");
                     continue;
                 }
-                if (!File.Exists (dll.path))
-                {
-                    continue;
-                }
-
-                var pathDest = DataPathHelper.GetCombinedCleanPath (pathLibraries, Path.GetFileName (dll.path));
-                File.Copy (dll.path, pathDest, true);
+                
+                var filename = Path.GetFileName (pathSource);
+                var pathDest = DataPathHelper.GetCombinedCleanPath (pathLibraries, filename);
+                
+                File.Copy (pathSource, pathDest, true);
+                Debug.Log ($"Copying external DLL into Libraries...\nFrom: {pathSource}\nTo: {pathDest}");
             }
         }
     }

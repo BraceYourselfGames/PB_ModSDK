@@ -77,6 +77,17 @@ namespace PhantomBrigade.SDK.ModTools
         public List<FileReference> files = new List<FileReference> ();
 
         FileReference CreateEntry () => new FileReference ();
+
+        public void OnAfterDeserialization (DataContainerModData parent)
+        {
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    file.OnAfterDeserialization (parent);
+                }
+            }
+        }
     }
 
     [Serializable, HideReferenceObjectPicker, HideDuplicateReferenceBox]
@@ -86,12 +97,86 @@ namespace PhantomBrigade.SDK.ModTools
         [PropertySpace (2f)]
         [HideLabel]
         public bool enabled = true;
+        
+        [HideInInspector]
+        public bool relative = false;
 
         [HorizontalGroup]
-        [EnableIf (nameof(enabled))]
-        [Sirenix.OdinInspector.FilePath (AbsolutePath = true, IncludeFileExtension = true, RequireExistingPath = true, UseBackslashes = false)]
-        [HideLabel]
+        [EnableIf (nameof (enabled)), GUIColor (nameof (GetPathColor))]
+        [Sirenix.OdinInspector.FilePath (AbsolutePath = true, RequireExistingPath = false, IncludeFileExtension = true, UseBackslashes = false)]
+        [HideLabel, ShowInInspector, InlineButton (nameof(ToggleRelative), "$" + nameof(GetRelativeLabel))]
+        public string pathProperty
+        {
+            get => GetFinalPath ();
+            set => UpdatePathFromInput (value);
+        }
+        
+        [ReadOnly, GUIColor(nameof(GetPathColor)), DisplayAsString (TextAlignment.Right)]
+        [HideLabel, ShowIf(nameof(relative))]
         public string path;
+
+        [YamlIgnore, HideInInspector]
+        public DataContainerModData parent;
+
+        public void OnAfterDeserialization (DataContainerModData parent)
+        {
+            this.parent = parent;
+            UpdatePathFromInput (path);
+        }
+
+        private void UpdatePathFromInput (string pathInput)
+        {
+            if (string.IsNullOrEmpty (pathInput))
+                return;
+            
+            if (relative)
+            {
+                var pathMod = parent.GetModPathProject ();
+                if (!pathInput.StartsWith (pathMod))
+                {
+                    Debug.LogWarning ($"Relative path invalid, doesn't start in parent directory:\n- Mod: {pathMod}\n- Path: {path}");
+                    return;
+                }
+            
+                path = pathInput.Substring (pathMod.Length + 1);
+            }
+            else
+            {
+                path = pathInput;
+            }
+        }
+
+        public string GetFinalPath ()
+        {
+            if (!relative)
+                return path;
+
+            if (parent == null)
+                return null;
+
+            var pathMod = parent.GetModPathProject ();
+            var pathRelative = DataPathHelper.GetCombinedCleanPath (pathMod, path);
+            return pathRelative;
+        }
+
+        private bool IsPathValid ()
+        {
+            var pathFinal = GetFinalPath ();
+            return File.Exists (pathFinal);
+        }
+
+        private void ToggleRelative ()
+        {
+            relative = !relative;
+            UpdatePathFromInput (path);
+        }
+
+        private string GetRelativeLabel ()
+        {
+            return relative ? " Relative " : " Absolute ";
+        }
+
+        private Color GetPathColor () => IsPathValid () ? relative ? ModToolsColors.HighlightNeonGreen : Color.white : ModToolsColors.HighlightNeonRed;
     }
     #endif
 
@@ -484,6 +569,12 @@ namespace PhantomBrigade.SDK.ModTools
 
             if (textEdits != null)
                 textEdits.OnAfterDeserialization ();
+            
+            if (libraryDLLs != null)
+                libraryDLLs.OnAfterDeserialization (this);
+            
+            if (extraFiles != null)
+                extraFiles.OnAfterDeserialization (this);
         }
 
         private void OnWorkshopChange ()
@@ -601,14 +692,24 @@ namespace PhantomBrigade.SDK.ModTools
                 {
                     continue;
                 }
-                if (!File.Exists (fr.path))
+                
+                var pathSource = fr.GetFinalPath ();
+                var fileSource = new FileInfo (pathSource);
+                
+                if (!fileSource.Exists)
                 {
+                    Debug.Log ($"External file doesn't exist: {pathSource}");
                     continue;
                 }
 
-                var pathDest = DataPathHelper.GetCombinedCleanPath (destPath, Path.GetFileName (fr.path));
-                // Do not overwrite existing files. This is to prevent accidentally overwriting metadata.yaml.
-                File.Copy (fr.path, pathDest);
+                var filename = Path.GetFileName (pathSource);
+                var pathDest = DataPathHelper.GetCombinedCleanPath (destPath, filename);
+                
+                if (string.Equals ("metadata.yaml", filename))
+                    continue;
+
+                Debug.Log ($"Copying external file...\nFrom: {pathSource}\nTo: {pathDest}");
+                File.Copy (pathSource, pathDest, true);
             }
         }
 
