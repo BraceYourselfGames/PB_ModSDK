@@ -130,6 +130,12 @@ namespace PhantomBrigade.SDK.ModTools
             
             if (relative)
             {
+                if (parent == null)
+                {
+                    Debug.LogWarning ($"Relative path can't be updated, no parent mod reference available. Reload the mod!");
+                    return;    
+                }
+                
                 var pathMod = parent.GetModPathProject ();
                 if (!pathInput.StartsWith (pathMod))
                 {
@@ -147,6 +153,9 @@ namespace PhantomBrigade.SDK.ModTools
 
         public string GetFinalPath ()
         {
+            if (string.IsNullOrEmpty (path))
+                return string.Empty;
+            
             if (!relative)
                 return path;
 
@@ -160,6 +169,9 @@ namespace PhantomBrigade.SDK.ModTools
 
         private bool IsPathValid ()
         {
+            if (string.IsNullOrEmpty (path))
+                return false;
+            
             var pathFinal = GetFinalPath ();
             return File.Exists (pathFinal);
         }
@@ -527,12 +539,12 @@ namespace PhantomBrigade.SDK.ModTools
 
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.LibraryDLLs)]
-        [LabelText ("Library DLLs")]
+        [LabelText ("Library DLLs"), OnValueChanged ("OnAfterDeserializationDlls", true)]
         public FileReferences libraryDLLs;
 
         [DropdownReference (true)]
         [PropertyOrder (OdinGroup.Order.ExtraFiles)]
-        [LabelText ("Extra Files")]
+        [LabelText ("Extra Files"), OnValueChanged ("OnAfterDeserializationFiles", true)]
         public FileReferences extraFiles;
 
         public override void OnAfterDeserialization (string key)
@@ -572,6 +584,18 @@ namespace PhantomBrigade.SDK.ModTools
             if (libraryDLLs != null)
                 libraryDLLs.OnAfterDeserialization (this);
             
+            if (extraFiles != null)
+                extraFiles.OnAfterDeserialization (this);
+        }
+
+        private void OnAfterDeserializationDlls ()
+        {
+            if (libraryDLLs != null)
+                libraryDLLs.OnAfterDeserialization (this);
+        }
+        
+        private void OnAfterDeserializationFiles ()
+        {
             if (extraFiles != null)
                 extraFiles.OnAfterDeserialization (this);
         }
