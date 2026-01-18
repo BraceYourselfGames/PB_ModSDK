@@ -42,6 +42,44 @@ namespace PhantomBrigade.Data
     public static class ScenarioUtility
     {
         private static List<string> keysFilteredArea = new List<string> ();
+        
+        public static bool IsTimeDay ()
+        {
+            #if !PB_MODSDK
+            bool isDay = TOD_Sky.Instance != null && !TOD_Sky.Instance.IsNight;
+            if (Application.isPlaying)
+            {
+                var overworld = Contexts.sharedInstance.overworld;
+                float hour = 8f; // Reasonable default if nothing is found
+                if (overworld.hasSimulationTime)
+                    hour = overworld.simulationTime.f % 24f;
+
+                var scenarioCurrent = ScenarioUtility.GetCurrentScenario ();
+                if (scenarioCurrent != null && scenarioCurrent.coreProc != null && scenarioCurrent.coreProc.timeLocked)
+                    hour = scenarioCurrent.coreProc.time % 24f;
+                
+                var areaCurrent = ScenarioUtility.GetCurrentArea ();
+                if (areaCurrent != null && areaCurrent.coreProc != null && areaCurrent.coreProc.timeCustom != null)
+                    hour = areaCurrent.coreProc.timeCustom.f % 24f;
+
+                isDay = hour > 5f && hour < 19f;
+
+                // Ensure all the visibility aids are on if visibility is lowered due to precipitation
+                if (isDay)
+                {
+                    var wm = WeatherManager.instance;
+                    if (wm != null && wm.precIntensityTarget > 0.7f)
+                        isDay = false;
+                }
+            }
+
+            isTimeCheckedOnce = true;
+            isTimeDayLast = isDay;
+            return isDay;
+            #else
+            return true;
+            #endif
+        }
 
         public static List<string> GetAreaKeysFromFilter (SortedDictionary<string, bool> filter, bool returnEmpty = true)
         {

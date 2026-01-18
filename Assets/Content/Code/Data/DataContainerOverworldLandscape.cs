@@ -91,7 +91,7 @@ namespace PhantomBrigade.Data
     
     public class DataContainerOverworldLandscape : DataContainer
     {
-        [ValueDropdown ("$GetAssetKeys")]
+        [ValueDropdown ("$GetAssetKeys"), InlineButton ("ApplyLandscape", "Apply")]
         public string assetKey;
         
         public float heightFull = 100f;
@@ -745,10 +745,11 @@ namespace PhantomBrigade.Data
         public void SelectToInspector ()
         {
             DataMultiLinkerOverworldLandscape.selection = this;
-            
-            if (OverworldLandscapeManager.ins == null)
-                return;
-            
+            ApplyLandscape ();
+        }
+
+        private void ApplyLandscape ()
+        {
             OverworldLandscapeManager.TryLoadingVisual 
             (
                 assetKey, 

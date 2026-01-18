@@ -5,15 +5,16 @@ using System.Linq;
 
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Assembly = System.Reflection.Assembly;
 
 #if UNITY_EDITOR
 using System;
-using System.Reflection;
 using PhantomBrigade.ModTools;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
+using UnityEditor.Compilation;
 #endif
 
 namespace PhantomBrigade.SDK.ModTools
@@ -544,6 +545,7 @@ namespace PhantomBrigade.SDK.ModTools
                     modData.RefreshConfigsVersion ();
                     DataContainerModData.selectedMod = modSelected;
                     InitializeExternalAssemblies ();
+                    InitializeLinkedAssets (modSelected);
                     ResetArea ();
                     ResetDBs ();
                 }
@@ -564,6 +566,9 @@ namespace PhantomBrigade.SDK.ModTools
                     CheckLoadedExternalAssemblies ();
                     ResetArea ();
                     ResetDBs ();
+                    
+                    OverworldLandscapeManager.Deactivate ();
+                    CombatSceneHelper.UnloadArea ();
                 }
             }
 
@@ -726,6 +731,15 @@ namespace PhantomBrigade.SDK.ModTools
             var settingsPath = $"{DataPathHelper.GetApplicationFolder ()}ConfigsModTools/";
             UtilitiesYAML.SaveToFile (settingsPath, "user_settings.yaml", settings);
         }
+        
+        [PropertyOrder (-100)]
+        [FoldoutGroup("Settings"), HorizontalGroup ("Settings/Bg")]
+        [Button (SdfIconType.ArrowRepeat, IconAlignment.LeftOfText, ButtonHeight = 32, Name = "Recompile")]
+        private static void Recompile ()
+        {
+            Debug.Log ($"Requested recompilation...");
+            CompilationPipeline.RequestScriptCompilation ();
+        }
 
         private static bool warnAboutInvalidFolders = false;
 
@@ -885,6 +899,57 @@ namespace PhantomBrigade.SDK.ModTools
                     UtilitiesYAML.RebuildSerializer ();
                 }
             }
+        }
+
+        public static void InitializeLinkedAssets (DataContainerModData modData)
+        {
+            if (modData == null || modData.assetBundles?.bundleDefinitions == null)
+                return;
+
+            var prefabExtension = ".prefab";
+            OverworldLandscapeManager.prefabsFromMod.Clear ();
+            ItemHelper.prefabsFromMod.Clear ();
+            
+            foreach (var assetBundle in modData.assetBundles.bundleDefinitions)
+            {
+                if (assetBundle == null || assetBundle.files == null || assetBundle.files.Count == 0)
+                    continue;
+
+                foreach (var file in assetBundle.files)
+                {
+                    if (string.IsNullOrEmpty (file.path))
+                        continue;
+                    
+                    if (!file.path.EndsWith (prefabExtension))
+                        continue;
+                    
+                    var prefab = AssetDatabase.LoadAssetAtPath (file.path, typeof (GameObject)) as GameObject;
+                    if (prefab == null)
+                    {
+                        Debug.LogWarning ($"Mod {modData.id} | Asset bundle {assetBundle.name} has invalid prefab path: {file.path}");
+                        continue;
+                    }
+                    
+                    var componentLandscape = prefab.GetComponent<OverworldLandscapeRoot> ();
+                    var componentItem = prefab.GetComponent<ItemVisual> ();
+                    
+                    if (componentLandscape != null)
+                    {
+                        Debug.Log ($"Mod {modData.id} | Loaded linked asset (landscape):\n- {file.path}");
+                        OverworldLandscapeManager.prefabsFromMod.Add (componentLandscape);
+                    }
+                    else if (componentItem != null)
+                    {
+                        Debug.Log ($"Mod {modData.id} | Loaded linked asset (item):\n- {file.path}");
+                        var visualKey = $"{assetBundle.name}/{prefab.name}";
+                        ItemHelper.prefabsFromMod[visualKey] = componentItem;
+                    }
+                }
+            }
+
+            // Reloading landscape DB immediately is quick and it's required for 
+            OverworldLandscapeManager.ReloadAssets ();
+            ItemHelper.ResetLoadedFlag ();
         }
 
         [PropertyOrder (-100)]

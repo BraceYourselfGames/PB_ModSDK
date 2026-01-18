@@ -1874,23 +1874,7 @@ namespace PhantomBrigade.Data
             
             DeselectAll ();
             
-            var sceneHelper = CombatSceneHelper.ins;
-            if (sceneHelper != null)
-                sceneHelper.areaManager.UnloadArea (false);
-
-            if (OverworldSceneHelper.ins != null)
-                OverworldSceneHelper.ins.SetActiveDirectly (true);
-
-            if (sceneHelper != null)
-            {
-                sceneHelper.DestroyTerrainMeshes ();
-                sceneHelper.segmentHelper.ClearSegments ();
-                sceneHelper.fieldHelper.ClearFields ();
-                
-                #if !PB_MODSDK
-                sceneHelper.ambientLight.OnLevelUnload ();
-                #endif
-            }
+            CombatSceneHelper.UnloadArea ();
         }
         
         private bool IsSelected => DataMultiLinkerCombatArea.selectedArea == this;

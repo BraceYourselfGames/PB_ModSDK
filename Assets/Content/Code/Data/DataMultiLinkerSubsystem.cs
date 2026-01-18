@@ -914,7 +914,7 @@ namespace PhantomBrigade.Data
 
                     var visualInstance = Instantiate (visualPrefab.gameObject).GetComponent<ItemVisual> ();
                     var t = visualInstance.transform;
-                    t.name = $"_vis_{i:00} | {visualPrefab.name}";
+                    t.name = $"_vis_{i:00} | {key}";
                     t.parent = subholder;
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero);
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity);
@@ -962,7 +962,7 @@ namespace PhantomBrigade.Data
 
                     var visualInstance = Instantiate (visualPrefab.gameObject).GetComponent<ItemVisual> ();
                     var t = visualInstance.transform;
-                    t.name = $"{kvp.Key} | {visualPrefab.name}";
+                    t.name = $"{kvp.Key} | {block.key}";
                     t.parent = subholder;
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero) + block.position;
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity) * Quaternion.Euler (block.rotation);

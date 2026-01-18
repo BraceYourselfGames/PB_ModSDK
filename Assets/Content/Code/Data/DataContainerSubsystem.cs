@@ -544,7 +544,7 @@ namespace PhantomBrigade.Data
         
         [PropertyOrder (-3)]
         [BoxGroup ("Stats", false)]
-        [ShowIf ("@AreStatsVisible && stats != null && hardpointsProcessed != null && hardpointsProcessed.Count > 1")]
+        [ShowIf ("@AreStatsVisible && stats != null && hardpointsProcessed != null && hardpointsProcessed.Count > 0")]
         [OnValueChanged ("OnFullRefreshRequired")]
         [InlineButton ("ClearStatDistribution", "-", ShowIf = "IsStatDistributionUsed")]
         [ValueDropdown ("@DataMultiLinkerSubsystemStatDistributions.data.Keys")]

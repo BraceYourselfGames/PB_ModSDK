@@ -145,4 +145,42 @@ public class CombatSceneHelper : MonoBehaviour
         var bh = boundary;
         boundary.DestroyMeshes ();
     }
+
+    public static void UnloadArea ()
+    {
+        if (ins == null)
+            return;
+        
+        if (ins.areaManager != null)
+            ins.areaManager.UnloadArea (false);
+
+        if (ins.background != null)
+            ins.background.gameObject.SetActive (false);
+        
+        if (ins.boundary != null)
+            ins.boundary.gameObject.SetActive (false);
+        
+        if (ins.terrain != null)
+        {
+            ins.DestroyTerrainMeshes ();
+            ins.terrain.gameObject.SetActive (false);
+        }
+        
+        if (ins.segmentHelper != null)
+        {
+            ins.segmentHelper.ClearSegments ();
+            ins.segmentHelper.gameObject.SetActive (false);
+        }
+        
+        if (ins.fieldHelper != null)
+            ins.fieldHelper.ClearFields ();
+        
+        #if !PB_MODSDK
+        if (ins.ambientLight != null)
+        {
+            ins.ambientLight.OnLevelUnload ();
+            ins.ambientLight.gameObject.SetActive (false);
+        }
+        #endif
+    }
 }

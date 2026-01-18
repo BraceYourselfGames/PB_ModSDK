@@ -91,7 +91,28 @@ public struct OverworldLandscapePropTransform
 public class OverworldLandscapeManager : MonoBehaviour
 {
     [ShowInInspector, ReadOnly, InfoBox ("@GetInstanceText ()")]
-    public static OverworldLandscapeManager ins;
+    public static OverworldLandscapeManager ins
+    {
+        get
+        {
+            if (!insInitialized)
+            {
+                insInitialized = true;
+                if (insInternal == null)
+                    insInternal = GameObject.FindObjectOfType<OverworldLandscapeManager> (true);
+            }
+
+            return insInternal;
+        }
+        set
+        {
+            insInternal = value;
+        }
+    }
+    
+    private static OverworldLandscapeManager insInternal;
+    private static bool insInitialized = false;
+    private static bool assetsLoaded = false;
 
     public GameObject holder;
 
@@ -256,11 +277,12 @@ public class OverworldLandscapeManager : MonoBehaviour
         }
     }
 
-    private static OverworldLandscapeRoot rootInjected = null;
+    private static OverworldLandscapeRoot prefabInjected = null;
+    public static List<OverworldLandscapeRoot> prefabsFromMod = new List<OverworldLandscapeRoot> ();
 
     public static void TryInjectingVisual (OverworldLandscapeRoot root)
     {
-        rootInjected = null;
+        prefabInjected = null;
         
         if (root == null)
         {
@@ -280,16 +302,36 @@ public class OverworldLandscapeManager : MonoBehaviour
             return;
         }
         
-        rootInjected = root;
+        prefabInjected = root;
         ins.UpdateAssets ();
         
         Debug.Log ($"Visual injected: prefab {root.name} with key {root.key}");
         TryLoadingVisual (root.key, true);
     }
 
+    public static void ResetLoadedFlag ()
+    {
+        assetsLoaded = false;
+    }
+
+    private static void CheckAssetsLoaded ()
+    {
+        if (!assetsLoaded && ins != null)
+            ins.UpdateAssets ();
+    }
+    
+    public static void ReloadAssets ()
+    {
+        if (ins == null)
+            return;
+        
+        ins.UpdateAssets ();
+    }
+
     private void UpdateAssets ()
     {
         assetLookup.Clear ();
+        assetsLoaded = true;
         
         if (assets != null)
         {
@@ -300,8 +342,19 @@ public class OverworldLandscapeManager : MonoBehaviour
             }
         }
 
-        if (rootInjected != null && !string.IsNullOrEmpty (rootInjected.key))
-            assetLookup[rootInjected.key] = new OverworldLandscapeRootLink { prefab = rootInjected };
+        if (prefabsFromMod != null && prefabsFromMod.Count > 0)
+        {
+            foreach (var prefab in prefabsFromMod)
+            {
+                if (prefab == null || string.IsNullOrEmpty (prefab.key))
+                    continue;
+
+                assetLookup[prefab.key] = new OverworldLandscapeRootLink { prefab = prefab };
+            }
+        }
+
+        if (prefabInjected != null && !string.IsNullOrEmpty (prefabInjected.key))
+            assetLookup[prefabInjected.key] = new OverworldLandscapeRootLink { prefab = prefabInjected };
 
         // Allow mods to inject additional visuals
         #if !PB_MODSDK
@@ -633,6 +686,8 @@ public class OverworldLandscapeManager : MonoBehaviour
 
     public static IEnumerable<string> GetAssetKeys ()
     {
+        CheckAssetsLoaded ();
+        
         if (ins == null || ins.assetLookup == null)
             return null;
 
@@ -777,6 +832,8 @@ public class OverworldLandscapeManager : MonoBehaviour
 
         if (!reloadIfLast && IsVisualLoaded (key))
             return true;
+
+        CheckAssetsLoaded ();
         
         #if PB_MODSDK
         if (ins == null)
@@ -784,8 +841,7 @@ public class OverworldLandscapeManager : MonoBehaviour
             Debug.LogWarning ($"Failed to find the OverworldLandscapeManager component. Make sure you install the optional asset package and open the extended scene (game_extended_sdk).");
             return false;
         }
-        
-        ins.UpdateAssets ();
+
         #endif
         
         if (ins.rootHolder == null)

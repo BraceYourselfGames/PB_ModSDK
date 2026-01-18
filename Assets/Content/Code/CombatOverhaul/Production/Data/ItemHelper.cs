@@ -10,6 +10,7 @@ public static class ItemHelper
     public static Dictionary<string, ItemVisual> itemVisualPrefabs = new Dictionary<string, ItemVisual> ();
 
     private static bool autoloadAttempted = false;
+    public static Dictionary<string, ItemVisual> prefabsFromMod = new Dictionary<string, ItemVisual> ();
 
     public static void CheckDatabase ()
     {
@@ -25,6 +26,11 @@ public static class ItemHelper
     public static bool AreAssetsPresent ()
     {
         return itemVisualPrefabs != null && itemVisualPrefabs.Count > 0;
+    }
+
+    public static void ResetLoadedFlag ()
+    {
+        autoloadAttempted = false;
     }
 
     public static void LoadVisuals ()
@@ -75,56 +81,14 @@ public static class ItemHelper
 
         #if UNITY_EDITOR
         
-        if (DataContainerModData.selectedMod != null)
+        if (prefabsFromMod != null)
         {
-            var prefabExtension = ".prefab";
-            var mod = DataContainerModData.selectedMod;
-            if (mod.assetBundles != null && mod.assetBundles.bundleDefinitions != null)
+            foreach (var kvp in prefabsFromMod)
             {
-                foreach (var assetBundleDefinition in mod.assetBundles.bundleDefinitions)
-                {
-                    if (assetBundleDefinition == null)
-                        continue;
-
-                    if (!assetBundleDefinition.enabled)
-                        continue;
-
-                    if (string.IsNullOrEmpty (assetBundleDefinition.name))
-                    {
-                        Debug.LogWarning ($"Mod {mod.id} | Asset bundle has no name");
-                        continue;
-                    }
-                    
-                    if (assetBundleDefinition.files == null || assetBundleDefinition.files.Count == 0)
-                        continue;
-
-                    foreach (var file in assetBundleDefinition.files)
-                    {
-                        if (file == null)
-                            continue;
-                        
-                        if (string.IsNullOrEmpty (file.path))
-                            continue;
-
-                        if (!file.path.EndsWith (prefabExtension))
-                            continue;
-
-                        var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject> (file.path);
-                        if (prefab == null)
-                        {
-                            Debug.LogWarning ($"Mod {mod.id} | Asset bundle {assetBundleDefinition.name} has invalid prefab path: {file.path}");
-                            continue;
-                        }
-                        
-                        var component = prefab.GetComponent<ItemVisual> ();
-                        if (component == null)
-                            continue;
-                        
-                        var visualKey = $"{assetBundleDefinition.name}/{prefab.name}";
-                        itemVisualPrefabs.Add (visualKey, component);
-                        Debug.Log ($"Mod {mod.id} | Loaded new ItemVisual from AssetBundle: {visualKey}");
-                    }
-                }
+                var key = kvp.Key;
+                var prefab = kvp.Value;
+                if (!string.IsNullOrEmpty (key) && prefab != null)
+                    itemVisualPrefabs[key] = prefab;
             }
         }
         
