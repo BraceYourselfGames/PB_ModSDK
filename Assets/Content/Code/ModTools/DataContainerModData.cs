@@ -423,7 +423,8 @@ namespace PhantomBrigade.SDK.ModTools
 
             try
             {
-                var zipPath = dirPathPkg + "Mod.zip";
+                var suffix = !string.IsNullOrEmpty (metadata?.ver) ? $"Archive_{metadata.ver}" : "Archive";
+                var zipPath = $"{dirPathPkg}_{suffix}.zip";
                 if (File.Exists (zipPath))
                 {
                     Debug.Log ($"Deleting existing archive...");
