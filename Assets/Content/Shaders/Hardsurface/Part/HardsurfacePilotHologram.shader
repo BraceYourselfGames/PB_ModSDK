@@ -43,15 +43,17 @@
 		{
 			"RenderType" = "Opaque"
 			"ForceNoShadowCasting" = "True"
+			"DisableBatching" = "True"
 		}
 
 		LOD 200
 		// Blend One Zero
 		Blend SrcAlpha OneMinusSrcAlpha
+		Cull Back
 		
 		CGPROGRAM
-		#pragma surface surf Standard vertex:vert noshadow addshadow alpha:fade
-		#pragma target 5.0
+		#pragma surface surf Standard vertex:vert alpha:fade keepalpha noshadow exclude_path:deferred noambient novertexlights nolightmap nodynlightmap nodirlightmap nofog nometa noforwardadd 
+		#pragma target 3.0
 		#pragma shader_feature_local USE_CAMERAOFFSET
 
 		#include "Assets/Content/Shaders/Other/Utilities_Shared.cginc"
@@ -226,15 +228,7 @@
 
 			if (_FilterInputs.w > 0.01)
 			{
-				float4x4 thresholdMatrix =
-			   { 1.0 / 17.0,  9.0 / 17.0,  3.0 / 17.0, 11.0 / 17.0,
-				   13.0 / 17.0,  5.0 / 17.0, 15.0 / 17.0,  7.0 / 17.0,
-				   4.0 / 17.0, 12.0 / 17.0,  2.0 / 17.0, 10.0 / 17.0,
-				   16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0
-			   };
-				float4x4 rowAccess = { 1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1 };
-
-				float clipFactor = alphaFinal * _ScanColorMin.w - thresholdMatrix[fmod (screenPos.x, 4)] * rowAccess[fmod (screenPos.y, 4)] - _CutoffFactors.y;
+				float clipFactor = alphaFinal * _ScanColorMin.w - thresholdMatrix[fmod (screenPos.x, 4)][fmod (screenPos.y, 4)] - _CutoffFactors.y;
 				float clipAlpha = clipFactor <= 0 ? 0 : 1;
 				clipAlpha = lerp (clipAlpha, 1, saturate (1 - _CutoffFactors.x) * scan.w);
 			

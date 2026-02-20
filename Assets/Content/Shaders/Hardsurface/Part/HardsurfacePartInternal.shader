@@ -45,7 +45,7 @@
 		Blend One Zero
 
 		CGPROGRAM
-		#pragma surface surf Standard vertex:vert noshadow addshadow
+		#pragma surface surf Standard vertex:vert noshadow addshadow exclude_path:forward novertexlights nolightmap nodynlightmap nodirlightmap nofog nometa noforwardadd 
 		#pragma target 5.0
 		#pragma shader_feature_local USE_CAMERAOFFSET
 
@@ -201,21 +201,10 @@
 			o.Emission = emissionFinal * 2;
 			o.Alpha = alphaFinal;
 
-			float4x4 thresholdMatrix =
-			{ 1.0 / 17.0,  9.0 / 17.0,  3.0 / 17.0, 11.0 / 17.0,
-				13.0 / 17.0,  5.0 / 17.0, 15.0 / 17.0,  7.0 / 17.0,
-				4.0 / 17.0, 12.0 / 17.0,  2.0 / 17.0, 10.0 / 17.0,
-				16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0
-			};
-			float4x4 rowAccess = { 1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1 };
-
-			clip (alphaFinal * _ScanColorMin.w - thresholdMatrix[fmod (screenPos.x, 4)] * rowAccess[fmod (screenPos.y, 4)]);
+			clip (alphaFinal * _ScanColorMin.w - thresholdMatrix[fmod (screenPos.x, 4)][fmod (screenPos.y, 4)]);
 		}
 
 		ENDCG
-
-        
-
 	}
 
 	FallBack "Diffuse"

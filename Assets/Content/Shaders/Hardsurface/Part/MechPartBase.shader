@@ -79,6 +79,11 @@ Shader "Hardsurface/Parts/Base (mech)"
         _LocalHighlightIntensityTweak ("Optional highlight intensity tweak", Range (0, 1)) = 1
 
         [Space (10)]
+        [Header (Iridescence)]
+        [Space (5)]
+		_IridescenseEffect ("Iridescense Effect", Vector) = (0.0, 0.0, 0.0, 0.0)
+
+        [Space (10)]
         [Header (Occlusion)]
         [Space (5)]
 		_AlbedoOcclusionIntensity ("Albedo occlusion overlay", Range (0, 1)) = 1
@@ -105,6 +110,11 @@ Shader "Hardsurface/Parts/Base (mech)"
 		[HDR] _PixelOverlayColor ("Pixel overlay color", Color) = (1, 1, 1, 1)
 		_PixelOverlayUVScale ("Pixel overlay UV scale", Float) = 0.8
 		_PixelOverlayDotScale ("Pixel overlay dot scale", Float) = 0.4 
+
+        [Space (10)]
+        [Header (Special Content)]
+        [Space (5)]
+		_SpecialContent ("Special Content", Vector) = (0.0, 0.0, 0.0, 0.0)
 
         [Space (10)]
         [Header (Debug)]
@@ -140,7 +150,7 @@ Shader "Hardsurface/Parts/Base (mech)"
 		Cull Off
 
 		CGPROGRAM
-		#pragma surface surf Standard vertex:vert exclude_path:prepass addshadow noforwardadd keepalpha // alphatest:_Cutoff
+        #pragma surface surf Standard vertex:vert addshadow keepalpha exclude_path:forward exclude_path:prepass novertexlights nolightmap nodynlightmap nodirlightmap nofog nometa noforwardadd 
 		#pragma target 5.0
         #pragma shader_feature_local PART_USE_TRIPLANAR
         #pragma shader_feature_local PART_USE_MSEO
@@ -205,6 +215,8 @@ Shader "Hardsurface/Parts/Base (mech)"
         float _EmissionColorBoost;
         float _EmissionColorSaturation;
 
+        float4 _IridescenseEffect;
+
 		float _DebugVertexRGB;
 		float _DebugVertexA;
 
@@ -224,6 +236,8 @@ Shader "Hardsurface/Parts/Base (mech)"
 		float4 _PixelOverlayColor;
 		float _PixelOverlayUVScale;
 		float _PixelOverlayDotScale;
+
+        float4 _SpecialContent;
 
         // Local variable to optionally tweak the highlight intensity per material if needed (DON'T tweak on armor or weapons for visual consistency)
 		float _LocalHighlightIntensityTweak;
@@ -311,6 +325,7 @@ Shader "Hardsurface/Parts/Base (mech)"
                 float4 arrayData_metalness = _ArrayForMetalness[arrayIndex];
                 float4 arrayData_effect = _ArrayForEffect[arrayIndex];
                 float4 arrayData_damage = _ArrayForDamage[arrayIndex];
+                float4 arrayData_specialContent = _ArrayForSpecialContent[arrayIndex];
 
             #endif
 
@@ -423,7 +438,8 @@ Shader "Hardsurface/Parts/Base (mech)"
             float3 emissionClean = 0;
             // Use tertiary color as emission color
             float3 emissionColor = _ColorTertiary;
-            float effectIntensity = 0;
+            float4 effectInputForSelection = 0;
+            float4 specialContentInputForSelection = 0;
 
             #if PART_USE_ARRAYS
 
@@ -451,8 +467,9 @@ Shader "Hardsurface/Parts/Base (mech)"
                     );
                 }
 
-                float4 effectInputForSelection = float4 (arrayData_effect.x, arrayData_effect.y, arrayData_effect.z, 0);
-                effectIntensity = SelectValueFromVC (IN.color, effectInputForSelection);
+                effectInputForSelection = float4 (arrayData_effect.x, arrayData_effect.y, arrayData_effect.z, 0);
+
+                specialContentInputForSelection = float4 (arrayData_specialContent.x, arrayData_specialContent.y, arrayData_specialContent.z, arrayData_specialContent.w);
 
             #else
 
@@ -465,7 +482,13 @@ Shader "Hardsurface/Parts/Base (mech)"
                     _ColorTertiary
                 );
 
+                effectInputForSelection = float4 (_IridescenseEffect.x, _IridescenseEffect.y, _IridescenseEffect.z, 0);
+
+                specialContentInputForSelection = float4 (_SpecialContent.x, _SpecialContent.y, _SpecialContent.z, _SpecialContent.w);
+
             #endif
+
+            float effectIntensity = SelectValueFromVC (IN.color, effectInputForSelection);
 
             // Adjust albedo saturation, used to make a color\value gradient spanning across the whole mech (less saturated at the bottom, saturated at the top)
             albedoColor = RGBSaturation(albedoColor, _AlbedoSaturation);
@@ -536,6 +559,42 @@ Shader "Hardsurface/Parts/Base (mech)"
             // Background color mask to reduce damage effects in dark areas of the armor
             float backgroundColorExclusionMask = saturate(IN.color.r + IN.color.g + IN.color.b);
 
+            float2 pixelPos = ((IN.screenPos.xy / IN.screenPos.w) * _ScreenParams.xy);
+            float pixelDepthDistance = saturate ((IN.screenPos.w - 45) / 50);
+
+            // Special livery effect
+            // TODO: Revisit this part, this was thrown together really fast and has lots of 'magic values'
+            float specialContentActive = specialContentInputForSelection.x + specialContentInputForSelection.y + specialContentInputForSelection.z + specialContentInputForSelection.w;
+            if (specialContentActive > 0.0)
+            {
+                float screenPixelSize = 1 / _ScreenParams.y;
+                float pixelGridSizeDots = 0.003 / screenPixelSize;
+                float pixelGridSizeStripes = 0.007 / screenPixelSize;
+                float pixelGridBrighnessBoost = 15;
+
+                // Choose one of 3 Fresnel patterns based on specialContent's .w value (done this way the checks are kept simple and mutually exclusive)
+                float pixelGrid = 0;
+                float pixelGridFresnelMask = saturate (fresnel * fresnel * 1.5);
+                // Grid
+                if (abs (specialContentInputForSelection.w - 1) < 0.1)
+                    pixelGrid = (1 - saturate (length ((frac (pixelPos.xy / pixelGridSizeDots) - 0.5) * 2) * 1.5)) * 3.5;
+
+                // Stripes
+                if (abs (specialContentInputForSelection.w - 2) < 0.1)
+                    pixelGrid = pow (abs ((frac ((pixelPos.x + (1 - pixelPos.y)) / pixelGridSizeStripes) - 0.5) * 2), 1);
+                    
+                // Reflections
+                if (abs (specialContentInputForSelection.w - 3) < 0.1)
+                    pixelGrid = pow ((sin (fresnel * 55) + 1) * 0.5, 6);
+                
+                pixelGrid *= pixelGridFresnelMask * pixelGridBrighnessBoost;
+
+                float fresnelMaskAdditionalTerm = lerp (1, 2, pixelDepthDistance);
+                float pixelGridNear = pixelGrid;
+                float pixelGridFar = pixelGridFresnelMask * fresnelMaskAdditionalTerm * 3;
+                emissionClean += lerp (pixelGridNear, pixelGridFar, pixelDepthDistance) * specialContentInputForSelection.rgb;
+            }
+
             ApplyDamage
             (
                 damageInput,
@@ -572,20 +631,22 @@ Shader "Hardsurface/Parts/Base (mech)"
             // Overheating effect
             emissionAfterDamage += highlightMask * pow (saturate (IN.localPos.y * 0.2), 3) * _OverheatColor;
 
-            // Pixel overlay
-            if (_PixelOverlayIntensity > 0.01)
+            // Pixel overlay       
+            if (_PixelOverlayIntensity > 0.0)
             {
                 float glint = -(IN.localPos.x / 4) - (IN.localPos.y / 4) - ((1 - _PixelOverlayIntensity) * 4) + 1.8;
                 glint = saturate (glint * step(glint, 1));
-                float2 pixelPos = ((IN.screenPos.xy / IN.screenPos.w) * _ScreenParams.xy);
+                
                 float damageTex = tex2D (_GlobalUnitDamageTex, IN.texcoord_uv1).r;
-                float pixelOverlay = min(step(_PixelOverlayDotScale, pixelPos.x % _PixelOverlayUVScale), step(_PixelOverlayDotScale, pixelPos.y % _PixelOverlayUVScale)) * step(damageTex, _PixelOverlayIntensity).r;
-                pixelOverlay += min(step(_PixelOverlayDotScale, pixelPos.x % (_PixelOverlayUVScale * 1.01)), step(_PixelOverlayDotScale, pixelPos.y % (_PixelOverlayUVScale * 1.01))) * step(damageTex, _PixelOverlayIntensity / 2).r;
+                float pixelOverlay = step(_PixelOverlayDotScale, pixelPos.x % _PixelOverlayUVScale) * step(_PixelOverlayDotScale, pixelPos.y % _PixelOverlayUVScale) * step(damageTex, _PixelOverlayIntensity).r;
+                pixelOverlay += step(_PixelOverlayDotScale, pixelPos.x % (_PixelOverlayUVScale * 1.01)) * step(_PixelOverlayDotScale, pixelPos.y % (_PixelOverlayUVScale * 1.01)) * step(damageTex, _PixelOverlayIntensity / 2).r;
                 pixelOverlay = pixelOverlay * fresnelAfterDamage * 10;
                 pixelOverlay *= step(damageTex, _PixelOverlayIntensity);
                 pixelOverlay *= glint;
                 emissionAfterDamage += saturate(pixelOverlay + pow(saturate((glint - 0.5) * 2), 4)) * _PixelOverlayColor;
             }
+            
+
             
             o.Normal = normalAfterDamage;
             o.Albedo = albedoAfterDamage;

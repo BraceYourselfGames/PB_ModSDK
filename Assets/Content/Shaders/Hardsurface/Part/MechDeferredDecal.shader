@@ -46,7 +46,7 @@
         _EmissionColor          ("Color",                   Color) = (0,0,0)
         _EmissionMap            ("Emission",                2D) = "white" {}
 
-        _DecalCutoffDistance    ("Decal Cutoff Distance",   Range (1, 300)) = 35
+        _DecalCutoffDistance    ("Decal Cutoff Distance",   Range (1, 1000)) = 35
 
         [Header (Debug)]
         _ArrayOverrideIndex ("Array test index", Range (0,17)) = 6
