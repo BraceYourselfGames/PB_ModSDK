@@ -43,7 +43,9 @@ namespace PhantomBrigade.Data
 
             var dataPathSplit = Application.dataPath.Replace ('\\', '/').Split ('/');
             applicationFolder = Application.dataPath.Substring (0, Application.dataPath.Length - dataPathSplit[dataPathSplit.Length - 1].Length - 1);
-
+            if (!applicationFolder.EndsWith ("/"))
+                applicationFolder += "/";
+            
             documentsFolder = GetCleanPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData));
             userFolder = $"{documentsFolder}/PhantomBrigade/";
             saveFolder = $"{userFolder}SavedGames/";
