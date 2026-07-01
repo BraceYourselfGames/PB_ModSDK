@@ -9,8 +9,6 @@ namespace PhantomBrigade.Functions
     [Serializable]
     public class CombatCreateCommsMessageGroup : ICombatFunction
     {
-        
-        
         public bool clearQueue = false;
         
         [ListDrawerSettings (CustomAddFunction = "@new DataBlockScenarioCommLink ()")]
@@ -65,7 +63,7 @@ namespace PhantomBrigade.Functions
         {
             #if !PB_MODSDK
             
-            CIViewCombatComms.ScheduleMessage (key, time);
+            CIViewCombatComms.ScheduleMessage (key);
             
             #endif
         }
@@ -74,7 +72,7 @@ namespace PhantomBrigade.Functions
         {
             #if !PB_MODSDK
             
-            CIViewCombatComms.ScheduleMessage (key, time, unitPersistent);
+            CIViewCombatComms.ScheduleMessage (key, unitPersistent);
             
             #endif
         }

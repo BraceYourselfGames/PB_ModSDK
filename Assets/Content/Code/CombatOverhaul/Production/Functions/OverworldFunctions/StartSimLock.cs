@@ -267,22 +267,9 @@ namespace PhantomBrigade.Functions
         public void Run ()
         {
             #if !PB_MODSDK
-            
-            var overworldAction = Contexts.sharedInstance.overworldAction;
-            var workshopActions = overworldAction.GetEntitiesWithDataKeyOverworldAction ("workshop_build");
-            if (workshopActions != null && workshopActions.Count > 0)
-            {
-                int i = 0;
-                foreach (var action in workshopActions)
-                {
-                    if (action.isCompleted || action.isCancelled || action.isDestroyed)
-                        continue;
 
-                    action.isCompleted = true;
-                    i += 1;
-                }
-            }
-            
+            WorkshopUtility.CompleteQueuedActions ();
+
             #endif
         }
     }

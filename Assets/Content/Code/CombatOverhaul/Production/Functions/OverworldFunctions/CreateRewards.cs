@@ -29,7 +29,6 @@ namespace PhantomBrigade.Functions
     {
         public bool randomSingleEntry = false;
         
-        [DictionaryKeyDropdown ("@DataMultiLinkerOverworldReward.data.Keys")]
         public List<DataBlockOverworldPointReward> rewards = new List<DataBlockOverworldPointReward> ();
 
         [YamlIgnore, ReadOnly]

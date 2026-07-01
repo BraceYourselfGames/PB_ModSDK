@@ -58,7 +58,7 @@ namespace PhantomBrigade.Functions
 
             if (radius != null && radius.radius > 0.0f)
             {
-                CombatSceneHelper.ins.areaManager.ApplyDamageToRadius (target, damage, radius.radius, radius.exponent, forceDestructible);
+                CombatSceneHelper.ins.areaManager.ApplyDamageToRadius (target, damage, radius.radius, radius.exponent, out int overlapCountDestruction, forceDestructible);
             }
             else
             {

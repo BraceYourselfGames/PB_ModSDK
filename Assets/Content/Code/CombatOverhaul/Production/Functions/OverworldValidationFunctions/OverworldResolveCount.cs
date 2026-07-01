@@ -319,6 +319,39 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
+    public class OverworldIntValueProvincesVisited : IOverworldIntValueFunction
+    {
+        public bool unique = false;
+        
+        private static HashSet<string> provincesVisitedKeysUnique = new HashSet<string> ();
+        
+        public int Resolve (OverworldEntity entityOverworld)
+        {
+            #if !PB_MODSDK
+
+            var overworld = Contexts.sharedInstance.overworld;
+            var campaignState = overworld.campaignState.s;
+            var provincesVisitedCount = campaignState?.provincesVisited != null ? campaignState.provincesVisited.Count : 0;
+
+            if (campaignState?.provincesVisited == null || campaignState.provincesVisited.Count == 0)
+                return 0;
+            
+            if (!unique)
+                return campaignState.provincesVisited.Count;
+            
+            provincesVisitedKeysUnique.Clear ();
+            foreach (var key in campaignState.provincesVisited)
+                provincesVisitedKeysUnique.Add (key);
+
+            return provincesVisitedKeysUnique.Count;
+
+            #endif
+            
+            return 0;
+        }
+    }
+    
+    [Serializable]
     public class OverworldIntValueWorkshopQueue : IOverworldIntValueFunction
     {
         public int Resolve (OverworldEntity entityOverworld)

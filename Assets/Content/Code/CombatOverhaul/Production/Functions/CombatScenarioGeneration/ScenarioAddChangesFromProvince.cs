@@ -6,7 +6,7 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioAddChangesFromProvince : ICombatScenarioGenStep
     {
-        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed, bool standaloneMode)
         {
             #if !PB_MODSDK
             
@@ -35,7 +35,7 @@ namespace PhantomBrigade.Data
                     if (change == null || !change.IsChangeApplicable (scenario, targetPersistent))
                         continue;
 
-                    ApplyChange (scenario, seed, context, change);
+                    ApplyChange (scenario, seed, context, change, standaloneMode);
                 }
             }
 
@@ -56,11 +56,11 @@ namespace PhantomBrigade.Data
                             if (change == null || !change.IsChangeApplicable (scenario, targetPersistent))
                                 continue;
 
-                            ApplyChange (scenario, seed, context, change);
+                            ApplyChange (scenario, seed, context, change, standaloneMode);
                         }
                     }
                     
-                    if (!string.IsNullOrEmpty (modifierData.pilotPersistentInjected))
+                    if (!standaloneMode && !string.IsNullOrEmpty (modifierData.pilotPersistentInjected))
                         ScenarioUtilityGeneration.InsertPersistentPilot (scenario, targetPersistent, modifierData.pilotPersistentInjected);
                 }
             }
@@ -68,7 +68,7 @@ namespace PhantomBrigade.Data
             #endif
         }
         
-        private void ApplyChange (DataContainerScenario scenario, int seed, string context, DataBlockProvinceScenarioChange change)
+        private void ApplyChange (DataContainerScenario scenario, int seed, string context, DataBlockProvinceScenarioChange change, bool standaloneMode)
         {
             #if !PB_MODSDK
 
@@ -98,7 +98,7 @@ namespace PhantomBrigade.Data
                 }
             }
 
-            if (change.units != null && change.units.Count > 0)
+            if (!standaloneMode && change.units != null && change.units.Count > 0)
                 ScenarioUtilityGeneration.InsertUnitBlocks (scenario, change.units, context);
             
             #endif

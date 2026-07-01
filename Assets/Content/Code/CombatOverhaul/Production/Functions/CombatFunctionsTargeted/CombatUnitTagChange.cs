@@ -6,6 +6,23 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
+    public class CombatUnitTagSet : ICombatFunctionTargeted
+    {
+        [ValueDropdown ("@DataShortcuts.sim.scenarioUnitTags")]
+        public HashSet<string> tags = new HashSet<string> ();
+
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            
+            var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            ScenarioUtility.AddUnitScenarioTags (unitCombat, tags);
+            
+            #endif
+        }
+    }
+    
+    [Serializable]
     public class CombatUnitTagChange : ICombatFunctionTargeted
     {
         [DictionaryKeyDropdown ("@DataShortcuts.sim.scenarioUnitTags")]

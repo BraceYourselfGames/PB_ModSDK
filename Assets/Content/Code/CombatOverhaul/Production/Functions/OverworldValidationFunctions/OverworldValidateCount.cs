@@ -72,14 +72,17 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class OverworldValidateCompletionPreset : OverworldValidateCount, IOverworldEntityValidationFunction
+    public class OverworldValidateCompletionPreset : OverworldValidateCount, IOverworldEntityValidationFunction, IOverworldGlobalValidationFunction
     {
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
         [DictionaryKeyDropdown ("@DropdownUtils.ParentTypeMethod ($property, \"OverworldValidateCompletionPreset\", \"GetKeys\")")]
         public SortedDictionary<string, DataBlockOverworldEventSubcheckInt> filter = new SortedDictionary<string, DataBlockOverworldEventSubcheckInt> ();
         
         protected override IEnumerable<string> GetKeys () => DataMultiLinkerOverworldPointPreset.GetKeys ();
         
-        public bool IsValid (PersistentEntity entityPersistent)
+        public bool IsValid (PersistentEntity entityPersistent) => IsValid ();
+        
+        public bool IsValid ()
         {
             #if !PB_MODSDK
 
@@ -94,14 +97,40 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class OverworldValidateCompletionScenario : OverworldValidateCount, IOverworldEntityValidationFunction
+    public class OverworldValidateCompletedOnePreset : IOverworldGlobalValidationFunction
     {
+        [ValueDropdown ("$GetKeys")]
+        public string key;
+        
+        protected IEnumerable<string> GetKeys () => DataMultiLinkerOverworldPointPreset.GetKeys ();
+        
+        public bool IsValid ()
+        {
+            #if !PB_MODSDK
+
+            var overworld = Contexts.sharedInstance.overworld;
+            var c = overworld.overworldPointCompletions.keys;
+            var completions = c != null && !string.IsNullOrEmpty (key) && c.TryGetValue (key, out var v) ? v : 0; 
+            return completions > 0;
+
+            #else
+            return false;
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class OverworldValidateCompletionScenario : OverworldValidateCount, IOverworldEntityValidationFunction, IOverworldGlobalValidationFunction
+    {
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
         [DictionaryKeyDropdown ("@DropdownUtils.ParentTypeMethod ($property, \"OverworldValidateCompletionScenario\", \"GetKeys\")")]
         public SortedDictionary<string, DataBlockOverworldEventSubcheckInt> filter = new SortedDictionary<string, DataBlockOverworldEventSubcheckInt> ();
         
         protected override IEnumerable<string> GetKeys () => DataMultiLinkerScenario.GetKeys ();
         
-        public bool IsValid (PersistentEntity entityPersistent)
+        public bool IsValid (PersistentEntity entityPersistent) => IsValid ();
+        
+        public bool IsValid ()
         {
             #if !PB_MODSDK
 
@@ -116,20 +145,69 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class OverworldValidateCompletionArea : OverworldValidateCount, IOverworldEntityValidationFunction
+    public class OverworldValidateCompletedOneScenario : IOverworldGlobalValidationFunction
     {
+        [ValueDropdown ("$GetKeys")]
+        public string key;
+        
+        protected IEnumerable<string> GetKeys () => DataMultiLinkerScenario.GetKeys ();
+        
+        public bool IsValid ()
+        {
+            #if !PB_MODSDK
+
+            var overworld = Contexts.sharedInstance.overworld;
+            var c = overworld.overworldScenarioCompletions.keys;
+            var completions = c != null && !string.IsNullOrEmpty (key) && c.TryGetValue (key, out var v) ? v : 0; 
+            return completions > 0;
+
+            #else
+            return false;
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class OverworldValidateCompletionArea : OverworldValidateCount, IOverworldEntityValidationFunction, IOverworldGlobalValidationFunction
+    {
+        [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
         [DictionaryKeyDropdown ("@DropdownUtils.ParentTypeMethod ($property, \"OverworldValidateCompletionArea\", \"GetKeys\")")]
         public SortedDictionary<string, DataBlockOverworldEventSubcheckInt> filter = new SortedDictionary<string, DataBlockOverworldEventSubcheckInt> ();
         
         protected override IEnumerable<string> GetKeys () => DataMultiLinkerCombatArea.GetKeys ();
+
+        public bool IsValid (PersistentEntity entityPersistent) => IsValid ();
         
-        public bool IsValid (PersistentEntity entityPersistent)
+        public bool IsValid ()
         {
             #if !PB_MODSDK
 
             var overworld = Contexts.sharedInstance.overworld;
             var c = overworld.overworldAreaCompletions.keys;
             return IsCountValid (filter, c);
+
+            #else
+            return false;
+            #endif
+        }
+    }
+    
+    [Serializable]
+    public class OverworldValidateCompletedOneArea : IOverworldGlobalValidationFunction
+    {
+        [ValueDropdown ("$GetKeys")]
+        public string key;
+        
+        protected IEnumerable<string> GetKeys () => DataMultiLinkerCombatArea.GetKeys ();
+        
+        public bool IsValid ()
+        {
+            #if !PB_MODSDK
+
+            var overworld = Contexts.sharedInstance.overworld;
+            var c = overworld.overworldAreaCompletions.keys;
+            var completions = c != null && !string.IsNullOrEmpty (key) && c.TryGetValue (key, out var v) ? v : 0; 
+            return completions > 0;
 
             #else
             return false;
@@ -179,11 +257,10 @@ namespace PhantomBrigade.Functions
         public DataBlockInt completionSeparation;
 
         private IEnumerable<string> GetKeys => DataMultiLinkerOverworldPointPreset.data.Keys;
-
+        
         #if !PB_MODSDK
         public bool IsValidInternal (Dictionary<string, int> spawnsByKey, Dictionary<string, int> completionsByKey, List<PointCompletionRecord> completionRecords)
         {
-            
             // Skip presets that can't spawn more than N times
             if (spawnLimit != null)
             {

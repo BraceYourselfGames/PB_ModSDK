@@ -6,9 +6,12 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioAddChangesFromSite : ICombatScenarioGenStep
     {
-        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed, bool standaloneMode)
         {
             #if !PB_MODSDK
+            
+            if (standaloneMode)
+                return;
 
             if (targetOverworld == null || !targetOverworld.hasDataLinkPointPreset)
             {

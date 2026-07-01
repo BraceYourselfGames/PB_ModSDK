@@ -25,14 +25,14 @@ namespace PhantomBrigade.Functions
                 return;
             
             TextUtility.GetPilotIdentificationText (pilot, out var textName, out var textCallsign);
-            var textActivation = "Trait activated";
+            var textActivation = Txt.Get (TextLibs.uiCombat, "unit_status_source_action");
             var textFull = $"{textCallsign} ({textName}): {textActivation} ({trait.GetTextName ()})";
 
             if (IDUtility.IsGameState (GameStates.combat))
             {
                 var unitPersistent = IDUtility.GetPersistentParent (pilot);
                 var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
-                CIViewCombatEventLog.AddMessageEventUnit (unitCombat, textFull);
+                CIViewCombatNav.AddMessageEventUnit (unitCombat, textFull);
             }
             else
             {

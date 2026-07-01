@@ -218,11 +218,54 @@ namespace PhantomBrigade.Functions
         #endif
         #endregion
     }
-    
+
+    public class DataBlockUnitStat
+    {
+        public float value;
+        
+        [InlineButtonClear]
+        [ValueDropdown ("@DataMultiLinkerUnitStats.data.Keys")]
+        public string statKey;
+        
+        [InlineButtonClear]
+        [ShowIf ("statKey")]
+        [ValueDropdown ("@DataHelperUnitEquipment.GetSockets ()")]
+        public string socket;
+
+        public float GetValue (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+            if (unitPersistent == null)
+                return 0f;
+            
+            var radiusFinal = value;
+            if (!string.IsNullOrEmpty (statKey))
+            {
+                if (!string.IsNullOrEmpty (socket))
+                {
+                    var part = EquipmentUtility.GetPartInUnit (unitPersistent, socket);
+                    if (part != null)
+                        radiusFinal = DataHelperStats.GetCachedStatForPart (statKey, part) + value;
+                }
+                else
+                    radiusFinal = DataHelperStats.GetCachedStatForUnit (statKey, unitPersistent) + value;
+            }
+            
+            return radiusFinal;
+            #else
+            return 0f;
+            #endif
+        }
+    }
+
     [Serializable]
     public class CombatValidateUnitNeighborProjectiles : DataBlockSubcheckBoolProjectiles, ICombatUnitValidationFunction
     {
         public float radius = 10f;
+        
+        [DropdownReference (true)]
+        public DataBlockUnitStat radiusFromStat = null;
+        
         public Vector3 offset;
 
         public UnitFactionFilter factionFilter = UnitFactionFilter.Any;
@@ -256,7 +299,11 @@ namespace PhantomBrigade.Functions
                 directionSource = unitCombatSource.rotation.q * Vector3.forward;
             }
 
-            var projectilesSorted = OverlapUtility.GetSortedProjectileOverlaps (positionSource, directionSource, radius, factionFilter, filter, unitCombatSource);
+            var radiusFinal = radius;
+            if (radiusFromStat != null)
+                radiusFinal = radiusFromStat.GetValue (unitPersistent);
+
+            var projectilesSorted = OverlapUtility.GetSortedProjectileOverlaps (positionSource, directionSource, radiusFinal, factionFilter, filter, unitCombatSource);
             if (projectilesSorted == null || projectilesSorted.Count == 0)
                 return false;
 

@@ -32,6 +32,8 @@ namespace PhantomBrigade.Functions
 				return;
 
 			var entities = OverworldPointUtility.GetActivePoints (onlyCombat, onlyHostile, questKeyOverride: questState.key, checks: checks);
+			Debug.Log ($"QuestDeletePoints | Destroying points linked to quest {questState.key} | Only combat: {onlyCombat} | Only hostile: {onlyHostile} | Checks: {checks.ToStringFormatted ()}");
+			
 			foreach (var entityOverworld in entities)
 			{
 				// // Hack to remove these entities from a recording if they are waiting to be presented

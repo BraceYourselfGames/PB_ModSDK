@@ -48,7 +48,7 @@ namespace PhantomBrigade.Functions
                 
                 var provinceNextPersistent = IDUtility.GetLinkedPersistentEntity (provinceNextOverworld);
                 if (provinceNextPersistent == null || !provinceNextPersistent.hasFaction || string.Equals (provinceNextPersistent.faction.s, Factions.player))
-                    return false;
+                    continue;
 
                 linkFound = true;
                 break;
