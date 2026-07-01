@@ -26,8 +26,12 @@ entries:
     textEng: Deploying
   base_briefing__p04_text:
     id: 1
-    text: 임무를 위한 유닛과 조종사 선택이 마음에 든다면, "배치"를 클릭해 진행할 수 있습니다.
-    textEng: Once you are happy with the units and pilots chosen for the mission, you can click "Deploy" to proceed.
+    text: 임무를 위한 분대 구성이 마음에 든다면, "배치"를 클릭해 진행할 수 있습니다.
+    textEng: Once you're happy with your squad makeup for the mission, you can click "Deploy" to proceed.
+  base_briefing__p04_text_ctrl:
+    id: 2
+    text: 분대가 마음에 든다면, "배치"를 클릭해 진행하세요.
+    textEng: Once you're happy with your squad, use the "Deploy" button to proceed.
   base_briefing_demolition__p00_hint:
     id: 1
     text: 이 임무에서는 구조물에 대미지를 가해야 합니다. 분대가 작업 준비를 완료했는지 확인하세요.
@@ -43,11 +47,23 @@ entries:
       It's a good idea to review the loadouts of your mechs before each mission.
 
 
-      You might have an improved armor you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
+      You might have improved armour you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
   base_briefing_demolition__p02_hint:
     id: 1
     text: 분대의 메카 하나를 선택하고, "유닛 편집" 버튼을 클릭해 커스터마이징 화면으로 이동하세요.
-    textEng: Select one of the mechs in your squad, then click the "Edit Unit" button to jump to the customization screen.
+    textEng: Select a mech in your squad, then click the "Edit Unit" button to jump to the Unit Editing menu.
+  base_briefing_demolition__p02_hint_ctrl:
+    id: 2
+    text: >-
+      채워진 상태의 메카 슬롯을 선택하면, "유닛 편집" 버튼을 통해 커스터마이징 화면으로 빠르게 이동할 수 있습니다.
+
+
+      {0}
+    textEng: >-
+      Once you select a filled mech slot, you can quickly jump into the customization screen with the "Edit Unit" button.
+
+
+      {0}
   base_briefing_demolition__p03_header:
     id: 1
     text: 대미지 확인
@@ -69,7 +85,7 @@ entries:
       [FFD8A2][sp=s_text_24_insert_env2]Structure damage[aa] — [ff][b]50[/b][-]
 
 
-      Once you're happy with the weapons, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
+      Once you're happy with your choice, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
   base_introduction__p00_header:
     id: 1
     text: 이동식 기지
@@ -102,6 +118,18 @@ entries:
 
 
       You can also double click a unit in the list to do the same.
+  base_introduction__p02_hint_ctrl:
+    id: 2
+    text: >-
+      이미 선택된 유닛은 왼쪽의 목록에 있습니다. 이곳의 "편집하기" 버튼으로 해당 유닛을 커스텀할 수 있습니다.
+
+
+      {0}
+    textEng: >-
+      A unit is already selected in the list on the left. The "Edit" button here allows you to customize that unit.
+
+
+      {0}
   base_introduction__p03_header:
     id: 1
     text: 편집
@@ -109,15 +137,45 @@ entries:
   base_introduction__p03_text:
     id: 1
     text: 이것은 편집 화면입니다. 유닛에게 장비된 개별적인 부품을 조사하고 교체할 수 있습니다.
-    textEng: This is the editing screen. You can inspect and swap out individual parts equipped by a unit.
+    textEng: This is the Unit Editing menu. You can inspect and swap out individual parts equipped to a mech.
   base_introduction__p04_hint:
     id: 1
     text: 저번 전투에서 무기를 새로 얻었습니다. 주 무기 슬롯을 클릭해 옵션을 검토하세요.
     textEng: You picked up new weapons in the last fight. Click to the primary weapon slot to review the options.
+  base_introduction__p04_hint_ctrl:
+    id: 2
+    text: >-
+      저번 전투에서 무기를 새로 얻었습니다. 주 무기 슬롯을 열어 옵션을 검토합시다.
+
+
+      {0}
+    textEng: >-
+      You picked up new weapons in the last fight. Let's open the primary weapon slot to review the options.
+
+
+      {0}
   base_introduction__p05_hint:
     id: 1
     text: "이것은 현재 장비한 무기입니다.\n\n메카 장비는 복잡하고 여러 종류의 능력치로 특징이 구성되므로, 보통 여기서 많은 시간을 보내게 됩니다.  \n\n이 창에 있는 다양한 능력치에 커서를 올리면 자세한 설명을 확인할 수 있습니다. 잠재적으로 교체할 항목을 선택하면 비교 대상이 표시되어 더 현명한 결정을 할 수 있습니다."
-    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and characterized by many different stats, so it is normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and has many different stats, so it's normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+  base_introduction__p05_hint_ctrl:
+    id: 2
+    text: >-
+      이것은 현재 장착한 무기입니다.
+
+
+      메카 장비는 복합적이며 다양한 능력치를 지니고 있습니다. 보통은 이 화면에서 머무르며 옵션을 조심스럽게 따져봅니다.
+
+
+      이 튜토리얼이 끝나면, 컨트롤러를 사용해 이 패널에 초점을 맞추고 모든 능력치를 자세히 점검할 수 있게 됩니다. 일단은 계속 진행합시다.
+    textEng: >-
+      This is the currently equipped weapon.
+
+
+      Mech equipment is complex and features many different stats. It's normal to take your time on this screen and carefully weigh your options.
+
+
+      Once this tutorial is concluded, you will be able to focus this panel with your controller and inspect every stat in detail. For now, let's continue.
   base_introduction__p06_hint:
     id: 1
     text: >-
@@ -133,21 +191,39 @@ entries:
   base_introduction__p07_hint:
     id: 1
     text: >-
-      무기에 커서를 올리면 비교해 볼 수 있습니다. 몇몇 선택은 대가가 있을 수 있지만, 다른 선택은 직접적인 업그레이드로 이어집니다.
+      새로운 무기를 선택해 현재 장착한 무기와 비교하세요. 일부 아이템은 딱 부러지게 더 낫지만, 다른 아이템은 다양한 절충적 요소를 가질 수 있습니다.
 
 
-      부품을 고르는 가장 간단한 방법은 레벨을 확인하는 겁니다. 장비 레벨이 올라가면 이에 따라 대미지와 체력이 상승하므로 메카가 더 강한 적과 대면할 수 있습니다.
+      메카의 전체 레벨에 따라 대미지와 체력이 증가하므로 더 높은 레벨의 부품을 장착하면 메카가 더 강한 적에 맞설 수 있습니다.
 
 
-      [b]새로운 무기를 장비하려면[/b] 목록에서 더블 클릭하거나 길게 누르세요.
+      목록에서 원하는 무기를 클릭해 장착하세요.
     textEng: >-
-      Hover over a weapon to see the comparison. Some picks might have tradeoffs, while others could be a direct upgrade.
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
 
 
-      One of the most straighforward ways to pick parts is checking their level. Increasing the equipment level lets the mech face stronger enemies, as damage and health is scaled with the level.
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
 
 
-      [b]Equip a new weapon[/b] by double clicking or long pressing it in the list.
+      Equip the weapon you prefer by clicking it in the list.
+  base_introduction__p07_hint_ctrl:
+    id: 2
+    text: >-
+      새로운 무기를 선택해 현재 장착한 무기와 비교하세요. 일부 아이템은 딱 부러지게 더 낫지만, 다른 아이템은 다양한 절충적 요소를 가질 수 있습니다.
+
+
+      메카의 전체 레벨에 따라 대미지와 체력이 증가하므로 더 높은 레벨의 부품을 장착하면 메카가 더 강한 적에 맞설 수 있습니다.
+
+
+      원하는 무기를 장착하세요. 어떤 방법으로 탐색해야 할지 모르겠다면, 화면 하단의 입력 힌트를 확인하세요.
+    textEng: >-
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
+
+
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
+
+
+      Equip the weapon you prefer. If you're not sure how to navigate, check the input hints at the bottom of the screen.
   base_introduction__p08_hint:
     id: 1
     text: >-
@@ -167,7 +243,43 @@ entries:
   base_introduction__p10_hint:
     id: 1
     text: 유닛 커스터마이징 탐색을 마쳤다면, 여기를 클릭하여 기지로 돌아가세요. 그곳에서 오버월드로 돌아갈 수 있습니다.
-    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld.
+    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld map.
+  base_standalone_ops__p00_header:
+    id: 2
+    text: 계약
+    textEng: Contracts
+  base_standalone_ops__p00_text:
+    id: 2
+    text: 이 지역 내 저항군과 계약을 수립했습니다. 이제 원격 지원 계약을 이용할 수 있습니다.
+    textEng: You have established contact with the resistance forces in this region. Remote assistance contracts are now available.
+  base_standalone_ops__p01_hint:
+    id: 2
+    text: >-
+      계약을 통해 퓌랜드 다른 곳에 있는 아군 분대를 통제할 수 있습니다. 당신의 분대가 참여하지는 않으므로, 조종사 경험치를 얻거나 회수품에 직접 접근할 수는 없습니다. 하지만 지정된 보상을 받을 수 있으며 대미지, 피로도 또는 다른 자원을 감수할 필요가 없습니다.
+
+
+      계약은 선택 사항이며 지방을 해방하는 데 필수 조건이 아닙니다. 계약은 자원을 얻고, 분대를 위한 장비를 더 많이 획득하거나, 특정 세력을 위한 작업장 잠금 해제 조건을 완료하는 데 유용한 방법이 될 수 있습니다.
+    textEng: >-
+      The contracts allow you to control allied squads elsewhere in Fyrland. Your squad will not participate, so you will not gain pilot experience or direct access to salvage. However, you can receive predetermined rewards and will not risk damage, fatigue or other resources.
+
+
+      The contracts are optional and are not required to liberate a province. They can be a useful way to get resources, obtain more equipment for your squad or finish the workshop unlocks for a particular faction.
+  base_standalone_ops__p02_header:
+    id: 2
+    text: 테스트 사정거리
+    textEng: Test range
+  base_standalone_ops__p02_text:
+    id: 2
+    text: >-
+      훈련 섹션에서 가상 사정거리를 확인하는 걸 잊지 마세요. 메카의 성능을 시험할 수 있는 곳입니다.
+
+
+      또한 메카 커스터마이징 화면의 테스트 운행 버튼을 통해 가상 사정거리를 확인할 수도 있습니다.
+    textEng: >-
+      Remember to check the virtual range in the Training section, where you can test the performance of your mechs.
+
+
+      You can also access the virtual range through the Test Drive button in the mech customization screen.
   base_upgrades__p00_header:
     id: 1
     text: 업그레이드
@@ -188,6 +300,18 @@ entries:
     id: 1
     text: 새로운 능력이 잠금 해제되었습니다. 검토를 시작하려면, 업그레이드 버튼을 클릭하세요.
     textEng: New capabilities have been unlocked. To start reviewing them, click the Upgrades button.
+  base_workshop__p00_hint_ctrl:
+    id: 2
+    text: >-
+      새로운 능력이 잠금 해제되었습니다. 새로운 업그레이드 화면을 열고 검토를 시작합시다.
+
+
+      {0}
+    textEng: >-
+      New capabilities have been unlocked. To start reviewing them, let's open the new Upgrades screen.
+
+
+      {0}
   base_workshop__p01_header:
     id: 1
     text: 업그레이드
@@ -195,7 +319,7 @@ entries:
   base_workshop__p01_text:
     id: 1
     text: 이제 자원을 사용해 기지를 업그레이드할 수 있습니다. 업그레이드를 하면 기지가 더 많은 유닛을 수용할 수 있고, 새로운 능력을 잠금 해제하는 등 많은 가능성이 열립니다.
-    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to fit more units, unlock new capabilities and more.
+    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to house more units, unlock new capabilities, and more.
   base_workshop__p02_hint:
     id: 1
     text: >-
@@ -208,10 +332,40 @@ entries:
 
 
       Hover over the upgrade tile to inspect the details, then double click or long press to confirm it.
+  base_workshop__p02_hint_ctrl:
+    id: 2
+    text: >-
+      나중에 가장 필요로 하게 될 중요한 시스템 중 하나는 작업장입니다.
+
+
+      "확정"을 눌러 업그레이드를 설치하세요.
+
+
+      {0}
+    textEng: >-
+      One of the most important systems you'll need in the days to come is the Workshop.
+
+
+      Install the upgrade by pressing "confirm".
+
+
+      {0}
   base_workshop__p03_hint:
     id: 1
     text: 새롭게 잠금 해제된 작업장 탭을 탐색하세요.
     textEng: Navigate to the newly unlocked workshop tab.
+  base_workshop__p03_hint_ctrl:
+    id: 2
+    text: >-
+      새롭게 잠금 해제된 작업장 탭을 탐색하세요.
+
+
+      {0}
+    textEng: >-
+      Navigate to the newly unlocked workshop tab.
+
+
+      {0}
   base_workshop__p04_header:
     id: 1
     text: 작업장
@@ -228,14 +382,14 @@ entries:
 
       캠페인을 진행하면서 더 많은 설계도를 발견하게 될 겁니다.
     textEng: >-
-      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armor and mech frames.
+      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armour and mech frames.
 
 
       You'll discover more blueprints over the course of the campaign.
   base_workshop__p06_hint:
     id: 1
     text: "프레임은 엄청나게 중요합니다. 이는 커스터마이징 탭에서 몸체 방어구와 무기를 장비하는 유닛인 메카의 몸체입니다. \n\n더 많은 프레임을 제조하면 분대를 확장하고 손실을 보충할 수 있습니다."
-    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armor and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
+    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armour and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
   base_workshop__p07_hint:
     id: 1
     text: >-
@@ -248,10 +402,28 @@ entries:
 
 
       Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
+  base_workshop__p07_hint_ctrl:
+    id: 2
+    text: >-
+      "빌드" 버튼으로 프로젝트를 시작하세요.
+
+
+      {0}
+
+
+      새로운 부품을 프린팅하는 일은 기지가 멈춰야 하는 세심한 작업입니다. 메카 수리와 조종사 회복처럼, 제조 또한 막사 정차를 해야 가능합니다.
+    textEng: >-
+      Begin this project with the "Build" button.
+
+
+      {0}
+
+
+      Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
   base_workshop__p08_hint:
     id: 1
     text: "새로운 메카 프레임이 제조 중이므로, 아이템 제조를 검토해 봅시다. \n\n이곳의 카테고리 버튼을 사용하면 잠금 해제된 부품과 서브시스템에 접근할 수 있습니다."
-    textEng: "With a new mech frame being built, let's review item manufacturing. \n\nYou'll be able to access unlocked parts and subsystems by using the category buttons here."
+    textEng: "With a new mech frame being built, let's review equipment manufacturing. \n\nYou'll be able to access researched parts by using the category buttons here."
   base_workshop__p09_hint:
     id: 1
     text: >-
@@ -263,7 +435,7 @@ entries:
 
       더 높은 품질의 부품은 개별적인 잠금 해제를 필요로 합니다.
     textEng: >-
-      To unlock parts or subsystems in the workshop, you'll need to scrap them. This can be done through the inventory or through the salvage screen.
+      To unlock projects in the workshop, you'll need to research them by scrapping parts. This can be done through the inventory or through the salvage screen.
 
 
       Some projects might require multiple scrapped items to be researched. Check the workshop progress bar on the item information panel to learn more.
@@ -294,7 +466,7 @@ entries:
 
       ■ 배리어는 대미지를 흡수하고, 싸움 중 재생시킬 수 있습니다. 메카에게 대미지를 입히려면 배리어를 완전히 파괴하세요!
     textEng: >-
-      ■ The enemy is equipped with barrier armor. Note the green portion of the health bars.
+      ■ The enemy is equipped with barrier armour. Note the green portion of the health bars.
 
 
       ■ Barriers absorb damage, and can regenerate during the fight. Fully deplete barriers to damage the mech!
@@ -327,7 +499,7 @@ entries:
   combat_base__p01_hint:
     id: 1
     text: "이 발전기를 파괴하면 포탑을 비활성화할 수 있습니다. \n\n선택한 아군 메카로 장거리 빔을 사용해 파괴해 보세요!"
-    textEng: "Destroying this generator will disable turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
+    textEng: "Destroying this generator will disable the turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
   combat_base__p02_hint:
     id: 1
     text: >-
@@ -382,14 +554,6 @@ entries:
 
 
       The [b]Dash[/b] maneuver makes the mech break missile lock, evades most projectiles and allows for quick position changes.
-  combat_breakthrough_01__p00_header:
-    id: 1
-    text: 테스트
-    textEng: Test
-  combat_breakthrough_01__p00_text:
-    id: 1
-    text: 이건 다수의 목표가 있는 복잡한 작업입니다.
-    textEng: This is a complex operation with multiple objectives.
   combat_convoy_hg__p00_hint:
     id: 1
     text: 퓌랜드 자유군 저격수가 전투에 합류합니다. 그들은 유리한 위치에 있어 당신이 호송차를 막는 걸 도울 수 있습니다.
@@ -496,6 +660,10 @@ entries:
     id: 1
     text: "방향 공격을 연습하고 적 메카를 파괴해 임무의 다음 단계로 넘어가세요. \n\n적 유닛의 일체성이 얼마나 남았는지 잘 모르겠다면, 적 유닛을 선택하고 모디파이어 키를 길게 누르세요.\n\n— 유닛 세부 사항 표시: {0}"
     textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or hold the modifier key.\n\n— Display unit details: {0}"
+  combat_demo_directional__p02_text_ctrl:
+    id: 2
+    text: "방향 공격을 연습하고 적 메카를 파괴해 임무의 다음 단계로 넘어가세요. \n\n적 유닛의 일체성이 얼마나 남았는지 잘 모르겠다면, 적 유닛을 선택하거나 자세한 디스플레이 모드를 활성화하세요.\n\n— 자세한 디스플레이 켜기/끄기: {1}"
+    textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or activate the detailed display mode.\n\n— Toggle detailed display: {1}"
   combat_demo_retreat__p00_hint:
     id: 1
     text: 여기는 후퇴 영역입니다. 이 임무와 같은 일부 임무는 성공적인 완수를 위해 후퇴를 필요로 합니다.
@@ -554,6 +722,24 @@ entries:
 
 
       — Target environment: {0}
+  combat_demo_structures__p02_hint_ctrl:
+    id: 2
+    text: >-
+      올바른 무기를 선택한 뒤에는, 구조물을 겨냥해야 합니다. 기본적으로 공격은 적 타겟을 필요로 하지만, 자유롭게 사격하는 방법이 있습니다.
+
+
+      이곳의 얇은 벽처럼 약한 곳을 찾으세요. 켜기/끄기 키를 눌러 타겟팅 위치를 전환하면, 공격을 확정할 수 있게 됩니다.
+
+
+      — 타겟 모드 켜기/끄기: {1}
+    textEng: >-
+      Once you select the right weapon, you'll need to target the structures. By default, attacks require an enemy target, but there is a way to fire at any location.
+
+
+      Find a weak spot such as a thin wall here. Press the toggle key to switch to targeting locations, and you'll be able to confirm the attack.
+
+
+      — Toggle target mode: {1}
   combat_intro_01__p00_header:
     id: 1
     text: '카메라 '
@@ -588,10 +774,46 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  combat_intro_01__p00_text_ctrl:
+    id: 2
+    text: >-
+      출발하기 전에, 카메라 뷰를 조정해 보세요.
+
+
+      — 카메라 이동: {9}
+
+
+      — 카메라 회전: {11}
+
+
+      — 카메라 각도 조절: {12}
+    textEng: >-
+      Before moving out, try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   combat_intro_01__p01_hint:
     id: 1
-    text: 선택하려면 이 유닛을 {0}하세요.
-    textEng: '{0} this unit to select it.'
+    text: >-
+      이 유닛을 클릭해 선택하세요:
+
+
+      {0}
+    textEng: >-
+      Select this unit by clicking it:
+
+
+      {0}
+  combat_intro_01__p01_hint_ctrl:
+    id: 2
+    text: "커서를 이동해 이 유닛을 선택하고 타겟팅 단축키를 누르세요.\n\n{2} ► {3} \n\n\n대신, 다음 키로 선택한 유닛을 전환할 수 있습니다.\n\n{4}{5} "
+    textEng: "Select this unit by moving the cursor and pressing the targeting hotkey:\n\n{2} ► {3} \n\n\nAlternatively, you can switch the selected unit with:\n\n{4}{5} "
   combat_intro_01__p02_hint:
     id: 1
     text: 선택한 유닛에 대한 정보가 여기 표시됩니다.
@@ -616,6 +838,18 @@ entries:
     id: 1
     text: 전투가 한창일 땐 모든 것을 계속 파악하는 게 어려울 수 있습니다. 지난 5초를 리플레이하려면 여기를 클릭하세요!
     textEng: In the heat of battle, it can be hard to keep track of everything. Click here to replay the last five seconds!
+  combat_intro_04__p00_hint_ctrl:
+    id: 2
+    text: >-
+      전투가 한창일 땐 모든 것을 계속 파악하는 게 어려울 수 있습니다. 지난 5초를 리플레이해 검토해 봅시다!
+
+
+      {0}
+    textEng: >-
+      In the heat of battle, it can be hard to keep track of everything. Let's review a replay the last five seconds!
+
+
+      {0}
   combat_intro_04__p01_hint:
     id: 1
     text: 타임라인에 커서를 올려 특정 시점을 다시 보거나, 시간 조절을 사용하여 작업을 반복 재생할 수도 있습니다.
@@ -651,7 +885,7 @@ entries:
   combat_liberation__p02_text:
     id: 1
     text: 도시 내에서 싸울 때, 일부 적은 시야를 확보할 때까지 사격을 중지할 수 있습니다. 하지만, 그들의 사격 규율에 의존하지 않는 것이 좋습니다. 적은 당신의 유닛을 힐끗 보기라도 하면 그 뒤에 민간 건물이 있어도 사격할 겁니다.
-    textEng: "When fighting in cities, some enemies might hold fire until they get line of sight. Hovewer, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
+    textEng: "When fighting in cities, some enemies might hold fire until they have line of sight. However, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
   combat_liberation_ally__p00_hint:
     id: 2
     text: 이 메카는 퓌랜드 자유군의 소유입니다. 이들은 종종 당신을 도우러 올 겁니다.
@@ -737,7 +971,7 @@ entries:
   combat_status_intro__p00_text:
     id: 1
     text: 이 유닛은 방금 상태 효과를 받았습니다. 조종사 상태, 특성, 무기 등으로 생겼을 수 있습니다. 일부 상태 효과는 시간 제한이 있지만, 다른 상태 효과는 전투 내내 지속될 수 있습니다. 상태 바 위에 커서를 올려 더 알아보세요.
-    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight. Hover over the status bar to learn more.
+    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight.
   combat_status_intro__p01_hint:
     id: 1
     text: >-
@@ -762,6 +996,36 @@ entries:
 
 
       Here, you can see the names of the effects and the time they will remain active for. You can also hover over each effect to learn more.
+  combat_status_intro__p02_hint_ctrl:
+    id: 2
+    text: >-
+      세부 정보 패널에서 선택한 유닛의 상태 효과에 대한 자세한 정보를 확인할 수 있습니다.
+
+
+      여기에서 효과의 이름과 해당 효과가 활성화된 상태로 유지되는 시간을 확인할 수 있습니다. 각 상태 효과에 관한 세부 사항을 포함한 툴팁을 열려면, 타임라인에 초점을 맞추고 왼쪽 그리고 위로 탐색하면 됩니다.
+
+
+      {0} - 타임라인에 초점 맞추기
+
+
+      {1} - 유닛 패널로
+
+
+      {2} - 상태 패널로
+    textEng: >-
+      You can get more information about the status effects on a selected unit in the detail panel.
+
+
+      Here, you can see the names of the effects and the time they will remain active for. To open the tooltips with details about each status effect, you can focus the timeline and navigate left and up.
+
+
+      {0} - Focus timeline
+
+
+      {1} - To unit panel
+
+
+      {2} - To status panel
   endgame__p00_header:
     id: 1
     text: 플레이해 주셔서 감사합니다!
@@ -797,7 +1061,25 @@ entries:
   overworld_camp__p01_hint:
     id: 1
     text: 이건 개요 코너입니다. 소유한 유닛 및 조종사에 관한 한눈에 볼 수 있는 요약을 중요한 옵션과 함께 제공합니다.
-    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with important options.
+    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+  overworld_camp__p01_hint_ctrl:
+    id: 2
+    text: >-
+      이건 개요 코너입니다. 사용 가능한 유닛과 조종사, 기타 중요한 작업에 대한 요약 정보를 한눈에 확인할 수 있습니다.
+
+
+      오버월드에서 아래를 눌러 이 패널에 접근할 수 있습니다.
+
+
+      {0}
+    textEng: >-
+      This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+
+
+      You can access this panel by pressing down in the overworld.
+
+
+      {0}
   overworld_camp__p02_hint:
     id: 1
     text: >-
@@ -810,6 +1092,24 @@ entries:
 
 
       You can hover over each unit to check their average level, weapon loadout, warnings and more.
+  overworld_camp__p02_hint_ctrl:
+    id: 2
+    text: >-
+      해당 섹션은 보유한 메카와 기지가 수용할 수 있는 총 메카 개수를 표시합니다. 각 메카 일체성은 하단에 표시됩니다.
+
+
+      이 패널에 초점을 맞추면, 아래로 탐색해 각 메카에서 평균 레벨, 무기 군수, 경고 등을 열거한 툴팁을 열 수 있습니다.
+
+
+      또한 선택한 메카에서 "확정"을 눌러 장비 커스터마이징으로 이동할 수 있습니다.
+    textEng: >-
+      This section displays the mechs at your disposal, and the total number of mechs your base can accommodate. The integrity of each mech is displayed at the bottom.
+
+
+      While this panel is in focus, you can navigate down to each mech to open a tooltip listing their average level, weapon loadout, warnings and more.
+
+
+      You can also jump to equipment customization by pressing "confirm" on a selected mech.
   overworld_camp__p03_hint:
     id: 1
     text: >-
@@ -822,14 +1122,48 @@ entries:
 
 
       You can hover over each pilot to check their level, experience, status, and more.
+  overworld_camp__p03_hint_ctrl:
+    id: 2
+    text: "해당 섹션은 보유한 조종사와 사용 가능한 전체 조종사 공간을 표시합니다. 각 조종사의 체력은 하단에 표시됩니다.\n\n이 패널에 초점을 맞춘 동안, 아래로 탐색해 각 조종사로 이동해 레벨, 경험치, 상태 등을 열거한 툴팁을 열 수 있습니다. "
+    textEng: "This section displays the pilots at your disposal and the overall space available for them. The health of each pilot is displayed at the bottom.\n\nWhile this panel is in focus, you can navigate down to each pilot to open a tooltip listing their level, experience, status, and more. "
   overworld_camp__p04_hint:
     id: 1
     text: 조종사들은 탈진했고 메카는 손상되었습니다. 막사를 세우고 분대를 보살피는 것이 현명합니다. 아래의 막사 버튼을 클릭해 진행하세요.
     textEng: With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Click the camp button below to proceed.
+  overworld_camp__p04_hint_ctrl:
+    id: 2
+    text: >-
+      조종사들은 탈진했고 메카는 손상되었습니다. 막사를 세우고 분대를 보살피는 것이 현명합니다. 막사 화면을 열어 진행하세요.
+
+
+      {0}
+    textEng: >-
+      With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Open the camp screen to proceed.
+
+
+      {0}
   overworld_camp__p05_hint:
     id: 1
     text: 주의가 필요한 메카 혹은 조종사를 선택하고, 시작을 눌러 막사를 세우세요.
-    textEng: Select the mechs or pilots requiring attention, then press Start to set up camp.
+    textEng: Select the mechs or pilots requiring attention, then press "Start" to set up camp.
+  overworld_camp__p05_hint_ctrl:
+    id: 2
+    text: >-
+      주의가 필요한 메카 혹은 조종사를 선택하세요. 아래로 탐색한 후, "확정"을 눌러 선택을 전환하세요.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      완료되면, "시작" 버튼을 사용해 막사를 세우세요.
+    textEng: >-
+      Select the mechs or pilots requiring attention. Navigate down, then press "confirm" to toggle selections.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      Once you're done, use the "Start" button to set up camp.
   overworld_camp__p06_hint:
     id: 1
     text: 선택지에 확신이 든다면 진행하세요.
@@ -838,6 +1172,18 @@ entries:
     id: 1
     text: 당신의 분대가 복귀했습니다. 대원들이 무기를 완성하는 동안, 수리를 하고 조종사가 휴식을 취할 짧은 시간이 있습니다. 막사를 세우세요.
     textEng: Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+  overworld_capital_camp__p00_hint_ctrl:
+    id: 2
+    text: >-
+      당신의 분대가 복귀했습니다. 대원들이 무기를 완성하는 동안, 수리를 하고 조종사가 휴식을 취할 짧은 시간이 있습니다. 막사를 세우세요.
+
+
+      {0}
+    textEng: >-
+      Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+
+
+      {0}
   overworld_capital_camp__p01_hint:
     id: 1
     text: 남은 시간을 최대로 활용하세요. 가장 주의가 필요해 보이는 조종사와 메카를 결정하세요.
@@ -1046,6 +1392,30 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  overworld_intro__p00_text_ctrl:
+    id: 2
+    text: >-
+      이것은 월드맵입니다. 카메라 뷰를 조정해 보세요.
+
+
+      — 카메라 이동: {9}
+
+
+      — 카메라 회전: {11}
+
+
+      — 카메라 각도 조절: {12}
+    textEng: >-
+      This is the world map. Try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   overworld_intro__p01_hint:
     id: 1
     text: 현재 작전과 활성 목표의 세부 사항이 여기 표시됩니다.
@@ -1053,15 +1423,31 @@ entries:
   overworld_intro__p02_hint:
     id: 1
     text: >-
-      — 목적지 위로 커서를 올리고 {0} 키를 눌러 월드맵에서 움직이세요
+      월드 맵을 움직이려면, 원하는 목적지를 오른쪽 클릭하세요.
 
 
-      —  길을 잃게 되면 {1} 키를 눌러 카메라를 다시 중앙에 위치시키세요
+      {0}
+
+
+      길을 잃게 되면, 이 버튼을 눌러 카메라를 다시 중앙에 위치시키세요.
+
+
+      {1}
     textEng: >-
-      — Hover over a destination and press {0} to move on the world map
+      To move on the world map, right click a desired destination:
 
 
-      —  If you're ever lost, press {1} to recenter the camera
+      {0}
+
+
+      If you're ever lost, press this button to recenter the camera:
+
+
+      {1}
+  overworld_intro__p02_hint_ctrl:
+    id: 2
+    text: "월드 맵을 움직이려면, 커서를 목적지 위로 움직여 확정 버튼을 누르세요. \n\n{2} ► {3}\n\n\n길을 잃게 되면, 이 버튼을 눌러 카메라를 다시 중앙에 위치시키세요.\n\n{4}"
+    textEng: "To move on the world map, move the cursor to your destination and press the confirmation button: \n\n{2} ► {3}\n\n\nIf you're ever lost, press this button to recenter the camera:\n\n{4}"
   overworld_pilot_progression__p00_hint:
     id: 1
     text: >-
@@ -1070,10 +1456,28 @@ entries:
 
       진행하려면, 조종사 화면으로 이동하세요. 아래의 아무 조종사를 클릭해 그곳을 빠르게 둘러볼 수 있습니다.
     textEng: >-
-      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, new pilot levels will be highlighted with the icons here.
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
 
 
       To proceed, move to the pilot screen. You can quickly navigate there by clicking any pilot below.
+  overworld_pilot_progression__p00_hint_ctrl:
+    id: 2
+    text: >-
+      조종사가 지난 몇 번의 싸움 동안 경험치를 얻어 레벨을 올릴 준비가 되었습니다. 임무 보고에서 강조 표시된 것 외에, 레벨을 올릴 수 있는 조종사는 이곳의 아이콘으로 강조 표시됩니다.
+
+
+      조종사 진급을 관리하려면, 조종사 화면으로 이동해야 합니다. 해당 화면으로 빠르게 이동하려면 이곳에서 조종사를 선택하고 컨트롤러의 "확정" 버튼을 누르세요.
+
+
+      {0}
+    textEng: >-
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
+
+
+      To manage pilot promotions, you'll need to navigate to the pilot screen. A quick way to reach that screen is to select a pilot here and press the "confirm" button on your controller.
+
+
+      {0}
   overworld_pilot_progression__p01_hint:
     id: 1
     text: >-
@@ -1090,6 +1494,10 @@ entries:
     id: 1
     text: "각각의 조종사는 레벨이 상승할 때마다 서서히 잠금 해제되는 특성 모음인 고유한 진행도 트리를 가지게 됩니다. \n\n특성 위에 커서를 올려 잠금 해제되지 않은 특성까지도 그 효과를 알 수 있습니다."
     textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nYou can hover over the traits to learn their effects, even if they aren't unlocked yet."
+  overworld_pilot_progression__p02_hint_ctrl:
+    id: 2
+    text: "각각의 조종사는 레벨이 상승할 때마다 서서히 잠금 해제되는 특성 모음인 고유한 진행도 트리를 가지게 됩니다. \n\n트리에서 특성을 선택하면 아직 잠금 해제되지 않은 특성이라도 특성 효과에 관한 세부 사항을 포함한 툴팁이 열립니다."
+    textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nSelecting a trait in this tree opens a tooltip with the details about its effects, even if that trait is not unlocked yet."
   overworld_pilot_progression__p03_hint:
     id: 1
     text: >-
@@ -1101,7 +1509,7 @@ entries:
       Every pilot starts with a random intrinsic trait based on their class. Starter traits can affect traits further up in the tree, akin to a subclass.
 
 
-      For example, a support pilot with with a repair-related starter trait is likely to unlock more repair abilities as they level up.
+      For example, a support pilot with a repair-related starter trait is likely to unlock more repair abilities as they level up.
   overworld_pilot_progression__p04_hint:
     id: 1
     text: >-
@@ -1114,18 +1522,36 @@ entries:
 
 
       Hover over each trait to see their benefits, then click on the one you'd like to unlock.
+  overworld_pilot_progression__p04_hint_ctrl:
+    id: 2
+    text: >-
+      이제 이 조종사가 레벨 2에 도달했으니, 새로운 특성을 잠금 해제할 수 있습니다. 일부 레벨에서는 두 가지 특성 중 하나를 골라야 합니다.
+
+
+      두 특성 사이를 오가며 혜택을 확인하고, "확정"을 눌러 둘 중 하나를 잠금 해제하세요.
+
+
+      {0}{1}
+    textEng: >-
+      Now that this pilot is at level 2, a new trait can be unlocked. Some levels offer a choice between two traits.
+
+
+      Navigate between the two traits to see their benefits, then press the "confirm" button to unlock one.
+
+
+      {0}{1}
   overworld_pilot_progression__p05_hint:
     id: 1
     text: >-
-      더 작은 분대는 더 빨리 레벨이 상승하며, 조종사는 처치하는 적마다 추가로 경험치를 더 얻습니다. 소규모 분대를 배치하고 특정 조종사가 적을 끝장내도록 하면 빠르게 진행할 수 있습니다.
+      전투 임무를 통해 정해진 양의 경험치를 얻을 수 있으며, 이 경험치는 배치된 모든 조종사에게 분할됩니다. 더 작은 분대는 더 빨리 레벨이 상승하며, 조종사는 적을 처치할 때마다 적마다 추가로 경험치를 더 얻습니다.
 
 
-      새로운 특성이 고정되었으니, 이 조종사는 더 많은 도전에 맞설 수 있습니다. [B]다른 조종사의 레벨을 올리는 걸 잊지 마세요![/B]
+      새로운 특성이 고정되었으니, 이 조종사는 더 많은 도전에 맞설 수 있습니다. [b]다른 조종사의 레벨을 올리는 걸 잊지 마세요![/b]
     textEng: >-
-      Smaller squads level up more quickly, and pilots gain additional experience for each enemy they bring down. Deploying a lean squad and letting a specific pilot finish enemies can lead to quick progress.
+      Combat missions net you a set amount of experience, split between all pilots deployed. Smaller squads will level up more quickly, and pilots will gain additional experience for each enemy they dispatch.
 
 
-      With the new trait locked in, this pilot is ready to face more challenges. [B]Don't forget to level up your other pilot![/B]
+      With the new trait locked in, this pilot is ready to face more challenges. [b]Don't forget to level up your other pilot![/b]
   overworld_pilot_recruit__p00_hint:
     id: 1
     text: >-
@@ -1141,7 +1567,19 @@ entries:
   overworld_pilot_recruit__p01_hint:
     id: 1
     text: 떠나기 전에 영입할 수 있는 신병이 있는지 확인할 가치가 있습니다. 이 버튼을 클릭해 영입 목록을 여세요.
-    textEng: It's worth checking out available recruits before departing. Click this button to open the recruit list.
+    textEng: It's worth checking out the available recruits before departing. Click this button to open the recruit list.
+  overworld_pilot_recruit__p01_hint_ctrl:
+    id: 2
+    text: >-
+      떠나기 전에 영입할 수 있는 신병이 있는지 확인하면 좋습니다. 이 버튼을 사용해 확인하세요.
+
+
+      {0}
+    textEng: >-
+      It's worth checking out the available recruits before departing. Use this button to view them.
+
+
+      {0}
   overworld_pilot_recruit__p02_header:
     id: 1
     text: 영입 화면
@@ -1162,6 +1600,24 @@ entries:
 
 
       Click this button to review the first available pilot.
+  overworld_pilot_recruit__p03_hint_ctrl:
+    id: 2
+    text: >-
+      병사를 늘리는 건 생존에 필수적입니다. 막사 물자가 부족해질 수 있고, 조종사가 치명적인 상처를 입을 수 있고, 시간에 쫓겨 막사 정차가 불가능할 수 있습니다.
+
+
+      첫 번째로 영입 가능한 조종사를 봅시다.
+
+
+      {0}
+    textEng: >-
+      Growing your ranks is essential for survival. Camp supplies might become scarce, pilots might be critically injured, or you might be pressed for time and unable to camp.
+
+
+      Let's review the first available pilot.
+
+
+      {0}
   overworld_pilot_recruit__p04_hint:
     id: 1
     text: >-
@@ -1173,7 +1629,7 @@ entries:
       Rookies are inexperienced pilots. You'll need to deploy them on a mission to learn their specialization and start leveling them up, but they can be hired at a low cost.
 
 
-      Click the button above the portrait to recruit them.
+      Use the button above the portrait to recruit them.
   overworld_pilot_recruit__p05_hint:
     id: 1
     text: 남은 조종사 중 한 명을 고르세요.
@@ -1195,7 +1651,7 @@ entries:
       Veteran pilots might be the right pick if you need to quickly fill a specific role.
 
 
-      Click the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
+      Use the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
   overworld_pilot_recruit__p07_header:
     id: 1
     text: 떠날 준비 완료
@@ -1208,6 +1664,18 @@ entries:
     id: 1
     text: 목적지를 고를 시간입니다. 이 버튼을 클릭해 월드 맵을 여세요.
     textEng: Time to pick a destination. Click this button to open the world map.
+  overworld_pilot_recruit__p08_hint_ctrl:
+    id: 2
+    text: >-
+      목적지를 고를 시간입니다. 이 버튼을 사용해 월드 맵을 여세요.
+
+
+      {0}
+    textEng: >-
+      Time to pick a destination. Use this button to open the world map.
+
+
+      {0}
   overworld_pilot_recruit__p09_hint:
     id: 1
     text: >-
@@ -1232,6 +1700,24 @@ entries:
 
 
       Click this button to select the destination suggested by the resistance.
+  overworld_pilot_recruit__p10_hint_ctrl:
+    id: 2
+    text: >-
+      퓌랜드 자유군은 당신에게 적 약점에 관한 정보를 제공할 겁니다. 몇몇 경우, 하나의 뻔한 선택지밖에 없습니다. 다른 경우, 장단점이 있는 여러 목적지 중에서 고를 수 있습니다.
+
+
+      이 버튼을 사용해 저항군이 제안하는 목적지를 선택하세요.
+
+
+      {0}
+    textEng: >-
+      Fyrland Freedom Forces will provide you intel about enemy vulnerabilities. In some cases, there will be only one obvious choice. In other cases, you can choose between multiple destinations with their own pros and cons.
+
+
+      Use this button to select the destination suggested by the resistance.
+
+
+      {0}
   overworld_pilot_recruit__p11_hint:
     id: 1
     text: >-
@@ -1243,7 +1729,7 @@ entries:
       Once you select a potential destination, you can review the available intel here. This panel is similar to mission preview and can list important modifiers, enemy strength, and other details.
 
 
-      Once you're ready to proceed, click the "Travel" option next to the recommended destination.
+      Once you're ready to proceed, use the "Travel" option next to the recommended destination.
   overworld_salvage__p00_header:
     id: 1
     text: 임무 보고
@@ -1268,6 +1754,10 @@ entries:
     id: 1
     text: 버튼을 눌러 진행하세요.
     textEng: Press this button to proceed.
+  overworld_salvage__p02_hint_ctrl:
+    id: 2
+    text: '{0} 버튼을 눌러 진행하세요.'
+    textEng: Press {0} to proceed.
   overworld_salvage__p03_hint:
     id: 1
     text: >-
@@ -1279,11 +1769,15 @@ entries:
       The next pages cover the state of your pilots and mechs.
 
 
-      Taking care of your squad is key to a successful campaign, so it is important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
+      Taking care of your squad is key to a successful campaign, so it's important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
   overworld_salvage__p04_hint:
     id: 1
     text: 정해진 조종사에 배정한 메카는 배경에 표시됩니다. 이 패널에 커서를 올려 메카 상태의 추가적인 정보를 얻을 수 있습니다.
     textEng: The mech assigned to a given pilot will be displayed in the background. You can hover over this panel to get additional information about its state.
+  overworld_salvage__p04_hint_ctrl:
+    id: 2
+    text: 정해진 조종사에 배정한 메카는 배경에 표시됩니다.
+    textEng: The mech assigned to a given pilot will be displayed in the background.
   overworld_salvage__p05_hint:
     id: 1
     text: 준비가 완료되면 다음 페이지로 넘어가세요.
@@ -1296,10 +1790,14 @@ entries:
 
       이 목록의 아이템을 클릭해 능력치와 외관을 확인할 수 있습니다.
     textEng: >-
-      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip onto your mechs.
+      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
 
 
       You can click the items in this list to check their stats and appearance.
+  overworld_salvage__p06_hint_ctrl:
+    id: 2
+    text: 대부분의 전투에서 보상을 받을 수 있습니다. 여기에는 귀중한 자원 혹은 방금 당신이 메카에 장비한 아이템도 포함됩니다.
+    textEng: Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
   overworld_salvage__p07_hint:
     id: 1
     text: 준비가 완료되면 다음 페이지로 넘어가세요.
@@ -1357,11 +1855,7 @@ entries:
 
 
       예를 들어, 당신 메카의 방패를 확인하면 발견한 다른 방패에 가져갈 가치가 있는지 결정하는 데 도움이 됩니다.
-    textEng: >-
-      If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts of your mechs.
-
-
-      As an example, checking a shield from your mech can help you decide whether another shield you found is worth taking.
+    textEng: If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts in the salvage pool with the equipment on your mechs. As an example, checking an equipped shield can help you decide whether another shield you found is worth salvaging.
   overworld_salvage__p13_hint:
     id: 1
     text: 끝낼 준비가 되었으면, 이곳의 버튼을 누르세요. 당신의 선택이 예산에 맞으면, 회수가 시작됩니다.

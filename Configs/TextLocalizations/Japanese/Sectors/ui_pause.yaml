@@ -229,6 +229,18 @@ entries:
     id: 1
     text: リセット
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: DLC
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: インストール済みのコンテンツ
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: サポーターアップグレード
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: >-
@@ -236,6 +248,10 @@ entries:
 
       スされました！
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: バージョン2.2のアップデートが配信されました！
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -264,6 +280,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      自分流にプレイ！コントローラーの完全サポートとキーボードナビゲーションの拡張を追加しました。
+
+
+      新たな遠隔支援契約と射撃範囲により、進行とビルド構築の選択肢が広がります。
+
+
+      アクションカメラ、追加マップ、UIの改善なども実施！アップデートや2.0の大規模刷新の詳細は、以下のリンクからご覧いただけます。
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -462,12 +496,12 @@ entries:
     textEng: Numpad
   input_kb_page_down:
     id: 2
-    text: Page Down
-    textEng: Page Down
+    text: PgDn
+    textEng: PgDn
   input_kb_page_up:
     id: 2
-    text: Page Up
-    textEng: Page Up
+    text: PgUp
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: リターン
@@ -508,6 +542,74 @@ entries:
     id: 2
     text: マウスホイール
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: 共通操作
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: コントローラー使用時
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: カメラ移動
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: カメラ回転
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: キャンセル／戻る
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: 選択ボタンの確定／クリック
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: ボタン間の移動
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: 一時停止
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: 画面切り替え／ユニット切り替え
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: ズーム調整／戦闘時間調整
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      フォーカス枠に注目して、現在位置と次に移動できる場所を確認してください。画面ごとの入力ヒントを確認して、その他の操作方法を学びましょう。
+
+
+      コントローラー操作で問題が発生した場合は、下記の報告ダイアログからフィードバックをお寄せください。
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: キーボード使用時
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      画面ごとの入力ヒントを確認して、その他の操作方法を学びましょう。
+
+
+      ゲームのほとんどの操作はキーボードで行えます。矢印キーで移動し、フォーカス枠に注目して選択内容を確認してください。
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: このセーブデータは、戦闘セーブなど実験的機能を含むキャンペーンから作成されました。読み込みは可能ですが、公式にはサポートされていません。
@@ -758,6 +860,14 @@ entries:
     id: 2
     text: 入力内容は保存されますが、以下を除きます：
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: このカテゴリをリセットしますか？
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: このカテゴリーのすべての設定を初期値にリセットしてもよろしいですか？
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: オフ
@@ -856,6 +966,10 @@ entries:
     id: 1
     text: ロード
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: ブリーフィングを読み込む
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: MOD
@@ -904,6 +1018,14 @@ entries:
     id: 1
     text: 保存をロード
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: 最新のセーブを読み込んでいます
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: 最新のセーブデータから続けますか？
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: 削除を確認

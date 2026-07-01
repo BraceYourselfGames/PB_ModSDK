@@ -7,6 +7,30 @@ splits: []
 tags: 
 groups: 
 entries:
+  base_briefing_list__s0:
+    noteDev: 
+    temp: false
+    text: Return to squad
+  base_briefing_list__s1:
+    noteDev: 
+    temp: false
+    text: Add or remove
+  base_briefing_slot__s1:
+    noteDev: 
+    temp: false
+    text: Enter list
+  base_briefing_slot__s2:
+    noteDev: 
+    temp: false
+    text: Clear slot
+  base_briefing_squad__s0:
+    noteDev: 
+    temp: false
+    text: Return to scenario
+  base_briefing_squad_list__s1:
+    noteDev: 
+    temp: false
+    text: Jump to list
   base_context_item_selector__s0:
     noteDev: 
     temp: false
@@ -19,46 +43,174 @@ entries:
     noteDev: 
     temp: false
     text: Manage your pilots, units and inventory. Invest resources into workshop projects or base upgrades. Return to the overworld map when you're ready to continue your campaign.
-  base_general__s0:
-    noteDev: 
-    temp: false
-    text: World map
-  base_general__s1:
-    noteDev: 
-    temp: false
-    text: Pilot list
   base_general__s2:
     noteDev: 
     temp: false
-    text: Unit list
+    text: Navigate
   base_general__s3:
     noteDev: 
     temp: false
-    text: Inventory
+    text: World map
   base_general__s4:
     noteDev: 
     temp: false
-    text: Workshop
+    text: Pilot list
   base_general__s5:
     noteDev: 
     temp: false
-    text: Upgrades
+    text: Unit list
   base_general__s6:
     noteDev: 
     temp: false
-    text: Briefing
+    text: Inventory
   base_general__s7:
     noteDev: 
     temp: false
-    text: Inventory multi-select
+    text: Workshop
   base_general__s8:
     noteDev: 
     temp: false
-    text: Customization camera
+    text: Upgrades
+  base_inventory_context__s0:
+    noteDev: 
+    temp: false
+    text: Return to list
+  base_inventory_root__s0:
+    noteDev: 
+    temp: false
+    text: Select category
+  base_inventory_root__s1:
+    noteDev: 
+    temp: false
+    text: Open category
+  base_inventory_sel__s0:
+    noteDev: 
+    temp: false
+    text: Move
+  base_inventory_sel__s1:
+    noteDev: 
+    temp: false
+    text: Select item
+  base_inventory_sel__s2:
+    noteDev: 
+    temp: false
+    text: Context menu
+  base_loadout_livery_grid__s0:
+    noteDev: 
+    temp: false
+    text: Navigate
+  base_loadout_livery_grid__s1:
+    noteDev: 
+    temp: false
+    text: Toggle livery
+  base_loadout_livery_nav__s2:
+    noteDev: 
+    temp: false
+    text: Clear slot
+  base_loadout_role__s0:
+    noteDev: 
+    temp: false
+    text: Move
+  base_loadout_role__s1:
+    noteDev: 
+    temp: false
+    text: Select icon
+  base_loadout_root__s0:
+    noteDev: 
+    temp: false
+    text: Select slot
+  base_loadout_root__s1:
+    noteDev: 
+    temp: false
+    text: Open slot
+  base_loadout_root__s2:
+    noteDev: 
+    temp: false
+    text: Clear slot
+  base_loadout_sel__s0:
+    noteDev: 
+    temp: false
+    text: Select item
+  base_loadout_sel__s1:
+    noteDev: 
+    temp: false
+    text: Equip
+  base_loadout_sel__s2:
+    noteDev: 
+    temp: false
+    text: Return to slots
+  base_loadout_sel_filter__s0:
+    noteDev: 
+    temp: false
+    text: Apply filter
+  base_upgrades_grid__overview:
+    noteDev: 
+    temp: false
+    text: Navigating upgrade grid
+  base_upgrades_grid__s0:
+    noteDev: 
+    temp: false
+    text: Scroll
+  base_upgrades_grid__s2:
+    noteDev: 
+    temp: false
+    text: Jump between upgrades
+  base_upgrades_grid__s3:
+    noteDev: 
+    temp: false
+    text: Jump to stats
+  base_upgrades_sidebar__overview:
+    noteDev: 
+    temp: false
+    text: Sidebar in focus
+  base_upgrades_sidebar__s0:
+    noteDev: 
+    temp: false
+    text: Return to upgrades
+  base_upgrades_sidebar__s1:
+    noteDev: 
+    temp: false
+    text: Select stats
+  combat_action_melee__s3:
+    noteDev: 
+    temp: false
+    text: Swap direction
+  combat_action_targeting_swap__s3:
+    noteDev: 
+    temp: false
+    text: Target mode
+  combat_action_targeting_swap__s5:
+    noteDev: 
+    temp: false
+    text: Nudge height
   combat_context_comms__s0:
     noteDev: 
     temp: false
     text: Skip dialogue
+  combat_context_nav__overview:
+    noteDev: 
+    temp: false
+    text: Navigation in focus
+  combat_context_nav__s1:
+    noteDev: 
+    temp: false
+    text: Select units
+  combat_context_nav__s3:
+    noteDev: 
+    temp: false
+    text: Change time
+  combat_context_timeline__overview:
+    noteDev: 
+    temp: false
+    text: Timeline in focus
+  combat_context_timeline__s1:
+    noteDev: 
+    temp: false
+    text: Delete action
+  combat_context_timeline__s3:
+    noteDev: 
+    temp: false
+    text: Drag action
   combat_general__header:
     noteDev: 
     temp: false
@@ -74,35 +226,95 @@ entries:
   combat_general__s1:
     noteDev: 
     temp: false
-    text: Execute
-  combat_general__s2:
-    noteDev: 
-    temp: false
-    text: Move the camera
-  combat_general__s3:
-    noteDev: 
-    temp: false
-    text: Rotate the camera
-  combat_general__s4:
-    noteDev: 
-    temp: false
-    text: Select next unit
-  combat_general__s5:
-    noteDev: 
-    temp: false
-    text: Show all units
-  combat_general__s6:
-    noteDev: 
-    temp: false
-    text: Targeting mode
-  combat_general__s7:
+    text: Confirm / Execute
+  combat_general__s10:
     noteDev: 
     temp: false
     text: Toggle slow motion
+  combat_general__s2:
+    noteDev: 
+    temp: false
+    text: Navigate
+  combat_general__s3:
+    noteDev: 
+    temp: false
+    text: Move camera
+  combat_general__s4:
+    noteDev: 
+    temp: false
+    text: Rotate camera
+  combat_general__s5:
+    noteDev: 
+    temp: false
+    text: Select next unit
+  combat_general__s6:
+    noteDev: 
+    temp: false
+    text: Select previous unit
+  combat_general__s7:
+    noteDev: 
+    temp: false
+    text: Targeting mode
   combat_general__s8:
     noteDev: 
     temp: false
+    text: Select action
+  combat_general__s9:
+    noteDev: 
+    temp: false
     text: Set time scale
+  combat_root_execution__s7:
+    noteDev: 
+    temp: false
+    text: Toggle slow motion
+  combat_root_execution__s9:
+    noteDev: 
+    temp: false
+    text: Focus time controls
+  combat_root_planning__s0:
+    noteDev: 
+    temp: false
+    text: Execute
+  combat_root_planning__s1:
+    noteDev: 
+    temp: false
+    text: Execute
+  combat_root_planning__s10:
+    noteDev: 
+    temp: false
+    text: Jump to timeline
+  combat_root_planning__s11:
+    noteDev: 
+    temp: false
+    text: Jump to actions
+  combat_root_planning__s12:
+    noteDev: 
+    temp: false
+    text: Jump to movement
+  combat_root_planning__s4:
+    noteDev: 
+    temp: false
+    text: Remove actions
+  combat_root_planning__s5:
+    noteDev: 
+    temp: false
+    text: Zoom camera
+  combat_root_planning__s6:
+    noteDev: 
+    temp: false
+    text: Switch unit
+  combat_root_planning__s8:
+    noteDev: 
+    temp: false
+    text: Toggle details
+  combat_root_planning__s9:
+    noteDev: 
+    temp: false
+    text: Show details
+  combat_test_zoom__s0:
+    noteDev: 
+    temp: false
+    text: Zoom test
   credits__s0:
     noteDev: 
     temp: false
@@ -119,10 +331,30 @@ entries:
     noteDev: 
     temp: false
     text: Confirm
-  generic_confirm_return__s1:
+  generic_return__s0:
     noteDev: 
     temp: false
     text: Return
+  overworld_campaign_map__s0:
+    noteDev: 
+    temp: false
+    text: Select province
+  overworld_campaign_map__s2:
+    noteDev: 
+    temp: false
+    text: Move map
+  overworld_campaign_options__s2:
+    noteDev: 
+    temp: false
+    text: Select option
+  overworld_campaign_options_mods__s3:
+    noteDev: 
+    temp: false
+    text: Inspect modifiers
+  overworld_codex__s1:
+    noteDev: 
+    temp: false
+    text: Scroll
   overworld_general__header:
     noteDev: 
     temp: false
@@ -131,58 +363,86 @@ entries:
     noteDev: 
     temp: false
     text: Navigate the map, participate in events, attack hostile sites. Contest provinces and drive the invasion forces out. Use the mobile base to manage units, pilots and upgrades.
-  overworld_general__s0:
-    noteDev: 
-    temp: false
-    text: Select
-  overworld_general__s1:
-    noteDev: 
-    temp: false
-    text: Move the base
   overworld_general__s2:
     noteDev: 
     temp: false
-    text: Move the camera
+    text: Navigate
   overworld_general__s3:
     noteDev: 
     temp: false
-    text: Rotate the camera
+    text: Select on the map
   overworld_general__s4:
     noteDev: 
     temp: false
+    text: Move the base
+  overworld_general__s5:
+    noteDev: 
+    temp: false
+    text: Move camera
+  overworld_general__s6:
+    noteDev: 
+    temp: false
+    text: Rotate camera
+  overworld_general__s7:
+    noteDev: 
+    temp: false
     text: Toggle pause
-  overworld_root_controller__s0:
+  overworld_interaction_choice__s0:
+    noteDev: 
+    temp: false
+    text: Select option
+  overworld_interaction_choice__s1:
+    noteDev: 
+    temp: false
+    text: Confirm
+  overworld_roster_root__s0:
     noteDev: 
     temp: false
     text: Select
-  overworld_root_controller__s1:
+  overworld_roster_root__s1:
     noteDev: 
     temp: false
     text: Move
-  overworld_root_controller__s2:
+  overworld_roster_root__s2:
     noteDev: 
     temp: false
     text: Return
-  overworld_root_controller__s3:
+  overworld_roster_root__s3:
     noteDev: 
     temp: false
     text: Move
-  overworld_root_controller__s4:
+  overworld_roster_root__s4:
     noteDev: 
     temp: false
     text: Return / Stop
-  overworld_root_controller__s5:
+  overworld_roster_root__s5:
     noteDev: 
     temp: false
-    text: Pause
-  overworld_root_controller__s6:
+    text: Toggle time
+  overworld_roster_root__s7:
     noteDev: 
     temp: false
     text: Select
-  overworld_root_controller__s7:
+  pause_difficulty_option__s0:
     noteDev: 
     temp: false
-    text: Roster / Navbar
+    text: Select option
+  pause_difficulty_option__s1:
+    noteDev: 
+    temp: false
+    text: Change option
+  pause_difficulty_preset__s0:
+    noteDev: 
+    temp: false
+    text: Select preset
+  pause_difficulty_preset__s1:
+    noteDev: 
+    temp: false
+    text: Apply preset
+  pause_difficulty_preset__s2:
+    noteDev: 
+    temp: false
+    text: Jump to options
   pause_options_group__s0:
     noteDev: 
     temp: false
@@ -235,3 +495,7 @@ entries:
     noteDev: 
     temp: false
     text: Return to groups
+  pause_root__s0:
+    noteDev: 
+    temp: false
+    text: Navigate

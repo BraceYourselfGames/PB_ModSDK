@@ -1,0 +1,43 @@
+icon: s_icon_l32_action_attack4
+color:
+  r: 0.7254902
+  g: 0.5205229
+  b: 0.2862745
+  a: 1
+hidden: false
+debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: false
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated: 
+durationFull:
+  f: 3
+durationUpdate: 
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio: 
+effectsOnStart:
+- enabled: true
+  triggerCheckUnit: 
+  triggerCheckPilot: 
+  comment: 
+  functionsOnHost:
+  - !CombatUnitActionsOffsetTime
+    offset: 3
+    locked: true
+    primary: true
+    secondary: false
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+effectsOnUpdate: 
+effectsOnEnd: 
+statOffsets: 

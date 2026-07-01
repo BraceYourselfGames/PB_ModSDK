@@ -29,6 +29,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -63,28 +65,12 @@ tags:
 states:
   destruction_warning:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: -1
-    ui:
-      briefingHidden: false
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: true
-      progressHiddenAtZero: true
-      moodIntensityNormal: 
-      moodIntensityProgress:
-        f: 0.8
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: s_icon_l16_context_point2
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd, OnLevelDestruction
     evaluationOnOutcome: 
     turn: 
@@ -119,6 +105,7 @@ states:
           - time: 0.1
             hidden: false
             key: generic_pb_friendlystructure_destroyed
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -132,16 +119,11 @@ states:
           outcome: 
   reinforcements_hg:
     comment: 
-    textNameKey: generic_enemy_reinforcements_header
-    textDescKey: generic_enemy_reinforcements_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 9
     priority: 9
-    priorityDisplay: 9
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -172,6 +154,7 @@ states:
           - time: 0
             hidden: false
             key: radio_home_guard_active
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -250,17 +233,36 @@ states:
           outcome: 
   reinforcements_hg_tutorial:
     comment: 
-    textNameKey: reinforcements_friendly_header
-    textDescKey: reinforcements_friendly_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 9
     priority: 9
-    priorityDisplay: 9
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 9
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: reinforcements_friendly_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: reinforcements_friendly_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -295,7 +297,7 @@ states:
           rewards: 
           functions:
           - !StartTutorial
-            key: combat_liberation_00
+            key: combat_liberation_ally
             allowRepeat: true
           functionsPerUnit: 
           unitGroups: 
@@ -310,13 +312,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: true
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_civilian_liberation__name
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_civilian_liberation__text
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -407,6 +415,7 @@ steps:
     - time: 1
       hidden: false
       key: generic_civilian_defense_start
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

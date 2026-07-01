@@ -144,10 +144,6 @@ entries:
     id: 1
     text: Konzentriere dich darauf, Strukturen zu zerstören und möglichst viel Schaden anzurichten. Die örtliche Garnison ist eine Bedrohung, doch ihr wird die Existenzberechtigung fehlen, wenn nichts mehr steht, was noch von Nutzen ist.
     textEng: Prioritize destroying structures, inflict as much damage as possible. The local garrison is a threat, but it won't have a reason to stick around if there is nothing of use is left standing.
-  generic_raid__step_main_0c_header:
-    id: 1
-    text: Überfall
-    textEng: Raid
   generic_raid__step_main_0c_text:
     id: 1
     text: Die Frachtkisten sind mit Ortungsgeräten ausgestattet. Sobald das feindliche Flugzeug das Signal empfängt, werden sie per Lufttransport abgeholt. Bewege deine Mechs zu den Kisten, um das Signal zu stören und die Abholung zu verzögern.
@@ -316,6 +312,10 @@ entries:
     id: 1
     text: Provoziere den Feind, um Truppen aus anderen Teilen der Hauptstadt anzulocken.
     textEng: Provoke the enemy to pull forces from other parts of the Capital.
+  unique_intro__briefing_name:
+    id: 2
+    text: Intro
+    textEng: Intro
   unique_intro__intro_location:
     id: 1
     text: Grenze der Republik Fyrland
@@ -368,10 +368,38 @@ entries:
     id: 1
     text: Klicke mit der linken Maustaste in die Welt, um die Bewegung zu bestätigen.
     textEng: Left click in the world to confirm your movement.
+  unique_intro__step_02_move1_1hc_2_text_ctrl:
+    id: 2
+    text: >-
+      Bewege die Kamera so, dass der Cursor auf diesen Bereich zeigt, und bestätige dann das Ziel:
+
+
+      {0}
+    textEng: >-
+      Move the camera to align the cursor with this area, then confirm the destination:
+
+
+      {0}
   unique_intro__step_02_move1_1hc_3_text:
     id: 1
     text: Klicke auf diese Schaltfläche, um den Plan auszuführen.
     textEng: Click this button to execute plan.
+  unique_intro__step_02_move1_1hc_3_text_ctrl:
+    id: 2
+    text: Klicke auf diese Schaltfläche (oder drücke den markierten Kurzbefehl), um den Plan auszuführen.
+    textEng: Use this button (or press the highlighted shortcut) to execute the plan.
+  unique_intro__step_02_move1_1hc_4_text:
+    id: 2
+    text: >-
+      Verwende das Steuerkreuz, um das Aktionsfeld in den Fokus zu rücken. Sobald es im Fokus ist, bestätige die Aktion „Rennen“, indem du Folgendes drückst:
+
+
+      {0}
+    textEng: >-
+      Use the directional pad to focus the action panel. Once focused, confirm the "Run" action by pressing:
+
+
+      {0}
   unique_intro__step_07_wait_and_move_1hc_0_text:
     id: 1
     text: >-
@@ -384,6 +412,10 @@ entries:
 
 
       Hovering over the timeline will also show the prediction.
+  unique_intro__step_07_wait_and_move_1hc_0_text_ctrl:
+    id: 2
+    text: Starte die Aktion „Rennen“, um zu sehen, wie die Planung mit dem Prognosesystem zusammenwirken kann.
+    textEng: Start the "Run" action to see how planning can interact with the prediction system.
   unique_intro__step_07_wait_and_move_1hc_1_text:
     id: 1
     text: Klicke auf die Aktion „Rennen“.
@@ -394,8 +426,36 @@ entries:
     textEng: This point should provide a clear view. Note how the distance to it changes the predicted arrival time.
   unique_intro__step_07_wait_and_move_1hc_3_text:
     id: 1
-    text: "Die Bewegungszeit wird durch die Entfernung bestimmt. Du kannst dich beliebig oft bewegen. \n \n Aktionen können mit zwei Rechtsklicks abgebrochen werden. Wenn du mit dem Plan zufrieden bist, führe ihn aus!"
-    textEng: "Movement time is determined by distance. You can move any number of times. \n\nActions can be cancelled with two right clicks. If you're happy with the plan, execute it!"
+    text: >-
+      Fahre mit der Maus über die Zeitleiste, um durch die Prognose zu scrollen und zu sehen, wie sich diese Einheit mit der Zeit entwickelt.
+
+
+      Wenn du bereit bist, fortzufahren, führe den Plan aus.
+    textEng: >-
+      You can hover over the timeline to scrub through the prediction and see how this unit will move over time.
+
+
+      When you're ready to proceed, execute the plan.
+  unique_intro__step_07_wait_and_move_1hc_3_text_ctrl:
+    id: 2
+    text: >-
+      Du kannst die Zeitleiste fokussieren und mithilfe der Trigger durch die Prognose scrollen, um zu sehen, wie sich diese Einheit mit der Zeit entwickelt.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      Wenn du bereit bist, fortzufahren, führe den Plan aus.
+    textEng: >-
+      You can focus the timeline and use the triggers to scrub through the prediction and see how this unit will move over time.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      When you're ready to proceed, execute the plan.
   unique_intro__step_07_wait_and_move_1hc_4_text:
     id: 1
     text: "Dies ist die Zeitleiste des Commanders. Sie zeigt die Aktionen, die er in den nächsten fünf Sekunden ausführen wird. \n\nDenke daran: Du kannst die Zeitleiste jeder Einheit, auch der feindlichen, überprüfen, bevor du deinen Plan ausführst!"
@@ -406,8 +466,8 @@ entries:
     textEng: Select the controllable unit.
   unique_intro__step_09_tank_plans_1hc_0_text:
     id: 1
-    text: Der Panzer wird gleich angreifen! Du musst näher heran, um ihn anzugreifen. Klicke auf die Aktion „Rennen“.
-    textEng: The tank is about to attack! You will need to get closer to engage it. Click the "Run" action.
+    text: Der Panzer wird gleich angreifen! Du musst näher heran, um ihn anzugreifen. Verwende die Aktion „Rennen“.
+    textEng: The tank is about to attack! You will need to get closer to engage it. Use the "Run" action.
   unique_intro__step_09_tank_plans_1hc_1_text:
     id: 1
     text: Klicke auf die Aktion „Rennen“.
@@ -430,14 +490,32 @@ entries:
 
 
       {0}
+  unique_intro__step_09_tank_plans_1hc_10_text_ctrl:
+    id: 2
+    text: >-
+      [ff9999]Das ist die Zeitleiste des feindlichen Panzers. Die Prognose lautet, dass er sich vorwärts bewegt und feuert.[-]
+
+
+      Kehre zu deiner Einheit zurück, indem du zum blauen Einheiten-Tab unten navigierst, oder drücke:
+
+
+      {1}{2}
+    textEng: >-
+      [ff9999]This is the timeline of the hostile tank. It's predicted to move forward and fire.[-]
+
+
+      You can return to your unit by navigating to the blue unit tab below or by pressing:
+
+
+      {1}{2}
   unique_intro__step_09_tank_plans_1hc_2_text:
     id: 1
     text: Wenn du dich hierher begibst, wird das Ziel in optimale Reichweite gebracht.
     textEng: Moving here will place the target into optimal range.
   unique_intro__step_09_tank_plans_1hc_3_text:
     id: 1
-    text: Klicke anschließend auf die Aktion „Angriff“.
-    textEng: Click the "Attack" action next.
+    text: Verwende anschließend die Aktion „Angriff“.
+    textEng: Use the "Attack" action next.
   unique_intro__step_09_tank_plans_1hc_4_text:
     id: 1
     text: Klicke auf die Aktion „Angriff“.
@@ -454,6 +532,18 @@ entries:
 
 
       The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
+  unique_intro__step_09_tank_plans_1hc_5_text_ctrl:
+    id: 2
+    text: >-
+      Lege zunächst mit den Triggern fest, [b]wann[/b] der Angriff erfolgen soll.
+
+
+      Das Ziel sollte sich in dieser Zeit in [b]optimaler Reichweite[/b] (weißer Ring um deine Einheit) befinden.
+    textEng: >-
+      First, choose [b]when[/b] the attack should happen using the triggers.
+
+
+      The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
   unique_intro__step_09_tank_plans_1hc_6_text:
     id: 1
     text: >-
@@ -466,14 +556,68 @@ entries:
 
 
       The % displayed is the predicted effectiveness of your weapon at this range.
+  unique_intro__step_09_tank_plans_1hc_6_text_ctrl:
+    id: 2
+    text: >-
+      Bestätige den Angriff, nachdem du den Cursor auf das gewünschte Ziel (oder dessen Prognosehologramm) bewegt hast. Das Fadenkreuz rastet ein, wenn du mit dem Cursor über ein gültiges Ziel fährst.
+
+
+      Der angezeigte Prozentsatz ist die voraussichtliche Wirksamkeit deiner Waffe in diesem Bereich.
+    textEng: >-
+      Confirm the attack after moving the cursor to the intended target (or its prediction hologram). The reticle will lock on if you are hovering over a valid target.
+
+
+      The % displayed is the predicted effectiveness of your weapon at this range.
   unique_intro__step_09_tank_plans_1hc_7_text:
     id: 1
-    text: "Du kannst die Bewegungen und Angriffe auf der Zeitleiste ziehen, um die Zeit und die Position jedes Schritts anzupassen.\n \n [b]Es kann mehr als ein Angriff geplant werden.[/b] Versuche, einen weiteren Angriff zu erstellen."
+    text: >-
+      ■ Einheiten können beliebig viele Aktionen ausführen, solange der Plan auf die Zeitleiste passt.
+
+
+      ■ Geplante Aktionen können durch Ziehen mit der linken Maustaste zeitlich verschoben oder per Rechtsklick aus der Zeitleiste gelöscht werden.
+
+
+      ■ Aktionen können auch über die Tastatur und durch Fokussieren auf die Zeitleiste zeitlich verschoben oder gelöscht werden (siehe die Eingabehinweise links).
+
+
+      [b]Wenn du fortfahren möchtest, versuche einen weiteren Angriff zu erstellen.[/b]
     textEng: >-
-      You can drag the movements and attacks on the timeline to adjust the time and place of every step.
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
 
 
-      [b]More than one attack can be planned.[/b] Try creating another attack.
+      ■ Planned actions can retimed by dragging with a left mouse button, or deleted from the timeline with right clicks.
+
+
+      ■ Actions can also be retimed or deleted using the keyboard and focusing the timeline (see the input hints to the left).
+
+
+      [b]When you're ready to proceed, try creating another attack.[/b]
+  unique_intro__step_09_tank_plans_1hc_7_text_ctrl:
+    id: 2
+    text: >-
+      ■ Einheiten können beliebig viele Aktionen ausführen, solange der Plan auf die Zeitleiste passt.
+
+
+      ■ Aktionen können zeitlich verschoben oder gelöscht werden, sobald die Zeitleiste im Fokus ist:
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      Sieh dir die links angezeigten Kurzbefehle an, um mehr zu erfahren. [b]Wenn du fortfahren möchtest, versuche einen weiteren Angriff zu erstellen.[/b]
+    textEng: >-
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
+
+
+      ■ Actions can be retimed or deleted once the timeline is in focus:
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      Check the shortcuts displayed to the left to learn more. [b]When you're ready to proceed, try creating another attack.[/b]
   unique_intro__step_09_tank_plans_1hc_8_text:
     id: 1
     text: Du hast jetzt zwei Angriffe hintereinander geplant. Versuche, deinen Plan auszuführen!
@@ -550,6 +694,26 @@ entries:
     id: 1
     text: Eine weitere Einheit hat sich soeben dem Kampf angeschlossen. Eliminiere alle Feinde, bevor sie eure Anwesenheit melden.
     textEng: An additional unit just joined the fight. Eliminate all hostiles before they report your presence.
+  unique_test_range__briefing_name:
+    id: 2
+    text: Testgelände
+    textEng: Test range
+  unique_test_range__briefing_text:
+    id: 2
+    text: Teste die Leistungsfähigkeit deiner Mechs auf verschiedenem Terrain und gegen unterschiedliche Gegner.
+    textEng: Test the performance of your mechs over varied terrain and against different enemies.
+  unique_test_range__intro_location:
+    id: 2
+    text: Trainingssimulation
+    textEng: Training simulation
+  unique_test_range__intro_ready:
+    id: 2
+    text: Bereit
+    textEng: Ready
+  unique_test_range__intro_threat:
+    id: 2
+    text: Ausgewählte Ausrüstung wird initialisiert ...
+    textEng: Initializing selected equipment...
   unique_tutorial_base__state_wave_02_trigger_0c_text:
     id: 1
     text: Eliminiere jede feindliche Einheit im Feld, um zur nächsten Phase überzugehen.

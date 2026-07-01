@@ -144,10 +144,6 @@ entries:
     id: 1
     text: 建造物の破壊を優先し、可能な限りの損害を与えよう。現地の守備隊は脅威だが、有用なものが残っていないのであれば、ここに留まる理由はない。
     textEng: Prioritize destroying structures, inflict as much damage as possible. The local garrison is a threat, but it won't have a reason to stick around if there is nothing of use is left standing.
-  generic_raid__step_main_0c_header:
-    id: 1
-    text: 襲撃
-    textEng: Raid
   generic_raid__step_main_0c_text:
     id: 1
     text: 貨物木箱に追跡装置が仕込まれている。敵機が信号を捕捉すると木箱が空輸される。機械工を木箱のところへ移動させ、信号を妨害して回収を遅らせよう。
@@ -316,6 +312,10 @@ entries:
     id: 1
     text: 敵を挑発して首都の他地域から部隊を引き抜かせよ。
     textEng: Provoke the enemy to pull forces from other parts of the Capital.
+  unique_intro__briefing_name:
+    id: 2
+    text: イントロ
+    textEng: Intro
   unique_intro__intro_location:
     id: 1
     text: ファーランド共和国国境
@@ -368,10 +368,38 @@ entries:
     id: 1
     text: ここをクリックして移動を決定する。
     textEng: Left click in the world to confirm your movement.
+  unique_intro__step_02_move1_1hc_2_text_ctrl:
+    id: 2
+    text: >-
+      カメラを動かしてカーソルをこのエリアに合わせ、目的地を確定してください：
+
+
+      {0}
+    textEng: >-
+      Move the camera to align the cursor with this area, then confirm the destination:
+
+
+      {0}
   unique_intro__step_02_move1_1hc_3_text:
     id: 1
     text: このボタンをクリックしてプランを実行する。
     textEng: Click this button to execute plan.
+  unique_intro__step_02_move1_1hc_3_text_ctrl:
+    id: 2
+    text: このボタン（または表示されたショートカットキー）を押すと、計画を実行します。
+    textEng: Use this button (or press the highlighted shortcut) to execute the plan.
+  unique_intro__step_02_move1_1hc_4_text:
+    id: 2
+    text: >-
+      方向パッドでアクションパネルにフォーカスを合わせ、以下のボタンで「実行」を確定してください：
+
+
+      {0}
+    textEng: >-
+      Use the directional pad to focus the action panel. Once focused, confirm the "Run" action by pressing:
+
+
+      {0}
   unique_intro__step_07_wait_and_move_1hc_0_text:
     id: 1
     text: >-
@@ -384,6 +412,10 @@ entries:
 
 
       Hovering over the timeline will also show the prediction.
+  unique_intro__step_07_wait_and_move_1hc_0_text_ctrl:
+    id: 2
+    text: 「実行」アクションを開始して、プランニングが予測システムとどのように連動するかを確認しましょう。
+    textEng: Start the "Run" action to see how planning can interact with the prediction system.
   unique_intro__step_07_wait_and_move_1hc_1_text:
     id: 1
     text: 「実行」アクションをクリックする。
@@ -394,8 +426,36 @@ entries:
     textEng: This point should provide a clear view. Note how the distance to it changes the predicted arrival time.
   unique_intro__step_07_wait_and_move_1hc_3_text:
     id: 1
-    text: "移動時間は距離によって決まる。移動回数は自由だ。\n \n アクションは右クリック2回でキャンセルできる。満足いく計画が立てられたら実行に移そう！"
-    textEng: "Movement time is determined by distance. You can move any number of times. \n\nActions can be cancelled with two right clicks. If you're happy with the plan, execute it!"
+    text: >-
+      タイムラインにカーソルを合わせると、予測をスクラブし、このユニットが時間の経過とともにどのように移動するかを確認できます。
+
+
+      準備ができたら、計画を実行してください。
+    textEng: >-
+      You can hover over the timeline to scrub through the prediction and see how this unit will move over time.
+
+
+      When you're ready to proceed, execute the plan.
+  unique_intro__step_07_wait_and_move_1hc_3_text_ctrl:
+    id: 2
+    text: >-
+      タイムラインにフォーカスを合わせ、トリガーを使って予測をスクラブすると、このユニットが時間経過とともにどのように移動するかを確認できます。
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      準備ができたら、計画を実行してください。
+    textEng: >-
+      You can focus the timeline and use the triggers to scrub through the prediction and see how this unit will move over time.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      When you're ready to proceed, execute the plan.
   unique_intro__step_07_wait_and_move_1hc_4_text:
     id: 1
     text: >-
@@ -410,8 +470,8 @@ entries:
     textEng: Select the controllable unit.
   unique_intro__step_09_tank_plans_1hc_0_text:
     id: 1
-    text: 戦車が攻撃しようとしている！交戦するには接近する必要がある。「実行」アクションをクリックする。
-    textEng: The tank is about to attack! You will need to get closer to engage it. Click the "Run" action.
+    text: 戦車が攻撃しようとしています！交戦するには接近する必要があります。「実行」アクションをクリックしてください。
+    textEng: The tank is about to attack! You will need to get closer to engage it. Use the "Run" action.
   unique_intro__step_09_tank_plans_1hc_1_text:
     id: 1
     text: 「実行」アクションをクリックする。
@@ -434,14 +494,32 @@ entries:
 
 
       {0}
+  unique_intro__step_09_tank_plans_1hc_10_text_ctrl:
+    id: 2
+    text: >-
+      [ff9999]これは敵戦車のタイムラインです。前進して発砲すると予測されています。[-]
+
+
+      下の青いユニットタブを選択するか以下のボタンを押すと、自軍ユニットに戻ります：
+
+
+      {1}{2}
+    textEng: >-
+      [ff9999]This is the timeline of the hostile tank. It's predicted to move forward and fire.[-]
+
+
+      You can return to your unit by navigating to the blue unit tab below or by pressing:
+
+
+      {1}{2}
   unique_intro__step_09_tank_plans_1hc_2_text:
     id: 1
     text: ここに移動すると、目標が最適な範囲に配置される。
     textEng: Moving here will place the target into optimal range.
   unique_intro__step_09_tank_plans_1hc_3_text:
     id: 1
-    text: 次に「攻撃」アクションをクリックする。
-    textEng: Click the "Attack" action next.
+    text: 次に「攻撃」アクションを使用します。
+    textEng: Use the "Attack" action next.
   unique_intro__step_09_tank_plans_1hc_4_text:
     id: 1
     text: 「攻撃」アクションをクリックする。
@@ -458,6 +536,18 @@ entries:
 
 
       The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
+  unique_intro__step_09_tank_plans_1hc_5_text_ctrl:
+    id: 2
+    text: >-
+      まず、トリガーを使用して攻撃を行う[b]タイミング[/b]を選択します。
+
+
+      その間、ターゲットが[b]適正範囲[/b]（自軍ユニット周囲の白いリング）内にいる必要があります。
+    textEng: >-
+      First, choose [b]when[/b] the attack should happen using the triggers.
+
+
+      The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
   unique_intro__step_09_tank_plans_1hc_6_text:
     id: 1
     text: >-
@@ -470,14 +560,68 @@ entries:
 
 
       The % displayed is the predicted effectiveness of your weapon at this range.
+  unique_intro__step_09_tank_plans_1hc_6_text_ctrl:
+    id: 2
+    text: >-
+      カーソルを対象（またはその予測ホログラム）に合わせ、攻撃を確定してください。有効な対象にカーソルを合わせると、レティクルがロックオンします。
+
+
+      表示されているパーセンテージは、この範囲での武器の予測有効度です。
+    textEng: >-
+      Confirm the attack after moving the cursor to the intended target (or its prediction hologram). The reticle will lock on if you are hovering over a valid target.
+
+
+      The % displayed is the predicted effectiveness of your weapon at this range.
   unique_intro__step_09_tank_plans_1hc_7_text:
     id: 1
-    text: "タイムライン上の移動と攻撃をドラッグして、各ステップの時間と場所を調節できる。\n \n [b]複数の攻撃を計画できる。[/b]別の攻撃を作成してみよう。"
+    text: >-
+      ■ タイムラインに収まる限り、ユニットはいくつでもアクションを実行できます。
+
+
+      ■ 設定したアクションは、左クリックでドラッグしてタイミングを変更するか、右クリックでタイムラインから削除できます。
+
+
+      ■ キーボードでタイムラインにフォーカスして、タイミングの変更や削除を行うこともできます（左側の入力ヒントを参照）。
+
+
+      [b]■ 準備ができたら、もう一つ攻撃を作成してみてください。[/b]
     textEng: >-
-      You can drag the movements and attacks on the timeline to adjust the time and place of every step.
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
 
 
-      [b]More than one attack can be planned.[/b] Try creating another attack.
+      ■ Planned actions can retimed by dragging with a left mouse button, or deleted from the timeline with right clicks.
+
+
+      ■ Actions can also be retimed or deleted using the keyboard and focusing the timeline (see the input hints to the left).
+
+
+      [b]When you're ready to proceed, try creating another attack.[/b]
+  unique_intro__step_09_tank_plans_1hc_7_text_ctrl:
+    id: 2
+    text: >-
+      ■ タイムラインに収まる限り、ユニットはいくつでもアクションを実行できます。
+
+
+      ■ タイムラインにフォーカスが当たっている間は、アクションのタイミング変更や削除を行うことができます。
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      詳しくは左側に表示されているショートカットを参照してください。[b]準備ができたら、もう一つ攻撃を作成してみましょう。[/b]
+    textEng: >-
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
+
+
+      ■ Actions can be retimed or deleted once the timeline is in focus:
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      Check the shortcuts displayed to the left to learn more. [b]When you're ready to proceed, try creating another attack.[/b]
   unique_intro__step_09_tank_plans_1hc_8_text:
     id: 1
     text: 2つの攻撃を連続で計画した。計画を実行してみよう！
@@ -554,6 +698,26 @@ entries:
     id: 1
     text: 追加のユニットが参戦した。敵に存在を報告される前に、すべての敵を排除する。
     textEng: An additional unit just joined the fight. Eliminate all hostiles before they report your presence.
+  unique_test_range__briefing_name:
+    id: 2
+    text: 試射場
+    textEng: Test range
+  unique_test_range__briefing_text:
+    id: 2
+    text: さまざまな地形や敵に対し、メカの性能を試すことができます。
+    textEng: Test the performance of your mechs over varied terrain and against different enemies.
+  unique_test_range__intro_location:
+    id: 2
+    text: 訓練シミュレーション
+    textEng: Training simulation
+  unique_test_range__intro_ready:
+    id: 2
+    text: 準備完了
+    textEng: Ready
+  unique_test_range__intro_threat:
+    id: 2
+    text: 選択した装備を初期化しています...
+    textEng: Initializing selected equipment...
   unique_tutorial_base__state_wave_02_trigger_0c_text:
     id: 1
     text: フィールド上の全敵ユニットを撃破し、次フェーズへ進みましょう。

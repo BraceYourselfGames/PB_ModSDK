@@ -886,9 +886,10 @@ factionColors:
       g: 0.3254902
       b: 0.2313726
       a: 0.5019608
-controllerSupportEnabled: false
-directionalNavigationKeyboardEnabled: false
+controllerSupportEnabled: true
 workshopDisplayed: true
+forceHoldAllComms: false
+allowEnemyPilotInspection: false
 combatIsolinesDisplayed: true
 combatMultiTargetSupport: false
 overlayOverworldSwitchHeights:
@@ -1137,9 +1138,9 @@ modeConfigs:
     inTimeline: false
   Simulating:
     color:
-      r: 0.3867925
-      g: 0.3867925
-      b: 0.3867925
+      r: 0.28
+      g: 0.5589063
+      b: 0.7
       a: 1
     icon: s_icon_m_time_unlock
     overlayUsed: false
@@ -1693,6 +1694,26 @@ inputDisplayController:
     spriteName: xbox_button_view
     locKey: controller_back
     locIndex: -1
+  Circle:
+    spriteName: ps_button_circle
+    locKey: 
+    locIndex: -1
+  Cross:
+    spriteName: ps_button_cross
+    locKey: 
+    locIndex: -1
+  DirCollapsedAll:
+    spriteName: xbox_dpad
+    locKey: 
+    locIndex: -1
+  DirCollapsedHorizontal:
+    spriteName: xbox_dpad_horizontal_outline
+    locKey: 
+    locIndex: -1
+  DirCollapsedVertical:
+    spriteName: xbox_dpad_vertical_outline
+    locKey: 
+    locIndex: -1
   D-Pad Down:
     spriteName: xbox_dpad_down_outline
     locKey: controller_dpad_down
@@ -1708,6 +1729,14 @@ inputDisplayController:
   D-Pad Up:
     spriteName: xbox_dpad_up_outline
     locKey: controller_dpad_up
+    locIndex: -1
+  L1:
+    spriteName: ps_l1
+    locKey: controller_lb
+    locIndex: -1
+  L2:
+    spriteName: ps_l2
+    locKey: controller_lt
     locIndex: -1
   Left Shoulder:
     spriteName: xbox_lb
@@ -1729,6 +1758,18 @@ inputDisplayController:
     spriteName: xbox_lt
     locKey: controller_lt
     locIndex: -1
+  Options:
+    spriteName: ps_mid_options
+    locKey: 
+    locIndex: -1
+  R1:
+    spriteName: ps_r1
+    locKey: controller_rb
+    locIndex: -1
+  R2:
+    spriteName: ps_r2
+    locKey: controller_rt
+    locIndex: -1
   Right Shoulder:
     spriteName: xbox_rb
     locKey: controller_rb
@@ -1749,9 +1790,21 @@ inputDisplayController:
     spriteName: xbox_rt
     locKey: controller_rt
     locIndex: -1
+  Share:
+    spriteName: ps_mid_share
+    locKey: 
+    locIndex: -1
+  Square:
+    spriteName: ps_button_square
+    locKey: 
+    locIndex: -1
   Start:
     spriteName: xbox_button_menu
     locKey: controller_start
+    locIndex: -1
+  Triangle:
+    spriteName: ps_button_triangle
+    locKey: 
     locIndex: -1
   X:
     spriteName: xbox_button_x
@@ -1762,16 +1815,60 @@ inputDisplayController:
     locKey: ''
     locIndex: -1
 inputDisplayMkb:
+  '-':
+    spriteName: keyboard_alpha_minus
+    locKey: 
+    locIndex: -1
+  ',':
+    spriteName: keyboard_misc_comma
+    locKey: 
+    locIndex: -1
+  .:
+    spriteName: keyboard_misc_period
+    locKey: 
+    locIndex: -1
+  _:
+    spriteName: keyboard_alpha_underscore
+    locKey: 
+    locIndex: -1
+  +:
+    spriteName: keyboard_alpha_plus
+    locKey: 
+    locIndex: -1
+  <:
+    spriteName: keyboard_misc_chevron_l
+    locKey: 
+    locIndex: -1
+  =:
+    spriteName: keyboard_alpha_equals
+    locKey: 
+    locIndex: -1
+  '>':
+    spriteName: keyboard_misc_chevron_r
+    locKey: 
+    locIndex: -1
   Backspace:
     spriteName: 
     locKey: kb_backspace
+    locIndex: -1
+  DirCollapsedAll:
+    spriteName: keyboard_arrows_all_outline
+    locKey: 
+    locIndex: -1
+  DirCollapsedHorizontal:
+    spriteName: keyboard_arrows_horizontal_outline
+    locKey: 
+    locIndex: -1
+  DirCollapsedVertical:
+    spriteName: keyboard_arrows_vertical_outline
+    locKey: 
     locIndex: -1
   Down Arrow:
     spriteName: keyboard_arrows_down_outline
     locKey: kb_arrow_down
     locIndex: -1
   ESC:
-    spriteName: 
+    spriteName: keyboard_esc_outline
     locKey: kb_esc
     locIndex: -1
   Left Alt:
@@ -1807,7 +1904,7 @@ inputDisplayMkb:
     locKey: mouse_prefix
     locIndex: 5
   Mouse Wheel:
-    spriteName: 
+    spriteName: mouse_scroll_vertical_outline
     locKey: mouse_wheel
     locIndex: -1
   Page Down:
@@ -1819,7 +1916,7 @@ inputDisplayMkb:
     locKey: kb_page_up
     locIndex: -1
   Return:
-    spriteName: 
+    spriteName: keyboard_return_outline
     locKey: kb_return
     locIndex: -1
   Right Alt:

@@ -28,6 +28,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -66,16 +68,11 @@ tags:
 states:
   comms_hg_lost_x1:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
@@ -133,6 +130,7 @@ states:
           - time: 0
             hidden: false
             key: draft_frontal_guerrillas_1tankdown
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -146,16 +144,11 @@ states:
           outcome: 
   comms_hg_lost_x2:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 1
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
@@ -213,6 +206,7 @@ states:
           - time: 0
             hidden: false
             key: draft_frontal_pb_pilotdown
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -226,17 +220,36 @@ states:
           outcome: 
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: false
-    visible: true
     startInScope: false
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -267,13 +280,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: generic_eliminate_isolated_generic_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_eliminate_isolated_generic_text
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -449,6 +468,7 @@ steps:
     - time: 0
       hidden: false
       key: ftue_battlesite_hg_intro_01
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

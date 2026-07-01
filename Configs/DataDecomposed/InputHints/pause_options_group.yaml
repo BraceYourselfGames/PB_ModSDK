@@ -1,19 +1,29 @@
+horizontal: false
 extended: false
 lines:
-- mode: All
-  text: Select group
+- visibility: All
   actions:
   - action: global_direction_up
     newline: false
   - action: global_direction_down
     newline: false
-- mode: All
-  text: Enter group
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_confirm
     newline: false
-- mode: All
-  text: Exit options
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_cancel
     newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 

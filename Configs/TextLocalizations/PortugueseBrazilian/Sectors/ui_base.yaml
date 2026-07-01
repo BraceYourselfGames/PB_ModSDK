@@ -100,10 +100,46 @@ entries:
     id: 1
     text: Previsão do esquadrão
     textEng: Prediction for squad
+  briefing_info_st_refresh:
+    id: 2
+    text: Contratos de assistência remota são atualizados depois de cada batalha, acampamento ou viagem para uma nova província.
+    textEng: Remote assistance contracts refresh after each fight, camp or trip to a new province.
+  briefing_info_st_unavailable:
+    id: 2
+    text: Contratos de assistência remota indisponíveis. Avance na campanha para restabelecer o contato com seus aliados.
+    textEng: Remote assistance contracts unavailable. Advance the campaign to reestablish contact with your allies.
   briefing_info_threat_prefix:
     id: 1
     text: Ameaça
     textEng: Threat
+  briefing_mission_locked_header:
+    id: 2
+    text: Bloqueado
+    textEng: Locked
+  briefing_mission_locked_text:
+    id: 2
+    text: Sem informações disponíveis. Conclua a missão anterior para desbloquear esta.
+    textEng: No intel available. Complete the preceding mission to unlock this mission.
+  briefing_mission_type_remote:
+    id: 2
+    text: Assistência remota
+    textEng: Remote assist
+  briefing_mission_type_remote_desc_builtin:
+    id: 2
+    text: Assuma o controle de um esquadrão aliado sem arriscar suas unidades e mekanautas. Isso impossibilita a coleta pós-batalha, mas garante muitas recompensas.
+    textEng: Take control of an allied squad without a risk to your units and pilots. No salvage access, but plentiful guaranteed rewards.
+  briefing_mission_type_sim:
+    id: 2
+    text: Simulação
+    textEng: Simulation
+  briefing_mission_type_sim_desc_builtin:
+    id: 2
+    text: Teste suas unidades e mekanautas em um ambiente virtual. O dano não é mantido após a batalha. Não é permitido personalizar o esquadrão.
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. No squad customization allowed.
+  briefing_mission_type_sim_desc_squad:
+    id: 2
+    text: Teste suas unidades e mekanautas em um ambiente virtual. O dano não é mantido após a batalha. É possível personalizar o esquadrão.
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. Squad can be customized.
   briefing_nav_button_cant_deploy:
     id: 1
     text: Não é possível mobilizar
@@ -292,6 +328,14 @@ entries:
     id: 1
     text: Unidade
     textEng: Unit
+  briefing_standalone_header:
+    id: 2
+    text: Operações
+    textEng: Operations
+  briefing_standalone_subtitle:
+    id: 2
+    text: Assistências remotas e simulações
+    textEng: Remote assists & simulations
   briefing_units_empty_desc:
     id: 1
     text: A base não tem unidades disponíveis ou todas as unidades já foram adicionadas ao esquadrão
@@ -839,11 +883,11 @@ entries:
   inventory_info_hint_favorite_header:
     id: 1
     text: Favoritar
-    textEng: Favorite
+    textEng: Favourite
   inventory_info_hint_favorite_text:
     id: 1
     text: Marca este item como favorito. Destaca o item nas listas de inventário, tornando mais fácil de encontrar.
-    textEng: Mark this item as a favorite. This highlights it in inventory lists, making it easier to find.
+    textEng: Mark this item as a favourite. This highlights it in inventory lists, making it easier to find.
   inventory_info_hint_level_header:
     id: 1
     text: Nível
@@ -1847,6 +1891,10 @@ entries:
     id: 1
     text: Dissipação
     textEng: Dissipation
+  unit_loadout_hint_altitude_range:
+    id: 2
+    text: Alcance em flutuação
+    textEng: Hover range
   unit_loadout_hint_barrier:
     id: 1
     text: Barreira
@@ -1903,6 +1951,10 @@ entries:
     id: 1
     text: 'Espaço vazio: nenhuma peça instalada.'
     textEng: 'Empty socket: no installed part.'
+  unit_loadout_test_drive:
+    id: 2
+    text: Test drive
+    textEng: Test drive
   unit_remove_header:
     id: 2
     text: Confirmar destruição

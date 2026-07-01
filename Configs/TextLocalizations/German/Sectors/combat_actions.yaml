@@ -8,6 +8,14 @@ entries:
     id: 1
     text: Aktiviere das an dieser Einheit angebrachte Verteidigungssystem.
     textEng: Activate the defense system mounted to this unit.
+  ability_back_spotter_name:
+    id: 2
+    text: Artillerieschlag
+    textEng: Strike
+  ability_back_spotter_text:
+    id: 2
+    text: Stelle Zielkoordinaten für einen Artillerieangriff bereit.
+    textEng: Provide target coordinates for an artillery strike.
   ability_back_targeted_name:
     id: 1
     text: Fähigkeit
@@ -168,6 +176,22 @@ entries:
     id: 1
     text: Infolge der Kollision oder Zerstörung wurden alle geplanten Aktionen abgebrochen. Die Zeitleiste gibt die Regenerationsdauer an.
     textEng: As a result of collision or destruction, all planned actions were terminated. The timeline indicates recovery duration.
+  dash_bulldoze_name:
+    id: 2
+    text: Planieren
+    textEng: Bulldoze
+  dash_bulldoze_text:
+    id: 2
+    text: >-
+      Überlade die Schubdüsen, um nach vorne zu gleiten und zerstörbare Hindernisse zu durchbrechen. Der Mech hält kurz vor dem Abheben an, um die Energie umzuleiten und sich auf den Aufprall vorzubereiten.
+
+
+      Der Mech ist zwar vor Kollisionen geschützt, aber jedes Hindernis verringert die Stabilität (abhängig von der Gewichtsklasse der Einheit). Wenn die Stabilität vollständig verloren geht, kommt es bei jeder Kollision zum Sturz.
+    textEng: >-
+      Overcharge the thrusters to slide forward, breaking through destructible obstacles. The mech will stop for a moment before takeoff to divert power and brace for impact.
+
+
+      The mech will be shielded from collisions, but each obstacle will reduce stability (depending on unit weight class). Losing all stability will lead to a crash on any collision.
   dash_name:
     id: 1
     text: Ansturm
@@ -176,6 +200,22 @@ entries:
     id: 1
     text: Aktiviert die Schubdüsen, um zu einer bestimmten Position zu springen. Kann verwendet werden, um Feuer auszuweichen oder eine vorteilhafte Position zu erreichen. Durchbricht die Zielerfassung von Raketen und verhindert direkte Treffer.
     textEng: 'Activate thrusters to jump to a selected position. Can be used to evade fire or gain an advantageous position. Breaks missile locks and prevents direct hits. '
+  dash_vertical_name:
+    id: 2
+    text: Schweben
+    textEng: Hover
+  dash_vertical_text:
+    id: 2
+    text: >-
+      Aktiviere die Schubdüsen, um für eine konfigurierbare Zeit in der Luft zu schweben.
+
+
+      Die Schwebehöhe hängt von den Werten der ausgerüsteten Schwebeschubdüse und der Rüstungsklasse des Mechs ab. Schwerere Mechs können nicht so hoch schweben wie leichtere.
+    textEng: >-
+      Activate thrusters to hover above ground for a configurable time.
+
+
+      The hover altitude is determined by the stats of the equipped hover thruster and the armor class of the mech. Heavier mechs can't lift as high as lighter ones.
   default_mode_path_drawing_header:
     id: 1
     text: Ziel festlegen

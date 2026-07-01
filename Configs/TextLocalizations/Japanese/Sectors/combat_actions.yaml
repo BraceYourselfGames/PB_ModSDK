@@ -8,6 +8,14 @@ entries:
     id: 1
     text: このユニットに搭載されている防衛システムを起動する。
     textEng: Activate the defense system mounted to this unit.
+  ability_back_spotter_name:
+    id: 2
+    text: 攻撃
+    textEng: Strike
+  ability_back_spotter_text:
+    id: 2
+    text: 砲撃の目標座標を出してください。
+    textEng: Provide target coordinates for an artillery strike.
   ability_back_targeted_name:
     id: 1
     text: 能力
@@ -168,6 +176,22 @@ entries:
     id: 1
     text: 衝突または破壊の結果、計画されていたすべての行動が中止。タイムラインは回復にかかる時間を示す。
     textEng: As a result of collision or destruction, all planned actions were terminated. The timeline indicates recovery duration.
+  dash_bulldoze_name:
+    id: 2
+    text: 猛進
+    textEng: Bulldoze
+  dash_bulldoze_text:
+    id: 2
+    text: >-
+      スラスターを過充電して前方へスライドし、破壊可能な障害物を突破します。メカは出力を転換して衝撃に備えるため、発進前に一瞬停止します。
+
+
+      機体は衝突から保護されますが、障害物ごとに安定性が低下します（ユニットの重量クラスに依存）。安定性を完全に失うと、いかなる衝突でもクラッシュします。
+    textEng: >-
+      Overcharge the thrusters to slide forward, breaking through destructible obstacles. The mech will stop for a moment before takeoff to divert power and brace for impact.
+
+
+      The mech will be shielded from collisions, but each obstacle will reduce stability (depending on unit weight class). Losing all stability will lead to a crash on any collision.
   dash_name:
     id: 1
     text: ダッシュ
@@ -176,6 +200,22 @@ entries:
     id: 1
     text: 'スラスターを作動させ、指定した位置までジャンプする。攻撃を回避し、有利な位置を確保できる。ミサイルロックを解除し、直撃を防ぐ。 '
     textEng: 'Activate thrusters to jump to a selected position. Can be used to evade fire or gain an advantageous position. Breaks missile locks and prevents direct hits. '
+  dash_vertical_name:
+    id: 2
+    text: ホバリング
+    textEng: Hover
+  dash_vertical_text:
+    id: 2
+    text: >-
+      スラスターを起動し、設定した時間だけ地上を浮遊します。
+
+
+      ホバリング高度は、装備しているホバースラスターのステータスとメカの装甲クラスによって決まります。重量級の機体は、軽量級の機体ほど高く浮上できません。
+    textEng: >-
+      Activate thrusters to hover above ground for a configurable time.
+
+
+      The hover altitude is determined by the stats of the equipped hover thruster and the armor class of the mech. Heavier mechs can't lift as high as lighter ones.
   default_mode_path_drawing_header:
     id: 1
     text: 目的地設定

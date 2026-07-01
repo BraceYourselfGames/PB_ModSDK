@@ -30,7 +30,6 @@ dataCore:
   instantEffect: true
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -38,6 +37,7 @@ dataCore:
   eventsOnDispose: 
   functionsOnTargetCheck: 
   functionsOnValidation: 
+  functionsOnValidationBase: 
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart:
@@ -78,6 +78,8 @@ dataCore:
   pilotLink:
     chargeStatKey: ability_pilot_repair_shield
     status: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

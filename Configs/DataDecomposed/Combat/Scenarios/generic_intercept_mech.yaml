@@ -2,6 +2,7 @@ hidden: false
 parents:
 - key: generic_intercept
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -10,17 +11,36 @@ tags:
 states:
   objective_tier1:
     comment: 
-    textNameKey: generic_salvage_t1_header
-    textDescKey: generic_salvage_t1_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 10
-    priorityDisplay: 1
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 1
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_salvage_t1_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_salvage_t1_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -44,17 +64,36 @@ states:
     reactions: 
   objective_tier2:
     comment: 
-    textNameKey: generic_salvage_t2_header
-    textDescKey: generic_salvage_t2_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 11
-    priorityDisplay: 2
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 2
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_salvage_t2_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_salvage_t2_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -78,17 +117,36 @@ states:
     reactions: 
   objective_tier3:
     comment: 
-    textNameKey: generic_salvage_t3_header
-    textDescKey: generic_salvage_t3_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 12
-    priorityDisplay: 3
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 3
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_salvage_t3_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_salvage_t3_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -112,16 +170,11 @@ states:
     reactions: 
   runner_spawn:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 2
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 

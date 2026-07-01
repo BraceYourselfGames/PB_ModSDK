@@ -112,6 +112,14 @@ entries:
     id: 1
     text: PSE
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 'La altura que se mantiene al usar el propulsor de sobrevuelo. Depende de la clase de armadura: las unidades con un blindaje más pesado no se elevarán tanto.'
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: Altitud de sobrevuelo
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: Cómo la energía de la unidad se compara con su masa.
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: Disipación de calor
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: La altitud más alta que puede mantener esta unidad al sobrevolar (con blindaje ligero equipado).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: Altitud máxima
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: La altitud más baja que puede mantener esta unidad al sobrevolar (con blindaje pesado equipado).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: Altitud mínima
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: 'La capa interior de armadura construida con compuestos tradicionales. Puede ser muy resistente, pero, si se daña, es necesario repararla. '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: 'Valor: Suministros'
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: Resistencia a las colisiones.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: Estabilidad
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: Producción del subsistema del propulsor. Contrarresta la masa para determinar la distancia del impulso.

@@ -6,6 +6,7 @@ audioEventOnMovementStart: tank_movement
 audioEventOnMovementStop: tank_movement_stop
 audioSyncOnMovementElevation: 
 audioSyncOnMovementTilt: 
+stabilityOffset: 1
 movementSpeedBase: 16
 movementSpeedMin: 4
 movementSpeedMax: 28
@@ -36,6 +37,13 @@ partPresetFilter:
   tank_part_elevated: false
   turret_part: false
 sockets:
+  back:
+    presetDefault: 
+    presetFiltered: false
+    critical: false
+    stabilizing: false
+    ui: 
+    statOffsetsOnAbsence: 
   core:
     presetDefault: 
     presetFiltered: true

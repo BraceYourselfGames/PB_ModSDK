@@ -229,10 +229,26 @@ entries:
     id: 1
     text: 重置
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: DLC
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: 已安装内容
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: 支持者包
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: 2.0版本更新已经上线！
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: 2.2版本更新现已上线！
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -261,6 +277,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      随心畅玩！游戏现已全面支持手柄操作，并新增了更完善的键盘导航功能。
+
+
+      新增的远程支援合约与射击训练场，大大丰富了推进流程与配装玩法。
+
+
+      此外，还有动作镜头、新增地图和界面优化等多项改进！点击下方链接，即可了解本次更新及2.0大改版的详细内容。
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -463,12 +497,12 @@ entries:
     textEng: Numpad
   input_kb_page_down:
     id: 2
-    text: Page Down键
-    textEng: Page Down
+    text: 下翻页
+    textEng: PgDn
   input_kb_page_up:
     id: 2
-    text: Page Up键
-    textEng: Page Up
+    text: 上翻页
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: 返回
@@ -509,6 +543,74 @@ entries:
     id: 2
     text: 鼠标滚轮
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: 常用操作
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: 手柄已启用
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: 移动视角
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: 旋转视角
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: 取消/返回
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: 确认/点击已选按钮
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: 按钮间切换
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: 暂停
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: 切换屏幕/切换单位
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: 调整缩放/调整战斗时间
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      留意焦点轮廓框，确认当前位置以及下一步的导航方向。查看不同屏幕上的输入提示，了解更多上下文操作。
+
+
+      如果您在使用手柄时遇到问题，请随时通过下方提供的报告对话框分享您的反馈。
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: 键盘已启用
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      查看不同屏幕上的输入提示，了解更多上下文操作。
+
+
+      游戏的大部分内容都可以使用键盘操作。使用方向键导航，并留意焦点轮廓框以跟踪您的选择。
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: 此存档源自启用了战斗存档等实验性功能的战役。可以加载，但不受官方支持。
@@ -756,6 +858,14 @@ entries:
     id: 2
     text: 所有输入都会被保存，但以下情况除外：
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: 重置该类别？
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: 确认要将该类别下的所有选项恢复为默认值吗？
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: 关
@@ -854,6 +964,10 @@ entries:
     id: 1
     text: 加载
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: 加载简报
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: 模组
@@ -902,6 +1016,14 @@ entries:
     id: 1
     text: 加载存档
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: 正在加载最近存档
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: 是否从最近的存档文件继续游戏？
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: 确认删除

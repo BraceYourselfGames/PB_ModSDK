@@ -1,0 +1,43 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_mech_w2
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: juggernaut
+tags:
+- range_long
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_top_thrusters:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_thruster_hover
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_sidearm_03
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_rifle_marksman_02
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

@@ -112,6 +112,14 @@ entries:
     id: 1
     text: PSE
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: "L'altezza di un sorvolo sostenuto quando utilizzi il propulsore da sorvolo. Dipende dalla classe di armatura: unità dall'armatura più pesante raggiungeranno altitudini di sorvolo inferiori."
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: Altitudine di sorvolo
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: L'emissione di energia dell'unità in rapporto alla sua massa.
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: Dissipazione di calore
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: La massima altitudine di sorvolo sostenibile da questa unità (se equipaggiata con armatura leggera).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: Altitudine max.
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: L'altitudine di sorvolo minima sostenibile da questa unità (se equipaggiata con armatura pesante).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: Altitudine min.
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: "Lo strato più interno di un'armatura, realizzato con materiali compositi tradizionali. Può essere piuttosto resiliente, ma richiede riparazioni se danneggiato. "
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: Valore - Risorse
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: Resistenza alle collisioni.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: Stabilità
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: Spinta prodotta dal sottosistema di propulsione. Fa da contrappeso alla massa, determinando la distanza coperta dallo scatto.

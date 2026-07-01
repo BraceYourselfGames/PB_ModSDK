@@ -34,7 +34,7 @@ entries:
     textEng: Closed off
   pilot_negative_exp__c_text:
     id: 1
-    text: Dieses Mitglied der Pilotencrew ist seit seinem Trauma im Kampf weniger aufmerksam. Es erhält weniger Erfahrung, kann aber mehr Einsätze aushalten, bevor es durch Erschöpfung geschwächt wird.
+    text: Dieses Mitglied der Pilotencrew ist seit seinem Trauma im Kampf weniger aufmerksam. Es erhält weniger Erfahrung, kann aber mehr Einsätze aushalten, bevor es durch Ermüdung geschwächt wird.
     textEng: This pilot pays less attention during combat since their trauma. They gain less experience, but can tolerate more deployments before fatigue takes its toll.
   pilot_negative_hp__c_header:
     id: 1
@@ -310,11 +310,11 @@ entries:
     textEng: Bonus stats gained from prestige rank
   pilot_starter_fatigue_burn__c_header:
     id: 1
-    text: Erschöpfungsbrand
+    text: Ermüdungsbrand
     textEng: Tired burn
   pilot_starter_fatigue_burn__c_text:
     id: 1
-    text: Bei extremer Erschöpfung besteht die Chance, dass dieses Mitglied der Pilotencrew versehentlich ihren Mech überhitzt, wenn sie ihre Waffe abfeuert.
+    text: Bei extremer Ermüdung besteht die Chance, dass dieses Mitglied der Pilotencrew versehentlich ihren Mech überhitzt, wenn sie ihre Waffe abfeuert.
     textEng: When extremely fatigued, this pilot has a chance to accidentally overheat their mech while firing their weapon.
   pilot_starter_fatigue_crash__c_header:
     id: 1
@@ -322,7 +322,7 @@ entries:
     textEng: Tired tumble
   pilot_starter_fatigue_crash__c_text:
     id: 1
-    text: Bei extremer Erschöpfung besteht die Chance, dass dieses Mitglied der Pilotencrew mit ihrem Mech ins Stürzen kommt.
+    text: Bei extremer Ermüdung besteht die Chance, dass dieses Mitglied der Pilotencrew mit ihrem Mech ins Stürzen kommt.
     textEng: When extremely fatigued, this pilot has a chance to crash their mech in combat.
   pilot_starter_fatigue_eject__c_header:
     id: 1
@@ -330,7 +330,7 @@ entries:
     textEng: Tired escape
   pilot_starter_fatigue_eject__c_text:
     id: 1
-    text: Bei extremer Erschöpfung besteht die Chance, dass dieses Mitglied der Pilotencrew mitten im Kampf den Schleudersitz benutzt.
+    text: Bei extremer Ermüdung besteht die Chance, dass dieses Mitglied der Pilotencrew mitten im Kampf den Schleudersitz benutzt.
     textEng: When extremely fatigued, this pilot might decide to eject mid-combat.
   pilot_starter_rookie__c_header:
     id: 1
@@ -362,7 +362,7 @@ entries:
     textEng: Fortified
   pilot_starter_stat_defender__c_text:
     id: 1
-    text: Spezialisiert auf Abwehr. Erhöhte Gesundheit und Erschöpfungstoleranz. Der bediente Mech verursacht etwas weniger Schaden, verfügt aber über mehr Rüstung.
+    text: Spezialisiert auf Abwehr. Erhöhte Gesundheit und Ermüdungstoleranz. Der bediente Mech verursacht etwas weniger Schaden, verfügt aber über mehr Rüstung.
     textEng: This pilot specializes in defense. Increased health and tolerance to fatigue. The piloted mech deals slightly less damage, but has increased armor.
   pilot_starter_stat_defender2__c_header:
     id: 1
@@ -370,7 +370,7 @@ entries:
     textEng: Shield specialist
   pilot_starter_stat_defender2__c_text:
     id: 1
-    text: Verfügt über eine höhere Erschöpfungstoleranz. Der gesteuerte Mech bewirkt weniger Schaden, aber hält mehr Schildschaden stand und reduziert obendrein die Masse.
+    text: Verfügt über eine höhere Ermüdungstoleranz. Der gesteuerte Mech bewirkt weniger Schaden, aber hält mehr Schildschaden stand und reduziert obendrein die Masse.
     textEng: This pilot has a higher tolerance to fatigue. The piloted mech has reduced damage output, but withstands more damage to shields while also reducing their weight.
   pilot_starter_stat_sharpshooter__c_header:
     id: 1
@@ -378,7 +378,7 @@ entries:
     textEng: Deadeye
   pilot_starter_stat_sharpshooter__c_text:
     id: 1
-    text: Talentiert im präzisen Schießen und bewirkt erhöhten Schaden mit Langstreckenwaffen. Dafür sind GP und Erschöpfungslimit verringert.
+    text: Talentiert im präzisen Schießen und bewirkt erhöhten Schaden mit Langstreckenwaffen. Dafür sind GP und Ermüdungslimit verringert.
     textEng: Skilled sharpshooter, the pilot deals increased damage with long range weapons. Reduced HP and fatigue limit.
   pilot_starter_stat_sharpshooter2__c_header:
     id: 1
@@ -386,7 +386,7 @@ entries:
     textEng: Cool head
   pilot_starter_stat_sharpshooter2__c_text:
     id: 1
-    text: Der Mech dieses Mitglieds der Pilotencrew verfügt über eine bessere Wärmeableitung. Dafür sind GP und Erschöpfungslimit verringert.
+    text: Der Mech dieses Mitglieds der Pilotencrew verfügt über eine bessere Wärmeableitung. Dafür sind GP und Ermüdungslimit verringert.
     textEng: This pilot's mech has improved heat dissipation. They have lower HP and a reduced fatigue limit.
   pilot_starter_stat_support__c_header:
     id: 1
@@ -394,15 +394,15 @@ entries:
     textEng: Pack mule
   pilot_starter_stat_support__c_text:
     id: 1
-    text: Dieses Mitglied der Pilotencrew kann die effektive Masse ausgerüsteter Rucksäcke optimieren, wodurch sich das Gesamtgewicht verringert. Verfügt außerdem über ein erhöhtes Erschöpfungslimit auf Kosten von Gesundheit.
+    text: Dieses Mitglied der Pilotencrew kann die effektive Masse ausgerüsteter Rucksäcke optimieren, wodurch sich das Gesamtgewicht verringert. Verfügt außerdem über ein erhöhtes Ermüdungslimit auf Kosten von Gesundheit.
     textEng: This pilot can optimize the effective weight of equipped backpacks, reducing overall weight, also increases fatigue limit at the cost of some health
   pilot_starter_stat_support2__c_header:
     id: 1
     text: Präventivwartung
-    textEng: Preventative Maintanence
+    textEng: Preventative Maintenance
   pilot_starter_stat_support2__c_text:
     id: 1
-    text: Dieses Mitglied der Pilotencrew repariert 15 % Intaktheit seines Mech-Rahmens, bevor es in den Kampf zieht. Verringertes Rucksackgewicht und erhöhtes Erschöpfungslimit auf Kosten von GP.
+    text: Dieses Mitglied der Pilotencrew repariert 15 % Intaktheit seines Mech-Rahmens, bevor es in den Kampf zieht. Verringertes Rucksackgewicht und erhöhtes Ermüdungslimit auf Kosten von GP.
     textEng: Pilot repairs 15% integrity of their mech frame before deploying to combat. Also reduces backpack weight while increasing fatigue limit at the cost of some HP
   pilot_stat_back_resist__c_header:
     id: 1
@@ -418,7 +418,7 @@ entries:
     textEng: Endurance
   pilot_stat_basic_fatigue__c_text:
     id: 1
-    text: Erhöhte Resistenz gegenüber Erschöpfungseffekten.
+    text: Erhöhte Resistenz gegenüber Ermüdungseffekten.
     textEng: Pilot has increased resistance to the effects of fatigue
   pilot_stat_basic_fatigue1__c_header:
     id: 1
@@ -426,7 +426,7 @@ entries:
     textEng: Endurance II
   pilot_stat_basic_fatigue1__c_text:
     id: 1
-    text: Noch höhere Resistenz gegenüber Erschöpfungseffekten.
+    text: Noch höhere Resistenz gegenüber Ermüdungseffekten.
     textEng: Pilot has further increased resistance to the effects of fatigue
   pilot_stat_basic_hp__c_header:
     id: 1
@@ -466,7 +466,7 @@ entries:
     textEng: Endurance
   pilot_stat_fatigue_score__c_text:
     id: 1
-    text: Hält mehr Erschöpfung aus, aber auf Kosten von Gesundheit und Traumatoleranz.
+    text: Hält mehr Ermüdung aus, aber auf Kosten von Gesundheit und Traumatoleranz.
     textEng: This pilot can take on more fatigue, but has reduced health and tolerance to trauma
   pilot_stat_fatigue1__c_header:
     id: 1
@@ -474,7 +474,7 @@ entries:
     textEng: Patient
   pilot_stat_fatigue1__c_text:
     id: 1
-    text: Hält mehr Erschöpfung durch Kämpfe aus.
+    text: Hält mehr Ermüdung durch Kämpfe aus.
     textEng: This pilot can tolerate a higher level of fatigue from combat.
   pilot_stat_glass_cannon__c_header:
     id: 1
@@ -515,7 +515,7 @@ entries:
   pilot_stat_hp3__c_text:
     id: 1
     text: Verfügt über deutlich mehr GP, erhält dafür aber weniger Erfahrung.
-    textEng: Pilot has signifcantly increased HP but gains reduced experience
+    textEng: Pilot has significantly increased HP but gains reduced experience
   pilot_stat_light_mech__c_header:
     id: 1
     text: Scout
@@ -650,7 +650,7 @@ entries:
     textEng: Bloodthirsty
   special_postcombat_fatigue__c_text:
     id: 1
-    text: Das Mitglied der Pilotencrew ermüdet nicht, wenn es im Kampf 2 oder mehr feindliche Einheiten zerstören konnte. Die maximale Erschöpfung verringert sich um 1.
+    text: Das Mitglied der Pilotencrew ermüdet nicht, wenn es im Kampf 2 oder mehr feindliche Einheiten zerstören konnte. Die maximale Ermüdung verringert sich um 1.
     textEng: This pilot will not gain fatigue after combat if they had an opportunity to destroy 2 or more enemy units. The pilot's maximum fatigue will be reduced to 1.
   special_postcombat_healing__c_header:
     id: 1
@@ -699,7 +699,7 @@ entries:
   unit_final_stat_defender2__c_text:
     id: 1
     text: Zusätzlich erhöhte Schildgesundheit. Jedes Mal, wenn das Mitglied der Pilotencrew mit der Schildaktion Schaden blockt, heilt sie eine kleine Menge Gesundheit. Ist der Schild zu Kampfende noch intakt, stellt er 50 % Intaktheit wieder her.
-    textEng: Further improves shield health. Pilot heals a small amount of health each time they block damage with the shield action. If the shield is still intact at end of combat it will recover 50% integrity
+    textEng: Further improves shield integrity. Pilot heals a small amount of health each time they block damage with the shield action. If the shield is still intact at end of combat recover 25% mech integrity
   unit_final_stat_sharpshooter__c_header:
     id: 1
     text: Ziel-Expertise

@@ -1,0 +1,37 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_mech_w3
+- key: vhc_mech_sec_sr
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: juggernaut
+tags:
+- range_long
+- role_3f_squads
+partTagPreferences: 
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_support_defense_active_01
+      - back_support_defense_active_02
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_ml: true
+          wpn_primary: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

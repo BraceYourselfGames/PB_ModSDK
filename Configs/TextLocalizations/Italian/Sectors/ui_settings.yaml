@@ -24,6 +24,22 @@ entries:
     id: 1
     text: Attiva il movimento della visuale e degli effetti di sfondo nel menu principale.
     textEng: Toggles background camera movement and effects in the main menu.
+  access_navframe_style__header:
+    id: 2
+    text: Inquadratura selezione
+    textEng: Focus frame
+  access_navframe_style__text:
+    id: 2
+    text: Lo stile dell'inquadratura che evidenzia l'elemento attualmente selezionato nella navigazione con tastiera e controller.
+    textEng: The style of the frame highlighting the currently focused element for keyboard and controller navigation.
+  access_navframe_timeout__header:
+    id: 2
+    text: Dissoluzione inquadratura
+    textEng: Focus fade
+  access_navframe_timeout__text:
+    id: 2
+    text: Il tempo richiesto affinché l'inquadratura della selezione si dissolva.
+    textEng: The time it takes for the focus frame to fade out.
   access_overworld_glitch_effect__header:
     id: 1
     text: Effetto glitch della mappa principale
@@ -239,7 +255,15 @@ entries:
   game_base_preserve_colors__text:
     id: 1
     text: Se l'opzione viene abilitata, l'attuale personalizzazione dei colori sul mech avrà la priorità rispetto ai colori di una parte appena installata. Ad esempio, se un mech ha una vernice grigia e la nuova arma è rossa, l'arma sarà riverniciata di grigio al momento dell'installazione.
-    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
+  game_combat_action_tooltip_details__header:
+    id: 2
+    text: Suggerimenti per le azioni
+    textEng: Action tooltip hints
+  game_combat_action_tooltip_details__text:
+    id: 2
+    text: Mostra suggerimenti relativi alle meccaniche, come calore e cariche, nelle descrizioni delle azioni di combattimento.
+    textEng: Display hints about mechanics like heat and charges in the combat action tooltips.
   game_combat_damage_numbers__header:
     id: 1
     text: Mostra i valori dei danni
@@ -336,6 +360,14 @@ entries:
     id: 1
     text: Questa impostazione stabilisce se il tempo di predizione viene riportato all'inizio del turno dopo un periodo di inattività.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
+  game_combat_updates__header:
+    id: 2
+    text: Mostra notifiche
+    textEng: Show notifications
+  game_combat_updates__text:
+    id: 2
+    text: Mostra le notifiche relative a diversi eventi nell'angolo in alto a destra dello schermo.
+    textEng: Show update notifications in the top right corner of the screen.
   game_ent_sp_logo__header:
     id: 2
     text: Cambia logo menu
@@ -376,6 +408,14 @@ entries:
     id: 1
     text: Mostra una carrellata che evidenzia ogni nuova missione che appare sulla mappa del mondo.
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
+  game_overworld_updates__header:
+    id: 2
+    text: Mostra notifiche
+    textEng: Show notifications
+  game_overworld_updates__text:
+    id: 2
+    text: Mostra le notifiche relative a diversi eventi nell'angolo in alto a destra dello schermo.
+    textEng: Show update notifications in the top right corner of the screen.
   game_screenshots_lossless__header:
     id: 1
     text: Schermate non compresse
@@ -580,6 +620,22 @@ entries:
     id: 1
     text: Controlla la risoluzione delle texture, a eccezione dell'interfaccia utente. L'impostazione predefinita consigliata è Massima.
     textEng: Controls resolution of textures with exception of user interface. Recommended default is Full.
+  input_gamepad_enabled__header:
+    id: 2
+    text: Rileva controller
+    textEng: Detect controllers
+  input_gamepad_enabled__text:
+    id: 2
+    text: Se questa opzione è disattivata, il gioco ignorerà tutti gli input relativi ai controller.
+    textEng: If disabled, the game will ignore all controller input.
+  input_gamepad_hints__header:
+    id: 2
+    text: Mostra suggerimenti comandi
+    textEng: Show input hints
+  input_gamepad_hints__text:
+    id: 2
+    text: Mostra a schermo suggerimenti sui comandi del controller.
+    textEng: Display hints about the controller bindings on the screen.
   input_gamepad_look_invert_vertical__header:
     id: 1
     text: Visuale invertita
@@ -620,6 +676,14 @@ entries:
     id: 1
     text: Controlla quanto la linea temporale si sposta in base all'input dell'utente.
     textEng: Controls how much the timeline moves from user input
+  input_gamepad_zoom_invert__header:
+    id: 2
+    text: Zoom invertito
+    textEng: Inverted zoom
+  input_gamepad_zoom_invert__text:
+    id: 2
+    text: Scambia i pulsanti di zoom sinistro e destro.
+    textEng: Swaps the left and right zoom buttons.
   input_gamepad_zoom_sensitivity__header:
     id: 1
     text: Sensibilità di zoom
@@ -628,6 +692,14 @@ entries:
     id: 1
     text: Controlla quanto la telecamera può zoomare in base all'input dell'utente.
     textEng: Controls how much the camera zooms from user input
+  input_keyboard_hints__header:
+    id: 2
+    text: Mostra suggerimenti di input
+    textEng: Show input hints
+  input_keyboard_hints__text:
+    id: 2
+    text: Mostra a schermo suggerimenti sui comandi di mouse e tastiera.
+    textEng: Display hints about keyboard and mouse controls on the screen.
   input_keyboard_look_invert_vertical__header:
     id: 1
     text: Visuale invertita

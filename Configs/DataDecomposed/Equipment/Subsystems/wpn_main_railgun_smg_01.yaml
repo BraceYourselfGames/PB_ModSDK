@@ -9,8 +9,8 @@ textDesc:
 hardpoints: 
 tags:
 - mnf_04
-- category_wpn_mg_sub
 - spec_locking
+- category_wpn_repeater_railgun
 statDistribution: ''
 stats:
   act_count:
@@ -64,7 +64,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_penetration_charges:
-    value: 10
+    value: 6
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -94,7 +94,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_min:
-    value: 5
+    value: 0
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -166,7 +166,7 @@ projectile:
       colorOverride: 
       colorOverrideEnemy: 
     impact:
-      key: fx_aoe_explosion_01_small
+      key: fx_impact_projectile_thermal
       keyEnemy: ''
       scale:
         x: 1
@@ -208,7 +208,7 @@ projectile:
           y: 0.183867
         m: {}
       - tv_tg:
-          x: 0.2567314
+          x: 0.1783999
           y: 1
           z: 0
           w: 0
@@ -240,6 +240,7 @@ projectile:
     distance: 3
   ballistics: 
   fuseProximity: 
+  spike: 
   hitResponse: 
   splashDamage: 
   splashImpact: 

@@ -8,92 +8,196 @@ shadowDistanceBasePerCamera: {}
 shadowOffsetOverworld: -60
 shadowOffsetCombat: -60
 shadowOffsetBase: -10
-mechMountedCameraPresets:
-  torso_back_left:
-    target: Torso
-    followMode: Orbital
-    FOV: 80
-    offset:
-      x: -2
-      y: 3
-      z: -3
-    movementDamping: 0.3
-    aimDamping: 1
-    orbitalAngle: 0
-  torso_back_right:
-    target: Torso
-    followMode: Orbital
-    FOV: 80
-    offset:
-      x: 2
-      y: 3
-      z: -3
-    movementDamping: 0.3
-    aimDamping: 1
-    orbitalAngle: 0
-  torso_front:
-    target: Torso
-    followMode: Orbital
-    FOV: 80
-    offset:
-      x: 0
-      y: 2
-      z: 5
-    movementDamping: 0.3
-    aimDamping: 1
-    orbitalAngle: 0
-  torso_front_left:
-    target: Torso
-    followMode: Orbital
-    FOV: 80
-    offset:
-      x: 2
-      y: 2
-      z: 5
-    movementDamping: 0.3
-    aimDamping: 1
-    orbitalAngle: 0
-  torso_front_low:
-    target: Torso
-    followMode: Orbital
-    FOV: 80
-    offset:
-      x: 2
-      y: -1
-      z: 5
-    movementDamping: 0.3
-    aimDamping: 1
-    orbitalAngle: 0
-  torso_front_right:
-    target: Torso
-    followMode: Orbital
-    FOV: 80
-    offset:
-      x: -2
-      y: 2
-      z: 5
-    movementDamping: 0.3
-    aimDamping: 1
-    orbitalAngle: 0
-  weapon_left:
-    target: WeaponLeft
-    followMode: Locked
-    FOV: 70
-    offset:
-      x: -2
-      y: 1
-      z: -2
-    movementDamping: 0
-    aimDamping: 0
-    orbitalAngle: 0
-  weapon_right:
-    target: WeaponRight
-    followMode: Locked
-    FOV: 70
-    offset:
-      x: 2
-      y: 1
-      z: -2
-    movementDamping: 0
-    aimDamping: 0
-    orbitalAngle: 0
+unitCameraPresets:
+- presetNamePrimary: body
+  presetNameSecondary: back
+  presetNameTertiary: ''
+  followMode: Orbital
+  targetMode: Body
+  offset:
+    x: 0
+    y: 4
+    z: -14
+  fov: 55
+  dampingPosition: 1.5
+  dampingRotation: 7
+- presetNamePrimary: body
+  presetNameSecondary: back
+  presetNameTertiary: close
+  followMode: Locked
+  targetMode: Body
+  offset:
+    x: -1.5
+    y: 2.5
+    z: -2
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 0.25
+- presetNamePrimary: body
+  presetNameSecondary: front
+  presetNameTertiary: ''
+  followMode: Orbital
+  targetMode: Body
+  offset:
+    x: 12.5
+    y: 4
+    z: -14
+  fov: 55
+  dampingPosition: 0.5
+  dampingRotation: 7
+- presetNamePrimary: body
+  presetNameSecondary: front
+  presetNameTertiary: low
+  followMode: Orbital
+  targetMode: Body
+  offset:
+    x: 12.5
+    y: -2.5
+    z: -5.5
+  fov: 75
+  dampingPosition: 0
+  dampingRotation: 7
+- presetNamePrimary: body
+  presetNameSecondary: right
+  presetNameTertiary: ''
+  followMode: Orbital
+  targetMode: Body
+  offset:
+    x: 6.25
+    y: 2
+    z: 7
+  fov: 55
+  dampingPosition: 0.5
+  dampingRotation: 3
+- presetNamePrimary: body
+  presetNameSecondary: left
+  presetNameTertiary: ''
+  followMode: Orbital
+  targetMode: Body
+  offset:
+    x: -6.25
+    y: 2
+    z: 7
+  fov: 55
+  dampingPosition: 0.5
+  dampingRotation: 7
+- presetNamePrimary: wpn
+  presetNameSecondary: right
+  presetNameTertiary: ''
+  followMode: Locked
+  targetMode: WeaponRight
+  offset:
+    x: 2.5
+    y: 1.5
+    z: -5.5
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 0
+- presetNamePrimary: wpn
+  presetNameSecondary: right
+  presetNameTertiary: close
+  followMode: Locked
+  targetMode: WeaponRight
+  offset:
+    x: 1.5
+    y: 1
+    z: -2.5
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 0.25
+- presetNamePrimary: wpn
+  presetNameSecondary: right
+  presetNameTertiary: front
+  followMode: Orbital
+  targetMode: WeaponRight
+  offset:
+    x: 4
+    y: 1.5
+    z: 8.5
+  fov: 40
+  dampingPosition: 0
+  dampingRotation: 7
+- presetNamePrimary: wpn
+  presetNameSecondary: left
+  presetNameTertiary: ''
+  followMode: Locked
+  targetMode: WeaponLeft
+  offset:
+    x: -2.5
+    y: 1.5
+    z: -5.5
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 0
+- presetNamePrimary: wpn
+  presetNameSecondary: left
+  presetNameTertiary: close
+  followMode: Locked
+  targetMode: WeaponLeft
+  offset:
+    x: -1.5
+    y: 1
+    z: -2.5
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 0.25
+- presetNamePrimary: wpn
+  presetNameSecondary: left
+  presetNameTertiary: front
+  followMode: Orbital
+  targetMode: WeaponLeft
+  offset:
+    x: -4
+    y: 1.5
+    z: 8.5
+  fov: 40
+  dampingPosition: 0
+  dampingRotation: 7
+- presetNamePrimary: side
+  presetNameSecondary: left
+  presetNameTertiary: ''
+  followMode: Orbital
+  targetMode: ShoulderLeft
+  offset:
+    x: 3
+    y: 1.5
+    z: -5.5
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 7
+- presetNamePrimary: side
+  presetNameSecondary: left
+  presetNameTertiary: close
+  followMode: Locked
+  targetMode: ShoulderLeft
+  offset:
+    x: -1.5
+    y: 1
+    z: -3
+  fov: 45
+  dampingPosition: 0
+  dampingRotation: 0.25
+- presetNamePrimary: side
+  presetNameSecondary: right
+  presetNameTertiary: ''
+  followMode: Orbital
+  targetMode: ShoulderRight
+  offset:
+    x: -3
+    y: 1.5
+    z: -5.5
+  fov: 55
+  dampingPosition: 0
+  dampingRotation: 7
+- presetNamePrimary: side
+  presetNameSecondary: right
+  presetNameTertiary: close
+  followMode: Locked
+  targetMode: ShoulderRight
+  offset:
+    x: 1.5
+    y: 1
+    z: -3
+  fov: 45
+  dampingPosition: 0
+  dampingRotation: 0.25

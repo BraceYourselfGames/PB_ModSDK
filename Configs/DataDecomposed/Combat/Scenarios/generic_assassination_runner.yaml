@@ -2,6 +2,7 @@ hidden: false
 parents:
 - key: generic_assassination
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -9,16 +10,11 @@ tags:
 states:
   01_elite_damage_reaction:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 1
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -67,9 +63,11 @@ states:
           - time: 0.1
             hidden: false
             key: generic_assassination_reaction_panic
+            functionsOnExit: 
           - time: 6
             hidden: false
             key: generic_assassination_reaction_panic_hq
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -102,22 +100,32 @@ states:
           outcome: 
   elite_escape:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 102
     priority: 102
-    priorityDisplay: 0
-    mood: -1
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -1
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -186,6 +194,7 @@ states:
           - time: 0.1
             hidden: false
             key: generic_assassination_target_airlift
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 

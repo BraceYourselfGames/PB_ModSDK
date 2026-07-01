@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -40,6 +39,7 @@ dataCore:
   functionsOnValidation:
   - !CombatActionValidationDependency
     dependencyActionKey: shield
+  functionsOnValidationBase: 
   functionsOnCreation:
   - !CombatActionCreateReaction
     dependencyActionKey: shield
@@ -57,6 +57,8 @@ dataCore:
   check: 
   unitCheck: 
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

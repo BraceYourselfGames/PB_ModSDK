@@ -67,10 +67,14 @@ effectsOnEvents:
   functionsBase: 
   functionsUnit:
   - !CombatUnitIntegrityChange
-    value: 0.5
+    value: 0.25
     offset: true
     sockets:
-    - equipment_left
+    - core
+    - optional_left
+    - optional_right
+    - secondary
+    - back
   functionsSelf: 
   functionsEventUnit: 
   linkedEffectKeys: 

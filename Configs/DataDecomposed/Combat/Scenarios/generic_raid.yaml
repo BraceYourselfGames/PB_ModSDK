@@ -28,6 +28,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -65,16 +67,11 @@ states:
   obj_01_detection:
     comment:
       comment: This state reacts for every turn a PB mech is not in a designated location.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 2
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -141,16 +138,11 @@ states:
   obj_01_disruption:
     comment:
       comment: This state reacts upon PB unit entering the location, visualizing disruption.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnLocationContact
     evaluationOnOutcome: 
@@ -214,24 +206,36 @@ states:
           outcome: 
   obj_01_extraction:
     comment: 
-    textNameKey: generic_raid_obj_01_header
-    textDescKey: generic_raid_obj_text
-    textOnCompletion:
-      textNameKey: 
-      textDescKey: generic_raid_obj_fail_text
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 3
-    priorityDisplay: 3
-    mood: -2
+    briefingHidden: false
     ui:
+      priorityDisplay: 3
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_01_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_text
+      textHeaderCompleted:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_fail_text
+      textDescCompleted: 
+      mood:
+        i: -2
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.5
@@ -282,6 +286,7 @@ states:
           - time: 0
             hidden: false
             key: generic_raid_obj_extracted_one
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             obj_01_detection: false
@@ -314,16 +319,11 @@ states:
   obj_02_detection:
     comment:
       comment: This state reacts for every turn a PB mech is not in a designated location.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 2
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -390,16 +390,11 @@ states:
   obj_02_disruption:
     comment:
       comment: This state reacts upon PB unit entering the location, visualizing disruption.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnLocationContact
     evaluationOnOutcome: 
@@ -463,24 +458,36 @@ states:
           outcome: 
   obj_02_extraction:
     comment: 
-    textNameKey: generic_raid_obj_02_header
-    textDescKey: generic_raid_obj_text
-    textOnCompletion:
-      textNameKey: 
-      textDescKey: generic_raid_obj_fail_text
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 3
-    priorityDisplay: 3
-    mood: -2
+    briefingHidden: false
     ui:
+      priorityDisplay: 3
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_02_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_text
+      textHeaderCompleted:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_fail_text
+      textDescCompleted: 
+      mood:
+        i: -2
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.5
@@ -531,6 +538,7 @@ states:
           - time: 0
             hidden: false
             key: generic_raid_obj_extracted_one
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             obj_02_detection: false
@@ -563,16 +571,11 @@ states:
   obj_fail:
     comment:
       comment: This state has negative priority to ensure it only returns true next turn after all cargo is extracted. It ends combat if player fails to stop every extraction.
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: -1
     priority: -1
-    priorityDisplay: 10
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -608,6 +611,7 @@ states:
           - time: 0
             hidden: false
             key: generic_raid_obj_extracted_all
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -624,16 +628,11 @@ states:
             instant: false
   outcome_reward_conditional:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome:
@@ -714,16 +713,11 @@ states:
           outcome: 
   outcome_victory:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 50
     priority: 50
-    priorityDisplay: 50
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome:
@@ -785,17 +779,36 @@ states:
             instant: false
   reinforcements:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
-    evaluated: false
-    visible: false
-    startInScope: false
+    evaluated: true
+    startInScope: true
     priorityGeneration: 20
     priority: 20
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 50
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -863,17 +876,36 @@ states:
           outcome: 
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: false
-    visible: true
     startInScope: false
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -904,13 +936,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_raid__name
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -1016,6 +1054,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_raid_start
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

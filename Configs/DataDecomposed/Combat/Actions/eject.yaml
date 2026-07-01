@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart:
@@ -40,6 +39,7 @@ dataCore:
   functionsOnTargetCheck: 
   functionsOnValidation:
   - !CombatActionValidationEject {}
+  functionsOnValidationBase: 
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart: 
@@ -63,6 +63,8 @@ dataCore:
     pilot: 
   unitCheck: 
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

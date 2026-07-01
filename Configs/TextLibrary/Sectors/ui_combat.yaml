@@ -47,6 +47,186 @@ entries:
     noteDev: 
     temp: false
     text: This is an offensive action utilizing an installed weapon. Weapon information is available on the bottom right side of the screen.
+  cam_bt_activate:
+    noteDev: 
+    temp: false
+    text: Action camera
+  cam_bt_exit_text:
+    noteDev: 
+    temp: false
+    text: Exit action camera
+  cam_bt_follow_locked_text:
+    noteDev: 
+    temp: false
+    text: Lock the camera direction
+  cam_bt_follow_mode_text:
+    noteDev: 
+    temp: false
+    text: Switch between locking the camera to the target and orbiting the target
+  cam_bt_follow_orbit_text:
+    noteDev: 
+    temp: false
+    text: Camera orbits the unit
+  cam_bt_fov_text:
+    noteDev: 
+    temp: false
+    text: Field of view
+  cam_bt_mount_arm_l_text:
+    noteDev: 
+    temp: false
+    text: Follow the left shoulder
+  cam_bt_mount_arm_r_text:
+    noteDev: 
+    temp: false
+    text: Follow the right shoulder
+  cam_bt_mount_body_text:
+    noteDev: 
+    temp: false
+    text: Follow the body
+  cam_bt_mount_wpn_l_text:
+    noteDev: 
+    temp: false
+    text: Follow the left weapon
+  cam_bt_mount_wpn_r_text:
+    noteDev: 
+    temp: false
+    text: Follow the right weapon
+  cam_bt_offset_depth_text:
+    noteDev: 
+    temp: false
+    text: Camera distance
+  cam_bt_offset_hor_text:
+    noteDev: 
+    temp: false
+    text: Horizontal camera offset
+  cam_bt_offset_vert_text:
+    noteDev: 
+    temp: false
+    text: Vertical camera offset
+  cam_bt_position_damping_text:
+    noteDev: 
+    temp: false
+    text: Position smoothing
+  cam_bt_preset_next_text:
+    noteDev: 
+    temp: false
+    text: Next camera preset
+  cam_bt_preset_prev_text:
+    noteDev: 
+    temp: false
+    text: Previous camera preset
+  cam_bt_rotation_damping_text:
+    noteDev: 
+    temp: false
+    text: Rotation smoothing
+  cam_bt_settings_toggle_text:
+    noteDev: 
+    temp: false
+    text: Show advanced settings
+  cam_button_hint_dir:
+    noteDev: 
+    temp: false
+    text: Move up or down to change this value.
+  cam_button_hint_mouse:
+    noteDev: 
+    temp: false
+    text: Use the left and right mouse buttons to change this value.
+  cam_preset_back:
+    noteDev: 
+    temp: false
+    text: Back
+  cam_preset_body:
+    noteDev: 
+    temp: false
+    text: Body
+  cam_preset_close:
+    noteDev: 
+    temp: false
+    text: Close
+  cam_preset_front:
+    noteDev: 
+    temp: false
+    text: Front
+  cam_preset_left:
+    noteDev: 
+    temp: false
+    text: Left
+  cam_preset_low:
+    noteDev: 
+    temp: false
+    text: Low
+  cam_preset_right:
+    noteDev: 
+    temp: false
+    text: Right
+  cam_preset_side:
+    noteDev: 
+    temp: false
+    text: Side
+  cam_preset_wpn:
+    noteDev: 
+    temp: false
+    text: Weapon
+  dash_bulldoze_depth_nominal:
+    noteDev: 
+    temp: false
+    text: Structure demolition predicted
+  dash_bulldoze_no_impact:
+    noteDev: 
+    temp: false
+    text: No structures in the way
+  dash_bulldoze_path_above_ground:
+    noteDev: 
+    temp: false
+    text: Ground contact interrupted
+  dash_bulldoze_path_ends_inside_obstacle:
+    noteDev: 
+    temp: false
+    text: Can't stop inside structures!
+  dash_bulldoze_path_hits_bounds:
+    noteDev: 
+    temp: false
+    text: Out of bounds!
+  dash_bulldoze_path_hits_indestructible:
+    noteDev: 
+    temp: false
+    text: Can't break through this location
+  dash_bulldoze_path_too_deep:
+    noteDev: 
+    temp: false
+    text: Obstacle size exceeds limits
+  dash_bulldoze_stat_env_hits:
+    noteDev: 
+    temp: false
+    text: Structure collisions
+  dash_bulldoze_stat_unit_hits:
+    noteDev: 
+    temp: false
+    text: Unit collisions
+  dash_bulldoze_status_blocked:
+    noteDev: 
+    temp: false
+    text: Blocked
+  dash_bulldoze_status_crash_predicted:
+    noteDev: 
+    temp: false
+    text: Predicted crash
+  dash_bulldoze_status_valid:
+    noteDev: 
+    temp: false
+    text: All clear
+  dash_bulldoze_unstable:
+    noteDev: 
+    temp: false
+    text: Too many collisions to maintain stability
+  dialog_exec_confirm_desc:
+    noteDev: 
+    temp: false
+    text: The time will resume and all units will execute their plans. Do you wish to proceed?
+  dialog_exec_confirm_header:
+    noteDev: 
+    temp: false
+    text: Confirm execution?
   dialog_no_orders_desc:
     noteDev: 
     temp: false
@@ -71,6 +251,10 @@ entries:
     noteDev: 
     temp: false
     text: The base has picked up our units and retreated, but the site remains under enemy control. We can defeat them next time!
+  end_detail_defeat_st:
+    noteDev: 
+    temp: false
+    text: The operation has been concluded. Closing the connection, evaluating combat performance...
   end_detail_defeat_total:
     noteDev: 
     temp: false
@@ -79,6 +263,10 @@ entries:
     noteDev: 
     temp: false
     text: Congratulations! The base has secured our units and all objectives have been fulfilled. With the enemy gone, you now have control of the site.
+  end_detail_victory_st:
+    noteDev: 
+    temp: false
+    text: The operation was successfully concluded. Closing the connection, evaluating combat performance...
   end_detail_victory_total:
     noteDev: 
     temp: false
@@ -87,6 +275,10 @@ entries:
     noteDev: 
     temp: false
     text: Retreated
+  end_header_defeat_st:
+    noteDev: 
+    temp: false
+    text: Operation failed
   end_header_defeat_total:
     noteDev: 
     temp: false
@@ -95,10 +287,18 @@ entries:
     noteDev: 
     temp: false
     text: Victory
+  end_header_victory_st:
+    noteDev: 
+    temp: false
+    text: Operation success
   end_header_victory_total:
     noteDev: 
     temp: false
     text: Victory
+  end_st_next_mission:
+    noteDev: 
+    temp: false
+    text: Next mission
   end_subtitle_defeat_early:
     noteDev: 
     temp: false
@@ -155,6 +355,14 @@ entries:
     noteDev: 
     temp: false
     text: Unidentified unit
+  intro_generator_ready_remote:
+    noteDev: 
+    temp: false
+    text: Connection established
+  intro_generator_ready_sim:
+    noteDev: 
+    temp: false
+    text: Simulation initialized
   intro_squad_ready:
     noteDev: 
     temp: false
@@ -491,7 +699,15 @@ entries:
     text: >-
       Click a unit to lock target.
 
-      To target environment, hold [ffcc77]Ctrl.[-]
+      To target environment, hold
+  targeting_environment_hint_controller:
+    noteDev:
+      text: This text must be split to two lines and should not exceed two lines. It can be as long as needed horizontally. Displayed when a player clicks the ground while in a mode that requires clicking units.
+    temp: false
+    text: >-
+      Click a unit to lock target.
+
+      To target environment, press
   targeting_falloff:
     noteDev: 
     temp: false

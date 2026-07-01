@@ -41,4 +41,30 @@ parts:
     rating: 
     systems: 
 animationOverrides: 
-effects: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitModifyMemory
+      changes:
+      - change: Set
+        key: unit_weight_class_override
+        value: 4
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CombatUnitTagSet
+      tags:
+      - movement_skipped
+      - flag_no_concussion_in
+      - flag_uncrashable
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

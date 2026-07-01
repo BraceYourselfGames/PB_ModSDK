@@ -24,6 +24,22 @@ entries:
     id: 1
     text: 메인 메뉴에서 배경 카메라 이동 및 효과를 켜거나 끕니다.
     textEng: Toggles background camera movement and effects in the main menu.
+  access_navframe_style__header:
+    id: 2
+    text: 초점 프레임
+    textEng: Focus frame
+  access_navframe_style__text:
+    id: 2
+    text: 키보드 및 컨트롤러 탐색 시 현재 초점을 맞춘 요소를 강조 표시하는 프레임의 스타일입니다.
+    textEng: The style of the frame highlighting the currently focused element for keyboard and controller navigation.
+  access_navframe_timeout__header:
+    id: 2
+    text: 초점 희미해짐
+    textEng: Focus fade
+  access_navframe_timeout__text:
+    id: 2
+    text: 초점 프레임이 희미해지는 데 걸리는 시간입니다.
+    textEng: The time it takes for the focus frame to fade out.
   access_overworld_glitch_effect__header:
     id: 1
     text: 오버월드 글리치 효과
@@ -239,7 +255,15 @@ entries:
   game_base_preserve_colors__text:
     id: 1
     text: 활성화 시, 커스텀한 메카의 기존 색상 커스터마이징이 새롭게 장착한 부품의 색상보다 우선됩니다. 예를 들어, 메카가 회색으로 도색된 후에 새롭게 장비한 무기가 빨간색이라면, 무기는 장비 시 회색으로 재도색됩니다.
-    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
+  game_combat_action_tooltip_details__header:
+    id: 2
+    text: 작업 툴팁 힌트
+    textEng: Action tooltip hints
+  game_combat_action_tooltip_details__text:
+    id: 2
+    text: 전투 작업 툴팁에서 열 및 전하와 같은 메커니즘에 관한 힌트를 표시합니다.
+    textEng: Display hints about mechanics like heat and charges in the combat action tooltips.
   game_combat_damage_numbers__header:
     id: 1
     text: 대미지 수치 표시
@@ -336,6 +360,14 @@ entries:
     id: 1
     text: 이 설정은 활동하지 않는 기간 이후에 예측 시간을 턴의 맨 앞으로 되돌릴지 여부를 결정합니다.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
+  game_combat_updates__header:
+    id: 2
+    text: 알림 표시
+    textEng: Show notifications
+  game_combat_updates__text:
+    id: 2
+    text: 화면 오른쪽 상단에 다양한 이벤트에 대한 알림을 표시합니다.
+    textEng: Show update notifications in the top right corner of the screen.
   game_ent_sp_logo__header:
     id: 2
     text: 메뉴 로고 변경
@@ -376,6 +408,14 @@ entries:
     id: 1
     text: 월드 맵에 등장하는 모든 새로운 임무를 강조 표시하는 슬라이드 쇼를 보여줍니다.
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
+  game_overworld_updates__header:
+    id: 2
+    text: 알림 표시
+    textEng: Show notifications
+  game_overworld_updates__text:
+    id: 2
+    text: 화면 오른쪽 상단에 다양한 이벤트에 대한 알림을 표시합니다.
+    textEng: Show update notifications in the top right corner of the screen.
   game_screenshots_lossless__header:
     id: 1
     text: 무손실 스크린샷
@@ -580,6 +620,22 @@ entries:
     id: 1
     text: 사용자 인터페이스를 제외한 텍스처의 해상도를 제어합니다. 권장 기본값은 최대입니다.
     textEng: Controls resolution of textures with exception of user interface. Recommended default is Full.
+  input_gamepad_enabled__header:
+    id: 2
+    text: 컨트롤러 감지
+    textEng: Detect controllers
+  input_gamepad_enabled__text:
+    id: 2
+    text: 비활성화 시, 게임이 모든 컨트롤러 입력을 무시합니다.
+    textEng: If disabled, the game will ignore all controller input.
+  input_gamepad_hints__header:
+    id: 2
+    text: 입력 힌트 표시
+    textEng: Show input hints
+  input_gamepad_hints__text:
+    id: 2
+    text: 컨트롤러 바인딩 힌트를 화면에 표시합니다.
+    textEng: Display hints about the controller bindings on the screen.
   input_gamepad_look_invert_vertical__header:
     id: 1
     text: 보기 반전
@@ -620,6 +676,14 @@ entries:
     id: 1
     text: 타임라인이 사용자 입력에 따라 이동하는 정도를 제어합니다.
     textEng: Controls how much the timeline moves from user input
+  input_gamepad_zoom_invert__header:
+    id: 2
+    text: 반전 줌
+    textEng: Inverted zoom
+  input_gamepad_zoom_invert__text:
+    id: 2
+    text: 왼쪽 및 오른쪽 줌 버튼을 전환합니다.
+    textEng: Swaps the left and right zoom buttons.
   input_gamepad_zoom_sensitivity__header:
     id: 1
     text: 줌 감도
@@ -628,6 +692,14 @@ entries:
     id: 1
     text: 사용자 입력에 따라 카메라가 확대 및 축소되는 정도를 제어합니다.
     textEng: Controls how much the camera zooms from user input
+  input_keyboard_hints__header:
+    id: 2
+    text: 력 힌트 표시
+    textEng: Show input hints
+  input_keyboard_hints__text:
+    id: 2
+    text: 키보드 및 마우스 컨트롤 힌트를 화면에 표시합니다.
+    textEng: Display hints about keyboard and mouse controls on the screen.
   input_keyboard_look_invert_vertical__header:
     id: 1
     text: 보기 반전

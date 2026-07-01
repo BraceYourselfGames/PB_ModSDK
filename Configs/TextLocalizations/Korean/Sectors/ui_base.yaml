@@ -100,10 +100,46 @@ entries:
     id: 1
     text: 분대에 대한 예측
     textEng: Prediction for squad
+  briefing_info_st_refresh:
+    id: 2
+    text: 원격 지원 계약은 매 전투, 막사, 새로운 지방으로의 이동 후에 새로고침 됩니다.
+    textEng: Remote assistance contracts refresh after each fight, camp or trip to a new province.
+  briefing_info_st_unavailable:
+    id: 2
+    text: 원격 지원 계약을 이용할 수 없습니다. 캠페인을 진행하고 아군과의 계약을 재수립하세요.
+    textEng: Remote assistance contracts unavailable. Advance the campaign to reestablish contact with your allies.
   briefing_info_threat_prefix:
     id: 1
     text: 위협
     textEng: Threat
+  briefing_mission_locked_header:
+    id: 2
+    text: 잠김
+    textEng: Locked
+  briefing_mission_locked_text:
+    id: 2
+    text: 볼 수 있는 정보가 없습니다. 이전 임무를 완료해 이 임무를 잠금 해제하세요.
+    textEng: No intel available. Complete the preceding mission to unlock this mission.
+  briefing_mission_type_remote:
+    id: 2
+    text: 원격 지원
+    textEng: Remote assist
+  briefing_mission_type_remote_desc_builtin:
+    id: 2
+    text: 내 유닛과 조종사에게 위험을 초래하지 않으면서 아군 분대를 통제하세요. 회수품을 얻을 수는 없지만 풍부한 보상이 보장되어 있습니다.
+    textEng: Take control of an allied squad without a risk to your units and pilots. No salvage access, but plentiful guaranteed rewards.
+  briefing_mission_type_sim:
+    id: 2
+    text: 시뮬레이션
+    textEng: Simulation
+  briefing_mission_type_sim_desc_builtin:
+    id: 2
+    text: 내 유닛과 조종사를 가상환경에서 시험하세요. 대미지는 지속되지 않습니다. 분대 커스터마이징은 허용되지 않습니다.
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. No squad customization allowed.
+  briefing_mission_type_sim_desc_squad:
+    id: 2
+    text: 내 유닛과 조종사를 가상환경에서 시험하세요. 대미지는 지속되지 않습니다. 분대를 커스터마이징할 수 있습니다.
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. Squad can be customized.
   briefing_nav_button_cant_deploy:
     id: 1
     text: 배치 불가
@@ -292,6 +328,14 @@ entries:
     id: 1
     text: 유닛
     textEng: Unit
+  briefing_standalone_header:
+    id: 2
+    text: 작전
+    textEng: Operations
+  briefing_standalone_subtitle:
+    id: 2
+    text: 원격 지원 및 시뮬레이션
+    textEng: Remote assists & simulations
   briefing_units_empty_desc:
     id: 1
     text: 기지에 사용 가능한 유닛이 없거나 모든 유닛이 이미 분대에 추가되었습니다
@@ -839,11 +883,11 @@ entries:
   inventory_info_hint_favorite_header:
     id: 1
     text: 즐겨찾기
-    textEng: Favorite
+    textEng: Favourite
   inventory_info_hint_favorite_text:
     id: 1
     text: 이 아이템을 즐겨찾기로 표시하세요. 이렇게 하면 인벤토리 목록에서 강조되어, 찾기 더 쉬워집니다.
-    textEng: Mark this item as a favorite. This highlights it in inventory lists, making it easier to find.
+    textEng: Mark this item as a favourite. This highlights it in inventory lists, making it easier to find.
   inventory_info_hint_level_header:
     id: 1
     text: 레벨
@@ -1844,6 +1888,10 @@ entries:
     id: 1
     text: 방열
     textEng: Dissipation
+  unit_loadout_hint_altitude_range:
+    id: 2
+    text: 호버링 범위
+    textEng: Hover range
   unit_loadout_hint_barrier:
     id: 1
     text: 배리어
@@ -1900,6 +1948,10 @@ entries:
     id: 1
     text: '소켓 비었음: 설치된 부품이 없습니다.'
     textEng: 'Empty socket: no installed part.'
+  unit_loadout_test_drive:
+    id: 2
+    text: 테스트 운행
+    textEng: Test drive
   unit_remove_header:
     id: 2
     text: 파괴 확정

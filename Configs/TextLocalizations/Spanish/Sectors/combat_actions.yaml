@@ -8,6 +8,14 @@ entries:
     id: 1
     text: Activa el sistema de defensa integrado en esta unidad.
     textEng: Activate the defense system mounted to this unit.
+  ability_back_spotter_name:
+    id: 2
+    text: Ataque
+    textEng: Strike
+  ability_back_spotter_text:
+    id: 2
+    text: Facilita las coordenadas del objetivo para un ataque de artillería.
+    textEng: Provide target coordinates for an artillery strike.
   ability_back_targeted_name:
     id: 1
     text: Habilidad
@@ -168,6 +176,22 @@ entries:
     id: 1
     text: Como resultado de una colisión o de su destrucción, se han cancelado todas las acciones planeadas. La línea temporal indica cuándo se recuperará.
     textEng: As a result of collision or destruction, all planned actions were terminated. The timeline indicates recovery duration.
+  dash_bulldoze_name:
+    id: 2
+    text: Embestida
+    textEng: Bulldoze
+  dash_bulldoze_text:
+    id: 2
+    text: >-
+      Sobrecarga los propulsores para deslizarte hacia delante y atravesar obstáculos destructibles. El meca se detendrá un momento antes de despegar para desviar la potencia y prepararse para el impacto.
+
+
+      El meca estará protegido de las colisiones, pero cada obstáculo reducirá su estabilidad (en función de la categoría de peso de la unidad). Si pierde toda la estabilidad, se estrellará ante cualquier colisión.
+    textEng: >-
+      Overcharge the thrusters to slide forward, breaking through destructible obstacles. The mech will stop for a moment before takeoff to divert power and brace for impact.
+
+
+      The mech will be shielded from collisions, but each obstacle will reduce stability (depending on unit weight class). Losing all stability will lead to a crash on any collision.
   dash_name:
     id: 1
     text: Impulso
@@ -176,6 +200,22 @@ entries:
     id: 1
     text: 'Activa los propulsores para impulsarte a la posición seleccionada. Puede esquivar disparos o colocarte en una posición aventajada. Desbarata los misiles teledirigidos y evita impactos directos. '
     textEng: 'Activate thrusters to jump to a selected position. Can be used to evade fire or gain an advantageous position. Breaks missile locks and prevents direct hits. '
+  dash_vertical_name:
+    id: 2
+    text: Sobrevuelo
+    textEng: Hover
+  dash_vertical_text:
+    id: 2
+    text: >-
+      Activa los propulsores para sobrevolar durante una cantidad de tiempo configurable.
+
+
+      La altitud del sobrevuelo viene dada por las estadísticas del propulsor de sobrevuelo equipado y la clase de armadura del meca. Los mecas pesados no se elevan tanto como los ligeros.
+    textEng: >-
+      Activate thrusters to hover above ground for a configurable time.
+
+
+      The hover altitude is determined by the stats of the equipped hover thruster and the armor class of the mech. Heavier mechs can't lift as high as lighter ones.
   default_mode_path_drawing_header:
     id: 1
     text: Establecer destino

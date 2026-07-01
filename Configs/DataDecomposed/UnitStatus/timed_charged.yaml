@@ -30,6 +30,7 @@ durationUpdate:
 buildupDecayRate:
   f: 0.5
   compMultiplier: 2
+  decayOnDash: true
 buildupThreshold:
   f: 0.95
   compMultiplier: 2
@@ -138,7 +139,6 @@ effectsOnUpdate:
         f: 100
       concussion: 
       heat: 
-      stagger: 
       statusBuildup: 
     fx:
     - distance: 0
@@ -329,7 +329,6 @@ effectsOnUpdate:
         f: 100
       concussion: 
       heat: 
-      stagger: 
       statusBuildup: 
     fx:
     - distance: 0
@@ -441,7 +440,6 @@ effectsOnEnd:
       f: 100
     concussion: 
     heat: 
-    stagger: 
     statusBuildup: 
   - !CombatUnitEffectSpawn
     position:

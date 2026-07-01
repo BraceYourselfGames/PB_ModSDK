@@ -14,18 +14,23 @@ sections:
     a: 1
 - !CodexSectionTextControls
   lines:
-  - mode: All
-    text: Back / Cancel
+  - visibility: All
     actions:
     - action: global_cancel
       newline: false
-  - mode: All
-    text: Execute
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_confirm
       newline: false
-  - mode: All
-    text: Move the camera
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_move_vertical_pos
       newline: false
@@ -35,8 +40,11 @@ sections:
       newline: false
     - action: global_move_horizontal_pos
       newline: false
-  - mode: All
-    text: Rotate the camera
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_camera_vertical_pos
       newline: false
@@ -48,28 +56,43 @@ sections:
       newline: false
     - action: global_mouse_middle
       newline: true
-  - mode: All
-    text: Select next unit
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: combat_next_unit
       newline: false
-  - mode: All
-    text: Show all units
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: combat_toggle_overlay
       newline: false
-  - mode: All
-    text: Targeting mode
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: combat_toggle_targeting
       newline: false
-  - mode: All
-    text: Toggle slow motion
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: combat_time_toggle
       newline: false
-  - mode: All
-    text: Set time scale
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: combat_time_pause
       newline: false
@@ -79,3 +102,7 @@ sections:
       newline: false
     - action: combat_time_full
       newline: false
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 

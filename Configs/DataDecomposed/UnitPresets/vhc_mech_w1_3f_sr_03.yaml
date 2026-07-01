@@ -1,0 +1,30 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_mech_w1
+- key: vhc_mech_sec_shield_l
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: juggernaut
+tags:
+- range_short
+- role_3f_squads
+- role_3f_melee
+partTagPreferences: 
+parts:
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_melee: true
+          wpn_primary: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

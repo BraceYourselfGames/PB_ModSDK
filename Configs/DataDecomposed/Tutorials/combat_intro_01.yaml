@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -14,8 +15,22 @@ pages:
     a: 0.5019608
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions:
       spriteWrap: true
       actions:
@@ -28,6 +43,11 @@ pages:
       - global_camera_vertical_pos
       - global_camera_vertical_neg
       - global_mouse_middle
+      - global_move_horizontal
+      - global_move_vertical
+      - global_camera_horizontal
+      - global_camera_vertical
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:
@@ -53,7 +73,8 @@ pages:
 - depthForeground: 0
   depthBackground: 0
   skippable: false
-  cameraInputPermitted: false
+  cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -75,12 +96,10 @@ pages:
     frameSizeX: 304
     frameSizeY: 304
     frameBlocksInput: false
-    frameBoundary: true
+    frameBoundary: false
     textLocation: TopLeft
     buttonLocation: None
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor:
       entityName: unit_friendly_mech_pc
       stateName: 
@@ -95,10 +114,54 @@ pages:
         y: 0
       rotation: 0
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions:
       spriteWrap: true
       actions:
       - global_mouse_primary
+      - combat_next_unit
+      - global_move_horizontal
+      - global_gamepad_y
+      - overworld_tab_move_prev
+      - overworld_tab_move_next
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: TabPrev
+      functionsOverworld: 
+      functionsCombat:
+      - !CombatSelectUnit
+        nameInternal: unit_friendly_mech_pc
+        select: true
+        focus: true
+        delay: 0
+    - controller: All
+      inputDirection: TabNext
+      functionsOverworld: 
+      functionsCombat:
+      - !CombatSelectUnit
+        nameInternal: unit_friendly_mech_pc
+        select: true
+        focus: true
+        delay: 0
+    - controller: Controller
+      inputDirection: CustomY
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: PhantomBrigade.Combat.Systems.InputCombatUnitSelectionUtility
+        methodName: AttemptUnitSelectionAtCursor
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase
@@ -134,6 +197,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -155,16 +219,22 @@ pages:
     frameSizeX: 238
     frameSizeY: 332
     frameBlocksInput: true
-    frameBoundary: true
+    frameBoundary: false
     textLocation: RightBottom
     buttonLocation: Top
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase

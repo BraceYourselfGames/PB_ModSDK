@@ -24,6 +24,22 @@ entries:
     id: 1
     text: Schaltet die Kamerabewegung im Hintergrund und die Effekte im Hauptmenü ein und aus.
     textEng: Toggles background camera movement and effects in the main menu.
+  access_navframe_style__header:
+    id: 2
+    text: Fokusrahmen
+    textEng: Focus frame
+  access_navframe_style__text:
+    id: 2
+    text: Der Stil des Rahmens, der das aktuell markierte Element bei der Navigation mit Tastatur und Controller hervorhebt.
+    textEng: The style of the frame highlighting the currently focused element for keyboard and controller navigation.
+  access_navframe_timeout__header:
+    id: 2
+    text: Fokusausblendung
+    textEng: Focus fade
+  access_navframe_timeout__text:
+    id: 2
+    text: Die Zeit, die es dauert, bis der Fokusrahmen ausgeblendet wird.
+    textEng: The time it takes for the focus frame to fade out.
   access_overworld_glitch_effect__header:
     id: 1
     text: Glitch-Effekt in der Oberwelt
@@ -76,10 +92,6 @@ entries:
     id: 1
     text: Stimmlautstärke
     textEng: Voice Volume
-  audio_volume_voice__text:
-    id: 1
-    text: Regelt die Stimmlautstärke in Filmsequenzen.
-    textEng: Control cutscene voiceover.
   display_fps_limit__header:
     id: 1
     text: Bildraten-Limit
@@ -243,7 +255,15 @@ entries:
   game_base_preserve_colors__text:
     id: 1
     text: 'Ist diese Funktion aktiviert, überschreiben existierende Farbanpassungen am individualisierten Mech die Farbe eines neu ausgerüsteten Teils. Ein Beispiel: Ist ein Mech grau, eine neue Waffe jedoch rot, wir die Waffe bei der Installation ebenfalls grau eingefärbt.'
-    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
+  game_combat_action_tooltip_details__header:
+    id: 2
+    text: Aktions-Tooltipp-Hinweise
+    textEng: Action tooltip hints
+  game_combat_action_tooltip_details__text:
+    id: 2
+    text: Zeige in den Tooltipps der Kampfaktionen Hinweise zu Spielmechaniken wie Hitze und Ladungen an.
+    textEng: Display hints about mechanics like heat and charges in the combat action tooltips.
   game_combat_damage_numbers__header:
     id: 1
     text: Schadenszahlen anzeigen
@@ -344,6 +364,14 @@ entries:
     id: 1
     text: Diese Einstellung bestimmt, ob die Prognosezeit nach einem Zeitraum der Inaktivität auf den Beginn einer Runde zurückgesetzt wird.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
+  game_combat_updates__header:
+    id: 2
+    text: Benachrichtigungen anzeigen
+    textEng: Show notifications
+  game_combat_updates__text:
+    id: 2
+    text: Benachrichtigungen zu verschiedenen Ereignissen werden oben rechts auf dem Bildschirm angezeigt.
+    textEng: Show update notifications in the top right corner of the screen.
   game_ent_sp_logo__header:
     id: 2
     text: Menülogo ändern
@@ -384,6 +412,14 @@ entries:
     id: 1
     text: Zeigt eine Diashow aller neuen Missionen auf der Weltkarte.
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
+  game_overworld_updates__header:
+    id: 2
+    text: Benachrichtigungen anzeigen
+    textEng: Show notifications
+  game_overworld_updates__text:
+    id: 2
+    text: Benachrichtigungen zu verschiedenen Ereignissen werden oben rechts auf dem Bildschirm angezeigt.
+    textEng: Show update notifications in the top right corner of the screen.
   game_screenshots_lossless__header:
     id: 1
     text: Verlustfreie Screenshots
@@ -588,6 +624,22 @@ entries:
     id: 1
     text: Regelt die Auflösung der Texturen mit Ausnahme der Benutzeroberfläche. Die empfohlene Standardeinstellung ist „Voll“.
     textEng: Controls resolution of textures with exception of user interface. Recommended default is Full.
+  input_gamepad_enabled__header:
+    id: 2
+    text: Controller erkennen
+    textEng: Detect controllers
+  input_gamepad_enabled__text:
+    id: 2
+    text: Wenn diese Option deaktiviert ist, ignoriert das Spiel alle Controller-Eingaben.
+    textEng: If disabled, the game will ignore all controller input.
+  input_gamepad_hints__header:
+    id: 2
+    text: Eingabehinweise anzeigen
+    textEng: Show input hints
+  input_gamepad_hints__text:
+    id: 2
+    text: Zeige Hinweise zu den Controller-Belegungen auf dem Bildschirm an.
+    textEng: Display hints about the controller bindings on the screen.
   input_gamepad_look_invert_vertical__header:
     id: 1
     text: Invertiertes Umsehen
@@ -628,6 +680,14 @@ entries:
     id: 1
     text: Regelt, wie stark sich die Zeitleiste bei einer Eingabe bewegt.
     textEng: Controls how much the timeline moves from user input
+  input_gamepad_zoom_invert__header:
+    id: 2
+    text: Umgekehrter Zoom
+    textEng: Inverted zoom
+  input_gamepad_zoom_invert__text:
+    id: 2
+    text: Vertauscht die linke und rechte Zoom-Taste.
+    textEng: Swaps the left and right zoom buttons.
   input_gamepad_zoom_sensitivity__header:
     id: 1
     text: Zoom-Empfindlichkeit
@@ -636,6 +696,14 @@ entries:
     id: 1
     text: Regelt, wie stark die Kamera bei einer Eingabe zoomt.
     textEng: Controls how much the camera zooms from user input
+  input_keyboard_hints__header:
+    id: 2
+    text: Eingabehinweise anzeigen
+    textEng: Show input hints
+  input_keyboard_hints__text:
+    id: 2
+    text: Zeige Hinweise zur „Tastatur und Maus“-Steuerung auf dem Bildschirm an.
+    textEng: Display hints about keyboard and mouse controls on the screen.
   input_keyboard_look_invert_vertical__header:
     id: 1
     text: Invertiertes Umsehen

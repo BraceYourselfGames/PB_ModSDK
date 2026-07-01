@@ -28,6 +28,28 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone:
+  developerOnly: false
+  standaloneOnly: false
+  squadCustomization: true
+  enemyPreview: false
+  type: sim
+  group: replay
+  priority: 30
+  textName: 
+  textDesc: 
+  conditionVisible: 
+  conditionUnlock:
+    checksGlobal: 
+    checksBase:
+    - !OverworldValidateCompletionScenario
+      filter:
+        unique_capital_outskirts:
+          check: GreaterEqual
+          value: 1
+    checksBaseValues: 
+  scenarioNext: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -69,16 +91,11 @@ tags:
 states:
   enemy_counter:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: -1
     priority: -1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
@@ -157,17 +174,36 @@ states:
           outcome: 
   objective_elimination:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -236,22 +272,31 @@ states:
           outcome: 
   objective_escape:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 1
-    mood: 0
+    briefingHidden: true
     ui:
+      priorityDisplay: 1
       briefingHidden: true
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -379,6 +424,7 @@ states:
           - time: 0
             hidden: false
             key: capital_outskirts_new_victory1
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -395,17 +441,37 @@ states:
             instant: false
   reinforcements_perimeter:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 11
-    priorityDisplay: 11
-    mood: -1
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 11
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -1
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -571,17 +637,37 @@ states:
           outcome: 
   reinforcements_timed:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 10
-    priorityDisplay: 10
-    mood: -1
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 10
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -1
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -711,16 +797,11 @@ states:
           outcome: 
   trespass:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -783,6 +864,7 @@ states:
           - time: 2
             hidden: false
             key: capital_outskirts_new_trespass1
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             reinforcements: true
@@ -804,13 +886,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: true
       executionAllowed: true
       visible: true
     tags:
@@ -1109,12 +1197,15 @@ steps:
     - time: 0
       hidden: false
       key: capital_outskirts_new_intro1
+      functionsOnExit: 
     - time: 7
       hidden: false
       key: capital_outskirts_new_intro2
+      functionsOnExit: 
     - time: 14
       hidden: false
       key: capital_outskirts_new_intro3
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

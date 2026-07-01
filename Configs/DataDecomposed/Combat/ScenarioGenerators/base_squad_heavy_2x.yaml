@@ -1,0 +1,41 @@
+hidden: true
+parents: 
+core: 
+tags:
+- difficulty_medium
+textList: 
+escalation: 
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter: 
+scenarioChanges: 
+squads:
+- comment:
+    comment: 2 units, 1-2 level boost
+  scenarioTagsRequired: 
+  scenarioTagsBlocked: 
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 2
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_heavy: true
+        role_3f_squads: true
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 2
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_heavy: true
+        role_3f_squads: true
+squadFilter: 
+rewardPool: 
+effectsOnCompletion: 

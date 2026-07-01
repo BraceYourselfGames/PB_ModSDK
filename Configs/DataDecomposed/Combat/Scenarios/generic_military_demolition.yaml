@@ -28,6 +28,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -68,17 +70,36 @@ tags:
 states:
   demolition_t1:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnLevelDestruction
     evaluationOnOutcome: 
     turn: 
@@ -113,6 +134,7 @@ states:
           - time: 0
             hidden: false
             key: generic_military_demolition_t1
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             demolition_t2: true
@@ -128,17 +150,36 @@ states:
           outcome: 
   demolition_t2:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 1
     priority: 1
-    priorityDisplay: 1
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 1
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnLevelDestruction
     evaluationOnOutcome: 
     turn: 
@@ -173,6 +214,7 @@ states:
           - time: 0
             hidden: false
             key: generic_military_demolition_t2
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             demolition_t3: true
@@ -188,17 +230,36 @@ states:
           outcome: 
   demolition_t3:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 1
     priority: 1
-    priorityDisplay: 1
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 1
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnLevelDestruction
     evaluationOnOutcome: 
     turn: 
@@ -233,6 +294,7 @@ states:
           - time: 0
             hidden: false
             key: generic_military_demolition_t3
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -247,17 +309,36 @@ states:
           outcome: 
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -283,16 +364,11 @@ states:
   spawn_recurring:
     comment:
       comment: Spawn new squads every 2 turns, provided there aren't too many non-turret units already on the field and provided there are still objectives to be completed.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 20
     priority: 20
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -392,16 +468,11 @@ states:
           outcome: 
   timer_escape_comms:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 10
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -432,6 +503,7 @@ states:
           - time: 0.1
             hidden: false
             key: generic_military_demolition_escape_warning
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -475,27 +547,12 @@ states:
           outcome: 
   timer_escape_defeat:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 11
     priority: 11
-    priorityDisplay: 11
-    mood: 0
-    ui:
-      briefingHidden: false
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -526,6 +583,7 @@ states:
           - time: 0.1
             hidden: false
             key: generic_military_demolition_escape_defeat
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -542,22 +600,31 @@ states:
             instant: false
   timer_escape_victory:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 12
     priority: 12
-    priorityDisplay: 12
-    mood: 0
+    briefingHidden: false
     ui:
+      priorityDisplay: 12
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -593,6 +660,7 @@ states:
           - time: 0
             hidden: false
             key: generic_military_demolition_escape_victory
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -616,13 +684,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -759,6 +833,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_military_demolition_start
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

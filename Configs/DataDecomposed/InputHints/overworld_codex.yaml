@@ -1,0 +1,29 @@
+horizontal: false
+extended: false
+lines:
+- visibility: All
+  actions:
+  - action: global_cancel
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_pause
+  textKey: root_button_back
+- visibility: KeyboardMouse
+  actions:
+  - action: global_move_vertical_pos
+    newline: false
+  - action: global_move_vertical_neg
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: Controller
+  actions:
+  - action: global_move_vertical
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: overworld_codex__s1

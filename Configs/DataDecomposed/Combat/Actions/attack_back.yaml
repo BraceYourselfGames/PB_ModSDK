@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -38,6 +37,7 @@ dataCore:
   eventsOnDispose: 
   functionsOnTargetCheck: 
   functionsOnValidation: 
+  functionsOnValidationBase: 
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart: 
@@ -57,8 +57,7 @@ dataCore:
     locationOccupiedUnlinked: 
     relativeTransform: 
     blueprints: 
-    classes:
-      mech: true
+    classes: 
     stats: 
     statsNormalized: 
     actionsInProgress: 
@@ -72,6 +71,8 @@ dataCore:
         activation_is_attack: true
       present: true
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment:

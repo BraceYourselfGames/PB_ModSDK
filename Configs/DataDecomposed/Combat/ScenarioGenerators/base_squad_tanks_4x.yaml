@@ -1,0 +1,182 @@
+hidden: true
+parents: 
+core: 
+tags:
+- difficulty_medium
+textList: 
+escalation: 
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter: 
+scenarioChanges: 
+squads:
+- comment:
+    comment: 4 units, 0-1 level boost
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_underground
+  - type_intercept_mech
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: misc_hvt_03
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_squads: true
+        type_mech: true
+        weight_light: true
+  - qualityTable: unitgroup_q2_uncommon
+    livery: misc_hvt_03
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_squads: true
+        type_mech: true
+        weight_light: false
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_01
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_02
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_03
+      tags: 
+- comment:
+    comment: 4 units, 0-1 level boost
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_underground
+  - type_intercept_mech
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_mech_w3_3f_heavy_04
+      tags: 
+  - qualityTable: default_r2_uncommon
+    livery: misc_hvt_03
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_squads: true
+        type_mech: true
+        weight_heavy: false
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_01
+      - vhc_tank_v2_w3_adapter_3f_02
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_03
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_03
+      tags: 
+- comment:
+    comment: 4 units, 0-1 level boost
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_underground
+  - type_intercept_mech
+  slots:
+  - qualityTable: default_r2_uncommon
+    livery: misc_hvt_03
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        range_long: true
+        role_3f_squads: true
+        type_mech: true
+        weight_heavy: false
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_01
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_02
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_v2_w3_adapter_3f_03
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_02
+      tags: 
+squadFilter: 
+rewardPool: 
+effectsOnCompletion: 

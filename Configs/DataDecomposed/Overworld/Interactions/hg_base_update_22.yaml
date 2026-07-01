@@ -1,0 +1,84 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core:
+  stepOnStart: main
+  priority: -100
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags:
+- context_forward_base
+check:
+  repeat: Enabled
+  checksGlobal: 
+  checksBase:
+  - !OverworldValidateMemory
+    check:
+      method: RequireAll
+      checks:
+      - key: world_update_unlocked_22
+        presenceDesired: false
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: NoValueCheck
+        value: 0
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_salvage
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !ModifyMemoryBase
+        changes:
+        - change: Set
+          key: world_update_unlocked_22
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.2122642
+            g: 0.5577623
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: overworld_interaction
+          textKey: liberation_step2_intro__s_bonus_op_choice_context5_parts_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewards
+            rewards:
+              special_update_22: 1
+          functionsLocal: 
+    optionsReused: 

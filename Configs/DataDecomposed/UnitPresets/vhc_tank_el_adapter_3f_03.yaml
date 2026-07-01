@@ -1,0 +1,59 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_tank_el
+- key: vhc_tank_el_wpn_adapter
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: 
+tags:
+- range_long
+partTagPreferences: 
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_wpn_tank_ml_01
+      - back_wpn_tank_defense_01
+    rating: 
+    systems: 
+  equipment_right:
+    livery:
+      livery: inv_army_officer_a
+    preset: !PartResolverKeys
+      keys:
+      - wpn_cannon_pf_uh_01
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 10
+    - !CombatUnitTagSet
+      tags:
+      - flag_scatter_stabilized
+    functionsPilot:
+    - !PilotStatSet
+      key: ability_dissipation
+      normalized: false
+      value: 4
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

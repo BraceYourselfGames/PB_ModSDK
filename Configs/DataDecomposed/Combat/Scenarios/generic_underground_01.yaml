@@ -14,7 +14,8 @@ core:
   lootingUsed: true
   musicDynamic: false
   introUsed: true
-  musicCustom: 
+  musicCustom:
+    linearStateKey: underwater
   introOverride: 
   briefingSpawnHighlights: 
   briefingGroupsInjected: 
@@ -30,6 +31,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -47,20 +50,40 @@ tags:
 - context_generic
 - trait_units_detectable
 - block_persistent_pilots
+- context_contract
 states:
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: false
-    visible: true
     startInScope: false
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -91,22 +114,27 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: true
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_underground__name
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_underground__text
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
     - start
     unitGroups:
     - !UnitGroupFilter
-      tagsFromFactionBranch: true
+      tagsFromFactionBranch: false
       tags:
-        range_medium: true
         underground_units: true
       check: 
       combatTags: 
@@ -119,23 +147,58 @@ steps:
       maxGrade: 2
       cloneable: true
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       spawnTagsUsed: true
       spawnTags:
         perimeter_outer: true
       spawnGroupKey: 
-      filterDistancePlayer: 
+      filterDistancePlayer:
+        check: Greater
+        value: 100
       filterDistanceEnemy: 
       filterDistanceSpawn: 
       filterDistanceLocation: 
       filterDistanceVolume: 
       filterDistanceState: 
       filterDistanceRetreat: 
-      sorting: !UnitSlotSortingPlayer
-        invert: false
+      sorting: 
       spawnRegistration: 
     - !UnitGroupFilter
-      tagsFromFactionBranch: true
+      tagsFromFactionBranch: false
+      tags:
+        range_medium: true
+        underground_units_secondary: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 1
+      cloneable: true
+      functions:
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 100
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: false
       tags:
         range_short: true
         underground_units: true
@@ -159,7 +222,8 @@ steps:
       maxGrade: 2
       cloneable: true
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       spawnTagsUsed: true
       spawnTags:
         perimeter_outer: true
@@ -194,14 +258,7 @@ steps:
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
-    functions:
-    - !CombatChangeFogCustom
-      time: 0
-      delay: 0
-      densityGlobal: 0.3
-      densityDistance: 0.5
-      densityHeight: 0.5
-      heightOffset: -3
+    functions: []
     outcome: 
     transitions: 
 unitPresets: 

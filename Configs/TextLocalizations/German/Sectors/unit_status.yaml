@@ -14,7 +14,7 @@ entries:
     textEng: Exhausted
   pilot_fatigue_damage__text:
     id: 1
-    text: Dieses Mitglied der Pilotencrew wurde trotz extremer Erschöpfung eingesetzt. Daher verliert sie langsam Gesundheit, bis sie bewusstlos wird. Entweder du beendest den Kampf sehr schnell, oder du befiehlst ihr, sich auswerfen zu lassen.
+    text: Dieses Mitglied der Pilotencrew wurde trotz extremer Ermüdung eingesetzt. Daher verliert sie langsam Gesundheit, bis sie bewusstlos wird. Entweder du beendest den Kampf sehr schnell, oder du befiehlst ihr, sich auswerfen zu lassen.
     textEng: This pilot was deployed despite extreme fatigue. They will slowly lose health until they faint. It's best to finish the fight quickly or order them to eject before that happens.
   pilot_well_rested__header:
     id: 1
@@ -22,7 +22,7 @@ entries:
     textEng: Well rested
   pilot_well_rested__text:
     id: 1
-    text: Das Mitglied der Pilotencrew dieser Einheit zeigt keine Erschöpfungserscheinungen. Einheitengeschwindigkeit und -schaden sind in den ersten 3 Runden erhöht.
+    text: Das Mitglied der Pilotencrew dieser Einheit zeigt keine Ermüdungserscheinungen. Einheitengeschwindigkeit und -schaden sind in den ersten 3 Runden erhöht.
     textEng: The pilot of this unit has no fatigue. Unit speed and damage are increased for the first 3 turns.
   timed_buff_damage__header:
     id: 1
@@ -88,6 +88,14 @@ entries:
     id: 1
     text: Diese Einheit ist [...]
     textEng: This unit is [...]
+  timed_impaled__header:
+    id: 2
+    text: Aufgespießt
+    textEng: Impaled
+  timed_impaled__text:
+    id: 2
+    text: Diese Einheit wurde von einer raketengetriebenen Stachelmunition getroffen. Die Einheit kann keine geplanten Bewegungen ausführen und wird so lange weitergeschoben, bis sie auf ein Hindernis stößt oder bis das Projektil ausgebrannt ist.
+    textEng: This unit has been struck with a rocket propelled spike munition. The unit can not execute planned movements and will be pushed until it hits an obstacle, or until the projectile burns out.
   timed_meltdown__header:
     id: 1
     text: Kernschmelze
@@ -96,6 +104,14 @@ entries:
     id: 1
     text: Der Reaktorkern dieser Einheit schmilzt. Sobald der Countdown für diesen Statuseffekt null erreicht, explodiert der Reaktor und zerstört die Einheit.
     textEng: The reactor core of this unit is melting down. Once the countdown of this status effect reaches zero, the reactor will explode, destroying the unit.
+  timed_pinned__header:
+    id: 2
+    text: Festgesetzt
+    textEng: Pinned
+  timed_pinned__text:
+    id: 2
+    text: Diese Einheit ist vorübergehend bewegungsunfähig. Alle Bewegungsaktionen werden so lange aufgeschoben, bis dieser Status endet.
+    textEng: This unit has been temporarily immobilized. All movement actions are pushed forward until this status expires.
   timed_soaked__header:
     id: 1
     text: Durchnässt

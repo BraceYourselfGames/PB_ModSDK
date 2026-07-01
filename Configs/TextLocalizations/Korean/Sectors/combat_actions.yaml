@@ -8,6 +8,14 @@ entries:
     id: 1
     text: 이 유닛에 장착된 방어 시스템을 활성화합니다.
     textEng: Activate the defense system mounted to this unit.
+  ability_back_spotter_name:
+    id: 2
+    text: 공격
+    textEng: Strike
+  ability_back_spotter_text:
+    id: 2
+    text: 대포 사격을 위한 타겟 좌표를 준비합니다.
+    textEng: Provide target coordinates for an artillery strike.
   ability_back_targeted_name:
     id: 1
     text: 능력
@@ -168,6 +176,22 @@ entries:
     id: 1
     text: 충돌 또는 파괴의 결과로, 계획한 모든 작업이 종료되었습니다. 타임라인에 복구 기간이 표시됩니다.
     textEng: As a result of collision or destruction, all planned actions were terminated. The timeline indicates recovery duration.
+  dash_bulldoze_name:
+    id: 2
+    text: 밀고 나가기
+    textEng: Bulldoze
+  dash_bulldoze_text:
+    id: 2
+    text: >-
+      추진기를 과충전해 앞으로 미끄러뜨리고, 파괴할 수 있는 장애물을 뚫고 나아가게 합니다. 메카는 이륙하기 전 잠시 멈춰 전력을 전환하고 충격에 대비합니다.
+
+
+      메카는 충돌로부터 보호되지만, 각 장애물과 부딪힐 때마다 안정성이 저하됩니다(유닛 무게 클래스에 따라 다름). 안정성을 모두 잃으면 모든 충돌 상황에서 추락하게 됩니다.
+    textEng: >-
+      Overcharge the thrusters to slide forward, breaking through destructible obstacles. The mech will stop for a moment before takeoff to divert power and brace for impact.
+
+
+      The mech will be shielded from collisions, but each obstacle will reduce stability (depending on unit weight class). Losing all stability will lead to a crash on any collision.
   dash_name:
     id: 1
     text: 돌진
@@ -176,6 +200,22 @@ entries:
     id: 1
     text: '추진기를 작동시켜 선택한 위치로 점프합니다. 발사를 회피하거나 유리한 위치를 차지하는 데 사용할 수 있습니다. 미사일 잠금장치를 해제하고 직격탄을 방지합니다. '
     textEng: 'Activate thrusters to jump to a selected position. Can be used to evade fire or gain an advantageous position. Breaks missile locks and prevents direct hits. '
+  dash_vertical_name:
+    id: 2
+    text: 호버링
+    textEng: Hover
+  dash_vertical_text:
+    id: 2
+    text: >-
+      추진기를 활성화해 변경 가능한 시간 동안 지상 위를 호버링하도록 만듭니다.
+
+
+      호버링 고도는 장착한 호버링 추진기의 능력치와 메카의 방어구 클래스에 따라 결정됩니다. 무거운 메카는 가벼운 메카만큼 높이 올라갈 수 없습니다.
+    textEng: >-
+      Activate thrusters to hover above ground for a configurable time.
+
+
+      The hover altitude is determined by the stats of the equipped hover thruster and the armor class of the mech. Heavier mechs can't lift as high as lighter ones.
   default_mode_path_drawing_header:
     id: 1
     text: 목적지 설정

@@ -1,0 +1,102 @@
+hidden: true
+parents: 
+core: 
+tags: 
+textList: 
+escalation: 
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter: 
+scenarioChanges: 
+squads: 
+squadFilter: 
+rewardPool:
+- comment: 
+  rewards:
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_general: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_general_lq: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      subsystem_general: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_res_common: true
+- comment: 
+  rewards:
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_armor: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_weapon: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_weapon_lq: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_res_common: true
+- comment: 
+  rewards:
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_armor: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: true
+    keys: 
+    tags:
+      part_weapon_lq: true
+  - chance: 1
+    repeats: 1
+    tagsUsed: false
+    keys:
+    - sub_r2
+    tags: 
+  - chance: 1
+    repeats: 1
+    tagsUsed: false
+    keys:
+    - sub_r1
+    tags: 
+effectsOnCompletion:
+- functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_contract_points
+      value: 2
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsBase: 

@@ -1,6 +1,7 @@
 hidden: false
 parents: 
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -9,27 +10,12 @@ tags:
 states:
   inj_strike_aircraft_recurring:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 100
-    priorityDisplay: 0
-    mood: -2
-    ui:
-      briefingHidden: true
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 

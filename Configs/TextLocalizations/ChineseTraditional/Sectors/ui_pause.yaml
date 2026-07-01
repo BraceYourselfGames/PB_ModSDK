@@ -229,10 +229,26 @@ entries:
     id: 1
     text: 重置
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: DLC
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: 已安裝內容
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: 支援者禮包
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: 2.0更新現已推出！
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: 2.2 更新現已推出！
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -257,6 +273,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      用你的方式暢玩！遊戲現在可以完整支援控制器，並享有更進階的鍵盤導覽功能。
+
+
+      全新遠端支援合約與靶場，讓你有更多進展與裝配選擇。
+
+
+      動作攝影機、額外地圖、UI 改善等多項內容！歡迎透過下方連結深入了解本次更新與 2.0 版大改版的詳細資訊。
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -459,12 +493,12 @@ entries:
     textEng: Numpad
   input_kb_page_down:
     id: 2
-    text: 下翻頁鍵
-    textEng: Page Down
+    text: PgDn
+    textEng: PgDn
   input_kb_page_up:
     id: 2
-    text: 上翻頁鍵
-    textEng: Page Up
+    text: PgUp
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: 返回
@@ -505,6 +539,74 @@ entries:
     id: 2
     text: 滑鼠滾輪
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: 常用操作
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: 手把已啟用
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: 移動視角
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: 旋轉視角
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: 取消/返回
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: 確認/點擊已選按鈕
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: 按鈕間切換
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: 暫停
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: 切換螢幕/切換單位
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: 調整縮放/調整戰鬥時間
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      留意焦點輪廓框，確認目前位置以及下一步的導航方向。查看不同螢幕上的輸入提示，以了解更多上下文操作。
+
+
+      如果您在使用手把時遇到問題，請隨時透過下方提供的報告對話方塊分享您的回饋。
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: 鍵盤已啟用
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      查看不同螢幕上的輸入提示，以了解更多上下文操作。
+
+
+      遊戲的大部分內容都可以使用鍵盤操作。使用方向鍵導航，並留意焦點輪廓框以追蹤您的選擇。
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: 這個存檔是在劇情戰役中透過實驗性的功能（如戰鬥存檔）產生的。這個存檔可以讀取，但不受正式支援。
@@ -749,6 +851,14 @@ entries:
     id: 2
     text: 除以下項目外，所有輸入都會儲存：
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: 要重設此類別嗎？
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: 確定要將此類別中的所有選項重設為預設值嗎？
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: 關閉
@@ -847,6 +957,10 @@ entries:
     id: 1
     text: 載入
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: 載入簡報
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: 遊戲模組
@@ -895,6 +1009,14 @@ entries:
     id: 1
     text: 載入存檔
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: 正在載入上次存檔
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: 你要用最近儲存的檔案繼續遊玩嗎？
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: 確定刪除

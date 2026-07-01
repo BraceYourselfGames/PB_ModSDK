@@ -40,6 +40,186 @@ entries:
     id: 1
     text: 取り付けられた武器を利用した攻撃的アクション。画面右下に武器情報が表示される。
     textEng: This is an offensive action utilizing an installed weapon. Weapon information is available on the bottom right side of the screen.
+  cam_bt_activate:
+    id: 2
+    text: アクションカメラ
+    textEng: Action camera
+  cam_bt_exit_text:
+    id: 2
+    text: アクションカメラを終了する
+    textEng: Exit action camera
+  cam_bt_follow_locked_text:
+    id: 2
+    text: カメラの向きを固定する
+    textEng: Lock the camera direction
+  cam_bt_follow_mode_text:
+    id: 2
+    text: カメラを目標に固定するモードと、目標周囲を旋回するモードとを切り替えます
+    textEng: Switch between locking the camera to the target and orbiting the target
+  cam_bt_follow_orbit_text:
+    id: 2
+    text: カメラがユニットの周囲を旋回します
+    textEng: Camera orbits the unit
+  cam_bt_fov_text:
+    id: 2
+    text: 視野
+    textEng: Field of view
+  cam_bt_mount_arm_l_text:
+    id: 2
+    text: 左肩に追従
+    textEng: Follow the left shoulder
+  cam_bt_mount_arm_r_text:
+    id: 2
+    text: 右肩に追従
+    textEng: Follow the right shoulder
+  cam_bt_mount_body_text:
+    id: 2
+    text: 機体に追従
+    textEng: Follow the body
+  cam_bt_mount_wpn_l_text:
+    id: 2
+    text: 左の武器に追従
+    textEng: Follow the left weapon
+  cam_bt_mount_wpn_r_text:
+    id: 2
+    text: 右の武器に追従
+    textEng: Follow the right weapon
+  cam_bt_offset_depth_text:
+    id: 2
+    text: カメラの距離
+    textEng: Camera distance
+  cam_bt_offset_hor_text:
+    id: 2
+    text: 水平カメラ補正
+    textEng: Horizontal camera offset
+  cam_bt_offset_vert_text:
+    id: 2
+    text: 垂直カメラ補正
+    textEng: Vertical camera offset
+  cam_bt_position_damping_text:
+    id: 2
+    text: 位置スムージング
+    textEng: Position smoothing
+  cam_bt_preset_next_text:
+    id: 2
+    text: 次のカメラプリセット
+    textEng: Next camera preset
+  cam_bt_preset_prev_text:
+    id: 2
+    text: 前のカメラプリセット
+    textEng: Previous camera preset
+  cam_bt_rotation_damping_text:
+    id: 2
+    text: 回転スムージング
+    textEng: Rotation smoothing
+  cam_bt_settings_toggle_text:
+    id: 2
+    text: 詳細設定を表示
+    textEng: Show advanced settings
+  cam_button_hint_dir:
+    id: 2
+    text: 上下に動かすと値を変更できます。
+    textEng: Move up or down to change this value.
+  cam_button_hint_mouse:
+    id: 2
+    text: マウスの左右ボタンで値を変更できます。
+    textEng: Use the left and right mouse buttons to change this value.
+  cam_preset_back:
+    id: 2
+    text: 戻る
+    textEng: Back
+  cam_preset_body:
+    id: 2
+    text: 本体
+    textEng: Body
+  cam_preset_close:
+    id: 2
+    text: 閉じる
+    textEng: Close
+  cam_preset_front:
+    id: 2
+    text: 前
+    textEng: Front
+  cam_preset_left:
+    id: 2
+    text: 左
+    textEng: Left
+  cam_preset_low:
+    id: 2
+    text: 低
+    textEng: Low
+  cam_preset_right:
+    id: 2
+    text: 右
+    textEng: Right
+  cam_preset_side:
+    id: 2
+    text: サイド
+    textEng: Side
+  cam_preset_wpn:
+    id: 2
+    text: 武器
+    textEng: Weapon
+  dash_bulldoze_depth_nominal:
+    id: 2
+    text: 構造物破壊を予測
+    textEng: Structure demolition predicted
+  dash_bulldoze_no_impact:
+    id: 2
+    text: 進路に構造物はありません
+    textEng: No structures in the way
+  dash_bulldoze_path_above_ground:
+    id: 2
+    text: 接地が中断されました
+    textEng: Ground contact interrupted
+  dash_bulldoze_path_ends_inside_obstacle:
+    id: 2
+    text: 構造物内では停止できません！
+    textEng: Can't stop inside structures!
+  dash_bulldoze_path_hits_bounds:
+    id: 2
+    text: 範囲外です！
+    textEng: Out of bounds!
+  dash_bulldoze_path_hits_indestructible:
+    id: 2
+    text: この地点は突破できません
+    textEng: Can't break through this location
+  dash_bulldoze_path_too_deep:
+    id: 2
+    text: 障害物のサイズが上限を超えています
+    textEng: Obstacle size exceeds limits
+  dash_bulldoze_stat_env_hits:
+    id: 2
+    text: 構造物との衝突
+    textEng: Structure collisions
+  dash_bulldoze_stat_unit_hits:
+    id: 2
+    text: ユニットとの衝突
+    textEng: Unit collisions
+  dash_bulldoze_status_blocked:
+    id: 2
+    text: 遮断
+    textEng: Blocked
+  dash_bulldoze_status_crash_predicted:
+    id: 2
+    text: 予測クラッシュ
+    textEng: Predicted crash
+  dash_bulldoze_status_valid:
+    id: 2
+    text: 問題なし
+    textEng: All clear
+  dash_bulldoze_unstable:
+    id: 2
+    text: 衝突過多により安定性を維持できません
+    textEng: Too many collisions to maintain stability
+  dialog_exec_confirm_desc:
+    id: 2
+    text: 時間が再開され、すべてのユニットが計画を実行します。よろしいですか？
+    textEng: The time will resume and all units will execute their plans. Do you wish to proceed?
+  dialog_exec_confirm_header:
+    id: 2
+    text: 実行を確定しますか？
+    textEng: Confirm execution?
   dialog_no_orders_desc:
     id: 1
     text: 一部のユニットには命令がない。本当に続行する？
@@ -64,6 +244,10 @@ entries:
     id: 1
     text: 基地は我々のユニットを回収して撤退したが、現場は依然として敵の支配下にある。次こそは倒せる！
     textEng: The base has picked up our units and retreated, but the site remains under enemy control. We can defeat them next time!
+  end_detail_defeat_st:
+    id: 2
+    text: 作戦が終了しました。接続を切断し、戦闘結果を評価します...
+    textEng: The operation has been concluded. Closing the connection, evaluating combat performance...
   end_detail_defeat_total:
     id: 1
     text: 我々のユニットは敗北したが、基地は逃げ切れた。現場は依然として敵の支配下にある。次こそは倒せる！
@@ -72,6 +256,10 @@ entries:
     id: 1
     text: おめでとう！基地は我々のユニットを安全に確保し、すべての目標は遂行された。敵がいなくなり、現場を支配できるようになった。
     textEng: Congratulations! The base has secured our units and all objectives have been fulfilled. With the enemy gone, you now have control of the site.
+  end_detail_victory_st:
+    id: 2
+    text: 作戦が成功しました。接続を切断し、戦闘結果を評価します...
+    textEng: The operation was successfully concluded. Closing the connection, evaluating combat performance...
   end_detail_victory_total:
     id: 1
     text: おめでとう！敵は敗れ、現場を支配できるようになった。
@@ -80,6 +268,10 @@ entries:
     id: 1
     text: 撤退済み
     textEng: Retreated
+  end_header_defeat_st:
+    id: 2
+    text: 作戦失敗
+    textEng: Operation failed
   end_header_defeat_total:
     id: 1
     text: 敗北
@@ -88,10 +280,18 @@ entries:
     id: 1
     text: 勝利
     textEng: Victory
+  end_header_victory_st:
+    id: 2
+    text: 作戦成功
+    textEng: Operation success
   end_header_victory_total:
     id: 1
     text: 勝利
     textEng: Victory
+  end_st_next_mission:
+    id: 2
+    text: 次のミッション
+    textEng: Next mission
   end_subtitle_defeat_early:
     id: 1
     text: 部隊が撤退、ミッションに失敗。
@@ -148,6 +348,14 @@ entries:
     id: 1
     text: 未確認ユニット
     textEng: Unidentified unit
+  intro_generator_ready_remote:
+    id: 2
+    text: 接続を確立
+    textEng: Connection established
+  intro_generator_ready_sim:
+    id: 2
+    text: シミュレーション開始
+    textEng: Simulation initialized
   intro_squad_ready:
     id: 1
     text: 部隊配置完了
@@ -483,13 +691,23 @@ entries:
   targeting_environment_hint:
     id: 1
     text: >-
-      ユニットをクリックしてターゲットをロックする。
+      ユニットをクリックすると目標をロックします。
 
-      目標の環境では、[ffcc77]Ctrl[-]を押したままにする。
+      環境を目標にするには長押しします
     textEng: >-
       Click a unit to lock target.
 
-      To target environment, hold [ffcc77]Ctrl.[-]
+      To target environment, hold
+  targeting_environment_hint_controller:
+    id: 2
+    text: >-
+      ユニットをクリックすると目標をロックします。
+
+      環境を目標にするには早押しします
+    textEng: >-
+      Click a unit to lock target.
+
+      To target environment, press
   targeting_falloff:
     id: 1
     text: 範囲適性

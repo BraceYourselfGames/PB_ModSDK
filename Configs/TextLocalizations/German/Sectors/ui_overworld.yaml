@@ -342,11 +342,11 @@ entries:
     textEng: One of your pilots was injured
   int_sh_effect_pilots_fatigue_added:
     id: 1
-    text: Deine Pilotencrew erhält etwas Erschöpfung
+    text: Deine Pilotencrew erhält etwas Ermüdung
     textEng: Your pilots gain some fatigue
   int_sh_effect_pilots_fatigue_reduced:
     id: 1
-    text: Deine Pilotencrew verliert etwas Erschöpfung
+    text: Deine Pilotencrew verliert etwas Ermüdung
     textEng: Your pilots lose some fatigue
   int_sh_effect_pilots_levelup:
     id: 1
@@ -391,7 +391,7 @@ entries:
   lock_camp_review_hint_last_supplies:
     id: 1
     text: Dies ist der letzte Satz Lagervorräte in deinem Inventar. Es sind keine weiteren Stopps möglich, bis du neue findest.
-    textEng: This is the last set of camp supplies in your inventory. No further stops would be possible until you find more.
+    textEng: This is the last set of camp supplies in your inventory. No further stops will be possible until you find more.
   lock_camp_review_hint_pilots_free:
     id: 1
     text: Die Medizinbucht war nicht maximal ausgelastet.
@@ -402,7 +402,7 @@ entries:
     textEng: No pilots were assigned to the medical bay.
   lock_camp_review_hint_pilots_total:
     id: 1
-    text: Pilotencrew mit Verletzungen oder Erschöpfung insgesamt
+    text: Pilotencrew mit Verletzungen oder Ermüdung insgesamt
     textEng: Total pilots with injuries or fatigue
   lock_camp_review_hint_start:
     id: 1
@@ -475,7 +475,7 @@ entries:
   lock_hint_camp:
     id: 1
     text: 'Die Crew kümmert sich um die Verwundeten, repariert die Mechs und ruht sich aus. Aber dieser Halt ist nicht von Dauer: Die optische Tarnung wird nicht lange vorhalten.'
-    textEng: "The crew attends to the injured, repairs the mechs and rests. This is but a short stop: the optical camo won't last long."
+    textEng: "The crew attends to the injured, repairs the mechs, and rests. This is but a short stop: the optical camo won't last long."
   lock_hint_generic:
     id: 1
     text: Die Basis wartet in Position.
@@ -498,7 +498,7 @@ entries:
     textEng: The mobile base still has some camp supplies. If you need to repair mechs or treat pilot injuries, it might be optimal to set up a camp instead.
   lock_retreat_hint_start:
     id: 1
-    text: Möchtest du dich wirklich zur nächsten Frontbasis zurückziehen? Dies wird viel Zeit in Anspruch nehmen, aber dafür die Basis aufstocken, alle Einheiten reparieren und alle Piloten heilen. Die Pilotenerschöpfung wird auf neutral zurückgesetzt.
+    text: Möchtest du dich wirklich zur nächsten Frontbasis zurückziehen? Dies wird viel Zeit in Anspruch nehmen, aber dafür die Basis aufstocken, alle Einheiten reparieren und alle Piloten heilen. Die Pilotenermüdung wird auf neutral zurückgesetzt.
     textEng: Are you sure you would like to retreat to the nearest frontline base? This will take considerable time, but will resupply the base, repair all units and heal every pilot. Pilot fatigue will reset to neutral.
   log_ability_drone_stun:
     id: 1
@@ -1222,7 +1222,7 @@ entries:
     textEng: Option unavailable, participate in combat to unlock. [cc]You already stopped to camp or resupply recently and it is too risky to stop again without securing the area.[ff]
   roster_camp_enter_tooltip_effects:
     id: 1
-    text: "– [b]Erfordert Zeit. Missionen könnten ablaufen.[/b] \n– Ausgewählte Mechs werden repariert. \n– Ausgewählte Mitglieder der Pilotencrew werden geheilt. \n– Die gesamte Pilotencrew hat etwas weniger Erschöpfung."
+    text: "– [b]Erfordert Zeit. Missionen könnten ablaufen.[/b] \n– Ausgewählte Mechs werden repariert. \n– Ausgewählte Mitglieder der Pilotencrew werden geheilt. \n– Die gesamte Pilotencrew hat etwas weniger Ermüdung."
     textEng: "- [b]Takes time. Missions might expire.[/b] \n- Selected mechs will be repaired. \n- Selected pilots will be healed. \n- All pilots will have slightly reduced fatigue."
   roster_camp_enter_tooltip_inventory:
     id: 1
@@ -1348,7 +1348,7 @@ entries:
 
       – Einheiten werden repariert.
 
-      – Mitglieder der Pilotencrew werden geheilt, aber erholen sich nicht vollständig von Erschöpfung.
+      – Mitglieder der Pilotencrew werden geheilt, aber erholen sich nicht vollständig von Ermüdung.
     textEng: >-
       Returning to a friendly base is a last resort. Use it when you run out of camp supplies and have no other options to proceed.
 
@@ -1591,7 +1591,7 @@ entries:
   selection_province_travel_dialog_text:
     id: 1
     text: Auf dem Weg in die nächste Region ruht sich deine Pilotencrew aus und deine Einheiten werden repariert. Die Widerstandstruppen folgen dir und die nächste Mission beginnt, sobald du ankommst.
-    textEng: Your pilots will rest and your units will be repaired on the way to the selected region. The resistance forces will follow you and the next operation will begin once you arrive.
+    textEng: Your pilots will rest, your units will be repaired, and workshop projects will finish building on the way to the selected region. The resistance forces will follow you and the next operation will begin once you arrive.
   selection_province_type_fallback_header:
     id: 1
     text: Vorrangiger Zielort

@@ -144,10 +144,6 @@ entries:
     id: 1
     text: 優先摧毀建築物，盡可能造成最大傷害。在地駐軍的確會形成威脅，但如果沒有剩下多少物資可用，就沒有理由留下來。
     textEng: Prioritize destroying structures, inflict as much damage as possible. The local garrison is a threat, but it won't have a reason to stick around if there is nothing of use is left standing.
-  generic_raid__step_main_0c_header:
-    id: 1
-    text: 襲擊
-    textEng: Raid
   generic_raid__step_main_0c_text:
     id: 1
     text: 這些貨箱都裝了追蹤器。敵方的飛行器只要鎖定了訊號，就會來把它們運走。把你的機甲移動到貨箱旁干擾訊號，延誤對方的運輸作業。
@@ -316,6 +312,10 @@ entries:
     id: 1
     text: 引誘敵軍從首都其他地區調動兵力。
     textEng: Provoke the enemy to pull forces from other parts of the Capital.
+  unique_intro__briefing_name:
+    id: 2
+    text: 介紹
+    textEng: Intro
   unique_intro__intro_location:
     id: 1
     text: 菲而蘭共和國邊境
@@ -368,10 +368,38 @@ entries:
     id: 1
     text: 在世界中左鍵點擊來確認移動。
     textEng: Left click in the world to confirm your movement.
+  unique_intro__step_02_move1_1hc_2_text_ctrl:
+    id: 2
+    text: >-
+      移動鏡頭，將游標對準這個區域，然後確認目的地：
+
+
+      {0}
+    textEng: >-
+      Move the camera to align the cursor with this area, then confirm the destination:
+
+
+      {0}
   unique_intro__step_02_move1_1hc_3_text:
     id: 1
     text: 點擊這個按鈕來執行計畫。
     textEng: Click this button to execute plan.
+  unique_intro__step_02_move1_1hc_3_text_ctrl:
+    id: 2
+    text: 使用這個按鈕（或按下顯示的快捷鍵）來執行計畫。
+    textEng: Use this button (or press the highlighted shortcut) to execute the plan.
+  unique_intro__step_02_move1_1hc_4_text:
+    id: 2
+    text: >-
+      使用方向鍵選定動作面板。選定後，按下下列按鍵以確認「奔跑」動作：
+
+
+      {0}
+    textEng: >-
+      Use the directional pad to focus the action panel. Once focused, confirm the "Run" action by pressing:
+
+
+      {0}
   unique_intro__step_07_wait_and_move_1hc_0_text:
     id: 1
     text: >-
@@ -384,6 +412,10 @@ entries:
 
 
       Hovering over the timeline will also show the prediction.
+  unique_intro__step_07_wait_and_move_1hc_0_text_ctrl:
+    id: 2
+    text: 開始「奔跑」動作，看看計畫如何與預測系統互動。
+    textEng: Start the "Run" action to see how planning can interact with the prediction system.
   unique_intro__step_07_wait_and_move_1hc_1_text:
     id: 1
     text: 點擊「奔跑」動作。
@@ -394,8 +426,36 @@ entries:
     textEng: This point should provide a clear view. Note how the distance to it changes the predicted arrival time.
   unique_intro__step_07_wait_and_move_1hc_3_text:
     id: 1
-    text: "移動時間是由距離決定的。移動次數不限。\n \n 兩下右鍵可以取消動作。如果你滿意這個預計行動，就執行它吧！"
-    textEng: "Movement time is determined by distance. You can move any number of times. \n\nActions can be cancelled with two right clicks. If you're happy with the plan, execute it!"
+    text: >-
+      你可以將滑鼠懸停在時間軸拖曳，查看這個單位隨時間的預期移動狀況。
+
+
+      準備好繼續時，請執行計畫。
+    textEng: >-
+      You can hover over the timeline to scrub through the prediction and see how this unit will move over time.
+
+
+      When you're ready to proceed, execute the plan.
+  unique_intro__step_07_wait_and_move_1hc_3_text_ctrl:
+    id: 2
+    text: >-
+      你可以選定時間軸，並使用扳機鍵拖曳預測，查看這個單位隨時間的移動狀況。
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      準備好繼續時，請執行計畫。
+    textEng: >-
+      You can focus the timeline and use the triggers to scrub through the prediction and see how this unit will move over time.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      When you're ready to proceed, execute the plan.
   unique_intro__step_07_wait_and_move_1hc_4_text:
     id: 1
     text: >-
@@ -410,8 +470,8 @@ entries:
     textEng: Select the controllable unit.
   unique_intro__step_09_tank_plans_1hc_0_text:
     id: 1
-    text: 坦克即將發動攻擊！你得再靠近一點才能對付它。點擊「奔跑」動作。
-    textEng: The tank is about to attack! You will need to get closer to engage it. Click the "Run" action.
+    text: 坦克即將發動攻擊！你得再靠近一點才能對付它。請使用「奔跑」動作。
+    textEng: The tank is about to attack! You will need to get closer to engage it. Use the "Run" action.
   unique_intro__step_09_tank_plans_1hc_1_text:
     id: 1
     text: 點擊「奔跑」動作。
@@ -434,14 +494,32 @@ entries:
 
 
       {0}
+  unique_intro__step_09_tank_plans_1hc_10_text_ctrl:
+    id: 2
+    text: >-
+      [ff9999]這是敵方坦克的時間軸。根據預測，它會向前移動並開火。[-]
+
+
+      透過下方的藍色單位分頁或按下：
+
+
+      {1}{2} 讓你的單位返回。
+    textEng: >-
+      [ff9999]This is the timeline of the hostile tank. It's predicted to move forward and fire.[-]
+
+
+      You can return to your unit by navigating to the blue unit tab below or by pressing:
+
+
+      {1}{2}
   unique_intro__step_09_tank_plans_1hc_2_text:
     id: 1
     text: 移動到這裡就會將目標置於理想射程內。
     textEng: Moving here will place the target into optimal range.
   unique_intro__step_09_tank_plans_1hc_3_text:
     id: 1
-    text: 接下來點擊「攻擊」動作。
-    textEng: Click the "Attack" action next.
+    text: 接下來請使用「攻擊」動作。
+    textEng: Use the "Attack" action next.
   unique_intro__step_09_tank_plans_1hc_4_text:
     id: 1
     text: 點擊「攻擊」動作。
@@ -458,6 +536,18 @@ entries:
 
 
       The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
+  unique_intro__step_09_tank_plans_1hc_5_text_ctrl:
+    id: 2
+    text: >-
+      首先，請使用扳機鍵選擇攻擊的[b]時間[/b]。
+
+
+      那個時候目標應該要在[b]理想射程[/b]之內（你的單位周圍的白色光圈）。
+    textEng: >-
+      First, choose [b]when[/b] the attack should happen using the triggers.
+
+
+      The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
   unique_intro__step_09_tank_plans_1hc_6_text:
     id: 1
     text: >-
@@ -470,14 +560,68 @@ entries:
 
 
       The % displayed is the predicted effectiveness of your weapon at this range.
+  unique_intro__step_09_tank_plans_1hc_6_text_ctrl:
+    id: 2
+    text: >-
+      將游標移到預定目標（或其預測投影）後，確認攻擊。當游標懸停在有效目標上時，準星會鎖定。
+
+
+      呈現的百分比代表這個範圍之內預測你的武器有效的比率。
+    textEng: >-
+      Confirm the attack after moving the cursor to the intended target (or its prediction hologram). The reticle will lock on if you are hovering over a valid target.
+
+
+      The % displayed is the predicted effectiveness of your weapon at this range.
   unique_intro__step_09_tank_plans_1hc_7_text:
     id: 1
-    text: "你可以拖曳時間軸上的移動和攻擊來調整時間和每一步驟的位置。\n \n [b]可以計劃超過一個攻擊動作。[/b]試試看增加另一個攻擊動作。"
+    text: >-
+      ■ 只要計畫放得進時間軸，單位就能執行任意數量的動作。
+
+
+      ■ 已規劃的動作可以用滑鼠左鍵拖曳來調整時機，或用右鍵從時間軸上刪除。
+
+
+      ■ 你也可以透過鍵盤並聚焦時間軸來調整或刪除動作（請參考左側的操作提示）。
+
+
+      [b]準備好繼續時，試試看增加另一個攻擊動作。[/b]
     textEng: >-
-      You can drag the movements and attacks on the timeline to adjust the time and place of every step.
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
 
 
-      [b]More than one attack can be planned.[/b] Try creating another attack.
+      ■ Planned actions can retimed by dragging with a left mouse button, or deleted from the timeline with right clicks.
+
+
+      ■ Actions can also be retimed or deleted using the keyboard and focusing the timeline (see the input hints to the left).
+
+
+      [b]When you're ready to proceed, try creating another attack.[/b]
+  unique_intro__step_09_tank_plans_1hc_7_text_ctrl:
+    id: 2
+    text: >-
+      ■ 只要計畫放得進時間軸，單位就能執行任意數量的動作。
+
+
+      ■ 選定時間軸後就可以調整或刪除動作：
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      請查看左側顯示的快捷鍵以了解更多資訊。[b]準備好繼續時，試試看增加另一個攻擊動作。[/b]
+    textEng: >-
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
+
+
+      ■ Actions can be retimed or deleted once the timeline is in focus:
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      Check the shortcuts displayed to the left to learn more. [b]When you're ready to proceed, try creating another attack.[/b]
   unique_intro__step_09_tank_plans_1hc_8_text:
     id: 1
     text: 現在你在一個序列中計畫了兩個攻擊動作。試著執行預計行動看看！
@@ -554,6 +698,26 @@ entries:
     id: 1
     text: 一個額外的單位剛加入戰鬥。趁他們還沒報告你的存在，消滅所有敵軍。
     textEng: An additional unit just joined the fight. Eliminate all hostiles before they report your presence.
+  unique_test_range__briefing_name:
+    id: 2
+    text: 測試靶場
+    textEng: Test range
+  unique_test_range__briefing_text:
+    id: 2
+    text: 在各種地形與不同敵人對抗，測試你機甲的性能。
+    textEng: Test the performance of your mechs over varied terrain and against different enemies.
+  unique_test_range__intro_location:
+    id: 2
+    text: 訓練模擬
+    textEng: Training simulation
+  unique_test_range__intro_ready:
+    id: 2
+    text: 準備就緒
+    textEng: Ready
+  unique_test_range__intro_threat:
+    id: 2
+    text: 正在初始化所選裝備…
+    textEng: Initializing selected equipment...
   unique_tutorial_base__state_wave_02_trigger_0c_text:
     id: 1
     text: 殲滅戰場上所有敵軍單位以進入下一階段。

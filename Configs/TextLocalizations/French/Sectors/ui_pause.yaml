@@ -229,10 +229,26 @@ entries:
     id: 1
     text: Réinitialiser
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: DLC
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: Contenu installé
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: Pack de soutien
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: La mise à jour 2.0 est là !
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: La mise à jour 2.2 est là !
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -257,6 +273,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      Jouez à votre façon ! Nous avons ajouté la prise en charge totale des manettes et une navigation améliorée au clavier.
+
+
+      Découvrez de nouvelles options de progression et de configuration grâce aux contrats d'assistance à distance et au développement du stand de tir.
+
+
+      Profitez des caméras d'action, de nouvelles cartes, d'améliorations de l'interface, et bien plus encore ! Découvrez tous les détails de cette mise à jour et de la refonte de la version 2.0 en accédant au lien ci-dessous.
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -456,11 +490,11 @@ entries:
   input_kb_page_down:
     id: 2
     text: Page suivante
-    textEng: Page Down
+    textEng: PgDn
   input_kb_page_up:
     id: 2
     text: Page précédente
-    textEng: Page Up
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: Retour
@@ -501,6 +535,74 @@ entries:
     id: 2
     text: Molette
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: Commandes communes
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: Manette active
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: Déplacer la caméra
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: Pivoter la caméra
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: Annuler / Retour
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: Confirmer / Cliquer sur le bouton sélectionné
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: Naviguer entre les boutons
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: Pause
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: Changer d'écran / Changer d'unité
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: Ajuster le zoom / Ajuster le temps de combat
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      Gardez un œil sur le cadre de sélection pour vous repérer et identifier les zones accessibles. Consultez les indications contextuelles sur les différents écrans pour découvrir les commandes supplémentaires.
+
+
+      Si vous rencontrez des problèmes avec la manette, n'hésitez pas à nous faire part de vos commentaires via le formulaire de signalement ci-dessous.
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: Clavier actif
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      Consultez les indications contextuelles sur les différents écrans pour découvrir les commandes supplémentaires.
+
+
+      La majeure partie du jeu est accessible au clavier. Utilisez les flèches directionnelles et gardez un œil sur le cadre de sélection pour suivre vos choix.
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: Cette sauvegarde provient d'une campagne utilisant des fonctionnalités expérimentales, comme les sauvegardes en combat. Vous pouvez la charger, mais elle n'est pas officiellement prise en charge.
@@ -745,6 +847,14 @@ entries:
     id: 2
     text: Les commandes assignées seront sauvegardées sauf
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: Réinitialiser cette catégorie ?
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: Voulez-vous vraiment restaurer la valeur par défaut de toutes les options de cette catégorie ?
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: Sans
@@ -843,6 +953,10 @@ entries:
     id: 1
     text: Charger
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: Charger le briefing
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: Mods
@@ -891,6 +1005,14 @@ entries:
     id: 1
     text: Charger la sauvegarde
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: Chargement de la dernière sauvegarde
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: Voulez-vous continuer à partir de la sauvegarde la plus récente ?
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: Confirmer la suppression

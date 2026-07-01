@@ -1,0 +1,45 @@
+horizontal: true
+extended: true
+lines:
+- visibility: All
+  actions:
+  - action: global_cancel
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_pause
+  textKey: root_button_back
+- visibility: Controller
+  actions:
+  - action: global_gamepad_x
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: KeyboardMouse
+  actions:
+  - action: global_confirm
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_context_timeline__s1
+- visibility: KeyboardMouse
+  actions:
+  - action: global_mouse_primary
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: Controller
+  actions:
+  - action: overworld_tab_move_prev
+    newline: false
+  - action: overworld_tab_move_next
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_context_timeline__s3

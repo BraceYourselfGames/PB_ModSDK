@@ -29,6 +29,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -68,22 +70,32 @@ states:
   info_end:
     comment:
       comment: Enters scope when everyone has arrived. Drops the player out when the field is empty / no targets remain.
-    textNameKey: generic_intercept_targets_outgoing_header
-    textDescKey: generic_intercept_targets_outgoing_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 20
-    priorityDisplay: 0
-    mood: 1
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_intercept_targets_outgoing_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_intercept_targets_outgoing_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: 1
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -157,6 +169,7 @@ states:
           - time: 0
             hidden: false
             key: generic_intercept_swarm_exit
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -173,22 +186,31 @@ states:
             instant: false
   info_progress:
     comment: 
-    textNameKey: generic_intercept_targets_incoming_header
-    textDescKey: generic_intercept_targets_incoming_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 20
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_intercept_targets_incoming_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_intercept_targets_incoming_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -228,6 +250,7 @@ states:
           - time: 5
             hidden: false
             key: generic_intercept_swarm_spawn_end
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             info_end: true
@@ -242,17 +265,36 @@ states:
           outcome: 
   objective_tier1:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 10
-    priorityDisplay: 1
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 1
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -287,6 +329,7 @@ states:
           - time: 0
             hidden: false
             key: generic_intercept_swarm_tier1
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             objective_tier2: true
@@ -302,17 +345,36 @@ states:
           outcome: 
   objective_tier2:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 11
-    priorityDisplay: 2
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 2
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -347,6 +409,7 @@ states:
           - time: 0
             hidden: false
             key: unique_tutorial_convoy_victory_early_01
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -363,17 +426,36 @@ states:
             instant: false
   reinforcements_hg:
     comment: 
-    textNameKey: generic_enemy_reinforcements_header
-    textDescKey: generic_enemy_reinforcements_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 9
     priority: 9
-    priorityDisplay: 9
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 9
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -591,16 +673,11 @@ states:
   runner_delay:
     comment:
       comment: The purpose of this state is to delay introduction of first actionable objective into scope until first batch of targets spawns in. This is to avoid confusing the player.
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: -1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -643,16 +720,11 @@ states:
   runner_escape:
     comment:
       comment: This state makes enemy units that have reached their destination escape the fight. Units are retreated, tags removed, counters updated. State is non-incrementing, so reactions repeat forever, per unit.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -741,16 +813,11 @@ states:
   runner_intercepted:
     comment:
       comment: This state detects targets being taken out. Specifically, since the goal of these targets is to escape, they are considered taken out if they lose ability to move, not just lose pilots/HP. This state reacts forever, per unit.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled, OnPartDisabled
     evaluationOnOutcome: 
@@ -856,16 +923,11 @@ states:
   runner_spawn:
     comment:
       comment: This state spawns new enemy squads. Spawns occur every 2 turns starting from 1 (1, 3, 5, 7, ...). Spawns require total spawns to be less than goal and for total online targets to be less than a certain number, to avoid overloading the field. Spawns are relative to escape objective and can't be too close. Spawns are not precooked, as the state runs repeatedly. Only unit groups specially customized to disable spawn group registration should be used in this, otherwise spawns run out. All spawns receive a destination AI data to proceed forward (guards won't make use of it immediately).
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 2
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1026,13 +1088,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_intercept_swarm_header
-      textCurrentSecondaryKey: generic_intercept_swarm_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_intercept_swarm_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_intercept_swarm_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -1225,9 +1293,11 @@ steps:
       - time: 0
         hidden: false
         key: unique_tutorial_convoy_intro_01
+        functionsOnExit: 
       - time: 8
         hidden: false
         key: unique_tutorial_convoy_intro_02
+        functionsOnExit: 
     - !StartTutorial
       key: combat_convoy_intro
       allowRepeat: true

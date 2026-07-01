@@ -1,0 +1,87 @@
+horizontal: false
+extended: false
+lines:
+- visibility: Controller
+  actions:
+  - action: global_gamepad_y
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_context_nav__s1
+- visibility: KeyboardMouse
+  actions:
+  - action: global_mouse_primary
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_context_nav__s1
+- visibility: KeyboardMouse
+  actions:
+  - action: global_camera_zoom
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_root_planning__s5
+- visibility: All
+  actions:
+  - action: overworld_tab_move_prev
+    newline: false
+  - action: overworld_tab_move_next
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_root_planning__s6
+- visibility: Controller
+  actions:
+  - action: global_camera_zoom_neg
+    newline: false
+  - action: global_camera_zoom_pos
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_root_planning__s5
+- visibility: All
+  actions:
+  - action: global_gamepad_right_stick
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_root_planning__s8
+- visibility: All
+  actions:
+  - action: combat_toggle_overlay
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_root_planning__s8
+- visibility: KeyboardMouse
+  actions:
+  - action: combat_time_toggle
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: Controller
+  actions:
+  - action: global_gamepad_x
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: combat_root_execution__s7
+- visibility: All
+  actions:
+  - action: global_direction_down
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 

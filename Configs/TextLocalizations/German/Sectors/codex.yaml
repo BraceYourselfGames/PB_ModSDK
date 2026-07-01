@@ -44,6 +44,14 @@ entries:
     id: 1
     text: Du kannst fast jede Mission abbrechen, indem du auf dem Briefing-Bildschirm auf „Verlassen“ oder in der Navigationsleiste auf „Provinz“ klickst.
     textEng: You can back out from almost every mission by pressing "Leave" on the briefing screen or clicking the "Province" button on the navigation bar.
+  base_briefing_contracts__a_title:
+    id: 2
+    text: Verträge & Ausbildung
+    textEng: Contracts & training
+  base_briefing_contracts__s1_ts_text:
+    id: 2
+    text: In besetzten Gebieten kannst du über den Operationen-Bildschirm optionale Vertragsmissionen annehmen. Diese Missionen werden nach jedem Kampf, jedem Lagern und jeder Nachschubfahrt aktualisiert.
+    textEng: While in occupied territory, you can undertake optional contract missions through the Operations screen. These missions refresh after every fight, camp and resupply trip.
   base_briefing_squad__a_title:
     id: 1
     text: Trupp-Bildschirm
@@ -189,7 +197,7 @@ entries:
   base_workshop_unlocks__s1_tq_quote:
     id: 1
     text: 'Wenn du etwas wirklich liebst, lass es los. Anders gesagt: Nimm deine Lieblingswaffen, zerlege sie, entwickle sie rückwärts und drucke fünf neue.'
-    textEng: If you love it, let it go. In other words, take your favorite guns, tear them to pieces, reverse engineer 'em, and print five more.
+    textEng: If you love it, let it go. In other words, take your favourite guns, tear them to pieces, reverse engineer 'em, and print five more.
   base_workshop_unlocks__s1_tq_subtitle:
     id: 1
     text: Sage Oster
@@ -553,7 +561,7 @@ entries:
   overworld_camping__s1_ts_text:
     id: 1
     text: >-
-      Obwohl du mehrere Missionen nacheinander annehmen kannst, können Pilotenerschöpfung, Verletzungen und Mech-Schäden deinen Fortschritt stoppen. Deshalb ist es wichtig, zu rasten, damit dein Trupp erholt weitermachen kann.
+      Obwohl du mehrere Missionen nacheinander annehmen kannst, können Pilotenermüdung, Verletzungen und Mech-Schäden deinen Fortschritt stoppen. Deshalb ist es wichtig, zu rasten, damit dein Trupp erholt weitermachen kann.
 
 
       Um eine kurze Rast zu starten, klicke auf die Schaltfläche [ffce80]Lager aufschlagen[-] unten links in der Provinz-Benutzeroberfläche.
@@ -573,7 +581,11 @@ entries:
   overworld_camping__s5_ts_text:
     id: 1
     text: Nach der Pause siehst du eine Zusammenfassung. Die ausgewählten Mechs werden repariert, die ausgewählten Mitglieder der Pilotencrew geheilt und erholt. Zufällige Ereignisse können deine Piloten abhängig von vorherigen Kämpfen, der aktuellen Hoffnungsstufe oder Zufall beeinflussen.\n\nWenn in der Werkstatt ein Projekt in Bearbeitung war, wird es jetzt abgeschlossen.
-    textEng: Once camp has been struck, you will be presented with a summary of the outcomes. The mechs you selected will be repaired; the pilots you selected will be healed and lose all fatigue. Some additional random events might affect your pilots depending on the outcomes of recent fights, the current Hope level, or random chance.\n\nIf you had a project underway in the workshop, they will now be completed.
+    textEng: >-
+      Once camp has been struck, you will be presented with a summary of the outcomes. The mechs you selected will be repaired; the pilots you selected will be healed and lose all fatigue. Some additional random events might affect your pilots depending on the outcomes of recent fights, the current Hope level, or random chance.
+
+
+      If you had a project underway in the workshop, it will now be completed.
   overworld_camping__s6_to_text:
     id: 1
     text: Das Rasten dauert nicht so lange wie ein Rückzug. Trotzdem können Missionsmöglichkeiten ablaufen, wenn der feindliche Countdown niedrig ist. Behalte den feindlichen Countdown im Auge, um zu überprüfen, ob du genug Zeit zum Rasten hast.
@@ -750,7 +762,7 @@ entries:
       Wenn deiner mobilen Basis die Lagervorräte, kampfbereiten Mitglieder der Pilotencrew oder funktionstüchtigen Mechs ausgehen, bleibt dir nur der Rückzug zu einer Frontbasis, um Nachschub zu beschaffen. Nutze dazu die Schaltfläche unten links in der Provinz-Benutzeroberfläche oder nähere dich einer Frontbasis direkt auf der Karte.
 
 
-      Die Nachschubversorgung kostet Zeit, heilt aber alle Piloten, reduziert ihre Erschöpfung und repariert alle Mechs. Wenn du kaum Lagervorräte hast, bekommst du genug, um wenigstens einmal zu rasten.
+      Die Nachschubversorgung kostet Zeit, heilt aber alle Piloten, reduziert ihre Ermüdung und repariert alle Mechs. Wenn du kaum Lagervorräte hast, bekommst du genug, um wenigstens einmal zu rasten.
 
 
       Solltest du im Kampf alle funktionstüchtigen Mechs verlieren, erhältst du zudem einige Basiseinheiten, um weiterkämpfen zu können. Erwarte allerdings keine Spitzentechnik.
@@ -838,12 +850,12 @@ entries:
     textEng: Whenever a pilot gains a new level, you will have the opportunity to unlock a new trait. Trait selection can be done from the pilots menu in the base.
   pilots_fatigue__a_title:
     id: 1
-    text: Erschöpfung
+    text: Ermüdung
     textEng: Fatigue
   pilots_fatigue__s1_ts_text:
     id: 1
     text: >-
-      Jeder Kampfeinsatz erhöht die Erschöpfung der Mitglieder deiner Pilotencrew. Achte auf das Erschöpfungssymbol neben den Pilotenporträts, um gut ausgeruhte und erschöpfte Mitglieder der Pilotencrew leicht zu erkennen.
+      Jeder Kampfeinsatz erhöht die Ermüdung der Mitglieder deiner Pilotencrew. Achte auf das Ermüdungssymbol neben den Pilotenporträts, um gut ausgeruhte und erschöpfte Mitglieder der Pilotencrew leicht zu erkennen.
 
 
       [F488FF]Müde[-] Crewmitglieder verlieren jede Runde Gesundheit und können abhängig von ihrer Klasse zusätzlich benachteiligt sein. Wenn es unbedingt sein muss, können sie zwar am Kampf teilnehmen, sie bleiben jedoch besser in der Basis. Wenn du sie einsetzen musst, nutze den Schleudersitz, bevor ihre Gesundheit ganz aufgebraucht ist, sonst erleiden sie ein bleibendes Trauma.
@@ -852,7 +864,7 @@ entries:
       [ADFFDD]Gut ausgeruhte[-] Mitglieder der Pilotencrew erhalten zu Beginn eines Kampfes einen Bonus auf Geschwindigkeit und Angriff. Dieser hält nur wenige Runden an, kann aber entscheidend sein.
 
 
-      Wenn Mitglieder der Pilotencrew einen Kampf aussetzen, verlieren sie einen Erschöpfungspunkt. Bis zur Rast in der Krankenstation behalten sie aber immer mindestens einen Erschöpfungspunkt.
+      Wenn Mitglieder der Pilotencrew einen Kampf aussetzen, verlieren sie einen Ermüdungspunkt. Bis zur Rast in der Medizinbucht behalten sie aber immer mindestens einen Ermüdungspunkt.
     textEng: >-
       Every combat deployment increases your pilots' fatigue. Keep an eye on the fatigue icon next to pilot portraits to easily spot well rested or exhausted pilots.
 

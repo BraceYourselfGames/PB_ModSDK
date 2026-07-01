@@ -1,0 +1,75 @@
+dataUI:
+  icon: s_icon_l32_world_battlesite2
+  color:
+    r: 0.2941176
+    g: 0.3143736
+    b: 0.8313726
+    a: 1
+  colorOverride:
+    r: 0
+    g: 0.0333333
+    b: 1
+    a: 1
+  sortingPriority: 176
+  hidden: true
+  irreversible: false
+  heating: true
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Primary
+  paintingType: Wait
+  heatType: DataConstantRate
+  durationType: Variable
+  duration: 0
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 45
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnValidationBase:
+  - !CombatValidateUnitClass
+    classKey: mech
+    present: true
+  - !CombatValidateUnitSubsystem
+    socket: core
+    hardpoint: internal_aux_top_thrusters
+    blueprint: 
+    tags:
+      thruster_type_hover: true
+    present: true
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck: 
+  pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
+dataFactionCheck: 
+dataMovement:
+  movementSpeedScalar: 1
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart: 
+dataCustom:
+  flags: 
+  ints: 
+  floats:
+    range_min: 12
+  vectors: 
+  strings: 
+functionsTimed: 

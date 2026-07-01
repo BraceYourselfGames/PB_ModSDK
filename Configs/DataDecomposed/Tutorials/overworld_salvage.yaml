@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: true
   backgroundColor:
@@ -14,9 +15,20 @@ pages:
     a: 0.9843137
   center:
     textImage: event_salvage
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld: 
   effectsCombat: 
@@ -24,6 +36,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -49,12 +62,18 @@ pages:
     textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -67,6 +86,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -82,7 +102,7 @@ pages:
       b: 0.3411765
       a: 1
     frameLocation: BottomRight
-    frameGradientMode: None
+    frameGradientMode: Top
     framePositionX: 0
     framePositionY: 0
     frameSizeX: 440
@@ -91,13 +111,35 @@ pages:
     frameBoundary: false
     textLocation: TopRight
     buttonLocation: Bottom
-    textWidth: 256
-    textReused: 
-    icon: 
+    textWidth: 390
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldDebriefing
+        methodName: OnStageNextExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -110,6 +152,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -135,12 +178,18 @@ pages:
     textLocation: LeftBottom
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -153,6 +202,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -178,12 +228,22 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -196,6 +256,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -211,28 +272,51 @@ pages:
       b: 0.3411765
       a: 1
     frameLocation: BottomRight
-    frameGradientMode: None
+    frameGradientMode: Top
     framePositionX: 0
     framePositionY: 0
-    frameSizeX: 440
+    frameSizeX: 528
     frameSizeY: 96
     frameBlocksInput: false
     frameBoundary: false
-    textLocation: LeftBottom
+    textLocation: TopRight
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocReused
+      text: 
+      textSector: ui_tutorials
+      textKey: overworld_salvage__p02_hint_ctrl
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldDebriefing
+        methodName: OnStageNextExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -258,12 +342,22 @@ pages:
     textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -276,6 +370,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -301,18 +396,41 @@ pages:
     textLocation: TopRight
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocReused
+      text: 
+      textSector: ui_tutorials
+      textKey: overworld_salvage__p02_hint_ctrl
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldDebriefing
+        methodName: OnStageNextExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -338,12 +456,18 @@ pages:
     textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -356,6 +480,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -381,12 +506,18 @@ pages:
     textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions: []
   effectsCombat: 
@@ -394,7 +525,8 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
-  backgroundUsed: false
+  navigationFocus: true
+  backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
     r: 0
@@ -416,15 +548,21 @@ pages:
     frameSizeY: 420
     frameBlocksInput: false
     frameBoundary: true
-    textLocation: BottomRight
+    textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -437,7 +575,8 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
-  backgroundUsed: false
+  navigationFocus: true
+  backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
     r: 0
@@ -458,16 +597,22 @@ pages:
     frameSizeX: 178
     frameSizeY: 120
     frameBlocksInput: false
-    frameBoundary: true
+    frameBoundary: false
     textLocation: TopRight
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -480,6 +625,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -505,12 +651,18 @@ pages:
     textLocation: TopRight
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -523,6 +675,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -538,22 +691,28 @@ pages:
       b: 0.7058824
       a: 1
     frameLocation: BottomRight
-    frameGradientMode: None
+    frameGradientMode: Top
     framePositionX: 0
     framePositionY: 0
     frameSizeX: 438
     frameSizeY: 146
     frameBlocksInput: false
     frameBoundary: false
-    textLocation: TopRight
+    textLocation: TopLeft
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic

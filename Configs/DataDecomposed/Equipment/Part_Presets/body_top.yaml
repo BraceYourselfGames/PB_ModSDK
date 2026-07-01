@@ -120,6 +120,15 @@ genSteps:
   - !CheckPartRating
     ratingMin: 1
     ratingMax: 3
+- !TrimSystemsByTagFilter
+  requireAll: true
+  filter:
+    type_generator_excluded: false
+  hardpointsTargeted:
+  - internal_aux_top_thrusters
+  priority: 15
+  comment: 
+  checks: 
 - !TrimSystemsByRating
   ratingMin: 0
   ratingMax: 0

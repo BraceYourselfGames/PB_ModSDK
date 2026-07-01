@@ -112,6 +112,14 @@ entries:
     id: 1
     text: EHP
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 호버링 추진기를 사용할 시 지속되는 호버링 고도입니다. 방어구 클래스에 따라 다릅니다. 무거운 방어구를 지닌 유닛은 호버링 고도가 낮습니다.
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: 호버링 고도
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: 해당 유닛의 동력 출력이 유닛의 질량과 비교되는 방식입니다.
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: 방열
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: 이 유닛이 호버링 시 유지할 수 있는 최고 고도입니다(가벼운 방어구 장착 시).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: 최고 고도
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: 이 유닛이 호버링 시 유지할 수 있는 최저 고도입니다(무거운 방어구 장착 시).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: 최저 고도
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: '전통적인 복합 재료로 제조된 방어구의 내부 층입니다. 상당한 회복력이 있지만, 대미지를 입으면 수리가 필요합니다. '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: 가치 - 물자
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: 충돌에 대한 저항력입니다.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: 안정성
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: 추진기 서브시스템의 출력입니다. 질량을 상쇄하여, 돌진 거리를 결정합니다.

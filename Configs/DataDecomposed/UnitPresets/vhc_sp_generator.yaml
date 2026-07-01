@@ -39,14 +39,15 @@ effects:
         value: 4
         valueFromMemory: false
         valueFromMemoryKey: 
-    - !CombatUnitTagChange
-      tagChanges:
-        flag_no_concussion_in: true
-        movement_skipped: true
-        purpose_sp_generator: true
     - !CombatUnitControlChange
       ai: false
       player: false
+    - !CombatUnitTagSet
+      tags:
+      - purpose_sp_generator
+      - movement_skipped
+      - flag_no_concussion_in
+      - flag_uncrashable
     functionsPilot: 
   effectsOnArrival: 
   effectProximity: 

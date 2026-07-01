@@ -8,6 +8,14 @@ entries:
     id: 1
     text: Активировать защитные системы этого юнита.
     textEng: Activate the defense system mounted to this unit.
+  ability_back_spotter_name:
+    id: 2
+    text: Удар
+    textEng: Strike
+  ability_back_spotter_text:
+    id: 2
+    text: Укажите координаты цели для артиллерийского удара.
+    textEng: Provide target coordinates for an artillery strike.
   ability_back_targeted_name:
     id: 1
     text: Способность
@@ -168,6 +176,22 @@ entries:
     id: 1
     text: В результате столкновения или уничтожения все запланированные действия были отменены. Таймлайн показывает время восстановления.
     textEng: As a result of collision or destruction, all planned actions were terminated. The timeline indicates recovery duration.
+  dash_bulldoze_name:
+    id: 2
+    text: Бульдозер
+    textEng: Bulldoze
+  dash_bulldoze_text:
+    id: 2
+    text: >-
+      Перегрузите двигатели, чтобы проскользнуть вперед, проломив разрушаемые препятствия. Перед рывком мех ненадолго остановится, чтобы перенаправить энергию и подготовиться к столкновению.
+
+
+      Во время движения мех будет защищен от столкновений, однако каждое препятствие снижает устойчивость (в зависимости от весового класса юнита). Полная потеря устойчивости приведет к крушению при следующем столкновении.
+    textEng: >-
+      Overcharge the thrusters to slide forward, breaking through destructible obstacles. The mech will stop for a moment before takeoff to divert power and brace for impact.
+
+
+      The mech will be shielded from collisions, but each obstacle will reduce stability (depending on unit weight class). Losing all stability will lead to a crash on any collision.
   dash_name:
     id: 1
     text: Рывок
@@ -176,6 +200,22 @@ entries:
     id: 1
     text: 'Активируйте двигатели, чтобы прыгнуть в выбранную точку. Можно использовать, чтобы уклоняться от огня противника или занять выгодную позицию. Отменяет захват цели ракетами и предотвращает прямые попадания. '
     textEng: 'Activate thrusters to jump to a selected position. Can be used to evade fire or gain an advantageous position. Breaks missile locks and prevents direct hits. '
+  dash_vertical_name:
+    id: 2
+    text: Полет
+    textEng: Hover
+  dash_vertical_text:
+    id: 2
+    text: >-
+      Запустите двигатели, чтобы парить над землей в течение установленного времени.
+
+
+      Высота парения определяется характеристиками установленного летного двигателя и классом брони меха. Тяжелые мехи не могут подниматься так же высоко, как легкие.
+    textEng: >-
+      Activate thrusters to hover above ground for a configurable time.
+
+
+      The hover altitude is determined by the stats of the equipped hover thruster and the armor class of the mech. Heavier mechs can't lift as high as lighter ones.
   default_mode_path_drawing_header:
     id: 1
     text: Выбрать точку

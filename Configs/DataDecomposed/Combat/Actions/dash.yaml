@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -38,33 +37,29 @@ dataCore:
   eventsOnDispose: 
   functionsOnTargetCheck: 
   functionsOnValidation: 
+  functionsOnValidationBase:
+  - !CombatValidateUnitClass
+    classKey: mech
+    present: true
+  - !CombatValidateUnitSubsystem
+    socket: core
+    hardpoint: internal_aux_top_thrusters
+    blueprint: 
+    tags:
+      thruster_type_hover: false
+      thruster_type_bulldoze: false
+    present: true
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart: 
   functionsOnUpdate: 
   functionsOnEnd: 
   functionsOnDispose: 
-  check:
-    encompassingMethod: RequireAll
-    tagsMethod: RequireAll
-    blueprintsMethod: RequireAll
-    partsMethod: RequireAll
-    subsystemsMethod: RequireAll
-    statsMethod: RequireAll
-    tags:
-    - classTag: mech
-      not: false
-    blueprints: 
-    parts: 
-    subsystems:
-    - socket: core
-      hardpoint: internal_aux_top_thrusters
-      not: false
-      requirement: Present
-    stats: 
-    pilot: 
+  check: 
   unitCheck: 
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment:

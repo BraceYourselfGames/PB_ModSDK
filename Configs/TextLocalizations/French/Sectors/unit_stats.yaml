@@ -112,6 +112,14 @@ entries:
     id: 1
     text: PVE
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 'Altitude de lévitation lorsque vous utilisez les propulseurs à lévitation. Varie selon la catégorie de blindage : les unités lourdes lévitent moins haut.'
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: Altitude de lévitation
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: La comparaison entre la génération de puissance d'une unité et sa masse.
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: Dissipation de chaleur
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: Altitude la plus élevée que cette unité peut maintenir (lorsqu'elle est équipée d'un blindage léger).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: Altitude maximum
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: Altitude la plus basse que cette unité peut maintenir (lorsqu'elle est équipée d'un blindage lourd).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: Altitude minimum
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: "La couche interne de l'armure, fabriquée à partir de matériaux composites traditionnels. Elle peut être assez résistante, mais nécessite des réparations si elle est endommagée. "
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: Valeur - ravitaillement
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: Résistance aux collisions.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: Stabilité
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: La performance du sous-système de propulsion. Elle contrebalance la masse pour déterminer la distance de poussée.

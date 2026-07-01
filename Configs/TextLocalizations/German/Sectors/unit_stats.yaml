@@ -112,6 +112,14 @@ entries:
     id: 1
     text: EGP
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 'Die Höhe, in der man beim Einsatz der Schwebeschubdüse schweben kann. Hängt von der Rüstungsklasse ab: Einheiten mit schwererer Rüstung erreichen eine geringere Schwebehöhe.'
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: Schwebehöhe
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: Verhältnis zwischen Leistungskraft und Masse dieser Einheit.
@@ -170,7 +178,7 @@ entries:
     textEng: Overall state of the mech after combat.
   frame_health__name:
     id: 1
-    text: Rahmen-Zustand
+    text: Rahmen-Intaktheit
     textEng: Frame integrity
   heat_dissipation__desc:
     id: 1
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: Wärmeableitung
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: Die höchste Höhe, die diese Einheit im Schwebeflug halten kann (wenn sie mit leichter Rüstung ausgestattet ist).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: Max. Höhe
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: Die niedrigste Höhe, die diese Einheit im Schwebeflug halten kann (wenn sie mit schwerer Rüstung ausgestattet ist).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: Min. Höhe
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: 'Innere Rüstungsschicht aus herkömmlichen Kompositen. Sie kann recht widerstandsfähig sein, muss aber bei Beschädigung repariert werden. '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: Wert – Vorräte
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: Widerstandsfähigkeit bei Kollisionen.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: Stabilität
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: Leistung des Schubdüsen-Subsystems. Wirkt der Masse entgegen, um die Ansturmdistanz zu bestimmen.

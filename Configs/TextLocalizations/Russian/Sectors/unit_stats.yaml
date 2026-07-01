@@ -112,6 +112,14 @@ entries:
     id: 1
     text: ЭОЗ
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 'Высота устойчивого парения при использовании летного двигателя. Зависит от класса брони: юниты с более тяжелой броней поднимаются на меньшую высоту.'
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: Высота парения
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: Отношение мощности юнита к его массе.
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: Рассеивание тепла
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: Максимальная высота, на которую этот юнит может подняться в воздух (при использовании легкой брони).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: Макс. высота
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: Минимальная высота, на которую этот юнит может подняться в воздух (при использовании тяжелой брони).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: Мин. высота
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: 'Внутренний слой брони из традиционных композитных материалов. Может быть довольно выносливым, но требует ремонта в случае повреждения. '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: Количество (припасы)
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: Сопротивляемость столкновениям.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: Устойчивость
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: Мощность подсистемы двигателей. Как и масса, определяет расстояние рывка.

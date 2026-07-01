@@ -12,6 +12,7 @@ aiTargeting: default
 tags:
 - type_system
 - type_uncrewed
+- type_flying
 partTagPreferences: 
 parts:
   core:
@@ -34,6 +35,10 @@ effects:
     functionsUnit:
     - !CombatUnitRoleChange
       role: special_drone_bomb
+    - !CombatUnitTagSet
+      tags:
+      - flag_uncollideable
+      - flag_spike_one_hit
     functionsPilot: 
   effectsOnArrival: 
   effectProximity:
@@ -58,9 +63,11 @@ effects:
         normalized: false
         leveled: true
         f: 500
+      environmentDamage:
+        value: 80
+        radius: 15
       concussion: 
       heat: 
-      stagger: 
       statusBuildup: 
       crash: 
       targetCheck: 
@@ -100,5 +107,50 @@ effects:
     functionsGlobal: 
     functionsBase: 
     functionsCombat: 
-    functionsUnit: 
+    functionsUnit:
+    - !CombatAreaOfEffect
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      radius: 16
+      exponent: 2
+      dispersed: true
+      integrity:
+        normalized: false
+        leveled: true
+        f: 350
+      environmentDamage:
+        value: 80
+        radius: 15
+      concussion: 
+      heat: 
+      statusBuildup: 
+      crash: 
+      targetCheck: 
+      functionsOnHit: 
+      impactUnitSelf: true
+      impactUnitAllies: true
+      impactUnitHostiles: true
+      impactUnitComposites: true
+      impactProjectiles: false
+      impactProps: true
+      fxDetonation: fx_aoe_explosion_01_large
+      fxDetonationScale: 2
+      fxArea: fx_aoe_volume_01
+      fxHit: fx_aoe_hit_01
+      audioDetonation: 
+    - !CombatFragmentSpawn
+      subsystemKey: prj_debris_01
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      count: 4
+      lifetime: 2
+      speed: 30
+      gravity: 0.66
+      damage: 0.1
+      impact: 10
+      scatterVertical: 0.2
     functionsPilot: 
