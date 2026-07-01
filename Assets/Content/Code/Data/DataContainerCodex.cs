@@ -515,15 +515,6 @@ namespace PhantomBrigade.Data
         #endregion
     }
 
-    public class DataBlockInputHintLine
-    {
-        public InputHintMode mode = InputHintMode.All;
-        public string text;
-            
-        [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false, CustomAddFunction = "@new DataBlockInputHintAction ()")]
-        public List<DataBlockInputHintAction> actions = new List<DataBlockInputHintAction> ();
-    }
-
     public class CodexSectionTextControls : ICodexSection
     {
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false, CustomAddFunction = "@new DataBlockInputHintLine ()")]
@@ -554,10 +545,14 @@ namespace PhantomBrigade.Data
                 bool linesStarted = false;
                 foreach (var line in lines)
                 {
-                    if (line == null || string.IsNullOrEmpty (line.text) || line.actions == null || line.actions.Count == 0)
+                    if (line == null || line.actions == null || line.actions.Count == 0)
                         continue;
                     
-                    if (line.mode != InputHintMode.All && !mode.HasFlag (line.mode))
+                    if (line.visibility != InputHintMode.All && !mode.HasFlag (line.visibility))
+                        continue;
+                    
+                    var text = line.GetText ();
+                    if (string.IsNullOrEmpty (text))
                         continue;
                     
                     bool lineUsed = false;
@@ -581,7 +576,7 @@ namespace PhantomBrigade.Data
                             else
                                 linesStarted = true;
 
-                            sb1.Append (line.text);
+                            sb1.Append (text);
                         }
 
                         if (action.newline)
@@ -617,8 +612,8 @@ namespace PhantomBrigade.Data
                     var line = lines[i];
                     if (line == null)
                         continue;
-                    
-                    line.text = DataManagerText.GetText (TextLibs.codex, $"{key}__s{index}_input{i}");
+
+                    line.ResolveText (TextLibs.codex, $"{key}__s{index}_input{i}");
                 }
             }
             
@@ -637,8 +632,7 @@ namespace PhantomBrigade.Data
                     if (line == null)
                         continue;
                     
-                    if (!string.IsNullOrEmpty (line.text))
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.codex, $"{key}__s{index}_input{i}", line.text);
+                    line.SaveText (TextLibs.codex, $"{key}__s{index}_input{i}");
                 }
             }
         }
@@ -772,7 +766,7 @@ namespace PhantomBrigade.Data
             
             CIViewCodex.ins.RefreshNav ();
             CIViewOverworldNav.ins.RefreshCodex ();
-            CIViewCombatEventLog.ins.RefreshCodex ();
+            CIViewCombatNav.ins.RefreshCodex ();
         }
         
         [ShowIf ("unlockable")]

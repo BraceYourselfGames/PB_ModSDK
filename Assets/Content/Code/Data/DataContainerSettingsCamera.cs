@@ -1,35 +1,96 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using YamlDotNet.Serialization;
 
 namespace PhantomBrigade.Data
 {
-    [HideInInspector]
-    public class DataBlockMechCamera
+    [Serializable]
+    public class DataBlockUnitCameraState
     {
-        public enum MechCameraFollowMode
+        [LabelText ("Loc. primary"), PropertyOrder (-2)]
+        public string presetNamePrimary = "";
+        
+        [LabelText ("Loc. secondary"), PropertyOrder (-2)]
+        public string presetNameSecondary = "";
+        
+        [LabelText ("Loc. tertiary"), PropertyOrder (-2)]
+        public string presetNameTertiary = "";
+
+        [LabelText ("Loc. preview"), PropertyOrder (-1), ReadOnly, ShowInInspector, YamlIgnore]
+        public string presetLocText => GetLocalizedText (false);
+        
+        private static StringBuilder sb = new StringBuilder ();
+
+        public string GetLocalizedText (bool multiline)
+        {
+            var primaryText = !string.IsNullOrEmpty (presetNamePrimary) ? Txt.Get (TextLibs.uiCombat, "cam_preset_" + presetNamePrimary) : null;
+            bool primaryUsed = !string.IsNullOrEmpty (primaryText);
+                
+            var secondaryText = !string.IsNullOrEmpty (presetNameSecondary) ? Txt.Get (TextLibs.uiCombat, "cam_preset_" + presetNameSecondary) : null;
+            bool secondaryUsed = !string.IsNullOrEmpty (secondaryText);
+                
+            var tertiaryText = !string.IsNullOrEmpty (presetNameTertiary) ? Txt.Get (TextLibs.uiCombat, "cam_preset_" + presetNameTertiary) : null;
+            bool tertiaryUsed = !string.IsNullOrEmpty (tertiaryText);
+
+            sb.Clear ();
+                
+            if (primaryUsed)
+                sb.Append (primaryText);
+                
+            if (secondaryUsed)
+            {
+                if (sb.Length > 0)
+                    sb.Append (" / ");
+                sb.Append (secondaryText);
+            }
+                
+            if (tertiaryUsed)
+            {
+                if (multiline)
+                {
+                    if (sb.Length > 0)
+                        sb.Append ("\n");
+                    sb.Append ("[aa]");
+                    sb.Append (tertiaryText);
+                    sb.Append ("[ff]");
+                }
+                else
+                {
+                    if (sb.Length > 0)
+                        sb.Append (" / ");
+                    sb.Append (tertiaryText);
+                }
+            }
+                
+            return sb.ToString ();
+        }
+        
+        public enum FollowMode
         {
             Locked,
             Orbital
         }
 
-        public enum MechCameraTargetMode
+        public enum TargetMode
         {
-            Torso,
+            Body,
             WeaponLeft,
-            WeaponRight
+            WeaponRight,
+            ShoulderLeft,
+            ShoulderRight
         }
 
-        public MechCameraTargetMode target;
-        public MechCameraFollowMode followMode;
-        public float FOV;
-        public Vector3 offset;
-        public float movementDamping;
-        public float aimDamping;
-
-        [ShowIf ("@followMode == MechCameraFollowMode.Orbital")]
-        public float orbitalAngle;
+        public FollowMode followMode = FollowMode.Locked;
+        public TargetMode targetMode = TargetMode.Body;
+        public Vector3 offset = new Vector3 (0.0f, 1.5f, -7.0f);
+        public float fov = 45f;
+        public float dampingPosition = 0.0f;
+        public float dampingRotation = 0.5f;
+        
+        
     }
 
     [Serializable]
@@ -51,7 +112,7 @@ namespace PhantomBrigade.Data
         public int shadowOffsetCombat = -60;
         public int shadowOffsetBase = -10;
 
-        [Header ("Mech-Mounted Camera Presets")]
-        public SortedDictionary<string, DataBlockMechCamera> mechMountedCameraPresets = new SortedDictionary<string, DataBlockMechCamera> ();
+        [Header ("Unit-Mounted Camera Presets")]
+        public List<DataBlockUnitCameraState> unitCameraPresets = new List<DataBlockUnitCameraState> ();
     }
 }

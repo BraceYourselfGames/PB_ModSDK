@@ -844,7 +844,7 @@ namespace PhantomBrigade.Data
 	        EquipmentUtility.AttachPartToInventory (partEntity, playerBasePersistent, true, true);
             
             if (CIViewBaseCustomizationNav.ins.IsEntered ())
-                CIViewBaseCustomizationNav.ins.RefreshForInventory (playerBasePersistent);
+                CIViewBaseCustomizationNav.ins.RefreshForInventory ();
 
             if (CIViewBaseCustomizationSelector.ins.IsEntered ())
                 CIViewBaseCustomizationSelector.ins.RedrawAnyEquipmentList ();

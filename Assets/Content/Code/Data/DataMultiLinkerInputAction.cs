@@ -103,17 +103,19 @@ namespace PhantomBrigade.Data
             var mapHelper = ReInput.mapping;
             var mapHelperPlayer = player.controllers.maps;
             
+            var controllerKeyboard = ReInput.controllers.GetController (ControllerType.Keyboard, 0);
+            var controllerMouse = ReInput.controllers.GetController (ControllerType.Mouse, 0);
+            var controllerGamepad = ReInput.controllers.GetLastActiveController (ControllerType.Joystick);
+            int controllerGamepadID = controllerGamepad != null ? controllerGamepad.id : 0;
+            
+            var mapsGamepad = mapHelperPlayer.GetMaps (ControllerType.Joystick, controllerGamepadID);
+            var mapGamepad = mapsGamepad != null && mapsGamepad.Count > 0 ? mapsGamepad[0] : null;
+            
             var mapsKeyboard = mapHelperPlayer.GetMaps (ControllerType.Keyboard, 0);
             var mapKeyboard = mapsKeyboard != null && mapsKeyboard.Count > 0 ? mapsKeyboard[0] : null;
-            bool mapKeyboardFound = mapKeyboard != null;
             
             var mapsMouse = mapHelperPlayer.GetMaps (ControllerType.Mouse, 0);
             var mapMouse = mapsMouse != null && mapsMouse.Count > 0 ? mapsMouse[0] : null;
-            bool mapMouseFound = mapMouse != null;
-            
-            var mapsGamepad = mapHelperPlayer.GetMaps (ControllerType.Joystick, 0);
-            var mapGamepad = mapsGamepad != null && mapsGamepad.Count > 0 ? mapsGamepad[0] : null;
-            bool mapGamepadFound = mapGamepad != null;
 
             data.Clear ();
             
@@ -256,7 +258,7 @@ namespace PhantomBrigade.Data
                 }
             }
         }
-
+        
         #endif
     }
 }

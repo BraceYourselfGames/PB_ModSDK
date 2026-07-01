@@ -13,7 +13,7 @@ namespace PhantomBrigade.Data
     {
         [ShowInInspector][PropertyOrder (-1)]
         [FoldoutGroup ("Last generated units")]
-        public static List<DataBlockUnitDescriptionDebug> unitsGenerated;
+        public static List<DataBlockUnitDescriptionSaved> unitsGenerated;
 
         public DataMultiLinkerUnitPreset ()
         {

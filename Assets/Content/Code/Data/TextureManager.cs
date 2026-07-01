@@ -225,8 +225,8 @@ namespace PhantomBrigade.Data
             // Build lookup
             if (!groupKeysFromFolders.ContainsKey (group.folderName))
                 groupKeysFromFolders.Add (group.folderName, groupKey);
-            else
-                Debug.LogWarning ($"Group {groupKey} is using path {group.folderName} already used by another group {groupKeysFromFolders[group.folderName]}");
+            // else
+            //     Debug.LogWarning ($"Group {groupKey} is using path {group.folderName} already used by another group {groupKeysFromFolders[group.folderName]}");
 
             // Clear collections
             if (group.textures == null)
@@ -425,7 +425,9 @@ namespace PhantomBrigade.Data
 
                         byte[] pngBytes = System.IO.File.ReadAllBytes (filePath);
                         var tex = new Texture2D (4, 4, TextureFormat.BC7, group.mipLevels, false);
+                        #if !PB_MODSDK
                         tex.ignoreMipmapLimit = true;
+                        #endif
                         tex.name = Path.GetFileNameWithoutExtension (fileInfo.Name);
                         tex.wrapMode = TextureWrapMode.Clamp;
                         tex.filterMode = FilterMode.Bilinear;
@@ -1278,6 +1280,71 @@ namespace PhantomBrigade.Data
             atlas.MarkAsChanged ();
 
             UIFontHelper.RebuildFontsGlobally (true);
+        }
+        
+        
+        private static StringBuilder sb = new StringBuilder ();
+        
+        [Command("stream-status-print", "")]
+        public static void TexMipStreamingStatus ()
+        {
+            sb.Clear ();
+            sb.Append ("Texture streaming ");
+            sb.Append (QualitySettings.streamingMipmapsActive ? "Active" : "Disabled");
+
+            if (QualitySettings.streamingMipmapsActive)
+            {
+                sb.Append ("\n- Budget: ");
+                sb.Append (QualitySettings.streamingMipmapsMemoryBudget);
+                sb.Append ("\n- Renderers per frame: ");
+                sb.Append (QualitySettings.streamingMipmapsRenderersPerFrame);
+                sb.Append ("\n- Max reduction: ");
+                sb.Append (QualitySettings.streamingMipmapsMaxLevelReduction);
+                sb.Append ("\n- Max IO requests: ");
+                sb.Append (QualitySettings.streamingMipmapsMaxFileIORequests);
+                sb.Append ("\n- Discard unused: ");
+                sb.Append (Texture.streamingTextureDiscardUnusedMips);
+            }
+
+            var report = sb.ToString ();
+            Debug.Log (report);
+            QuantumConsole.Instance.LogToConsole (report);
+        }
+        
+        [Command("stream-active", "")]
+        public static void TexMipStreamingActive (bool active)
+        {
+            QualitySettings.streamingMipmapsActive = active;
+        }
+		
+        [Command("stream-mem-budget", "")]
+        public static void TexMipStreamingMemBudget (int budget)
+        {
+            QualitySettings.streamingMipmapsMemoryBudget = Mathf.Clamp (budget, 16, 4096);
+        }
+		
+        [Command("stream-renderers-per-frame", "")]
+        public static void TexMipStreamingRenderersPerFrame (int count)
+        {
+            QualitySettings.streamingMipmapsRenderersPerFrame = Mathf.Clamp (count, 1, 2048);
+        }
+		
+        [Command("stream-max-reduction", "")]
+        public static void TexMipStreamingMaxReduction (int mip)
+        {
+            QualitySettings.streamingMipmapsMaxLevelReduction = Mathf.Clamp (mip, 1, 8);
+        }
+		
+        [Command("stream-max-io-requests", "")]
+        public static void TexMipStreamingMaxIORequests (int requests)
+        {
+            QualitySettings.streamingMipmapsMaxFileIORequests = Mathf.Clamp (requests, 4, 2048);
+        }
+		
+        [Command("stream-discard-unused-mips", "")]
+        public static void TexMipStreamingDiscardUnused (bool discard)
+        {
+            Texture.streamingTextureDiscardUnusedMips = discard;
         }
         
         #endif

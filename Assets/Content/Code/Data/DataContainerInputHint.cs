@@ -31,9 +31,20 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
+    
+    public class DataBlockInputHintLine : DataBlockTextTrimodal
+    {
+        [PropertyOrder (1), HorizontalGroup ("A", 0.5f), HideLabel]
+        public InputHintMode visibility = InputHintMode.All;
+
+        [PropertyOrder (10)]
+        [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false, CustomAddFunction = "@new DataBlockInputHintAction ()")]
+        public List<DataBlockInputHintAction> actions = new List<DataBlockInputHintAction> ();
+    }
 
     public class DataContainerInputHint : DataContainerWithText
     {
+        public bool horizontal = false;
         public bool extended = true; 
         
         [ShowIf ("extended")]
@@ -46,6 +57,11 @@ namespace PhantomBrigade.Data
 
         [ListDrawerSettings (DefaultExpandedState = true, ShowPaging = false, CustomAddFunction = "@new DataBlockInputHintLine ()")]
         public List<DataBlockInputHintLine> lines = new List<DataBlockInputHintLine> ();
+
+        public override void OnAfterDeserialization (string key)
+        {
+            base.OnAfterDeserialization (key);
+        }
 
         public override void ResolveText ()
         {
@@ -63,7 +79,7 @@ namespace PhantomBrigade.Data
                     if (line == null)
                         continue;
                     
-                    line.text = DataManagerText.GetText (TextLibs.uiInputHints, $"{key}__s{i}");
+                    line.ResolveText (TextLibs.uiInputHints, $"{key}__s{i}");
                 }
             }
         }
@@ -77,8 +93,11 @@ namespace PhantomBrigade.Data
 
             if (extended)
             {
-                DataManagerText.TryAddingTextToLibrary (TextLibs.uiInputHints, $"{key}__header", textHeader);
-                DataManagerText.TryAddingTextToLibrary (TextLibs.uiInputHints, $"{key}__overview", textOverview);
+                if (!string.IsNullOrEmpty (textHeader))
+                    DataManagerText.TryAddingTextToLibrary (TextLibs.uiInputHints, $"{key}__header", textHeader);
+                
+                if (!string.IsNullOrEmpty (textOverview))
+                    DataManagerText.TryAddingTextToLibrary (TextLibs.uiInputHints, $"{key}__overview", textOverview);
             }
 
             if (lines != null)
@@ -89,8 +108,7 @@ namespace PhantomBrigade.Data
                     if (line == null)
                         continue;
                     
-                    if (!string.IsNullOrEmpty (line.text))
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.uiInputHints, $"{key}__s{i}", line.text);
+                    line.SaveText (TextLibs.uiInputHints, $"{key}__s{i}");
                 }
             }
         }

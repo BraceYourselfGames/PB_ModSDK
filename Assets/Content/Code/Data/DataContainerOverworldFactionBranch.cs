@@ -43,6 +43,9 @@ namespace PhantomBrigade.Data
         public string liveryPrefix;
 
         public bool training;
+
+        [DropdownReference]
+        public HashSet<string> tags;
         
         [DropdownReference]
         public List<DataBlockCodexUnlock> codexUnlocksBriefing;

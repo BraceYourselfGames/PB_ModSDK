@@ -544,13 +544,14 @@ namespace PhantomBrigade.Data
             if (saveForDebugging)
             {
                 if (DataMultiLinkerUnitPreset.unitsGenerated != null)
-                    DataMultiLinkerUnitPreset.unitsGenerated.Add (new DataBlockUnitDescriptionDebug
+                    DataMultiLinkerUnitPreset.unitsGenerated.Add (new DataBlockUnitDescriptionSaved
                     {
-                        preset = preset?.key,
-                        factionDataSource = factionData != null ? factionData.key : null,
-                        qualityTableKey = equipmentQualityTableKey,
-                        quality = rating,
-                        description = description
+                        inputPreset = preset?.key, 
+                        inputBranchKey = factionData != null ? factionData.key : null,
+                        inputQualityTable = equipmentQualityTableKey,
+                        inputRating = rating,
+                        inputLevel = level,
+                        parts = description
                     });
             }
 

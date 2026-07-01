@@ -19,6 +19,10 @@ namespace PhantomBrigade.Data
     [Serializable][Searchable]
     public class DataContainerSettingsSimulation : DataContainerUnique
     {
+        public int dashStandardStabilityBonus = 1;
+        public int dashBulldozeStabilityBonus = 3;
+        public int meleeStabilityBonus = 2;
+        
         //How much of a bonus does a unit get from having a shield equipped
         public int passivelyShieldedStabilityBonus = 1;
         //How much of a bonus does a unit get from having a shield actively deployed
@@ -63,6 +67,21 @@ namespace PhantomBrigade.Data
         public bool combatIntro = false;
         public bool combatLoadingBugfix = false;
 
+        [Header ("Standalone scenarios")]
+        public bool standaloneScenariosAvailable = false;
+
+        [Header ("Spikes")]
+        public float impaledTerminalVelocity = 50f;
+        public float impaledTerminalAcceleration = 50f;
+        
+        public float impaledEnvCrashImpactDamage = 80f;
+        public float impaledEnvCrashImpactRadius = 5f;
+
+        public bool impaledUnitCrashOnBurnout = true;
+        public float impaledSpikeLength = 6f;
+        public float impaledSpikeRadius = 0.5f;
+        public float impaledSpikeOffset = 0f;
+        
         [Header ("Gameplay")]
         public bool noDamageFriendly = false;
         public bool noDamageEnemy = false;
@@ -128,6 +147,7 @@ namespace PhantomBrigade.Data
         public bool logEquipmentGeneration = false;
         public bool logEquipmentLoading = false;
         public bool logScenarioGeneration = false;
+        public bool logScenarioGeneratorRebuild = false;
         public bool logScenarioUpdates = false;
         public bool logRewardGeneration = false;
         public bool logCombatDamage = false;
@@ -186,7 +206,11 @@ namespace PhantomBrigade.Data
         public float dashWindowMaxOffset = 3f;
         public float dashDistanceDistributionMin;
         public float dashDistanceDistributionMax;
+        public float dashBulldozeRangeMin = 45f;
         public bool logDashDistanceCalculation = true;
+
+        public float hoverAltitudeMin = 6f;
+        public float hoverAltitudeMax = 18f;
         
         [YamlIgnore, HideReferenceObjectPicker]
         public AnimationCurveContainer dashDistanceRemap;

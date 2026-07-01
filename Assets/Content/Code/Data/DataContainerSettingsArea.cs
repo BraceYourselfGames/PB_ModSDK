@@ -1,4 +1,5 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace PhantomBrigade.Data
@@ -9,11 +10,13 @@ namespace PhantomBrigade.Data
         public float blockMass = 1f;
         public float blockDrag = 0.01f;
         public float blockAngularDrag = 0.1f;
-        public float crashDamageRadius = 3f;
-        public float crashDamageAtEpicenter = 50f;
-        public float crashDamageAtEdge = 10f;
-        public float crashBounceForceMultiplier = 1f;
-        public float crashPushForceMultiplier = 1f;
+        
+        [ValueDropdown("@DataMultiLinkerAssetPools.data.Keys"), InlineButtonClear]
+        public string crashHitEffect = "fx_aoe_hit_01";
+        public float crashDamageRadius = 6f;
+        public float crashDamageToUnits = 0.45f;
+        public float crashImpulseToUnits = 6f;
+        
         public float damageScalar = 0.015f;
 
         [Space (8f)]

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using PhantomBrigade.Data;
+using PhantomBrigade.Functions.Equipment;
 using PhantomBrigade.Overworld;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ namespace PhantomBrigade
 
             if (project.textLinkName != null)
                 textName = project.textLinkName.GetText ();
-            
+
             return textName;
         }
 
@@ -29,13 +30,13 @@ namespace PhantomBrigade
                 return string.Empty;
 
             string textSubtitle = string.Empty;
-            
+
             if (project.textLinkSubtitle != null)
                 textSubtitle = project.textLinkSubtitle.GetText ();
 
             return textSubtitle;
         }
-        
+
         public static string GetProjectDescription (DataContainerWorkshopProject project)
         {
             if (project == null)
@@ -70,7 +71,7 @@ namespace PhantomBrigade
                     if (inputResourcesTemp.ContainsKey (kvp.Key))
                     {
                         var f = inputResourcesTemp[kvp.Key];
-                        inputResourcesTemp[kvp.Key] = f * kvp.Value;
+                        inputResourcesTemp[kvp.Key] = Mathf.RoundToInt (f * kvp.Value);
                     }
                 }
             }
@@ -167,7 +168,7 @@ namespace PhantomBrigade
             }
         }
 
-        private static SortedDictionary<string, float> inputResourcesTemp = new SortedDictionary<string, float> ();
+        private static SortedDictionary<string, int> inputResourcesTemp = new SortedDictionary<string, int> ();
 
         public static void ProcessProject (this DataBlockWorkshopProjectProcessed p, DataContainerWorkshopProject project, string variantPrimaryKey = null, string variantSecondaryKey = null)
         {
@@ -192,6 +193,7 @@ namespace PhantomBrigade
 
             p.duration = project.duration != null ? project.duration.f : 0f;
             p.inputCharges = DataShortcuts.sim.workshopChargeSpending && project.inputCharges != null ? project.inputCharges.i : 0;
+            p.unlockChargeCount = project.unlockCharges != null && project.unlockCharges.i > 1 ? project.unlockCharges.i : 1;
 
             if (project.basePartRequirements != null && project.basePartRequirements.Count > 0)
             {
@@ -210,7 +212,7 @@ namespace PhantomBrigade
                 for (int i = 0, count = project.inputResources.Count; i < count; ++i)
                 {
                     var block = project.inputResources[i];
-                    var resource = DataMultiLinkerResource.GetEntry (block.key);
+                    var resource = DataMultiLinkerResource.GetEntry (block.key, false);
                     if (resource == null)
                         continue;
 
@@ -357,6 +359,13 @@ namespace PhantomBrigade
                         amount = output.amount
                     });
                 }
+            }
+
+            if (project.outputFunctions != null)
+            {
+                p.outputFunctions.Clear ();
+                foreach (var function in project.outputFunctions)
+                    p.outputFunctions.Add (function);
             }
 
             var variantsPrimary = project.GetVariantsPrimary ();

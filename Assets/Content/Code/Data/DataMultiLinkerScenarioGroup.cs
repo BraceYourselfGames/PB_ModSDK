@@ -9,18 +9,18 @@ namespace PhantomBrigade.Data
     {
         public DataMultiLinkerScenarioGroup ()
         {
-            textSectorKeys = new List<string> { TextLibs.scenarioGroups };
-            DataMultiLinkerUtility.RegisterOnTextExport 
-            (
-                dataType, 
-                () => TextLibraryHelper.OnBeforeTextExport (dataType, TextLibs.scenarioGroups),
-                () => TextLibraryHelper.OnAfterTextExport (dataType, TextLibs.scenarioGroups)
-            );
+            DataMultiLinkerUtility.RegisterStandardTextHandling (dataType, ref textSectorKeys, TextLibs.scenarioGroups); 
+            DataMultiLinkerUtility.RegisterOnAfterDeserialization (dataType, OnAfterDeserialization);
         }
 
         [FoldoutGroup ("Utilities", false)]
         [ShowInInspector]
         public static SortedDictionary<string, List<string>> lookup = new SortedDictionary<string, List<string>> ();
+
+        public static void OnAfterDeserialization ()
+        {
+
+        }
 
         [FoldoutGroup ("Utilities", false)]
         [Button]

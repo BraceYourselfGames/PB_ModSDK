@@ -21,11 +21,14 @@ namespace PhantomBrigade.Data
         
         // Whether base is unlocked at all
         public const string BaseAvailable = "feature_base_available";
+        
         public const string BaseWorkshop = "feature_base_workshop";
         public const string BaseUpgrades = "feature_base_upgrades";
         public const string BaseRoster = "feature_base_roster";
         public const string BaseRosterAdvanced = "feature_base_roster_advanced";
         public const string BaseRosterDismissal = "feature_base_roster_dismissal";
+        
+        public const string BaseStandaloneOpsUnlocked = "feature_base_standalone_ops_unlocked";
 
         // Whether navigation is unlocked
         // Value has meaning: 1 is nav to mountain base, 2 is nav within the province 0, 3 is full nav
@@ -53,17 +56,23 @@ namespace PhantomBrigade.Data
         public const string CombatPrediction = "feature_combat_prediction";
 
         public static Dictionary<string, int> featureValuesLast = new Dictionary<string, int> ();
-        
+
+        public static HashSet<string> featuresIndependentFromMainCheck = new HashSet<string>
+        {
+            BaseStandaloneOpsUnlocked
+        };
     }
     
     public static class EventMemoryInt
     {
         public const string World_Counter_Resistance_Reputation = "world_reputation_guard";
         public const string World_Left_Tutorial_Province = "world_left_tutorial_province";
+        public const string World_UpdateUnlocked22 = "world_update_unlocked_22";
         
         public const string BaseVisualEarly = "base_visual_early";
 
         public const string UnitWeightOverride = "unit_weight_class_override";
+        public const string UnitAIControlCountdown = "unit_ai_control_countdown";
     }
     
     public static class EventMemoryIntAutofilled
@@ -151,6 +160,7 @@ namespace PhantomBrigade.Data
         
         public const string World_Internal_Cta_Workshop = "world_internal_cta_workshop";
         public const string World_Internal_Cta_Upgrades = "world_internal_cta_upgrades";
+        public const string World_Internal_Cta_StandaloneOps = "world_internal_cta_standalone_ops";
         
         public const string Combat_Auto_LevelDestruction = "combat_sc_level_destruction";
         public const string Combat_Auto_LevelDestructionPercentage = "combat_sc_level_destruction_percentage";

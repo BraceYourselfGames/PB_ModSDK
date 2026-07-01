@@ -39,6 +39,9 @@ namespace PhantomBrigade.Data
         [BoxGroup ("actionTypeCountsGroup")]
         [DictionaryKeyDropdown ("@DataMultiLinkerAction.data.Keys")]
         public SortedDictionary<string, DataBlockOverworldEventSubcheckInt> actionCounts;
+        
+        [DropdownReference]
+        public List<ICombatUnitValidationFunction> checks;
 
         #region Editor
         #if UNITY_EDITOR
@@ -61,9 +64,12 @@ namespace PhantomBrigade.Data
         [OnValueChanged ("OnDataChange", true)]
         [HideLabel, BoxGroup ("UI", false)]
         public DataBlockTutorialHint data = new DataBlockTutorialHint ();
-
+        
         [BoxGroup (boxGroupCore, false)]
         public CombatUIModes inputMode;
+
+        [BoxGroup (boxGroupCore, false)]
+        public InputHintMode inputController = InputHintMode.All;
         
         [DropdownReference (true)]
         public DataBlockScenarioHintUnitLink unitLink;
@@ -108,6 +114,28 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
+    
+    public class DataBlockViewTutorialEffects
+    {
+        public InputHintModeSimplified controller = InputHintModeSimplified.All;
+        public CINavDir inputDirection = CINavDir.Forward;
+        
+        [DropdownReference]
+        public List<IOverworldFunction> functionsOverworld;
+        
+        [DropdownReference]
+        public List<ICombatFunction> functionsCombat;
+        
+        #if UNITY_EDITOR
+        
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockViewTutorialEffects () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+
+        #endif
+    }
 
     [Serializable][LabelWidth (180f)]
     public class DataBlockViewTutorialEffectsOverworld
@@ -139,6 +167,10 @@ namespace PhantomBrigade.Data
         [OnValueChanged (onChange)]
         [LabelText ("Camera Input")]
         public bool cameraInputPermitted = true;
+        
+        [OnValueChanged (onChange)]
+        [LabelText ("Nav. Focus")]
+        public bool navigationFocus = true;
 
         [OnValueChanged (onChange)]
         [ToggleGroup ("backgroundUsed", groupTitle: "Background", CollapseOthersOnExpand = false)]
@@ -232,26 +264,34 @@ namespace PhantomBrigade.Data
         [InlineButtonClear]
         public string textImage = null;
 
-        [OnValueChanged ("OnChange")]
-        [LabelText ("Header / Text")]
-        [YamlIgnore]
-        [HideIf ("@textHeaderReused != null")]
-        public string textHeader;
-        
         [DropdownReference (true)]
-        public DataBlockLocString textHeaderReused;
+        public DataBlockFloat01 hue;
         
-        [OnValueChanged ("OnChange")]
-        [Multiline (5), HideLabel]
-        [YamlIgnore]
-        [HideIf ("@textContentReused != null")]
-        public string textContent;
+        // [DropdownReference (true)]
+        // public DataBlockLocString textHeaderReused;
 
+        // [DropdownReference (true)]
+        // public DataBlockLocString textContentReused;
+
+        [OnValueChanged ("OnChange", true)]
         [DropdownReference (true)]
-        public DataBlockLocString textContentReused;
+        public DataBlockTextTrimodal textHeaderLink = new DataBlockTextTrimodal ();
+        
+        [OnValueChanged ("OnChange", true)]
+        [DropdownReference (true)]
+        public DataBlockTextTrimodal textContentLink = new DataBlockTextTrimodal ();
+        
+        [OnValueChanged ("OnChange", true)]
+        [DropdownReference (true)]
+        public DataBlockTextTrimodal textContentLinkController;
         
         [DropdownReference (true)]
         public DataBlockTextInputActions textInputActions;
+        
+        [DropdownReference (true)]
+        [ValueDropdown ("@DataMultiLinkerInputHint.data.Keys")]
+        [LabelText ("Input Hint Appendix")]
+        public string textInputHintAppendix;
         
         [YamlIgnore, HideInInspector]
         public DataBlockViewTutorialPage parent;
@@ -330,20 +370,6 @@ namespace PhantomBrigade.Data
         
         [OnValueChanged (onChange)]
         public int textWidth = 256;
-        
-        [OnValueChanged (onChange)]
-        [YamlIgnore, HideLabel, Multiline (5)]
-        [HideIf ("@textReused != null")]
-        public string text;
-
-        [PropertyOrder (1)]
-        [DropdownReference (true)]
-        public DataBlockLocString textReused;
-        
-        [PropertyOrder (1)]
-        [DropdownReference (true)]
-        [OnValueChanged (onChange, true)]
-        public string icon;
 
         [PropertyOrder (1)]
         [DropdownReference (true)]
@@ -360,8 +386,30 @@ namespace PhantomBrigade.Data
         [OnValueChanged (onChange, true)]
         public DataBlockTutorialHintHighlight frameHighlight;
         
+        // [PropertyOrder (1)]
+        // [DropdownReference (true)]
+        // public DataBlockLocString textReused;
+        
+        [OnValueChanged ("OnChange", true)]
+        [DropdownReference (true)]
+        public DataBlockTextTrimodal textLink;
+        
+        [OnValueChanged ("OnChange", true)]
+        [DropdownReference (true)]
+        public DataBlockTextTrimodal textLinkController;
+        
+        [OnValueChanged ("OnChange", true)]
         [DropdownReference (true)]
         public DataBlockTextInputActions textInputActions;
+        
+        [DropdownReference (true)]
+        [OnValueChanged ("OnChange", true)]
+        [ValueDropdown ("@DataMultiLinkerInputHint.data.Keys")]
+        [LabelText ("Input Hint Appendix")]
+        public string textInputHintAppendix;
+        
+        [DropdownReference, BoxGroup ("Combat effects", false)]
+        public List<DataBlockViewTutorialEffects> effectsOnInput;
 
         [YamlIgnore, HideInInspector]
         public string id;
@@ -381,26 +429,6 @@ namespace PhantomBrigade.Data
 
         private void OnChange ()
         {
-            /*
-            if (!Application.isPlaying || CIViewTutorialHint.ins == null || !CIViewTutorialHint.ins.IsEntered ())
-                return;
-
-            if (CIViewTutorialHint.ins.hintIDLast != id)
-                return;
-            
-            var frameSize = new Vector2Int (frameSizeX, frameSizeY);
-            var framePosition = new Vector2Int (framePositionX, framePositionY);
-
-            CIViewTutorialHint.ins.OpenInUI 
-            (
-                frameLocation, framePosition, frameSize, frameBlocksInput, frameBoundary, frameGradientMode,
-                text, textLocation, textWidth, 
-                buttonLocation,
-                color, instant: true, id: id,
-                worldAnchor: worldAnchor
-            );
-            */
-            
             if (parent != null)
                 parent.OnChange ();
         }
@@ -519,12 +547,82 @@ namespace PhantomBrigade.Data
 
                     if (page.center != null)
                     {
-                        page.center.textHeader = DataManagerText.GetText (TextLibs.uiTutorials, $"{page.id}_header");
-                        page.center.textContent = DataManagerText.GetText (TextLibs.uiTutorials, $"{page.id}_text");
+                        /*
+                        if (page.center.textHeaderLink == null)
+                        {
+                            page.center.textHeaderLink = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
+                            Debug.Log ($"Created tutorial text link: center header {page.id}");
+                        }
+                        
+                        if (page.center.textHeaderReused != null)
+                        {
+                            page.center.textHeaderLink = new DataBlockTextTrimodal
+                            {
+                                mode = DataBlockTextTrimodal.Mode.LocReused,
+                                textSector = page.center.textHeaderReused.textSector,
+                                textKey = page.center.textHeaderReused.textKey
+                            };
+                            
+                            Debug.Log ($"Created reused tutorial text link: center header {page.id}");
+                        }
+                        
+                        if (page.center.textContentLink == null)
+                        {
+                            page.center.textContentLink = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
+                            Debug.Log ($"Created tutorial text link: center content {page.id}");
+                        }
+                        
+                        if (page.center.textContentReused != null)
+                        {
+                            page.center.textContentLink = new DataBlockTextTrimodal
+                            {
+                                mode = DataBlockTextTrimodal.Mode.LocReused,
+                                textSector = page.center.textContentReused.textSector,
+                                textKey = page.center.textContentReused.textKey
+                            };
+                            
+                            Debug.Log ($"Created reused tutorial text link: center content {page.id}");
+                        }
+                        */
+                        
+                        if (page.center.textHeaderLink != null)
+                            page.center.textHeaderLink.ResolveText (TextLibs.uiTutorials, $"{page.id}_header");
+
+                        if (page.center.textContentLink != null)
+                            page.center.textContentLink.ResolveText (TextLibs.uiTutorials, $"{page.id}_text");
+                        
+                        if (page.center.textContentLinkController != null)
+                            page.center.textContentLinkController.ResolveText (TextLibs.uiTutorials, $"{page.id}_text_ctrl");
                     }
 
                     if (page.hint != null)
-                        page.hint.text = DataManagerText.GetText (TextLibs.uiTutorials, $"{page.id}_hint");
+                    {
+                        /*
+                        if (page.hint.textLink == null)
+                        {
+                            page.hint.textLink = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
+                            Debug.Log ($"Created tutorial text link: hint {page.id}");
+                        }
+                        
+                        if (page.hint.textReused != null)
+                        {
+                            page.hint.textLink = new DataBlockTextTrimodal
+                            {
+                                mode = DataBlockTextTrimodal.Mode.LocReused,
+                                textSector = page.hint.textReused.textSector,
+                                textKey = page.hint.textReused.textKey
+                            };
+                            
+                            Debug.Log ($"Created reused tutorial text link: hint {page.id}");
+                        }
+                        */
+                        
+                        if (page.hint.textLink != null)
+                            page.hint.textLink.ResolveText (TextLibs.uiTutorials, $"{page.id}_hint");
+                        
+                        if (page.hint.textLinkController != null)
+                            page.hint.textLinkController.ResolveText (TextLibs.uiTutorials, $"{page.id}_hint_ctrl");
+                    }
                 }
             }
         }
@@ -549,25 +647,37 @@ namespace PhantomBrigade.Data
 
                     if (page.center != null)
                     {
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.uiTutorials, $"{page.id}_header", page.center.textHeader);
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.uiTutorials, $"{page.id}_text", page.center.textContent);
+                        if (page.center.textHeaderLink != null)
+                            page.center.textHeaderLink.SaveText (TextLibs.uiTutorials, $"{page.id}_header");
+                        
+                        if (page.center.textContentLink != null)
+                            page.center.textContentLink.SaveText (TextLibs.uiTutorials, $"{page.id}_text");
+                        
+                        if (page.center.textContentLinkController != null)
+                            page.center.textContentLinkController.SaveText (TextLibs.uiTutorials, $"{page.id}_text_ctrl");
                     }
                     
                     if (page.hint != null)
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.uiTutorials, $"{page.id}_hint", page.hint.text);
+                    {
+                        if (page.hint.textLink != null)
+                            page.hint.textLink.SaveText (TextLibs.uiTutorials, $"{page.id}_hint");
+                        
+                        if (page.hint.textLinkController != null)
+                            page.hint.textLinkController.SaveText (TextLibs.uiTutorials, $"{page.id}_hint_ctrl");
+                    }
                 }
             }
         }
 
-        #if !PB_MODSDK
         [HideInEditorMode]
         [Button (ButtonSizes.Medium), PropertyOrder (-1)]
         private void Test ()
         {
+            #if !PB_MODSDK
             if (CIViewTutorial.ins != null)
                 CIViewTutorial.ins.OnTutorialStartFromKey (key, true);
+            #endif
         }
-        #endif
         
         #endif
     }

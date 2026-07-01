@@ -418,6 +418,19 @@ namespace PhantomBrigade.Data
         public override SortedDictionary<string, DataContainerScenario> GetData () => DataMultiLinkerScenario.data;
 
         protected override string GetTooltip () => "Optional scenario constraints.";
+
+        public override bool IsCandidateValid (DataContainerScenario candidate)
+        {
+            bool valid = base.IsCandidateValid (candidate);
+            if (!valid)
+                return false;
+
+            // Exclude any scenarios that are standalone only from filters for scenarios
+            if (candidate.standaloneProc != null && candidate.standaloneProc.standaloneOnly)
+                return false;
+
+            return true;
+        }
     }
     
     [Serializable]

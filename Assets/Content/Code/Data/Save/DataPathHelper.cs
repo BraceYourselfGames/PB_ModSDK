@@ -9,14 +9,14 @@ namespace PhantomBrigade.Data
         User,
         Project
     }
-    
+
     public enum ModFolderType
     {
         User,
         Application,
         Workshop
     }
-    
+
     public static class DataPathHelper
     {
         private static bool initialized = false;
@@ -25,12 +25,15 @@ namespace PhantomBrigade.Data
         private static string documentsFolder;
         private static string userFolder;
         private static string saveFolder;
+        private static string saveFolderLegacy;
         private static string saveReportingFolder;
+        private static string savePreviewFolder;
         private static string settingsFolder;
         private static string screenshotsFolder;
         private static string modsFolderUser;
         private static string modsFolderApplication;
         private static string modsFolderWorkshop;
+        private static string reportsFolder;
         private static string temporaryFolder;
 
 
@@ -40,18 +43,19 @@ namespace PhantomBrigade.Data
 
             var dataPathSplit = Application.dataPath.Replace ('\\', '/').Split ('/');
             applicationFolder = Application.dataPath.Substring (0, Application.dataPath.Length - dataPathSplit[dataPathSplit.Length - 1].Length - 1);
-            if (!applicationFolder.EndsWith ("/"))
-                applicationFolder += "/";
 
             documentsFolder = GetCleanPath (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData));
             userFolder = $"{documentsFolder}/PhantomBrigade/";
-            saveFolder = $"{userFolder}Saves/";
-            saveReportingFolder = $"{userFolder}Saves (Reporting)/";
+            saveFolder = $"{userFolder}SavedGames/";
+            saveFolderLegacy = $"{userFolder}Saves/";
+            saveReportingFolder = $"{userFolder}SavedGames_Reports";
+            savePreviewFolder = $"{userFolder}SavedPreviews/";
             settingsFolder = $"{userFolder}Settings/";
             screenshotsFolder = $"{userFolder}Screenshots/";
             modsFolderUser = $"{userFolder}Mods/";
-            modsFolderApplication = $"{applicationFolder}Mods/";
-            modsFolderWorkshop = null; // Can't be set on initialization, needs to be refreshed from Steam callback
+            modsFolderApplication = $"{applicationFolder}/Mods/";
+            modsFolderWorkshop = null;
+            reportsFolder = $"{userFolder}Reports/";
             temporaryFolder = $"{userFolder}Temp/";
 
             Debug.Log ($"Application folder: {applicationFolder}\nUser folder: {userFolder}\nSaves: {saveFolder}\nSettings: {settingsFolder}\nScreenshots: {screenshotsFolder}\nMods (user): {modsFolderUser}\nMods (workshop): {modsFolderWorkshop}");
@@ -108,6 +112,12 @@ namespace PhantomBrigade.Data
             return saveFolder;
         }
 
+        public static string GetSaveFolderLegacy ()
+        {
+            if (!initialized) Initialize ();
+            return saveFolderLegacy;
+        }
+
         public static string GetModsFolder (ModFolderType type)
         {
             if (!initialized) Initialize ();
@@ -128,6 +138,12 @@ namespace PhantomBrigade.Data
 	        return saveReportingFolder;
         }
 
+        public static string GetSavePreviewFolder ()
+        {
+            if (!initialized) Initialize ();
+            return savePreviewFolder;
+        }
+
         public static string GetScreenshotFolder ()
         {
             if (!initialized) Initialize ();
@@ -138,6 +154,12 @@ namespace PhantomBrigade.Data
         {
             if (!initialized) Initialize ();
             return settingsFolder;
+        }
+
+        public static string GetReportsFolder ()
+        {
+            if (!initialized) Initialize ();
+            return reportsFolder;
         }
 
         public static string GetTemporaryFolder ()
@@ -190,7 +212,11 @@ namespace PhantomBrigade.Data
         public const string quicksave = "autosave_quicksave";
         public const string beforeCombat = "autosave_before_combat";
         public const string afterCombat = "autosave_after_combat";
-        public const string campaignExit = "autosave_campaign_exit";
+        public const string beforeTravel = "autosave_before_travel";
+        // public const string afterTravel = "autosave_after_travel";
+        public const string afterStop = "autosave_after_stop";
+        // public const string campaignExit = "autosave_campaign_exit";
+        public const string campaignEnd = "autosave_campaign_end";
         public const string gameExit = "autosave_game_exit";
     }
 }

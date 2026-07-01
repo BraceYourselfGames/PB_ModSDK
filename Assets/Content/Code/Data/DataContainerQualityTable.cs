@@ -47,8 +47,10 @@ public class DataContainerQualityTable : DataContainer
 				return weightsInternal[i].qualityIndex;
 		}
 
+		// From ModExtensions
+		// Removed clamping of the output
 		int result = weightsInternal[weightsInternal.Count - 1].qualityIndex;
-		return Mathf.Clamp (result, 0, 4);
+		return result;
 	}
 	
 	private void OnWeightsChanged ()

@@ -48,6 +48,10 @@ namespace PhantomBrigade.Data
         public const string DistanceCancelThreshold = "distance_cancel_threshold";
         public const string AngleThreshold = "angle_threshold";
         
+        public const string HoverAltitude = "hover_altitude";
+        public const string DestructionRadius = "destruction_radius";
+        public const string DestructionOriginOffset = "destruction_origin_offset";
+        
         private static List<string> keys;
         public static List<string> GetKeys ()
         {
@@ -72,6 +76,7 @@ namespace PhantomBrigade.Data
     public static class ActionCustomIntKeys
     {
         public const string MeleeAnimationVariant = "melee_animation_variant";
+        public const string DestructionLimit = "destruction_limit";
         
         private static List<string> keys;
         public static List<string> GetKeys ()
@@ -146,7 +151,22 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
-    
+
+    public enum ActionTimelineWarningStyle
+    {
+        None,
+        ActionDuration,
+        CustomDuration
+    }
+
+    public class DataBlockActionTimelinePreview
+    {
+        public ActionTimelineWarningStyle warning = ActionTimelineWarningStyle.None;
+        
+        [ShowIf ("@warning == ActionTimelineWarningStyle.CustomDuration")]
+        public float warningDuration = 0f;
+    }
+
     [Action][DontDrawComponent]
     public sealed class DataLinkActionCore : IComponent 
     { public DataBlockActionCore data; }
@@ -212,6 +232,10 @@ namespace PhantomBrigade.Data
         
         [DropdownReference]
         [ListDrawerSettings (ShowPaging = false)] 
+        public List<IOverworldUnitValidationFunction> functionsOnValidationBase;
+        
+        [DropdownReference]
+        [ListDrawerSettings (ShowPaging = false)] 
         public List<ICombatActionExecutionFunction> functionsOnCreation;
         
         [DropdownReference]
@@ -245,6 +269,12 @@ namespace PhantomBrigade.Data
         
         [DropdownReference (true)]
         public DataBlockActionPilotLink pilotLink;
+        
+        [DropdownReference (true)]
+        public DataBlockUnitStat rangePreviewFromStat;
+        
+        [DropdownReference (true)]
+        public DataBlockActionTimelinePreview timelinePreview;
         
         #region Editor
         #if UNITY_EDITOR
@@ -451,14 +481,14 @@ namespace PhantomBrigade.Data
         
         
         
-public void ValidateFlags ()
-{
-    if (flags != null)
-    {
-        flags = new HashSet<string> (flags).ToList ();
-        flags.Sort ();
-    }
-}
+        public void ValidateFlags ()
+        {
+            if (flags != null)
+            {
+                flags = new HashSet<string> (flags).ToList ();
+                flags.Sort ();
+            }
+        }
 
         public bool IsFlagPresent (string key)
         {

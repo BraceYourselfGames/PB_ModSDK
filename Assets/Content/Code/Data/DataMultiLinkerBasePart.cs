@@ -131,7 +131,7 @@ namespace PhantomBrigade.Data
         {
             return childLink1.priority.CompareTo (childLink2.priority);
         }
-        
+
         [PropertyOrder (-20), Button ("Redraw UI", ButtonSizes.Large), HideInEditorMode]
         public static void RedrawUI ()
         {

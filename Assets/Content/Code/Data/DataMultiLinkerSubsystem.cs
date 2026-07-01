@@ -531,6 +531,9 @@ namespace PhantomBrigade.Data
                 if (current.projectile.fuseProximity != null && root.projectileProcessed.fuseProximity == null)
                     root.projectileProcessed.fuseProximity = current.projectile.fuseProximity;
                 
+                if (current.projectile.spike != null && root.projectileProcessed.spike == null)
+                    root.projectileProcessed.spike = current.projectile.spike;
+                
                 if (current.projectile.hitResponse != null && root.projectileProcessed.hitResponse == null)
                     root.projectileProcessed.hitResponse = current.projectile.hitResponse;
                 
@@ -623,8 +626,6 @@ namespace PhantomBrigade.Data
                     {
                         if (!root.customProcessed.ints.ContainsKey (kvp.Key))
                             root.customProcessed.ints.Add (kvp.Key, kvp.Value);
-                        else
-                            root.customProcessed.ints[kvp.Key] = kvp.Value;
                     }
                 }
                 
@@ -637,8 +638,6 @@ namespace PhantomBrigade.Data
                     {
                         if (!root.customProcessed.floats.ContainsKey (kvp.Key))
                             root.customProcessed.floats.Add (kvp.Key, kvp.Value);
-                        else
-                            root.customProcessed.floats[kvp.Key] = kvp.Value;
                     }
                 }
                 
@@ -651,8 +650,6 @@ namespace PhantomBrigade.Data
                     {
                         if (!root.customProcessed.vectors.ContainsKey (kvp.Key))
                             root.customProcessed.vectors.Add (kvp.Key, kvp.Value);
-                        else
-                            root.customProcessed.vectors[kvp.Key] = kvp.Value;
                     }
                 }
                 
@@ -665,8 +662,6 @@ namespace PhantomBrigade.Data
                     {
                         if (!root.customProcessed.strings.ContainsKey (kvp.Key))
                             root.customProcessed.strings.Add (kvp.Key, kvp.Value);
-                        else
-                            root.customProcessed.strings[kvp.Key] = kvp.Value;
                     }
                 }
             }
@@ -914,33 +909,11 @@ namespace PhantomBrigade.Data
 
                     var visualInstance = Instantiate (visualPrefab.gameObject).GetComponent<ItemVisual> ();
                     var t = visualInstance.transform;
-                    t.name = $"_vis_{i:00} | {key}";
+                    t.name = $"_vis_{i:00} | {visualPrefab.name}";
                     t.parent = subholder;
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero);
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity);
                     t.localScale = Vector3.one;
-                    
-                    if (logMaterialWarnings)
-                    {
-                        var renderers = visualInstance.GetComponentsInChildren<Renderer> (true);
-                        if (renderers != null && renderers.Length > 0)
-                        {
-                            for (int r = 0; r < renderers.Length; r++)
-                            {
-                                var renderer = renderers[r];
-                                var sm = renderer.sharedMaterials;
-                                if (sm == null || sm.Length == 0)
-                                    continue;
-
-                                for (int m = 0; m < sm.Length; m++)
-                                {
-                                    var mat = sm[m];
-                                    if (mat == null)
-                                        Debug.LogWarning ($"Subsystem {subsystem.key} | Material {m} on renderer {renderer.name} under visual {key} is null");
-                                }
-                            }
-                        }
-                    }
                 }
             }
             
@@ -962,7 +935,7 @@ namespace PhantomBrigade.Data
 
                     var visualInstance = Instantiate (visualPrefab.gameObject).GetComponent<ItemVisual> ();
                     var t = visualInstance.transform;
-                    t.name = $"{kvp.Key} | {block.key}";
+                    t.name = $"{kvp.Key} | {visualPrefab.name}";
                     t.parent = subholder;
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero) + block.position;
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity) * Quaternion.Euler (block.rotation);
@@ -1226,7 +1199,7 @@ namespace PhantomBrigade.Data
         public void Migrate ()
         {
             data.Clear ();
-
+            
             // Migrate lowest level subsystems
             foreach (var kvp in DataMultiLinkerSubsystemBlueprint.data)
             {
@@ -1236,7 +1209,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Can't migrate key {key} from blueprint DB");
                     continue;
                 }
-
+                
                 var sb = kvp.Value;
                 if (sb == null)
                     continue;
@@ -1274,7 +1247,7 @@ namespace PhantomBrigade.Data
                     }
                 }
             }
-
+            
             // Migrate archetypes
             foreach (var kvp in DataMultiLinkerSubsystemArchetype.data)
             {
@@ -1284,7 +1257,7 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Can't migrate key {key} from archetype DB");
                     continue;
                 }
-
+                
                 var sa = kvp.Value;
                 if (sa == null)
                     continue;

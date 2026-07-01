@@ -130,6 +130,21 @@ namespace PhantomBrigade.Data
         public AnimationCurve idleIntensityBlend;
         [YamlMember (Alias = "idleIntensityBlend"), HideInInspector] 
         public AnimationCurveSerialized idleIntensityBlendSerialized;
+
+
+        [Header ("Vertical dashes")]
+        public float dashVerticalInDuration = 1f;
+        public float dashVerticalOutDuration = 1f;
+        
+        [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
+        public AnimationCurve dashVerticalIn;
+        [YamlMember (Alias = "dashVerticalIn"), HideInInspector] 
+        public AnimationCurveSerialized dashVerticalInSerialized;
+
+        [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
+        public AnimationCurve dashVerticalOut;
+        [YamlMember (Alias = "dashVerticalOut"), HideInInspector] 
+        public AnimationCurveSerialized dashVerticalOutSerialized;
         
         [Header ("Listener curves")]
         [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
@@ -174,6 +189,21 @@ namespace PhantomBrigade.Data
         [FoldoutGroup ("Shockwaves")]
         public SortedDictionary<string, DataContainerResourceAsset<ShockwaveVisualPreset>> shockwavePresets;
         
+        [Header ("Bulldoze Dash")]
+        [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
+        public AnimationCurve timeRemapDashBulldoze;
+        [YamlMember (Alias = "timeRemapDashBulldoze"), HideInInspector] 
+        public AnimationCurveSerialized timeRemapDashBulldozeSerialized;
+        
+        [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
+        public AnimationCurve timePreviewDashBulldoze;
+        [YamlMember (Alias = "timePreviewDashBulldozeFlat"), HideInInspector] 
+        public AnimationCurveSerialized timePreviewDashBulldozeSerialized;
+        
+        public float timePreviewSpeedBulldoze = 0.5f;
+        public float timePreviewRemapBulldoze = 0.5f;
+        public float timeNormalizedBulldozeTakeoff = 0.5f;
+
         [Header ("Dash")]
         [YamlIgnore, ShowInInspector, HideReferenceObjectPicker] 
         public AnimationCurve timeRemapDash;
@@ -502,6 +532,8 @@ namespace PhantomBrigade.Data
             stopIntensityPostDecelerationSerialized = (AnimationCurveSerialized)stopIntensityPostDeceleration;
             stopIntensityBlendSerialized = (AnimationCurveSerialized)stopIntensityBlend;
             idleIntensityBlendSerialized = (AnimationCurveSerialized)idleIntensityBlend;
+            dashVerticalInSerialized = (AnimationCurveSerialized)dashVerticalIn;
+            dashVerticalOutSerialized = (AnimationCurveSerialized)dashVerticalOut;
             weaponDrawSerialized = (AnimationCurveSerialized)weaponDraw;
             
             listenerPositionSerialized = (AnimationCurveSerialized)listenerPosition;
@@ -510,6 +542,9 @@ namespace PhantomBrigade.Data
 
             timeRemapDashSerialized = (AnimationCurveSerialized)timeRemapDash;
             timePreviewDashSerialized = (AnimationCurveSerialized)timePreviewDash;
+            
+            timeRemapDashBulldozeSerialized = (AnimationCurveSerialized)timeRemapDashBulldoze;
+            timePreviewDashBulldozeSerialized = (AnimationCurveSerialized)timePreviewDashBulldoze;
             
             timeRemapMeleeStandardSerialized = (AnimationCurveSerialized)timeRemapMeleeStandard;
             timePreviewMeleeStandardSerialized = (AnimationCurveSerialized)timePreviewMeleeStandard;
@@ -544,6 +579,8 @@ namespace PhantomBrigade.Data
             stopIntensityPostDeceleration = (AnimationCurve)stopIntensityPostDecelerationSerialized;
             stopIntensityBlend = (AnimationCurve)stopIntensityBlendSerialized;
             idleIntensityBlend = (AnimationCurve)idleIntensityBlendSerialized;
+            dashVerticalIn = (AnimationCurve)dashVerticalInSerialized;
+            dashVerticalOut = (AnimationCurve)dashVerticalOutSerialized;
             weaponDraw = (AnimationCurve)weaponDrawSerialized;
 
             listenerPosition = (AnimationCurve)listenerPositionSerialized;
@@ -552,6 +589,9 @@ namespace PhantomBrigade.Data
             
             timeRemapDash = (AnimationCurve)timeRemapDashSerialized;
             timePreviewDash = (AnimationCurve)timePreviewDashSerialized;
+            
+            timeRemapDashBulldoze = (AnimationCurve)timeRemapDashBulldozeSerialized;
+            timePreviewDashBulldoze = (AnimationCurve)timePreviewDashBulldozeSerialized;
             
             timeRemapMeleeStandard = (AnimationCurve)timeRemapMeleeStandardSerialized;
             timePreviewMeleeStandard = (AnimationCurve)timePreviewMeleeStandardSerialized;

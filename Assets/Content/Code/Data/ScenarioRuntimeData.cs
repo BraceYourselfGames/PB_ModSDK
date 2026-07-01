@@ -10,6 +10,26 @@ namespace PhantomBrigade
     {
         public PointRewardType type;
         public SortedDictionary<string, int> rewards;
+        public CombatRewardGroupSavedOutput savedOutput;
+    }
+
+    public class CombatRewardGroupSavedOutput
+    {
+        public SortedDictionary<string, int> resources;
+        public List<CombatRewardSavedPart> parts;
+        public List<CombatRewardSavedSubsystem> subsystems;
+    }
+    
+    public class CombatRewardSavedPart
+    {
+        public int level;
+        public int rating;
+        public string preset;
+    }
+
+    public class CombatRewardSavedSubsystem
+    {
+        public string blueprint;
     }
     
     public class CombatDescription
@@ -17,6 +37,7 @@ namespace PhantomBrigade
         // Scenario key and seed used to generate it
         public string scenarioKey;
         public int scenarioSeed;
+        public bool standaloneMode;
 
         [YamlIgnore, FoldoutGroup ("Scenario")]
         public DataContainerScenario scenarioGenerated;
@@ -42,6 +63,9 @@ namespace PhantomBrigade
         
         // Mapping of state keys to area volume keys
         public SortedDictionary<string, string> stateVolumes;
+                
+        // Custom player squad
+        public SortedDictionary<string, DataBlockUnitDescriptionSaved> unitDescriptionSaved;
 
         // Rewards
         public SortedDictionary<string, CombatRewardGroupCollapsed> rewardGroupsCollapsed;
@@ -92,12 +116,17 @@ namespace PhantomBrigade
                 stateVolumes = new SortedDictionary<string, string> ();
             else
                 stateVolumes.Clear ();
+            
+            if (unitDescriptionSaved == null)
+                unitDescriptionSaved = new SortedDictionary<string, DataBlockUnitDescriptionSaved> ();
+            else
+                unitDescriptionSaved.Clear ();
 
             if (rewardGroupsCollapsed == null)
                 rewardGroupsCollapsed = new SortedDictionary<string, CombatRewardGroupCollapsed> ();
             else
                 rewardGroupsCollapsed.Clear ();
-            
+
             if (scenarioGenerated == null)
                 scenarioGenerated = new DataContainerScenario ();
 

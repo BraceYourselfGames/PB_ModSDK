@@ -382,6 +382,9 @@ namespace PhantomBrigade.Data
             if (current.core != null && root.coreProc == null)
                 root.coreProc = current.core;
             
+            if (current.standalone != null && root.standaloneProc == null)
+                root.standaloneProc = current.standalone;
+
             if (current.areas != null && root.areasProc == null)
                 root.areasProc = current.areas;
             
@@ -419,34 +422,20 @@ namespace PhantomBrigade.Data
                         root.statesProc.Add (stateKey, stateProc);
                         
                         // Set unserializable fields
-                        stateProc.textName = stateCurrent.textName;
-                        stateProc.textDesc = stateCurrent.textDesc;
                         stateProc.parentScenario = root;
                         stateProc.key = stateKey;
                         
                         // Set non-reference fields
                         stateProc.evaluated = stateCurrent.evaluated;
                         stateProc.evaluationContext = stateCurrent.evaluationContext;
-                        stateProc.visible = stateCurrent.visible;
                         stateProc.startInScope = stateCurrent.startInScope;
                         stateProc.priorityGeneration = stateCurrent.priorityGeneration;
                         stateProc.priority = stateCurrent.priority;
-                        stateProc.priorityDisplay = stateCurrent.priorityDisplay;
-                        stateProc.mood = stateCurrent.mood;
                     }
 
                     // Grab references to existing objects for reference fields, where available
                     // This is useful as most of these benefit from ability to live edit mid gameplay
-                    
-                    if (!string.IsNullOrEmpty (stateCurrent.textNameKey) && string.IsNullOrEmpty (stateProc.textNameKey))
-                        stateProc.textNameKey = stateCurrent.textNameKey;
-                    
-                    if (!string.IsNullOrEmpty (stateCurrent.textDescKey) && string.IsNullOrEmpty (stateProc.textDescKey))
-                        stateProc.textDescKey = stateCurrent.textDescKey;
-                    
-                    if (stateCurrent.textOnCompletion != null && stateProc.textOnCompletion == null)
-                        stateProc.textOnCompletion = stateCurrent.textOnCompletion;
-                    
+
                     if (stateCurrent.ui != null && stateProc.ui == null)
                         stateProc.ui = stateCurrent.ui;
                     
@@ -921,29 +910,6 @@ namespace PhantomBrigade.Data
         [FoldoutGroup ("Upgrade methods", false)]
         [ShowInInspector, ListDrawerSettings (DefaultExpandedState = false, ShowPaging = false, HideAddButton = true)]
         private static List<DuplicateTextGroup> contentDuplicationStates = new List<DuplicateTextGroup> ();
-
-        [FoldoutGroup ("Upgrade methods", false)]
-        [Button ("Clear state text keys", ButtonSizes.Large), PropertyOrder (-10)]
-        public void ClearStateTextKeys ()
-        {
-            foreach (var kvp in data)
-            {
-                var scenario = kvp.Value;
-
-                if (scenario.statesProc != null)
-                {
-                    foreach (var kvp2 in scenario.statesProc)
-                    {
-                        var state = kvp2.Value;
-                        if (state == null)
-                            continue;
-
-                        state.textNameKey = string.Empty;
-                        state.textDescKey = string.Empty;
-                    }
-                }
-            }
-        }
         
         [FoldoutGroup ("Utilities", false)]
         [Button ("Print execution locks", ButtonSizes.Large), PropertyOrder (-10)]
@@ -960,31 +926,6 @@ namespace PhantomBrigade.Data
                     var step = kvp2.Value;
                     if (step.core != null && !step.core.executionAllowed)
                         Debug.LogWarning ($"{kvp.Key} / {kvp2.Key}: execution not allowed");
-                }
-            }
-        }
-        
-        [FoldoutGroup ("Utilities", false)]
-        [Button ("Print hints", ButtonSizes.Large), PropertyOrder (-10)]
-        private static void PrintHints ()
-        {
-            foreach (var kvp in data)
-            {
-                var scenario = kvp.Value;
-                if (scenario == null || scenario.stepsProc == null)
-                    continue;
-
-                foreach (var kvp2 in scenario.stepsProc)
-                {
-                    var step = kvp2.Value;
-                    if (step.hintsConditional != null)
-                    {
-                        for (int i = 0; i < step.hintsConditional.Count; ++i)
-                        {
-                            var hint = step.hintsConditional[i];
-                            Debug.LogWarning ($"{kvp.Key} / {kvp2.Key}: Hint {i + 1}\n- {hint.data?.text}");
-                        }
-                    }
                 }
             }
         }
@@ -1058,6 +999,100 @@ namespace PhantomBrigade.Data
             var report = sb.ToString ();
             Debug.Log (report);
             GUIUtility.systemCopyBuffer = report;
+        }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button ("Log steps without text", ButtonSizes.Large), PropertyOrder (-10)]
+        private static void LogStepsWithoutText ()
+        {
+            foreach (var kvp in data)
+            {
+                var scenario = kvp.Value;
+                if (scenario == null)
+                    continue;
+
+                if (scenario.steps != null)
+                {
+                    foreach (var kvp2 in scenario.steps)
+                    {
+                        var stepKey = kvp2.Key;
+                        var step = kvp2.Value;
+                        if (step == null)
+                        {
+                            Debug.LogWarning ($"Scenario {scenario.key} step {stepKey} is null");
+                            continue;
+                        }
+
+                        var stepProc = scenario.stepsProc != null && scenario.stepsProc.TryGetValue (stepKey, out var s) ? s : null;
+                        var core = step.core != null ? step.core : stepProc?.core;
+                        if (core == null)
+                        {
+                            Debug.LogWarning ($"Scenario {scenario.key} step {stepKey} has no core and there's no processed step core to fall back to");
+                            continue;
+                        }
+                        
+                        var textStepHeader = core.textHeader != null ? core.textHeader.GetText () : null;
+                        var textStepDesc = core.textDesc != null ? core.textDesc.GetText () : null;
+                        
+                        if (string.IsNullOrEmpty (textStepHeader))
+                        {
+                            if (string.IsNullOrEmpty (textStepDesc))
+                                Debug.LogWarning ($"Scenario {scenario.key} step {stepKey} has no header or description!");
+                            else
+                                Debug.LogWarning ($"Scenario {scenario.key} step {stepKey} has no header!");
+                        }
+                        else if (string.IsNullOrEmpty (textStepDesc))
+                            Debug.LogWarning ($"Scenario {scenario.key} step {stepKey} has no description!");
+                    }
+                }
+            }
+        }
+        
+        [FoldoutGroup ("Utilities", false)]
+        [Button ("Log states without text", ButtonSizes.Large), PropertyOrder (-10)]
+        private static void LogStatesWithoutText ()
+        {
+            foreach (var kvp in data)
+            {
+                var scenario = kvp.Value;
+                if (scenario == null)
+                    continue;
+
+                if (scenario.states != null)
+                {
+                    foreach (var kvp2 in scenario.states)
+                    {
+                        var stateKey = kvp2.Key;
+                        var state = kvp2.Value;
+                        if (state == null)
+                        {
+                            Debug.LogWarning ($"Scenario {scenario.key} state {stateKey} is null");
+                            continue;
+                        }
+                        
+                        if (state.locationRetreat != null)
+                            continue;
+
+                        var stateProc = scenario.statesProc != null && scenario.statesProc.TryGetValue (stateKey, out var s) ? s : null;
+                        var ui = state.ui != null ? state.ui : stateProc?.ui;
+                        if (ui == null)
+                            continue;
+
+                        var textName = ui.textHeader != null ? ui.textHeader.GetText () : string.Empty;
+                        var textDesc = ui.textDesc != null ? ui.textDesc.GetText () : string.Empty;
+                        
+                        if (string.IsNullOrEmpty (textName))
+                        {
+                            if (string.IsNullOrEmpty (textDesc))
+                                Debug.LogWarning ($"Scenario {scenario.key} state {stateKey} has no header or description!");
+                            else
+                                Debug.LogWarning ($"Scenario {scenario.key} state {stateKey} has no header!");
+                        }
+                        else if (string.IsNullOrEmpty (textDesc))
+                            Debug.LogWarning ($"Scenario {scenario.key} state {stateKey} has no description!");
+                    }
+                }
+            }
         }
         
         [FoldoutGroup ("Utilities", false)]

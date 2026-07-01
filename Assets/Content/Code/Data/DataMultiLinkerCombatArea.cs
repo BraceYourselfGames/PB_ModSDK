@@ -143,29 +143,15 @@ namespace PhantomBrigade.Data
 
         public static AreaDataCore GetCurrentLevelDataCore ()
         {
-            if (selectedArea == null)
-                return null;
-
-            if (selectedArea?.contentProc?.channels == null)
-                return null;
-
-            return selectedArea.contentProc.core;
+            if (selectedArea != null)
+                return selectedArea.GetLevelDataCore ();
+            return null;
         }
 
         public static AreaDataContainer GetCurrentLevelDataRoot ()
         {
-            if (selectedArea == null)
-                return null;
-
-            if (selectedArea?.contentProc?.channels == null)
-                return null;
-
-            if (selectedArea.contentProc.core == null)
-                return null;
-            
-            if (selectedArea.contentProc.channels.TryGetValue (AreaChannelRoot.alias, out var channel) && channel is AreaChannelRoot channelRoot)
-                return channelRoot.content;
-            
+            if (selectedArea != null)
+                return selectedArea.GetLevelDataRoot ();
             return null;
         }
         
@@ -565,8 +551,12 @@ namespace PhantomBrigade.Data
                         
             if (!Application.isPlaying)
             {
+                #if !PB_MODSDK
+
                 if (OverworldSceneHelper.ins != null)
                     OverworldSceneHelper.ins.SetActiveDirectly (true);
+
+                #endif
 
                 if (CombatSceneHelper.ins != null)
                     CombatSceneHelper.ins.DestroyTerrainMeshes ();

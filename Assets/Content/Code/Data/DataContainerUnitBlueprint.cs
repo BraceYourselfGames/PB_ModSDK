@@ -157,6 +157,8 @@ namespace PhantomBrigade.Data
         public string audioSyncOnMovementElevation;
         public string audioSyncOnMovementTilt;
 
+        public int stabilityOffset;
+        
         //Speed and movement
         public float movementSpeedBase;
         public float movementSpeedMin;

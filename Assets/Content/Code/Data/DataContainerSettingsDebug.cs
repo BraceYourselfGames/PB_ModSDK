@@ -42,12 +42,18 @@ namespace PhantomBrigade.Data
         public bool debugWeapons = false;
         public bool debugInteractions = false;
         public bool debugAchievements = false;
+
+        public bool debugNavigation = false;
         
         public bool combatSubsystemTooltips = false;
         public bool combatBeamsHidden = false;
         
         public bool forceFirstTimeBoot = false;
+        
         public bool forceQuickLoad = false;
+        public bool forceQuickLoadInternal = false;
+        public string forceQuickLoadKey = null;
+        
         public bool forceWorldGeneration = false;
         public bool forceWorldPreservation = false;
         
