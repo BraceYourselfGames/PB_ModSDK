@@ -1,0 +1,1016 @@
+parents:
+- key: walker_cruiser
+- key: walker_block_enrage_cas
+- key: walker_block_enrage_top_beam
+hidden: false
+core: 
+ui:
+  textName: {}
+  textType: 
+tags: 
+layout:
+  units:
+    c20_turret_top_left:
+      comment: 
+      preset: vhc_system_wpn_main_cannon_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform: 
+      linksConditional: 
+      legStepBlocklist: 
+    c21_turret_top_right:
+      comment: 
+      preset: vhc_system_wpn_main_cannon_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_main
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform: 
+      linksConditional: 
+      legStepBlocklist: 
+    d1_launcher_left:
+      comment: 
+      preset: vhc_system_wpn_main_mg_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_main
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides:
+          primaryRotationSpeed: 0
+          secondaryRotationSpeed: 250
+          secondaryYawLimit: 65
+          secondaryPitchLimit: 35
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -16.75
+          y: 17.5
+          z: -10.1
+        rotation:
+          x: 0
+          y: -90
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    d2_launcher_right:
+      comment: 
+      preset: vhc_system_wpn_main_mg_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_main
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides:
+          primaryRotationSpeed: 0
+          secondaryRotationSpeed: 250
+          secondaryYawLimit: 65
+          secondaryPitchLimit: 35
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 16.75
+          y: 17.5
+          z: -10.1
+        rotation:
+          x: 0
+          y: 90
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    l1_wpn_launcher_back:
+      comment: 
+      preset: vhc_system_wpn_comp_shotgun_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides:
+          primaryRotationSpeed: 0
+          secondaryRotationSpeed: 250
+          secondaryYawLimit: 45
+          secondaryPitchLimit: 35
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 16
+          z: -19
+        rotation:
+          x: 0
+          y: 180
+          z: 0
+        secondary:
+          startMode: Animate
+          startAnimTimings:
+            x: 0
+            y: 1
+          position:
+            x: 0
+            y: 16
+            z: -16
+          rotation:
+            x: 0
+            y: 180
+            z: 0
+      linksConditional: 
+      legStepBlocklist: 
+    t10_turret_front_left:
+      comment: 
+      preset: vhc_system_wpn_comp_shotgun_01_ud
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -4.5
+          y: 9.75
+          z: 23
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    t11_turret_front_right:
+      comment: 
+      preset: vhc_system_wpn_comp_shotgun_01_ud
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 4.5
+          y: 9.75
+          z: 23
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 0
+    name: Main-Left-Flank
+    color: 
+    comment: 
+    selfChange:
+      unitKey: d1_launcher_left
+    functionGroups: 
+    childMode: ExecuteFirstValid
+    children:
+    - name: Targeted
+      color: 
+      comment:
+        comment: Executed if there is a PB unit within a 90 degree cone in front of the boss. Staggered attacks on targeted unit.
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted: 
+        functionsGlobal:
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_bt_wpn_main_left_locked
+      childMode: ExecuteFirstValid
+      children:
+      - name: Locked
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups:
+        - functionsTargetedContext: Self
+          functionsTargeted: 
+          functionsGlobal: 
+        - functionsTargetedContext: Self
+          functionsTargeted:
+          - !CombatUnitActionsCreate
+            discardExisting: true
+            actions:
+            - key: attack_system
+              startTime: 2.5
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboard
+                name: tgt_main_left_flank
+                center: true
+                modifiersDirectional: false
+                modifiers: 
+              targetSecondary: 
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction:
+              - !CombatActionAddTargetWarning {}
+          functionsGlobal: 
+        childMode: ExecuteAll
+        children: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck: 
+        unitFilterCount: 
+        memoryBase: 
+      - name: Swipe
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups:
+        - functionsTargetedContext: Self
+          functionsTargeted:
+          - !CombatUnitActionsCreate
+            discardExisting: true
+            actions:
+            - key: attack_system
+              startTime: 0.25
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboardRelative
+                name: tgt_main_left_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: -25
+                    y: 0
+                    z: 0
+              targetSecondary:
+                eased: false
+                mode: Linear
+                midpointOffsetLocal:
+                  x: 0
+                  y: 0
+                  z: 0
+                type: UnitBlackboardRelative
+                name: tgt_main_left_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: 25
+                    y: 0
+                    z: 0
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction: 
+            - key: attack_system
+              startTime: 2
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboardRelative
+                name: tgt_main_left_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: 25
+                    y: 0
+                    z: 0
+              targetSecondary:
+                eased: false
+                mode: Linear
+                midpointOffsetLocal:
+                  x: 0
+                  y: 0
+                  z: 0
+                type: UnitBlackboardRelative
+                name: tgt_main_left_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: -25
+                    y: 0
+                    z: 0
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction: 
+          functionsGlobal: 
+        childMode: ExecuteAll
+        children: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck: 
+        unitFilterCount: 
+        memoryBase: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck:
+        sort: Distance
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited:
+          key: tgt_main_left_flank
+          indexed: false
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction:
+          key: Phantoms
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform:
+          origin: 
+          directionOriginRotation:
+            x: 0
+            y: 0
+            z: 0
+          directionDot: 
+          directionDotFlat: 
+          directionAngle:
+            check: Less
+            value: 45
+          distance: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_no_power: false
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+  - looping: true
+    durationInTurns: 1
+    priority: 0
+    name: Main-Right-Flank
+    color: 
+    comment: 
+    selfChange:
+      unitKey: d2_launcher_right
+    functionGroups: 
+    childMode: ExecuteFirstValid
+    children:
+    - name: Targeted
+      color: 
+      comment:
+        comment: Executed if there is a PB unit within a 90 degree cone in front of the boss. Staggered attacks on targeted unit.
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted: 
+        functionsGlobal:
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_bt_wpn_main_right_locked
+      childMode: ExecuteFirstValid
+      children:
+      - name: Locked
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups:
+        - functionsTargetedContext: Self
+          functionsTargeted: 
+          functionsGlobal: 
+        - functionsTargetedContext: Self
+          functionsTargeted:
+          - !CombatUnitActionsCreate
+            discardExisting: true
+            actions:
+            - key: attack_system
+              startTime: 2.5
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboard
+                name: tgt_main_right_flank
+                center: true
+                modifiersDirectional: false
+                modifiers: 
+              targetSecondary: 
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction:
+              - !CombatActionAddTargetWarning {}
+          functionsGlobal: 
+        childMode: ExecuteAll
+        children: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck: 
+        unitFilterCount: 
+        memoryBase: 
+      - name: Swipe
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups:
+        - functionsTargetedContext: Self
+          functionsTargeted:
+          - !CombatUnitActionsCreate
+            discardExisting: true
+            actions:
+            - key: attack_system
+              startTime: 0.25
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboardRelative
+                name: tgt_main_right_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: -25
+                    y: 0
+                    z: 0
+              targetSecondary:
+                eased: false
+                mode: Linear
+                midpointOffsetLocal:
+                  x: 0
+                  y: 0
+                  z: 0
+                type: UnitBlackboardRelative
+                name: tgt_main_right_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: 25
+                    y: 0
+                    z: 0
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction: 
+            - key: attack_system
+              startTime: 2
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboardRelative
+                name: tgt_main_right_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: 25
+                    y: 0
+                    z: 0
+              targetSecondary:
+                eased: false
+                mode: Linear
+                midpointOffsetLocal:
+                  x: 0
+                  y: 0
+                  z: 0
+                type: UnitBlackboardRelative
+                name: tgt_main_right_flank
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: -25
+                    y: 0
+                    z: 0
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction: 
+          functionsGlobal: 
+        childMode: ExecuteAll
+        children: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck: 
+        unitFilterCount: 
+        memoryBase: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck:
+        sort: Distance
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited:
+          key: tgt_main_right_flank
+          indexed: false
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction:
+          key: Phantoms
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform:
+          origin: 
+          directionOriginRotation:
+            x: 0
+            y: 0
+            z: 0
+          directionDot: 
+          directionDotFlat: 
+          directionAngle:
+            check: Less
+            value: 45
+          distance: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_no_power: false
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+  - looping: true
+    durationInTurns: 1
+    priority: 0
+    name: Main-Back
+    color: 
+    comment: 
+    selfChange:
+      unitKey: l1_wpn_launcher_back
+    functionGroups: 
+    childMode: ExecuteFirstValid
+    children:
+    - name: Targeted
+      color: 
+      comment:
+        comment: Executed if there is a PB unit within a 90 degree cone in front of the boss. Staggered attacks on targeted unit.
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted: 
+        functionsGlobal:
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_bt_wpn_main_right_locked
+      childMode: ExecuteOneRandomValid
+      children:
+      - name: Locked
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups:
+        - functionsTargetedContext: Self
+          functionsTargeted: 
+          functionsGlobal: 
+        - functionsTargetedContext: Self
+          functionsTargeted:
+          - !CombatUnitActionsCreate
+            discardExisting: true
+            actions:
+            - key: attack_system
+              startTime: 2.5
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboard
+                name: tgt_main_back
+                center: true
+                modifiersDirectional: false
+                modifiers: 
+              targetSecondary: 
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction:
+              - !CombatActionAddTargetWarning {}
+          functionsGlobal: 
+        childMode: ExecuteAll
+        children: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck: 
+        unitFilterCount: 
+        memoryBase: 
+      - name: Swipe
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups:
+        - functionsTargetedContext: Self
+          functionsTargeted:
+          - !CombatUnitActionsCreate
+            discardExisting: true
+            actions:
+            - key: attack_system
+              startTime: 0.25
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboardRelative
+                name: tgt_main_back
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: -25
+                    y: 0
+                    z: 0
+              targetSecondary:
+                eased: false
+                mode: Linear
+                midpointOffsetLocal:
+                  x: 0
+                  y: 0
+                  z: 0
+                type: UnitBlackboardRelative
+                name: tgt_main_back
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: 25
+                    y: 0
+                    z: 0
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction: 
+            - key: attack_system
+              startTime: 2
+              startTimeIsLocal: true
+              locked: false
+              durationVariable:
+                f: 1.5
+              targetLocal: 
+              target:
+                type: UnitBlackboardRelative
+                name: tgt_main_back
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: 25
+                    y: 0
+                    z: 0
+              targetSecondary:
+                eased: false
+                mode: Linear
+                midpointOffsetLocal:
+                  x: 0
+                  y: 0
+                  z: 0
+                type: UnitBlackboardRelative
+                name: tgt_main_back
+                center: true
+                modifiersDirectional: true
+                modifiers:
+                - !TargetModifierOffsetLocal
+                  offset:
+                    x: -25
+                    y: 0
+                    z: 0
+              targetUnitFiltered: 
+              targetUnitLocalOffsets: 
+              movementCustom: 
+              functionsTimed: 
+              functionsOnAction: 
+          functionsGlobal: 
+        childMode: ExecuteAll
+        children: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck: 
+        unitFilterCount: 
+        memoryBase: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck:
+        sort: Distance
+        unitLimit: -1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited:
+          key: tgt_main_back
+          indexed: false
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction:
+          key: Phantoms
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform:
+          origin: 
+          directionOriginRotation:
+            x: 0
+            y: 0
+            z: 0
+          directionDot: 
+          directionDotFlat: 
+          directionAngle:
+            check: Less
+            value: 45
+          distance: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_no_power: false
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable: 

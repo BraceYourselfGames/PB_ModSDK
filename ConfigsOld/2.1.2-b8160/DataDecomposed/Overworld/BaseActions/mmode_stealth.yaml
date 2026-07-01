@@ -1,0 +1,22 @@
+icon: s_icon_l32_hotbar_move_slow
+priority: 1
+color:
+  r: 0.8679245
+  g: 0.4223139
+  b: 0.3234247
+  a: 1
+inputKey: overworld_action2_stealth
+group: mmode
+groupActivationBlock: false
+instant: false
+dialog: false
+textDialogHeader: 
+textDialogContent: 
+resourceKeyLinked: battery
+targeting: 
+callsForUnlock: []
+callsForAvailability:
+- IsStealthMovementAvailable
+callsOnStart:
+- OnStealthMovement
+callsOnEnd: 

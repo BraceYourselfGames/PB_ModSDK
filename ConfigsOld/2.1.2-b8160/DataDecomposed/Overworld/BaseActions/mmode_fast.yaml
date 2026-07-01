@@ -1,0 +1,22 @@
+icon: s_icon_l32_hotbar_move_fast
+priority: 3
+color:
+  r: 0.4795301
+  g: 0.5471698
+  b: 0.3019758
+  a: 1
+inputKey: overworld_action4_overdrive
+group: mmode
+groupActivationBlock: false
+instant: false
+dialog: false
+textDialogHeader: 
+textDialogContent: 
+resourceKeyLinked: battery
+targeting: 
+callsForUnlock: []
+callsForAvailability:
+- IsFastMovementAvailable
+callsOnStart:
+- OnFastMovement
+callsOnEnd: 

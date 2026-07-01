@@ -1,0 +1,33 @@
+parents:
+- key: mm_cruise
+  priority: -1
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 2
+ui:
+  positionX: 2
+  positionY: 1
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_sensor6
+unlock: 
+cost:
+  resources:
+    components_r2: 10
+    supplies: 1000
+effect:
+  stats:
+  - key: mm_normal_vision_own
+    modifier: Offset
+    value: 0.2
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_sensors

@@ -1,0 +1,512 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: wave_00_guard
+  timeLocked: true
+  time: 7
+  scalingUsed: false
+  loadImmediately: true
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: false
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist:
+  - eject
+  customExitBehaviour: 
+  weatherOverridePrecipitation:
+    f: 0.15
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_mountainbase
+entry:
+  squadUsed: true
+  squadSize: 2
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      player: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- type_assault
+- unique_mountainbase
+- listed
+- trait_entrenched
+- block_exit_on_defeat
+- block_save_after
+states:
+  main:
+    comment: 
+    textNameKey: generic_breakin_objective_hostiles_header
+    textDescKey: generic_breakin_objective_hostiles_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: GreaterEqual
+        value: 3
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden:
+          present: false
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.1
+            hidden: false
+            key: unique_mountainbase_victory
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: false
+            instant: false
+  wave_00_guard_turn:
+    comment: 
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: generic_enemy_reinforcements_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: None
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 2
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: wave_01_alarm
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  wave_00_guard:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: 
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_tank_training_aa_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: -1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_training_cannon_0
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: -1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: false
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: wave_00_guard
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      reinforcement_wave_test: true
+      reward: true
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional:
+    - hidden: false
+      data:
+        color:
+          r: 0.6
+          g: 0.24
+          b: 0.24
+          a: 0
+        frameLocation: BottomLeft
+        frameGradientMode: None
+        framePositionX: 234
+        framePositionY: 0
+        frameSizeX: 704
+        frameSizeY: 128
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopRight
+        buttonLocation: None
+        textWidth: 336
+        textReused: 
+        icon: 
+        worldAnchor: 
+        arrowCustom: 
+        frameHighlight: 
+        textInputActions: 
+      inputMode: Unit_Selection
+      unitLink:
+        tags: 
+        name: 
+        faction:
+          key: Phantoms
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: false
+        actionCounts:
+          attack_primary:
+            check: Equal
+            value: 1
+          attack_secondary:
+            check: Equal
+            value: 1
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 12
+      hidden: false
+      key: unique_mountainbase_intro_02
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_mountainbase
+      allowRepeat: true
+    - !CombatModifyUnits
+      units: 1
+      checks:
+      - !UnitValidateNameInternal
+        nameInternal: pb_mech_01
+      functions:
+      - !CombatCreateCommsMessage
+        time: 0
+        key: unique_mountainbase_intro_01
+    outcome: 
+    transitions: 
+  wave_01_alarm:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: 
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: custom_mountainbase_bravo
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: Default
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing:
+            landingUsed: false
+            landingData: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - salvage_blocked
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: false
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: wave_01_alarm
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0.1
+      hidden: false
+      key: unique_mountainbase_reinforcement_01
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

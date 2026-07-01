@@ -1,0 +1,87 @@
+tags:
+- alpine_light
+- alpine
+slot1:
+  layerKey: default_grass2
+  hsv:
+    x: 0
+    y: 0.4
+    z: 0.5
+    w: 1
+  blending:
+    x: 0.5
+    y: 0.5
+slot2:
+  layerKey: rock1
+  hsv:
+    x: 0
+    y: 0.1
+    z: 0.5
+    w: 1
+  blending:
+    x: 0.5
+    y: 0
+slot3:
+  layerKey: forestfloor2
+  hsv:
+    x: 0
+    y: 0.1
+    z: 0.6
+    w: 1
+  blending:
+    x: 0.5
+    y: 0
+slot4:
+  layerKey: bush
+  hsv:
+    x: 0
+    y: 0.5
+    z: 0.5
+    w: 1
+  blending:
+    x: 0.5
+    y: 0.5
+slopeColor:
+  r: 0.802
+  g: 0.802
+  b: 0.802
+  a: 0
+textureSlope: layered3
+textureDistant: default
+textureSplat: default
+gradientRange:
+  x: 0
+  y: 30
+gradient:
+  mode: Blend
+  alphaKeys:
+  - alpha: 1
+    time: 0
+  - alpha: 1
+    time: 0.9411765
+  - alpha: 1
+    time: 1
+  colorKeys:
+  - color:
+      r: 0.8113208
+      g: 0.7035826
+      b: 0.5625668
+      a: 1
+    time: 0
+  - color:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    time: 1
+vegetationColorPrimary:
+  r: 1
+  g: 0.3254717
+  b: 0.3254717
+  a: 1
+vegetationColorSecondary:
+  r: 1
+  g: 0.5434602
+  b: 0.1372549
+  a: 1
+weatherSnowAmount: 0.01

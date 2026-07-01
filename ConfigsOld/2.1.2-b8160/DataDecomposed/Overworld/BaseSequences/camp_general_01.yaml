@@ -1,0 +1,30 @@
+comment:
+  comment: General logic for camp state. Covers main global effect + bonus effects like workshop.
+hidden: false
+stopOnEmptyStep: false
+tags:
+- camp_general
+steps:
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - camp_general_base
+  tags:
+    camp_general: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: true
+  keys: 
+  tags:
+    camp_general_hope: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_general: true

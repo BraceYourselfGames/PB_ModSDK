@@ -1,0 +1,26 @@
+icon: s_icon_l32_mnf_arms3
+priority: 10
+color:
+  r: 0.3215686
+  g: 0.7573279
+  b: 0.8666667
+  a: 1
+inputKey: 
+group: ''
+groupActivationBlock: false
+instant: true
+dialog: false
+textDialogHeader: 
+textDialogContent: 
+resourceKeyLinked: item_drone_decoy
+targeting:
+  navigable: true
+  rangeMin: 10
+  rangeMax: 300
+callsForUnlock:
+- IsDroneDecoyUnlocked
+callsForAvailability:
+- IsDroneDecoyAvailable
+callsOnStart:
+- OnDroneDecoy
+callsOnEnd: 

@@ -1,0 +1,23 @@
+hidden: false
+parents:
+- key: vhc_tank_elevated_body_turret
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags: 
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - vhc_vis_tank_elevated_turret_adapter
+  pickRandom: false
+  hardpointsTargeted:
+  - vhc_vis_secondary
+  priority: 0
+  comment: 
+  checks: 

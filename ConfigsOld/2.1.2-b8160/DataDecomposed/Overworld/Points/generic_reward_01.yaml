@@ -1,0 +1,41 @@
+comment: 
+hidden: false
+parents: 
+core: 
+tags: 
+generation: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter: 
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget:
+    f: 15
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: []
+        tags:
+          part_res: true
+          part_res_rare: false
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: []
+        tags:
+          part_res: false
+      - chance: 0.6
+        repeats: 1
+        tagsUsed: true
+        keys: 
+        tags:
+          subsystem: true

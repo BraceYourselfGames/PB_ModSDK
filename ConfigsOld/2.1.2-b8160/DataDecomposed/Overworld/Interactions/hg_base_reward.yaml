@@ -1,0 +1,100 @@
+hidden: true
+parents:
+- key: sh_core_basic
+core:
+  stepOnStart: main
+  priority: -10
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags:
+- context_forward_base
+check:
+  repeat: Enabled
+  checksGlobal: 
+  checksBase:
+  - !OverworldValidateMemory
+    check:
+      method: RequireAll
+      checks:
+      - key: quest_liberation_reward_earned
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: NoValueCheck
+        value: 0
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_mine_02
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !ModifyMemoryBase
+        changes:
+        - change: Remove
+          key: quest_liberation_reward_earned
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsLocal: 
+    options:
+      option_a:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+      option_b:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+    optionsReused: 

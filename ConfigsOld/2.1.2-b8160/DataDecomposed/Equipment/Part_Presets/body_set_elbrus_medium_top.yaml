@@ -1,0 +1,76 @@
+hidden: false
+parents:
+- key: body_set_elbrus_medium
+- key: body_top
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags: 
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - armor_elbrus_m_head
+  pickRandom: false
+  hardpointsTargeted:
+  - external_top_head
+  priority: 0
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - armor_elbrus_m_pelvis
+  pickRandom: false
+  hardpointsTargeted:
+  - external_top_pelvis
+  priority: 1
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - armor_elbrus_m_torso
+  pickRandom: false
+  hardpointsTargeted:
+  - external_top_torso
+  priority: 2
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  priority: 3
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_mobility
+  priority: 4
+  comment:
+    comment: Base stats of Elbrus are lower than others, so R3 offers an extra aux hardpoint.
+  checks:
+  - !CheckPartRating
+    ratingMin: 3
+    ratingMax: 3
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_top_thrusters
+  - internal_aux_pilot
+  priority: 51
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3

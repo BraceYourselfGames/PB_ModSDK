@@ -1,0 +1,127 @@
+comment:
+  comment: First step before capital. Exits to the looping open step or the shortcut step.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: 
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_21_open_start
+  tags: 
+entry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_countdown_base_length
+      value: 16
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !QuestStart
+    questKey: province_liberation
+  - !ApplyProvinceArrivalEffects {}
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_breakthrough
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Offset
+      key: campaign_progress_region_03
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: false
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
+  functionsBase: 
+progressDisplay:
+  memoryKey: campaign_progress_breakthrough
+  target: 3
+effects:
+  create_showdown:
+    functionsGlobal:
+    - !QuestProvinceCreatePoint
+      key: generic_base_showdown
+      spawnGroupOverride: 
+      nameOverride: 
+      functionsOnSpawn:
+      - !OverworldEntityMemorySet
+        value: 1
+        memoryKey: quest_liberation_progress_s3
+      - !OverworldEntityEscalation
+        offset: false
+        level: 3
+      questMain: true
+      questKey: 
+    functionsBase: 
+branches:
+- comment: 
+  preferences: 
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 22_open_loop
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_mixed: true
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 23_open_shortcut
+    levelOffset:
+      i: 2
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03_shortcut: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_negative: true
+    - tagsUsed: false
+      keys:
+      - sp_capital_shortcut
+      tags: 
+tags: 

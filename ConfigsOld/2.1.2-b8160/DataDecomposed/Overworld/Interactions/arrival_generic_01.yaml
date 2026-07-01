@@ -1,0 +1,200 @@
+hidden: false
+parents:
+- key: arrival_generic
+core: 
+effectsOnExit: 
+tags: 
+check:
+  repeat: Enabled
+  checksGlobal:
+  - !OverworldValidateResolvedInt
+    resolver: !OverworldIntValueMemory
+      key: campaign_arrival_event_count
+    check: Equal
+    value: 0
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_capital_assault
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.3726415
+        b: 0.3726415
+        a: 0
+      image: event_capital_assault
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !ModifyMemoryBase
+        changes:
+        - change: Set
+          key: campaign_arrival_event_count
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 10
+          color:
+            r: 1
+            g: 0.372549
+            b: 0.372549
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: event_hologram_default
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.7022639
+        b: 0.3725491
+        a: 0
+      image: event_hologram_default
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 10
+          color:
+            r: 1
+            g: 0.7019608
+            b: 0.372549
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_03
+    optionsReused: 
+  step_03:
+    comment: 
+    image: event_landscape_01
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.7093171
+        b: 0.3537736
+        a: 0
+      image: event_landscape_01
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 10
+          color:
+            r: 1
+            g: 0.7098039
+            b: 0.3529412
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !Log
+            message: Applying arrival effects!
+          - !ApplyProvinceArrivalEffects {}
+          functionsLocal: 
+    optionsReused: 

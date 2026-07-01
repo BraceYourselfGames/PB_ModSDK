@@ -1,0 +1,56 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+core:
+  textIdentifierGroup: 
+  textName: {}
+  textDesc: {}
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Settlement_Small_OnFire
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_force_site_info
+- flag_weather_clear
+- flag_preserve_on_victory
+- flag_preserve_on_defeat
+generation: 
+interaction:
+  keys:
+  - ftue_10_liberation_combat
+  tags: 
+effectsOnEvents: 
+combat:
+  scenarioKeys:
+  - unique_tutorial_liberation
+  scenarioFilter: 
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_camp
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - ftue_02_liberation
+        tags: 

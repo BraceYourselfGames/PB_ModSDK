@@ -1,0 +1,130 @@
+hidden: false
+parents: []
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart:
+    value: Standard
+  devSkipStep: 
+effectsOnExit:
+- functionsBase: 
+  functionsTarget: 
+  functionsGlobal:
+  - !SelectEntity
+    nameInternal: internal_mobilebase
+    delay: 0
+    select: true
+    focus: true
+  - !SetScreenFade
+    active: true
+    instant: true
+  - !SetScreenFade
+    active: false
+    instant: false
+  functionsLocal: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.5137255
+        g: 1
+        b: 0.7322555
+        a: 0
+      image: event_celebration
+      imageSecondary: 
+      video:
+        loop: false
+        contentDelay: 2
+        path: Content/Video/slides/post_capital
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.4386792
+            g: 1
+            b: 0.5333334
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CallMethodStatic
+            typeName: PhantomBrigade.Data.SettingUtility
+            methodName: OnCampaignEndSave
+            argument: ''
+            frameDelay: 1
+          functionsLocal: 
+      exit:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CallMethodStatic
+            typeName: PhantomBrigade.Data.SettingUtility
+            methodName: OnCampaignEndSave
+            argument: ''
+            frameDelay: 1
+          functionsLocal: 
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CallMethodStatic
+            typeName: PhantomBrigade.Data.SettingUtility
+            methodName: OnCampaignExitWithoutSave
+            argument: ''
+            frameDelay: 1
+          functionsLocal: 
+    optionsReused: 

@@ -1,0 +1,74 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_officer_a
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- branch_elite
+- branch_elite_commander
+- range_far
+- type_mech
+- weight_heavy
+partTagPreferences:
+  body:
+  - tags:
+      armor_knox: true
+      weight_heavy: true
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_radio
+    rating: 
+    systems: 
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_top
+    rating: 
+    systems: 
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_handgun_heavy_02
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_rifle_assault_sp_01
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_arm_shielded
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_arm_shielded
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_bottom
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

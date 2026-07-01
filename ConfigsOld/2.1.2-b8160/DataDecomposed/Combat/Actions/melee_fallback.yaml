@@ -1,0 +1,109 @@
+dataUI:
+  icon: s_icon_l32_deploy
+  color:
+    r: 0.7176471
+    g: 0.254902
+    b: 0.4477124
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0.4166667
+    a: 1
+  sortingPriority: 175
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes:
+    Targeting_Locations: {}
+dataCore:
+  locking: false
+  trackType: Double
+  paintingType: Melee
+  heatType: DataConstant
+  durationType: Data
+  duration: 1.3333
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 110
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: mech
+      not: false
+    blueprints: 
+    parts:
+    - socket: equipment_left
+      not: false
+      requirement: Destroyed
+      tags: {}
+    - socket: equipment_right
+      not: false
+      requirement: Destroyed
+      tags:
+        type_melee: true
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom:
+  flags:
+  - melee_impact_crash
+  ints:
+    melee_animation_variant: 0
+  floats:
+    distance_cancel_threshold: 3
+    melee_distance_in: 9
+    melee_distance_offset: 0
+    melee_distance_out: 11
+    melee_duration_dash_align: 0.1
+    melee_duration_dash_full: 0.766
+    melee_duration_dash_out: 0.333
+    melee_duration_strike: 1
+    melee_time_impact: 0.23
+    range_max: 25
+    range_min: 9
+  vectors: 
+  strings: 
+functionsTimed:
+- timeNormalized: 0.25
+  repeat: 
+  functions:
+  - !CombatUnitScrambleGuidance
+    fxKey: fx_thruster_flash
+    offset:
+      x: 0
+      y: 2
+      z: 0

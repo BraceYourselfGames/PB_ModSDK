@@ -1,0 +1,33 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_tank_elevated_generic
+- key: vhc_tank_elevated_generic_adapter
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: artillery
+tags:
+- filter_hybrid
+- role_artillery
+- filter_energy
+partTagPreferences:
+  body:
+  - tags:
+      mnf_vhc_04: true
+  equipment_right:
+  - tags:
+      part_energy: true
+      range_far: true
+      tank_part: false
+  - tags:
+      part_energy: true
+      range_long: true
+      tank_part: false
+parts: 
+animationOverrides: 
+effects: 

@@ -1,0 +1,1467 @@
+timeLastSync: 63811540437
+localized: true
+exportMode: LinePerKeySimple
+name: Scenarios (Comms)
+description: "Communications you receive in combat. Keys ending with \"header\" show who's speaking - normally it's no one unique (you'll find some heavily reused ones at the end, prefixed with \"src\"). Keys ending with \"text\" are main content. Some types of messages have multiple variants - for example, enemy talking about reinforcements would've gotten old too quickly if only one sentence was attached to that event, so there are some variants (\"text_00\", \"text_01\", \"text_02\" etc.). "
+splits: []
+tags: 
+groups: 
+entries:
+  cm_ace_ml_s1_arrival_text_00:
+    noteDev: 
+    temp: false
+    text: We finally meet! Let us dance, everyone - these fireworks are just for the Brigade.
+  cm_ace_ml_s1_ejection_text_00:
+    noteDev: 
+    temp: false
+    text: This isn't a retreat - only a reload!
+  cm_ace_ml_s1_retreat_text_00:
+    noteDev: 
+    temp: false
+    text: I think I've seen enough. This is below expectations.
+  cm_ace_ml_s1_taunt_text_00:
+    noteDev: 
+    temp: false
+    text: Missiles away. Let's see what you're made of.
+  cm_ace_ml_s1_taunt_text_01:
+    noteDev: 
+    temp: false
+    text: I've heard a lot about you. Show me what you've got.
+  cm_ace_ml_s2_arrival_text_00:
+    noteDev: 
+    temp: false
+    text: You again! I brought more of my favorites this time! Let's see you dodge this!
+  cm_ace_ml_s2_ejection_text_00:
+    noteDev: 
+    temp: false
+    text: You will regret this! I will rain hellfire! I will burn everything you have!
+  cm_ace_ml_s2_order_targeted_text_00:
+    noteDev: 
+    temp: false
+    text: All units, hold fire! I have enough for everyone! You get a missile, and you get a missile! Everyone gets missiles!
+  cm_ace_ml_s2_retreat_text_00:
+    noteDev: 
+    temp: false
+    text: Out of missiles? Outta here!
+  cm_ace_ml_s2_taunt_text_00:
+    noteDev: 
+    temp: false
+    text: Missiles first! Questions never!
+  cm_ace_ml_s2_taunt_text_01:
+    noteDev: 
+    temp: false
+    text: Make a wish! Look at all these shooting stars!
+  cm_ace_ml_s2_taunt_text_02:
+    noteDev: 
+    temp: false
+    text: Dodge all you like! Dance, dance, dance!
+  cm_ace_ml_s3_arrival_text_00:
+    noteDev: 
+    temp: false
+    text: Why won't you die?! Are you laughing at me?! Die, die, die!
+  cm_ace_ml_s3_order_targeted_text_00:
+    noteDev: 
+    temp: false
+    text: Freeze! Do you think you can hide?! You can't outrun this!
+  cm_ace_ml_s3_taunt_text_00:
+    noteDev: 
+    temp: false
+    text: Die, die, die already!
+  cm_ace_ml_s3_taunt_text_01:
+    noteDev: 
+    temp: false
+    text: Fly, my precious! Burn them to a crisp!
+  cm_ace_ml_s3_taunt_text_02:
+    noteDev: 
+    temp: false
+    text: No dancing! No dodging! No hiding! Face me!
+  cm_ace_ml_terminated_text_00:
+    noteDev: 
+    temp: false
+    text: >-
+      How?! You should be dead! I'll be back with more, more, more until...
+
+      ... ... ...
+
+      [ffcc99][b]/// CONNECTION LOST ///[/b]
+  cm_boss_bt_enrage_cas_ml_text_00:
+    noteDev: 
+    temp: false
+    text: Requesting emergency air support! Get these mechs off of us!
+  cm_boss_bt_enrage_cas_ml_text_01:
+    noteDev: 
+    temp: false
+    text: CAS aircraft vectoring in, missile strike imminent.
+  cm_boss_bt_enrage_cas_ml_text_02:
+    noteDev: 
+    temp: false
+    text: Close air support on final approach. Blast them into bits.
+  cm_boss_bt_enrage_cas_ml_text_03:
+    noteDev: 
+    temp: false
+    text: Air support inbound. Target lock acquired, missiles primed.
+  cm_boss_bt_enrage_start_ehp_text_00:
+    noteDev: 
+    temp: false
+    text: Hull integrity compromised! Activating emergency protocols, sending power to reserve weapons.
+  cm_boss_bt_enrage_start_wpn_text_00:
+    noteDev: 
+    temp: false
+    text: Primary weapon system lost! Activating emergency protocols, sending power to reserve weapons.
+  cm_boss_bt_shockwave_near_text_00:
+    noteDev: 
+    temp: false
+    text: Targets in close proximity. Charging a pressure shockwave to protect the core.
+  cm_boss_bt_wpn_launcher_block_text_00:
+    noteDev: 
+    temp: false
+    text: Launching missiles to block the advance.
+  cm_boss_bt_wpn_launcher_block_text_01:
+    noteDev: 
+    temp: false
+    text: Missiles primed, launching area denial sequence.
+  cm_boss_bt_wpn_launcher_block_text_02:
+    noteDev: 
+    temp: false
+    text: Launching area denial missile volley.
+  cm_boss_bt_wpn_launcher_ranged_counter_text_00:
+    noteDev: 
+    temp: false
+    text: Out of bounds target detected. Launching long range missiles to intercept.
+  cm_boss_bt_wpn_launcher_surround_text_00:
+    noteDev: 
+    temp: false
+    text: Missile launch pattern C, surrounding the target.
+  cm_boss_bt_wpn_launcher_surround_text_01:
+    noteDev: 
+    temp: false
+    text: Saturating target, missiles primed.
+  cm_boss_bt_wpn_launcher_surround_text_02:
+    noteDev: 
+    temp: false
+    text: Missile launch confirmed, encircling the target.
+  cm_boss_bt_wpn_main_generic_locked_text_00:
+    noteDev: 
+    temp: false
+    text: Target ahead, guidance lock acquired. Arming the primary weapon.
+  cm_boss_bt_wpn_main_left_locked_text_00:
+    noteDev: 
+    temp: false
+    text: Target ahead, firing the left weapon.
+  cm_boss_bt_wpn_main_left_locked_text_01:
+    noteDev: 
+    temp: false
+    text: Target lock on the left, preparing to fire the left weapon.
+  cm_boss_bt_wpn_main_multi_locked_text_00:
+    noteDev: 
+    temp: false
+    text: Target ahead, preparing main guns. Waiting for full target lock.
+  cm_boss_bt_wpn_main_multi_pattern_c_text_00:
+    noteDev: 
+    temp: false
+    text: 'Target ahead, preparing main guns. Pattern C: blocking approach.'
+  cm_boss_bt_wpn_main_multi_pattern_f_text_00:
+    noteDev: 
+    temp: false
+    text: 'Target ahead, preparing main guns. Pattern F: blocking flanks.'
+  cm_boss_bt_wpn_main_multi_pattern_v_text_00:
+    noteDev: 
+    temp: false
+    text: Target ahead, preparing main guns. Sweep pattern V.
+  cm_boss_bt_wpn_main_multi_pattern_x_text_00:
+    noteDev: 
+    temp: false
+    text: Target ahead, preparing main guns. Converging pattern X.
+  cm_boss_bt_wpn_main_right_locked_text_00:
+    noteDev: 
+    temp: false
+    text: Target ahead, firing the right weapon.
+  cm_boss_bt_wpn_main_right_locked_text_01:
+    noteDev: 
+    temp: false
+    text: Right weapon locked on, preparing to fire!
+  cm_boss_bt_wpn_main_untargered_sweep_text_00:
+    noteDev: 
+    temp: false
+    text: No target ahead. Arming the primary weapon for an arc sweep.
+  cm_boss_bt_wpn_target_left_text_00:
+    noteDev: 
+    temp: false
+    text: Target lock on the left flank.
+  cm_boss_bt_wpn_target_left_text_01:
+    noteDev: 
+    temp: false
+    text: Target spotted on the left, engaging.
+  cm_boss_bt_wpn_target_left_text_02:
+    noteDev: 
+    temp: false
+    text: Left sector compromised, preparing to attack.
+  cm_boss_bt_wpn_target_right_text_00:
+    noteDev: 
+    temp: false
+    text: Target lock on the right flank.
+  cm_boss_bt_wpn_target_right_text_01:
+    noteDev: 
+    temp: false
+    text: Target acquired to the right, engaging.
+  cm_boss_bt_wpn_target_right_text_02:
+    noteDev: 
+    temp: false
+    text: Right sector compromised, preparing to attack.
+  cm_boss_evt_weakpoint_core_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: Fuel line destroyed!
+  cm_boss_intro_cruiser_hq_text_00:
+    noteDev: 
+    temp: false
+    text: What a monstrosity. There is no military need for anything like this, they built it to terrorize. We can't let it escape, Commander. Find a weakness and bring it down.
+  cm_boss_intro_cruiser_hq_text_01:
+    noteDev: 
+    temp: false
+    text: This is going to be a tough one, Commander. Take cover immediately, while it's still waking up. Carefully consider the weapon systems posing the highest threat and take them out quickly.
+  cm_boss_intro_frigate_hq_text_00:
+    noteDev: 
+    temp: false
+    text: This one seems to be lightly armored for its size. It's packed to the brim with capital class weapons instead. Try to quickly neutralize it, Commander.
+  cm_boss_intro_frigate_hq_text_01:
+    noteDev: 
+    temp: false
+    text: It's still waking up, Commander! Take the opportunity to strike first or find cover before our units are under fire!
+  cm_boss_intro_shieldbearer_hq_text_00:
+    noteDev: 
+    temp: false
+    text: This will be a tough nut to crack, Commander. It's almost buckling under the weight of all these shields. Exercise extreme caution.
+  cm_boss_intro_shieldbearer_hq_text_01:
+    noteDev: 
+    temp: false
+    text: These shields are going to be a challenge. Try to focus on one and whittle it down to get to the core. Don't let your guard down.
+  cm_boss_intro_text_00:
+    noteDev: 
+    temp: false
+    text: Targets sighted, initializing weapon systems. Ready to fire in 5 seconds.
+  cm_boss_intro_text_01:
+    noteDev: 
+    temp: false
+    text: Intruder alert. Interrupting refueling, initializing weapon systems.
+  cm_boss_intro_text_02:
+    noteDev: 
+    temp: false
+    text: 'Tracked targets entering range. Initializing termination protocols. '
+  cm_boss_intro_text_03:
+    noteDev: 
+    temp: false
+    text: Engaging termination protocols. Estimated flatline within 10 seconds.
+  cm_boss_intro_text_04:
+    noteDev: 
+    temp: false
+    text: New targets in range. Weapon systems online, preparing firing solutions.
+  cm_boss_intro_tutorial_hq_text_00:
+    noteDev: 
+    temp: false
+    text: Well, this is something, Commander. Those heavy platforms haven't been in use since the invasion. Behemoths, we called them. Difficult to run, but devastating on the battlefield. Exercise extreme caution.
+  cm_boss_layout_cruiser_generators_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: External generators down! Power loss to deck weapons and propulsion! Switching to internal power, activating reserve weapons!
+  cm_boss_layout_frigate_generator_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: External generator lost, switching to internal power! Losing movement speed.
+  cm_boss_layout_frigate_shield_lost_text_00:
+    noteDev: 
+    temp: false
+    text: Shield lost. Increasing speed.
+  cm_boss_layout_frigate_shield_lost_text_01:
+    noteDev: 
+    temp: false
+    text: External shield lost. Load reduced, increasing speed.
+  cm_boss_layout_frigate_shield_lost_text_02:
+    noteDev: 
+    temp: false
+    text: Shield plate destroyed. Redirecting power to propulsion.
+  cm_boss_outro_core_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: This is an emergency broadcast! We have internal fires spreading in all sectors, the superstructure is blown to bits, our reactor is melting down! Requesting—
+  cm_boss_outro_core_destroyed_text_01:
+    noteDev: 
+    temp: false
+    text: How is this possible?! Where are the reinforcements, where is evac and air support?! We need help!
+  cm_boss_outro_core_destroyed_text_02:
+    noteDev: 
+    temp: false
+    text: Cascading system failures all over! Reroute power away from the core, engage fire suppression! If we can buy some time, then—
+  cm_boss_outro_core_destroyed_text_03:
+    noteDev: 
+    temp: false
+    text: This was supposed to turn the tide! Where's our evac?! Someone, anyone?!
+  cm_boss_outro_core_destroyed_text_04:
+    noteDev: 
+    temp: false
+    text: This is impossible! How are they doing this with just a few mechs?! Where are our land assets?!
+  cm_boss_outro_core_destroyed_text_05:
+    noteDev: 
+    temp: false
+    text: We need every CAS aircraft, every dropship, every artillery shell at these coordinates, now! It's not too late, we can still—
+  cm_boss_outro_victory_hq_text_00:
+    noteDev: 
+    temp: false
+    text: Incredible work, Commander! We did the impossible and brought down a threat that could have decimated the resistance forces. I think our pilots have earned a well deserved rest.
+  cm_boss_outro_victory_hq_text_01:
+    noteDev: 
+    temp: false
+    text: Mission accomplished, Commander! What a feat. Fyrland Freedom Forces are sure to be relieved to hear the news. Time to regroup and resupply, our pilots deserve to rest after this.
+  cm_boss_outro_victory_hq_text_02:
+    noteDev: 
+    temp: false
+    text: Mission accomplished! We're already relaying the footage to Fyrland Freedom Forces, this is sure to be welcome news. With this asset out of commission, they should have no trouble routing the remnant forces out of the province.
+  cm_boss_outro_victory_hq_text_03:
+    noteDev: 
+    temp: false
+    text: Astonishing operation, Commander. With this asset lost, there is nothing the invasion forces can do to hold onto the province. It might be unwise to stick around, let's head out.
+  cm_br_00_intro1_text_00:
+    noteDev: 
+    temp: false
+    text: Squad is in position, Commander. Let's take out the guards, then we'll see what we can do about their communications.
+  cm_br_00_intro2_text_00:
+    noteDev: 
+    temp: false
+    text: Once the antenna is down, there's a chance we could spoof the signal and take control of the Behemoth's navigation. It would be a shame if it accidentally drove right through their own stronghold.
+  cm_br_00_signal1_text_00:
+    noteDev: 
+    temp: false
+    text: Antenna is down. Attempting to take control of the Behemoth's navigation.
+  cm_br_00_signal2_text_00:
+    noteDev: 
+    temp: false
+    text: Watcher Station, please respond — comms have degraded, and your Behemoth is executing an unscheduled course change. It's on a collision path, revert its heading immediately!
+  cm_br_00_signal3_text_00:
+    noteDev: 
+    temp: false
+    text: This should be quite the show. Let's finish up here, then launch a full assault after the Behemoth hits.
+  cm_br_01_aircraft1_text_00:
+    noteDev: 
+    temp: false
+    text: Be advised, hostile CAS aircraft approaching your position. T-minus ten seconds. Prepare to take cover!
+  cm_br_01_artillery1_text_00:
+    noteDev: 
+    temp: false
+    text: Shields are down. Archer 3, 7, 9, open fire! All ground units, stand clear!
+  cm_br_01_crawler_realization_text_00:
+    noteDev: 
+    temp: false
+    text: Detecting insurgent units on long range scanners — it's the Brigade! We need immediate reinforcements!
+  cm_br_01_crawler_turrets_down_text_00:
+    noteDev: 
+    temp: false
+    text: All weapons down! We're sitting ducks here, where the hell are our reinforcements?!
+  cm_br_01_crawler_turrets_online_text_00:
+    noteDev: 
+    temp: false
+    text: Weapons are back online. Let's see how well they can dance.
+  cm_br_01_final1_text_00:
+    noteDev: 
+    temp: false
+    text: Incredible work, everyone. Let's clean up and head out.
+  cm_br_01_gate1_text_00:
+    noteDev: 
+    temp: false
+    text: The blast took out the gates! Move into the stronghold, we're tracking enemy reinforcements descending towards you.
+  cm_br_01_intro1_text_00:
+    noteDev: 
+    temp: false
+    text: Control, the Behemoth has collided with the dish! The base has sustained catastrophic damage, requesting immediate support at the eastern gate.
+  cm_br_01_intro2_text_00:
+    noteDev: 
+    temp: false
+    text: There's a generator next to the gate keeping the entrance locked down, we'll need to take it out to get inside. Watch for the turrets, they're still live!
+  cm_br_01_towers1_text_00:
+    noteDev: 
+    temp: false
+    text: We're in, but the Behemoth still has advanced shielding up. If we destroy the generators at the base of the towers, the surge should be enough to overload them.
+  cm_br_01_towers2_text_00:
+    noteDev: 
+    temp: false
+    text: Once the shields have been taken out, we'll hit the receiver overhead with artillery fire — if we're lucky, it should crack the Behemoth like an egg.
+  cm_br_train_cargo_lost_text_00:
+    noteDev: 
+    temp: false
+    text: We're seeing a bunch of valuable cargo spilling onto the road, Commander. Just try to make sure there's something left when you're done?
+  cm_br_train_cargo_lost_text_01:
+    noteDev: 
+    temp: false
+    text: I see you're clearing the deck, Commander. We'll try to steer clear of whatever gets blown overboard.
+  cm_br_train_cargo_lost_text_02:
+    noteDev: 
+    temp: false
+    text: That's a lot of useful cargo flying off the carrier. I'm sure this was necessary to get to the engines.
+  cm_br_train_engine_remains0_text_00:
+    noteDev: 
+    temp: false
+    text: All engines down! This thing is only being driven by pure inertia.
+  cm_br_train_engine_remains1_text_00:
+    noteDev: 
+    temp: false
+    text: Just one engine to go. Their propulsion is hanging by a thread.
+  cm_br_train_engine_remains4_text_00:
+    noteDev: 
+    temp: false
+    text: Four down, you're halfway there! But be careful, Kaskad's response squad is rapidly catching up. Watch your flanks!
+  cm_br_train_engine_remains7_text_00:
+    noteDev: 
+    temp: false
+    text: Engine down! Be advised, we're seeing enemy vehicles in pursuit. They're having trouble keeping pace, but they'll catch up as the carrier slows down.
+  cm_br_train_intro1_text_00:
+    noteDev: 
+    temp: false
+    text: I see your squad is on board, Commander. This carrier has eight engines running in parallel, they'll all need to be destroyed to bring it to a stop.
+  cm_br_train_intro2_text_00:
+    noteDev: 
+    temp: false
+    text: Watch your corners. Things look quiet, but it's a cramped space with a lot of blind spots — don't let yourself get ambushed.
+  cm_br_train_victory_text_00:
+    noteDev: 
+    temp: false
+    text: Exceptional work, Commander! With the carrier down, Kaskad's supply line should be completely cut off.
+  cm_breakin_entrance_text_00:
+    noteDev: 
+    temp: false
+    text: Great work, Commander. Salvage crews are on their way to discover the contents of this cache.
+  cm_capital_center_new_aftermath1_text_00:
+    noteDev: 
+    temp: false
+    text: Confirmed hit! The citadel is coming down!
+  cm_capital_center_new_aftermath2_text_00:
+    noteDev: 
+    temp: false
+    text: Additional 3F units are approaching your location. Let's mop up so there's room to celebrate.
+  cm_capital_center_new_counters_down1_text_00:
+    noteDev: 
+    temp: false
+    text: Generators down, target locked in. Rerouting all our reactor output to charge the weapon.
+  cm_capital_center_new_counters_down2_text_00:
+    noteDev: 
+    temp: false
+    text: Uh, not to worry you, but that ship in the canal has just started moving.
+  cm_capital_center_new_drones_drain1_text_00:
+    noteDev: 
+    temp: false
+    text: Commander! That drone just drained the weapon charge! Do not let any more of them through!
+  cm_capital_center_new_drones_drain1_text_01:
+    noteDev: 
+    temp: false
+    text: That drone just hit us with an EMP, capacitors draining! Keep them away from the base!
+  cm_capital_center_new_drones_drain1_text_02:
+    noteDev: 
+    temp: false
+    text: Another EMP hit, we're losing charge! We can do this, just hold the line!
+  cm_capital_center_new_drones1_text_00:
+    noteDev: 
+    temp: false
+    text: Release the drones, target their crawler! Don't let them charge that weapon!
+  cm_capital_center_new_firing1_text_00:
+    noteDev: 
+    temp: false
+    text: All capacitors full, preparing to fire! Stand clear!
+  cm_capital_center_new_firing2_text_00:
+    noteDev: 
+    temp: false
+    text: 2 ... 1 ... [i]Fire![-]
+  cm_capital_center_new_intro1_text_00:
+    noteDev: 
+    temp: false
+    text: We've reached the city centre, the crawler has a clear sightline to the Kaskad citadel. The crew is prepping the weapon, you just need to buy us time.
+  cm_capital_center_new_intro2_text_00:
+    noteDev: 
+    temp: false
+    text: Commander! It looks like several squads are converging on your location, but our scanners are getting a lot of interference.
+  cm_capital_center_new_intro3_text_00:
+    noteDev: 
+    temp: false
+    text: The interference is coming from those generators on top of City Hall. The weapon won't be able to target their headquarters until we take them out.
+  cm_capital_center_new_ship1_text_00:
+    noteDev: 
+    temp: false
+    text: How did they get a Behemoth-class weapon into the city?! I need immediate firing solutions on that crawler!
+  cm_capital_center_new_ship2_text_00:
+    noteDev: 
+    temp: false
+    text: The insurgents took out the bridge and the drone launcher! Redirecting power to remaining weapons!
+  cm_capital_outskirts_new_intro1_text_00:
+    noteDev: 
+    temp: false
+    text: Kaskad has really dug in, the whole city is a giant killbox. We need to draw them out, force them to reposition.
+  cm_capital_outskirts_new_intro2_text_00:
+    noteDev: 
+    temp: false
+    text: Their headquarters are dead ahead. If we can thin their ranks here, they'll have no choice but to draw forces from the rest of the Capital.
+  cm_capital_outskirts_new_intro3_text_00:
+    noteDev: 
+    temp: false
+    text: The Brigade is here! All squads, converge on my position! Get me everyone, I want to see dropships in the air now!
+  cm_capital_outskirts_new_retreat1_text_00:
+    noteDev: 
+    temp: false
+    text: Confirming significant enemy losses. We've plotted an egress, once your units are in position you should be clear to bring the mobile base forward.
+  cm_capital_outskirts_new_trespass1_text_00:
+    noteDev: 
+    temp: false
+    text: The Brigade has breached the perimeter, they're advancing on headquarters! Everyone, cut them off!
+  cm_capital_outskirts_new_victory1_text_00:
+    noteDev: 
+    temp: false
+    text: Their squad is moving north! I need blockades on every street, every interceptor squad deployed! Do not let them reach the city core!
+  cm_enemy_pause_from_order_text_00:
+    noteDev: 
+    temp: false
+    text: Roger that... All units, stand by for a moment.
+  cm_exit_reinforcement_hold_text_00:
+    noteDev: 
+    temp: false
+    text: Received an all clear signal. Delaying drop squad launch, units on site, confirm enemy status.
+  cm_exit_reinforcement_hold_text_01:
+    noteDev: 
+    temp: false
+    text: No longer detecting any activity. Units on site, report enemy status.
+  cm_exit_reinforcement_hold_text_02:
+    noteDev: 
+    temp: false
+    text: Status update required, we're no longer seeing actvitity on our scans, drop squad on hold. Did you finish them off?
+  cm_exit_reinforcement_hold_text_03:
+    noteDev: 
+    temp: false
+    text: Drop squad on hold, scan no longer shows any activity. Units on site, report rebel unit status.
+  cm_ftue_base_hq_generatordestroyed_01_text_00:
+    noteDev: 
+    temp: false
+    text: Good work on destroying that generator, Commander. Turrets should be down now.
+  cm_ftue_base_hq_intro_00_text_00:
+    noteDev: 
+    temp: false
+    text: Good to see you, Commander. Our forces are engaging the enemy all over the perimeter. Two of our mechs will join you at the gates. Give 'em hell!
+  cm_ftue_base_inv_intro_02_text_00:
+    noteDev: 
+    temp: false
+    text: Our perimeter is on fire, our comms are down, and we have four unidentified mechs at the gate! What are you all waiting for? All units, engage immediately!
+  cm_ftue_base_inv_outro_01_text_00:
+    noteDev: 
+    temp: false
+    text: Exceptional work, Commander! The base is secure, the enemy is in disarray, and perimeter squads are on the run. Let's get our pilots back on board.
+  cm_ftue_base_inv_reinforcements_00_text_00:
+    noteDev: 
+    temp: false
+    text: We're overhead. Confirming massive damage to the structures and multiple unidentified mechs on site. Quick response squad rapidly descending.
+  cm_ftue_base_pb_intro_01_text_00:
+    noteDev: 
+    temp: false
+    text: Echo-Whiskey assets are degrading enemy comms, recommend we mop em’ up before reinforcements arrive.
+  cm_ftue_base_pb_retreatpossible_text_00:
+    noteDev: 
+    temp: false
+    text: Boss! We have a fallback site secured if you need to retreat. Relaying coordinates to you, out.
+  cm_ftue_battlesite_hg_intro_01_text_00:
+    noteDev: 
+    temp: false
+    text: Brigade's here, folks. Look sharp, and aim true. We’re gonna make it out of this.
+  cm_ftue_battlesite_inv_beamunitkilled_00_text_00:
+    noteDev: 
+    temp: false
+    text: Hey, someone check what happened to the beam unit!
+  cm_ftue_battlesite_inv_beamunitkilled_01_text_00:
+    noteDev: 
+    temp: false
+    text: '...Someone? Anyone!?'
+  cm_ftue_battlesite_pb_intro_00_text_00:
+    noteDev: 
+    temp: false
+    text: All right people, let’s help the resistance fighters and get them out of there!
+  cm_ftue_battlesite_pb_unitlost_pb_text_00:
+    noteDev: 
+    temp: false
+    text: We can’t save the resistance fighters if we lose units like that, Commander!
+  cm_ftue_patrol_inv_intro_01_text_00:
+    noteDev: 
+    temp: false
+    text: Whatever you say, Sir. Just keep the comms on your unit intact.
+  cm_ftue_patrol_inv_vipdiesfirst_00_text_00:
+    noteDev: 
+    temp: false
+    text: Command, we just lost our VIP. Requesting permission to fall back, over.
+  cm_ftue_patrol_inv_vipdiesfirst_01_text_00:
+    noteDev: 
+    temp: false
+    text: '...Hey, are my comms down!?'
+  cm_ftue_patrol_inv_vipejected_text_00:
+    noteDev: 
+    temp: false
+    text: VIP has ejected, and our comms are down. Secure the site so we can call for backup!
+  cm_ftue_patrol_pb_unitlost_pb_text_00:
+    noteDev: 
+    temp: false
+    text: Unit down! Boss, recommend you exfil and cut our losses, this might not be worth it...
+  cm_ftue_patrol_vip_escortejectsfirst_text_00:
+    noteDev: 
+    temp: false
+    text: What are you doing? Don't [i]eject[/i], protect your commander!
+  cm_ftue_patrol_vip_escortsdiefirst_text_00:
+    noteDev: 
+    temp: false
+    text: Don't think because you took out my escort that you're so tough, Brigade!
+  cm_ftue_patrol_vip_intro_00_text_00:
+    noteDev: 
+    temp: false
+    text: Rebels are clinging to rumors about a Phantom Brigade, huh? Let's show them why only children believe in fairy tales.
+  cm_generic_assassination_reaction_enrage_hq_text_00:
+    noteDev: 
+    temp: false
+    text: Something's not right, Commander! They just vanished from the prediction system!
+  cm_generic_assassination_reaction_enrage_text_00:
+    noteDev: 
+    temp: false
+    text: You're not walking out of here alive, Brigade.
+  cm_generic_assassination_reaction_panic_hq_text_00:
+    noteDev: 
+    temp: false
+    text: Looks like they can't take a hit and decided to run. Look out for reinforcements and cut them off from their LZ!
+  cm_generic_assassination_reaction_panic_hq_text_01:
+    noteDev: 
+    temp: false
+    text: And here we thought they'd give us a proper fight. Don't let them escape to their evac point!
+  cm_generic_assassination_reaction_panic_text_00:
+    noteDev: 
+    temp: false
+    text: On second though, I'd rather be elsewhere. Let me go, please! I didn't sign up for this, cover me! Call in our aircraft!
+  cm_generic_assassination_reaction_panic_text_01:
+    noteDev: 
+    temp: false
+    text: How are they hitting my mech?! Some guard you are, what are you even here for? Cover me, I need to get out of here!
+  cm_generic_assassination_reaction_panic_text_02:
+    noteDev: 
+    temp: false
+    text: All of you are getting demoted if you let another round hit my mech! I'm out of here, call in my evac and cover me!
+  cm_generic_assassination_reinforcements_text_00:
+    noteDev: 
+    temp: false
+    text: Good hits on target, Commander! We're intercepting calls for reinforcements, keep up the pressure!
+  cm_generic_assassination_start_text_00:
+    noteDev: 
+    temp: false
+    text: Target in sight. You can deal with their escort first or strike immediately. Be ready for anything and don't let the target escape.
+  cm_generic_assassination_target_airlift_text_00:
+    noteDev: 
+    temp: false
+    text: I'm in position, where is my airlift?! Hurry up and get me out of here!
+  cm_generic_assassination_target_ejecting_text_00:
+    noteDev: 
+    temp: false
+    text: The target is trying to eject! Take them out before they're able to escape!
+  cm_generic_assassination_target_eliminated_text_00:
+    noteDev: 
+    temp: false
+    text: The target is down! Well done, Commander! We'll retreat when you're ready.
+  cm_generic_assassination_target_escaped_text_00:
+    noteDev: 
+    temp: false
+    text: The target managed to escape. We'll have to retreat, Commander - there's nothing more we can do here.
+  cm_generic_civilian_defense_destruction_warning_text_00:
+    noteDev: 
+    temp: false
+    text: Too many civilian structures are getting hit, Commander. We'll be forced to retreat from this district if this continues.
+  cm_generic_civilian_defense_destruction_warning_text_01:
+    noteDev: 
+    temp: false
+    text: We can't leave all these homes in ruins just to win the fight. Commander, we'll have to retreat from the district if this continues.
+  cm_generic_civilian_defense_outcome_fail_text_00:
+    noteDev: 
+    temp: false
+    text: We need to retreat, Commander. It's too risky to continue fighting in this district, there's too much damage. We'll have to approach from another direction next time.
+  cm_generic_civilian_defense_outcome_win_text_00:
+    noteDev: 
+    temp: false
+    text: Well done, Commander! Fyrland Freedom Forces will secure the area. Let's head back to base.
+  cm_generic_civilian_defense_reinforcements_text_00:
+    noteDev: 
+    temp: false
+    text: Glad to see you, Commander! Our artillery units are at your disposal. The missile launchers should come in handy here to strike from above and avoid unnecessary damage.
+  cm_generic_civilian_defense_reinforcements_text_01:
+    noteDev: 
+    temp: false
+    text: Commander, we're fielding missile launchers. You should be able to use them to shoot over buildings, instead of through them. Just watch the splash damage.
+  cm_generic_civilian_defense_start_text_00:
+    noteDev: 
+    temp: false
+    text: This isn't the best place for a fight, Commander. Lead the enemy away from the buildings. Fyrland Freedom Forces should be here soon, they're bringing indirect weapons to make this easier.
+  cm_generic_civilian_defense_start_text_01:
+    noteDev: 
+    temp: false
+    text: We need to be careful here, Commander. Try to minimize damage, these are people's homes. Local resistance forces will be here to help soon.
+  cm_generic_civilian_defense_start_text_02:
+    noteDev: 
+    temp: false
+    text: This mission calls for careful work. We need to eliminate the enemy, but we can't leave this district in ruins. Lure the enemy away from the buildings.
+  cm_generic_crawler_defense_damaged_text_00:
+    noteDev: 
+    temp: false
+    text: We're getting too many hits! If this continues, we'll be lucky to limp back home in one piece. Don't let more of them through!
+  cm_generic_crawler_defense_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: Things are dire over here, Commander. Heavy injuries among the crew, mech bay inoperable. We got the reserve engine up, but we need to cut our losses. Every unit, fall back immediately! This scrap heap is getting out of here with or without you!
+  cm_generic_crawler_defense_destroyed_text_01:
+    noteDev: 
+    temp: false
+    text: Condition critical! One of the engines is spinning back up but we've got injuries among the crew, key systems fried. Every unit, fall back immediately! No choice but to head back!
+  cm_generic_crawler_defense_eliminated_text_00:
+    noteDev: 
+    temp: false
+    text: You took out everything that posed a threat to our armor! We almost got the engine running, hurry up and extract, before reinforcements come in!
+  cm_generic_crawler_defense_incoming_drones_text_00:
+    noteDev: 
+    temp: false
+    text: Commander! A large group of drones just appeared on our scans. Do not let any of them approach the base, do you copy?
+  cm_generic_crawler_defense_incoming_missiles_text_00:
+    noteDev: 
+    temp: false
+    text: Commander! A large number of cruise missiles just appeared on our scans. Do not let any of them reach the base, do you copy?
+  cm_generic_crawler_defense_reinforcements_text_00:
+    noteDev: 
+    temp: false
+    text: They took out every one of our units! Deploying reserve squad!
+  cm_generic_crawler_defense_repaired_text_00:
+    noteDev: 
+    temp: false
+    text: The base is up and running again. Hurry up and extract, before reinforcements come in!
+  cm_generic_crawler_defense_start_text_00:
+    noteDev: 
+    temp: false
+    text: The engine took a hit, we'll need you to buy us some time. Take defensive positions and prevent more damage to the base!
+  cm_generic_elimination_spotter_removed_text_00:
+    noteDev: 
+    temp: false
+    text: Enemy spotter eliminated! Good job, Commander. Their aircraft is flying blind now.
+  cm_generic_elimination_spotter_removed_text_01:
+    noteDev: 
+    temp: false
+    text: Enemy spotter down. Good. Their air support should be out of the picture now.
+  cm_generic_elimination_start_cas_text_00:
+    noteDev: 
+    temp: false
+    text: Commander, we're detecting a hostile aircraft rapidly approaching the site. It's best to find and take out a spotter guiding them to our position!
+  cm_generic_elimination_start_cas_text_01:
+    noteDev: 
+    temp: false
+    text: They called in air support! Take out the spotter relaying our position and leave their bomber blind.
+  cm_generic_elimination_start_cas_text_02:
+    noteDev: 
+    temp: false
+    text: Commander, we're detecting a spotter painting your position. Take them out, let's not find out what they're planning to drop on our heads.
+  cm_generic_elimination_start_early_text_00:
+    noteDev: 
+    temp: false
+    text: We're in luck, this squad got separated from the main force. Take them out, Commander.
+  cm_generic_elimination_start_early_text_01:
+    noteDev: 
+    temp: false
+    text: We managed to outmaneuver their main force. Take out these scouts and prepare to deal with the rest.
+  cm_generic_elimination_start_early_text_02:
+    noteDev: 
+    temp: false
+    text: They made a mistake by splitting up like this. Take out these stragglers and prepare for imminent reinforcements, Commander!
+  cm_generic_elimination_start_normal_text_00:
+    noteDev: 
+    temp: false
+    text: Enemy force in sight. Take them out, Commander.
+  cm_generic_elimination_start_normal_text_01:
+    noteDev: 
+    temp: false
+    text: Combat protocols in effect, contact imminent. Careful out there!
+  cm_generic_elimination_start_normal_text_02:
+    noteDev: 
+    temp: false
+    text: Hostiles in range. Light them up, Commander!
+  cm_generic_hg_unitlost_hg_text_00:
+    noteDev: 
+    temp: false
+    text: We've got a unit down, Brigade! Keep them off us!
+  cm_generic_hg_unitlost_hg_text_01:
+    noteDev: 
+    temp: false
+    text: It’s not looking too good for our allies, Commander. They're down a unit!
+  cm_generic_hg_unitlost_hg_text_02:
+    noteDev: 
+    temp: false
+    text: Commander, we're losing resistance fighters out here. Requesting support!
+  cm_generic_hg_unitlost_hg_text_03:
+    noteDev: 
+    temp: false
+    text: One of ours is down! Get CASEVAC as soon as the area’s secure!
+  cm_generic_industry_liberation_start_text_00:
+    noteDev: 
+    temp: false
+    text: Scans complete, no civilians on site, just hostile contacts. Still, let's try to preserve as much as we can, Commander.
+  cm_generic_industry_liberation_start_text_01:
+    noteDev: 
+    temp: false
+    text: Let's try to preserve at least some of this facility, Commander. These aren't people's homes, but the place could still be of use later on.
+  cm_generic_industry_liberation_start_text_02:
+    noteDev: 
+    temp: false
+    text: Hostiles in range, weapons ready! Let's make this quick and clean, Commander.
+  cm_generic_intercept_fail_text_00:
+    noteDev: 
+    temp: false
+    text: The enemy unit has escaped! Let's try to be faster next time.
+  cm_generic_intercept_start_text_00:
+    noteDev: 
+    temp: false
+    text: The enemy unit carrying valuable cargo is passing through this area. Don't let them escape!
+  cm_generic_intercept_success_text_00:
+    noteDev: 
+    temp: false
+    text: We've successfully intercepted the cargo! Well done, Commander.
+  cm_generic_intercept_swarm_exit_text_00:
+    noteDev: 
+    temp: false
+    text: No targets remain on the field. Mission concluded.
+  cm_generic_intercept_swarm_flee_text_00:
+    noteDev: 
+    temp: false
+    text: There is no one to protect remaining on the field. No point dragging this out, let's get out of here.
+  cm_generic_intercept_swarm_spawn_end_text_00:
+    noteDev: 
+    temp: false
+    text: Every unit in the convoy has passed the checkpoint. No one else is coming, let's finish them off!
+  cm_generic_intercept_swarm_start_text_00:
+    noteDev: 
+    temp: false
+    text: The convoy is approaching quickly. Prioritize the cargo units once they arrive. The guards will try to stop you, stay focused.
+  cm_generic_intercept_swarm_tier1_text_00:
+    noteDev: 
+    temp: false
+    text: You've intercepted the first target, we're seeing some spilled cargo on our sensors!
+  cm_generic_intercept_swarm_tier2_text_00:
+    noteDev: 
+    temp: false
+    text: A fair number of targets is down, we're tracking a lot of cargo on the scene. Keep up the good work, Commander!
+  cm_generic_intercept_swarm_tier3_text_00:
+    noteDev: 
+    temp: false
+    text: Most targets are down. You've picked this convoy clean, Commander!
+  cm_generic_inv_alarm_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: They've taken down our alarm. Reinforcements aren't coming, so now’s not the time to get lax!
+  cm_generic_inv_generatordestroyed_text_00:
+    noteDev: 
+    temp: false
+    text: Defenses are down!? Damn it, they hit the generator.
+  cm_generic_inv_piloteject_inv_text_00:
+    noteDev: 
+    temp: false
+    text: An ejection? How did this happen...? They weren’t supposed to see us coming!
+  cm_generic_inv_piloteject_inv_text_01:
+    noteDev: 
+    temp: false
+    text: An ejection? What are you...don’t show them weakness!
+  cm_generic_inv_piloteject_inv_text_02:
+    noteDev: 
+    temp: false
+    text: Keep the pressure on, do you hear me? No one else should even [i]think[/i] of ejecting!
+  cm_generic_inv_piloteject_inv_text_03:
+    noteDev: 
+    temp: false
+    text: Pilot ejection commenced. Damn it, what's going on out there?!
+  cm_generic_inv_piloteject_pb_text_00:
+    noteDev: 
+    temp: false
+    text: Ejection commenced. The rest of you, do [i]not[/i] let these peasants give you the runaround!
+  cm_generic_inv_piloteject_pb_text_01:
+    noteDev: 
+    temp: false
+    text: Ejection alert received, cadet. Everyone else, finish up there quickly and get eyes on our pilot!
+  cm_generic_inv_piloteject_pb_text_02:
+    noteDev: 
+    temp: false
+    text: One of their pilots ejected. Keep up the pressure out there!
+  cm_generic_inv_unitlost_inv_text_00:
+    noteDev: 
+    temp: false
+    text: We've got reports of a downed unit, people. Get the Brigade out of here [i]now[/i]!
+  cm_generic_inv_unitlost_inv_text_01:
+    noteDev: 
+    temp: false
+    text: We're getting reports that we're down a unit! Get it together out there, or Command will have our hides.
+  cm_generic_inv_unitlost_inv_text_02:
+    noteDev: 
+    temp: false
+    text: Unit down, unit down! All remaining units be on your guard.
+  cm_generic_inv_unitlost_inv_text_03:
+    noteDev: 
+    temp: false
+    text: We are [i]not[/i] losing any more units on our own turf! All remaining units, put on the pressure!
+  cm_generic_military_demolition_escape_defeat_text_00:
+    noteDev: 
+    temp: false
+    text: We failed to damage the site enough, looks like the enemy forces are staying put! No choice but to retreat for now, get in!
+  cm_generic_military_demolition_escape_victory_text_00:
+    noteDev: 
+    temp: false
+    text: Site's compromised! Let air support deal with this demolition crew, we're out. Ground forces, retreat!
+  cm_generic_military_demolition_escape_warning_text_00:
+    noteDev: 
+    temp: false
+    text: The reinforcements are moments away! Whatever you have planned, wrap it up quickly, we're leaving!
+  cm_generic_military_demolition_start_text_00:
+    noteDev: 
+    temp: false
+    text: We have limited time, the enemy reinforcements are already en route. Destroy as much as you can!
+  cm_generic_military_demolition_t1_text_00:
+    noteDev: 
+    temp: false
+    text: Looking great, keep hitting their structures! It'll take them a while to repair this damage.
+  cm_generic_military_demolition_t2_text_00:
+    noteDev: 
+    temp: false
+    text: Where are the reinforcements?! They are wrecking the site, there'll be nothing left by the time you arrive!
+  cm_generic_military_demolition_t3_text_00:
+    noteDev: 
+    temp: false
+    text: Incredible work, Commander! There is no coming back from this, they'll be forced to abandon the site.
+  cm_generic_pb_alarm_delay_text_00:
+    noteDev: 
+    temp: false
+    text: Get that tower in your sights! A couple shots from that 3F mech's weapon should take it down.
+  cm_generic_pb_alarm_firsthit_text_00:
+    noteDev: 
+    temp: false
+    text: Keep up the pressure on that tower! Just a little more, and we'll have it knocked out.
+  cm_generic_pb_alarm_target_text_00:
+    noteDev: 
+    temp: false
+    text: Eyes on that alarm tower! If we don’t want enemy reinforcements, it needs to go down—and fast.
+  cm_generic_pb_friendlystructure_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: Don’t get too fiery out there! Let's try to avoid damaging civilian buildings too much, Commander.
+  cm_generic_pb_friendlystructure_destroyed_text_01:
+    noteDev: 
+    temp: false
+    text: Watch it out there! Keep fire away from civilian buildings!
+  cm_generic_pb_friendlystructure_destroyed_text_02:
+    noteDev: 
+    temp: false
+    text: Commander, we gotta keep damage to civilian buildings to a minimum.
+  cm_generic_pb_piloteject_pb_text_00:
+    noteDev: 
+    temp: false
+    text: Mech down! We've got a mech down! Let’s make this next push count.
+  cm_generic_pb_piloteject_pb_text_01:
+    noteDev: 
+    temp: false
+    text: Ejection commenced. But we haven’t lost yet! Those of you who can, let’s ride this out.
+  cm_generic_pb_piloteject_pb_text_02:
+    noteDev: 
+    temp: false
+    text: Pilot ejected! But we’re still in the fight. Let’s make this count!
+  cm_generic_pb_piloteject_pb_text_03:
+    noteDev: 
+    temp: false
+    text: Pilot ejected! Hang together, everyone! We've got this!
+  cm_generic_pb_piloteject_pb_text_04:
+    noteDev: 
+    temp: false
+    text: Pilot ejected, Commander. Those of you remaining—we’re not out of the fight yet!
+  cm_generic_pb_unitlost_hg_text_00:
+    noteDev: 
+    temp: false
+    text: 3F unit lost, stay focused! We can’t let down our allies.
+  cm_generic_pb_unitlost_hg_text_01:
+    noteDev: 
+    temp: false
+    text: Ally down! Careful out there, Commander!
+  cm_generic_pb_unitlost_hg_text_02:
+    noteDev: 
+    temp: false
+    text: We can’t afford allied losses! Stay on top of those enemy mechs!
+  cm_generic_pb_unitlost_hg_text_03:
+    noteDev: 
+    temp: false
+    text: Freedom forces are losing units. Back up our allies, Commander!
+  cm_generic_pb_unitlost_pb_text_00:
+    noteDev: 
+    temp: false
+    text: Unit lost. We’ve gotta keep pushing forward, Commander. The people here are counting on us.
+  cm_generic_pb_unitlost_pb_text_01:
+    noteDev: 
+    temp: false
+    text: We have a downed unit! Come on Brigade, let's turn the tide.
+  cm_generic_pb_unitlost_pb_text_02:
+    noteDev: 
+    temp: false
+    text: We got reports of a downed unit! Watch out for each other, folks!
+  cm_generic_pb_unitlost_pb_text_03:
+    noteDev: 
+    temp: false
+    text: Damn, we've lost a unit, Commander. Let's make sure that's the last one!
+  cm_generic_raid_obj_extracted_all_text_00:
+    noteDev: 
+    temp: false
+    text: The enemy managed to extract every bit of cargo. Return to base, there's nothing more we can do here.
+  cm_generic_raid_obj_extracted_all_text_01:
+    noteDev: 
+    temp: false
+    text: We failed to stop their transports, Commander. Time to head out, there's always another convoy.
+  cm_generic_raid_obj_extracted_one_text_00:
+    noteDev: 
+    temp: false
+    text: Ground, we got a lock on the cargo. T minus 5 seconds.
+  cm_generic_raid_obj_extracted_one_text_01:
+    noteDev: 
+    temp: false
+    text: Ground, stay clear, we're grabbing the cargo. Good work keeping them off the goods.
+  cm_generic_raid_obj_extracted_one_text_02:
+    noteDev: 
+    temp: false
+    text: Cargo exfil in progress, aircraft on final approach. Good work, Ground.
+  cm_generic_raid_start_text_00:
+    noteDev: 
+    temp: false
+    text: 'Looks like the enemy gave up running: they are planning extract the goods by air. Stay near the cargo to disrupt their scans!'
+  cm_generic_raid_start_text_01:
+    noteDev: 
+    temp: false
+    text: Commander, it looks like the convoy changed their plans. They just called in an airlift for the cargo. Stay near to block their aircraft!
+  cm_generic_raid_victory_text_00:
+    noteDev: 
+    temp: false
+    text: Great work, Commander! All hostiles eliminated, our crews can come in and grab the cargo.
+  cm_generic_raid_victory_text_01:
+    noteDev: 
+    temp: false
+    text: All clear! We're ready to come in and grab the grounded cargo. Excellent work, Commander.
+  cm_generic_reinforcements_dropship_text_00:
+    noteDev: 
+    temp: false
+    text: Eagle Two, on final approach. Dropping reserves, ETA five seconds.
+  cm_generic_reinforcements_dropship_text_01:
+    noteDev: 
+    temp: false
+    text: Just passed over the site, confirming visual of the Brigade. Reinforcements landing shortly.
+  cm_generic_reinforcements_dropship_text_02:
+    noteDev: 
+    temp: false
+    text: Reaper Six, we have visual on the Brigade engaging our forces. Dropping reinforcements.
+  cm_generic_reinforcements_dropship_text_03:
+    noteDev: 
+    temp: false
+    text: LZ clear, dropping the airborne units. Ground, expect landing shortly.
+  cm_generic_reinforcements_dropship_text_04:
+    noteDev: 
+    temp: false
+    text: Brigade sighting confirmed, dropping reinforcements. Ground, stand clear.
+  cm_generic_reinforcements_dropship_text_05:
+    noteDev: 
+    temp: false
+    text: Eagle Four, airborne squad on its way down. Clear the LZ.
+  cm_generic_reinforcements_tower_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: Ground, we're calling off reinforcements. Not seeing any readings on our end, heading to higher priority targets.
+  cm_generic_reinforcements_tower_destroyed_text_01:
+    noteDev: 
+    temp: false
+    text: Resistance forces dropped off our sensors. Assuming those are dealt with, Ground. Heading out.
+  cm_generic_reinforcements_tower_destroyed_text_02:
+    noteDev: 
+    temp: false
+    text: Ground, our sensor feed is clear. Whatever you're seeing must be small fry, mop it up yourself. Dropship out.
+  cm_generic_reinforcements_tower_trigger_text_00:
+    noteDev: 
+    temp: false
+    text: Local watchtower detecting resistance forces. Sending the airborne squad down.
+  cm_generic_reinforcements_tower_trigger_text_01:
+    noteDev: 
+    temp: false
+    text: Receiving alerts from the watchtower. Suppression squad dropped, ETA five seconds.
+  cm_generic_reinforcements_tower_trigger_text_02:
+    noteDev: 
+    temp: false
+    text: Ground tower reporting resistance forces. Dropping reinforcements in, clear the LZ.
+  cm_generic_target_block_a_text_00:
+    noteDev: 
+    temp: false
+    text: Target A blocked.
+  cm_generic_target_block_b_text_00:
+    noteDev: 
+    temp: false
+    text: Target B blocked.
+  cm_generic_target_block_c_text_00:
+    noteDev: 
+    temp: false
+    text: Target C blocked.
+  cm_liberation_destroyed_text_00:
+    noteDev: 
+    temp: false
+    text: One of the historical buildings was destroyed beyond repair. Civilians will not be happy with this.
+  cm_liberation_warning_text_00:
+    noteDev: 
+    temp: false
+    text: Careful, do not damage key civilian locations. We are here to protect them.
+  cm_looting_increment_end_text_00:
+    noteDev: 
+    temp: false
+    text: Alright, the crate is locked on. Our drone has the coords and should be descending any second now.
+  cm_looting_increment_start_text_00:
+    noteDev: 
+    temp: false
+    text: The drone has a rough location of the crate, but we're going to need another ping to ensure it's picked up. Stay at the location to finish this.
+  cm_meteorite_secured_text_00:
+    noteDev: 
+    temp: false
+    text: Great work, Commander. Salvage crews are on their way to discover the contents of this meteorite.
+  cm_mid_reinforcement_first_text_00:
+    noteDev: 
+    temp: false
+    text: Bravo 1, fall back and regroup, we'll take the lead from here. They are outnumbered now, we'll make short work of them. Another group should be arriving shortly.
+  cm_mid_reinforcement_first_text_01:
+    noteDev: 
+    temp: false
+    text: Squad decelerating, ETA three seconds. Another squad dropping shortly if these contacts remain on radar, let's make this quick.
+  cm_mid_reinforcement_first_text_02:
+    noteDev: 
+    temp: false
+    text: Approaching landing site, hold out a bit longer. Another squad standing by if we don't break this up immediately.
+  cm_mid_reinforcement_first_text_03:
+    noteDev: 
+    temp: false
+    text: Rebel units in visual range, landing ETA three seconds. Expecting another group to land shortly.
+  cm_mid_reinforcement_last_text_00:
+    noteDev: 
+    temp: false
+    text: Sierra 2 on the field. What's taking you so long here? Surround them and finish them off.
+  cm_mid_reinforcement_last_text_01:
+    noteDev: 
+    temp: false
+    text: Decelerating. Let's flank and finish them off.
+  cm_mid_reinforcement_last_text_02:
+    noteDev: 
+    temp: false
+    text: What a persistent bunch. Command won't commit any more drop squads to the site so let's get this over with.
+  cm_mid_reinforcement_last_text_03:
+    noteDev: 
+    temp: false
+    text: Dropping in. Command is getting impatient, let's get this over and done with.
+  cm_mid_replanning_camp_text_00:
+    noteDev: 
+    temp: false
+    text: 'Rebel units eliminated the garrison, requiring tactical relocation for a better approach vector. '
+  cm_mid_replanning_camp_text_01:
+    noteDev: 
+    temp: false
+    text: Rebel units eliminated the garrison, requiring updated tactical plans.
+  cm_mid_replanning_squad_text_00:
+    noteDev: 
+    temp: false
+    text: 'Rebel units eliminated troops in the field, requiring tactical relocation for a better approach vector. '
+  cm_mid_replanning_squad_text_01:
+    noteDev: 
+    temp: false
+    text: Rebel units eliminated troops in the field, requiring updated tactical plans.
+  cm_profile_hunter_death_text_00:
+    noteDev: 
+    temp: false
+    text: You will regret this, friends. They will replace me, they always do.
+  cm_profile_hunter_ejection_text_00:
+    noteDev: 
+    temp: false
+    text: I'll be back in no time, friends. Just you wait.
+  cm_profile_hunter_ejection_text_01:
+    noteDev: 
+    temp: false
+    text: This is not the last we see each other, friends. I'll be waiting.
+  cm_profile_hunter_intro_text_00:
+    noteDev: 
+    temp: false
+    text: Found you... Now, would you please stay still?
+  cm_profile_hunter_intro_text_01:
+    noteDev: 
+    temp: false
+    text: You're not walking out of here alive.
+  cm_radio_home_guard_active_text_00:
+    noteDev: 
+    temp: false
+    text: Approaching the LZ, landing five seconds away! Glad to join the fight, Commander!
+  cm_retreat_end_text_00:
+    noteDev: 
+    temp: false
+    text: Commander, the base had to disengage, we won't be able to pick up the squad for the time being.
+  cm_retreat_possible_negative_text_00:
+    noteDev: 
+    temp: false
+    text: Commander, the base has circled around to the perimeter, we're ready to pick the squad up if needed. The enemy will hold the site if you do so.
+  cm_retreat_possible_positive_text_00:
+    noteDev: 
+    temp: false
+    text: Commander, the base is ready to pick the squad up. We're intercepting the enemy garrison comms here, they have no objectives left to defend and plan to flee the area.
+  cm_start_reinforcement_request_text_00:
+    noteDev: 
+    temp: false
+    text: Command, rebel units just entered visual range. I'm outnumbered, requesting rapid response team ASAP!
+  cm_start_reinforcement_request_text_01:
+    noteDev: 
+    temp: false
+    text: IFF response negative, treating as hostile. Requesting immediate reinforcements!
+  cm_start_reinforcement_request_text_02:
+    noteDev: 
+    temp: false
+    text: No identification received, targets continue closing in. Reinforcements needed!
+  cm_start_reinforcement_request_text_03:
+    noteDev: 
+    temp: false
+    text: Rebel units sighted, requesting immediate reinforcements. Let's make this quick.
+  cm_start_reinforcement_request_text_04:
+    noteDev: 
+    temp: false
+    text: Rebel units in range, engaging. Requesting backup.
+  cm_start_reinforcement_request_text_05:
+    noteDev: 
+    temp: false
+    text: Code red, hostile unit contact. All units, hold optimal range and await reinforcements.
+  cm_start_reinforcement_request_text_06:
+    noteDev: 
+    temp: false
+    text: Getting negative IFF code, we've got hostiles in range! Engage at will, reinforcements should be coming soon.
+  cm_start_reinforcement_request_text_07:
+    noteDev: 
+    temp: false
+    text: And here they are. Great timing, our big bird is about to do another pass. They'll send backup our way so don't panic and hold out for a minute.
+  cm_unique_mountainbase_intro_01_text_00:
+    noteDev: 
+    temp: false
+    text: Okay, this is what we've been training for. If we can capture that mobile base, we'll be able to repair and refit these rusty mechs.
+  cm_unique_mountainbase_intro_02_text_00:
+    noteDev: 
+    temp: false
+    text: Control, we're seeing two mechs approaching from the west. I'm getting a negative response on my IFF. Treating these signatures as hostile.
+  cm_unique_mountainbase_reinforcement_01_text_00:
+    noteDev: 
+    temp: false
+    text: Deploying. Those old mechs... Ha, is this supposed to be Fyrland’s “resistance”? Let's put them in the ground and report it to Command.
+  cm_unique_mountainbase_victory_text_00:
+    noteDev: 
+    temp: false
+    text: All clear. Looks like we got them before they managed to get the word out. Let's salvage what equipment we can, then get this crawler up and running!
+  cm_unique_sky_stronghold_00_start_c0_text_00:
+    noteDev: 
+    temp: false
+    text: Bravo-1, we're seeing unidentified mechs landing on the deck. What is going on? Our birds can't land with the runway blocked, deal with this immediately.
+  cm_unique_sky_stronghold_00_start_c1_text_00:
+    noteDev: 
+    temp: false
+    text: "Roger that, engaging. Let's throw this trash back to where it came from. "
+  cm_unique_sky_stronghold_01_wave_c0_text_00:
+    noteDev: 
+    temp: false
+    text: Engaging. Let's deal with them and report to Command - there has been no activity here for a while, I've no idea who these walkers are.
+  cm_unique_tutorial_convoy_hg_01_text_00:
+    noteDev: 
+    temp: false
+    text: Reached the vantage point, enemy in sight. I'm near my limit here, been piloting this tin can for the past 20 hours. I sure hope those crates are packed with meals and bathtubs.
+  cm_unique_tutorial_convoy_intro_01_text_00:
+    noteDev: 
+    temp: false
+    text: You're in position. Tracking enemy convoy approaching from the east.
+  cm_unique_tutorial_convoy_intro_02_text_00:
+    noteDev: 
+    temp: false
+    text: Commander! A 3F unit is nearby and might be able to assist. They're a little worn down, but you'll need all the firepower you can get.
+  cm_unique_tutorial_convoy_victory_early_01_text_00:
+    noteDev: 
+    temp: false
+    text: Excellent work, Commander! The convoy is scattering and abandoning its destination. Time to review our haul.
+  cm_unique_tutorial_demolition_intro_01_text_00:
+    noteDev: 
+    temp: false
+    text: No active threats in sight. Looks like they sent all their forces on patrol after the clash in that village. Let's get to work.
+  cm_unique_tutorial_demolition_intro_02_text_00:
+    noteDev: 
+    temp: false
+    text: This is outpost Sierra! All squads, return to base immediately! We are under attack by unidentified mechs!
+  cm_unique_tutorial_demolition_main_01_text_00:
+    noteDev: 
+    temp: false
+    text: Unit down, all clear! The base is calling reinforcements, but we still have some time before they arrive. You're free to renovate.
+  cm_unique_tutorial_demolition_main_02_text_00:
+    noteDev: 
+    temp: false
+    text: Distress call received, Sierra. Returning to base. Prepare for emergency airdrops, keep landing sites clear.
+  cm_unique_tutorial_demolition_retreat_01_text_00:
+    noteDev: 
+    temp: false
+    text: Their forces are entering range, time to go. The damage is done, no point risking a fight with a dozen squads.
+  cm_unique_tutorial_demolition_retreat_02_text_00:
+    noteDev: 
+    temp: false
+    text: How did they manage to cause so much damage? All units, move to intercept. Don't let them escape!
+  cm_unique_tutorial_intro_01_greeting_c0_text_00:
+    noteDev: 
+    temp: false
+    text: All systems nominal. Ready to commence testing.
+  cm_unique_tutorial_intro_01_greeting_c1_text_00:
+    noteDev: 
+    temp: false
+    text: Deployment confirmed. The techs want to see if you can push the prediction prototype to a full five seconds.
+  cm_unique_tutorial_intro_01_greeting_c2_text_00:
+    noteDev: 
+    temp: false
+    text: HQ, I'm seeing a lot of interference in our data streams. It looks like the northern comm tower might be offline.
+  cm_unique_tutorial_intro_01_greeting_c3_text_00:
+    noteDev: 
+    temp: false
+    text: We're seeing that, too. The Lieutenant is busy at the townsite, any chance you could check on the tower before commencing the test?
+  cm_unique_tutorial_intro_03_move2_c0_text_00:
+    noteDev: 
+    temp: false
+    text: On our way. I swear, if it's just those damn birds again…
+  cm_unique_tutorial_intro_04_discovery_c1_text_00:
+    noteDev: 
+    temp: false
+    text: Major? It looks like the power line has been completely severed. How is that even possible?
+  cm_unique_tutorial_intro_04_discovery_c2_text_00:
+    noteDev: 
+    temp: false
+    text: HQ, are you seeing this?
+  cm_unique_tutorial_intro_04_discovery_c3_text_00:
+    noteDev: 
+    temp: false
+    text: >-
+      ▲ [b]CONNECTION ERROR[/b]
+           Attempting to reconnect...
+  cm_unique_tutorial_intro_04_discovery_c4_text_00:
+    noteDev: 
+    temp: false
+    text: This doesn't feel right. Let's bring the prediction system online.
+  cm_unique_tutorial_intro_07_prediction_flank_c1_text_00:
+    noteDev: 
+    temp: false
+    text: I'll circle the tower, cover my six. If your system has warmed up, and the thing actually works, you should see my predicted movement.
+  cm_unique_tutorial_intro_08_tank_appears_c1_text_00:
+    noteDev: 
+    temp: false
+    text: We have contact. It looks like... a Kaskad tank? I'm not detecting any registration. Or transponder.
+  cm_unique_tutorial_intro_08_tank_appears_c2_text_00:
+    noteDev: 
+    temp: false
+    text: Attention! You have crossed the border into Fyrland territory. We will provide an escort back to Kaskad Dominion soil. Please confirm.
+  cm_unique_tutorial_intro_09_tank_plans_c1_text_00:
+    noteDev: 
+    temp: false
+    text: Contact confirmed, commencing phase two. Boundary Falls has multiple prototype units on patrol, try to take them intact.
+  cm_unique_tutorial_intro_09_tank_plans_c2_text_00:
+    noteDev: 
+    temp: false
+    text: Major! Predicting weapons going hot!
+  cm_unique_tutorial_intro_10_skirmish_reaction_c1_text_00:
+    noteDev: 
+    temp: false
+    text: What the hell were they thinking? That was an act of war. Are comms still down? We need to —
+  cm_unique_tutorial_intro_10_skirmish_reaction_c2_text_00:
+    noteDev: 
+    temp: false
+    text: — Reading multiple Kaskad signatures approaching from the north. Take cover!
+  cm_unique_tutorial_intro_12_skirmish_final_c1_text_00:
+    noteDev: 
+    temp: false
+    text: All teams, continue to advance, weapons free. Secure those prototypes. Level everything if you have to.
+  cm_unique_tutorial_intro_12_skirmish_final_c2_text_00:
+    noteDev: 
+    temp: false
+    text: Major, come in. Multiple signatures are moving on the townsite. Requesting immediate support.
+  cm_unique_tutorial_intro_12_skirmish_final_c3_text_00:
+    noteDev: 
+    temp: false
+    text: Get to the town, Cadet. I'll defend this position.
+  cm_unique_tutorial_intro_14_siege_hints_c1_text_00:
+    noteDev: 
+    temp: false
+    text: Multiple units on approach, treat as hostile. T-minus five seconds!
+  cm_unique_tutorial_intro_14_siege_wave_c0_text_00:
+    noteDev: 
+    temp: false
+    text: More Kaskad signatures approaching our position. Detecting twenty... thirty...
+  cm_unique_tutorial_intro_14_siege_wave_c1_text_00:
+    noteDev: 
+    temp: false
+    text: >-
+      ▲ [b]CONNECTION LOST[/b]
+           Reserve relay offline
+           Emergency broadcast failed
+  cm_unique_tutorial_intro_14_siege_wave_c2_text_00:
+    noteDev: 
+    temp: false
+    text: We're being overrun. All units, evacuate the civilians and fall back. Don't let them get their hands on the prototypes!
+  src_enemy_boss_intercepted_header:
+    noteDev: 
+    temp: false
+    text: Behemoth
+  src_enemy_commander_direct_header:
+    noteDev: 
+    temp: false
+    text: General [aa][ Direct ]
+  src_enemy_commander_intercepted_header:
+    noteDev: 
+    temp: false
+    text: General [aa][ Intercept ]
+  src_enemy_dropship_header:
+    noteDev: 
+    temp: false
+    text: Dropship [aa][ Intercept ]
+  src_enemy_elite_direct_header:
+    noteDev: 
+    temp: false
+    text: Enemy [aa][ Direct ]
+  src_enemy_elite_intercepted_header:
+    noteDev: 
+    temp: false
+    text: Enemy [aa][ Intercept ]
+  src_enemy_generic_intercepted_header:
+    noteDev: 
+    temp: false
+    text: Enemy [aa][ Intercept ]
+  src_enemy_target_blurry_header:
+    noteDev: 
+    temp: false
+    text: Target
+  src_friendly_disconnected_header:
+    noteDev: 
+    temp: false
+    text: '[aa]—[ff]'
+  src_friendly_disconnected_hq_header:
+    noteDev: 
+    temp: false
+    text: HQ [aa][ Error ]
+  src_friendly_homeguard_header:
+    noteDev: 
+    temp: false
+    text: Fyrland Freedom Forces
+  src_friendly_hq_header:
+    noteDev: 
+    temp: false
+    text: HQ
+  src_friendly_mobilebase_header:
+    noteDev: 
+    temp: false
+    text: Mobile base
+  src_friendly_tutorial_cadet_header:
+    noteDev: 
+    temp: false
+    text: Cadet
+  src_friendly_tutorial_lieutenant_header:
+    noteDev: 
+    temp: false
+    text: Lieutenant
+  src_friendly_tutorial_major_header:
+    noteDev: 
+    temp: false
+    text: Major

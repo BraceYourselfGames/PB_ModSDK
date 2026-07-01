@@ -1,0 +1,122 @@
+hidden: false
+parent: wpn_main_melee_secondary
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_06
+- category_wpn_melee_blade
+statDistribution: ''
+stats:
+  act_heat:
+    value: 100
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp2_value:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  comp3_value:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 160
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_heat:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 45
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 15
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_stagger:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_melee_sword_03_bottom_b
+- wpn_melee_sword_03_top_a_s
+attachments: 
+activation:
+  visual:
+    local:
+      key: 
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio: 
+  light:
+    shared: true
+    key: default
+    custom: 
+  recoil:
+    key: 
+  timing: 
+  hitReaction: 
+projectile: 
+beam: 
+custom:
+  flags: []
+  ints:
+    melee_animation_variant: 0
+  floats:
+    distance_cancel_threshold: 6
+    melee_blade_length: 1
+    melee_distance_in: 7
+    melee_distance_offset: -6
+    melee_distance_out: 16
+    melee_duration_dash_align: 0.1
+    melee_duration_dash_full: 0.766
+    melee_duration_dash_out: 0.333
+    melee_duration_strike: 0.75
+    melee_time_impact: 0.23
+  vectors:
+    melee_hit_size:
+      x: 6
+      y: 4
+      z: 4
+  strings: 
+functions: 
+workshopInfo: 

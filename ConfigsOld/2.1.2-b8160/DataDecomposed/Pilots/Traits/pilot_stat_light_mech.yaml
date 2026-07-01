@@ -1,0 +1,70 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_m_unit_mech4
+tags:
+- level_4
+- bonus
+- type_brawler
+- type_sharpshooter
+- type_special
+group: preferred_armor_weight
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !CombatValidateUnitCheck
+    check:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats:
+        drv_weight_class:
+          check: RoughlyEqual
+          value: 1
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitSetStatMultiplier
+    key: overheat_buffer
+    mode: Set
+    value: 0.7
+    refreshFullStats: true
+  - !CombatUnitSetStatMultiplier
+    key: overheat_limit
+    mode: Offset
+    value: 0.25
+    refreshFullStats: true
+  functionsSelf: 
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

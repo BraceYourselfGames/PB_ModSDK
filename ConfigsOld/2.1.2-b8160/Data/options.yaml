@@ -1,0 +1,176 @@
+selections:
+  Display_Resolution: 8
+  Display_Mode: 1
+  Display_Sync: 0
+  Game_Language: 0
+  Game_UI_Scaling: 0
+groups:
+  game:
+    name: groupGameName
+    desc: groupGameDesc
+    icon: 
+  display:
+    name: groupDisplayName
+    desc: groupDisplayDesc
+    icon: 
+definitions:
+  Display_Mode:
+    name: displayModeName
+    desc: displayModeDesc
+    group: display
+    type: Bool
+    levels:
+      0: !OptionLevelBool
+        value: false
+        name: displayModeWindowed
+        desc: 
+      1: !OptionLevelBool
+        value: true
+        name: displayModeFullscreen
+        desc: 
+  Display_Resolution:
+    name: displayResolutionName
+    desc: displayResolutionDesc
+    group: display
+    type: Vector2Int
+    levels:
+      0: !OptionLevelVector2Int
+        width: 1280
+        height: 960
+        group: 0
+        name: 
+        desc: 
+      1: !OptionLevelVector2Int
+        width: 1440
+        height: 1080
+        group: 0
+        name: 
+        desc: 
+      2: !OptionLevelVector2Int
+        width: 1600
+        height: 1200
+        group: 0
+        name: 
+        desc: 
+      3: !OptionLevelVector2Int
+        width: 1920
+        height: 1440
+        group: 0
+        name: 
+        desc: 
+      4: !OptionLevelVector2Int
+        width: 2048
+        height: 1536
+        group: 0
+        name: 
+        desc: 
+      5: !OptionLevelVector2Int
+        width: 1280
+        height: 720
+        group: 1
+        name: 
+        desc: 
+      6: !OptionLevelVector2Int
+        width: 1366
+        height: 768
+        group: 1
+        name: 
+        desc: 
+      7: !OptionLevelVector2Int
+        width: 1600
+        height: 900
+        group: 1
+        name: 
+        desc: 
+      8: !OptionLevelVector2Int
+        width: 1920
+        height: 1080
+        group: 1
+        name: 
+        desc: 
+      9: !OptionLevelVector2Int
+        width: 2560
+        height: 1440
+        group: 1
+        name: 
+        desc: 
+      10: !OptionLevelVector2Int
+        width: 1280
+        height: 800
+        group: 2
+        name: 
+        desc: 
+      11: !OptionLevelVector2Int
+        width: 1440
+        height: 900
+        group: 2
+        name: 
+        desc: 
+      12: !OptionLevelVector2Int
+        width: 1680
+        height: 1050
+        group: 2
+        name: 
+        desc: 
+      13: !OptionLevelVector2Int
+        width: 1920
+        height: 1200
+        group: 2
+        name: 
+        desc: 
+      14: !OptionLevelVector2Int
+        width: 2560
+        height: 1600
+        group: 2
+        name: 
+        desc: 
+  Display_Sync:
+    name: displaySyncName
+    desc: displaySyncDesc
+    group: display
+    type: Integer
+    levels:
+      0: !OptionLevelInteger
+        value: 0
+        name: displaySyncOff
+        desc: 
+      1: !OptionLevelInteger
+        value: 1
+        name: displaySyncFull
+        desc: 
+      2: !OptionLevelInteger
+        value: 2
+        name: displaySyncHalf
+        desc: 
+  Game_Language:
+    name: gameLanguageName
+    desc: gameLanguageDesc
+    group: game
+    type: String
+    levels:
+      0: !OptionLevelString
+        value: English
+        name: gameLanguageLevelEnglish
+        desc: 
+      1: !OptionLevelString
+        value: Chinese
+        name: gameLanguageLevelChinese
+        desc: 
+  Game_UI_Scaling:
+    name: gameUIScalingName
+    desc: gameUIScalingDesc
+    group: game
+    type: Integer
+    levels:
+      0: !OptionLevelInteger
+        value: 1080
+        name: ''
+        desc: 
+      1: !OptionLevelInteger
+        value: 1280
+        name: ''
+        desc: 
+      2: !OptionLevelInteger
+        value: 1440
+        name: ''
+        desc: 

@@ -1,0 +1,9 @@
+textDescInTooltips: true
+hidden: false
+icon: s_icon_l32_stat_wpn_damage
+severity: Critical
+check: 
+functions:
+- !CombatValidateUnitFrameIntegrity
+  check: Less
+  value: 0.01

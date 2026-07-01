@@ -1,0 +1,125 @@
+comment:
+  comment: Postgame loop start. Two provinces that can be visited or unvisited.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: 
+  textNavDesc: 
+  iconNav: 
+  textFromQuest: 
+  mapHeader:
+    color:
+      r: 0.504717
+      g: 0.7936321
+      b: 1
+      a: 1
+    mode: LocUnique
+    text: ''
+    textSector: 
+    textKey: 
+  mapBackground:
+    image: map_endgame
+    size:
+      x: 2048
+      y: 2048
+    color:
+      r: 1
+      g: 1
+      b: 1
+      a: 0.7
+  mapLabels: 
+  mapProvinceFilter: 
+travelInteraction: 
+entry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_countdown_base_length
+      value: 20
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !QuestStart
+    questKey: province_liberation
+  - !ApplyProvinceArrivalEffects {}
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_region_04
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: true
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
+  functionsBase: 
+progressDisplay: 
+effects: 
+branches:
+- comment: 
+  preferences:
+    branchActiveExcluded: true
+    modifiersUnique: true
+    modifierVisitsTracked: false
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 42_postgame_recapture
+    levelOffset:
+      i: 0
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Any
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_positive: true
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 42_postgame_recapture
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Any
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_mixed: true
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_negative: true
+tags: 

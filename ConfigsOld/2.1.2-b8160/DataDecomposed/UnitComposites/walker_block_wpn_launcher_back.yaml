@@ -1,0 +1,168 @@
+parents: []
+hidden: true
+core: 
+ui: 
+tags: 
+layout:
+  units:
+    l1_wpn_launcher_back:
+      comment: 
+      preset: vhc_system_wpn_launcher_02
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_launcher
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags: 
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform: 
+      linksConditional: 
+      legStepBlocklist: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 10
+    name: Launcher-Back
+    color: 
+    comment:
+      comment: This node activates the back missile launcher. It selects a random valid child. Each chosen node has more child nodes.
+    selfChange:
+      unitKey: l1_wpn_launcher_back
+    functionGroups: 
+    childMode: ExecuteOneRandomValid
+    children:
+    - name: Targeted
+      color: 
+      comment:
+        comment: Targets PB unit the closest to the base.
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted: 
+        functionsGlobal:
+        - !CombatCreateCommsMessage
+          time: 0
+          key: boss_bt_wpn_launcher_ranged_counter
+      - functionsTargetedContext: Self
+        functionsTargeted:
+        - !CombatUnitActionsCreate
+          discardExisting: true
+          actions:
+          - key: attack_system
+            startTime: 0.75
+            startTimeIsLocal: true
+            locked: false
+            durationVariable: 
+            targetLocal: 
+            target:
+              type: UnitBlackboard
+              name: tgt_ml_back
+              center: true
+              modifiersDirectional: false
+              modifiers: 
+            targetSecondary: 
+            targetUnitFiltered: 
+            targetUnitLocalOffsets: 
+            movementCustom: 
+            functionsTimed: 
+            functionsOnAction:
+            - !CombatActionAddTargetWarning {}
+        functionsGlobal: 
+      childMode: ExecuteAll
+      children: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck:
+        sort: DistanceInv
+        unitLimit: 1
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited:
+          key: tgt_ml_back
+          indexed: false
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction:
+          key: Phantoms
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform:
+          origin: 
+          directionOriginRotation:
+            x: 0
+            y: 0
+            z: 0
+          directionDot: 
+          directionDotFlat: 
+          directionAngle: 
+          distance:
+            socketStatSource: 
+            range:
+              x: 100
+              y: 500
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_no_power: false
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable: 

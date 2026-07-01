@@ -1,0 +1,68 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: juggernaut
+tags:
+- role_elite_brawler
+partTagPreferences: 
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_radio
+    rating: 
+    systems: 
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_top
+    rating: 
+    systems: 
+  equipment_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_ml: true
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_ultraheavy: true
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_arm_shielded
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_arm_shielded
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_bottom
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

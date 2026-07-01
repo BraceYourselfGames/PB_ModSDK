@@ -1,0 +1,237 @@
+hidden: false
+parents: 
+textName: {}
+textDesc: {}
+core:
+  stepOnStart: prep
+  mainType: true
+  recordPointCompletion: true
+  recordPointMemory: true
+tags: 
+steps:
+  main:
+    comment: 
+    index:
+      i: 3
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidatePointKey
+          key: special_capital_center
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !Log
+        message: Detected victory. No changes to quest from this callback, moved to end of victory interaction.
+      functionsBase:
+      - !OverworldEntityInteractionStart
+        key: breakthrough_capital_center_victory
+        validated: false
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCreatePoint
+        key: special_capital_center
+        spawnGroupOverride: city_center
+        nameOverride: capital_center
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        questMain: true
+        questKey: 
+      - !QuestProvinceCreatePoint
+        key: generic_patrol
+        spawnGroupOverride: patrol_main
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        questMain: true
+        questKey: 
+      - !QuestProvinceCreatePoint
+        key: generic_patrol_loop_01
+        spawnGroupOverride: patrol_loop_01
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        questMain: true
+        questKey: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 2
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !TeleportBaseToEntityName
+        nameInternal: capital_center
+        interactionRangeMultiplier: 0.5
+      - !BasePartInstall
+        partKey: mobilebase_endgame
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 
+  prep:
+    comment: 
+    index:
+      i: 1
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidatePointKey
+          key: special_capital_outskirts
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - breakthrough_capital_outskirts_victory
+        tags: 
+      functionsBase: 
+      functionsEventEntity:
+      - !OverworldEntityQuestUnlink {}
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCreatePoint
+        key: special_capital_outskirts
+        spawnGroupOverride: city_outskirts
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 2
+        questMain: true
+        questKey: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !QuestProvinceCreatePoint
+        key: generic_patrol
+        spawnGroupOverride: patrol_main
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        - !OverworldEntityQuestUnlink {}
+        questMain: true
+        questKey: 
+      - !QuestProvinceCreatePoint
+        key: generic_patrol_loop_01
+        spawnGroupOverride: patrol_loop_01
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        - !OverworldEntityQuestUnlink {}
+        questMain: true
+        questKey: 
+      functionsBase:
+      - !OverworldEntityInteractionStart
+        key: breakthrough_capital_intro
+        validated: false
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: prep_camp
+  prep_camp:
+    comment: 
+    index:
+      i: 2
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes:
+      - OverworldTimeSkipEndCamp
+      filterEventEntity: 
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProgress
+        stepRequired: 
+        stepNext: 
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !StartTutorial
+        key: overworld_capital_camp
+        allowRepeat: true
+      - !DeletePoints
+        mode: DeleteUntilTarget
+        target: 0
+        onlyCombat: true
+        onlyHostile: true
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_patrol
+            not: false
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: main
+effectsShared: {}

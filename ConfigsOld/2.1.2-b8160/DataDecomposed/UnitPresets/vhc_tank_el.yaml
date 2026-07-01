@@ -1,0 +1,66 @@
+hidden: true
+listed: false
+branchIndependent: false
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: 
+blueprint: unit_tank_elevated
+textType: {}
+livery: default
+aiBehavior: Flanker
+aiTargeting: striker
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- weight_medium
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_el_body
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_el_side
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_el_side
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_el_turret
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 12
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

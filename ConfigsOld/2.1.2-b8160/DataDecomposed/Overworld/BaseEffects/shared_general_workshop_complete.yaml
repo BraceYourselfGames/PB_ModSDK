@@ -1,0 +1,24 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: 1
+rating: 0
+mood: 0
+group: 
+hue: 0.4
+icon: s_icon_l32_salvage_dismantle
+textFromFunctions: FunctionTextOmitted
+textSource: 
+tags:
+- camp_general
+checksGlobal:
+- !OverworldValidateResolvedInt
+  resolver: !OverworldIntValueWorkshopQueue {}
+  check: Greater
+  value: 0
+checksBase: 
+functionsGlobal:
+- !CompleteWorkshopQueue {}
+functionsBase: 
+pilot: 
+unit: 

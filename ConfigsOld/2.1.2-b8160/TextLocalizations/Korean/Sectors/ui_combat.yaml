@@ -1,0 +1,910 @@
+timeLastSync: 63817556034
+entries:
+  action_instant_header:
+    id: 1
+    text: 즉각 작업 확정
+    textEng: Confirm instant action
+  action_instant_hint:
+    id: 1
+    text: 이 작업은 즉각적이며 이 계획 단계에 즉시 영향을 주게 됩니다. 한번 확정하면 취소할 수 없습니다. 확정하시겠습니까?
+    textEng: This action is instantaneous and will immediately affect this planning phase. It can not be cancelled once confirmed. Would you like to confirm it?
+  action_tooltip_charged_header:
+    id: 1
+    text: 제한된 충전량
+    textEng: Limited charges
+  action_tooltip_charged_text:
+    id: 1
+    text: 이 작업은 싸움당 제한된 횟수만 행할 수 있습니다.
+    textEng: This action can only be performed a limited number of times per fight.
+  action_tooltip_heat_header:
+    id: 1
+    text: 가열
+    textEng: Heating
+  action_tooltip_heat_text:
+    id: 1
+    text: 해당 작업은 유닛에 열을 가합니다. 타임라인에서 이 작업들 사이에 간격을 두어 과열을 방지하세요.
+    textEng: This action will heat up the unit. Avoid overheating by spacing apart these actions on the timeline.
+  action_tooltip_irreversible_header:
+    id: 1
+    text: 철회 불가
+    textEng: Irreversible
+  action_tooltip_irreversible_text:
+    id: 1
+    text: 해당 작업은 유닛을 전투에서 제거합니다. 한번 실행하면 되돌릴 수 없습니다.
+    textEng: This action will remove the unit from the fight. It can not be reversed once executed.
+  action_tooltip_offensive_header:
+    id: 1
+    text: 공격형
+    textEng: Offensive
+  action_tooltip_offensive_text:
+    id: 1
+    text: 이것은 설치한 무기를 활용한 공격형 작업입니다. 무기 정보는 화면의 오른쪽 하단에서 확인할 수 있습니다.
+    textEng: This is an offensive action utilizing an installed weapon. Weapon information is available on the bottom right side of the screen.
+  dialog_no_orders_desc:
+    id: 1
+    text: 일부 유닛에 명령이 없습니다. 정말 계속 진행하시겠습니까?
+    textEng: Some units have no orders. Are you sure you wish to proceed?
+  dialog_no_orders_header:
+    id: 1
+    text: 명령 없는 유닛
+    textEng: Units Without Orders
+  end_continue:
+    id: 1
+    text: 계속하기
+    textEng: Continue
+  end_defeat_block_header:
+    id: 1
+    text: 전진 불가능
+    textEng: No way forward
+  end_defeat_block_text:
+    id: 1
+    text: 이 싸움에서 패배는 선택지가 아닙니다. 마지막으로 저장한 게임 파일에서 다시 시작하시겠습니까?
+    textEng: Defeat is not an option in this fight. Retry from the last saved game?
+  end_detail_defeat_early:
+    id: 1
+    text: 기지가 우리 유닛을 태우고 후퇴했지만, 현장은 여전히 적이 장악하고 있습니다. 다음에는 적을 쓰러뜨릴 수 있을 겁니다!
+    textEng: The base has picked up our units and retreated, but the site remains under enemy control. We can defeat them next time!
+  end_detail_defeat_total:
+    id: 1
+    text: 우리 유닛을 잃었지만, 기지가 가까스로 탈출했습니다. 현장은 여전히 적이 장악하고 있습니다. 다음에는 적을 쓰러뜨릴 수 있을 겁니다!
+    textEng: Our units are lost, but the base has managed to escape. The site remains under enemy control. We can defeat them next time!
+  end_detail_victory_early:
+    id: 1
+    text: 축하합니다! 기지가 유닛을 확보하였으며 모든 목표를 달성했습니다. 적이 사라지고, 이제 현장을 접수했습니다.
+    textEng: Congratulations! The base has secured our units and all objectives have been fulfilled. With the enemy gone, you now have control of the site.
+  end_detail_victory_total:
+    id: 1
+    text: 축하합니다! 적을 쓰러뜨렸으며 이제 현장을 접수했습니다.
+    textEng: Congratulations! The enemy has been defeated and you now have control of the site.
+  end_header_defeat_early:
+    id: 1
+    text: 후퇴함
+    textEng: Retreated
+  end_header_defeat_total:
+    id: 1
+    text: 패배함
+    textEng: Defeated
+  end_header_victory_early:
+    id: 1
+    text: 승리
+    textEng: Victory
+  end_header_victory_total:
+    id: 1
+    text: 승리
+    textEng: Victory
+  end_subtitle_defeat_early:
+    id: 1
+    text: 분대 철수 중, 임무 실패.
+    textEng: Squad extracting, mission failed.
+  end_subtitle_defeat_total:
+    id: 1
+    text: 임무 실패.
+    textEng: Mission failed.
+  end_subtitle_victory_early:
+    id: 1
+    text: 분대 철수 중, 임무 성공.
+    textEng: Squad extracting, mission successful.
+  end_subtitle_victory_total:
+    id: 1
+    text: 남은 타겟 없음, 임무 성공.
+    textEng: No targets remain, mission successful.
+  event_log_bt_comms_text:
+    id: 1
+    text: 도청한 통신의 디스플레이를 켜거나 끕니다.
+    textEng: Toggle the display of intercepted comms.
+  event_log_bt_other_text:
+    id: 1
+    text: 기타 메시지의 디스플레이를 켜거나 끕니다.
+    textEng: Toggle the display of other messages.
+  event_log_bt_toggle_text:
+    id: 1
+    text: 소형과 확장 윈도우 크기 사이를 오갑니다.
+    textEng: Toggle between compact and expanded window size.
+  event_log_bt_units_enemy_text:
+    id: 1
+    text: 적 유닛과 관련된 사건의 디스플레이를 켜거나 끕니다.
+    textEng: Toggle the display of events involving enemy units.
+  event_log_bt_units_friendly_text:
+    id: 1
+    text: 아군 유닛과 관련된 사건의 디스플레이를 켜거나 끕니다.
+    textEng: Toggle the display of events involving friendly units.
+  event_log_empty_header:
+    id: 1
+    text: 표시할 내용 없음
+    textEng: Nothing to display
+  event_log_empty_text_hidden:
+    id: 1
+    text: 메시지 숨김
+    textEng: Messages hidden
+  event_log_empty_text_none:
+    id: 1
+    text: 숨긴 메시지 없음
+    textEng: No hidden messages
+  id_unknown_unit_desc:
+    id: 1
+    text: 이 유닛의 사용 가능한 정보가 없습니다.
+    textEng: No intel available for this unit.
+  id_unknown_unit_name:
+    id: 1
+    text: 신원 불명의 유닛
+    textEng: Unidentified unit
+  intro_squad_ready:
+    id: 1
+    text: 분대 준비 완료
+    textEng: Squad in position
+  log_strike_incoming:
+    id: 1
+    text: 임박한 공습 탐지됨!
+    textEng: Incoming air strike detected!
+  log_target_neutralized:
+    id: 1
+    text: 대상 무력화됨!
+    textEng: Target neutralized!
+  log_unit_detected:
+    id: 1
+    text: 새로운 적 감지됨!
+    textEng: New enemy detected!
+  log_unit_detected_multiple:
+    id: 1
+    text: 새로운 적 감지됨!
+    textEng: New enemies detected!
+  mode_context_both:
+    id: 1
+    text: 타임라인이나 월드 내
+    textEng: In timeline or world
+  mode_context_timeline:
+    id: 1
+    text: 타임라인 내
+    textEng: In timeline
+  mode_context_world:
+    id: 1
+    text: 월드 내
+    textEng: In world
+  mode_tooltip_contact_header:
+    id: 1
+    text: 접촉
+    textEng: Contact
+  overlay_collision_hint:
+    id: 2
+    text: 충돌
+    textEng: Collision
+  overlay_flag_concussed:
+    id: 1
+    text: 뇌진탕 걸림
+    textEng: Concussed
+  overlay_flag_crash:
+    id: 1
+    text: 충돌함
+    textEng: Crashed
+  overlay_flag_destroyed:
+    id: 1
+    text: 파괴됨
+    textEng: Destroyed
+  overlay_flag_ejected:
+    id: 1
+    text: 탈출함
+    textEng: Ejected
+  overlay_flag_nodata:
+    id: 2
+    text: 데이터 없음
+    textEng: no data
+  overlay_flag_overheat:
+    id: 1
+    text: 과열됨
+    textEng: Overheated
+  overlay_flag_part_integrity:
+    id: 1
+    text: 부품 일체성
+    textEng: Part integrity
+  overlay_flag_part_lost:
+    id: 1
+    text: 부품 잃음
+    textEng: Part lost
+  overlay_flag_reaction_fired:
+    id: 1
+    text: 활성화됨
+    textEng: Activated
+  overlay_flag_reaction_triggered:
+    id: 1
+    text: 탐지됨
+    textEng: Detected
+  pilot_event_knockout_header:
+    id: 2
+    text: 기절
+    textEng: Knocked out
+  pilot_event_knockout_text:
+    id: 2
+    text: 이 조종사는 위독한 상태입니다. 살아남기는 했지만, 다시 배치하려면 치료를 받아야 하며 영구적인 트라우마를 얻습니다.
+    textEng: This pilot is in a critical condition. They have survived, but require treatment to deploy again and gain a permanent trauma.
+  pilot_event_lost_desc_trauma:
+    id: 1
+    text: 조종사가 해결되지 않은 과거의 트라우마 때문에 부상에서 살아남지 못했습니다. 유해는 전투 후에 되찾을 겁니다. 전투 후에 조종사가 부상에서 회복하도록 하면 이런 일을 방지할 수 있습니다.
+    textEng: The pilot did not survive this injury due to untreated past trauma. Their remains will be recovered after combat. Letting pilots recover from injuries after combat can avoid this.
+  pilot_event_lost_header:
+    id: 1
+    text: 조종사 잃음
+    textEng: Pilot lost
+  pilot_health_damage_concussion:
+    id: 1
+    text: 뇌진탕까지의 대미지
+    textEng: Damage until concussion
+  pilot_health_damage_death:
+    id: 1
+    text: 사망까지의 대미지
+    textEng: Damage until death
+  pilot_health_deployment:
+    id: 1
+    text: 배치 시 체력
+    textEng: Health on deployment
+  pilot_health_desc_enemy:
+    id: 1
+    text: 해당 적 조종사가 의식을 잃을 때까지 남은 체력입니다. 뇌진탕 무기를 사용하여 조종사의 체력에 대미지를 입히세요.
+    textEng: Remaining health until this hostile pilot is knocked unconscious. Use concussive weapons to damage pilot health.
+  pilot_health_desc_friendly:
+    id: 1
+    text: 우리 조종사가 의식을 잃을 때까지 남은 체력입니다. 이를 방지하려면 뇌진탕 무기 대미지를 피하세요.
+    textEng: Remaining health until our pilot is knocked unconscious. Prevent this by avoiding concussive weapon damage.
+  pilot_health_max:
+    id: 1
+    text: 최대 체력
+    textEng: Maximum health
+  pilot_health_tooltip_header:
+    id: 1
+    text: 조종사 체력
+    textEng: Pilot health
+  pilot_risk_death:
+    id: 1
+    text: 사망할 위험 있음!
+    textEng: At risk of death!
+  pilot_risk_death_desc_enemy:
+    id: 1
+    text: 해당 적 조종사가 부상으로 쓰러질 때까지 남은 체력입니다. 뇌진탕 무기를 사용하여 조종사의 체력에 대미지를 입히세요.
+    textEng: Remaining health until this hostile pilot succumbs to their injuries. Use concussive weapons to damage pilot health.
+  pilot_risk_death_desc_friendly:
+    id: 1
+    text: 우리 조종사가 부상으로 쓰러질 때까지 남은 체력입니다. 뇌진탕 무기 대미지를 피하세요. 조종사의 사망은 영구적입니다!
+    textEng: Remaining health until our pilot succumbs to their injuries. Avoid concussive weapon damage - pilot death is permanent!
+  pilot_status_concussion_desc_enemy:
+    id: 1
+    text: 적 조종사가 뇌진탕 무기로 인해 기절했습니다. 조종사의 유닛은 온전합니다. 회수하기에 좋은 기회입니다!
+    textEng: The enemy pilot was knocked out from a concussive weapon. Their unit is intact - a great opportunity for salvage!
+  pilot_status_concussion_desc_friendly:
+    id: 1
+    text: 우리 조종사가 뇌진탕 공격으로 기절했습니다. 싸움에서 이겨 조종사의 생존을 확보하세요! 우리가 지면 되살릴 수 없습니다.
+    textEng: Our pilot was knocked out from a concussive hit. Win the fight to ensure their survival! We cannot revive them if we lose.
+  pilot_status_concussion_header:
+    id: 1
+    text: 뇌진탕 걸림
+    textEng: Concussed
+  pilot_status_concussion_subheader:
+    id: 1
+    text: >-
+      조종사
+
+      뇌진탕 걸림
+    textEng: >-
+      Pilot
+
+      Concussed
+  pilot_status_crashed_desc:
+    id: 1
+    text: 해당 유닛은 충돌 혹은 파괴된 부품 때문에 조종할 수 없습니다. 이전에 계획된 모든 작업이 종료되었습니다.
+    textEng: This unit is out of control from a collision or destroyed part. All previously planned actions have been terminated.
+  pilot_status_crashed_header:
+    id: 1
+    text: 충돌함
+    textEng: Crashed
+  pilot_status_crashed_subheader:
+    id: 1
+    text: >-
+      유닛
+
+      충돌 중
+    textEng: >-
+      Unit
+
+      Crashing
+  pilot_status_deceased_concussion_desc_enemy:
+    id: 1
+    text: 적 조종사를 뇌진탕 무기 대미지로 처치했습니다. 해당 조종사의 유닛에서 장비를 일부 회수할 수 있을지도 모릅니다.
+    textEng: The enemy pilot was killed by concussive weapon damage. We might be able to salvage some equipment from their unit.
+  pilot_status_deceased_concussion_desc_friendly:
+    id: 1
+    text: 우리 조종사가 뇌진탕 무기 대미지로 사망했습니다. 건강하고, 부상을 입지 않은 조종사를 내보내는 것을 명심하세요. 그런 조종사가 생존할 가능성이 더 높습니다.
+    textEng: Our pilot was killed by concussive weapon damage. Remember to send in healthy, uninjured pilots - they have stronger chances of survival.
+  pilot_status_deceased_core_desc_enemy:
+    id: 1
+    text: 해당 적 조종사는 그의 유닛의 원자로 코어가 폭발한 후 사망했습니다.
+    textEng: This enemy pilot was killed after their unit's reactor core detonated.
+  pilot_status_deceased_core_desc_friendly:
+    id: 1
+    text: 해당 조종사는 유닛의 원자로 코어가 폭발한 후 사망했습니다. 적시에 탈출했다면 생존을 확보할 수 있었을 것입니다.
+    textEng: This pilot was killed after the unit's reactor core detonated. A timely ejection could have ensured their survival.
+  pilot_status_deceased_header:
+    id: 1
+    text: 사망함
+    textEng: Deceased
+  pilot_status_deceased_subheader:
+    id: 1
+    text: >-
+      조종사
+
+      사망함
+    textEng: >-
+      Pilot
+
+      Deceased
+  pilot_status_default:
+    id: 1
+    text: >-
+      기록
+
+      없음
+    textEng: >-
+      No
+
+      Recording
+  pilot_status_ejected_desc_enemy:
+    id: 1
+    text: 적 조종사가 탈출하였으며 유닛을 온전하게 남겨 두었습니다. 회수하기에 좋은 기회입니다!
+    textEng: The enemy pilot has ejected and left their unit intact - a great opportunity for salvage!
+  pilot_status_ejected_desc_friendly:
+    id: 1
+    text: 우리 조종사가 이 유닛에서 탈출하였으며 전투 현장 근처에 착륙할 것입니다. 즉시 구조하여 조종사의 생존을 확보하세요.
+    textEng: Our pilot has ejected from this unit and will land near the battle site. Rescue them promptly to ensure their survival.
+  pilot_status_ejected_header:
+    id: 1
+    text: 탈출함
+    textEng: Ejected
+  pilot_status_ejected_subheader:
+    id: 1
+    text: >-
+      조종사
+
+      탈출함
+    textEng: >-
+      Pilot
+
+      Ejected
+  pilot_status_uncrewed_desc:
+    id: 1
+    text: 이 유닛은 자율적이며 조종사가 없습니다. 뇌진탕 피해에 면역이 있습니다.
+    textEng: This unit is autonomous and lacks a pilot. It is immune to concussive damage.
+  pilot_status_uncrewed_header:
+    id: 1
+    text: 무인
+    textEng: Uncrewed
+  pilot_status_uncrewed_subheader:
+    id: 1
+    text: 무인
+    textEng: Uncrewed
+  profile_arrival_header:
+    id: 1
+    text: 침략 경보!
+    textEng: Invader alert!
+  profile_arrival_hint:
+    id: 1
+    text: 엘리트 적 유닛이 예상치 못하게 싸움에 끼어들었습니다. 극도로 조심하길 바랍니다.
+    textEng: An elite enemy unit has unexpectedly joined the fight. Exercise extreme caution.
+  scenario_from:
+    id: 1
+    text: 발신자
+    textEng: From
+  scenario_imminent:
+    id: 1
+    text: 임박
+    textEng: Imminent
+  scenario_incoming_units:
+    id: 1
+    text: 들어오는 유닛
+    textEng: Incoming Units
+  scenario_pings_left:
+    id: 1
+    text: 남은 핑
+    textEng: Pings Left
+  scenario_turns_left:
+    id: 1
+    text: 남은 턴
+    textEng: Turns left
+  startup_day_prefix:
+    id: 1
+    text: 데이
+    textEng: Day
+  startup_hint_skip:
+    id: 1
+    text: '[b]Esc[/b] [C0C0C0]혹은[-] [b]스페이스 [/b] [C0C0C0]키를[-] 눌러[-] [C0C0C0]건너뛰세요[-]'
+    textEng: '[C0C0C0]Press[-] [b]Esc[/b][-] [C0C0C0]or[-] [b]Space[/b] [C0C0C0]to skip[-]'
+  startup_unknown_region:
+    id: 1
+    text: 알 수 없는 지역
+    textEng: Unknown region
+  targeting_barrier_damage:
+    id: 1
+    text: >-
+      배리어
+
+      대미지
+    textEng: >-
+      barrier
+
+      damage
+  targeting_blocked:
+    id: 1
+    text: 차단됨
+    textEng: Blocked
+  targeting_coverage:
+    id: 1
+    text: 커버리지
+    textEng: Coverage
+  targeting_crit_chance:
+    id: 1
+    text: 치명타
+    textEng: Crit
+  targeting_damage:
+    id: 1
+    text: 대미지
+    textEng: Damage
+  targeting_damage_at_range:
+    id: 1
+    text: 이 거리에서의 대미지
+    textEng: Damage at range
+  targeting_damage_estimate:
+    id: 1
+    text: 추정 대미지
+    textEng: Damage estimate
+  targeting_damage_estimate_env:
+    id: 1
+    text: 예상 대미지
+    textEng: Predicted damage
+  targeting_damage_estimate_unit:
+    id: 1
+    text: 예상 대미지
+    textEng: Predicted damage
+  targeting_environment_hint:
+    id: 1
+    text: >-
+      유닛을 클릭하여 타겟을 고정하세요.
+
+      주변 환경을 겨냥하려면, [ffcc77]Ctrl[-]을 누르고 있으세요.
+    textEng: >-
+      Click a unit to lock target.
+
+      To target environment, hold [ffcc77]Ctrl.[-]
+  targeting_falloff:
+    id: 1
+    text: 사정거리 내
+    textEng: Range fit
+  targeting_heat:
+    id: 1
+    text: 열
+    textEng: heat
+  targeting_integrity_damage:
+    id: 1
+    text: >-
+      일체성
+
+      대미지
+    textEng: >-
+      integrity
+
+      damage
+  targeting_left_weapon:
+    id: 1
+    text: 좌측 무기
+    textEng: Left weapon
+  targeting_low_hit_chance:
+    id: 1
+    text: 적중률 낮음
+    textEng: Low hit chance
+  targeting_move_penalty:
+    id: 1
+    text: 움직임 변동
+    textEng: Movement sway
+  targeting_optimal_range:
+    id: 1
+    text: 최적
+    textEng: Optimal
+  targeting_out_of_range:
+    id: 1
+    text: 사정거리 벗어남
+    textEng: Out of range
+  targeting_pilot_hp:
+    id: 1
+    text: 조종사 HP
+    textEng: pilot HP
+  targeting_pilot_knocked_out:
+    id: 1
+    text: 조종사가 기절함
+    textEng: Pilot knocked out
+  targeting_scatter:
+    id: 1
+    text: 산탄도
+    textEng: Scatter
+  targeting_stagger:
+    id: 1
+    text: 경직
+    textEng: stagger
+  targeting_too_close:
+    id: 1
+    text: 너무 가까움
+    textEng: Too Close
+  targeting_triggered_reaction:
+    id: 1
+    text: '촉발된 반응 '
+    textEng: 'Triggered reaction '
+  time_button_full:
+    id: 1
+    text: 최대
+    textEng: Full
+  time_button_half:
+    id: 1
+    text: 보통
+    textEng: Half
+  time_button_slow:
+    id: 1
+    text: 느림
+    textEng: Slow
+  time_mirror:
+    id: 1
+    text: 미러
+    textEng: Mirror
+  time_once:
+    id: 1
+    text: 한 번
+    textEng: Once
+  time_pause:
+    id: 1
+    text: 일시중지
+    textEng: Pause
+  time_paused:
+    id: 1
+    text: 일시 중지됨
+    textEng: Paused
+  time_playing:
+    id: 1
+    text: 재생 중
+    textEng: Playing
+  time_repeat:
+    id: 1
+    text: 반복
+    textEng: Repeat
+  time_speed_full:
+    id: 1
+    text: 최대 속도
+    textEng: Full Speed
+  time_speed_half:
+    id: 1
+    text: 절반 속도
+    textEng: Half Speed
+  time_speed_slow:
+    id: 1
+    text: 슬로 모션
+    textEng: Slow Motion
+  timeline_boot_desc:
+    id: 1
+    text: >-
+      예측 시스템
+
+      사용 준비됨
+    textEng: >-
+      Prediction system
+
+      ready for use
+  timeline_boot_header:
+    id: 1
+    text: 부팅하기
+    textEng: Boot Up
+  timeline_button_plan:
+    id: 1
+    text: 계획하기
+    textEng: Plan
+  timeline_button_replay:
+    id: 1
+    text: 리플레이
+    textEng: Replay
+  timeline_confirm_removal:
+    id: 1
+    text: >-
+      제거
+
+      확정
+    textEng: >-
+      confirm
+
+      removal
+  timeline_execute:
+    id: 1
+    text: 실행하기
+    textEng: Execute
+  timeline_execution_total_time:
+    id: 1
+    text: 총 시간
+    textEng: Total time
+  timeline_execution_turn:
+    id: 1
+    text: 턴
+    textEng: Turn
+  timeline_finalize_order:
+    id: 1
+    text: >-
+      명령 마무리하여
+
+      계속하기
+    textEng: >-
+      Finalize order
+
+      to continue
+  timeline_heat_warning:
+    id: 1
+    text: >-
+      과열:
+
+      유닛이 대미지 입게 됨
+    textEng: >-
+      Overheating:
+
+      unit will be damaged
+  timeline_horizon_header:
+    id: 1
+    text: 데이터
+    textEng: No data
+  timeline_horizon_text:
+    id: 1
+    text: 이 유닛의 작업은 시뮬레이션할 수 없습니다. 적이 당신의 예측 시스템을 방해하고 있을 수도 있습니다. 조심해서 적 행동을 가늠해 보세요.
+    textEng: The actions of this unit can not be simulated. The enemy might be jamming your prediction system. Exercise caution and try to guess their actions.
+  timeline_late_desc:
+    id: 1
+    text: 타임라인에서 작업을 너무 늦게 계획하는 것은 허용되지 않습니다.
+    textEng: Planning actions too late in the timeline is not permitted.
+  timeline_late_header:
+    id: 1
+    text: 너무 늦음
+    textEng: Too Late
+  timeline_lock_desc:
+    id: 1
+    text: 실행 불가능
+    textEng: Execution unavailable
+  timeline_lock_header:
+    id: 1
+    text: 잠김
+    textEng: Locked
+  timeline_overlap_desc:
+    id: 1
+    text: 공격과 같은, 보조 작업은 중첩할 수 없습니다. 그러나, 유닛은 동시에 공격 및 이동할 수 있습니다.
+    textEng: Secondary actions can not overlap, such as attacks. However, units can attack and move at the same time.
+  timeline_overlap_header:
+    id: 1
+    text: 중첩
+    textEng: Overlap
+  timeline_status_normal_desc:
+    id: 1
+    text: 예측 한계 접근 중
+    textEng: Prediction limit approaching
+  timeline_status_paused_desc:
+    id: 1
+    text: 커서 올려 탐색
+    textEng: Hover to explore
+  timeline_status_paused_header:
+    id: 1
+    text: 일시 중지됨
+    textEng: Paused
+  timeline_status_playing_desc:
+    id: 1
+    text: 커서 올려 개입
+    textEng: Hover to Interrupt
+  timeline_status_playing_header:
+    id: 1
+    text: 재생 중
+    textEng: Playing
+  timeline_status_warning_desc:
+    id: 1
+    text: 다음 턴 예측 중
+    textEng: Predicting into next turn
+  timeline_status_warning_header:
+    id: 1
+    text: 낮은 정확도 경고
+    textEng: Low precision warning
+  timeline_tooltip_heat_header:
+    id: 1
+    text: 열
+    textEng: Heat
+  timeline_tooltip_heat_text:
+    id: 1
+    text: 장기적인 과열은 유닛이 불이 붙어 대미지를 받게 할 수 있습니다. 공격과 기타 발열 작업 사이에 간격을 두어 유닛의 열이 식을 시간을 주세요. 유닛이 과열로 파괴되면, 조종사가 자동으로 탈출합니다.
+    textEng: Prolonged overheating will lead to the unit catching fire and taking damage. Space out attacks and other heat-generating actions to give the unit time to cool down. If a unit is destroyed by overheating, the pilot will automatically eject.
+  turn_header:
+    id: 1
+    text: 턴
+    textEng: Turn
+  unit_barrier:
+    id: 1
+    text: 배리어
+    textEng: Barrier
+  unit_event_defect_header:
+    id: 2
+    text: 유닛 비활성화됨
+    textEng: Unit disabled
+  unit_event_defect_text:
+    id: 2
+    text: 이 메카는 치명적인 대미지를 입었습니다. 다시 배치하려면 기지에서 내부 프레임을 수리해야 합니다. 부착된 부품은 전투 후에 회수할 수 있습니다.
+    textEng: This mech has taken critical damage. The internal frame will require repairs at the base before it can be deployed again. The attached parts can be salvaged after combat.
+  unit_event_destroyed_header:
+    id: 2
+    text: 유닛 파괴됨
+    textEng: Unit destroyed
+  unit_event_destroyed_text:
+    id: 2
+    text: 이 메카는 여러 전투를 치르며 치명적인 대미지를 입고 한계에 다다랐습니다. 부착된 부품은 전투 후에 회수할 수 있지만, 프레임은 복구할 수 없습니다.
+    textEng: This mech has taken critical damage across multiple fights and has reached its limit. The attached parts can be salvaged after combat, but the frame is not recoverable.
+  unit_health_full:
+    id: 1
+    text: 최대
+    textEng: Full
+  unit_health_none:
+    id: 1
+    text: 없음
+    textEng: None
+  unit_info_blueprint_hint:
+    id: 1
+    text: 일체성
+    textEng: Integrity
+  unit_info_targeted_hint:
+    id: 1
+    text: 타겟 유닛
+    textEng: Targeted Unit
+  unit_integrity:
+    id: 1
+    text: 일체성
+    textEng: Integrity
+  unit_postfix_meters:
+    id: 1
+    text: m
+    textEng: m
+  unit_postfix_seconds:
+    id: 1
+    text: 초
+    textEng: s
+  unit_prefix_allied:
+    id: 1
+    text: 아군
+    textEng: Allied
+  unit_prefix_hostile:
+    id: 1
+    text: 적
+    textEng: Hostile
+  unit_prefix_squad:
+    id: 1
+    text: 분대
+    textEng: Squad
+  unit_status_buildup:
+    id: 1
+    text: 누적
+    textEng: Buildup
+  unit_status_countdown:
+    id: 1
+    text: 카운트다운
+    textEng: Countdown
+  unit_status_source_action:
+    id: 1
+    text: 활성 작업
+    textEng: Active action
+  unit_status_source_equipment:
+    id: 1
+    text: 장착한 아이템
+    textEng: Equipped item
+  unit_status_source_function:
+    id: 1
+    text: 이벤트
+    textEng: Event
+  unit_status_source_header:
+    id: 1
+    text: 상태 원인
+    textEng: Status source
+  unit_status_source_hit:
+    id: 1
+    text: 무기 명중
+    textEng: Weapon hit
+  unit_status_source_overheat:
+    id: 1
+    text: 과열
+    textEng: Overheating
+  unit_status_source_trait:
+    id: 1
+    text: 조종사 특성
+    textEng: Pilot trait
+  unit_status_source_unknown:
+    id: 1
+    text: 알 수 없음
+    textEng: Unknown
+  unit_status_turn_duration:
+    id: 1
+    text: 1턴
+    textEng: 1 turn
+  unit_status_turn_linked:
+    id: 1
+    text: 이 상태는 현재 턴과 관계되어 있습니다. 현재 계획 단계와 다음의 실행 단계에 영향을 줍니다.
+    textEng: This status is linked to the current turn. It affects the current planning phase and the upcoming execution phase.
+  unit_tooltip_crashing:
+    id: 1
+    text: 충돌 중
+    textEng: Crashing
+  unit_tooltip_crashing_desc:
+    id: 1
+    text: 해당 유닛은 충돌하여 계획된 작업을 모두 잃었습니다. 다음 턴에 회복됩니다.
+    textEng: This unit had a collision and lost all planned actions. It will recover next turn.
+  unit_tooltip_ejecting:
+    id: 1
+    text: 탈출 중
+    textEng: Ejecting
+  unit_tooltip_ejecting_desc:
+    id: 1
+    text: 해당 유닛의 조종사는 탈출하여 전투에서 빠져나갈 계획입니다.
+    textEng: The pilot of this unit is planning to eject and ecape the fight.
+  unit_tooltip_focus_camera_header:
+    id: 1
+    text: 카메라 맞추기
+    textEng: Focus Camera
+  unit_tooltip_focus_camera_text:
+    id: 1
+    text: 카메라를 유닛 위치로 이동합니다. 카메라를 유닛에 고정하려면 더블 클릭하세요.
+    textEng: Move the camera to the unit location. Double click to lock the camera to the unit.
+  unit_tooltip_landing:
+    id: 1
+    text: 착륙 중
+    textEng: Landing
+  unit_tooltip_landing_desc:
+    id: 1
+    text: 해당 유닛은 하강하고 있으며 다음 턴에 전투에 참가하게 됩니다.
+    textEng: This unit is descending and will join the fight next turn.
+  unit_tooltip_no_actions:
+    id: 1
+    text: 작업 없음
+    textEng: No Actions
+  unit_tooltip_no_actions_desc:
+    id: 1
+    text: 해당 유닛은 타임라인에 작업이 없습니다. 다음 턴으로 진행하기 전에 명령을 내리는 것을 고려해 보세요.
+    textEng: This unit has no actions on its timeline. Consider giving it orders before proceeding to next turn.
+  unit_tooltip_repair_gel_header:
+    id: 1
+    text: 리퀴드 픽스
+    textEng: Liquid Fix
+  unit_tooltip_repair_gel_text:
+    id: 1
+    text: 유닛이 사격을 받지 않고 있을 시 배리어 방어구를 재생할 수 있습니다. 리퀴드 픽스 비축량이 고갈되면 재생이 멈추게 됩니다.
+    textEng: Barrier armor can be regenerated if the unit is not under fire. Regeneration will stop when Liquid Fix supply is depleted.
+  unit_tooltip_retreating:
+    id: 1
+    text: 후퇴 중
+    textEng: Retreating
+  unit_tooltip_retreating_desc:
+    id: 1
+    text: 해당 유닛은 전투에서 후퇴할 계획입니다.
+    textEng: This unit is planning to retreat from the fight.
+  unit_tooltip_target_warning_header:
+    id: 1
+    text: 타겟 경고
+    textEng: Target warning
+  unit_tooltip_target_warning_text:
+    id: 1
+    text: 이 유닛은 위험한 공격의 타겟이 되었습니다. 타임라인을 확인하고 회피해 보세요.
+    textEng: This unit is being targeted by a dangerous attack. Check the timeline and try to evade it.

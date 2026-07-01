@@ -1,0 +1,76 @@
+hidden: false
+parents:
+- key: sh_option_main_continue
+core:
+  stepOnStart: main
+  priority: 10
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_empty_base
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.4103774
+        g: 0.4917048
+        b: 1
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4784187
+            b: 0.4386792
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase:
+          - !OverworldEntityChangeView
+            assetKey: Squad_MobileBase
+          - !ModifyMemory
+            changes:
+            - change: Remove
+              key: base_visual_early
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsTarget: 
+          functionsGlobal:
+          - !StartTutorial
+            key: base_introduction
+            allowRepeat: true
+          functionsLocal: 
+    optionsReused: 

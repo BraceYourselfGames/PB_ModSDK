@@ -1,0 +1,22 @@
+textDescInTooltips: false
+hidden: false
+icon: s_icon_l32_socket_upperbody
+severity: Critical
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireAll
+  subsystemsMethod: RequireAll
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts:
+  - socket: core
+    not: true
+    requirement: Present
+    tags: 
+  subsystems: []
+  stats: []
+  pilot: []
+functions: 

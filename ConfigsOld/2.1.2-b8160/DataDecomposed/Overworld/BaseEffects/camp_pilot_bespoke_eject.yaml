@@ -1,0 +1,31 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 0
+rating: 0
+mood: 1
+group: 
+hue: 0.333
+icon: s_icon_l32_system_internal_pod
+textFromFunctions: FunctionTextInSecondary
+textSource:
+  tagAssociated: ''
+  pilotEventAssociated: combat_ejection
+tags:
+- camp_pilot_bespoke
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: CombatEjection
+    check: GreaterEqual
+    value: 1
+  functionsPilot:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.35
+unit: 

@@ -1,0 +1,31 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_part_defensive
+tags:
+- target_pilot_self
+- type_negative
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible:
+- defender
+activationRecordTags: 
+statValues:
+  unit_barrier_shield:
+    mode: Offset
+    value: -0.5
+  unit_damage:
+    mode: Offset
+    value: 0.05
+  unit_hp_shield:
+    mode: Offset
+    value: -0.5
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

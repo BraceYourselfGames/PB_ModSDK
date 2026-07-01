@@ -1,0 +1,26 @@
+behaviorTree:
+  m_treeRoot: !PhantomBrigade.AIOverworld.BT.Nodes.BTComposite_Sequence
+    m_dynamic: false
+    m_children:
+    - !BTDecorator_ForceResult
+      m_overrideResultSuccess: true
+      m_taskChild: !BTAction_MoveToDestination
+        destinationKey: patrol_origin
+        allowRepath: false
+    - !BTAction_Delay
+      delayAmount: 0.1666667
+    - !PhantomBrigade.AIOverworld.BT.Nodes.BTDecorator_Repeat
+      m_repeatMode: RepeatForever
+      m_repeatUntilCondition: Ready
+      m_timesToRun: 0
+      m_taskChild: !PhantomBrigade.AIOverworld.BT.Nodes.BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTAction_SelectDestinationAroundPoint
+          targetPositionKey: patrol_destination
+          originKey: patrol_origin
+        - !BTAction_MoveToDestination
+          destinationKey: patrol_destination
+          allowRepath: false
+        - !BTAction_Delay
+          delayAmount: 0.1666667

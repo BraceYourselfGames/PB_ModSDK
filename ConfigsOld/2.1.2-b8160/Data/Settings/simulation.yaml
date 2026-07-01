@@ -1,0 +1,493 @@
+passivelyShieldedStabilityBonus: 0
+activelyShieldedStabilityBonus: 1
+minorUnitStabilityPenalty: 0
+idleUnitStabilityPenalty: 2
+minimumStability: -10
+maxStability: 10
+concussionLevelOffsetScalar: 0.25
+concussionLevelMinScalar: 0.1
+concussionLevelMaxScalar: 2.5
+buildupLevelOffsetScalar: 0.25
+buildupLevelMinScalar: 0.5
+buildupLevelMaxScalar: 2
+unitPhysicsMassMin: 20
+unitPhysicsMassMax: 140
+unitGameMassMin: 50
+unitGameMassMax: 98
+repairRate: 0
+repairResourceDrainRate: 1.44
+barrierRefuelResourceConsumption: false
+repairCombatBarrierLimit: 2.5
+repairCombatBarrierCost: 16
+combatReactionLights: true
+combatNightLights: true
+combatAccentLights: true
+combatIntro: true
+combatLoadingBugfix: true
+noDamageFriendly: false
+noDamageEnemy: false
+noHeatModeFriendly: false
+noHeatModeEnemy: false
+unlimitedBatteryMode: false
+unlimitedRepairMode: false
+readGuidedScatterStat: true
+estimatedStatsIncludeRandomSystems: false
+editorAutoSelectOverworld: false
+editorAutoSelectCombat: false
+editorAutoSelectCombatMode: 0
+salvageCostsPart:
+  1:
+    costTakeIntact: 10
+    costTakeDamaged: 15
+    costDismantleIntact: 5
+    costDismantleDamaged: 5
+  2:
+    costTakeIntact: 15
+    costTakeDamaged: 20
+    costDismantleIntact: 5
+    costDismantleDamaged: 5
+  3:
+    costTakeIntact: 20
+    costTakeDamaged: 25
+    costDismantleIntact: 5
+    costDismantleDamaged: 5
+costDismantlePartIntact: 5
+costDismantlePartDamaged: 10
+costTakePartIntact: 15
+costTakePartDamaged: 25
+costDismantleSubsystemIntact: 5
+costDismantleSubsystemDamaged: 10
+costTakeSubsystemIntact: 10
+costTakeSubsystemDamaged: 15
+costTakeMechFrame: 80
+mechDamageLimit: 2
+salvageBudgetBaseDefeat: 50
+salvageWorkshopDuplicateProtection: true
+workshopChargeSpending: false
+dismantlingRewardsUsed: false
+liveryUnlocks: false
+shotAimDeviationLimit: 10
+shotScatterXScalar: 0.4
+shotScatterYScalar: 1
+defaultRotationSpeed: 1
+mximumProjectileSpeed: 500
+stateChangeDelay: 1
+targetRangeRestrictions: true
+targetRangeRestrictionsFlat: false
+targetSelectionFromPaths: false
+targetTrackingIterations: 3
+targetVelocityModifier: 0.5
+targetVelocityModifierPlayer: 1
+logOverworldPoints: false
+logEquipmentGeneration: false
+logEquipmentLoading: false
+logScenarioGeneration: false
+logScenarioUpdates: false
+logRewardGeneration: false
+logCombatDamage: false
+logCombatActions: false
+logCombatTargeting: false
+logCombatAreaOfEffect: false
+logCombatUnitStatus: false
+logCompositeLinks: false
+logCompositeBehavior: false
+logStandaloneDirectors: false
+logProjectileStatus: false
+logPilotTraitEffects: false
+logPilotEventBuffer: false
+logPilotEventExperience: false
+logPilotGeneration: false
+debugCombatStructureAnalysis: false
+partLevelUsed: true
+partLevelExponential: false
+partLevelLimit: 99
+partLevelIncrease: 0.25
+partFiringCancellable: false
+partLevelUpgradeable: true
+partLevelUpgradeLimitFromWorkshop: true
+partLevelUpgradeLimit: 3
+partLevelCostIncrease: 0.5
+partLevelCostsByRating:
+  1:
+    supplies: 100
+  2:
+    components_r2: 1
+    supplies: 200
+  3:
+    components_r2: 1
+    components_r3: 1
+    supplies: 300
+partEventsLog: false
+activeSquadLimit: 5
+scrambleDuration: 15
+scrambleInnerRadius: 60
+scrambleOuterRadius: 90
+scrambleDelayVisual: 0.1
+scrambleOffsetUsed: true
+scrambleOffsetTime: 0.1
+scrambleOffsetVertical: 0
+scrambleOffsetLateral: 9
+powerToMassRatio: 1
+massToSpeedRatio: 0.5
+speedLimitUltraHeavy: true
+thrusterPowerToMassRatio: 1
+massToDashRatio: 0.5
+dashAngleLimit: 30
+dashWindowMin: 0
+dashWindowMaxOffset: 5
+dashDistanceDistributionMin: 0
+dashDistanceDistributionMax: 50
+logDashDistanceCalculation: false
+dashDistanceRemap:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 1
+      w: 1
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+    w:
+      x: 0
+      y: 0
+    m: {}
+overheatTickInterval: 0.1
+overheatTimestampEraseTime: 0.5
+overheatVFXInterval: 0.3
+overheatDamagePerHeatUnit: 0.0016
+overheatDuration: 0.5
+overheatDamagePerTick: 0.01
+overheatBuildupPerTick: 0.09
+rainMinIntensityThreshold: 0.25
+rainMaxPotencyThreshold: 1
+rainMaxDissipationMultiplier: 1.575
+fieldStatusFromWater: false
+fieldStatusImmediateWater: false
+fieldDissipationMultiplierWater: 1.5
+fieldDissipationMultiplierLava: 0.5
+fieldHeatLava: 10
+timeEventsRealtime: true
+timeEventDurationDefault: 3.5
+timeScaleSteps: 6
+timeScaleMain: 0.6
+timeScaleSlow: 0.03875786
+timeScaleEaseOutTime: 0.3
+timeScaleMinEaseOut: 0.05
+timeScaleEaseOutSpeed: 0.5
+timeScaleEaseInSpeed: 0.5
+skyLatitude: 45
+turnLength: 5
+maxActionTimePlacement: 4.5
+paintToSecondsScalar: 0.1
+minActionLengthEquipment: 0.6
+predictionTimeAnimationSpeedLimit: 100
+predictionTimeAnimationDuration: 0.1
+predictionFadeoutThreshold: 5
+timelineAdjustmentPatchUsed: true
+timelineAdjustmentPatchLog: false
+timelineAdjustmentPatchOnPlacement: false
+critEffectKey: fx_thruster_flash
+critMultiplierBase: 2
+critMultiplierOffsetPerScore: 0
+critMultiplierLimitComposites: 1.2
+critChanceBase: 0.15
+critChanceOffsetPerScore: 0.15
+meleeDamageOnFriendlies: false
+meleeDamageOnPilotsMissing: false
+meleeDamageOnPilotsKnockedOut: false
+ricochetOnDash: true
+ricochetOnDashDamageScalar: 0.5
+ricochetOnMelee: true
+ricochetOnEjected: false
+minimumEnvironmentalDamageFalloffThreshold: 1
+environmentCollisionDebug: false
+environmentDamageFalloffPower: 2
+environmentExplosionAsset: fx_environment_destruction_overkill
+environmentFireAsset: fx_environment_fire
+environmentFireChance: 0.5
+falloffRicochetThreshold: 0.5
+ricochetScatterDegrees: 45
+ricochetVelocityDecay: 0.2
+ricochetGravityScalar: 1
+ricochetDamageMultiplierNext: 0.6
+ricochetDamageMultiplierDirect: 0
+ricochetOnPropHit: false
+environmentRicochetScalar: 0.33
+propRicochetScalar: 0.33
+environmentPenetrationDamageLoss: 0.2
+unitPenetrationDamageLoss: 0.25
+propPenetrationDamageLoss: 0.2
+beamVulnerabilityDecayPerSec: 1
+beamVulnerabilityDecayPauseOnDamage: 0.1
+beamTicksPerSecond: 30
+turningLimitLengthAdjustmentK: 1.05
+shieldBeamReflectionArc: 180
+beamSingularityGenerationDistance: -1
+beamSingularityRadius: 13
+beamSingularityAreaDamage: 7
+beamSingularityDamageMultiplier: 0.1
+beamReflectionDamageNegation: 0.2
+beamReflectionDamageAttenuationK: 0.8
+compositeAreaOfEffectDecay: 0.5
+penetrationUnitDistance: 3
+impactDamageFalloff:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0.05271149
+      y: 1
+      z: -2.386194
+      w: -2.386194
+    w:
+      x: 0
+      y: 0.03150406
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0.1699438
+      z: -0.1073775
+      w: -0.1073775
+    w:
+      x: 0.2217054
+      y: 0
+    m: {}
+damageCoverageApproximation:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 1
+      w: 1
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 1
+      w: 1
+    w:
+      x: 0
+      y: 0
+    m: {}
+shieldVsHeatDamageMultiplier: 0.25
+shieldVsStaggerDamageMultiplier: 0
+shieldVsConcussionDamageMultiplier: 0
+concussionScalingFromWeightClass: true
+weightClassThresholdMedium: 6
+weightClassThresholdHeavy: 10
+staggerUsed: false
+staggerDebuffDecay: 0.45
+staggerLevelOffsetMultiplier: 0.25
+staggerLevelMinMultiplier: 0.1
+staggerLevelMaxMultiplier: 2
+heatLevelOffsetMultiplier: 0.25
+heatLevelMinMultiplier: 0.1
+heatLevelMaxMultiplier: 2
+heatCooldownMessageThreshold: 0.05
+concussionScalarFlanking: 2.25
+healthRecoveryRate: 0
+concussionFatiguePenalty: 1
+pilotHealthBase: 100
+pilotHealthBaseVariation: 25
+pilotHealthDeficitVariationEnemy: 0.2
+pilotPrestigeFixedBonuses: false
+pilotFatigueLowRangeLogic: false
+pilotFatigueExperiencePenalty: false
+pilotScoreUsed: false
+pilotScoreLossWithoutDeployment: false
+pilotScoreExperienceBonus: 0
+pilotScoreDamageBonus: 0
+pilotExperienceFromSquadLocked: false
+pilotExperienceFromSquadDisplayMultiplier: 1
+pilotExperienceFromSquad:
+  1: 3
+  2: 2.5
+  3: 2
+  4: 1
+barrierRegenerationDelay: 1.9
+pilotUpkeepFrequency: 24
+pilotUpkeepCost: 0
+observationOffset: 4.5
+observationDistanceMin: 12
+observationDistanceMax: 160
+allowPhysicsSubstepping: true
+minimumSubstepLength: 0.001
+maximumStepLength: 0.06
+defaultPhysicsStep: 0.03
+preWarmStep: 0.03
+gravityForce:
+  x: 0
+  y: -0.66
+  z: 0
+crashingGroundCastRadius: 1
+crashingGroundCastSkidRadius: 0.5
+crashingGroundRayOffset: 2
+crashingGroundRayThreshold: 2.25
+crashingGroundDecelerationRate: 10
+crashingSlopeGroundingThreshold: 0.95
+crashingSteepSlopeThreshold: 0.75
+crashingGroundOnEnd: false
+crashingPuppetSeparation: 1.25
+crumpleDuration: 3.5
+crashingDuration: 4
+crashingAngularVelocityMax: 80
+crashingDelayOnHeatDeath: 0.1
+verticalVelocityLimit: 10
+verticalVelocityGain: 10
+verticalVelocityDamageThreshold: 1
+environmentalImpactDamage: 100
+environmentalInactiveImpactDamageModifier: 0.1
+environmentalDebugDamageLow: 25
+environmentalDebugDamageHigh: 100
+environmentalDebugDamageShift: -0.5
+mechEnvironmentDamageScalar: 0.1
+unitCollisionDamageScalar: 0.1
+vehicleEnvironmentDamageScalar: 0.1
+crashingImpactCoefficient: 0.75
+crashingDestructionCoefficient: 0.125
+crashingSeparationThreshold: 3
+crashingSeparationSpeed: 5
+crashingVelocityLimit: 15
+crashingVelocityTransferFactor: 0.866
+crashingMassDifferentialLimit: 2
+tankAngularDamping: 0.75
+tankLinearDamping: 1.25
+mechAngularDamping: 0.9
+mechLinearDamping: 1.5
+environmentalDamageCooldown: 0.3
+unitCrashDamageCooldown: 1
+unitCrashCollisionCooldown: 0.3
+environmentCollisionCooldown: 0.5
+meleeFallbackVariantsUsed: false
+meleeRangeFromDash: true
+meleeProjectileCollision: true
+meleeCollisionRadius: 4
+pathSegmentLengthLimit: 9
+pathRelaxationFactor: 0.5
+pathSubdivisionLevel: 4
+restrictedPathTags: 1
+openPathTags: 3
+pathEndPointExactness: ClosestOnNode
+pathStartPointExactness: ClosestOnNode
+combatSpawnTags:
+- context_defended
+- context_road
+- context_undefended
+- direction_center
+- direction_e
+- direction_n
+- direction_ne
+- direction_nw
+- direction_s
+- direction_se
+- direction_sw
+- direction_w
+- perimeter_center
+- perimeter_inner
+- perimeter_outer
+- player
+- utility_boss
+- utility_player
+- utility_stage01
+- utility_stage02
+- utility_turret
+- utility_wave_00
+- utility_wave_01
+- utility_wave_02
+- utility_wave_03
+- utility_wave_04
+- utility_wave_05
+combatLocationTags:
+- direction_e
+- direction_n
+- direction_ne
+- direction_nw
+- direction_s
+- direction_se
+- direction_sw
+- direction_w
+- obj_defense_navigable
+- obj_defense_origin
+- obj_escape
+- obj_loot
+- obj_retreat
+- perimeter_center
+- perimeter_inner
+- perimeter_outer
+scenarioRewardKeys:
+- obj_capture_loot
+- obj_elimination
+- obj_tier1
+- obj_tier2
+- obj_tier3
+- rew_locked
+- rew_warmemorial
+scenarioUnitTags:
+- auto_eject_on_destruction
+- custom_homeguard
+- fields_ignored
+- flag_attacks_need_sightline
+- flag_boss_state_enrage_active
+- flag_boss_state_enrage_started
+- flag_no_concussion_in
+- flag_no_damage_in
+- flag_no_heat
+- flag_no_power
+- flag_reduced_damage_in
+- flag_reduced_heat
+- flag_uncollideable
+- flag_untargetable
+- hide_disposable_status
+- movement_anim_maxed
+- movement_skipped
+- purpose_boss_core
+- purpose_boss_generator
+- purpose_flying
+- purpose_gen
+- purpose_gen_00
+- purpose_gen_01
+- purpose_gen_02
+- purpose_gen_03
+- purpose_guard
+- purpose_objective_00
+- purpose_objective_01
+- purpose_objective_02
+- purpose_objective_03
+- purpose_recon
+- purpose_runner
+- purpose_scout
+- purpose_spotter
+- purpose_vip
+combatVolumeTags: []
+dismantlingRewardsParts:
+- tags:
+    wpn_main: true
+  resources:
+    components_wpn: 1
+- tags:
+    armor: true
+  resources:
+    components_body: 1
+dismantlingRewardsSubsystems: []
+displayCombatStats: false
+salvageMaxSupplyFeature: false
+inventoryRangeSelection: false
+scrollableEventText: false
+autoResolution: true
+pathfindingMaxSearchRange: 400
+pathfindingPushbackDistance: 15
+saveMaximumLimit: 60

@@ -1,0 +1,28 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 0
+rating: 0
+mood: -1
+group: 
+hue: 1
+icon: s_icon_l32_pilot_injury
+textFromFunctions: FunctionTextInSecondary
+textSource:
+  tagAssociated: ''
+  pilotEventAssociated: combat_unit_crash_lost
+tags:
+- camp_pilot_bespoke
+- camp_pilot
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: CombatUnitCrashLost
+    check: GreaterEqual
+    value: 2
+  functionsPilot: []
+unit: 

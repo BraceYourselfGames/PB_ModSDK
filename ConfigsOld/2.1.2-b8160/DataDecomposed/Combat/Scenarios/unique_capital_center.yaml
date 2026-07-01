@@ -1,0 +1,1840 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: 00_start
+  timeLocked: true
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom:
+    linearStateKey: waves
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_capital_center
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: false
+    spawnTags: 
+    spawnGroupKey: pb
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- listed
+- unique_capital_center
+- type_capital_center
+- block_exit_on_defeat
+- trait_deadly
+- trait_marathon
+states:
+  03_firing_reaction:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.5
+            hidden: false
+            key: capital_center_new_aftermath1
+          - time: 5
+            hidden: false
+            key: capital_center_new_aftermath2
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCameraCutsceneState
+            enabled: false
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupLink
+            key: special_hg_indirect
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 2
+            maxGrade: 2
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: hg
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  03_firing_start:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionStart
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.5
+            hidden: false
+            key: capital_center_new_firing2
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCameraChange
+            smoothed: true
+            positionOverride: true
+            position:
+              x: 1.5
+              y: 1.000001
+              z: 1.5
+            positionFromEntityName: 
+            rotationXOverride: true
+            rotationX: 20
+            rotationYOverride: true
+            rotationY: 19.50616
+            zoomOverride: true
+            zoom: 0.08
+            delay: 0
+          - !CombatCameraCutsceneState
+            enabled: true
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  charge_increment:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: -1
+    mood: 1
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: Greater
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_objective_progress_02
+        presenceDesired: false
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: Less
+        value: 6
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges:
+          - context: Source
+            provinceKey: 
+            changes:
+            - change: Offset
+              key: combat_sc_objective_progress_02
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  charge_progress:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: -1
+    mood: 1
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_objective_progress_02
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 6
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: 03_firing
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  drone_spawn:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Less
+        value: 3
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    - count:
+        check: GreaterEqual
+        value: 1
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_objective_03: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_spawned
+              value: 2
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: vhc_drone_core_01
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: 
+              aiBehavior: DumbDestination
+              aiTargeting: ''
+              liveryPreset: 
+              custom:
+                name: 
+                id: 
+                idReused: 
+                idPilot: 
+                role: special_drone_bomb
+                spawn: 
+                landing:
+                  landingUsed: false
+                  landingData: 
+                flags: 
+                faction: 
+                speed: 
+                uncrewed:
+                  portraitKey: 
+                pilotAppearance: 
+                pilotStats: 
+                predictionLimit: 
+                animationOverrides: 
+                statMultipliers:
+                  drv_speed: 1.5
+                hitDirectionModifiers: 
+                functions: 
+                combatTags:
+                - purpose_runner
+                - flag_uncollideable
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 2
+            cloneable: true
+            functions:
+            - !CombatUnitTeleport
+              target:
+                type: Unit
+                name: capital_ship_c1_commander_deck
+                center: true
+                modifiersDirectional: false
+                modifiers:
+                - !TargetModifierOffsetGlobal
+                  offset:
+                    x: -4
+                    y: -9
+                    z: -18.5
+              effectOnOrigin: 
+              effectOnDestination: 
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: drone_trigger
+                center: false
+                modifiersDirectional: false
+                modifiers: 
+            - !CombatUnitEffectSpawn
+              position:
+                x: 0
+                y: 5
+                z: 0
+              rotation:
+                x: 90
+                y: 0
+                z: 0
+              centered: true
+              asset:
+                key: fx_podejection_shaft
+                scale:
+                  x: 1.5
+                  y: 1.5
+                  z: 1.5
+            - !CombatUnitEffectSpawn
+              position:
+                x: 0
+                y: 5
+                z: 0
+              rotation:
+                x: 90
+                y: 0
+                z: 0
+              centered: true
+              asset:
+                key: fx_podejection_shockwave
+                scale:
+                  x: 1.5
+                  y: 1.5
+                  z: 1.5
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: drone_spawn
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          unitGeneratorKeys: 
+          outcome: 
+  drone_start:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: GreaterEqual
+      value: 2
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.5
+            hidden: false
+            key: capital_center_new_drones1
+          memoryChanges: 
+          stateScopeChanges:
+            drone_spawn: true
+            drone_trigger: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges:
+            purpose_runner: true
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  drone_trigger:
+    comment:
+      comment: This state makes enemy drones that have reached their destination detonate. Units are destroyed, tags removed, counters updated. State is non-incrementing, so reactions repeat forever, per unit.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnLocationContact
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_drone_trigger: true
+        purpose_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: true
+        tagRequirements:
+          obj_defense_navigable: true
+        filters:
+        - !CombatPositionValidationByStateDistance
+          stateKey: crawler_origin
+          checkDistance:
+            check: Less
+            value: 60
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions:
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_targets_lost
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            - !CombatEffectSpawn
+              target:
+                type: Location
+                name: obj_defense_origin_01
+                center: true
+                modifiersDirectional: false
+                modifiers:
+                - !TargetModifierTransformRandom
+                  transforms:
+                  - offset:
+                      x: -7
+                      y: 10.3
+                      z: -13
+                    rotation:
+                      x: 0
+                      y: -90
+                      z: 0
+                  - offset:
+                      x: 7
+                      y: 10.3
+                      z: -13
+                    rotation:
+                      x: 0
+                      y: 90
+                      z: 0
+                  - offset:
+                      x: 0.3
+                      y: 8.7
+                      z: -19
+                    rotation:
+                      x: 0
+                      y: 180
+                      z: -30
+                  - offset:
+                      x: -2.7
+                      y: 5
+                      z: -19
+                    rotation:
+                      x: 0
+                      y: 180
+                      z: 0
+                  - offset:
+                      x: -5.7
+                      y: 11.4
+                      z: -18.2
+                    rotation:
+                      x: 0
+                      y: -135
+                      z: 110
+              asset:
+                key: fx_lightning_arc
+                scale:
+                  x: 2
+                  y: 2
+                  z: 2
+              delay: 0.25
+            - !CombatGroupConditional
+              checksBase:
+              - !OverworldValidateMemory
+                check:
+                  method: RequireAll
+                  checks:
+                  - key: combat_sc_objective_progress_02
+                    presenceDesired: true
+                    valueFromMemory: false
+                    valueFromMemoryKey: 
+                    valueCheck: Greater
+                    value: 1
+              checksBaseValues: 
+              functions:
+              - !ModifyMemoryBaseAdv
+                keyInput: combat_sc_objective_progress_02
+                keyOutput: 
+                operations:
+                - !FloatOperationAdd
+                  value: -3
+                - !FloatOperationClamp
+                  min: 0
+                  max: 6
+              - !CombatCreateCommsMessage
+                time: 0.1
+                key: capital_center_new_drones_drain1
+              functionsElse: 
+            functionsTargeted:
+            - !CombatUnitDestroy {}
+            - !CombatUnitTagChange
+              tagChanges:
+                purpose_runner: false
+            - !CombatAreaOfEffect
+              offset:
+                x: 0
+                y: 0
+                z: 0
+              radius: 15
+              exponent: 2
+              dispersed: true
+              integrity:
+                normalized: false
+                leveled: true
+                f: 100
+              concussion: 
+              heat: 
+              stagger: 
+              statusBuildup: 
+              crash: 
+              targetCheck: 
+              functionsOnHit: 
+              impactUnitSelf: false
+              impactUnitAllies: true
+              impactUnitHostiles: true
+              impactUnitComposites: false
+              impactProjectiles: false
+              impactProps: true
+              fxDetonation: fx_aoe_explosion_01_large
+              fxDetonationScale: 1
+              fxArea: fx_aoe_volume_01
+              fxHit: fx_aoe_hit_01
+              audioDetonation: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  sequence1_countermeasures_destroyed:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride:
+        i: 3
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: LessEqual
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_objective_01: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: 02_charge
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  sequence1_intro:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: 01_city_hall
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  sequence2_ship_notification:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.5
+            hidden: false
+            key: capital_center_new_ship1
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  ship_restart:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: GreaterEqual
+      value: 0
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatUnitTargetCompositeNamed
+            instanceKey: capital_ship
+            unitKey: a_core
+            functionsTargeted:
+            - !CombatUnitTagChange
+              tagChanges:
+                flag_no_power: false
+          - !CombatBackgroundChildActivation
+            active: false
+            segment: area_seg_main_capital_center
+            child: camera_firing
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  wave1:
+    comment: 
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: generic_enemy_reinforcements_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: GreaterEqual
+      value: 3
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.5
+            hidden: false
+            key: generic_reinforcements_dropship
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags: {}
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 2
+            maxGrade: 2
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: city_hall_east
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          - !UnitGroupLink
+            key: special_elite_brawler
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 2
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: city_hall_landing2
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  wave2:
+    comment: 
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: generic_enemy_reinforcements_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: true
+      check: GreaterEqual
+      value: 6
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0.5
+            hidden: false
+            key: generic_reinforcements_dropship
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              range_long: false
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 2
+            maxGrade: 2
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: beam
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  00_start:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: 
+      textFromScenarioGroup: true
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: true
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: custom_m_capital_center_guard
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: vanguard
+        liveryPreset: inv_army_g1
+        custom: 
+      - keyExternal: true
+        key: custom_m_capital_center_guard
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: vanguard
+        liveryPreset: inv_army_g1
+        custom: 
+      - keyExternal: true
+        key: custom_m_capital_center_guard
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: vanguard
+        liveryPreset: inv_army_g1
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: false
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: city_hall_west
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sp_generator
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_sp_generator
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_sp_generator
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: ''
+        aiTargeting: ''
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: comp_generator
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions:
+      - !CombatUnitTagChange
+        tagChanges:
+          purpose_objective_01: true
+      - !CombatUnitPredictionLimit
+        limit: 0.5
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: city_hall_roof
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood:
+      key: uncertainty
+      executionAllowed: true
+    musicIntensity:
+      f: 10
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: capital_center_new_intro1
+    - time: 9
+      hidden: false
+      key: capital_center_new_intro2
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateUnitComposite
+      tagsUsed: false
+      tags: 
+      blueprintKeys:
+      - capital_crawler
+      instanceNameOverride: capital_crawler
+      target:
+        type: Location
+        name: obj_defense_origin_01
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      levelOffset: 0
+      friendly: true
+      controllable: false
+      navigationSampled: false
+    - !CombatCreateUnitComposite
+      tagsUsed: false
+      tags: 
+      blueprintKeys:
+      - capital_ship
+      instanceNameOverride: capital_ship
+      target:
+        type: Location
+        name: obj_boss_origin
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      levelOffset: 0
+      friendly: false
+      controllable: false
+      navigationSampled: false
+    outcome: 
+    transitions: 
+  01_city_hall:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: 
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: true
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      sequence1_countermeasures_destroyed: true
+      wave1: true
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_objective_01: true
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: capital_center_new_intro3
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+  02_charge:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: 
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: true
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      charge_increment: true
+      charge_progress: true
+      drone_start: true
+      sequence1_countermeasures_destroyed: false
+      sequence2_ship_notification: true
+      wave2: true
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_objective_01: false
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: capital_center_new_counters_down1
+    - time: 9
+      hidden: false
+      key: capital_center_new_counters_down2
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatUnitTargetCompositeNamed
+      instanceKey: capital_ship
+      unitKey: a_core
+      functionsTargeted:
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_boss_state_enrage_started: true
+    outcome: 
+    transitions: 
+  03_firing:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: true
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges:
+      03_firing_reaction: true
+      03_firing_start: true
+      charge_increment: false
+      charge_progress: false
+      drone_spawn: false
+      drone_trigger: false
+      ship_restart: true
+      wave1: false
+      wave2: false
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: capital_center_new_firing1
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatBackgroundChildTween
+      active: true
+      duration: 5
+      range:
+        x: 0
+        y: 1
+      segment: area_seg_main_capital_center
+      child: invader_tower_destruction
+    - !CombatBackgroundChildParticle
+      active: true
+      segment: area_seg_main_capital_center
+      child: beam_charge_fx
+    - !CombatModifyUnits
+      units: 0
+      checks:
+      - !CombatValidateUnitAllied
+        present: false
+      functions:
+      - !CombatUnitAIPause
+        discardActions: true
+    - !CombatModifyUnits
+      units: 0
+      checks:
+      - !CombatValidateUnitCheck
+        check:
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags:
+            purpose_runner: true
+          name: 
+          faction:
+            key: Invaders
+          state: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform: 
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions: 
+      functions:
+      - !CombatUnitDestroy {}
+    - !CombatUnitTargetCompositeNamed
+      instanceKey: capital_ship
+      unitKey: a_core
+      functionsTargeted:
+      - !CombatUnitTagChange
+        tagChanges:
+          flag_no_power: true
+    - !CombatModifyUnits
+      units: 0
+      checks: 
+      functions:
+      - !CombatUnitActionsDiscard
+        locked: true
+        primary: true
+        secondary: true
+    - !CombatCameraCutsceneState
+      enabled: true
+    - !CombatBackgroundChildActivation
+      active: true
+      segment: area_seg_main_capital_center
+      child: camera_firing
+    - !CombatDelayGroup
+      unscaled: true
+      delayMin: 5
+      delayMax: 5
+      repeats: 1
+      functions:
+      - !CombatForceExecution
+        turnsAdvanced: 1
+        timeScaleForced: 1
+      - !CombatCreateCommsMessage
+        time: 0
+        key: capital_center_new_firing2
+      - !CombatCameraChange
+        smoothed: true
+        positionOverride: true
+        position:
+          x: 1.5
+          y: 1.000001
+          z: 1.5
+        positionFromEntityName: 
+        rotationXOverride: true
+        rotationX: 20
+        rotationYOverride: true
+        rotationY: 19.50616
+        zoomOverride: true
+        zoom: 0.0897604
+        delay: 0
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

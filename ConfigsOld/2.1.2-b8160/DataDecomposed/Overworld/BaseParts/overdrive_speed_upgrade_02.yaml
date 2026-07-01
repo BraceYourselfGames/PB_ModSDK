@@ -1,0 +1,35 @@
+parents:
+- key: overdrive_speed_upgrade
+  priority: 1
+  offsetStart: 30
+  offsetEnd: -10
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 2
+  positionY: -4
+  endpoint: false
+  group: 
+  icon: s_icon_l32_nav_speed3
+unlock: 
+cost:
+  resources:
+    components_r2: 90
+    components_r3: 45
+    supplies: 1600
+    unit_token: 1
+effect:
+  stats:
+  - key: mm_overdrive_speed
+    modifier: Offset
+    value: 0.25
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

@@ -1,0 +1,34 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: 
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- branch_trainingreserves
+- type_mech
+partTagPreferences:
+  body:
+  - tags:
+      armor_knox: true
+      weight_heavy: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_primary_04
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

@@ -1,0 +1,29 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: 0
+rating: 3
+mood: 0
+group: 
+hue: 0.5
+icon: s_icon_sm_repair2
+textFromFunctions: FunctionTextInSecondary
+textSource: 
+tags:
+- camp_unit
+- camp_unit_base
+checksGlobal:
+- !OverworldValidateBasePart
+  partKey: unit_repair_amount_l2
+  check: GreaterEqual
+  value: 1
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot: 
+unit:
+  checksUnit: 
+  functionsUnit:
+  - !OverworldUnitFrameIntegrityFromDifficulty
+    multiplier: overworld_camp_recovery_amount
+    value: 0.7

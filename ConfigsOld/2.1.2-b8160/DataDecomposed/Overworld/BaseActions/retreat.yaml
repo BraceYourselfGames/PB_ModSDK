@@ -1,0 +1,23 @@
+icon: s_icon_l32_resupply
+priority: 5
+color:
+  r: 0.3013083
+  g: 0.5754717
+  b: 0.3030822
+  a: 1
+inputKey: 
+group: 
+groupActivationBlock: false
+instant: true
+dialog: true
+textDialogHeader: Confirm retreat
+textDialogContent: The base will retreat to nearest resupply point. Time will pass proportionally to distance to that site. Upon arrival, the base will have an opportunity to replenish units, pilots and resources.
+resourceKeyLinked: 
+targeting: 
+callsForUnlock:
+- IsRetreatUnlocked
+callsForAvailability:
+- IsRetreatAvailable
+callsOnStart:
+- OnRetreat
+callsOnEnd: 

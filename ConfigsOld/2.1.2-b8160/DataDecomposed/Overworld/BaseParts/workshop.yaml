@@ -1,0 +1,56 @@
+parents:
+- key: mobilebase
+  priority: 4
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 0
+  positionY: 5
+  endpoint: false
+  group:
+    positionX: 0
+    positionY: 0
+    sizeX: 0
+    sizeY: 0
+  icon: s_icon_l32_upgrade_workshop1
+unlock: 
+cost: 
+effect:
+  stats:
+  - key: workshop_jobs
+    modifier: Offset
+    value: 2
+  - key: unit_slots
+    modifier: Offset
+    value: 1
+  - key: pilot_slots
+    modifier: Offset
+    value: 3
+  functions:
+  - !WorkshopProgressPart
+    partPresetKey: body_set_elbrus_medium_top
+    rating: 1
+    offset: 1
+  - !WorkshopProgressPart
+    partPresetKey: body_set_elbrus_medium_bottom
+    rating: 1
+    offset: 1
+  - !WorkshopProgressPart
+    partPresetKey: body_set_elbrus_medium_arm
+    rating: 1
+    offset: 1
+  - !WorkshopProgressPart
+    partPresetKey: wpn_mg_sub_02
+    rating: 1
+    offset: 2
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_workshop

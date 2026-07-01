@@ -1,0 +1,194 @@
+hidden: false
+parent: wpn_main_heavy
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_01
+- category_wpn_beam
+- spec_turn
+- spec_beam
+- spec_impact
+statDistribution: ''
+stats:
+  act_count:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 3.75
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 225
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 20
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 8.7
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_buildup:
+    value: 0.3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_heat:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 89
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 1400
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_stagger:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_turnrate_limit:
+    value: 8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_heavy_laser_01_back
+- wpn_heavy_laser_01_bottom
+- wpn_heavy_laser_01_front
+- wpn_heavy_laser_01_top
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_beam_impact
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy:
+        f: 0.5
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: 
+    onActivationMid: 
+    onActivationLast: 
+    onActivationStart: weapon_energy_beam_ultra_heavy
+    onActivationEnd: weapon_energy_beam_ultra_heavy_stop
+  light:
+    shared: true
+    key: default
+    custom: 
+  recoil:
+    key: recoil_beam
+  timing: 
+  hitReaction: 
+projectile: 
+beam:
+  reflectionAngleLimit: 30
+  body:
+    key: fx_beam_large_friendly
+    keyEnemy: 
+    scale:
+      x: 1
+      y: 1
+      z: 1
+    colorOverride: 
+    colorOverrideEnemy:
+      colorFrom:
+        r: 1
+        g: 0.08333334
+        b: 0
+        a: 1
+      colorTo:
+        r: 1
+        g: 0.6078432
+        b: 0.4117647
+        a: 1
+  impact:
+    key: fx_beam_impact
+    keyEnemy: 
+    scale:
+      x: 1
+      y: 1
+      z: 1
+    hueOffset: 
+    hueOffsetEnemy:
+      f: 0.5
+  reflection:
+    key: fx_beam_reflection
+    keyEnemy: 
+    scale:
+      x: 4
+      y: 4
+      z: 4
+    hueOffset: 
+    hueOffsetEnemy:
+      f: 0.5
+  statusBuildup: 
+custom: 
+functions: 
+workshopInfo: 

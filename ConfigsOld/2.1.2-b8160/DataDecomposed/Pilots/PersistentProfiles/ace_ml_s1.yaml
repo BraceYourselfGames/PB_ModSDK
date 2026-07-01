@@ -1,0 +1,207 @@
+comment: 
+parents: 
+core:
+  version: 1
+  nameInternalSuffix: ace_ml
+  modifierRemovedOnDeath: gen_pilot_persistent_01
+  injectionChance:
+    f: 0.6
+textName: 
+textCallsign: 
+textUnit: {}
+textDesc: {}
+textSections:
+  s1:
+    color:
+      r: 1
+      g: 0.6462264
+      b: 0.6462264
+      a: 1
+    icon: s_icon_l32_face8
+  s2:
+    color:
+      r: 1
+      g: 0.7941177
+      b: 0.6470588
+      a: 1
+    icon: s_icon_l32_loot
+roleKey: special_elite
+appearanceKey: profile_hunter
+liveryPreset: misc_hvt_01
+traitSlotsInjected:
+  core:
+    tagsUsed: false
+    keys:
+    - ace_ml_s1_core
+    tags: 
+unitPresetFilter:
+  tagsUsed: false
+  keys:
+  - ace_ml_s1
+  tags: 
+injectionCheck: 
+deploymentTurnCheck:
+  check: GreaterEqual
+  value: 1
+deploymentConditions: 
+effectsOnSpawn: 
+effectsOnLandingStart:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat:
+  - !CombatCreateStrike
+    delay: 0
+    blueprintKey: aircraft_ml_01
+    target:
+      type: UnitRelative
+      name: pilot_persistent_ace_ml_unit
+      center: true
+      modifiersDirectional: true
+      modifiers:
+      - !TargetModifierOffsetLocal
+        offset:
+          x: 0
+          y: 0
+          z: 24
+  functionsUnit: 
+  functionsPilot: 
+effectsOnArrival:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatCreateCommsMessage
+    time: 0
+    key: ace_ml_s1_arrival
+  functionsPilot: 
+effectsOnTraumaCombat:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat:
+  - !Log
+    message: 'Test: ace_ml_s1 trauma'
+  functionsUnit:
+  - !CombatCreateCommsMessage
+    time: 0.1
+    key: ace_ml_s1_ejection
+  functionsPilot: 
+effectsOnTraumaDebriefing:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsPilot:
+  - !SetPilotProfileLink
+    profileKey: ace_ml_s2
+effectsOnDeathCombat: 
+effectsOnDeathDebriefing: 
+director:
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 0
+    name: Turn-Counter
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitModifyMemory
+        changes:
+        - change: Offset
+          key: unit_ace_turn_count
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !Log
+        message: Unit spends another turn
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children:
+    - name: Retreat
+      color: 
+      comment: 
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted:
+        - !CombatUnitControlChange
+          ai: false
+          player: false
+        - !CombatUnitActionsCreate
+          discardExisting: true
+          actions:
+          - key: retreat_airlift
+            startTime: 1.5
+            startTimeIsLocal: true
+            locked: true
+            durationVariable: 
+            targetLocal: 
+            target: 
+            targetSecondary: 
+            targetUnitFiltered: 
+            targetUnitLocalOffsets: 
+            movementCustom: 
+            functionsTimed: 
+            functionsOnAction: 
+        - !CombatCreateCommsMessage
+          time: 0.1
+          key: ace_ml_s1_retreat
+        functionsGlobal: 
+      childMode: ExecuteAll
+      children: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck:
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions:
+        - !UnitValidateMemory
+          method: RequireAll
+          checks:
+          - key: unit_ace_turn_count
+            presenceDesired: true
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: GreaterEqual
+            value: 8
+      unitConnectedCheck: 
+      unitFilterCheck: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 

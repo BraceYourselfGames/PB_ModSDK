@@ -1,0 +1,100 @@
+dataUI:
+  icon: s_icon_l32_action_attack1
+  color:
+    r: 1
+    g: 0.4117647
+    b: 0.490196
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0.1333333
+    a: 1
+  sortingPriority: 500
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 1.75
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation:
+  - !CombatActionValidationDependency
+    dependencyActionKey: attack_vehicle
+  functionsOnCreation:
+  - !CombatActionCreateReaction
+    dependencyActionKey: attack_vehicle
+    delay: 
+    range: 
+    directionAnimation: 
+    duration: 
+    overrideCheck: 
+    functionsTimed: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: turret
+      not: false
+    blueprints: 
+    parts: 
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck:
+  requireFaction: Invaders
+dataMovement: 
+dataEquipment: 
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: ReactiveAttackMain
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom:
+  flags:
+  - check_los
+  - range_from_equipment
+  ints: 
+  floats:
+    range_max: 0
+    range_min: 0
+    range_multiplier: 1
+  vectors: 
+  strings: 
+functionsTimed: 

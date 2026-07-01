@@ -1,0 +1,34 @@
+textDescInTooltips: false
+hidden: false
+icon: s_icon_l32_socket_lowerbody
+severity: Hint
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireAll
+  subsystemsMethod: RequireOne
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts: []
+  subsystems:
+  - socket: secondary
+    hardpoint: external_bottom_left_upper
+    not: true
+    requirement: Present
+  - socket: secondary
+    hardpoint: external_bottom_right_upper
+    not: true
+    requirement: Present
+  - socket: secondary
+    hardpoint: external_bottom_left_lower
+    not: true
+    requirement: Present
+  - socket: secondary
+    hardpoint: external_bottom_right_lower
+    not: true
+    requirement: Present
+  stats: []
+  pilot: []
+functions: 

@@ -1,0 +1,33 @@
+parents:
+- key: mm_overdrive
+  priority: 1
+  offsetStart: 30
+  offsetEnd: -10
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 1
+  positionY: -3
+  endpoint: false
+  group: 
+  icon: s_icon_l32_stat_heat
+unlock: 
+cost:
+  resources:
+    supplies: 600
+    unit_token: 1
+effect:
+  stats:
+  - key: heat_dissipation
+    modifier: Offset
+    value: 0.15
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

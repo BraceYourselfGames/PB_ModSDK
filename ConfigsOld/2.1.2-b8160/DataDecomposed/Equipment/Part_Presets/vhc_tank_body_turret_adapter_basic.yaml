@@ -1,0 +1,35 @@
+hidden: false
+parents:
+- key: vhc_tank_body_turret
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- vhc_basic
+- branch_trainingarmy
+- branch_trainingreserves
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - vhc_vis_tank_turret_adapter
+  pickRandom: false
+  hardpointsTargeted:
+  - vhc_vis_secondary
+  priority: 0
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_vhc_tank_turret_v01_set00
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_turret
+  priority: 1
+  comment: 
+  checks: 

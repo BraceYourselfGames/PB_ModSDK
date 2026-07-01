@@ -1,0 +1,65 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- type_ace_core
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax:
+  hp:
+    mode: Set
+    value: 45
+effectsOnEvents:
+- filterEventTypes:
+  - CombatActionAttackStart
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal:
+  - !OverworldValidateChance
+    chance: 0.5
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !UnitValidateMemory
+    method: RequireAll
+    checks:
+    - key: unit_ace_taunt_count
+      presenceDesired: false
+      valueFromMemory: false
+      valueFromMemoryKey: 
+      valueCheck: Less
+      value: 3
+    - key: unit_ace_turn_count
+      presenceDesired: true
+      valueFromMemory: false
+      valueFromMemoryKey: 
+      valueCheck: Greater
+      value: 1
+  functionsGlobal: 
+  functionsCombat:
+  - !CombatCreateCommsMessage
+    time: 0
+    key: ace_ml_s2_taunt
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitModifyMemory
+    changes:
+    - change: Offset
+      key: unit_ace_taunt_count
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsSelf: 
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

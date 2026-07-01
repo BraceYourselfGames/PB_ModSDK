@@ -1,0 +1,36 @@
+comment:
+  comment: Implement salvage offset stat.
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_inventory
+tags:
+- level_5
+- type_support
+- prestige_unpickable
+group: 
+existingTraitTagsFilter:
+  support_backpack: true
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  support_salvage_budget:
+    mode: Offset
+    value: 10
+  unit_charges_back:
+    mode: Offset
+    value: 0.25
+  unit_damage_backpack:
+    mode: Offset
+    value: 0.45
+  unit_mass_back:
+    mode: Offset
+    value: -5
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

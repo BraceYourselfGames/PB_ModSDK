@@ -1,0 +1,32 @@
+liveryPrefix: inv_exp
+training: false
+codexUnlocksBriefing: 
+unitGroupTags:
+  branch_experimental: true
+unitPresetTags:
+  branch_experimental: true
+unitPartFilters:
+  mech:
+    filters:
+      body:
+      - tags:
+          branch_experimental: true
+      - tags:
+          branch_specops: true
+      equipment:
+      - tags:
+          branch_experimental: true
+      - tags:
+          branch_specops: true
+      - tags:
+          branch_army: true
+  tank:
+    filters:
+      body:
+      - tags:
+          branch_experimental: true
+      equipment_right:
+      - tags:
+          branch_experimental: true
+      - tags:
+          branch_army: true

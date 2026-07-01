@@ -1,0 +1,55 @@
+parents:
+- key: mm_cruise_vision_own
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 0
+- key: mm_stealth_vision_own
+  priority: 0
+  offsetStart: 20
+  offsetEnd: 192
+- key: mm_overdrive_vision_own
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 212
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 4
+  positionY: 1
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_sensor2
+unlock:
+  dependencies:
+  - key: mm_cruise_vision_own
+    required: true
+  - key: mm_stealth_vision_own
+    required: true
+  - key: mm_overdrive_vision_own
+    required: true
+cost:
+  resources:
+    components_r2: 20
+    components_r3: 10
+    supplies: 2000
+effect:
+  stats:
+  - key: mm_normal_vision_own
+    modifier: Offset
+    value: 0.1
+  - key: mm_fast_vision_own
+    modifier: Offset
+    value: 0.1
+  - key: mm_stealth_vision_own
+    modifier: Offset
+    value: 0.1
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_sensors

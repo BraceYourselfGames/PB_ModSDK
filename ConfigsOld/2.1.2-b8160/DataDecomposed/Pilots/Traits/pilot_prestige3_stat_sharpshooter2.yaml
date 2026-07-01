@@ -1,0 +1,33 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_stat_heat_out
+tags:
+- type_prestige
+- type_sharpshooter
+group: 
+existingTraitTagsFilter:
+  sharpshooter_dissipation: true
+prestigeRank:
+  check: Equal
+  value: 3
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_heat_dissipation:
+    mode: Offset
+    value: 0.3
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: 1
+  trauma:
+    mode: Offset
+    value: 1
+effectsOnEvents: 
+effectsShared: 

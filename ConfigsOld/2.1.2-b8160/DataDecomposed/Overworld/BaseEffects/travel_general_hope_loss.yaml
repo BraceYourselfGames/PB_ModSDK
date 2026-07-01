@@ -1,0 +1,31 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: 2
+rating: 0
+mood: 0
+group: 
+hue: 0.15
+icon: s_icon_l32_salvage_dismantle
+textFromFunctions: FunctionTextOmitted
+textSource: 
+tags:
+- travel_general_hope
+checksGlobal:
+- !OverworldValidateBaseResources
+  checks:
+    hope:
+      check: GreaterEqual
+      value: 1
+checksBase: 
+functionsGlobal:
+- !ModifyResources
+  resourceChanges:
+  - key: hope
+    check: false
+    checkStrict: false
+    offset: false
+    value: 0
+functionsBase: 
+pilot: 
+unit: 

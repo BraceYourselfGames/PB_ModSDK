@@ -1,0 +1,83 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_cache
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Cache
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- contest_s1
+- flag_battlesite_on_defeat
+- flag_preserve_on_victory
+- flag_weather_clear
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByKey
+    keyChecked: generic_underground
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit:
+      i: 2
+    completionSeparation:
+      i: 4
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_underground: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_camp
+        - res_r3
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys:
+        - sub_r1
+        - sub_r2
+        - sub_reactor_r1
+        - sub_thruster
+        tags:
+          blueprint: false
+          part_res: false
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: 
+        tags:
+          part_weapon: true

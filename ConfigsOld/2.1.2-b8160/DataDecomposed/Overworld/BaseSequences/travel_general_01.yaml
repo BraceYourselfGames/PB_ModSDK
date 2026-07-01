@@ -1,0 +1,30 @@
+comment:
+  comment: General logic for travel state. Covers main global effect + bonus effects like workshop.
+hidden: false
+stopOnEmptyStep: false
+tags:
+- travel_general
+steps:
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - travel_general_base
+  tags:
+    camp_general: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: false
+  keys:
+  - shared_general_workshop_complete
+  tags:
+    camp_general: true
+- stopSequenceIfEmpty: false
+  checksGlobal: 
+  checksBase: 
+  tagsUsed: true
+  keys: 
+  tags:
+    travel_general_hope: true

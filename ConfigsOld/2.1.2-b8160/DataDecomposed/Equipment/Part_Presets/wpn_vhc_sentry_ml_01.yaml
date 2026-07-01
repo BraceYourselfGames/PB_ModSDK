@@ -1,0 +1,31 @@
+hidden: false
+parents:
+- key: wpn_vhc_primary
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- branch_trainingarmy
+- branch_trainingreserves
+- part_ml
+- turret_part
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_vhc_sentry_ml_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

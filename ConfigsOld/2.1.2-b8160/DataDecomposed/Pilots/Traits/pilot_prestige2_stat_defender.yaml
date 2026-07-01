@@ -1,0 +1,33 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_upgrade_shield1
+tags:
+- type_defender
+- type_prestige
+group: 
+existingTraitTagsFilter:
+  defender_health: true
+prestigeRank:
+  check: Equal
+  value: 2
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_barrier_body:
+    mode: Offset
+    value: 0.25
+  unit_hp_body:
+    mode: Offset
+    value: 0.25
+statRangesMin: 
+statRangesMax:
+  trauma:
+    mode: Offset
+    value: 1
+effectsOnEvents: 
+effectsShared: 

@@ -1,0 +1,42 @@
+hidden: true
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_tank_elevated
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- type_tank_spider
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_spider_body_chassis
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_elevated_body_track
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_elevated_body_track
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

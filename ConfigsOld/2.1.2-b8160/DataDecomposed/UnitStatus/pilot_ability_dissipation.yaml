@@ -1,0 +1,41 @@
+icon: 
+color:
+  r: 0.2980392
+  g: 0.6237139
+  b: 0.7490196
+  a: 1
+hidden: false
+debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
+restartOnRefresh: false
+turnLinked: true
+actionLink:
+  key: ability_pilot_dissipation
+tags:
+- ability
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.5
+  velocityDecayTime: 1
+  key: fx_status_coolant_oneshot
+  scale:
+    x: 1
+    y: 1
+    z: 1
+durationFull:
+  f: 1
+durationUpdate: 
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio: 
+effectsOnStart: 
+effectsOnUpdate: 
+effectsOnEnd: 
+statOffsets:
+  heat_dissipation: 30

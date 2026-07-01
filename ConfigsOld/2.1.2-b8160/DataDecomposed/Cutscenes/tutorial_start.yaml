@@ -1,0 +1,49 @@
+textName: Tutorial / Start
+instantiated: false
+path: Content/PrefabsCutscenes/cutscene_tutorial_start
+postprocessing:
+  startWithoutFade: false
+  endWithoutFade: true
+  fogSpeedCustom: false
+  fogSpeed: 1
+  pathNormal: ''
+  pathFogLight: ''
+  pathFogMedium: ''
+  pathFogHeavy: ''
+world: 
+environment: 
+area:
+  area: dev_demo
+units:
+  unitsBuilt:
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_commander
+    key: commander
+  - presetResolver: !UnitPresetLink
+      preset: custom_tutorial_mech_pc
+    key: player
+camera:
+  custom:
+    position:
+      x: 124.6
+      y: -18
+      z: 255.1
+    rotationX: 38.9253
+    rotationY: 150
+    zoom: 0.6690191
+subtitles:
+- time: 5
+  duration: 5
+callbacksOnSkip: []
+audioEventsOnStart: []
+audioStatesOnStart: 
+audioSyncsOnStart: 
+audioEventsOnPlay:
+- key: cut_tutorial_intro
+audioStatesOnPlay:
+- key: music_cinematic_state
+  state: tutorial_cutscene_01
+audioSyncsOnPlay: 
+audioEventsOnEnd: []
+audioStatesOnEnd: 
+audioSyncsOnEnd: 

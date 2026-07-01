@@ -1,0 +1,33 @@
+hidden: false
+parents:
+- key: wpn_root_universal
+- key: wpn_perk_filter_gun
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- branch_experimental
+- difficulty_medium
+- equipment_left
+- mnf_wpn_03
+- part_ballistic
+- range_medium
+- part_concussion
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_handgun_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

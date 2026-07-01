@@ -1,0 +1,44 @@
+parents:
+- key: workshop
+  priority: 10
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 1
+  positionY: 5
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_workshop2
+unlock: 
+cost:
+  resources:
+    components_r2: 55
+    supplies: 1000
+effect:
+  stats: 
+  functions: 
+  functionsOnLoad:
+  - !CreateWorkshopProjects
+    projects:
+    - countMin: 1
+      countMax: 1
+      countRandom: false
+      tagsUsed: false
+      key: utl_res_convert_r2
+      tags: 
+    - countMin: 1
+      countMax: 1
+      countRandom: false
+      tagsUsed: false
+      key: utl_res_convert_r1_from_r2
+      tags: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_workshop

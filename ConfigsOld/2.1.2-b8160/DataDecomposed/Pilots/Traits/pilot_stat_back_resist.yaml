@@ -1,0 +1,51 @@
+comment:
+  comment: Adding concussion resistance does not seem to work.
+state: Blocked
+hidden: true
+priority: 0
+level: 0
+icon: s_icon_l32_character9
+tags:
+- tradeoff
+- level_4
+- type_support
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax:
+  trauma:
+    mode: Offset
+    value: -1
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit:
+  - !CombatValidateUnitPart
+    socket: back
+    preset: 
+    tags: 
+    present: true
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitSetStatMultiplier
+    key: res_concussion
+    mode: Offset
+    value: 0.5
+    refreshFullStats: true
+  functionsSelf: 
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

@@ -1,0 +1,361 @@
+comment: 
+parents:
+- key: ace_ml_s2
+core: 
+textName: 
+textCallsign: 
+textUnit: 
+textDesc: 
+textSections: 
+roleKey: 
+appearanceKey: profile_hunter_secondary
+liveryPreset: misc_hvt_05
+traitSlotsInjected:
+  core:
+    tagsUsed: false
+    keys:
+    - ace_ml_s3_core
+    tags: 
+unitPresetFilter:
+  tagsUsed: false
+  keys:
+  - ace_ml_s3
+  tags: 
+injectionCheck: 
+deploymentTurnCheck: 
+deploymentConditions: 
+effectsOnSpawn:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatUnitSetSpeed
+    mode: Set
+    speed: 12
+  functionsPilot: 
+effectsOnLandingStart:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat:
+  - !CombatCreateStrike
+    delay: 0
+    blueprintKey: aircraft_ml_01
+    target:
+      type: UnitRelative
+      name: pilot_persistent_ace_ml_unit
+      center: true
+      modifiersDirectional: true
+      modifiers:
+      - !TargetModifierRotateDirection
+        rotationRange:
+          x: -15
+          y: -15
+      - !TargetModifierOffsetLocal
+        offset:
+          x: -32
+          y: 0
+          z: 24
+  - !CombatCreateStrike
+    delay: 0
+    blueprintKey: aircraft_ml_01
+    target:
+      type: UnitRelative
+      name: pilot_persistent_ace_ml_unit
+      center: true
+      modifiersDirectional: true
+      modifiers:
+      - !TargetModifierRotateDirection
+        rotationRange:
+          x: 15
+          y: 15
+      - !TargetModifierOffsetLocal
+        offset:
+          x: 32
+          y: 0
+          z: 24
+  functionsUnit:
+  - !CombatUnitSetStatMultiplier
+    key: power
+    mode: Set
+    value: 4
+    refreshFullStats: true
+  - !CombatUnitSetStatMultiplier
+    key: heat_dissipation
+    mode: Set
+    value: 4
+    refreshFullStats: true
+  functionsPilot: 
+effectsOnArrival:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatCreateCommsMessage
+    time: 0
+    key: ace_ml_s3_arrival
+  functionsPilot: 
+effectsOnTraumaCombat:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit: 
+  functionsPilot: 
+effectsOnTraumaDebriefing:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsPilot: 
+effectsOnDeathCombat:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsCombat: 
+  functionsUnit:
+  - !CombatCreateCommsMessage
+    time: 0
+    key: ace_ml_terminated
+  functionsPilot: 
+effectsOnDeathDebriefing:
+- checksGlobal: 
+  checksBase: 
+  checksPilot: 
+  functionsGlobal: 
+  functionsBase: 
+  functionsPilot: 
+director:
+  nodes:
+  - looping: true
+    durationInTurns: 2
+    priority: 10
+    name: Launcher-Back
+    color: 
+    comment:
+      comment: This node activates the back missile launcher. It selects a random valid child. Each chosen node has more child nodes.
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitModifyMemory
+        changes:
+        - change: Offset
+          key: unit_ace_ability_activations
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsGlobal:
+      - !Log
+        message: Unit clear to launch back VLS
+    childMode: ExecuteOneRandomValid
+    children:
+    - name: Targeted
+      color: 
+      comment:
+        comment: Targets PB unit the closest to the base.
+      selfChange: 
+      functionGroups:
+      - functionsTargetedContext: Self
+        functionsTargeted: 
+        functionsGlobal:
+        - !CombatCreateCommsMessage
+          time: 0.1
+          key: ace_ml_s3_order_targeted
+        - !CombatCreateCommsMessage
+          time: 7
+          key: enemy_pause_from_order
+        - !CombatModifyUnits
+          units: 0
+          checks:
+          - !CombatValidateUnitAllied
+            present: false
+          - !CombatValidateUnitWithPilotProfile
+            present: false
+          functions:
+          - !CombatUnitAIPause
+            discardActions: true
+          - !Log
+            message: Should be paused
+      - functionsTargetedContext: Self
+        functionsTargeted:
+        - !CombatUnitActionsDiscard
+          locked: true
+          primary: true
+          secondary: true
+        - !CombatUnitActionsCreate
+          discardExisting: false
+          actions:
+          - key: attack_back
+            startTime: 0.3
+            startTimeIsLocal: true
+            locked: false
+            durationVariable: 
+            targetLocal: 
+            target:
+              type: UnitBlackboard
+              name: tgt_ml_back_0
+              center: true
+              modifiersDirectional: false
+              modifiers:
+              - !TargetModifierOffsetRandomDirection
+                offset: 32
+            targetSecondary: 
+            targetUnitFiltered: 
+            targetUnitLocalOffsets: 
+            movementCustom: 
+            functionsTimed: 
+            functionsOnAction:
+            - !CombatActionAddTargetWarning {}
+          - key: attack_back
+            startTime: 2
+            startTimeIsLocal: true
+            locked: false
+            durationVariable: 
+            targetLocal: 
+            target:
+              type: UnitBlackboard
+              name: tgt_ml_back_1
+              center: true
+              modifiersDirectional: true
+              modifiers:
+              - !TargetModifierOffsetRandomDirection
+                offset: 32
+            targetSecondary: 
+            targetUnitFiltered: 
+            targetUnitLocalOffsets: 
+            movementCustom: 
+            functionsTimed: 
+            functionsOnAction:
+            - !CombatActionAddTargetWarning {}
+        functionsGlobal: 
+      childMode: ExecuteAll
+      children: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck: 
+      unitConnectedCheck: 
+      unitFilterCheck:
+        sort: DistanceInv
+        unitLimit: 3
+        unitRepeats: false
+        exportEntitiesToBlackboardLimited:
+          key: tgt_ml_back
+          indexed: true
+        exportCountToMemoryLimited: 
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction:
+          key: Phantoms
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions:
+      - !UnitValidateMemory
+        method: RequireAll
+        checks:
+        - key: unit_ace_turn_count
+          presenceDesired: true
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: GreaterEqual
+          value: 2
+        - key: unit_ace_ability_activations
+          presenceDesired: false
+          valueFromMemory: false
+          valueFromMemoryKey: 
+          valueCheck: Less
+          value: 2
+      - !CombatValidateUnitPart
+        socket: back
+        preset: 
+        tags: 
+        present: true
+      - !CombatValidateUnitPartIntegrity
+        socket: back
+        check: Greater
+        value: 0
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+  - looping: true
+    durationInTurns: 1
+    priority: 0
+    name: Turn-Counter
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups:
+    - functionsTargetedContext: Self
+      functionsTargeted:
+      - !CombatUnitModifyMemory
+        changes:
+        - change: Offset
+          key: unit_ace_turn_count
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !Log
+        message: Unit spends another turn
+      functionsGlobal: 
+    childMode: ExecuteAll
+    children: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 

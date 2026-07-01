@@ -1,0 +1,28 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_mech_w3
+- key: vhc_mech_empty_left_arm
+- key: vhc_mech_lr_guided_back_res
+- key: vhc_mech_sec_empty
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: 
+tags:
+- weight_medium
+partTagPreferences:
+  equipment_right:
+  - tags:
+      branch_reserves: true
+      equipment_left: false
+      part_ml: true
+      range_long: true
+      unguided: true
+parts: 
+animationOverrides: 
+effects: 

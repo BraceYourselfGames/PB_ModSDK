@@ -1,0 +1,36 @@
+hidden: false
+parents:
+- key: wpn_root_primary
+- key: wpn_perk_filter_gun
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- branch_experimental
+- difficulty_hard
+- mnf_wpn_01
+- mnf_wpn_02
+- mnf_wpn_03
+- part_energy
+- range_medium
+- part_assault
+- special_vip_brawler
+- wpn_primary
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_plasma_repeater_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

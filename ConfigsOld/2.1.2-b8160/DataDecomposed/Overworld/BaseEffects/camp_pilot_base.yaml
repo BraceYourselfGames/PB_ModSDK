@@ -1,0 +1,37 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: 0
+rating: 0
+mood: 0
+group: 
+hue: 0.56
+icon: s_icon_l32_add_clone
+textFromFunctions: FunctionTextInTooltip
+textSource:
+  tagAssociated: camp_pilot_base
+  pilotEventAssociated: ''
+tags:
+- camp_pilot
+- camp_pilot_base
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot: 
+  functionsPilot:
+  - !PilotStatOffsetDifficulty
+    multiplier: overworld_camp_recovery_amount
+    key: hp
+    normalized: true
+    value: 0.3
+  - !PilotStatSet
+    key: fatigue
+    normalized: false
+    value: 0
+  - !PilotStatSet
+    key: score
+    normalized: false
+    value: 0
+unit: 

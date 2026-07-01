@@ -1,0 +1,32 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 1
+rating: 0
+mood: 0
+group: ''
+hue: 0.56
+icon: s_icon_l32_mnf_industrial
+textFromFunctions: FunctionTextInSecondary
+textSource: 
+tags:
+- camp_unit
+- camp_unit_random
+checksGlobal:
+- !OverworldValidateChance
+  chance: 0.25
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot: 
+unit:
+  checksUnit:
+  - !CombatValidateUnitPart
+    socket: 
+    preset: 
+    tags:
+      armor_elbrus: true
+    present: true
+  functionsUnit:
+  - !OverworldUnitFrameIntegrityOffset
+    value: 0.1

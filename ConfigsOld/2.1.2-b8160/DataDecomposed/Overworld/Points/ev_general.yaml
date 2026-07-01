@@ -1,0 +1,36 @@
+comment: 
+hidden: false
+parents: 
+core:
+  textIdentifierGroup: 
+  textName: 
+  textDesc: 
+  image: 
+  icon: s_icon_overlay_type_player
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Camp
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_force_expanded_overlay
+- role_event
+- flag_interactive_friendly
+generation: 
+interaction:
+  keys: 
+  tags:
+    ev_general: true
+effectsOnEvents:
+  Spawn:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityConceal {}
+    - !OverworldEntityFaction
+      friendly: true
+combat: 

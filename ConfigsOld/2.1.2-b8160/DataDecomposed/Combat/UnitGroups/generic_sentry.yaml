@@ -1,0 +1,90 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: false
+factionBranchDefault: ''
+tags:
+- type_sentry
+unitsPerGrade:
+- liveryPreset: 
+  units:
+  - keyExternal: false
+    key: turret_mg
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Turret
+    aiTargeting: default
+    liveryPreset: 
+    custom: 
+- liveryPreset: 
+  units:
+  - keyExternal: false
+    key: turret_mg
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Turret
+    aiTargeting: default
+    liveryPreset: 
+    custom: 
+  - keyExternal: false
+    key: turret_ml
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Turret
+    aiTargeting: default
+    liveryPreset: 
+    custom: 
+- liveryPreset: 
+  units:
+  - keyExternal: false
+    key: turret_mg
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Turret
+    aiTargeting: default
+    liveryPreset: 
+    custom: 
+  - keyExternal: false
+    key: turret_ml
+    countMin: 2
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Turret
+    aiTargeting: default
+    liveryPreset: 
+    custom: 
+unitPresets:
+  turret_mg: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      range_short: true
+      type_turret: true
+  turret_ml: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      range_medium: true
+      type_turret: true

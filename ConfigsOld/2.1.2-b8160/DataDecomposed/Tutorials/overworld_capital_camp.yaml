@@ -1,0 +1,125 @@
+depthBackground: 90
+depthForeground: 90
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1490196
+  center: 
+  hint:
+    color:
+      r: 1
+      g: 0.7962419
+      b: 0.5990566
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 504
+    frameSizeY: 600
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: RightBottom
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyResources
+      resourceChanges:
+      - key: camp_supplies
+        check: false
+        checkStrict: false
+        offset: true
+        value: 1
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1490196
+  center: 
+  hint:
+    color:
+      r: 0.3176471
+      g: 0.2196079
+      b: 0.1960784
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 0
+    framePositionY: 0
+    frameSizeX: 644
+    frameSizeY: 398
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopLeft
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: false
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.1490196
+  center: 
+  hint:
+    color:
+      r: 0.3176471
+      g: 0.2196079
+      b: 0.1960784
+      a: 1
+    frameLocation: BottomRight
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: -72
+    frameSizeX: 48
+    frameSizeY: 48
+    frameBlocksInput: false
+    frameBoundary: false
+    textLocation: TopRight
+    buttonLocation: Top
+    textWidth: 320
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld: 
+  effectsCombat: 

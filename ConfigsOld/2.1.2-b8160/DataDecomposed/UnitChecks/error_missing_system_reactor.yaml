@@ -1,0 +1,22 @@
+textDescInTooltips: false
+hidden: false
+icon: s_icon_l32_system_internal_reactor
+severity: Critical
+check:
+  encompassingMethod: RequireAll
+  tagsMethod: RequireAll
+  blueprintsMethod: RequireAll
+  partsMethod: RequireAll
+  subsystemsMethod: RequireAll
+  statsMethod: RequireAll
+  tags: []
+  blueprints: []
+  parts: []
+  subsystems:
+  - socket: core
+    hardpoint: internal_aux_top_core
+    not: true
+    requirement: Present
+  stats: []
+  pilot: []
+functions: 

@@ -1,0 +1,88 @@
+dataUI:
+  icon: s_icon_l32_role_unit_generator
+  color:
+    r: 0.9803922
+    g: 0.5937909
+    b: 0.3176471
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0.6179739
+    b: 0.345098
+    a: 1
+  sortingPriority: 750
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 1
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: -20
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd:
+  - !CombatActionFunctionOwner
+    functions:
+    - !CombatUnitStatusAdd
+      key: timed_charged
+      durationOverride: -1
+      source: Function
+    - !CombatUnitStatusAdd
+      key: timed_charged_cooldown
+      durationOverride: -1
+      source: Function
+  functionsOnDispose: 
+  check: 
+  unitCheck:
+    exportCountToMemory: 
+    exportEntitiesToBlackboard: 
+    tags: 
+    name: 
+    faction: 
+    state: 
+    actionPlanned: 
+    locationOccupied: 
+    locationOccupiedUnlinked: 
+    relativeTransform: 
+    blueprints: 
+    classes: 
+    stats: 
+    statsNormalized: 
+    actionsInProgress: 
+    functions:
+    - !CombatValidateUnitPart
+      socket: 
+      preset: 
+      tags:
+        ability_charge: true
+      present: true
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

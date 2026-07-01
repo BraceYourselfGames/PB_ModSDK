@@ -1,0 +1,43 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: -1
+rating: 0
+mood: 0
+group: 
+hue: 0.6
+icon: s_icon_l32_add_clone
+textFromFunctions: FunctionTextOmitted
+textSource:
+  tagAssociated: camp_general
+  pilotEventAssociated: ''
+tags:
+- camp_general
+checksGlobal: 
+checksBase: 
+functionsGlobal:
+- !ModifyPilots
+  pilots: 0
+  deployed: false
+  checks:
+  - !PilotValidateRosterSelection
+    present: false
+  functions:
+  - !PilotStatOffsetClamped
+    key: fatigue
+    normalized: false
+    value: -1
+    min: 1
+    max: 5
+    avoidShiftIntoRange: true
+  - !PilotStatOffsetClamped
+    key: score
+    normalized: false
+    value: -1
+    min: 0
+    max: 10
+    avoidShiftIntoRange: true
+- !ImplementSimLockEffectCamp {}
+functionsBase: 
+pilot: 
+unit: 

@@ -1,0 +1,28 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_pilot_injury
+tags:
+- type_negative
+- target_pilot_self
+- target_unit_self
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  self_offset_exp:
+    mode: Offset
+    value: 0.2
+  unit_damage:
+    mode: Offset
+    value: -0.2
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

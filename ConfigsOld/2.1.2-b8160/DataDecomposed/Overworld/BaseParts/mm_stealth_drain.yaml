@@ -1,0 +1,33 @@
+parents:
+- key: mm_stealth
+  priority: 1
+  offsetStart: 10
+  offsetEnd: 10
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 2
+  positionY: -4
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_mm_stealth2
+unlock: 
+cost:
+  resources:
+    components_r3: 15
+    supplies: 500
+effect:
+  stats:
+  - key: mm_stealth_energy_change
+    modifier: Multiply
+    value: 0.85
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

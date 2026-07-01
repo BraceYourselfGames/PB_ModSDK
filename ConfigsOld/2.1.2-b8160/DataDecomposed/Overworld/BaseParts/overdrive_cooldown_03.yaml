@@ -1,0 +1,35 @@
+parents:
+- key: overdrive_cooldown_02
+  priority: 1
+  offsetStart: 30
+  offsetEnd: -10
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 3
+  positionY: -3
+  endpoint: false
+  group: 
+  icon: s_icon_l32_stat_heat_out
+unlock: 
+cost:
+  resources:
+    components_r2: 80
+    components_r3: 45
+    supplies: 1200
+    unit_token: 2
+effect:
+  stats:
+  - key: heat_dissipation
+    modifier: Offset
+    value: 0.15
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

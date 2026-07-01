@@ -1,0 +1,319 @@
+parents: []
+hidden: true
+core: 
+ui: 
+tags: 
+layout:
+  units:
+    e1_wpn_main_embedded_top:
+      comment: 
+      preset: vhc_system_wpn_comp_beam_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: 
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect:
+        unitKey: a_core
+      linkTransform: 
+      linksConditional: 
+      legStepBlocklist: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes:
+  - looping: true
+    durationInTurns: 1
+    priority: 100
+    name: Enrage-Top-Beam
+    color: 
+    comment: 
+    selfChange: 
+    functionGroups: 
+    childMode: ExecuteAll
+    children:
+    - name: Active
+      color: 
+      comment: 
+      selfChange:
+        unitKey: e1_wpn_main_embedded_top
+      functionGroups: 
+      childMode: ExecuteFirstValid
+      children:
+      - name: Targeted
+        color: 
+        comment: 
+        selfChange: 
+        functionGroups: 
+        childMode: ExecuteOneRandomValid
+        children:
+        - name: Tracked
+          color: 
+          comment: 
+          selfChange: 
+          functionGroups:
+          - functionsTargetedContext: Self
+            functionsTargeted:
+            - !CombatUnitActionsCreate
+              discardExisting: true
+              actions:
+              - key: attack_system
+                startTime: 1.5
+                startTimeIsLocal: true
+                locked: false
+                durationVariable: 
+                targetLocal: 
+                target:
+                  type: UnitBlackboard
+                  name: tgt_internal_turret_top
+                  center: true
+                  modifiersDirectional: false
+                  modifiers: 
+                targetSecondary: 
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom: 
+                functionsTimed: 
+                functionsOnAction:
+                - !CombatActionAddTargetWarning {}
+            functionsGlobal: 
+          childMode: ExecuteAll
+          children: 
+          enabled: true
+          turn: 
+          turnModulus: 
+          unitSelfCheck: 
+          unitConnectedCheck: 
+          unitFilterCheck: 
+          unitFilterCount: 
+          memoryBase: 
+        - name: Swipe
+          color: 
+          comment: 
+          selfChange: 
+          functionGroups:
+          - functionsTargetedContext: Self
+            functionsTargeted:
+            - !CombatUnitActionsCreate
+              discardExisting: true
+              actions:
+              - key: attack_system
+                startTime: 0.25
+                startTimeIsLocal: true
+                locked: false
+                durationVariable:
+                  f: 1.5
+                targetLocal: 
+                target:
+                  type: UnitBlackboardRelative
+                  name: tgt_internal_turret_top
+                  center: true
+                  modifiersDirectional: true
+                  modifiers:
+                  - !TargetModifierOffsetLocal
+                    offset:
+                      x: -25
+                      y: 0
+                      z: 0
+                targetSecondary:
+                  eased: false
+                  mode: Linear
+                  midpointOffsetLocal:
+                    x: 0
+                    y: 0
+                    z: 0
+                  type: UnitBlackboardRelative
+                  name: tgt_internal_turret_top
+                  center: true
+                  modifiersDirectional: true
+                  modifiers:
+                  - !TargetModifierOffsetLocal
+                    offset:
+                      x: 25
+                      y: 0
+                      z: 0
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom: 
+                functionsTimed: 
+                functionsOnAction: 
+              - key: attack_system
+                startTime: 2
+                startTimeIsLocal: true
+                locked: false
+                durationVariable:
+                  f: 1.5
+                targetLocal: 
+                target:
+                  type: UnitBlackboardRelative
+                  name: tgt_internal_turret_top
+                  center: true
+                  modifiersDirectional: true
+                  modifiers:
+                  - !TargetModifierOffsetLocal
+                    offset:
+                      x: 25
+                      y: 0
+                      z: 0
+                targetSecondary:
+                  eased: false
+                  mode: Linear
+                  midpointOffsetLocal:
+                    x: 0
+                    y: 0
+                    z: 0
+                  type: UnitBlackboardRelative
+                  name: tgt_internal_turret_top
+                  center: true
+                  modifiersDirectional: true
+                  modifiers:
+                  - !TargetModifierOffsetLocal
+                    offset:
+                      x: -25
+                      y: 0
+                      z: 0
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom: 
+                functionsTimed: 
+                functionsOnAction: 
+            functionsGlobal: 
+          childMode: ExecuteAll
+          children: 
+          enabled: true
+          turn: 
+          turnModulus: 
+          unitSelfCheck: 
+          unitConnectedCheck: 
+          unitFilterCheck: 
+          unitFilterCount: 
+          memoryBase: 
+        enabled: true
+        turn: 
+        turnModulus: 
+        unitSelfCheck: 
+        unitConnectedCheck: 
+        unitFilterCheck:
+          sort: None
+          unitLimit: -1
+          unitRepeats: false
+          exportEntitiesToBlackboardLimited:
+            key: tgt_internal_turret_top
+            indexed: false
+          exportCountToMemoryLimited: 
+          exportCountToMemory: 
+          exportEntitiesToBlackboard: 
+          tags: 
+          name: 
+          faction:
+            key: Phantoms
+          state:
+            unitActive:
+              present: true
+            unitMobile: 
+            unitHidden: 
+            unitWrecked: 
+            unitDisabled: 
+            pilotMissing: 
+            pilotDead: 
+            pilotConcussed: 
+            pilotActive: 
+          actionPlanned: 
+          locationOccupied: 
+          locationOccupiedUnlinked: 
+          relativeTransform:
+            origin: 
+            directionOriginRotation:
+              x: 0
+              y: 0
+              z: 0
+            directionDot: 
+            directionDotFlat: 
+            directionAngle: 
+            distance:
+              socketStatSource: 
+              range:
+                x: 60
+                y: 600
+          blueprints: 
+          classes: 
+          stats: 
+          statsNormalized: 
+          actionsInProgress: 
+          functions: 
+        unitFilterCount: 
+        memoryBase: 
+      enabled: true
+      turn: 
+      turnModulus: 
+      unitSelfCheck:
+        exportCountToMemory: 
+        exportEntitiesToBlackboard: 
+        tags: 
+        name: 
+        faction: 
+        state: 
+        actionPlanned: 
+        locationOccupied: 
+        locationOccupiedUnlinked: 
+        relativeTransform: 
+        blueprints: 
+        classes: 
+        stats: 
+        statsNormalized: 
+        actionsInProgress: 
+        functions: 
+      unitConnectedCheck: 
+      unitFilterCheck: 
+      unitFilterCount: 
+      memoryBase: 
+    enabled: true
+    turn: 
+    turnModulus: 
+    unitSelfCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        flag_boss_state_enrage_active: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitConnectedCheck: 
+    unitFilterCheck: 
+    unitFilterCount: 
+    memoryBase: 
+events:
+  eventsSpatial: 
+  eventsAssignable: 

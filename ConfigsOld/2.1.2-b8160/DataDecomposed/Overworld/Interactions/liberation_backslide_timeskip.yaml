@@ -1,0 +1,63 @@
+hidden: false
+parents:
+- key: sh_core_basic
+- key: sh_option_main_continue
+core:
+  stepOnStart: main
+  priority: -1
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_mech_approach
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 0
+      image: event_mech_approach
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: 
+    textReused:
+      textSector: ui_overworld
+      textKey: quest_liberation_expiration_all
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.3879717
+            b: 0.1839623
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+    optionsReused: 

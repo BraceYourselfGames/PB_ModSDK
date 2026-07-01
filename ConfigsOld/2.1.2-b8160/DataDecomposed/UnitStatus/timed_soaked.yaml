@@ -1,0 +1,55 @@
+icon: s_icon_l32_action_wait
+color:
+  r: 0.3157262
+  g: 0.4525359
+  b: 0.5188679
+  a: 1
+hidden: false
+debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.5
+  velocityDecayTime: 1
+  key: fx_status_soaked_oneshot
+  scale:
+    x: 1
+    y: 1
+    z: 1
+durationFull:
+  f: 4
+durationUpdate:
+  f: 0.1
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio: 
+effectsOnStart: 
+effectsOnUpdate:
+- triggerRemoval: true
+  triggerInStack: false
+  applyMissedUpdates: false
+  enabled: true
+  triggerCheckUnit:
+  - !CombatValidateUnitStatus
+    key: timed_burn
+    present: true
+  triggerCheckPilot: 
+  comment:
+    comment: Each update, check if the unit is under the burning status. If yes, remove this status.
+  functionsOnHost: 
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+effectsOnEnd: 
+statOffsets:
+  drv_speed: -0.5

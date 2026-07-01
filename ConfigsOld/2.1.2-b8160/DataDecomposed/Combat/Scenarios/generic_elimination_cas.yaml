@@ -1,0 +1,263 @@
+hidden: false
+parents:
+- key: generic_elimination
+core: 
+areas: 
+entry: 
+generationInjection: 
+tags:
+- trait_cas
+- block_strikes
+states:
+  strike_recurring:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_spotter: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions:
+    - !CombatValidateOverworldBase
+      functions:
+      - !OverworldValidateChance
+        chance: 0.5
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatLogMessage
+            data:
+              textSector: ui_combat
+              textKey: log_strike_incoming
+            colorKey: warning_primary
+          - !CombatCreateStrikeTargeted
+            unitFilter:
+              sort: None
+              unitLimit: 1
+              unitRepeats: false
+              exportEntitiesToBlackboardLimited: 
+              exportCountToMemoryLimited: 
+              exportCountToMemory: 
+              exportEntitiesToBlackboard: 
+              tags: 
+              name: 
+              faction:
+                key: Phantoms
+              state:
+                unitActive:
+                  present: true
+                unitMobile: 
+                unitHidden: 
+                unitWrecked: 
+                unitDisabled: 
+                pilotMissing: 
+                pilotDead: 
+                pilotConcussed: 
+                pilotActive: 
+              actionPlanned: 
+              locationOccupied: 
+              locationOccupiedUnlinked: 
+              relativeTransform: 
+              blueprints: 
+              classes: 
+              stats: 
+              statsNormalized: 
+              actionsInProgress: 
+              functions: 
+            blueprintKeys:
+            - aircraft_ml_01
+            delayRange:
+              x: 0.75
+              y: 1.5
+            modifiers: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  strike_spotters:
+    comment: 
+    textNameKey: generic_target_spotter_header
+    textDescKey: generic_target_spotter_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: LessEqual
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_spotter: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  main:
+    comment: 
+    core: 
+    tags: 
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: false
+      tags:
+        type_spotter: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: false
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 135
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat:
+        key: default
+        check: Greater
+        value: 95
+      sorting: !UnitSlotSortingPlayer
+        invert: false
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_spotter: true
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: generic_elimination_start_cas
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

@@ -1,0 +1,39 @@
+hidden: false
+parents:
+- key: arrival_campaign
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: ResearchInvestigating
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 0.768
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_smoke_distant
+      imageSecondary: 
+      video:
+        loop: true
+        contentDelay: 0
+        path: Content/Video/slides_temp/travel_loop_03
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options: 
+    optionsReused: 

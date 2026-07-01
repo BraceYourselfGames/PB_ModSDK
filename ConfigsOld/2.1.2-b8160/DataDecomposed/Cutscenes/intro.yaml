@@ -1,0 +1,169 @@
+textName: Intro / Main cinematic
+instantiated: false
+path: ''
+postprocessing:
+  startWithoutFade: false
+  endWithoutFade: false
+  fogSpeedCustom: false
+  fogSpeed: 1
+  pathNormal: ''
+  pathFogLight: ''
+  pathFogMedium: ''
+  pathFogHeavy: ''
+world: 
+environment: 
+area: 
+units:
+  unitsBuilt:
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: pb_arctic_sky
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_elbrus: true
+        parts:
+          equipment_left:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+          equipment_right:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+    key: friendly_victim
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: pb_arctic_sky
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_tsubasa: true
+        parts:
+          equipment_left:
+            livery: 
+            preset: !PartResolverKeys
+              keys:
+              - wpn_mg_sub_01_r1
+            rating: 
+            systems: 
+          equipment_right:
+            livery: 
+            preset: !PartResolverKeys
+              keys:
+              - wpn_rifle_assault_01_r1
+            rating: 
+            systems: 
+    key: friendly_arrival
+  - presetResolver: !UnitPresetLink
+      preset: invader_cutscene_intro_bein
+    key: enemy_executioner
+  - presetResolver: !UnitPresetLink
+      preset: invader_cutscene_intro_dual
+    key: enemy_approach1
+  - presetResolver: !UnitPresetLink
+      preset: invader_cutscene_intro_main
+    key: enemy_approach2
+  - presetResolver: !UnitPresetLink
+      preset: invader_cutscene_intro_main
+    key: enemy_approach3
+  - presetResolver: !UnitPresetLink
+      preset: invader_cutscene_intro_main
+    key: enemy_patrol_early
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: inv_army_city_b
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_asgard: true
+        parts:
+          equipment_left:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+          equipment_right:
+            livery: 
+            preset: !PartResolverKeys
+              keys:
+              - wpn_rifle_assault_02_r1
+            rating: 
+            systems: 
+    key: enemy_patrol_late
+camera: 
+subtitles:
+- time: 8
+  duration: 2
+- time: 10.5
+  duration: 2
+- time: 12.8
+  duration: 1.5
+- time: 17
+  duration: 4
+- time: 22.5
+  duration: 2.5
+- time: 26
+  duration: 2.15
+- time: 30.25
+  duration: 2.5
+- time: 34.75
+  duration: 2
+- time: 38
+  duration: 2
+- time: 43
+  duration: 2
+- time: 46
+  duration: 2.5
+- time: 50
+  duration: 2.5
+- time: 55.5
+  duration: 3
+- time: 60.5
+  duration: 3
+- time: 66.5
+  duration: 2
+- time: 69.5
+  duration: 4.5
+callbacksOnSkip: 
+audioEventsOnStart:
+- key: tableau_start
+audioStatesOnStart: 
+audioSyncsOnStart: 
+audioEventsOnPlay:
+- key: tableau_intro_audio
+- key: tableau_intro_vo
+audioStatesOnPlay: 
+audioSyncsOnPlay: 
+audioEventsOnEnd:
+- key: tableau_stop
+- key: music_worldmap
+- key: ambience_worldmap
+audioStatesOnEnd: 
+audioSyncsOnEnd: 

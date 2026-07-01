@@ -1,0 +1,36 @@
+comment:
+  comment: Need support for only boosting melee weapon types
+state: Blocked
+hidden: true
+priority: 0
+level: 0
+icon: s_icon_l32_role_custom1
+tags:
+- target_unit_self
+- level_4
+- type_brawler
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive:
+- defender
+- brawler
+pilotTypesIncompatible:
+- sharpshooter
+- support
+activationRecordTags: 
+statValues:
+  unit_barrier_shield:
+    mode: Offset
+    value: 0.2
+  unit_damage_sr:
+    mode: Offset
+    value: 0.25
+  unit_hp_shield:
+    mode: Offset
+    value: 0.2
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

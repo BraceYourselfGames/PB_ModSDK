@@ -1,0 +1,35 @@
+hidden: false
+parents:
+- key: combat_main
+core:
+  stepOnStart: main
+  priority: -10
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check:
+  repeat: Enabled
+  checksGlobal: 
+  checksBase: 
+  checksTarget:
+  - !OverworldValidatePointTags
+    tagsMethod: RequireAll
+    tags:
+    - tag: role_patrol
+      not: false
+  - !OverworldValidateCombatCapable
+    baseShouldBeReady: true
+steps:
+  main:
+    comment: 
+    image: event_under_fire
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options: 
+    optionsReused: 

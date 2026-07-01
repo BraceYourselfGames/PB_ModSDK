@@ -1,0 +1,146 @@
+comment:
+  comment: Postgame loop start. Two closest unvisited provinces. Both have level offset of 0 and weakened modifier to allow for easier time.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: 
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_40_postgame_cleanup
+  tags: 
+entry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_countdown_base_length
+      value: 20
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !QuestStart
+    questKey: province_liberation
+  - !ApplyProvinceArrivalEffects {}
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_region_04
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: true
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
+  - !UnlockAchievement
+    key: homeground_patrol
+  functionsBase: 
+progressDisplay: 
+effects: 
+branches:
+- comment: 
+  preferences:
+    branchActiveExcluded: true
+    modifiersUnique: true
+    modifierVisitsTracked: false
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 41_postgame_loop
+    levelOffset:
+      i: 0
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_mixed: true
+    - tagsUsed: false
+      keys:
+      - sp_weakened
+      tags: 
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 41_postgame_loop
+    levelOffset:
+      i: 0
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_positive: true
+    - tagsUsed: false
+      keys:
+      - sp_weakened
+      tags: 
+- comment: 
+  preferences:
+    branchActiveExcluded: true
+    modifiersUnique: true
+    modifierVisitsTracked: false
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment:
+      comment: This branch is reached if there are no unvisited provinces to link to.
+    checksGlobal: 
+    checksBase: 
+    stepKey: 42_postgame_recapture
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: Closest
+    searchMode: Visited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_breakthrough_central: false
+        group_breakthrough_line: false
+        group_capital: false
+    modifiers: 
+tags: 

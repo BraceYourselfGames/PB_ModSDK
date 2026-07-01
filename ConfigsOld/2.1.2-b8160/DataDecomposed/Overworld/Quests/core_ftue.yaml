@@ -1,0 +1,560 @@
+hidden: false
+parents: 
+textName: {}
+textDesc: {}
+core:
+  stepOnStart: 00_prequel
+  mainType: true
+  recordPointCompletion: true
+  recordPointMemory: true
+tags: 
+steps:
+  00_prequel:
+    comment: 
+    index:
+      i: 0
+    textName: 
+    textDesc: 
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !SetGameplayUIActive
+        active: false
+      - !OverworldModifierAdd
+        key: sp_tutorial_intro
+      - !ModifyMemoryBase
+        changes:
+        - change: Set
+          key: feature_check
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !DelayGroupRealtime
+        delay: 1
+        functions:
+        - !UpdateCampaignOnFullStart {}
+        - !OverworldCombatForced
+          scenarioKey: unique_intro
+          areaKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 01_mountainbase
+  01_mountainbase:
+    comment: 
+    index:
+      i: 1
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue: 
+        checksBase:
+        - !OverworldValidateCompletionPreset
+          filter:
+            ftue_01_mountainbase:
+              check: Greater
+              value: 0
+    effectsOnEvents: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !CreatePoint
+        spawnPriority: Closest
+        spawnGroup: f1_mountain
+        spawnRange:
+          v:
+            x: 0
+            y: 10000
+        provinceOverride: 
+        nameOverride: mountainbase
+        questKey: 
+        functionsOnSpawn: 
+        tagsUsed: false
+        keys:
+        - ftue_01_mountainbase
+        tags: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - prequel_01
+        tags: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 02_mountainbase_after
+  02_mountainbase_after:
+    comment: 
+    index: 
+    textName: 
+    textDesc: 
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes:
+      - OverworldContextEnabled
+      filterEventEntity: 
+      comment: 
+      checksGlobal: 
+      checksBase:
+      - !OverworldValidateMemorySimple
+        filter:
+          tutorial_complete_base_introduction:
+            check: GreaterEqual
+            value: 1
+      functionsGlobal:
+      - !Log
+        message: Loaded to world after base intro
+      - !QuestProgress
+        stepRequired: 02_mountainbase_after
+        stepNext: 
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !OverworldInteractionStartFilter
+        overrideOngoing: false
+        tagsUsed: false
+        keys:
+        - ftue_02_mountainbase_exit
+        tags: 
+      - !ApplySimLockEffect
+        type: resupply_hidden
+        displayDialog: false
+      - !ModifyResources
+        resourceChanges:
+        - key: camp_supplies
+          check: false
+          checkStrict: false
+          offset: false
+          value: 1
+      - !ModifyPilots
+        pilots: 0
+        deployed: false
+        checks: 
+        functions:
+        - !PilotStatOffset
+          key: fatigue
+          normalized: false
+          value: 1
+      - !ModifyPilots
+        pilots: 1
+        deployed: false
+        checks: 
+        functions:
+        - !PilotStatOffset
+          key: hp
+          normalized: false
+          value: -5
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 03_liberation
+  03_liberation:
+    comment: 
+    index:
+      i: 2
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue: 
+        checksBase:
+        - !OverworldValidateCompletionPreset
+          filter:
+            ftue_02_liberation:
+              check: Greater
+              value: 0
+    effectsOnEvents: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !CreatePoint
+        spawnPriority: Closest
+        spawnGroup: f2_village
+        spawnRange:
+          v:
+            x: 0
+            y: 10000
+        provinceOverride: 
+        nameOverride: 
+        questKey: 
+        functionsOnSpawn: 
+        tagsUsed: false
+        keys:
+        - ftue_02_liberation
+        tags: 
+      - !CreatePoint
+        spawnPriority: Closest
+        spawnGroup: poi_01
+        spawnRange: 
+        provinceOverride: 
+        nameOverride: ftue_poi_01
+        questKey: 
+        functionsOnSpawn: 
+        tagsUsed: false
+        keys:
+        - ev_general_unique_ftue_01
+        tags: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: false
+        tagsUsed: false
+        keys:
+        - ftue_09_liberation_notification
+        tags: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 04_liberation_after
+  04_liberation_after:
+    comment: 
+    index:
+      i: 3
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes:
+      - OverworldTimeSkipEndCamp
+      filterEventEntity: 
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !Log
+        message: Finished camp
+      - !QuestProgress
+        stepRequired: 04_liberation_after
+        stepNext: 05_choice
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !OverworldInteractionStartFilter
+        overrideOngoing: false
+        tagsUsed: false
+        keys:
+        - ftue_11_liberation_exit
+        tags: 
+      - !DeletePoints
+        mode: DeleteUntilTarget
+        target: 0
+        onlyCombat: false
+        onlyHostile: false
+        checks:
+        - !OverworldValidatePointKey
+          key: ev_general_unique_ftue_01
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 05_choice
+  05_choice:
+    comment: 
+    index:
+      i: 4
+    textName: {}
+    textDesc: 
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldQuestMemory
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue:
+          value: !OverworldIntValueQuestMemory
+            questKey: core_ftue
+            memoryPrefix: 
+            memoryKey: quest_progress_generic
+          target: !OverworldIntValueFixed
+            value: 2
+        checksBase: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks: 
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestMemoryOffset
+        memoryKey: quest_progress_generic
+        value: 1
+        min: 
+        max: 
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !ModifyMemoryBase
+        changes:
+        - change: Set
+          key: quest_progress_generic
+          value: 0
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !CreatePoint
+        spawnPriority: Closest
+        spawnGroup: f3_choice
+        spawnRange:
+          v:
+            x: 0
+            y: 10000
+        provinceOverride: 
+        nameOverride: f3_choice_demolition
+        questKey: core_ftue
+        functionsOnSpawn: []
+        tagsUsed: false
+        keys:
+        - ftue_03_demolition
+        tags: 
+      - !CreatePoint
+        spawnPriority: Closest
+        spawnGroup: f3_choice
+        spawnRange:
+          v:
+            x: 0
+            y: 10000
+        provinceOverride: 
+        nameOverride: f3_choice_convoy
+        questKey: core_ftue
+        functionsOnSpawn:
+        - !OverworldEntityMemorySet
+          value: 1
+          memoryKey: quest_progress_generic
+        tagsUsed: false
+        keys:
+        - ftue_04_convoy
+        tags: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 1
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - ftue_20_choice_notification
+        tags: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 06_showdown
+  06_showdown:
+    comment: 
+    index:
+      i: 5
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions:
+      main:
+        priority: 0
+        filterEventTypes:
+        - OverworldPointCombatEndLate
+        completionTarget: 
+        checkValue: 
+        checksBase:
+        - !OverworldValidateCompletionPreset
+          filter:
+            ftue_05_showdown:
+              check: Greater
+              value: 0
+    effectsOnEvents: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !CreatePoint
+        spawnPriority: Closest
+        spawnGroup: f4_final
+        spawnRange:
+          v:
+            x: 0
+            y: 10000
+        provinceOverride: 
+        nameOverride: f4_showdown
+        questKey: core_ftue
+        functionsOnSpawn: []
+        tagsUsed: false
+        keys:
+        - ftue_05_showdown
+        tags: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: false
+        tagsUsed: false
+        keys:
+        - ftue_30_showdown_notification
+        tags: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 2
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 07_showdown_after
+  07_showdown_after:
+    comment: 
+    index: 
+    textName: 
+    textDesc: 
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes:
+      - OverworldContextEnabled
+      filterEventEntity: 
+      comment: 
+      checksGlobal: 
+      checksBase:
+      - !OverworldValidateMemorySimple
+        filter:
+          tutorial_complete_base_workshop:
+            check: GreaterEqual
+            value: 1
+      functionsGlobal:
+      - !Log
+        message: Loaded to world after workshop tutorial
+      - !QuestProgress
+        stepRequired: 07_showdown_after
+        stepNext: 
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !OverworldInteractionStartFilter
+        overrideOngoing: false
+        tagsUsed: false
+        keys:
+        - ftue_32_showdown_exit
+        tags: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 0
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 08_frontline
+  08_frontline:
+    comment: 
+    index: 
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !OverworldInteractionStartFilter
+        overrideOngoing: false
+        tagsUsed: false
+        keys:
+        - ftue_33_frontline_notification
+        tags: 
+      - !QuestProvinceCapture
+        questMain: true
+        questKey: 
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 
+effectsShared: 

@@ -1,0 +1,359 @@
+hidden: true
+parents: 
+core:
+  stepOnStart: wave
+  timeLocked: false
+  time: 7
+  scalingUsed: false
+  loadImmediately: false
+  externalBranchUsed: false
+  externalLevelUsed: true
+  reinforcementsUsed: false
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom:
+    linearStateKey: boss_big
+  introOverride:
+    cameraInputsFinal:
+      target:
+        type: Location
+        name: obj_boss_origin
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      rotationX: 30
+      rotationY: -90
+      zoom: 0.9
+    shots:
+    - duration: 5
+      easing: linear
+      fadeOnEnd: true
+      fadeDuration: 0.3
+      from:
+        position:
+          x: 240.61
+          y: 0.44
+          z: 290.73
+        rotation:
+          x: 358.77
+          y: 218.11
+          z: 0
+        fov: 40
+      to:
+        position:
+          x: 39.51
+          y: 1.31
+          z: 290.85
+        rotation:
+          x: 358.59
+          y: 150.34
+          z: 0
+        fov: 40
+    - duration: 5
+      easing: linear
+      fadeOnEnd: true
+      fadeDuration: 0.3
+      from:
+        position:
+          x: 65.35
+          y: 21.02
+          z: 38.3
+        rotation:
+          x: 20
+          y: 40
+          z: 0
+        fov: 40
+      to:
+        position:
+          x: 223.8
+          y: 23.67
+          z: 47.38
+        rotation:
+          x: 25
+          y: 320
+          z: 0
+        fov: 40
+    - duration: 4
+      easing: easeOutQuad
+      fadeOnEnd: false
+      fadeDuration: 0.5
+      from:
+        position:
+          x: 80
+          y: -15
+          z: 85
+        rotation:
+          x: -15
+          y: -135
+          z: 0
+        fov: 35
+      to:
+        position:
+          x: 210
+          y: 45
+          z: 210
+        rotation:
+          x: 30
+          y: -135
+          z: 0
+        fov: 25
+    - duration: 1
+      easing: easeInOutCubic
+      fadeOnEnd: false
+      fadeDuration: 0.5
+      from:
+        position:
+          x: 210
+          y: 45
+          z: 210
+        rotation:
+          x: 30
+          y: -135
+          z: 0
+        fov: 25
+      to:
+        position:
+          x: 0
+          y: 0
+          z: 0
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        fov: 0
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: false
+  tagFilterUsed: true
+  tagFilter:
+    context_boss: true
+  keys: 
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      perimeter_outer: true
+    spawnGroupKey: perimeter_outer_090_e
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Greater
+      value: 50
+    sorting: !UnitSlotSortingRetreat
+      key: default
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- difficulty_normal
+- listed
+- type_boss
+- trait_long
+- trait_deadly
+- trait_adaptable_enemy
+- trait_move_or_die
+- block_persistent_pilots
+- block_exit_on_defeat
+states:
+  boss_defeated:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 20
+    priorityDisplay: 20
+    mood: 1
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_core: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: boss_outro_core_destroyed
+          - time: 8
+            hidden: false
+            key: boss_outro_victory_hq
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: true
+            instant: false
+  retreat_default:
+    comment: 
+    textNameKey: retreat_general_header
+    textDescKey: retreat_general_text
+    textOnCompletion: 
+    evaluated: false
+    visible: true
+    startInScope: false
+    priorityGeneration: 100
+    priority: 100
+    priorityDisplay: 100
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_retreat: true
+        filters: 
+      visual: 
+    locationRetreat:
+      commsUsed: false
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  wave:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: generic_eliminate_isolated_generic_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatChangeFogCustom
+      time: 0
+      delay: 0
+      densityGlobal: 0.2
+      densityDistance: 0.5
+      densityHeight: 0.5
+      heightOffset: 10
+    - !CombatChangeFogCustom
+      time: 10
+      delay: 6
+      densityGlobal: 0.2
+      densityDistance: 0.5
+      densityHeight: 0.15
+      heightOffset: 5
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

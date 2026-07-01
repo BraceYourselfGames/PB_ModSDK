@@ -1,0 +1,933 @@
+timeLastSync: 63811496155
+localized: true
+exportMode: LinePerKeySimple
+name: UI (Combat)
+description: Text in the combat UI
+splits: []
+tags: 
+groups: 
+entries:
+  action_instant_header:
+    noteDev: 
+    temp: false
+    text: Confirm instant action
+  action_instant_hint:
+    noteDev: 
+    temp: false
+    text: This action is instantaneous and will immediately affect this planning phase. It can not be cancelled once confirmed. Would you like to confirm it?
+  action_tooltip_charged_header:
+    noteDev: 
+    temp: false
+    text: Limited charges
+  action_tooltip_charged_text:
+    noteDev: 
+    temp: false
+    text: This action can only be performed a limited number of times per fight.
+  action_tooltip_heat_header:
+    noteDev: 
+    temp: false
+    text: Heating
+  action_tooltip_heat_text:
+    noteDev: 
+    temp: false
+    text: This action will heat up the unit. Avoid overheating by spacing apart these actions on the timeline.
+  action_tooltip_irreversible_header:
+    noteDev: 
+    temp: false
+    text: Irreversible
+  action_tooltip_irreversible_text:
+    noteDev: 
+    temp: false
+    text: This action will remove the unit from the fight. It can not be reversed once executed.
+  action_tooltip_offensive_header:
+    noteDev: 
+    temp: false
+    text: Offensive
+  action_tooltip_offensive_text:
+    noteDev: 
+    temp: false
+    text: This is an offensive action utilizing an installed weapon. Weapon information is available on the bottom right side of the screen.
+  dialog_no_orders_desc:
+    noteDev: 
+    temp: false
+    text: Some units have no orders. Are you sure you wish to proceed?
+  dialog_no_orders_header:
+    noteDev: 
+    temp: false
+    text: Units Without Orders
+  end_continue:
+    noteDev: 
+    temp: false
+    text: Continue
+  end_defeat_block_header:
+    noteDev: 
+    temp: false
+    text: No way forward
+  end_defeat_block_text:
+    noteDev: 
+    temp: false
+    text: Defeat is not an option in this fight. Retry from the last saved game?
+  end_detail_defeat_early:
+    noteDev: 
+    temp: false
+    text: The base has picked up our units and retreated, but the site remains under enemy control. We can defeat them next time!
+  end_detail_defeat_total:
+    noteDev: 
+    temp: false
+    text: Our units are lost, but the base has managed to escape. The site remains under enemy control. We can defeat them next time!
+  end_detail_victory_early:
+    noteDev: 
+    temp: false
+    text: Congratulations! The base has secured our units and all objectives have been fulfilled. With the enemy gone, you now have control of the site.
+  end_detail_victory_total:
+    noteDev: 
+    temp: false
+    text: Congratulations! The enemy has been defeated and you now have control of the site.
+  end_header_defeat_early:
+    noteDev: 
+    temp: false
+    text: Retreated
+  end_header_defeat_total:
+    noteDev: 
+    temp: false
+    text: Defeated
+  end_header_victory_early:
+    noteDev: 
+    temp: false
+    text: Victory
+  end_header_victory_total:
+    noteDev: 
+    temp: false
+    text: Victory
+  end_subtitle_defeat_early:
+    noteDev: 
+    temp: false
+    text: Squad extracting, mission failed.
+  end_subtitle_defeat_total:
+    noteDev: 
+    temp: false
+    text: Mission failed.
+  end_subtitle_victory_early:
+    noteDev: 
+    temp: false
+    text: Squad extracting, mission successful.
+  end_subtitle_victory_total:
+    noteDev: 
+    temp: false
+    text: No targets remain, mission successful.
+  event_log_bt_comms_text:
+    noteDev: 
+    temp: false
+    text: Toggle the display of intercepted comms.
+  event_log_bt_other_text:
+    noteDev: 
+    temp: false
+    text: Toggle the display of other messages.
+  event_log_bt_toggle_text:
+    noteDev: 
+    temp: false
+    text: Toggle between compact and expanded window size.
+  event_log_bt_units_enemy_text:
+    noteDev: 
+    temp: false
+    text: Toggle the display of events involving enemy units.
+  event_log_bt_units_friendly_text:
+    noteDev: 
+    temp: false
+    text: Toggle the display of events involving friendly units.
+  event_log_empty_header:
+    noteDev: 
+    temp: false
+    text: Nothing to display
+  event_log_empty_text_hidden:
+    noteDev: 
+    temp: false
+    text: Messages hidden
+  event_log_empty_text_none:
+    noteDev: 
+    temp: false
+    text: No hidden messages
+  id_unknown_unit_desc:
+    noteDev: 
+    temp: false
+    text: No intel available for this unit.
+  id_unknown_unit_name:
+    noteDev: 
+    temp: false
+    text: Unidentified unit
+  intro_squad_ready:
+    noteDev: 
+    temp: false
+    text: Squad in position
+  log_strike_incoming:
+    noteDev: 
+    temp: false
+    text: Incoming air strike detected!
+  log_target_neutralized:
+    noteDev: 
+    temp: false
+    text: Target neutralized!
+  log_unit_detected:
+    noteDev: 
+    temp: false
+    text: New enemy detected!
+  log_unit_detected_multiple:
+    noteDev: 
+    temp: false
+    text: New enemies detected!
+  mode_context_both:
+    noteDev:
+      text: See below.
+    temp: false
+    text: In timeline or world
+  mode_context_timeline:
+    noteDev:
+      text: 'This text is appended to mode text from Combat Actions sector. For example "Choose time: In timeline". The timeline is part of 2D UI displaying the upcoming turn and letting you schedule actions.'
+    temp: false
+    text: In timeline
+  mode_context_world:
+    noteDev:
+      text: "This text is appended to mode text from Combat Actions sector. For example \"Set target unit: In world\". The world in this case means the area of your screen displaying a 3D environment, as opposed to part of your screen displaying 2D UI, such as the timeline. It's important to translate this correctly to ensure players understand where to move their mouse to progress."
+    temp: false
+    text: In world
+  mode_tooltip_contact_header:
+    noteDev: 
+    temp: false
+    text: Contact
+  overlay_collision_hint:
+    noteDev: 
+    temp: false
+    text: Collision
+  overlay_flag_concussed:
+    noteDev: 
+    temp: false
+    text: Concussed
+  overlay_flag_crash:
+    noteDev: 
+    temp: false
+    text: Crashed
+  overlay_flag_destroyed:
+    noteDev: 
+    temp: false
+    text: Destroyed
+  overlay_flag_ejected:
+    noteDev: 
+    temp: false
+    text: Ejected
+  overlay_flag_nodata:
+    noteDev: 
+    temp: false
+    text: no data
+  overlay_flag_overheat:
+    noteDev: 
+    temp: false
+    text: Overheated
+  overlay_flag_part_integrity:
+    noteDev: 
+    temp: false
+    text: Part integrity
+  overlay_flag_part_lost:
+    noteDev: 
+    temp: false
+    text: Part lost
+  overlay_flag_reaction_fired:
+    noteDev: 
+    temp: false
+    text: Activated
+  overlay_flag_reaction_triggered:
+    noteDev: 
+    temp: false
+    text: Detected
+  pilot_event_knockout_header:
+    noteDev: 
+    temp: false
+    text: Knocked out
+  pilot_event_knockout_text:
+    noteDev: 
+    temp: false
+    text: This pilot is in a critical condition. They have survived, but require treatment to deploy again and gain a permanent trauma.
+  pilot_event_lost_desc_trauma:
+    noteDev: 
+    temp: false
+    text: The pilot did not survive this injury due to untreated past trauma. Their remains will be recovered after combat. Letting pilots recover from injuries after combat can avoid this.
+  pilot_event_lost_header:
+    noteDev: 
+    temp: false
+    text: Pilot lost
+  pilot_health_damage_concussion:
+    noteDev: 
+    temp: false
+    text: Damage until concussion
+  pilot_health_damage_death:
+    noteDev: 
+    temp: false
+    text: Damage until death
+  pilot_health_deployment:
+    noteDev: 
+    temp: false
+    text: Health on deployment
+  pilot_health_desc_enemy:
+    noteDev: 
+    temp: false
+    text: Remaining health until this hostile pilot is knocked unconscious. Use concussive weapons to damage pilot health.
+  pilot_health_desc_friendly:
+    noteDev: 
+    temp: false
+    text: Remaining health until our pilot is knocked unconscious. Prevent this by avoiding concussive weapon damage.
+  pilot_health_max:
+    noteDev: 
+    temp: false
+    text: Maximum health
+  pilot_health_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Pilot health
+  pilot_risk_death:
+    noteDev: 
+    temp: false
+    text: At risk of death!
+  pilot_risk_death_desc_enemy:
+    noteDev: 
+    temp: false
+    text: Remaining health until this hostile pilot succumbs to their injuries. Use concussive weapons to damage pilot health.
+  pilot_risk_death_desc_friendly:
+    noteDev: 
+    temp: false
+    text: Remaining health until our pilot succumbs to their injuries. Avoid concussive weapon damage - pilot death is permanent!
+  pilot_status_concussion_desc_enemy:
+    noteDev: 
+    temp: false
+    text: The enemy pilot was knocked out from a concussive weapon. Their unit is intact - a great opportunity for salvage!
+  pilot_status_concussion_desc_friendly:
+    noteDev: 
+    temp: false
+    text: Our pilot was knocked out from a concussive hit. Win the fight to ensure their survival! We cannot revive them if we lose.
+  pilot_status_concussion_header:
+    noteDev: 
+    temp: false
+    text: Concussed
+  pilot_status_concussion_subheader:
+    noteDev:
+      text: This text appears over the pilot's portrait and is split in two lines for aesthetic reasons.
+    temp: false
+    text: >-
+      Pilot
+
+      Concussed
+  pilot_status_crashed_desc:
+    noteDev: 
+    temp: false
+    text: This unit is out of control from a collision or destroyed part. All previously planned actions have been terminated.
+  pilot_status_crashed_header:
+    noteDev: 
+    temp: false
+    text: Crashed
+  pilot_status_crashed_subheader:
+    noteDev:
+      text: This text appears over the pilot's portrait and is split in two lines for aesthetic reasons.
+    temp: false
+    text: >-
+      Unit
+
+      Crashing
+  pilot_status_deceased_concussion_desc_enemy:
+    noteDev: 
+    temp: false
+    text: The enemy pilot was killed by concussive weapon damage. We might be able to salvage some equipment from their unit.
+  pilot_status_deceased_concussion_desc_friendly:
+    noteDev: 
+    temp: false
+    text: Our pilot was killed by concussive weapon damage. Remember to send in healthy, uninjured pilots - they have stronger chances of survival.
+  pilot_status_deceased_core_desc_enemy:
+    noteDev: 
+    temp: false
+    text: This enemy pilot was killed after their unit's reactor core detonated.
+  pilot_status_deceased_core_desc_friendly:
+    noteDev: 
+    temp: false
+    text: This pilot was killed after the unit's reactor core detonated. A timely ejection could have ensured their survival.
+  pilot_status_deceased_header:
+    noteDev: 
+    temp: false
+    text: Deceased
+  pilot_status_deceased_subheader:
+    noteDev:
+      text: This text appears over the pilot's portrait and is split in two lines for aesthetic reasons.
+    temp: false
+    text: >-
+      Pilot
+
+      Deceased
+  pilot_status_default:
+    noteDev:
+      text: This text appears over the pilot's portrait and is split in two lines for aesthetic reasons.
+    temp: false
+    text: >-
+      No
+
+      Recording
+  pilot_status_ejected_desc_enemy:
+    noteDev: 
+    temp: false
+    text: The enemy pilot has ejected and left their unit intact - a great opportunity for salvage!
+  pilot_status_ejected_desc_friendly:
+    noteDev: 
+    temp: false
+    text: Our pilot has ejected from this unit and will land near the battle site. Rescue them promptly to ensure their survival.
+  pilot_status_ejected_header:
+    noteDev: 
+    temp: false
+    text: Ejected
+  pilot_status_ejected_subheader:
+    noteDev:
+      text: This text appears over the pilot's portrait and is split in two lines for aesthetic reasons.
+    temp: false
+    text: >-
+      Pilot
+
+      Ejected
+  pilot_status_uncrewed_desc:
+    noteDev: 
+    temp: false
+    text: This unit is autonomous and lacks a pilot. It is immune to concussive damage.
+  pilot_status_uncrewed_header:
+    noteDev: 
+    temp: false
+    text: Uncrewed
+  pilot_status_uncrewed_subheader:
+    noteDev: 
+    temp: false
+    text: Uncrewed
+  profile_arrival_header:
+    noteDev: 
+    temp: false
+    text: Invader alert!
+  profile_arrival_hint:
+    noteDev: 
+    temp: false
+    text: An elite enemy unit has unexpectedly joined the fight. Exercise extreme caution.
+  scenario_from:
+    noteDev: 
+    temp: false
+    text: From
+  scenario_imminent:
+    noteDev:
+      text: Displayed next to text about enemy reinforcements when they are about to arrive.
+    temp: false
+    text: Imminent
+  scenario_incoming_units:
+    noteDev: 
+    temp: false
+    text: Incoming Units
+  scenario_pings_left:
+    noteDev:
+      text: Displayed next to location capture objectives, which require your unit to stand in a specified area for multiple turns to hack a cargo container and relay coordinates to a drone picking it up. Ping, in this context, refers to "location ping" or "sending coordinates".
+    temp: false
+    text: Pings Left
+  scenario_turns_left:
+    noteDev: 
+    temp: false
+    text: Turns left
+  startup_day_prefix:
+    noteDev:
+      text: Used in the intro cutscene to show the "Day X" text
+    temp: false
+    text: Day
+  startup_hint_skip:
+    noteDev: 
+    temp: false
+    text: '[C0C0C0]Press[-] [b]Esc[/b][-] [C0C0C0]or[-] [b]Space[/b] [C0C0C0]to skip[-]'
+  startup_unknown_region:
+    noteDev: 
+    temp: false
+    text: Unknown region
+  targeting_barrier_damage:
+    noteDev:
+      text: Should be lowercase and split into two lines for visual reasons. The exception is CJK - in CJK, please use one line.
+    temp: false
+    text: >-
+      barrier
+
+      damage
+  targeting_blocked:
+    noteDev:
+      text: Displayed when a planned attack target can't be reached, because there is an obstacle between your unit and where your cursor is pointing.
+    temp: false
+    text: Blocked
+  targeting_coverage:
+    noteDev:
+      text: This term refers to proportion of the scatter cone of your weapon being intersected by average target size. This is a bit technical, but to give an example - a sniper rifle with very narrow scatter cone has coverage of 100% at all distances, because average target size is much larger than the cone bullets travel in. A weapon like a shotgun only remains at 100% coverages over a short distance, then drops sharply. The bullets start out close together, but quickly separate by 2,3,4,5 meters and so on. Once bullets separate by 5 meters (average target size), coverage begins dropping from 100%. This term is important to advanced players who optimize their firing distances.
+    temp: false
+    text: Coverage
+  targeting_crit_chance:
+    noteDev: 
+    temp: false
+    text: Crit
+  targeting_damage:
+    noteDev: 
+    temp: false
+    text: Damage
+  targeting_damage_at_range:
+    noteDev:
+      text: Displayed before another % while targeting. This term refers to how potent a bullet is at a given distance. For balance reason, most bullets have low damage at close range, 100% damage at ideal range and lowered damage further out. Advanced players refer to this % when optimizing firing distances.
+    temp: false
+    text: Damage at range
+  targeting_damage_estimate:
+    noteDev: 
+    temp: false
+    text: Damage estimate
+  targeting_damage_estimate_env:
+    noteDev: 
+    temp: false
+    text: Predicted damage
+  targeting_damage_estimate_unit:
+    noteDev: 
+    temp: false
+    text: Predicted damage
+  targeting_environment_hint:
+    noteDev:
+      text: This text must be split to two lines and should not exceed two lines. It can be as long as needed horizontally. Displayed when a player clicks the ground while in a mode that requires clicking units.
+    temp: false
+    text: >-
+      Click a unit to lock target.
+
+      To target environment, hold [ffcc77]Ctrl.[-]
+  targeting_falloff:
+    noteDev: 
+    temp: false
+    text: Range fit
+  targeting_heat:
+    noteDev: 
+    temp: false
+    text: heat
+  targeting_integrity_damage:
+    noteDev:
+      text: Should be lowercase and split into two lines for visual reasons. The exception is CJK - in CJK, please use one line.
+    temp: false
+    text: >-
+      integrity
+
+      damage
+  targeting_left_weapon:
+    noteDev: 
+    temp: false
+    text: Left weapon
+  targeting_low_hit_chance:
+    noteDev:
+      text: Warning displayed when coverage and damage at distance are both low.
+    temp: false
+    text: Low hit chance
+  targeting_move_penalty:
+    noteDev: 
+    temp: false
+    text: Movement sway
+  targeting_optimal_range:
+    noteDev: 
+    temp: false
+    text: Optimal
+  targeting_out_of_range:
+    noteDev: 
+    temp: false
+    text: Out of range
+  targeting_pilot_hp:
+    noteDev: 
+    temp: false
+    text: pilot HP
+  targeting_pilot_knocked_out:
+    noteDev: 
+    temp: false
+    text: Pilot knocked out
+  targeting_scatter:
+    noteDev: 
+    temp: false
+    text: Scatter
+  targeting_stagger:
+    noteDev: 
+    temp: false
+    text: stagger
+  targeting_too_close:
+    noteDev: 
+    temp: false
+    text: Too Close
+  targeting_triggered_reaction:
+    noteDev: 
+    temp: false
+    text: 'Triggered reaction '
+  time_button_full:
+    noteDev:
+      text: Refers to time scale, displayed in time control UI
+    temp: false
+    text: Full
+  time_button_half:
+    noteDev:
+      text: Refers to time scale, displayed in time control UI
+    temp: false
+    text: Half
+  time_button_slow:
+    noteDev:
+      text: Refers to time scale, displayed in time control UI
+    temp: false
+    text: Slow
+  time_mirror:
+    noteDev:
+      text: Switches playback of replay of last turn from looped mode to ping-pong mode, where time bounces back in reverse after reaching 100%
+    temp: false
+    text: Mirror
+  time_once:
+    noteDev:
+      text: Do not repeat playback
+    temp: false
+    text: Once
+  time_pause:
+    noteDev:
+      text: Pause playback
+    temp: false
+    text: Pause
+  time_paused:
+    noteDev: 
+    temp: false
+    text: Paused
+  time_playing:
+    noteDev: 
+    temp: false
+    text: Playing
+  time_repeat:
+    noteDev:
+      text: Repeat playback of last turn
+    temp: false
+    text: Repeat
+  time_speed_full:
+    noteDev:
+      text: Refers to time scale, displayed in time control UI
+    temp: false
+    text: Full Speed
+  time_speed_half:
+    noteDev:
+      text: Refers to time scale, displayed in time control UI
+    temp: false
+    text: Half Speed
+  time_speed_slow:
+    noteDev:
+      text: Refers to time scale, displayed in time control UI
+    temp: false
+    text: Slow Motion
+  timeline_boot_desc:
+    noteDev:
+      text: Should be split into two lines for styling reasons.
+    temp: false
+    text: >-
+      Prediction system
+
+      ready for use
+  timeline_boot_header:
+    noteDev:
+      text: Boot up the prediction system, the device that lets your mech use the timeline and see enemy actions in the future.
+    temp: false
+    text: Boot Up
+  timeline_button_plan:
+    noteDev: 
+    temp: false
+    text: Plan
+  timeline_button_replay:
+    noteDev: 
+    temp: false
+    text: Replay
+  timeline_confirm_removal:
+    noteDev:
+      text: Should be lowercase and split into two lines for visual reasons. The exception is CJK - in CJK, please use one line.
+    temp: false
+    text: >-
+      confirm
+
+      removal
+  timeline_execute:
+    noteDev:
+      text: Execute your plan, beginning next turn.
+    temp: false
+    text: Execute
+  timeline_execution_total_time:
+    noteDev: 
+    temp: false
+    text: Total time
+  timeline_execution_turn:
+    noteDev: 
+    temp: false
+    text: Turn
+  timeline_finalize_order:
+    noteDev:
+      text: The text here is on two lines so it will fit in the UI.
+    temp: false
+    text: >-
+      Finalize order
+
+      to continue
+  timeline_heat_warning:
+    noteDev:
+      text: The text here is on two lines so it will fit in the UI.
+    temp: false
+    text: >-
+      Overheating:
+
+      unit will be damaged
+  timeline_horizon_header:
+    noteDev: 
+    temp: false
+    text: No data
+  timeline_horizon_text:
+    noteDev: 
+    temp: false
+    text: The actions of this unit can not be simulated. The enemy might be jamming your prediction system. Exercise caution and try to guess their actions.
+  timeline_late_desc:
+    noteDev: 
+    temp: false
+    text: Planning actions too late in the timeline is not permitted.
+  timeline_late_header:
+    noteDev:
+      text: Displayed when a player tries to place an action too late in the timeline (too far into the future).
+    temp: false
+    text: Too Late
+  timeline_lock_desc:
+    noteDev: 
+    temp: false
+    text: Execution unavailable
+  timeline_lock_header:
+    noteDev: 
+    temp: false
+    text: Locked
+  timeline_overlap_desc:
+    noteDev: 
+    temp: false
+    text: Secondary actions can not overlap, such as attacks. However, units can attack and move at the same time.
+  timeline_overlap_header:
+    noteDev: 
+    temp: false
+    text: Overlap
+  timeline_status_normal_desc:
+    noteDev:
+      text: Displayed when a player tries to view prediction of enemy actions too far into the future.
+    temp: false
+    text: Prediction limit approaching
+  timeline_status_paused_desc:
+    noteDev: 
+    temp: false
+    text: Hover to explore
+  timeline_status_paused_header:
+    noteDev: 
+    temp: false
+    text: Paused
+  timeline_status_playing_desc:
+    noteDev: 
+    temp: false
+    text: Hover to Interrupt
+  timeline_status_playing_header:
+    noteDev: 
+    temp: false
+    text: Playing
+  timeline_status_warning_desc:
+    noteDev: 
+    temp: false
+    text: Predicting into next turn
+  timeline_status_warning_header:
+    noteDev: 
+    temp: false
+    text: Low precision warning
+  timeline_tooltip_heat_header:
+    noteDev: 
+    temp: false
+    text: Heat
+  timeline_tooltip_heat_text:
+    noteDev: 
+    temp: false
+    text: Prolonged overheating will lead to the unit catching fire and taking damage. Space out attacks and other heat-generating actions to give the unit time to cool down. If a unit is destroyed by overheating, the pilot will automatically eject.
+  turn_header:
+    noteDev:
+      text: >-
+        Displayed at the top of the screen at the beginning of each turn, with the current turn number, example:
+
+        "Turn 3"
+    temp: false
+    text: Turn
+  unit_barrier:
+    noteDev: 
+    temp: false
+    text: Barrier
+  unit_event_defect_header:
+    noteDev: 
+    temp: false
+    text: Unit disabled
+  unit_event_defect_text:
+    noteDev: 
+    temp: false
+    text: This mech has taken critical damage. The internal frame will require repairs at the base before it can be deployed again. The attached parts can be salvaged after combat.
+  unit_event_destroyed_header:
+    noteDev: 
+    temp: false
+    text: Unit destroyed
+  unit_event_destroyed_text:
+    noteDev: 
+    temp: false
+    text: This mech has taken critical damage across multiple fights and has reached its limit. The attached parts can be salvaged after combat, but the frame is not recoverable.
+  unit_health_full:
+    noteDev: 
+    temp: false
+    text: Full
+  unit_health_none:
+    noteDev: 
+    temp: false
+    text: None
+  unit_info_blueprint_hint:
+    noteDev: 
+    temp: false
+    text: Integrity
+  unit_info_targeted_hint:
+    noteDev: 
+    temp: false
+    text: Targeted Unit
+  unit_integrity:
+    noteDev: 
+    temp: false
+    text: Integrity
+  unit_postfix_meters:
+    noteDev:
+      text: >-
+        Character added to the end of a number, indicating it is a length in meters, example:
+
+        "3.9m"
+    temp: false
+    text: m
+  unit_postfix_seconds:
+    noteDev:
+      text: >-
+        Character appended to a time in seconds, example:
+
+        "3.9s"
+    temp: false
+    text: s
+  unit_prefix_allied:
+    noteDev: 
+    temp: false
+    text: Allied
+  unit_prefix_hostile:
+    noteDev: 
+    temp: false
+    text: Hostile
+  unit_prefix_squad:
+    noteDev: 
+    temp: false
+    text: Squad
+  unit_status_buildup:
+    noteDev: 
+    temp: false
+    text: Buildup
+  unit_status_countdown:
+    noteDev: 
+    temp: false
+    text: Countdown
+  unit_status_source_action:
+    noteDev: 
+    temp: false
+    text: Active action
+  unit_status_source_equipment:
+    noteDev: 
+    temp: false
+    text: Equipped item
+  unit_status_source_function:
+    noteDev: 
+    temp: false
+    text: Event
+  unit_status_source_header:
+    noteDev: 
+    temp: false
+    text: Status source
+  unit_status_source_hit:
+    noteDev: 
+    temp: false
+    text: Weapon hit
+  unit_status_source_overheat:
+    noteDev: 
+    temp: false
+    text: Overheating
+  unit_status_source_trait:
+    noteDev: 
+    temp: false
+    text: Pilot trait
+  unit_status_source_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown
+  unit_status_turn_duration:
+    noteDev: 
+    temp: false
+    text: 1 turn
+  unit_status_turn_linked:
+    noteDev: 
+    temp: false
+    text: This status is linked to the current turn. It affects the current planning phase and the upcoming execution phase.
+  unit_tooltip_actions:
+    noteDev: 
+    temp: false
+    text: ''
+  unit_tooltip_crashing:
+    noteDev: 
+    temp: false
+    text: Crashing
+  unit_tooltip_crashing_desc:
+    noteDev: 
+    temp: false
+    text: This unit had a collision and lost all planned actions. It will recover next turn.
+  unit_tooltip_ejecting:
+    noteDev: 
+    temp: false
+    text: Ejecting
+  unit_tooltip_ejecting_desc:
+    noteDev: 
+    temp: false
+    text: The pilot of this unit is planning to eject and ecape the fight.
+  unit_tooltip_focus_camera_header:
+    noteDev: 
+    temp: false
+    text: Focus Camera
+  unit_tooltip_focus_camera_text:
+    noteDev: 
+    temp: false
+    text: Move the camera to the unit location. Double click to lock the camera to the unit.
+  unit_tooltip_landing:
+    noteDev: 
+    temp: false
+    text: Landing
+  unit_tooltip_landing_desc:
+    noteDev: 
+    temp: false
+    text: This unit is descending and will join the fight next turn.
+  unit_tooltip_no_actions:
+    noteDev: 
+    temp: false
+    text: No Actions
+  unit_tooltip_no_actions_desc:
+    noteDev: 
+    temp: false
+    text: This unit has no actions on its timeline. Consider giving it orders before proceeding to next turn.
+  unit_tooltip_repair_gel_header:
+    noteDev: 
+    temp: false
+    text: Liquid Fix
+  unit_tooltip_repair_gel_text:
+    noteDev: 
+    temp: false
+    text: Barrier armor can be regenerated if the unit is not under fire. Regeneration will stop when Liquid Fix supply is depleted.
+  unit_tooltip_retreating:
+    noteDev: 
+    temp: false
+    text: Retreating
+  unit_tooltip_retreating_desc:
+    noteDev: 
+    temp: false
+    text: This unit is planning to retreat from the fight.
+  unit_tooltip_target_warning_header:
+    noteDev: 
+    temp: false
+    text: Target warning
+  unit_tooltip_target_warning_text:
+    noteDev: 
+    temp: false
+    text: This unit is being targeted by a dangerous attack. Check the timeline and try to evade it.

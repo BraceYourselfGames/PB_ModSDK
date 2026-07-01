@@ -1,0 +1,52 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_combat_trait_monument2
+tags:
+- type_special
+- starter
+- type_brawler
+- brawler_tackle
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_offset_speed:
+    mode: Offset
+    value: 4
+statRangesMin: 
+statRangesMax:
+  fatigue:
+    mode: Offset
+    value: -1
+effectsOnEvents:
+- filterEventTypes: 
+  filterEventEntity:
+    eventType: CombatUnitCrashWon
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit:
+  - !CombatUnitIntegrityChange
+    value: 0.25
+    offset: true
+    sockets:
+    - core
+    - secondary
+    - optional_left
+    - optional_right
+  functionsSelf: 
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

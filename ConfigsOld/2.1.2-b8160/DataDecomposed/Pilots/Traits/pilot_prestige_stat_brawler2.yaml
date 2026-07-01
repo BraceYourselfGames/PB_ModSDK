@@ -1,0 +1,27 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_pilot1
+tags:
+- type_prestige
+- type_brawler
+group: 
+existingTraitTagsFilter:
+  brawler_damage: true
+prestigeRank:
+  check: Equal
+  value: 1
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  unit_damage_sr:
+    mode: Offset
+    value: 0.2
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents: 
+effectsShared: 

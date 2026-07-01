@@ -1,0 +1,84 @@
+dataUI:
+  icon: s_icon_sm_shield
+  color:
+    r: 0.9336878
+    g: 1
+    b: 0.4117647
+    a: 1
+  colorOverride:
+    r: 0.8872693
+    g: 1
+    b: 0
+    a: 1
+  sortingPriority: 700
+  hidden: true
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 2
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation:
+  - !CombatActionValidationDependency
+    dependencyActionKey: shield
+  functionsOnCreation:
+  - !CombatActionCreateReaction
+    dependencyActionKey: shield
+    delay: 
+    range: 
+    directionAnimation: 
+    duration: 
+    overrideCheck: 
+    functionsTimed: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: ReactiveGuard
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom:
+  flags:
+  - melee_damage_dispersed
+  ints: 
+  floats: 
+  vectors: 
+  strings: 
+functionsTimed:
+- timeNormalized: 0
+  repeat: 
+  functions: 

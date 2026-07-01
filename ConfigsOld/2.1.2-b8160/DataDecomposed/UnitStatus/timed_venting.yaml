@@ -1,0 +1,113 @@
+icon: s_icon_l32_stat_heat_out
+color:
+  r: 0.7490196
+  g: 0.4172684
+  b: 0.2980392
+  a: 1
+hidden: false
+debug: false
+showOverlay: true
+showNotifications: true
+showTutorial: true
+restartOnRefresh: false
+turnLinked: false
+actionLink: 
+tags: 
+fxAttached: 
+fxRepeated:
+  parented: true
+  interval: 0.9
+  velocityDecayTime: 1
+  key: fx_status_venting_oneshot
+  scale:
+    x: 1
+    y: 1
+    z: 1
+durationFull:
+  f: 2
+durationUpdate:
+  f: 0.08
+buildupDecayRate: 
+buildupThreshold: 
+buildupOverflow: 
+buildupShieldMultiplier: 
+stackable: 
+audio:
+  audioOnStart: status_venting_loop
+  audioOnStop: status_venting_loop_stop
+effectsOnStart: 
+effectsOnUpdate:
+- triggerRemoval: true
+  triggerInStack: false
+  applyMissedUpdates: false
+  enabled: true
+  triggerCheckUnit:
+  - !CombatValidateUnitStatus
+    key: timed_burn
+    present: true
+  triggerCheckPilot: 
+  comment:
+    comment: If a unit is burning, reset the duration of the burning status effect and apply damage and build burning status effect up on neighbouring units.
+  functionsOnHost:
+  - !CombatUnitStatusCountdownReset
+    key: timed_burn
+  - !CombatUnitEffectSpawn
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    centered: true
+    asset:
+      key: fx_status_venting_ignition
+      scale:
+        x: 1
+        y: 1
+        z: 1
+  - !CombatAreaOfEffect
+    offset:
+      x: 0
+      y: 0
+      z: 0
+    radius: 15
+    exponent: 2
+    dispersed: true
+    integrity:
+      normalized: false
+      leveled: true
+      f: 50
+    concussion: 
+    heat: 
+    stagger: 
+    statusBuildup:
+      key: timed_burn
+      amount: 1
+    crash: 
+    targetCheck: 
+    functionsOnHit: 
+    impactUnitSelf: false
+    impactUnitAllies: true
+    impactUnitHostiles: true
+    impactUnitComposites: true
+    impactProjectiles: false
+    impactProps: true
+    fxDetonation: 
+    fxDetonationScale: 1
+    fxArea: 
+    fxHit: 
+    audioDetonation: 
+  - !CombatAudioEvent
+    offset:
+      x: 0
+      y: 0
+      z: 0
+    audio: status_venting_burning
+    delayScaled: 0
+  functionsOnPilot: 
+  functionsGlobal: 
+  functionsOnBlackboard: 
+effectsOnEnd: 
+statOffsets: 

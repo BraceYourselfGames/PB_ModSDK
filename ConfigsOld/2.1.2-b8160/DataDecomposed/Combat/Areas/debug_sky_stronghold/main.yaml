@@ -1,0 +1,98 @@
+hidden: false
+parents: []
+image: 
+core:
+  backgroundTerrainUsed: false
+  sliceShadingUsed: false
+  sliceShadingInputs:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
+content: 
+atmosphere:
+  groundHeight: 0
+  destructionMapping:
+    x: 10
+    y: 20
+    z: 0
+    w: 1
+tags:
+- type_unique
+spawnGroups:
+  gates:
+    tags:
+    - utility_wave_00
+    points:
+    - point:
+        x: 133.5
+        y: -16.5
+        z: 136.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 100.5
+        y: -16.5
+        z: 124.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 52.5
+        y: -16.5
+        z: 112.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+  player:
+    tags:
+    - player
+    points:
+    - point:
+        x: 88.5
+        y: -16.5
+        z: 250.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 88.5
+        y: -16.5
+        z: 238.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 91.5
+        y: -16.5
+        z: 244.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+locations: 
+volumes: 
+fields: 
+waypointGroups: 
+briefingGroupsInjected: 
+intro: 
+boundary: 
+segments:
+- path: Content/AreaSegments/area_seg_debug_sky_stronghold
+biomeFilter: 
+scenarioChanges: 

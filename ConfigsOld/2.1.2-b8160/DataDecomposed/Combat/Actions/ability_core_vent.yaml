@@ -1,0 +1,166 @@
+dataUI:
+  icon: s_icon_l32_stat_heat_out
+  color:
+    r: 0.9811321
+    g: 0.5955609
+    b: 0.3193307
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0.6156474
+    b: 0.3443396
+    a: 1
+  sortingPriority: 750
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Primary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: UnitStat
+  duration: 1
+  durationUnitStat: act_duration_vent
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart:
+  - !CombatActionFunctionsChecked
+    unitCheck:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions:
+      - !CombatValidateUnitOverheating
+        present: false
+    functions:
+    - !CombatActionAddStatus
+      key: timed_venting
+      durationFullOverrideStat: 
+      updateCountOverrideStat: 
+    functionsElse:
+    - !CombatActionFunctionOwner
+      functions:
+      - !CombatUnitStatusAdd
+        key: timed_burn
+        durationOverride: -1
+        source: Function
+      - !CombatUnitEffectSpawn
+        position:
+          x: 0
+          y: 0
+          z: 0
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        centered: true
+        asset:
+          key: fx_status_venting_ignition
+          scale:
+            x: 1
+            y: 1
+            z: 1
+      - !CombatAreaOfEffect
+        offset:
+          x: 0
+          y: 0
+          z: 0
+        radius: 15
+        exponent: 2
+        dispersed: true
+        integrity:
+          normalized: false
+          leveled: true
+          f: 50
+        concussion: 
+        heat: 
+        stagger: 
+        statusBuildup:
+          key: timed_burn
+          amount: 1
+        crash: 
+        targetCheck: 
+        functionsOnHit: 
+        impactUnitSelf: false
+        impactUnitAllies: true
+        impactUnitHostiles: true
+        impactUnitComposites: true
+        impactProjectiles: false
+        impactProps: true
+        fxDetonation: 
+        fxDetonationScale: 1
+        fxArea: 
+        fxHit: 
+        audioDetonation: 
+      - !CombatAudioEvent
+        offset:
+          x: 0
+          y: 0
+          z: 0
+        audio: status_venting_burning
+        delayScaled: 0
+    - !CombatActionDispose {}
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck:
+    exportCountToMemory: 
+    exportEntitiesToBlackboard: 
+    tags: 
+    name: 
+    faction: 
+    state: 
+    actionPlanned: 
+    locationOccupied: 
+    locationOccupiedUnlinked: 
+    relativeTransform: 
+    blueprints: 
+    classes: 
+    stats: 
+    statsNormalized: 
+    actionsInProgress: 
+    functions:
+    - !CombatValidateUnitPart
+      socket: 
+      preset: 
+      tags:
+        ability_vent: true
+      present: true
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

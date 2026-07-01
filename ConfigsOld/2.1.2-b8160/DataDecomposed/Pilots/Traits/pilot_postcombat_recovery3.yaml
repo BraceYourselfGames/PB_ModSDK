@@ -1,0 +1,61 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_part_arch_structure
+tags:
+- level_2
+- bonus
+- type_support
+group: 
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible:
+- brawler
+- defender
+- sharpshooter
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionVictoryEarly
+  - CombatMissionDefeatEarly
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal:
+  - !ModifyPilots
+    pilots: 0
+    deployed: true
+    checks: 
+    functions:
+    - !PilotCheck
+      checks:
+      - !PilotValidateTraitTriggered
+        key: pilot_postcombat_recovery3
+        tag: false
+        present: false
+      functions:
+      - !PilotStatOffset
+        key: hp
+        normalized: true
+        value: 0.15
+      functionsElse: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotRecordTraitActivation
+    key: pilot_postcombat_recovery3
+    log: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

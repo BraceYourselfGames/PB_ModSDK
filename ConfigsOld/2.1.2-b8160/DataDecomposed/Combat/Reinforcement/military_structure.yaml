@@ -1,0 +1,36 @@
+unitGroups:
+- !UnitGroupFilter
+  tagsFromFactionBranch: true
+  tags:
+    range_long: true
+    type_main: true
+  check: 
+  combatTags: 
+  spawnGroupOccupied: true
+  spawnCountStrict: true
+  spawnOrderRandom: true
+  factionBranchOverride: false
+  factionBranchKey: 
+  baseGrade: 0
+  maxGrade: 2
+  cloneable: true
+  functions: 
+  spawnTagsUsed: true
+  spawnTags:
+    perimeter_outer: true
+  spawnGroupKey: 
+  filterDistancePlayer:
+    check: Greater
+    value: 80
+  filterDistanceEnemy: 
+  filterDistanceSpawn: 
+  filterDistanceLocation: 
+  filterDistanceVolume: 
+  filterDistanceState: 
+  filterDistanceRetreat:
+    key: default
+    check: Greater
+    value: 50
+  sorting: !UnitSlotSortingPlayer
+    invert: true
+  spawnRegistration: 

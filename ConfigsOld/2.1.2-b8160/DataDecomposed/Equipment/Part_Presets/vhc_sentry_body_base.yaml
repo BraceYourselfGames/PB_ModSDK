@@ -1,0 +1,42 @@
+hidden: false
+parents:
+- key: vhc_sentry_body
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- core
+tags: 
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - vhc_vis_sentry_base
+  pickRandom: false
+  hardpointsTargeted:
+  - vhc_vis_core
+  priority: 0
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_vhc_sentry_core_v01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_chassis
+  priority: 1
+  comment: 
+  checks: 
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_aux_core_vhc
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_core
+  priority: 2
+  comment: 
+  checks: 

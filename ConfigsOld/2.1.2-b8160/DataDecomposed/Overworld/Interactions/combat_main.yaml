@@ -1,0 +1,127 @@
+hidden: true
+parents:
+- key: sh_group_precombat_optional
+core: 
+effectsOnExit: 
+tags:
+- combat-general
+check: 
+steps:
+  main:
+    comment: 
+    image: 
+    background: 
+    mood: 
+    textHeader: 
+    text: 
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      02_modify:
+        core:
+          hidden: true
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 5
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: modifiers
+    optionsReused: 
+  modifiers:
+    comment: 
+    image: event_hologram_default
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      t1:
+        core: 
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !Log
+            message: Test
+          functionsLocal: 
+      t2:
+        core: 
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !Log
+            message: Test
+          functionsLocal: 
+      t3:
+        core: 
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main
+    optionsReused: 

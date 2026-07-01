@@ -1,0 +1,24 @@
+extended: false
+lines:
+- mode: All
+  text: Select option
+  actions:
+  - action: global_direction_up
+    newline: false
+  - action: global_direction_down
+    newline: false
+- mode: All
+  text: Select binding
+  actions:
+  - action: global_direction_right
+    newline: false
+- mode: All
+  text: Apply or reset
+  actions:
+  - action: global_confirm
+    newline: false
+- mode: All
+  text: Return to groups
+  actions:
+  - action: global_cancel
+    newline: false

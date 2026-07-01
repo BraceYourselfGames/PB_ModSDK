@@ -1,0 +1,33 @@
+parents:
+- key: reactor_expanded
+  priority: 2
+  offsetStart: 0
+  offsetEnd: 211
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 2
+ui:
+  positionX: 4
+  positionY: 4
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_reactor4
+unlock: 
+cost:
+  resources:
+    components_r3: 30
+    supplies: 2000
+effect:
+  stats:
+  - key: energy_recharge_delay
+    modifier: Multiply
+    value: 0.8
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_reactor

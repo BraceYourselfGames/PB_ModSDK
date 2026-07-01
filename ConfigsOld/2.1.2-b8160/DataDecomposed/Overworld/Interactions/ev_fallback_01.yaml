@@ -1,0 +1,62 @@
+hidden: true
+parents:
+- key: sh_core_basic
+core:
+  stepOnStart: main
+  priority: 10
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags:
+- ev_general
+check:
+  repeat: Enabled
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_smoke_distant
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      leave:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: 
+        textMainReused:
+          textSector: ui_overworld
+          textKey: int_sh_option_leave_header
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !OverworldOffsetCountdownStartTime
+            hours: 4
+          functionsLocal: 
+    optionsReused: 
