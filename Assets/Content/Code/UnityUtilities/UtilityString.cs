@@ -37,6 +37,65 @@ public static class UtilityString
 
         return String.Format ("{0:0.##} {1}", byteCountAsDouble, byteCountSuffixes[i]);
     }
+    
+    
+    public static string FormatIndexed (this string input, List<string> args)
+    {
+        if (args == null || args.Count == 0)
+        {
+            Debug.LogWarning ("Can't format string, no arguments provided");
+            return input;
+        }
+        
+        sb.Clear ();
+
+        int len = input.Length;
+        uint argsCount = (uint)args.Count;
+        
+        for (int i = 0; i < len; i++)
+        {
+            char c = input[i];
+            if (c != '{')
+            {
+                sb.Append (c);
+                continue;
+            }
+
+            int index = 0;
+            bool hasDigits = false;
+
+            int j = i + 1;
+            for (; j < len; j++)
+            {
+                char d = input[j];
+                if (d == '}')
+                    break;
+
+                if ((uint)(d - '0') <= 9)
+                {
+                    hasDigits = true;
+                    index = index * 10 + (d - '0');
+                }
+                else
+                {
+                    hasDigits = false;
+                    break;
+                }
+            }
+
+            if (hasDigits && j < len && (uint)index < argsCount)
+            {
+                sb.Append (args[index]);
+                i = j; // skip past '}'
+            }
+            else
+            {
+                sb.Append ('{'); // fallback: treat as literal
+            }
+        }
+
+        return sb.ToString ();
+    }
 
     public static void AppendBarToStringBuilder (int valueCurrent, int valueLimit, string segmentText, StringBuilder sb1)
     {
@@ -143,7 +202,7 @@ public static class UtilityString
 
     public static string ToStringFormatted (this int[] source)
     {
-        StringBuilder sb = new StringBuilder ();
+        sb.Clear ();
         sb.Append ("[");
         for (int i = 0; i < source.Length; ++i)
         {
@@ -157,7 +216,7 @@ public static class UtilityString
 
     public static string ToStringFormatted (this List<int> source)
     {
-        StringBuilder sb = new StringBuilder ();
+        sb.Clear ();
         sb.Append ("[");
         for (int i = 0; i < source.Count; ++i)
         {
@@ -171,7 +230,7 @@ public static class UtilityString
 
     public static string ToStringFormatted (this float[] source)
     {
-        StringBuilder sb = new StringBuilder ();
+        sb.Clear ();
         sb.Append ("[");
         for (int i = 0; i < source.Length; ++i)
         {
@@ -185,7 +244,7 @@ public static class UtilityString
 
     public static string ToStringFormatted (this List<float> source)
     {
-        StringBuilder sb = new StringBuilder ();
+        sb.Clear ();
         sb.Append ("[");
         for (int i = 0; i < source.Count; ++i)
         {
@@ -203,8 +262,8 @@ public static class UtilityString
     public static string ToStringFormattedKeys<T1, T2> (this IDictionary<T1, T2> dict, bool multiline = false, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
+        sb.Clear ();
         
-        StringBuilder sb = new StringBuilder ();
         if (!multiline)
             sb.Append ("[");
         
@@ -243,8 +302,8 @@ public static class UtilityString
     public static string ToStringFormattedKeysLegacy (this IDictionary dict, bool multiline = false, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
+        sb.Clear ();
         
-        StringBuilder sb = new StringBuilder ();
         if (!multiline)
             sb.Append ("[");
         
@@ -287,8 +346,8 @@ public static class UtilityString
     public static string ToStringFormattedValues<T1, T2> (this IDictionary<T1, T2> dict, bool multiline = false, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
+        sb.Clear ();
         
-        StringBuilder sb = new StringBuilder ();
         if (!multiline)
             sb.Append ("[");
         
@@ -333,8 +392,8 @@ public static class UtilityString
     public static string ToStringFormattedKeyValuePairs<T1, T2> (this IDictionary<T1, T2> dict, bool multiline = false, Func<T2,string> toStringOverride = null, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
-
-        StringBuilder sb = new StringBuilder ();
+        sb.Clear ();
+        
         if (!multiline)
             sb.Append ("[");
         
@@ -389,8 +448,8 @@ public static class UtilityString
     public static string ToStringFormatted<T> (this T[] array, bool multiline = false, Func<T,string> toStringOverride = null, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
+        sb.Clear ();
         
-        StringBuilder sb = new StringBuilder ();
         if (!multiline)
             sb.Append ("[");
         
@@ -434,8 +493,8 @@ public static class UtilityString
     public static string ToStringFormatted<T> (this IEnumerable<T> collection, bool multiline = false, Func<T,string> toStringOverride = null, bool appendBrackets = true, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
+        sb.Clear ();
         
-        StringBuilder sb = new StringBuilder ();
         if (!multiline && appendBrackets)
             sb.Append ("[");
 
@@ -481,8 +540,8 @@ public static class UtilityString
     public static string ToStringFormattedFilter (this IDictionary<string,bool> collection, bool multiline = false, bool appendBrackets = true, string multilinePrefix = null)
     {
         bool multilinePrefixUsed = multiline && !string.IsNullOrEmpty (multilinePrefix);
+        sb.Clear ();
         
-        StringBuilder sb = new StringBuilder ();
         if (!multiline && appendBrackets)
             sb.Append ("[");
 

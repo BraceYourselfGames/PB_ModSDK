@@ -65,6 +65,11 @@ public static class UtilityTransform
         return null;
     }
 
+    public static Vector2 LocalPos2D (this Transform t)
+    {
+        return (Vector2)t.localPosition;
+    }
+
     public static string GetNameWithParent (this Transform t)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder ();
