@@ -1,0 +1,39 @@
+hidden: true
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: 
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- type_mech
+partTagPreferences:
+  body:
+  - tags:
+      armor_arrow: true
+      weight_medium: true
+parts:
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_top_core:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_core_standard
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ultraheavy_beam_01
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

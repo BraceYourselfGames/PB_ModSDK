@@ -29,6 +29,28 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone:
+  developerOnly: false
+  standaloneOnly: false
+  squadCustomization: true
+  enemyPreview: false
+  type: sim
+  group: replay
+  priority: 10
+  textName: 
+  textDesc: 
+  conditionVisible: 
+  conditionUnlock:
+    checksGlobal: 
+    checksBase:
+    - !OverworldValidateCompletionScenario
+      filter:
+        unique_breakthrough_stage_01:
+          check: GreaterEqual
+          value: 1
+    checksBaseValues: 
+  scenarioNext: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -61,16 +83,11 @@ tags:
 states:
   cargo_destruction_counter:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 9
     priority: 9
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnLevelDestruction
     evaluationOnOutcome: 
@@ -119,22 +136,32 @@ states:
           outcome: 
   cargo_destruction_threshold:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 10
     priority: 30
-    priorityDisplay: 30
-    mood: -1
+    briefingHidden: false
     ui:
+      priorityDisplay: 30
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: true
       progressHiddenAtZero: true
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -1
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.8
@@ -221,16 +248,11 @@ states:
           outcome: 
   engine_remains0:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 20
     priority: 20
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -294,16 +316,11 @@ states:
           outcome: 
   engine_remains1:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 21
     priority: 21
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -375,16 +392,11 @@ states:
           outcome: 
   engine_remains4:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 22
     priority: 22
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -455,22 +467,18 @@ states:
             - time: 0
               hidden: false
               key: br_train_engine_remains4
+              functionsOnExit: 
           functionsPerUnit: 
           unitGroups: 
           unitGeneratorKeys: 
           outcome: 
   engine_remains7:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 23
     priority: 23
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -545,16 +553,11 @@ states:
   engine_wreck_activate_aoe_damage_center_l:
     comment:
       comment: Destroys any tanks present on the LEFT flank after center-left engine was destroyed (either of the two engines in the center). Destruction happens from nearby engine's explosion blast
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: false
-    visible: false
     startInScope: false
     priorityGeneration: 10
     priority: 45
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -659,16 +662,11 @@ states:
   engine_wreck_activate_aoe_damage_center_r:
     comment:
       comment: Destroys any tanks present on the RIGHT flank after center-right engine was destroyed (either of the two engines in the center). Destruction happens from nearby engine's explosion blast
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: false
-    visible: false
     startInScope: false
     priorityGeneration: 10
     priority: 45
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -773,16 +771,11 @@ states:
   engine_wreck_activate_aoe_damage_front_l:
     comment:
       comment: Destroys any tanks present on the LEFT flank after front-left engine was destroyed. Destruction happens after engine's panel hits the tanks
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: false
-    visible: false
     startInScope: false
     priorityGeneration: 10
     priority: 45
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -887,16 +880,11 @@ states:
   engine_wreck_activate_aoe_damage_front_r:
     comment:
       comment: Destroys any tanks present on the RIGHT flank after front-right engine was destroyed. Destruction happens after engine's panel hits the tanks
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: false
-    visible: false
     startInScope: false
     priorityGeneration: 10
     priority: 45
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1001,16 +989,11 @@ states:
   engine_wreck_effect:
     comment:
       comment: Checks for combat_sc_score, which indicates an engine was taken out during a turn. Resets temp memory combat_sc_score to 0.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 33
     priority: 33
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1066,16 +1049,11 @@ states:
   engine_wreck_trigger:
     comment:
       comment: Every time an engine is destroyed, run this logic. Non-incremented reaction. The memory key combat_sc_score is used to communicate with wreck_effect state to apply destruction effects that shouldn't be repeated per engine.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 10
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1152,16 +1130,11 @@ states:
   reinforcements_progress:
     comment:
       comment: If no guards are on the field, Increment combat_sc_progress by 1 to track how soon reinforcements should arrive. Another state will use this to spawn them.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 32
     priority: 32
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1233,22 +1206,32 @@ states:
   reinforcements_spawn:
     comment:
       comment: If progress reaches threshold, spawn guard squad. Reset progress counter to spawning them.
-    textNameKey: generic_enemy_reinforcements_header
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 35
     priority: 35
-    priorityDisplay: 0
-    mood: -2
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: true
       progressHiddenAtZero: true
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -2
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.8
@@ -1351,16 +1334,11 @@ states:
           outcome: 
   state_c1_engine_l_01_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1440,16 +1418,11 @@ states:
           outcome: 
   state_c1_engine_l_02_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1529,16 +1502,11 @@ states:
           outcome: 
   state_c1_engine_r_01_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1618,16 +1586,11 @@ states:
           outcome: 
   state_c1_engine_r_02_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1707,16 +1670,11 @@ states:
           outcome: 
   state_c2_engine_l_01_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1796,16 +1754,11 @@ states:
           outcome: 
   state_c2_engine_l_02_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1885,16 +1838,11 @@ states:
           outcome: 
   state_c2_engine_r_01_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -1974,16 +1922,11 @@ states:
           outcome: 
   state_c2_engine_r_02_damage:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnUnitDisabled
     evaluationOnOutcome: 
@@ -2063,16 +2006,11 @@ states:
           outcome: 
   victory:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -2213,13 +2151,19 @@ steps:
         g: 0.2688679
         b: 0.2688679
         a: 0
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -2251,7 +2195,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2294,7 +2239,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2337,7 +2283,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2393,7 +2340,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2449,7 +2397,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2492,7 +2441,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2535,7 +2485,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2578,7 +2529,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2621,7 +2573,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2664,7 +2617,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2707,7 +2661,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2750,7 +2705,8 @@ steps:
       maxGrade: 2
       cloneable: false
       functions:
-      - !CombatUnitHiddenDetectable {}
+      - !CombatUnitHiddenDetectable
+        controlDelay: 0
       - !CombatUnitTagChange
         tagChanges:
           flag_attacks_need_sightline: true
@@ -2818,9 +2774,11 @@ steps:
       - time: 3
         hidden: false
         key: br_train_intro1
+        functionsOnExit: 
       - time: 15
         hidden: false
         key: br_train_intro2
+        functionsOnExit: 
     - !ClearBaseCombatMemory {}
     outcome: 
     transitions: 

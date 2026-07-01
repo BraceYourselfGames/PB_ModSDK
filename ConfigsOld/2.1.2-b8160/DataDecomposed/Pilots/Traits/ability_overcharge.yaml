@@ -1,0 +1,45 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- level_3
+- prestige_unpickable
+- type_ability
+- type_brawler
+- type_special
+group: 
+existingTraitTagsFilter:
+  brawler_damage: true
+prestigeRank: 
+actionLink:
+  key: ability_pilot_overcharge
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatSet
+    key: ability_overcharge
+    normalized: false
+    value: 2
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

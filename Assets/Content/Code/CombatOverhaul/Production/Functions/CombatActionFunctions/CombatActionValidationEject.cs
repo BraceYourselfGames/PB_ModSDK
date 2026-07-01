@@ -29,6 +29,19 @@ namespace PhantomBrigade.Functions
                     }
                 }
             }
+
+            
+            if (unitPersistent.isDisposableOutsideCombat && unitCombat.isOwnerAllied)
+            {
+                // Block ejections on disposable non-mech units
+                var classKey = unitPersistent.hasDataKeyUnitClass ? unitPersistent.dataKeyUnitClass.s : null;
+                if (classKey != UnitClassKeys.mech)
+                    return false;
+                
+                // Block ejections on 3F squads in generated missions
+                if (unitCombat.IsUnitTagged (ScenarioUnitTags.CustomGeneratedSquad))
+                    return false;
+            }
             
             return true;
 

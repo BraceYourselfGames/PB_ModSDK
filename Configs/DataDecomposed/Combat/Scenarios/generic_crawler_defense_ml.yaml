@@ -2,6 +2,7 @@ hidden: false
 parents:
 - key: generic_crawler_defense
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -10,16 +11,11 @@ states:
   drone_missile_flight:
     comment:
       comment: This state gives missile drones a move action every turn.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 30
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -117,16 +113,11 @@ states:
           outcome: 
   drone_spawn:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 2
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -208,16 +199,11 @@ states:
           outcome: 
   drone_spawn_callout:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -245,6 +231,7 @@ states:
           - time: 0
             hidden: false
             key: generic_crawler_defense_incoming_missiles
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 

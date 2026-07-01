@@ -1,0 +1,35 @@
+parents:
+- key: pilots_limit_l1
+  priority: 2
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 2
+  positionY: 1
+  endpoint: false
+  group: 
+  icon: s_icon_l32_pilot_escape3
+unlock: 
+cost:
+  resources:
+    components_r2: 35
+    components_r3: 15
+    supplies: 800
+    unit_token: 2
+effect:
+  stats:
+  - key: pilot_slots
+    modifier: Offset
+    value: 3
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

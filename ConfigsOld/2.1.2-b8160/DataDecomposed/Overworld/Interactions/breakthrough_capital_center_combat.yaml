@@ -1,0 +1,124 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: intro
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  intro:
+    comment: 
+    image: event_breakthrough_capital_center_combat_sunrise
+    background:
+      immersive: false
+      focus: false
+      brightness: 0.9
+      color:
+        r: 1
+        g: 0.6733333
+        b: 0.6
+        a: 0
+      image: event_breakthrough_capital_center_combat_sunrise
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4481132
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main
+    optionsReused: 
+  main:
+    comment: 
+    image: event_breakthrough_capital_center_combat_crawler
+    background:
+      immersive: false
+      focus: false
+      brightness: 0.8
+      color:
+        r: 1
+        g: 0.7122642
+        b: 0.9536621
+        a: 0
+      image: event_breakthrough_capital_center_combat_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      combat:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: -1
+          color:
+            r: 1
+            g: 0.3647059
+            b: 0.3647059
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_combat
+          step: main
+          option: combat
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget:
+          - !OverworldEntityCombat {}
+          functionsGlobal: 
+          functionsLocal: 
+    optionsReused: 

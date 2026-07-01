@@ -1,0 +1,35 @@
+parents:
+- key: camp_speed
+  priority: 2
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 3
+  positionY: 3
+  endpoint: false
+  group: 
+  icon: s_icon_l32_camp2
+unlock: 
+cost:
+  resources:
+    camp_supplies: 2
+    components_r2: 45
+    supplies: 1000
+    unit_token: 2
+effect:
+  stats:
+  - key: camp_duration
+    modifier: Offset
+    value: -1
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_movement

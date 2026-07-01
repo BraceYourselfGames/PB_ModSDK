@@ -1,0 +1,37 @@
+parents:
+- key: mobilebase
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: true
+limit: 1
+ui:
+  positionX: 0
+  positionY: -1
+  endpoint: false
+  group:
+    positionX: 0
+    positionY: 0
+    sizeX: 0
+    sizeY: 0
+  icon: s_icon_l32_upgrade_units1
+unlock: 
+cost: 
+effect:
+  stats:
+  - key: unit_repair_jobs
+    modifier: Offset
+    value: 3
+  - key: unit_slots
+    modifier: Offset
+    value: 3
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

@@ -1,0 +1,32 @@
+comment: 
+hidden: true
+parents:
+- key: generic_patrol
+core: 
+tags: 
+generation: 
+interaction: 
+effectsOnEvents:
+  Spawn:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveThroughSpawnGroup
+      rawPath: true
+      rawPathSubdivision: 3
+      destroyOnEnd: false
+      speed: 2.5
+      spawnGroupKey: patrol_loop_01
+      indexMemoryKey: waypoint_index
+  Arrival:
+    functionsGlobal: 
+    functionsBase: 
+    functionsSelf:
+    - !OverworldEntityMoveThroughSpawnGroup
+      rawPath: true
+      rawPathSubdivision: 3
+      destroyOnEnd: false
+      speed: 2.5
+      spawnGroupKey: patrol_loop_01
+      indexMemoryKey: waypoint_index
+combat: 

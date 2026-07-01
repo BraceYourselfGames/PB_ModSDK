@@ -1,0 +1,52 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_focus1
+tags:
+- level_2
+- bonus
+- type_brawler
+- type_defender
+- type_special
+group: active_healing
+existingTraitTagsFilter: 
+prestigeRank: 
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags:
+- type_special
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatUnitTakedownEnemy
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf:
+  - !PilotValidateStatValue
+    key: hp
+    normalized: true
+    check: Less
+    value: 0.75
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatOffset
+    key: hp
+    normalized: true
+    value: 0.25
+  - !PilotRecordTraitActivation
+    key: special_heal_on_kill
+    log: true
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

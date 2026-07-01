@@ -1,0 +1,7 @@
+behaviorTree:
+  m_treeRoot: !PhantomBrigade.AIOverworld.BT.Nodes.BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTAction_Delay
+      delayAmount: 1.666667

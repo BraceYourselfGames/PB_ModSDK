@@ -1,0 +1,91 @@
+classTag: tank
+classIcon: s_icon_m_unit_tank_ev
+asset: Content/Objects/Units/unit_tank_elevated_overhaul
+assetPreview: Content/Objects/Units/unit_tank_elevated_body
+audioEventOnMovementStart: tank_elevated_movement
+audioEventOnMovementStop: tank_elevated_movement_stop
+audioSyncOnMovementElevation: tank_elevation
+audioSyncOnMovementTilt: tank_tilt
+movementSpeedBase: 16
+movementSpeedMin: 4
+movementSpeedMax: 28
+dashDistanceBase: 0
+dashDistanceMin: 0
+dashDistanceMax: 0
+rotationSpeed: 150
+secondaryRotationSpeedLimit: 500
+secondaryRotationSpeedK: 500
+hitTableKey: tank_table
+movementRestricted: true
+crashSpin: true
+crashPossible: true
+centerPoint:
+  x: 0
+  y: 2.5
+  z: 0
+bodyTagPinningExempted: true
+salvageExempted: false
+salvageBudgetBonus: 10
+heatMax: 100
+heatOverloadConstant: 0.4
+partPresetFilter:
+  part_energy: false
+  part_melee: false
+  part_ultraheavy: false
+  range_close: false
+  tank_part: false
+  turret_part: false
+sockets:
+  core:
+    presetDefault: 
+    presetFiltered: true
+    critical: true
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_tank_core
+      textOverride: true
+    statOffsetsOnAbsence: 
+  equipment_right:
+    presetDefault: 
+    presetFiltered: true
+    critical: false
+    stabilizing: false
+    ui: 
+    statOffsetsOnAbsence: 
+  optional_left:
+    presetDefault: 
+    presetFiltered: true
+    critical: false
+    stabilizing: true
+    ui:
+      blueprintSpriteName: s_icon_l_unit_tank_side
+      textOverride: true
+    statOffsetsOnAbsence: 
+  optional_right:
+    presetDefault: 
+    presetFiltered: true
+    critical: false
+    stabilizing: true
+    ui:
+      blueprintSpriteName: s_icon_l_unit_tank_side
+      textOverride: true
+    statOffsetsOnAbsence: 
+  secondary:
+    presetDefault: 
+    presetFiltered: true
+    critical: true
+    stabilizing: false
+    ui:
+      blueprintSpriteName: s_icon_l_unit_tank_turret_aa
+      textOverride: true
+    statOffsetsOnAbsence: 
+dependencies: 
+destructionFragments: 
+crashFunctions: 
+destructionFunctions: 
+uncrewed: 
+weightClassOverride:
+  i: 1
+aiBehavior: Flanker
+aiCollisionRadius: 5
+aiCollisionHeight: 10

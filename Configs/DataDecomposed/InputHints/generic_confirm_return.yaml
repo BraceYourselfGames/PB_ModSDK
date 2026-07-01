@@ -1,12 +1,19 @@
+horizontal: false
 extended: false
 lines:
-- mode: All
-  text: Confirm
+- visibility: All
   actions:
   - action: global_confirm
     newline: false
-- mode: All
-  text: Return
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_cancel
     newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: generic_return__s0

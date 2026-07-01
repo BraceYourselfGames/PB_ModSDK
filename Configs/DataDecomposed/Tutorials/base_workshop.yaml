@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -30,12 +31,34 @@ pages:
     textLocation: BottomLeft
     buttonLocation: None
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldNav
+        methodName: OnClickBasePartsExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase
@@ -55,6 +78,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -64,9 +88,20 @@ pages:
     a: 0.5019608
   center:
     textImage: event_empty_base
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:
@@ -89,6 +124,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -114,12 +150,34 @@ pages:
     textLocation: LeftTop
     buttonLocation: None
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewBaseParts
+        methodName: OnPartInstallRequestExternal
+        argument: workshop
+        frameDelay: 1
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -139,6 +197,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -164,12 +223,34 @@ pages:
     textLocation: BottomLeft
     buttonLocation: None
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldNav
+        methodName: OnClickBaseWorkshopExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase
@@ -184,6 +265,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -193,9 +275,20 @@ pages:
     a: 0.5019608
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:
@@ -206,6 +299,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -228,15 +322,25 @@ pages:
     frameSizeY: 356
     frameBlocksInput: true
     frameBoundary: false
-    textLocation: BottomRight
+    textLocation: BottomLeft
     buttonLocation: Bottom
-    textWidth: 256
-    textReused: 
-    icon: 
+    textWidth: 320
     worldAnchor: 
-    arrowCustom: 
+    arrowCustom:
+      offset:
+        x: 176
+        y: 0
+      rotation: 0
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !ModifyResources
@@ -256,6 +360,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -281,12 +386,22 @@ pages:
     textLocation: RightBottom
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
-    arrowCustom: 
+    arrowCustom:
+      offset:
+        x: 0
+        y: 48
+      rotation: 0
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -299,6 +414,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -320,22 +436,45 @@ pages:
     frameSizeX: 392
     frameSizeY: 96
     frameBlocksInput: false
-    frameBoundary: true
+    frameBoundary: false
     textLocation: RightBottom
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewBaseWorkshopV2
+        methodName: OnWorkshopTutorialBuild
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -361,12 +500,18 @@ pages:
     textLocation: BottomRight
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -379,6 +524,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -404,12 +550,18 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 312
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -429,6 +581,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -454,18 +607,25 @@ pages:
     textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -491,12 +651,18 @@ pages:
     textLocation: BottomLeft
     buttonLocation: Bottom
     textWidth: 275
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !UnlockCodex
@@ -506,6 +672,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -515,9 +682,20 @@ pages:
     a: 0.1843137
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:

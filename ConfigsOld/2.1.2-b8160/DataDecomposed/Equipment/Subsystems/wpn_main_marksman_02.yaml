@@ -1,0 +1,210 @@
+hidden: false
+parent: wpn_main_marksman
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_05
+- spec_concussion
+statDistribution: ''
+stats:
+  act_count:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 135
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 4.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 1.25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 53.75
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 90
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 35
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 9
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 400
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_vis_set03_back_02
+- wpn_vis_set03_bottom_02
+- wpn_vis_set03_front_05
+- wpn_vis_set03_top_03
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_rifle_marksman_blue
+      keyEnemy: fx_muzzle_rifle_marksman_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_rifle_marksman
+    onActivationMid: weapon_rifle_marksman
+    onActivationLast: weapon_rifle_marksman
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: default
+    custom: 
+  recoil:
+    key: recoil_rifle_sniper
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_standard_blue
+      keyEnemy: fx_projectile_standard_red
+      scale:
+        x: 0.9
+        y: 0.9
+        z: 3
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact: 
+    deactivation: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.25
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+      - tv_tg:
+          x: 0.3974032
+          y: 1
+          z: 0.00505951
+          w: 0.00505951
+        w:
+          x: 0.9790305
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.6019017
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.508078
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0.3129921
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom: 
+functions: 
+workshopInfo: 

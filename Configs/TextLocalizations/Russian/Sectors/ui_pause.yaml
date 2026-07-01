@@ -226,10 +226,26 @@ entries:
     id: 1
     text: Сбросить
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: Дополнение
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: Установленный контент
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: Улучшение до версии спонсора
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: Обновление 2.0 уже вышло!
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: Обновление 2.2 уже вышло!
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -254,6 +270,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      Играйте, как вам удобно! Добавлена полная поддержка контроллеров, а также расширенная навигация с помощью клавиатуры.
+
+
+      Новые контракты удаленной поддержки и испытательный полигон открывают дополнительные возможности для развития и настройки сборок.
+
+
+      Камеры действия, дополнительные карты, улучшения интерфейса и многое другое! Подробнее об обновлении и переработке версии 2.0 можно узнать по ссылке ниже.
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -452,12 +486,12 @@ entries:
     textEng: Numpad
   input_kb_page_down:
     id: 2
-    text: Page Down
-    textEng: Page Down
+    text: PgDn
+    textEng: PgDn
   input_kb_page_up:
     id: 2
-    text: Page Up
-    textEng: Page Up
+    text: PgUp
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: Enter
@@ -498,6 +532,74 @@ entries:
     id: 2
     text: Колесо мыши
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: Основы управления
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: Контроллер активен
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: Перемещение камеры
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: Вращение камеры
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: Отмена / возврат назад
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: Подтверждение выбора
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: Переключение выбора
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: Пауза
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: Смена экрана / переключение юнита
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: Увеличение камеры / время таймлайна
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      Следите за рамкой выделения, чтобы подтвердить выделенную кнопку и доступные направления. Проверяйте подсказки ввода на разных экранах, чтобы узнать о дополнительных контекстных элементах управления.
+
+
+      Если у вас возникнут проблемы с поддержкой контроллера, не стесняйтесь оставлять отзывы через диалоговое окно для обратной связи, расположенное ниже.
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: Клавиатура активна
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      Проверяйте подсказки ввода на разных экранах, чтобы узнать о дополнительных контекстных элементах управления.
+
+
+      Большей частью игры можно управлять с помощью клавиатуры, без использования мыши. Перемещайтесь с помощью клавиш со стрелками и следите за рамкой выделения, чтобы отслеживать свой выбор.
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: Это сохранение из кампании с экспериментальными функциями, такими как сохранение в бою. Его можно загрузить, но официально оно не поддерживается.
@@ -742,6 +844,14 @@ entries:
     id: 2
     text: 'Любая кнопка будет сохранена, кроме:'
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: Сбросить эту категорию?
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: Вы точно хотите сбросить все настройки этой категории к значениям по умолчанию?
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: Выкл.
@@ -840,6 +950,10 @@ entries:
     id: 1
     text: Загрузить
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: Загрузить брифинг
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: Модификации
@@ -888,6 +1002,14 @@ entries:
     id: 1
     text: Загрузить сохранение
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: Загрузка последнего сохранения
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: Хотите продолжить с последнего файла сохранения?
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: Подтвердить удаление

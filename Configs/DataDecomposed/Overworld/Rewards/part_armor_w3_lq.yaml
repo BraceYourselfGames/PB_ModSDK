@@ -1,0 +1,41 @@
+color:
+  r: 0.8562092
+  g: 1
+  b: 0.654902
+  a: 1
+hidden: false
+icon: s_icon_m_unit_mech2
+text:
+  mode: LocReused
+  text: 
+  textSector: overworld_rewards
+  textKey: part_armor_w3__name
+tags:
+- part_armor_lq
+- part_general_lq
+resources: 
+projects: 
+parts:
+- factionFilter: true
+  qualityTableKey: reward_generic_q2
+  levelRange: 
+  countMin: 1
+  countMax: 2
+  countRandom: false
+  tagsUsed: true
+  keys: 
+  tags:
+    body_part: true
+    weight_heavy: true
+- factionFilter: true
+  qualityTableKey: reward_generic_q1
+  levelRange: 
+  countMin: 1
+  countMax: 2
+  countRandom: false
+  tagsUsed: true
+  keys: 
+  tags:
+    body_part: true
+    weight_heavy: true
+subsystems: 

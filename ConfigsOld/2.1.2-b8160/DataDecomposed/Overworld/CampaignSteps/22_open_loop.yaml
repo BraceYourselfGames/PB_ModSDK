@@ -1,0 +1,184 @@
+comment:
+  comment: Phase before capital, repeatable liberation quests in random provinces.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: 
+  textFromQuest: 
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_22_open_loop
+  tags: 
+entry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_countdown_base_length
+      value: 16
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !QuestStart
+    questKey: province_liberation
+  - !ApplyProvinceArrivalEffects {}
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Offset
+      key: campaign_progress_breakthrough
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+    - change: Offset
+      key: campaign_progress_region_03
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !OverworldInteractionStartFilter
+    overrideOngoing: false
+    tagsUsed: true
+    keys: 
+    tags:
+      context_liberation: true
+  functionsBase: 
+progressDisplay:
+  memoryKey: campaign_progress_breakthrough
+  target: 3
+effects:
+  create_showdown:
+    functionsGlobal:
+    - !OverworldGroupConditional
+      checksGlobal: 
+      checksBase:
+      - !OverworldValidateMemory
+        check:
+          method: RequireAll
+          checks:
+          - key: campaign_progress_breakthrough
+            presenceDesired: false
+            valueFromMemory: false
+            valueFromMemoryKey: 
+            valueCheck: Less
+            value: 2
+      checksBaseValues: 
+      functions:
+      - !QuestProvinceCreatePoint
+        key: generic_base_showdown
+        spawnGroupOverride: 
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityMemorySet
+          value: 1
+          memoryKey: quest_liberation_progress_s3
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        questMain: true
+        questKey: 
+      functionsElse:
+      - !QuestProvinceCreatePoint
+        key: generic_boss_cruiser_02
+        spawnGroupOverride: 
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityMemorySet
+          value: 1
+          memoryKey: quest_liberation_progress_s3
+        - !OverworldEntityEscalation
+          offset: false
+          level: 3
+        questMain: true
+        questKey: 
+    functionsBase: 
+branches:
+- comment:
+    comment: If total progress is high enough, proceed to the capital.
+  preferences: 
+  checksGlobal:
+  - !OverworldValidateResolvedInt
+    resolver: !OverworldIntValueMemory
+      key: campaign_progress_breakthrough
+    check: GreaterEqual
+    value: 2
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 30_breakthrough_capital
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: false
+      keys:
+      - province_capital
+      tags: 
+    modifiers: 
+- comment:
+    comment: Fallback branch. Loop back into open gameplay, choice of two provinces.
+  preferences: 
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 22_open_loop
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_mixed: true
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 22_open_loop
+    levelOffset: 
+    branchKey: 
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_03: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_negative: true
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_positive: true
+tags: 

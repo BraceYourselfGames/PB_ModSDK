@@ -1,0 +1,175 @@
+comment: 
+hidden: false
+listed: true
+factionAllied: false
+factionBranchDefault: branch_reserves
+tags:
+- branch_reserves
+- weight_light
+- range_long
+- type_ranger
+- type_main
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w1_lr_backonly_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_lr_ml_unguided_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w1_lr_mls_guided_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: grenadier
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w1_lr_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q2_uncommon
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g2_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w2_lr_ml_unguided_res
+    countMin: 2
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w1_lr_mls_guided_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: striker
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: vhc_mech_w1_lr_full_res
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: Flanker
+    aiTargeting: leader
+    liveryPreset: inv_reserves_g3_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_tank_v2_w1_lr_mls_guided_res
+    countMin: 2
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_mech_w1_lr_mls_res
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: sharpshooter
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+  - keyExternal: true
+    key: vhc_drone_exp_01
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: DumbAdvance
+    aiTargeting: default
+    liveryPreset: inv_reserves_g1_ranger
+    custom: 
+unitPresets:
+  mech_scout: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_ultraheavy: false
+      role_scout: true
+      type_mech: true
+  mech_sharpshooter: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_ultraheavy: false
+      role_sharpshooter: true
+      type_mech: true
+  tank_guardian: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      role_guardian: true
+      type_tank_standard: true
+  tank_striker: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      role_striker: true
+      type_tank_standard: true

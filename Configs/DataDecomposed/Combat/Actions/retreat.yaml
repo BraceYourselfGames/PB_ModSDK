@@ -30,8 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation:
-  - IsRetreatAvailable
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart:
@@ -39,30 +37,20 @@ dataCore:
   eventsOnEnd: 
   eventsOnDispose: 
   functionsOnTargetCheck: 
-  functionsOnValidation: 
+  functionsOnValidation:
+  - !CombatActionValidationRetreat {}
+  functionsOnValidationBase: 
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart: 
   functionsOnUpdate: 
   functionsOnEnd: 
   functionsOnDispose: 
-  check:
-    encompassingMethod: RequireAll
-    tagsMethod: RequireAll
-    blueprintsMethod: RequireAll
-    partsMethod: RequireAll
-    subsystemsMethod: RequireAll
-    statsMethod: RequireAll
-    tags:
-    - classTag: mech
-      not: false
-    blueprints: 
-    parts: 
-    subsystems: 
-    stats: 
-    pilot: 
+  check: 
   unitCheck: 
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck:
   requireFaction: Phantoms
 dataMovement: 

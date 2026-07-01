@@ -8,6 +8,7 @@ textDescFromPreset:
 textDesc: 
 hardpoints: 
 tags:
+- category_wpn_splitter_railgun
 - mnf_04
 - spec_concussion
 statDistribution: ''
@@ -58,7 +59,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_penetration_charges:
-    value: 9
+    value: 4
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -108,7 +109,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_speed:
-    value: 1000
+    value: 500
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -203,7 +204,7 @@ projectile:
           y: 0
         m: {}
       - tv_tg:
-          x: 0.4134381
+          x: 0.1784528
           y: 1
           z: 0
           w: 0
@@ -233,6 +234,7 @@ projectile:
   animationFade: 
   ballistics: 
   fuseProximity: 
+  spike: 
   hitResponse: 
   splashDamage: 
   splashImpact: 

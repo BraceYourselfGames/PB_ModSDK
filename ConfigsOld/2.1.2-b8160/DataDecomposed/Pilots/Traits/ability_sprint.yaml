@@ -1,0 +1,45 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- level_3
+- prestige_unpickable
+- type_ability
+- type_support
+- type_special
+group: 
+existingTraitTagsFilter:
+  support_backpack: true
+prestigeRank: 
+actionLink:
+  key: ability_pilot_sprint
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatSet
+    key: ability_sprint
+    normalized: false
+    value: 3
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

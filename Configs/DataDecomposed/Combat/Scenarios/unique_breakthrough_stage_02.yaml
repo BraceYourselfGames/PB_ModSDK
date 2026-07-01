@@ -24,10 +24,36 @@ core:
   weatherOverridePrecipitation: 
   weatherOverrideTemperature: 
   introSettings: 
-  textIntroPrimary: {}
+  textIntroPrimary:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone:
+  developerOnly: false
+  standaloneOnly: false
+  squadCustomization: true
+  enemyPreview: false
+  type: sim
+  group: replay
+  priority: 20
+  textName: 
+  textDesc: 
+  conditionVisible: 
+  conditionUnlock:
+    checksGlobal: 
+    checksBase:
+    - !OverworldValidateCompletionScenario
+      filter:
+        unique_breakthrough_stage_02:
+          check: GreaterEqual
+          value: 1
+    checksBaseValues: 
+  scenarioNext: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -63,16 +89,11 @@ tags:
 states:
   auto_comp_state1:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -149,16 +170,11 @@ states:
           outcome: 
   auto_comp_state2:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -274,16 +290,11 @@ states:
           outcome: 
   auto_comp_state3:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -355,16 +366,11 @@ states:
           outcome: 
   auto_reinf_01:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -446,16 +452,11 @@ states:
           outcome: 
   auto_reinf_02:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -536,16 +537,11 @@ states:
           outcome: 
   auto_reinf_03:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: false
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -626,17 +622,36 @@ states:
           outcome: 
   obj_breakin:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
     turn: 
@@ -766,16 +781,11 @@ states:
           outcome: 
   obj_breakin_delay:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: -1
     priority: -1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -820,17 +830,36 @@ states:
           outcome: 
   obj_satellite_tower_01:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
     turn: 
@@ -970,17 +999,36 @@ states:
           outcome: 
   obj_satellite_tower_02:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
     turn: 
@@ -1120,17 +1168,36 @@ states:
           outcome: 
   obj_satellite_tower_03:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
     turn: 
@@ -1305,16 +1372,11 @@ states:
   obj_satellite_towers_destroyed:
     comment:
       comment: This state triggers after all 3 satellite tower generators have been destroyed by PB units. Intact towers get hidden, then we spawn an FX tween effect in the same place towers' location to play tower destruction fx.
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1397,6 +1459,7 @@ states:
             - time: 1
               hidden: false
               key: br_01_artillery1
+              functionsOnExit: 
           - !CombatCreateStrike
             delay: 0
             blueprintKey: aircraft_ml_hg_01
@@ -1493,16 +1556,11 @@ states:
           outcome: 
   obj_satellite_towers_destroyed_camera:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1607,13 +1665,19 @@ steps:
         g: 0.2688679
         b: 0.2688679
         a: 0
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -1645,6 +1709,7 @@ steps:
       - time: 2
         hidden: false
         key: br_01_final1
+        functionsOnExit: 
     outcome: 
     transitions: 
   main:
@@ -1655,13 +1720,19 @@ steps:
         g: 0.2688679
         b: 0.2688679
         a: 0
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -2005,9 +2076,11 @@ steps:
       - time: 3
         hidden: false
         key: br_01_intro1
+        functionsOnExit: 
       - time: 15
         hidden: false
         key: br_01_intro2
+        functionsOnExit: 
     outcome: 
     transitions: 
   towers:
@@ -2018,13 +2091,19 @@ steps:
         g: 0.2688679
         b: 0.2688679
         a: 0
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -2064,9 +2143,11 @@ steps:
       - time: 2
         hidden: false
         key: br_01_towers1
+        functionsOnExit: 
       - time: 13
         hidden: false
         key: br_01_towers2
+        functionsOnExit: 
     outcome: 
     transitions: 
 unitPresets: 

@@ -62,6 +62,7 @@ namespace PhantomBrigade.Data
     {
         public const string MeleeCollisionSize = "melee_hit_size";
         public const string MeleeCollisionOffset = "melee_hit_offset";
+        public const string NonMechVisualOffset = "non_mech_visual_offset";
 
         private static List<string> keys;
         public static List<string> GetKeys ()
@@ -644,7 +645,10 @@ namespace PhantomBrigade.Data
         public DataBlockProjectileBallistics ballistics;
         
         [DropdownReference (true)]
-        public DataBlockProjectileProximityFuse fuseProximity; 
+        public DataBlockProjectileProximityFuse fuseProximity;
+
+        [DropdownReference (true)]
+        public DataBlockProjectileSpike spike;
         
         [DropdownReference (true)]
         public DataBlockProjectileHitResponse hitResponse; 
@@ -1283,6 +1287,23 @@ namespace PhantomBrigade.Data
         
         [PropertyRange (0f, 1f)]
         public float envHitAlignmentAmount = 0f;
+    }
+
+    public class DataBlockProjectileSpike
+    {
+        [PropertyRange (0.1f, 5f)]
+        public float duration = 3f;
+        
+        [PropertyRange (1f, 500f)]
+        public float speed = 50;
+
+        public bool reversed = false;
+        
+        [PropertyRange (0f, 5f)]
+        public float pinDuration = 0f;
+
+        public float collisionRadius = 0.5f;
+        public float collisionLength = 5f;
     }
     
     public class DataBlockProjectileProximityFuse

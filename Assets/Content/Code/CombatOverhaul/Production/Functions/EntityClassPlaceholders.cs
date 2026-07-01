@@ -211,6 +211,29 @@ public enum InputHintMode
     All = Keyboard | Mouse | Controller
 }
 
+public enum InputHintModeSimplified
+{
+    KeyboardMouse = 0,
+    Controller = 1,
+    All = 2
+}
+
+[Flags]
+public enum CINavDir
+{
+    None = 0,
+    Back = 1,
+    Forward = 2,
+    Left = 4,
+    Right = 8,
+    Up = 16,
+    Down = 32,
+    TabPrev = 64,
+    TabNext = 128,
+    CustomX = 256,
+    CustomY = 512,
+}
+
 public enum InputHintAlignment
 {
     Center,

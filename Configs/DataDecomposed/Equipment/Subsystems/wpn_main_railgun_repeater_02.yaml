@@ -65,7 +65,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_penetration_charges:
-    value: 30
+    value: 20
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -137,8 +137,8 @@ activation:
       hueOffset: 
       hueOffsetEnemy: 
     root: 
-    localSocketOverride: ''
-    localHardpointOverride: ''
+    localSocketOverride: 
+    localHardpointOverride: 
     localTransformOverride: 
   audio:
     onActivationFirst: weapon_energy_marksman_thermite
@@ -241,6 +241,7 @@ projectile:
     distance: 3
   ballistics: 
   fuseProximity: 
+  spike: 
   hitResponse: 
   splashDamage: 
   splashImpact: 

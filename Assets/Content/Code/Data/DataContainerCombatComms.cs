@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PhantomBrigade.Functions;
 using PhantomBrigade.Game;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -32,6 +33,9 @@ namespace PhantomBrigade.Data
         [PropertyTooltip ("If false, this message will not be shown in the middle of the screen and will only appear in the event log.")]
         public bool priority = true;
         
+        [PropertyTooltip ("If true, this message stays on screen until dismissed.")]
+        public bool hold = false;
+        
         [PropertyTooltip ("Disable the semitransparent layer letting the player read entire text immediately. Used in rare cases where text must reveal something midway.")]
         public bool previewDisabled = false;
         
@@ -45,8 +49,8 @@ namespace PhantomBrigade.Data
         [DropdownReference]
         public DataBlockFloat01 audioSpeed;
         
-        [DropdownReference]
-        [ShowIf ("priority")]
+        // [DropdownReference (true)]
+        [HideInInspector]
         public string audioKey;
         
         [YamlIgnore, ShowIf ("@!string.IsNullOrEmpty (audioKey)"), LabelText (" ")]
@@ -57,6 +61,12 @@ namespace PhantomBrigade.Data
         [YamlIgnore]
         [HideLabel, TextArea (1, 10)]
         public List<string> textContent = new List<string> ();
+        
+        [DropdownReference]
+        public List<ICombatFunction> functionsOnStart;
+        
+        [DropdownReference]
+        public List<ICombatFunction> functionsOnExit;
 
         public override void OnBeforeSerialization ()
         {
@@ -131,7 +141,7 @@ namespace PhantomBrigade.Data
         private void Test ()
         {
             if (Application.isPlaying)
-                CIViewCombatComms.ScheduleMessage (key, 0f);
+                CIViewCombatComms.ScheduleMessage (key, null);
         }
         #endif
         

@@ -1,0 +1,47 @@
+horizontal: true
+extended: true
+lines:
+- visibility: Controller
+  actions:
+  - action: global_move_horizontal
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: KeyboardMouse
+  actions:
+  - action: global_move_vertical_pos
+    newline: false
+  - action: global_move_vertical_neg
+    newline: false
+  - action: global_move_horizontal_neg
+    newline: false
+  - action: global_move_horizontal_pos
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: base_upgrades_grid__s0
+- visibility: All
+  actions:
+  - action: global_direction_up
+    newline: false
+  - action: global_direction_down
+    newline: false
+  - action: global_direction_left
+    newline: false
+  - action: global_direction_right
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
+  actions:
+  - action: global_gamepad_x
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 

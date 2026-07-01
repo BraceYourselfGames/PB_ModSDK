@@ -14,18 +14,23 @@ sections:
     a: 1
 - !CodexSectionTextControls
   lines:
-  - mode: All
-    text: Select
+  - visibility: All
     actions:
     - action: global_mouse_primary
       newline: false
-  - mode: All
-    text: Move the base
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_mouse_secondary
       newline: false
-  - mode: All
-    text: Move the camera
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_move_vertical_pos
       newline: false
@@ -35,8 +40,11 @@ sections:
       newline: false
     - action: global_move_horizontal_pos
       newline: false
-  - mode: All
-    text: Rotate the camera
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_camera_vertical_pos
       newline: false
@@ -48,8 +56,15 @@ sections:
       newline: false
     - action: global_mouse_middle
       newline: true
-  - mode: All
-    text: Toggle pause
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_time_toggle
       newline: false
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 

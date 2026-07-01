@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -26,12 +27,10 @@ pages:
     frameSizeX: 128
     frameSizeY: 128
     frameBlocksInput: false
-    frameBoundary: true
+    frameBoundary: false
     textLocation: TopLeft
     buttonLocation: None
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight:
@@ -40,7 +39,24 @@ pages:
         y: 0
         z: 0
         w: 0
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewCombatExecution
+        methodName: OnPredictionBootExternal
+        argument: ''
+        frameDelay: 1
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase
@@ -60,6 +76,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -85,12 +102,18 @@ pages:
     textLocation: TopRight
     buttonLocation: Top
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase

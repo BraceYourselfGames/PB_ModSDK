@@ -1,0 +1,67 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: pb_arctic_sky
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_knox: true
+      weight_medium: true
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_wpn_ml_01
+    rating: 
+    systems: 
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_knox_medium_top
+    rating: 
+    systems:
+      internal_aux_top_core:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_core_heat
+      internal_aux_top_thrusters:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_thruster_standard
+      perk_1:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - perk_mass_pos_r2
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_shield_03
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_mg_heavy_01
+    rating:
+      i: 3
+    systems: 
+animationOverrides: 
+effects: 

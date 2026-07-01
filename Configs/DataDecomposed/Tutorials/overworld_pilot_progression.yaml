@@ -5,6 +5,7 @@ pages:
   depthBackground: -50
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -30,8 +31,6 @@ pages:
     textLocation: TopLeft
     buttonLocation: None
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight:
@@ -40,7 +39,31 @@ pages:
         y: -94
         z: -76
         w: -18
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldRoster
+        methodName: OnPilotGridClickExternal
+        argument: 0
+        frameDelay: 1
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !UnlockCodex
@@ -50,6 +73,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -75,12 +99,18 @@ pages:
     textLocation: LeftBottom
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !UnlockCodex
@@ -90,6 +120,7 @@ pages:
   depthBackground: -50
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -115,12 +146,22 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !UnlockCodex
@@ -130,6 +171,7 @@ pages:
   depthBackground: -50
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: true
   backgroundColor:
@@ -155,18 +197,25 @@ pages:
     textLocation: LeftBottom
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: -50
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: false
   backgroundUsed: true
   backgroundBlur: true
   backgroundColor:
@@ -192,18 +241,33 @@ pages:
     textLocation: LeftBottom
     buttonLocation: None
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_direction_up
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: -50
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: true
   backgroundColor:
@@ -229,12 +293,18 @@ pages:
     textLocation: LeftTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 effectsOnEnd: 

@@ -1,0 +1,139 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit: 
+tags:
+- context_liberation
+check: 
+steps:
+  main:
+    comment: 
+    image: event_celebration
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.7292891
+        g: 1
+        b: 0.4198113
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !UnlockAchievement
+        key: first_month
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.6821934
+            g: 1
+            b: 0.6367924
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+    optionsReused: 
+  reward:
+    comment: 
+    image: event_empty_base
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.3537736
+        b: 0.3537736
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      option_a:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+      option_b:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects: 
+    optionsReused: 

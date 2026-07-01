@@ -1,0 +1,73 @@
+dataUI:
+  icon: s_icon_l32_combat_trait_retreat1
+  color:
+    r: 0.4287196
+    g: 0.6901961
+    b: 0.3294118
+    a: 1
+  colorOverride:
+    r: 0.2752552
+    g: 1
+    b: 0
+    a: 1
+  sortingPriority: 1000
+  hidden: false
+  irreversible: true
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 1
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation:
+  - IsRetreatAvailable
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart:
+  - On_Retreat
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: mech
+      not: false
+    blueprints: 
+    parts: 
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck:
+  requireFaction: Phantoms
+dataMovement: 
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

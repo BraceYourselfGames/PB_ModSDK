@@ -49,7 +49,7 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class CombatValidateUnitClass : DataBlockSubcheckBool, ICombatUnitValidationFunction
+    public class CombatValidateUnitClass : DataBlockSubcheckBool, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
     {
         [ValueDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (UnitClassKeys), false)")]
         public string classKey = "mech";
@@ -71,7 +71,7 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class CombatValidateUnitBlueprint : DataBlockSubcheckBool, ICombatUnitValidationFunction
+    public class CombatValidateUnitBlueprint : DataBlockSubcheckBool, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
     {
         [ValueDropdown ("@DataMultiLinkerUnitBlueprint.data.Keys")]
         public string blueprintKey = "mech";
@@ -93,7 +93,7 @@ namespace PhantomBrigade.Functions
     }
     
     [Serializable]
-    public class CombatValidateUnitPreset : DataBlockSubcheckBool, ICombatUnitValidationFunction
+    public class CombatValidateUnitPreset : DataBlockSubcheckBool, ICombatUnitValidationFunction, IOverworldUnitValidationFunction
     {
         [ValueDropdown ("@DataMultiLinkerUnitPreset.data.Keys")]
         public string presetKey = "mech";

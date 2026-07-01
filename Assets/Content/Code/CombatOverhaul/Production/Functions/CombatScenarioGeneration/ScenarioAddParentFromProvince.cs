@@ -6,7 +6,7 @@ namespace PhantomBrigade.Data
 {
     public class ScenarioAddParentFromProvince : ICombatScenarioGenStep
     {
-        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed, bool standaloneMode)
         {
             #if !PB_MODSDK
             

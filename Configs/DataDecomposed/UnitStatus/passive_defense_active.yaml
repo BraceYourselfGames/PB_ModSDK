@@ -50,6 +50,7 @@ effectsOnUpdate:
   triggerCheckUnit:
   - !CombatValidateUnitNeighborProjectiles
     radius: 24
+    radiusFromStat: 
     offset:
       x: 0
       y: 4
@@ -71,6 +72,7 @@ effectsOnUpdate:
           check: Greater
           value: 0.1
         directionDotFlat: 
+        directionDotRelative: 
         directionAngle: 
         distance: 
     effect:

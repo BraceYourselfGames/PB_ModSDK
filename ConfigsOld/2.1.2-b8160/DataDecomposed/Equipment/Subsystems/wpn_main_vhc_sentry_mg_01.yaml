@@ -1,0 +1,227 @@
+hidden: false
+parent: wpn_main_vhc_sentry_mg
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- category_wpn_mg
+- spec_stabilized
+- stat_concussive
+statDistribution: ''
+stats:
+  act_count:
+    value: 13
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1.3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 105
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0.8387061
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 20
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_ricochet:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 60
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 7
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 300
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_tank_aa
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: secondary
+    localHardpointOverride: vhc_vis_secondary
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_tank_aa_first
+    onActivationMid: weapon_tank_aa_mid
+    onActivationLast: weapon_tank_aa_last
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_vhc_aa
+    custom: 
+  recoil:
+    key: 
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_standard_blue
+      keyEnemy: fx_projectile_standard_red
+      scale:
+        x: 0.6
+        y: 0.6
+        z: 2.1
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact: 
+    deactivation: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.5
+          z: -0.04288539
+          w: -0.04288539
+        w:
+          x: 0.3333333
+          y: 0.6949571
+        m: {}
+      - tv_tg:
+          x: 0.2097057
+          y: 1
+          z: 0.03605096
+          w: 0.03605096
+        w:
+          x: 0.371355
+          y: 1
+        m: {}
+      - tv_tg:
+          x: 0.6728638
+          y: 1
+          z: -0.006326779
+          w: -0.006326779
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0.3937492
+          z: -0.3491671
+          w: -0.3491671
+        w:
+          x: 0.9694084
+          y: 0.3333333
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact:
+    exponent: 2
+    triggerOnDamage: false
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom:
+  flags:
+  - reaction_los_check
+  ints: 
+  floats:
+    reaction_angle_threshold: 90
+    reaction_rotation_speed: 0.5
+  vectors: 
+  strings: 
+functions: 
+workshopInfo: 

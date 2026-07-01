@@ -1,0 +1,30 @@
+hidden: false
+parents:
+- key: wpn_rifle_assault_sp
+livery: ''
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- special_vip_brawler
+- difficulty_hard
+- part_concussion
+- range_medium
+- reward_special
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_assault_sp_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

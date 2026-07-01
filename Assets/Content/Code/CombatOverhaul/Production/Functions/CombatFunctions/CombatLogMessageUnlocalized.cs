@@ -23,7 +23,7 @@ namespace PhantomBrigade.Functions
             if (string.IsNullOrEmpty (text))
                 return;
 
-            CIViewCombatEventLog.AddMessageFromCommSource ("enemy_boss_intercepted", text, colorKey);
+            CIViewCombatNav.AddMessageFromCommSource ("enemy_boss_intercepted", text, colorKey);
             
             #endif
         }

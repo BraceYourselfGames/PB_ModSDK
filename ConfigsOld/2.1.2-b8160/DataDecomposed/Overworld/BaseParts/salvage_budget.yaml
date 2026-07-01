@@ -1,0 +1,33 @@
+parents:
+- key: core
+  priority: 3
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 1
+  positionY: 2
+  endpoint: false
+  group: 
+  icon: s_icon_l32_star2
+unlock: 
+cost:
+  resources:
+    components_r2: 35
+    supplies: 700
+effect:
+  stats:
+  - key: salvage_bonus
+    modifier: Offset
+    value: 5
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_reactor

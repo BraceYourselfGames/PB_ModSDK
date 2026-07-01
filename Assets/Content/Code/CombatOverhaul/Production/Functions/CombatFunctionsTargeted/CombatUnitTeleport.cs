@@ -61,4 +61,46 @@ namespace PhantomBrigade.Functions
             #endif
         }
     }
+    
+    public class CombatUnitTeleportToOrigin : ICombatFunctionTargeted
+    {
+        public void Run (PersistentEntity unitPersistent)
+        {
+            #if !PB_MODSDK
+
+            if (unitPersistent == null)
+                return;
+            
+            var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            if (unitCombat == null)
+                return;
+            
+            if (!unitPersistent.hasCustomMemory)
+            {
+                Debug.LogWarning ($"Can't teleport unit {unitPersistent.ToLog ()}/{unitCombat.ToLog ()} to origin: no recordings found");
+                return;
+            }
+            
+            var cm = unitPersistent.customMemory.s;
+
+            if (!cm.TryGetValue ("rec_pos", out var posRaw) || posRaw == null || posRaw is CustomMemoryVector == false)
+            {
+                Debug.LogWarning ($"Can't teleport unit {unitPersistent.ToLog ()}/{unitCombat.ToLog ()} to origin: no recorded position found");
+                return;
+            }
+            
+            if (!cm.TryGetValue ("rec_dir", out var dirRaw) || dirRaw == null || dirRaw is CustomMemoryVector == false)
+            {
+                Debug.LogWarning ($"Can't teleport unit {unitPersistent.ToLog ()}/{unitCombat.ToLog ()} to origin: no recorded direction found");
+                return;
+            }
+
+            Debug.Log ($"Teleporting unit {unitPersistent.ToLog ()}/{unitCombat.ToLog ()} to origin...");
+            var pos = ((CustomMemoryVector)posRaw).value;
+            var dir = ((CustomMemoryVector)dirRaw).value;
+            unitCombat.ForceUnitTransform (pos, dir, true, false);
+
+            #endif
+        }
+    }
 }

@@ -24,6 +24,22 @@ entries:
     id: 1
     text: メインメニューでバックグラウンドカメラの動きと効果を切り替えます。
     textEng: Toggles background camera movement and effects in the main menu.
+  access_navframe_style__header:
+    id: 2
+    text: フォーカス枠
+    textEng: Focus frame
+  access_navframe_style__text:
+    id: 2
+    text: キーボード／コントローラー操作時に、現在フォーカス中の要素を強調する枠線スタイルです。
+    textEng: The style of the frame highlighting the currently focused element for keyboard and controller navigation.
+  access_navframe_timeout__header:
+    id: 2
+    text: フォーカス部分のフェード
+    textEng: Focus fade
+  access_navframe_timeout__text:
+    id: 2
+    text: フォーカス枠がフェードアウトするまでの時間です。
+    textEng: The time it takes for the focus frame to fade out.
   access_overworld_glitch_effect__header:
     id: 1
     text: オーバーワールドグリッチ効果
@@ -243,7 +259,15 @@ entries:
   game_base_preserve_colors__text:
     id: 1
     text: 有効にすると、カスタマイズ済みメカの既存カラーカスタマイズが、新しく装備したパーツの色より優先されます。例えば、メカが灰色で、新しく装備した武器が赤の場合、装備時に武器は灰色に再塗装されます。
-    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
+  game_combat_action_tooltip_details__header:
+    id: 2
+    text: アクションのツールチップヒント
+    textEng: Action tooltip hints
+  game_combat_action_tooltip_details__text:
+    id: 2
+    text: 戦闘アクションのツールチップに、ヒートやチャージなどメカニクスに関するヒントを表示します。
+    textEng: Display hints about mechanics like heat and charges in the combat action tooltips.
   game_combat_damage_numbers__header:
     id: 1
     text: ダメージ数を表示する
@@ -344,6 +368,14 @@ entries:
     id: 1
     text: この設定により、一定時間操作が行われなかった後、予測時間がターンの最初にスナップバックするかどうかを決定します。
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
+  game_combat_updates__header:
+    id: 2
+    text: 通知を表示
+    textEng: Show notifications
+  game_combat_updates__text:
+    id: 2
+    text: 画面右上に各種イベントの通知を表示します。
+    textEng: Show update notifications in the top right corner of the screen.
   game_ent_sp_logo__header:
     id: 2
     text: メニューロゴの変更
@@ -384,6 +416,14 @@ entries:
     id: 1
     text: ワールドマップに表示されるすべての新しいミッションをハイライトしたスライドショーを表示します。
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
+  game_overworld_updates__header:
+    id: 2
+    text: 通知を表示
+    textEng: Show notifications
+  game_overworld_updates__text:
+    id: 2
+    text: 画面右上に各種イベントの通知を表示します。
+    textEng: Show update notifications in the top right corner of the screen.
   game_screenshots_lossless__header:
     id: 1
     text: ロスレススクリーンショット
@@ -588,6 +628,22 @@ entries:
     id: 1
     text: ユーザーインターフェイスを除く、テクスチャの解像度を制御します。推奨されるデフォルトは「全」です。
     textEng: Controls resolution of textures with exception of user interface. Recommended default is Full.
+  input_gamepad_enabled__header:
+    id: 2
+    text: コントローラーを検出
+    textEng: Detect controllers
+  input_gamepad_enabled__text:
+    id: 2
+    text: 無効にすると、コントローラーの入力がすべて無視されます。
+    textEng: If disabled, the game will ignore all controller input.
+  input_gamepad_hints__header:
+    id: 2
+    text: 入力のヒントを表示する
+    textEng: Show input hints
+  input_gamepad_hints__text:
+    id: 2
+    text: コントローラーのボタン割り当てに関するヒントを画面上にに表示します。
+    textEng: Display hints about the controller bindings on the screen.
   input_gamepad_look_invert_vertical__header:
     id: 1
     text: 反転
@@ -628,6 +684,14 @@ entries:
     id: 1
     text: ユーザー入力からタイムラインがどれだけ動くかを制御します。
     textEng: Controls how much the timeline moves from user input
+  input_gamepad_zoom_invert__header:
+    id: 2
+    text: 反転ズーム
+    textEng: Inverted zoom
+  input_gamepad_zoom_invert__text:
+    id: 2
+    text: 左右のズームボタンを入れ替えます。
+    textEng: Swaps the left and right zoom buttons.
   input_gamepad_zoom_sensitivity__header:
     id: 1
     text: ズーム感度
@@ -636,6 +700,14 @@ entries:
     id: 1
     text: ユーザー入力からカメラがどれだけズームするかを制御します。
     textEng: Controls how much the camera zooms from user input
+  input_keyboard_hints__header:
+    id: 2
+    text: 入力ヒントの表示
+    textEng: Show input hints
+  input_keyboard_hints__text:
+    id: 2
+    text: キーボードとマウスの操作に関するヒントを画面上に表示します。
+    textEng: Display hints about keyboard and mouse controls on the screen.
   input_keyboard_look_invert_vertical__header:
     id: 1
     text: 反転

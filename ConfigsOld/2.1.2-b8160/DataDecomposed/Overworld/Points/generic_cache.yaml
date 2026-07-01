@@ -1,0 +1,97 @@
+comment: 
+hidden: false
+parents:
+- key: block_core_basic
+- key: block_interaction_combat
+- key: generic_reward_01
+core:
+  textIdentifierGroup: site_cache
+  textName: {}
+  textDesc: 
+  image: 
+  icon: 
+  visionColor: 
+  visual:
+    path: Content/Overworld/Site_Cache
+  visualLiberated: 
+  observer: 
+  movement: 
+  rangeVision: 
+  rangeInteraction: 
+  detection: 
+tags:
+- flag_preserve_on_victory
+- contest_s1
+generation:
+  spawnPrefs: 
+  checksBase:
+  - !OverworldValidatePointUseByKey
+    keyChecked: generic_cache
+    spawnLimit: 
+    instanceLimit:
+      i: 1
+    completionLimit: 
+    completionSeparation:
+      i: 2
+  functionsOnSpawn: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_breakin: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    obj_tier1:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_sr
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_weapon_melee
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_r3
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - part_backpack
+        - part_armor_w1
+        - part_armor_w2
+        - part_armor_w3
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_reactor_r1
+        - sub_thruster
+        tags: 
+      - chance: 0.6
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_reactor_r2
+        - sub_r2
+        tags: 

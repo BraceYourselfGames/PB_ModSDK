@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using PhantomBrigade.Data.UI;
 using PhantomBrigade.Mods;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 #if PB_MODSDK
 using PhantomBrigade.SDK.ModTools;
@@ -18,9 +20,9 @@ namespace PhantomBrigade.Data
         private const string tgLib = "Library";
         private const string fgAddText = "_DefaultTabGroup/Library/Add or replace text";
         private const string bgAddText = "_DefaultTabGroup/Library/Add or replace text/Bg";
-
+        
         private const string tgLoc = "Localization";
-
+        
         private const string tgUtilities = "Utilities";
         private const string bgUtilitiesLegacy = "_DefaultTabGroup/Utilities/ButtonsLegacy";
         private const string bgUtilitiesOther = "_DefaultTabGroup/Utilities/ButtonsOther";
@@ -32,8 +34,11 @@ namespace PhantomBrigade.Data
         public static bool showProcessedText = false;
 
         private static bool libraryLoadedOnce = false;
-        private static DataContainerTextLibrary libraryDataInternal;
 
+        // [PropertySpace (8f), PropertyOrder (-5)]
+        // [TabGroup (tgLib), ShowInInspector, OnValueChanged ("OnLibraryModified", true)]
+        private static DataContainerTextLibrary libraryDataInternal;
+        
         [PropertySpace (8f), PropertyOrder (-5)]
         [TabGroup (tgLib), ShowInInspector, OnValueChanged ("OnLibraryModified", true)]
         public static DataContainerTextLibrary libraryData
@@ -49,10 +54,10 @@ namespace PhantomBrigade.Data
                 libraryDataInternal = value;
             }
         }
-
+        
         private static bool libraryUnsaved = false;
         private static string libraryPath = "Configs/TextLibrary";
-
+        
         #if PB_MODSDK
 
         private static bool librarySourceLoadedOnce = false;
@@ -72,27 +77,30 @@ namespace PhantomBrigade.Data
 
         #endif
 
-
-
         [TabGroup (tgLoc), ShowInInspector, PropertyOrder (-2)]
         private static SortedDictionary<string, string> localizationKeysToPathsBuiltin = new SortedDictionary<string, string> ();
-
+        
         [TabGroup (tgLoc), ShowInInspector, PropertyOrder (-2)]
-        private static SortedDictionary<string, string> localizationKeysToPathsMods = new SortedDictionary<string, string> ();
+        public static SortedDictionary<string, string> localizationKeysToPathsMods = new SortedDictionary<string, string> ();
+        
+        #if !PB_MODSDK
+        [TabGroup (tgLoc), ShowInInspector, PropertyOrder (-2)]
+        public static SortedDictionary<string, OptionLevel> optionLevels = new SortedDictionary<string, OptionLevel> ();
+        #endif
 
         [TabGroup (tgLoc), ShowInInspector]
         [ValueDropdown ("@localizationKeysToPathsBuiltin.Keys")]
         public static string localizationKeySelected = "French";
-
+        
         [TabGroup (tgLoc), ShowInInspector, ReadOnly]
         public static string localizationKeyLast;
 
         [TabGroup (tgLoc), ShowInInspector, ReadOnly]
         public static string localizationPathLast;
-
+        
         [TabGroup (tgLoc), ShowInInspector, ReadOnly]
         public static bool localizationPathAppendedLast;
-
+        
 
         [PropertySpace (8f), PropertyOrder (1)]
         [TabGroup (tgLoc), ShowInInspector, OnValueChanged ("OnLocalizationModified", true)]
@@ -117,7 +125,7 @@ namespace PhantomBrigade.Data
 
         private void OnLibraryModified () => libraryUnsaved = true;
         private void OnLocalizationModified () => localizationUnsaved = true;
-
+        
         [PropertyOrder (-10)]
         [TabGroup (tgLib)]
         [ButtonGroup ("_DefaultTabGroup/Library/Buttons"), Button ("Load", ButtonSizes.Large)]
@@ -154,7 +162,7 @@ namespace PhantomBrigade.Data
 
             libraryDataInternal.OnAfterDeserialization ();
         }
-
+        
         #if PB_MODSDK
 
         public static void LoadLibrarySource ()
@@ -198,7 +206,7 @@ namespace PhantomBrigade.Data
         }
 
         #endif
-
+        
         [PropertyOrder (-10)]
         [TabGroup (tgLib)]
         [ButtonGroup ("_DefaultTabGroup/Library/Buttons"), Button ("@libraryUnsaved ? \"Save data*\" : \"Save data\"", ButtonSizes.Large)]
@@ -253,12 +261,12 @@ namespace PhantomBrigade.Data
 
             libraryUnsaved = false;
         }
-
+        
         public static void MarkLibraryChanged ()
         {
             libraryUnsaved = true;
         }
-
+        
         public static void MarkLocalizationChanged ()
         {
             libraryUnsaved = true;
@@ -275,15 +283,15 @@ namespace PhantomBrigade.Data
                 return localizationDataInternal.core.font;
             return libraryDataInternal.core.font;
         }
-
-
+        
+        
         [PropertyOrder (-1)]
         [TabGroup (tgLoc)]
         [ButtonGroup ("_DefaultTabGroup/Localization/Buttons"), Button ("Refresh list", ButtonSizes.Large)]
         public static void RefreshLocalizationListBuiltin ()
         {
             localizationKeysToPathsBuiltin.Clear ();
-
+            
             // Initialize lookup first, provided its possible
             if (!Directory.Exists (localizationPathBuiltin))
             {
@@ -304,10 +312,14 @@ namespace PhantomBrigade.Data
                 var files = Directory.GetFiles (path);
                 if (files.Length == 0)
                     continue;
-
+                    
                 var key = path.Replace (localizationPathBuiltin, string.Empty).Replace ("\\", "/");
                 localizationKeysToPathsBuiltin.Add (key, path);
             }
+
+            #if !PB_MODSDK
+            RefreshLocalizationOptionLevels ();
+            #endif
         }
 
         [PropertyOrder (-1)]
@@ -325,7 +337,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Null or empty localization key provided, can't load localization");
                 return;
             }
-
+            
             // Initialize lookup first, provided its possible
             if (localizationKeysToPathsBuiltin.Count == 0)
                 RefreshLocalizationListBuiltin ();
@@ -348,26 +360,38 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Failed to find any localizations with key {localizationKey}");
             }
         }
-
+        
         public static void LoadLocalization (string localizationPath, bool appendApplicationPath)
         {
             localizationPathLast = DataPathHelper.GetCleanPath (localizationPath);
             localizationPathAppendedLast = appendApplicationPath;
             Debug.Log ($"Attempting to load localization using path {localizationPathLast} | Application path appended: {localizationPathAppendedLast}");
-
+            
             localizationDataInternal = new DataContainerTextLocalization ();
-
-            localizationDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore>
+            
+            localizationDataInternal.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCore> 
                 (localizationPath, "core.yaml", appendApplicationPath: appendApplicationPath);
 
-            localizationDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorLocalization>
+            localizationDataInternal.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorLocalization> 
                 ($"{localizationPath}/Sectors", appendApplicationPath: appendApplicationPath);
-
+                
             // Only inject mod text at runtime and before post-deserialization code
             if (Application.isPlaying)
                 ModManager.ProcessLocalizationEdits (localizationKeyLast, localizationDataInternal.sectors);
-
+                
             localizationDataInternal.OnAfterDeserialization ();
+            
+            #if !PB_MODSDK
+            if (!enableChangeCallbacks)
+            {
+                if (Application.isPlaying)
+                    Debug.LogWarning ($"Language change callbacks are disabled, but we are not going to skip them. TODO: Investigate why they needed to be disabled.");
+                // Debug.LogWarning ($"Skipping language change callback, likely due to ongoing initial load");
+                // return;
+            }
+
+            OnLocalizationChange ();
+            #endif
         }
 
         [PropertyOrder (-1)]
@@ -381,8 +405,78 @@ namespace PhantomBrigade.Data
             localizationKeyLast = "English";
             localizationPathLast = null;
             localizationPathAppendedLast = false;
+            
+            #if !PB_MODSDK
+            // Only inject mod text at runtime and before post-deserialization code
+            if (Application.isPlaying)
+            {
+                ModManager.ProcessLibraryEdits (libraryDataInternal.sectors);
+                libraryDataInternal.OnAfterDeserialization ();
+            }
+            
+            OnLocalizationChange ();
+            #endif
         }
 
+        #if !PB_MODSDK
+        private static void OnLocalizationChange ()
+        {
+            if (!Application.isPlaying)
+                return;
+
+            Debug.Log ($"Applying language {localizationKeyLast} to UI and databases");
+            registeredCallback?.Invoke ();
+            if (registeredLabels != null)
+            {
+                for (int i = registeredLabels.Count - 1; i >= 0; --i)
+                {
+                    var label = registeredLabels[i];
+                    if (label != null && label.gameObject != null)
+                        label.ApplyLibraryValue ();
+                    else
+                        registeredLabels.RemoveAt (i);
+                }
+            }
+
+            // Quick hack for refreshing text-utilizing databases
+            if (DataMultiLinkerHelper.actionListResolveText != null)
+            {
+                // Debug.LogWarning ($"Resolving text {DataMultiLinkerHelper.actionListResolveText.Count} data multi-linkers that use localization");
+                foreach (var action in DataMultiLinkerHelper.actionListResolveText)
+                    action.Invoke ();
+            }
+            
+            // Quick hack for some exceptions that put localized text outside of multi-linkers
+            DataLinkerGameSettingGlobals.LoadData ();
+            DataLinkerUI.LoadData ();
+            
+            foreach (var kvp in DataMultiLinkerUtility.callbacksOnAfterTextLoad)
+                kvp.Value?.Invoke ();
+
+            if (Application.isPlaying)
+            {
+                var fontKey = GetCurrentFontKey ();
+                UIFontHelper.Initialize (fontKey);
+                
+                // Refresh views
+                CIViewLoader.RefreshLocalization ();
+                
+                // Apply values from core.yaml
+                var c = localizationDataInternal != null && localizationDataInternal.core != null ? localizationDataInternal.core : libraryData.core;
+                CIViewSubtitleBottom.ApplyLanguageSettings (c.widthSubtitle, c.sizeSubtitle, c.subtitleFadeoutTime, c.subtitleBuffer);
+                CIViewSubtitleTop.ApplyLanguageSettings (c.widthSubtitle, c.sizeSubtitle, c.subtitleFadeoutTime, c.subtitleBuffer);
+                CIHelperTooltip.ApplyLanguageSettings (c.sizeTooltipHeader, c.sizeTooltipContent, c.spacingTooltipHeader);
+                
+                // Since it has content copied from hardpoints, recreate it, last
+                DataMultiLinkerEquipmentGroup.OnAfterDeserialization ();
+                DataMultiLinkerBaseEffect.OnAfterDeserialization ();
+                
+                OverworldTimeUtility.RefreshLocalizationStrings ();
+                DataHelperEquipment.RefreshLocalizationStrings ();
+            }
+        }
+        #endif
+        
         [PropertyOrder (-1)]
         [TabGroup (tgLoc)]
         [ButtonGroup ("_DefaultTabGroup/Localization/Buttons"), Button ("@localizationUnsaved ? \"Save data*\" : \"Save data\"", ButtonSizes.Large)]
@@ -400,7 +494,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ("No last localization path available, can't save");
                 return;
             }
-
+            
             if (log)
                 Debug.Log ($"Writing localization {localizationKeyLast} to path {localizationPathLast} | Appended: {localizationPathAppendedLast}");
 
@@ -414,14 +508,14 @@ namespace PhantomBrigade.Data
 
             localizationUnsaved = false;
         }
-
-
-
+        
+        
+        
         public static DataContainerTextSectorLocalization GetLocalizationSector (string sectorKey)
         {
             if (localizationDataInternal == null || localizationDataInternal.sectors == null)
                 return null;
-
+            
             return localizationDataInternal.GetSector (sectorKey);
         }
 
@@ -429,8 +523,49 @@ namespace PhantomBrigade.Data
         {
             if (libraryData == null || libraryData.sectors == null)
                 return null;
-
+            
             return libraryData.GetSector (sectorKey);
+        }
+
+        public static DataStructLocString GetRandomLocStructFromTag (string tag, string group = null)
+        {
+            if (string.IsNullOrEmpty (tag))
+            {
+                Debug.LogWarning ($"Loc (GRLS) | Failed to get random loc string, no tag provided");
+                return DataStructLocString.Empty;
+            }
+            
+            if (libraryData == null || libraryData.tagsMap == null || !libraryData.tagsMap.TryGetValue (tag, out var sectorKeysWithTag) || sectorKeysWithTag == null || sectorKeysWithTag.Count == 0)
+            {
+                Debug.LogWarning ($"Loc (GRLS) | Failed to get random loc string, no sectors with tag {tag}");
+                return DataStructLocString.Empty;
+            }
+
+            var sectorKey = sectorKeysWithTag.GetRandomEntry ();
+            if (libraryData == null || libraryData.sectors == null || !libraryData.sectors.TryGetValue (sectorKey, out var sector) || sector?.entries == null || sector.entries.Count == 0)
+            {
+                Debug.LogWarning ($"Loc (GRLS) | Failed to get random loc string, no sector {sectorKey} referenced by tag {tag} lookup exists");
+                return DataStructLocString.Empty;
+            }
+
+            bool groupChecked = !string.IsNullOrEmpty (group);
+            if (groupChecked)
+            {
+                var groups = sector.groups;
+                if (groups == null || !groups.TryGetValue (group, out var entryKeysInGroup) || entryKeysInGroup == null ||entryKeysInGroup.Count == 0)
+                {
+                    Debug.LogWarning ($"Loc (GRLS) | Failed to get random loc string, no group {group} found under sector {sectorKey} (tag {tag})");
+                    return DataStructLocString.Empty;
+                }
+                
+                var entryKeyRandom = entryKeysInGroup.GetRandomEntry ();
+                return new DataStructLocString (sectorKey, entryKeyRandom);
+            }
+            else
+            {
+                var entryKeyRandom = sector.entries.GetRandomKey ();
+                return new DataStructLocString (sectorKey, entryKeyRandom);
+            }
         }
 
         public static string GetText (string sectorKey, string textKey, bool suppressWarning = false)
@@ -441,18 +576,18 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found: Null or empty sector key");
                 return string.Empty;
             }
-
+            
             if (string.IsNullOrEmpty (textKey))
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found: Null or empty text key");
                 return string.Empty;
             }
-
+            
             // Only check loc. during play mode
             if (!Application.isPlaying)
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
-
+            
             // If localization is missing entirely, go straight to library as fallback
             if (localizationDataInternal == null)
             {
@@ -460,7 +595,7 @@ namespace PhantomBrigade.Data
                 //     Debug.LogWarning ($"Text not found in localization ({sectorKey}/{textKey}): Localization not loaded, falling back to library");
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
             }
-
+            
             var sector = localizationDataInternal.GetSector (sectorKey);
             if (sector == null)
             {
@@ -468,18 +603,18 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in localization ({sectorKey}/{textKey}): Sector not present, falling back to library");
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
             }
-
-            if (sector.entries == null || !sector.entries.ContainsKey (textKey))
+            
+            DataBlockTextEntryLocalization entry = null;
+            if (sector.entries == null || !sector.entries.TryGetValue (textKey, out entry) || entry == null)
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found in localization ({sectorKey}/{textKey}): Sector doesn't contain a given key, falling back to library");
                 return GetTextFromLibrary (sectorKey, textKey, suppressWarning);
             }
-
-            var entry = sector.entries[textKey];
+            
             var text = entry.textProcessed;
             bool textEmpty = string.IsNullOrEmpty (text);
-
+            
             if (textEmpty)
             {
                 if (DataShortcuts.debug.textFromLibraryWhenEmpty)
@@ -492,54 +627,7 @@ namespace PhantomBrigade.Data
 
             return entry.textProcessed;
         }
-
-        #if PB_MODSDK
-
-        public static string GetRawTextFromLibrary (bool forceSource, string sectorKey, string textKey, bool suppressWarning = true)
-        {
-            if (string.IsNullOrEmpty (sectorKey))
-            {
-                if (!suppressWarning)
-                    Debug.LogWarning ($"Text not found in library: Null or empty sector key");
-                return string.Empty;
-            }
-
-            if (string.IsNullOrEmpty (textKey))
-            {
-                if (!suppressWarning)
-                    Debug.LogWarning ($"Text not found in library: Null or empty text key");
-                return string.Empty;
-            }
-
-            var libraryDataSelected = forceSource ? librarySourceData : libraryData;
-            if (libraryDataSelected == null)
-            {
-                if (!suppressWarning)
-                    Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Library not loaded");
-                return string.Empty;
-            }
-
-            var sector = libraryData.GetSector (sectorKey);
-            if (sector == null)
-            {
-                if (!suppressWarning)
-                    Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Sector not present");
-                return string.Empty;
-            }
-
-            if (sector.entries == null || !sector.entries.ContainsKey (textKey))
-            {
-                if (!suppressWarning)
-                    Debug.LogWarning ($"Text not found in ({(forceSource ? "source" : "working")}) library ({sectorKey}/{textKey}): Sector doesn't contain this key");
-                return string.Empty;
-            }
-
-            var entry = sector.entries[textKey];
-            return entry.text;
-        }
-
-        #endif
-
+        
         private static string GetTextFromLibrary (string sectorKey, string textKey, bool suppressWarning = false)
         {
             if (string.IsNullOrEmpty (sectorKey))
@@ -548,21 +636,21 @@ namespace PhantomBrigade.Data
                     Debug.LogWarning ($"Text not found in library: Null or empty sector key");
                 return string.Empty;
             }
-
+            
             if (string.IsNullOrEmpty (textKey))
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found in library: Null or empty text key");
                 return string.Empty;
             }
-
+            
             if (libraryData == null)
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Main library not loaded");
                 return string.Empty;
             }
-
+            
             var sector = libraryData.GetSector (sectorKey);
             if (sector == null)
             {
@@ -571,17 +659,17 @@ namespace PhantomBrigade.Data
                 return string.Empty;
             }
 
-            if (sector.entries == null || !sector.entries.ContainsKey (textKey))
+            DataBlockTextEntryMain entry = null;
+            if (sector.entries == null || !sector.entries.TryGetValue (textKey, out entry) || entry == null)
             {
                 if (!suppressWarning)
                     Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Sector doesn't contain a given key");
                 return string.Empty;
             }
-
-            var entry = sector.entries[textKey];
+            
             var text = entry.textProcessed;
             bool textEmpty = string.IsNullOrEmpty (text);
-
+            
             if (textEmpty)
             {
                 if (DataShortcuts.debug.textWarningWhenEmpty)
@@ -592,7 +680,7 @@ namespace PhantomBrigade.Data
 
             return entry.textProcessed;
         }
-
+        
         public static DataBlockTextEntryMain GetTextEntryFromLibrary (string sectorKey, string textKey)
         {
             if (string.IsNullOrEmpty (sectorKey))
@@ -600,33 +688,33 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Text not found in library: Null or empty sector key");
                 return null;
             }
-
+            
             if (string.IsNullOrEmpty (textKey))
             {
                 Debug.LogWarning ($"Text not found in library: Null or empty text key");
                 return null;
             }
-
+            
             if (libraryData == null)
             {
                 Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Main library not loaded");
                 return null;
             }
-
+            
             var sector = libraryData.GetSector (sectorKey);
             if (sector == null)
             {
                 Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Sector not present");
                 return null;
             }
-
-            if (sector.entries == null || !sector.entries.ContainsKey (textKey))
+            
+            DataBlockTextEntryMain entry = null;
+            if (sector.entries == null || !sector.entries.TryGetValue (textKey, out entry) || entry == null)
             {
                 Debug.LogWarning ($"Text not found in library ({sectorKey}/{textKey}): Sector doesn't contain a given key");
                 return null;
             }
-
-            var entry = sector.entries[textKey];
+            
             return entry;
         }
 
@@ -636,10 +724,10 @@ namespace PhantomBrigade.Data
         {
             if (libraryData == null || libraryData.sectors == null)
                 return fallbackKeyList;
-
+            
             return libraryData.sectors.Keys;
         }
-
+        
         #if UNITY_EDITOR
         public static IEnumerable<string> GetAddTextKeys ()
         {
@@ -662,10 +750,10 @@ namespace PhantomBrigade.Data
         {
             if (localizationDataInternal == null || localizationDataInternal.sectors == null)
                 return fallbackKeyList;
-
+            
             return localizationDataInternal.sectors.Keys;
         }
-
+        
         public static IEnumerable<string> GetLibraryTextKeys (string sectorKey)
         {
             if (libraryData == null || libraryData.sectors == null || string.IsNullOrEmpty (sectorKey) || !libraryData.sectors.ContainsKey (sectorKey))
@@ -676,7 +764,7 @@ namespace PhantomBrigade.Data
                 return fallbackKeyList;
             return sector.entries.Keys;
         }
-
+        
         public static void TryAddingTextToLibrary (string sectorKey, string textKey, string text, string note = null)
         {
             if (libraryData == null)
@@ -684,10 +772,10 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Can't add text to library: no library loaded");
                 return;
             }
-
+            
             libraryData.TryAddingText (sectorKey, textKey, text, note);
         }
-
+        
         public static void TryAddingSectorToLibrary (string sectorKey)
         {
             if (libraryData == null)
@@ -695,7 +783,7 @@ namespace PhantomBrigade.Data
                 Debug.LogWarning ($"Can't add sector to library: no library loaded");
                 return;
             }
-
+            
             libraryData.TryAddingSector (sectorKey);
         }
 
@@ -704,7 +792,7 @@ namespace PhantomBrigade.Data
         {
             localizationKeysToPathsMods.Clear ();
         }
-
+        
         public static void AddLocalizationFromMod (string key, string path)
         {
             if (string.IsNullOrEmpty (key))
@@ -729,10 +817,10 @@ namespace PhantomBrigade.Data
         }
 
         #if UNITY_EDITOR
-
+        
         private static Color colorNormal = new Color (1f, 1f, 1f, 1f);
         private static Color colorUnsaved = Color.HSVToRGB (0.6f, 0.5f, 1f);
-
+        
         private Color GetLibrarySaveButtonColor => libraryUnsaved ? colorUnsaved : colorNormal;
         private Color GetLocalizationSaveButtonColor => localizationUnsaved ? colorUnsaved : colorNormal;
 
@@ -749,17 +837,30 @@ namespace PhantomBrigade.Data
         }
 
 
+        
+        [PropertyOrder (-6)]
+        [ShowIf ("IsAddBlockVisible")]
+        [FoldoutGroup (fgAddText, false)]
+        [Button ("Add to DB", ButtonSizes.Medium, Icon = SdfIconType.FilePlusFill), ButtonGroup (bgAddText)]
+        private static void AddTextToLibrary ()
+        {
+            TryAddingTextToLibrary (addTextSector, addTextKey, addTextValue);
+        }
+        
+        [PropertyOrder (-6)]
+        [ShowIf ("IsAddBlockVisible")]
+        [FoldoutGroup (fgAddText, false)]
+        [Button ("Add & save DB", ButtonSizes.Medium, Icon = SdfIconType.FileEarmarkPlusFill), ButtonGroup (bgAddText)]
+        private static void AddTextToLibraryAndSave ()
+        {
+            TryAddingTextToLibrary (addTextSector, addTextKey, addTextValue);
+            SaveLibrary ();
+        }
 
         [PropertyOrder (-6)]
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText, false)]
-        [Button ("Add to library"), ButtonGroup (bgAddText)]
-        private static void AddTextToLibrary () => TryAddingTextToLibrary (addTextSector, addTextKey, addTextValue);
-
-        [PropertyOrder (-6)]
-        [ShowIf ("IsAddBlockVisible")]
-        [FoldoutGroup (fgAddText, false)]
-        [Button ("Copy to clipboard"), ButtonGroup (bgAddText)]
+        [Button ("Copy to clipboard", ButtonSizes.Medium, Icon = SdfIconType.ClipboardCheck), ButtonGroup (bgAddText)]
         private static void CopyTextSnippet ()
         {
             #if UNITY_EDITOR
@@ -782,9 +883,9 @@ namespace PhantomBrigade.Data
         [FoldoutGroup (fgAddText)]
         [ShowInInspector]
         [LabelText ("Sector"), LabelWidth (120f), ValueDropdown ("GetLibrarySectorKeys")]
-        [InfoBox ("@GetExistingText ()", "IsExistingTextVisible", InfoMessageType = InfoMessageType.None)]
+        [InfoBox ("@GetExistingText ()", InfoMessageType = InfoMessageType.None)]
         private static string addTextSector;
-
+        
         [PropertyOrder (-6)]
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText)]
@@ -796,9 +897,9 @@ namespace PhantomBrigade.Data
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText)]
         [ShowInInspector]
-        [LabelText ("Key / Text"), LabelWidth (120f), InfoBox ("Invalid key (empty or already registered)", "IsAddKeyInvalid", InfoMessageType = InfoMessageType.Warning)]
+        [LabelText ("Key / Text"), LabelWidth (120f)]
         private static string addTextKey;
-
+        
         [PropertyOrder (-6)]
         [ShowIf ("IsAddBlockVisible")]
         [FoldoutGroup (fgAddText)]
@@ -807,14 +908,15 @@ namespace PhantomBrigade.Data
         private static string addTextValue;
 
         [PropertyOrder (-5)]
-        [ShowIf ("@IsAddBlockVisible () && !string.IsNullOrEmpty (addTextSector) && !string.IsNullOrEmpty (addTextKey)")]
+        [ShowIf ("@(IsAddBlockVisible () && !string.IsNullOrEmpty (addTextSector) && !string.IsNullOrEmpty (addTextKey)) || IsAddKeyInvalid ()")]
+        [InfoBox ("Invalid key (empty or already registered)", "IsAddKeyInvalid", InfoMessageType = InfoMessageType.Warning)]
         [FoldoutGroup (fgAddText)]
         [ShowInInspector]
         [HideLabel, MultiLineProperty (3), GUIColor (0.625f, 0.825f, 0.8f)]
         private static string addTextCode
         {
             get { return GetCodeSnippet (); }
-            set {  }
+            set { value = value; }
         }
 
         private static Type textSectorKeyClassType = typeof (TextLibs);
@@ -822,10 +924,10 @@ namespace PhantomBrigade.Data
         {
             if (string.IsNullOrEmpty (addTextSector) || string.IsNullOrEmpty (addTextKey))
                 return string.Empty;
-
+            
             var fields = FieldReflectionUtility.GetConstantStringFieldNamesValues (textSectorKeyClassType);
             string shortcut = null;
-
+            
             foreach (var kvp in fields)
             {
                 bool match = kvp.Value == addTextSector;
@@ -835,7 +937,7 @@ namespace PhantomBrigade.Data
                     break;
                 }
             }
-
+            
             if (shortcut != null)
                 return $"Txt.Get (TextLibs.{shortcut}, \"{addTextKey}\")";
             else
@@ -843,29 +945,29 @@ namespace PhantomBrigade.Data
         }
 
         #endif
-
-
+        
+        
         [PropertySpace (8f), PropertyOrder (1)]
         [TabGroup (tgUtilities), ShowInInspector]
         private static DataContainerTextLibraryOld libraryDataOld;
 
         private static string libraryPathOld = "Configs/Text/English";
-
+        
         [TabGroup (tgUtilities)]
         [ButtonGroup (bgUtilitiesLegacy), Button ("Load (old)", ButtonSizes.Large)]
         public static void LoadLibraryOld ()
         {
             Debug.Log ($"Loading old library from {libraryPathOld}");
-
+            
             libraryDataOld = new DataContainerTextLibraryOld ();
-            libraryDataOld.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCoreOld>
+            libraryDataOld.core = UtilitiesYAML.LoadDataFromFile<DataContainerTextLibraryCoreOld> 
                 (libraryPathOld, "core.yaml", appendApplicationPath: true);
-            libraryDataOld.specialized = UtilitiesYAML.LoadDataFromFile<DataContainerTextSpecializedOld>
+            libraryDataOld.specialized = UtilitiesYAML.LoadDataFromFile<DataContainerTextSpecializedOld> 
                 (libraryPathOld, "specialized.yaml", appendApplicationPath: true);
-            libraryDataOld.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorOld>
+            libraryDataOld.sectors = UtilitiesYAML.LoadDecomposedDictionary<DataContainerTextSectorOld> 
                 ($"{libraryPathOld}/Sectors", appendApplicationPath: true);
         }
-
+        
         [TabGroup (tgUtilities)]
         [ButtonGroup (bgUtilitiesLegacy), Button ("Save (old)", ButtonSizes.Large)]
         public static void SaveLibraryOld ()
@@ -875,19 +977,19 @@ namespace PhantomBrigade.Data
                 Debug.Log ($"No old library data available, can't save");
                 return;
             }
-
+            
             Debug.Log ($"Writing old text library to path {libraryPathOld}");
 
             if (libraryDataOld.core != null)
                 UtilitiesYAML.SaveDataToFile (libraryPathOld, "core.yaml", libraryDataOld.core);
-
+            
             if (libraryDataOld.specialized != null)
                 UtilitiesYAML.SaveDataToFile (libraryPathOld, "specialized.yaml", libraryDataOld.specialized);
 
             if (libraryDataOld.sectors != null)
                 UtilitiesYAML.SaveDecomposedDictionary ($"{libraryPathOld}/Sectors", libraryDataOld.sectors, false);
         }
-
+        
         [TabGroup (tgUtilities)]
         [ButtonGroup (bgUtilitiesLegacy), Button ("Convert to\nnew format", ButtonSizes.Large)]
         public static void ConvertLibraryOld ()
@@ -906,7 +1008,7 @@ namespace PhantomBrigade.Data
 
             core.name = "English";
             core.flag = "icon_flag_english";
-
+            
             core.subtitleBuffer = coreOld.subtitleBuffer;
             core.subtitleFadeoutTime = coreOld.subtitleFadeoutTime;
             core.insertNewLines = coreOld.insertNewLines;
@@ -916,74 +1018,6 @@ namespace PhantomBrigade.Data
             core.sizeTooltipHeader = coreOld.sizeTooltipHeader;
             core.sizeTooltipContent = coreOld.sizeTooltipContent;
             core.spacingTooltipHeader = coreOld.spacingTooltipHeader;
-
-            /*
-            var specOld = libraryDataOld.specialized;
-            var collections = new SortedDictionary<string, DataContainerTextCollectionMain> ();
-            libraryData.collections = collections;
-
-            if (specOld.pilotGroups != null)
-            {
-                if (specOld.pilotGroups.TryGetValue ("player_default", out var group))
-                {
-                    collections.Add ("pilot_names_family_01", new DataContainerTextCollectionMain
-                    {
-                        localized = true,
-                        tags = new HashSet<string> { "group_pilot", "pilot_names_family" },
-                        entries = new List<string> (group.familyNames)
-                    });
-
-                    collections.Add ("pilot_names_given_01", new DataContainerTextCollectionMain
-                    {
-                        localized = true,
-                        tags = new HashSet<string> { "group_pilot", "pilot_names_given" },
-                        entries = new List<string> (group.givenNames)
-                    });
-
-                    collections.Add ("pilot_names_callsigns_01", new DataContainerTextCollectionMain
-                    {
-                        localized = true,
-                        tags = new HashSet<string> { "group_pilot", "pilot_names_callsigns" },
-                        entries = new List<string> (group.callsigns)
-                    });
-                }
-            }
-
-            if (specOld.overworldEntityGroups != null)
-            {
-                var nameGroupData = DataMultiLinkerOverworldNameGroup.data;
-                nameGroupData.Clear ();
-
-                int i = 0;
-                foreach (var kvp in specOld.overworldEntityGroups)
-                {
-                    var groupKey = kvp.Key;
-                    var group = kvp.Value;
-
-                    if (group.names == null || group.names.Count == 0)
-                        continue;
-
-                    nameGroupData.Add (groupKey, new DataContainerOverworldNameGroup
-                    {
-                        key = groupKey,
-                        collectionTag = groupKey,
-                        prefixID = group.prefixFromID,
-                        suffixID = group.suffixFromID
-                    });
-
-                    collections.Add ($"overworld_{groupKey}", new DataContainerTextCollectionMain
-                    {
-                        localized = true,
-                        tags = new HashSet<string> { "group_overworld", groupKey },
-                        entries = new List<string> (group.names)
-                    });
-
-                    i += 1;
-                }
-
-                DataMultiLinkerOverworldNameGroup.SaveData ();
-            }
-            */
 
             int sectorCount = 0;
             int entryCount = 0;
@@ -1032,47 +1066,15 @@ namespace PhantomBrigade.Data
                     entry.text = entryOld.text;
                 }
             }
-
+            
             Debug.Log ($"Finished import of legacy text database to new format | Sectors: {sectorCount} | Entries: {entryCount}");
             DataManagerText.SaveLibrary ();
         }
-
-        /*
-        [TabGroup (tgUtilities)]
-        [Button ("Convert collections to sectors", ButtonSizes.Large)]
-        public static void ConvertCollectionsToSectors ()
-        {
-            if (libraryDataInternal == null || libraryDataInternal.collections == null)
-                return;
-
-            foreach (var kvp in libraryDataInternal.collections)
-            {
-                var colKey = kvp.Key;
-                var colOld = kvp.Value;
-
-                var colNew = new DataBlockTextCollection ();
-                colNew.tags = colOld.tags;
-                colNew.entries = colOld.entries;
-
-                var sector = new DataContainerTextSectorMain ();
-                sector.key = $"xc_{colKey}";
-                sector.name = $"Col. ({colKey})";
-                sector.description = "This is a text collection. In contrast to most text sectors, this has no pairs of keys and text. Instead, it simply contains a list of text. The game randomly selects from this list.";
-                sector.localized = colOld.localized;
-                sector.collection = colNew;
-                sector.exportMode = TextSectorExportMode.Collection;
-                sector.parent = libraryDataInternal;
-                libraryDataInternal.sectors.Add (sector.key, sector);
-            }
-
-            libraryDataInternal.collections = null;
-        }
-        */
     }
 
     public static class Txt
     {
-        public static string Get (string sectorKey, string textKey, bool suppressWarning = false) =>
+        public static string Get (string sectorKey, string textKey, bool suppressWarning = false) => 
             DataManagerText.GetText (sectorKey, textKey, suppressWarning);
 
         public static string Wrap (this string content, string prefix, string suffix)
@@ -1081,3 +1083,5 @@ namespace PhantomBrigade.Data
         }
     }
 }
+
+

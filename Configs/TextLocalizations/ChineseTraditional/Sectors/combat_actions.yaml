@@ -8,6 +8,14 @@ entries:
     id: 1
     text: 啟動這個單位搭載的防禦系統。
     textEng: Activate the defense system mounted to this unit.
+  ability_back_spotter_name:
+    id: 2
+    text: 呼叫砲擊
+    textEng: Strike
+  ability_back_spotter_text:
+    id: 2
+    text: 提供砲擊的目標座標。
+    textEng: Provide target coordinates for an artillery strike.
   ability_back_targeted_name:
     id: 1
     text: 能力
@@ -168,6 +176,22 @@ entries:
     id: 1
     text: 由於碰撞或毀損，所有項目的行動都被終止。時間線顯示出恢復時間。
     textEng: As a result of collision or destruction, all planned actions were terminated. The timeline indicates recovery duration.
+  dash_bulldoze_name:
+    id: 2
+    text: 強行突破
+    textEng: Bulldoze
+  dash_bulldoze_text:
+    id: 2
+    text: >-
+      使推進器超載以向前滑行，撞碎可破壞的障礙物。機甲會在起動前暫停片刻，以轉移能量並做好撞擊準備。
+
+
+      機甲在衝撞時會受到防護，但每撞擊一個障礙物都會降低其穩定性（依單位重量級別而定）。穩定性歸零後，任何碰撞都會導致故障。
+    textEng: >-
+      Overcharge the thrusters to slide forward, breaking through destructible obstacles. The mech will stop for a moment before takeoff to divert power and brace for impact.
+
+
+      The mech will be shielded from collisions, but each obstacle will reduce stability (depending on unit weight class). Losing all stability will lead to a crash on any collision.
   dash_name:
     id: 1
     text: 衝刺
@@ -176,6 +200,22 @@ entries:
     id: 1
     text: '啟動推進器以跳躍到選擇的位置。可用於躲避火力或是取得有利位置。消除導彈鎖定以防止被直接命中。 '
     textEng: 'Activate thrusters to jump to a selected position. Can be used to evade fire or gain an advantageous position. Breaks missile locks and prevents direct hits. '
+  dash_vertical_name:
+    id: 2
+    text: 懸浮
+    textEng: Hover
+  dash_vertical_text:
+    id: 2
+    text: >-
+      啟動推進器在地面上方懸浮一段時間，懸浮時間可調整。
+
+
+      懸浮高度取決於所裝備懸浮推進器的數值以及機甲的裝甲等級。較重的機甲無法升得跟輕型機甲一樣高。
+    textEng: >-
+      Activate thrusters to hover above ground for a configurable time.
+
+
+      The hover altitude is determined by the stats of the equipped hover thruster and the armor class of the mech. Heavier mechs can't lift as high as lighter ones.
   default_mode_path_drawing_header:
     id: 1
     text: 設定目的地

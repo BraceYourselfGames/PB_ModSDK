@@ -1,0 +1,58 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_tank_modular
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: default
+tags:
+- branch_trainingreserves
+- branch_trainingarmy
+- role_leader
+- role_scout
+- role_sharpshooter
+- role_support
+- type_tank_standard
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_body_chassis_basic
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_vhc_tank_cannon_01
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_body_track_basic
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_body_track_basic
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_body_turret_cannon_basic
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

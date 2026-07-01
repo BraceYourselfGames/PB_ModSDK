@@ -1,0 +1,348 @@
+parents: []
+hidden: false
+core:
+  unitRoot: a_core
+  speedTranslation: 6
+  speedRotationPrimary: 0.35
+  speedRotationSecondary: 30
+ui:
+  textName: {}
+  textType: {}
+tags: 
+layout:
+  units:
+    a_core:
+      comment: 
+      preset: vhc_system_core_sat_crawler
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_core_reinforced_proto
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats:
+          healthCurrent: 200
+          healthLimit: 200
+          concussionOffset: 100
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers:
+          barrier: 1
+          hp: 1
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_no_concussion_in
+        - purpose_boss_core
+        - flag_no_damage_in
+        - flag_untargetable
+        - group_02
+      spawnFunctions: 
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform: 
+      linksConditional: 
+      legStepBlocklist: 
+    b1_sensor:
+      comment: 
+      preset: vhc_system_wpn_sensor_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_sensor
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+      spawnFunctions:
+      - !CombatUnitSetUntargetable
+        untargetable: true
+      assignableEventsDestruction: 
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 2.9
+          z: 24.97
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    t1_wpn_turret_front:
+      comment: 
+      preset: vhc_system_wpn_main_cannon_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_main
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides:
+          primaryRotationSpeed: 150
+          secondaryRotationSpeed: 250
+          secondaryYawLimit: 120
+          secondaryPitchLimit: 65
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_no_power
+        - group_02
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 0
+          y: 10
+          z: 22.5
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    t2_wpn_turret_left:
+      comment: 
+      preset: vhc_system_wpn_comp_cannon_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides:
+          primaryRotationSpeed: 150
+          secondaryRotationSpeed: 250
+          secondaryYawLimit: 90
+          secondaryPitchLimit: 65
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_no_power
+        - group_02
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -7.582
+          y: 11.5
+          z: -8.868
+        rotation:
+          x: 0
+          y: -135
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    t3_wpn_turret_right:
+      comment: 
+      preset: vhc_system_wpn_comp_cannon_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_turret
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides:
+          primaryRotationSpeed: 150
+          secondaryRotationSpeed: 250
+          secondaryYawLimit: 90
+          secondaryPitchLimit: 65
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_no_power
+        - group_02
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 7.582
+          y: 11.5
+          z: -8.868
+        rotation:
+          x: 0
+          y: 135
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    w1_wpn_launcher_left:
+      comment: 
+      preset: vhc_system_wpn_launcher_vertical_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_launcher
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_no_power
+        - group_02
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: -6.36
+          y: 6.2
+          z: 0.1
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+    w2_wpn_launcher_right:
+      comment: 
+      preset: vhc_system_wpn_launcher_vertical_01
+      textName: 
+      textDesc: 
+      spawnInfo: 
+      spawnCustomization:
+        name: 
+        id: 
+        idReused: 
+        idPilot: 
+        role: comp_wpn_launcher
+        spawn: 
+        landing: 
+        flags: 
+        faction: 
+        speed: 
+        uncrewed: 
+        pilotAppearance: 
+        pilotStats: 
+        predictionLimit: 
+        animationOverrides: 
+        statMultipliers: 
+        hitDirectionModifiers: 
+        functions: 
+        combatTags:
+        - flag_untargetable
+        - flag_no_power
+        - group_02
+      spawnFunctions: 
+      assignableEventsDestruction:
+      - weakpoint_core
+      linkDamageRedirect: 
+      linkTransform:
+        unitKey: a_core
+        position:
+          x: 6.36
+          y: 6.2
+          z: 0.1
+        rotation:
+          x: 0
+          y: 0
+          z: 0
+        secondary: 
+      linksConditional: 
+      legStepBlocklist: 
+director:
+  booting: 
+  facing: 
+  navigation: 
+  nodes: 
+events: 

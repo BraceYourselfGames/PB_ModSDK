@@ -1,0 +1,71 @@
+!BehaviorTree
+m_treeRoot: !BTComposite_Parallel
+  m_policy: RequireOne
+  m_children:
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Sequence
+      m_dynamic: true
+      m_children:
+      - !BTCondition_CheckRangeTo
+        m_targetSource: !VariableSource_BlackboardTarget {}
+        m_checkType: GreaterThan
+        m_checkThreshold: 15
+        Comment: ''
+      - !BTCondition_CheckActionEngagementRange
+        m_targetSource: !VariableSource_BlackboardTarget {}
+        m_checkType: GreaterThan
+        m_rangeType: Avg
+        m_actionType: AttackMain
+        Comment: ''
+      - !BTCondition_CheckUtilityCounter
+        m_checkType: LessOrEqualTo
+        m_checkThreshold: 3
+        Comment: ''
+      - !BTAction_MoveApproach
+        m_targetSource: !VariableSource_BlackboardTarget {}
+        m_blockerSearchNSteps: 10
+        m_threshold: !VariableSource_IndividualTimeOffset
+          m_actionTypeTimeBuffer: AttackMain
+        Comment: ''
+      Comment: ''
+    Comment: ''
+  - !BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !BTComposite_Selector
+      m_dynamic: true
+      m_children:
+      - !BTComposite_Sequence
+        m_dynamic: true
+        m_children:
+        - !BTCondition_CheckIsUsingEquipment
+          m_value: false
+          Comment: ''
+        - !BTCondition_CheckActionHeat
+          m_actionType: AttackMain
+          m_checkType: GreaterOrEqualTo
+          m_thresholdType: HeatMax
+          Comment: ''
+        - !BTAction_UseEquipment
+          m_actionType: VentHeat
+          m_targetIDSource: 
+          Comment: ''
+        Comment: ''
+      - !BTComposite_Sequence
+        m_dynamic: false
+        m_children:
+        - !BTAction_Idle
+          m_duration: 2
+          Comment: ''
+        - !BTAction_UseEquipment
+          m_actionType: AttackMain
+          m_targetIDSource: !VariableSource_BlackboardTargetID {}
+          Comment: ''
+        Comment: ''
+      Comment: ''
+    Comment: ''
+  Comment: ''

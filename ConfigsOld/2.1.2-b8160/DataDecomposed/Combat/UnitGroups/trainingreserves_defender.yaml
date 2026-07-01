@@ -1,0 +1,146 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: false
+factionBranchDefault: branch_trainingreserves
+tags:
+- branch_trainingreserves
+- range_short
+- weight_heavy
+- type_defender
+- type_main
+- range_medium
+- weight_medium
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: false
+    key: mech
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+  - keyExternal: false
+    key: vehicle_vanguard
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: vanguard
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: false
+    key: mech
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 0
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+  - keyExternal: false
+    key: vehicle_guardian
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+  - keyExternal: false
+    key: vehicle_vanguard
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: vanguard
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+- liveryPreset: ''
+  units:
+  - keyExternal: false
+    key: mech
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+  - keyExternal: false
+    key: vehicle_guardian
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: guardian
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+  - keyExternal: false
+    key: vehicle_vanguard
+    countMin: 2
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: -1
+    levelOffsetMax: 1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q0_training
+    aiBehavior: Flanker
+    aiTargeting: vanguard
+    liveryPreset: inv_reserves_g1_defender
+    custom: 
+unitPresets:
+  mech: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_ultraheavy: false
+      role_guardian: true
+      type_mech: true
+  vehicle_guardian: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_hybrid: false
+      role_guardian: true
+      type_tank_standard: true
+  vehicle_vanguard: !UnitFilter
+    tagsFromOverworld: true
+    tags:
+      filter_energy: false
+      filter_hybrid: false
+      role_vanguard: true
+      type_tank_standard: true

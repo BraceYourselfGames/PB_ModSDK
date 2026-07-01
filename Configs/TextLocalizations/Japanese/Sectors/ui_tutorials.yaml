@@ -26,8 +26,12 @@ entries:
     textEng: Deploying
   base_briefing__p04_text:
     id: 1
-    text: ミッションに選択したユニットとパイロットを確認したら、「配備」をクリックすると次に進みます。
-    textEng: Once you are happy with the units and pilots chosen for the mission, you can click "Deploy" to proceed.
+    text: ミッション用の部隊構成が決まったら、「展開」をクリックして次に進みましょう。
+    textEng: Once you're happy with your squad makeup for the mission, you can click "Deploy" to proceed.
+  base_briefing__p04_text_ctrl:
+    id: 2
+    text: 部隊が決まったら、「展開」ボタンを使用して次に進みましょう。
+    textEng: Once you're happy with your squad, use the "Deploy" button to proceed.
   base_briefing_demolition__p00_hint:
     id: 1
     text: このミッションでは構造物にダメージを与える必要があります。部隊が任務を遂行できるか確認しましょう。
@@ -43,11 +47,23 @@ entries:
       It's a good idea to review the loadouts of your mechs before each mission.
 
 
-      You might have an improved armor you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
+      You might have improved armour you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
   base_briefing_demolition__p02_hint:
     id: 1
     text: 部隊のメカの1機を選び、「ユニットを編集」ボタンをクリックしてカスタマイズ画面に進みます。
-    textEng: Select one of the mechs in your squad, then click the "Edit Unit" button to jump to the customization screen.
+    textEng: Select a mech in your squad, then click the "Edit Unit" button to jump to the Unit Editing menu.
+  base_briefing_demolition__p02_hint_ctrl:
+    id: 2
+    text: >-
+      メカが配置されたスロットを選択すると、「ユニット編集」ボタンからすぐにカスタマイズ画面へ移動できます。
+
+
+      {0}
+    textEng: >-
+      Once you select a filled mech slot, you can quickly jump into the customization screen with the "Edit Unit" button.
+
+
+      {0}
   base_briefing_demolition__p03_header:
     id: 1
     text: 破損調査
@@ -69,7 +85,7 @@ entries:
       [FFD8A2][sp=s_text_24_insert_env2]Structure damage[aa] — [ff][b]50[/b][-]
 
 
-      Once you're happy with the weapons, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
+      Once you're happy with your choice, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
   base_introduction__p00_header:
     id: 1
     text: 移動基地
@@ -102,6 +118,18 @@ entries:
 
 
       You can also double click a unit in the list to do the same.
+  base_introduction__p02_hint_ctrl:
+    id: 2
+    text: >-
+      左側のリストではすでにユニットが選択されています。「編集」ボタンから該当ユニットをカスタマイズできます。
+
+
+      {0}
+    textEng: >-
+      A unit is already selected in the list on the left. The "Edit" button here allows you to customize that unit.
+
+
+      {0}
   base_introduction__p03_header:
     id: 1
     text: エディット
@@ -109,11 +137,23 @@ entries:
   base_introduction__p03_text:
     id: 1
     text: これがエディット画面です。ユニットが装備する個々のパーツを確認したり、交換したりすることができます。
-    textEng: This is the editing screen. You can inspect and swap out individual parts equipped by a unit.
+    textEng: This is the Unit Editing menu. You can inspect and swap out individual parts equipped to a mech.
   base_introduction__p04_hint:
     id: 1
     text: 直近の戦闘で新しい武器を手に入れました。メイン武器スロットをクリックすると装備オプションを確認できます。
     textEng: You picked up new weapons in the last fight. Click to the primary weapon slot to review the options.
+  base_introduction__p04_hint_ctrl:
+    id: 2
+    text: >-
+      直近の戦闘で新しい武器を手に入れました。メイン武器スロットを開いて、装備オプションを確認しましょう。
+
+
+      {0}
+    textEng: >-
+      You picked up new weapons in the last fight. Let's open the primary weapon slot to review the options.
+
+
+      {0}
   base_introduction__p05_hint:
     id: 1
     text: >-
@@ -124,7 +164,25 @@ entries:
 
 
       このウィンドウで各ステータスにマウスを重ねると、詳細な説明が表示されます。交換候補を選ぶと比較結果が表示され、より適切な判断をするのに役立ちます。
-    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and characterized by many different stats, so it is normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and has many different stats, so it's normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+  base_introduction__p05_hint_ctrl:
+    id: 2
+    text: >-
+      これが現在装備している武器です。
+
+
+      メカの装備は複雑で、多種多様なステータスがあります。この画面では、じっくりと選択肢を検討しましょう。
+
+
+      チュートリアル終了後は、コントローラーでこのパネルにフォーカスを合わせ、各ステータスを詳しく確認することができます。では先へ進みましょう。
+    textEng: >-
+      This is the currently equipped weapon.
+
+
+      Mech equipment is complex and features many different stats. It's normal to take your time on this screen and carefully weigh your options.
+
+
+      Once this tutorial is concluded, you will be able to focus this panel with your controller and inspect every stat in detail. For now, let's continue.
   base_introduction__p06_hint:
     id: 1
     text: >-
@@ -140,21 +198,39 @@ entries:
   base_introduction__p07_hint:
     id: 1
     text: >-
-      武器にカーソルを合わせると、比較が表示されます。装備によっては一長一短がある場合もあれば、単純な強化になる場合もあります。
+      新しい武器を選択して、現在装備している武器と比較してみましょう。単に上位互換となるアイテムもあれば、トレードオフが生じるものもあります。
 
 
-      パーツ選びで最もわかりやすい方法の一つはレベルを確認することです。装備レベルを上げるとメカはより強力な敵に対応でき、ダメージやHPもレベルに応じて変化します。
+      ダメージとHPはメカ全体のレベルに連動して変化するため、高レベルのパーツを装備すると、より強力な敵に対抗できるようになります。
 
 
-      リスト内の武器をダブルクリックまたは長押しすると、[b]新しい武器を装備[/b]できます。
+      リストからお好きな武器をクリックして、装備を完了してください。
     textEng: >-
-      Hover over a weapon to see the comparison. Some picks might have tradeoffs, while others could be a direct upgrade.
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
 
 
-      One of the most straighforward ways to pick parts is checking their level. Increasing the equipment level lets the mech face stronger enemies, as damage and health is scaled with the level.
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
 
 
-      [b]Equip a new weapon[/b] by double clicking or long pressing it in the list.
+      Equip the weapon you prefer by clicking it in the list.
+  base_introduction__p07_hint_ctrl:
+    id: 2
+    text: >-
+      新しい武器を選択して、現在装備している武器と比較してみましょう。単に上位互換となるアイテムもあれば、トレードオフが生じるものもあります。
+
+
+      ダメージとHPはメカ全体のレベルに連動して変化するため、高レベルのパーツを装備すると、より強力な敵に対抗できるようになります。
+
+
+      お好きな武器を装備してください。操作方法がわからない場合には、画面下部の操作ヒントから確認しましょう。
+    textEng: >-
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
+
+
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
+
+
+      Equip the weapon you prefer. If you're not sure how to navigate, check the input hints at the bottom of the screen.
   base_introduction__p08_hint:
     id: 1
     text: >-
@@ -174,7 +250,43 @@ entries:
   base_introduction__p10_hint:
     id: 1
     text: ユニットのカスタマイズを一通り確認し終えたら、ここをクリックして基地に戻ってください。そこから、ワールドマップに戻ることができます。
-    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld.
+    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld map.
+  base_standalone_ops__p00_header:
+    id: 2
+    text: 契約
+    textEng: Contracts
+  base_standalone_ops__p00_text:
+    id: 2
+    text: この地域の抵抗軍との接触に成功しました。遠隔支援契約を利用可能できるようになりました。
+    textEng: You have established contact with the resistance forces in this region. Remote assistance contracts are now available.
+  base_standalone_ops__p01_hint:
+    id: 2
+    text: >-
+      契約を結ぶと、ファーランド各地に展開する味方部隊を指揮できるようになります。自軍は出撃しないため、パイロット経験値の獲得やサルベージへの直接アクセスはできません。ただし、固定の報酬を受け取れるほか、ダメージや疲労など資源面のリスクを負いません。
+
+
+      契約は任意であり、州の解放に必須ではありません。リソースの獲得、部隊の装備拡充、特定勢力のワークショップのアンロック完了に役立てることができます。
+    textEng: >-
+      The contracts allow you to control allied squads elsewhere in Fyrland. Your squad will not participate, so you will not gain pilot experience or direct access to salvage. However, you can receive predetermined rewards and will not risk damage, fatigue or other resources.
+
+
+      The contracts are optional and are not required to liberate a province. They can be a useful way to get resources, obtain more equipment for your squad or finish the workshop unlocks for a particular faction.
+  base_standalone_ops__p02_header:
+    id: 2
+    text: 試射場
+    textEng: Test range
+  base_standalone_ops__p02_text:
+    id: 2
+    text: >-
+      「トレーニング」セクションのバーチャル射撃場も忘れずに確認しましょう。メカの性能テストを行うことができます。
+
+
+      バーチャル射撃場へは、カスタマイズ画面の「テスト走行」ボタンからもアクセスすることができます。
+    textEng: >-
+      Remember to check the virtual range in the Training section, where you can test the performance of your mechs.
+
+
+      You can also access the virtual range through the Test Drive button in the mech customization screen.
   base_upgrades__p00_header:
     id: 1
     text: アップグレード
@@ -195,6 +307,18 @@ entries:
     id: 1
     text: 新しい機能がアンロックされました。確認するには「アップグレード」ボタンをクリックしてください。
     textEng: New capabilities have been unlocked. To start reviewing them, click the Upgrades button.
+  base_workshop__p00_hint_ctrl:
+    id: 2
+    text: >-
+      新しい機能がアンロックされました。確認するには、まず新しい「アップグレード」画面を開きます。
+
+
+      {0}
+    textEng: >-
+      New capabilities have been unlocked. To start reviewing them, let's open the new Upgrades screen.
+
+
+      {0}
   base_workshop__p01_header:
     id: 1
     text: アップグレード
@@ -202,7 +326,7 @@ entries:
   base_workshop__p01_text:
     id: 1
     text: 資源を消費して基地をアップグレードできるようになりました。アップグレードにより、基地に収容できるユニット数が増えたり、新たな能力がアンロックされたりするメリットがあります。
-    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to fit more units, unlock new capabilities and more.
+    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to house more units, unlock new capabilities, and more.
   base_workshop__p02_hint:
     id: 1
     text: >-
@@ -215,10 +339,40 @@ entries:
 
 
       Hover over the upgrade tile to inspect the details, then double click or long press to confirm it.
+  base_workshop__p02_hint_ctrl:
+    id: 2
+    text: >-
+      これからの戦いで必要となる最も重要なシステムの一つがワークショップです。
+
+
+      「確定」を押して、アップグレードをインストールしましょう。
+
+
+      {0}
+    textEng: >-
+      One of the most important systems you'll need in the days to come is the Workshop.
+
+
+      Install the upgrade by pressing "confirm".
+
+
+      {0}
   base_workshop__p03_hint:
     id: 1
     text: 新たにアンロックされたワークショップタブに移動します。
     textEng: Navigate to the newly unlocked workshop tab.
+  base_workshop__p03_hint_ctrl:
+    id: 2
+    text: >-
+      新たにアンロックされた「ワークショップ」タブへ移動しましょう。
+
+
+      {0}
+    textEng: >-
+      Navigate to the newly unlocked workshop tab.
+
+
+      {0}
   base_workshop__p04_header:
     id: 1
     text: ワークショップ
@@ -235,7 +389,7 @@ entries:
 
       キャンペーンを進めることで、さらに多くの設計図を発見することができます。
     textEng: >-
-      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armor and mech frames.
+      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armour and mech frames.
 
 
       You'll discover more blueprints over the course of the campaign.
@@ -246,7 +400,7 @@ entries:
 
 
       フレームを増やすことで、部隊を拡張したり、損失を補充したりできます。
-    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armor and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
+    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armour and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
   base_workshop__p07_hint:
     id: 1
     text: >-
@@ -259,6 +413,24 @@ entries:
 
 
       Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
+  base_workshop__p07_hint_ctrl:
+    id: 2
+    text: >-
+      「ビルド」ボタンでプロジェクトを開始します。
+
+
+      {0}
+
+
+      新しいパーツのプリントは繊細な工程であり、ベースが静止している必要があります。メカの修理やパイロットの回復と同様に、製造はキャンプ中に実行されます。
+    textEng: >-
+      Begin this project with the "Build" button.
+
+
+      {0}
+
+
+      Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
   base_workshop__p08_hint:
     id: 1
     text: >-
@@ -266,7 +438,7 @@ entries:
 
 
       ここにあるカテゴリーボタンを使えば、アンロック済みのパーツやサブシステムにアクセスすることができます。
-    textEng: "With a new mech frame being built, let's review item manufacturing. \n\nYou'll be able to access unlocked parts and subsystems by using the category buttons here."
+    textEng: "With a new mech frame being built, let's review equipment manufacturing. \n\nYou'll be able to access researched parts by using the category buttons here."
   base_workshop__p09_hint:
     id: 1
     text: >-
@@ -278,7 +450,7 @@ entries:
 
       より高品質なパーツには、別途アンロックが必要です。
     textEng: >-
-      To unlock parts or subsystems in the workshop, you'll need to scrap them. This can be done through the inventory or through the salvage screen.
+      To unlock projects in the workshop, you'll need to research them by scrapping parts. This can be done through the inventory or through the salvage screen.
 
 
       Some projects might require multiple scrapped items to be researched. Check the workshop progress bar on the item information panel to learn more.
@@ -313,7 +485,7 @@ entries:
 
       ■ バリアはダメージを吸収し、戦闘中に再生することができます。メカにダメージを与えるためには、まずはバリアを破壊しよう。
     textEng: >-
-      ■ The enemy is equipped with barrier armor. Note the green portion of the health bars.
+      ■ The enemy is equipped with barrier armour. Note the green portion of the health bars.
 
 
       ■ Barriers absorb damage, and can regenerate during the fight. Fully deplete barriers to damage the mech!
@@ -354,7 +526,7 @@ entries:
 
 
       選択した友軍メカの長距離ビームを使ってタレット破壊しましょう！
-    textEng: "Destroying this generator will disable turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
+    textEng: "Destroying this generator will disable the turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
   combat_base__p02_hint:
     id: 1
     text: >-
@@ -409,14 +581,6 @@ entries:
 
 
       The [b]Dash[/b] maneuver makes the mech break missile lock, evades most projectiles and allows for quick position changes.
-  combat_breakthrough_01__p00_header:
-    id: 1
-    text: テスト
-    textEng: Test
-  combat_breakthrough_01__p00_text:
-    id: 1
-    text: これは複数の目標がある複雑な作戦です。
-    textEng: This is a complex operation with multiple objectives.
   combat_convoy_hg__p00_hint:
     id: 1
     text: ファーランド自由軍の狙撃兵が戦闘に加わります。彼らは有利な位置におり、護衛部隊の阻止を支援してくれます。
@@ -530,6 +694,17 @@ entries:
 
       — ユニットの詳細を表示：{0}
     textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or hold the modifier key.\n\n— Display unit details: {0}"
+  combat_demo_directional__p02_text_ctrl:
+    id: 2
+    text: >-
+      方向性攻撃を練習し、敵メカを破壊してミッションの次のフェーズに進みましょう。
+
+
+      敵ユニットの残存構造保全性が不明な場合には、ユニットを選択するか詳細表示モードを有効にしましょう。
+
+
+      — 詳細表示の切り替え：{1}
+    textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or activate the detailed display mode.\n\n— Toggle detailed display: {1}"
   combat_demo_retreat__p00_hint:
     id: 1
     text: これは退却ゾーンです。このようなミッションを成功させるには、退却が必要です。
@@ -588,6 +763,24 @@ entries:
 
 
       — Target environment: {0}
+  combat_demo_structures__p02_hint_ctrl:
+    id: 2
+    text: >-
+      武器を選択したら構造物をターゲットします。デフォルトでは敵ターゲットが必要ですが、任意の場所に攻撃することも可能です。
+
+
+      この薄い壁のような弱点を探しましょう。切り替えキーを押して目標指定モードに切り替えることで、攻撃を確定できます。
+
+
+      —目標モード切り替え：{1}
+    textEng: >-
+      Once you select the right weapon, you'll need to target the structures. By default, attacks require an enemy target, but there is a way to fire at any location.
+
+
+      Find a weak spot such as a thin wall here. Press the toggle key to switch to targeting locations, and you'll be able to confirm the attack.
+
+
+      — Toggle target mode: {1}
   combat_intro_01__p00_header:
     id: 1
     text: 'カメラ '
@@ -622,10 +815,46 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  combat_intro_01__p00_text_ctrl:
+    id: 2
+    text: >-
+      移動する前に、カメラビューを調整してみましょう。
+
+
+      — カメラを移動するには: {9}
+
+
+      — カメラを回転するには:{11}
+
+
+      — カメラを傾けるには: {12}
+    textEng: >-
+      Before moving out, try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   combat_intro_01__p01_hint:
     id: 1
-    text: '{0}このユニットを選択します。'
-    textEng: '{0} this unit to select it.'
+    text: >-
+      このユニットをクリックして選択しましょう：
+
+
+      {0}
+    textEng: >-
+      Select this unit by clicking it:
+
+
+      {0}
+  combat_intro_01__p01_hint_ctrl:
+    id: 2
+    text: "カーソルを移動してターゲット指定ホットキーを押し、このユニットを選択してください：\n\n{2} ► {3} \n\n\n以下で選択ユニットを切り替えることもできます：\n\n{4}{5} "
+    textEng: "Select this unit by moving the cursor and pressing the targeting hotkey:\n\n{2} ► {3} \n\n\nAlternatively, you can switch the selected unit with:\n\n{4}{5} "
   combat_intro_01__p02_hint:
     id: 1
     text: 選択したユニットの情報がここに表示されます。
@@ -650,6 +879,18 @@ entries:
     id: 1
     text: 白熱する戦闘中に、すべての動きを追跡するのは困難です。ここをクリックして最後の5秒を再生することができます。
     textEng: In the heat of battle, it can be hard to keep track of everything. Click here to replay the last five seconds!
+  combat_intro_04__p00_hint_ctrl:
+    id: 2
+    text: >-
+      白熱する戦闘中に、すべての動きを追跡するのは困難です。最後の5秒を再生してみましょう！
+
+
+      {0}
+    textEng: >-
+      In the heat of battle, it can be hard to keep track of everything. Let's review a replay the last five seconds!
+
+
+      {0}
   combat_intro_04__p01_hint:
     id: 1
     text: タイムラインにカーソルを合わせると、特定の時間帯を確認することができます。また、タイムコントロールを使って、アクションを繰り返し見ることも可能です。
@@ -685,7 +926,7 @@ entries:
   combat_liberation__p02_text:
     id: 1
     text: 都市部での戦闘では、敵が視界を確保するまで発砲を控える場合があります。とはいえ、敵の自制心に期待すべきではないでしょう。例え背後に民間の建物があっても、あなたのユニットを視認すれば、彼らは発砲してきます。
-    textEng: "When fighting in cities, some enemies might hold fire until they get line of sight. Hovewer, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
+    textEng: "When fighting in cities, some enemies might hold fire until they have line of sight. However, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
   combat_liberation_ally__p00_hint:
     id: 2
     text: このメカはファーランド自由軍に所属しています。彼らは時折、あなたの援護に駆けつけてくれます。
@@ -771,7 +1012,7 @@ entries:
   combat_status_intro__p00_text:
     id: 1
     text: このユニットはステータス効果を受けました。パイロットの状態、特性、武器などで発生する場合があります。一部のステータス効果は時間制限があり、戦闘中ずっと持続するものもあります。ステータスバーにマウスオーバーすると詳細が確認できます。
-    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight. Hover over the status bar to learn more.
+    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight.
   combat_status_intro__p01_hint:
     id: 1
     text: >-
@@ -796,6 +1037,36 @@ entries:
 
 
       Here, you can see the names of the effects and the time they will remain active for. You can also hover over each effect to learn more.
+  combat_status_intro__p02_hint_ctrl:
+    id: 2
+    text: >-
+      詳細パネルで、選択したユニットのステータス効果に関する詳しい情報を見ることができます。
+
+
+      ここでは効果の名称と残りの持続時間を確認できます。ステータス効果の詳細ツールチップを開くには、タイムラインにフォーカスを合わせ、左および上方向へ移動します。
+
+
+      {0} - タイムラインにフォーカス
+
+
+      {1} - ユニットパネルへ
+
+
+      {2} - ステータスパネルへ
+    textEng: >-
+      You can get more information about the status effects on a selected unit in the detail panel.
+
+
+      Here, you can see the names of the effects and the time they will remain active for. To open the tooltips with details about each status effect, you can focus the timeline and navigate left and up.
+
+
+      {0} - Focus timeline
+
+
+      {1} - To unit panel
+
+
+      {2} - To status panel
   endgame__p00_header:
     id: 1
     text: プレイしていただき、ありがとうございます！
@@ -835,7 +1106,25 @@ entries:
   overworld_camp__p01_hint:
     id: 1
     text: ここは概要コーナーです。利用可能なユニットとパイロットの概要、重要なオプションが一目で確認できます。
-    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with important options.
+    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+  overworld_camp__p01_hint_ctrl:
+    id: 2
+    text: >-
+      ここは概要コーナーです。利用可能なユニットとパイロットの概要、重要なアクションを一目で確認できます。
+
+
+      オーバーワールドで下方向を入力すると、このパネルが開きます。
+
+
+      {0}
+    textEng: >-
+      This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+
+
+      You can access this panel by pressing down in the overworld.
+
+
+      {0}
   overworld_camp__p02_hint:
     id: 1
     text: >-
@@ -848,6 +1137,24 @@ entries:
 
 
       You can hover over each unit to check their average level, weapon loadout, warnings and more.
+  overworld_camp__p02_hint_ctrl:
+    id: 2
+    text: >-
+      このセクションには、利用可能なメカと、基地に収容可能なメカの総数が表示されます。各メカの構造保全性は下部に表示されます。
+
+
+      このパネルにフォーカスを合わせた状態で下方向に進むと、各メカのツールチップが開き、平均レベルや武器構成、警告などを確認できます。
+
+
+      選択中のメカで「確定」を押すと、装備カスタマイズ画面へ移動できます。
+    textEng: >-
+      This section displays the mechs at your disposal, and the total number of mechs your base can accommodate. The integrity of each mech is displayed at the bottom.
+
+
+      While this panel is in focus, you can navigate down to each mech to open a tooltip listing their average level, weapon loadout, warnings and more.
+
+
+      You can also jump to equipment customization by pressing "confirm" on a selected mech.
   overworld_camp__p03_hint:
     id: 1
     text: >-
@@ -860,14 +1167,48 @@ entries:
 
 
       You can hover over each pilot to check their level, experience, status, and more.
+  overworld_camp__p03_hint_ctrl:
+    id: 2
+    text: "このセクションには、利用可能なパイロットと、利用可能なスペース全体が表示されます。各パイロットのHPは下部に表示されます。\n\nこのパネルにフォーカスを合わせた状態で下方向に進むと、各パイロットのツールチップが開き、レベル、経験値、ステータスなどを確認できます。 "
+    textEng: "This section displays the pilots at your disposal and the overall space available for them. The health of each pilot is displayed at the bottom.\n\nWhile this panel is in focus, you can navigate down to each pilot to open a tooltip listing their level, experience, status, and more. "
   overworld_camp__p04_hint:
     id: 1
     text: パイロットが疲労し、メカが損傷したので、キャンプを設営して部隊のケアを行うのが賢明です。下のキャンプボタンをクリックしてください。
     textEng: With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Click the camp button below to proceed.
+  overworld_camp__p04_hint_ctrl:
+    id: 2
+    text: >-
+      パイロットが疲弊し、メカも損傷したら、キャンプを設営して部隊のケアを行うのが賢明です。キャンプ画面を開いて先へ進みましょう。
+
+
+      {0}
+    textEng: >-
+      With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Open the camp screen to proceed.
+
+
+      {0}
   overworld_camp__p05_hint:
     id: 1
     text: 対処必要なメカやパイロットを選択し、「開始」を押してキャンプを設営してください。
-    textEng: Select the mechs or pilots requiring attention, then press Start to set up camp.
+    textEng: Select the mechs or pilots requiring attention, then press "Start" to set up camp.
+  overworld_camp__p05_hint_ctrl:
+    id: 2
+    text: >-
+      処置が必要なメカまたはパイロットを選択してください。下方向に移動し、「確定」を押して選択を切り替えます。
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      完了したら「スタート」ボタンでキャンプを設営しましょう。
+    textEng: >-
+      Select the mechs or pilots requiring attention. Navigate down, then press "confirm" to toggle selections.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      Once you're done, use the "Start" button to set up camp.
   overworld_camp__p06_hint:
     id: 1
     text: 選択に納得したら、先に進みましょう。
@@ -876,6 +1217,18 @@ entries:
     id: 1
     text: 部隊が帰還しました。乗組員が武器の仕上げをしているうちに、修理とパイロットの休息のための短い時間があります。キャンプを設営してください。
     textEng: Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+  overworld_capital_camp__p00_hint_ctrl:
+    id: 2
+    text: >-
+      部隊が帰還しました。乗組員が武器の仕上げをしているうちに、修理とパイロットは短時間休息できます。キャンプを設営してください。
+
+
+      {0}
+    textEng: >-
+      Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+
+
+      {0}
   overworld_capital_camp__p01_hint:
     id: 1
     text: 残された時間を最大限に活用し、最も対応が必要なパイロットとメカを決めてください。
@@ -1084,6 +1437,30 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  overworld_intro__p00_text_ctrl:
+    id: 2
+    text: >-
+      これはワールドマップです。カメラビューを調整してみましょう。
+
+
+      — カメラを移動するには：{9}
+
+
+      — カメラを回転するには：{11}
+
+
+      — カメラを傾けるには：{12}
+    textEng: >-
+      This is the world map. Try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   overworld_intro__p01_hint:
     id: 1
     text: 現在の作戦と進行中の目標の詳細がここに表示されます。
@@ -1091,15 +1468,42 @@ entries:
   overworld_intro__p02_hint:
     id: 1
     text: >-
-      — 目的地にマウスを合わせて{0} を押すと、世界地図上で移動できます
+      ワールドマップ上を移動するには、目的地を右クリックします：
 
 
-      — 迷ったら{1}を押すと、カメラが中心に戻ります
+      {0}
+
+
+      迷ってしまったら、このボタンを押してカメラを中央に戻しましょう：
+
+
+      {1}
     textEng: >-
-      — Hover over a destination and press {0} to move on the world map
+      To move on the world map, right click a desired destination:
 
 
-      —  If you're ever lost, press {1} to recenter the camera
+      {0}
+
+
+      If you're ever lost, press this button to recenter the camera:
+
+
+      {1}
+  overworld_intro__p02_hint_ctrl:
+    id: 2
+    text: >-
+      ワールドマップ上を移動するには、カーソルを目的地まで動かし、確定ボタンを押します：
+
+
+      {2} ► {3}
+
+
+
+      迷ってしまったら、このボタンを押してカメラを中央に戻しましょう：
+
+
+      {4}
+    textEng: "To move on the world map, move the cursor to your destination and press the confirmation button: \n\n{2} ► {3}\n\n\nIf you're ever lost, press this button to recenter the camera:\n\n{4}"
   overworld_pilot_progression__p00_hint:
     id: 1
     text: >-
@@ -1108,10 +1512,28 @@ entries:
 
       次に進むには、パイロット画面に移動してください。下のパイロットをクリックするとすぐに移動できます。
     textEng: >-
-      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, new pilot levels will be highlighted with the icons here.
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
 
 
       To proceed, move to the pilot screen. You can quickly navigate there by clicking any pilot below.
+  overworld_pilot_progression__p00_hint_ctrl:
+    id: 2
+    text: >-
+      パイロットたちはここ数回の戦闘で経験を積み、レベルアップの準備が整いました。レベルアップ可能なパイロットは、事後報告画面で強調表示されるほか、ここでもアイコン付きで表示されます。
+
+
+      パイロットを昇格させるには、パイロット画面へ移動します。該当するパイロットを選択し、コントローラーの「確定」ボタンを押すと、素早くその画面へ移動できます。
+
+
+      {0}
+    textEng: >-
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
+
+
+      To manage pilot promotions, you'll need to navigate to the pilot screen. A quick way to reach that screen is to select a pilot here and press the "confirm" button on your controller.
+
+
+      {0}
   overworld_pilot_progression__p01_hint:
     id: 1
     text: >-
@@ -1132,6 +1554,14 @@ entries:
 
       特性にマウスオーバーすると、未アンロックでも効果を確認できます。
     textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nYou can hover over the traits to learn their effects, even if they aren't unlocked yet."
+  overworld_pilot_progression__p02_hint_ctrl:
+    id: 2
+    text: >-
+      各パイロットには独自の進行ツリーがあります。これは、レベルアップごとに徐々にアンロックされる一連の特性です。
+
+
+      このツリーで特性を選択すると、未解放の特性であっても、効果の詳細ツールチップが表示されます。
+    textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nSelecting a trait in this tree opens a tooltip with the details about its effects, even if that trait is not unlocked yet."
   overworld_pilot_progression__p03_hint:
     id: 1
     text: >-
@@ -1143,7 +1573,7 @@ entries:
       Every pilot starts with a random intrinsic trait based on their class. Starter traits can affect traits further up in the tree, akin to a subclass.
 
 
-      For example, a support pilot with with a repair-related starter trait is likely to unlock more repair abilities as they level up.
+      For example, a support pilot with a repair-related starter trait is likely to unlock more repair abilities as they level up.
   overworld_pilot_progression__p04_hint:
     id: 1
     text: >-
@@ -1156,18 +1586,36 @@ entries:
 
 
       Hover over each trait to see their benefits, then click on the one you'd like to unlock.
+  overworld_pilot_progression__p04_hint_ctrl:
+    id: 2
+    text: >-
+      このパイロットはレベル2になったので、新しい特性をアンロックできます。レベルによっては2つの特性から選択可能です。
+
+
+      2つの特性を切り替えてそれぞれの効果を確認し、「確定」ボタンを押していずれかをアンロックしてください。
+
+
+      {0}{1}
+    textEng: >-
+      Now that this pilot is at level 2, a new trait can be unlocked. Some levels offer a choice between two traits.
+
+
+      Navigate between the two traits to see their benefits, then press the "confirm" button to unlock one.
+
+
+      {0}{1}
   overworld_pilot_progression__p05_hint:
     id: 1
     text: >-
-      部隊の規模が小さいほどレベルアップは早く、パイロットは敵を倒すごとに追加の経験値を得ます。少人数の部隊を配備して特定のパイロットに敵を仕留めさせると、迅速な進歩が可能です。
+      戦闘任務では一定の経験値が得られ、出撃した全パイロットに分配されます。少人数の部隊ほど早くレベルアップでき、パイロットは敵を撃破するたびに追加の経験値を獲得します。
 
 
-      新しい特性が確定したパイロットは、より多くの挑戦に臨む準備が整いました。[B]もう一方のパイロットのレベルアップもお忘れなく！[/B]
+      新たな特性が確定し、このパイロットはさらなる挑戦に備えられました。[b]もう1人のパイロットのレベルアップもお忘れなく！[/b]
     textEng: >-
-      Smaller squads level up more quickly, and pilots gain additional experience for each enemy they bring down. Deploying a lean squad and letting a specific pilot finish enemies can lead to quick progress.
+      Combat missions net you a set amount of experience, split between all pilots deployed. Smaller squads will level up more quickly, and pilots will gain additional experience for each enemy they dispatch.
 
 
-      With the new trait locked in, this pilot is ready to face more challenges. [B]Don't forget to level up your other pilot![/B]
+      With the new trait locked in, this pilot is ready to face more challenges. [b]Don't forget to level up your other pilot![/b]
   overworld_pilot_recruit__p00_hint:
     id: 1
     text: >-
@@ -1183,7 +1631,19 @@ entries:
   overworld_pilot_recruit__p01_hint:
     id: 1
     text: 出発前に募集可能なパイロットを確認しておくことをお勧めします。このボタンをクリックすると募集リストが開きます。
-    textEng: It's worth checking out available recruits before departing. Click this button to open the recruit list.
+    textEng: It's worth checking out the available recruits before departing. Click this button to open the recruit list.
+  overworld_pilot_recruit__p01_hint_ctrl:
+    id: 2
+    text: >-
+      出発前に、雇用可能な新兵を調べておくとよいでしょう。このボタンから閲覧できます。
+
+
+      {0}
+    textEng: >-
+      It's worth checking out the available recruits before departing. Use this button to view them.
+
+
+      {0}
   overworld_pilot_recruit__p02_header:
     id: 1
     text: 雇用画面
@@ -1204,6 +1664,24 @@ entries:
 
 
       Click this button to review the first available pilot.
+  overworld_pilot_recruit__p03_hint_ctrl:
+    id: 2
+    text: >-
+      パイロットを増やすことは生存に不可欠です。キャンプの物資が不足したり、パイロットが重傷を負ったり、時間が迫ってキャンプできない状況になることもあります。
+
+
+      雇用可能な1人目のパイロットを確認してみましょう。
+
+
+      {0}
+    textEng: >-
+      Growing your ranks is essential for survival. Camp supplies might become scarce, pilots might be critically injured, or you might be pressed for time and unable to camp.
+
+
+      Let's review the first available pilot.
+
+
+      {0}
   overworld_pilot_recruit__p04_hint:
     id: 1
     text: >-
@@ -1215,7 +1693,7 @@ entries:
       Rookies are inexperienced pilots. You'll need to deploy them on a mission to learn their specialization and start leveling them up, but they can be hired at a low cost.
 
 
-      Click the button above the portrait to recruit them.
+      Use the button above the portrait to recruit them.
   overworld_pilot_recruit__p05_hint:
     id: 1
     text: 残りのパイロットから1人を選択します。
@@ -1237,7 +1715,7 @@ entries:
       Veteran pilots might be the right pick if you need to quickly fill a specific role.
 
 
-      Click the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
+      Use the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
   overworld_pilot_recruit__p07_header:
     id: 1
     text: 出発準備完了
@@ -1250,6 +1728,18 @@ entries:
     id: 1
     text: 目的地を選択しましょう。このボタンをクリックして世界地図を開いてください。
     textEng: Time to pick a destination. Click this button to open the world map.
+  overworld_pilot_recruit__p08_hint_ctrl:
+    id: 2
+    text: >-
+      目的地を選択しましょう。このボタンを使って世界地図を開いてください。
+
+
+      {0}
+    textEng: >-
+      Time to pick a destination. Use this button to open the world map.
+
+
+      {0}
   overworld_pilot_recruit__p09_hint:
     id: 1
     text: >-
@@ -1274,6 +1764,24 @@ entries:
 
 
       Click this button to select the destination suggested by the resistance.
+  overworld_pilot_recruit__p10_hint_ctrl:
+    id: 2
+    text: >-
+      ファーランド自由軍は敵の弱点に関する情報を提供します。明白な選択肢が一つしかないこともあります。それ以外の場合には、それぞれに長所と短所を持つ複数の目的地から選べます。
+
+
+      このボタンを使うと、抵抗軍が提案する目的地を選択できます。
+
+
+      {0}
+    textEng: >-
+      Fyrland Freedom Forces will provide you intel about enemy vulnerabilities. In some cases, there will be only one obvious choice. In other cases, you can choose between multiple destinations with their own pros and cons.
+
+
+      Use this button to select the destination suggested by the resistance.
+
+
+      {0}
   overworld_pilot_recruit__p11_hint:
     id: 1
     text: >-
@@ -1285,7 +1793,7 @@ entries:
       Once you select a potential destination, you can review the available intel here. This panel is similar to mission preview and can list important modifiers, enemy strength, and other details.
 
 
-      Once you're ready to proceed, click the "Travel" option next to the recommended destination.
+      Once you're ready to proceed, use the "Travel" option next to the recommended destination.
   overworld_salvage__p00_header:
     id: 1
     text: 報告
@@ -1310,6 +1818,10 @@ entries:
     id: 1
     text: このボタンを押すと先に進みます。
     textEng: Press this button to proceed.
+  overworld_salvage__p02_hint_ctrl:
+    id: 2
+    text: '{0}を押すと先に進みます。'
+    textEng: Press {0} to proceed.
   overworld_salvage__p03_hint:
     id: 1
     text: >-
@@ -1321,11 +1833,15 @@ entries:
       The next pages cover the state of your pilots and mechs.
 
 
-      Taking care of your squad is key to a successful campaign, so it is important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
+      Taking care of your squad is key to a successful campaign, so it's important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
   overworld_salvage__p04_hint:
     id: 1
     text: 特定のパイロットに割り当てられたメカは背景に表示されます。このパネルにマウスオーバーすると、メカの状態に関する詳細な報告が表示されます。
     textEng: The mech assigned to a given pilot will be displayed in the background. You can hover over this panel to get additional information about its state.
+  overworld_salvage__p04_hint_ctrl:
+    id: 2
+    text: 特定のパイロットに割り当てられたメカは背景に表示されます。
+    textEng: The mech assigned to a given pilot will be displayed in the background.
   overworld_salvage__p05_hint:
     id: 1
     text: 準備ができたら次のページに進んでください。
@@ -1338,10 +1854,14 @@ entries:
 
       このリストのアイテムをクリックすると、ステータスや外観を確認できます。
     textEng: >-
-      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip onto your mechs.
+      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
 
 
       You can click the items in this list to check their stats and appearance.
+  overworld_salvage__p06_hint_ctrl:
+    id: 2
+    text: ほとんどの戦闘では報酬が得られます。報酬には貴重な資源のほか、その場ですぐにメカへ装着可能なアイテムが含まれることもあります。
+    textEng: Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
   overworld_salvage__p07_hint:
     id: 1
     text: 準備ができたら次のページに進んでください。
@@ -1403,11 +1923,7 @@ entries:
 
 
       例えば、メカのシールドを確認することで、他に見つけたシールドをサルベージする価値があるか判断できます。
-    textEng: >-
-      If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts of your mechs.
-
-
-      As an example, checking a shield from your mech can help you decide whether another shield you found is worth taking.
+    textEng: If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts in the salvage pool with the equipment on your mechs. As an example, checking an equipped shield can help you decide whether another shield you found is worth salvaging.
   overworld_salvage__p13_hint:
     id: 1
     text: 終了する準備ができたら、ここでボタンを押してください。選択が予算内であれば、サルベージが開始されます。

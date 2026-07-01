@@ -1,0 +1,226 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: step_01
+  priority: 0
+  moodOnStart:
+    value: Sad
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 1
+        g: 0.7568628
+        b: 0.5137255
+        a: 0
+      image: event_capital_03
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !OverworldGroupConditional
+        checksGlobal:
+        - !OverworldValidateCampaignStepVisit
+          stepKey: 02_side
+          present: true
+        - !OverworldValidateCampaignStepVisit
+          stepKey: 13_side
+          present: true
+        - !OverworldValidateCampaignStepVisit
+          stepKey: 22_open_loop
+          present: true
+        checksBase: 
+        checksBaseValues: 
+        functions:
+        - !UnlockAchievement
+          key: year
+        functionsElse: 
+      functionsLocal: 
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !OverworldGroupConditional
+        checksGlobal:
+        - !OverworldValidateCampaignStepVisit
+          stepKey: 02_side
+          present: false
+        - !OverworldValidateCampaignStepVisit
+          stepKey: 13_side
+          present: false
+        - !OverworldValidateCampaignStepVisit
+          stepKey: 22_open_loop
+          present: false
+        checksBase: 
+        checksBaseValues: 
+        functions:
+        - !UnlockAchievement
+          key: rush_capital
+        functionsElse: 
+      functionsLocal: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5803922
+            g: 0.6636169
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_02
+    optionsReused: 
+  step_02:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 1
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_breakthrough_capital_intro_fortified
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.5803922
+            g: 0.6691577
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: step_04
+    optionsReused: 
+  step_04:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: true
+      brightness: 0.863
+      color:
+        r: 1
+        g: 0.8977656
+        b: 0.3254717
+        a: 0
+      image: event_breakthrough_capital_intro_citadel
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: {}
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.6696418
+            b: 0.3254902
+            a: 1
+          effect: Exit
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ApplyProvinceArrivalEffects {}
+          - !UnlockCodex
+            key: history_capital
+          functionsLocal: 
+    optionsReused: 

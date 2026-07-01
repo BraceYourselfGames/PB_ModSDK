@@ -37,7 +37,7 @@ namespace PhantomBrigade.Data
         public static bool showLibraryText = true;
 
         public const string textAttrArg = "@DataEditor.showLibraryText";
-
+        
         #if !PB_MODSDK
         public static INGUIAtlas atlasLast;
         #endif
@@ -48,13 +48,13 @@ namespace PhantomBrigade.Data
             var col = Color.HSVToRGB (Mathf.Abs (hueStart - (float)index / 12f) % 1f, 0.25f, b).WithAlpha (alpha);
             return col;
         }
-
+        
         public static Color GetColorFromElementIndexBright (int index, float hueStart = 0.6f, float saturation = 0.25f)
         {
             var col = Color.HSVToRGB (Mathf.Abs (hueStart - (float)index / 12f) % 1f, saturation, 1f).WithAlpha (1f);
             return col;
         }
-
+        
         #if !PB_MODSDK
         public static void DrawSpritePreview (string spriteName, bool previewUniform = false, float previewSize = 16f, INGUIAtlas atlas = null)
         {
@@ -113,6 +113,23 @@ namespace PhantomBrigade.Data
 
             GUI.DrawTextureWithTexCoords (clipRect, tex, uv);
         }
+        
+        private const string atlasInfoPath = "Assets/StreamingAssets/UI/Sprites/atlas_info.yaml";
+
+        public class SpriteAtlasInfoExported
+        {
+            public SortedDictionary<string, SpriteInfoExported> sprites;
+        }
+        
+        public class SpriteInfoExported
+        {
+            public string name;
+            public int x = 0;
+            public int y = 0;
+            public int width = 0;
+            public int height = 0;
+        }
+        
         #endif
 
         [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
@@ -341,7 +358,7 @@ namespace PhantomBrigade.Data
                 if (arg1 != null)
                 {
                     // The whole purpose of everything below is invoking CreateInstance and that can't be done with abstract types
-                    if (arg1.IsAbstract)
+                    if (arg1.IsAbstract || arg1.IsInterface)
                         return;
 
                     if (fieldTypeGeneric == typeList)
@@ -365,6 +382,9 @@ namespace PhantomBrigade.Data
                     else if (args.Length > 1)
                     {
                         var arg2 = args[1];
+                        if (arg2.IsAbstract || arg2.IsInterface)
+                            return;
+                        
                         if (fieldTypeGeneric == typeDictionary)
                         {
                             Debug.Log ($"{fieldType.Name} is a Dictionary<T> with types {arg1.Name}, {arg2.Name}, adding an element");
@@ -572,40 +592,40 @@ namespace PhantomBrigade.Data
 
     public static class DataMultiLinkerUtility
     {
-        public static Dictionary<Type, System.Action> callbacksOnAfterDeserialization = new Dictionary<Type, System.Action> ();
-        public static Dictionary<Type, System.Action> callbacksOnBeforeSerialization = new Dictionary<Type, System.Action> ();
-        public static Dictionary<Type, System.Action> callbacksOnAfterKeyChange = new Dictionary<Type, System.Action> ();
-        public static Dictionary<Type, System.Action> callbacksOnBeforeTextExport = new Dictionary<Type, System.Action> ();
-        public static Dictionary<Type, System.Action> callbacksOnAfterTextExport = new Dictionary<Type, System.Action> ();
-        public static Dictionary<Type, System.Action> callbacksOnAfterTextLoad = new Dictionary<Type, System.Action> ();
+        public static Dictionary<Type, Action> callbacksOnAfterDeserialization = new Dictionary<Type, Action> ();
+        public static Dictionary<Type, Action> callbacksOnBeforeSerialization = new Dictionary<Type, Action> ();
+        public static Dictionary<Type, Action> callbacksOnAfterKeyChange = new Dictionary<Type, Action> ();
+        public static Dictionary<Type, Action> callbacksOnBeforeTextExport = new Dictionary<Type, Action> ();
+        public static Dictionary<Type, Action> callbacksOnAfterTextExport = new Dictionary<Type, Action> ();
+        public static Dictionary<Type, Action> callbacksOnAfterTextLoad = new Dictionary<Type, Action> ();
 
         private static Dictionary<string, IDataMultiLinker> linkersFound = new Dictionary<string, IDataMultiLinker> ();
 
-        public static void RegisterOnAfterDeserialization (Type type, System.Action action)
+        public static void RegisterOnAfterDeserialization (Type type, Action action)
         {
             if (action != null && !callbacksOnAfterDeserialization.ContainsKey (type))
                 callbacksOnAfterDeserialization.Add (type, action);
         }
 
-        public static void RegisterOnBeforeSerialization (Type type, System.Action action)
+        public static void RegisterOnBeforeSerialization (Type type, Action action)
         {
             if (action != null && !callbacksOnBeforeSerialization.ContainsKey (type))
                 callbacksOnBeforeSerialization.Add (type, action);
         }
 
-        public static void RegisterOnAfterKeyChange (Type type, System.Action action)
+        public static void RegisterOnAfterKeyChange (Type type, Action action)
         {
             if (action != null && !callbacksOnAfterKeyChange.ContainsKey (type))
                 callbacksOnAfterKeyChange.Add (type, action);
         }
 
-        public static void RegisterOnAfterTextLoad (Type type, System.Action action)
+        public static void RegisterOnAfterTextLoad (Type type, Action action)
         {
             if (action != null && !callbacksOnAfterTextLoad.ContainsKey (type))
                 callbacksOnAfterTextLoad.Add (type, action);
         }
 
-        public static void RegisterOnTextExport (Type type, System.Action actionBefore, System.Action actionAfter)
+        public static void RegisterOnTextExport (Type type, Action actionBefore, Action actionAfter)
         {
             if (actionBefore != null && !callbacksOnBeforeTextExport.ContainsKey (type))
                 callbacksOnBeforeTextExport.Add (type, actionBefore);
@@ -642,7 +662,7 @@ namespace PhantomBrigade.Data
         {
             if (dataType == null)
                 return null;
-
+            
             return FindLinkerAsInterface (dataType.FullName);
         }
 
@@ -703,7 +723,7 @@ namespace PhantomBrigade.Data
         public bool IsDeserializedOnCopy ();
         public DataContainer GetDisplayIsolatedOverride ();
         public bool IsModdable ();
-
+        
         public GameObject GetObject ();
         public void SelectObject ();
         public string GetFilter ();
@@ -713,7 +733,7 @@ namespace PhantomBrigade.Data
         public void LoadDataLocal ();
         public void CreateEntry (string key);
         public IEnumerable<string> GetKeysLocal ();
-
+        
         #if PB_MODSDK && UNITY_EDITOR
         public void ResetLoadedOnce ();
         public List<string> SDKKeys { get; }
@@ -762,10 +782,12 @@ namespace PhantomBrigade.Data
 
         public static class OdinPropertyOrder
         {
+            public const float SettingsPath = -1f;
             public const float SettingsTextSectors = -1f;
+            public const float Replacements = 60f;
             public const float DataList = 100f;
         }
-
+        
         private static DataMultiLinker<T> ins;
         private static SortedDictionary<string, T> dataInternal;
         private static List<T> dataList = new List<T> ();
@@ -781,9 +803,11 @@ namespace PhantomBrigade.Data
         private static readonly Dictionary<(string, int), T> generatedDataInternal = new Dictionary<(string, int), T> ();
 
         [NonSerialized]
+        [FoldoutGroup (OdinGroup.Name.Settings, OdinGroup.Order.Settings)]
         private static bool loadedOnce = false;
-
+        
         #if PB_MODSDK && UNITY_EDITOR
+
         public void ResetLoadedOnce ()
         {
             if (!loadedOnce)
@@ -793,7 +817,7 @@ namespace PhantomBrigade.Data
             path = null;
             dataInternal = null;
         }
-
+        
         public List<string> SDKKeys
         {
             get
@@ -804,8 +828,8 @@ namespace PhantomBrigade.Data
                     return new List<string> ();
                 }
                 return IsUsingDirectories ()
-                        ? Directory.EnumerateDirectories (pathSDK).Select (Path.GetFileName).ToList ()
-                        : Directory.EnumerateFiles (pathSDK, "*.yaml").Select (Path.GetFileNameWithoutExtension).ToList ();
+                    ? Directory.EnumerateDirectories (pathSDK).Select (Path.GetFileName).ToList ()
+                    : Directory.EnumerateFiles (pathSDK, "*.yaml").Select (Path.GetFileNameWithoutExtension).ToList ();
             }
         }
 
@@ -825,9 +849,8 @@ namespace PhantomBrigade.Data
         [ShowIf (nameof(IsModdable))]
         [ShowInInspector, PropertyOrder (-100), HideReferenceObjectPicker, HideLabel, HideDuplicateReferenceBox]
         private static ModConfigStatus status = new ModConfigStatus ();
-
         public static string configsPath => DataContainerModData.selectedMod.GetModPathConfigs ();
-
+        
         [PropertyOrder (OdinGroup.Order.RestoreButtons)]
         [ShowIf(nameof(hasSelectedMod))]
         [GUIColor (nameof(colorSepia))]
@@ -893,6 +916,7 @@ namespace PhantomBrigade.Data
         #endif
 
         [NonSerialized]
+        [FoldoutGroup (OdinGroup.Name.Settings)]
         public static bool unsavedChangesPossible = false;
 
         [ShowInInspector]
@@ -931,7 +955,7 @@ namespace PhantomBrigade.Data
         [FoldoutGroup (OdinGroup.Name.Settings)]
         [OnInspectorGUI ("AppendedInspectorGUI")]
         public bool log = false;
-
+        
         [ShowInInspector]
         [FoldoutGroup (OdinGroup.Name.Settings)]
         [ShowIf (nameof(IsDisplayIsolated))]
@@ -968,13 +992,15 @@ namespace PhantomBrigade.Data
         [HideLabel]
         [SerializeField]
         public string filter = string.Empty;
-
+        
+        [HideIf ("IsDisplayIsolatedInspector")]
         [NonSerialized, ShowInInspector]
         [ToggleGroup (OdinGroup.Name.Filter)]
         [HorizontalGroup (OdinGroup.Name.FilterInput, 40f)]
         [HideLabel, ProgressBar (0, 1, DrawValueLabel = false)]
         public double filterTime = 0f;
-
+        
+        [HideIf ("IsDisplayIsolatedInspector")]
         [GUIColor ("filterColor")]
         [ToggleGroup (OdinGroup.Name.Filter)]
         [HorizontalGroup (OdinGroup.Name.FilterInput, 60f)]
@@ -986,12 +1012,12 @@ namespace PhantomBrigade.Data
         private static bool filterRequestedFromLoad = false;
         private bool filterRequested = false;
         private double filterTimeStart = 0;
-
+        
         [ShowInInspector]
         [BoxGroup(OdinGroup.Name.Isolated, true, LabelText = "Selection", VisibleIf = nameof(IsDisplayIsolatedInspector), Order = OdinGroup.Order.Isolated)]
-        [PropertySpace (8f)]
+        [PropertySpace (8f), PropertyOrder (OdinPropertyOrder.DataList)]
         [OnValueChanged (nameof (ValidateData), true)]
-        [HideLabel, HideDuplicateReferenceBox, InlineProperty]
+        [HideLabel, HideDuplicateReferenceBox]
         public DataFilterKeyValuePair<T> dataFilteredIsolated
         {
             get
@@ -1028,9 +1054,7 @@ namespace PhantomBrigade.Data
         public static List<DataFilterKeyValuePair<T>> dataFiltered;
 
         [ShowInInspector]
-        #if UNITY_EDITOR
-        [ShowIf (nameof(showAllData))]
-        #endif
+        [ShowIf ("@!IsFilterUsed () && !IsDisplayIsolatedInspector ()")]
         [OnValueChanged (nameof(ValidateData), true)]
         [DictionaryDrawerSettings (DisplayMode = DictionaryDisplayOptions.ExpandedFoldout, KeyLabel = "")]
         [PropertySpace (8f), PropertyOrder (OdinPropertyOrder.DataList)]
@@ -1048,15 +1072,27 @@ namespace PhantomBrigade.Data
             }
         }
 
-        #if UNITY_EDITOR
-        bool showAllData => !IsFilterUsed () & !IsDisplayIsolatedInspector ();
-        #endif
-
         public SortedDictionary<string, T> dataNonStatic => data;
+        
+        private static List<string> keysCachedAll = new List<string> ();
+
+        public static List<string> GetKeysAll ()
+        {
+            keysCachedAll.Clear ();
+
+            var dataFetched = data;
+            if (dataFetched != null)
+            {
+                foreach (var kvp in dataFetched)
+                    keysCachedAll.Add (kvp.Key);
+            }
+
+            return keysCachedAll;
+        }
 
         private static List<string> keysCached = new List<string> ();
 
-        public static IEnumerable<string> GetKeys ()
+        public static List<string> GetKeys ()
         {
             keysCached.Clear ();
 
@@ -1079,8 +1115,6 @@ namespace PhantomBrigade.Data
 
             return keysCached;
         }
-
-
 
         protected virtual void OnEnable ()
         {
@@ -1136,11 +1170,11 @@ namespace PhantomBrigade.Data
         {
             #if UNITY_EDITOR
             UnityEditor.EditorApplication.update -= UpdateInEditor;
-
+            #endif
             filterRequested = false;
             filterRequestedFromLoad = false;
-            #endif
         }
+
 
         private static void CheckPathResolved ()
         {
@@ -1216,7 +1250,7 @@ namespace PhantomBrigade.Data
 
             bool directoryMode = ins != null && ins.IsUsingDirectories ();
             dataInternal = UtilitiesYAML.LoadDecomposedDictionary<T> (path, directoryMode: directoryMode, appendApplicationPath: false);
-
+            
             int i = 0;
             foreach (var kvp in dataInternal)
             {
@@ -1225,12 +1259,12 @@ namespace PhantomBrigade.Data
                 entry.index = i;
                 i += 1;
             }
-
+            
             unsavedChangesPossible = false;
             loadedOnce = true;
 
             ModManager.ProcessConfigModsForMultiLinker (dataTypeStatic, dataInternal, path);
-
+            
             foreach (var kvp in dataInternal)
                 kvp.Value.OnAfterDeserialization (kvp.Key);
 
@@ -1258,14 +1292,14 @@ namespace PhantomBrigade.Data
         {
             // Ensure at least one load has occurred
             var dataTemp = data;
-
+            
             CheckPathResolved ();
             if (string.IsNullOrEmpty (path))
             {
                 Debug.LogError ($"Failed to load global data container of type {typeof (T).Name} due to missing path");
                 return null;
             }
-
+            
             bool directoryMode = ins != null && ins.IsUsingDirectories ();
             var entry = UtilitiesYAML.LoadDecomposedEntryIsolated<T> (path, key, directoryMode: directoryMode, appendApplicationPath: false);
 
@@ -1286,7 +1320,7 @@ namespace PhantomBrigade.Data
             filterRequestedFromLoad = true;
 
             #endif
-
+            
             Debug.Log ($"Reloaded individual entry {key} of type {typeof (T).Name}");
             return entry;
         }
@@ -1303,7 +1337,7 @@ namespace PhantomBrigade.Data
         {
             if (dataInternal == null)
                 return;
-
+            
             #if PB_MODSDK && UNITY_EDITOR
             if (!isSaveAvailable)
             {
@@ -1327,11 +1361,11 @@ namespace PhantomBrigade.Data
             bool directoryMode = ins != null && ins.IsUsingDirectories ();
             UtilitiesYAML.SaveDecomposedDictionary (path, dataInternal, warnAboutDeletions: false, directoryMode: directoryMode, appendApplicationPath: false);
             unsavedChangesPossible = false;
-
+            
             foreach (var kvp in dataInternal)
                 kvp.Value.OnAfterSerialization ();
         }
-
+        
         public static void SaveDataIsolated (string key)
         {
             if (dataInternal == null || string.IsNullOrEmpty (key))
@@ -1345,29 +1379,30 @@ namespace PhantomBrigade.Data
                     Debug.LogError ($"Failed to save global data container of type {typeof (T).Name} due to missing path");
                     return;
                 }
-
+                
                 entry.OnBeforeSerialization ();
-
+                
                 if (DataMultiLinkerUtility.callbacksOnBeforeSerialization.TryGetValue (dataTypeStatic, out var callback) && callback != null)
                     callback.Invoke ();
-
+                
                 bool directoryMode = ins != null && ins.IsUsingDirectories ();
                 UtilitiesYAML.SaveDecomposedEntryIsolated (path, key, entry, directoryMode: directoryMode, appendApplicationPath: false);
-
+                
                 entry.OnAfterSerialization ();
             }
             else
             {
                 Debug.LogWarning ($"Failed to save isolated config {key} of type {typeof (T).Name}: no such key is present in the dictionary");
             }
-
+            
         }
+        
 
         public static void ValidateData ()
         {
             if (dataInternal == null)
                 return;
-
+            
             #if PB_MODSDK
             if (!DataContainerModData.hasSelectedConfigs && IsModdableStatic ())
                 return;
@@ -1390,7 +1425,7 @@ namespace PhantomBrigade.Data
         {
             if (dataInternal == null)
                 return;
-
+            
             #if PB_MODSDK
             if (!DataContainerModData.hasSelectedConfigs && IsModdableStatic ())
                 return;
@@ -1414,7 +1449,7 @@ namespace PhantomBrigade.Data
             }
             RefreshList ();
             entry.OnKeyReplacement (keyOld, keyNew);
-
+            
             #if PB_MODSDK && UNITY_EDITOR
             if (IsDisplayIsolatedInspector ())
             {
@@ -1422,7 +1457,7 @@ namespace PhantomBrigade.Data
                 return;
             }
             #endif
-
+            
             #if UNITY_EDITOR
             RequestFilter ();
             #endif
@@ -1498,14 +1533,14 @@ namespace PhantomBrigade.Data
             return filterDescription;
         }
 
-        public static string GetUpgradedKey (string keyInput, out bool replaced)
+        public static string GetUpgradedKey (string keyInput, out bool replaced, bool log = true)
         {
-            return DataLinkerHistory.GetUpgradedKey (dataTypeStatic.Name, keyInput, out replaced);
+            return DataLinkerHistory.GetUpgradedKey (dataTypeStatic.Name, keyInput, out replaced, log);
         }
 
-        public static string GetUpgradedKey (string keyInput)
+        public static string GetUpgradedKey (string keyInput, bool log = true)
         {
-            return DataLinkerHistory.GetUpgradedKey (dataTypeStatic.Name, keyInput, out bool replaced);
+            return DataLinkerHistory.GetUpgradedKey (dataTypeStatic.Name, keyInput, out bool replaced, log);
         }
 
         [ButtonGroup (OdinGroup.Name.Text, Order = OdinGroup.Order.TextButtons)]
@@ -1643,9 +1678,9 @@ namespace PhantomBrigade.Data
                     {
                         dataFiltered.Add (new DataFilterKeyValuePair<T>
                         {
-                            keyLast = kvp.Key,
-                            key = kvp.Key,
-                            value = kvp.Value,
+                            keyLast = kvp.Key, 
+                            key = kvp.Key, 
+                            value = kvp.Value, 
                             parent = this,
                             foldoutUsed = true
                         });
@@ -1662,9 +1697,9 @@ namespace PhantomBrigade.Data
                     {
                         dataFiltered.Add (new DataFilterKeyValuePair<T>
                         {
-                            keyLast = kvp.Key,
-                            key = kvp.Key,
-                            value = kvp.Value,
+                            keyLast = kvp.Key, 
+                            key = kvp.Key, 
+                            value = kvp.Value, 
                             parent = this,
                             foldoutUsed = !filterExact
                         });
@@ -1789,12 +1824,12 @@ namespace PhantomBrigade.Data
                 ApplyFilter ();
             }
         }
-
+        
         private string GetFilterSuffix ()
         {
             return dataInternal != null ? dataInternal.Count.ToString () : "?";
         }
-
+        
         private string filterButtonName => filterExact ? "Find exact match" : "Find matches";
         private Color filterColor => filterExact && !IsDisplayIsolatedInspector () ? colorFilterExact : colorFilterNormal;
 
@@ -1895,7 +1930,7 @@ namespace PhantomBrigade.Data
         {
             if (textSectorKeys == null || textSectorKeys.Count == 0)
                 return;
-
+            
             var helper = GameObject.FindObjectOfType<DataHelperTextPipeline> ();
             if (helper == null)
                 return;

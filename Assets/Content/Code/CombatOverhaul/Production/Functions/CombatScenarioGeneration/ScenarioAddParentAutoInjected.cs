@@ -8,9 +8,12 @@ namespace PhantomBrigade.Data
     {
         private static Dictionary<string, List<string>> injectionCandidatesPerGroup = new Dictionary<string, List<string>> ();
         
-        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed)
+        public void Run (OverworldEntity targetOverworld, DataContainerScenario scenario, int seed, bool standaloneMode)
         {
             #if !PB_MODSDK
+            
+            if (standaloneMode)
+                return;
 
             var basePersistent = IDUtility.playerBasePersistent;
             if (basePersistent == null)

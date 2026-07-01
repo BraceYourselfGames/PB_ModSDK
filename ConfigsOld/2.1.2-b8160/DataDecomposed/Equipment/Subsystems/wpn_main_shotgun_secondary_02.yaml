@@ -1,0 +1,217 @@
+hidden: false
+parent: wpn_main
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_05
+- category_wpn_shotgun
+- type_lightweight
+statDistribution: ''
+stats:
+  act_count:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 80
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 10
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 0.5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 25
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 5
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 18
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 18
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 150
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_vis_set03_back_01
+- wpn_vis_set03_bottom_03
+- wpn_vis_set03_front_02
+- wpn_vis_set03_top_01
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_handgun_blue
+      keyEnemy: fx_muzzle_handgun_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_shotgun_semiauto
+    onActivationMid: weapon_shotgun_semiauto
+    onActivationLast: weapon_shotgun_semiauto
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_handgun
+    custom: 
+  recoil:
+    key: recoil_sidearm
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_flak_blue
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact: 
+    deactivation: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation:
+    count: 15
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart:
+      type: Coverage
+      coverageTarget: 1
+      worldOffset: 0
+    referenceMid:
+      type: Coverage
+      coverageTarget: 2
+      worldOffset: 0
+    referenceEnd:
+      type: Coverage
+      coverageTarget: 2
+      worldOffset: 60
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.5
+          z: 0.9770408
+          w: 0.9770408
+        w:
+          x: 0
+          y: 1
+        m: {}
+      - tv_tg:
+          x: 0.5071834
+          y: 1
+          z: 1.021385
+          w: -2.107516
+        w:
+          x: 0.8815966
+          y: 0.1099279
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0
+          z: -2.011821
+          w: -2.011821
+        w:
+          x: 1
+          y: 0
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom: 
+functions: 
+workshopInfo: 

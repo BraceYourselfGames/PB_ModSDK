@@ -1,0 +1,86 @@
+comment: 
+hidden: false
+parents:
+- key: generic_military
+core: 
+tags: 
+generation: 
+interaction: 
+effectsOnEvents: 
+combat:
+  scenarioKeys: 
+  scenarioFilter:
+    tagsUsed: true
+    keys: 
+    tags:
+      context_generic: true
+      type_military_demolition: true
+  scenarioChanges: 
+  areaKeys: 
+  areaFilter: 
+  completion: 
+  salvageBudget: 
+  rewards:
+    main:
+      type: CombatVictory
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_module_armor
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_token
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: true
+        keys: 
+        tags:
+          part_res: false
+          subsystem: false
+    obj_tier1:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_r2
+        - sub_r1
+        tags: 
+    obj_tier2:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_r3
+        - sub_r2
+        tags: 
+    obj_tier3:
+      type: CombatConditional
+      collapsed: true
+      rewards:
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - sub_reactor_r2
+        - part_weapon_mr
+        - part_weapon_lr
+        tags: 
+      - chance: 1
+        repeats: 1
+        tagsUsed: false
+        keys:
+        - res_token
+        tags: 

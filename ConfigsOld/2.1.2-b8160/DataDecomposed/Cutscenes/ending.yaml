@@ -1,0 +1,124 @@
+textName: Outro / Main cinematic
+instantiated: false
+path: ''
+postprocessing:
+  startWithoutFade: false
+  endWithoutFade: true
+  fogSpeedCustom: false
+  fogSpeed: 1
+  pathNormal: ''
+  pathFogLight: ''
+  pathFogMedium: ''
+  pathFogHeavy: ''
+world: 
+environment: 
+area: 
+units:
+  unitsBuilt:
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: pb_arctic_sky
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_elbrus: true
+        parts:
+          equipment_left:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+          equipment_right:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+    key: 01_wall
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: pb_arctic_sky
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_tsubasa: true
+        parts:
+          equipment_left:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+          equipment_right:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+    key: 02_carrying
+  - presetResolver: !UnitPresetEmbedded
+      preset:
+        hidden: false
+        listed: true
+        textName: 
+        parents: []
+        blueprint: unit_mech
+        livery: pb_arctic_sky
+        aiBehavior: Flanker
+        aiTargeting: default
+        tags: []
+        partTagPreferences:
+          body:
+          - tags:
+              armor_tsubasa: true
+        parts:
+          equipment_left:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+          equipment_right:
+            livery: 
+            preset: !PartResolverClear {}
+            rating: 
+            systems: 
+    key: 03_end
+camera: 
+subtitles:
+- time: 2
+  duration: 4
+- time: 12.5
+  duration: 3.5
+- time: 21
+  duration: 3.5
+- time: 32
+  duration: 4
+callbacksOnSkip: 
+audioEventsOnStart:
+- key: tableau_start
+audioStatesOnStart: 
+audioSyncsOnStart: 
+audioEventsOnPlay:
+- key: tableau_outro_audio
+- key: tableau_outro_vo
+audioStatesOnPlay: []
+audioSyncsOnPlay: 
+audioEventsOnEnd:
+- key: tableau_stop
+- key: music_worldmap
+- key: ambience_worldmap
+audioStatesOnEnd: 
+audioSyncsOnEnd: 

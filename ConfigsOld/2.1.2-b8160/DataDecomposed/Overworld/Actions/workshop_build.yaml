@@ -1,0 +1,41 @@
+ui:
+  color:
+    r: 0.3411765
+    g: 0.4705883
+    b: 0.227451
+    a: 1
+  minified: false
+  locationFromTarget: false
+audio: 
+time: 
+cost: 0
+limitPerOwner: 0
+progressGroup: 0
+progressJobsStat: workshop_jobs
+progressSpeedStat: workshop_speed
+requireCombatParticipation: false
+completeOnCombatVictory: false
+terminateOnCombatDefeat: false
+discardOnWorldChange: false
+requiresDeployment: false
+cancellationAllowed: true
+refundOnCancellation: true
+refundOnTermination: true
+refreshTargetOnTermination: false
+haltedByMovementModes: false
+haltedByLock: false
+changesOnStart: 
+changesOnCancellation:
+  functions:
+  - !WorkshopBuildCancel {}
+  memoryChanges: 
+changesOnTermination: 
+changesOnCompletion:
+  functions:
+  - !WorkshopBuildFinish {}
+  memoryChanges: 
+tags: []
+customFlags: 
+customInts: 
+customFloats: 
+customStrings: 

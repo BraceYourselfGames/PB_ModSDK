@@ -1,0 +1,45 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- type_special
+- prestige_unpickable
+- type_ability
+- level_3
+- type_brawler
+group: 
+existingTraitTagsFilter:
+  brawler_tackle: true
+prestigeRank: 
+actionLink:
+  key: ability_pilot_braced
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatSet
+    key: ability_braced
+    normalized: false
+    value: 2
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

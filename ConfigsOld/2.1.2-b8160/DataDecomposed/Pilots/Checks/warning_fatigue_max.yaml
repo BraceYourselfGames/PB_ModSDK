@@ -1,0 +1,11 @@
+textDescInTooltips: true
+hidden: false
+displayInCombat: true
+icon: 
+severity: Warning
+checks:
+- !PilotValidateStatValue
+  key: fatigue
+  normalized: true
+  check: Greater
+  value: 0.95

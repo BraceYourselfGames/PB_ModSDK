@@ -1,0 +1,26 @@
+hidden: false
+parents:
+- key: sh_group_precombat_optional
+core: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_liberation
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget: 
+      functionsGlobal:
+      - !UnlockCodex
+        key: overworld_missions
+      functionsLocal: 
+    options: 
+    optionsReused: 

@@ -1,0 +1,72 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: 
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: grenadier
+tags: 
+partTagPreferences: 
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_wpn_ml_02
+    rating:
+      i: 3
+    systems: 
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_top
+    rating:
+      i: 3
+    systems: 
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_sidearm_01
+    rating:
+      i: 3
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_primary_sp_02
+    rating:
+      i: 3
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_arm_shielded
+    rating:
+      i: 3
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_arm_shielded
+    rating:
+      i: 3
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_asgard_heavy_bottom
+    rating:
+      i: 3
+    systems: 
+animationOverrides: 
+effects: 

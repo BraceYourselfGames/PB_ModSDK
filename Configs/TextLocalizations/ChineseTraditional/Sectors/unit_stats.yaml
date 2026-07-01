@@ -112,6 +112,14 @@ entries:
     id: 1
     text: EHP
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 使用懸浮推進器時可維持的懸浮高度。取決於裝甲等級：裝甲越重的單位，懸浮高度越低。
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: 懸浮高度
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: 相對於單位質量下的動力輸出
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: 散熱性
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: 此單位在裝備輕型裝甲時，能維持懸浮的最高高度。
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: 最大高度
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: 此單位在裝備重型裝甲時，能維持懸浮的最低高度。
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: 最小高度
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: '由傳統複合材料製成的內層裝甲。可以很有彈性，但如果損壞則需要維修。 '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: 價值－物資
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: 碰撞抗性。
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: 穩定性
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: 推進器子系統的輸出量。抵銷質量，決定衝刺的距離。

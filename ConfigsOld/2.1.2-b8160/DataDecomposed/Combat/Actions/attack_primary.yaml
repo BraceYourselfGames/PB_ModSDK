@@ -1,0 +1,96 @@
+dataUI:
+  icon: s_icon_l32_target
+  color:
+    r: 1
+    g: 0.4103774
+    b: 0.4103774
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  sortingPriority: 200
+  hidden: false
+  irreversible: false
+  heating: true
+  offensive: true
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Targeting
+  heatType: DataConstant
+  durationType: Equipment
+  duration: 0
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check:
+    encompassingMethod: RequireAll
+    tagsMethod: RequireAll
+    blueprintsMethod: RequireAll
+    partsMethod: RequireAll
+    subsystemsMethod: RequireAll
+    statsMethod: RequireAll
+    tags:
+    - classTag: mech
+      not: false
+    blueprints: 
+    parts:
+    - socket: equipment_right
+      not: true
+      requirement: Destroyed
+      tags: 
+    - socket: equipment_right
+      not: false
+      requirement: Tags
+      tags:
+        type_melee: false
+        wpn_main: true
+    subsystems: 
+    stats: 
+    pilot: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: equipment_right
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: AttackMain
+    weightType: DataConstant
+    weightConstant: 10
+    partSocket: 
+    statUsed: 
+  - aiActionType: AttackSecondary
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom: 
+functionsTimed: 

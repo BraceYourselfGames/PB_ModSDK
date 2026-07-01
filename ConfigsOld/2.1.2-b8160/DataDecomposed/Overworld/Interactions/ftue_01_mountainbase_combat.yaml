@@ -1,0 +1,81 @@
+hidden: false
+parents:
+- key: sh_group_precombat_optional
+core:
+  stepOnStart: intro
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  intro:
+    comment: 
+    image: event_mine_01
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.6047036
+        g: 0.5990566
+        b: 1
+        a: 0
+      image: event_mine_01
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.4481132
+            b: 0.4481132
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main
+    optionsReused: 
+  main:
+    comment: 
+    image: event_mountain_base
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options: 
+    optionsReused: 

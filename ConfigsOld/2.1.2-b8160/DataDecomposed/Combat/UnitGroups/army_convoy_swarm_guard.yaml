@@ -1,0 +1,52 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: false
+factionBranchDefault: branch_army
+tags:
+- type_convoy
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: false
+    key: tank_vanguard_standard_hybrid
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: Flanker
+    aiTargeting: default
+    liveryPreset: inv_army_g1_berserker
+    custom:
+      name: 
+      id: 
+      idReused:
+        textSector: scenario_embedded
+        textKey: unique_tutorial_elimination__step_wave_01_g0_u1_pilot_callsign
+      idPilot: 
+      role: 
+      spawn: 
+      landing: 
+      flags: 
+      faction: 
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags:
+      - purpose_guard
+unitPresets:
+  tank_vanguard_standard_hybrid: !UnitFilter
+    tagsFromOverworld: false
+    tags:
+      filter_hybrid: false
+      role_sharpshooter: true
+      type_tank_elevated: true

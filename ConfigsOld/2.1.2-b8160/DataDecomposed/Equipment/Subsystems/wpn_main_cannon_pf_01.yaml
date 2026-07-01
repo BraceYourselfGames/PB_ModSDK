@@ -1,0 +1,392 @@
+hidden: false
+parent: wpn_main
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- aihint_stopmovementtofire
+- category_wpn_cannon
+- spec_ballistic
+- spec_locking
+statDistribution: ''
+stats:
+  act_count:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 110
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 64
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 80
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 90
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 40
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 11
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 400
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments:
+  b00:
+    key: wpn_vis_set03_front_06
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  b01:
+    key: wpn_vis_set03_front_07
+    centered: false
+    activated: true
+    position:
+      x: 0.75
+      y: 0.7
+      z: 2.5
+    rotation:
+      x: 0
+      y: 0
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  b02:
+    key: wpn_vis_set03_front_05
+    centered: false
+    activated: true
+    position:
+      x: 0.75
+      y: 0.7
+      z: -1.75
+    rotation:
+      x: 0
+      y: 0
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  grip:
+    key: shared_grip_set_01_grip
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0
+      z: 0
+    rotation:
+      x: 0
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  m01:
+    key: wpn_missile_01a_bottom_a
+    centered: false
+    activated: true
+    position:
+      x: 1.15
+      y: 0.6
+      z: -1.05
+    rotation:
+      x: 0
+      y: 0
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  m02:
+    key: wpn_vis_set03_top_01
+    centered: false
+    activated: true
+    position:
+      x: 1.75
+      y: 0.6
+      z: -0.9
+    rotation:
+      x: 0
+      y: 0
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  m03:
+    key: wpn_modular_grip_03
+    centered: false
+    activated: true
+    position:
+      x: 0.55
+      y: 0.6
+      z: 0.85
+    rotation:
+      x: 0
+      y: 0
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  m04:
+    key: wpn_vis_set03_top_03
+    centered: false
+    activated: true
+    position:
+      x: 1.45
+      y: 0.6
+      z: 0.1
+    rotation:
+      x: 0
+      y: 17.5
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  s01:
+    key: wpn_melee_sword_03_top_b_l
+    centered: false
+    activated: true
+    position:
+      x: 0.25
+      y: 0.7
+      z: -2.05
+    rotation:
+      x: 0
+      y: 90
+      z: 90
+    scale:
+      x: 1
+      y: 1
+      z: 1
+  s02:
+    key: wpn_melee_sword_03_top_b_l
+    centered: false
+    activated: true
+    position:
+      x: 0
+      y: 0.7
+      z: -1.05
+    rotation:
+      x: 90
+      y: 0
+      z: 0
+    scale:
+      x: 1
+      y: 1
+      z: 1
+activation:
+  visual:
+    local:
+      key: fx_muzzle_tank_cannon
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride:
+      root: false
+      position:
+        x: 0
+        y: 0.7
+        z: 6.285
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+  audio:
+    onActivationFirst: weapon_tank_cannon
+    onActivationMid: weapon_tank_cannon
+    onActivationLast: weapon_tank_cannon
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_vhc_cannon
+    custom: 
+  recoil:
+    key: recoil_flat
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_standard_blue
+      keyEnemy: fx_projectile_standard_red
+      scale:
+        x: 1.2
+        y: 1.2
+        z: 2
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact:
+      key: fx_impact_general_caliber_01
+      keyEnemy: 
+      scale:
+        x: 5
+        y: 5
+        z: 5
+      hueOffset: 
+      hueOffsetEnemy: 
+    deactivation:
+      key: fx_projectile_pop
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0
+          y: 0
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity:
+    distance: 6
+    targetExclusive: false
+    inertBeforeHit: false
+    inertPrimingDelay: 1
+    triggerWithoutEntity: false
+  hitResponse: 
+  splashDamage:
+    exponent: 2
+    fxDetonation: fx_aoe_explosion_01_small
+    fxDetonationScale: 1
+    fxArea: fx_aoe_volume_01
+    fxHit: fx_aoe_hit_01
+  splashImpact:
+    exponent: 2
+    triggerOnDamage: false
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom: 
+functions: 
+workshopInfo: 

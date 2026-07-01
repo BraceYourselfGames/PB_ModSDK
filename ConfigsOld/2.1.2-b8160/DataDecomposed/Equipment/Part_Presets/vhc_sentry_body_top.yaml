@@ -1,0 +1,24 @@
+hidden: true
+parents:
+- key: vhc_sentry_body
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- secondary
+tags: 
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - internal_vhc_sentry_top_v01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_vhc_turret
+  priority: 0
+  comment: 
+  checks: 

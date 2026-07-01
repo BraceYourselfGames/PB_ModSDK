@@ -1,0 +1,34 @@
+parents:
+- key: ability_sensor_rain
+  priority: 0
+  offsetStart: 0
+  offsetEnd: 0
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 3
+ui:
+  positionX: 6
+  positionY: 0
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_sensor3
+unlock: 
+cost:
+  resources:
+    components_r2: 20
+    components_r3: 10
+    supplies: 400
+effect:
+  stats:
+  - key: sensor_rain_effect
+    modifier: Offset
+    value: 0.15
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_sensors

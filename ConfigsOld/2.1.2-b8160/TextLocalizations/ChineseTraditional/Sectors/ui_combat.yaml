@@ -1,0 +1,910 @@
+timeLastSync: 63817552305
+entries:
+  action_instant_header:
+    id: 1
+    text: 確認即時行動
+    textEng: Confirm instant action
+  action_instant_hint:
+    id: 1
+    text: 此行動將立即生效並影響本次戰術規劃階段。一經確認即無法取消。是否要執行？
+    textEng: This action is instantaneous and will immediately affect this planning phase. It can not be cancelled once confirmed. Would you like to confirm it?
+  action_tooltip_charged_header:
+    id: 1
+    text: 使用次數限制
+    textEng: Limited charges
+  action_tooltip_charged_text:
+    id: 1
+    text: 此行動在每場戰鬥中可執行的次數有限。
+    textEng: This action can only be performed a limited number of times per fight.
+  action_tooltip_heat_header:
+    id: 1
+    text: 暖身
+    textEng: Heating
+  action_tooltip_heat_text:
+    id: 1
+    text: 這個動作將會讓單位暖身。透過在時間軸分隔這些動作來避免過熱。
+    textEng: This action will heat up the unit. Avoid overheating by spacing apart these actions on the timeline.
+  action_tooltip_irreversible_header:
+    id: 1
+    text: 不可逆
+    textEng: Irreversible
+  action_tooltip_irreversible_text:
+    id: 1
+    text: 這個動作將從戰鬥中移除這個單位。執行後結果不可倒轉。
+    textEng: This action will remove the unit from the fight. It can not be reversed once executed.
+  action_tooltip_offensive_header:
+    id: 1
+    text: 進攻性
+    textEng: Offensive
+  action_tooltip_offensive_text:
+    id: 1
+    text: 這是一個使用已安裝武器的進攻性動作。武器資訊可在視窗底部右邊看到。
+    textEng: This is an offensive action utilizing an installed weapon. Weapon information is available on the bottom right side of the screen.
+  dialog_no_orders_desc:
+    id: 1
+    text: 有些單位沒有下達到指令。你確定要繼續進行嗎？
+    textEng: Some units have no orders. Are you sure you wish to proceed?
+  dialog_no_orders_header:
+    id: 1
+    text: 無指令單位
+    textEng: Units Without Orders
+  end_continue:
+    id: 1
+    text: 繼續
+    textEng: Continue
+  end_defeat_block_header:
+    id: 1
+    text: 無路可退
+    textEng: No way forward
+  end_defeat_block_text:
+    id: 1
+    text: 此戰不容失敗。要從上次儲存點重新嘗試嗎？
+    textEng: Defeat is not an option in this fight. Retry from the last saved game?
+  end_detail_defeat_early:
+    id: 1
+    text: 基地接走了我們的單位並且撤退，但是這個地點還是在敵方的控制之下。我們下一次再打敗他們！
+    textEng: The base has picked up our units and retreated, but the site remains under enemy control. We can defeat them next time!
+  end_detail_defeat_total:
+    id: 1
+    text: 我們的單位陣亡，但是基地成功逃脫。這個地點還是在敵方的控制之下。我們下一次再打敗他們！
+    textEng: Our units are lost, but the base has managed to escape. The site remains under enemy control. We can defeat them next time!
+  end_detail_victory_early:
+    id: 1
+    text: 恭喜！基地保護了我們單位的安危，並且達成所有目標。敵軍離開後，你現在取得這個地點的控制權。
+    textEng: Congratulations! The base has secured our units and all objectives have been fulfilled. With the enemy gone, you now have control of the site.
+  end_detail_victory_total:
+    id: 1
+    text: 恭喜！已擊退敵方並取得這個地點的控制權。
+    textEng: Congratulations! The enemy has been defeated and you now have control of the site.
+  end_header_defeat_early:
+    id: 1
+    text: 已撤退
+    textEng: Retreated
+  end_header_defeat_total:
+    id: 1
+    text: 已戰勝
+    textEng: Defeated
+  end_header_victory_early:
+    id: 1
+    text: 勝利
+    textEng: Victory
+  end_header_victory_total:
+    id: 1
+    text: 勝利
+    textEng: Victory
+  end_subtitle_defeat_early:
+    id: 1
+    text: 小隊撤退，任務失敗。
+    textEng: Squad extracting, mission failed.
+  end_subtitle_defeat_total:
+    id: 1
+    text: 任務失敗。
+    textEng: Mission failed.
+  end_subtitle_victory_early:
+    id: 1
+    text: 小隊撤退，任務達成。
+    textEng: Squad extracting, mission successful.
+  end_subtitle_victory_total:
+    id: 1
+    text: 已無任何目標，任務達成。
+    textEng: No targets remain, mission successful.
+  event_log_bt_comms_text:
+    id: 1
+    text: 切換截獲通訊的顯示方式。
+    textEng: Toggle the display of intercepted comms.
+  event_log_bt_other_text:
+    id: 1
+    text: 接換其他訊息的顯示方式。
+    textEng: Toggle the display of other messages.
+  event_log_bt_toggle_text:
+    id: 1
+    text: 切換視窗大小。
+    textEng: Toggle between compact and expanded window size.
+  event_log_bt_units_enemy_text:
+    id: 1
+    text: 切換敵方單位相關活動的顯示方式。
+    textEng: Toggle the display of events involving enemy units.
+  event_log_bt_units_friendly_text:
+    id: 1
+    text: 切換友方單位相關活動的顯示方式。
+    textEng: Toggle the display of events involving friendly units.
+  event_log_empty_header:
+    id: 1
+    text: 沒有可顯示內容
+    textEng: Nothing to display
+  event_log_empty_text_hidden:
+    id: 1
+    text: 訊息已隱藏
+    textEng: Messages hidden
+  event_log_empty_text_none:
+    id: 1
+    text: 無隱藏訊息
+    textEng: No hidden messages
+  id_unknown_unit_desc:
+    id: 1
+    text: 沒有此單位的情報。
+    textEng: No intel available for this unit.
+  id_unknown_unit_name:
+    id: 1
+    text: 不明單位
+    textEng: Unidentified unit
+  intro_squad_ready:
+    id: 1
+    text: 小隊已就位
+    textEng: Squad in position
+  log_strike_incoming:
+    id: 1
+    text: 偵測到空襲接近！
+    textEng: Incoming air strike detected!
+  log_target_neutralized:
+    id: 1
+    text: 目標威脅已消除！
+    textEng: Target neutralized!
+  log_unit_detected:
+    id: 1
+    text: 發現新敵軍！
+    textEng: New enemy detected!
+  log_unit_detected_multiple:
+    id: 1
+    text: 發現多個新敵軍！
+    textEng: New enemies detected!
+  mode_context_both:
+    id: 1
+    text: 在時間軸或是在世界中
+    textEng: In timeline or world
+  mode_context_timeline:
+    id: 1
+    text: 在時間軸
+    textEng: In timeline
+  mode_context_world:
+    id: 1
+    text: 在世界中
+    textEng: In world
+  mode_tooltip_contact_header:
+    id: 1
+    text: 接觸
+    textEng: Contact
+  overlay_collision_hint:
+    id: 2
+    text: 碰撞
+    textEng: Collision
+  overlay_flag_concussed:
+    id: 1
+    text: 被擊倒
+    textEng: Concussed
+  overlay_flag_crash:
+    id: 1
+    text: 被摧毀
+    textEng: Crashed
+  overlay_flag_destroyed:
+    id: 1
+    text: 已毀壞
+    textEng: Destroyed
+  overlay_flag_ejected:
+    id: 1
+    text: 已彈射
+    textEng: Ejected
+  overlay_flag_nodata:
+    id: 2
+    text: 無資料
+    textEng: no data
+  overlay_flag_overheat:
+    id: 1
+    text: 已過熱
+    textEng: Overheated
+  overlay_flag_part_integrity:
+    id: 1
+    text: 零件完整
+    textEng: Part integrity
+  overlay_flag_part_lost:
+    id: 1
+    text: 零件損失
+    textEng: Part lost
+  overlay_flag_reaction_fired:
+    id: 1
+    text: 已啟動
+    textEng: Activated
+  overlay_flag_reaction_triggered:
+    id: 1
+    text: 已偵測
+    textEng: Detected
+  pilot_event_knockout_header:
+    id: 2
+    text: 遭擊倒
+    textEng: Knocked out
+  pilot_event_knockout_text:
+    id: 2
+    text: 這名駕駛員傷勢嚴重。雖然倖存，但需要接受治療才能再次上場，並會得到一項永久性創傷。
+    textEng: This pilot is in a critical condition. They have survived, but require treatment to deploy again and gain a permanent trauma.
+  pilot_event_lost_desc_trauma:
+    id: 1
+    text: 此駕駛員因有先前的創傷，在本次受傷後宣告不治。戰鬥結束後將回收其遺體。讓駕駛員在戰後充分療傷休養可避免此情況發生。
+    textEng: The pilot did not survive this injury due to untreated past trauma. Their remains will be recovered after combat. Letting pilots recover from injuries after combat can avoid this.
+  pilot_event_lost_header:
+    id: 1
+    text: 駕駛員陣亡
+    textEng: Pilot lost
+  pilot_health_damage_concussion:
+    id: 1
+    text: 傷害至昏厥
+    textEng: Damage until concussion
+  pilot_health_damage_death:
+    id: 1
+    text: 傷害至死亡
+    textEng: Damage until death
+  pilot_health_deployment:
+    id: 1
+    text: 部屬時的生命值
+    textEng: Health on deployment
+  pilot_health_desc_enemy:
+    id: 1
+    text: 直到這名敵方駕駛員被衝撞到昏厥為止的生命值。使用衝擊波武器來傷害駕駛員生命值。
+    textEng: Remaining health until this hostile pilot is knocked unconscious. Use concussive weapons to damage pilot health.
+  pilot_health_desc_friendly:
+    id: 1
+    text: 直到我方的駕駛員被衝撞到昏厥為止的生命值。避開衝擊波武器傷害來避免昏厥。
+    textEng: Remaining health until our pilot is knocked unconscious. Prevent this by avoiding concussive weapon damage.
+  pilot_health_max:
+    id: 1
+    text: 最大生命值
+    textEng: Maximum health
+  pilot_health_tooltip_header:
+    id: 1
+    text: 駕駛員生命值
+    textEng: Pilot health
+  pilot_risk_death:
+    id: 1
+    text: 有致命風險！
+    textEng: At risk of death!
+  pilot_risk_death_desc_enemy:
+    id: 1
+    text: 直到這名敵方駕駛員受傷致死為止的生命值。使用衝擊波武器來傷害駕駛員生命值。
+    textEng: Remaining health until this hostile pilot succumbs to their injuries. Use concussive weapons to damage pilot health.
+  pilot_risk_death_desc_friendly:
+    id: 1
+    text: 直到我方駕駛員受傷致死為止的生命值。避開衝擊波武器傷害－駕駛員的死亡是永久的！
+    textEng: Remaining health until our pilot succumbs to their injuries. Avoid concussive weapon damage - pilot death is permanent!
+  pilot_status_concussion_desc_enemy:
+    id: 1
+    text: 這名敵方駕駛員因為衝擊波武器而被擊倒。駕駛的單位毫髮無傷－是回收的好機會！
+    textEng: The enemy pilot was knocked out from a concussive weapon. Their unit is intact - a great opportunity for salvage!
+  pilot_status_concussion_desc_friendly:
+    id: 1
+    text: 我方駕駛員因為衝擊波武器而被擊倒。贏得這場戰鬥來確保他們能夠活下來。若戰敗的話將會無法喚醒他們。
+    textEng: Our pilot was knocked out from a concussive hit. Win the fight to ensure their survival! We cannot revive them if we lose.
+  pilot_status_concussion_header:
+    id: 1
+    text: 被擊倒
+    textEng: Concussed
+  pilot_status_concussion_subheader:
+    id: 1
+    text: >-
+      被擊倒的
+
+      駕駛員
+    textEng: >-
+      Pilot
+
+      Concussed
+  pilot_status_crashed_desc:
+    id: 1
+    text: 這個單位由於碰撞或毀損而失控。所有先前計畫的項目行動被終止。
+    textEng: This unit is out of control from a collision or destroyed part. All previously planned actions have been terminated.
+  pilot_status_crashed_header:
+    id: 1
+    text: 被摧毀
+    textEng: Crashed
+  pilot_status_crashed_subheader:
+    id: 1
+    text: >-
+      被摧毀的
+
+      駕駛員
+    textEng: >-
+      Unit
+
+      Crashing
+  pilot_status_deceased_concussion_desc_enemy:
+    id: 1
+    text: 這名敵方駕駛員因衝擊波武器而陣亡。我們可能有機會從他們的單位回收一些裝備。
+    textEng: The enemy pilot was killed by concussive weapon damage. We might be able to salvage some equipment from their unit.
+  pilot_status_deceased_concussion_desc_friendly:
+    id: 1
+    text: 我方駕駛員因衝擊波武器而陣亡。記得派出毫髮無傷的駕駛員－有更高的機率存活下來。
+    textEng: Our pilot was killed by concussive weapon damage. Remember to send in healthy, uninjured pilots - they have stronger chances of survival.
+  pilot_status_deceased_core_desc_enemy:
+    id: 1
+    text: 這名敵方駕駛員在駕駛的單位反應爐核心爆炸後陣亡。
+    textEng: This enemy pilot was killed after their unit's reactor core detonated.
+  pilot_status_deceased_core_desc_friendly:
+    id: 1
+    text: 這名駕駛員在駕駛的單位反應爐核心爆炸而陣亡。及時彈射能夠確保他們活下來。
+    textEng: This pilot was killed after the unit's reactor core detonated. A timely ejection could have ensured their survival.
+  pilot_status_deceased_header:
+    id: 1
+    text: 死亡
+    textEng: Deceased
+  pilot_status_deceased_subheader:
+    id: 1
+    text: >-
+      死亡的
+
+      駕駛員
+    textEng: >-
+      Pilot
+
+      Deceased
+  pilot_status_default:
+    id: 1
+    text: >-
+      沒有
+
+      紀錄
+    textEng: >-
+      No
+
+      Recording
+  pilot_status_ejected_desc_enemy:
+    id: 1
+    text: 這名敵方駕駛員彈射逃生留下毫髮無傷的單位－是回收的好機會！
+    textEng: The enemy pilot has ejected and left their unit intact - a great opportunity for salvage!
+  pilot_status_ejected_desc_friendly:
+    id: 1
+    text: 我方駕駛員員從這個單位彈射逃生，即將降落在靠近戰區的地點。立即展開救援確保他們活下來。
+    textEng: Our pilot has ejected from this unit and will land near the battle site. Rescue them promptly to ensure their survival.
+  pilot_status_ejected_header:
+    id: 1
+    text: 已彈射
+    textEng: Ejected
+  pilot_status_ejected_subheader:
+    id: 1
+    text: >-
+      已彈射的
+
+      駕駛員
+    textEng: >-
+      Pilot
+
+      Ejected
+  pilot_status_uncrewed_desc:
+    id: 1
+    text: 這個單位是自動的，無須駕駛員。它能夠免除衝擊波傷害。
+    textEng: This unit is autonomous and lacks a pilot. It is immune to concussive damage.
+  pilot_status_uncrewed_header:
+    id: 1
+    text: 未配備機組員
+    textEng: Uncrewed
+  pilot_status_uncrewed_subheader:
+    id: 1
+    text: 未配備機組員
+    textEng: Uncrewed
+  profile_arrival_header:
+    id: 1
+    text: 入侵警報！
+    textEng: Invader alert!
+  profile_arrival_hint:
+    id: 1
+    text: 一個敵軍的菁英單位意外加入戰場，務必提高警戒。
+    textEng: An elite enemy unit has unexpectedly joined the fight. Exercise extreme caution.
+  scenario_from:
+    id: 1
+    text: 來自
+    textEng: From
+  scenario_imminent:
+    id: 1
+    text: 逼近
+    textEng: Imminent
+  scenario_incoming_units:
+    id: 1
+    text: 即將到來的單位
+    textEng: Incoming Units
+  scenario_pings_left:
+    id: 1
+    text: 等待發送座標剩餘回合
+    textEng: Pings Left
+  scenario_turns_left:
+    id: 1
+    text: 剩餘回合
+    textEng: Turns left
+  startup_day_prefix:
+    id: 1
+    text: 天
+    textEng: Day
+  startup_hint_skip:
+    id: 1
+    text: '[C0C0C0]按下[-][b]Esc[/b][-][C0C0C0]或[-][b]Space[/b][C0C0C0]來跳過[-]'
+    textEng: '[C0C0C0]Press[-] [b]Esc[/b][-] [C0C0C0]or[-] [b]Space[/b] [C0C0C0]to skip[-]'
+  startup_unknown_region:
+    id: 1
+    text: 未知區域
+    textEng: Unknown region
+  targeting_barrier_damage:
+    id: 1
+    text: >-
+      屏障
+
+      傷害
+    textEng: >-
+      barrier
+
+      damage
+  targeting_blocked:
+    id: 1
+    text: 受到阻擋
+    textEng: Blocked
+  targeting_coverage:
+    id: 1
+    text: 散射角度覆蓋率
+    textEng: Coverage
+  targeting_crit_chance:
+    id: 1
+    text: 爆擊
+    textEng: Crit
+  targeting_damage:
+    id: 1
+    text: 傷害
+    textEng: Damage
+  targeting_damage_at_range:
+    id: 1
+    text: 距離傷害率
+    textEng: Damage at range
+  targeting_damage_estimate:
+    id: 1
+    text: 傷害預估
+    textEng: Damage estimate
+  targeting_damage_estimate_env:
+    id: 1
+    text: 預測傷害
+    textEng: Predicted damage
+  targeting_damage_estimate_unit:
+    id: 1
+    text: 預測傷害
+    textEng: Predicted damage
+  targeting_environment_hint:
+    id: 1
+    text: >-
+      點擊一個單位來鎖定目標。
+
+      選擇周圍環境的話則是按住[ffcc77]Ctrl[-]。
+    textEng: >-
+      Click a unit to lock target.
+
+      To target environment, hold [ffcc77]Ctrl.[-]
+  targeting_falloff:
+    id: 1
+    text: 最佳射程
+    textEng: Range fit
+  targeting_heat:
+    id: 1
+    text: 熱能
+    textEng: heat
+  targeting_integrity_damage:
+    id: 1
+    text: >-
+      完整性
+
+      傷害
+    textEng: >-
+      integrity
+
+      damage
+  targeting_left_weapon:
+    id: 1
+    text: 左武器
+    textEng: Left weapon
+  targeting_low_hit_chance:
+    id: 1
+    text: 命中機會低
+    textEng: Low hit chance
+  targeting_move_penalty:
+    id: 1
+    text: 移動偏移
+    textEng: Movement sway
+  targeting_optimal_range:
+    id: 1
+    text: 理想範圍
+    textEng: Optimal
+  targeting_out_of_range:
+    id: 1
+    text: 射程外
+    textEng: Out of range
+  targeting_pilot_hp:
+    id: 1
+    text: 駕駛員HP
+    textEng: pilot HP
+  targeting_pilot_knocked_out:
+    id: 1
+    text: 倒下的駕駛員
+    textEng: Pilot knocked out
+  targeting_scatter:
+    id: 1
+    text: 散射
+    textEng: Scatter
+  targeting_stagger:
+    id: 1
+    text: 步履蹣跚
+    textEng: stagger
+  targeting_too_close:
+    id: 1
+    text: 太靠近
+    textEng: Too Close
+  targeting_triggered_reaction:
+    id: 1
+    text: '觸發的反應 '
+    textEng: 'Triggered reaction '
+  time_button_full:
+    id: 1
+    text: 全速
+    textEng: Full
+  time_button_half:
+    id: 1
+    text: 半速
+    textEng: Half
+  time_button_slow:
+    id: 1
+    text: 慢速
+    textEng: Slow
+  time_mirror:
+    id: 1
+    text: 來回播放
+    textEng: Mirror
+  time_once:
+    id: 1
+    text: 播放一次
+    textEng: Once
+  time_pause:
+    id: 1
+    text: 暫停
+    textEng: Pause
+  time_paused:
+    id: 1
+    text: 已暫停
+    textEng: Paused
+  time_playing:
+    id: 1
+    text: 播放中
+    textEng: Playing
+  time_repeat:
+    id: 1
+    text: 重複
+    textEng: Repeat
+  time_speed_full:
+    id: 1
+    text: 全速
+    textEng: Full Speed
+  time_speed_half:
+    id: 1
+    text: 一半速度
+    textEng: Half Speed
+  time_speed_slow:
+    id: 1
+    text: 慢動作
+    textEng: Slow Motion
+  timeline_boot_desc:
+    id: 1
+    text: >-
+      預測系統
+
+      已可使用
+    textEng: >-
+      Prediction system
+
+      ready for use
+  timeline_boot_header:
+    id: 1
+    text: 啟動系統
+    textEng: Boot Up
+  timeline_button_plan:
+    id: 1
+    text: 計畫
+    textEng: Plan
+  timeline_button_replay:
+    id: 1
+    text: 重新播放
+    textEng: Replay
+  timeline_confirm_removal:
+    id: 1
+    text: >-
+      確認
+
+      移除
+    textEng: >-
+      confirm
+
+      removal
+  timeline_execute:
+    id: 1
+    text: 執行
+    textEng: Execute
+  timeline_execution_total_time:
+    id: 1
+    text: 總計時間
+    textEng: Total time
+  timeline_execution_turn:
+    id: 1
+    text: 回合
+    textEng: Turn
+  timeline_finalize_order:
+    id: 1
+    text: >-
+      最後確定指令
+
+      以進行
+    textEng: >-
+      Finalize order
+
+      to continue
+  timeline_heat_warning:
+    id: 1
+    text: >-
+      過熱：
+
+      單位將受到傷害
+    textEng: >-
+      Overheating:
+
+      unit will be damaged
+  timeline_horizon_header:
+    id: 1
+    text: 無資料
+    textEng: No data
+  timeline_horizon_text:
+    id: 1
+    text: 無法模擬此單位的行動。敵方可能正在干擾你的預測系統。請提高警戒，並嘗試判斷其行動。
+    textEng: The actions of this unit can not be simulated. The enemy might be jamming your prediction system. Exercise caution and try to guess their actions.
+  timeline_late_desc:
+    id: 1
+    text: 無法允許在時間線上計畫過慢的動作。
+    textEng: Planning actions too late in the timeline is not permitted.
+  timeline_late_header:
+    id: 1
+    text: 時間軸太晚
+    textEng: Too Late
+  timeline_lock_desc:
+    id: 1
+    text: 無法執行
+    textEng: Execution unavailable
+  timeline_lock_header:
+    id: 1
+    text: 已鎖定
+    textEng: Locked
+  timeline_overlap_desc:
+    id: 1
+    text: 無法重疊如攻擊等地第二行動。然而，單位可以邊攻擊邊移動。
+    textEng: Secondary actions can not overlap, such as attacks. However, units can attack and move at the same time.
+  timeline_overlap_header:
+    id: 1
+    text: 重疊
+    textEng: Overlap
+  timeline_status_normal_desc:
+    id: 1
+    text: 瀕臨預測時間極限
+    textEng: Prediction limit approaching
+  timeline_status_paused_desc:
+    id: 1
+    text: 滑鼠停留可以勘察
+    textEng: Hover to explore
+  timeline_status_paused_header:
+    id: 1
+    text: 已暫停
+    textEng: Paused
+  timeline_status_playing_desc:
+    id: 1
+    text: 滑鼠停留可以中斷
+    textEng: Hover to Interrupt
+  timeline_status_playing_header:
+    id: 1
+    text: 播放中
+    textEng: Playing
+  timeline_status_warning_desc:
+    id: 1
+    text: 預測至下個回合
+    textEng: Predicting into next turn
+  timeline_status_warning_header:
+    id: 1
+    text: 低準確性警告
+    textEng: Low precision warning
+  timeline_tooltip_heat_header:
+    id: 1
+    text: 熱能
+    textEng: Heat
+  timeline_tooltip_heat_text:
+    id: 1
+    text: 長時間過熱將導致單位起火並造成傷害。請替攻擊與其他產生熱能的行動預留空檔，給予冷卻時間。如果單位因過熱毀損，駕駛員會自動彈射逃生。
+    textEng: Prolonged overheating will lead to the unit catching fire and taking damage. Space out attacks and other heat-generating actions to give the unit time to cool down. If a unit is destroyed by overheating, the pilot will automatically eject.
+  turn_header:
+    id: 1
+    text: 回合
+    textEng: Turn
+  unit_barrier:
+    id: 1
+    text: 屏障
+    textEng: Barrier
+  unit_event_defect_header:
+    id: 2
+    text: 機甲停用
+    textEng: Unit disabled
+  unit_event_defect_text:
+    id: 2
+    text: 這台機甲受到嚴重損傷，內部骨架必須在基地修復後才能再次投入戰鬥。裝備的零件可在戰後回收。
+    textEng: This mech has taken critical damage. The internal frame will require repairs at the base before it can be deployed again. The attached parts can be salvaged after combat.
+  unit_event_destroyed_header:
+    id: 2
+    text: 單位遭摧毀
+    textEng: Unit destroyed
+  unit_event_destroyed_text:
+    id: 2
+    text: 這台機甲在多場戰鬥中累積了過度損傷，已達極限。裝備的零件可在戰後回收，但機甲骨架無法再修復。
+    textEng: This mech has taken critical damage across multiple fights and has reached its limit. The attached parts can be salvaged after combat, but the frame is not recoverable.
+  unit_health_full:
+    id: 1
+    text: 全滿
+    textEng: Full
+  unit_health_none:
+    id: 1
+    text: 無
+    textEng: None
+  unit_info_blueprint_hint:
+    id: 1
+    text: 完整性
+    textEng: Integrity
+  unit_info_targeted_hint:
+    id: 1
+    text: 目標單位
+    textEng: Targeted Unit
+  unit_integrity:
+    id: 1
+    text: 完整性
+    textEng: Integrity
+  unit_postfix_meters:
+    id: 1
+    text: 分
+    textEng: m
+  unit_postfix_seconds:
+    id: 1
+    text: 秒
+    textEng: s
+  unit_prefix_allied:
+    id: 1
+    text: 友方
+    textEng: Allied
+  unit_prefix_hostile:
+    id: 1
+    text: 敵方
+    textEng: Hostile
+  unit_prefix_squad:
+    id: 1
+    text: 小隊
+    textEng: Squad
+  unit_status_buildup:
+    id: 1
+    text: 累積
+    textEng: Buildup
+  unit_status_countdown:
+    id: 1
+    text: 倒數計時
+    textEng: Countdown
+  unit_status_source_action:
+    id: 1
+    text: 主動動作
+    textEng: Active action
+  unit_status_source_equipment:
+    id: 1
+    text: 裝備的物品
+    textEng: Equipped item
+  unit_status_source_function:
+    id: 1
+    text: 事件
+    textEng: Event
+  unit_status_source_header:
+    id: 1
+    text: 狀態來源
+    textEng: Status source
+  unit_status_source_hit:
+    id: 1
+    text: 遭武器命中
+    textEng: Weapon hit
+  unit_status_source_overheat:
+    id: 1
+    text: 過熱
+    textEng: Overheating
+  unit_status_source_trait:
+    id: 1
+    text: 駕駛員特性
+    textEng: Pilot trait
+  unit_status_source_unknown:
+    id: 1
+    text: 未知
+    textEng: Unknown
+  unit_status_turn_duration:
+    id: 1
+    text: 1個回合
+    textEng: 1 turn
+  unit_status_turn_linked:
+    id: 1
+    text: 此狀態與目前回合相關，會影響當下的規劃階段與即將執行的行動階段。
+    textEng: This status is linked to the current turn. It affects the current planning phase and the upcoming execution phase.
+  unit_tooltip_crashing:
+    id: 1
+    text: 衝撞
+    textEng: Crashing
+  unit_tooltip_crashing_desc:
+    id: 1
+    text: 這個單位受到碰撞並且失去所有行動項目。下個回合將會恢復。
+    textEng: This unit had a collision and lost all planned actions. It will recover next turn.
+  unit_tooltip_ejecting:
+    id: 1
+    text: 彈射逃生中
+    textEng: Ejecting
+  unit_tooltip_ejecting_desc:
+    id: 1
+    text: 這個單位的駕駛員正在計畫彈射逃離戰鬥。
+    textEng: The pilot of this unit is planning to eject and ecape the fight.
+  unit_tooltip_focus_camera_header:
+    id: 1
+    text: 鏡頭聚焦
+    textEng: Focus Camera
+  unit_tooltip_focus_camera_text:
+    id: 1
+    text: 將鏡頭移向單位位置。雙擊可以鎖定鏡頭在單位上。
+    textEng: Move the camera to the unit location. Double click to lock the camera to the unit.
+  unit_tooltip_landing:
+    id: 1
+    text: 降落中
+    textEng: Landing
+  unit_tooltip_landing_desc:
+    id: 1
+    text: 這個單位正在降落，將在下一回合加入戰鬥。
+    textEng: This unit is descending and will join the fight next turn.
+  unit_tooltip_no_actions:
+    id: 1
+    text: 沒有動作
+    textEng: No Actions
+  unit_tooltip_no_actions_desc:
+    id: 1
+    text: 這個單位的時間軸未安排行動。在進行到下一個回合之前考慮下達指令。
+    textEng: This unit has no actions on its timeline. Consider giving it orders before proceeding to next turn.
+  unit_tooltip_repair_gel_header:
+    id: 1
+    text: 修復液體
+    textEng: Liquid Fix
+  unit_tooltip_repair_gel_text:
+    id: 1
+    text: 單位在沒有被攻擊的情況下，屏障裝甲可以再生。當修復液體物資耗盡時再生將會停止。
+    textEng: Barrier armor can be regenerated if the unit is not under fire. Regeneration will stop when Liquid Fix supply is depleted.
+  unit_tooltip_retreating:
+    id: 1
+    text: 撤退中
+    textEng: Retreating
+  unit_tooltip_retreating_desc:
+    id: 1
+    text: 這個單位正在計畫從戰鬥中撤退。
+    textEng: This unit is planning to retreat from the fight.
+  unit_tooltip_target_warning_header:
+    id: 1
+    text: 目標警告
+    textEng: Target warning
+  unit_tooltip_target_warning_text:
+    id: 1
+    text: 這個單位已成為危險攻擊的目標。查看時間軸，試著避開。
+    textEng: This unit is being targeted by a dangerous attack. Check the timeline and try to evade it.

@@ -3,11 +3,60 @@ using System.Collections.Generic;
 
 public static class DebugExtensions
 {
+    public static void DrawBox (Vector3 origin, Quaternion rotation, Vector3 halfExtents, Color color = default, float time = 0f, bool depthTest = true)
+    {
+        if (color == default)
+            color = Color.white;
+        
+        Matrix4x4 matrix = Matrix4x4.TRS (origin, rotation, Vector3.one);
+
+        // Calculate the 8 corner points of the box
+        Vector3 p1 = matrix.MultiplyPoint (new Vector3 (-halfExtents.x, -halfExtents.y, halfExtents.z));
+        Vector3 p2 = matrix.MultiplyPoint (new Vector3 (halfExtents.x, -halfExtents.y, halfExtents.z));
+        Vector3 p3 = matrix.MultiplyPoint (new Vector3 (halfExtents.x, -halfExtents.y, -halfExtents.z));
+        Vector3 p4 = matrix.MultiplyPoint (new Vector3 (-halfExtents.x, -halfExtents.y, -halfExtents.z));
+        Vector3 p5 = matrix.MultiplyPoint (new Vector3 (-halfExtents.x, halfExtents.y, halfExtents.z));
+        Vector3 p6 = matrix.MultiplyPoint (new Vector3 (halfExtents.x, halfExtents.y, halfExtents.z));
+        Vector3 p7 = matrix.MultiplyPoint (new Vector3 (halfExtents.x, halfExtents.y, -halfExtents.z));
+        Vector3 p8 = matrix.MultiplyPoint (new Vector3 (-halfExtents.x, halfExtents.y, -halfExtents.z));
+
+        // Draw the 12 lines
+        Debug.DrawLine (p1, p2, color, time, depthTest);
+        Debug.DrawLine (p2, p3, color, time, depthTest);
+        Debug.DrawLine (p3, p4, color, time, depthTest);
+        Debug.DrawLine (p4, p1, color, time, depthTest);
+        Debug.DrawLine (p5, p6, color, time, depthTest);
+        Debug.DrawLine (p6, p7, color, time, depthTest);
+        Debug.DrawLine (p7, p8, color, time, depthTest);
+        Debug.DrawLine (p8, p5, color, time, depthTest);
+        Debug.DrawLine (p1, p5, color, time, depthTest);
+        Debug.DrawLine (p2, p6, color, time, depthTest);
+        Debug.DrawLine (p3, p7, color, time, depthTest);
+        Debug.DrawLine (p4, p8, color, time, depthTest);
+    }
+    
+    public static void DrawCapsule (Vector3 start, Vector3 end, float radius, Color color = default, float time = 0f, bool depthTest = true)
+    {
+        if (radius < 0f)
+            return;
+        
+        if (color == default)
+            color = Color.white;
+        
+        var origin = (start + end) * 0.5f;
+        var delta = end - start;
+        var dir = delta.normalized;
+        var rotation = Quaternion.LookRotation (dir, Vector3.up);
+        var halfExtents = new Vector3 (radius, radius, radius + delta.magnitude * 0.5f);
+        
+        DrawBox (origin, rotation, halfExtents, color, time, depthTest);
+    }
+    
     public static void DrawCube (Vector3 origin, Vector3 halfExtents, Color color = default, float time = 0f)
     {
         DrawCube (origin, Vector3.forward, Vector3.up, Vector3.right, halfExtents, color, time);
     }
-
+    
     public static void DrawCube (Vector3 origin, Vector3 dirForward, Vector3 dirUp, Vector3 dirRight, Vector3 halfExtents, Color color = default, float time = 0f)
     {
         var offsetRight = dirRight * halfExtents.x;
@@ -36,12 +85,12 @@ public static class DebugExtensions
         Debug.DrawLine (c2, c6, color, time);
         Debug.DrawLine (c3, c7, color, time);
         Debug.DrawLine (c4, c8, color, time);
-
+                            
         Debug.DrawLine (c1, c3, color, time);
         Debug.DrawLine (c2, c4, color, time);
         Debug.DrawLine (c5, c7, color, time);
         Debug.DrawLine (c6, c8, color, time);
-
+                            
         Debug.DrawLine (origin - dirForward, origin + dirForward, color, time);
         Debug.DrawLine (origin - dirRight, origin + dirRight, color, time);
     }
@@ -61,7 +110,7 @@ public static class UtilityGameObjects
             return physicsScene.Raycast (start, direction, out hit, 400f, mask);
         }
     }
-
+    
     public static Transform GetTransformSafely (ref Transform t, string name, HideFlags hideFlags, Vector3 scenePosition, string tag = null)
     {
         if (t == null)
@@ -86,10 +135,10 @@ public static class UtilityGameObjects
     {
         if (transform == null)
             return null;
-
+        
         var childCount = transform.childCount;
         var results = new List<T> ();
-
+        
         for (int i = 0; i < childCount; ++i)
         {
             var child = transform.GetChild (i);
@@ -100,7 +149,7 @@ public static class UtilityGameObjects
 
         return results;
     }
-
+    
     public static void CheckEmptyObjectExistence (ref GameObject gameObject, string name, Vector3 position)
     {
         if (gameObject == null)
@@ -134,7 +183,7 @@ public static class UtilityGameObjects
     {
         if (parent == null)
             return;
-
+        
         bool parentWasHidden = parent.gameObject.activeSelf == false;
         if (parentWasHidden) parent.gameObject.SetActive (true);
 
@@ -149,7 +198,7 @@ public static class UtilityGameObjects
         if (parentWasHidden)
             parent.gameObject.SetActive (false);
     }
-
+    
     public static T AddChildWithComponent<T> (this GameObject parent, string name = null) where T : Component
     {
         var go = new GameObject();
@@ -167,7 +216,7 @@ public static class UtilityGameObjects
             go.name = name;
         else
             go.name = typeof (T).Name;
-
+        
         var comp = go.AddComponent<T> ();
         return comp;
     }
@@ -193,7 +242,7 @@ public static class UtilityGameObjects
 	{
 		var o = component;
 		#if UNITY_EDITOR
-		UnityEditor.EditorApplication.delayCall += () =>
+		UnityEditor.EditorApplication.delayCall += () => 
         {
             if (o)
             {
@@ -204,9 +253,9 @@ public static class UtilityGameObjects
             }
         };
 		#else
-		if (withGameObject)
-            GameObject.Destroy (o.gameObject);
-        else
+		if (withGameObject) 
+            GameObject.Destroy (o.gameObject); 
+        else 
             GameObject.Destroy (o);
 		#endif
 	}
@@ -223,7 +272,7 @@ public static class UtilityGameObjects
             }
         }
     }
-
+    
     #if PB_MODSDK
     public static T AddChild<T> (this GameObject parent) where T : Component
     {

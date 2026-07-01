@@ -2,6 +2,7 @@ hidden: false
 parents:
 - key: generic_elimination
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -11,16 +12,11 @@ tags:
 states:
   strike_recurring:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -138,17 +134,36 @@ states:
           outcome: 
   strike_spotters:
     comment: 
-    textNameKey: generic_target_spotter_header
-    textDescKey: generic_target_spotter_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_target_spotter_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_target_spotter_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
     turn: 
@@ -253,6 +268,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_elimination_start_cas
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

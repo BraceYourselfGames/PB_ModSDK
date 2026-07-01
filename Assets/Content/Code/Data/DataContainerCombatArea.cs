@@ -1149,6 +1149,9 @@ namespace PhantomBrigade.Data
     {
         public bool backgroundTerrainUsed = true;
         public bool sliceShadingUsed = false;
+        
+        [PropertyTooltip ("Define a custom key for distant backgrounds. Leave empty for default (mountain range).")]
+        public string customBackgroundKey = "";
 
         [NonSerialized, YamlIgnore, ShowInInspector, ShowIf ("sliceShadingUsed")]
         private bool sliceLiveRefresh = false;
@@ -1452,6 +1455,31 @@ namespace PhantomBrigade.Data
             processed ? tagsProc : tags;
 
         public bool IsHidden () => hidden;
+        
+        
+        
+        public AreaDataCore GetLevelDataCore ()
+        {
+            if (contentProc?.channels == null)
+                return null;
+
+            return contentProc.core;
+        }
+
+        public AreaDataContainer GetLevelDataRoot ()
+        {
+            if (contentProc?.channels == null)
+                return null;
+
+            if (contentProc.core == null)
+                return null;
+            
+            if (contentProc.channels.TryGetValue (AreaChannelRoot.alias, out var channel) && channel is AreaChannelRoot channelRoot)
+                return channelRoot.content;
+            
+            return null;
+        }
+        
 
         public override void OnBeforeSerialization ()
         {
@@ -1630,7 +1658,13 @@ namespace PhantomBrigade.Data
             if (sceneHelper.background != null)
             {
                 if (backgroundTerrainUsed)
-                    sceneHelper.background.Rebuild ("default");
+                {
+                    string bgKey = coreProc.customBackgroundKey;
+                    if (!string.IsNullOrEmpty (bgKey))
+                        sceneHelper.background.Rebuild (bgKey);
+                    else
+                        sceneHelper.background.Rebuild ("default");
+                }
                 else
                     sceneHelper.background.RebuildOnlyBoundaryDecal ();
             }
@@ -1855,8 +1889,12 @@ namespace PhantomBrigade.Data
 
             if (applyToScene)
             {
+                #if !PB_MODSDK
+
                 if (!Application.isPlaying && OverworldSceneHelper.ins != null)
                     OverworldSceneHelper.ins.SetActiveDirectly (false);
+
+                #endif
 
                 bool success = TryApplyLevelContentToScene ();
                 if (!success)
@@ -1875,6 +1913,13 @@ namespace PhantomBrigade.Data
             DeselectAll ();
             
             CombatSceneHelper.UnloadArea ();
+            
+            #if !PB_MODSDK
+
+            if (OverworldSceneHelper.ins != null)
+                OverworldSceneHelper.ins.SetActiveDirectly (true);
+
+            #endif
         }
         
         private bool IsSelected => DataMultiLinkerCombatArea.selectedArea == this;

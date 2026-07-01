@@ -1,0 +1,42 @@
+firings:
+- time: 0.4
+  timeTravel: 1.8
+  partPresetKey: wpn_vhc_strike_ml_01
+  transformBasedDirection: true
+  transformBasedVelocityMultiplier: 0.5
+  transforms:
+  - top_left
+  - top_right
+  startPosition:
+    x: 0
+    y: 0
+    z: 0
+  targetPosition:
+    x: 0
+    y: 0
+    z: 0
+  positionDeviation: 2
+  repeats: 8
+  timeOffset: 0.0125
+  startPositionOffset:
+    x: 0
+    y: 0
+    z: 0
+  targetPositionOffset:
+    x: 0
+    y: 0
+    z: 6
+visual:
+  startPositionLocal:
+    x: 0
+    y: 100
+    z: -200
+  startRotationLocal:
+    x: 0
+    y: 0
+    z: 0
+  linker:
+    path: Content/CombatStrikes/Visuals/aircraft_military_hg_01
+  animation:
+    path: Content/CombatStrikes/Clips/strike_forward_01_legacy_higher_altitude
+  functionsTimed: 

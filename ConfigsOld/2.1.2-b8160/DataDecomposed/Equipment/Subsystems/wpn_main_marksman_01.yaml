@@ -1,0 +1,228 @@
+hidden: false
+parent: wpn_main_marksman
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_05
+- spec_impact
+statDistribution: ''
+stats:
+  act_count:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 0.9
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 105
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 4
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 88.3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 106.6
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 100
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 49
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 11
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 400
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_vis_set03_back_02
+- wpn_vis_set03_bottom_02
+- wpn_vis_set03_front_06
+- wpn_vis_set03_top_03
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_rifle_marksman_blue
+      keyEnemy: fx_muzzle_rifle_marksman_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_rifle_marksman
+    onActivationMid: weapon_rifle_marksman
+    onActivationLast: weapon_rifle_marksman
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: default
+    custom: 
+  recoil:
+    key: recoil_rifle_sniper
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_standard_blue
+      keyEnemy: fx_projectile_standard_red
+      scale:
+        x: 0.9
+        y: 0.9
+        z: 4
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact: 
+    deactivation: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0.0125
+          y: 0.2511865
+          z: 2.385687
+          w: 2.385687
+        w:
+          x: 0
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.172712
+          y: 0.657318
+          z: 2.486946
+          w: 2.486946
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.2908131
+          y: 0.9090077
+          z: 1.703044
+          w: 1.703044
+        w:
+          x: 0.8395048
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.3927981
+          y: 0.9975943
+          z: 0.00581076
+          w: 0.00581076
+        w:
+          x: 0.6711627
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 0.5952558
+          y: 0.9961934
+          z: -0.0006398765
+          w: -0.0006398765
+        w:
+          x: 0.3333333
+          y: 0.5058608
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0.3018875
+          z: -1.715419
+          w: -1.715419
+        w:
+          x: 0.3333333
+          y: 0
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom: 
+functions: 
+workshopInfo: 

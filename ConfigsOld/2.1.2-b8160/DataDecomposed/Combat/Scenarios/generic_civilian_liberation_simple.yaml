@@ -1,0 +1,242 @@
+hidden: false
+parents:
+- key: generic_civilian_liberation
+core: 
+areas: 
+entry: 
+generationInjection: 
+tags: 
+states:
+  reinforcements_enemy:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 9
+    priority: 9
+    priorityDisplay: 9
+    mood: 0
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 2
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_reinforcements_dropship
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              type_main: true
+              weight_heavy: false
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 1
+            cloneable: false
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: false
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  victory_elimination:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 15
+    priority: 15
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      destruction_critical: false
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  main:
+    comment: 
+    core: 
+    tags: 
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_short: false
+        type_main: true
+        weight_heavy: false
+      check: 
+      combatTags:
+      - flag_attacks_need_sightline
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_inner: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: retreat_default
+        check: Greater
+        value: 150
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_short: true
+        type_main: true
+        weight_light: false
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags:
+      - flag_attacks_need_sightline
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer:
+        check: Greater
+        value: 120
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: retreat_default
+        check: Greater
+        value: 150
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

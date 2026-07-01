@@ -213,19 +213,19 @@ namespace PhantomBrigade.Functions
 			
 			if (pointsToRemove == 0)
 			{
-				Debug.Log ($"No points to remove | Current entities: {entitiesCount} | Target: {target} | Mode: {mode}");
+				Debug.Log ($"DeletePoints | No points to remove | Current entities: {entitiesCount} | Target: {target} | Mode: {mode}");
 				return;
 			}
 
 			if (pointsToRemove >= entitiesCount)
 			{
-				Debug.Log ($"Removing all filtered points: {entitiesCount}");
+				Debug.Log ($"DeletePoints | Removing all filtered points: {entitiesCount} | Only hostile: {onlyHostile} | Only combat: {onlyCombat} | Checks: {checks.ToStringFormatted ()}");
 				foreach (var entityOverworld in entities)
 					OverworldUtility.TryDestroySite (entityOverworld);
 			}
 			else
 			{
-				Debug.Log ($"Removing {pointsToRemove} filtered points | Current entities: {entitiesCount} | Target: {target} | Mode: {mode}");
+				Debug.Log ($"DeletePoints | Removing {pointsToRemove} filtered points | Current entities: {entitiesCount} | Target: {target} | Mode: {mode} | Only hostile: {onlyHostile} | Only combat: {onlyCombat} | Checks: {checks.ToStringFormatted ()}");
 				for (int i = 0; i < pointsToRemove; ++i)
 				{
 					var entityOverworld = entities.GetRandomEntry ();

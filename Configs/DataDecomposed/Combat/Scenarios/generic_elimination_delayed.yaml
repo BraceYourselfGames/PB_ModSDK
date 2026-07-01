@@ -29,6 +29,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -36,22 +38,31 @@ tags:
 states:
   delayed_start:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -104,13 +115,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -167,6 +184,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_elimination_start_early
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -198,6 +216,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_elimination_start_normal
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

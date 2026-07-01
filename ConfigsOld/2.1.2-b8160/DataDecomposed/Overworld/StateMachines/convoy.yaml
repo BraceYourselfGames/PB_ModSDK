@@ -1,0 +1,44 @@
+info:
+  isAggressive: false
+  isSummoningHelp: true
+stateMachine:
+  states:
+  - name: deliver
+    transitions:
+    - Item1: player_detected
+      Item2: flee
+    linkedData:
+      order: deliver_cargo
+      speedMultiplierTarget: 1
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1.666667
+      entryCommands: 
+      aiState: Calm
+  - name: flee
+    transitions:
+    - Item1: player_lost
+      Item2: flee_timed
+    linkedData:
+      order: flee_player
+      speedMultiplierTarget: 2.5
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 0.8333335
+      entryCommands: 
+      aiState: Alerted
+  - name: flee_timed
+    transitions:
+    - Item1: player_detected
+      Item2: flee
+    - Item1: timer_done
+      Item2: deliver
+    linkedData:
+      order: flee_player
+      speedMultiplierTarget: 2.5
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 0.8333335
+      entryCommands:
+      - !TimedMessage
+        timerDone: timer_done
+        aiPursuitTimeLimit: 0.6666668
+      aiState: Investigating
+  initialState: deliver

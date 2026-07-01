@@ -12,6 +12,7 @@ aiTargeting:
 tags:
 - type_system
 - type_uncrewed
+- type_flying
 partTagPreferences: 
 parts:
   core:
@@ -22,4 +23,22 @@ parts:
     rating: 
     systems: 
 animationOverrides: 
-effects: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitTagSet
+      tags:
+      - flag_uncollideable
+      - flag_spike_one_hit
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

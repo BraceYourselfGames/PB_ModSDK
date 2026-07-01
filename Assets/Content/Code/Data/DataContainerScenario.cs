@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using PhantomBrigade.Combat.Components;
 using PhantomBrigade.Functions;
 using PhantomBrigade.Game;
@@ -9,6 +10,10 @@ using PhantomBrigade.Overworld;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace PhantomBrigade.Data
 {
@@ -1122,43 +1127,79 @@ namespace PhantomBrigade.Data
 
         [DisableIf ("hidden")]
         [ValueDropdown ("@DataMultiLinkerCombatComms.data.Keys")]
-        [HideLabel]
+        [HideLabel, OnInspectorGUI ("DrawPreview")]
         public string key;
+
+        [HideIf ("@functionsOnExit == null"), InlineButtonClear]
+        public List<ICombatFunction> functionsOnExit = null;
         
         #if UNITY_EDITOR
 
-        [ShowInInspector]
-        [MultiLineProperty (3), GUIColor (1f, 1f, 1f, 0.5f)]
-        [HideLabel]
-        public string content
+        private static StringBuilder sb = new StringBuilder ();
+        
+        private void DrawPreview ()
         {
-            get
+            var data = DataMultiLinkerCombatComms.GetEntry (key, false);
+            if (data == null)
+                return;
+            
+            EditorGUILayout.BeginHorizontal ();
+            GUILayout.Label (GetContent (data), EditorStyles.wordWrappedMiniLabel);
+            if (GUILayout.Button ("Open", EditorStyles.miniButton, GUILayout.Width (48f)))
+                TryOpeningConfig ();
+            if (functionsOnExit == null)
             {
-                return GetContent ();
+                if (GUILayout.Button ("≡", EditorStyles.miniButton, GUILayout.Width (24f)))
+                    functionsOnExit = new List<ICombatFunction> ();
             }
-            set
+            EditorGUILayout.EndHorizontal ();
+
+            if (data.functionsOnStart != null)
             {
-                //
+                EditorGUILayout.BeginHorizontal ();
+                GUILayout.FlexibleSpace ();
+                GUILayout.Label ("Embedded start functions: " + data.functionsOnStart.Count, EditorStyles.miniLabel);
+                EditorGUILayout.EndHorizontal ();
+            }
+            
+            if (data.functionsOnExit != null)
+            {
+                EditorGUILayout.BeginHorizontal ();
+                GUILayout.FlexibleSpace ();
+                GUILayout.Label ("Embedded exit functions: " + data.functionsOnExit.Count, EditorStyles.miniLabel);
+                EditorGUILayout.EndHorizontal ();
             }
         }
-
-        private string GetContent ()
+        
+        private void TryOpeningConfig ()
         {
-            if (string.IsNullOrEmpty (key))
-                return string.Empty;
+            if (string.IsNullOrEmpty (key) || !DataMultiLinkerCombatComms.data.ContainsKey (key))
+                return;
             
-            var data = DataMultiLinkerCombatComms.GetEntry (key);
+            var linker = GameObject.FindObjectOfType<DataMultiLinkerCombatComms> ();
+            if (linker == null)
+                return;
+
+            UnityEditor.Selection.activeGameObject = linker.gameObject;
+            linker.filter = key;
+            linker.filterUsed = true;
+            linker.ApplyFilter ();
+        }
+
+        private string GetContent (DataContainerCombatComms data)
+        {
             if (data == null)
                 return string.Empty;
 
             if (data.textContent == null || data.textContent.Count == 0)
                 return string.Empty;
 
+            string text = null;
             if (data.textContent.Count == 1)
-                return data.textContent[0];
-
-            var textContentCombined = data.textContent.ToStringFormatted (true, multilinePrefix: "- ");
-            return textContentCombined;
+                text = data.textContent[0];
+            else
+                data.textContent.ToStringFormatted (true, multilinePrefix: "- ");
+            return text;
         }
 
         #if !PB_MODSDK
@@ -1543,6 +1584,9 @@ namespace PhantomBrigade.Data
         
         [DropdownReference (true)]
         public DataBlockOverworldEventSubcheckFloat directionDotFlat;
+        
+        [DropdownReference (true)]
+        public DataBlockOverworldEventSubcheckFloat directionDotRelative;
         
         [DropdownReference (true)]
         public DataBlockOverworldEventSubcheckFloat directionAngle;
@@ -1946,11 +1990,41 @@ namespace PhantomBrigade.Data
 
     public class DataBlockScenarioStateUI
     {
+        [LabelText ("Display priority")]
+        public int priorityDisplay = 0;
+
+        [LabelText ("Hide in briefings")]
         public bool briefingHidden;
+        
+        [LabelText ("Show checkbox")]
         public bool checkboxUsed;
+        
+        [LabelText ("Invert progress bar")]
         public bool progressInverted;
+        
+        [LabelText ("Hide progress limit")]
         public bool progressLimitHidden;
+        
+        [LabelText ("Hide progress at 0")]
         public bool progressHiddenAtZero;
+        
+        [FoldoutGroup ("Header")]
+        [DropdownReference, InlineProperty, HideLabel]
+        public DataBlockTextTrimodal textHeader;
+        
+        [FoldoutGroup ("Description")]
+        [DropdownReference, InlineProperty, HideLabel]
+        public DataBlockTextTrimodal textDesc;
+        
+        [FoldoutGroup ("Header (completed)")]
+        [DropdownReference, InlineProperty, HideLabel]
+        public DataBlockTextTrimodal textHeaderCompleted;
+        
+        [FoldoutGroup ("Description (completed)")]
+        [DropdownReference, InlineProperty, HideLabel]
+        public DataBlockTextTrimodal textDescCompleted;
+        
+        public DataBlockInt mood;
         
         [DropdownReference (true)]
         public DataBlockFloat01 moodIntensityNormal;
@@ -2015,61 +2089,24 @@ namespace PhantomBrigade.Data
         [DropdownReference (true), HideLabel] 
         public DataBlockComment comment;
         
-        [ShowIf("visible")]
-        [YamlIgnore]
-        [LabelText("Header / Desc.")]
-        [DisableIf("@!string.IsNullOrEmpty (textNameKey)")]
-        public string textName;
-
-        [ShowIf("visible")]
-        [YamlIgnore]
-        [HideLabel, TextArea(1, 10)]
-        [DisableIf("@!string.IsNullOrEmpty (textDescKey)")]
-        public string textDesc;
-
-        [ShowIf("visible")]
-        [InlineButton("ResetTextHeaderKey", "-", ShowIf = "@!string.IsNullOrEmpty (textNameKey)")]
-        [ValueDropdown("@DataMultiLinkerScenario.textKeysStateHeader")]
-        [OnValueChanged("ResolveText")]
-        [LabelText("Header Key")]
-        public string textNameKey = "generic_unknown_header";
-
-        [ShowIf ("visible")]
-        [InlineButton("ResetTextDescKey", "-", ShowIf = "@!string.IsNullOrEmpty (textDescKey)")]
-        [ValueDropdown("@DataMultiLinkerScenario.textKeysStateDescription")]
-        [OnValueChanged("ResolveText")]
-        [LabelText("Description Key")]
-        public string textDescKey = "generic_unknown_text";
-
-        [DropdownReference (true)]
-        public DataBlockScenarioStateText textOnCompletion;
-
         // Is this state actively checked, or does it only exist as a flag that's set manually?
         public bool evaluated = true;
 
-        // Is this state visible in scenario UI
-        public bool visible = true;
-
         // Does this state start in scope without requiring starting step to bring it in
+        [LabelText ("Start in scope")]
         public bool startInScope = false;
         
         [FoldoutGroup ("Priorities")]
-        [LabelText ("Gen. Priority")]
+        [LabelText ("Gen. priority")]
         public int priorityGeneration = 0;
 
         [FoldoutGroup ("Priorities")]
-        [LabelText ("Eval. Priority")]
+        [LabelText ("Eval. priority")]
         public int priority = 0;
         
-        [FoldoutGroup ("Priorities")]
-        [ShowIf ("visible")]
-        [LabelText ("Display Priority")]
-        public int priorityDisplay = 0;
+        [LabelText ("Hide in briefings")]
+        public bool briefingHidden;
 
-        [PropertyRange (-2, 1)]
-        [ShowIf("visible")]
-        public int mood = 0;
-        
         [DropdownReference (true)]
         [LabelText ("UI")]
         public DataBlockScenarioStateUI ui;
@@ -2135,30 +2172,6 @@ namespace PhantomBrigade.Data
         
         [HideInInspector, YamlIgnore] 
         public string key;
-        
-        public void ResolveText ()
-        {
-            if (!visible)
-                return;
-            
-            if (parentScenario == null || string.IsNullOrEmpty (key))
-            {
-                Debug.LogWarning ($"Failed to resolve text for scenario state | Scenario: {(parentScenario != null ? parentScenario.key : "null")} | Key: {key}");
-                return;
-            }
-
-            var scenarioKey = parentScenario.key;
-            var headerShared = !string.IsNullOrEmpty (textNameKey);
-            var headerSector = headerShared ? TextLibs.scenarioStatesShared : TextLibs.scenarioEmbedded;
-            var headerKey = headerShared ? textNameKey : $"{scenarioKey}__state_{key}_0c_header";
-                    
-            var descShared = !string.IsNullOrEmpty (textDescKey);
-            var descSector = descShared ? TextLibs.scenarioStatesShared : TextLibs.scenarioEmbedded;
-            var descKey = descShared ? textDescKey : $"{scenarioKey}__state_{key}_0c_text";
-
-            textName = DataManagerText.GetText (headerSector, headerKey, true);
-            textDesc = DataManagerText.GetText (descSector, descKey, true);
-        }
 
         #region Editor
         #if UNITY_EDITOR
@@ -2170,18 +2183,6 @@ namespace PhantomBrigade.Data
             helper = new DataEditor.DropdownReferenceHelper (this);
 
         private bool IsEvaluatedFieldVisible => evaluated;
-        
-        private void ResetTextHeaderKey ()
-        {
-            textNameKey = string.Empty;
-            ResolveText ();
-        }
-        
-        private void ResetTextDescKey ()
-        {
-            textDescKey = string.Empty;
-            ResolveText ();
-        }
 
         private string GetEvaluationOnOutcomeText ()
         {
@@ -2474,106 +2475,33 @@ namespace PhantomBrigade.Data
     {
         [HideLabel, ColorUsage (false)]
         public Color color = Color.white;
-
-        [YamlIgnore]
-        [LabelText ("Header / Desc.")]
-        [DisableIf ("@textFromScenarioGroup || !string.IsNullOrEmpty (textCurrentPrimaryKey)")]
-        public string textHeader;
         
-        [YamlIgnore]
-        [HideLabel, TextArea (1, 10)]
-        [DisableIf ("@textFromScenarioGroup || !string.IsNullOrEmpty (textCurrentSecondaryKey)")]
-        public string textDesc;
-
-        [HideIf ("textFromScenarioGroup")]
-        [InlineButton ("ResetTextHeaderKey", "-", ShowIf = "@!string.IsNullOrEmpty (textCurrentPrimaryKey)")]
-        [ValueDropdown ("@DataMultiLinkerScenario.textKeysStepHeader")]
-        [OnValueChanged ("ResolveText")]
-        [LabelText ("Header Key")]
-        public string textCurrentPrimaryKey = "generic_unknown_header";
-
-        [HideIf ("textFromScenarioGroup")]
-        [InlineButton ("ResetTextDescKey", "-", ShowIf = "@!string.IsNullOrEmpty (textCurrentSecondaryKey)")]
-        [ValueDropdown ("@DataMultiLinkerScenario.textKeysStepDescription")]
-        [OnValueChanged ("ResolveText")]
-        [LabelText ("Description Key")]
-        public string textCurrentSecondaryKey = "generic_unknown_text";
-
-        [OnValueChanged ("ResolveText")]
-        public bool textFromScenarioGroup = false;
+        [FoldoutGroup ("Header")]
+        [DropdownReference, InlineProperty, HideLabel]
+        public DataBlockTextTrimodal textHeader;
+        
+        [FoldoutGroup ("Description")]
+        [DropdownReference, InlineProperty, HideLabel]
+        public DataBlockTextTrimodal textDesc;
         
         [LabelText ("Threat Rating %")]
         public float threatRatingPercentage = 1;
         public bool allowOutcomeVictory = true;
         public bool allowOutcomeDefeat = true;
-        public bool unitsRevealed = false;
         public bool executionAllowed = false;
         public bool visible = true;
         
-        [YamlIgnore, HideInInspector, NonSerialized] 
-        public DataBlockScenarioStep parentStep;
+        #region Editor
+        #if UNITY_EDITOR
         
-        [YamlIgnore, NonSerialized, ShowInInspector, ReadOnly] 
-        public string parentScenarioKey;
+        [ShowInInspector]
+        private DataEditor.DropdownReferenceHelper helper;
         
-        private void ResetTextHeaderKey ()
-        {
-            textCurrentPrimaryKey = string.Empty;
-            ResolveText ();
-        }
+        public DataBlockScenarioStepCore () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
         
-        private void ResetTextDescKey ()
-        {
-            textCurrentSecondaryKey = string.Empty;
-            ResolveText ();
-        }
-        
-        public void ResolveText ()
-        {
-            if (parentStep == null || parentStep.parentScenario == null || string.IsNullOrEmpty (parentStep.key))
-            {
-                Debug.LogWarning ($"Failed to resolve text for scenario step | Parent step: {parentStep.ToStringNullCheck ()} | Parent scenario: {parentStep?.parentScenario.ToStringNullCheck ()} | Key: {parentStep?.key}");
-                return;
-            }
-            
-            if (textFromScenarioGroup)
-            {
-                textHeader = string.Empty;
-                textDesc = string.Empty;
-                
-                var groupKeys = parentStep?.parentScenario?.groupKeys;
-                if (groupKeys != null && groupKeys.Count > 0)
-                {
-                    var groupKeyMain = groupKeys[0];
-                    var group = DataMultiLinkerScenarioGroup.GetEntry (groupKeyMain, false);
-                    if (group != null && !group.hidden)
-                    {
-                        textHeader = group.textName;
-                        textDesc = group.textDesc;
-                    }
-                }
-            }
-            else
-            {
-                var stepKey = parentStep.key;
-                var scenarioKey = parentScenarioKey; // parentStep.parentScenario.key; - this can cause empty strings on child scenarios
-                var headerShared = !string.IsNullOrEmpty (textCurrentPrimaryKey);
-                var headerSector = headerShared ? TextLibs.scenarioStepsShared : TextLibs.scenarioEmbedded;
-                var headerKey = headerShared ? textCurrentPrimaryKey : $"{scenarioKey}__step_{stepKey}_0c_header";
-                    
-                var descShared = !string.IsNullOrEmpty (textCurrentSecondaryKey);
-                var descSector = descShared ? TextLibs.scenarioStepsShared : TextLibs.scenarioEmbedded;
-                var descKey = descShared ? textCurrentSecondaryKey : $"{scenarioKey}__step_{stepKey}_0c_text";
-
-                var textHeaderResolved = DataManagerText.GetText (headerSector, headerKey, true);
-                var textDescResolved = DataManagerText.GetText (descSector, descKey, true);
-                if (!string.IsNullOrEmpty (textHeader) && string.IsNullOrEmpty (textHeaderResolved))
-                    Debug.Log ($"Header emptied from value: \"{textHeader}\" under step {stepKey} in scenario {scenarioKey}");
-                
-                textHeader = textHeaderResolved;
-                textDesc = textDescResolved;
-            }
-        }
+        #endif
+        #endregion
     }
     
     public class DataBlockScenarioStepTransitions
@@ -2974,12 +2902,12 @@ namespace PhantomBrigade.Data
         [DropdownReference]
         [LabelText ("AI Behavior")]
         [ValueDropdown ("GetAIBehaviorKeys")]
-        public string aiBehavior = string.Empty;
+        public string aiBehavior;
         
         [DropdownReference]
         [LabelText ("AI Targeting")]
         [ValueDropdown ("GetAITargetingProfileKeys")]
-        public string aiTargeting = string.Empty;
+        public string aiTargeting;
         
         [DropdownReference]
         [ValueDropdown ("@DataMultiLinkerUnitLiveryPreset.data.Keys")]
@@ -3522,16 +3450,19 @@ namespace PhantomBrigade.Data
         public DataBlockScenarioIntroSettings introSettings;
         
         [DropdownReference (true)]
-        public DataBlockStringNonSerialized textIntroPrimary;
+        public DataBlockTextTrimodal textIntroPrimary;
         
         [DropdownReference (true)]
-        public DataBlockStringNonSerialized textIntroLocation;
+        public DataBlockTextTrimodal textIntroLocation;
         
         [DropdownReference (true)]
-        public DataBlockStringNonSerialized textIntroThreat;
+        public DataBlockTextTrimodal textIntroThreat;
         
         [DropdownReference (true)]
-        public DataBlockStringNonSerialized textIntroReady;
+        public DataBlockTextTrimodal textIntroReady;
+
+        [DropdownReference (true)]
+        public DataBlockFloat cameraStartingYawRotation;
         
         #region Editor
         #if UNITY_EDITOR
@@ -3556,9 +3487,14 @@ namespace PhantomBrigade.Data
 
     public class DataBlockScenarioIntroSettings
     {
+        [PropertyRange (0f, 1f)]
+        public float hue = 0f;
         public bool blurUsed = true;
         public bool textReadyUsed = true;
-        public float durationOverride = -1f;
+        
+        [ValueDropdown ("@DataMultiLinkerSitrep.data.Keys")]
+        [InlineButtonClear]
+        public string sitrepKey;
     }
 
     public class DataBlockScenarioMusicCustom
@@ -3736,8 +3672,132 @@ namespace PhantomBrigade.Data
         #endif
         #endregion
     }
+
+    public static class StandaloneScenarioType
+    {
+        public const string sim = "sim";
+        public const string remote = "remote";
+    }
     
+    public class DataBlockOverworldCondition
+    {
+        [DropdownReference]
+        public List<IOverworldGlobalValidationFunction> checksGlobal;
+        
+        [DropdownReference]
+        public List<IOverworldEntityValidationFunction> checksBase;
+        
+        [DropdownReference]
+        public List<DataBlockOverworldResolvedIntCheck> checksBaseValues;
+
+        public bool IsValid ()
+        {
+            #if !PB_MODSDK
+
+            if (checksGlobal != null)
+            {
+                foreach (var check in checksGlobal)
+                {
+                    if (check != null && !check.IsValid ())
+                        return false;
+                }
+            }
+
+            if (checksBase != null)
+            {
+                var basePersistent = IDUtility.playerBasePersistent;
+                foreach (var check in checksBase)
+                {
+                    if (check != null && !check.IsValid (basePersistent))
+                        return false;
+                }
+            }
+
+            if (checksBaseValues != null)
+            {
+                var baseOverworld = IDUtility.playerBaseOverworld;
+                foreach (var check in checksBaseValues)
+                {
+                    if (check != null && !check.IsPassedWithEntity (baseOverworld))
+                        return false;
+                }
+            }
+
+            return true;
+            #else
+            return false;
+            #endif
+        }
+
+        #region Editor
+        #if UNITY_EDITOR
+        
+        [ShowInInspector, PropertyOrder (100)]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataBlockOverworldCondition () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        #endif
+        #endregion
+    }
     
+    [HideReferenceObjectPicker]
+    public class DataContainerScenarioStandalone
+    {
+        public bool developerOnly;
+        public bool standaloneOnly;
+        public bool squadCustomization;
+        public bool enemyPreview;
+        
+        [ValueDropdown ("@FieldReflectionUtility.GetConstantStringFieldValues (typeof (StandaloneScenarioType), false)")]
+        public string type;
+        
+        [ValueDropdown ("@DataMultiLinkerScenarioStandaloneGroup.GetKeys ()")]
+        public string group;
+        
+        public int priority;
+
+        [DropdownReference (true)]
+        public DataBlockTextTrimodal textName;
+        
+        [DropdownReference (true)]
+        public DataBlockTextTrimodal textDesc;
+        
+        [DropdownReference (true)]
+        public DataBlockOverworldCondition conditionVisible;
+        
+        [DropdownReference (true)]
+        public DataBlockOverworldCondition conditionUnlock;
+        
+        [DropdownReference (true)]
+        [ValueDropdown ("@DataMultiLinkerScenario.GetKeys ()")]
+        public string scenarioNext;
+        
+        #region Editor
+        #if UNITY_EDITOR
+        
+        #if !PB_MODSDK
+        
+        [Button ("Refresh UI"), HideInEditorMode, PropertyOrder (-1)]
+        private static void RefreshUI ()
+        {
+            if (Application.isPlaying && CIViewBaseBriefingV2.ins.IsEntered ())
+                CIViewBaseBriefingV2.ins.OnEntryToRoot ();
+        }
+        
+        #endif
+        
+        [ShowInInspector, PropertyOrder (100)]
+        private DataEditor.DropdownReferenceHelper helper;
+        
+        public DataContainerScenarioStandalone () => 
+            helper = new DataEditor.DropdownReferenceHelper (this);
+        
+        #endif
+        #endregion
+    }
+
     [Serializable][LabelWidth (180f)]
     public class DataContainerScenario : DataContainerWithText, IDataContainerTagged
     {
@@ -3778,6 +3838,17 @@ namespace PhantomBrigade.Data
         [HideDuplicateReferenceBox]
         [PropertyOrder (-3), ShowIf ("IsTabCore")]
         [DropdownReference (true)]
+        public DataContainerScenarioStandalone standalone;
+        
+        [HideDuplicateReferenceBox]
+        [PropertyOrder (-3), ShowIf ("@IsTabCore && IsInheritanceVisible")]
+        [YamlIgnore, ReadOnly]
+        public DataContainerScenarioStandalone standaloneProc;
+        
+        
+        [HideDuplicateReferenceBox]
+        [PropertyOrder (-3), ShowIf ("IsTabCore")]
+        [DropdownReference (true)]
         public DataBlockScenarioAreaRequirements areas;
         
         [HideDuplicateReferenceBox]
@@ -3800,6 +3871,7 @@ namespace PhantomBrigade.Data
         [PropertyOrder (-3), ShowIf ("IsTabCore")]
         [DropdownReference (true)]
         public DataBlockScenarioGenerationInjection generationInjection;
+        
         
         
         [PropertyOrder (-2), BoxGroup ("Tags")]
@@ -4112,26 +4184,6 @@ namespace PhantomBrigade.Data
 
             if (groupKeys.Count > 0)
                 groupKeyMain = groupKeys[0];
-
-            if (stepsProc != null && !string.IsNullOrEmpty (groupKeyMain))
-            {
-                var groupMain = DataMultiLinkerScenarioGroup.GetEntry (groupKeyMain, false);
-                foreach (var kvp in stepsProc)
-                {
-                    var step = kvp.Value;
-                    if (step != null && step.core != null && step.core.textFromScenarioGroup)
-                    {
-                        step.core.textHeader = string.Empty;
-                        step.core.textDesc = string.Empty;
-
-                        if (groupMain != null && !groupMain.hidden)
-                        {
-                            step.core.textHeader = groupMain.textName;
-                            step.core.textDesc = groupMain.textDesc;
-                        }
-                    }
-                }
-            }
         }
 
         private void RefreshParentsInStates () => RefreshParentsInStatesSelective (false);
@@ -4167,6 +4219,7 @@ namespace PhantomBrigade.Data
                 if (state == null)
                     continue;
 
+                state.briefingHidden = state.ui != null ? state.ui.briefingHidden : false;
                 state.key = stateKey;
                 state.parentScenario = this;
 
@@ -4217,7 +4270,7 @@ namespace PhantomBrigade.Data
                 {
                     stateKeysSortedGeneration.Add (stateKey);
                     stateKeysSortedEvaluation.Add (stateKey);
-                    if (state.visible)
+                    if (state.ui != null)
                         stateKeysSortedDisplay.Add (stateKey);
                 }
             }
@@ -4226,7 +4279,7 @@ namespace PhantomBrigade.Data
             {
                 stateKeysSortedGeneration.Sort ((x, y) => statesSelected[x].priorityGeneration.CompareTo (statesSelected[y].priorityGeneration));
                 stateKeysSortedEvaluation.Sort ((x, y) => statesSelected[x].priority.CompareTo (statesSelected[y].priority));
-                stateKeysSortedDisplay.Sort ((x, y) => statesSelected[x].priorityDisplay.CompareTo (statesSelected[y].priorityDisplay));
+                stateKeysSortedDisplay.Sort ((x, y) => statesSelected[x].ui.priorityDisplay.CompareTo (statesSelected[y].ui.priorityDisplay));
             }
         }
 
@@ -4251,13 +4304,6 @@ namespace PhantomBrigade.Data
 
                 step.key = stepKey;
                 step.parentScenario = this;
-
-                if (step.core != null)
-                {
-                    step.core.parentStep = step;
-                    if (!processed)
-                        step.core.parentScenarioKey = key;
-                }
 
                 if (step.unitGroups != null)
                 {
@@ -4338,16 +4384,25 @@ namespace PhantomBrigade.Data
             if (core != null)
             {
                 if (core.textIntroPrimary != null)
-                    core.textIntroPrimary.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_primary", true);
+                    core.textIntroPrimary.ResolveText (TextLibs.scenarioEmbedded, $"{key}__intro_primary");
                 
                 if (core.textIntroLocation != null)
-                    core.textIntroLocation.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_location", true);
+                    core.textIntroLocation.ResolveText (TextLibs.scenarioEmbedded, $"{key}__intro_location");
                 
                 if (core.textIntroThreat != null)
-                    core.textIntroThreat.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_threat", true);
+                    core.textIntroThreat.ResolveText (TextLibs.scenarioEmbedded, $"{key}__intro_threat");
                 
                 if (core.textIntroReady != null)
-                    core.textIntroReady.s = DataManagerText.GetText (TextLibs.scenarioEmbedded, $"{key}__intro_ready", true);
+                    core.textIntroReady.ResolveText (TextLibs.scenarioEmbedded, $"{key}__intro_ready");
+            }
+
+            if (standalone != null)
+            {
+                if (standalone.textName != null)
+                    standalone.textName.ResolveText (TextLibs.scenarioEmbedded, $"{key}__briefing_name");
+                
+                if (standalone.textDesc != null)
+                    standalone.textDesc.ResolveText (TextLibs.scenarioEmbedded, $"{key}__briefing_text");
             }
             
             if (states != null)
@@ -4359,7 +4414,21 @@ namespace PhantomBrigade.Data
                     if (state == null)
                         continue;
 
-                    state.ResolveText ();
+                    var ui = state.ui;
+                    if (ui != null)
+                    {
+                        if (ui.textHeader != null)
+                            ui.textHeader.ResolveText (TextLibs.scenarioEmbedded, $"{key}__state_{stateKey}_0c_header");
+                
+                        if (ui.textHeaderCompleted != null)
+                            ui.textHeaderCompleted.ResolveText (TextLibs.scenarioEmbedded, $"{key}__state_{stateKey}_0c_header_comp");
+                
+                        if (ui.textDesc != null)
+                            ui.textDesc.ResolveText (TextLibs.scenarioEmbedded, $"{key}__state_{stateKey}_0c_text");
+                
+                        if (ui.textDescCompleted != null)
+                            ui.textDescCompleted.ResolveText (TextLibs.scenarioEmbedded, $"{key}__state_{stateKey}_0c_text_comp");
+                    }
                 }
             }
             
@@ -4373,21 +4442,33 @@ namespace PhantomBrigade.Data
                         continue;
 
                     if (step.core != null)
-                        step.core.ResolveText ();
+                    {
+                        if (step.core.textHeader != null)
+                            step.core.textHeader.ResolveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_0c_header");
+            
+                        if (step.core.textDesc != null)
+                            step.core.textDesc.ResolveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_0c_text");
+                    }
 
                     if (step.hintsConditional != null && step.hintsConditional.Count > 0)
                     {
                         for (int i = 0; i < step.hintsConditional.Count; ++i)
                         {
                             var hint = step.hintsConditional[i];
-                            if (hint == null)
+                            if (hint == null || hint.data == null)
                                 continue;
-                            
-                            var textKeyHintConditional = $"{key}__step_{stepKey}_1hc_{i}_text";
-                            // hint.text = DataManagerText.GetText (TextLibs.scenarioEmbedded, textKeyHintConditional, true);
-                            
-                            if (hint.data != null)
-                                hint.data.text = DataManagerText.GetText (TextLibs.scenarioEmbedded, textKeyHintConditional, true);
+
+                            if (hint.data.textLink == null)
+                            {
+                                hint.data.textLink = new DataBlockTextTrimodal { mode = DataBlockTextTrimodal.Mode.LocUnique };
+                                Debug.Log ($"Created scenario text link: hint {key}/{stepKey}/{i}");
+                            }
+                        
+                            if (hint.data.textLink != null)
+                                hint.data.textLink.ResolveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_1hc_{i}_text");
+                        
+                            if (hint.data.textLinkController != null)
+                                hint.data.textLinkController.ResolveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_1hc_{i}_text_ctrl");
                         }
                     }
 
@@ -4489,17 +4570,26 @@ namespace PhantomBrigade.Data
         {
             if (core != null)
             {
-                if (!string.IsNullOrEmpty (core.textIntroPrimary?.s))
-                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_primary", core.textIntroPrimary.s);
+                if (core.textIntroPrimary != null)
+                    core.textIntroPrimary.SaveText (TextLibs.scenarioEmbedded, $"{key}__intro_primary");
                 
-                if (!string.IsNullOrEmpty (core.textIntroLocation?.s))
-                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_location", core.textIntroLocation.s);
+                if (core.textIntroLocation != null)
+                    core.textIntroLocation.SaveText (TextLibs.scenarioEmbedded, $"{key}__intro_location");
                 
-                if (!string.IsNullOrEmpty (core.textIntroThreat?.s))
-                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_threat", core.textIntroThreat.s);
+                if (core.textIntroThreat != null)
+                    core.textIntroThreat.SaveText (TextLibs.scenarioEmbedded, $"{key}__intro_threat");
                 
-                if (!string.IsNullOrEmpty (core.textIntroReady?.s))
-                    DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, $"{key}__intro_ready", core.textIntroReady.s);
+                if (core.textIntroReady != null)
+                    core.textIntroReady.SaveText (TextLibs.scenarioEmbedded, $"{key}__intro_ready");
+            }
+            
+            if (standalone != null)
+            {
+                if (standalone.textName != null)
+                    standalone.textName.SaveText (TextLibs.scenarioEmbedded, $"{key}__briefing_name");
+                
+                if (standalone.textDesc != null)
+                    standalone.textDesc.SaveText (TextLibs.scenarioEmbedded, $"{key}__briefing_text");
             }
             
             if (states != null)
@@ -4508,20 +4598,22 @@ namespace PhantomBrigade.Data
                 {
                     var statesKey = kvp.Key;
                     var state = kvp.Value;
-                    if (state == null || !state.visible)
+                    if (state == null || state.ui == null)
                         continue;
+
+                    var ui = state.ui;
                     
-                    if (string.IsNullOrEmpty (state.textNameKey))
-                    {
-                        var textKeyPrimary = $"{key}__state_{statesKey}_0c_header";
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, textKeyPrimary, state.textName);
-                    }
-  
-                    if (string.IsNullOrEmpty (state.textDescKey))
-                    {
-                        var textKeySecondary = $"{key}__state_{statesKey}_0c_text";
-                        DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, textKeySecondary, state.textDesc);
-                    }
+                    if (ui.textHeader != null)
+                        ui.textHeader.SaveText (TextLibs.scenarioEmbedded,  $"{key}__state_{statesKey}_0c_header");
+                    
+                    if (ui.textHeaderCompleted != null)
+                        ui.textHeaderCompleted.SaveText (TextLibs.scenarioEmbedded,  $"{key}__state_{statesKey}_0c_header_comp");
+                    
+                    if (ui.textDesc != null)
+                        ui.textDesc.SaveText (TextLibs.scenarioEmbedded,  $"{key}__state_{statesKey}_0c_text");
+                    
+                    if (ui.textDescCompleted != null)
+                        ui.textDescCompleted.SaveText (TextLibs.scenarioEmbedded,  $"{key}__state_{statesKey}_0c_text_comp");
                 }
             }
 
@@ -4534,19 +4626,13 @@ namespace PhantomBrigade.Data
                     if (step == null)
                         continue;
                     
-                    if (step.core != null && !step.core.textFromScenarioGroup)
+                    if (step.core != null)
                     {
-                        if (string.IsNullOrEmpty (step.core.textCurrentPrimaryKey))
-                        {
-                            var textKeyPrimary = $"{key}__step_{stepKey}_0c_header";
-                            DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, textKeyPrimary, step.core.textHeader);
-                        }
+                        if (step.core.textHeader != null)
+                            step.core.textHeader.SaveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_0c_header");
 
-                        if (string.IsNullOrEmpty (step.core.textCurrentSecondaryKey))
-                        {
-                            var textKeySecondary = $"{key}__step_{stepKey}_0c_text";
-                            DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, textKeySecondary, step.core.textDesc);
-                        }
+                        if (step.core.textDesc != null)
+                            step.core.textDesc.SaveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_0c_text");
                     }
 
                     if (step.hintsConditional != null && step.hintsConditional.Count > 0)
@@ -4554,14 +4640,18 @@ namespace PhantomBrigade.Data
                         for (int i = 0; i < step.hintsConditional.Count; ++i)
                         {
                             var hint = step.hintsConditional[i];
-                            if (hint == null)
+                            if (hint == null || hint.data == null)
                                 continue;
-                            
-                            var textKeyHintConditional = $"{key}__step_{stepKey}_1hc_{i}_text";
-                            
+
                             // DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, textKeyHintConditional, hint.text);
                             if (hint.data != null)
-                                DataManagerText.TryAddingTextToLibrary (TextLibs.scenarioEmbedded, textKeyHintConditional, hint.data.text);
+                            {
+                                if (hint.data.textLink != null)
+                                    hint.data.textLink.SaveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_1hc_{i}_text");
+                                
+                                if (hint.data.textLinkController != null)
+                                    hint.data.textLinkController.SaveText (TextLibs.scenarioEmbedded, $"{key}__step_{stepKey}_1hc_{i}_text_ctrl");
+                            }
                         }
                     }
                     

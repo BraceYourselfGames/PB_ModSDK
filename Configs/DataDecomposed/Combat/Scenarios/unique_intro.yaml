@@ -47,13 +47,48 @@ core:
   weatherOverrideTemperature:
     f: 1
   introSettings:
+    hue: 0
     blurUsed: false
     textReadyUsed: false
-    durationOverride: 7
-  textIntroPrimary: {}
-  textIntroLocation: {}
-  textIntroThreat: {}
-  textIntroReady: {}
+    sitrepKey: 
+  textIntroPrimary:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textIntroLocation:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textIntroThreat:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textIntroReady:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  cameraStartingYawRotation: 
+standalone:
+  developerOnly: false
+  standaloneOnly: false
+  squadCustomization: false
+  enemyPreview: false
+  type: sim
+  group: contracts
+  priority: -1
+  textName:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textDesc: 
+  conditionVisible: 
+  conditionUnlock: 
+  scenarioNext: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -73,17 +108,36 @@ tags:
 states:
   encounter_act_attack_count:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -124,17 +178,36 @@ states:
     reactions: 
   encounter_act_attack_targeted:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -179,17 +252,36 @@ states:
     reactions: 
   encounter_act_move:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -237,17 +329,36 @@ states:
     reactions: 
   flank_act_move:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -294,17 +405,36 @@ states:
     reactions: 
   prediction_active:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: false
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -320,17 +450,36 @@ states:
     reactions: 
   retreat_act_move:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -375,16 +524,11 @@ states:
     reactions: 
   siege_end_enemy:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -443,16 +587,11 @@ states:
           outcome: 
   siege_end_squad:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -513,16 +652,11 @@ states:
           outcome: 
   siege_end_timed:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -567,16 +701,11 @@ states:
           outcome: 
   siege_end_wave:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -670,17 +799,36 @@ states:
           outcome: 
   startup_act_move:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_unknown_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: None
     evaluationOnOutcome: 
     turn: 
@@ -732,13 +880,19 @@ steps:
         g: 0.4716981
         b: 0.4716981
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags:
@@ -1028,13 +1182,19 @@ steps:
         g: 1
         b: 1
         a: 0
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags: 
@@ -1065,28 +1225,27 @@ steps:
     - time: 0.5
       hidden: false
       key: unique_tutorial_intro_01_greeting_c0
+      functionsOnExit: 
     - time: 8
       hidden: false
       key: unique_tutorial_intro_01_greeting_c1
+      functionsOnExit: 
     - time: 19
       hidden: false
       key: unique_tutorial_intro_01_greeting_c2
+      functionsOnExit: 
     - time: 29
       hidden: false
       key: unique_tutorial_intro_01_greeting_c3
+      functionsOnExit:
+      - !CombatStepChange
+        stepKey: 02_move1
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
     functions: 
     outcome: 
-    transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: true
-      transitionLocksExecution: true
-      transitionsStateBased: 
-      transitionTimeBased:
-        time: 14
-        stepKey: 02_move1
+    transitions: 
   02_move1:
     comment: 
     core:
@@ -1095,13 +1254,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -1170,8 +1335,6 @@ steps:
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: unit_friendly_mech_pc
           stateName: 
@@ -1191,8 +1354,17 @@ steps:
             y: -96
             z: -96
             w: -96
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: KeyboardMouse
       unitLink:
         tags: 
         name:
@@ -1207,6 +1379,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu:
         present: false
       actionSelection: 
@@ -1231,8 +1404,6 @@ steps:
         textLocation: BottomLeft
         buttonLocation: None
         textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: unit_friendly_mech_pc
           stateName: 
@@ -1248,8 +1419,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1264,6 +1444,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu:
         present: true
       actionSelection: 
@@ -1288,8 +1469,6 @@ steps:
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: 
           stateName: startup_act_move
@@ -1309,8 +1488,24 @@ steps:
             y: -96
             z: -96
             w: -96
-        textInputActions: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textInputActions:
+          spriteWrap: true
+          actions:
+          - global_confirm
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Path_Drawing
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1325,6 +1520,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -1337,28 +1533,39 @@ steps:
           b: 0.2475
           a: 1
         frameLocation: BottomLeft
-        frameGradientMode: None
+        frameGradientMode: Top
         framePositionX: 236
         framePositionY: 0
         frameSizeX: 128
-        frameSizeY: 128
+        frameSizeY: 184
         frameBlocksInput: false
         frameBoundary: false
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight:
           offsets:
             x: 0
             y: 0
-            z: 0
+            z: -56
             w: 0
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1372,10 +1579,70 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
       actionsUnblocked: 
+    - hidden: false
+      data:
+        color:
+          r: 0.25198
+          g: 0.3584906
+          b: 0.1944642
+          a: 1
+        frameLocation: BottomLeft
+        frameGradientMode: Right
+        framePositionX: 236
+        framePositionY: 130
+        frameSizeX: 80
+        frameSizeY: 80
+        frameBlocksInput: false
+        frameBoundary: false
+        textLocation: TopLeft
+        buttonLocation: None
+        textWidth: 360
+        worldAnchor: 
+        arrowCustom:
+          offset:
+            x: 10
+            y: 52
+          rotation: 0
+        frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
+        textInputActions:
+          spriteWrap: true
+          actions:
+          - global_confirm
+        textInputHintAppendix: 
+        effectsOnInput: 
+      inputMode: Unit_Selection
+      inputController: Controller
+      unitLink:
+        tags: 
+        name:
+          nameInternal: unit_friendly_mech_pc
+        faction: 
+        state: 
+        selection:
+          present: true
+        actionTotalCount: 
+        actionCountsRequireAll: true
+        actionCounts:
+          move_run:
+            check: Equal
+            value: 0
+        checks: 
+      actionContextMenu: 
+      actionSelection: 
+      actionsBlocked: 
+      actionsUnblocked:
+      - move_run
     unitSelection: 
     camera: 
     musicMood: 
@@ -1409,13 +1676,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -1440,6 +1713,7 @@ steps:
     - time: 2
       hidden: false
       key: unique_tutorial_intro_03_move2_c0
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -1463,13 +1737,19 @@ steps:
         g: 1
         b: 0.7607844
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags: 
@@ -1500,15 +1780,21 @@ steps:
     - time: 1.5
       hidden: false
       key: unique_tutorial_intro_04_discovery_c1
+      functionsOnExit: 
     - time: 11
       hidden: false
       key: unique_tutorial_intro_04_discovery_c2
+      functionsOnExit: 
     - time: 17
       hidden: false
       key: unique_tutorial_intro_04_discovery_c3
+      functionsOnExit: 
     - time: 24
       hidden: false
       key: unique_tutorial_intro_04_discovery_c4
+      functionsOnExit:
+      - !CombatStepChange
+        stepKey: 05_prediction_boot
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -1553,14 +1839,7 @@ steps:
         actionsInProgress: 
         functions: 
     outcome: 
-    transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: true
-      transitionLocksExecution: true
-      transitionsStateBased: 
-      transitionTimeBased:
-        time: 16
-        stepKey: 05_prediction_boot
+    transitions: 
   05_prediction_boot:
     comment: 
     core:
@@ -1569,13 +1848,19 @@ steps:
         g: 1
         b: 0.4745098
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: true
     tags: 
@@ -1629,13 +1914,19 @@ steps:
         g: 0.8078432
         b: 0.2784314
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -1747,11 +2038,9 @@ steps:
         frameSizeY: 64
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: RightTop
+        textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight:
@@ -1760,8 +2049,21 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1776,6 +2078,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu:
         present: false
       actionSelection: 
@@ -1800,8 +2103,6 @@ steps:
         textLocation: RightTop
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: unit_friendly_mech_pc
           stateName: 
@@ -1817,8 +2118,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1833,6 +2143,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu:
         present: true
       actionSelection: 
@@ -1857,8 +2168,6 @@ steps:
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: 
           stateName: flank_act_move
@@ -1878,8 +2187,17 @@ steps:
             y: -96
             z: -96
             w: -96
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Path_Drawing
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1894,6 +2212,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -1913,20 +2232,32 @@ steps:
         frameSizeY: 128
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: TopRight
+        textLocation: RightBottom
         buttonLocation: None
-        textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
+        textWidth: 272
         worldAnchor: 
-        arrowCustom:
-          offset:
-            x: -64
-            y: 0
-          rotation: 0
+        arrowCustom: 
         frameHighlight: 
-        textInputActions: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textInputActions:
+          spriteWrap: true
+          actions:
+          - global_direction_down
+          - overworld_tab_move_prev
+          - overworld_tab_move_next
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1941,6 +2272,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -1963,13 +2295,20 @@ steps:
         textLocation: TopRight
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: ''
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -1981,6 +2320,7 @@ steps:
         actionTotalCount: 
         actionCountsRequireAll: true
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2003,8 +2343,6 @@ steps:
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: unit_friendly_mech_pc
           stateName: 
@@ -2015,8 +2353,17 @@ steps:
           entityPrediction: false
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2028,6 +2375,7 @@ steps:
         actionTotalCount: 
         actionCountsRequireAll: true
         actionCounts: 
+        checks: 
       actionContextMenu:
         present: false
       actionSelection: 
@@ -2042,6 +2390,7 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_07_prediction_flank_c1
+      functionsOnExit: 
     audioEventsOnStart: []
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -2081,13 +2430,19 @@ steps:
         g: 0.3921569
         b: 0.2862745
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags: 
@@ -2184,9 +2539,13 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_08_tank_appears_c1
+      functionsOnExit: 
     - time: 10
       hidden: false
       key: unique_tutorial_intro_08_tank_appears_c2
+      functionsOnExit:
+      - !CombatStepChange
+        stepKey: 09_tank_plans
     audioEventsOnStart: []
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -2231,14 +2590,7 @@ steps:
         actionsInProgress: 
         functions: 
     outcome: 
-    transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: true
-      transitionLocksExecution: true
-      transitionsStateBased: 
-      transitionTimeBased:
-        time: 19
-        stepKey: 09_tank_plans
+    transitions: 
   09_tank_plans:
     comment: 
     core:
@@ -2247,13 +2599,19 @@ steps:
         g: 0.2812389
         b: 0.2812389
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -2436,11 +2794,9 @@ steps:
         frameSizeY: 64
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: BottomLeft
+        textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight:
@@ -2449,8 +2805,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2464,6 +2829,7 @@ steps:
           value: 0
         actionCountsRequireAll: true
         actionCounts: 
+        checks: 
       actionContextMenu:
         present: false
       actionSelection: 
@@ -2488,8 +2854,6 @@ steps:
         textLocation: BottomLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: unit_friendly_mech_pc
           stateName: 
@@ -2505,8 +2869,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2520,6 +2893,7 @@ steps:
           value: 0
         actionCountsRequireAll: true
         actionCounts: 
+        checks: 
       actionContextMenu:
         present: true
       actionSelection: 
@@ -2544,8 +2918,6 @@ steps:
         textLocation: BottomLeft
         buttonLocation: None
         textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: 
           stateName: encounter_act_move
@@ -2565,8 +2937,17 @@ steps:
             y: -96
             z: -96
             w: -96
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Path_Drawing
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2579,6 +2960,7 @@ steps:
           value: 0
         actionCountsRequireAll: true
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2598,11 +2980,9 @@ steps:
         frameSizeY: 64
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: RightTop
+        textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight:
@@ -2611,8 +2991,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2630,6 +3019,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu:
         present: false
       actionSelection: 
@@ -2654,8 +3044,6 @@ steps:
         textLocation: RightTop
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: unit_friendly_mech_pc
           stateName: 
@@ -2671,8 +3059,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2690,6 +3087,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu:
         present: true
       actionSelection: 
@@ -2704,23 +3102,34 @@ steps:
           b: 0.24
           a: 1
         frameLocation: BottomLeft
-        frameGradientMode: None
+        frameGradientMode: Top
         framePositionX: 234
         framePositionY: 0
-        frameSizeX: 684
-        frameSizeY: 178
+        frameSizeX: 706
+        frameSizeY: 226
         frameBlocksInput: false
         frameBoundary: false
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Time_Placement
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2738,6 +3147,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2757,11 +3167,9 @@ steps:
         frameSizeY: 260
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: BottomLeft
+        textLocation: TopLeft
         buttonLocation: None
-        textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
+        textWidth: 320
         worldAnchor:
           entityName: unit_enemy_tank_first
           stateName: 
@@ -2770,19 +3178,28 @@ steps:
             y: 0
             z: 0
           entityPrediction: false
-        arrowCustom:
-          offset:
-            x: 130
-            y: 0
-          rotation: 0
+        arrowCustom: 
         frameHighlight:
           offsets:
             x: -96
             y: -96
             z: -96
             w: -96
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Targeting_Units
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2800,6 +3217,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2812,23 +3230,41 @@ steps:
           b: 0.24
           a: 1
         frameLocation: BottomLeft
-        frameGradientMode: None
+        frameGradientMode: Top
         framePositionX: 234
         framePositionY: 0
-        frameSizeX: 684
+        frameSizeX: 876
         frameSizeY: 128
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: TopRight
+        textLocation: RightBottom
         buttonLocation: None
-        textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
+        textWidth: 300
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
-        textInputActions: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textInputActions:
+          spriteWrap: true
+          actions:
+          - global_direction_down
+          - global_confirm
+          - overworld_tab_move_prev
+          - overworld_tab_move_next
+          - global_gamepad_x
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2846,6 +3282,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2866,11 +3303,9 @@ steps:
         frameSizeY: 128
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: TopRight
+        textLocation: RightTop
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight:
@@ -2879,8 +3314,17 @@ steps:
             y: 0
             z: 0
             w: 0
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2898,6 +3342,7 @@ steps:
           move_run:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2920,13 +3365,20 @@ steps:
         textLocation: TopRight
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: 
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2944,6 +3396,7 @@ steps:
           wait:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -2966,16 +3419,29 @@ steps:
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: 
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
         textInputActions:
           spriteWrap: true
           actions:
           - combat_next_unit
+          - overworld_tab_move_prev
+          - overworld_tab_move_next
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -2987,6 +3453,7 @@ steps:
         actionTotalCount: 
         actionCountsRequireAll: false
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -3000,9 +3467,11 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_09_tank_plans_c1
+      functionsOnExit: 
     - time: 11
       hidden: false
       key: unique_tutorial_intro_09_tank_plans_c2
+      functionsOnExit: 
     audioEventsOnStart: []
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -3075,13 +3544,19 @@ steps:
         g: 0.4196079
         b: 0.682353
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags: 
@@ -3109,22 +3584,19 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_10_skirmish_reaction_c1
+      functionsOnExit: 
     - time: 6
       hidden: false
       key: unique_tutorial_intro_10_skirmish_reaction_c2
+      functionsOnExit:
+      - !CombatStepChange
+        stepKey: 11_skirmish_cover
     audioEventsOnStart: []
     audioStatesOnStart: 
     audioSyncsOnStart: 
     functions: 
     outcome: 
-    transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: true
-      transitionLocksExecution: true
-      transitionsStateBased: 
-      transitionTimeBased:
-        time: 13
-        stepKey: 11_skirmish_cover
+    transitions: 
   11_skirmish_cover:
     comment: 
     core:
@@ -3133,13 +3605,19 @@ steps:
         g: 0.2980392
         b: 1
         a: 1
-      textCurrentPrimaryKey: unique_tutorial_contact_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: unique_tutorial_contact_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -3488,11 +3966,9 @@ steps:
         frameSizeY: 64
         frameBlocksInput: false
         frameBoundary: false
-        textLocation: BottomLeft
+        textLocation: TopLeft
         buttonLocation: None
         textWidth: 256
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor: 
         arrowCustom: 
         frameHighlight:
@@ -3501,8 +3977,17 @@ steps:
             y: -8
             z: -8
             w: -8
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -3517,6 +4002,7 @@ steps:
           move_run:
             check: Equal
             value: 0
+        checks: 
       actionContextMenu:
         present: false
       actionSelection: 
@@ -3541,8 +4027,6 @@ steps:
         textLocation: TopLeft
         buttonLocation: None
         textWidth: 212
-        textReused: 
-        icon: icon_input_mouse_left
         worldAnchor:
           entityName: 
           stateName: 
@@ -3562,8 +4046,17 @@ steps:
             y: -96
             z: -96
             w: -96
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Path_Drawing
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -3576,6 +4069,7 @@ steps:
           value: 0
         actionCountsRequireAll: true
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -3709,13 +4203,19 @@ steps:
         g: 0.5333334
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags: 
@@ -3744,12 +4244,15 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_12_skirmish_final_c1
+      functionsOnExit: 
     - time: 9
       hidden: false
       key: unique_tutorial_intro_12_skirmish_final_c2
+      functionsOnExit: 
     - time: 18
       hidden: false
       key: unique_tutorial_intro_12_skirmish_final_c3
+      functionsOnExit: 
     audioEventsOnStart: []
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -3834,17 +4337,15 @@ steps:
         z: -20
     outcome: 
     transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: false
+      transitionMode: OnExecutionEnd
+      transitionBasedScope: true
       transitionLocksExecution: false
       transitionsStateBased:
       - priority: 0
         stateCleanupOnUse: false
         stateRequirements: 
         stepKey: 13_mid_cutscene
-      transitionTimeBased:
-        time: 22
-        stepKey: 13_mid_cutscene
+      transitionTimeBased: 
   13_mid_cutscene:
     comment: 
     core:
@@ -3853,13 +4354,19 @@ steps:
         g: 0.8216994
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: false
     tags: 
@@ -4018,13 +4525,19 @@ steps:
         g: 0.8216994
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: false
       visible: false
     tags: 
@@ -4263,6 +4776,8 @@ steps:
       - !CombatUnitControlChange
         ai: false
         player: false
+      - !CombatUnitAIPause
+        discardActions: false
       - !CombatUnitTagChange
         tagChanges:
           purpose_objective_01: true
@@ -4286,18 +4801,9 @@ steps:
     unitChanges:
     - nameInternal: unit_enemy_mech1
       check: 
-      flags:
-        visible: true
-        playerControllable: false
-        aiControllable: false
-        aiControllableNextTurn: true
+      flags: 
       destruction: 
-      transform:
-        position:
-          x: 289.5
-          y: -19.5
-          z: 139.5
-        rotation: 270
+      transform: 
       actions:
       - key: move_run
         startTime: 0
@@ -4371,18 +4877,9 @@ steps:
       functions: 
     - nameInternal: unit_enemy_tank1
       check: 
-      flags:
-        visible: true
-        playerControllable: false
-        aiControllable: false
-        aiControllableNextTurn: true
+      flags: 
       destruction: 
-      transform:
-        position:
-          x: 289.5
-          y: -19.5
-          z: 151.5
-        rotation: 270
+      transform: 
       actions:
       - key: move_vehicle
         startTime: 0
@@ -4410,18 +4907,9 @@ steps:
       functions: 
     - nameInternal: unit_enemy_tank2
       check: 
-      flags:
-        visible: true
-        playerControllable: false
-        aiControllable: false
-        aiControllableNextTurn: true
+      flags: 
       destruction: 
-      transform:
-        position:
-          x: 286.5
-          y: -19.5
-          z: 34.5
-        rotation: 315
+      transform: 
       actions:
       - key: move_vehicle
         startTime: 0
@@ -4472,18 +4960,9 @@ steps:
       functions: 
     - nameInternal: unit_enemy_tank3
       check: 
-      flags:
-        visible: true
-        playerControllable: false
-        aiControllable: false
-        aiControllableNextTurn: true
+      flags: 
       destruction: 
-      transform:
-        position:
-          x: 268.5
-          y: -19.5
-          z: 16.5
-        rotation: 315
+      transform: 
       actions:
       - key: move_vehicle
         startTime: 0
@@ -4534,18 +5013,9 @@ steps:
       functions: 
     - nameInternal: unit_enemy_tank4_aa
       check: 
-      flags:
-        visible: true
-        playerControllable: false
-        aiControllable: false
-        aiControllableNextTurn: true
+      flags: 
       destruction: 
-      transform:
-        position:
-          x: 289.5
-          y: -19.5
-          z: 127.5
-        rotation: 270
+      transform: 
       actions:
       - key: move_vehicle
         startTime: 0
@@ -4573,18 +5043,9 @@ steps:
       functions: 
     - nameInternal: unit_enemy_tank5_aa
       check: 
-      flags:
-        visible: true
-        playerControllable: false
-        aiControllable: false
-        aiControllableNextTurn: true
+      flags: 
       destruction: 
-      transform:
-        position:
-          x: 289.5
-          y: -19.5
-          z: 25.5
-        rotation: 270
+      transform: 
       actions:
       - key: move_vehicle
         startTime: 0
@@ -4711,13 +5172,19 @@ steps:
         g: 1
         b: 0.866686
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -4745,6 +5212,9 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_14_siege_hints_c1
+      functionsOnExit:
+      - !CombatStepChange
+        stepKey: 15_siege_hints
     audioEventsOnStart: []
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -4757,14 +5227,7 @@ steps:
         valueFromMemory: false
         valueFromMemoryKey: 
     outcome: 
-    transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: true
-      transitionLocksExecution: true
-      transitionsStateBased: []
-      transitionTimeBased:
-        time: 10
-        stepKey: 15_siege_hints
+    transitions: 
   15_siege_hints:
     comment: 
     core:
@@ -4773,13 +5236,19 @@ steps:
         g: 1
         b: 0.9
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -4814,13 +5283,20 @@ steps:
         textLocation: TopLeft
         buttonLocation: Top
         textWidth: 256
-        textReused: 
-        icon: 
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -4832,6 +5308,7 @@ steps:
         actionTotalCount: 
         actionCountsRequireAll: false
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -4854,13 +5331,20 @@ steps:
         textLocation: TopLeft
         buttonLocation: Top
         textWidth: 256
-        textReused: 
-        icon: 
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -4872,6 +5356,7 @@ steps:
         actionTotalCount: 
         actionCountsRequireAll: false
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -4894,13 +5379,20 @@ steps:
         textLocation: TopLeft
         buttonLocation: Top
         textWidth: 256
-        textReused: 
-        icon: 
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name:
@@ -4912,6 +5404,7 @@ steps:
         actionTotalCount: 
         actionCountsRequireAll: false
         actionCounts: 
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -4955,13 +5448,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -5096,13 +5595,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -5139,13 +5644,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: false
     tags: 
@@ -5170,12 +5681,17 @@ steps:
     - time: 0
       hidden: false
       key: unique_tutorial_intro_14_siege_wave_c0
+      functionsOnExit: 
     - time: 8
       hidden: false
       key: unique_tutorial_intro_14_siege_wave_c1
+      functionsOnExit: 
     - time: 16
       hidden: false
       key: unique_tutorial_intro_14_siege_wave_c2
+      functionsOnExit:
+      - !CombatStepChange
+        stepKey: end_victory_exit
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -5259,14 +5775,7 @@ steps:
           x: 180
           y: 180
     outcome: 
-    transitions:
-      transitionMode: OnRealTime
-      transitionBasedScope: true
-      transitionLocksExecution: false
-      transitionsStateBased: 
-      transitionTimeBased:
-        time: 26
-        stepKey: end_victory_exit
+    transitions: 
   end_victory_exit:
     comment: 
     core:
@@ -5275,13 +5784,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_unknown_header
-      textCurrentSecondaryKey: generic_unknown_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: false
     tags: 

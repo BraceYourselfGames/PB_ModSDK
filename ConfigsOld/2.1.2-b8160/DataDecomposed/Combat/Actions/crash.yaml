@@ -1,0 +1,59 @@
+dataUI:
+  icon: s_icon_l32_retreat
+  color:
+    r: 0.6792453
+    g: 0.3300107
+    b: 0.3300107
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  sortingPriority: 0
+  hidden: true
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: true
+  trackType: Double
+  paintingType: Wait
+  heatType: DataConstant
+  durationType: Data
+  duration: 4
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart:
+  - OnCrashStart
+  eventsOnEnd:
+  - OnCrashStop
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck: 
+dataMovement:
+  movementSpeedScalar: 1
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart: 
+dataCustom: 
+functionsTimed: 

@@ -1,0 +1,127 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_hologram_default
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.4470588
+        g: 0.7633253
+        b: 1
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.4470589
+            g: 0.764706
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main_02
+    optionsReused: 
+  main_02:
+    comment: 
+    image: event_salvage
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0.2313725
+        g: 0.5965152
+        b: 1
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.2313726
+            g: 0.5960785
+            b: 1
+            a: 1
+          effect: None
+        dataReused:
+          interaction: sh_option_main_continue
+          step: main
+          option: continue
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !StartTutorial
+            key: base_workshop
+            allowRepeat: true
+          functionsLocal:
+          - !InteractionOptionExit {}
+    optionsReused: 

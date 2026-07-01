@@ -1,0 +1,29 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- mnf_vhc_04
+- tank_part_spider
+- type_incompatible
+workshopInfo: 
+genSteps:
+- !TrimSystemsByRating
+  ratingMin: 1
+  ratingMax: 1
+  relative: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  - perk_1
+  priority: 50
+  comment:
+    comment: Filter content of aux and perk hardpoints to only include basic subsystems
+  checks: 

@@ -1,0 +1,393 @@
+hidden: false
+parents: []
+image: 
+core:
+  backgroundTerrainUsed: true
+  sliceShadingUsed: false
+  sliceShadingInputs:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
+content: {}
+atmosphere:
+  groundHeight: -13.4
+  destructionMapping:
+    x: 20
+    y: 100
+    z: 0
+    w: 1
+tags:
+- type_unique
+spawnGroups:
+  player:
+    tags:
+    - player
+    points:
+    - point:
+        x: 87.75876
+        y: -19.45
+        z: 112.2956
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+    - point:
+        x: 60.90951
+        y: -13.45
+        z: 130.0695
+      rotation:
+        x: 0
+        y: 45
+        z: 0
+  wave_00_guard:
+    tags:
+    - utility_wave_00
+    points:
+    - point:
+        x: 103.5
+        y: -13.45
+        z: 233.4406
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 148.5
+        y: -13.45
+        z: 247.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  wave_01_alarm:
+    tags:
+    - utility_wave_01
+    points:
+    - point:
+        x: 163.5
+        y: -13.45
+        z: 247.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 148.5
+        y: -13.45
+        z: 247.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  wave_02_reinforcment_west:
+    tags:
+    - utility_wave_02
+    points:
+    - point:
+        x: 277.5
+        y: -13.45
+        z: 94.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 280.5
+        y: -13.45
+        z: 112.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+    - point:
+        x: 280.5
+        y: -13.45
+        z: 133.5
+      rotation:
+        x: 0
+        y: 270
+        z: 0
+  wave_03_reinforcment_south:
+    tags:
+    - utility_wave_03
+    points:
+    - point:
+        x: 187.5
+        y: -13.45
+        z: 40.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+locations: 
+volumes: 
+fields: 
+waypointGroups: 
+briefingGroupsInjected: 
+intro:
+  cameraInputsFinal: 
+  shots:
+  - duration: 6
+    easing: easeInSine
+    fadeOnEnd: true
+    fadeDuration: 0.5
+    from:
+      position:
+        x: -81.37
+        y: 12.84
+        z: -234.96
+      rotation:
+        x: 359.52
+        y: 24.1
+        z: 0
+      fov: 20
+    to:
+      position:
+        x: 12.9
+        y: 25.26
+        z: -22.58
+      rotation:
+        x: 6.57
+        y: 28.92
+        z: 0.01
+      fov: 20
+  - duration: 6
+    easing: linear
+    fadeOnEnd: true
+    fadeDuration: 0.5
+    from:
+      position:
+        x: 286.3
+        y: 23.67
+        z: 103.84
+      rotation:
+        x: 38.54
+        y: 329.28
+        z: 0.01
+      fov: 35
+    to:
+      position:
+        x: 94.47
+        y: 16.07
+        z: 169.53
+      rotation:
+        x: 21.69
+        y: 27.54
+        z: 0.01
+      fov: 35
+  - duration: 6
+    easing: easeOutSine
+    fadeOnEnd: false
+    fadeDuration: 0.5
+    from:
+      position:
+        x: 175.25
+        y: 8.73
+        z: 255.24
+      rotation:
+        x: 5.88
+        y: 0.38
+        z: 0
+      fov: 40
+    to:
+      position:
+        x: 100.05
+        y: -6.09
+        z: 164.09
+      rotation:
+        x: 359.69
+        y: 19.98
+        z: 0.01
+      fov: 40
+boundary:
+  groundHeight: -18
+  innerSkirtSize: 30
+  curveBoundsOffset: 0
+  curveBoundsHeight: 22
+  north:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+    - tv_tg:
+        x: 1
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0
+      m: {}
+  south:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.1220703
+        z: -1.433397
+        w: -1.433397
+      w:
+        x: 0
+        y: 0.117933
+      m: {}
+    - tv_tg:
+        x: 0.2567511
+        y: 0
+        z: 1.8404
+        w: 1.8404
+      w:
+        x: 0.1360739
+        y: 0.5229651
+      m: {}
+    - tv_tg:
+        x: 0.314034
+        y: 0.1352497
+        z: 2.780653
+        w: 2.780653
+      w:
+        x: 0.3333333
+        y: 0.9585047
+      m: {}
+    - tv_tg:
+        x: 0.3472259
+        y: 0.2532507
+        z: 2.434622
+        w: 2.434622
+      w:
+        x: 0.3333333
+        y: 1
+      m: {}
+    - tv_tg:
+        x: 0.3808517
+        y: 0.3460813
+        z: 2.165378
+        w: 2.165378
+      w:
+        x: 0.3333333
+        y: 0.5466959
+      m: {}
+    - tv_tg:
+        x: 0.4402531
+        y: 0.5070565
+        z: 2.38425
+        w: 2.38425
+      w:
+        x: 0.4889159
+        y: 0.2498323
+      m: {}
+    - tv_tg:
+        x: 0.567555
+        y: 0.5700744
+        z: -0.05001761
+        w: -0.05001761
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.6676208
+        y: 0.5656185
+        z: 0.05749189
+        w: 0.05749189
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 1
+        y: 0.6338026
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0
+      m: {}
+  east:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0
+        y: 0.5258179
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.1459289
+        y: 0.4834116
+        z: -1.614094
+        w: -1.614094
+      w:
+        x: 0.3333333
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.5525373
+        y: 0
+        z: 9.05851
+        w: 9.05851
+      w:
+        x: 0.3333333
+        y: 0.141632
+      m: {}
+    - tv_tg:
+        x: 0.7757568
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0
+      m: {}
+  west:
+    modePostWrap: ClampForever
+    modePreWrap: ClampForever
+    keys:
+    - tv_tg:
+        x: 0.3046684
+        y: 0.07511902
+        z: 0
+        w: 0
+      w:
+        x: 0
+        y: 0.3333333
+      m: {}
+    - tv_tg:
+        x: 0.5313675
+        y: 1
+        z: 0
+        w: 0
+      w:
+        x: 0.3333333
+        y: 0
+      m: {}
+segments:
+- path: Content/AreaSegments/area_seg_unique_mountainbase
+biomeFilter:
+  tagsUsed: false
+  keys:
+  - alpine_06
+  tags: 
+scenarioChanges: 

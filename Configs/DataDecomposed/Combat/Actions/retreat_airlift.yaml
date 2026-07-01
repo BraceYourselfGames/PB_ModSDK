@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -38,6 +37,7 @@ dataCore:
   eventsOnDispose: 
   functionsOnTargetCheck: 
   functionsOnValidation: 
+  functionsOnValidationBase: 
   functionsOnCreation:
   - !CombatActionCreateAirlift
     blueprintKey: aircraft_airlift
@@ -73,6 +73,8 @@ dataCore:
   check: 
   unitCheck: 
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 
@@ -95,9 +97,9 @@ functionsTimed:
       normalized: false
       leveled: true
       f: 5
+    environmentDamage: 
     concussion: 
     heat: 
-    stagger: 
     statusBuildup: 
     crash: 
     targetCheck: 
@@ -147,9 +149,9 @@ functionsTimed:
       normalized: false
       leveled: true
       f: 5
+    environmentDamage: 
     concussion: 
     heat: 
-    stagger: 
     statusBuildup: 
     crash: 
     targetCheck: 

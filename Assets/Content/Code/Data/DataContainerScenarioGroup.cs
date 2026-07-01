@@ -12,8 +12,9 @@ namespace PhantomBrigade.Data
         public bool hidden;
         public int priority;
         public int priorityBriefing;
+        public bool skipInStandaloneMode = false;
         public bool tinted = false;
-        
+
         [PropertyRange (0, 360), HorizontalGroup]
         public int hue = 0;
 

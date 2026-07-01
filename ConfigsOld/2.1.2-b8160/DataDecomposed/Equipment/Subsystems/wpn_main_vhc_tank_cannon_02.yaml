@@ -1,0 +1,260 @@
+hidden: false
+parent: wpn_main_vhc_tank_cannon
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- category_wpn_tank_cannon_railgun
+- stat_concussive
+statDistribution: ''
+stats:
+  act_count:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 135
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 6
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 2.795686
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 90
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 30
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact_radius:
+    value: 7
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_penetration_charges:
+    value: 9
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_penetration_damagek:
+    value: 0.8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_penetration_geomcost:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_penetration_unitcost:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_ricochet:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 150
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 50
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 2
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 13
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 500
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals: 
+attachments: 
+activation:
+  visual:
+    local:
+      key: 
+      keyEnemy: 
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: secondary
+    localHardpointOverride: vhc_vis_secondary
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_rifle_sniper
+    onActivationMid: weapon_rifle_sniper
+    onActivationLast: weapon_rifle_sniper
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_vhc_cannon
+    custom: 
+  recoil:
+    key: 
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_railgun_blue_long
+      keyEnemy: fx_projectile_railgun_red_long
+      scale:
+        x: 2
+        y: 2
+        z: 1.5
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact:
+      key: fx_impact_general_caliber_01
+      keyEnemy: ''
+      scale:
+        x: 5
+        y: 5
+        z: 5
+      hueOffset: 
+      hueOffsetEnemy: 
+    deactivation:
+      key: fx_projectile_pop
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+  audio:
+    onImpact: impact_bullet_mech_small
+    onDeactivation: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.15
+          z: 0.006913905
+          w: 0.006913905
+        w:
+          x: 0.3333333
+          y: 0.3872665
+        m: {}
+      - tv_tg:
+          x: 0.3523377
+          y: 1
+          z: 0.03605096
+          w: 0.03605096
+        w:
+          x: 0.371355
+          y: 1
+        m: {}
+      - tv_tg:
+          x: 0.662603
+          y: 1
+          z: 0.007910742
+          w: 0.007910742
+        w:
+          x: 0.9979232
+          y: 0.9973046
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 1
+          z: -0.008274017
+          w: -0.008274017
+        w:
+          x: 0.3288348
+          y: 0.3333333
+        m: {}
+  falloffGlobal: 
+  animationFade: 
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact:
+    exponent: 2
+    triggerOnDamage: true
+  guidanceData: 
+  guidanceAudio: 
+  statusBuildup: 
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom:
+  flags:
+  - damage_dispersed
+  ints: 
+  floats: 
+  vectors: 
+  strings: 
+functions: 
+workshopInfo: 

@@ -1,0 +1,63 @@
+hidden: true
+listed: false
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_tank_v2
+blueprint: 
+textType: {}
+livery: 
+aiBehavior: 
+aiTargeting: 
+tags:
+- weight_light
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_v2_body_w1
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_v2_side_w1
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_v2_side_w1
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_v2_turret_w1
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 13
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

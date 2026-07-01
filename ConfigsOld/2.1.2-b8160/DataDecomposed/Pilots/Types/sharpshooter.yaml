@@ -1,0 +1,133 @@
+hidden: false
+spriteIcon: s_icon_l32_role_custom4
+spriteFrame: 
+spritePattern: s_background_pilot_pattern2
+equipmentCritCapable: true
+equipmentRangePreferred: 2
+tags: []
+equipmentTagsPreferred:
+- spec_ballistic
+traits:
+  l0_acquired_negative:
+    hidden: false
+    level: 0
+    type: Acquired
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      type_negative: true
+  l1_starter:
+    hidden: false
+    level: 1
+    type: Starting
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      starter: true
+      type_sharpshooter: true
+  l1_starter_fatigue:
+    hidden: true
+    level: 1
+    type: Starting
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      starter_fatigue: true
+  l2_u1:
+    hidden: false
+    level: 2
+    type: Unlockable
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      bonus: true
+      level_2: true
+      type_negative: false
+      type_sharpshooter: true
+  l2_u2:
+    hidden: false
+    level: 2
+    type: Unlockable
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      level_2: true
+      tradeoff: true
+      type_negative: false
+      type_sharpshooter: true
+  l3_u1:
+    hidden: false
+    level: 3
+    type: Unlockable
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      level_3: true
+      type_sharpshooter: true
+  l4_u1:
+    hidden: false
+    level: 4
+    type: Unlockable
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      bonus: true
+      level_4: true
+      type_negative: false
+      type_sharpshooter: true
+  l4_u2:
+    hidden: false
+    level: 4
+    type: Unlockable
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      level_4: true
+      tradeoff: true
+      type_negative: false
+      type_sharpshooter: true
+  l5_u1:
+    hidden: false
+    level: 5
+    type: Unlockable
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      level_5: true
+      type_negative: false
+      type_sharpshooter: true
+  l6_acquired_prestige:
+    hidden: false
+    level: 1
+    type: PrestigeEffect
+    prestigeRank: 
+    tagsUsed: true
+    keys: 
+    tags:
+      type_prestige: true
+      type_sharpshooter: true
+statValues: 
+statRanges: 
+tutorialInfo:
+  priority: 2
+  identification:
+    callsignLoc:
+      textSector: xc_pilot_names_callsigns_01
+      textKey: 18
+    namePrimaryLoc:
+      textSector: xc_pilot_names_given_01
+      textKey: 20
+    nameSecondaryLoc:
+      textSector: xc_pilot_names_family_01
+      textKey: 30
+  appearancePreset: unique_tutorial_vet_04
+  traitKeyStarter: 'pilot_starter_stat_sharpshooter '

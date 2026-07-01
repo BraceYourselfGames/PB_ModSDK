@@ -1,0 +1,75 @@
+hidden: false
+parents:
+- key: sh_option_main_continue
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_hologram_default
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.7413164
+        b: 0.4009434
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.6666667
+            b: 0.3333334
+            a: 1
+          effect: Exit
+        dataReused: 
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase:
+          - !OverworldEntityChangeView
+            assetKey: Squad_MobileBase
+          functionsTarget: 
+          functionsGlobal:
+          - !QuestProgress
+            stepRequired: 02_mountainbase_after
+            stepNext: 03_liberation
+            effectOnExit: true
+            effectOnEntry: true
+            questMain: true
+            questKey: core_ftue
+          - !UnlockCodex
+            key: history_homeguard
+          functionsLocal: 
+    optionsReused: 

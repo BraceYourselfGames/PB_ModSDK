@@ -104,6 +104,70 @@ idleIntensityBlend:
       x: 0
       y: 0
     m: {}
+dashVerticalInDuration: 1
+dashVerticalOutDuration: 0.5
+dashVerticalIn:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 0.7589152
+      y: 1.13336
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+dashVerticalOut:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 0.8675592
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
 listenerPosition:
   modePostWrap: ClampForever
   modePreWrap: ClampForever
@@ -204,6 +268,53 @@ shockwavePresets:
     path: Content/Textures/VFX/fx_shockwave_sim_01
   sim_02:
     path: Content/Textures/VFX/fx_shockwave_sim_02
+timeRemapDashBulldoze:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 1.355503
+      w: 1.355503
+    w:
+      x: 0
+      y: 0.06437768
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0.3297171
+      w: 0.3297171
+    w:
+      x: 0.1072962
+      y: 0
+    m: {}
+timePreviewDashBulldozeFlat:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 1.355503
+      w: 1.355503
+    w:
+      x: 0
+      y: 0.06437768
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0.3297171
+      w: 0.3297171
+    w:
+      x: 0.1072962
+      y: 0
+    m: {}
+timePreviewSpeedBulldoze: 0.5
+timePreviewRemapBulldoze: 0
+timeNormalizedBulldozeTakeoff: 0.5
 timeRemapDash:
   modePostWrap: ClampForever
   modePreWrap: ClampForever
@@ -787,7 +898,7 @@ tiltLateralDampMaxSpeed: 10
 tiltParallelDampSmoothTime: 0.05
 tiltParallelDampMaxSpeed: 20
 tiltParallelDecaySpeed: 0.5
-movementFactorNegative: 1
+movementFactorNegative: 0
 movementFactorPositive: 1
 movementFactorDampSmoothTime: 0.3
 movementFactorDampMaxSpeed: 10
@@ -934,6 +1045,7 @@ slidingStartThreshold: 0.99
 slidingEndThreshold: 0.75
 animationSlidingPrep: 0.66
 animationLengthFiringPrep: 0.25
+rotationFixTemp: 0
 animationLengthMovementStop: 0.8
 animationLengthMovementStopFastMechs: 0.666
 animationLengthMovementStart: 0.8

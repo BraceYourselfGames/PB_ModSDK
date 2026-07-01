@@ -1,0 +1,36 @@
+behaviorTree:
+  m_treeRoot: !PhantomBrigade.AIOverworld.BT.Nodes.BTDecorator_Repeat
+    m_repeatMode: RepeatForever
+    m_repeatUntilCondition: Ready
+    m_timesToRun: 0
+    m_taskChild: !PhantomBrigade.AIOverworld.BT.Nodes.BTComposite_Sequence
+      m_dynamic: false
+      m_children:
+      - !BTAction_MoveToEntity
+        entityKey: target_entity
+        fallbackPositionKey: movement_destination
+        outputKey: path_requested_destination
+      - !BTAction_MoveToDestination
+        destinationKey: path_requested_destination
+        allowRepath: false
+      - !BTDecorator_ForceResult
+        m_overrideResultSuccess: true
+        m_taskChild: !PhantomBrigade.AIOverworld.BT.Nodes.BTComposite_Sequence
+          m_dynamic: false
+          m_children:
+          - !BTAction_CheckAtWar
+            value: true
+          - !BTAction_NotifyCommander
+            notificationKey: movement_complete
+          - !BTAction_WaitForNewTarget
+            entityBlackboardKey: target_entity
+      - !BTDecorator_ForceResult
+        m_overrideResultSuccess: true
+        m_taskChild: !PhantomBrigade.AIOverworld.BT.Nodes.BTComposite_Sequence
+          m_dynamic: false
+          m_children:
+          - !BTAction_CheckAtWar
+            value: false
+          - !BTAction_DestroyOnArrival
+            distanceThreshold: 5
+            destinationVectorKey: path_requested_destination

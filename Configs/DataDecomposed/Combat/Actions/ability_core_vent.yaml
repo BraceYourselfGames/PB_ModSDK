@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -38,6 +37,7 @@ dataCore:
   eventsOnDispose: 
   functionsOnTargetCheck: 
   functionsOnValidation: 
+  functionsOnValidationBase: 
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart:
@@ -101,9 +101,9 @@ dataCore:
           normalized: false
           leveled: true
           f: 50
+        environmentDamage: 
         concussion: 
         heat: 
-        stagger: 
         statusBuildup:
           key: timed_burn
           amount: 1
@@ -157,6 +157,8 @@ dataCore:
         ability_vent: true
       present: true
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck: 
 dataMovement: 
 dataEquipment: 

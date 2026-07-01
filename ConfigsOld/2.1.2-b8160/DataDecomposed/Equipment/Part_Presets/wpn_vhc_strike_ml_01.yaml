@@ -1,0 +1,24 @@
+hidden: false
+parents:
+- key: wpn_vhc_primary
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- part_ml
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_vhc_strike_ml_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

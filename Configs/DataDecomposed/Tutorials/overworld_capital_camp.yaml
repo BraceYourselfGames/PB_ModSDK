@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -30,12 +31,34 @@ pages:
     textLocation: RightBottom
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldRoster
+        methodName: OnCampStartExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !ModifyResources
@@ -45,11 +68,17 @@ pages:
         checkStrict: false
         offset: true
         value: 1
+    - !CallMethodStatic
+      typeName: CIViewOverworldRoster
+      methodName: TutorialCampHighlightOn
+      argument: ''
+      frameDelay: 0
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: false
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -65,28 +94,35 @@ pages:
       b: 0.1960784
       a: 1
     frameLocation: BottomLeft
-    frameGradientMode: None
+    frameGradientMode: Top
     framePositionX: 0
     framePositionY: 0
     frameSizeX: 644
-    frameSizeY: 398
+    frameSizeY: 256
     frameBlocksInput: false
     frameBoundary: false
-    textLocation: TopLeft
+    textLocation: RightTop
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: false
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -112,14 +148,26 @@ pages:
     textLocation: TopRight
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 effectsOnEnd:
-  effectsOverworld: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldRoster
+      methodName: TutorialCampHighlightOff
+      argument: ''
+      frameDelay: 0
   effectsCombat: 

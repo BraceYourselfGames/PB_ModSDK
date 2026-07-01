@@ -1,0 +1,106 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_mech
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: juggernaut
+tags:
+- role_3f_squads
+- role_3f_heavy
+- weight_heavy
+partTagPreferences:
+  body:
+  - tags:
+      armor_full_weight_coverage: true
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_wpn_ml_02
+      - back_wpn_ml_03
+    rating: 
+    systems: 
+  core:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_medium: true
+    rating: 
+    systems:
+      internal_aux_top_core:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_core_heat
+  equipment_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_shield: true
+          weight_light: true
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_assault: true
+          part_energy: false
+          part_railgun: false
+          reward_special: false
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_medium: true
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_light: true
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          weight_heavy: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 7.5
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

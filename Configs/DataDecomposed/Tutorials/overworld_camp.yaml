@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: true
   backgroundColor:
@@ -14,9 +15,20 @@ pages:
     a: 0
   center:
     textImage: event_workshop
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:
@@ -39,6 +51,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -64,18 +77,32 @@ pages:
     textLocation: TopLeft
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_direction_down
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -101,18 +128,29 @@ pages:
     textLocation: TopLeft
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -138,12 +176,22 @@ pages:
     textLocation: TopLeft
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !UnlockCodex
@@ -153,6 +201,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -178,8 +227,6 @@ pages:
     textLocation: TopLeft
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight:
@@ -188,16 +235,46 @@ pages:
         y: -354
         z: -16
         w: -138
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewOverworldRoster
+        methodName: OnCampStartExternal
+        argument: ''
+        frameDelay: 0
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !UnlockCodex
       key: pilots_fatigue
+    - !CallMethodStatic
+      typeName: CIViewOverworldRoster
+      methodName: TutorialCampHighlightOn
+      argument: ''
+      frameDelay: 0
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: false
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -223,18 +300,39 @@ pages:
     textLocation: TopLeft
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
-    textInputActions: 
-  effectsOverworld: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_direction_down
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput: 
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewOverworldRoster
+      methodName: TutorialCampHighlightOff
+      argument: ''
+      frameDelay: 0
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: false
   cameraInputPermitted: false
+  navigationFocus: false
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -260,12 +358,18 @@ pages:
     textLocation: TopRight
     buttonLocation: Top
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 effectsOnEnd:
@@ -273,4 +377,9 @@ effectsOnEnd:
     functions:
     - !UnlockCodex
       key: overworld_camping
+    - !CallMethodStatic
+      typeName: CIViewOverworldRoster
+      methodName: TutorialCampHighlightOff
+      argument: ''
+      frameDelay: 0
   effectsCombat: 

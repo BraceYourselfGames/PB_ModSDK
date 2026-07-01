@@ -1,0 +1,17 @@
+startingMusicProgress: 0
+maxStep: 1
+minProgressWhileTeamIntact: -1
+teamIntactThreshold: 2
+reactiveMusicThresholds:
+- powerBalanceThreshold: 1.3
+  progress: 1
+  mood: positive
+- powerBalanceThreshold: 0.6
+  progress: 0
+  mood: neutral
+- powerBalanceThreshold: 0.2
+  progress: -1
+  mood: negative
+- powerBalanceThreshold: 0.1
+  progress: -2
+  mood: dire

@@ -42,9 +42,6 @@ namespace PhantomBrigade.Functions
         public DataBlockFloat heat;
         
         [DropdownReference (true)]
-        public DataBlockFloat stagger;
-        
-        [DropdownReference (true)]
         public DataBlockInflictedStatusBuildup statusBuildup;
 
         public void Run (PersistentEntity unitPersistent)
@@ -66,8 +63,7 @@ namespace PhantomBrigade.Functions
             float integrityChange = integrity != null ? integrity.f : 0f;
             float concussionChange = concussion != null ? concussion.f : 0f;
             float heatChange = heat != null ? heat.f : 0f;
-            float staggerChange = stagger != null ? stagger.f : 0f;
-            
+
             if (integrity != null)
             {
                 if (integrity.normalized)
@@ -94,7 +90,6 @@ namespace PhantomBrigade.Functions
             bool integrityPresent = !integrityChange.RoughlyEqual (0f);
             bool concussionPresent = !concussionChange.RoughlyEqual (0f);
             bool heatPresent = !heatChange.RoughlyEqual (0f);
-            bool staggerPresent = !staggerChange.RoughlyEqual (0f);
 
             var group = splash ? DamageEventGroup.Splash : DamageEventGroup.ContactStandard;
             var de = CombatUtilities.CreateDamageEvent (group, unitCombat.id.id);
@@ -123,9 +118,6 @@ namespace PhantomBrigade.Functions
 
             if (heatPresent)
                 de.AddInflictedHeat (heatChange);
-                
-            if (staggerPresent)
-                de.AddInflictedStagger (staggerChange);
 
             if (sourceInternal)
                 de.isDamageEventInternal = true;

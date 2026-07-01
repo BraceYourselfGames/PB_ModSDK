@@ -1,0 +1,317 @@
+hidden: false
+parents:
+- key: sh_core_basic
+- key: sh_option_main_leave
+core:
+  stepOnStart: main
+  priority: 0
+  moodOnStart: 
+  devSkipStep: 
+effectsOnExit: 
+tags:
+- context_forward_base
+check:
+  repeat: Enabled
+  checksGlobal:
+  - !OverworldValidateProvinceFaction
+    present: true
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_hologram_default
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects:
+    - functionsBase: 
+      functionsTarget:
+      - !OverworldEntityChecked
+        conditions:
+        - !OverworldValidateQuestLink
+          questMain: false
+          questKey: core_ftue
+        functions:
+        - !Log
+          message: Entering FTUE exit frontline
+        - !OverworldEntityGlobal
+          function: !StartTutorial
+            key: overworld_pilot_recruit
+            allowRepeat: false
+        functionsElse: 
+      functionsGlobal: 
+      functionsLocal: 
+    options:
+      01_travel:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.5349452
+            b: 0
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget:
+        - !OverworldValidateContestPossible {}
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterTravel {}
+      02_recruit:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 3
+          color:
+            r: 0.801
+            g: 0.9720505
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterRecruitment {}
+    optionsReused: 
+  recruit:
+    comment: 
+    image: event_pilot_internal
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 0
+        g: 0
+        b: 0
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties:
+      displayResources: true
+      optionLimitRandom: 
+    effects: 
+    options:
+      acquire:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 0.7838411
+            g: 1
+            b: 0.3632075
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal:
+        - !OverworldValidatePilotRecruitment {}
+        - !OverworldValidateBaseResources
+          checks:
+            camp_supplies:
+              check: GreaterEqual
+              value: 1
+            supplies:
+              check: GreaterEqual
+              value: 100
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: camp_supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: -1
+            - key: supplies
+              check: true
+              checkStrict: false
+              offset: true
+              value: -100
+          - !CreatePilot
+            identification: 
+            bio: 
+            appearanceOverlay: 
+            appearanceCustom: 
+            appearancePresets: 
+            memory:
+              recruited: 1
+          functionsLocal:
+          - !InteractionOptionExit {}
+      back:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main
+    optionsReused: 
+  travel_confirmation:
+    comment: 
+    image: event_intel
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties:
+      displayResources: false
+      optionLimitRandom: 
+    effects: 
+    options:
+      01_contest:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 0.1839623
+            b: 0.1839623
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget:
+        - !OverworldValidateContestPossible {}
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionExit {}
+        - functionsBase: 
+          functionsTarget:
+          - !OverworldTravelFrontline
+            functionsGlobal: 
+            functionsBase: 
+            functionsDestination: 
+          functionsGlobal:
+          - !QuestExit
+            effectOnExit: true
+            questMain: false
+            questKey: province_selection
+          - !QuestExit
+            effectOnExit: true
+            questMain: false
+            questKey: core_ftue
+          functionsLocal: 
+      cancel:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 1
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal: 
+          functionsLocal:
+          - !InteractionOptionEnterStep
+            step: main
+    optionsReused: 

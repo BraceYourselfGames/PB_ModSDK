@@ -750,6 +750,9 @@ namespace PhantomBrigade.Data
 
         private void ApplyLandscape ()
         {
+            if (OverworldLandscapeManager.ins == null)
+                return;
+            
             OverworldLandscapeManager.TryLoadingVisual 
             (
                 assetKey, 

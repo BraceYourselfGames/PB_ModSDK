@@ -1,0 +1,37 @@
+horizontal: true
+extended: false
+lines:
+- visibility: All
+  actions:
+  - action: global_direction_up
+    newline: false
+  - action: global_direction_down
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
+  actions:
+  - action: global_confirm
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
+  actions:
+  - action: global_gamepad_x
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
+  actions:
+  - action: global_cancel
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: generic_return__s0

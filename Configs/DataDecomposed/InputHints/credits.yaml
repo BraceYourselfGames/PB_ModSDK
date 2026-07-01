@@ -1,14 +1,29 @@
+horizontal: false
 extended: false
 lines:
-- mode: All
-  text: Exit
+- visibility: All
   actions:
   - action: global_cancel
     newline: false
-- mode: All
-  text: Scroll
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: KeyboardMouse
   actions:
   - action: global_move_vertical_pos
     newline: false
   - action: global_move_vertical_neg
     newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: Controller
+  actions:
+  - action: global_move_vertical
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: credits__s1

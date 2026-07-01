@@ -1,0 +1,86 @@
+dataUI:
+  icon: s_icon_l32_action_attack1
+  color:
+    r: 1
+    g: 0.4117647
+    b: 0.490196
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0.1333333
+    a: 1
+  sortingPriority: 500
+  hidden: true
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Secondary
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 2
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation:
+  - !CombatActionValidationDependency
+    dependencyActionKey: attack_primary
+  functionsOnCreation:
+  - !CombatActionCreateReaction
+    dependencyActionKey: attack_primary
+    delay: 
+    range: 
+    directionAnimation: 
+    duration: 
+    overrideCheck: 
+    functionsTimed: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck: 
+  pilotLink: 
+dataFactionCheck:
+  requireFaction: Invaders
+dataMovement: 
+dataEquipment: 
+dataAI:
+  actionEndsPlanning: false
+  possibleActionTypes:
+  - aiActionType: ReactiveAttackMain
+    weightType: DataConstant
+    weightConstant: 0
+    partSocket: 
+    statUsed: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: ''
+dataCustom:
+  flags:
+  - check_los
+  - range_from_equipment
+  ints: 
+  floats:
+    range_max: -5
+    range_min: 5
+    range_multiplier: 0.5
+  vectors: 
+  strings: 
+functionsTimed: 

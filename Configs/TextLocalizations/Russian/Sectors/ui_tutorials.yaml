@@ -26,8 +26,12 @@ entries:
     textEng: Deploying
   base_briefing__p04_text:
     id: 1
-    text: Если вы довольны выбором юнитов и пилотов для задания, нажмите «Отправить в бой», чтобы продолжить.
-    textEng: Once you are happy with the units and pilots chosen for the mission, you can click "Deploy" to proceed.
+    text: Если вы довольны составом отряда для задания, нажмите кнопку «Отправить в бой», чтобы продолжить.
+    textEng: Once you're happy with your squad makeup for the mission, you can click "Deploy" to proceed.
+  base_briefing__p04_text_ctrl:
+    id: 2
+    text: Если вы довольны составом отряда, нажмите кнопку «Отправить в бой», чтобы продолжить.
+    textEng: Once you're happy with your squad, use the "Deploy" button to proceed.
   base_briefing_demolition__p00_hint:
     id: 1
     text: Это задание предполагает разрушение вражеских построек. Убедитесь, что ваш отряд к этому готов.
@@ -43,11 +47,23 @@ entries:
       It's a good idea to review the loadouts of your mechs before each mission.
 
 
-      You might have an improved armor you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
+      You might have improved armour you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
   base_briefing_demolition__p02_hint:
     id: 1
     text: Выберите одного из мехов отряда и нажмите «Редактировать юнит», чтобы перейти к экрану настройки.
-    textEng: Select one of the mechs in your squad, then click the "Edit Unit" button to jump to the customization screen.
+    textEng: Select a mech in your squad, then click the "Edit Unit" button to jump to the Unit Editing menu.
+  base_briefing_demolition__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Выбрав занятую ячейку меха, вы можете быстро перейти к экрану настройки с помощью кнопки «Редактировать юнит».
+
+
+      {0}
+    textEng: >-
+      Once you select a filled mech slot, you can quickly jump into the customization screen with the "Edit Unit" button.
+
+
+      {0}
   base_briefing_demolition__p03_header:
     id: 1
     text: Проверка урона
@@ -69,7 +85,7 @@ entries:
       [FFD8A2][sp=s_text_24_insert_env2]Structure damage[aa] — [ff][b]50[/b][-]
 
 
-      Once you're happy with the weapons, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
+      Once you're happy with your choice, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
   base_introduction__p00_header:
     id: 1
     text: Мобильная база
@@ -102,6 +118,18 @@ entries:
 
 
       You can also double click a unit in the list to do the same.
+  base_introduction__p02_hint_ctrl:
+    id: 2
+    text: >-
+      В списке слева уже выбран юнит. Кнопка «Редактировать» позволяет настроить этого юнита.
+
+
+      {0}
+    textEng: >-
+      A unit is already selected in the list on the left. The "Edit" button here allows you to customize that unit.
+
+
+      {0}
   base_introduction__p03_header:
     id: 1
     text: Изменение
@@ -109,15 +137,45 @@ entries:
   base_introduction__p03_text:
     id: 1
     text: Это экран изменения мехов. Вы можете осмотреть и заменить отдельные части юнита.
-    textEng: This is the editing screen. You can inspect and swap out individual parts equipped by a unit.
+    textEng: This is the Unit Editing menu. You can inspect and swap out individual parts equipped to a mech.
   base_introduction__p04_hint:
     id: 1
     text: После боя мы подобрали новое оружие! Найдите ячейку основного оружия, чтобы осмотреть и установить его.
     textEng: You picked up new weapons in the last fight. Click to the primary weapon slot to review the options.
+  base_introduction__p04_hint_ctrl:
+    id: 2
+    text: >-
+      После боя мы подобрали новое оружие! Давайте откроем ячейку основного оружия, чтобы осмотреть и установить его.
+
+
+      {0}
+    textEng: >-
+      You picked up new weapons in the last fight. Let's open the primary weapon slot to review the options.
+
+
+      {0}
   base_introduction__p05_hint:
     id: 1
     text: "Это установленное в данный момент оружие.\n\nОборудование мехов сложно устроено и имеет множество различных характеристик, так что не торопитесь с выбором. \n\nНаведите курсор на любой показатель в этом окне, чтобы увидеть его подробное описание. Когда выберете возможную замену, появится сравнительная информация, чтобы помочь вам принять взвешенное решение."
-    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and characterized by many different stats, so it is normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and has many different stats, so it's normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+  base_introduction__p05_hint_ctrl:
+    id: 2
+    text: >-
+      Это установленное в данный момент оружие.
+
+
+      Оснащение мехов устроено довольно сложно и включает множество различных характеристик. Задержитесь на этом экране и тщательно взвесьте доступные варианты.
+
+
+      После обучения вы сможете выделить эту панель с помощью контроллера и подробно изучить все характеристики. А пока давайте продолжим.
+    textEng: >-
+      This is the currently equipped weapon.
+
+
+      Mech equipment is complex and features many different stats. It's normal to take your time on this screen and carefully weigh your options.
+
+
+      Once this tutorial is concluded, you will be able to focus this panel with your controller and inspect every stat in detail. For now, let's continue.
   base_introduction__p06_hint:
     id: 1
     text: >-
@@ -133,21 +191,39 @@ entries:
   base_introduction__p07_hint:
     id: 1
     text: >-
-      Наведите курсор на оружие, чтобы увидеть сравнение. У некоторых вариантов могут быть свои плюсы и минусы, а другие станут прямым улучшением.
+      Выберите новое оружие, чтобы сравнить его с установленным. Некоторые предметы будут прямым улучшением, тогда как другие предложат иной баланс преимуществ и недостатков.
 
 
-      Один из самых простых способов выбрать подходящую деталь — посмотреть на ее уровень. Более высокий уровень оснащения позволяет меху противостоять более сильным противникам, так как урон и запас прочности масштабируются вместе с уровнем.
+      Детали более высокого уровня позволят вашим мехам противостоять более сильным врагам, поскольку урон и запас прочности зависят от общего уровня меха.
 
 
-      [b]Установите новое оружие[/b] двойным щелчком или долгим нажатием на него в списке.
+      Установите оружие, которое вам больше нравится, щелкнув по нему в списке.
     textEng: >-
-      Hover over a weapon to see the comparison. Some picks might have tradeoffs, while others could be a direct upgrade.
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
 
 
-      One of the most straighforward ways to pick parts is checking their level. Increasing the equipment level lets the mech face stronger enemies, as damage and health is scaled with the level.
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
 
 
-      [b]Equip a new weapon[/b] by double clicking or long pressing it in the list.
+      Equip the weapon you prefer by clicking it in the list.
+  base_introduction__p07_hint_ctrl:
+    id: 2
+    text: >-
+      Выберите новое оружие, чтобы сравнить его с установленным. Некоторые предметы будут прямым улучшением, тогда как другие предложат иной баланс преимуществ и недостатков.
+
+
+      Детали более высокого уровня позволят вашим мехам противостоять более сильным врагам, поскольку урон и запас прочности зависят от общего уровня меха.
+
+
+      Установите оружие, которое вам больше нравится. Если не можете разобраться в навигации, обратитесь к подсказкам по управлению в нижней части экрана.
+    textEng: >-
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
+
+
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
+
+
+      Equip the weapon you prefer. If you're not sure how to navigate, check the input hints at the bottom of the screen.
   base_introduction__p08_hint:
     id: 1
     text: >-
@@ -167,7 +243,43 @@ entries:
   base_introduction__p10_hint:
     id: 1
     text: Когда закончите экспериментировать с настройкой юнита, щелкните здесь, чтобы вернуться на базу, после чего вы сможете выйти на карту мира.
-    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld.
+    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld map.
+  base_standalone_ops__p00_header:
+    id: 2
+    text: Контракты
+    textEng: Contracts
+  base_standalone_ops__p00_text:
+    id: 2
+    text: Вы установили связь с силами сопротивления в этом регионе. Контракты удаленной поддержки теперь доступны.
+    textEng: You have established contact with the resistance forces in this region. Remote assistance contracts are now available.
+  base_standalone_ops__p01_hint:
+    id: 2
+    text: >-
+      Контракты позволяют вам брать под управление союзные отряды в других районах Фирланда. Ваш собственный отряд не будет участвовать в этих операциях, поэтому пилоты не получат опыта, а вы — доступа к лому. Однако вы сможете получить заранее определенные награды, не рискуя при этом потерять ресурсы, получить повреждения или повысить усталость пилотов.
+
+
+      Контракты являются дополнительным видом активности и не требуются для освобождения провинции. Они могут стать полезным способом получить ресурсы, добыть дополнительное снаряжение для своего отряда или завершить разблокировку мастерской определенной фракции.
+    textEng: >-
+      The contracts allow you to control allied squads elsewhere in Fyrland. Your squad will not participate, so you will not gain pilot experience or direct access to salvage. However, you can receive predetermined rewards and will not risk damage, fatigue or other resources.
+
+
+      The contracts are optional and are not required to liberate a province. They can be a useful way to get resources, obtain more equipment for your squad or finish the workshop unlocks for a particular faction.
+  base_standalone_ops__p02_header:
+    id: 2
+    text: Испытательный полигон
+    textEng: Test range
+  base_standalone_ops__p02_text:
+    id: 2
+    text: >-
+      Не забывайте о виртуальном полигоне в разделе «Обучение», где можно проверить эффективность своих мехов.
+
+
+      Доступ к виртуальному полигону также можно получить с помощью кнопки «Тест-драйв» на экране настройки меха.
+    textEng: >-
+      Remember to check the virtual range in the Training section, where you can test the performance of your mechs.
+
+
+      You can also access the virtual range through the Test Drive button in the mech customization screen.
   base_upgrades__p00_header:
     id: 1
     text: Улучшения
@@ -188,6 +300,18 @@ entries:
     id: 1
     text: Открыты новые возможности. Чтобы ознакомиться с ними, нажмите кнопку «Улучшения».
     textEng: New capabilities have been unlocked. To start reviewing them, click the Upgrades button.
+  base_workshop__p00_hint_ctrl:
+    id: 2
+    text: >-
+      Открыты новые возможности. Чтобы ознакомиться с ними, откройте новый экран «Улучшения».
+
+
+      {0}
+    textEng: >-
+      New capabilities have been unlocked. To start reviewing them, let's open the new Upgrades screen.
+
+
+      {0}
   base_workshop__p01_header:
     id: 1
     text: Улучшения
@@ -195,7 +319,7 @@ entries:
   base_workshop__p01_text:
     id: 1
     text: Теперь базу можно модернизировать, тратя ресурсы. Эти улучшения позволяют размещать больше юнитов, открывать новые функции и расширять возможности базы.
-    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to fit more units, unlock new capabilities and more.
+    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to house more units, unlock new capabilities, and more.
   base_workshop__p02_hint:
     id: 1
     text: >-
@@ -208,10 +332,40 @@ entries:
 
 
       Hover over the upgrade tile to inspect the details, then double click or long press to confirm it.
+  base_workshop__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Одной из важнейших систем, которая понадобится вам в ближайшие дни, является мастерская.
+
+
+      Установите улучшение, нажав кнопку «Подтвердить».
+
+
+      {0}
+    textEng: >-
+      One of the most important systems you'll need in the days to come is the Workshop.
+
+
+      Install the upgrade by pressing "confirm".
+
+
+      {0}
   base_workshop__p03_hint:
     id: 1
     text: Перейдите на разблокированную вкладку мастерской.
     textEng: Navigate to the newly unlocked workshop tab.
+  base_workshop__p03_hint_ctrl:
+    id: 2
+    text: >-
+      Перейдите на только что открытую вкладку мастерской.
+
+
+      {0}
+    textEng: >-
+      Navigate to the newly unlocked workshop tab.
+
+
+      {0}
   base_workshop__p04_header:
     id: 1
     text: Мастерская
@@ -228,7 +382,7 @@ entries:
 
       В ходе кампании вы сможете находить новые чертежи.
     textEng: >-
-      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armor and mech frames.
+      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armour and mech frames.
 
 
       You'll discover more blueprints over the course of the campaign.
@@ -239,7 +393,7 @@ entries:
 
 
       Создавая новые корпуса, вы можете расширять отряд и восполнять потери.
-    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armor and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
+    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armour and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
   base_workshop__p07_hint:
     id: 1
     text: >-
@@ -252,6 +406,24 @@ entries:
 
 
       Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
+  base_workshop__p07_hint_ctrl:
+    id: 2
+    text: >-
+      Начните этот проект с помощью кнопки «Построить».
+
+
+      {0}
+
+
+      Печать новых деталей — процесс деликатный, требующий, чтобы база оставалась неподвижной. Как и ремонт мехов или восстановление пилотов, процесс производства будет идти во время стоянки.
+    textEng: >-
+      Begin this project with the "Build" button.
+
+
+      {0}
+
+
+      Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
   base_workshop__p08_hint:
     id: 1
     text: >-
@@ -259,7 +431,7 @@ entries:
 
 
       Получить доступ к разблокированным деталям и подсистемам можно здесь, с помощью кнопок категорий.
-    textEng: "With a new mech frame being built, let's review item manufacturing. \n\nYou'll be able to access unlocked parts and subsystems by using the category buttons here."
+    textEng: "With a new mech frame being built, let's review equipment manufacturing. \n\nYou'll be able to access researched parts by using the category buttons here."
   base_workshop__p09_hint:
     id: 1
     text: >-
@@ -271,7 +443,7 @@ entries:
 
       Детали более высокого качества нужно разблокировать отдельно.
     textEng: >-
-      To unlock parts or subsystems in the workshop, you'll need to scrap them. This can be done through the inventory or through the salvage screen.
+      To unlock projects in the workshop, you'll need to research them by scrapping parts. This can be done through the inventory or through the salvage screen.
 
 
       Some projects might require multiple scrapped items to be researched. Check the workshop progress bar on the item information panel to learn more.
@@ -306,7 +478,7 @@ entries:
 
       ■ Барьеры поглощают урон и могут восстанавливаться во время боя. Полностью разрядившийся барьер наносит меху урон!
     textEng: >-
-      ■ The enemy is equipped with barrier armor. Note the green portion of the health bars.
+      ■ The enemy is equipped with barrier armour. Note the green portion of the health bars.
 
 
       ■ Barriers absorb damage, and can regenerate during the fight. Fully deplete barriers to damage the mech!
@@ -343,7 +515,7 @@ entries:
 
 
       Попробуйте сделать это с помощью дальнобойного луча выбранного меха союзников!
-    textEng: "Destroying this generator will disable turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
+    textEng: "Destroying this generator will disable the turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
   combat_base__p02_hint:
     id: 1
     text: >-
@@ -398,14 +570,6 @@ entries:
 
 
       The [b]Dash[/b] maneuver makes the mech break missile lock, evades most projectiles and allows for quick position changes.
-  combat_breakthrough_01__p00_header:
-    id: 1
-    text: Тест
-    textEng: Test
-  combat_breakthrough_01__p00_text:
-    id: 1
-    text: Сложная операция с несколькими целями.
-    textEng: This is a complex operation with multiple objectives.
   combat_convoy_hg__p00_hint:
     id: 1
     text: К бою присоединяется снайпер Сил Свободы Фирланда. У него выгодная позиция, он поможет остановить конвой.
@@ -512,6 +676,10 @@ entries:
     id: 1
     text: "Отработайте направленные атаки и уничтожьте вражеского меха, чтобы перейти к следующей фазе задания. \n\nЕсли вы точно не знаете, сколько у вражеского юнита осталось прочности, выберите его или удерживайте клавишу модификатора.\n\n— Показать информацию о юните: {0}"
     textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or hold the modifier key.\n\n— Display unit details: {0}"
+  combat_demo_directional__p02_text_ctrl:
+    id: 2
+    text: "Отработайте направленные атаки и уничтожьте вражеского меха, чтобы перейти к следующей фазе задания. \n\nЕсли вы точно не знаете, сколько у вражеского юнита осталось прочности, выберите его или включите режим подробного отображения.\n\n— Переключить подробное отображение: {1}"
+    textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or activate the detailed display mode.\n\n— Toggle detailed display: {1}"
   combat_demo_retreat__p00_hint:
     id: 1
     text: Это зона отхода. Чтобы успешно выполнить некоторые задания, нужно отступить.
@@ -570,6 +738,24 @@ entries:
 
 
       — Target environment: {0}
+  combat_demo_structures__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Когда выберете подходящее оружие, нужно нацелиться на постройки. По умолчанию для атаки требуется вражеская цель, но можно стрелять и по местности.
+
+
+      Найдите слабое место — например, тонкую стену. Нажмите клавишу переключения, чтобы перейти в режим наведения по точкам, после чего сможете подтвердить атаку.
+
+
+      — Переключить режим наведения: {1}
+    textEng: >-
+      Once you select the right weapon, you'll need to target the structures. By default, attacks require an enemy target, but there is a way to fire at any location.
+
+
+      Find a weak spot such as a thin wall here. Press the toggle key to switch to targeting locations, and you'll be able to confirm the attack.
+
+
+      — Toggle target mode: {1}
   combat_intro_01__p00_header:
     id: 1
     text: 'Камера '
@@ -604,10 +790,46 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  combat_intro_01__p00_text_ctrl:
+    id: 2
+    text: >-
+      Прежде чем отправиться в путь, попробуйте настроить камеру.
+
+
+      — движение камеры: {9}
+
+
+      — поворот камеры: {11}
+
+
+      — наклон камеры: {12}
+    textEng: >-
+      Before moving out, try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   combat_intro_01__p01_hint:
     id: 1
-    text: Нажмите {0} по юниту, чтобы выбрать его.
-    textEng: '{0} this unit to select it.'
+    text: >-
+      Выберите этого юнита, щелкнув по нему:
+
+
+      {0}
+    textEng: >-
+      Select this unit by clicking it:
+
+
+      {0}
+  combat_intro_01__p01_hint_ctrl:
+    id: 2
+    text: "Выберите этого юнита, переместив курсор и нажав клавишу выбора цели:\n\n{2} ► {3} \n\n\nТакже можно переключать выбранного юнита с помощью:\n\n{4}{5} "
+    textEng: "Select this unit by moving the cursor and pressing the targeting hotkey:\n\n{2} ► {3} \n\n\nAlternatively, you can switch the selected unit with:\n\n{4}{5} "
   combat_intro_01__p02_hint:
     id: 1
     text: Здесь будет показана информация о выбранном юните.
@@ -632,6 +854,18 @@ entries:
     id: 1
     text: В пылу битвы может быть сложно уследить за всем происходящим. Щелкните здесь, чтобы просмотреть последние пять секунд!
     textEng: In the heat of battle, it can be hard to keep track of everything. Click here to replay the last five seconds!
+  combat_intro_04__p00_hint_ctrl:
+    id: 2
+    text: >-
+      В пылу битвы может быть сложно уследить за всем происходящим. Давайте посмотрим повтор последних пяти секунд!
+
+
+      {0}
+    textEng: >-
+      In the heat of battle, it can be hard to keep track of everything. Let's review a replay the last five seconds!
+
+
+      {0}
   combat_intro_04__p01_hint:
     id: 1
     text: Наведите курсор на таймлайн, чтобы просматривать произошедшее в конкретный момент, или используйте элементы управления временем, чтобы смотреть действие на повторе.
@@ -667,7 +901,7 @@ entries:
   combat_liberation__p02_text:
     id: 1
     text: 'Во время боев в городе некоторые противники могут не открывать огонь, пока не получат прямую линию видимости. Однако не стоит слишком полагаться на их дисциплину: стоит им только заметить вашего юнита, они начнут стрелять, даже если за вами окажется жилое здание.'
-    textEng: "When fighting in cities, some enemies might hold fire until they get line of sight. Hovewer, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
+    textEng: "When fighting in cities, some enemies might hold fire until they have line of sight. However, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
   combat_liberation_ally__p00_hint:
     id: 2
     text: Этот мех принадлежит Силам Свободы Фирланда. Они иногда будут приходить вам на помощь.
@@ -753,7 +987,7 @@ entries:
   combat_status_intro__p00_text:
     id: 1
     text: Этот юнит только что получил эффект состояния. Такие эффекты могут быть вызваны состоянием пилота, его особенностями, оружием и другими факторами. Некоторые эффекты состояния временные, а другие могут действовать до конца боя. Наведите курсор на строку состояния, чтобы узнать больше.
-    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight. Hover over the status bar to learn more.
+    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight.
   combat_status_intro__p01_hint:
     id: 1
     text: >-
@@ -778,6 +1012,36 @@ entries:
 
 
       Here, you can see the names of the effects and the time they will remain active for. You can also hover over each effect to learn more.
+  combat_status_intro__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Узнать об эффектах состояния, действующих на выбранного юнита, можно на экране подробной информации.
+
+
+      Здесь перечислены названия эффектов и время, в течение которого они будут действовать. Чтобы открыть всплывающие подсказки с подробным описанием каждого эффекта состояния, можно выделить таймлайн и переместиться влево и вверх.
+
+
+      {0} — выделить таймлайн
+
+
+      {1} — перейти к панели юнита
+
+
+      {2} — перейти к панели эффектов состояния
+    textEng: >-
+      You can get more information about the status effects on a selected unit in the detail panel.
+
+
+      Here, you can see the names of the effects and the time they will remain active for. To open the tooltips with details about each status effect, you can focus the timeline and navigate left and up.
+
+
+      {0} - Focus timeline
+
+
+      {1} - To unit panel
+
+
+      {2} - To status panel
   endgame__p00_header:
     id: 1
     text: Спасибо за игру!
@@ -817,7 +1081,25 @@ entries:
   overworld_camp__p01_hint:
     id: 1
     text: Это обзор. Здесь вы видите краткое сводное состояние юнитов и пилотов, а также основные доступные действия.
-    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with important options.
+    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+  overworld_camp__p01_hint_ctrl:
+    id: 2
+    text: >-
+      Это обзор. Здесь вы видите краткое сводное состояние юнитов и пилотов, а также основные доступные действия.
+
+
+      Доступ к этой панели можно получить, нажав вниз на поле боя.
+
+
+      {0}
+    textEng: >-
+      This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+
+
+      You can access this panel by pressing down in the overworld.
+
+
+      {0}
   overworld_camp__p02_hint:
     id: 1
     text: >-
@@ -830,6 +1112,24 @@ entries:
 
 
       You can hover over each unit to check their average level, weapon loadout, warnings and more.
+  overworld_camp__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Этот раздел показывает всех мехов на базе и общее количество мест для них. Прочность каждого меха отображается внизу.
+
+
+      Когда эта панель находится в фокусе, можно перейти вниз к любому меху, чтобы открыть подсказку с информацией о его среднем уровне, вооружении, предупреждениях и других данных.
+
+
+      Также можно перейти к настройке снаряжения, нажав «Подтвердить» на выбранном мехе.
+    textEng: >-
+      This section displays the mechs at your disposal, and the total number of mechs your base can accommodate. The integrity of each mech is displayed at the bottom.
+
+
+      While this panel is in focus, you can navigate down to each mech to open a tooltip listing their average level, weapon loadout, warnings and more.
+
+
+      You can also jump to equipment customization by pressing "confirm" on a selected mech.
   overworld_camp__p03_hint:
     id: 1
     text: >-
@@ -842,14 +1142,48 @@ entries:
 
 
       You can hover over each pilot to check their level, experience, status, and more.
+  overworld_camp__p03_hint_ctrl:
+    id: 2
+    text: "В этом разделе показаны все пилоты и общее количество мест на базе. Здоровье каждого пилота отображается внизу.\n\nКогда эта панель находится в фокусе, можно перейти вниз к любому пилоту, чтобы открыть подсказку с информацией о его уровне, опыте, состоянии и другими данными. "
+    textEng: "This section displays the pilots at your disposal and the overall space available for them. The health of each pilot is displayed at the bottom.\n\nWhile this panel is in focus, you can navigate down to each pilot to open a tooltip listing their level, experience, status, and more. "
   overworld_camp__p04_hint:
     id: 1
     text: Ваши пилоты измотаны, а мехи повреждены — самое время разбить лагерь и заняться восстановлением отряда. Нажмите кнопку лагеря ниже, чтобы продолжить.
     textEng: With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Click the camp button below to proceed.
+  overworld_camp__p04_hint_ctrl:
+    id: 2
+    text: >-
+      Ваши пилоты измотаны, а мехы повреждены — самое время разбить лагерь и заняться восстановлением отряда. Чтобы продолжить, откройте экран лагеря.
+
+
+      {0}
+    textEng: >-
+      With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Open the camp screen to proceed.
+
+
+      {0}
   overworld_camp__p05_hint:
     id: 1
     text: Выберите мехов или пилотов, нуждающихся в уходе, затем нажмите «Начать», чтобы разбить лагерь.
-    textEng: Select the mechs or pilots requiring attention, then press Start to set up camp.
+    textEng: Select the mechs or pilots requiring attention, then press "Start" to set up camp.
+  overworld_camp__p05_hint_ctrl:
+    id: 2
+    text: >-
+      Выберите мехов или пилотов, которым требуется внимание. Перейдите вниз и нажмите «Подтвердить», чтобы отметить или снять отметку.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      Когда закончите, воспользуйтесь кнопкой «Начать», чтобы разбить лагерь.
+    textEng: >-
+      Select the mechs or pilots requiring attention. Navigate down, then press "confirm" to toggle selections.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      Once you're done, use the "Start" button to set up camp.
   overworld_camp__p06_hint:
     id: 1
     text: Продолжайте, когда будете уверены в своем выборе.
@@ -858,6 +1192,18 @@ entries:
     id: 1
     text: Ваш отряд вернулся. Пока экипажи заканчивают сборку оружия, есть короткая передышка для ремонта и отдыха пилотов. Разбейте лагерь.
     textEng: Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+  overworld_capital_camp__p00_hint_ctrl:
+    id: 2
+    text: >-
+      Ваш отряд вернулся. Пока экипажи заканчивают сборку оружия, есть короткая передышка для ремонта и отдыха пилотов. Разбейте лагерь.
+
+
+      {0}
+    textEng: >-
+      Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+
+
+      {0}
   overworld_capital_camp__p01_hint:
     id: 1
     text: 'Используйте это время с умом: выберите тех пилотов и мехов, кому помощь нужнее всего.'
@@ -1066,6 +1412,30 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  overworld_intro__p00_text_ctrl:
+    id: 2
+    text: >-
+      Это карта поля боя. Попробуйте настроить камеру.
+
+
+      — движение камеры: {9}
+
+
+      — поворот камеры: {11}
+
+
+      — наклон камеры: {12}
+    textEng: >-
+      This is the world map. Try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   overworld_intro__p01_hint:
     id: 1
     text: Здесь отображаются подробности текущей операции и активные цели.
@@ -1073,15 +1443,31 @@ entries:
   overworld_intro__p02_hint:
     id: 1
     text: >-
-      — Наведите курсор на пункт назначения и нажмите {0}, чтобы переместиться по карте мира
+      Чтобы перемещаться по полю боя, щелкните правой кнопкой мыши по нужному пункту назначения:
 
 
-      — Если потерялись, нажмите {1}, чтобы вернуть камеру в центр
+      {0}
+
+
+      Если потерялись, нажмите эту кнопку, чтобы вернуть камеру в центр:
+
+
+      {1}
     textEng: >-
-      — Hover over a destination and press {0} to move on the world map
+      To move on the world map, right click a desired destination:
 
 
-      —  If you're ever lost, press {1} to recenter the camera
+      {0}
+
+
+      If you're ever lost, press this button to recenter the camera:
+
+
+      {1}
+  overworld_intro__p02_hint_ctrl:
+    id: 2
+    text: "Чтобы перемещаться по полю боя, наведите курсор на пункт назначения и нажмите кнопку подтверждения: \n\n{2} ► {3}\n\n\nЕсли потерялись, нажмите эту кнопку, чтобы вернуть камеру в центр:\n\n{4}"
+    textEng: "To move on the world map, move the cursor to your destination and press the confirmation button: \n\n{2} ► {3}\n\n\nIf you're ever lost, press this button to recenter the camera:\n\n{4}"
   overworld_pilot_progression__p00_hint:
     id: 1
     text: >-
@@ -1090,10 +1476,28 @@ entries:
 
       Чтобы продолжить, перейдите на экран пилотов — достаточно щелкнуть по любому из них ниже.
     textEng: >-
-      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, new pilot levels will be highlighted with the icons here.
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
 
 
       To proceed, move to the pilot screen. You can quickly navigate there by clicking any pilot below.
+  overworld_pilot_progression__p00_hint_ctrl:
+    id: 2
+    text: >-
+      Ваши пилоты получили опыт в последних сражениях и готовы повысить уровень. Новые уровни отмечаются как в подведении итогов, так и значками здесь.
+
+
+      Чтобы управлять повышениями пилотов, необходимо перейти на экран пилотов. Быстрый способ открыть его — выбрать здесь пилота и нажать кнопку «Подтвердить» на контроллере.
+
+
+      {0}
+    textEng: >-
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
+
+
+      To manage pilot promotions, you'll need to navigate to the pilot screen. A quick way to reach that screen is to select a pilot here and press the "confirm" button on your controller.
+
+
+      {0}
   overworld_pilot_progression__p01_hint:
     id: 1
     text: >-
@@ -1114,6 +1518,14 @@ entries:
 
       Наведите курсор на любой навык, чтобы увидеть его эффект, даже если он пока недоступен.
     textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nYou can hover over the traits to learn their effects, even if they aren't unlocked yet."
+  overworld_pilot_progression__p02_hint_ctrl:
+    id: 2
+    text: >-
+      У каждого пилота есть свое древо развития — набор навыков, которые открываются по мере роста уровня.
+
+
+      Выберите любой навык, чтобы увидеть его эффект, даже если он пока недоступен.
+    textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nSelecting a trait in this tree opens a tooltip with the details about its effects, even if that trait is not unlocked yet."
   overworld_pilot_progression__p03_hint:
     id: 1
     text: >-
@@ -1125,7 +1537,7 @@ entries:
       Every pilot starts with a random intrinsic trait based on their class. Starter traits can affect traits further up in the tree, akin to a subclass.
 
 
-      For example, a support pilot with with a repair-related starter trait is likely to unlock more repair abilities as they level up.
+      For example, a support pilot with a repair-related starter trait is likely to unlock more repair abilities as they level up.
   overworld_pilot_progression__p04_hint:
     id: 1
     text: >-
@@ -1138,18 +1550,36 @@ entries:
 
 
       Hover over each trait to see their benefits, then click on the one you'd like to unlock.
+  overworld_pilot_progression__p04_hint_ctrl:
+    id: 2
+    text: >-
+      Теперь, когда пилот достиг 2-го уровня, доступна новая особенность. На некоторых уровнях предлагается выбор из двух особенностей.
+
+
+      Переключайтесь между ними, чтобы изучить преимущества, а затем нажмите кнопку «Подтвердить», чтобы открыть нужную.
+
+
+      {0}{1}
+    textEng: >-
+      Now that this pilot is at level 2, a new trait can be unlocked. Some levels offer a choice between two traits.
+
+
+      Navigate between the two traits to see their benefits, then press the "confirm" button to unlock one.
+
+
+      {0}{1}
   overworld_pilot_progression__p05_hint:
     id: 1
     text: >-
-      Малые отряды повышают уровень быстрее, а пилоты получают больше опыта за каждого поверженного врага. Если хотите ускорить рост, берите меньше юнитов и давайте выбранному пилоту добивать цели.
+      За выполнение боевых заданий начисляется определенное количество опыта, который распределяется между всеми задействованными пилотами. Малые отряды повышают уровень быстрее, а пилоты получают больше опыта за каждого поверженного врага.
 
 
-      С новой особенностью этот пилот готов к новым испытаниям. [B]Не забудьте повысить уровень и остальным![/B]
+      Теперь, когда новая особенность выбрана, этот пилот готов к новым испытаниям. [B]Не забудьте повысить уровень и второго пилота![/B]
     textEng: >-
-      Smaller squads level up more quickly, and pilots gain additional experience for each enemy they bring down. Deploying a lean squad and letting a specific pilot finish enemies can lead to quick progress.
+      Combat missions net you a set amount of experience, split between all pilots deployed. Smaller squads will level up more quickly, and pilots will gain additional experience for each enemy they dispatch.
 
 
-      With the new trait locked in, this pilot is ready to face more challenges. [B]Don't forget to level up your other pilot![/B]
+      With the new trait locked in, this pilot is ready to face more challenges. [b]Don't forget to level up your other pilot![/b]
   overworld_pilot_recruit__p00_hint:
     id: 1
     text: >-
@@ -1165,7 +1595,19 @@ entries:
   overworld_pilot_recruit__p01_hint:
     id: 1
     text: Перед отправлением стоит взглянуть на доступных рекрутов. Нажмите эту кнопку, чтобы открыть список.
-    textEng: It's worth checking out available recruits before departing. Click this button to open the recruit list.
+    textEng: It's worth checking out the available recruits before departing. Click this button to open the recruit list.
+  overworld_pilot_recruit__p01_hint_ctrl:
+    id: 2
+    text: >-
+      Перед отправлением стоит взглянуть на доступных рекрутов. Используйте эту кнопку, чтобы посмотреть их.
+
+
+      {0}
+    textEng: >-
+      It's worth checking out the available recruits before departing. Use this button to view them.
+
+
+      {0}
   overworld_pilot_recruit__p02_header:
     id: 1
     text: Экран найма
@@ -1186,6 +1628,24 @@ entries:
 
 
       Click this button to review the first available pilot.
+  overworld_pilot_recruit__p03_hint_ctrl:
+    id: 2
+    text: >-
+      Рост команды — залог выживания. Лагерные припасы не бесконечны, пилоты могут получить тяжелые травмы, а иногда времени на стоянку просто не будет.
+
+
+      Давайте рассмотрим первого кандидата.
+
+
+      {0}
+    textEng: >-
+      Growing your ranks is essential for survival. Camp supplies might become scarce, pilots might be critically injured, or you might be pressed for time and unable to camp.
+
+
+      Let's review the first available pilot.
+
+
+      {0}
   overworld_pilot_recruit__p04_hint:
     id: 1
     text: >-
@@ -1197,7 +1657,7 @@ entries:
       Rookies are inexperienced pilots. You'll need to deploy them on a mission to learn their specialization and start leveling them up, but they can be hired at a low cost.
 
 
-      Click the button above the portrait to recruit them.
+      Use the button above the portrait to recruit them.
   overworld_pilot_recruit__p05_hint:
     id: 1
     text: Выберите одного из оставшихся кандидатов.
@@ -1219,7 +1679,7 @@ entries:
       Veteran pilots might be the right pick if you need to quickly fill a specific role.
 
 
-      Click the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
+      Use the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
   overworld_pilot_recruit__p07_header:
     id: 1
     text: Готовы к бою
@@ -1232,6 +1692,18 @@ entries:
     id: 1
     text: Выберите пункт назначения. Нажмите эту кнопку, чтобы открыть карту мира.
     textEng: Time to pick a destination. Click this button to open the world map.
+  overworld_pilot_recruit__p08_hint_ctrl:
+    id: 2
+    text: >-
+      Выберите пункт назначения. Используйте эту кнопку, чтобы открыть поле боя.
+
+
+      {0}
+    textEng: >-
+      Time to pick a destination. Use this button to open the world map.
+
+
+      {0}
   overworld_pilot_recruit__p09_hint:
     id: 1
     text: >-
@@ -1256,6 +1728,24 @@ entries:
 
 
       Click this button to select the destination suggested by the resistance.
+  overworld_pilot_recruit__p10_hint_ctrl:
+    id: 2
+    text: >-
+      Силы Свободы Фирланда предоставят разведданные о таких уязвимостях. Иногда выбор очевиден, а порой можно выбрать между несколькими направлениями, каждое со своими плюсами и минусами.
+
+
+      Используйте эту кнопку, чтобы выбрать цель, рекомендованную сопротивлением.
+
+
+      {0}
+    textEng: >-
+      Fyrland Freedom Forces will provide you intel about enemy vulnerabilities. In some cases, there will be only one obvious choice. In other cases, you can choose between multiple destinations with their own pros and cons.
+
+
+      Use this button to select the destination suggested by the resistance.
+
+
+      {0}
   overworld_pilot_recruit__p11_hint:
     id: 1
     text: >-
@@ -1267,7 +1757,7 @@ entries:
       Once you select a potential destination, you can review the available intel here. This panel is similar to mission preview and can list important modifiers, enemy strength, and other details.
 
 
-      Once you're ready to proceed, click the "Travel" option next to the recommended destination.
+      Once you're ready to proceed, use the "Travel" option next to the recommended destination.
   overworld_salvage__p00_header:
     id: 1
     text: Подведение итогов
@@ -1292,6 +1782,10 @@ entries:
     id: 1
     text: Нажмите эту кнопку, чтобы продолжить.
     textEng: Press this button to proceed.
+  overworld_salvage__p02_hint_ctrl:
+    id: 2
+    text: Нажмите {0}, чтобы продолжить.
+    textEng: Press {0} to proceed.
   overworld_salvage__p03_hint:
     id: 1
     text: >-
@@ -1303,11 +1797,15 @@ entries:
       The next pages cover the state of your pilots and mechs.
 
 
-      Taking care of your squad is key to a successful campaign, so it is important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
+      Taking care of your squad is key to a successful campaign, so it's important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
   overworld_salvage__p04_hint:
     id: 1
     text: Мех, закрепленный за конкретным пилотом, показан на фоне. Наведите курсор, чтобы узнать больше о его состоянии.
     textEng: The mech assigned to a given pilot will be displayed in the background. You can hover over this panel to get additional information about its state.
+  overworld_salvage__p04_hint_ctrl:
+    id: 2
+    text: Мех, назначенный данному пилоту, будет отображаться на заднем плане.
+    textEng: The mech assigned to a given pilot will be displayed in the background.
   overworld_salvage__p05_hint:
     id: 1
     text: Перейдите на следующую страницу, когда будете готовы.
@@ -1320,10 +1818,14 @@ entries:
 
       Щелкните по предмету в списке, чтобы просмотреть его характеристики и внешний вид.
     textEng: >-
-      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip onto your mechs.
+      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
 
 
       You can click the items in this list to check their stats and appearance.
+  overworld_salvage__p06_hint_ctrl:
+    id: 2
+    text: Большинство боев приносит награды — ценные ресурсы или снаряжение, которое можно сразу установить на мехов.
+    textEng: Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
   overworld_salvage__p07_hint:
     id: 1
     text: Перейдите на следующую страницу, когда будете готовы.
@@ -1381,11 +1883,7 @@ entries:
 
 
       Например, посмотрев на щит одного из своих мехов, вы сможете понять, стоит ли брать найденный.
-    textEng: >-
-      If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts of your mechs.
-
-
-      As an example, checking a shield from your mech can help you decide whether another shield you found is worth taking.
+    textEng: If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts in the salvage pool with the equipment on your mechs. As an example, checking an equipped shield can help you decide whether another shield you found is worth salvaging.
   overworld_salvage__p13_hint:
     id: 1
     text: Когда будете готовы, нажмите кнопку здесь. Если ваш выбор укладывается в бюджет, начнется процесс разбора добычи.

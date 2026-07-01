@@ -1,0 +1,267 @@
+hidden: false
+parents:
+- key: generic_intercept
+core: 
+areas: 
+entry: 
+generationInjection: 
+tags:
+- type_intercept_mech
+states:
+  objective_tier1:
+    comment: 
+    textNameKey: generic_salvage_t1_header
+    textDescKey: generic_salvage_t1_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 10
+    priorityDisplay: 1
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_neutralized
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 1
+    functions: 
+    reactions: 
+  objective_tier2:
+    comment: 
+    textNameKey: generic_salvage_t2_header
+    textDescKey: generic_salvage_t2_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 11
+    priorityDisplay: 2
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_neutralized
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 3
+    functions: 
+    reactions: 
+  objective_tier3:
+    comment: 
+    textNameKey: generic_salvage_t3_header
+    textDescKey: generic_salvage_t3_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 12
+    priorityDisplay: 3
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_neutralized
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 5
+    functions: 
+    reactions: 
+  runner_spawn:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 2
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_present
+        presenceDesired: false
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: Less
+        value: 4
+      - key: combat_sc_targets_spawned
+        presenceDesired: false
+        valueFromMemory: true
+        valueFromMemoryKey: combat_sc_targets_goal
+        valueCheck: Less
+        value: 0
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_present
+              value: 2
+              valueFromMemory: false
+              valueFromMemoryKey: 
+            - change: Offset
+              key: combat_sc_targets_spawned
+              value: 2
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupLink
+            key: army_convoy_mech
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions:
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: runner_escape
+                center: false
+                modifiersDirectional: false
+                modifiers: 
+            spawnTagsUsed: true
+            spawnTags:
+              context_road: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState:
+              key: runner_escape
+              check: Greater
+              value: 220
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  00_start:
+    comment: 
+    core: 
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !ClearBaseCombatMemory {}
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: combat_sc_targets_goal
+        value: 6
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    outcome: 
+    transitions: 
+unitPresets:
+  custom_runner_cargo: !UnitPresetLink
+    preset: custom_runner_cargo
+  custom_tank_cargo: !UnitPresetLink
+    preset: vhc_tank_generic_cargo_0
+  custom_tank_escort: !UnitPresetLink
+    preset: vhc_tank_elevated_generic
+unitGenerators: 

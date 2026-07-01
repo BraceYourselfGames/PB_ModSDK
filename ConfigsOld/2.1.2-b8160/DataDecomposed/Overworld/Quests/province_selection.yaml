@@ -1,0 +1,35 @@
+hidden: false
+parents: 
+textName: {}
+textDesc: {}
+core:
+  stepOnStart: main
+  mainType: true
+  recordPointCompletion: false
+  recordPointMemory: false
+tags: 
+steps:
+  main:
+    comment: 
+    index: 
+    textName: {}
+    textDesc: {}
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !RebuildTravelPoints
+        questMain: false
+        questKey: province_selection
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit: 
+    stepNext: 
+effectsShared: 

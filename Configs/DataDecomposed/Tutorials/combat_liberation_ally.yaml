@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -30,8 +31,6 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor:
       entityName: pb_ml
       stateName: 
@@ -42,7 +41,15 @@ pages:
       entityPrediction: false
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat:
     functions:
@@ -50,11 +57,12 @@ pages:
       nameInternal: pb_ml
       select: true
       focus: true
-      delay: 0
+      delay: 0.2
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -80,12 +88,18 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat:
     functions:
@@ -98,6 +112,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -123,12 +138,18 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat:
     functions:

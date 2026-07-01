@@ -2,6 +2,7 @@ hidden: false
 parents:
 - key: generic_civilian_liberation
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -9,27 +10,12 @@ tags:
 states:
   reinforcements_enemy:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: false
-    visible: false
     startInScope: false
     priorityGeneration: 9
     priority: 9
-    priorityDisplay: 9
-    mood: 0
-    ui:
-      briefingHidden: true
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -59,6 +45,7 @@ states:
           - time: 0
             hidden: false
             key: generic_reinforcements_dropship
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -101,16 +88,11 @@ states:
           outcome: 
   victory_elimination:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 15
     priority: 15
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 

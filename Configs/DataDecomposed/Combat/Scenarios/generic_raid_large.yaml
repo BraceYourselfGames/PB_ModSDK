@@ -2,6 +2,7 @@ hidden: false
 parents:
 - key: generic_raid
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -10,16 +11,11 @@ states:
   obj_03_detection:
     comment:
       comment: This state reacts for every turn a PB mech is not in a designated location.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 2
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -86,16 +82,11 @@ states:
   obj_03_disruption:
     comment:
       comment: This state reacts upon PB unit entering the location, visualizing disruption.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 1
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnLocationContact
     evaluationOnOutcome: 
@@ -159,24 +150,36 @@ states:
           outcome: 
   obj_03_extraction:
     comment: 
-    textNameKey: generic_raid_obj_03_header
-    textDescKey: generic_raid_obj_text
-    textOnCompletion:
-      textNameKey: 
-      textDescKey: generic_raid_obj_fail_text
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 3
-    priorityDisplay: 4
-    mood: -2
+    briefingHidden: false
     ui:
+      priorityDisplay: 4
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_03_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_text
+      textHeaderCompleted:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_raid_obj_fail_text
+      textDescCompleted: 
+      mood:
+        i: -2
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.5
@@ -226,6 +229,7 @@ states:
           - time: 0
             hidden: false
             key: generic_raid_obj_extracted_one
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             obj_03_detection: false
@@ -257,16 +261,11 @@ states:
           outcome: 
   outcome_reward_conditional:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome:

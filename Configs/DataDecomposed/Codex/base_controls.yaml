@@ -14,48 +14,71 @@ sections:
     a: 1
 - !CodexSectionTextControls
   lines:
-  - mode: All
-    text: World map
+  - visibility: All
     actions:
     - action: overworld_tab_nav1_overworld
       newline: false
-  - mode: All
-    text: Pilot list
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_tab_nav2_pilots
       newline: false
-  - mode: All
-    text: Unit list
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_tab_nav3_units
       newline: false
-  - mode: All
-    text: Inventory
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_tab_nav4_inventory
       newline: false
-  - mode: All
-    text: Workshop
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_tab_nav5_workshop
       newline: false
-  - mode: All
-    text: Upgrades
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_tab_nav6_upgrades
       newline: false
-  - mode: All
-    text: Briefing
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_tab_nav7_briefing
       newline: false
-  - mode: All
-    text: Inventory multi-select
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: overworld_inventory_multiselect
       newline: false
-  - mode: All
-    text: Customization camera
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  - visibility: All
     actions:
     - action: global_camera_vertical_pos
       newline: false
@@ -65,3 +88,7 @@ sections:
       newline: false
     - action: global_camera_horizontal_pos
       newline: false
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 

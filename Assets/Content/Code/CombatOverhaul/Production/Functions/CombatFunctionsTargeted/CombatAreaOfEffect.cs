@@ -155,6 +155,13 @@ namespace PhantomBrigade.Functions
         }
     }
     
+    [HideReferenceObjectPicker]
+    public class DataBlockImpactDamage
+    {
+        public float value;
+        public float radius;
+    }
+    
     [Serializable]
     public class CombatAreaOfEffect : CombatAreaOfEffectBase, ICombatFunctionTargeted
     {
@@ -256,13 +263,13 @@ namespace PhantomBrigade.Functions
         public DataBlockIntegrityDamage integrity;
         
         [DropdownReference (true)]
+        public DataBlockImpactDamage environmentDamage;
+        
+        [DropdownReference (true)]
         public DataBlockFloat concussion;
         
         [DropdownReference (true)]
         public DataBlockFloat heat;
-        
-        [DropdownReference (true)]
-        public DataBlockFloat stagger;
         
         [DropdownReference (true)]
         public DataBlockInflictedStatusBuildup statusBuildup;
@@ -355,6 +362,13 @@ namespace PhantomBrigade.Functions
                 var fxScale = radius * 2f * Vector3.one;
                 AssetPoolUtility.ActivateInstance (fxArea, position, direction, fxScale);
             }
+
+            if (environmentDamage != null && environmentDamage.value > 0f && CombatSceneHelper.ins.areaManager != null)
+            {
+                var ed = environmentDamage;
+                var am = CombatSceneHelper.ins.areaManager;
+                var destructionCount = am.ApplyDamageToRadius (position, ed.value, ed.radius, exponent, out int overlapCount);
+            }
             
             if (impactUnitSelf || impactUnitAllies || impactUnitHostiles || impactUnitComposites)
             {
@@ -362,7 +376,6 @@ namespace PhantomBrigade.Functions
                 float integrityChange = integrity != null ? integrity.f : 0f;
                 float concussionChange = concussion != null ? concussion.f : 0f;
                 float heatChange = heat != null ? heat.f : 0f;
-                float staggerChange = stagger != null ? stagger.f : 0f;
                 float crashVelocity = crash != null ? Mathf.Max (0f, crash.f) : -1f;
 
                 if (integrity != null)
@@ -415,7 +428,7 @@ namespace PhantomBrigade.Functions
                 OverlapUtility.OnAreaOfEffectAgainstUnits
                 (
                     position, radius, exponent,
-                    integrityChange, concussionChange, heatChange, staggerChange,
+                    integrityChange, concussionChange, heatChange,
                     fxHit,
                     null,
                     unitCombatSource,

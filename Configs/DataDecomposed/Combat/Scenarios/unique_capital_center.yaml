@@ -29,6 +29,28 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone:
+  developerOnly: false
+  standaloneOnly: false
+  squadCustomization: true
+  enemyPreview: false
+  type: sim
+  group: replay
+  priority: 40
+  textName: 
+  textDesc: 
+  conditionVisible: 
+  conditionUnlock:
+    checksGlobal: 
+    checksBase:
+    - !OverworldValidateCompletionScenario
+      filter:
+        unique_capital_center:
+          check: GreaterEqual
+          value: 1
+    checksBaseValues: 
+  scenarioNext: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -62,27 +84,12 @@ tags:
 states:
   03_firing_reaction:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui:
-      briefingHidden: true
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -112,9 +119,11 @@ states:
           - time: 0.5
             hidden: false
             key: capital_center_new_aftermath1
+            functionsOnExit: 
           - time: 5
             hidden: false
             key: capital_center_new_aftermath2
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -156,27 +165,12 @@ states:
           outcome: 
   03_firing_start:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui:
-      briefingHidden: true
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionStart
     evaluationOnOutcome: 
     turn:
@@ -206,6 +200,7 @@ states:
           - time: 0.5
             hidden: false
             key: capital_center_new_firing2
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -236,16 +231,11 @@ states:
           outcome: 
   charge_increment:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: -1
-    mood: 1
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -302,22 +292,32 @@ states:
           outcome: 
   charge_progress:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 1
-    priorityDisplay: -1
-    mood: 1
+    briefingHidden: false
     ui:
+      priorityDisplay: -1
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: 1
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -368,27 +368,12 @@ states:
           outcome: 
   drone_spawn:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui:
-      briefingHidden: true
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -590,27 +575,12 @@ states:
           outcome: 
   drone_start:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui:
-      briefingHidden: true
-      checkboxUsed: false
-      progressInverted: false
-      progressLimitHidden: false
-      progressHiddenAtZero: false
-      moodIntensityNormal: 
-      moodIntensityProgress: 
-      progressLimitOverride: 
-      progressLimitMemory: 
-      progressSuffixSprite: 
+    briefingHidden: false
+    ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -640,6 +610,7 @@ states:
           - time: 0.5
             hidden: false
             key: capital_center_new_drones1
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             drone_spawn: true
@@ -657,16 +628,11 @@ states:
   drone_trigger:
     comment:
       comment: This state makes enemy drones that have reached their destination detonate. Units are destroyed, tags removed, counters updated. State is non-incrementing, so reactions repeat forever, per unit.
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnLocationContact
     evaluationOnOutcome: 
@@ -847,9 +813,9 @@ states:
                 normalized: false
                 leveled: true
                 f: 100
+              environmentDamage: 
               concussion: 
               heat: 
-              stagger: 
               statusBuildup: 
               crash: 
               targetCheck: 
@@ -870,22 +836,31 @@ states:
           outcome: 
   sequence1_countermeasures_destroyed:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride:
@@ -950,16 +925,11 @@ states:
           outcome: 
   sequence1_intro:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1001,16 +971,11 @@ states:
           outcome: 
   sequence2_ship_notification:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1041,6 +1006,7 @@ states:
           - time: 0.5
             hidden: false
             key: capital_center_new_ship1
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -1054,16 +1020,11 @@ states:
           outcome: 
   ship_restart:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -1115,17 +1076,36 @@ states:
           outcome: 
   wave1:
     comment: 
-    textNameKey: generic_enemy_reinforcements_header
-    textDescKey: generic_enemy_reinforcements_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -1155,6 +1135,7 @@ states:
           - time: 0.5
             hidden: false
             key: generic_reinforcements_dropship
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -1221,17 +1202,36 @@ states:
           outcome: 
   wave2:
     comment: 
-    textNameKey: generic_enemy_reinforcements_header
-    textDescKey: generic_enemy_reinforcements_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -1261,6 +1261,7 @@ states:
           - time: 0.5
             hidden: false
             key: generic_reinforcements_dropship
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -1309,13 +1310,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: 
-      textFromScenarioGroup: true
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_boss__name
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_capital_center__text
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: true
       executionAllowed: true
       visible: true
     tags:
@@ -1538,9 +1545,11 @@ steps:
     - time: 0
       hidden: false
       key: capital_center_new_intro1
+      functionsOnExit: 
     - time: 9
       hidden: false
       key: capital_center_new_intro2
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -1587,13 +1596,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: 
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: true
       executionAllowed: true
       visible: true
     tags: 
@@ -1621,6 +1636,7 @@ steps:
     - time: 0
       hidden: false
       key: capital_center_new_intro3
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -1635,13 +1651,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: 
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: true
       executionAllowed: true
       visible: true
     tags: 
@@ -1673,9 +1695,11 @@ steps:
     - time: 0
       hidden: false
       key: capital_center_new_counters_down1
+      functionsOnExit: 
     - time: 9
       hidden: false
       key: capital_center_new_counters_down2
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -1697,13 +1721,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: true
       executionAllowed: true
       visible: true
     tags: 
@@ -1737,6 +1767,7 @@ steps:
     - time: 0
       hidden: false
       key: capital_center_new_firing1
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

@@ -1,0 +1,1239 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation:
+    f: 0.7
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - main_wilderness_mountain_01
+entry:
+  squadUsed: true
+  squadSize: 2
+  squadSlotCustom:
+    spawnTagsUsed: false
+    spawnTags:
+      context_undefended: true
+      perimeter_outer: false
+    spawnGroupKey: tutorial_pb
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Greater
+      value: 50
+    sorting: !UnitSlotSortingRetreat
+      key: default
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- block_exit_on_defeat
+- listed
+- tutorial_pilot_progression
+- type_intercept_swarm
+states:
+  info_end:
+    comment:
+      comment: Enters scope when everyone has arrived. Drops the player out when the field is empty / no targets remain.
+    textNameKey: generic_intercept_targets_outgoing_header
+    textDescKey: generic_intercept_targets_outgoing_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 20
+    priorityDisplay: 0
+    mood: 1
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: combat_sc_targets_goal
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_guard: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_intercept_swarm_exit
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: false
+            instant: false
+  info_progress:
+    comment: 
+    textNameKey: generic_intercept_targets_incoming_header
+    textDescKey: generic_intercept_targets_incoming_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 20
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_spawned
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: combat_sc_targets_goal
+        valueCheck: GreaterEqual
+        value: 9
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 5
+            hidden: false
+            key: generic_intercept_swarm_spawn_end
+          memoryChanges: 
+          stateScopeChanges:
+            info_end: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  objective_tier1:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 10
+    priorityDisplay: 1
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_neutralized
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 1
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_intercept_swarm_tier1
+          memoryChanges: 
+          stateScopeChanges:
+            objective_tier2: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards:
+            obj_tier1: 1
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  objective_tier2:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 11
+    priorityDisplay: 2
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_neutralized
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 6
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: unique_tutorial_convoy_victory_early_01
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: false
+            instant: false
+  reinforcements_hg:
+    comment: 
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: generic_enemy_reinforcements_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 9
+    priority: 9
+    priorityDisplay: 9
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatModifyUnits
+            units: 1
+            checks:
+            - !UnitValidateNameInternal
+              nameInternal: pb_homeguard1
+            functions:
+            - !CombatUnitStatusAdd
+              key: pilot_fatigue_damage
+              durationOverride: -1
+              source: Fatigue
+            - !CombatUnitPilotEffect
+              functions:
+              - !PilotStatSet
+                key: fatigue
+                normalized: true
+                value: 1
+              - !PilotStatModifierReplace
+                statKey: hp
+                modifierKey: test
+                value: 15
+            - !CombatUnitTeleport
+              target:
+                type: None
+                name: 
+                center: false
+                modifiersDirectional: false
+                modifiers:
+                - !TargetModifierOffsetGlobal
+                  offset:
+                    x: 239.5
+                    y: -22.5
+                    z: 44.5
+              effectOnOrigin: 
+              effectOnDestination: 
+            - !CombatUnitActionsCreate
+              discardExisting: true
+              actions:
+              - key: move_run
+                startTime: 0
+                startTimeIsLocal: true
+                locked: false
+                durationVariable: 
+                targetLocal: 
+                target:
+                  type: None
+                  name: 
+                  center: false
+                  modifiersDirectional: false
+                  modifiers:
+                  - !TargetModifierOffsetGlobal
+                    offset:
+                      x: 205.5
+                      y: -19.5
+                      z: 55.5
+                targetSecondary: 
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom: 
+                functionsTimed: 
+                functionsOnAction: 
+              - key: attack_primary
+                startTime: 3.8
+                startTimeIsLocal: true
+                locked: false
+                durationVariable: 
+                targetLocal: 
+                target:
+                  type: None
+                  name: 
+                  center: false
+                  modifiersDirectional: false
+                  modifiers:
+                  - !TargetModifierOffsetGlobal
+                    offset:
+                      x: 66.5
+                      y: -18.5
+                      z: 61.5
+                targetSecondary: 
+                targetUnitFiltered: 
+                targetUnitLocalOffsets: 
+                movementCustom: 
+                functionsTimed: 
+                functionsOnAction: 
+            - !CombatUnitIntegrityChangeRandom
+              range:
+                x: 0.75
+                y: 0.9
+              offset: false
+              randomPerPart: true
+              sockets:
+              - core
+              - optional_left
+          - !CombatDelayGroup
+            unscaled: true
+            delayMin: 0.1
+            delayMax: 0.1
+            repeats: 1
+            functions:
+            - !CombatSelectUnit
+              nameInternal: pb_homeguard1
+              select: false
+              focus: true
+              delay: 0
+            - !CombatCreateCommsMessage
+              time: 0
+              key: unique_tutorial_convoy_hg_01
+            - !StartTutorial
+              key: combat_convoy_hg
+              allowRepeat: true
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: ftue_convoy_hg
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 1
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: unitgroup_q1_common
+              aiBehavior: Flanker
+              aiTargeting: artillery
+              liveryPreset: hg_main_g2
+              custom:
+                name:
+                  name: pb_homeguard1
+                id: 
+                idReused: 
+                idPilot: 
+                role: special_homeguard
+                spawn: 
+                landing:
+                  landingUsed: false
+                  landingData: 
+                flags:
+                  controlByPlayer: true
+                  controlledByAI: false
+                  uncrewed: false
+                faction:
+                  faction: Phantoms
+                speed: 
+                uncrewed: 
+                pilotAppearance:
+                  presetKey: generic_hg_01
+                pilotStats: 
+                predictionLimit: 
+                animationOverrides: 
+                statMultipliers: 
+                hitDirectionModifiers: 
+                functions: 
+                combatTags: 
+            check: 
+            combatTags:
+            - custom_homeguard
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: false
+            factionBranchOverride: true
+            factionBranchKey: branch_army
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags:
+              custom_ftue_homeguard: true
+            spawnGroupKey: tutorial_hg
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          unitGeneratorKeys: 
+          outcome: 
+  runner_delay:
+    comment:
+      comment: The purpose of this state is to delay introduction of first actionable objective into scope until first batch of targets spawns in. This is to avoid confusing the player.
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: -1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            objective_tier1: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  runner_escape:
+    comment:
+      comment: This state makes enemy units that have reached their destination escape the fight. Units are retreated, tags removed, counters updated. State is non-incrementing, so reactions repeat forever, per unit.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied:
+        present: true
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationKey
+        key: obj_retreat_outer_e_00
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions:
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_targets_lost
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+              - change: Offset
+                key: combat_sc_targets_present
+                value: -1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            functionsTargeted:
+            - !CombatUnitRetreat {}
+            - !CombatUnitTagChange
+              tagChanges:
+                purpose_runner: false
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  runner_intercepted:
+    comment:
+      comment: This state detects targets being taken out. Specifically, since the goal of these targets is to escape, they are considered taken out if they lose ability to move, not just lose pilots/HP. This state reacts forever, per unit.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled, OnPartDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive: 
+        unitMobile:
+          present: false
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationFromState
+        stateKey: runner_escape
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions:
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_targets_neutralized
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_targets_present
+                value: -1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            functionsTargeted:
+            - !CombatUnitEffectSpawn
+              position:
+                x: 0
+                y: 0
+                z: 0
+              rotation:
+                x: 0
+                y: 0
+                z: 0
+              centered: true
+              asset:
+                key: fx_prop_destruction_vehicle_loot
+                scale:
+                  x: 1
+                  y: 1
+                  z: 1
+            - !CombatUnitTagChange
+              tagChanges:
+                purpose_runner: false
+            - !CombatUnitPilotEject {}
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  runner_spawn:
+    comment:
+      comment: This state spawns new enemy squads. Spawns occur every 2 turns starting from 1 (1, 3, 5, 7, ...). Spawns require total spawns to be less than goal and for total online targets to be less than a certain number, to avoid overloading the field. Spawns are relative to escape objective and can't be too close. Spawns are not precooked, as the state runs repeatedly. Only unit groups specially customized to disable spawn group registration should be used in this, otherwise spawns run out. All spawns receive a destination AI data to proceed forward (guards won't make use of it immediately).
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 2
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 2
+    turnModulus:
+      relative: false
+      factor: 2
+      check: Equal
+      value: 1
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_present
+        presenceDesired: false
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: LessEqual
+        value: 3
+      - key: combat_sc_targets_spawned
+        presenceDesired: false
+        valueFromMemory: false
+        valueFromMemoryKey: combat_sc_targets_goal
+        valueCheck: Less
+        value: 9
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_present
+              value: 3
+              valueFromMemory: false
+              valueFromMemoryKey: 
+            - change: Offset
+              key: combat_sc_targets_spawned
+              value: 3
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: vhc_tank_generic_cargo_0
+              countMin: 3
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: 
+              aiBehavior: DumbDestination
+              aiTargeting: defensive
+              liveryPreset: misc_hvt_cargo_01
+              custom:
+                name: 
+                id: 
+                idReused:
+                  textSector: overworld_entity_actions
+                  textKey: secret_target__1_name
+                idPilot: 
+                role: 
+                spawn: 
+                landing:
+                  landingUsed: true
+                  landingData:
+                    duration: 1
+                    positionStart:
+                      x: 0
+                      y: 0
+                      z: -11
+                    rotationStart:
+                      x: 0
+                      y: 0
+                      z: 0
+                    easing: true
+                    convertToAction: true
+                flags: 
+                faction: 
+                speed:
+                  libraryUsed: false
+                  speed: 11
+                uncrewed: 
+                pilotAppearance: 
+                pilotStats: 
+                predictionLimit: 
+                animationOverrides: 
+                statMultipliers: 
+                hitDirectionModifiers: 
+                functions: 
+                combatTags:
+                - purpose_runner
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: branch_army
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions:
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: runner_escape
+                center: false
+                modifiersDirectional: false
+                modifiers: 
+            spawnTagsUsed: false
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: road_w
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_intercept_swarm_header
+      textCurrentSecondaryKey: generic_intercept_swarm_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_tank_generic_cargo_0
+        countMin: 3
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: DumbDestination
+        aiTargeting: defensive
+        liveryPreset: misc_hvt_cargo_01
+        custom:
+          name: 
+          id: 
+          idReused:
+            textSector: overworld_entity_actions
+            textKey: secret_target__1_name
+          idPilot: 
+          role: 
+          spawn: 
+          landing:
+            landingUsed: true
+            landingData:
+              duration: 1
+              positionStart:
+                x: 0
+                y: 0
+                z: -11
+              rotationStart:
+                x: 0
+                y: 0
+                z: 0
+              easing: true
+              convertToAction: true
+          flags: 
+          faction: 
+          speed:
+            libraryUsed: false
+            speed: 11
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - purpose_runner
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions:
+      - !CombatUnitDestinationChange
+        target:
+          type: State
+          name: runner_escape
+          center: false
+          modifiersDirectional: false
+          modifiers: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: tutorial_convoy_cargo
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: trainingreserves_smg_01
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: misc_hvt_05
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: 
+          spawn: 
+          landing: 
+          flags: 
+          faction: 
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions:
+      - !CombatUnitTagChange
+        tagChanges:
+          purpose_guard: true
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: perimeter_outer_225_sw
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges:
+      combat_sc_targets_lost: true
+      combat_sc_targets_neutralized: true
+    unitTagDisplayChanges:
+      purpose_runner: true
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !ClearBaseCombatMemory {}
+    - !ModifyMemoryBase
+      changes:
+      - change: Offset
+        key: combat_sc_targets_goal
+        value: 9
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Offset
+        key: combat_sc_targets_present
+        value: 3
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CombatCreateCommsMessageGroup
+      clearQueue: true
+      comms:
+      - time: 0
+        hidden: false
+        key: unique_tutorial_convoy_intro_01
+      - time: 8
+        hidden: false
+        key: unique_tutorial_convoy_intro_02
+    - !StartTutorial
+      key: combat_convoy_intro
+      allowRepeat: true
+    outcome: 
+    transitions: 
+unitPresets:
+  pb_rail: !UnitPresetLink
+    preset: ftue_patrol_pb_rail
+unitGenerators: 

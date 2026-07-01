@@ -1,0 +1,28 @@
+hidden: false
+parents:
+- key: back_root
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- back
+- category_cargo
+- back_drop_boss
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - back_cargo_salvage
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

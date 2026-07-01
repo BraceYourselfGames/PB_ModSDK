@@ -1,0 +1,89 @@
+color:
+  r: 1
+  g: 1
+  b: 1
+  a: 1
+hidden: false
+icon: s_icon_m_unit_mech2
+tags: []
+resources:
+  camp_supplies:
+    amountMin: 1
+    amountMax: 1
+    amountRandom: false
+  hope:
+    amountMin: 1
+    amountMax: 1
+    amountRandom: false
+projects: 
+parts:
+- factionFilter: false
+  qualityTableKey: default_r1_common
+  levelRange: 
+  countMin: 1
+  countMax: 1
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - body_set_knox_light_top
+  tags:
+    body_part: true
+    weight_medium: true
+- factionFilter: false
+  qualityTableKey: default_r2_uncommon
+  levelRange: 
+  countMin: 1
+  countMax: 1
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - body_set_knox_medium_top
+  tags:
+    body_part: true
+    weight_medium: true
+- factionFilter: false
+  qualityTableKey: default_r2_uncommon
+  levelRange: 
+  countMin: 1
+  countMax: 1
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - wpn_rifle_sniper_03
+  tags:
+    body_part: true
+    weight_medium: true
+- factionFilter: false
+  qualityTableKey: default_r1_common
+  levelRange: 
+  countMin: 1
+  countMax: 1
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - wpn_handgun_semi_01
+  tags:
+    body_part: true
+    weight_medium: true
+- factionFilter: false
+  qualityTableKey: default_r1_common
+  levelRange: 
+  countMin: 1
+  countMax: 1
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - back_cargo_salvage
+  tags:
+    body_part: true
+    weight_medium: true
+subsystems:
+- ratingRange: 
+  countMin: 1
+  countMax: 1
+  countRandom: false
+  tagsUsed: false
+  keys:
+  - internal_aux_thruster_distance
+  tags:
+    internal_aux_thruster_distance: true

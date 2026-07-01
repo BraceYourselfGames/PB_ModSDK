@@ -1,0 +1,18 @@
+!BehaviorTree
+m_treeRoot: !BTComposite_Parallel
+  m_policy: RequireOne
+  m_children:
+  - !BTComposite_Sequence
+    m_dynamic: true
+    m_children:
+    - !BTCondition_CheckUtilityCounter
+      m_checkType: LessOrEqualTo
+      m_checkThreshold: 3
+      Comment: ''
+    - !BTAction_MoveApproachDestinationFlight
+      m_targetSource: !VariableSource_BlackboardDestination {}
+      m_threshold: !VariableSource_IndividualTimeOffset
+        m_actionTypeTimeBuffer: AttackMain
+      Comment: ''
+    Comment: ''
+  Comment: ''

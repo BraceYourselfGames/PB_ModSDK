@@ -1,0 +1,45 @@
+comment: 
+state: Finalized
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- type_special
+- prestige_unpickable
+- type_ability
+- level_3
+- type_sharpshooter
+group: 
+existingTraitTagsFilter:
+  sharpshooter_damage: true
+prestigeRank: 
+actionLink:
+  key: ability_pilot_dissipation
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatSet
+    key: ability_dissipation
+    normalized: false
+    value: 2
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

@@ -1,0 +1,1127 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: false
+  time: 7
+  scalingUsed: false
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: true
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_capital_outskirts
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: false
+    spawnTags:
+      context_undefended: true
+      perimeter_outer: false
+    spawnGroupKey: pb
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Greater
+      value: 200
+    sorting: !UnitSlotSortingRetreat
+      key: default
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- unique_capital_outskirts
+- listed
+- type_capital_outskirts
+- block_exit_on_defeat
+- block_save_after
+- block_tabs_sentries
+- trait_turrets
+states:
+  enemy_counter:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: -1
+    priority: -1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: -1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBaseAdv
+            keyInput: combat_sc_targets_mobile
+            keyOutput: 
+            operations:
+            - !FloatOperationSetResolvedInt
+              resolver: !OverworldIntValueUnitsInCombat
+                checks:
+                - !CombatValidateUnitAllied
+                  present: false
+                - !CombatValidateUnitCheck
+                  check:
+                    exportCountToMemory: 
+                    exportEntitiesToBlackboard: 
+                    tags: 
+                    name: 
+                    faction: 
+                    state:
+                      unitActive: 
+                      unitMobile:
+                        present: true
+                      unitHidden: 
+                      unitWrecked: 
+                      unitDisabled: 
+                      pilotMissing: 
+                      pilotDead: 
+                      pilotConcussed: 
+                      pilotActive: 
+                    actionPlanned: 
+                    locationOccupied: 
+                    locationOccupiedUnlinked: 
+                    relativeTransform: 
+                    blueprints: 
+                    classes:
+                      turret: false
+                    stats: 
+                    statsNormalized: 
+                    actionsInProgress: 
+                    functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  objective_elimination:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Less
+        value: 5
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints:
+        unit_sentry: false
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            objective_escape: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  objective_escape:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 1
+    mood: 0
+    ui:
+      briefingHidden: true
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied:
+        present: false
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    - count:
+        check: Greater
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    - count:
+        check: Less
+        value: 5
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints:
+        unit_sentry: false
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationKey
+        key: objective
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: capital_outskirts_new_victory1
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: true
+            instant: false
+  reinforcements_perimeter:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 11
+    priorityDisplay: 11
+    mood: -1
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      trespass: true
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: custom_m_capital_outskirts_fast
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 2
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r2_uncommon
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: inv_specops_g2_charger
+              custom: 
+            - keyExternal: true
+              key: custom_m_capital_outskirts_fast
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 2
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r2_uncommon
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: inv_specops_g2_charger
+              custom: 
+            - keyExternal: true
+              key: vhc_tank_v2_w3_adapter_lr_cannon
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 1
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r2_uncommon
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: inv_specops_g2_charger
+              custom: 
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: false
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags: 
+            spawnGroupKey: support_n
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: custom_m_capital_outskirts_fast
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 2
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r2_uncommon
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: inv_specops_g2_charger
+              custom: 
+            - keyExternal: true
+              key: custom_m_capital_outskirts_fast
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 2
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r2_uncommon
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: inv_specops_g2_charger
+              custom: 
+            - keyExternal: true
+              key: vhc_tank_v2_w3_adapter_lr_cannon
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 1
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r2_uncommon
+              aiBehavior: ''
+              aiTargeting: ''
+              liveryPreset: inv_specops_g2_charger
+              custom: 
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: false
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags: 
+            spawnGroupKey: support_s
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  reinforcements_timed:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 10
+    priorityDisplay: 10
+    mood: -1
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 4
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupEmbedded
+            units:
+            - keyExternal: true
+              key: custom_m_capital_outskirts_guard
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r1_common
+              aiBehavior: Flanker
+              aiTargeting: guardian
+              liveryPreset: inv_army_g1_berserker
+              custom: 
+            - keyExternal: true
+              key: custom_m_capital_outskirts_guard
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r1_common
+              aiBehavior: Flanker
+              aiTargeting: guardian
+              liveryPreset: inv_army_g1_berserker
+              custom: 
+            - keyExternal: true
+              key: vhc_tank_v2_w2_standard_sr_aa
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r1_common
+              aiBehavior: Flanker
+              aiTargeting: striker
+              liveryPreset: inv_army_g1_defender
+              custom: 
+            - keyExternal: true
+              key: vhc_tank_v2_w2_standard_sr_aa
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r1_common
+              aiBehavior: Flanker
+              aiTargeting: artillery
+              liveryPreset: inv_army_g1_charger
+              custom: 
+            - keyExternal: true
+              key: vhc_tank_elevated_generic_medium_0
+              countMin: 1
+              countMax: 1
+              countRandom: false
+              levelOffsetMin: 0
+              levelOffsetMax: 0
+              levelOffsetRandom: false
+              qualityTableKey: default_r1_common
+              aiBehavior: Flanker
+              aiTargeting: striker
+              liveryPreset: inv_army_g1_defender
+              custom: 
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: false
+            factionBranchOverride: true
+            factionBranchKey: branch_experimental
+            baseGrade: 2
+            maxGrade: 2
+            cloneable: true
+            functions: 
+            spawnTagsUsed: false
+            spawnTags: 
+            spawnGroupKey: defense_a
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  trespass:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Greater
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied:
+        present: true
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationKey
+        key: barrier_1
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 2
+            hidden: false
+            key: capital_outskirts_new_trespass1
+          memoryChanges: 
+          stateScopeChanges:
+            reinforcements: true
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: true
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: custom_m_capital_outskirts_guard_long
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: sharpshooter
+        liveryPreset: inv_army_g1_ranger
+        custom: 
+      - keyExternal: true
+        key: custom_m_capital_outskirts_guard
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: guardian
+        liveryPreset: inv_army_g1_defender
+        custom: 
+      - keyExternal: true
+        key: custom_m_capital_outskirts_guard
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: guardian
+        liveryPreset: inv_army_g1_defender
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_v2_w3_adapter_mr_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: sharpshooter
+        liveryPreset: inv_army_g1_ranger
+        custom: 
+      - keyExternal: true
+        key: vhc_tank_v2_w3_adapter_lr_ml
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: default_r1_common
+        aiBehavior: Flanker
+        aiTargeting: sharpshooter
+        liveryPreset: inv_army_g1_ranger
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: 
+      spawnGroupKey: defense_b
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_ml
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_ml
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      - keyExternal: true
+        key: vhc_sentry_mg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: -1
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q1_common
+        aiBehavior: Turret
+        aiTargeting: default
+        liveryPreset: inv_specops_g3
+        custom: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        '': false
+      spawnGroupKey: turrets
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges:
+      combat_sc_targets_mobile: true
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: capital_outskirts_new_intro1
+    - time: 7
+      hidden: false
+      key: capital_outskirts_new_intro2
+    - time: 14
+      hidden: false
+      key: capital_outskirts_new_intro3
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets:
+  m_long: !UnitPresetLink
+    preset: custom_m_capital_outskirts_long
+unitGenerators: 

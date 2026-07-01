@@ -1,0 +1,49 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: false
+factionBranchDefault: ''
+tags: []
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: false
+    key: elite
+    countMin: 1
+    countMax: 1
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q3_rare
+    aiBehavior: Flanker
+    aiTargeting: default
+    liveryPreset: misc_hvt_01
+    custom:
+      name: 
+      id: 
+      idReused: 
+      idPilot: 
+      role: special_elite
+      spawn: 
+      landing: 
+      flags: 
+      faction: 
+      speed:
+        libraryUsed: false
+        speed: 12
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags:
+      - purpose_vip
+unitPresets:
+  elite: !UnitFilter
+    tagsFromOverworld: false
+    tags:
+      role_elite_runner: true

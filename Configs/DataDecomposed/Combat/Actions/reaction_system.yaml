@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -40,6 +39,7 @@ dataCore:
   functionsOnValidation:
   - !CombatActionValidationDependency
     dependencyActionKey: attack_system
+  functionsOnValidationBase: 
   functionsOnCreation:
   - !CombatActionCreateReaction
     dependencyActionKey: attack_system
@@ -71,6 +71,8 @@ dataCore:
     pilot: 
   unitCheck: 
   pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
 dataFactionCheck:
   requireFaction: Invaders
 dataMovement: 

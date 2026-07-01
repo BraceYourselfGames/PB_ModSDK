@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using YamlDotNet.Serialization;
@@ -57,6 +58,8 @@ namespace PhantomBrigade.Data
         public bool removableValueKeyboard = true;
         public bool removableValueMouse = true;
         public bool removableValueGamepad = true;
+
+        public HashSet<int> invalidValuesKeyboard;
     
         public override void OnBeforeSerialization ()
         {

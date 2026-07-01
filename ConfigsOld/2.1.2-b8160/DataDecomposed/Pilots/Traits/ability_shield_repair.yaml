@@ -1,0 +1,45 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: 
+tags:
+- level_3
+- prestige_unpickable
+- type_ability
+- type_special
+- type_defender
+group: 
+existingTraitTagsFilter:
+  defender_shield: true
+prestigeRank: 
+actionLink:
+  key: ability_pilot_repair_shield
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues: 
+statRangesMin: 
+statRangesMax: 
+effectsOnEvents:
+- filterEventTypes:
+  - CombatMissionEntry
+  filterEventEntity: 
+  activeOnDisabledPilots: false
+  checksGlobal: 
+  checksBase: 
+  checksSelf: 
+  checksUnit: 
+  functionsGlobal: 
+  functionsCombat: 
+  functionsBase: 
+  functionsUnit: 
+  functionsSelf:
+  - !PilotStatSet
+    key: ability_pilot_repair_shield
+    normalized: false
+    value: 2
+  functionsEventUnit: 
+  linkedEffectKeys: 
+effectsShared: 

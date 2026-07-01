@@ -1,0 +1,857 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: wave_01
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - main_wilderness_road_02
+entry:
+  squadUsed: true
+  squadSize: 2
+  squadSlotCustom:
+    spawnTagsUsed: false
+    spawnTags:
+      context_undefended: true
+      perimeter_outer: false
+    spawnGroupKey: custom_ftue_pb
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat:
+      key: default
+      check: Greater
+      value: 50
+    sorting: !UnitSlotSortingRetreat
+      key: default
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- difficulty_normal
+- entity_patrol
+- tutorial_pilot_progression
+- listed
+- type_assassination
+- unique_tutorial_elimination
+- block_exit_on_defeat
+states:
+  comms_pb_lost:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Phantoms
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive:
+          present: false
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: ftue_patrol_pb_unitlost_pb
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  comms_vip_ejecting:
+    comment: 
+    textNameKey: generic_retreat_condition_header
+    textDescKey: generic_enemy_vip_arriving_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnActionCreated
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_vip: true
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned:
+        key: eject
+        actionCount: 
+        targetUnit: 
+        targetPosition: 
+        targetVisibleModes: 
+        targetVisibleStateValues: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_assassination_target_ejecting
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  outcome_effects:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 3
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: true
+            outcomeDefeat: true
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards:
+            ftue: 1
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+        2:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: true
+            outcomeDefeat: false
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: []
+          memoryChanges:
+          - context: Source
+            provinceKey: 
+            changes:
+            - change: Add
+              key: world_core_patrol_victory
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+        3:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: false
+            outcomeDefeat: true
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges:
+          - context: Source
+            provinceKey: 
+            changes:
+            - change: Add
+              key: world_core_patrol_defeat
+              value: 0
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  retreat_default:
+    comment: 
+    textNameKey: retreat_general_header
+    textDescKey: retreat_general_text
+    textOnCompletion: 
+    evaluated: false
+    visible: true
+    startInScope: false
+    priorityGeneration: 100
+    priority: 100
+    priorityDisplay: 100
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationKey
+        key: obj_retreat_outer_s_00
+      visual: 
+    locationRetreat:
+      commsUsed: false
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  transition_vip_ejected:
+    comment: 
+    textNameKey: generic_enemy_reinforcements_header
+    textDescKey: generic_enemy_reinforcements_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_vip: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing:
+          present: true
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: retreat_fail
+          commsOnStart:
+          - time: 2
+            hidden: false
+            key: ftue_patrol_inv_vipejected
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  transition_vip_killed:
+    comment: 
+    textNameKey: generic_assassination_target_header
+    textDescKey: generic_assassination_target_text
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_vip: true
+      name: 
+      faction:
+        key: Invaders
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive:
+          present: false
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition:
+            stepKey: retreat_success
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: ftue_patrol_inv_vipdiesfirst_00
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  retreat_fail:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: generic_eliminate_nonspecific_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+  retreat_success:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: generic_eliminate_nonspecific_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 0
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags: 
+    unitGroups: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: true
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+  wave_01:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: generic_objective_header
+      textCurrentSecondaryKey: generic_eliminate_nonspecific_text
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: true
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: ftue_patrol_inv_vip
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 1
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: leader
+        liveryPreset: misc_hvt_01
+        custom:
+          name:
+            name: vip
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_elite
+          spawn: 
+          landing: 
+          flags: 
+          faction:
+            faction: Invaders
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats:
+            healthCurrent: 100
+            healthLimit: 100
+            concussionOffset: 20
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - purpose_vip
+      - keyExternal: true
+        key: ftue_patrol_inv_guard1
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: unitgroup_q0_training
+        aiBehavior: Flanker
+        aiTargeting: guardian
+        liveryPreset: inv_army_g2
+        custom:
+          name:
+            name: 
+          id: 
+          idReused: 
+          idPilot: {}
+          role: 
+          spawn: 
+          landing: 
+          flags: 
+          faction:
+            faction: Invaders
+          speed: 
+          uncrewed: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags:
+          - purpose_guard
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: true
+      factionBranchKey: branch_army
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: true
+      functions: 
+      spawnTagsUsed: false
+      spawnTags: {}
+      spawnGroupKey: custom_ftue_inv
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_long: false
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 0
+      cloneable: false
+      functions: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: road_w
+      filterDistancePlayer:
+        check: Greater
+        value: 150
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingPlayer
+        invert: true
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges:
+      purpose_vip: true
+    unitChanges:
+    - nameInternal: vip
+      check: 
+      flags:
+        visible: true
+        playerControllable: false
+        aiControllable: false
+        aiControllableNextTurn: false
+      destruction: 
+      transform: 
+      actions:
+      - key: wait
+        startTime: 0
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 175.5
+              y: -13.5
+              z: 148.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      - key: move_run
+        startTime: 1
+        startTimeIsLocal: true
+        locked: false
+        durationVariable: 
+        targetLocal: 
+        target:
+          type: None
+          name: 
+          center: false
+          modifiersDirectional: false
+          modifiers:
+          - !TargetModifierOffsetGlobal
+            offset:
+              x: 175.5
+              y: -13.5
+              z: 160.5
+        targetSecondary: 
+        targetUnitFiltered: 
+        targetUnitLocalOffsets: 
+        movementCustom: 
+        functionsTimed: 
+        functionsOnAction: 
+      functions: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0.1
+      hidden: false
+      key: generic_assassination_start
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !StartTutorial
+      key: combat_patrol
+      allowRepeat: true
+    outcome: 
+    transitions: 
+unitPresets:
+  pb_rail: !UnitPresetLink
+    preset: ftue_patrol_pb_rail
+unitGenerators: 

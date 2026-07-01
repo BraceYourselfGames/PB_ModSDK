@@ -28,6 +28,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -63,25 +65,36 @@ tags:
 - context_settlement
 - flag_escalation_squads
 - block_persistent_pilots
+- context_contract
 states:
   destruction_critical:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: false
     priorityGeneration: 1
     priority: 1
-    priorityDisplay: 1
-    mood: -2
+    briefingHidden: false
     ui:
+      priorityDisplay: 1
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: true
       progressHiddenAtZero: true
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -2
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.8
@@ -122,6 +135,7 @@ states:
           - time: 0
             hidden: false
             key: generic_civilian_defense_outcome_fail
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -138,22 +152,32 @@ states:
             instant: false
   destruction_early:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: -1
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: true
       progressHiddenAtZero: true
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -1
       moodIntensityNormal: 
       moodIntensityProgress:
         f: 0.8
@@ -194,6 +218,7 @@ states:
           - time: 0
             hidden: false
             key: generic_civilian_defense_destruction_warning
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges:
             destruction_critical: true
@@ -208,22 +233,32 @@ states:
           outcome: 
   reinforcements_hg:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 12
     priority: 12
-    priorityDisplay: 12
-    mood: 1
+    briefingHidden: false
     ui:
+      priorityDisplay: 12
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: 1
       moodIntensityNormal:
         f: 0.5
       moodIntensityProgress: 
@@ -260,6 +295,7 @@ states:
           - time: 0
             hidden: false
             key: generic_civilian_defense_reinforcements
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -299,17 +335,36 @@ states:
           outcome: 
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -334,16 +389,11 @@ states:
     reactions: 
   victory_elimination:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 15
     priority: 15
-    priorityDisplay: 15
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -392,6 +442,7 @@ states:
           - time: 0.1
             hidden: false
             key: generic_civilian_defense_outcome_win
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -415,13 +466,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: ''
-      textCurrentSecondaryKey: ''
-      textFromScenarioGroup: true
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_civilian_liberation__name
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_groups
+        textKey: type_civilian_liberation__text
       threatRatingPercentage: 1
       allowOutcomeVictory: false
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -450,6 +507,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_civilian_defense_start
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

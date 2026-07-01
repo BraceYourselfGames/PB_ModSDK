@@ -100,10 +100,46 @@ entries:
     id: 1
     text: Prognose für Trupp
     textEng: Prediction for squad
+  briefing_info_st_refresh:
+    id: 2
+    text: Fernunterstützungsverträge werden nach jedem Kampf, jedem Lager oder jeder Reise in eine neue Provinz erneuert.
+    textEng: Remote assistance contracts refresh after each fight, camp or trip to a new province.
+  briefing_info_st_unavailable:
+    id: 2
+    text: Fernunterstützungsverträge nicht verfügbar. Komm in der Kampagne voran, um den Kontakt zu deinen Verbündeten wiederherzustellen.
+    textEng: Remote assistance contracts unavailable. Advance the campaign to reestablish contact with your allies.
   briefing_info_threat_prefix:
     id: 1
     text: Bedrohung
     textEng: Threat
+  briefing_mission_locked_header:
+    id: 2
+    text: Gesperrt
+    textEng: Locked
+  briefing_mission_locked_text:
+    id: 2
+    text: Keine Informationen verfügbar. Schließe die vorherige Mission ab, um diese Mission freizuschalten.
+    textEng: No intel available. Complete the preceding mission to unlock this mission.
+  briefing_mission_type_remote:
+    id: 2
+    text: Fernunterstützung
+    textEng: Remote assist
+  briefing_mission_type_remote_desc_builtin:
+    id: 2
+    text: Übernimm das Kommando über einen verbündeten Trupp, ohne deine Einheiten und die Pilotencrew zu gefährden. Kein Zugang zu Bergungen, dafür aber jede Menge garantierte Belohnungen.
+    textEng: Take control of an allied squad without a risk to your units and pilots. No salvage access, but plentiful guaranteed rewards.
+  briefing_mission_type_sim:
+    id: 2
+    text: Simulation
+    textEng: Simulation
+  briefing_mission_type_sim_desc_builtin:
+    id: 2
+    text: Teste deine Einheiten und die Pilotencrew in einer virtuellen Umgebung. Schaden bleibt nicht bestehen. Keine Truppanpassung erlaubt.
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. No squad customization allowed.
+  briefing_mission_type_sim_desc_squad:
+    id: 2
+    text: Teste deine Einheiten und die Pilotencrew in einer virtuellen Umgebung. Schaden bleibt nicht bestehen. Trupps können angepasst werden.
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. Squad can be customized.
   briefing_nav_button_cant_deploy:
     id: 1
     text: Einsatz nicht möglich
@@ -130,7 +166,7 @@ entries:
     textEng: Fatigued pilots
   briefing_review_fatigue_text:
     id: 2
-    text: Sie haben die maximale Erschöpfungsstufe erreicht und verlieren kontinuierlich Gesundheit. Lege ein kurze Rast ein oder tausche sie für diese Mission aus.
+    text: Sie haben die maximale Ermüdungsstufe erreicht und verlieren kontinuierlich Gesundheit. Lege ein kurze Rast ein oder tausche sie für diese Mission aus.
     textEng: These pilots are at maximum fatigue and will continuously lose health. Consider a rest stop or swapping them for this mission.
   briefing_review_frame_damage_header:
     id: 2
@@ -292,6 +328,14 @@ entries:
     id: 1
     text: Einheit
     textEng: Unit
+  briefing_standalone_header:
+    id: 2
+    text: Operationen
+    textEng: Operations
+  briefing_standalone_subtitle:
+    id: 2
+    text: Fernunterstützungen & Simulationen
+    textEng: Remote assists & simulations
   briefing_units_empty_desc:
     id: 1
     text: Der Basis stehen keine Einheiten zur Verfügung, oder alle Einheiten wurden bereits zum Trupp hinzugefügt.
@@ -839,11 +883,11 @@ entries:
   inventory_info_hint_favorite_header:
     id: 1
     text: Favorit
-    textEng: Favorite
+    textEng: Favourite
   inventory_info_hint_favorite_text:
     id: 1
     text: Markiere diesen Gegenstand als Favoriten. Dadurch wird er in Inventarlisten hervorgehoben und ist leichter auffindbar.
-    textEng: Mark this item as a favorite. This highlights it in inventory lists, making it easier to find.
+    textEng: Mark this item as a favourite. This highlights it in inventory lists, making it easier to find.
   inventory_info_hint_level_header:
     id: 1
     text: Stufe
@@ -1710,7 +1754,7 @@ entries:
     textEng: Warnings
   pilot_trait_fatigue_lowrange:
     id: 1
-    text: Dieses Mitglied der Pilotencrew hält nur einen Erschöpfungspunkt aus und kann nicht den „Gut ausgeruht“-Status erhalten, selbst bei Erschöpfung 0.
+    text: Dieses Mitglied der Pilotencrew hält nur einen Ermüdungspunkt aus und kann nicht den „Gut ausgeruht“-Status erhalten, selbst bei Ermüdung 0.
     textEng: This pilot can only tolerate one fatigue point. They can not acquire a "Well rested" status even if they are at 0 fatigue.
   pilot_trait_personal:
     id: 1
@@ -1844,6 +1888,10 @@ entries:
     id: 1
     text: Ableitung
     textEng: Dissipation
+  unit_loadout_hint_altitude_range:
+    id: 2
+    text: Schwebereichweite
+    textEng: Hover range
   unit_loadout_hint_barrier:
     id: 1
     text: Barriere
@@ -1900,6 +1948,10 @@ entries:
     id: 1
     text: 'Leerer Aufnahmeplatz: Kein installiertes Teil.'
     textEng: 'Empty socket: no installed part.'
+  unit_loadout_test_drive:
+    id: 2
+    text: Testfahrt
+    textEng: Test drive
   unit_remove_header:
     id: 2
     text: Zerstörung bestätigen

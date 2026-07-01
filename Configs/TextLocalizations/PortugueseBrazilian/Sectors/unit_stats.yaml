@@ -112,6 +112,14 @@ entries:
     id: 1
     text: PVE
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: 'Altura de flutuação sustentada ao usar o propulsor de flutuação. Depende da categoria de blindagem: unidades com proteção mais pesada flutuam a uma altura menor.'
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: Altitude de flutuação
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: Relação da geração de energia com a massa da unidade.
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: Dissipação de calor
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: Altitude máxima em que esta unidade consegue se manter flutuando (quando equipada com blindagem leve).
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: Altitude máx.
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: Altitude mais baixa em que esta unidade consegue se manter flutuando (quando equipada com blindagem pesada).
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: Altitude mín.
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: 'Camada interna de blindagem construída com compósitos tradicionais. Pode ser muito resistente, mas requer reparos se for danificada. '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: Valor - suprimentos
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: Resistência a colisões.
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: Estabilidade
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: Potência do subsistema propulsor. Leva em conta a massa para determinar a distância de uma investida.

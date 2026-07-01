@@ -2,10 +2,12 @@ hidden: false
 parents:
 - key: generic_elimination
 core: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
-tags: 
+tags:
+- context_contract
 states: 
 steps:
   main:
@@ -33,6 +35,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_elimination_start_normal
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

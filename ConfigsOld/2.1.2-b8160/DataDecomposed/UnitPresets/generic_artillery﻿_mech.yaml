@@ -1,0 +1,43 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: artillery
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- role_artillery
+- type_mech
+- weight_light
+- weight_medium
+partTagPreferences:
+  body:
+  - tags:
+      weight_light: true
+  - tags:
+      weight_medium: true
+  equipment_left:
+  - tags:
+      part_ml: false
+      range_short: true
+      wpn_secondary: true
+  equipment_right:
+  - tags:
+      part_ml: true
+      range_long: true
+      wpn_primary: true
+  - tags:
+      part_ml: true
+      range_far: true
+      wpn_primary: true
+parts: 
+animationOverrides: 
+effects: 

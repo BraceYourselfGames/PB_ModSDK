@@ -1,0 +1,98 @@
+firings: 
+visual:
+  startPositionLocal:
+    x: 0
+    y: 8
+    z: 0
+  startRotationLocal:
+    x: 0
+    y: 0
+    z: 0
+  linker:
+    path: Content/CombatStrikes/Visuals/aircraft_military_02_airlift
+  animation:
+    path: Content/CombatStrikes/Clips/strike_airlift_02_aircraft_legacy
+  functionsTimed:
+  - timeNormalized: 0.3
+    repeat: 
+    transformOverrideKey: utl_bottom
+    functionsSpatial:
+    - !CombatAreaOfEffectSpatial
+      offset:
+        x: 0
+        y: -3
+        z: 0
+      radius: 15
+      exponent: 2
+      dispersed: true
+      integrity: 
+      concussion: 
+      heat: 
+      stagger: 
+      statusBuildup: 
+      crash: 
+      targetCheck: 
+      functionsOnHit: 
+      impactUnitSelf: false
+      impactUnitAllies: false
+      impactUnitHostiles: false
+      impactUnitComposites: false
+      impactProjectiles: false
+      impactProps: true
+      fxDetonation: 
+      fxDetonationScale: 1
+      fxArea: fx_aoe_volume_01
+      fxHit: 
+      audioDetonation: 
+    functions: 
+  - timeNormalized: 0.3
+    repeat:
+      timeNormalizedEnd: 0.7
+      count: 4
+    transformOverrideKey: utl_bottom
+    functionsSpatial:
+    - !CombatEffectSpawnSpatial
+      delay: 0
+      asset:
+        key: fx_aircraft_hover
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      directionFlatten: true
+      positionGround: true
+    functions: 
+  - timeNormalized: 0.7333333
+    repeat:
+      timeNormalizedEnd: 0.78
+      count: 3
+    transformOverrideKey: utl_engine_left
+    functionsSpatial:
+    - !CombatEffectSpawnSpatial
+      delay: 0
+      asset:
+        key: fx_muzzle_tank_aa
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      directionFlatten: false
+      positionGround: false
+    functions: 
+  - timeNormalized: 0.7333333
+    repeat:
+      timeNormalizedEnd: 0.78
+      count: 3
+    transformOverrideKey: utl_engine_right
+    functionsSpatial:
+    - !CombatEffectSpawnSpatial
+      delay: 0
+      asset:
+        key: fx_muzzle_tank_aa
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      directionFlatten: false
+      positionGround: false
+    functions: 

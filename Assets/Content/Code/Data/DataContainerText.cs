@@ -32,6 +32,8 @@ namespace PhantomBrigade.Data
         public const string overworldQuests = "overworld_quests";
         public const string overworldRewards = "overworld_rewards";
         
+        public const string overworldMissionLinks = "overworld_mission_links";
+        
         public const string baseEffects = "base_effects";
         public const string baseUpgrades = "base_upgrades";
         public const string baseStats = "base_stats";
@@ -46,9 +48,11 @@ namespace PhantomBrigade.Data
         public const string scenarioStatesShared = "scenario_states_shared";
         public const string scenarioStepsShared = "scenario_steps_shared";
         public const string scenarioGroups = "scenario_groups";
+        public const string scenarioGenerators = "scenario_generators";
         
         public const string combatActions = "combat_actions";
         public const string combatStats = "combat_stats";
+        public const string combatSitreps = "combat_sitreps";
 
         public const string uiHints = "ui_hints";
         public const string uiInputHints = "ui_input_hints";
@@ -389,14 +393,7 @@ namespace PhantomBrigade.Data
             int argumentCount = GetStringFormatArgumentCount (text);
             if (argumentCount == 0)
             {
-                Debug.LogWarning ($"Text can not be formatted with input actions due lack of argument points:\n{text}");
-                return text;
-            }
-            
-            int actionCount = actions.Count;
-            if (actionCount != argumentCount)
-            {
-                Debug.LogWarning ($"Text can not be formatted due to mismatch of input action count ({actionCount}) and argument points ({argumentCount}):\n{text}");
+                // Debug.LogWarning ($"Text can not be formatted with input actions due lack of argument points:\n{text}");
                 return text;
             }
 
@@ -409,8 +406,7 @@ namespace PhantomBrigade.Data
                 actionText.Add (insert);
             }
 
-            var array = actionText.ToArray ();
-            return string.Format (text, array);
+            return text.FormatIndexed (actionText);
         }
 
         public static string InsertInputActions (string text, bool spriteWrap)
@@ -835,7 +831,74 @@ namespace PhantomBrigade.Data
                     if (entry != null)
                         entry.OnAfterDeserialization (kvp.Key, insertNewlines);
                 }
+                
+                RefreshGroups ();
             }
+        }
+
+        private static string groupPrefix = "group_";
+        private static string groupKeyAny = "any_";
+        
+        private static HashSet<string> keysInGroups = new HashSet<string> ();
+        private static List<string> keyInjectionReports = new List<string> ();
+        
+        private void RefreshGroups ()
+        {
+            if (groups == null || entries == null)
+                return;
+            
+            if (!Application.isPlaying)
+                return;
+            
+            keysInGroups.Clear ();
+            keyInjectionReports.Clear ();
+            
+            foreach (var kvp in groups)
+            {
+                var group = kvp.Value;
+                if (group == null)
+                    continue;
+
+                foreach (var entryKey in group)
+                    keysInGroups.Add (entryKey);
+            }
+            
+            foreach (var kvp in entries)
+            {
+                var entryKey = kvp.Key;
+                if (keysInGroups.Contains (entryKey))
+                    continue;
+                
+                if (!entryKey.StartsWith (groupPrefix))
+                    continue;
+                
+                var entryKeySubstring = entryKey.Substring (groupPrefix.Length);
+                if (entryKeySubstring.StartsWith (groupKeyAny))
+                {
+                    foreach (var kvp2 in groups)
+                    {
+                        var group = kvp2.Value;
+                        group.Add (entryKey);
+                        keyInjectionReports.Add ($"{entryKey} → {kvp2.Key}");
+                    }
+                }
+                else
+                {
+                    foreach (var kvp2 in groups)
+                    {
+                        var groupKey = kvp2.Key;
+                        if (entryKeySubstring.StartsWith (groupKey))
+                        {
+                            var group = kvp2.Value;
+                            group.Add (entryKey);
+                            keyInjectionReports.Add ($"{entryKey} → {kvp2.Key}");
+                        }
+                    }
+                }
+            }
+            
+            if (keyInjectionReports.Count > 0)
+                Debug.Log ($"Loaded text sector {key} with {groups.Count} groups {groups.ToStringFormattedKeys ()} | Discovered keys requiring group changes:\n{keyInjectionReports.ToStringMultilineDash ()}");
         }
         
         [Button ("Mark all placeholder"), ButtonGroup]

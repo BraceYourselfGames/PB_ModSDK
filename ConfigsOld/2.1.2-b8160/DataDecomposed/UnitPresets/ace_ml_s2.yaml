@@ -1,0 +1,72 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: 
+blueprint: unit_mech
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: grenadier
+tags: 
+partTagPreferences: 
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_wpn_ml_01
+    rating:
+      i: 2
+    systems: 
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_hakobu_light_top
+    rating:
+      i: 2
+    systems: 
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_sidearm_02
+    rating:
+      i: 2
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_primary_03
+    rating:
+      i: 2
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_hakobu_light_arm
+    rating:
+      i: 2
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_hakobu_light_arm
+    rating:
+      i: 2
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_hakobu_light_bottom
+    rating:
+      i: 2
+    systems: 
+animationOverrides: 
+effects: 

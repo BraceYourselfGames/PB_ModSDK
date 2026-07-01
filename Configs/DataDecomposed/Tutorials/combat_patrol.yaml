@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -30,8 +31,6 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor:
       entityName: vip
       stateName: 
@@ -42,7 +41,15 @@ pages:
       entityPrediction: false
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase
@@ -78,6 +85,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -103,8 +111,6 @@ pages:
     textLocation: RightBottom
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight:
@@ -113,7 +119,15 @@ pages:
         y: -130
         z: -78
         w: -76
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !ModifyMemoryBase
@@ -149,6 +163,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -174,8 +189,6 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor:
       entityName: 
       stateName: 
@@ -186,7 +199,15 @@ pages:
       entityPrediction: false
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat:
     functions:

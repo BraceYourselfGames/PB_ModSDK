@@ -1,0 +1,30 @@
+hidden: true
+parents:
+- key: wpn_root_primary
+- key: wpn_perk_filter_gun
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- wpn_special_drop_req
+- mnf_wpn_01
+- range_long
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_cannon_pf_01
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment:
+    comment: Very simple equipment generator step - insert the main subsystem responsible for weapon visuals and stats
+  checks: 

@@ -1,0 +1,33 @@
+hidden: true
+positive: true
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+group: 
+priority: 0
+tinted: false
+hue: 35
+icon: s_icon_l32_world_battlesite1
+tags:
+- type_mixed
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: quest_liberation_target_s1
+      value: 1
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  functionsBase: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 
+customValues: 

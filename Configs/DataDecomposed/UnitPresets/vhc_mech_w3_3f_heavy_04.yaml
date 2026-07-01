@@ -1,0 +1,76 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_mech
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: juggernaut
+tags:
+- role_3f_squads
+- role_3f_heavy
+- weight_heavy
+partTagPreferences:
+  body:
+  - tags:
+      weight_light: true
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_wpn_miner_01
+      - back_wpn_miner_02
+      - back_support_defense_active_01
+      - back_support_defense_active_02
+    rating: 
+    systems: 
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_aux_top_core:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_core_heat
+  equipment_left:
+    livery: 
+    preset: !PartResolverClear {}
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_ballistic: true
+          part_ultraheavy: true
+          wpn_primary: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitSetSpeed
+      mode: Set
+      speed: 14
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity: 
+  effectsOnEjection: 
+  effectsOnDestruction: 

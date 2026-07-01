@@ -1,0 +1,49 @@
+hidden: true
+parents: 
+core: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: 
+    background: 
+    mood: 
+    textHeader: 
+    text: 
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      combat:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: -1
+          color:
+            r: 1
+            g: 0
+            b: 0
+            a: 1
+          effect: None
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget:
+          - !OverworldEntityCombat {}
+          functionsGlobal: 
+          functionsLocal: 
+    optionsReused: 

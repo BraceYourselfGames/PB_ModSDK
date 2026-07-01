@@ -9,7 +9,8 @@ namespace PhantomBrigade.Functions
         {
             #if !PB_MODSDK
 
-            bool available = ScenarioUtility.IsRetreatAvailable ();
+            bool friendly = unitCombat != null && unitCombat.isOwnerAllied;
+            bool available = friendly &&  ScenarioUtility.IsRetreatAvailable ();
             return available;
 
             #else

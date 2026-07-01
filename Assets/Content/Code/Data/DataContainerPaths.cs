@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using YamlDotNet.Serialization; 
+using YamlDotNet.Serialization;
 
 #if PB_MODSDK
 using PhantomBrigade.SDK.ModTools;

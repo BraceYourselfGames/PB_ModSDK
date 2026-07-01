@@ -4,6 +4,7 @@ image:
 core:
   backgroundTerrainUsed: true
   sliceShadingUsed: true
+  customBackgroundKey: ''
   sliceShadingInputs:
     x: -1.75
     y: 10.5
@@ -23,13 +24,13 @@ core:
   fogCustom: !CombatChangeFogCustom
     time: 0
     delay: 0
-    densityGlobal: 0.3
+    densityGlobal: 0.1
     densityDistance: 0.5
-    densityHeight: 0.5
-    heightOffset: -3
+    densityHeight: 0.45
+    heightOffset: 0
   projectileCeiling:
     guidedOnly: false
-    height: -1
+    height: -2
     fxKey: fx_impact_concrete
     fxRotationCustom: false
     fxRotation:
@@ -40,8 +41,8 @@ content: {}
 atmosphere:
   groundHeight: -19.4
   destructionMapping:
-    x: 100
-    y: 200
+    x: 200
+    y: 500
     z: 0
     w: 0.6
 tags:
@@ -96,6 +97,7 @@ spawnGroups:
     tags:
     - perimeter_center
     - context_defended
+    - direction_ne
     points:
     - point:
         x: 184.5
@@ -141,6 +143,7 @@ spawnGroups:
     tags:
     - perimeter_center
     - context_defended
+    - direction_se
     points:
     - point:
         x: 184.5
@@ -184,9 +187,9 @@ spawnGroups:
         z: 0
   perimeter_center_225_sw:
     tags:
-    - perimeter_center
     - context_defended
-    - direction_ne
+    - direction_sw
+    - perimeter_center
     points:
     - point:
         x: 115.5
@@ -230,9 +233,9 @@ spawnGroups:
         z: 0
   perimeter_center_315_nw:
     tags:
-    - perimeter_center
     - context_defended
-    - direction_se
+    - direction_nw
+    - perimeter_center
     points:
     - point:
         x: 104.1068
@@ -278,6 +281,8 @@ spawnGroups:
     tags:
     - perimeter_inner
     - context_undefended
+    - direction_e
+    - direction_se
     points:
     - point:
         x: 226.5
@@ -323,6 +328,8 @@ spawnGroups:
     tags:
     - perimeter_inner
     - context_undefended
+    - direction_s
+    - direction_se
     points:
     - point:
         x: 195.5417
@@ -366,10 +373,10 @@ spawnGroups:
         z: 0
   perimeter_inner_195_ssw:
     tags:
-    - perimeter_inner
     - context_undefended
-    - direction_n
-    - direction_ne
+    - direction_sw
+    - direction_s
+    - perimeter_inner
     points:
     - point:
         x: 130.9144
@@ -413,10 +420,10 @@ spawnGroups:
         z: 0
   perimeter_inner_255_wsw:
     tags:
-    - perimeter_inner
     - context_undefended
-    - direction_ne
-    - direction_e
+    - direction_sw
+    - direction_w
+    - perimeter_inner
     points:
     - point:
         x: 70.34982
@@ -463,6 +470,7 @@ spawnGroups:
     - perimeter_outer
     - context_undefended
     - player
+    - direction_n
     points:
     - point:
         x: 184.5
@@ -508,6 +516,7 @@ spawnGroups:
     tags:
     - perimeter_outer
     - context_undefended
+    - direction_ne
     points:
     - point:
         x: 256.5
@@ -554,6 +563,8 @@ spawnGroups:
     - perimeter_outer
     - context_undefended
     - player
+    - direction_e
+    - direction_ne
     points:
     - point:
         x: 262.5
@@ -600,6 +611,8 @@ spawnGroups:
     - perimeter_outer
     - context_undefended
     - player
+    - direction_e
+    - direction_se
     points:
     - point:
         x: 267.313
@@ -645,6 +658,7 @@ spawnGroups:
     tags:
     - perimeter_outer
     - context_undefended
+    - direction_se
     points:
     - point:
         x: 238.5
@@ -691,6 +705,8 @@ spawnGroups:
     - perimeter_outer
     - context_undefended
     - player
+    - direction_s
+    - direction_se
     points:
     - point:
         x: 213.9545
@@ -734,10 +750,10 @@ spawnGroups:
         z: 0
   perimeter_outer_180_s:
     tags:
-    - perimeter_outer
     - context_undefended
+    - direction_s
+    - perimeter_outer
     - player
-    - direction_n
     points:
     - point:
         x: 137.6701
@@ -781,10 +797,10 @@ spawnGroups:
         z: 0
   perimeter_outer_202_ssw:
     tags:
-    - perimeter_outer
     - context_undefended
-    - direction_n
-    - direction_ne
+    - direction_sw
+    - direction_s
+    - perimeter_outer
     points:
     - point:
         x: 79.5
@@ -828,9 +844,9 @@ spawnGroups:
         z: 0
   perimeter_outer_225_sw:
     tags:
-    - perimeter_outer
     - context_undefended
-    - direction_ne
+    - direction_sw
+    - perimeter_outer
     points:
     - point:
         x: 28.5
@@ -874,10 +890,10 @@ spawnGroups:
         z: 0
   perimeter_outer_270_w:
     tags:
-    - perimeter_outer
     - context_undefended
+    - direction_w
+    - perimeter_outer
     - player
-    - direction_e
     points:
     - point:
         x: 43.15483
@@ -921,9 +937,9 @@ spawnGroups:
         z: 0
   perimeter_outer_315_nw:
     tags:
-    - perimeter_outer
     - context_undefended
-    - direction_se
+    - direction_nw
+    - perimeter_outer
     points:
     - point:
         x: 43.5

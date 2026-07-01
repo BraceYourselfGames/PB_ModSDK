@@ -1,0 +1,28 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: 0
+rating: 0
+mood: -1
+group: 
+hue: 1
+icon: s_icon_l32_pilot_injury
+textFromFunctions: FunctionTextInSecondary
+textSource:
+  tagAssociated: ''
+  pilotEventAssociated: combat_mission_entry
+tags:
+- camp_pilot_bespoke
+- camp_pilot
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: CombatMissionEntry
+    check: LessEqual
+    value: 0
+  functionsPilot: []
+unit: 

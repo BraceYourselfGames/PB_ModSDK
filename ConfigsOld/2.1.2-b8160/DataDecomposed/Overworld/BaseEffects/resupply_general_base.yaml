@@ -1,0 +1,87 @@
+hidden: false
+unique: false
+quickIntro: true
+priority: -1
+rating: 0
+mood: 0
+group: 
+hue: 0.06
+icon: s_icon_l32_combat_trait_ally1
+textFromFunctions: FunctionTextOmitted
+textSource:
+  tagAssociated: resupply_general
+  pilotEventAssociated: ''
+tags:
+- resupply_general
+checksGlobal: 
+checksBase: 
+functionsGlobal:
+- !ModifyPilots
+  pilots: 0
+  deployed: false
+  checks:
+  - !PilotValidateStatValue
+    key: fatigue
+    normalized: false
+    check: Greater
+    value: 1
+  functions:
+  - !Comment
+    comment: If a pilot has normal fatigue range (above 0-1) offset fatigue down by up to -1, but with a floor of 1. If a pilot has abnormally low fatigue range (0-1), just set their fatigue to 0.
+  - !PilotFunctionGroup
+    conditions:
+    - !PilotValidateStatMaxRounded
+      key: fatigue
+      check: Greater
+      value: 1
+    functions:
+    - !PilotStatOffsetClamped
+      key: fatigue
+      normalized: false
+      value: -3
+      min: 1
+      max: 5
+      avoidShiftIntoRange: true
+    functionsElse:
+    - !PilotStatSet
+      key: fatigue
+      normalized: false
+      value: 0
+- !ModifyPilots
+  pilots: 0
+  deployed: false
+  checks:
+  - !PilotValidateStatValue
+    key: hp
+    normalized: true
+    check: Less
+    value: 1
+  functions:
+  - !PilotStatSet
+    key: hp
+    normalized: true
+    value: 1
+  - !PilotStatSet
+    key: score
+    normalized: false
+    value: 0
+- !ModifyUnitsOverworld
+  units: 0
+  checks:
+  - !UnitValidateFrameIntegrity
+    check: Less
+    value: 1
+  functions:
+  - !OverworldUnitFrameIntegritySet
+    value: 1
+- !ImplementSimLockEffectResupply {}
+- !ModifyResources
+  resourceChanges:
+  - key: hope
+    check: false
+    checkStrict: false
+    offset: true
+    value: -1
+functionsBase: 
+pilot: 
+unit: 

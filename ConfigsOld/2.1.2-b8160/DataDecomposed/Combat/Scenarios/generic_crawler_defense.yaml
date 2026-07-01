@@ -1,0 +1,1258 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: false
+  time: 7
+  scalingUsed: false
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: true
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights:
+  - spawnTagsUsed: true
+    spawnTags:
+      perimeter_outer: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState:
+      key: drone_trigger
+      check: Greater
+      value: 150
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: []
+  customExitBehaviour:
+    victory: 
+    defeat: 
+    functions:
+    - mask: DefeatTotal
+      functions:
+      - !StartRetreat {}
+    calls: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: false
+  tagFilterUsed: true
+  tagFilter:
+    context_crawler_defense: true
+  keys: 
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      perimeter_outer: true
+    spawnGroupKey: perimeter_outer_090_e
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState:
+      key: drone_trigger
+      check: Less
+      value: 100
+    filterDistanceRetreat: 
+    sorting: !UnitSlotSortingState
+      key: drone_trigger
+      invert: true
+    spawnRegistration: 
+generationInjection: 
+tags:
+- context_generic
+- difficulty_normal
+- entity_patrol
+- listed
+- type_crawler_defense
+- flag_escalation_squads
+states:
+  crawler_damaged:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 19
+    priorityDisplay: 20
+    mood: 1
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_core: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized:
+        ehp:
+          check: Less
+          value: 0.5
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_crawler_defense_damaged
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatEffectSpawn
+            target:
+              type: State
+              name: crawler_origin
+              center: true
+              modifiersDirectional: false
+              modifiers:
+              - !TargetModifierOffsetLocal
+                offset:
+                  x: 0
+                  y: 13.2
+                  z: 1.6
+            asset:
+              key: fx_tank_destruction_full
+              scale:
+                x: 1
+                y: 1
+                z: 1
+            delay: 0
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  crawler_destroyed:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 19
+    priorityDisplay: 20
+    mood: 1
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_boss_core: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_crawler_defense_destroyed
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Defeat
+            early: false
+            instant: false
+  crawler_origin:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: -1
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: true
+        tagRequirements:
+          obj_defense_origin: true
+        filters: 
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+  drone_intercepted:
+    comment:
+      comment: This state detects targets being taken out. Specifically, since the goal of these targets is to escape, they are considered taken out if they lose ability to move, not just lose pilots/HP. This state reacts forever, per unit.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd, OnUnitDisabled
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: false
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions:
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_targets_neutralized
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            functionsTargeted:
+            - !CombatUnitTagChange
+              tagChanges:
+                purpose_runner: false
+            - !CombatAreaOfEffect
+              offset:
+                x: 0
+                y: 0
+                z: 0
+              radius: 15
+              exponent: 2
+              dispersed: true
+              integrity:
+                normalized: false
+                leveled: true
+                f: 100
+              concussion:
+                f: 4
+              heat: 
+              stagger: 
+              statusBuildup: 
+              crash: 
+              targetCheck: 
+              functionsOnHit: 
+              impactUnitSelf: false
+              impactUnitAllies: true
+              impactUnitHostiles: true
+              impactUnitComposites: true
+              impactProjectiles: false
+              impactProps: true
+              fxDetonation: fx_aoe_explosion_01_large
+              fxDetonationScale: 1
+              fxArea: fx_aoe_volume_01
+              fxHit: fx_aoe_hit_01
+              audioDetonation: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  drone_spawn:
+    comment:
+      comment: This state spawns new drones. Spawns occur every turn starting from 1. Spawns are relative to target objective and can't be too close. Spawns are not precooked, as the state runs repeatedly. Only unit groups specially customized to disable spawn group registration should be used in this, otherwise spawns run out.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 2
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_spawned
+        presenceDesired: false
+        valueFromMemory: true
+        valueFromMemoryKey: combat_sc_targets_goal
+        valueCheck: Less
+        value: 0
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_spawned
+              value: 2
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupLink
+            key: special_defense_drones
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: false
+            functions:
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: drone_trigger
+                center: false
+                modifiersDirectional: false
+                modifiers: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState:
+              key: drone_trigger
+              check: Greater
+              value: 220
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          - !UnitGroupLink
+            key: special_defense_drones
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: false
+            functions:
+            - !CombatUnitDestinationChange
+              target:
+                type: State
+                name: drone_trigger
+                center: false
+                modifiersDirectional: false
+                modifiers: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState:
+              key: drone_trigger
+              check: Greater
+              value: 220
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration:
+              skipRegistration: true
+          unitGeneratorKeys: 
+          outcome: 
+  drone_spawn_callout:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: Equal
+      value: 1
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_crawler_defense_incoming_drones
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  drone_trigger:
+    comment:
+      comment: This state makes enemy drones that have reached their destination detonate. Units are destroyed, tags removed, counters updated. State is non-incrementing, so reactions repeat forever, per unit.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnLocationContact
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_drone_trigger: true
+        purpose_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive:
+          present: true
+        unitMobile: 
+        unitHidden: 
+        unitWrecked: 
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: true
+        tagRequirements:
+          obj_defense_navigable: true
+        filters:
+        - !CombatPositionValidationByStateDistance
+          stateKey: crawler_origin
+          checkDistance:
+            check: Less
+            value: 60
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions:
+            - !ModifyMemoryBase
+              changes:
+              - change: Offset
+                key: combat_sc_targets_lost
+                value: 1
+                valueFromMemory: false
+                valueFromMemoryKey: 
+            - !CombatUnitTargetCompositeNamed
+              instanceKey: crawler
+              unitKey: a_core
+              functionsTargeted:
+              - !CombatUnitDamageEvent
+                delay: 0
+                splash: true
+                dispersed: true
+                sourceInternal: true
+                integrity:
+                  normalized: true
+                  leveled: false
+                  f: 0.2
+                concussion: 
+                heat: 
+                stagger: 
+                statusBuildup: 
+            - !CombatEffectSpawn
+              target:
+                type: State
+                name: crawler_origin
+                center: true
+                modifiersDirectional: false
+                modifiers:
+                - !TargetModifierTransformRandom
+                  transforms:
+                  - offset:
+                      x: -7
+                      y: 10.3
+                      z: -13
+                    rotation:
+                      x: 0
+                      y: -90
+                      z: 0
+                  - offset:
+                      x: 7
+                      y: 10.3
+                      z: -13
+                    rotation:
+                      x: 0
+                      y: 90
+                      z: 0
+                  - offset:
+                      x: 0.3
+                      y: 8.7
+                      z: -19
+                    rotation:
+                      x: 0
+                      y: 180
+                      z: -30
+                  - offset:
+                      x: -2.7
+                      y: 5
+                      z: -19
+                    rotation:
+                      x: 0
+                      y: 180
+                      z: 0
+                  - offset:
+                      x: -5.7
+                      y: 11.4
+                      z: -18.2
+                    rotation:
+                      x: 0
+                      y: -135
+                      z: 110
+              asset:
+                key: fx_tank_destruction_socket_side
+                scale:
+                  x: 1
+                  y: 1
+                  z: 1
+              delay: 0.25
+            functionsTargeted:
+            - !CombatUnitDestroy {}
+            - !CombatUnitTagChange
+              tagChanges:
+                purpose_runner: false
+            - !CombatAreaOfEffect
+              offset:
+                x: 0
+                y: 0
+                z: 0
+              radius: 15
+              exponent: 2
+              dispersed: true
+              integrity:
+                normalized: false
+                leveled: true
+                f: 100
+              concussion:
+                f: 4
+              heat: 
+              stagger: 
+              statusBuildup: 
+              crash: 
+              targetCheck: 
+              functionsOnHit: 
+              impactUnitSelf: false
+              impactUnitAllies: true
+              impactUnitHostiles: true
+              impactUnitComposites: true
+              impactProjectiles: false
+              impactProps: true
+              fxDetonation: fx_aoe_explosion_01_large
+              fxDetonationScale: 1
+              fxArea: fx_aoe_volume_01
+              fxHit: fx_aoe_hit_01
+              audioDetonation: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  escape_elimination:
+    comment:
+      comment: This state spawns reinforcements when more than half of drones are spawned and no active non-drone units are left. Their purpose is to harrass the player, who might have had too easy of a time with drones so far (if they had an opportunity to destroy every non-drone unit).
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 1
+    priority: 21
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 2
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      crawler_destroyed: false
+      escape_timer: false
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_spawned
+        presenceDesired: true
+        valueFromMemory: true
+        valueFromMemoryKey: combat_sc_targets_goal
+        valueCheck: GreaterEqual
+        value: 0
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0.5
+            key: generic_crawler_defense_eliminated
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: true
+            instant: false
+  escape_timer:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 20
+    priorityDisplay: 0
+    mood: 0
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 8
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      crawler_destroyed: false
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 1
+            hidden: false
+            key: generic_crawler_defense_repaired
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: true
+            instant: false
+  reinforcement_spawn:
+    comment:
+      comment: This state spawns reinforcements when more than half of drones are spawned and no active non-drone units are left. Their purpose is to harrass the player, who might have had too easy of a time with drones so far (if they had an opportunity to destroy every non-drone unit).
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 1
+    priority: 50
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 2
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        purpose_runner: false
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes:
+        system: false
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues:
+      crawler_destroyed: false
+      escape_elimination: false
+      escape_timer: false
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_spawned
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 6
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0.5
+            key: generic_crawler_defense_reinforcements
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              type_charger: true
+            check: 
+            combatTags: 
+            spawnGroupOccupied: false
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 0
+            cloneable: false
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState:
+              key: drone_trigger
+              check: Greater
+              value: 100
+            filterDistanceRetreat: 
+            sorting: !UnitSlotSortingState
+              key: drone_trigger
+              invert: false
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        weight_light: true
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 1
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: drone_trigger
+        invert: false
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_long: true
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: drone_trigger
+        invert: false
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges:
+      combat_sc_targets_neutralized: true
+    unitTagDisplayChanges:
+      purpose_runner: true
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: generic_crawler_defense_start
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !CombatCreateUnitComposite
+      tagsUsed: false
+      tags: 
+      blueprintKeys:
+      - crawler
+      instanceNameOverride: crawler
+      target:
+        type: State
+        name: crawler_origin
+        center: true
+        modifiersDirectional: false
+        modifiers: 
+      levelOffset: 0
+      friendly: true
+      controllable: false
+      navigationSampled: false
+    - !ClearBaseCombatMemory {}
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: combat_sc_targets_goal
+        value: 8
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    - !CombatEffectSpawn
+      target:
+        type: State
+        name: crawler_origin
+        center: true
+        modifiersDirectional: false
+        modifiers:
+        - !TargetModifierOffsetLocal
+          offset:
+            x: 0
+            y: 13.2
+            z: 1.6
+      asset:
+        key: fx_tank_destruction_full
+        scale:
+          x: 1
+          y: 1
+          z: 1
+      delay: 0
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

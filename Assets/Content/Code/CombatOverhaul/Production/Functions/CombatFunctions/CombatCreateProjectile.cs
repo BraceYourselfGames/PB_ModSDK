@@ -178,6 +178,7 @@ namespace PhantomBrigade.Functions
             {
                 projectile.AddProjectilePenetrationInfo 
                 (
+                    projSpeed,
                     penetrationCharges,
                     penetrationUnitCost,
                     penetrationGeomCost,

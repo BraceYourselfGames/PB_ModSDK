@@ -1,0 +1,115 @@
+depthBackground: 90
+depthForeground: 90
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  navigationFocus: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.05098039
+  center:
+    textImage: event_factory
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
+    textInputActions: 
+    textInputHintAppendix: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  navigationFocus: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center: 
+  hint:
+    color:
+      r: 0.2009167
+      g: 0.3301887
+      b: 0.2882626
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: Top
+    framePositionX: 0
+    framePositionY: 80
+    frameSizeX: 429
+    frameSizeY: 299
+    frameBlocksInput: true
+    frameBoundary: false
+    textLocation: RightTop
+    buttonLocation: Bottom
+    textWidth: 400
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
+    textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
+  effectsOverworld: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  navigationFocus: true
+  backgroundUsed: true
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0.5019608
+  center:
+    textImage: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
+    textInputActions: 
+    textInputHintAppendix: 
+  hint: 
+  effectsOverworld: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !UnlockCodex
+      key: overworld_map_province
+  effectsCombat: 

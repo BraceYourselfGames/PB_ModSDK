@@ -1,0 +1,45 @@
+parents:
+- key: reactor
+  priority: 10
+  offsetStart: 0
+  offsetEnd: 0
+hidden: true
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 2
+  positionY: 3
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_reactor2
+unlock: 
+cost:
+  resources:
+    components_r2: 30
+    supplies: 1000
+effect:
+  stats:
+  - key: energy_limit
+    modifier: Offset
+    value: 50
+  - key: energy_recharge_delay
+    modifier: Offset
+    value: -0.2
+  - key: mm_fast_vision_enemy
+    modifier: Offset
+    value: 0.3
+  - key: mm_normal_vision_enemy
+    modifier: Offset
+    value: 0.3
+  - key: mm_stealth_vision_enemy
+    modifier: Offset
+    value: 0.3
+  functions: []
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_reactor

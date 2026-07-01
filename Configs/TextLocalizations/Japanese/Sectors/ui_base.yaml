@@ -100,10 +100,46 @@ entries:
     id: 1
     text: 分隊の予測
     textEng: Prediction for squad
+  briefing_info_st_refresh:
+    id: 2
+    text: 遠隔支援の契約は、戦闘、キャンプ、または新たな州への移動のたびに更新されます。
+    textEng: Remote assistance contracts refresh after each fight, camp or trip to a new province.
+  briefing_info_st_unavailable:
+    id: 2
+    text: 遠隔支援の契約は現在利用できません。キャンペーンを進め、味方との連絡を再確立してください。
+    textEng: Remote assistance contracts unavailable. Advance the campaign to reestablish contact with your allies.
   briefing_info_threat_prefix:
     id: 1
     text: 脅威
     textEng: Threat
+  briefing_mission_locked_header:
+    id: 2
+    text: ロック済み
+    textEng: Locked
+  briefing_mission_locked_text:
+    id: 2
+    text: 情報がありません。先行ミッションをクリアすると、このミッションが解放されます。
+    textEng: No intel available. Complete the preceding mission to unlock this mission.
+  briefing_mission_type_remote:
+    id: 2
+    text: 遠隔支援
+    textEng: Remote assist
+  briefing_mission_type_remote_desc_builtin:
+    id: 2
+    text: 自軍のユニットやパイロットを危険にさらすことなく、味方部隊を指揮できます。サルベージはできませんが、保証されたたくさんの報酬を得られます。
+    textEng: Take control of an allied squad without a risk to your units and pilots. No salvage access, but plentiful guaranteed rewards.
+  briefing_mission_type_sim:
+    id: 2
+    text: シミュレーション
+    textEng: Simulation
+  briefing_mission_type_sim_desc_builtin:
+    id: 2
+    text: 仮想環境でユニットとパイロットを試します。ダメージは持続しません。部隊のカスタマイズは行えません。
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. No squad customization allowed.
+  briefing_mission_type_sim_desc_squad:
+    id: 2
+    text: 仮想環境でユニットとパイロットを試します。ダメージは持続しません。部隊のカスタマイズを行えます。
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. Squad can be customized.
   briefing_nav_button_cant_deploy:
     id: 1
     text: 展開できない
@@ -292,6 +328,14 @@ entries:
     id: 1
     text: ユニット
     textEng: Unit
+  briefing_standalone_header:
+    id: 2
+    text: 作戦
+    textEng: Operations
+  briefing_standalone_subtitle:
+    id: 2
+    text: 遠隔支援＆シミュレーション
+    textEng: Remote assists & simulations
   briefing_units_empty_desc:
     id: 1
     text: 基地に使用可能なユニットがないか、すべてのユニットがすでに分隊に追加されている
@@ -839,11 +883,11 @@ entries:
   inventory_info_hint_favorite_header:
     id: 1
     text: お気に入り
-    textEng: Favorite
+    textEng: Favourite
   inventory_info_hint_favorite_text:
     id: 1
     text: アイテムをお気に入りとして登録すると、アイテムリストでハイライトされ、見つけやすくなります。
-    textEng: Mark this item as a favorite. This highlights it in inventory lists, making it easier to find.
+    textEng: Mark this item as a favourite. This highlights it in inventory lists, making it easier to find.
   inventory_info_hint_level_header:
     id: 1
     text: レベル
@@ -1847,6 +1891,10 @@ entries:
     id: 1
     text: 放熱性
     textEng: Dissipation
+  unit_loadout_hint_altitude_range:
+    id: 2
+    text: ホバリング範囲
+    textEng: Hover range
   unit_loadout_hint_barrier:
     id: 1
     text: バリア
@@ -1903,6 +1951,10 @@ entries:
     id: 1
     text: 空のソケット：パーツが装着されていません。
     textEng: 'Empty socket: no installed part.'
+  unit_loadout_test_drive:
+    id: 2
+    text: テスト走行
+    textEng: Test drive
   unit_remove_header:
     id: 2
     text: 破壊を確認

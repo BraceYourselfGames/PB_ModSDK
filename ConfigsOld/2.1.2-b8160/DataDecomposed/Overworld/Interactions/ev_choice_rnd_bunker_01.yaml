@@ -1,0 +1,181 @@
+hidden: false
+parents:
+- key: sh_core_basic
+core: 
+effectsOnExit: 
+tags:
+- ev_general
+check:
+  repeat: UniquePerProvince
+  checksGlobal: 
+  checksBase: 
+  checksTarget: 
+steps:
+  main:
+    comment: 
+    image: event_mine_03
+    background: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties:
+      displayResources: true
+      optionLimitRandom:
+        i: 2
+    effects: 
+    options:
+      option_a:
+        core:
+          hidden: false
+          hiddenIfUnavailable: true
+          textEffectsCombined: true
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: components_r2
+              check: false
+              checkStrict: false
+              offset: true
+              value: 45
+          - !ModifyResources
+            resourceChanges:
+            - key: components_r3
+              check: true
+              checkStrict: false
+              offset: true
+              value: 10
+          functionsLocal: 
+      option_b:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !CreateRewardsFiltered
+            randomSingleEntry: false
+            rewards:
+            - chance: 1
+              repeats: 1
+              tagsUsed: true
+              keys: 
+              tags:
+                part_armor: true
+          functionsLocal: 
+      option_c:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: unit_token
+              check: false
+              checkStrict: false
+              offset: true
+              value: 1
+          functionsLocal: 
+      option_d:
+        core:
+          hidden: false
+          hiddenIfUnavailable: false
+          textEffectsCombined: false
+          priority: 0
+          color:
+            r: 1
+            g: 1
+            b: 1
+            a: 1
+          effect: Exit, DestroyTarget
+        dataReused: 
+        textMain: {}
+        textMainReused: 
+        textContent: {}
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !ModifyResources
+            resourceChanges:
+            - key: camp_supplies
+              check: false
+              checkStrict: false
+              offset: true
+              value: 1
+          functionsLocal: 
+    optionsReused: 

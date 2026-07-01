@@ -1,0 +1,104 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_system
+textType: 
+livery: default
+aiBehavior: DumbAdvance
+aiTargeting: default
+tags:
+- type_system
+- type_uncrewed
+partTagPreferences: 
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_drone_core_01
+    rating: 
+    systems: 
+animationOverrides: 
+effects:
+  effectsOnSpawn:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit:
+    - !CombatUnitRoleChange
+      role: special_drone_bomb
+    functionsPilot: 
+  effectsOnArrival: 
+  effectProximity:
+    distance: 8
+    triggerBreaksIteration: true
+    updateInterval:
+      f: 0.1
+    triggerLimit:
+      i: 1
+    checksUnit: 
+    checksUnitTarget: 
+    functionsUnit:
+    - !CombatAreaOfEffect
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      radius: 16
+      exponent: 2
+      dispersed: true
+      integrity:
+        normalized: false
+        leveled: true
+        f: 500
+      concussion: 
+      heat: 
+      stagger: 
+      statusBuildup: 
+      crash: 
+      targetCheck: 
+      functionsOnHit: 
+      impactUnitSelf: true
+      impactUnitAllies: true
+      impactUnitHostiles: true
+      impactUnitComposites: true
+      impactProjectiles: false
+      impactProps: true
+      fxDetonation: fx_aoe_explosion_01_large
+      fxDetonationScale: 2
+      fxArea: fx_aoe_volume_01
+      fxHit: fx_aoe_hit_01
+      audioDetonation: 
+    - !CombatFragmentSpawn
+      subsystemKey: prj_debris_01
+      offset:
+        x: 0
+        y: 0
+        z: 0
+      count: 4
+      lifetime: 2
+      speed: 30
+      gravity: 0.66
+      damage: 0.1
+      impact: 10
+      scatterVertical: 0.2
+    - !CombatUnitDestroy {}
+    functionsUnitTarget: 
+  effectsOnEjection: 
+  effectsOnDestruction:
+  - checksGlobal: 
+    checksBase: 
+    checksPilot: 
+    checksUnit: 
+    functionsGlobal: 
+    functionsBase: 
+    functionsCombat: 
+    functionsUnit: 
+    functionsPilot: 

@@ -1,0 +1,39 @@
+hidden: false
+parents:
+- key: contract_generic
+- key: base_rewards_e1_01
+core:
+  priority: 1
+  type: remote
+  group: gen_contracts
+tags: 
+textList:
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+escalation:
+  i: 1
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter:
+  tagsUsed: true
+  keys: 
+  tags:
+    context_contract: true
+    context_generic: true
+    type_intercept_mech: false
+    type_military_demolition: false
+    type_raid: false
+scenarioChanges: 
+squads: 
+squadFilter:
+  tagsUsed: false
+  keys:
+  - base_squad_heavy_3x
+  - base_squad_general_4x
+  - base_squad_general_3x
+  tags: 
+rewardPool: 
+effectsOnCompletion: 

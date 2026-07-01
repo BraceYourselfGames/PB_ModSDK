@@ -1,0 +1,38 @@
+hidden: false
+unique: true
+quickIntro: false
+priority: 0
+rating: 0
+mood: -1
+group: 
+hue: 1
+icon: s_icon_l32_pilot_injury
+textFromFunctions: FunctionTextInSecondary
+textSource: 
+tags:
+- camp_pilot_bespoke
+- camp_pilot
+checksGlobal: 
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot:
+  checksPilot:
+  - !PilotValidateEventCount
+    type: CombatUnitDamageIncoming
+    check: LessEqual
+    value: 0
+  - !PilotValidateEventCount
+    type: CombatUnitDamageOutgoingEnemy
+    check: LessEqual
+    value: 0
+  - !PilotValidateEventCount
+    type: CombatUnitCrashWon
+    check: LessEqual
+    value: 0
+  - !PilotValidateEventCount
+    type: CombatMissionEntry
+    check: GreaterEqual
+    value: 1
+  functionsPilot: []
+unit: 

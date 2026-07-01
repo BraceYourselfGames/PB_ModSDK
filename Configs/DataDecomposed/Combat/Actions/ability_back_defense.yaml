@@ -30,7 +30,6 @@ dataCore:
   instantEffect: false
   targetWithoutStandardChecks: false
   targetWithoutPart: false
-  eventsOnValidation: 
   eventsOnCreation: 
   eventsOnModification: 
   eventsOnStart: 
@@ -38,6 +37,7 @@ dataCore:
   eventsOnDispose: 
   functionsOnTargetCheck: 
   functionsOnValidation: 
+  functionsOnValidationBase: 
   functionsOnCreation: 
   functionsOnModification: 
   functionsOnStart: 
@@ -69,6 +69,13 @@ dataCore:
         ability_defense: true
       present: true
   pilotLink: 
+  rangePreviewFromStat:
+    value: 0
+    statKey: wpn_range_max
+    socket: back
+  timelinePreview:
+    warning: CustomDuration
+    warningDuration: 4
 dataFactionCheck: 
 dataMovement: 
 dataEquipment:

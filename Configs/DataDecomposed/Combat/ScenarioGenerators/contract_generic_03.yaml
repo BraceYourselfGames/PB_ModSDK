@@ -1,0 +1,38 @@
+hidden: false
+parents:
+- key: contract_generic
+- key: base_rewards_e3_01
+core:
+  priority: 3
+  type: remote
+  group: gen_contracts
+tags: 
+textList:
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+escalation:
+  i: 3
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter:
+  tagsUsed: true
+  keys: 
+  tags:
+    context_contract: true
+    context_generic: true
+scenarioChanges: 
+squads: 
+squadFilter:
+  tagsUsed: false
+  keys:
+  - base_squad_general_2x
+  - base_squad_general_3x
+  - base_squad_heavy_2x
+  - base_squad_tanks_4x
+  - base_squad_tanks_el_3x
+  tags: 
+rewardPool: 
+effectsOnCompletion: 

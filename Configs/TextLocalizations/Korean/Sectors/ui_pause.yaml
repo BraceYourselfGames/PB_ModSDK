@@ -226,10 +226,26 @@ entries:
     id: 1
     text: 초기화하기
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: DLC
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: 설치된 콘텐츠
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: 서포터 업그레이드
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: 2.0 업데이트가 도착했습니다!
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: 2.2 업데이트가 도착했습니다!
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -254,6 +270,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      나만의 방식으로 즐기세요! 컨트롤러 완전 지원과 더불어 확장 키보드 탐색이 추가되었습니다.
+
+
+      새로운 원격 지원 계약과 사정거리 추가 옵션으로 나아가며 빌드크래프트를 즐기세요.
+
+
+      작업 카메라, 추가 맵, UI 개선, 그리고 더 많은 요소들이 추가되었습니다! 아래 링크에서 업데이트 및 2.0 점검에 관한 세부 사항을 확인하세요.
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -452,12 +486,12 @@ entries:
     textEng: Numpad
   input_kb_page_down:
     id: 2
-    text: Page Down
-    textEng: Page Down
+    text: PgDn
+    textEng: PgDn
   input_kb_page_up:
     id: 2
-    text: Page Up
-    textEng: Page Up
+    text: PgUp
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: Enter(Return)
@@ -498,6 +532,74 @@ entries:
     id: 2
     text: 마우스 휠
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: 일반 조작법
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: 컨트롤러 사용 시
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: 카메라 이동
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: 카메라 회전
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: 취소/뒤로 가기
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: 선택한 버튼 확인/클릭
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: 버튼 간 이동
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: 일시 정지
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: 화면 전환/유닛 변경
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: 줌/전투 시간 조정
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      현재 위치와 다음 이동 위치를 확인하려면 포커스 윤곽선을 참고하세요. 각 화면의 입력 힌트를 확인하여 상황별 조작법을 익히세요.
+
+
+      컨트롤러 사용에 문제가 발생하면 아래 신고 양식을 통해 의견을 보내주세요.
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: 키보드 사용 시
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      각 화면의 입력 힌트를 확인하여 상황별 조작법을 익히세요.
+
+
+      게임의 대부분은 키보드로 조작할 수 있습니다. 방향키를 사용하여 이동하고 포커스 윤곽선을 통해 선택 위치를 확인하세요.
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: 이 저장 파일은 전투 저장과 같은 실험 기능을 포함한 캠페인에서 생성되었습니다. 불러올 수는 있지만, 공식적으로 지원되지는 않습니다.
@@ -742,6 +844,14 @@ entries:
     id: 2
     text: '다음을 제외한 모든 입력이 저장됨:'
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: 이 카테고리를 초기화합니까?
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: 정말 이 카테고리 내 모든 옵션을 기본값으로 초기화하시겠습니까?
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: 끄기
@@ -840,6 +950,10 @@ entries:
     id: 1
     text: 불러오기
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: 브리핑 불러오기
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: 모드
@@ -888,6 +1002,14 @@ entries:
     id: 1
     text: 저장 파일 불러오기
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: 마지막 저장 파일 불러오는 중
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: 가장 최근의 저장 파일에서부터 계속하시겠습니까?
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: 삭제 확정

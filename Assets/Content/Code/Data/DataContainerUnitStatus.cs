@@ -324,6 +324,19 @@ namespace PhantomBrigade.Data
         [PropertyRange (0f, 10f)]
         public float compMultiplier = 1f;
     }
+    
+    [HideReferenceObjectPicker]
+    public class DataBlockStatusDecay
+    {
+        [LabelText ("Value")]
+        public float f;
+
+        [LabelText ("Boss multiplier")]
+        [PropertyRange (0f, 10f)]
+        public float compMultiplier = 1f;
+
+        public bool decayOnDash = true;
+    }
 
     public static class UnitStatusTags
     {
@@ -409,7 +422,7 @@ namespace PhantomBrigade.Data
         public DataBlockFloat durationUpdate;
         
         [DropdownReference (true)]
-        public DataBlockFloatComposite buildupDecayRate;
+        public DataBlockStatusDecay buildupDecayRate;
         
         [DropdownReference (true)]
         public DataBlockFloatComposite buildupThreshold;
@@ -459,7 +472,7 @@ namespace PhantomBrigade.Data
             OnColorChange ();
         }
 
-        public virtual void OnKeyReplacement (string keyOld, string keyNew)
+        public override void OnKeyReplacement (string keyOld, string keyNew)
         {
             base.OnKeyReplacement (keyOld, keyNew);
             keyHash = key.GetHashCode ();

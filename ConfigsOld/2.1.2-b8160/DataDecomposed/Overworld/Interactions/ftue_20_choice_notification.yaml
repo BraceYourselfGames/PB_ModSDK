@@ -1,0 +1,58 @@
+hidden: false
+parents:
+- key: sh_group_precombat_optional
+core: 
+effectsOnExit: 
+tags: 
+check: 
+steps:
+  main:
+    comment: 
+    image: event_hologram_old_orange1
+    background:
+      immersive: false
+      focus: false
+      brightness: 1
+      color:
+        r: 1
+        g: 0.7413164
+        b: 0.4009434
+        a: 0
+      image: bg_blur_crawler
+      imageSecondary: 
+      video: 
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options:
+      continue:
+        core: 
+        dataReused: 
+        textMain: 
+        textMainReused: 
+        textContent: 
+        textContentReused: 
+        textEffect: 
+        textEffectReused: 
+        check: 
+        checkOtherOptions: 
+        checksGlobal: 
+        checksBase: 
+        checksTarget: 
+        effects:
+        - functionsBase: 
+          functionsTarget: 
+          functionsGlobal:
+          - !QuestProgress
+            stepRequired: 04_liberation_after
+            stepNext: 05_choice
+            effectOnExit: true
+            effectOnEntry: true
+            questMain: true
+            questKey: core_ftue
+          functionsLocal:
+          - !InteractionOptionExit {}
+    optionsReused: 

@@ -397,8 +397,7 @@ public class DictionaryDropdownAttributeProcessor : OdinAttributeProcessor<strin
 {
     private static Type dictionaryStringKeyTag = typeof (DictionaryStringKeyTag);
     private static Type dictionaryStringValueTag = typeof (DictionaryStringValueTag);
-
-
+    
     public override void ProcessSelfAttributes (InspectorProperty property, List<Attribute> attributes)
     {
         bool isKey = false;
@@ -409,11 +408,11 @@ public class DictionaryDropdownAttributeProcessor : OdinAttributeProcessor<strin
 
         if (!isKey && !isValue)
             return;
-
+        
         var p1 = property;
         var p2 = p1.Parent;
         var p3 = p2.Parent;
-
+        
         if (isKey)
         {
             bool isKeyDropdown = p3.Attributes.HasAttribute<DictionaryKeyDropdown> ();
@@ -472,14 +471,14 @@ public class DictionaryDropdownAttributeProcessor : OdinAttributeProcessor<strin
             {
                 var d = p3.Attributes.GetAttribute<DictionaryValueDropdown> ();
                 // Debug.Log ($"Located a value dropdown tag on: {p3.ParentType.Name}/{p3.Name} (type: {d.type}, expression: {(string.IsNullOrEmpty (d.expression) ? "none" : d.expression)})");
-
+                
                 if (d.type == DictionaryValueDropdownType.Expression)
                 {
                     var expression = d.expression;
                     if (!string.IsNullOrEmpty (expression))
                         SetupValueDropdown (attributes, expression, d.append);
                 }
-
+                
                 else if (d.type == DictionaryValueDropdownType.Socket)
                     SetupValueDropdown (attributes, "@DataHelperUnitEquipment.GetSockets ()", d.append);
                 else if (d.type == DictionaryValueDropdownType.Hardpoint)
@@ -516,7 +515,7 @@ public class EditableKeyValueStringResolver : OdinAttributeProcessor<EditableKey
         bool isValue = member.Name == "Value";
         if (!isKey && !isValue)
             return;
-
+        
         if (isKey)
             attributes.Add (new DictionaryStringKeyTag ());
         else if (isValue)
@@ -590,13 +589,14 @@ public class EditableKeyStringResolverDB34 : EditableKeyStringResolver<DataBlock
 public class EditableKeyStringResolverDB35 : EditableKeyStringResolver<DataBlockSubsystemStat> { }
 public class EditableKeyStringResolverDB36 : EditableKeyStringResolver<DataBlockUnitBlueprintTrainingSocket> { }
 public class EditableKeyStringResolverDB37 : EditableKeyStringResolver<DataBlockUnitCompositeSpatialEffect> { }
+public class EditableKeyStringResolverDB38 : EditableKeyStringResolver<DataBlockFloatChange> { }
 
 public class EditableKeyStringResolverDB40 : EditableKeyStringResolver<ModConfigEditLinker> { }
 public class EditableKeyStringResolverDB41 : EditableKeyStringResolver<ModConfigEditMultiLinker> { }
 public class EditableKeyStringResolverDB42 : EditableKeyStringResolver<ModConfigEditSourceFileMultiLinker> { }
 
 // Looks like TempKeyValuePair is severed from parent dictionary property so parentProperty.Parent is null
-// This makes current processor setup break, so temp resolver is commented out for now
+// This makes current processor setup break, so temp resolver is commented out for now 
 
 /*
 public class TempKeyStringResolver<T> : OdinAttributeProcessor<TempKeyValuePair<string, T>>
@@ -651,18 +651,18 @@ public class FoldoutReferenceResolver<T> : OdinAttributeProcessor<T> where T : c
     {
         if (parentProperty == null || parentProperty.Parent == null)
             return;
-
+        
         if (!attributes.HasAttribute<FoldoutReference> ())
             return;
-
+        
         var source = attributes.GetAttribute<FoldoutReference> ();
         var fieldName = member.Name;
         // var fieldProperty = parentProperty.Children.Get (fieldName);
         // var fieldStatus = fieldProperty != null ? fieldProperty.BaseValueEntry.ValueState == PropertyValueState.NullReference ? "null" : "present" : "?";
-
+        
         var foldoutGroupID = fieldName;
         var horGroupName = $"{foldoutGroupID}/hg";
-
+        
         var fieldNameNice = ObjectNames.NicifyVariableName (fieldName).ToLowerInvariant ();
         var foldoutGroupLabel = $"@{fieldName} != null ? \"{fieldNameNice.FirstLetterToUpperCase ()}\" : \"No {fieldNameNice}\""; // —
 
@@ -687,10 +687,10 @@ public class InlineButtonClearResolver<T> : OdinAttributeProcessor<T> where T : 
     {
         if (parentProperty == null || parentProperty.Parent == null)
             return;
-
+        
         if (!attributes.HasAttribute<InlineButtonClear> ())
             return;
-
+        
         var source = attributes.GetAttribute<InlineButtonClear> ();
         var fieldName = member.Name;
         var fieldType = member.GetReturnType ();
@@ -701,7 +701,7 @@ public class InlineButtonClearResolver<T> : OdinAttributeProcessor<T> where T : 
 
         var attr = new InlineButtonAttribute (expAction, "-");
         attr.ShowIf = expShowIf;
-
+        
         attributes.Add (attr);
     }
 }
@@ -712,7 +712,7 @@ public class FoldoutReferenceButtonResolver<T> : OdinAttributeProcessor<T> where
     {
         if (parentProperty == null || parentProperty.Parent == null)
             return;
-
+        
         if (!attributes.HasAttribute<FoldoutReferenceButton> ())
             return;
 
@@ -720,12 +720,12 @@ public class FoldoutReferenceButtonResolver<T> : OdinAttributeProcessor<T> where
         var fieldName = source.fieldName;
         // var fieldProperty = parentProperty.Children.Get ("fieldName");
         // var fieldStatus = fieldProperty != null ? fieldProperty.BaseValueEntry.ValueState == PropertyValueState.NullReference ? "null" : "present" : "?";
-
+        
         var foldoutGroupID = fieldName;
         var horGroupName = $"{foldoutGroupID}/hg";
-
+        
         var buttonArg = $"@DataEditor.GetToggleLabel ({fieldName})";
-
+        
         // attributes.Add (new InfoBoxAttribute (fieldStatus));
         attributes.Add (new ButtonAttribute (buttonArg));
         attributes.Add (new HorizontalGroupAttribute (horGroupName, DataEditor.toggleButtonWidth));
@@ -738,10 +738,10 @@ public class DropdownReferenceResolver<T> : OdinAttributeProcessor<T> where T : 
     {
         if (parentProperty == null || parentProperty.Parent == null)
             return;
-
+        
         if (!attributes.HasAttribute<DropdownReference> ())
             return;
-
+        
         var source = attributes.GetAttribute<DropdownReference> ();
         var fieldName = member.Name;
 
@@ -755,7 +755,7 @@ public class DropdownReferenceResolver<T> : OdinAttributeProcessor<T> where T : 
 
         ShowIfAttribute showIfAttribute = null;
         bool showIfAttributePresent = attributes.HasAttribute<ShowIfAttribute> ();
-
+        
         if (!showIfAttributePresent)
         {
             string showIfCondition = hideIfCondition != null ? $"@{fieldName} != null && !({hideIfCondition})" : $"@{fieldName} != null";
@@ -766,12 +766,12 @@ public class DropdownReferenceResolver<T> : OdinAttributeProcessor<T> where T : 
         {
             showIfAttribute = attributes.GetAttribute<ShowIfAttribute> ();
             string showIfCondition = showIfAttribute.Condition;
-
+            
             if (!showIfCondition.StartsWith ("@"))
                 showIfCondition = $"@{showIfCondition}";
-
+            
             showIfCondition = $"{showIfCondition} && {fieldName} != null";
-
+            
             if (hideIfCondition != null)
                 showIfCondition = $"{showIfCondition} && !({hideIfCondition})";
 
@@ -788,19 +788,24 @@ public class DropdownReferenceResolver<T> : OdinAttributeProcessor<T> where T : 
                 var tabGroupAttribute = attributes.GetAttribute<TabGroupAttribute> ();
                 groupName = $"{tabGroupAttribute.GroupID}/{groupName}";
             }
+            else if (attributes.HasAttribute<FoldoutGroupAttribute> ())
+            {
+                var foldoutGroupAttribute = attributes.GetAttribute<FoldoutGroupAttribute> ();
+                groupName = $"{foldoutGroupAttribute.GroupID}/{groupName}";
+            }
             
             attributes.Add (new BoxGroupAttribute (groupName, false));
         }
-
+        
         attributes.Add (new InlineButtonAttribute ($"@{fieldName} = null", "×"));
     }
 }
 
-public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
+public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute> 
 {
     private ValueResolver labelGetter;
 
-
+    
     /// <summary>
     /// initialize values for colors, labels, etc
     /// </summary>
@@ -809,7 +814,7 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
         labelGetter = ValueResolver.GetForString(Property, Attribute.LabelText ?? Attribute.GroupName);
     }
 
-
+    
     /// <summary>
     /// Draw the stuff
     /// </summary>
@@ -828,11 +833,11 @@ public class ColoredBoxGroupDrawer : OdinGroupDrawer<ColoredBoxGroupAttribute>
                 headerLabel = "";
             }
         }
-
+        
         SirenixEditorGUI.BeginBox();
         SirenixEditorGUI.BeginBoxHeader();
-        GUIHelper.PopColor();
-
+        GUIHelper.PopColor(); 
+        
         SirenixEditorGUI.Title(headerLabel, null, TextAlignment.Left, false, Attribute.BoldLabel);
         SirenixEditorGUI.EndBoxHeader();
 
@@ -1029,7 +1034,7 @@ sealed class FunctionListAttributeProcessor19 : FunctionListAttributeProcessor<I
 #endif
 
 // Looks like TempKeyValuePair is severed from parent dictionary property so parentProperty.Parent is null
-// This makes current processor setup break, so temp resolver is commented out for now
+// This makes current processor setup break, so temp resolver is commented out for now 
 /*
 public class TempValueStringResolver<T> : OdinAttributeProcessor<TempKeyValuePair<T, string>>
 {
@@ -1134,14 +1139,14 @@ public class TempValueReferenceResolverDB8 : TempValueReferenceResolver<DataBloc
 public class OnInspectorGUIStartDrawer : OdinValueDrawer<OnInspectorGUIStart>
 {
     private InspectorPropertyValueGetter<int> valueGetter;
-
+    
     protected override void Initialize ()
     {
         this.valueGetter = new InspectorPropertyValueGetter<int> (this.Property, "OnInspectorGUIStart.expression");
         var value = this.valueGetter.GetValue ();
         SkipWhenDrawing = true;
     }
-
+    
     protected override void DrawPropertyLayout (GUIContent label)
     {
         var value = this.valueGetter.GetValue ();

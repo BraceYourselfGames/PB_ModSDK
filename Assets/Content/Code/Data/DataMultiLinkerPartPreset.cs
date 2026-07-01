@@ -608,7 +608,7 @@ namespace PhantomBrigade.Data
                     t.localPosition = (visualInstance.customTransform ? visualInstance.customPosition : Vector3.zero);
                     t.localRotation = (visualInstance.customTransform ? Quaternion.Euler (visualInstance.customRotation) : Quaternion.identity);
                     t.localScale = Vector3.one;
-
+                    
                     if (logMaterialWarnings)
                     {
                         var renderers = visualInstance.GetComponentsInChildren<Renderer> (true);

@@ -28,6 +28,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -64,20 +66,41 @@ tags:
 - listed
 - trait_entrenched
 - trait_turrets
+- context_contract
 states:
   alarm:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: -1
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood:
+        i: -1
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -101,17 +124,36 @@ states:
     reactions: 
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: false
-    visible: true
     startInScope: false
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -135,16 +177,11 @@ states:
     reactions: 
   reward:
     comment: 
-    textNameKey: generic_unknown_header
-    textDescKey: generic_unknown_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: false
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -187,17 +224,36 @@ states:
           outcome: 
   wave_2:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn:
@@ -223,13 +279,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: generic_eliminate_isolated_generic_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_eliminate_isolated_generic_text
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -257,6 +319,7 @@ steps:
     - time: 0
       hidden: false
       key: mid_reinforcement_last
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -271,13 +334,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: generic_eliminate_isolated_generic_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_eliminate_isolated_generic_text
       threatRatingPercentage: 0
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -386,6 +455,7 @@ steps:
     - time: 0
       hidden: false
       key: mid_reinforcement_last
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -400,13 +470,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: generic_eliminate_nonspecific_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_eliminate_nonspecific_text
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -497,6 +573,7 @@ steps:
     - time: 0
       hidden: false
       key: start_reinforcement_request
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

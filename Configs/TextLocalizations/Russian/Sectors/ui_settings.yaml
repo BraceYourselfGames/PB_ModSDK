@@ -24,6 +24,22 @@ entries:
     id: 1
     text: Переключение фонового движения камеры и эффектов в главном меню.
     textEng: Toggles background camera movement and effects in the main menu.
+  access_navframe_style__header:
+    id: 2
+    text: Рамка фокуса
+    textEng: Focus frame
+  access_navframe_style__text:
+    id: 2
+    text: Стиль рамки, которая выделяет текущий элемент, находящийся в фокусе, при навигации с помощью клавиатуры или контроллера.
+    textEng: The style of the frame highlighting the currently focused element for keyboard and controller navigation.
+  access_navframe_timeout__header:
+    id: 2
+    text: Затухание рамки фокуса
+    textEng: Focus fade
+  access_navframe_timeout__text:
+    id: 2
+    text: Время, за которое рамка фокуса исчезает.
+    textEng: The time it takes for the focus frame to fade out.
   access_overworld_glitch_effect__header:
     id: 1
     text: Глитч-эффект на карте мира
@@ -239,7 +255,15 @@ entries:
   game_base_preserve_colors__text:
     id: 1
     text: Если выбран этот параметр, сохраненные цвета меха будут иметь приоритет над цветами новых деталей. Например, если мех окрашен в серый, а новое оружие — красное, то после установки оружие будет перекрашено в серый.
-    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
+  game_combat_action_tooltip_details__header:
+    id: 2
+    text: Подсказки в описаниях действий
+    textEng: Action tooltip hints
+  game_combat_action_tooltip_details__text:
+    id: 2
+    text: Показывать в подсказках боевых действий информацию о механиках, таких как нагрев и заряды.
+    textEng: Display hints about mechanics like heat and charges in the combat action tooltips.
   game_combat_damage_numbers__header:
     id: 1
     text: Показывать количество урона
@@ -336,6 +360,14 @@ entries:
     id: 1
     text: Эта настройка определяет, возвращается ли время предсказания в начало хода после периода простоя.
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
+  game_combat_updates__header:
+    id: 2
+    text: Показать уведомления
+    textEng: Show notifications
+  game_combat_updates__text:
+    id: 2
+    text: Показать уведомления о различных событиях в правом верхнем углу экрана.
+    textEng: Show update notifications in the top right corner of the screen.
   game_ent_sp_logo__header:
     id: 2
     text: Изменить логотип в меню
@@ -376,6 +408,14 @@ entries:
     id: 1
     text: Показывает слайд-шоу, выделяющее каждое новое задание, появляющееся на карте мира.
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
+  game_overworld_updates__header:
+    id: 2
+    text: Показать уведомления
+    textEng: Show notifications
+  game_overworld_updates__text:
+    id: 2
+    text: Показать уведомления о различных событиях в правом верхнем углу экрана.
+    textEng: Show update notifications in the top right corner of the screen.
   game_screenshots_lossless__header:
     id: 1
     text: Скриншоты без потерь
@@ -580,6 +620,22 @@ entries:
     id: 1
     text: Управление разрешением всех текстур, кроме интерфейса пользователя. По умолчанию рекомендуется «Полное».
     textEng: Controls resolution of textures with exception of user interface. Recommended default is Full.
+  input_gamepad_enabled__header:
+    id: 2
+    text: Обнаружение контроллеров
+    textEng: Detect controllers
+  input_gamepad_enabled__text:
+    id: 2
+    text: Если отключено, игра будет игнорировать весь ввод с контроллеров.
+    textEng: If disabled, the game will ignore all controller input.
+  input_gamepad_hints__header:
+    id: 2
+    text: Подсказки управления
+    textEng: Show input hints
+  input_gamepad_hints__text:
+    id: 2
+    text: Показывать на экране подсказки по управлению с помощью контроллера.
+    textEng: Display hints about the controller bindings on the screen.
   input_gamepad_look_invert_vertical__header:
     id: 1
     text: Инвертирование камеры
@@ -620,6 +676,14 @@ entries:
     id: 1
     text: Определяет, как сильно таймлайн движется в зависимости от ввода игрока.
     textEng: Controls how much the timeline moves from user input
+  input_gamepad_zoom_invert__header:
+    id: 2
+    text: Инверсия масштаба
+    textEng: Inverted zoom
+  input_gamepad_zoom_invert__text:
+    id: 2
+    text: Меняет местами кнопки увеличения и уменьшения масштаба.
+    textEng: Swaps the left and right zoom buttons.
   input_gamepad_zoom_sensitivity__header:
     id: 1
     text: Чувствительность приближения
@@ -628,6 +692,14 @@ entries:
     id: 1
     text: Определяет, как сильно камера приближается в зависимости от ввода игрока.
     textEng: Controls how much the camera zooms from user input
+  input_keyboard_hints__header:
+    id: 2
+    text: Подсказки управления
+    textEng: Show input hints
+  input_keyboard_hints__text:
+    id: 2
+    text: Показывать на экране подсказки по управлению с помощью клавиатуры и мыши.
+    textEng: Display hints about keyboard and mouse controls on the screen.
   input_keyboard_look_invert_vertical__header:
     id: 1
     text: Инвертирование камеры

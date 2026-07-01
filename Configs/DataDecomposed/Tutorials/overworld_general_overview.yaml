@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: true
   backgroundColor:
@@ -14,13 +15,24 @@ pages:
     a: 0.8
   center:
     textImage: event_mountain_base
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions:
       spriteWrap: true
       actions:
       - global_confirm
       - overworld_time_toggle
+    textInputHintAppendix: 
   hint: 
   effectsOverworld: 
   effectsCombat: 
@@ -28,6 +40,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -53,18 +66,25 @@ pages:
     textLocation: BottomRight
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -74,8 +94,18 @@ pages:
     a: 0.05098039
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions:
       spriteWrap: true
       actions:
@@ -88,6 +118,7 @@ pages:
       - global_camera_vertical_pos
       - global_camera_vertical_neg
       - global_mouse_middle
+    textInputHintAppendix: 
   hint: 
   effectsOverworld: 
   effectsCombat: 
@@ -95,6 +126,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -104,13 +136,24 @@ pages:
     a: 0.05098039
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions:
       spriteWrap: true
       actions:
       - global_mouse_secondary
       - overworld_selection_reset
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:

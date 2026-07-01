@@ -1,0 +1,367 @@
+hidden: false
+parents: []
+image: 
+core:
+  backgroundTerrainUsed: true
+  sliceShadingUsed: false
+  customBackgroundKey: ''
+  sliceShadingInputs:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  sliceColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  cameraHeightRange: 
+  timeCustom: 
+  fogCustom: 
+  projectileCeiling: 
+content: {}
+atmosphere:
+  groundHeight: 0
+  destructionMapping:
+    x: 100
+    y: 350
+    z: 0
+    w: 1
+tags:
+- type_unique
+- dev_listed
+- force_lights
+spawnGroups:
+  enemy_group0:
+    tags: []
+    points:
+    - point:
+        x: 142.5
+        y: -19.5
+        z: 85.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 160.5
+        y: -19.5
+        z: 100.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 178.5
+        y: -19.5
+        z: 115.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 196.5
+        y: -19.5
+        z: 130.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 214.5
+        y: -19.5
+        z: 145.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 232.5
+        y: -19.5
+        z: 175.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 250.5
+        y: -19.5
+        z: 205.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 268.5
+        y: -19.5
+        z: 235.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+    - point:
+        x: 286.5
+        y: -19.5
+        z: 265.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  enemy_group1:
+    tags: []
+    points:
+    - point:
+        x: 145.5
+        y: -19.5
+        z: 166.5
+      rotation:
+        x: 0
+        y: -90
+        z: 0
+    - point:
+        x: 145.5
+        y: -19.5
+        z: 196.5
+      rotation:
+        x: 0
+        y: -90
+        z: 0
+    - point:
+        x: 145.5
+        y: -19.5
+        z: 226.5
+      rotation:
+        x: 0
+        y: -90
+        z: 0
+    - point:
+        x: 145.5
+        y: -19.5
+        z: 256.5
+      rotation:
+        x: 0
+        y: -90
+        z: 0
+  enemy_group2:
+    tags: []
+    points:
+    - point:
+        x: 30
+        y: -13.5
+        z: 30
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 30
+        y: -13.5
+        z: 78
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 30
+        y: -13.5
+        z: 126
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 30
+        y: -13.5
+        z: 174
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 30
+        y: -13.5
+        z: 222
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+    - point:
+        x: 30
+        y: -13.5
+        z: 270
+      rotation:
+        x: 0
+        y: 90
+        z: 0
+  enemy_group3:
+    tags: []
+    points:
+    - point:
+        x: 61.5
+        y: -16.5
+        z: 286.5
+      rotation:
+        x: 0
+        y: 180
+        z: 0
+  player:
+    tags:
+    - perimeter_center
+    - player
+    points:
+    - point:
+        x: 160.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 178.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 196.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 214.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 232.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 250.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 268.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+    - point:
+        x: 286.5
+        y: -19.5
+        z: 76.5
+      rotation:
+        x: 0
+        y: 0
+        z: 0
+locations:
+  enemy_exit1:
+    tags: []
+    data: !AreaLocation
+      point:
+        x: 61.5
+        y: -19.5
+        z: 4.5
+      rotation: 0
+      sizeX: 9
+      sizeY: 9
+      rect: false
+volumes: 
+fields:
+- type: water
+  visible: true
+  origin:
+    x: 200.3454
+    y: -21.06521
+    z: 224.5591
+  size:
+    x: 53
+    y: 4
+    z: 128
+  force:
+    x: 0
+    y: 0
+    z: 0
+    w: 0
+  rotation: 20
+waypointGroups: 
+briefingGroupsInjected: 
+intro:
+  cameraInputsFinal: 
+  shots:
+  - duration: 6
+    easing: easeInSine
+    fadeOnEnd: true
+    fadeDuration: 0.3
+    from:
+      position:
+        x: 298.24
+        y: 5.49
+        z: 217.3
+      rotation:
+        x: 80
+        y: 140
+        z: 0
+      fov: 35
+    to:
+      position:
+        x: 152.89
+        y: 61.74
+        z: 89.02
+      rotation:
+        x: 80
+        y: 140
+        z: 0
+      fov: 35
+  - duration: 8
+    easing: easeOutSine
+    fadeOnEnd: true
+    fadeDuration: 0.5
+    from:
+      position:
+        x: 13.91
+        y: -11.37
+        z: 34.33
+      rotation:
+        x: 357.67
+        y: 3.87
+        z: 0
+      fov: 35
+    to:
+      position:
+        x: 106.55
+        y: 62.62
+        z: 7.73
+      rotation:
+        x: 37.03
+        y: 36.87
+        z: 0
+      fov: 35
+boundary: 
+segments:
+- path: Content/AreaSegments/area_seg_test_range
+biomeFilter:
+  tagsUsed: false
+  keys:
+  - mossy_dry_02
+  tags: 
+scenarioChanges: 

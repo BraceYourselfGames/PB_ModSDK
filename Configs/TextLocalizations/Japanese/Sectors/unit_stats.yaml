@@ -112,6 +112,14 @@ entries:
     id: 1
     text: EHP
     textEng: EHP
+  drv_hover_altitude__desc:
+    id: 2
+    text: ホバースラスター使用時の継続ホバリング高度です。装甲クラスに依存し、重装甲のユニットほど低くなります。
+    textEng: 'The height of sustained hover when using the hover thruster. Depends on armor class: units with heavier armor get a lower hover altitude.'
+  drv_hover_altitude__name:
+    id: 2
+    text: ホバリング高度
+    textEng: Hover altitude
   drv_pmr__desc:
     id: 1
     text: このユニットのパワー出力をその質量と比較する方法。
@@ -180,6 +188,22 @@ entries:
     id: 1
     text: 放熱
     textEng: Heat dissipation
+  hover_altitude_max__desc:
+    id: 2
+    text: このユニットが（軽量装甲を装備して）ホバリングを維持できる最高高度です。
+    textEng: The highest altitude this unit can sustain hover at (when equipped with light armor).
+  hover_altitude_max__name:
+    id: 2
+    text: 最高高度
+    textEng: Max. altitude
+  hover_altitude_min__desc:
+    id: 2
+    text: このユニットが（重量装甲を装備して）ホバリングを維持できる最低高度です。
+    textEng: The lowest altitude this unit can sustain hover at (when equipped with heavy armor).
+  hover_altitude_min__name:
+    id: 2
+    text: 最低高度
+    textEng: Min. altitude
   hp__desc:
     id: 1
     text: '従来の複合材料から構築された装甲の内層。かなり弾力がありますが、損傷した場合は修理が必要です。 '
@@ -260,6 +284,14 @@ entries:
     id: 1
     text: 値 - 物資
     textEng: Value - Supplies
+  stability_offset__desc:
+    id: 2
+    text: 衝突に対する耐性です。
+    textEng: Resistance to collisions.
+  stability_offset__name:
+    id: 2
+    text: 安定性
+    textEng: Stability
   thruster_power__desc:
     id: 1
     text: スラスターサブシステムの出力。質量に反作用してダッシュ距離を決定します。

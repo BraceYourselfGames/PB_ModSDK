@@ -1,0 +1,140 @@
+hidden: false
+parents: 
+textName: {}
+textDesc: {}
+core:
+  stepOnStart: main
+  mainType: true
+  recordPointCompletion: true
+  recordPointMemory: true
+tags: 
+steps:
+  main:
+    comment: 
+    index:
+      i: 2
+    textName: 
+    textDesc: 
+    textExit: 
+    countdownCustom: 
+    memoryDisplayed: 
+    conditions: 
+    effectsOnEvents:
+    - early: true
+      filterEventTypes: 
+      filterEventEntity:
+        eventType: OverworldPointCombatVictory
+        checks:
+        - !OverworldValidateQuestLink
+          questMain: true
+          questKey: 
+        - !OverworldValidatePointKey
+          key: special_breakthrough_train
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestUnlinkPoints
+        onlyCombat: false
+        onlyHostile: false
+        checks: 
+        questMain: true
+        questKey: province_breakthrough_01
+      - !QuestProgress
+        stepRequired: 
+        stepNext: 
+        effectOnExit: true
+        effectOnEntry: true
+        questMain: true
+        questKey: 
+      - !OverworldInteractionStartFilter
+        overrideOngoing: true
+        tagsUsed: false
+        keys:
+        - breakthrough_line_exit
+        tags: 
+      - !DeletePoints
+        mode: DeleteUntilTarget
+        target: 0
+        onlyCombat: false
+        onlyHostile: false
+        checks:
+        - !OverworldValidatePointTags
+          tagsMethod: RequireAll
+          tags:
+          - tag: role_patrol
+            not: false
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnEntry:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCreatePoint
+        key: special_breakthrough_train
+        spawnGroupOverride: track_start
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityBranch
+          key: branch_reserves
+        questMain: true
+        questKey: 
+      - !QuestProvinceCreatePoint
+        key: generic_patrol
+        spawnGroupOverride: midpoint
+        nameOverride: 
+        functionsOnSpawn:
+        - !OverworldEntityQuestUnlink {}
+        - !OverworldEntityBranch
+          key: branch_reserves
+        questMain: true
+        questKey: 
+      - !ModifyMemoryProvinceCurrent
+        changes:
+        - change: Set
+          key: province_audio_escalation_override
+          value: 2
+          valueFromMemory: false
+          valueFromMemoryKey: 
+      - !StartTutorial
+        key: overworld_breakthrough_line
+        allowRepeat: true
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    effectsOnExit:
+      comment: 
+      checksGlobal: 
+      checksBase: 
+      functionsGlobal:
+      - !QuestProvinceCapture
+        questMain: true
+        questKey: 
+      - !TeleportBaseToPosition
+        position:
+          x: 103.5938
+          y: 48.41126
+          z: -208.0053
+      - !QuestStart
+        questKey: province_selection
+      - !OverworldCameraChange
+        delay: 0
+        positionOverride: true
+        position:
+          x: 104.7994
+          y: 54.41126
+          z: -205.4068
+        positionFromEntityName: internal_mobilebase
+        rotationXOverride: true
+        rotationX: 30
+        rotationYOverride: true
+        rotationY: 145
+        zoomOverride: true
+        zoom: 1
+      functionsBase: 
+      functionsEventEntity: 
+      linkedEffectKeys: 
+    stepNext: 
+effectsShared: {}

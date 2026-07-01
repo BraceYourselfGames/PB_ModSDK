@@ -1,0 +1,65 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_city_b
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_elbrus: true
+parts:
+  core:
+    livery: 
+    preset: 
+    rating: 
+    systems: {}
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_sidearm_02
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_rifle_assault_02
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+  optional_left:
+    livery: 
+    preset: 
+    rating: 
+    systems: {}
+  optional_right:
+    livery: 
+    preset: 
+    rating: 
+    systems: {}
+  secondary:
+    livery: 
+    preset: 
+    rating: 
+    systems: {}
+animationOverrides: 
+effects: 

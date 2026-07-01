@@ -1,0 +1,39 @@
+horizontal: false
+extended: false
+lines:
+- visibility: All
+  actions:
+  - action: global_direction_up
+    newline: false
+  - action: global_direction_down
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
+  actions:
+  - action: global_direction_left
+    newline: false
+  - action: global_direction_right
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
+  actions:
+  - action: global_cancel
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_pause
+  textKey: input_controller_back
+- visibility: All
+  actions:
+  - action: global_confirm
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_pause
+  textKey: newgame_button_start

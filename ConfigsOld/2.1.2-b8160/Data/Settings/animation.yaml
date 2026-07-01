@@ -1,0 +1,1041 @@
+stopIntensityPreDeceleration:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 2
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.2
+      y: 0.4
+      z: 0.9999999
+      w: 0.9999999
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.4
+      y: 0.5
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 1.828062
+      w: 1.828062
+    w:
+      x: 0.05347645
+      y: 0.3333333
+    m: {}
+stopIntensityPostDeceleration:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+stopIntensityBlend:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 1
+      z: 2
+      w: -1
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+idleIntensityBlend:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0
+      z: -1
+      w: 2
+    w:
+      x: 0
+      y: 0
+    m: {}
+listenerPosition:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 10
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 100
+      y: 0.5
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+listenerPositionCurveCombat:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0.75
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+listenerPositionCurveOverworld:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0.75
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+animLayerBlendSpeed: 10
+braceAnimLayerBlendSpeed: 2
+slidingSpeedThreshold: 8
+slidingActionLengthThreshold: 1
+minNormalizedSpeedQuickTurn: 0
+maxNormalizedSpeedQuickTurn: 0.5
+movementSpeedDampSmoothTime: 0.3
+movementSpeedDampMaxSpeed: 10000
+minViableSpeedRatio: 0.5
+landingDelayRange: 0.25
+pilotPersonalityUsed: true
+fineTuneAimIkUsed: true
+secondaryEquipmentFacingForcedAny: false
+secondaryEquipmentFacingForcedArms: false
+secondaryEquipmentFacingSmooth: true
+secondaryEquipmentFacingThreshold: 45
+shockwaveTextures:
+  dir_01:
+    path: Content/Textures/VFX/glow_shockwave_dir1
+  dir_02:
+    path: Content/Textures/VFX/glow_shockwave_dir2
+  sim_01:
+    path: Content/Textures/VFX/glow_shockwave_sim1
+  sim_02:
+    path: Content/Textures/VFX/glow_shockwave_sim2
+shockwavePresets:
+  dir_01:
+    path: Content/Textures/VFX/fx_shockwave_dir_01
+  dir_02:
+    path: Content/Textures/VFX/fx_shockwave_dir_02
+  sim_01:
+    path: Content/Textures/VFX/fx_shockwave_sim_01
+  sim_02:
+    path: Content/Textures/VFX/fx_shockwave_sim_02
+timeRemapDash:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.1
+      y: 0.05
+      z: 0.4968031
+      w: 0.4968031
+    w:
+      x: 0.3333333
+      y: 0.2133408
+    m: {}
+  - tv_tg:
+      x: 0.3
+      y: 0.1
+      z: 0.1464736
+      w: 0.1464736
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.31
+      y: 0.1075
+      z: 1.252462
+      w: 1.252462
+    w:
+      x: 0.9631317
+      y: 0.05844238
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 1.315692
+      w: 1.315692
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+timePreviewDash:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 2
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.05
+      y: 0.1
+      z: 2
+      w: 4
+    w:
+      x: 0.3333333
+      y: 0.2133408
+    m: {}
+  - tv_tg:
+      x: 0.1
+      y: 0.3
+      z: 4
+      w: 0.7777778
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0.7777778
+      w: 1.315692
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+dashTrajectoryFlat:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+dashTrajectoryAscent:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 0.5
+      y: 0.5
+      z: 0.7499889
+      w: 0.7499889
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0.5
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+dashTrajectoryDescent:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0.5
+      z: 0.6387496
+      w: 0.6387496
+    w:
+      x: 0
+      y: 0.1306254
+    m: {}
+  - tv_tg:
+      x: 0.67
+      y: 0.5
+      z: -1.702011
+      w: -1.702011
+    w:
+      x: 0.3333333
+      y: 0.1144321
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+dashVFXShutdownOffset: 0.1
+dashPreviewPoseWindow:
+  x: 0
+  y: 1
+timeRemapMeleeFallback:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.0112
+      y: 0.00494
+      z: 0.7604286
+      w: 0.7604286
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.1685
+      y: 0.142
+      z: 0.546753
+      w: 0.546753
+    w:
+      x: 0.3333333
+      y: 0.3045565
+    m: {}
+  - tv_tg:
+      x: 0.3025073
+      y: 0.18
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.3630593
+      y: 0.1960196
+      z: 1.214679
+      w: 1.214679
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.4713169
+      y: 0.6161941
+      z: 4.309524
+      w: 4.309524
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.5970159
+      y: 0.8780978
+      z: 1.132192
+      w: 1.132192
+    w:
+      x: 0.3333333
+      y: 0.9816682
+    m: {}
+  - tv_tg:
+      x: 0.7869237
+      y: 0.96
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.86
+      y: 0.96
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0.2857145
+      w: 0.2857145
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+timePreviewMeleeFallback:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0.4410714
+      w: 1.18662
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.142
+      y: 0.1685
+      z: 1.18662
+      w: 4.00926
+    w:
+      x: 0.3333333
+      y: 0.3045565
+    m: {}
+  - tv_tg:
+      x: 0.196
+      y: 0.385
+      z: 4.00926
+      w: 0.2286214
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.8302362
+      y: 0.53
+      z: 0.2286214
+      w: 1.310073
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.96
+      y: 0.7
+      z: 1.310073
+      w: 7.499996
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 7.499996
+      w: 0.2857145
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+timePreviewSpeed: 0.5
+timePreviewRemap: 0
+timePreviewFactors:
+  x: 1
+  y: 0
+  z: 0
+  w: 0
+timeRemapMeleeStandard:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.0112
+      y: 0.00494
+      z: 0.7604286
+      w: 0.7604286
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.1685
+      y: 0.142
+      z: 0.546753
+      w: 0.546753
+    w:
+      x: 0.3333333
+      y: 0.3045565
+    m: {}
+  - tv_tg:
+      x: 0.34
+      y: 0.18
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.385
+      y: 0.1960196
+      z: 1.214679
+      w: 1.214679
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.39
+      y: 0.207
+      z: 3.390297
+      w: 3.390297
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.4
+      y: 0.2686614
+      z: 6.018058
+      w: 6.018058
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.41
+      y: 0.39
+      z: 9.441935
+      w: 9.441935
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.47
+      y: 0.795
+      z: 4.309524
+      w: 4.309524
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.5
+      y: 0.88
+      z: 0.9233754
+      w: 0.9233754
+    w:
+      x: 0.3333333
+      y: 0.5125283
+    m: {}
+  - tv_tg:
+      x: 0.6
+      y: 0.94
+      z: 0.3999999
+      w: 0.3999999
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.7
+      y: 0.96
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.86
+      y: 0.96
+      z: 0
+      w: 0.2857145
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0.2857145
+      w: 0.5833333
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+timePreviewMeleeStandard:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0.4410714
+      w: 1.18662
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.142
+      y: 0.1685
+      z: 1.18662
+      w: 4.00926
+    w:
+      x: 0.3333333
+      y: 0.3045565
+    m: {}
+  - tv_tg:
+      x: 0.196
+      y: 0.385
+      z: 4.00926
+      w: 0.2286214
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.8302362
+      y: 0.53
+      z: 0.2286214
+      w: 1.310073
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.96
+      y: 0.7
+      z: 1.310073
+      w: 7.499996
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 7.499996
+      w: 0.2857145
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+meleeAnimationTimingsStandard:
+  x: 0.37
+  y: 0.49
+meleeAnimationTimingsFallback:
+  x: 0.37
+  y: 0.49
+meleePoseTimingsStandard:
+  x: 0.1
+  y: 0.8
+meleePoseTimingsFallback:
+  x: 0.1
+  y: 0.8
+meleePredictionRangeStandard:
+  x: 0.485
+  y: 0.75
+meleePredictionRangeFallback:
+  x: 0.485
+  y: 0.75
+meleeEffectTimingsStandard:
+  x: 0.41
+  y: 0.49
+meleeEffectTimingsFallback:
+  x: 0.25
+  y: 0.75
+meleeStandardCollisionSize:
+  x: 5
+  y: 7
+  z: 4
+meleeShockwaveHeightOffset: 2.5
+hipDropThreshold: -1
+poseBlendSpeed: 6
+lookAheadBlendSpeed: 6
+meleeCollisionVisualization: true
+meleeCollisionInterpolation: true
+meleeCollisionSizeOverride: false
+meleeCollisionSize:
+  x: 2
+  y: 6
+  z: 3
+meleeCollisionSizeFallback:
+  x: 3
+  y: 7
+  z: 3
+meleeCollisionOffsetOverride: false
+meleeCollisionOffset:
+  x: 0
+  y: 0
+  z: 0
+meleeCollisionOffsetFallback:
+  x: 0
+  y: 0
+  z: 0
+tiltLateralInputDeadzone: 5
+tiltLateralInputLimit: 15
+tiltLateralDampSmoothTime: 0.1
+tiltLateralDampMaxSpeed: 10
+tiltParallelDampSmoothTime: 0.05
+tiltParallelDampMaxSpeed: 20
+tiltParallelDecaySpeed: 0.5
+movementFactorNegative: 1
+movementFactorPositive: 1
+movementFactorDampSmoothTime: 0.3
+movementFactorDampMaxSpeed: 10
+paramDampenValue: 0.1
+fastMechTransitionThreshold: 16
+mechWalkSpeed: 3.5
+mechJogSpeed: 9
+mechRunSpeed: 16
+mechSprintSpeed: 28
+bankingAngularRange: 180
+bankingDampSmoothTime: 0.25
+bankingDampMaxSpeed: 10000
+bankingMultiplier: 1
+stationaryRotateSpeedValidMin: -0.5
+stationaryRotateSpeedValidMax: 0.5
+rotSpeedThreshold: 10
+maxStationTurningAngleWithoutStepping: 5
+mechBankingBlendSpeed: 2
+bankingSpeedWarp:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 1.875
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 0.4
+      y: 0.75
+      z: 1.145833
+      w: 1.145833
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+valuePopThreshold: 2
+animIdleToIdlePoseBlend: 4
+ikAimConstraintBlendOutroBuffer: 2
+iKAimConstraintIntroDelay: 0.1
+safeRotateDistanceThreshold: 10
+rotSpeedChangeDistanceBasedTarget: 300
+closePointTargetDistance: 150
+aimVerticalMaxAngle: 45
+aimVerticalMinAngle: -45
+aimVerticalHeadMultiplier: 0.5
+aimVerticalTorsoMultiplier: 0.75
+aimVerticalBlendOut: 100
+vertAngleBlendPilot: 0.2
+aimMechOriginHeight: 5
+aimMechAngleDivisor: 90
+ikUpperBody: true
+ikFeetOn: true
+ikFeetAdvancedOn: false
+ikFootLockStepStationaryTurning: false
+maxIKPoleWeightSupport: 0.75
+armStraightLength: 2.92
+upperIKBlendBound: 1
+lowerIKBlendBound: 0.95
+mechIkBlendSpeed: 20
+ikBlendIntroBuffer: 0.25
+ikBlendIntroBufferHeavy: 0.2
+ikBlendIntroBufferExcessive: 0
+mechIkBlendDeltaIntro: 3.5
+mechIkBlendDeltaIntroHeavy: 2
+mechIkBlendDeltaIntroExcessive: 3
+mechIkBlendDeltaOutro: 5
+mechIKBlendDeltaHolster: 25
+mechIkBlendDeltaOutroHeavy: 2.5
+mechIkBlendDeltaOutroExcessive: 2
+armIKBlendMultiplier: 2
+mechIKMaintainRotation: false
+ikRUpcomingEquipmentActivationWindow: 0.3
+ikLUpcomingEquipmentActivationWindow: 0.3
+ikTorsoUpcomingEquipmentActivationWindow: 0.15
+pvValueMultiplier: 0.8
+torsoIKSwitchTransformRotationDelta: 250
+torsoIKMaxRotThreshold: 180
+twistTorsoMax: 1
+twistTimeThreshold: 0.5
+timeTorsoTwistImpulse:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 12.43965
+      w: 12.43965
+    w:
+      x: 0
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.06029108
+      y: 0.75
+      z: 7.613221
+      w: 7.613221
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 0.15
+      y: 1
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0.3333333
+    m: {}
+  - tv_tg:
+      x: 1
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0.3333333
+      y: 0
+    m: {}
+footPlantedHeightThreshold: 0.985
+ikThreshold: 0.15
+mechIKFootBlendSpeed: 35
+ikFeetWeightBlendSpeed: 10
+distanceFootReduction: 1.5
+legHyperExtensionThreshold: 0.05
+maxGroundHitRayCast: 2
+footFloorPenetrationCheckThreshold: 0.25
+shieldDriftDebugSqrThreshold: 3
+slidingStartThreshold: 0.99
+slidingEndThreshold: 0.75
+animationSlidingPrep: 0.66
+animationLengthFiringPrep: 0.25
+animationLengthMovementStop: 0.8
+animationLengthMovementStopFastMechs: 0.666
+animationLengthMovementStart: 0.8
+animationLengthMovementStartRun: 0.525
+animationLengthMovementStartSprint: 0.425
+animationLengthDashAnticipation: 0.5
+animationStopLimitFast: 0.5
+animationStopLimitSlow: 1.9
+futureActionFastSwitchBuffer: 0.5
+endCurrentActionPoseBuffer: 0.5
+transitionToSlidingThreshold: 0.1
+transitionOutOfDashThreshold: 0.3
+targetedActionBuffer: 0.25
+targetedActionRootDelay: 0.083
+holsterCheckBuffer: 2
+quickHolsterBuffer: 1.3
+immediateHolsterBuffer: 0.1
+heavyUnholsterWindow: 0.5
+sideUnholsterWindow: 0.5
+jumpSpeedThreshold: 7.5
+dashToMeleeTransitionMaxLength: 0.35
+animationFiringIntroDuration: 0.27
+movementFollowMeleeThreshold: 0.1
+chainedActionThreshold: 1
+timeBetweenChainedActionsThreshold: 1
+shortActionThreshold: 2
+dashToMeleeTransitionTriggerTime: 1
+upcomingMeleeThreshold: 0.1
+filterPositionMode: SmoothDamp
+filterPositionDuringRemap: true
+filterPositionInputSmoothDamp: 0
+filterPositionLimitSmoothDamp: 10000
+filterPositionInputCriticalSpring: 50
+filterPositionLimitCriticalSpring: 10000
+filterPositionCatchup: true
+filterRotationMode: SmoothDamp
+filterRotationDuringRemap: true
+filterRotationInputSmoothDamp: 0.005
+filterRotationLimitSmoothDamp: 4
+filterFadeDuration: 0
+collisionWarningThreshold: 8.5
+crashingGravityForce: 9
+authoredGetUpAnimationLength: 1.1665
+authoredConcussionAnimationLength: 2.0835
+idleBreakCoolDownMin: 10
+idleBreakCoolDownMax: 15
+weaponDraw:
+  modePostWrap: ClampForever
+  modePreWrap: ClampForever
+  keys:
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 2
+      w: 2
+    w:
+      x: 0
+      y: 0
+    m: {}
+  - tv_tg:
+      x: 0
+      y: 0
+      z: 0
+      w: 0
+    w:
+      x: 0
+      y: 0
+    m: {}
+recoilUsed: true
+recoilDecaySpeed: 3
+recoilChangeSpeed: 10
+torsoRecoilMult: -50
+torsoZAxisRecoilMult: 0.1
+torsoZAxisBraceRecoilMult: -0.01
+braceRotRecoilMult: 5
+recoilTranslationDecayRate: 0.25
+maxSimSpeed: 0.6
+maxRateOfFire: 0.05
+maxAdditiveOffsetMag: 1
+recoilResetRotBlendOut: 5
+impactAdditionScalar: 250
+impactDecaySpeed: 4
+impactDecaySpeedFast: 0.1
+hitRandomSpreadUpper: 6
+hitRandomSpreadLower: -5
+hitReactUpperBodyMagMultiplier: 0.5
+hitReactMagMultiplier: -2
+hitReactAnimationDuration: 0.1
+hitReactAnimationSpeedLimit: 500
+damageHitDecayPilot: 10
+fxTimeToLive: 5
+firingCenterOffset:
+  x: 0
+  y: 0.1
+  z: -1
+fxStartDisposalAt: 0.9
+fxFadeSpeed: 2
+fxFadeDistance: 10
+debugMelee: false
+debugChains: false
+dashNonlinearMode: true
+meleeSpeedThresholdMedium: 9
+meleeSpeedThresholdLight: 18
+flipMeleeSide: false
+turretAudioAngularVelocityThreshold: 10

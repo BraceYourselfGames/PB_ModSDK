@@ -1,0 +1,29 @@
+hidden: false
+parents:
+- key: wpn_shield
+livery: 
+ratingRange: 
+comment: 
+textName:
+  split: true
+textDesc:
+  split: true
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- branch_army
+- branch_specops
+- weight_light
+- weight_medium
+workshopInfo: 
+genSteps:
+- !AddHardpoints
+  subsystemsInitial:
+  - wpn_main_shield_03
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_main_equipment
+  priority: 0
+  comment: 
+  checks: 

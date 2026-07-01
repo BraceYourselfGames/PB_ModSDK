@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -14,9 +15,20 @@ pages:
     a: 0.5019608
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:
@@ -58,6 +70,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -83,8 +96,6 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 320
-    textReused: 
-    icon: 
     worldAnchor:
       entityName: 
       stateName: 
@@ -95,7 +106,15 @@ pages:
       entityPrediction: false
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat:
     functions:
@@ -123,6 +142,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -132,12 +152,28 @@ pages:
     a: 0
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions:
       spriteWrap: true
       actions:
       - combat_toggle_targeting
+      - global_gamepad_right_stick
+    textInputHintAppendix: 
   hint: 
   effectsOverworld: 
   effectsCombat:

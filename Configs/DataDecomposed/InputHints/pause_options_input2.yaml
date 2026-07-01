@@ -1,12 +1,19 @@
+horizontal: false
 extended: false
 lines:
-- mode: All
-  text: Change binding
+- visibility: All
   actions:
   - action: global_confirm
     newline: false
-- mode: All
-  text: Return
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_cancel
     newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 

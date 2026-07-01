@@ -1,0 +1,33 @@
+hidden: true
+positive: true
+trackVisitUniqueness: true
+trackBranchUniqueness: true
+group: 
+priority: 0
+tinted: true
+hue: 0
+icon: s_icon_l32_lc_circle_slash
+tags:
+- type_negative
+levelOffset: 
+pilotExperienceMultiplier: 
+pilotPersistentInjected: 
+liberationSpawnVariants: 
+scenarioChanges: 
+effectsOnEntry:
+  functionsGlobal:
+  - !QuestProgress
+    stepRequired: 
+    stepNext: 
+    effectOnExit: false
+    effectOnEntry: true
+    questMain: true
+    questKey: province_liberation
+  functionsBase: 
+effectsOnCompletion: 
+effectsOnSpawn: 
+effectsOnUnitSpawn: 
+effectsOnUnitArrival: 
+effectsOnUnitDefeat: 
+unitGenModifiers: 
+customValues: 

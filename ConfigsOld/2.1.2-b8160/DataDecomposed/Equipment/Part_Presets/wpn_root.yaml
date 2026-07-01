@@ -1,0 +1,123 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets: 
+tags:
+- item_part
+workshopInfo:
+  1:
+    progressLimit:
+      i: 2
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 250
+    basePartRequirements: 
+  2:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 400
+    - key: components_r2
+      amount: 12
+    basePartRequirements:
+      workshop_tech_r2: 1
+  3:
+    progressLimit:
+      i: 3
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 500
+    - key: components_r2
+      amount: 12
+    - key: components_r3
+      amount: 8
+    basePartRequirements:
+      workshop_tech_r3: 1
+genSteps:
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - rarity
+  - perk_1
+  priority: 10
+  comment:
+    comment: Add hardpoint for rarity modifications and perks. Before adding, check if generated part rating is 1 or higher. This requirement matches between these two hardpoints, so we might as well do it in one pass. Order set to 10 to ensure initial setup on child presets is done first (e.g. main internal)
+  checks:
+  - !CheckPartRating
+    ratingMin: 1
+    ratingMax: 3
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 20
+  comment:
+    comment: Add hardpoint for aux modules. Before adding, check if generated part rating is 2 or higher.
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !TrimSystemsByRating
+  ratingMin: 0
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - rarity
+  priority: 30
+  comment:
+    comment: Filter subsystems on the rarity hardpoint, leaving only a candidate that exactly matches currently generated rating.
+  checks: 
+- !TrimSystemsByRating
+  ratingMin: -1
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - perk_1
+  - internal_aux_weapon
+  priority: 40
+  comment:
+    comment: On perk and aux module hardpoints, trim those subsystems that do not match the currently generated rating or one lower (e.g. for rating 2, only subsystems candidates with rating 2 or 1 qualify).
+  checks: 
+- !TrimSystemsByStatsInHardpoint
+  hardpointKeySource: internal_main_equipment
+  hardpointsTargeted:
+  - perk_1
+  - internal_aux_weapon
+  priority: 100
+  comment:
+    comment: Discard every targeted subsystem in perk and aux module hardpoints affecting a stat not present in the main internal subsystem. Order set to 100 to ensure all child operations are done first.
+  checks: 
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 110
+  comment:
+    comment: Make aux module component customizable at rating 3.
+  checks:
+  - !CheckPartRating
+    ratingMin: 3
+    ratingMax: 3
+- !TrimSystemsByChance
+  difficultyUsed: true
+  difficultyKey: combat_system_spawn_chance
+  chance: 0.5
+  individual: false
+  hardpointsTargeted:
+  - internal_aux_weapon
+  priority: 500
+  comment:
+    comment: This generation step will remove all content from the following hardpoints with a chance. The "individual" flag set to false makes this chance apply to entire set of candidates (so, passing this check clears everything).
+  checks: 

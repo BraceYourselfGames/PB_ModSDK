@@ -1,0 +1,121 @@
+depthBackground: 94
+depthForeground: 95
+pages:
+- depthForeground: 0
+  depthBackground: 0
+  skippable: false
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.8867924
+      g: 0.4641188
+      b: 0.2635279
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 236
+    framePositionY: 0
+    frameSizeX: 128
+    frameSizeY: 128
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: TopLeft
+    buttonLocation: None
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight:
+      offsets:
+        x: 0
+        y: 0
+        z: 0
+        w: 0
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Remove
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_prediction
+        value: 0
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+- depthForeground: 0
+  depthBackground: 0
+  skippable: true
+  cameraInputPermitted: true
+  backgroundUsed: false
+  backgroundBlur: false
+  backgroundColor:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  center: 
+  hint:
+    color:
+      r: 0.3372549
+      g: 0.4156863
+      b: 0.2392157
+      a: 1
+    frameLocation: BottomLeft
+    frameGradientMode: None
+    framePositionX: 238
+    framePositionY: 0
+    frameSizeX: 700
+    frameSizeY: 128
+    frameBlocksInput: false
+    frameBoundary: true
+    textLocation: TopRight
+    buttonLocation: Top
+    textWidth: 256
+    textReused: 
+    icon: 
+    worldAnchor: 
+    arrowCustom: 
+    frameHighlight: 
+    textInputActions: 
+  effectsOverworld:
+    functions:
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: feature_combat_action_hotbar
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+      - change: Set
+        key: feature_combat_prediction
+        value: 1
+        valueFromMemory: false
+        valueFromMemoryKey: 
+  effectsCombat: 
+effectsOnEnd:
+  effectsOverworld:
+    functions:
+    - !CallMethodStatic
+      typeName: CIViewCombatAction
+      methodName: ForceRefreshFromTutorial
+      argument: ''
+      frameDelay: 1
+  effectsCombat:
+    functions:
+    - !CombatStateValueChange
+      key: prediction_active
+      value: true

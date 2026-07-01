@@ -23,7 +23,7 @@ namespace PhantomBrigade.SDK.ModTools
     [Serializable, InlineProperty, HideReferenceObjectPicker]
     public class ConfigsVersion
     {
-        public const string versionExpected = "2.1.0";
+        public const string versionExpected = "2.2.1";
         
         [HideInInspector]
         public string version;

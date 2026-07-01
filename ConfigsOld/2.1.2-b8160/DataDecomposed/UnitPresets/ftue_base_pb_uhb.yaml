@@ -1,0 +1,118 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: pb_arctic_sky
+aiBehavior: Flanker
+aiTargeting: default
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_knox: true
+      weight_heavy: true
+parts:
+  core:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - body_set_knox_heavy_top
+    rating:
+      i: 2
+    systems:
+      internal_aux_top_core:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_core_heat
+      internal_aux_top_thrusters:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_thruster_distance
+      perk_1:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - perk_mass_pos_r2
+  equipment_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ml_sidearm_01
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_ultraheavy_beam_01
+    rating:
+      i: 2
+    systems:
+      internal_aux_weapon:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_aux_turnrate_right_r1
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+      perk_1:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - perk_heat_pos_r2
+  optional_left:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+  optional_right:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+  secondary:
+    livery: 
+    preset: 
+    rating: 
+    systems:
+      internal_utl:
+        livery: 
+        flags: 
+        resolver: !SubsystemResolverKeys
+          keys:
+          - internal_utl_destruction
+animationOverrides: 
+effects: 

@@ -44,6 +44,14 @@ entries:
     id: 1
     text: Вы можете отказаться от большинства заданий, нажав «Уйти» на экране брифинга или кнопку «Провинция» на панели навигации.
     textEng: You can back out from almost every mission by pressing "Leave" on the briefing screen or clicking the "Province" button on the navigation bar.
+  base_briefing_contracts__a_title:
+    id: 2
+    text: Контракты и тренировки
+    textEng: Contracts & training
+  base_briefing_contracts__s1_ts_text:
+    id: 2
+    text: Находясь на оккупированной территории, вы можете выполнять дополнительные задания по контракту через экран операций. Список таких заданий обновляется после каждого боя, стоянки и поездки для пополнения запасов.
+    textEng: While in occupied territory, you can undertake optional contract missions through the Operations screen. These missions refresh after every fight, camp and resupply trip.
   base_briefing_squad__a_title:
     id: 1
     text: Экран отряда
@@ -189,7 +197,7 @@ entries:
   base_workshop_unlocks__s1_tq_quote:
     id: 1
     text: «Если любишь — отпусти. А лучше — разбери на запчасти, изучи и распечатай еще пять таких же».
-    textEng: If you love it, let it go. In other words, take your favorite guns, tear them to pieces, reverse engineer 'em, and print five more.
+    textEng: If you love it, let it go. In other words, take your favourite guns, tear them to pieces, reverse engineer 'em, and print five more.
   base_workshop_unlocks__s1_tq_subtitle:
     id: 1
     text: — Мудрец Остер
@@ -497,10 +505,10 @@ entries:
   history_prediction__s1_ts_text:
     id: 1
     text: >-
-      Хотя большая часть сведений о проекте была утрачена из-за его секретности, а документация и оборудование — уничтожены во время вторжения Каскада, считается, что технологию прогнозирования разработали ученые института Массар, работавшие в Регаттале и в Баундари Фолс.
+      Хотя большая часть сведений о проекте была утрачена из-за его секретности, а документация и оборудование — уничтожены во время вторжения Каскада, считается, что технологию прогнозирования разработали ученые института Массар, работавшие в Регаттале и в Баундари-Фолс.
 
 
-      Несколько прототипов пережили вторжение — их вывез отряд, проводивший полевые испытания в Баундари Фолс. Очевидцы рассказывали, как мехи буквально «лавировали» сквозь шквал вражеского огня, уничтожая бронемашины одну за другой, прежде чем покинуть город. В итоге прототипы оказались в руках бойцов ССФ, из которых был собран отряд пилотов, умеющих ими пользоваться. Хотя технология могла дать огромное преимущество на поле боя, она почти не применялась в первые годы оккупации — из-за опасений, что Каскад сможет завладеть ей и использовать в своих целях.
+      Несколько прототипов пережили вторжение — их вывез отряд, проводивший полевые испытания в Баундари-Фолс. Очевидцы рассказывали, как мехи буквально «лавировали» сквозь шквал вражеского огня, уничтожая бронемашины одну за другой, прежде чем покинуть город. В итоге прототипы оказались в руках бойцов ССФ, из которых был собран отряд пилотов, умеющих ими пользоваться. Хотя технология могла дать огромное преимущество на поле боя, она почти не применялась в первые годы оккупации — из-за опасений, что Каскад сможет завладеть ей и использовать в своих целях.
 
 
       Алгоритм прогнозирования работает путем экстраполяции вероятных событий на ближайшие пять секунд, основываясь на скорости объектов, микроскопических изменениях в окружении, а также на моделях реакции человеческих нейронов и инстинктов. Ключевое ограничение: система не способна спрогнозировать действия самого оператора. Тем не менее даже с такими ограничениями она существенно повышает боевую эффективность. Современные мехи отличаются исключительной маневренностью — им достаточно предупреждения всего за несколько секунд до атаки, чтобы занять укрытие или уйти с линии огня.
@@ -573,7 +581,11 @@ entries:
   overworld_camping__s5_ts_text:
     id: 1
     text: 'После привала вы увидите сводку результатов: выбранные мехи будут отремонтированы, а пилоты — полностью излечены и избавлены от усталости. На состояние экипажа также могут повлиять случайные события, вероятность которых зависит от исходов последних боев, текущего уровня надежды и других факторов.\n\nЕсли в мастерской был запущен проект, он завершится автоматически.'
-    textEng: Once camp has been struck, you will be presented with a summary of the outcomes. The mechs you selected will be repaired; the pilots you selected will be healed and lose all fatigue. Some additional random events might affect your pilots depending on the outcomes of recent fights, the current Hope level, or random chance.\n\nIf you had a project underway in the workshop, they will now be completed.
+    textEng: >-
+      Once camp has been struck, you will be presented with a summary of the outcomes. The mechs you selected will be repaired; the pilots you selected will be healed and lose all fatigue. Some additional random events might affect your pilots depending on the outcomes of recent fights, the current Hope level, or random chance.
+
+
+      If you had a project underway in the workshop, it will now be completed.
   overworld_camping__s6_to_text:
     id: 1
     text: Привал занимает меньше времени, чем отступление. Однако, если до наступления врага остается мало времени, остановка на отдых может привести к тому, что у заданий закончится срок выполнения. Следите за обратным отсчетом противника и убедитесь, что у вас есть достаточно времени, чтобы передохнуть.

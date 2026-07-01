@@ -1,0 +1,28 @@
+info:
+  isAggressive: false
+  isSummoningHelp: true
+stateMachine:
+  states:
+  - name: idle
+    transitions:
+    - Item1: player_detected
+      Item2: calling_for_help
+    linkedData:
+      order: idle
+      speedMultiplierTarget: 1
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1
+      entryCommands: 
+      aiState: Calm
+  - name: calling_for_help
+    transitions:
+    - Item1: player_lost
+      Item2: idle
+    linkedData:
+      order: call_for_help
+      speedMultiplierTarget: 1
+      speedMultiplierHoldTime: 0
+      speedMultiplierRampTime: 1
+      entryCommands: 
+      aiState: Alerted
+  initialState: idle

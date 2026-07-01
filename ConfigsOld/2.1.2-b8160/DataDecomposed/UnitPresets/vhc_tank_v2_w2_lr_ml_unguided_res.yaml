@@ -1,0 +1,31 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents:
+- key: vhc_tank_v2_w2
+- key: vhc_tank_v2_wpn_adapter
+blueprint: 
+textType: 
+livery: 
+aiBehavior: 
+aiTargeting: 
+tags:
+- range_medium
+partTagPreferences: 
+parts:
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          branch_reserves: true
+          part_ml: true
+          range_long: true
+          turret_part: false
+          unguided: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

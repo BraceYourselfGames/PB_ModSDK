@@ -30,6 +30,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: false
@@ -64,17 +66,36 @@ tags:
 states:
   main:
     comment: 
-    textNameKey: generic_breakin_objective_hostiles_header
-    textDescKey: generic_breakin_objective_hostiles_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_breakin_objective_hostiles_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_breakin_objective_hostiles_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -132,6 +153,7 @@ states:
           - time: 0.1
             hidden: false
             key: unique_mountainbase_victory
+            functionsOnExit: 
           memoryChanges: 
           stateScopeChanges: 
           stateValueChanges: 
@@ -148,22 +170,31 @@ states:
             instant: false
   wave_00_guard_turn:
     comment: 
-    textNameKey: generic_enemy_reinforcements_header
-    textDescKey: generic_enemy_reinforcements_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui:
+      priorityDisplay: 0
       briefingHidden: false
       checkboxUsed: false
       progressInverted: false
       progressLimitHidden: false
       progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_enemy_reinforcements_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
       moodIntensityNormal: 
       moodIntensityProgress: 
       progressLimitOverride: 
@@ -216,13 +247,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: 
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -348,13 +385,20 @@ steps:
         textLocation: TopRight
         buttonLocation: None
         textWidth: 336
-        textReused: 
-        icon: 
         worldAnchor: 
         arrowCustom: 
         frameHighlight: 
+        textLink:
+          mode: LocUnique
+          text: 
+          textSector: 
+          textKey: 
+        textLinkController: 
         textInputActions: 
+        textInputHintAppendix: 
+        effectsOnInput: 
       inputMode: Unit_Selection
+      inputController: All
       unitLink:
         tags: 
         name: 
@@ -372,6 +416,7 @@ steps:
           attack_secondary:
             check: Equal
             value: 1
+        checks: 
       actionContextMenu: 
       actionSelection: 
       actionsBlocked: 
@@ -385,6 +430,7 @@ steps:
     - time: 12
       hidden: false
       key: unique_mountainbase_intro_02
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 
@@ -411,13 +457,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: 
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocUnique
+        text: 
+        textSector: 
+        textKey: 
       threatRatingPercentage: 0
       allowOutcomeVictory: false
       allowOutcomeDefeat: false
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -502,6 +554,7 @@ steps:
     - time: 0.1
       hidden: false
       key: unique_mountainbase_reinforcement_01
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

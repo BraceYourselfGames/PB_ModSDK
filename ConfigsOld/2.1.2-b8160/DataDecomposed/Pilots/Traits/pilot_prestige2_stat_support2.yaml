@@ -1,0 +1,30 @@
+comment: 
+state: ReadyForReview
+hidden: false
+priority: 0
+level: 0
+icon: s_icon_l32_part_arch_structure
+tags:
+- type_prestige
+- type_support
+group: 
+existingTraitTagsFilter:
+  support_repair: true
+prestigeRank:
+  check: Equal
+  value: 2
+actionLink: 
+pilotTypesExclusive: 
+pilotTypesIncompatible: 
+activationRecordTags: 
+statValues:
+  self_offset_exp:
+    mode: Offset
+    value: 0.5
+statRangesMin: 
+statRangesMax:
+  trauma:
+    mode: Offset
+    value: 1
+effectsOnEvents: 
+effectsShared: 

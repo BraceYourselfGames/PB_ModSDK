@@ -57,10 +57,6 @@ entries:
     noteDev: 
     temp: false
     text: Reserve Reinforcements will be alerted and deployed if the Alarm tower is not destroyed.
-  generic_breakin__state_obj_timer_fail_0c_text:
-    noteDev: 
-    temp: false
-    text: ''
   generic_civilian_liberation__state_destruction_critical_0c_header:
     noteDev: 
     temp: false
@@ -157,10 +153,6 @@ entries:
     noteDev: 
     temp: false
     text: Prioritize destroying structures, inflict as much damage as possible. The local garrison is a threat, but it won't have a reason to stick around if there is nothing of use is left standing.
-  generic_raid__step_main_0c_header:
-    noteDev: 
-    temp: false
-    text: Raid
   generic_raid__step_main_0c_text:
     noteDev: 
     temp: false
@@ -329,6 +321,10 @@ entries:
     noteDev: 
     temp: false
     text: Provoke the enemy to pull forces from other parts of the Capital.
+  unique_intro__briefing_name:
+    noteDev: 
+    temp: false
+    text: Intro
   unique_intro__intro_location:
     noteDev: 
     temp: false
@@ -381,10 +377,30 @@ entries:
     noteDev: 
     temp: false
     text: Left click in the world to confirm your movement.
+  unique_intro__step_02_move1_1hc_2_text_ctrl:
+    noteDev: 
+    temp: false
+    text: >-
+      Move the camera to align the cursor with this area, then confirm the destination:
+
+
+      {0}
   unique_intro__step_02_move1_1hc_3_text:
     noteDev: 
     temp: false
     text: Click this button to execute plan.
+  unique_intro__step_02_move1_1hc_3_text_ctrl:
+    noteDev: 
+    temp: false
+    text: Use this button (or press the highlighted shortcut) to execute the plan.
+  unique_intro__step_02_move1_1hc_4_text:
+    noteDev: 
+    temp: false
+    text: >-
+      Use the directional pad to focus the action panel. Once focused, confirm the "Run" action by pressing:
+
+
+      {0}
   unique_intro__step_07_wait_and_move_1hc_0_text:
     noteDev: 
     temp: false
@@ -393,6 +409,10 @@ entries:
 
 
       Hovering over the timeline will also show the prediction.
+  unique_intro__step_07_wait_and_move_1hc_0_text_ctrl:
+    noteDev: 
+    temp: false
+    text: Start the "Run" action to see how planning can interact with the prediction system.
   unique_intro__step_07_wait_and_move_1hc_1_text:
     noteDev: 
     temp: false
@@ -404,7 +424,23 @@ entries:
   unique_intro__step_07_wait_and_move_1hc_3_text:
     noteDev: 
     temp: false
-    text: "Movement time is determined by distance. You can move any number of times. \n\nActions can be cancelled with two right clicks. If you're happy with the plan, execute it!"
+    text: >-
+      You can hover over the timeline to scrub through the prediction and see how this unit will move over time.
+
+
+      When you're ready to proceed, execute the plan.
+  unique_intro__step_07_wait_and_move_1hc_3_text_ctrl:
+    noteDev: 
+    temp: false
+    text: >-
+      You can focus the timeline and use the triggers to scrub through the prediction and see how this unit will move over time.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      When you're ready to proceed, execute the plan.
   unique_intro__step_07_wait_and_move_1hc_4_text:
     noteDev: 
     temp: false
@@ -416,7 +452,7 @@ entries:
   unique_intro__step_09_tank_plans_1hc_0_text:
     noteDev: 
     temp: false
-    text: The tank is about to attack! You will need to get closer to engage it. Click the "Run" action.
+    text: The tank is about to attack! You will need to get closer to engage it. Use the "Run" action.
   unique_intro__step_09_tank_plans_1hc_1_text:
     noteDev: 
     temp: false
@@ -432,6 +468,17 @@ entries:
 
 
       {0}
+  unique_intro__step_09_tank_plans_1hc_10_text_ctrl:
+    noteDev: 
+    temp: false
+    text: >-
+      [ff9999]This is the timeline of the hostile tank. It's predicted to move forward and fire.[-]
+
+
+      You can return to your unit by navigating to the blue unit tab below or by pressing:
+
+
+      {1}{2}
   unique_intro__step_09_tank_plans_1hc_2_text:
     noteDev: 
     temp: false
@@ -439,7 +486,7 @@ entries:
   unique_intro__step_09_tank_plans_1hc_3_text:
     noteDev: 
     temp: false
-    text: Click the "Attack" action next.
+    text: Use the "Attack" action next.
   unique_intro__step_09_tank_plans_1hc_4_text:
     noteDev: 
     temp: false
@@ -452,6 +499,14 @@ entries:
 
 
       The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
+  unique_intro__step_09_tank_plans_1hc_5_text_ctrl:
+    noteDev: 
+    temp: false
+    text: >-
+      First, choose [b]when[/b] the attack should happen using the triggers.
+
+
+      The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
   unique_intro__step_09_tank_plans_1hc_6_text:
     noteDev: 
     temp: false
@@ -460,14 +515,43 @@ entries:
 
 
       The % displayed is the predicted effectiveness of your weapon at this range.
+  unique_intro__step_09_tank_plans_1hc_6_text_ctrl:
+    noteDev: 
+    temp: false
+    text: >-
+      Confirm the attack after moving the cursor to the intended target (or its prediction hologram). The reticle will lock on if you are hovering over a valid target.
+
+
+      The % displayed is the predicted effectiveness of your weapon at this range.
   unique_intro__step_09_tank_plans_1hc_7_text:
     noteDev: 
     temp: false
     text: >-
-      You can drag the movements and attacks on the timeline to adjust the time and place of every step.
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
 
 
-      [b]More than one attack can be planned.[/b] Try creating another attack.
+      ■ Planned actions can retimed by dragging with a left mouse button, or deleted from the timeline with right clicks.
+
+
+      ■ Actions can also be retimed or deleted using the keyboard and focusing the timeline (see the input hints to the left).
+
+
+      [b]When you're ready to proceed, try creating another attack.[/b]
+  unique_intro__step_09_tank_plans_1hc_7_text_ctrl:
+    noteDev: 
+    temp: false
+    text: >-
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
+
+
+      ■ Actions can be retimed or deleted once the timeline is in focus:
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      Check the shortcuts displayed to the left to learn more. [b]When you're ready to proceed, try creating another attack.[/b]
   unique_intro__step_09_tank_plans_1hc_8_text:
     noteDev: 
     temp: false
@@ -532,6 +616,26 @@ entries:
     noteDev: 
     temp: false
     text: An additional unit just joined the fight. Eliminate all hostiles before they report your presence.
+  unique_test_range__briefing_name:
+    noteDev: 
+    temp: false
+    text: Test range
+  unique_test_range__briefing_text:
+    noteDev: 
+    temp: false
+    text: Test the performance of your mechs over varied terrain and against different enemies.
+  unique_test_range__intro_location:
+    noteDev: 
+    temp: false
+    text: Training simulation
+  unique_test_range__intro_ready:
+    noteDev: 
+    temp: false
+    text: Ready
+  unique_test_range__intro_threat:
+    noteDev: 
+    temp: false
+    text: Initializing selected equipment...
   unique_tutorial_base__state_wave_02_trigger_0c_text:
     noteDev: 
     temp: false

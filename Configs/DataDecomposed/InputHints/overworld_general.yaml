@@ -1,17 +1,53 @@
+horizontal: false
 extended: true
 lines:
-- mode: All
-  text: Select
+- visibility: All
+  actions:
+  - action: global_cancel
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: generic_return__s0
+- visibility: All
+  actions:
+  - action: global_confirm
+    newline: false
+  mode: LocReused
+  text: 
+  textSector: ui_input_hints
+  textKey: generic_confirm_return__s0
+- visibility: All
+  actions:
+  - action: global_direction_left
+    newline: false
+  - action: global_direction_right
+    newline: false
+  - action: global_direction_up
+    newline: false
+  - action: global_direction_down
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_mouse_primary
     newline: false
-- mode: All
-  text: Move the base
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_mouse_secondary
     newline: false
-- mode: All
-  text: Move the camera
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: global_move_vertical_pos
     newline: false
@@ -21,21 +57,31 @@ lines:
     newline: false
   - action: global_move_horizontal_pos
     newline: false
-- mode: All
-  text: Rotate the camera
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
-  - action: global_camera_vertical_pos
+  - action: global_camera_horizontal_pos
     newline: false
   - action: global_camera_horizontal_neg
     newline: false
-  - action: global_move_horizontal_pos
+  - action: global_camera_vertical_pos
     newline: false
-  - action: global_move_horizontal_pos
+  - action: global_camera_vertical_neg
     newline: false
   - action: global_mouse_middle
     newline: true
-- mode: All
-  text: Toggle pause
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 
+- visibility: All
   actions:
   - action: overworld_time_toggle
     newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 

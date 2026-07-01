@@ -1,0 +1,92 @@
+dataUI:
+  icon: s_icon_l32_world_battlesite2
+  color:
+    r: 0.3504361
+    g: 0.7075472
+    b: 0.4694731
+    a: 1
+  colorOverride:
+    r: 0
+    g: 1
+    b: 0.3333335
+    a: 1
+  sortingPriority: 700
+  hidden: false
+  irreversible: false
+  heating: false
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Double
+  paintingType: Timing
+  heatType: DataConstant
+  durationType: Data
+  duration: 1.5
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnValidation: 
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart:
+  - !CombatActionFunctionOwner
+    functions:
+    - !CombatUnitStatusRemoveGroup
+      keys:
+      - timed_charged
+      - timed_burn
+      - timed_meltdown
+      - timed_unstable
+      limit: 10
+      fxAudio: status_stabilize
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck:
+    exportCountToMemory: 
+    exportEntitiesToBlackboard: 
+    tags: 
+    name: 
+    faction: 
+    state: 
+    actionPlanned: 
+    locationOccupied: 
+    locationOccupiedUnlinked: 
+    relativeTransform: 
+    blueprints: 
+    classes:
+      mech: true
+    stats: 
+    statsNormalized: 
+    actionsInProgress: 
+    functions:
+    - !CombatValidateUnitStatusGroup
+      condition: OnePresent
+      keys:
+      - timed_charged
+      - timed_burn
+      - timed_unstable
+      - timed_meltdown
+  pilotLink: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment: 
+dataAI: 
+dataVisualsOnStart:
+  reactionLightsUsed: true
+  fxKey: fx_emergency_vent
+dataCustom: 
+functionsTimed: 

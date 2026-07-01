@@ -30,8 +30,11 @@ namespace PhantomBrigade.Data
         public int debugAmount = 100;
         public int priority = 0;
 
-        public bool colorOverrideUsed = false;
-        public Color colorOverride = Color.white.WithAlpha (1f);
+        [DropdownReference (true)]
+        public DataBlockColor colorOverrideBar;
+        
+        [DropdownReference (true)]
+        public DataBlockColor colorOverrideRewards;
         
         public bool showCounter = true;
         public bool showCounterNegative = false;
@@ -86,6 +89,11 @@ namespace PhantomBrigade.Data
                     }
                 }
             });
+        }
+
+        public override void OnAfterDeserialization (string key)
+        {
+            base.OnAfterDeserialization (key);
         }
 
         public override void ResolveText ()

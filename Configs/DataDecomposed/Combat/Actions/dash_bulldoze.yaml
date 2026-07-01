@@ -1,0 +1,92 @@
+dataUI:
+  icon: s_icon_l32_spec_penetration
+  color:
+    r: 0.8301887
+    g: 0.2936988
+    b: 0.652801
+    a: 1
+  colorOverride:
+    r: 1
+    g: 0
+    b: 0.6666665
+    a: 1
+  sortingPriority: 176
+  hidden: false
+  irreversible: false
+  heating: true
+  offensive: false
+  modes: 
+dataCore:
+  locking: false
+  trackType: Double
+  paintingType: Dash
+  heatType: DataConstant
+  durationType: Data
+  duration: 2
+  durationUnitStat: 
+  durationPilotStat: 
+  heatChange: 0
+  secondaryDirection: false
+  instantEffect: false
+  targetWithoutStandardChecks: false
+  targetWithoutPart: false
+  eventsOnCreation: 
+  eventsOnModification: 
+  eventsOnStart: 
+  eventsOnEnd: 
+  eventsOnDispose: 
+  functionsOnTargetCheck: 
+  functionsOnValidation: 
+  functionsOnValidationBase:
+  - !CombatValidateUnitClass
+    classKey: mech
+    present: true
+  - !CombatValidateUnitSubsystem
+    socket: core
+    hardpoint: internal_aux_top_thrusters
+    blueprint: 
+    tags:
+      thruster_type_bulldoze: true
+    present: true
+  functionsOnCreation: 
+  functionsOnModification: 
+  functionsOnStart: 
+  functionsOnUpdate: 
+  functionsOnEnd: 
+  functionsOnDispose: 
+  check: 
+  unitCheck: 
+  pilotLink: 
+  rangePreviewFromStat: 
+  timelinePreview: 
+dataFactionCheck: 
+dataMovement: 
+dataEquipment:
+  partUsed: true
+  partSocket: core
+dataAI: 
+dataVisualsOnStart: 
+dataCustom:
+  flags:
+  - bulldoze
+  ints:
+    destruction_limit: 5
+  floats:
+    destruction_origin_offset: 4
+    destruction_radius: 8
+    melee_duration_dash_align: 0.1
+    melee_duration_dash_out: 0.333
+    range_max: 30
+    range_min: 10
+  vectors: 
+  strings: 
+functionsTimed:
+- timeNormalized: 0.25
+  repeat: 
+  functions:
+  - !CombatUnitScrambleGuidance
+    fxKey: fx_thruster_flash
+    offset:
+      x: 0
+      y: 2
+      z: 0

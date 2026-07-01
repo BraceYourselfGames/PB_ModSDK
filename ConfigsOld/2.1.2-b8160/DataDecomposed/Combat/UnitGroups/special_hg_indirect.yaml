@@ -1,0 +1,114 @@
+comment: 
+hidden: false
+listed: false
+factionAllied: true
+factionBranchDefault: ''
+tags: []
+unitsPerGrade:
+- liveryPreset: ''
+  units:
+  - keyExternal: true
+    key: special_hg_mech_indirect_01
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: StandoffAttack2
+    aiTargeting: default
+    liveryPreset: hg_main_g1
+    custom:
+      name: 
+      id: 
+      idReused: 
+      idPilot: 
+      role: special_homeguard
+      spawn: 
+      landing:
+        landingUsed: true
+        landingData:
+          duration: 1
+          positionStart:
+            x: 0
+            y: 0
+            z: -6
+          rotationStart:
+            x: 0
+            y: 0
+            z: 0
+          easing: true
+          convertToAction: true
+      flags:
+        controlByPlayer: true
+        controlledByAI: true
+        uncrewed: false
+      faction:
+        faction: Phantoms
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags:
+      - custom_homeguard
+  - keyExternal: true
+    key: vhc_tank_v2_w3_adapter_lr_ml
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: StandoffAttack2
+    aiTargeting: default
+    liveryPreset: hg_main_g1
+    custom:
+      name: 
+      id: 
+      idReused: 
+      idPilot: 
+      role: special_homeguard
+      spawn: 
+      landing:
+        landingUsed: true
+        landingData:
+          duration: 1
+          positionStart:
+            x: 0
+            y: 0
+            z: -6
+          rotationStart:
+            x: 0
+            y: 0
+            z: 0
+          easing: true
+          convertToAction: true
+      flags:
+        controlByPlayer: true
+        controlledByAI: true
+        uncrewed: false
+      faction:
+        faction: Phantoms
+      speed: 
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags:
+      - custom_homeguard
+unitPresets:
+  mech: !UnitPresetLink
+    preset: special_hg_mech_indirect_01
+  tank: !UnitPresetLink
+    preset: special_hg_tank_indirect_01

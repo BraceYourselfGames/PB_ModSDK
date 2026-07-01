@@ -1,0 +1,42 @@
+hidden: false
+parents:
+- key: arrival_campaign
+core: 
+effectsOnExit:
+- functionsBase: 
+  functionsTarget: 
+  functionsGlobal:
+  - !UnlockCodex
+    key: history_prediction
+  - !UnlockCodex
+    key: overworld_resupply
+  functionsLocal: 
+tags: 
+check: 
+steps:
+  step_01:
+    comment: 
+    image: 
+    background:
+      immersive: true
+      focus: false
+      brightness: 0.627
+      color:
+        r: 0.514151
+        g: 0.514151
+        b: 1
+        a: 0
+      image: event_smoke_distant
+      imageSecondary: 
+      video:
+        loop: true
+        contentDelay: 0
+        path: Content/Video/slides_temp/travel_loop_02
+    mood: 
+    textHeader: 
+    text: {}
+    textReused: 
+    properties: 
+    effects: 
+    options: 
+    optionsReused: 

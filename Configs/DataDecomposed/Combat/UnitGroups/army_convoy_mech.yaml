@@ -10,7 +10,7 @@ unitsPerGrade:
   units:
   - keyExternal: true
     key: custom_runner_cargo
-    countMin: 2
+    countMin: 1
     countMax: 2
     countRandom: false
     levelOffsetMin: 0
@@ -18,6 +18,56 @@ unitsPerGrade:
     levelOffsetRandom: false
     qualityTableKey: unitgroup_q1_common
     aiBehavior: DefensiveDestination
+    aiTargeting: defensive
+    liveryPreset: misc_hvt_cargo_01
+    custom:
+      name: 
+      id: 
+      idReused:
+        textSector: overworld_entity_actions
+        textKey: secret_target__1_name
+      idPilot: 
+      role: 
+      spawn: 
+      landing:
+        landingUsed: true
+        landingData:
+          duration: 1
+          positionStart:
+            x: 0
+            y: 0
+            z: -15
+          rotationStart:
+            x: 0
+            y: 0
+            z: 0
+          easing: true
+          convertToAction: true
+      flags: 
+      faction: 
+      speed:
+        libraryUsed: false
+        speed: 15
+      uncrewed: 
+      pilotAppearance: 
+      pilotStats: 
+      predictionLimit: 
+      animationOverrides: 
+      statMultipliers: 
+      hitDirectionModifiers: 
+      functions: 
+      combatTags:
+      - purpose_runner
+  - keyExternal: true
+    key: custom_runner_cargo2
+    countMin: 1
+    countMax: 2
+    countRandom: false
+    levelOffsetMin: 0
+    levelOffsetMax: -1
+    levelOffsetRandom: false
+    qualityTableKey: unitgroup_q1_common
+    aiBehavior: DumbDestination
     aiTargeting: defensive
     liveryPreset: misc_hvt_cargo_01
     custom:

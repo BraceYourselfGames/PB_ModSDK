@@ -100,10 +100,46 @@ entries:
     id: 1
     text: 小隊預測
     textEng: Prediction for squad
+  briefing_info_st_refresh:
+    id: 2
+    text: 遠端支援合約會在每場戰鬥、紮營或前往新省份後刷新。
+    textEng: Remote assistance contracts refresh after each fight, camp or trip to a new province.
+  briefing_info_st_unavailable:
+    id: 2
+    text: 遠端支援合約無法使用。請推進戰役以重新與你的盟友取得聯繫。
+    textEng: Remote assistance contracts unavailable. Advance the campaign to reestablish contact with your allies.
   briefing_info_threat_prefix:
     id: 1
     text: 威脅度
     textEng: Threat
+  briefing_mission_locked_header:
+    id: 2
+    text: 已鎖定
+    textEng: Locked
+  briefing_mission_locked_text:
+    id: 2
+    text: 無可用情報。請完成前置任務以解鎖此任務。
+    textEng: No intel available. Complete the preceding mission to unlock this mission.
+  briefing_mission_type_remote:
+    id: 2
+    text: 遠端支援
+    textEng: Remote assist
+  briefing_mission_type_remote_desc_builtin:
+    id: 2
+    text: 操控友軍小隊，讓你的機甲和駕駛員免於承受風險。無法獲得回收，但能獲得大量保證獎勵。
+    textEng: Take control of an allied squad without a risk to your units and pilots. No salvage access, but plentiful guaranteed rewards.
+  briefing_mission_type_sim:
+    id: 2
+    text: 模擬演練
+    textEng: Simulation
+  briefing_mission_type_sim_desc_builtin:
+    id: 2
+    text: 在虛擬環境中測試你的單位和駕駛員。傷害不會保留。無法自訂小隊。
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. No squad customization allowed.
+  briefing_mission_type_sim_desc_squad:
+    id: 2
+    text: 在虛擬環境中測試你的單位和駕駛員。傷害不會保留。小隊可自訂。
+    textEng: Test your units and pilots in a virtual environment. Damage does not persist. Squad can be customized.
   briefing_nav_button_cant_deploy:
     id: 1
     text: 無法部屬
@@ -292,6 +328,14 @@ entries:
     id: 1
     text: 單位
     textEng: Unit
+  briefing_standalone_header:
+    id: 2
+    text: 作戰行動
+    textEng: Operations
+  briefing_standalone_subtitle:
+    id: 2
+    text: 遠端支援與模擬
+    textEng: Remote assists & simulations
   briefing_units_empty_desc:
     id: 1
     text: 基地沒有可用的機甲，或是所有機甲已經添加至小隊中
@@ -839,11 +883,11 @@ entries:
   inventory_info_hint_favorite_header:
     id: 1
     text: 收藏
-    textEng: Favorite
+    textEng: Favourite
   inventory_info_hint_favorite_text:
     id: 1
     text: 將此物品標記為收藏。這能讓項目在物品清單中更醒目，使其更容易找到。
-    textEng: Mark this item as a favorite. This highlights it in inventory lists, making it easier to find.
+    textEng: Mark this item as a favourite. This highlights it in inventory lists, making it easier to find.
   inventory_info_hint_level_header:
     id: 1
     text: 等級
@@ -1847,6 +1891,10 @@ entries:
     id: 1
     text: 消散
     textEng: Dissipation
+  unit_loadout_hint_altitude_range:
+    id: 2
+    text: 懸浮範圍
+    textEng: Hover range
   unit_loadout_hint_barrier:
     id: 1
     text: 屏障
@@ -1903,6 +1951,10 @@ entries:
     id: 1
     text: 空槽位：未安裝零件。
     textEng: 'Empty socket: no installed part.'
+  unit_loadout_test_drive:
+    id: 2
+    text: 試駕
+    textEng: Test drive
   unit_remove_header:
     id: 2
     text: 確定破壞

@@ -1,0 +1,134 @@
+hidden: true
+parents: 
+livery: 
+ratingRange: 
+comment: 
+textName: 
+textDesc: 
+textNameFromRating: 
+textDescFromRating: 
+sockets:
+- optional_left
+- optional_right
+tags:
+- body_part
+- part_arm
+workshopInfo:
+  1:
+    progressLimit:
+      i: 4
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 200
+    basePartRequirements: 
+  2:
+    progressLimit:
+      i: 4
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 250
+    - key: components_r2
+      amount: 12
+    basePartRequirements:
+      workshop_tech_r2: 1
+  3:
+    progressLimit:
+      i: 4
+    inputResourcesViaStats: 
+    inputResources:
+    - key: supplies
+      amount: 350
+    - key: components_r2
+      amount: 12
+    - key: components_r3
+      amount: 6
+    basePartRequirements:
+      workshop_tech_r3: 1
+genSteps:
+- !AddHardpoints
+  subsystemsInitial: 
+  pickRandom: false
+  hardpointsTargeted:
+  - rarity
+  - perk_1
+  priority: 10
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 1
+    ratingMax: 3
+- !TrimSystemsByRating
+  ratingMin: 0
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - rarity
+  priority: 20
+  comment: 
+  checks: 
+- !TrimSystemsByRating
+  ratingMin: -1
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - perk_1
+  priority: 30
+  comment: 
+  checks: 
+- !TrimSystemsByTagFilter
+  requireAll: true
+  filter:
+    perk_occurrence_body: true
+  hardpointsTargeted:
+  - perk_1
+  priority: 31
+  comment: 
+  checks: 
+- !TrimSystemsByStats
+  statsDesired: false
+  statKeys:
+  - power
+  hardpointsTargeted:
+  - perk_1
+  priority: 32
+  comment: 
+  checks: 
+- !TrimSystemsByRating
+  ratingMin: -2
+  ratingMax: 0
+  relative: true
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  priority: 40
+  comment:
+    comment: Offset by -2 not -1 since some system types only exist at common quality and aux hardpoints could go empty at R3 otherwise.
+  checks: 
+- !SetHardpointState
+  fused: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  priority: 50
+  comment: 
+  checks:
+  - !CheckPartRating
+    ratingMin: 2
+    ratingMax: 3
+- !TrimSystemsByChance
+  difficultyUsed: true
+  difficultyKey: combat_system_spawn_chance
+  chance: 0.5
+  individual: false
+  hardpointsTargeted:
+  - internal_aux_defense
+  - internal_aux_offense
+  - internal_aux_mobility
+  priority: 500
+  comment:
+    comment: This generation step will remove all content from the following hardpoints with a chance. The "individual" flag set to false makes this chance apply to entire set of candidates (so, passing this check clears everything).
+  checks: 

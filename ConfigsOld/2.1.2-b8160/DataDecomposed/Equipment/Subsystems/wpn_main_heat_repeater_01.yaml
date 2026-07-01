@@ -1,0 +1,316 @@
+hidden: false
+parent: wpn_main_heat_repeater
+rating: 1
+textNameFromPreset: 
+textNameFromHardpoint: 
+textName: 
+textDescFromPreset: 
+textDesc: 
+hardpoints: 
+tags:
+- mnf_10
+- spec_guided_precise
+- type_sightline_recommended
+- spec_impact
+statDistribution: ''
+stats:
+  act_count:
+    value: 22
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_duration:
+    value: 1.75
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  act_heat:
+    value: 140
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  mass:
+    value: 8
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  scrap_value:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_concussion:
+    value: 0
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage:
+    value: 6
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_damage_radius:
+    value: 1
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_heat:
+    value: 15
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_impact:
+    value: 14
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_proj_lifetime:
+    value: 3
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_max:
+    value: 77
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_range_min:
+    value: 40
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle:
+    value: 16
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_angle_moving:
+    value: 16
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_scatter_radius:
+    value: 11
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+  wpn_speed:
+    value: 90
+    targetMode: 0
+    targetSocket: ''
+    targetHardpoint: ''
+visuals:
+- wpn_energy_03_back_b
+- wpn_energy_03_bottom
+- wpn_energy_03_front_c
+- wpn_energy_03_top_a
+attachments: 
+activation:
+  visual:
+    local:
+      key: fx_muzzle_mg_heavy_blue
+      keyEnemy: fx_muzzle_mg_heavy_red
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    root: 
+    localSocketOverride: ''
+    localHardpointOverride: ''
+    localTransformOverride: 
+  audio:
+    onActivationFirst: weapon_machinegun_sub_first
+    onActivationMid: weapon_machinegun_sub_mid
+    onActivationLast: weapon_machinegun_sub_last
+    onActivationStart: 
+    onActivationEnd: 
+  light:
+    shared: true
+    key: wpn_mg
+    custom: 
+  recoil:
+    key: recoil_smg
+  timing: 
+  hitReaction: 
+projectile:
+  debugIndexRange: {}
+  visual:
+    body:
+      key: fx_projectile_firebullet_blue_short_no_core
+      keyEnemy: fx_projectile_firebullet_red_short_no_core
+      scale:
+        x: 1.5
+        y: 1.5
+        z: 0.75
+      colorOverride: 
+      colorOverrideEnemy: 
+    impact:
+      key: fx_impact_projectile_thermal
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+    deactivation:
+      key: fx_projectile_pop
+      keyEnemy: ''
+      scale:
+        x: 1
+        y: 1
+        z: 1
+      hueOffset: 
+      hueOffsetEnemy: 
+  audio: 
+  damageDelay: 
+  distribution: 
+  range: 
+  fragmentation: 
+  fragmentationDelayed: 
+  falloff:
+    animated: true
+    referenceStart: 
+    referenceMid: 
+    referenceEnd: 
+    damageFalloff:
+      modePostWrap: ClampForever
+      modePreWrap: ClampForever
+      keys:
+      - tv_tg:
+          x: 0
+          y: 0.5001521
+          z: 1.338159
+          w: 1.338159
+        w:
+          x: 0
+          y: 0.1396616
+        m: {}
+      - tv_tg:
+          x: 0.3248339
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.1874415
+        m: {}
+      - tv_tg:
+          x: 0.8002866
+          y: 1
+          z: 0
+          w: 0
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+      - tv_tg:
+          x: 1
+          y: 0.09643555
+          z: -5.007175
+          w: -5.007175
+        w:
+          x: 0.3333333
+          y: 0.3333333
+        m: {}
+  falloffGlobal: 
+  animationFade:
+    speed: 10
+    distance: 3
+  ballistics: 
+  fuseProximity: 
+  hitResponse: 
+  splashDamage: 
+  splashImpact: 
+  guidanceData:
+    rigidbodyMass: 0
+    rigidbodyDrag: 3
+    rigidbodyDriftDrag: 3
+    rigidbodyAngularDrag: 8
+    rigidbodyLift: 0
+    driverSteeringForce: 20
+    driverPitchForce: 20
+    driverAccelerationForce: 75
+    driverAccelerationMin: 1
+    inputProgressFromTarget: true
+    inputTargetHeightScale: 0
+    inputTargetOffsetPower: 2
+    inputThrottleDotPowerScale: 1
+    inputTargetPointLateralMode: Interleaved
+    steeringPID:
+      proportionalGain: 7
+      derivativeGain: 0
+      integralGain: 0
+    pitchPID:
+      proportionalGain: 7
+      derivativeGain: 0
+      integralGain: 0
+    inputTargetPointLateral: 
+    inputTargetHeight: 
+    inputTargetBlend: 
+    inputTargetUpdate: !DataBlockGuidanceInputConstant
+      value: 1
+    inputTargetOffset: !DataBlockGuidanceInputCurve
+      curve:
+        modePostWrap: ClampForever
+        modePreWrap: ClampForever
+        keys:
+        - tv_tg:
+            x: 0
+            y: 1
+            z: 0
+            w: 0
+          w:
+            x: 0
+            y: 0
+          m: {}
+        - tv_tg:
+            x: 1
+            y: 0.2312469
+            z: 0
+            w: 0
+          w:
+            x: 0
+            y: 0
+          m: {}
+    inputSteering: !DataBlockGuidanceInputConstant
+      value: 1
+    inputThrottle: !DataBlockGuidanceInputConstant
+      value: 1
+    inputThrottleDotPower: 
+    directionCheck:
+      distance: 100
+      dotThreshold: 0
+    velocityCompensation:
+      rangeLimit:
+        x: 100
+        y: 100
+      timeLimit: 1
+      iterations: 1
+      targetVelocityCompensation: 0.7
+      selfVelocityCompensation: 0.6
+      selfVelocityProjection: 0
+  guidanceAudio:
+    soundOnLaunch: weapon_missile_seeker_fire
+    soundOnPriming: weapon_missile_seeker_prime
+    soundOnExpiration: weapon_missile_seeker_explode
+    syncProximityRange:
+      x: 12
+      y: 24
+    syncPowerAngularVelocity: 1
+    syncSize: 1
+  statusBuildup:
+    key: timed_burn
+    statMultiplier: 
+    amount: 0.15
+  uiTrajectory: 
+  uiSpeedAverage: 
+  uiEffectivenessMultiplier: 
+  uiCoverageWeight: 
+  uiOptimumThreshold: 
+beam: 
+custom: 
+functions: 
+workshopInfo: 

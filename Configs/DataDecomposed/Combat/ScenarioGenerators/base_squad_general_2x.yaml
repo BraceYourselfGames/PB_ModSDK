@@ -1,0 +1,70 @@
+hidden: true
+parents: 
+core: 
+tags:
+- difficulty_medium
+textList: 
+escalation: 
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter: 
+scenarioChanges: 
+squads:
+- comment:
+    comment: 2 units, +2 level
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_military_demolition
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 2
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_heavy: true
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 2
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_squads: true
+        type_mech: true
+        weight_heavy: false
+- comment:
+    comment: 2 units, +2 level
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_military_demolition
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 2
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_squads: true
+        type_mech: true
+        weight_medium: true
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 1
+    levelOffsetMax: 2
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_squads: true
+        type_mech: true
+        weight_light: true
+squadFilter: 
+rewardPool: 
+effectsOnCompletion: 

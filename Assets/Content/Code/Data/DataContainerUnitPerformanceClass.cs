@@ -16,6 +16,15 @@ namespace PhantomBrigade.Data
     {
         public int stabilityBonus = 0;
         public float concussionMultiplier = 1.5f;
+        
+        [PropertyRange (0f, 1f)]
+        public float hoverAltitudeFactor = 0.5f;
+        
+        [PropertyRange (0f, 1f)]
+        public float bulldozeHitDestabilization = 0.2f;
+        
+        [PropertyRange (0f, 1f)]
+        public float crashHitDestabilization = 0.2f;
     }
     
     [Serializable, HideReferenceObjectPicker, LabelWidth (160f)]

@@ -1,0 +1,32 @@
+parents:
+- key: workshop_combat
+  priority: 5
+  offsetStart: 30
+  offsetEnd: -10
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 2
+  positionY: 6
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_units6
+unlock: 
+cost:
+  resources:
+    components_r2: 110
+    components_r3: 50
+    supplies: 2200
+    unit_token: 2
+effect:
+  stats: 
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_workshop

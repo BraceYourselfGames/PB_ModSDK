@@ -226,6 +226,6 @@ namespace PhantomBrigade.Functions
     // [InterfaceInfo ("Used to modify a scenario being generated. Only used via hardcoded lists. Signature `void Run (OverworldEntity siteOverworld, DataContainerScenario scenario, int seed)`")]
     public interface ICombatScenarioGenStep
     {
-        void Run (OverworldEntity siteOverworld, DataContainerScenario scenario, int seed);
+        void Run (OverworldEntity siteOverworld, DataContainerScenario scenario, int seed, bool standaloneMode);
     }
 }

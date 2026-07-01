@@ -63,7 +63,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_penetration_charges:
-    value: 15
+    value: 10
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -88,7 +88,7 @@ stats:
     targetSocket: ''
     targetHardpoint: ''
   wpn_range_max:
-    value: 90
+    value: 75
     targetMode: 0
     targetSocket: ''
     targetHardpoint: ''
@@ -165,7 +165,7 @@ projectile:
       colorOverride: 
       colorOverrideEnemy: 
     impact:
-      key: fx_aoe_explosion_01_small
+      key: fx_impact_projectile_thermal
       keyEnemy: ''
       scale:
         x: 1
@@ -239,6 +239,7 @@ projectile:
     distance: 3
   ballistics: 
   fuseProximity: 
+  spike: 
   hitResponse: 
   splashDamage: 
   splashImpact: 

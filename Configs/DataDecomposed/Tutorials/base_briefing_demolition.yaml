@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -15,33 +16,40 @@ pages:
   center: 
   hint:
     color:
-      r: 0.1415094
-      g: 0.1406871
-      b: 0.1381719
-      a: 0
+      r: 1
+      g: 1
+      b: 1
+      a: 1
     frameLocation: BottomLeft
     frameGradientMode: Top
     framePositionX: 0
     framePositionY: 0
-    frameSizeX: 825
-    frameSizeY: 208
+    frameSizeX: 544
+    frameSizeY: 356
     frameBlocksInput: false
     frameBoundary: false
-    textLocation: RightBottom
-    buttonLocation: Top
+    textLocation: RightTop
+    buttonLocation: Bottom
     textWidth: 282
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld: 
   effectsCombat: 
 - depthForeground: 0
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -67,17 +75,23 @@ pages:
     textLocation: TopLeft
     buttonLocation: Bottom
     textWidth: 356
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
       typeName: CIViewBaseBriefingV2
-      methodName: TryEntryToSquad
+      methodName: OnNavToSquadExternal
       argument: ''
       frameDelay: 1
   effectsCombat: 
@@ -85,6 +99,7 @@ pages:
   depthBackground: 0
   skippable: false
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -101,21 +116,47 @@ pages:
       a: 1
     frameLocation: BottomLeft
     frameGradientMode: Top
-    framePositionX: 0
+    framePositionX: 208
     framePositionY: 0
-    frameSizeX: 434
-    frameSizeY: 406
+    frameSizeX: 224
+    frameSizeY: 424
     frameBlocksInput: false
     frameBoundary: false
-    textLocation: RightTop
+    textLocation: TopLeft
     buttonLocation: Bottom
-    textWidth: 282
-    textReused: 
-    icon: 
+    textWidth: 300
     worldAnchor: 
-    arrowCustom: 
+    arrowCustom:
+      offset:
+        x: 112
+        y: 0
+      rotation: 0
     frameHighlight: 
-    textInputActions: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textInputActions:
+      spriteWrap: true
+      actions:
+      - global_confirm
+    textInputHintAppendix: 
+    effectsOnInput:
+    - controller: All
+      inputDirection: Forward
+      functionsOverworld:
+      - !CallMethodStatic
+        typeName: CIViewBaseBriefingV2
+        methodName: OnEditExternal
+        argument: ''
+        frameDelay: 1
+      functionsCombat: 
   effectsOverworld:
     functions:
     - !CallMethodStatic
@@ -128,6 +169,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -137,9 +179,20 @@ pages:
     a: 0.05098039
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:

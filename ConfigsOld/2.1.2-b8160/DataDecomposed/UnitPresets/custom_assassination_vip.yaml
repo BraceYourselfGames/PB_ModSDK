@@ -1,0 +1,45 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_officer_a
+aiBehavior: Flanker
+aiTargeting: leader
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_helge: true
+      weight_heavy: true
+parts:
+  equipment_left:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          category_shield: true
+          weight_heavy: true
+    rating: 
+    systems: 
+  equipment_right:
+    livery: 
+    preset: !PartResolverTags
+      filters:
+      - tags:
+          part_ultraheavy: false
+          range_long: true
+          special_vip_brawler: true
+          wpn_primary: true
+      - tags:
+          part_ultraheavy: false
+          range_medium: true
+          special_vip_brawler: true
+          wpn_primary: true
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

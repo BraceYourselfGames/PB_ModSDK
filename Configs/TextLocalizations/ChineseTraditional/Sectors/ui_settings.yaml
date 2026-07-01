@@ -24,6 +24,22 @@ entries:
     id: 1
     text: 切換主選單的背景相機移動與效果。
     textEng: Toggles background camera movement and effects in the main menu.
+  access_navframe_style__header:
+    id: 2
+    text: 選定框線
+    textEng: Focus frame
+  access_navframe_style__text:
+    id: 2
+    text: 使用鍵盤和控制器瀏覽時，突顯目前選定物件的框線樣式。
+    textEng: The style of the frame highlighting the currently focused element for keyboard and controller navigation.
+  access_navframe_timeout__header:
+    id: 2
+    text: 選定框線淡出
+    textEng: Focus fade
+  access_navframe_timeout__text:
+    id: 2
+    text: 選定框線淡出的所需時間。
+    textEng: The time it takes for the focus frame to fade out.
   access_overworld_glitch_effect__header:
     id: 1
     text: 主世界毛刺效果
@@ -243,7 +259,15 @@ entries:
   game_base_preserve_colors__text:
     id: 1
     text: 啟用後，機甲的既有配色將優先於新裝備零件的顏色。例如：若機甲為灰色，新裝上紅色武器後，該武器將自動漆成灰色。
-    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted gray and a newly equipped weapon is red, the weapon will be repainted gray on installation.
+    textEng: If enabled, existing color customization on the customized mech will take priority over colors of a newly equipped part. For example, if a mech is painted grey and a newly equipped weapon is red, the weapon will be repainted grey on installation.
+  game_combat_action_tooltip_details__header:
+    id: 2
+    text: 動作提示說明
+    textEng: Action tooltip hints
+  game_combat_action_tooltip_details__text:
+    id: 2
+    text: 在戰鬥操作提示中顯示有關熱能與發數等機制的提示。
+    textEng: Display hints about mechanics like heat and charges in the combat action tooltips.
   game_combat_damage_numbers__header:
     id: 1
     text: 顯示傷害數字
@@ -344,6 +368,14 @@ entries:
     id: 1
     text: 這個設定決定預測時間是否在一段時間不活動後跳回到一回合開始時。
     textEng: This setting determines whether prediction time snaps back to the start of a turn after a period of inactivity.
+  game_combat_updates__header:
+    id: 2
+    text: 顯示通知
+    textEng: Show notifications
+  game_combat_updates__text:
+    id: 2
+    text: 在螢幕右上角顯示不同事件的通知。
+    textEng: Show update notifications in the top right corner of the screen.
   game_ent_sp_logo__header:
     id: 2
     text: 變更選單標誌
@@ -384,6 +416,14 @@ entries:
     id: 1
     text: 會以投影片形式展示世界地圖上出現的所有新任務。
     textEng: Display a slideshow highlighting every new mission appearing on the world map.
+  game_overworld_updates__header:
+    id: 2
+    text: 顯示通知
+    textEng: Show notifications
+  game_overworld_updates__text:
+    id: 2
+    text: 在螢幕右上角顯示不同事件的通知。
+    textEng: Show update notifications in the top right corner of the screen.
   game_screenshots_lossless__header:
     id: 1
     text: 無失真螢幕截圖
@@ -588,6 +628,22 @@ entries:
     id: 1
     text: 控制使用者介面之外的紋理解析度。推薦預設為全開。
     textEng: Controls resolution of textures with exception of user interface. Recommended default is Full.
+  input_gamepad_enabled__header:
+    id: 2
+    text: 偵測控制器
+    textEng: Detect controllers
+  input_gamepad_enabled__text:
+    id: 2
+    text: 如果停用，遊戲會忽略所有控制器輸入。
+    textEng: If disabled, the game will ignore all controller input.
+  input_gamepad_hints__header:
+    id: 2
+    text: 顯示輸入鍵的提示
+    textEng: Show input hints
+  input_gamepad_hints__text:
+    id: 2
+    text: 在螢幕上顯示有關控制器按鍵綁定的提示。
+    textEng: Display hints about the controller bindings on the screen.
   input_gamepad_look_invert_vertical__header:
     id: 1
     text: 畫面反向
@@ -628,6 +684,14 @@ entries:
     id: 1
     text: 從使用者輸入的數值來控制時間軸移動幅度
     textEng: Controls how much the timeline moves from user input
+  input_gamepad_zoom_invert__header:
+    id: 2
+    text: 反向縮放
+    textEng: Inverted zoom
+  input_gamepad_zoom_invert__text:
+    id: 2
+    text: 交換左右縮放按鈕。
+    textEng: Swaps the left and right zoom buttons.
   input_gamepad_zoom_sensitivity__header:
     id: 1
     text: 縮放敏感度
@@ -636,6 +700,14 @@ entries:
     id: 1
     text: 以使用者輸入的數值來控制相機放大幅度
     textEng: Controls how much the camera zooms from user input
+  input_keyboard_hints__header:
+    id: 2
+    text: 顯示輸入提示
+    textEng: Show input hints
+  input_keyboard_hints__text:
+    id: 2
+    text: 在螢幕上顯示有關鍵盤與滑鼠控制的提示。
+    textEng: Display hints about keyboard and mouse controls on the screen.
   input_keyboard_look_invert_vertical__header:
     id: 1
     text: 畫面反向

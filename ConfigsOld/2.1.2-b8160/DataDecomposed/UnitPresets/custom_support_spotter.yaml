@@ -1,0 +1,34 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_mech
+textType: 
+livery: inv_army_officer_a
+aiBehavior: StandoffAttack2
+aiTargeting: defensive
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      armor_bein: true
+  equipment_right:
+  - tags:
+      part_energy: false
+      part_ml: false
+      range_close: false
+      range_medium: false
+      range_short: false
+      wpn_primary: true
+parts:
+  back:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - back_radio
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

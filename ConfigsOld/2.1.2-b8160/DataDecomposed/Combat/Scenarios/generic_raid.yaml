@@ -1,0 +1,1034 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: false
+  time: 7
+  scalingUsed: true
+  loadImmediately: false
+  externalBranchUsed: true
+  externalLevelUsed: true
+  reinforcementsUsed: false
+  replayUsed: true
+  unitLossUsed: true
+  lootingUsed: true
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist: 
+  customExitBehaviour: 
+  weatherOverridePrecipitation: 
+  weatherOverrideTemperature: 
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation: 
+  textIntroThreat: 
+  textIntroReady: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: true
+  tagFilter:
+    context_capture_loot: true
+    type_main: true
+  keys: 
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      perimeter_outer: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- context_generic
+- listed
+- trait_marathon
+- trait_objectives
+- type_entity_convoy_cargo
+- type_raid
+- flag_escalation_squads
+states:
+  obj_01_detection:
+    comment:
+      comment: This state reacts for every turn a PB mech is not in a designated location.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 10
+    priority: 2
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_obj_01_extraction: true
+      name: 
+      faction:
+        key: Phantoms
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_objective_progress_01
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_01_disruption:
+    comment:
+      comment: This state reacts upon PB unit entering the location, visualizing disruption.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 10
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnLocationContact
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_obj_01_extraction: true
+      name: 
+      faction:
+        key: Phantoms
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFromState
+        stateKey: obj_01_extraction
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0
+            key: generic_target_block_a
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_01_extraction:
+    comment: 
+    textNameKey: generic_raid_obj_01_header
+    textDescKey: generic_raid_obj_text
+    textOnCompletion:
+      textNameKey: 
+      textDescKey: generic_raid_obj_fail_text
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 3
+    priorityDisplay: 3
+    mood: -2
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress:
+        f: 0.5
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_loot: true
+        filters: 
+      visual:
+        key: obj_prop_loot_01
+        reactionAnimation: true
+    locationRetreat: 
+    volume: 
+    stateValues:
+      outcome_reward_conditional: false
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_objective_progress_01
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 4
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_raid_obj_extracted_one
+          memoryChanges: 
+          stateScopeChanges:
+            obj_01_detection: false
+            obj_01_disruption: false
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_lost
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          - !CombatCreateStrike
+            delay: 0
+            blueprintKey: aircraft_airlift
+            target:
+              type: State
+              name: obj_01_extraction
+              center: true
+              modifiersDirectional: false
+              modifiers: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_02_detection:
+    comment:
+      comment: This state reacts for every turn a PB mech is not in a designated location.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 10
+    priority: 2
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_obj_02_extraction: true
+      name: 
+      faction:
+        key: Phantoms
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_objective_progress_02
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_02_disruption:
+    comment:
+      comment: This state reacts upon PB unit entering the location, visualizing disruption.
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 10
+    priority: 1
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnLocationContact
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count: 
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        in_state_obj_02_extraction: true
+      name: 
+      faction:
+        key: Phantoms
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFromState
+        stateKey: obj_02_extraction
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatCreateCommsMessage
+            time: 0
+            key: generic_target_block_b
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_02_extraction:
+    comment: 
+    textNameKey: generic_raid_obj_02_header
+    textDescKey: generic_raid_obj_text
+    textOnCompletion:
+      textNameKey: 
+      textDescKey: generic_raid_obj_fail_text
+    evaluated: true
+    visible: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 3
+    priorityDisplay: 3
+    mood: -2
+    ui:
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      moodIntensityNormal: 
+      moodIntensityProgress:
+        f: 0.5
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_loot: true
+        filters: 
+      visual:
+        key: obj_prop_loot_01
+        reactionAnimation: true
+    locationRetreat: 
+    volume: 
+    stateValues:
+      outcome_reward_conditional: false
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_objective_progress_02
+        presenceDesired: true
+        valueFromMemory: false
+        valueFromMemoryKey: 
+        valueCheck: GreaterEqual
+        value: 6
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_raid_obj_extracted_one
+          memoryChanges: 
+          stateScopeChanges:
+            obj_02_detection: false
+            obj_02_disruption: false
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !ModifyMemoryBase
+            changes:
+            - change: Offset
+              key: combat_sc_targets_lost
+              value: 1
+              valueFromMemory: false
+              valueFromMemoryKey: 
+          - !CombatCreateStrike
+            delay: 0
+            blueprintKey: aircraft_airlift
+            target:
+              type: State
+              name: obj_02_extraction
+              center: true
+              modifiersDirectional: false
+              modifiers: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  obj_fail:
+    comment:
+      comment: This state has negative priority to ensure it only returns true next turn after all cargo is extracted. It ends combat if player fails to stop every extraction.
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: -1
+    priority: -1
+    priorityDisplay: 10
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase:
+      method: RequireAll
+      checks:
+      - key: combat_sc_targets_lost
+        presenceDesired: true
+        valueFromMemory: true
+        valueFromMemoryKey: combat_sc_targets_spawned
+        valueCheck: GreaterEqual
+        value: 0
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart:
+          - time: 0
+            hidden: false
+            key: generic_raid_obj_extracted_all
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Defeat
+            early: true
+            instant: false
+  outcome_reward_conditional:
+    comment: 
+    textNameKey: ''
+    textDescKey: ''
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: true
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome:
+            outcomeVictory: true
+            outcomeDefeat: false
+            caseEarly: true
+            caseTotal: true
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges:
+            obj_01_extraction: false
+            obj_02_extraction: false
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions:
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 1
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier1: 1
+            functionsElse: 
+          - !CombatGroupConditional
+            checksBase:
+            - !OverworldValidateMemory
+              check:
+                method: RequireAll
+                checks:
+                - key: combat_sc_targets_lost
+                  presenceDesired: false
+                  valueFromMemory: false
+                  valueFromMemoryKey: 
+                  valueCheck: LessEqual
+                  value: 0
+            checksBaseValues: 
+            functions:
+            - !CombatReserveReward
+              rewards:
+                obj_tier2: 1
+            functionsElse: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  outcome_victory:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: true
+    visible: false
+    startInScope: true
+    priorityGeneration: 50
+    priority: 50
+    priorityDisplay: 50
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome:
+      present: false
+    turn: 
+    turnModulus: 
+    unitChecks:
+    - count:
+        check: Equal
+        value: 0
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags: 
+      name: 
+      faction:
+        key: Invaders
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome:
+            type: Victory
+            early: false
+            instant: false
+  reinforcements:
+    comment: 
+    textNameKey: generic_unknown_header
+    textDescKey: generic_unknown_text
+    textOnCompletion: 
+    evaluated: false
+    visible: false
+    startInScope: false
+    priorityGeneration: 20
+    priority: 20
+    priorityDisplay: 0
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn:
+      relative: false
+      check: GreaterEqual
+      value: 3
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: true
+      triggerLimit: 1
+      triggerIncrement: true
+      effectsPerIncrement:
+        1:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit: 
+          unitGroups:
+          - !UnitGroupFilter
+            tagsFromFactionBranch: true
+            tags:
+              weight_heavy: false
+            check: 
+            combatTags: 
+            spawnGroupOccupied: true
+            spawnCountStrict: true
+            spawnOrderRandom: true
+            factionBranchOverride: false
+            factionBranchKey: 
+            baseGrade: 0
+            maxGrade: 1
+            cloneable: false
+            functions: 
+            spawnTagsUsed: true
+            spawnTags:
+              perimeter_outer: true
+            spawnGroupKey: 
+            filterDistancePlayer: 
+            filterDistanceEnemy: 
+            filterDistanceSpawn: 
+            filterDistanceLocation: 
+            filterDistanceVolume: 
+            filterDistanceState: 
+            filterDistanceRetreat: 
+            sorting: 
+            spawnRegistration: 
+          unitGeneratorKeys: 
+          outcome: 
+  retreat_default:
+    comment: 
+    textNameKey: retreat_general_header
+    textDescKey: retreat_general_text
+    textOnCompletion: 
+    evaluated: false
+    visible: true
+    startInScope: false
+    priorityGeneration: 100
+    priority: 100
+    priorityDisplay: 100
+    mood: 0
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked: 
+    location:
+      visibleInWorld: true
+      locationProvider: !AreaLocationFilter
+        includeOverlaps: false
+        tagRequirements:
+          obj_retreat: true
+        filters: 
+      visual: 
+    locationRetreat:
+      commsUsed: false
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions: 
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+      textCurrentPrimaryKey: ''
+      textCurrentSecondaryKey: ''
+      textFromScenarioGroup: false
+      threatRatingPercentage: 1
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: true
+      unitsRevealed: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    unitGroups:
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        range_medium: true
+        weight_heavy: false
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_center: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: obj_01_extraction
+        check: Greater
+        value: 30
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: obj_01_extraction
+        invert: true
+      spawnRegistration: 
+    - !UnitGroupFilter
+      tagsFromFactionBranch: true
+      tags:
+        type_main: true
+        weight_heavy: true
+      check:
+        log: false
+        stateRequirements: 
+        checksGlobal:
+        - !OverworldValidateModifier
+          key: sp_liberation_easy
+          present: false
+        checksBase: 
+        checksTarget: 
+        checksProvince: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: true
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: false
+      functions: 
+      spawnTagsUsed: true
+      spawnTags:
+        perimeter_center: true
+      spawnGroupKey: 
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState:
+        key: obj_02_extraction
+        check: Greater
+        value: 30
+      filterDistanceRetreat: 
+      sorting: !UnitSlotSortingState
+        key: obj_02_extraction
+        invert: true
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat:
+      stateKey: retreat_default
+      stateValueModified: true
+      stateValue: false
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart:
+    - time: 0
+      hidden: false
+      key: generic_raid_start
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions:
+    - !ClearBaseCombatMemory {}
+    - !ModifyMemoryBase
+      changes:
+      - change: Set
+        key: combat_sc_targets_spawned
+        value: 2
+        valueFromMemory: false
+        valueFromMemoryKey: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

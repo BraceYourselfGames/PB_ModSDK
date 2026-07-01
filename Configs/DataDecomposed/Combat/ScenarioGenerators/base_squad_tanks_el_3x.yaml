@@ -1,0 +1,94 @@
+hidden: true
+parents: 
+core: 
+tags:
+- difficulty_easy
+- difficulty_medium
+textList: 
+escalation: 
+levelOffset: 
+checksGlobal: 
+checksBase: 
+scenarioFilter: 
+scenarioChanges: 
+squads:
+- comment:
+    comment: 3 units, 0-1 level boost
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_underground
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_01
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_02
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_03
+      tags: 
+  - qualityTable: default_r2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        range_short: false
+        role_3f_squads: true
+        weight_light: true
+- comment:
+    comment: 3 units, 0-1 level boost
+  scenarioTagsRequired: 
+  scenarioTagsBlocked:
+  - type_underground
+  slots:
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g3_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_01
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g2_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: false
+      keys:
+      - vhc_tank_el_adapter_3f_02
+      tags: 
+  - qualityTable: unitgroup_q2_uncommon
+    livery: hg_main_g1_green_arm
+    levelOffsetMin: 0
+    levelOffsetMax: 1
+    presetFilter:
+      tagsUsed: true
+      keys: 
+      tags:
+        role_3f_heavy: true
+squadFilter: 
+rewardPool: 
+effectsOnCompletion: 

@@ -1,0 +1,356 @@
+timeLastSync: 63811496378
+localized: true
+exportMode: LinePerKeySplit
+name: Workshop (Variants)
+description: Workshop project variants cover common modifications shared between many different projects. For example, each weapon project might have a unique description in the project sector, but might offer the player a choice between 3 quality levels, and text for these quality levels will be defined in this sector.
+splits: []
+tags: 
+groups: 
+entries:
+  prt_body_ratings_01__rating_1_name:
+    noteDev:
+      text: 'This set of variants controls quality level / rating of an item that will be built. This is similar to loot rarities in many RPGs: blue/green/purple loot in Destiny, WoW, Diablo, etc. The descriptions cover how these rarities affect performance in our game.'
+    temp: false
+    text: Common
+  prt_body_ratings_01__rating_1_text:
+    noteDev: 
+    temp: false
+    text: Average performance with varying perks. Mass-produced, with subsystems welded on directly to save costs.
+  prt_body_ratings_01__rating_2_name:
+    noteDev: 
+    temp: false
+    text: Uncommon
+  prt_body_ratings_01__rating_2_text:
+    noteDev: 
+    temp: false
+    text: Allows for customization of some internal subsystems, with higher quality perks.
+  prt_body_ratings_01__rating_3_name:
+    noteDev: 
+    temp: false
+    text: Rare
+  prt_body_ratings_01__rating_3_text:
+    noteDev: 
+    temp: false
+    text: Rare parts allow for a higher degree of customization of internal subsystems, with great perks.
+  prt_body_ratings_starter__rating_1_name:
+    noteDev:
+      text: This is text for a special version of the quality selector where common quality costs nothing to produce but has no perks at all. For example, basic armor and basic rifles are free to build, but we want uncommon and rare variants of same models to be as expensive as other uncommon and rare item types. The description currently doesn't reflect this distinction, but we might alter it in the future to point out what makes "starter" parts different from normal "common" parts.
+    temp: false
+    text: Common (Starter)
+  prt_body_ratings_starter__rating_1_text:
+    noteDev: 
+    temp: false
+    text: Average performance with varying perks. Mass-produced, with subsystems welded on directly to save costs.
+  prt_body_ratings_starter__rating_2_name:
+    noteDev: 
+    temp: false
+    text: Uncommon
+  prt_body_ratings_starter__rating_2_text:
+    noteDev: 
+    temp: false
+    text: Allows for customization of some internal subsystems, with higher quality perks.
+  prt_body_ratings_starter__rating_3_name:
+    noteDev: 
+    temp: false
+    text: Rare
+  prt_body_ratings_starter__rating_3_text:
+    noteDev: 
+    temp: false
+    text: Rare parts allow for a higher degree of customization of internal subsystems, with great perks.
+  prt_body_sockets__body_arm_name:
+    noteDev:
+      text: This is text for a workshop variant selector letting you specify which body part a given armor would be produced for. You are choosing "Elbrus" armor, and then you choose whether you're building torso, legs or arms of that model. This text should be consistent with the unit sockets translation as these are names of sockets (part slots).
+    temp: false
+    text: Arm
+  prt_body_sockets__body_arm_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_body_sockets__body_bottom_name:
+    noteDev: 
+    temp: false
+    text: Lower body
+  prt_body_sockets__body_bottom_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_body_sockets__body_top_name:
+    noteDev: 
+    temp: false
+    text: Upper body
+  prt_body_sockets__body_top_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_body_sockets_armless__body_bottom_name:
+    noteDev:
+      text: Variant of body part selector that lacks arms (for special cases where we never made arms for a given armor set). Same as above, names should just duplicate socket name translations.
+    temp: false
+    text: Lower body
+  prt_body_sockets_armless__body_bottom_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_body_sockets_armless__body_top_name:
+    noteDev: 
+    temp: false
+    text: Upper body
+  prt_body_sockets_armless__body_top_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_ballistic_sidearm__item_medium_name:
+    noteDev:
+      text: A project building a sidearm would have too many possible outputs with very diverse performance, so a player has to further choose whether they are building a short or long range sidearm via this selector.
+    temp: false
+    text: Medium Range
+  prt_item_ballistic_sidearm__item_medium_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_ballistic_sidearm__item_short_name:
+    noteDev: 
+    temp: false
+    text: Short Range
+  prt_item_ballistic_sidearm__item_short_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_melee__item_axe_name:
+    noteDev:
+      text: >-
+        Variant selector for melee weapons. There are 4 types of melee weapons and this selector lets you specify which one you want built. Translation should be consistent with Equipment (Groups) sector, which contains same classes among other item classes.
+
+
+        In PB, axes are a type of a melee weapon that focuses on concussion damage and crashes enemy units without inflicting much direct damage.
+    temp: false
+    text: Axe
+  prt_item_melee__item_axe_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_melee__item_blade_name:
+    noteDev:
+      text: In PB, this is just a type of a sword with a different stat focus and slightly different design style. Can be translated using any kind of a word for a straight sword, for as long as it sounds sufficiently general to work for varied sci-fi designs.
+    temp: false
+    text: Blade
+  prt_item_melee__item_blade_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_melee__item_cutter_name:
+    noteDev:
+      text: In PB, this is just a type of a sword with a different stat focus and slightly different design style. Can be translated using any kind of a word for a straight sword, for as long as it sounds sufficiently general to work for varied sci-fi designs.
+    temp: false
+    text: Cutter
+  prt_item_melee__item_cutter_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_melee__item_saber_name:
+    noteDev:
+      text: In PB, this a type of a sword that includes a power source and a red hot line applying energy damage. We refer to them as "sabers" as a play on "lightsaber".
+    temp: false
+    text: Saber
+  prt_item_melee__item_saber_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_ratings_01__rating_1_name:
+    noteDev:
+      text: See comment for prt_body_ratings. This text is separate from body ratings in case we need to vary description of the rarity effects between weapons and bodies.
+    temp: false
+    text: Common
+  prt_item_ratings_01__rating_1_text:
+    noteDev: 
+    temp: false
+    text: Average performance with varying perks. Mass-produced, with subsystems welded on directly to save costs.
+  prt_item_ratings_01__rating_2_name:
+    noteDev: 
+    temp: false
+    text: Uncommon
+  prt_item_ratings_01__rating_2_text:
+    noteDev: 
+    temp: false
+    text: Allows for customization of some internal subsystems, with higher quality perks.
+  prt_item_ratings_01__rating_3_name:
+    noteDev: 
+    temp: false
+    text: Rare
+  prt_item_ratings_01__rating_3_text:
+    noteDev: 
+    temp: false
+    text: Rare parts allow for a higher degree of customization of internal subsystems, with great perks.
+  prt_item_shield__heavy_name:
+    noteDev:
+      text: This variant selector allows choosing a type of a shield that would be built. Light shields are smaller and more square while heavy shields cover almost the entire height of a mech. Should be consistent with Equipment (Groups) text for the shields.
+    temp: false
+    text: Heavy
+  prt_item_shield__heavy_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_item_shield__light_name:
+    noteDev: 
+    temp: false
+    text: Light
+  prt_item_shield__light_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_ratings_utility__rating_1_name:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_ratings_utility__rating_1_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_ratings_utility__rating_2_name:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_ratings_utility__rating_2_text:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_ratings_utility__rating_3_name:
+    noteDev: 
+    temp: false
+    text: ''
+  prt_ratings_utility__rating_3_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_aux_plating__utl_additive_name:
+    noteDev:
+      text: Variant selector for a "Plating" subsystem. Text should be consistent with Equipment (Subsystems) sector for same subsystems.
+    temp: false
+    text: Additive
+  sub_aux_plating__utl_additive_text:
+    noteDev: 
+    temp: false
+    text: Plating subsystems with high mass that prioritize protection.
+  sub_aux_plating__utl_subtractive_name:
+    noteDev: 
+    temp: false
+    text: Subtractive
+  sub_aux_plating__utl_subtractive_text:
+    noteDev: 
+    temp: false
+    text: Plating subsystems which trade protection for reduced mass.
+  sub_aux_ratings_01__rating_1_name:
+    noteDev:
+      text: Currently unused.
+    temp: false
+    text: ''
+  sub_aux_ratings_01__rating_1_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_aux_ratings_01__rating_2_name:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_aux_ratings_01__rating_2_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_aux_ratings_01__rating_3_name:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_aux_ratings_01__rating_3_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_aux_sensor_socket__primary_name:
+    noteDev: 
+    temp: false
+    text: Primary Weapon
+  sub_aux_sensor_socket__primary_text:
+    noteDev: 
+    temp: false
+    text: The sensor will affect the primary weapon.
+  sub_aux_sensor_socket__secondary_name:
+    noteDev: 
+    temp: false
+    text: Secondary Weapon
+  sub_aux_sensor_socket__secondary_text:
+    noteDev: 
+    temp: false
+    text: The sensor will affect the secondary weapon.
+  sub_aux_sensor_type__01_range_name:
+    noteDev: 
+    temp: false
+    text: Range
+  sub_aux_sensor_type__01_range_text:
+    noteDev: 
+    temp: false
+    text: Increases the optimal range.
+  sub_aux_sensor_type__02_hybrid_name:
+    noteDev: 
+    temp: false
+    text: Hybrid
+  sub_aux_sensor_type__02_hybrid_text:
+    noteDev: 
+    temp: false
+    text: Increases the optimal range and slightly reduces scatter.
+  sub_aux_sensor_type__03_precision_name:
+    noteDev: 
+    temp: false
+    text: Precision
+  sub_aux_sensor_type__03_precision_text:
+    noteDev: 
+    temp: false
+    text: Reduces scatter.
+  sub_spc_core__utl_combat_name:
+    noteDev:
+      text: Variant selector for choosing type of a reactor core you build.
+    temp: false
+    text: Combat
+  sub_spc_core__utl_combat_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_spc_core__utl_speed_name:
+    noteDev: 
+    temp: false
+    text: Speed
+  sub_spc_core__utl_speed_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_spc_core__utl_utility_name:
+    noteDev: 
+    temp: false
+    text: Utility
+  sub_spc_core__utl_utility_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_spc_thruster__utl_combat_name:
+    noteDev:
+      text: Variant selector for choosing type of a thruster you build.
+    temp: false
+    text: Combat
+  sub_spc_thruster__utl_combat_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_spc_thruster__utl_distance_name:
+    noteDev: 
+    temp: false
+    text: Distance
+  sub_spc_thruster__utl_distance_text:
+    noteDev: 
+    temp: false
+    text: ''
+  sub_spc_thruster__utl_utility_name:
+    noteDev: 
+    temp: false
+    text: Utility
+  sub_spc_thruster__utl_utility_text:
+    noteDev: 
+    temp: false
+    text: ''

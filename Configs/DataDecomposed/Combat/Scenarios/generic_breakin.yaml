@@ -28,6 +28,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas:
   tagFilterFromSite: true
   tagFilterUsed: true
@@ -63,20 +65,40 @@ tags:
 - listed
 - trait_objectives
 - flag_escalation_squads
+- context_contract
 states:
   obj_cache:
     comment: 
-    textNameKey: generic_breakin_objective_cache_header
-    textDescKey: generic_breakin_objective_cache_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 0
     priority: 0
-    priorityDisplay: 0
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 0
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_breakin_objective_cache_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_breakin_objective_cache_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd, OnLocationContact
     evaluationOnOutcome: 
     turn: 
@@ -150,16 +172,11 @@ states:
           outcome: 
   obj_cache_elimination:
     comment: 
-    textNameKey: ''
-    textDescKey: ''
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 10
     priority: 10
-    priorityDisplay: 0
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd, OnUnitDisabled
     evaluationOnOutcome: 
@@ -224,17 +241,36 @@ states:
           outcome: 
   obj_timer_fail:
     comment: 
-    textNameKey: generic_objective_loot_header
-    textDescKey: generic_breakin_turn_text
-    textOnCompletion: 
     evaluated: true
-    visible: true
     startInScope: true
     priorityGeneration: 16
     priority: 16
-    priorityDisplay: 16
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 16
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_objective_loot_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: generic_breakin_turn_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -285,16 +321,11 @@ states:
           outcome: 
   obj_timer_progress:
     comment: 
-    textNameKey: generic_objective_loot_header
-    textDescKey: generic_breakin_objective_cache_text
-    textOnCompletion: 
     evaluated: true
-    visible: false
     startInScope: true
     priorityGeneration: 1
     priority: 1
-    priorityDisplay: 1
-    mood: 0
+    briefingHidden: false
     ui: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
@@ -343,17 +374,36 @@ states:
           outcome: 
   retreat_default:
     comment: 
-    textNameKey: retreat_general_header
-    textDescKey: retreat_general_text
-    textOnCompletion: 
     evaluated: false
-    visible: true
     startInScope: false
     priorityGeneration: 100
     priority: 100
-    priorityDisplay: 100
-    mood: 0
-    ui: 
+    briefingHidden: false
+    ui:
+      priorityDisplay: 100
+      briefingHidden: false
+      checkboxUsed: false
+      progressInverted: false
+      progressLimitHidden: false
+      progressHiddenAtZero: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_states_shared
+        textKey: retreat_general_text
+      textHeaderCompleted: 
+      textDescCompleted: 
+      mood: 
+      moodIntensityNormal: 
+      moodIntensityProgress: 
+      progressLimitOverride: 
+      progressLimitMemory: 
+      progressSuffixSprite: 
     evaluationContext: OnExecutionEnd
     evaluationOnOutcome: 
     turn: 
@@ -384,13 +434,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: generic_looting_cleanup_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_looting_cleanup_text
       threatRatingPercentage: 0
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags: 
@@ -429,13 +485,19 @@ steps:
         g: 1
         b: 1
         a: 1
-      textCurrentPrimaryKey: generic_objective_header
-      textCurrentSecondaryKey: generic_breakin_objective_text
-      textFromScenarioGroup: false
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_objective_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_breakin_objective_text
       threatRatingPercentage: 1
       allowOutcomeVictory: true
       allowOutcomeDefeat: true
-      unitsRevealed: false
       executionAllowed: true
       visible: true
     tags:
@@ -545,6 +607,7 @@ steps:
     - time: 0
       hidden: false
       key: generic_elimination_start_normal
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

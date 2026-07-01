@@ -18,7 +18,7 @@ fxRepeated:
 durationFull:
   f: 4
 durationUpdate:
-  f: 0.05
+  f: 0.038
 buildupDecayRate: 
 buildupThreshold: 
 buildupOverflow: 
@@ -33,7 +33,11 @@ effectsOnUpdate:
   enabled: true
   triggerCheckUnit:
   - !CombatValidateUnitNeighborProjectiles
-    radius: 20
+    radius: 22
+    radiusFromStat:
+      value: 0
+      statKey: wpn_range_max
+      socket: back
     offset:
       x: 0
       y: 4
@@ -45,7 +49,19 @@ effectsOnUpdate:
       candidateRepeats: false
       guided: 
       speed: 
-      relativeTransform: 
+      relativeTransform:
+        origin: 
+        directionOriginRotation:
+          x: 0
+          y: 0
+          z: 0
+        directionDot: 
+        directionDotFlat: 
+        directionDotRelative:
+          check: Greater
+          value: 0.1
+        directionAngle: 
+        distance: 
     effect:
       destroy: true
       scrambling: 

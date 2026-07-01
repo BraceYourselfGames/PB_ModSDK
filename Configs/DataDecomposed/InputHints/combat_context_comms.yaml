@@ -1,9 +1,13 @@
+horizontal: true
 extended: false
 lines:
-- mode: All
-  text: Skip dialogue
+- visibility: All
   actions:
-  - action: global_confirm
-    newline: false
   - action: combat_time_toggle
     newline: false
+  - action: global_confirm
+    newline: false
+  mode: LocUnique
+  text: 
+  textSector: 
+  textKey: 

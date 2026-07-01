@@ -1,0 +1,35 @@
+parents:
+- key: unit_repair_amount_l1
+  priority: -1
+  offsetStart: 0
+  offsetEnd: 0
+hidden: false
+hiddenUntilInstalled: false
+removable: false
+preinstalled: false
+limit: 1
+ui:
+  positionX: 3
+  positionY: -2
+  endpoint: false
+  group: 
+  icon: s_icon_l32_upgrade_sensor5
+unlock: 
+cost:
+  resources:
+    components_r2: 45
+    components_r3: 25
+    supplies: 2000
+    unit_token: 2
+effect:
+  stats:
+  - key: unit_repair_amount
+    modifier: Offset
+    value: 0.1
+  functions: 
+  functionsOnLoad: 
+effectPerInstance: 
+visual: 
+visualPerInstance: 
+audio:
+  onInstall: ui_upgrade_units

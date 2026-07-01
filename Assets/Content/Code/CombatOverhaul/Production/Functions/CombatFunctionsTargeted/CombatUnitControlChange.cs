@@ -1,4 +1,6 @@
 using System;
+using PhantomBrigade.Data;
+using PhantomBrigade.Overworld;
 using Sirenix.OdinInspector;
 
 namespace PhantomBrigade.Functions
@@ -28,6 +30,8 @@ namespace PhantomBrigade.Functions
     [Serializable]
     public class CombatUnitHiddenDetectable : ICombatFunctionTargeted
     {
+        public int controlDelay = 0;
+        
         public void Run (PersistentEntity unitPersistent)
         {
             #if !PB_MODSDK
@@ -38,6 +42,12 @@ namespace PhantomBrigade.Functions
 
             unitCombat.isHidden = true;
             unitCombat.isHiddenDetectable = true;
+
+            if (controlDelay > 0)
+            {
+                unitPersistent.SetMemoryFloat (EventMemoryInt.UnitAIControlCountdown, controlDelay + 1);
+                unitCombat.isAIControllable = false;
+            }
 
             #endif
         }

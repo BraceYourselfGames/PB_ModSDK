@@ -1,0 +1,1815 @@
+timeLastSync: 63811496201
+localized: true
+exportMode: LinePerKeySimple
+name: UI (Overworld)
+description: Not a database (text in this sector doesn't follow any repeating pattern). Variety of UI-embedded and code-embedded text used in the overworld UI.
+splits: []
+tags: 
+groups: 
+entries:
+  actions_button_cancel_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Cancel
+  actions_button_cancel_tooltip_text:
+    noteDev:
+      text: '"Action" in this case refers to an objective or a process over time displayed in the top left corner of overworld UI. This button is similar to deleting a quest from a quest log in other games.'
+    temp: false
+    text: Discard this action from the list.
+  actions_button_locate_tooltip_header:
+    noteDev:
+      text: Button that moves camera to location of the subject of the selected objective.
+    temp: false
+    text: Locate
+  actions_button_locate_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Move to location associated with this action.
+  actions_description_duration:
+    noteDev:
+      text: Text used in an action description on it's own line before the time remaining on an action.
+    temp: false
+    text: 'Duration:'
+  actions_description_unknown_project:
+    noteDev:
+      text: Refers to workshop project. Used when ongoing workshop builds are displayed in the action UI.
+    temp: false
+    text: No project description available.
+  actions_description_variant:
+    noteDev:
+      text: The translation of this text should be consistent with how workshop variants are translated in the workshop UI.
+    temp: false
+    text: 'Variant:'
+  actions_header:
+    noteDev:
+      text: Header for UI that displays overworld map objectives and progress of various actions over time such as workshop builds.
+    temp: false
+    text: Actions
+  actions_name_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown Entity
+  actions_name_workshop:
+    noteDev: 
+    temp: false
+    text: Workshop
+  actions_time_paused:
+    noteDev: 
+    temp: false
+    text: Paused
+  campaign_info_destination_subtitle_generic:
+    noteDev: 
+    temp: false
+    text: Destination intel
+  campaign_info_header:
+    noteDev: 
+    temp: false
+    text: Campaign intel
+  campaign_info_local_forces:
+    noteDev: 
+    temp: false
+    text: Local forces
+  campaign_info_modifiers:
+    noteDev: 
+    temp: false
+    text: Conditions
+  campaign_info_next_exit:
+    noteDev: 
+    temp: false
+    text: Approach one of the frontline sites to travel to the next region.
+  campaign_info_quest_reminder:
+    noteDev: 
+    temp: false
+    text: Follow the active objectives to progress to the next region.
+  campaign_info_stat_capital:
+    noteDev: 
+    temp: false
+    text: Steps to capital
+  campaign_info_stat_liberated:
+    noteDev: 
+    temp: false
+    text: Provinces liberated
+  campaign_status_progress:
+    noteDev: 
+    temp: false
+    text: Campaign progress
+  campaign_title_01_s1:
+    noteDev: 
+    temp: false
+    text: Three years ago
+  campaign_title_01_s2:
+    noteDev: 
+    temp: false
+    text: Boundary Falls Outpost
+  campaign_title_01_s3:
+    noteDev: 
+    temp: false
+    text: Fyrland Republic
+  campaign_title_02_s1:
+    noteDev: 
+    temp: false
+    text: Three years later
+  campaign_title_02_s2:
+    noteDev: 
+    temp: false
+    text: Hedmark Borderland
+  campaign_title_02_s3:
+    noteDev: 
+    temp: false
+    text: Kaskad Dominion Annex[ff9999] / Occupied Fyrland
+  campaign_tooltip_hint:
+    noteDev: 
+    temp: false
+    text: Click to open the campaign status screen.
+  codex_unlock_counter_suffix:
+    noteDev: 
+    temp: false
+    text: unlocked
+  codex_unlock_notification:
+    noteDev: 
+    temp: false
+    text: Codex article unlocked
+  danger_retreat_header:
+    noteDev: 
+    temp: false
+    text: Unable to fight
+  danger_retreat_text:
+    noteDev: 
+    temp: false
+    text: The enemy is within striking distance of the mobile base. With your squad in no condition to fight, retreating is the only option. You plot a course to an allied outpost to resupply.
+  danger_state_desc:
+    noteDev: 
+    temp: false
+    text: No units or pilots ready for combat. You will be forced to retreat if the enemy forces approach the base.
+  danger_state_header:
+    noteDev: 
+    temp: false
+    text: Danger
+  description_effects_available:
+    noteDev:
+      text: Every text prefixed with description_ relates to buffs applied around a certain point on the map.
+    temp: false
+    text: Effects available when near this facility
+  description_effects_battery_replenish:
+    noteDev: 
+    temp: false
+    text: Battery charge is replenished over time
+  description_effects_repair_cost:
+    noteDev: 
+    temp: false
+    text: Repairs consume less Liquid Fix
+  description_effects_repair_replenish:
+    noteDev: 
+    temp: false
+    text: Liquid Fix is replenished over time
+  description_effects_repair_speed:
+    noteDev: 
+    temp: false
+    text: Repairs progress faster
+  description_effects_unlock:
+    noteDev: 
+    temp: false
+    text: Liberate this facility to unlock local effects
+  description_effects_workshop_speed:
+    noteDev: 
+    temp: false
+    text: Workshop speed increased
+  description_recovering:
+    noteDev: 
+    temp: false
+    text: Recovering
+  dialog_enter_combat_fail_desc:
+    noteDev:
+      text: Error message that appears when the game fails to load into combat
+    temp: false
+    text: 'Failed to load resources required for entering combat. This could be caused by missing files: make sure to send the bug report using Alt+B and verify integrity of your installation'
+  dialog_enter_combat_fail_header:
+    noteDev: 
+    temp: false
+    text: Failed to enter combat
+  dialog_resupply_desc:
+    noteDev: 
+    temp: false
+    text: Would you like to resupply immediately? The process will take time and the base will not be able to move.
+  dialog_resupply_header:
+    noteDev: 
+    temp: false
+    text: Arrived to resupply point
+  event_added:
+    noteDev:
+      text: 'Prefixed before a list of changes applied by an event. E.g. "Added: Allied reputation"'
+    temp: false
+    text: Added
+  event_all_pilots_injured:
+    noteDev: 
+    temp: false
+    text: All pilots injured
+  event_all_pilots_recover:
+    noteDev: 
+    temp: false
+    text: All pilots recover
+  event_current_escalation:
+    noteDev:
+      text: Refers to escalation mechanic, which is a number between 0-100% and a level that increases every time you reach 100%. Similar to "wanted level" in GTA.
+    temp: false
+    text: Current escalation
+  event_depleted:
+    noteDev:
+      text: As in, a resource is all spent.
+    temp: false
+    text: Depleted
+  event_duration:
+    noteDev: 
+    temp: false
+    text: Duration
+  event_faction_enemy:
+    noteDev: 
+    temp: false
+    text: Enemy
+  event_faction_home_guard:
+    noteDev: 
+    temp: false
+    text: Fyrland Freedom Forces
+  event_friendly_province_bonus:
+    noteDev: 
+    temp: false
+    text: Friendly province bonus
+  event_hope:
+    noteDev: 
+    temp: false
+    text: Hope
+  event_hostiles_approaching:
+    noteDev:
+      text: Warns the player that more enemies than just POI you are currently interacting with will join combat entered from this event.
+    temp: false
+    text: Hostiles approaching
+  event_insufficient:
+    noteDev:
+      text: Printed when an option requires amount of resources that a player can't provide.
+    temp: false
+    text: Insufficient
+  event_our_reputation:
+    noteDev: 
+    temp: false
+    text: Our reputation
+  event_pilot_deceased:
+    noteDev:
+      text: This should always be translated as generally as possible. This label appears when even triggers a loss of a pilot, but that loss can be caused by anything - damage in combat, a death in event or something as small as a little penalty to pilot fatigue after a poor dialog choice. It should not say "dead" or "deserted" or "left due to stress" or provide any other specifics - it shoudl fit for death, stress and injury alike.
+    temp: false
+    text: Pilot lost
+  event_pilot_deceased_desc:
+    noteDev:
+      text: See the note above. See the writers note for alternative content of this message we used earlier - same idea, trying to make a message that fits all possible situations.
+    temp: false
+    text: In light of recent circumstances, this pilot has left the base.
+  event_pilot_injured:
+    noteDev:
+      text: Printed when event decreases pilot HP. If you can think of more general word than "injury", that would be even better, since some non-physically themed event options still modify this (e.g. disappointing choices impacting morale)
+    temp: false
+    text: Pilot affected
+  event_pilot_recovers:
+    noteDev:
+      text: Printed when event increases pilot HP.
+    temp: false
+    text: Pilot recovers
+  event_postfix_hour:
+    noteDev:
+      text: >-
+        Placed after a time in hours, used in event dialogs, example:
+
+        "8Hr"
+    temp: false
+    text: Hr
+  event_removed:
+    noteDev: 
+    temp: false
+    text: Removed
+  event_threat_jamming:
+    noteDev:
+      text: This refers to "Threat", a special metric we use to communicate how hard a fight with a given entity on the world map would be. Threat increases with escalation (wanted levels) A special item lets you invalidate all escalation, making this enemy return to original base threat even if you are wanted. This is the prefix before printed base threat when that item is used.
+    temp: false
+    text: Threat with jamming
+  event_tooltip_blocked_desc:
+    noteDev: 
+    temp: false
+    text: This option can't be used right now. Check the description for the requirements to unlock it.
+  event_tooltip_blocked_header:
+    noteDev: 
+    temp: false
+    text: Blocked
+  event_unit:
+    noteDev: 
+    temp: false
+    text: Unit
+  event_war_score:
+    noteDev: 
+    temp: false
+    text: War score
+  general_label_apply:
+    noteDev: 
+    temp: false
+    text: Apply
+  general_label_error:
+    noteDev: 
+    temp: false
+    text: Error!
+  general_label_exit:
+    noteDev: 
+    temp: false
+    text: Exit
+  general_label_next:
+    noteDev: 
+    temp: false
+    text: Next
+  general_label_return:
+    noteDev: 
+    temp: false
+    text: Return
+  general_label_warning:
+    noteDev: 
+    temp: false
+    text: Warning!
+  hotbar_ability_header_effect:
+    noteDev: 
+    temp: false
+    text: Effect
+  hotbar_ability_header_hotkey:
+    noteDev: 
+    temp: false
+    text: Hotkey
+  hotbar_ability_header_resource:
+    noteDev: 
+    temp: false
+    text: Required resource
+  hotbar_power_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Power
+  hotbar_power_tooltip_text:
+    noteDev: 
+    temp: false
+    text: The amount of battery power available to mobile base. Can be spent to boost speed or cloak the base. Regenerated when the base is at normal speed or stationary.
+  int_sh_effect_countdown_delay:
+    noteDev: 
+    temp: false
+    text: Enemy regrouping delayed
+  int_sh_effect_countdown_shorten:
+    noteDev: 
+    temp: false
+    text: Enemy regrouping will occur sooner
+  int_sh_effect_loot_salvage:
+    noteDev: 
+    temp: false
+    text: Gain salvage
+  int_sh_effect_patrol_spawn:
+    noteDev: 
+    temp: false
+    text: Incoming patrol detected
+  int_sh_effect_pilot_hp_lost:
+    noteDev: 
+    temp: false
+    text: One of your pilots was injured
+  int_sh_effect_pilots_fatigue_added:
+    noteDev: 
+    temp: false
+    text: Your pilots gain some fatigue
+  int_sh_effect_pilots_fatigue_reduced:
+    noteDev: 
+    temp: false
+    text: Your pilots lose some fatigue
+  int_sh_effect_pilots_levelup:
+    noteDev: 
+    temp: false
+    text: A pilot levels up
+  int_sh_effect_pilots_recruit:
+    noteDev: 
+    temp: false
+    text: A new pilot joins your ranks
+  int_sh_effect_prefix_salvage:
+    noteDev: 
+    temp: false
+    text: Salvage
+  int_sh_option_continue_text:
+    noteDev: 
+    temp: false
+    text: Continue
+  int_sh_option_leave_header:
+    noteDev: 
+    temp: false
+    text: Leave
+  int_sh_option_leave_text:
+    noteDev: 
+    temp: false
+    text: End the interaction
+  int_sidebar_hint_approach:
+    noteDev: 
+    temp: false
+    text: Approach to interact
+  int_sidebar_hint_interact:
+    noteDev: 
+    temp: false
+    text: Interact
+  lock_camp_open:
+    noteDev: 
+    temp: false
+    text: Set up camp
+  lock_camp_review_header:
+    noteDev: 
+    temp: false
+    text: Confirm camp
+  lock_camp_review_hint_last_supplies:
+    noteDev: 
+    temp: false
+    text: This is the last set of camp supplies in your inventory. No further stops will be possible until you find more.
+  lock_camp_review_hint_pilots_free:
+    noteDev: 
+    temp: false
+    text: The medical bay was not filled to capacity.
+  lock_camp_review_hint_pilots_none:
+    noteDev: 
+    temp: false
+    text: No pilots were assigned to the medical bay.
+  lock_camp_review_hint_pilots_total:
+    noteDev: 
+    temp: false
+    text: Total pilots with injuries or fatigue
+  lock_camp_review_hint_start:
+    noteDev: 
+    temp: false
+    text: Are you sure you'd like to spend the supplies and set up camp?
+  lock_camp_review_hint_units_free:
+    noteDev: 
+    temp: false
+    text: The mech repair bay was not filled to capacity.
+  lock_camp_review_hint_units_none:
+    noteDev: 
+    temp: false
+    text: No mechs were assigned to the repair bay.
+  lock_camp_review_hint_units_total:
+    noteDev: 
+    temp: false
+    text: Total mechs with repairable damage
+  lock_camp_selection_header:
+    noteDev: 
+    temp: false
+    text: Preparing camp
+  lock_camp_selection_hint:
+    noteDev: 
+    temp: false
+    text: You have the supplies to set up camp. A limited number of mechs and pilots can be attended to in one stop. Carefully review which pilots should be sent to the medical bay and which mechs should be repaired.
+  lock_camp_selection_numbers:
+    noteDev: 
+    temp: false
+    text: Mechs & pilots selected
+  lock_camp_selection_start:
+    noteDev: 
+    temp: false
+    text: Start
+  lock_duration:
+    noteDev: 
+    temp: false
+    text: Duration
+  lock_effect_multiple:
+    noteDev: 
+    temp: false
+    text: Multiple effects
+  lock_effect_pilot_event:
+    noteDev: 
+    temp: false
+    text: Relates to pilot event
+  lock_effect_tag_camp_general:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of stopping for a camp.
+  lock_effect_tag_camp_pilot:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of assigning a pilot to the medical bay.
+  lock_effect_tag_camp_unit:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of assigning a mech to the repair bay.
+  lock_effect_tag_resupply_general:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of resupplying at a frontline base.
+  lock_effect_tag_travel_general:
+    noteDev: 
+    temp: false
+    text: This is a standard outcome of travel between provinces.
+  lock_exit_hint:
+    noteDev: 
+    temp: false
+    text: Move out
+  lock_hint_camp:
+    noteDev: 
+    temp: false
+    text: "The crew attends to the injured, repairs the mechs, and rests. This is but a short stop: the optical camo won't last long."
+  lock_hint_generic:
+    noteDev: 
+    temp: false
+    text: The base is waiting in place.
+  lock_hint_resupply:
+    noteDev: 
+    temp: false
+    text: While the mobile base is getting restocked, the mechanics from Fyrland Freedom Forces get to work on your mechs. The crew rests & recovers.
+  lock_hint_travel:
+    noteDev: 
+    temp: false
+    text: The base is traveling to the next province. Your crew takes the opportunity to rest and repair the mechs.
+  lock_retreat_header:
+    noteDev: 
+    temp: false
+    text: Confirm retreat
+  lock_retreat_hint_camp_possible:
+    noteDev: 
+    temp: false
+    text: The mobile base still has some camp supplies. If you need to repair mechs or treat pilot injuries, it might be optimal to set up a camp instead.
+  lock_retreat_hint_start:
+    noteDev: 
+    temp: false
+    text: Are you sure you would like to retreat to the nearest frontline base? This will take considerable time, but will resupply the base, repair all units and heal every pilot. Pilot fatigue will reset to neutral.
+  log_ability_drone_stun:
+    noteDev:
+      text: >-
+        All text prefixed by log_ is displayed as a pop-up notification when certain events happen. It's worth keeping this text as succinct as possible, as it quickly disappears from the screen. All of this text is usually prefixed by entity name and type, e.g. "Granite-5 (Convoy): Incapacitated"
+
+
+        This specific text is displayed after a name of an enemy, when an enemy touches a self-destructing drone you launch on the world map.
+    temp: false
+    text: Hit by our drone, temporarily immobilized!
+  log_ability_hidden_spotted:
+    noteDev: 
+    temp: false
+    text: Hidden entity spotted!
+  log_ai_command_loss_controlled:
+    noteDev: 
+    temp: false
+    text: Lost contact with a squad in the controlled territory. Dispatching a patrol to investigate.
+  log_ai_command_loss_liberated:
+    noteDev: 
+    temp: false
+    text: Lost contact with a squad in the rebel territory.
+  log_ai_command_prefix:
+    noteDev:
+      text: Prefix we print before displaying intercepted enemy orders. "High Command" is the name of invasion force command/HQ/top generals.
+    temp: false
+    text: High Command
+  log_ai_investigation:
+    noteDev: 
+    temp: false
+    text: Enemy squad has been dispatched to investigate!
+  log_ai_recapture_end:
+    noteDev: 
+    temp: false
+    text: Enemy recaptured site
+  log_ai_recapture_start:
+    noteDev: 
+    temp: false
+    text: Enemy started recapturing site
+  log_ai_recaptured:
+    noteDev: 
+    temp: false
+    text: Enemy recaptured site
+  log_combat_contacts_friendly:
+    noteDev:
+      text: Please be very careful to avoid modifying any curly braces or numbers within. They are used to dynamically insert text into this text. Feel free to rearrange the braced numbers as you see fit if a language requires a different order when talking about numbers.
+    temp: false
+    text: 'New allied contacts on the field: {0}'
+  log_combat_contacts_hostile:
+    noteDev:
+      text: See above.
+    temp: false
+    text: 'New hostile contacts on the field: {0}'
+  log_combat_contacts_mixed:
+    noteDev:
+      text: See above.
+    temp: false
+    text: 'New contacts on the field: {0} friendly, {1} hostile'
+  log_combat_retreat_failed:
+    noteDev:
+      text: Printed when a unit fails to retreat.
+    temp: false
+    text: Unit failed to extract, not in active retreat zone
+  log_combat_retreat_success:
+    noteDev:
+      text: Printed when a unit successfully disappears from combat by retreating.
+    temp: false
+    text: Unit extracted
+  log_equipment_blocked_left_arm:
+    noteDev: 
+    temp: false
+    text: Unable to attach left equipment if left arm doesn't exist.
+  log_equipment_blocked_right_arm:
+    noteDev: 
+    temp: false
+    text: Unable to attach right equipment if right arm doesn't exist.
+  log_equipment_blocked_shield_ultraheavy:
+    noteDev: 
+    temp: false
+    text: Detached shield due to currently equipped weapon being ultra-heavy.
+  log_equipment_blocked_ultraheavy_shield:
+    noteDev: 
+    temp: false
+    text: Detached ultraheavy weapon due to currently equipped item being a shield.
+  log_header:
+    noteDev: 
+    temp: false
+    text: Updates
+  log_id_site:
+    noteDev:
+      text: General name we give to every single static structure on the map. Sites are cities, villages, factories, enemy bases, outposts, bunkers and anything in between.
+    temp: false
+    text: Site
+  log_id_squad:
+    noteDev:
+      text: General name given to every single mobile entity on the map. Squads are convoys, patrols, special units, the mobile base player is controlling etc.
+    temp: false
+    text: Squad
+  log_id_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown
+  log_inventory_part_received:
+    noteDev:
+      text: 'All log_inventory_ strings are printed before names of items you lose or receive, e.g. "Spent resource: Supplies, -200"'
+    temp: false
+    text: Received part
+  log_inventory_resource_changed:
+    noteDev: 
+    temp: false
+    text: Stored resource changed
+  log_inventory_resource_received:
+    noteDev: 
+    temp: false
+    text: Received resource
+  log_inventory_resource_spent:
+    noteDev: 
+    temp: false
+    text: Spent resource
+  log_inventory_subsystem_received:
+    noteDev: 
+    temp: false
+    text: Received subsystem
+  log_inventory_unit_received:
+    noteDev: 
+    temp: false
+    text: Received mech frame
+  log_inventory_workshop_progress:
+    noteDev: 
+    temp: false
+    text: Workshop unlock progress
+  log_inventory_workshop_received:
+    noteDev: 
+    temp: false
+    text: Received workshop project
+  log_inventory_workshop_spent:
+    noteDev: 
+    temp: false
+    text: Used workshop project
+  log_inventory_workshop_unlock:
+    noteDev: 
+    temp: false
+    text: Workshop unlocked
+  log_outcome_ejection_detected:
+    noteDev: 
+    temp: false
+    text: Detected landing site of an ejected pilot
+  log_outcome_site_capture:
+    noteDev: 
+    temp: false
+    text: Captured
+  log_outcome_site_defeat:
+    noteDev: 
+    temp: false
+    text: Defeated
+  log_power_depleted:
+    noteDev: 
+    temp: false
+    text: Base power depleted!
+  log_power_recharged:
+    noteDev: 
+    temp: false
+    text: Base power fully recharged
+  log_upgrade_installed:
+    noteDev: 
+    temp: false
+    text: Base upgrade installed
+  log_upgrade_removed:
+    noteDev: 
+    temp: false
+    text: Base upgrade removed
+  log_war_battlesite_defeat:
+    noteDev: 
+    temp: false
+    text: Your failed to disrupt the enemy at the battle site; Fyrland Freedom Forces are in retreat.
+  log_war_battlesite_loss:
+    noteDev: 
+    temp: false
+    text: Battle site lost; resistance fighters lost.
+  log_war_battlesite_spawn:
+    noteDev: 
+    temp: false
+    text: New battle site reported!
+  log_war_battlesite_victory:
+    noteDev: 
+    temp: false
+    text: Enemy flees the battle site; Fyrland Freedom Forces prevail.
+  log_war_escalation_down:
+    noteDev: 
+    temp: false
+    text: Escalation level decreased
+  log_war_escalation_up:
+    noteDev: 
+    temp: false
+    text: Escalation level increased!
+  log_war_fob_added:
+    noteDev: 
+    temp: false
+    text: The enemy sets up temporary bases to compensate for all their lost sites
+  log_war_fob_removal:
+    noteDev: 
+    temp: false
+    text: The enemy packs up their temporary bases.
+  log_war_hope_decrease:
+    noteDev: 
+    temp: false
+    text: Hope lost
+  log_war_hope_increase:
+    noteDev: 
+    temp: false
+    text: Hope increased
+  log_war_lost:
+    noteDev: 
+    temp: false
+    text: Province liberation failed!
+  log_war_objective_new:
+    noteDev: 
+    temp: false
+    text: New designated objective!
+  log_war_objective_victory:
+    noteDev: 
+    temp: false
+    text: War objective neutralized; enemy forces weakened
+  log_war_start:
+    noteDev: 
+    temp: false
+    text: Province is being contested by Fyrland Freedom Forces!
+  log_war_takeover_friendly:
+    noteDev: 
+    temp: false
+    text: Liberated with the province
+  log_war_takeover_hostile:
+    noteDev: 
+    temp: false
+    text: Taken with the province
+  log_war_victory:
+    noteDev: 
+    temp: false
+    text: Province liberated!
+  mission_eta_prefix:
+    noteDev: 
+    temp: false
+    text: ETA
+  mission_eta_suffix:
+    noteDev: 
+    temp: false
+    text: away
+  nav_button_base:
+    noteDev:
+      text: All text prefixed with nav_ is used on very narrow labels of navigation buttons. A translation should be a single word at most, and ideally under 10 characters. If a suffiiently short translation can't be found, I recommend using abbreviations or leaving all nav labels empty - it won't be an end of the world as little text on buttons is is supported by icons, large per-screen headers and other UI elements.
+    temp: false
+    text: Base
+  nav_button_base_header:
+    noteDev: 
+    temp: false
+    text: Base
+  nav_button_briefing:
+    noteDev:
+      text: The screen only displayed when you are locked into combat and can't return to the overworld map. Shows information about incoming fight, allows configuring your squad etc.
+    temp: false
+    text: Briefing
+  nav_button_briefing_header:
+    noteDev: 
+    temp: false
+    text: Briefing
+  nav_button_campaign_header:
+    noteDev: 
+    temp: false
+    text: World
+  nav_button_codex_header:
+    noteDev: 
+    temp: false
+    text: Codex
+  nav_button_inventory:
+    noteDev: 
+    temp: false
+    text: Inventory
+  nav_button_inventory_header:
+    noteDev: 
+    temp: false
+    text: Inventory
+  nav_button_pause_header:
+    noteDev: 
+    temp: false
+    text: Pause
+  nav_button_pause_menu:
+    noteDev: 
+    temp: false
+    text: Pause
+  nav_button_pilots:
+    noteDev:
+      text: The screen listing all your pilots.
+    temp: false
+    text: Pilots
+  nav_button_pilots_header:
+    noteDev: 
+    temp: false
+    text: Pilots
+  nav_button_units:
+    noteDev:
+      text: The screen listing all your mechs.
+    temp: false
+    text: Units
+  nav_button_units_header:
+    noteDev: 
+    temp: false
+    text: Units
+  nav_button_upgrades:
+    noteDev:
+      text: The screen with the tech tree of upgrades available to the mobile base (crawler).
+    temp: false
+    text: Upgrades
+  nav_button_upgrades_header:
+    noteDev: 
+    temp: false
+    text: Upgrades
+  nav_button_workshop:
+    noteDev:
+      text: The screen that lets you build mech parts.
+    temp: false
+    text: Workshop
+  nav_button_workshop_header:
+    noteDev: 
+    temp: false
+    text: Workshop
+  nav_button_world:
+    noteDev: 
+    temp: false
+    text: World
+  nav_button_world_header:
+    noteDev: 
+    temp: false
+    text: Province
+  overdrive_heat_decreasing:
+    noteDev: 
+    temp: false
+    text: Cooling...
+  overdrive_heat_increasing:
+    noteDev: 
+    temp: false
+    text: Heating...
+  overdrive_heat_max:
+    noteDev: 
+    temp: false
+    text: Overheated!
+  overdrive_hit_mech:
+    noteDev: 
+    temp: false
+    text: Mech damaged due to high speed
+  overdrive_hit_pilot:
+    noteDev: 
+    temp: false
+    text: Pilot injured due to high speed
+  overlay_name_resupply_point:
+    noteDev: 
+    temp: false
+    text: Resupply point
+  part_rating_header:
+    noteDev: 
+    temp: false
+    text: Quality tier
+  pointlist_header_changed:
+    noteDev: 
+    temp: false
+    text: Mission changed
+  pointlist_header_completed:
+    noteDev: 
+    temp: false
+    text: Mission completed
+  pointlist_header_expired:
+    noteDev: 
+    temp: false
+    text: Mission expired
+  pointlist_header_new:
+    noteDev: 
+    temp: false
+    text: New waypoint
+  pointlist_hint_last:
+    noteDev: 
+    temp: false
+    text: Return to base
+  pointlist_hint_next:
+    noteDev: 
+    temp: false
+    text: Navigate to next point
+  prefix_level:
+    noteDev: 
+    temp: false
+    text: L
+  prefix_threat:
+    noteDev: 
+    temp: false
+    text: T
+  province_current_header:
+    noteDev: 
+    temp: false
+    text: Current region
+  province_hover_suggested_level:
+    noteDev: 
+    temp: false
+    text: Suggested level
+  province_liberated_header:
+    noteDev: 
+    temp: false
+    text: Province liberated
+  province_liberated_text:
+    noteDev: 
+    temp: false
+    text: Thanks to your efforts, the enemy was driven out of the contested province. Resistance forces will hold it from here on out.
+  province_lost_header:
+    noteDev: 
+    temp: false
+    text: Province lost
+  province_lost_text:
+    noteDev: 
+    temp: false
+    text: Despite your efforts, the enemy managed to hold onto the contested province. Resistance forces will be preparing for another attempt.
+  province_pilot_persistent_progress:
+    noteDev: 
+    temp: false
+    text: Victories to elimination
+  province_prev_branch:
+    noteDev: 
+    temp: false
+    text: Enemy
+  province_prev_header:
+    noteDev: 
+    temp: false
+    text: Next province intel
+  province_prev_header_current:
+    noteDev: 
+    temp: false
+    text: Current province intel
+  province_prev_level:
+    noteDev: 
+    temp: false
+    text: Enemy level
+  province_prev_name:
+    noteDev: 
+    temp: false
+    text: Name
+  province_state_battle_site_header:
+    noteDev: 
+    temp: false
+    text: Battle site
+  province_state_battle_site_text:
+    noteDev: 
+    temp: false
+    text: Fyrland Freedom Forces are fighting the invaders at this location. Join the fight before the battle site runs out of time, or the 3F war score will be reduced.
+  province_state_contested:
+    noteDev: 
+    temp: false
+    text: —  Contested Province  —
+  province_state_neutral_war_score_header:
+    noteDev: 
+    temp: false
+    text: Allied strength
+  province_state_neutral_war_score_text:
+    noteDev: 
+    temp: false
+    text: Unused text.
+  province_state_objective_header:
+    noteDev: 
+    temp: false
+    text: Objective
+  province_state_objective_text:
+    noteDev: 
+    temp: false
+    text: Objectives are priority targets designated by your allies. Taking them out will weaken the enemy.
+  province_state_recovering:
+    noteDev: 
+    temp: false
+    text: Allies recovering...
+  province_state_showdown_header:
+    noteDev: 
+    temp: false
+    text: Key objective
+  province_state_showdown_text:
+    noteDev: 
+    temp: false
+    text: Key objectives appear once the enemy forces in the province are worn down. Eliminating these objectives is necessary to liberate the province.
+  province_state_war_score_enemy_header:
+    noteDev: 
+    temp: false
+    text: Enemy Strength
+  province_state_war_score_enemy_text:
+    noteDev: 
+    temp: false
+    text: The strength of the invasion forces in this contested province. Strike key objectives to make this value drop. When this value reaches 0, the enemy will retreat and the province will be liberated.
+  province_state_war_score_player_header:
+    noteDev: 
+    temp: false
+    text: 3F Strength
+  province_state_war_score_player_text:
+    noteDev: 
+    temp: false
+    text: The strength of Fyrland Freedom Forces engaging the enemy all over this contested province. Supporting your allies with strikes against key objectives and helping them at battle sites will lead us to victory. Letting this value fall to 0 will trigger a retreat, letting the enemy hold the province.
+  quest_liberation_expiration_all:
+    noteDev: 
+    temp: false
+    text: All mission opportunities expired. The occupation forces regain ground in the province.
+  quest_step_missing:
+    noteDev: 
+    temp: false
+    text: No details available for this step.
+  recruits_confirm_header:
+    noteDev: 
+    temp: false
+    text: Confirm recruitment
+  recruits_confirm_text:
+    noteDev: 
+    temp: false
+    text: Are you sure you'd like to recruit this pilot? The requisite supplies will be subtracted from your inventory and the pilot will be added to your roster.
+  recruits_empty:
+    noteDev: 
+    temp: false
+    text: No recruits available. Check back later.
+  recruits_notification_refresh:
+    noteDev: 
+    temp: false
+    text: New recruits available at forward bases
+  recruits_top_header:
+    noteDev: 
+    temp: false
+    text: Recruitment
+  recruits_top_subtitle:
+    noteDev: 
+    temp: false
+    text: Pilots available
+  reset_countdown_expired:
+    noteDev: 
+    temp: false
+    text: No time left
+  reset_countdown_hint:
+    noteDev: 
+    temp: false
+    text: 'Enemy regrouping in:'
+  reset_countdown_hint_added:
+    noteDev: 
+    temp: false
+    text: 'Selected option will take time. Enemy regrouping in:'
+  reset_countdown_hint_delay:
+    noteDev: 
+    temp: false
+    text: 'Selected mission will set back the enemy. Delayed regrouping in:'
+  reset_countdown_hint_expired:
+    noteDev: 
+    temp: false
+    text: Selected option will give the enemy time to regroup.
+  reset_countdown_hint_maxed:
+    noteDev: 
+    temp: false
+    text: 'Selected mission will set back the enemy. Delayed regrouping in:'
+  reset_countdown_tooltip_text:
+    noteDev: 
+    temp: false
+    text: "The enemy forces in this province are regrouping after a recent disturbance. Left unattended, they will gain ground and might find your base. \n\nAttacking enemy sites and interacting with points of interest will delay this countdown."
+  retreat_header:
+    noteDev: 
+    temp: false
+    text: Retreating...
+  retreat_text:
+    noteDev: 
+    temp: false
+    text: Returning to nearest resupply point
+  reward_unknown_header:
+    noteDev: 
+    temp: false
+    text: Reward container
+  root_button_contest_province:
+    noteDev: 
+    temp: false
+    text: >-
+      Contest
+
+      province
+  root_button_contest_province_tooltip_text:
+    noteDev: 
+    temp: false
+    text: You can call in your allies to fight for this province. Your brigade can't hold a province all on its own, but striking key objectives and turning the tide at battle sites will help.
+  root_button_contested_province_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Province contested
+  root_button_contested_province_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Your allies from 3F are attempting to retake this province. Striking key objectives and helping our forces at key battle sites will lead to victory!
+  root_button_time_1x:
+    noteDev:
+      text: Please translate this without the word "Time" if you exceed 8 characters with "Time" translated. It's a label of a narrow button controlling time scale, and would still read fine without specifying "Time".
+    temp: false
+    text: Time 1x
+  root_button_time_2x:
+    noteDev:
+      text: See above.
+    temp: false
+    text: Time 2x
+  root_button_time_3x:
+    noteDev:
+      text: See above.
+    temp: false
+    text: Time 3x
+  root_button_time_pause:
+    noteDev:
+      text: See above.
+    temp: false
+    text: Time 0x
+  root_province_contested:
+    noteDev: 
+    temp: false
+    text: Contested
+  root_province_friendly_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Friendly province
+  root_province_friendly_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Liberated province protected by Fyrland Freedom Forces.
+  root_province_hostile:
+    noteDev: 
+    temp: false
+    text: Hostile
+  root_province_hostile_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Hostile province
+  root_province_hostile_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Hostile provinces can have varying levels of enemy activity, otherwise known as escalation. Escalation grows when the mobile base is present in the province and drops if it leaves. Each new escalation level makes combat harder.
+  root_province_liberated:
+    noteDev:
+      text: Printed on provinces you fully control.
+    temp: false
+    text: Liberated
+  root_province_stage_contest_header:
+    noteDev: 
+    temp: false
+    text: Contested
+  root_province_stage_contest_text:
+    noteDev: 
+    temp: false
+    text: The Fyrland Freedom Forces are engaging the enemy all across the province. Strike the highlighted objectives to break their grip.
+  root_province_stage_contested_header:
+    noteDev: 
+    temp: false
+    text: Contested
+  root_province_stage_contested_text:
+    noteDev: 
+    temp: false
+    text: This province is a priority target for Fyrland Freedom Forces. Follow the objectives to liberate it.
+  root_province_stage_final_header:
+    noteDev: 
+    temp: false
+    text: Critical
+  root_province_stage_final_text:
+    noteDev: 
+    temp: false
+    text: The enemy forces are barely holding on. Strike the key objective to finish the fight.
+  root_province_stage_liberated_header:
+    noteDev: 
+    temp: false
+    text: Liberated
+  root_province_stage_liberated_text:
+    noteDev: 
+    temp: false
+    text: This province has been liberated through your efforts. Approach one of the frontline sites to travel to the next region.
+  root_province_stage_locked_header:
+    noteDev: 
+    temp: false
+    text: Reinforced
+  root_province_stage_locked_text:
+    noteDev: 
+    temp: false
+    text: This province is held by entrenched occupation forces. Liberate adjacent territory to unlock operations here.
+  root_province_stage_occupied_header:
+    noteDev: 
+    temp: false
+    text: Occupied
+  root_province_stage_occupied_text:
+    noteDev: 
+    temp: false
+    text: This province is held by the occupation forces. Follow the objectives to liberate it.
+  root_province_stage_priority_header:
+    noteDev: 
+    temp: false
+    text: Priority region
+  root_province_stage_priority_text:
+    noteDev: 
+    temp: false
+    text: This occupied territory has been designated as a priority target by Fyrland Freedom Forces. Targeted strikes here can inflict the most damage on the enemy and will disrupt their hold on the region. Follow the mission objectives to progress.
+  root_province_stage_raid_header:
+    noteDev: 
+    temp: false
+    text: Raiding
+  root_province_stage_raid_text:
+    noteDev: 
+    temp: false
+    text: The enemy is not alerted to your presence. Increase the escalation level to draw them out, contesting the province.
+  root_province_status_liberated:
+    noteDev: 
+    temp: false
+    text: Liberated
+  root_province_status_prefix:
+    noteDev:
+      text: >-
+        Prefix used to construct the province status text in the province tooltip, example:
+
+        "Status: Liberated"
+    temp: false
+    text: 'Status:'
+  root_province_status_protected:
+    noteDev: 
+    temp: false
+    text: Protected
+  root_province_status_surrounded:
+    noteDev: 
+    temp: false
+    text: Surrounded
+  root_province_status_vulnerable:
+    noteDev: 
+    temp: false
+    text: Vulnerable
+  roster_button_recruit_pilot:
+    noteDev: 
+    temp: false
+    text: >-
+      Recruit
+
+      pilot
+  roster_button_resupply:
+    noteDev: 
+    temp: false
+    text: Rest & resupply
+  roster_camp_enter_header:
+    noteDev: 
+    temp: false
+    text: Set up camp
+  roster_camp_enter_tooltip_blocked:
+    noteDev: 
+    temp: false
+    text: Option unavailable, participate in combat to unlock. [cc]You already stopped to camp or resupply recently and it is too risky to stop again without securing the area.[ff]
+  roster_camp_enter_tooltip_effects:
+    noteDev: 
+    temp: false
+    text: "- [b]Takes time. Missions might expire.[/b] \n- Selected mechs will be repaired. \n- Selected pilots will be healed. \n- All pilots will have slightly reduced fatigue."
+  roster_camp_enter_tooltip_inventory:
+    noteDev: 
+    temp: false
+    text: Supplies in inventory
+  roster_camp_enter_tooltip_liberated:
+    noteDev: 
+    temp: false
+    text: Liberated province, option unavailable. The crew will rest and resupply on the way to the next province.
+  roster_camp_enter_tooltip_requirement:
+    noteDev: 
+    temp: false
+    text: Required camp supplies
+  roster_dialog_resupply_main_header:
+    noteDev: 
+    temp: false
+    text: Starting Resupply
+  roster_dialog_resupply_main_text:
+    noteDev: 
+    temp: false
+    text: The base will be unable to move while resupplying. Continue?
+  roster_dialog_resupply_recruit_header:
+    noteDev: 
+    temp: false
+    text: Starting Recruitment
+  roster_dialog_resupply_recruit_text:
+    noteDev: 
+    temp: false
+    text: The base will be unable to move while recruitment is underway. Continue?
+  roster_label_no_pilots:
+    noteDev: 
+    temp: false
+    text: No Pilots
+  roster_label_no_squad_header:
+    noteDev: 
+    temp: false
+    text: No Squad
+  roster_label_no_squad_text:
+    noteDev: 
+    temp: false
+    text: Consider retreating to resupply point
+  roster_label_unit_level:
+    noteDev: 
+    temp: false
+    text: Level
+  roster_label_unit_threat:
+    noteDev: 
+    temp: false
+    text: Threat
+  roster_overdrive_button_header:
+    noteDev: 
+    temp: false
+    text: Overdrive
+  roster_overdrive_button_text:
+    noteDev: 
+    temp: false
+    text: 'Toggles the overdrive mode, allowing the base to move faster. Use sparingly: your pilots and mechs might suffer damage over time.'
+  roster_pilot_enemy_hint:
+    noteDev: 
+    temp: false
+    text: Hostile pilot. Limited intel available.
+  roster_pilot_hp_perfect:
+    noteDev: 
+    temp: false
+    text: Perfect health!
+  roster_pilot_notification_generic:
+    noteDev: 
+    temp: false
+    text: Visit the customization screen to review the status of this pilot.
+  roster_pilot_notification_header:
+    noteDev: 
+    temp: false
+    text: Important!
+  roster_pilot_notification_prestige:
+    noteDev: 
+    temp: false
+    text: New prestige rank available. Promote the pilot through the customization screen.
+  roster_pilot_notification_trait_unlock:
+    noteDev: 
+    temp: false
+    text: Level increased. Confirm a new trait in the pilot customization screen.
+  roster_pilot_stats_header:
+    noteDev: 
+    temp: false
+    text: Pilot Count
+  roster_pilot_stats_text:
+    noteDev: 
+    temp: false
+    text: Currently available pilots and the maximum pilot count allowed in the mobile base.
+  roster_pilot_streak_header:
+    noteDev: 
+    temp: false
+    text: Combat streak
+  roster_pilot_streak_hint:
+    noteDev: 
+    temp: false
+    text: Increased critical hit chance & XP
+  roster_repair_bar_header:
+    noteDev: 
+    temp: false
+    text: Liquid Fix
+  roster_repair_bar_text:
+    noteDev:
+      text: Refer to the description from Overworld Resources page.
+    temp: false
+    text: Repair resource used in the overworld or taken into combat by units with barrier armor.
+  roster_resupply_enter_tooltip_missing:
+    noteDev: 
+    temp: false
+    text: Resupply not available, no active resistance outposts detected. The resistance forces in this region are engaged in combat.
+  roster_return_enter_header:
+    noteDev: 
+    temp: false
+    text: Retreat
+  roster_return_enter_tooltip:
+    noteDev: 
+    temp: false
+    text: >-
+      Returning to a friendly base is a last resort. Use it when you run out of camp supplies and have no other options to proceed.
+
+
+      - Takes a long time. Missions will expire.
+
+      - Camp supplies will be restocked if empty.
+
+      - Units will be repaired.
+
+      - Pilots will be healed, but will not recover from all fatigue.
+  roster_unit_damaged_header:
+    noteDev: 
+    temp: false
+    text: Damaged
+  roster_unit_damaged_text:
+    noteDev: 
+    temp: false
+    text: Assign this unit to a repair bay during a rest stop to repair it.
+  roster_unit_stats_header:
+    noteDev: 
+    temp: false
+    text: Roster stats
+  roster_unit_stats_text:
+    noteDev: 
+    temp: false
+    text: Compare the average level and threat rating of your top four units against the ratings of enemy garrisons to make an informed decision before combat.
+  roster_unit_tooltip_parts_body:
+    noteDev: 
+    temp: false
+    text: Body parts
+  roster_unit_tooltip_pilot_effects:
+    noteDev: 
+    temp: false
+    text: Pilot effects
+  roster_unit_tooltip1_level:
+    noteDev:
+      text: Average level of a unit.
+    temp: false
+    text: Avg. level
+  roster_unit_tooltip2_threat:
+    noteDev: 
+    temp: false
+    text: Threat
+  roster_unit_tooltip3_ready:
+    noteDev: 
+    temp: false
+    text: Combat ready
+  roster_unit_tooltip3_ready_no:
+    noteDev: 
+    temp: false
+    text: Not combat ready
+  roster_unit_tooltip3_ready_yes:
+    noteDev: 
+    temp: false
+    text: Combat ready
+  roster_unit_tooltip4_issues_critical:
+    noteDev: 
+    temp: false
+    text: Critical issues
+  roster_unit_tooltip4_issues_info:
+    noteDev: 
+    temp: false
+    text: Notes
+  roster_unit_tooltip4_issues_warning:
+    noteDev: 
+    temp: false
+    text: Warnings
+  roster_unit_tooltip5_equipment:
+    noteDev: 
+    temp: false
+    text: Equipment
+  roster_unit_tooltip6_join:
+    noteDev:
+      text: >-
+        '&' character used to join two weapon names together to describe a mech's loadout.
+
+        For example: "Shotgun & Shield"
+    temp: false
+    text: '&'
+  selection_branch_tooltip_header:
+    noteDev: 
+    temp: false
+    text: Branch
+  selection_branch_tooltip_prefix:
+    noteDev: 
+    temp: false
+    text: Branch of invasion forces. Different branches use different equipment and unit compositions.
+  selection_branch_unknown_description:
+    noteDev: 
+    temp: false
+    text: No information available about this faction
+  selection_branch_unknown_name:
+    noteDev:
+      text: The "branch" refers to a branch of military forces (enemy subfaction). See the branch page for examples.
+    temp: false
+    text: Unknown branch
+  selection_contact_count_prefix:
+    noteDev:
+      text: Text indicating the number of contacts nearby that will have a number appended to it.
+    temp: false
+    text: 'Nearby contacts:'
+  selection_description_fallback:
+    noteDev: 
+    temp: false
+    text: No description available for this target
+  selection_description_objective:
+    noteDev: 
+    temp: false
+    text: Objective
+  selection_description_recaptured:
+    noteDev: 
+    temp: false
+    text: Recaptured
+  selection_difficulty_level_0:
+    noteDev: 
+    temp: false
+    text: Very Easy
+  selection_difficulty_level_1:
+    noteDev: 
+    temp: false
+    text: Easy
+  selection_difficulty_level_2:
+    noteDev: 
+    temp: false
+    text: Medium
+  selection_difficulty_level_3:
+    noteDev: 
+    temp: false
+    text: Hard
+  selection_difficulty_level_4:
+    noteDev: 
+    temp: false
+    text: Very Hard
+  selection_difficulty_level_5:
+    noteDev: 
+    temp: false
+    text: Impossible
+  selection_difficulty_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Approximate difficulty of the enemy.
+  selection_early_description:
+    noteDev: 
+    temp: false
+    text: The scout squad dispatched by the Brigade. Worn down by a long journey and in need of maintenance.
+  selection_early_mech_count:
+    noteDev: 
+    temp: false
+    text: 2 active mechs
+  selection_early_squad:
+    noteDev: 
+    temp: false
+    text: Squad
+  selection_escalation_name:
+    noteDev: 
+    temp: false
+    text: Escalation
+  selection_garrison_combat_capable:
+    noteDev: 
+    temp: false
+    text: Combat capable
+  selection_garrison_description_empty:
+    noteDev: 
+    temp: false
+    text: No military activity
+  selection_garrison_description_occupied:
+    noteDev: 
+    temp: false
+    text: Hostile units on site
+  selection_garrison_description_protected:
+    noteDev: 
+    temp: false
+    text: Allies on site
+  selection_garrison_status_empty:
+    noteDev: 
+    temp: false
+    text: Empty
+  selection_garrison_status_occupied:
+    noteDev: 
+    temp: false
+    text: Occupied
+  selection_garrison_status_protected:
+    noteDev: 
+    temp: false
+    text: Protected
+  selection_header_hovered:
+    noteDev: 
+    temp: false
+    text: Hovered
+  selection_header_selected:
+    noteDev: 
+    temp: false
+    text: Selected
+  selection_inspect:
+    noteDev: 
+    temp: false
+    text: Inspect
+  selection_location_unknown_description:
+    noteDev: 
+    temp: false
+    text: Unknown contact
+  selection_location_unknown_name:
+    noteDev:
+      text: Text displayed in place of the name of an enemy when the player doesn't know what it is
+    temp: false
+    text: ???
+  selection_outdated:
+    noteDev: 
+    temp: false
+    text: Outdated
+  selection_province_branch_hint:
+    noteDev: 
+    temp: false
+    text: Enemy forces
+  selection_province_branch_unknown_header:
+    noteDev: 
+    temp: false
+    text: No intel
+  selection_province_branch_unknown_text:
+    noteDev: 
+    temp: false
+    text: You have no information about the enemy forces in this region.
+  selection_province_frontline_exit_hint:
+    noteDev: 
+    temp: false
+    text: An outpost of Fyrland Freedom Forces at the edge of the liberated territories. You can recruit additional pilots and select the next destination from here.
+  selection_province_frontline_header1:
+    noteDev: 
+    temp: false
+    text: Route to next region
+  selection_province_hint_current:
+    noteDev: 
+    temp: false
+    text: Current region
+  selection_province_hint_destination:
+    noteDev: 
+    temp: false
+    text: Available destination
+  selection_province_hint_inaccessible:
+    noteDev: 
+    temp: false
+    text: Inaccessible region
+  selection_province_travel_dialog_header:
+    noteDev: 
+    temp: false
+    text: Depart to this destination?
+  selection_province_travel_dialog_text:
+    noteDev: 
+    temp: false
+    text: Your pilots will rest, your units will be repaired, and workshop projects will finish building on the way to the selected region. The resistance forces will follow you and the next operation will begin once you arrive.
+  selection_province_type_fallback_header:
+    noteDev: 
+    temp: false
+    text: Priority destination
+  selection_province_type_fallback_text:
+    noteDev: 
+    temp: false
+    text: This occupied region is vulnerable to an attack and has been designated a priority target by Fyrland Freedom Forces.
+  selection_province_type_recaptured_header:
+    noteDev: 
+    temp: false
+    text: Counterattack
+  selection_province_type_recaptured_text:
+    noteDev: 
+    temp: false
+    text: This previously liberated province is under attack.
+  selection_province_type_unreachable_hint:
+    noteDev: 
+    temp: false
+    text: This region is not reachable at the moment. You might get an opportunity to travel here once you liberate other regions.
+  selection_quest_link:
+    noteDev: 
+    temp: false
+    text: Quest
+  selection_resupply_header:
+    noteDev: 
+    temp: false
+    text: Home base
+  selection_resupply_hint:
+    noteDev: 
+    temp: false
+    text: Resupply available
+  selection_reward_header_conditional:
+    noteDev: 
+    temp: false
+    text: Conditional rewards
+  selection_reward_header_general:
+    noteDev: 
+    temp: false
+    text: Rewards
+  selection_reward_header_guaranteed:
+    noteDev: 
+    temp: false
+    text: Guaranteed rewards
+  selection_special_target:
+    noteDev: 
+    temp: false
+    text: Special target
+  selection_threat_header:
+    noteDev: 
+    temp: false
+    text: Danger[ff9999] & level
+  selection_threat_prefix_level:
+    noteDev:
+      text: Text which will have the enemy level appended to the end of it
+    temp: false
+    text: 'Level:'
+  selection_threat_prefix_rating:
+    noteDev:
+      text: Abbreviation of "Threat Rating" which will have the threat rating number appended to the end of it.
+    temp: false
+    text: TR
+  selection_unknown_text:
+    noteDev: 
+    temp: false
+    text: Weak sensor signature. No enemy detected. Approach the location to investigate.
+  suffix_hour:
+    noteDev: 
+    temp: false
+    text: H
+  suffix_km:
+    noteDev: 
+    temp: false
+    text: km
+  suffix_minute:
+    noteDev: 
+    temp: false
+    text: M
+  text_description_scan:
+    noteDev: 
+    temp: false
+    text: Keep contact in range for a time to acquire detailed scan.
+  tutorial_button_continue:
+    noteDev: 
+    temp: false
+    text: Continue
+  weather_hint_intensity:
+    noteDev: 
+    temp: false
+    text: Weather intensity
+  weather_l025_name:
+    noteDev: 
+    temp: false
+    text: Clear
+  weather_l025_name_neg:
+    noteDev: 
+    temp: false
+    text: Clear
+  weather_l050_name:
+    noteDev: 
+    temp: false
+    text: Cloudy
+  weather_l050_name_neg:
+    noteDev: 
+    temp: false
+    text: Cloudy
+  weather_l066_name:
+    noteDev: 
+    temp: false
+    text: Light Rain
+  weather_l066_name_neg:
+    noteDev: 
+    temp: false
+    text: Light Snowfall
+  weather_l083_name:
+    noteDev: 
+    temp: false
+    text: Medium Rain
+  weather_l083_name_neg:
+    noteDev: 
+    temp: false
+    text: Snowfall
+  weather_l100_name:
+    noteDev: 
+    temp: false
+    text: Heavy Rain
+  weather_l100_name_neg:
+    noteDev: 
+    temp: false
+    text: Snow Storm
+  world_top_header:
+    noteDev: 
+    temp: false
+    text: World map
+  world_top_subtitle:
+    noteDev: 
+    temp: false
+    text: Occupied Fyrland
+  world_travel_confirm_header:
+    noteDev: 
+    temp: false
+    text: Travel
+  world_travel_confirm_text:
+    noteDev: 
+    temp: false
+    text: Move out to selected province
+  world_travel_exit_header:
+    noteDev: 
+    temp: false
+    text: Exit
+  world_travel_exit_text:
+    noteDev: 
+    temp: false
+    text: Return to region map
+  world_travel_reset_header:
+    noteDev: 
+    temp: false
+    text: Return
+  world_travel_reset_text:
+    noteDev: 
+    temp: false
+    text: Select the current province
+  world_travel_return_header:
+    noteDev: 
+    temp: false
+    text: Exit
+  world_travel_return_text:
+    noteDev: 
+    temp: false
+    text: Return to frontline options

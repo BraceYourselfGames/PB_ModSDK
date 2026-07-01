@@ -1,0 +1,32 @@
+hidden: false
+unique: false
+quickIntro: false
+priority: 1
+rating: 0
+mood: 1
+group: ''
+hue: 0.45
+icon: s_icon_l32_pilot_escape
+textFromFunctions: FunctionTextInSecondary
+textSource:
+  tagAssociated: hope
+  pilotEventAssociated: ''
+tags:
+- camp_unit_hope
+- camp_unit
+- hope
+checksGlobal:
+- !OverworldValidateBaseResources
+  checks:
+    hope:
+      check: Equal
+      value: 1
+checksBase: 
+functionsGlobal: 
+functionsBase: 
+pilot: 
+unit:
+  checksUnit: 
+  functionsUnit:
+  - !OverworldUnitFrameIntegrityOffset
+    value: 0.15

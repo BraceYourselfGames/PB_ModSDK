@@ -1,0 +1,43 @@
+hidden: false
+listed: true
+branchIndependent: false
+salvageExempted: false
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_tank_modular
+textType: 
+livery: default
+aiBehavior: Flanker
+aiTargeting: striker
+tags:
+- branch_army
+- branch_experimental
+- branch_reserves
+- branch_specops
+- role_guardian
+- role_juggernaut
+- role_leader
+- role_striker
+- role_vanguard
+- type_tank_standard
+partTagPreferences:
+  body:
+  - tags:
+      mnf_vhc_02: true
+parts:
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - wpn_vhc_tank_aa_01
+    rating: 
+    systems: 
+  secondary:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_body_turret_aa_basic
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

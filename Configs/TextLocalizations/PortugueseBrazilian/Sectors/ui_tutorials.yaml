@@ -26,8 +26,12 @@ entries:
     textEng: Deploying
   base_briefing__p04_text:
     id: 1
-    text: Depois de analisar as unidades e mekanautas escolhidos para a missão, clique em "Mobilizar" para prosseguir.
-    textEng: Once you are happy with the units and pilots chosen for the mission, you can click "Deploy" to proceed.
+    text: Depois de analisar a composição do esquadrão para a missão, clique em "Mobilizar" para prosseguir.
+    textEng: Once you're happy with your squad makeup for the mission, you can click "Deploy" to proceed.
+  base_briefing__p04_text_ctrl:
+    id: 2
+    text: Depois de analisar a composição do esquadrão, use o botão "Mobilizar" para prosseguir.
+    textEng: Once you're happy with your squad, use the "Deploy" button to proceed.
   base_briefing_demolition__p00_hint:
     id: 1
     text: Esta missão envolve danificar estruturas. Verifique se seu esquadrão está pronto para a tarefa.
@@ -43,11 +47,23 @@ entries:
       It's a good idea to review the loadouts of your mechs before each mission.
 
 
-      You might have an improved armor you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
+      You might have improved armour you forgot to equip, a pilot that needs a different weapon, or a mission requiring a specific damage type.
   base_briefing_demolition__p02_hint:
     id: 1
     text: Selecione um dos mekas no seu esquadrão e clique em "Editar unidade" para ir para o menu de personalização.
-    textEng: Select one of the mechs in your squad, then click the "Edit Unit" button to jump to the customization screen.
+    textEng: Select a mech in your squad, then click the "Edit Unit" button to jump to the Unit Editing menu.
+  base_briefing_demolition__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Depois de selecionar um espaço de meka preenchido, você pode entrar rapidamente no menu de personalização com o botão "Editar Unidade".
+
+
+      {0}
+    textEng: >-
+      Once you select a filled mech slot, you can quickly jump into the customization screen with the "Edit Unit" button.
+
+
+      {0}
   base_briefing_demolition__p03_header:
     id: 1
     text: Verificação de dano
@@ -69,7 +85,7 @@ entries:
       [FFD8A2][sp=s_text_24_insert_env2]Structure damage[aa] — [ff][b]50[/b][-]
 
 
-      Once you're happy with the weapons, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
+      Once you're happy with your choice, proceed to the mission. If something goes wrong, you can always go back to the auto-save before the fight and adjust your build.
   base_introduction__p00_header:
     id: 1
     text: Base móvel
@@ -102,6 +118,18 @@ entries:
 
 
       You can also double click a unit in the list to do the same.
+  base_introduction__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Uma unidade já está selecionada na lista à esquerda. O botão "Editar" aqui permite que você personalize essa unidade.
+
+
+      {0}
+    textEng: >-
+      A unit is already selected in the list on the left. The "Edit" button here allows you to customize that unit.
+
+
+      {0}
   base_introduction__p03_header:
     id: 1
     text: Edição
@@ -109,11 +137,23 @@ entries:
   base_introduction__p03_text:
     id: 1
     text: Esta é a tela de edição, onde é possível inspecionar e substituir individualmente peças equipadas por uma unidade.
-    textEng: This is the editing screen. You can inspect and swap out individual parts equipped by a unit.
+    textEng: This is the Unit Editing menu. You can inspect and swap out individual parts equipped to a mech.
   base_introduction__p04_hint:
     id: 1
     text: Você pegou novas armas na última luta. Clique no espaço de arma primária para analisar as opções.
     textEng: You picked up new weapons in the last fight. Click to the primary weapon slot to review the options.
+  base_introduction__p04_hint_ctrl:
+    id: 2
+    text: >-
+      Você pegou novas armas na última luta. Vamos abrir o espaço de arma primária para analisar as opções.
+
+
+      {0}
+    textEng: >-
+      You picked up new weapons in the last fight. Let's open the primary weapon slot to review the options.
+
+
+      {0}
   base_introduction__p05_hint:
     id: 1
     text: >-
@@ -124,7 +164,25 @@ entries:
 
 
       Você pode passar o cursor por diferentes atributos nesta janela para ver as explicações detalhadas deles. Quando selecionar uma peça que pode ser trocada, as comparações serão exibidas para ajudar você a tomar uma decisão.
-    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and characterized by many different stats, so it is normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+    textEng: "This is the currently equipped weapon.\n\nMech equipment is complex and has many different stats, so it's normal to take your time here.  \n\nYou can hover over different stats in this window to see their detailed explanations. Once you select a potential replacement, comparisons will be displayed to help you make an informed decision."
+  base_introduction__p05_hint_ctrl:
+    id: 2
+    text: >-
+      Esta é a arma equipada no momento.
+
+
+      Equipamentos do meka são complexos e contam com muitos atributos diferentes. Não há problema em passar algum tempo nesta tela e considerar suas opções cuidadosamente.
+
+
+      Quando este tutorial for concluído, você poderá focar neste painel com seu controle e inspecionar cada atributo em detalhes. Por ora, vamos prosseguir.
+    textEng: >-
+      This is the currently equipped weapon.
+
+
+      Mech equipment is complex and features many different stats. It's normal to take your time on this screen and carefully weigh your options.
+
+
+      Once this tutorial is concluded, you will be able to focus this panel with your controller and inspect every stat in detail. For now, let's continue.
   base_introduction__p06_hint:
     id: 1
     text: >-
@@ -140,21 +198,39 @@ entries:
   base_introduction__p07_hint:
     id: 1
     text: >-
-      Mova o cursor sobre uma arma para ver a comparação. Algumas escolhas podem ter prós e contras, enquanto outras são melhorias diretas.
+      Selecione uma nova arma e compare-a à arma equipada no momento. Alguns itens podem ser uma melhoria direta, enquanto outros podem envolver vantagens e desvantagens.
 
 
-      Uma das formas mais simples de escolher peças é conferir o nível delas. Aumentar o nível dos equipamentos permite que o meka enfrente inimigos mais fortes, porque o dano escalona com o nível.
+      Peças de nível mais alto permitirão que seus mekas enfrentem inimigos mais fortes, já que o dano e a vida aumentam com o nível geral do seu meka.
 
 
-      [b]Equipe uma arma nova[/b] com dois cliques ou um segure o clique na lista.
+      Clique na arma que preferir na lista.
     textEng: >-
-      Hover over a weapon to see the comparison. Some picks might have tradeoffs, while others could be a direct upgrade.
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
 
 
-      One of the most straighforward ways to pick parts is checking their level. Increasing the equipment level lets the mech face stronger enemies, as damage and health is scaled with the level.
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
 
 
-      [b]Equip a new weapon[/b] by double clicking or long pressing it in the list.
+      Equip the weapon you prefer by clicking it in the list.
+  base_introduction__p07_hint_ctrl:
+    id: 2
+    text: >-
+      Selecione uma nova arma e compare-a à arma equipada no momento. Alguns itens podem ser uma melhoria direta, enquanto outros podem envolver vantagens e desvantagens.
+
+
+      Peças de nível mais alto permitirão que seus mekas enfrentem inimigos mais fortes, já que o dano e a vida aumentam com o nível geral do seu meka.
+
+
+      Equipe a arma que preferir. Se não souber como navegar na interface, confira as dicas de controles na parte inferior da tela.
+    textEng: >-
+      Select a new weapon to compare it to the currently equipped weapon. Some items might be a direct upgrade while others might involve different tradeoffs.
+
+
+      Parts of a higher level will let your mechs face stronger enemies, as damage and health are scaled with your mech's overall level.
+
+
+      Equip the weapon you prefer. If you're not sure how to navigate, check the input hints at the bottom of the screen.
   base_introduction__p08_hint:
     id: 1
     text: >-
@@ -174,7 +250,43 @@ entries:
   base_introduction__p10_hint:
     id: 1
     text: Quando tiver acabado de explorar a personalização da unidade, clique aqui para retornar à base. De lá, é possível retornar para o mapa do mundo.
-    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld.
+    textEng: Once you're done exploring unit customization, click here to return to the base. From there, you can return to overworld map.
+  base_standalone_ops__p00_header:
+    id: 2
+    text: Contratos
+    textEng: Contracts
+  base_standalone_ops__p00_text:
+    id: 2
+    text: Você estabeleceu contato com as forças de resistência nesta região. Contratos de assistência remota já estão disponíveis.
+    textEng: You have established contact with the resistance forces in this region. Remote assistance contracts are now available.
+  base_standalone_ops__p01_hint:
+    id: 2
+    text: >-
+      Os contratos permitem que você controle esquadrões aliados em outras partes de Fyrland. Seu esquadrão não participará, então seus mekanautas não ganharão experiência ou acesso direto a recursos de coleta. No entanto, você pode receber recompensas predeterminadas e não terá o risco de sofrer danos, fadiga ou perder recursos.
+
+
+      Os contratos são opcionais e não são necessários para a libertação de uma província. Podem ser formas úteis de obter recursos, conseguir mais equipamentos para seu esquadrão ou desbloquear elementos particulares de uma facção na oficina.
+    textEng: >-
+      The contracts allow you to control allied squads elsewhere in Fyrland. Your squad will not participate, so you will not gain pilot experience or direct access to salvage. However, you can receive predetermined rewards and will not risk damage, fatigue or other resources.
+
+
+      The contracts are optional and are not required to liberate a province. They can be a useful way to get resources, obtain more equipment for your squad or finish the workshop unlocks for a particular faction.
+  base_standalone_ops__p02_header:
+    id: 2
+    text: Campo de testes
+    textEng: Test range
+  base_standalone_ops__p02_text:
+    id: 2
+    text: >-
+      Lembre-se de conferir o campo virtual na seção de treinamento, onde você pode testar o desempenho dos seus mekas.
+
+
+      Também é possível acessar o campo virtual pelo botão Test Drive no menu de personalização de meka.
+    textEng: >-
+      Remember to check the virtual range in the Training section, where you can test the performance of your mechs.
+
+
+      You can also access the virtual range through the Test Drive button in the mech customization screen.
   base_upgrades__p00_header:
     id: 1
     text: Melhorias
@@ -195,6 +307,18 @@ entries:
     id: 1
     text: Novas habilidades foram desbloqueadas. Para conferi-las, clique no botão "Melhorias".
     textEng: New capabilities have been unlocked. To start reviewing them, click the Upgrades button.
+  base_workshop__p00_hint_ctrl:
+    id: 2
+    text: >-
+      Novas habilidades foram desbloqueadas. Para conferi-las, abra o novo menu de Melhorias.
+
+
+      {0}
+    textEng: >-
+      New capabilities have been unlocked. To start reviewing them, let's open the new Upgrades screen.
+
+
+      {0}
   base_workshop__p01_header:
     id: 1
     text: Melhorias
@@ -202,7 +326,7 @@ entries:
   base_workshop__p01_text:
     id: 1
     text: A base agora pode ser melhorada com o uso de recursos. Essas melhorias podem permitir que a base comporte mais unidades, desbloqueie novas habilidades e muito mais.
-    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to fit more units, unlock new capabilities and more.
+    textEng: The base can now be upgraded by spending resources. These upgrades can allow the base to house more units, unlock new capabilities, and more.
   base_workshop__p02_hint:
     id: 1
     text: >-
@@ -215,10 +339,40 @@ entries:
 
 
       Hover over the upgrade tile to inspect the details, then double click or long press to confirm it.
+  base_workshop__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Um dos sistemas mais importantes que você vai precisar nos dias que virão é a Oficina.
+
+
+      Pressione "confirmar" para instalar a melhoria.
+
+
+      {0}
+    textEng: >-
+      One of the most important systems you'll need in the days to come is the Workshop.
+
+
+      Install the upgrade by pressing "confirm".
+
+
+      {0}
   base_workshop__p03_hint:
     id: 1
     text: Vá até a aba da oficina recém-desbloqueada.
     textEng: Navigate to the newly unlocked workshop tab.
+  base_workshop__p03_hint_ctrl:
+    id: 2
+    text: >-
+      Vá até a aba da oficina recém-desbloqueada.
+
+
+      {0}
+    textEng: >-
+      Navigate to the newly unlocked workshop tab.
+
+
+      {0}
   base_workshop__p04_header:
     id: 1
     text: Oficina
@@ -235,7 +389,7 @@ entries:
 
       Você vai descobrir mais diagramas ao longo da campanha.
     textEng: >-
-      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armor and mech frames.
+      The unlocked blueprints are listed here. For now, you only possess the blueprint for building basic armour and mech frames.
 
 
       You'll discover more blueprints over the course of the campaign.
@@ -246,7 +400,7 @@ entries:
 
 
       Construir mais estruturas permite que você expanda seu esquadrão e recupere suas perdas.
-    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armor and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
+    textEng: "Frames are incredibly important. These are the bodies of your mechs, units that you equip with body armour and weapons in the customization tab. \n\nBuilding more frames allows you to expand your squad and replenish your losses."
   base_workshop__p07_hint:
     id: 1
     text: >-
@@ -259,6 +413,24 @@ entries:
 
 
       Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
+  base_workshop__p07_hint_ctrl:
+    id: 2
+    text: >-
+      Use o botão "Construir" para iniciar o projeto.
+
+
+      {0}
+
+
+      Imprimir novas peças é um processo delicado que exige que a base esteja parada. Assim como o conserto de mekas e a recuperação de mekanautas, a fabricação só ocorrerá quando você parar para acampar.
+    textEng: >-
+      Begin this project with the "Build" button.
+
+
+      {0}
+
+
+      Printing new parts is a delicate process that requires the base to be still. Just like mech repairs and pilot recovery, manufacturing will occur when you stop to camp.
   base_workshop__p08_hint:
     id: 1
     text: >-
@@ -266,7 +438,7 @@ entries:
 
 
       Você poderá acessar as peças e os subsistemas desbloqueados pelos botões de categorias aqui.
-    textEng: "With a new mech frame being built, let's review item manufacturing. \n\nYou'll be able to access unlocked parts and subsystems by using the category buttons here."
+    textEng: "With a new mech frame being built, let's review equipment manufacturing. \n\nYou'll be able to access researched parts by using the category buttons here."
   base_workshop__p09_hint:
     id: 1
     text: >-
@@ -278,7 +450,7 @@ entries:
 
       Uma peça de maior qualidade requer um novo desbloqueio.
     textEng: >-
-      To unlock parts or subsystems in the workshop, you'll need to scrap them. This can be done through the inventory or through the salvage screen.
+      To unlock projects in the workshop, you'll need to research them by scrapping parts. This can be done through the inventory or through the salvage screen.
 
 
       Some projects might require multiple scrapped items to be researched. Check the workshop progress bar on the item information panel to learn more.
@@ -313,7 +485,7 @@ entries:
 
       ■ Barreiras absorvem dano e podem regenerar durante o combate. Esgote as barreiras completamente para danificar este meka!
     textEng: >-
-      ■ The enemy is equipped with barrier armor. Note the green portion of the health bars.
+      ■ The enemy is equipped with barrier armour. Note the green portion of the health bars.
 
 
       ■ Barriers absorb damage, and can regenerate during the fight. Fully deplete barriers to damage the mech!
@@ -354,7 +526,7 @@ entries:
 
 
       Tente usar o meka aliado selecionado com o feixe de longa distância para fazer isso!
-    textEng: "Destroying this generator will disable turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
+    textEng: "Destroying this generator will disable the turrets. \n\nTry using the selected allied mech with the long range beam to do the job!"
   combat_base__p02_hint:
     id: 1
     text: >-
@@ -409,14 +581,6 @@ entries:
 
 
       The [b]Dash[/b] maneuver makes the mech break missile lock, evades most projectiles and allows for quick position changes.
-  combat_breakthrough_01__p00_header:
-    id: 1
-    text: Teste
-    textEng: Test
-  combat_breakthrough_01__p00_text:
-    id: 1
-    text: Esta é uma operação complexa com vários objetivos.
-    textEng: This is a complex operation with multiple objectives.
   combat_convoy_hg__p00_hint:
     id: 1
     text: Um atirador de precisão das Forças da Liberdade de Fyrland se juntou ao combate. Ele está numa posição vantajosa e pode ajudar você a deter o comboio.
@@ -530,6 +694,17 @@ entries:
 
       — Exibir informações da unidade: {0}
     textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or hold the modifier key.\n\n— Display unit details: {0}"
+  combat_demo_directional__p02_text_ctrl:
+    id: 2
+    text: >-
+      Treine ataques direcionais e destrua o meka inimigo para avançar para a próxima fase da missão.
+
+
+      Se não tiver certeza sobre a integridade restante de uma unidade inimiga, selecione-a ou ative o modo de exibição detalhado.
+
+
+      — Exibir/ocultar informações detalhadas: {1}
+    textEng: "Practice directional attacks and destroy the enemy mech to proceed to the next phase of the mission. \n\nIf you're unsure about remaining integrity of an enemy unit, select it or activate the detailed display mode.\n\n— Toggle detailed display: {1}"
   combat_demo_retreat__p00_hint:
     id: 1
     text: Esta é uma zona de recuo. Para concluir algumas missões com êxito, como esta, é necessário bater em retirada.
@@ -588,6 +763,24 @@ entries:
 
 
       — Target environment: {0}
+  combat_demo_structures__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Depois de selecionar a arma certa, você precisará atacar as estruturas. Por padrão, os ataques requerem um alvo inimigo, mas é possível disparar em qualquer local.
+
+
+      Procure um ponto fraco, como uma parede fina daqui. Pressione o comando de alternar para passar para o modo de mira no ambiente, e você poderá confirmar o ataque.
+
+
+      — Alternar modo de mira: {1}
+    textEng: >-
+      Once you select the right weapon, you'll need to target the structures. By default, attacks require an enemy target, but there is a way to fire at any location.
+
+
+      Find a weak spot such as a thin wall here. Press the toggle key to switch to targeting locations, and you'll be able to confirm the attack.
+
+
+      — Toggle target mode: {1}
   combat_intro_01__p00_header:
     id: 1
     text: 'Câmera '
@@ -622,10 +815,46 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  combat_intro_01__p00_text_ctrl:
+    id: 2
+    text: >-
+      Antes de partir, experimente ajustar a visão da câmera.
+
+
+      — Mova a câmera com: {9}
+
+
+      — Gire a câmera com: {11}
+
+
+      — Incline a câmera com: {12}
+    textEng: >-
+      Before moving out, try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   combat_intro_01__p01_hint:
     id: 1
-    text: '{0} nesta unidade para selecioná-la.'
-    textEng: '{0} this unit to select it.'
+    text: >-
+      Clique nesta unidade para selecioná-la:
+
+
+      {0}
+    textEng: >-
+      Select this unit by clicking it:
+
+
+      {0}
+  combat_intro_01__p01_hint_ctrl:
+    id: 2
+    text: "Mova o cursor e pressione o atalho de mira para selecionar esta unidade:\n\n{2} ► {3} \n\n\nVocê também pode trocar a unidade selecionada com:\n\n{4}{5} "
+    textEng: "Select this unit by moving the cursor and pressing the targeting hotkey:\n\n{2} ► {3} \n\n\nAlternatively, you can switch the selected unit with:\n\n{4}{5} "
   combat_intro_01__p02_hint:
     id: 1
     text: As informações sobre a unidade selecionada aparecerão aqui.
@@ -650,6 +879,18 @@ entries:
     id: 1
     text: No calor da batalha, pode ser difícil monitorar tudo. Clique aqui para repetir os cinco segundos anteriores!
     textEng: In the heat of battle, it can be hard to keep track of everything. Click here to replay the last five seconds!
+  combat_intro_04__p00_hint_ctrl:
+    id: 2
+    text: >-
+      No calor da batalha, pode ser difícil monitorar tudo. Vamos ver um replay dos últimos cinco segundos!
+
+
+      {0}
+    textEng: >-
+      In the heat of battle, it can be hard to keep track of everything. Let's review a replay the last five seconds!
+
+
+      {0}
   combat_intro_04__p01_hint:
     id: 1
     text: Mova o cursor sobre a linha temporal para analisar pontos específicos no tempo ou use os controles temporais para rever a ação.
@@ -685,7 +926,7 @@ entries:
   combat_liberation__p02_text:
     id: 1
     text: Ao lutar em cidades, alguns inimigos podem evitar atacar até terem um alvo na mira. No entanto, é melhor não contar com a moderação deles. Os inimigos dispararão se encontrarem uma unidade sua até de relance, mesmo que haja um prédio civil atrás dela.
-    textEng: "When fighting in cities, some enemies might hold fire until they get line of sight. Hovewer, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
+    textEng: "When fighting in cities, some enemies might hold fire until they have line of sight. However, it's best not to count on their trigger discipline: the enemies will fire if they catch a glimpse of your unit, even if there's a civlian building behind it."
   combat_liberation_ally__p00_hint:
     id: 2
     text: Esse meka pertence às Forças da Liberdade de Fyrland. Elas darão apoio ocasionalmente.
@@ -771,7 +1012,7 @@ entries:
   combat_status_intro__p00_text:
     id: 1
     text: Esta unidade recebeu um efeito de status. Isso pode ocorrer pelas características ou condições do mekanauta, por armas e muito mais. Alguns efeitos de status ocorrem por um determinado período, enquanto outros duram o combate inteiro. Mova o cursor sobre a barra de status para saber mais.
-    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight. Hover over the status bar to learn more.
+    textEng: This unit just received a status effect. They can be caused by pilot condition, traits, weapons and more. Some status effects are timed, while others might last an entire fight.
   combat_status_intro__p01_hint:
     id: 1
     text: >-
@@ -796,6 +1037,36 @@ entries:
 
 
       Here, you can see the names of the effects and the time they will remain active for. You can also hover over each effect to learn more.
+  combat_status_intro__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Veja mais informações sobre os efeitos de status em uma unidade selecionada no painel de detalhes.
+
+
+      Nele, você pode ver os nomes dos efeitos e o tempo em que eles permanecerão ativos. Para abrir os menus contextuais com informações sobre cada efeito de status, você pode focar na linha temporal e navegar para a esquerda e para cima.
+
+
+      {0} - Foque na linha temporal
+
+
+      {1} - Para o painel de unidades
+
+
+      {2} - Para o painel de status
+    textEng: >-
+      You can get more information about the status effects on a selected unit in the detail panel.
+
+
+      Here, you can see the names of the effects and the time they will remain active for. To open the tooltips with details about each status effect, you can focus the timeline and navigate left and up.
+
+
+      {0} - Focus timeline
+
+
+      {1} - To unit panel
+
+
+      {2} - To status panel
   endgame__p00_header:
     id: 1
     text: Obrigado por jogar!
@@ -835,7 +1106,25 @@ entries:
   overworld_camp__p01_hint:
     id: 1
     text: Esta é a visão geral. Você tem um resumo das unidades e mekanautas à sua disposição, além de opções importantes.
-    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with important options.
+    textEng: This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+  overworld_camp__p01_hint_ctrl:
+    id: 2
+    text: >-
+      Esta é a visão geral. Você tem um resumo das unidades e mekanautas à sua disposição, além de outras ações importantes.
+
+
+      Para acessar este painel, pressione para baixo no mapa do mundo.
+
+
+      {0}
+    textEng: >-
+      This is the overview corner. It gives you an at-a-glance summary of the units and pilots at your disposal, along with other important actions.
+
+
+      You can access this panel by pressing down in the overworld.
+
+
+      {0}
   overworld_camp__p02_hint:
     id: 1
     text: >-
@@ -848,6 +1137,24 @@ entries:
 
 
       You can hover over each unit to check their average level, weapon loadout, warnings and more.
+  overworld_camp__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Esta seção exibe os mekas à sua disposição, além do número total de mekas que sua base pode acomodar. A integridade de cada meka aparece na parte inferior.
+
+
+      Com este painel em foco, você pode navegar para baixo para cada meka e abrir um menu contextual que lista o nível médio, a composição de armas, avisos e muito mais.
+
+
+      Também é possível pressionar "confirmar" em um meka selecionado para ir para a personalização de equipamentos.
+    textEng: >-
+      This section displays the mechs at your disposal, and the total number of mechs your base can accommodate. The integrity of each mech is displayed at the bottom.
+
+
+      While this panel is in focus, you can navigate down to each mech to open a tooltip listing their average level, weapon loadout, warnings and more.
+
+
+      You can also jump to equipment customization by pressing "confirm" on a selected mech.
   overworld_camp__p03_hint:
     id: 1
     text: >-
@@ -860,14 +1167,48 @@ entries:
 
 
       You can hover over each pilot to check their level, experience, status, and more.
+  overworld_camp__p03_hint_ctrl:
+    id: 2
+    text: "Esta seção exibe os mekanautas à sua disposição, além do espaço disponível para eles. A quantidade de vida de cada mekanauta está exibida na parte inferior.\n\nCom este painel em foco, você pode navegar para baixo até cada piloto para abrir um menu contextual para conferir o nível, experiência, status e muito mais. "
+    textEng: "This section displays the pilots at your disposal and the overall space available for them. The health of each pilot is displayed at the bottom.\n\nWhile this panel is in focus, you can navigate down to each pilot to open a tooltip listing their level, experience, status, and more. "
   overworld_camp__p04_hint:
     id: 1
     text: Se seus mekanautas estiverem exaustos e seus mekas estiverem danificados, é recomendável montar acampamento e cuidar do seu esquadrão. Clique no botão de acampamento abaixo para prosseguir.
     textEng: With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Click the camp button below to proceed.
+  overworld_camp__p04_hint_ctrl:
+    id: 2
+    text: >-
+      Se seus mekanautas estiverem exaustos e seus mekas estiverem danificados, é recomendável montar acampamento e cuidar do seu esquadrão. Abra o menu do acampamento para prosseguir.
+
+
+      {0}
+    textEng: >-
+      With your pilots exhausted and your mechs damaged, it's prudent to set up camp and attend to your squad. Open the camp screen to proceed.
+
+
+      {0}
   overworld_camp__p05_hint:
     id: 1
     text: Selecione os mekas ou mekanautas que requerem atenção e pressione "Iniciar" para montar o acampamento.
-    textEng: Select the mechs or pilots requiring attention, then press Start to set up camp.
+    textEng: Select the mechs or pilots requiring attention, then press "Start" to set up camp.
+  overworld_camp__p05_hint_ctrl:
+    id: 2
+    text: >-
+      Selecione os mekas ou mekanautas que requerem atenção. Navegue para baixo e pressione "confirmar" para alternar as seleções.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      Quando acabar, pressione o botão "Iniciar" para montar o acampamento.
+    textEng: >-
+      Select the mechs or pilots requiring attention. Navigate down, then press "confirm" to toggle selections.
+
+
+      [ee]{0} ► [ff]{1}
+
+
+      Once you're done, use the "Start" button to set up camp.
   overworld_camp__p06_hint:
     id: 1
     text: Prossiga assim que tiver certeza das suas escolhas.
@@ -876,6 +1217,18 @@ entries:
     id: 1
     text: Seu esquadrão está de volta. Enquanto as equipes terminam de criar a arma, há um tempinho para fazer reparos e descansar seus mekanautas. Monte um acampamento.
     textEng: Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+  overworld_capital_camp__p00_hint_ctrl:
+    id: 2
+    text: >-
+      Seu esquadrão está de volta. Enquanto as equipes terminam de criar a arma, há um tempinho para fazer reparos e descansar seus mekanautas. Monte um acampamento.
+
+
+      {0}
+    textEng: >-
+      Your squad has returned. While the crews are finishing the weapon, there's a brief window of time to make repairs and rest your pilots. Set up camp.
+
+
+      {0}
   overworld_capital_camp__p01_hint:
     id: 1
     text: Aproveite o tempo restante ao máximo. Defina os mekanautas e mekas que mais precisam de atenção.
@@ -1084,6 +1437,30 @@ entries:
 
 
       — Or, move the mouse while holding: {8}
+  overworld_intro__p00_text_ctrl:
+    id: 2
+    text: >-
+      Este é o mapa do mundo. Experimente ajustar a visão da câmera.
+
+
+      — Mova a câmera com: {9}
+
+
+      — Gire a câmera com: {11}
+
+
+      — Incline a câmera com: {12}
+    textEng: >-
+      This is the world map. Try adjusting the camera view.
+
+
+      — Move the camera with: {9}
+
+
+      — Rotate the camera with: {11}
+
+
+      — Tilt the camera with: {12}
   overworld_intro__p01_hint:
     id: 1
     text: Os detalhes da sua operação atual e os objetivos ativos são exibidos aqui.
@@ -1091,15 +1468,31 @@ entries:
   overworld_intro__p02_hint:
     id: 1
     text: >-
-      — Mova o cursor sobre um destino e pressione {0} para movimentar o mapa do mundo
+      Para se movimentar no mapa do mundo, clique com o botão direito em um destino desejado:
 
 
-      — Caso você se perca, pressione {1} para recentralizar a câmera
+      {0}
+
+
+      Caso você se perca, pressione este botão para recentralizar a câmera:
+
+
+      {1}
     textEng: >-
-      — Hover over a destination and press {0} to move on the world map
+      To move on the world map, right click a desired destination:
 
 
-      —  If you're ever lost, press {1} to recenter the camera
+      {0}
+
+
+      If you're ever lost, press this button to recenter the camera:
+
+
+      {1}
+  overworld_intro__p02_hint_ctrl:
+    id: 2
+    text: "Para se movimentar no mapa do mundo, mova o cursor para o destino e pressione o botão de confirmação: \n\n{2} ► {3}\n\n\nCaso você se perca, pressione este botão para recentralizar a câmera:\n\n{4}"
+    textEng: "To move on the world map, move the cursor to your destination and press the confirmation button: \n\n{2} ► {3}\n\n\nIf you're ever lost, press this button to recenter the camera:\n\n{4}"
   overworld_pilot_progression__p00_hint:
     id: 1
     text: >-
@@ -1108,10 +1501,28 @@ entries:
 
       Para prosseguir, passe para o menu de mekanautas. Você pode navegar rapidamente para lá depois de clicar em qualquer mekanauta abaixo.
     textEng: >-
-      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, new pilot levels will be highlighted with the icons here.
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
 
 
       To proceed, move to the pilot screen. You can quickly navigate there by clicking any pilot below.
+  overworld_pilot_progression__p00_hint_ctrl:
+    id: 2
+    text: >-
+      Seus mekanautas ganharam experiência com as últimas lutas e estão prontos para subir de nível. Além de receber destaque no debriefing, os mekanautas que puderem subir de nível serão destacados com ícones aqui.
+
+
+      Para gerenciar as promoções, passe para o menu de mekanautas. Uma forma rápida de chegar nele é selecionar um mekanauta aqui e pressionar o botão "confirmar" no seu controle.
+
+
+      {0}
+    textEng: >-
+      Your pilots gained experience over the last few fights and are ready to level up. Aside from being highlighted in the debriefing, pilots able to level up will be highlighted with icons here.
+
+
+      To manage pilot promotions, you'll need to navigate to the pilot screen. A quick way to reach that screen is to select a pilot here and press the "confirm" button on your controller.
+
+
+      {0}
   overworld_pilot_progression__p01_hint:
     id: 1
     text: >-
@@ -1132,6 +1543,14 @@ entries:
 
       Você pode mover o cursor sobre as características para descobrir os efeitos delas mesmo se ainda não estiverem desbloqueadas.
     textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nYou can hover over the traits to learn their effects, even if they aren't unlocked yet."
+  overworld_pilot_progression__p02_hint_ctrl:
+    id: 2
+    text: >-
+      Cada mekanauta conta com uma árvore de progressão exclusiva — um conjunto de características que são gradualmente desbloqueadas a cada novo nível.
+
+
+      Selecionar uma característica nesta árvore abre um menu contextual com os detalhes sobre os efeitos dela, mesmo que ela ainda não tenha sido desbloqueada.
+    textEng: "Each pilot has a unique progression tree — a set of traits that is gradually unlocked with every new level. \n\nSelecting a trait in this tree opens a tooltip with the details about its effects, even if that trait is not unlocked yet."
   overworld_pilot_progression__p03_hint:
     id: 1
     text: >-
@@ -1143,7 +1562,7 @@ entries:
       Every pilot starts with a random intrinsic trait based on their class. Starter traits can affect traits further up in the tree, akin to a subclass.
 
 
-      For example, a support pilot with with a repair-related starter trait is likely to unlock more repair abilities as they level up.
+      For example, a support pilot with a repair-related starter trait is likely to unlock more repair abilities as they level up.
   overworld_pilot_progression__p04_hint:
     id: 1
     text: >-
@@ -1156,18 +1575,36 @@ entries:
 
 
       Hover over each trait to see their benefits, then click on the one you'd like to unlock.
+  overworld_pilot_progression__p04_hint_ctrl:
+    id: 2
+    text: >-
+      Agora que este mekanauta está no nível 2, uma nova característica pode ser desbloqueada. Alguns níveis oferecem uma escolha entre duas características.
+
+
+      Navegue entre as duas para ver os benefícios delas, depois pressione o botão "confirmar" para desbloquear uma.
+
+
+      {0}{1}
+    textEng: >-
+      Now that this pilot is at level 2, a new trait can be unlocked. Some levels offer a choice between two traits.
+
+
+      Navigate between the two traits to see their benefits, then press the "confirm" button to unlock one.
+
+
+      {0}{1}
   overworld_pilot_progression__p05_hint:
     id: 1
     text: >-
-      Esquadrões menores sobem de nível mais rapidamente, e os mekanautas ganham experiência adicional por cada inimigo eliminado. Mobilizar um esquadrão reduzido e deixar um mekanauta específico eliminar os inimigos pode permitir um avanço rápido.
+      Missões de combate rendem uma determinada quantidade de experiência que será dividida entre os mekanautas mobilizados. Esquadrões menores sobem de nível mais rapidamente, e os mekanautas ganham experiência adicional a cada inimigo eliminado.
 
 
-      Com a nova característica definida, este mekanauta está pronto para enfrentar mais desafios. [B]Não se esqueça de subir o nível do seu outro mekanauta![/B]
+      Com a nova característica definida, este mekanauta está pronto para enfrentar mais desafios. [b]Não se esqueça de subir o nível do seu outro mekanauta![/b]
     textEng: >-
-      Smaller squads level up more quickly, and pilots gain additional experience for each enemy they bring down. Deploying a lean squad and letting a specific pilot finish enemies can lead to quick progress.
+      Combat missions net you a set amount of experience, split between all pilots deployed. Smaller squads will level up more quickly, and pilots will gain additional experience for each enemy they dispatch.
 
 
-      With the new trait locked in, this pilot is ready to face more challenges. [B]Don't forget to level up your other pilot![/B]
+      With the new trait locked in, this pilot is ready to face more challenges. [b]Don't forget to level up your other pilot![/b]
   overworld_pilot_recruit__p00_hint:
     id: 1
     text: >-
@@ -1183,7 +1620,19 @@ entries:
   overworld_pilot_recruit__p01_hint:
     id: 1
     text: Vale conferir os recrutas disponíveis antes de partir. Clique neste botão para abrir a lista de recrutas.
-    textEng: It's worth checking out available recruits before departing. Click this button to open the recruit list.
+    textEng: It's worth checking out the available recruits before departing. Click this button to open the recruit list.
+  overworld_pilot_recruit__p01_hint_ctrl:
+    id: 2
+    text: >-
+      Vale conferir os recrutas disponíveis antes de partir. Use este botão para visualizá-los.
+
+
+      {0}
+    textEng: >-
+      It's worth checking out the available recruits before departing. Use this button to view them.
+
+
+      {0}
   overworld_pilot_recruit__p02_header:
     id: 1
     text: Menu de recrutamento
@@ -1204,6 +1653,24 @@ entries:
 
 
       Click this button to review the first available pilot.
+  overworld_pilot_recruit__p03_hint_ctrl:
+    id: 2
+    text: >-
+      É essencial aumentar seu efetivo para sobreviver. Os suprimentos de acampamento podem se tornar escassos, os mekanautas podem ficar criticamente feridos ou você pode estar sem tempo para acampar.
+
+
+      Vamos conferir o primeiro mekanauta disponível.
+
+
+      {0}
+    textEng: >-
+      Growing your ranks is essential for survival. Camp supplies might become scarce, pilots might be critically injured, or you might be pressed for time and unable to camp.
+
+
+      Let's review the first available pilot.
+
+
+      {0}
   overworld_pilot_recruit__p04_hint:
     id: 1
     text: >-
@@ -1215,7 +1682,7 @@ entries:
       Rookies are inexperienced pilots. You'll need to deploy them on a mission to learn their specialization and start leveling them up, but they can be hired at a low cost.
 
 
-      Click the button above the portrait to recruit them.
+      Use the button above the portrait to recruit them.
   overworld_pilot_recruit__p05_hint:
     id: 1
     text: Selecione um dos mekanautas restantes.
@@ -1237,7 +1704,7 @@ entries:
       Veteran pilots might be the right pick if you need to quickly fill a specific role.
 
 
-      Click the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
+      Use the button above the portrait to hire this veteran pilot, or switch to a different veteran pilot.
   overworld_pilot_recruit__p07_header:
     id: 1
     text: Pronto para partir
@@ -1250,6 +1717,18 @@ entries:
     id: 1
     text: Hora de escolher um destino. Clique neste botão para abrir o mapa do mundo.
     textEng: Time to pick a destination. Click this button to open the world map.
+  overworld_pilot_recruit__p08_hint_ctrl:
+    id: 2
+    text: >-
+      Hora de escolher um destino. Use este botão para abrir o mapa do mundo.
+
+
+      {0}
+    textEng: >-
+      Time to pick a destination. Use this button to open the world map.
+
+
+      {0}
   overworld_pilot_recruit__p09_hint:
     id: 1
     text: >-
@@ -1274,6 +1753,24 @@ entries:
 
 
       Click this button to select the destination suggested by the resistance.
+  overworld_pilot_recruit__p10_hint_ctrl:
+    id: 2
+    text: >-
+      As Forças da Liberdade de Fyrland fornecerão informações sobre as vulnerabilidades inimigas. Em alguns casos, só haverá uma escolha óbvia. Em outros casos, você pode escolher entre diferentes destinos, cada um com seus prós e contras.
+
+
+      Use este botão para selecionar o destino sugerido pela resistência.
+
+
+      {0}
+    textEng: >-
+      Fyrland Freedom Forces will provide you intel about enemy vulnerabilities. In some cases, there will be only one obvious choice. In other cases, you can choose between multiple destinations with their own pros and cons.
+
+
+      Use this button to select the destination suggested by the resistance.
+
+
+      {0}
   overworld_pilot_recruit__p11_hint:
     id: 1
     text: >-
@@ -1285,7 +1782,7 @@ entries:
       Once you select a potential destination, you can review the available intel here. This panel is similar to mission preview and can list important modifiers, enemy strength, and other details.
 
 
-      Once you're ready to proceed, click the "Travel" option next to the recommended destination.
+      Once you're ready to proceed, use the "Travel" option next to the recommended destination.
   overworld_salvage__p00_header:
     id: 1
     text: Debriefing
@@ -1310,6 +1807,10 @@ entries:
     id: 1
     text: Pressione este botão para prosseguir.
     textEng: Press this button to proceed.
+  overworld_salvage__p02_hint_ctrl:
+    id: 2
+    text: Pressione {0} para prosseguir.
+    textEng: Press {0} to proceed.
   overworld_salvage__p03_hint:
     id: 1
     text: >-
@@ -1321,11 +1822,15 @@ entries:
       The next pages cover the state of your pilots and mechs.
 
 
-      Taking care of your squad is key to a successful campaign, so it is important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
+      Taking care of your squad is key to a successful campaign, so it's important to take note of pilot injuries, fatigue, experience gains and other events that occur in combat.
   overworld_salvage__p04_hint:
     id: 1
     text: O meka atribuído a um determinado mekanauta será exibido ao fundo. Você pode mover o cursor sobre este painel para ver informações adicionais sobre a condição do meka.
     textEng: The mech assigned to a given pilot will be displayed in the background. You can hover over this panel to get additional information about its state.
+  overworld_salvage__p04_hint_ctrl:
+    id: 2
+    text: O meka atribuído a um determinado mekanauta será exibido ao fundo.
+    textEng: The mech assigned to a given pilot will be displayed in the background.
   overworld_salvage__p05_hint:
     id: 1
     text: Quando quiser, avance para a próxima página.
@@ -1338,10 +1843,14 @@ entries:
 
       Clique nos itens nesta lista para conferir as condições e aparências deles.
     textEng: >-
-      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip onto your mechs.
+      Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
 
 
       You can click the items in this list to check their stats and appearance.
+  overworld_salvage__p06_hint_ctrl:
+    id: 2
+    text: A maioria dos combates rendem recompensas. Dentre elas estão recursos valiosos ou até itens que você pode equipar imediatamente nos seus mekas.
+    textEng: Most fights will yield rewards. These can include valuable resources or even items that you can immediately equip on to your mechs.
   overworld_salvage__p07_hint:
     id: 1
     text: Quando quiser, avance para a próxima página.
@@ -1403,11 +1912,7 @@ entries:
 
 
       Por exemplo, confira um escudo do seu meka para decidir se outro escudo que foi encontrado vale a pena ser levado.
-    textEng: >-
-      If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts of your mechs.
-
-
-      As an example, checking a shield from your mech can help you decide whether another shield you found is worth taking.
+    textEng: If you're unsure what to pick, it can be a good idea to check your squad. You can click here to compare parts in the salvage pool with the equipment on your mechs. As an example, checking an equipped shield can help you decide whether another shield you found is worth salvaging.
   overworld_salvage__p13_hint:
     id: 1
     text: Ao terminar, pressione este botão. Se suas escolhas estiverem dentro do orçamento, a recuperação começará.

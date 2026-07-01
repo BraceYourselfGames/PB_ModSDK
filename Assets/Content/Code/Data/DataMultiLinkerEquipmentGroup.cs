@@ -358,14 +358,24 @@ namespace PhantomBrigade.Data
     
     public static class DataHelperEquipment
     {
-        public static readonly string fallbackPartModelName = Txt.Get(TextLibs.uiBase, "inventory_info_unknown");
-        public static readonly string fallbackPartModelDesc = string.Empty; // "No model description available";
+        public static string fallbackPartModelName = "?";
+        public static string fallbackPartModelDesc = string.Empty;
         
-        public static readonly string fallbackGroupName = Txt.Get(TextLibs.uiBase, "inventory_info_unknown");
-        public static readonly string fallbackGroupDesc = "No group description available";
-        public static readonly string fallbackGroupIcon = "s_icon_l32_part_arch_all";
+        public static string fallbackGroupName = "?";
+        public static string fallbackGroupDesc = string.Empty;
+        public static string fallbackGroupIcon = "s_icon_l32_part_arch_all";
+        public static string fallbackGroupIconSmall = "s_icon_l32_world_objective3";
 
         private static StringBuilder sb = new StringBuilder ();
+
+        public static void RefreshLocalizationStrings ()
+        {
+            fallbackPartModelName = Txt.Get(TextLibs.uiBase, "inventory_info_unknown");
+            fallbackPartModelDesc = string.Empty;
+            
+            fallbackGroupName = Txt.Get(TextLibs.uiBase, "inventory_info_unknown");
+            fallbackGroupDesc = string.Empty;
+        }
 
         public static DataContainerPartPreset GetLastInheritor (DataContainerPartPreset partPreset)
         {
@@ -584,23 +594,90 @@ namespace PhantomBrigade.Data
         #endif
         
         private static string partPresetTagBody = "body_part";
+
+        public static bool GetUIDependenciesForPartPreset 
+        (
+            DataContainerPartPreset preset, 
+            bool socketSuffixUsed, 
+            out string partModelName, 
+            out string partModelDesc, 
+            out string partGroupName, 
+            out string partGroupDesc, 
+            out string partGroupIcon,
+            out string partGroupIconSmall
+        )
+        {
+            partModelName = null;
+            partModelDesc = null;
+            partGroupName = null;
+            partGroupDesc = null;
+            partGroupIcon = null;
+            partGroupIconSmall = null;
+            
+            if (preset == null)
+                return false;
+            
+            partModelName = preset.GetPartModelName ();
+            partModelDesc = preset.GetPartModelDesc ();
+            
+            partGroupName = DataHelperEquipment.fallbackGroupName;
+            partGroupDesc = DataHelperEquipment.fallbackGroupDesc;
+            partGroupIcon = DataHelperEquipment.fallbackGroupIcon;
+            partGroupIconSmall = null;    
+            
+            var partGroup = DataMultiLinkerEquipmentGroup.GetEntry (preset.groupMainKey, false);
+            if (partGroup != null)
+            {
+                partGroupName = DataHelperEquipment.GetEquipmentGroupName (partGroup, preset);
+                partGroupDesc = partGroup.textDesc;
+                partGroupIcon = partGroup.icon;
+                
+                if (!string.IsNullOrEmpty (partGroup.iconSmall))
+                    partGroupIconSmall = partGroup.iconSmall;
+            }
+            
+            bool partGroupIconSmallMissing = string.IsNullOrEmpty (partGroupIconSmall);
+            if (partGroupIconSmallMissing)
+            {
+                DataContainerPartSocket socketInfo = null;
+                if (preset.socketsProcessed != null)
+                {
+                    foreach (var socket in preset.socketsProcessed)
+                    {
+                        socketInfo = DataMultiLinkerPartSocket.GetEntry (socket, false);
+                        break;
+                    }
+
+                    if (socketInfo != null)
+                    {
+                        partGroupIconSmall = socketInfo.icon;
+                        partGroupIconSmallMissing = false;
+                    }
+                }
+            }
+
+            if (partGroupIconSmallMissing)
+                partGroupIconSmall = fallbackGroupIconSmall;
+            
+            return true;
+        }
         
-        public static string GetEquipmentGroupName (DataContainerEquipmentGroup group, DataContainerPartPreset preset = null)
+        public static string GetEquipmentGroupName (DataContainerEquipmentGroup group, DataContainerPartPreset preset = null, bool socketSuffixUsed = true)
         {
             if (group == null || string.IsNullOrEmpty (group.textName))
                 return fallbackGroupName;
 
-            if (preset != null && preset.tagsProcessed != null && preset.tagsProcessed.Contains (partPresetTagBody))
+            if (socketSuffixUsed && preset != null && preset.tagsProcessed != null && preset.tagsProcessed.Contains (partPresetTagBody))
             {
                 var sockets = preset.socketsProcessed;
                 string socketSuffix = null;
-                    
+
                 if (sockets.Contains (LoadoutSockets.corePart))
-                    socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_torso");
+                    socketSuffix = Txt.Get (TextLibs.uiBase, "inventory_socket_suffix_torso");
                 else if (sockets.Contains (LoadoutSockets.secondaryPart))
-                    socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_legs");
+                    socketSuffix = Txt.Get (TextLibs.uiBase, "inventory_socket_suffix_legs");
                 else if (sockets.Contains (LoadoutSockets.leftOptionalPart))
-                    socketSuffix = Txt.Get(TextLibs.uiBase, "inventory_socket_suffix_arm");
+                    socketSuffix = Txt.Get (TextLibs.uiBase, "inventory_socket_suffix_arm");
 
                 if (!string.IsNullOrEmpty (socketSuffix))
                     return $"{group.textName} / {socketSuffix}";

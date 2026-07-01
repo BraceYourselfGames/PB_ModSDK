@@ -1,0 +1,47 @@
+hidden: false
+listed: true
+branchIndependent: true
+salvageExempted: true
+bodyTagPinningExempted: false
+parents: []
+blueprint: unit_tank_modular
+textType: 
+livery: neutral_color_030_orange_b
+aiBehavior: DumbDestination
+aiTargeting: defensive
+tags: []
+partTagPreferences:
+  body:
+  - tags:
+      mnf_vhc_02: true
+parts:
+  equipment_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys: []
+    rating: 
+    systems: 
+  optional_left:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_v2_side_w1
+    rating: 
+    systems: 
+  optional_right:
+    livery: 
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_v2_side_w1
+    rating: 
+    systems: 
+  secondary:
+    livery:
+      livery: cargo_a
+    preset: !PartResolverKeys
+      keys:
+      - vhc_tank_body_turret_cargo
+    rating: 
+    systems: 
+animationOverrides: 
+effects: 

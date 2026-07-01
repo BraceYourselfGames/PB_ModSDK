@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 namespace PhantomBrigade.Functions
 {
     [Serializable]
-    public class CombatValidateUnitStatusCount : ICombatUnitValidationFunction
+    public class CombatValidateUnitStatusCount : ICombatUnitValidationFunction, ICombatActionValidationFunction
     {
         [ValueDropdown ("@DataMultiLinkerUnitStatus.data.Keys")]
         [HideLabel]
@@ -22,6 +22,17 @@ namespace PhantomBrigade.Functions
                 return false;
 
             var unitCombat = IDUtility.GetLinkedCombatEntity (unitPersistent);
+            return IsValid (unitCombat);
+
+            #else
+            return false;
+            #endif
+        }
+        
+        public bool IsValid (CombatEntity unitCombat)
+        {
+            #if !PB_MODSDK
+
             if (unitCombat == null)
                 return false;
 

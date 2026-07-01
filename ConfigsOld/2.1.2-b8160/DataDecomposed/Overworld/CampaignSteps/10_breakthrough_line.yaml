@@ -1,0 +1,101 @@
+comment:
+  comment: Special quest leading back to open gameplay.
+ui:
+  textName: {}
+  textDesc: {}
+  textNavHint: 
+  textNavHeader: {}
+  textNavDesc: {}
+  iconNav: s_flag_02
+  textFromQuest: province_breakthrough_line
+  mapHeader: 
+  mapBackground: 
+  mapLabels: 
+  mapProvinceFilter: 
+travelInteraction:
+  tagsUsed: false
+  keys:
+  - arrival_campaign_10_breakthrough
+  tags: 
+entry:
+  functionsGlobal:
+  - !ApplyProvinceArrivalEffects {}
+  - !QuestStart
+    questKey: province_breakthrough_line
+  functionsBase: 
+liberation:
+  functionsGlobal:
+  - !ModifyMemoryBase
+    changes:
+    - change: Set
+      key: campaign_progress_breakthrough
+      value: 0
+      valueFromMemory: false
+      valueFromMemoryKey: 
+  - !UnlockAchievement
+    key: half_year
+  functionsBase: 
+progressDisplay: 
+effects: 
+branches:
+- comment: 
+  preferences:
+    branchActiveExcluded: true
+    modifiersUnique: false
+    modifierVisitsTracked: true
+  checksGlobal: 
+  checksBase: 
+  links:
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 11_open_start
+    levelOffset: 
+    branchKey: branch_specops
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_02_start: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_pilot_persistent: true
+    - tagsUsed: false
+      keys:
+      - gen_weather_clear
+      tags: 
+  - comment: 
+    checksGlobal: 
+    checksBase: 
+    stepKey: 11_open_start
+    levelOffset: 
+    branchKey: branch_experimental
+    searchRange:
+      x: 0
+      y: 0
+    searchPriority: None
+    searchMode: Unvisited
+    filter:
+      tagsUsed: true
+      keys: 
+      tags:
+        group_liberation_02_start: true
+    modifiers:
+    - tagsUsed: true
+      keys: 
+      tags:
+        type_pilot_persistent: true
+    - tagsUsed: false
+      keys:
+      - gen_weather_clear
+      tags: 
+tags:
+- priority
+- branch_hidden

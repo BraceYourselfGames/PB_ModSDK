@@ -144,10 +144,6 @@ entries:
     id: 1
     text: 구조물 파괴를 우선시하고, 최대한 많은 대미지를 가하세요. 지역 수비대는 위협적이지만, 쓸 만한 게 남아 있지 않다면 얼씬거릴 이유가 없습니다.
     textEng: Prioritize destroying structures, inflict as much damage as possible. The local garrison is a threat, but it won't have a reason to stick around if there is nothing of use is left standing.
-  generic_raid__step_main_0c_header:
-    id: 1
-    text: 습격
-    textEng: Raid
   generic_raid__step_main_0c_text:
     id: 1
     text: 화물 상자에는 추적 장치가 붙어 있습니다. 적 항공기가 신호를 포착하게 되면 항공기로 이송될 겁니다. 상자를 따라 메카를 움직여 신호를 방해하고 수거를 지연시키세요.
@@ -316,6 +312,10 @@ entries:
     id: 1
     text: 적을 도발해 수도의 다른 부분으로부터 적을 끌어오세요.
     textEng: Provoke the enemy to pull forces from other parts of the Capital.
+  unique_intro__briefing_name:
+    id: 2
+    text: 인트로
+    textEng: Intro
   unique_intro__intro_location:
     id: 1
     text: 퓌랜드 공화국 국경
@@ -368,10 +368,38 @@ entries:
     id: 1
     text: 월드를 왼쪽 클릭하여 이동을 확정하세요.
     textEng: Left click in the world to confirm your movement.
+  unique_intro__step_02_move1_1hc_2_text_ctrl:
+    id: 2
+    text: >-
+      이 영역에 맞추어 커서가 조정되도록 카메라를 이동한 후, 목적지를 확정합니다.
+
+
+      {0}
+    textEng: >-
+      Move the camera to align the cursor with this area, then confirm the destination:
+
+
+      {0}
   unique_intro__step_02_move1_1hc_3_text:
     id: 1
     text: 이 버튼을 눌러 계획을 실행하세요.
     textEng: Click this button to execute plan.
+  unique_intro__step_02_move1_1hc_3_text_ctrl:
+    id: 2
+    text: 이 버튼을 사용해(혹은 강조 표시된 단축키를 눌러) 계획을 실행합니다.
+    textEng: Use this button (or press the highlighted shortcut) to execute the plan.
+  unique_intro__step_02_move1_1hc_4_text:
+    id: 2
+    text: >-
+      방향키를 사용해 작업 패널에 초점을 맞추세요. 초점을 맞춘 뒤, 다음 키를 눌러 "시험" 작업을 확정하세요.
+
+
+      {0}
+    textEng: >-
+      Use the directional pad to focus the action panel. Once focused, confirm the "Run" action by pressing:
+
+
+      {0}
   unique_intro__step_07_wait_and_move_1hc_0_text:
     id: 1
     text: >-
@@ -384,6 +412,10 @@ entries:
 
 
       Hovering over the timeline will also show the prediction.
+  unique_intro__step_07_wait_and_move_1hc_0_text_ctrl:
+    id: 2
+    text: '"시험" 작업을 시작해 계획이 예측 시스템과 어떻게 상호작용할 수 있는지 확인하세요.'
+    textEng: Start the "Run" action to see how planning can interact with the prediction system.
   unique_intro__step_07_wait_and_move_1hc_1_text:
     id: 1
     text: '"시험" 작업을 클릭하세요.'
@@ -394,8 +426,36 @@ entries:
     textEng: This point should provide a clear view. Note how the distance to it changes the predicted arrival time.
   unique_intro__step_07_wait_and_move_1hc_3_text:
     id: 1
-    text: "이동 시간은 거리에 따라 결정됩니다. 몇 번이든 이동할 수 있습니다. \n \n 오른쪽 클릭을 두 번 하면 작업을 취소할 수 있습니다. 계획이 마음에 드신다면, 실행하세요!"
-    textEng: "Movement time is determined by distance. You can move any number of times. \n\nActions can be cancelled with two right clicks. If you're happy with the plan, execute it!"
+    text: >-
+      타임라인 위에 커서를 올려 예측 타임라인을 앞뒤로 조종하고 시간이 지남에 따라 이 유닛이 어떻게 이동할지 확인하세요.
+
+
+      진행할 준비가 되었다면, 계획을 실행하세요.
+    textEng: >-
+      You can hover over the timeline to scrub through the prediction and see how this unit will move over time.
+
+
+      When you're ready to proceed, execute the plan.
+  unique_intro__step_07_wait_and_move_1hc_3_text_ctrl:
+    id: 2
+    text: >-
+      타임라인에 초점을 맞추고 트리거를 사용해 예측 타임라인을 앞뒤로 조종하고 시간이 지남에 따라 이 유닛이 어떻게 이동할지 확인하세요.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      진행할 준비가 되었다면, 계획을 실행하세요.
+    textEng: >-
+      You can focus the timeline and use the triggers to scrub through the prediction and see how this unit will move over time.
+
+
+      [ee]{0} ► [ff]{1}{2}
+
+
+
+      When you're ready to proceed, execute the plan.
   unique_intro__step_07_wait_and_move_1hc_4_text:
     id: 1
     text: "이것은 사령관의 타임라인입니다. 앞으로 5초 동안에 걸쳐 사령관이 행할 작업을 보여 줍니다. \n\n기억해 두세요. 계획을 실행하기 전에는, 적을 포함한 어떤 유닛의 타임라인이든 확인하실 수 있습니다!"
@@ -406,8 +466,8 @@ entries:
     textEng: Select the controllable unit.
   unique_intro__step_09_tank_plans_1hc_0_text:
     id: 1
-    text: 탱크가 공격하려고 합니다! 교전하려면 더 가까이 가야 할 겁니다. "달리기" 작업을 클릭하세요.
-    textEng: The tank is about to attack! You will need to get closer to engage it. Click the "Run" action.
+    text: 탱크가 공격하려고 합니다! 교전하려면 더 가까이 가야 할 겁니다. "시험" 작업을 사용하세요.
+    textEng: The tank is about to attack! You will need to get closer to engage it. Use the "Run" action.
   unique_intro__step_09_tank_plans_1hc_1_text:
     id: 1
     text: '"달리기" 작업을 클릭하세요.'
@@ -430,14 +490,32 @@ entries:
 
 
       {0}
+  unique_intro__step_09_tank_plans_1hc_10_text_ctrl:
+    id: 2
+    text: >-
+      [ff9999]이것은 적 탱크의 타임라인입니다. 앞으로 이동해서 발사할 것으로 예측됩니다.[-]
+
+
+      아래의 파란색 유닛 탭으로 이동하거나 다음을 눌러 당신의 유닛으로 되돌아갈 수 있습니다.
+
+
+      {1}{2}
+    textEng: >-
+      [ff9999]This is the timeline of the hostile tank. It's predicted to move forward and fire.[-]
+
+
+      You can return to your unit by navigating to the blue unit tab below or by pressing:
+
+
+      {1}{2}
   unique_intro__step_09_tank_plans_1hc_2_text:
     id: 1
     text: 여기로 이동하면 타겟이 최적 거리 내에 들어옵니다.
     textEng: Moving here will place the target into optimal range.
   unique_intro__step_09_tank_plans_1hc_3_text:
     id: 1
-    text: 다음으로는 "공격" 작업을 클릭하세요.
-    textEng: Click the "Attack" action next.
+    text: 다음으로는 "공격" 작업을 사용하세요.
+    textEng: Use the "Attack" action next.
   unique_intro__step_09_tank_plans_1hc_4_text:
     id: 1
     text: '"공격" 작업을 클릭하세요.'
@@ -454,6 +532,18 @@ entries:
 
 
       The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
+  unique_intro__step_09_tank_plans_1hc_5_text_ctrl:
+    id: 2
+    text: >-
+      먼저, 트리거를 사용해 [b]언제[/b] 공격할지를 선택하세요.
+
+
+      이 시간 동안 타겟은 [b]최적 거리[/b](내 유닛 주변의 흰색 고리) 내에 있어야 합니다.
+    textEng: >-
+      First, choose [b]when[/b] the attack should happen using the triggers.
+
+
+      The target should be in the [b]optimal range[/b] (white ring around your unit) during that time.
   unique_intro__step_09_tank_plans_1hc_6_text:
     id: 1
     text: >-
@@ -466,14 +556,68 @@ entries:
 
 
       The % displayed is the predicted effectiveness of your weapon at this range.
+  unique_intro__step_09_tank_plans_1hc_6_text_ctrl:
+    id: 2
+    text: >-
+      커서를 대상 타겟(혹은 타겟의 예측 홀로그램)으로 이동한 후 공격을 확정하세요. 유효한 타겟 위에 커서를 올리면 십자선이 자동으로 조준됩니다.
+
+
+      표시되어 있는 %는 해당 거리에서 예상되는 내 무기의 효과입니다.
+    textEng: >-
+      Confirm the attack after moving the cursor to the intended target (or its prediction hologram). The reticle will lock on if you are hovering over a valid target.
+
+
+      The % displayed is the predicted effectiveness of your weapon at this range.
   unique_intro__step_09_tank_plans_1hc_7_text:
     id: 1
-    text: "타임라인에서 이동과 공격을 드래그하여 시간과 장소를 단계별로 변경할 수 있습니다.\n \n [b]두 번 이상의 공격을 계획할 수 있습니다.[/b] 또 다른 공격을 구상해 보세요."
+    text: >-
+      ■ 계획이 타임라인에 맞아 든다면, 유닛은 무한한 수의 작업을 만들 수 있습니다.
+
+
+      ■ 계획된 작업은 왼쪽 마우스 버튼으로 드래그해 일정을 변경하거나 오른쪽 클릭으로 타임라인에서 삭제할 수 있습니다.
+
+
+      ■ 또한 키보드를 사용하고 타임라인에 초점을 맞추어 작업의 일정을 변경하거나 삭제할 수 있습니다(왼쪽의 입력 힌트를 확인하세요).
+
+
+      [b]진행할 준비가 되었다면, 또 다른 공격을 생성해 보세요.[/b]
     textEng: >-
-      You can drag the movements and attacks on the timeline to adjust the time and place of every step.
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
 
 
-      [b]More than one attack can be planned.[/b] Try creating another attack.
+      ■ Planned actions can retimed by dragging with a left mouse button, or deleted from the timeline with right clicks.
+
+
+      ■ Actions can also be retimed or deleted using the keyboard and focusing the timeline (see the input hints to the left).
+
+
+      [b]When you're ready to proceed, try creating another attack.[/b]
+  unique_intro__step_09_tank_plans_1hc_7_text_ctrl:
+    id: 2
+    text: >-
+      ■ 계획이 타임라인에 맞아 든다면, 유닛은 무한한 수의 작업을 만들 수 있습니다.
+
+
+      ■ 타임라인에 초점이 맞으면 작업 일정을 변경하거나 삭제할 수 있습니다.
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      더 알아보려면 왼쪽에 표시된 단축키를 확인하세요. [b]진행할 준비가 되었다면, 또 다른 공격을 생성해 보세요.[/b]
+    textEng: >-
+      ■ Units can can make any number of actions, for as long as the plan fits on the timeline.
+
+
+      ■ Actions can be retimed or deleted once the timeline is in focus:
+
+
+      [ee]{0}{1} ► [ff]{2}{3}{4}
+
+
+
+      Check the shortcuts displayed to the left to learn more. [b]When you're ready to proceed, try creating another attack.[/b]
   unique_intro__step_09_tank_plans_1hc_8_text:
     id: 1
     text: 이제 연속 두 번의 공격을 계획했습니다. 계획을 실행해 보세요!
@@ -550,6 +694,26 @@ entries:
     id: 1
     text: 추가 유닛이 방금 전투에 참가했습니다. 적이 내 존재를 보고하기 전에 모두 제거하세요.
     textEng: An additional unit just joined the fight. Eliminate all hostiles before they report your presence.
+  unique_test_range__briefing_name:
+    id: 2
+    text: 테스트 사정거리
+    textEng: Test range
+  unique_test_range__briefing_text:
+    id: 2
+    text: 다양한 지형에서 서로 다른 적들을 상대로 메카 성능을 테스트하세요.
+    textEng: Test the performance of your mechs over varied terrain and against different enemies.
+  unique_test_range__intro_location:
+    id: 2
+    text: 훈련 시뮬레이션
+    textEng: Training simulation
+  unique_test_range__intro_ready:
+    id: 2
+    text: 준비
+    textEng: Ready
+  unique_test_range__intro_threat:
+    id: 2
+    text: 선택한 장비 초기화 중...
+    textEng: Initializing selected equipment...
   unique_tutorial_base__state_wave_02_trigger_0c_text:
     id: 1
     text: 전장의 모든 적 유닛을 처치해 다음 단계로 진행하세요.

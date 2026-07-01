@@ -1,0 +1,2213 @@
+timeLastSync: 63811497554
+localized: true
+exportMode: LinePerKeySimple
+name: UI (Base)
+description: Not a database (text in this sector doesn't follow any repeating pattern). Variety of UI-embedded and code-embedded text used in the Base subscreens in the overworld (Mechs, Pilots, Workshop, Upgrades, etc.)
+splits: []
+tags: 
+groups: 
+entries:
+  briefing_deploy_blocked:
+    noteDev: 
+    temp: false
+    text: Blocked
+  briefing_deploy_incomplete:
+    noteDev: 
+    temp: false
+    text: At least one slot has only a pilot or only a mech. Only complete units can be deployed.
+  briefing_deploy_issues_critical:
+    noteDev: 
+    temp: false
+    text: Critical issues detected in squad. Cannot deploy until resolved.
+  briefing_deploy_issues_note:
+    noteDev: 
+    temp: false
+    text: Hints available for squad. Does not block deployment.
+  briefing_deploy_issues_warning:
+    noteDev: 
+    temp: false
+    text: Warnings available for this squad. Does not block deployment, but highly recommended.
+  briefing_deploy_no_pilots:
+    noteDev: 
+    temp: false
+    text: No pilots selected for deployment. Add a pilot to at least one slot to proceed.
+  briefing_deploy_no_units:
+    noteDev: 
+    temp: false
+    text: No units selected for deployment. Add a unit to at least one slot to proceed.
+  briefing_deploy_ready:
+    noteDev: 
+    temp: false
+    text: Ready
+  briefing_deploy_slot_critical:
+    noteDev: 
+    temp: false
+    text: Critical issues that must be resolved before deployment.
+  briefing_deploy_slots_ready:
+    noteDev: 
+    temp: false
+    text: No critical issues blocking deployment.
+  briefing_deploy_squad_status:
+    noteDev: 
+    temp: false
+    text: Squad status
+  briefing_dialog_deploy_desc:
+    noteDev: 
+    temp: false
+    text: This is a point of no return. Continuing will start combat.
+  briefing_dialog_deploy_header:
+    noteDev: 
+    temp: false
+    text: Starting combat
+  briefing_dialog_exit_desc:
+    noteDev: 
+    temp: false
+    text: Are you sure you want to disengage from this combat site?
+  briefing_dialog_exit_header:
+    noteDev: 
+    temp: false
+    text: Confirm exit
+  briefing_dialog_exit_smoke_desc:
+    noteDev: 
+    temp: false
+    text: Are you sure you want to use the smoke charge to escape?
+  briefing_exit_leave_desc:
+    noteDev: 
+    temp: false
+    text: The enemy here will not pursue the mobile base. We can cancel the deployment.
+  briefing_exit_leave_header:
+    noteDev: 
+    temp: false
+    text: Leave
+  briefing_exit_no_smoke_desc:
+    noteDev: 
+    temp: false
+    text: With no charges left, there is no choice but to fight!
+  briefing_exit_no_smoke_header:
+    noteDev: 
+    temp: false
+    text: No smoke charges
+  briefing_exit_smoke_desc:
+    noteDev: 
+    temp: false
+    text: Stun the enemy, allowing us to escape from this mobile enemy. One charge will be used.
+  briefing_info_enemy:
+    noteDev: 
+    temp: false
+    text: Enemy
+  briefing_info_incoming_header:
+    noteDev: 
+    temp: false
+    text: Incoming mission
+  briefing_info_level_prefix:
+    noteDev:
+      text: >-
+        Text added before the level of the player or enemy force, example:
+
+        "L1.9" (indicating a Level of 1.9)
+    temp: false
+    text: L
+  briefing_info_prediction:
+    noteDev: 
+    temp: false
+    text: Prediction for squad
+  briefing_info_threat_prefix:
+    noteDev:
+      text: >-
+        Text added before the threat level of the player or enemy force, example:
+
+        "Threat: 59"
+    temp: false
+    text: Threat
+  briefing_nav_button_cant_deploy:
+    noteDev: 
+    temp: false
+    text: Can't deploy
+  briefing_nav_button_deploy:
+    noteDev: 
+    temp: false
+    text: Deploy
+  briefing_nav_button_mission:
+    noteDev: 
+    temp: false
+    text: Mission
+  briefing_nav_button_squad:
+    noteDev: 
+    temp: false
+    text: Squad
+  briefing_pilots_header:
+    noteDev: 
+    temp: false
+    text: Pilots
+  briefing_review_fatigue_header:
+    noteDev: 
+    temp: false
+    text: Fatigued pilots
+  briefing_review_fatigue_text:
+    noteDev: 
+    temp: false
+    text: These pilots are at maximum fatigue and will continuously lose health. Consider a rest stop or swapping them for this mission.
+  briefing_review_frame_damage_header:
+    noteDev: 
+    temp: false
+    text: Damaged mechs
+  briefing_review_frame_damage_text:
+    noteDev: 
+    temp: false
+    text: These mechs will not last as long in protracted combat. Consider a rest stop to repair them.
+  briefing_review_frame_loss_header:
+    noteDev: 
+    temp: false
+    text: Compromised mech frames
+  briefing_review_frame_loss_text:
+    noteDev: 
+    temp: false
+    text: These mechs were destroyed too many times. They will be permanently lost along with every equipped part if destroyed again.
+  briefing_review_header:
+    noteDev: 
+    temp: false
+    text: 'Are you certain you wish to deploy this squad? This is a point of no return. Consider the following:'
+  briefing_review_pilot_health_header:
+    noteDev: 
+    temp: false
+    text: Injured pilots
+  briefing_review_pilot_health_text:
+    noteDev: 
+    temp: false
+    text: These pilots have less than half of their health remaining.
+  briefing_review_squad_size:
+    noteDev: 
+    temp: false
+    text: Squad size
+  briefing_review_squad_xp_hint:
+    noteDev: 
+    temp: false
+    text: Using a smaller squad will net your pilots more experience.
+  briefing_review_trauma_header:
+    noteDev: 
+    temp: false
+    text: Severely traumatized
+  briefing_review_trauma_text:
+    noteDev: 
+    temp: false
+    text: These pilots will die if their health is depleted. Carefully weigh their deployment.
+  briefing_review_weapon_removal_header:
+    noteDev: 
+    temp: false
+    text: Invalid loadout detected
+  briefing_review_weapon_removal_text:
+    noteDev: 
+    temp: false
+    text: At least one mech had a weapon removed due to a missing arm. While deploying without an arm is possible, a weapon can't be used without a corresponding arm part. Carefully review the loadouts in your squad.
+  briefing_scenario_header:
+    noteDev: 
+    temp: false
+    text: Mission briefing
+  briefing_scenario_subtitle:
+    noteDev: 
+    temp: false
+    text: Location, garrison, objectives
+  briefing_squad_add_pilot:
+    noteDev: 
+    temp: false
+    text: No pilot
+  briefing_squad_add_unit:
+    noteDev: 
+    temp: false
+    text: No unit
+  briefing_squad_autofill_header:
+    noteDev: 
+    temp: false
+    text: Fill slots
+  briefing_squad_autofill_text:
+    noteDev: 
+    temp: false
+    text: The squad will be filled with combat ready pilots and mechs with the highest level and best condition. The selected mechs and pilots might not synergize or might not be the best fit for the upcoming mission. Carefully review your squad before deploying.
+  briefing_squad_edit_cant_desc:
+    noteDev: 
+    temp: false
+    text: This unit is damaged. Must be repaired before making changes.
+  briefing_squad_edit_cant_header:
+    noteDev: 
+    temp: false
+    text: Can't edit unit
+  briefing_squad_edit_desc:
+    noteDev: 
+    temp: false
+    text: Move to unit customization screen to edit the selected unit. Long press or double click to confirm.
+  briefing_squad_edit_header:
+    noteDev: 
+    temp: false
+    text: Edit unit
+  briefing_squad_edit_pilot:
+    noteDev: 
+    temp: false
+    text: Edit pilot
+  briefing_squad_header:
+    noteDev: 
+    temp: false
+    text: Squad
+  briefing_squad_issues_critical_desc:
+    noteDev: 
+    temp: false
+    text: The following critical issues must be resolved before unit can be deployed
+  briefing_squad_issues_critical_desc_pilot:
+    noteDev: 
+    temp: false
+    text: This pilot cannot participate in combat due to following critical issues
+  briefing_squad_issues_critical_header:
+    noteDev: 
+    temp: false
+    text: Critical issues
+  briefing_squad_issues_notes_desc:
+    noteDev: 
+    temp: false
+    text: This unit is combat ready. Low-priority notes
+  briefing_squad_issues_notes_desc_pilot:
+    noteDev: 
+    temp: false
+    text: This pilot is combat ready. Low-priority notes
+  briefing_squad_issues_notes_header:
+    noteDev: 
+    temp: false
+    text: Notes
+  briefing_squad_issues_warning_desc:
+    noteDev: 
+    temp: false
+    text: This unit can be deployed, but there are some warnings to consider
+  briefing_squad_issues_warning_desc_pilot:
+    noteDev: 
+    temp: false
+    text: This pilot is combat ready, but there are some warnings to consider
+  briefing_squad_issues_warning_header:
+    noteDev: 
+    temp: false
+    text: Warnings
+  briefing_squad_pilot:
+    noteDev: 
+    temp: false
+    text: Pilot
+  briefing_squad_remove_pilot_header:
+    noteDev: 
+    temp: false
+    text: Remove pilot
+  briefing_squad_remove_pilot_text:
+    noteDev: 
+    temp: false
+    text: Clear the pilot from the currently selected slot. Long press or double click to confirm.
+  briefing_squad_slots:
+    noteDev: 
+    temp: false
+    text: Slots filled
+  briefing_squad_subtitle:
+    noteDev: 
+    temp: false
+    text: Deployed units & pilots
+  briefing_squad_unit:
+    noteDev: 
+    temp: false
+    text: Unit
+  briefing_units_empty_desc:
+    noteDev: 
+    temp: false
+    text: The base has no units available or every unit is already added to the squad
+  briefing_units_empty_header:
+    noteDev: 
+    temp: false
+    text: No units
+  briefing_units_header:
+    noteDev: 
+    temp: false
+    text: Units
+  brieing_squad_remove_unit_header:
+    noteDev: 
+    temp: false
+    text: Remove unit
+  brieing_squad_remove_unit_text:
+    noteDev: 
+    temp: false
+    text: Clear the unit from the currently selected slot. Long press or double click to confirm.
+  debriefing_group_desc_intact:
+    noteDev: 
+    temp: false
+    text: Some equipment were retrieved intact by our drones during the fight. They are marked for recovery by default, at no salvage cost.
+  debriefing_group_destroyed:
+    noteDev: 
+    temp: false
+    text: Destroyed
+  debriefing_group_intact:
+    noteDev: 
+    temp: false
+    text: Intact
+  debriefing_group_label_intact:
+    noteDev: 
+    temp: false
+    text: Intact
+  debriefing_group_label_packaged:
+    noteDev: 
+    temp: false
+    text: Packaged items
+  debriefing_group_label_quality:
+    noteDev: 
+    temp: false
+    text: Level / Equipment quality
+  debriefing_group_salvageable_equipment:
+    noteDev: 
+    temp: false
+    text: Salvageable equipment
+  debriefing_item_damaged_desc:
+    noteDev: 
+    temp: false
+    text: This subsystem has increased salvage cost due to damage it sustained.
+  debriefing_item_damaged_name:
+    noteDev: 
+    temp: false
+    text: Damaged
+  debriefing_item_high_level:
+    noteDev:
+      text: Displayed above items a player can salvage. Specific to items which a player already possesses at a lower power level.
+    temp: false
+    text: Higher level
+  debriefing_item_high_quality:
+    noteDev:
+      text: Displayed above items a player can salvage. Specific to items which a player already possesses at a lower quality.
+    temp: false
+    text: Higher quality
+  debriefing_item_intact_desc:
+    noteDev: 
+    temp: false
+    text: This item was not damaged in battle and so has a reduced salvage cost.
+  debriefing_item_intact_name:
+    noteDev: 
+    temp: false
+    text: Intact
+  debriefing_item_lost_desc:
+    noteDev: 
+    temp: false
+    text: This item belonged to one of your mechs, but was detached in battle. It will be lost if not retrieved!
+  debriefing_item_lost_name:
+    noteDev: 
+    temp: false
+    text: Lost
+  debriefing_item_new:
+    noteDev:
+      text: Displayed above items a player can salvage. Specific to item models a player doesn't yet have in their possession.
+    temp: false
+    text: New
+  debriefing_outcome_allies_lost_desc:
+    noteDev: 
+    temp: false
+    text: You have failed to eliminate the enemy squad. Our retreat allowed them to overwhelm Fyrland Freedom Forces. The balance in the contested province shifts in the enemy favor.
+  debriefing_outcome_allies_lost_header:
+    noteDev: 
+    temp: false
+    text: Allies lost
+  debriefing_outcome_allies_saved_desc:
+    noteDev: 
+    temp: false
+    text: You have successfully driven the enemy away from this battle site, saving the allied units. This will let us contest the province longer.
+  debriefing_outcome_allies_saved_header:
+    noteDev: 
+    temp: false
+    text: Allies saved
+  debriefing_outcome_escalation_drop_desc:
+    noteDev: 
+    temp: false
+    text: The enemy no longer considers you a threat and drops the escalation in this province. You can retreat and resupply to take advantage of reduced patrols.
+  debriefing_outcome_escalation_drop_desc_defeat:
+    noteDev: 
+    temp: false
+    text: Due to your total defeat, the enemy no longer considers you a threat and drops all escalation in this province. Retreat to a resupply point to acquire more units and pilots.
+  debriefing_outcome_escalation_drop_desc_losses:
+    noteDev: 
+    temp: false
+    text: The enemy now considers you less of a threat and drops the escalation in this province by a level. You can retreat and resupply to take advantage of reduced patrols.
+  debriefing_outcome_escalation_drop_header:
+    noteDev: 
+    temp: false
+    text: Escalation drops
+  debriefing_outcome_escalation_gain_desc:
+    noteDev: 
+    temp: false
+    text: The enemy is alarmed by this attack and increases the escalation level in this province. When escalation reaches certain thresholds, more units will be committed to this province and fights will get harder. You can leave the province to decrease the escalation level.
+  debriefing_outcome_escalation_gain_header:
+    noteDev: 
+    temp: false
+    text: Escalation gained
+  debriefing_outcome_homeguard_improve:
+    noteDev: 
+    temp: false
+    text: Victory at this battle site was important for Fyrland Freedom Forces.
+  debriefing_outcome_homeguard_intact:
+    noteDev: 
+    temp: false
+    text: All allied units survived the battle unscathed.
+  debriefing_outcome_reputation_gain_desc:
+    noteDev: 
+    temp: false
+    text: Reputation increased. If you have the radio uplink upgrade, this can enable you to call more units for help.
+  debriefing_outcome_reputation_gain_header:
+    noteDev: 
+    temp: false
+    text: Reputation gain
+  debriefing_outcome_weakened_desc:
+    noteDev: 
+    temp: false
+    text: You've taken out an enemy in a contested province, slightly weakening their forces. It's recommended to attack critical objectives if you'd like to speed up the process and liberate the province more quickly.
+  debriefing_outcome_weakened_desc_objective:
+    noteDev: 
+    temp: false
+    text: You've successfully taken out an enemy objective, significantly weakening their hold on the province. Keep attacking objectives to liberate it!
+  debriefing_outcome_weakened_header:
+    noteDev: 
+    temp: false
+    text: Enemy weakened
+  debriefing_pilot_empty:
+    noteDev: 
+    temp: false
+    text: No notable events recorded
+  debriefing_pilot_header:
+    noteDev: 
+    temp: false
+    text: Pilot
+  debriefing_pilot_header2:
+    noteDev: 
+    temp: false
+    text: Squad performance
+  debriefing_rewards_empty:
+    noteDev: 
+    temp: false
+    text: No rewards available at this location
+  debriefing_rewards_header:
+    noteDev: 
+    temp: false
+    text: Rewards
+  debriefing_rewards_header2:
+    noteDev: 
+    temp: false
+    text: Stored equipment & materials
+  debriefing_salvage_budget_header:
+    noteDev: 
+    temp: false
+    text: Salvage budget
+  debriefing_salvage_budget_label:
+    noteDev: 
+    temp: false
+    text: Budget
+  debriefing_salvage_budget_mission:
+    noteDev: 
+    temp: false
+    text: Mission bonus
+  debriefing_salvage_budget_text:
+    noteDev: 
+    temp: false
+    text: The amount of salvage you can retrieve after this fight. Depends on mission type, defeated units and pilot traits.
+  debriefing_salvage_button_abandon_header:
+    noteDev: 
+    temp: false
+    text: Abandon
+  debriefing_salvage_button_abandon_text:
+    noteDev: 
+    temp: false
+    text: Leave the item on the battlefield.
+  debriefing_salvage_button_confirm:
+    noteDev: 
+    temp: false
+    text: Confirm
+  debriefing_salvage_button_continue:
+    noteDev: 
+    temp: false
+    text: Continue
+  debriefing_salvage_button_dismantle_header:
+    noteDev: 
+    temp: false
+    text: Scrap
+  debriefing_salvage_button_dismantle_text:
+    noteDev: 
+    temp: false
+    text: Dismantle the item for resources. Lower salvage cost than recovery.
+  debriefing_salvage_button_max_supply:
+    noteDev: 
+    temp: false
+    text: Max supplies
+  debriefing_salvage_button_take_header:
+    noteDev: 
+    temp: false
+    text: Recover
+  debriefing_salvage_button_take_text:
+    noteDev: 
+    temp: false
+    text: Collect the equipment to use on your mechs. Recovered items will appear in your inventory.
+  debriefing_salvage_dialog_start_desc:
+    noteDev: 
+    temp: false
+    text: Would you like to proceed with salvaging the selected items?
+  debriefing_salvage_dialog_start_header:
+    noteDev: 
+    temp: false
+    text: Starting salvage
+  debriefing_salvage_empty:
+    noteDev: 
+    temp: false
+    text: No units with salvageable equipment detected
+  debriefing_salvage_finish:
+    noteDev: 
+    temp: false
+    text: Confirm salvage
+  debriefing_salvage_finish_blocked:
+    noteDev: 
+    temp: false
+    text: Insufficient budget
+  debriefing_salvage_frame_content:
+    noteDev: 
+    temp: false
+    text: Retrieve the frame of a unit, adding a new customizable unit to the base. Extracting the frame comes at significant cost and sacrifices all the parts that could be salvaged otherwise.
+  debriefing_salvage_frame_header:
+    noteDev: 
+    temp: false
+    text: Salvage Mech Frame
+  debriefing_salvage_header:
+    noteDev: 
+    temp: false
+    text: Salvage
+  debriefing_salvage_header_no_salvage:
+    noteDev: 
+    temp: false
+    text: No salvage
+  debriefing_salvage_header2:
+    noteDev: 
+    temp: false
+    text: Unit equipment on the field
+  debriefing_salvage_hint:
+    noteDev: 
+    temp: false
+    text: Decide what to recover, dismantle or skip from the loot found on the battlefield. We have a limited budget and items vary in salvage cost, so choose wisely.
+  debriefing_salvage_hint_budget:
+    noteDev: 
+    temp: false
+    text: Cost & budget
+  debriefing_salvage_hint_dismantled:
+    noteDev: 
+    temp: false
+    text: Dismantled
+  debriefing_salvage_hint_enemy_no_loss:
+    noteDev: 
+    temp: false
+    text: With the enemy forces on patrol, we cannot risk retrieving salvage here. No equipment was lost by friendly units.
+  debriefing_salvage_hint_enemy_present:
+    noteDev: 
+    temp: false
+    text: With the enemy forces on patrol, we cannot risk retrieving salvage here. Most we can do is recover some of the parts lost by our units.
+  debriefing_salvage_hint_no_items:
+    noteDev: 
+    temp: false
+    text: No salvageable items or lost equipment found on our scanners this time.
+  debriefing_salvage_hint_recovered:
+    noteDev: 
+    temp: false
+    text: Recovered
+  debriefing_salvage_hint_skipped:
+    noteDev: 
+    temp: false
+    text: Skipped
+  debriefing_salvage_hint_unit_page:
+    noteDev: 
+    temp: false
+    text: More on next page
+  debriefing_salvage_label_base:
+    noteDev: 
+    temp: false
+    text: Base
+  debriefing_salvage_label_emergency:
+    noteDev: 
+    temp: false
+    text: Emergency
+  debriefing_salvage_list_category_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown category
+  debriefing_salvage_list_header_nocost:
+    noteDev: 
+    temp: false
+    text: No cost
+  debriefing_salvage_list_header_rewards:
+    noteDev: 
+    temp: false
+    text: Rewards & stored Items
+  debriefing_salvage_list_header_unit:
+    noteDev: 
+    temp: false
+    text: Unit
+  debriefing_salvage_list_header_unit_tooltip:
+    noteDev: 
+    temp: false
+    text: This unit has some salvageable equipment. You can click this header to decide about all of them, or click individual items down below.
+  debriefing_salvage_list_part_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown part
+  debriefing_salvage_list_resource:
+    noteDev: 
+    temp: false
+    text: Resource
+  debriefing_salvage_list_status_destroyed:
+    noteDev: 
+    temp: false
+    text: Destroyed
+  debriefing_salvage_list_status_intact:
+    noteDev: 
+    temp: false
+    text: Intact
+  debriefing_salvage_list_subsystem_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown subsystem
+  debriefing_salvage_list_tooltip_salvage:
+    noteDev: 
+    temp: false
+    text: This site stored some equipment ready for pickup. This equipment can be picked up at no salvage cost, if you so choose.
+  debriefing_salvage_list_workshop_charge:
+    noteDev: 
+    temp: false
+    text: Workshop charge
+  debriefing_salvage_resources_extracted:
+    noteDev: 
+    temp: false
+    text: Extracted resources
+  debriefing_units_defeated:
+    noteDev: 
+    temp: false
+    text: Units defeated
+  inventory_button_deselect_header:
+    noteDev: 
+    temp: false
+    text: Deselect
+  inventory_button_deselect_text:
+    noteDev: 
+    temp: false
+    text: Deselect all items
+  inventory_button_detach_header:
+    noteDev: 
+    temp: false
+    text: Detach
+  inventory_button_detach_text:
+    noteDev: 
+    temp: false
+    text: Detach all customizable subsystems from selected parts. For example, take our reactor cores from the upper body parts.
+  inventory_button_invert_header:
+    noteDev: 
+    temp: false
+    text: Invert
+  inventory_button_invert_text:
+    noteDev: 
+    temp: false
+    text: Invert all selected items
+  inventory_button_scrap_detach_header:
+    noteDev: 
+    temp: false
+    text: Scrap & detach
+  inventory_button_scrap_detach_text:
+    noteDev: 
+    temp: false
+    text: 'Detach all customizable subsystems, then dismantle the selected piece of equipment into supplies. Warning: you can not undo this operation!'
+  inventory_button_scrap_fully_header:
+    noteDev: 
+    temp: false
+    text: Scrap fully
+  inventory_button_scrap_fully_text:
+    noteDev: 
+    temp: false
+    text: 'Dismantle the selected piece of equipment into supplies, including all customizable subsystems currently attached to it. Warning: you can not undo this operation!'
+  inventory_button_select_all_header:
+    noteDev: 
+    temp: false
+    text: Select all
+  inventory_button_select_all_text:
+    noteDev: 
+    temp: false
+    text: Select all items
+  inventory_category_all:
+    noteDev: 
+    temp: false
+    text: All parts
+  inventory_category_all_subsystems:
+    noteDev: 
+    temp: false
+    text: All subsystems
+  inventory_category_all_subsystems_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Display every subsystem in the base inventory. Select a specific socket further down, then select a specific subsystem under it to narrow the list down by location.
+  inventory_category_all_tooltip_text:
+    noteDev: 
+    temp: false
+    text: Display every part in the base inventory. Select a specific socket further down to narrow parts by location.
+  inventory_group_all:
+    noteDev: 
+    temp: false
+    text: All
+  inventory_hardpoint_armor:
+    noteDev: 
+    temp: false
+    text: Armor
+  inventory_hardpoint_internal:
+    noteDev: 
+    temp: false
+    text: Internal
+  inventory_hint_filter:
+    noteDev: 
+    temp: false
+    text: Filter
+  inventory_hint_sort:
+    noteDev: 
+    temp: false
+    text: Sort
+  inventory_info_action_cooldown:
+    noteDev: 
+    temp: false
+    text: Each action available to the unit has a duration and optimal interval (cooldown). An optimal interval is not a hard restriction, but following it will avoid heat buildup.
+  inventory_info_action_peak_heat:
+    noteDev: 
+    temp: false
+    text: Peak heat
+  inventory_info_barrier:
+    noteDev: 
+    temp: false
+    text: Barrier
+  inventory_info_beam_width_desc:
+    noteDev: 
+    temp: false
+    text: Beam weapons have no scatter. Energy from this weapon is focused in a straight line.
+  inventory_info_beam_width_name:
+    noteDev: 
+    temp: false
+    text: Beam width
+  inventory_info_column_action:
+    noteDev: 
+    temp: false
+    text: Per attack
+  inventory_info_column_hit:
+    noteDev: 
+    temp: false
+    text: Per hit
+  inventory_info_column_second:
+    noteDev: 
+    temp: false
+    text: Per second (DPS)
+  inventory_info_context_comparison:
+    noteDev: 
+    temp: false
+    text: Comparison
+  inventory_info_context_equipped:
+    noteDev: 
+    temp: false
+    text: Equipped
+  inventory_info_dismantle_confirmation_header:
+    noteDev: 
+    temp: false
+    text: Confirm scrapping
+  inventory_info_dismantle_confirmation_text:
+    noteDev: 
+    temp: false
+    text: Are you sure you'd like to disassamble this item? This can not be undone. The item will disappear from your inventory. If there are removable subsystems, they will be placed in your inventory. The workshop progress for this item will increase.
+  inventory_info_dismantle_workshop_header:
+    noteDev: 
+    temp: false
+    text: Scrap for workshop
+  inventory_info_dismantle_workshop_hint_multiprogress:
+    noteDev: 
+    temp: false
+    text: Dismantling the part at this quality will also progress research for lower quality versions.
+  inventory_info_dismantle_workshop_hint_multistep:
+    noteDev: 
+    temp: false
+    text: This part needs to be dismantled multiple times to become unlocked in the workshop.
+  inventory_info_dismantle_workshop_progress:
+    noteDev: 
+    temp: false
+    text: Workshop progress
+  inventory_info_dismantle_workshop_resources:
+    noteDev: 
+    temp: false
+    text: Usable components
+  inventory_info_dismantle_workshop_text:
+    noteDev: 
+    temp: false
+    text: You can dismantle this item to unlock construction in the workshop.
+  inventory_info_hint_classification_header:
+    noteDev: 
+    temp: false
+    text: Classification
+  inventory_info_hint_classification_text:
+    noteDev: 
+    temp: false
+    text: >-
+      This text indicates part type (what general class this part belongs to) and model (which specific design of a given type this is).
+
+
+      The color indicates rarity: how uncommon and well-built the part is. Equipment of higher rarity includes more and higher quality perks and can include unlocked subsystem slots, enabling deeper customization.
+  inventory_info_hint_damage_type:
+    noteDev: 
+    temp: false
+    text: Damage type
+  inventory_info_hint_favorite_header:
+    noteDev: 
+    temp: false
+    text: Favourite
+  inventory_info_hint_favorite_text:
+    noteDev: 
+    temp: false
+    text: Mark this item as a favourite. This highlights it in inventory lists, making it easier to find.
+  inventory_info_hint_level_header:
+    noteDev: 
+    temp: false
+    text: Level
+  inventory_info_hint_level_text:
+    noteDev: 
+    temp: false
+    text: >-
+      Level determines how powerful a given part is. Integrity, barrier and damage scale with level.
+
+
+      Always keep an eye out for parts with a higher level to ensure your units are ready to face ever more challenging enemies!
+  inventory_info_hint_range_header:
+    noteDev: 
+    temp: false
+    text: Range
+  inventory_info_hint_range_text:
+    noteDev: 
+    temp: false
+    text: >-
+      The range in which this weapon is effective. The graph reflects whether the weapon remains effective throughout the recommended range, or if it changes potency depending on distance and scatter.
+
+
+      Most combat engagements take place in quadrants 300 meters across.
+  inventory_info_hint_serial_header:
+    noteDev: 
+    temp: false
+    text: Serial Number
+  inventory_info_hint_serial_text:
+    noteDev: 
+    temp: false
+    text: Unique number identifying a part among others of the same model. Every part can differ, offering different perks and subsystems.
+  inventory_info_hint_stat_modified:
+    noteDev: 
+    temp: false
+    text: This stat is modified by one or more swappable subsystems. Check subsystem information on the right to learn more.
+  inventory_info_hit_width_desc:
+    noteDev: 
+    temp: false
+    text: Melee weapons have no scattering projectiles — the damage is inflicted on direct contact. Melee weapons can vary in size, affecting how easy it is to land hits on targets.
+  inventory_info_hit_width_name:
+    noteDev: 
+    temp: false
+    text: Hit width
+  inventory_info_integrity:
+    noteDev: 
+    temp: false
+    text: Integrity
+  inventory_info_levelup_counter:
+    noteDev: 
+    temp: false
+    text: Times upgraded
+  inventory_info_levelup_dialog_header:
+    noteDev: 
+    temp: false
+    text: Confirm level upgrade
+  inventory_info_levelup_dialog_text:
+    noteDev: 
+    temp: false
+    text: Are you sure you'd like to upgrade this part to the next level?
+  inventory_info_levelup_header_available:
+    noteDev: 
+    temp: false
+    text: Upgradeable
+  inventory_info_levelup_header_blocked:
+    noteDev: 
+    temp: false
+    text: Upgrade blocked
+  inventory_info_levelup_header_max:
+    noteDev: 
+    temp: false
+    text: Upgraded to limit
+  inventory_info_levelup_header_unsupported:
+    noteDev: 
+    temp: false
+    text: Non-upgradeable
+  inventory_info_levelup_locked:
+    noteDev: 
+    temp: false
+    text: This item can't be upgraded at the mobile base.
+  inventory_info_levelup_resources_header_insufficient:
+    noteDev: 
+    temp: false
+    text: Insufficient resources
+  inventory_info_levelup_resources_header_valid:
+    noteDev: 
+    temp: false
+    text: Resources required
+  inventory_info_levelup_text_available:
+    noteDev: 
+    temp: false
+    text: If the requirements are met, this part can be upgraded to a higher level, increasing its stats.
+  inventory_info_levelup_text_max:
+    noteDev: 
+    temp: false
+    text: "This part has reached its performance limits: its level can't be upgraded further."
+  inventory_info_levelup_text_unsupported:
+    noteDev: 
+    temp: false
+    text: This part can not be upgraded to a higher level. This is usually the case for rare experimental equipment or low-quality training equipment.
+  inventory_info_levelup_workshop:
+    noteDev: 
+    temp: false
+    text: Workshop level
+  inventory_info_levelup_workshop_low:
+    noteDev: 
+    temp: false
+    text: Higher workshop level needed
+  inventory_info_no_description:
+    noteDev: 
+    temp: false
+    text: No description available
+  inventory_info_part_category:
+    noteDev: 
+    temp: false
+    text: Category
+  inventory_info_part_feature:
+    noteDev: 
+    temp: false
+    text: Feature
+  inventory_info_part_manufacturer:
+    noteDev: 
+    temp: false
+    text: Manufacturer
+  inventory_info_part_trait:
+    noteDev: 
+    temp: false
+    text: Trait
+  inventory_info_postfix_meters:
+    noteDev:
+      text: >-
+        Added to the end of a number indicating a distance in Meters. Example:
+
+        "20m"
+    temp: false
+    text: m
+  inventory_info_postfix_seconds:
+    noteDev:
+      text: >-
+        Added to the end of a number indicating a time in Seconds. Example:
+
+        "20 s"
+    temp: false
+    text: s
+  inventory_info_scatter_desc:
+    noteDev: 
+    temp: false
+    text: This display indicates weapon scatter angle. Wider angle spreads projectiles over a wider cone, making targets harder to hit.
+  inventory_info_scatter_name:
+    noteDev: 
+    temp: false
+    text: Scatter
+  inventory_info_scatter_stat_hint:
+    noteDev:
+      text: Descriptor of the scatter stat that appears above the value in an item's info panel.
+    temp: false
+    text: Scatter (idle — moving)
+  inventory_info_scatter_wide_desc:
+    noteDev: 
+    temp: false
+    text: This weapon is less stable when the unit is moving. Note the greater scatter angle.
+  inventory_info_serial_none:
+    noteDev:
+      text: Text displayed in the item info panel when an item doesn't have a serial number. (S/N is an abbreviation of Serial Number)
+    temp: false
+    text: No S/N
+  inventory_info_stat_action_duration:
+    noteDev: 
+    temp: false
+    text: Action duration
+  inventory_info_stat_optimal_frequency:
+    noteDev: 
+    temp: false
+    text: Optimal frequency
+  inventory_info_stat_optimal_range:
+    noteDev: 
+    temp: false
+    text: Optimal range
+  inventory_info_stat_shots_desc:
+    noteDev: 
+    temp: false
+    text: Number of projectiles fired by this weapon in one attack action.
+  inventory_info_stat_shots_fragments_desc:
+    noteDev: 
+    temp: false
+    text: Number of projectiles fired by this weapon in one attack action. Each projectile splits into a number of fragments.
+  inventory_info_stat_shots_fragments_name:
+    noteDev: 
+    temp: false
+    text: Shots & fragments
+  inventory_info_stat_shots_name:
+    noteDev: 
+    temp: false
+    text: Shots
+  inventory_info_status_buildup_desc:
+    noteDev: 
+    temp: false
+    text: This weapon builds up a status effect on hit. Once it reaches 100, the following status is applied to the target.
+  inventory_info_status_buildup_header:
+    noteDev: 
+    temp: false
+    text: Buildup
+  inventory_info_subsystem_customizable_desc:
+    noteDev: 
+    temp: false
+    text: This subsystem can be replaced or removed.
+  inventory_info_subsystem_customizable_name:
+    noteDev: 
+    temp: false
+    text: Customizable
+  inventory_info_subsystem_fused_desc:
+    noteDev: 
+    temp: false
+    text: This subsystem is welded into the part and can't be replaced.
+  inventory_info_subsystem_fused_name:
+    noteDev: 
+    temp: false
+    text: Fused
+  inventory_info_subsystem_missing_desc:
+    noteDev: 
+    temp: false
+    text: There is no subsystem installed into this hardpoint.
+  inventory_info_subsystem_missing_name:
+    noteDev: 
+    temp: false
+    text: Missing
+  inventory_info_subsystem_obscured:
+    noteDev: 
+    temp: false
+    text: Randomized subsystem
+  inventory_info_timeline_hint_duration_header:
+    noteDev: 
+    temp: false
+    text: Action duration
+  inventory_info_timeline_hint_duration_text:
+    noteDev: 
+    temp: false
+    text: How long it takes for a weapon to fire. Short action durations are valuable for weapons with narrow windows of opportunity, such as shotguns, but quickly spike heat.
+  inventory_info_timeline_hint_optimal_excess:
+    noteDev: 
+    temp: false
+    text: Excess cooling
+  inventory_info_timeline_hint_optimal_header:
+    noteDev: 
+    temp: false
+    text: Min. cooldown
+  inventory_info_timeline_hint_optimal_perfect:
+    noteDev: 
+    temp: false
+    text: No cooldown
+  inventory_info_timeline_hint_optimal_text:
+    noteDev: 
+    temp: false
+    text: The sustainable rate this weapon can be used at. The lower bound is action duration, as attacks can't be overlapped, but the interval is usually higher to allow net zero heat accumulation. Varies depending on action duration and heat generation of the weapon counteracted by heat dissipation in the reactor core of the mech.
+  inventory_info_trajectory_desc:
+    noteDev: 
+    temp: false
+    text: >-
+      This is a guided weapon, so there is no scatter: projectiles converge on targets.
+
+
+      The trajectory determines how the weapon can be used. Direct trajectory requires a clear path to target, while an arcing trajectory allows firing over cover, with projectiles descending from above.
+  inventory_info_trajectory_range_arc:
+    noteDev:
+      text: >-
+        A descriptor added to the end of a distance, in meters. Used in the item info panel. Example:
+
+        "3m arc"
+    temp: false
+    text: m Arc
+  inventory_info_trajectory_text:
+    noteDev: 
+    temp: false
+    text: Trajectory
+  inventory_info_unknown:
+    noteDev: 
+    temp: false
+    text: Unknown
+  inventory_socket_suffix_arm:
+    noteDev: 
+    temp: false
+    text: Arm
+  inventory_socket_suffix_legs:
+    noteDev: 
+    temp: false
+    text: Legs
+  inventory_socket_suffix_torso:
+    noteDev: 
+    temp: false
+    text: Torso
+  inventory_sort_group:
+    noteDev: 
+    temp: false
+    text: Group
+  inventory_sort_items:
+    noteDev:
+      text: >-
+        Appended to text indicating the number of items on a line beneath the item count, ex:
+
+        13
+
+        items
+    temp: false
+    text: Items
+  inventory_sort_level:
+    noteDev: 
+    temp: false
+    text: Level
+  inventory_sort_no_selections:
+    noteDev: 
+    temp: false
+    text: No selections
+  inventory_sort_quality:
+    noteDev: 
+    temp: false
+    text: Quality
+  item_equip_hint:
+    noteDev: 
+    temp: false
+    text: Equip a new item by clicking it.
+  item_info_rating_0:
+    noteDev: 
+    temp: false
+    text: Basic
+  item_info_rating_1:
+    noteDev: 
+    temp: false
+    text: Common
+  item_info_rating_1_text:
+    noteDev: 
+    temp: false
+    text: Average performance with minor variation. Mass-produced, with subsystems welded on directly to save costs.
+  item_info_rating_2:
+    noteDev: 
+    temp: false
+    text: Uncommon
+  item_info_rating_2_text:
+    noteDev: 
+    temp: false
+    text: Higher quality equipment. Greater perk variation with more pronounced effects. Some modules might be customizable.
+  item_info_rating_3:
+    noteDev: 
+    temp: false
+    text: Rare
+  item_info_rating_3_text:
+    noteDev: 
+    temp: false
+    text: Highest quality equipment. High perk variation with very pronounced effects. Highly customizable.
+  item_info_rating_4:
+    noteDev: 
+    temp: false
+    text: Legendary
+  item_info_rating_5:
+    noteDev: 
+    temp: false
+    text: Pinnacle
+  item_info_rating_missing:
+    noteDev: 
+    temp: false
+    text: Missing rating
+  pilot_ability_hint:
+    noteDev: 
+    temp: false
+    text: Combat ability. Can be used a limited number of times per fight.
+  pilot_ability_prefix:
+    noteDev: 
+    temp: false
+    text: Ability
+  pilot_ability_status_effect:
+    noteDev: 
+    temp: false
+    text: Applied effect
+  pilot_bio_builtin_01:
+    noteDev: 
+    temp: false
+    text: Trusted squad leader, one of the original members of the 3F.
+  pilot_bio_builtin_02:
+    noteDev: 
+    temp: false
+    text: Demolitions expert from Kongensland. Has a wealth of knowledge on old mining infrastructure, came up with the idea to investigate Langset as a potential target for the 3F.
+  pilot_bio_builtin_03:
+    noteDev: 
+    temp: false
+    text: Excellent marksman. One of the few survivors of the Regattal Bombing, owing to a chance assignment to a lookout post away from the base.
+  pilot_bio_builtin_04:
+    noteDev: 
+    temp: false
+    text: Veteran test pilot from the Hollis Institute. Has hands-on experience with dozens of mech configurations. Had worked as the Institue's liaison with Fyrland's military prior to the invasion, now responsible for training pilots in the use of prediction tech.
+  pilot_button_customize:
+    noteDev: 
+    temp: false
+    text: Customize
+  pilot_button_dismiss:
+    noteDev: 
+    temp: false
+    text: Dismiss
+  pilot_death_cause:
+    noteDev: 
+    temp: false
+    text: Cause of death
+  pilot_death_header:
+    noteDev: 
+    temp: false
+    text: Killed in action
+  pilot_death_short:
+    noteDev: 
+    temp: false
+    text: KIA
+  pilot_dismiss_deceased_header:
+    noteDev: 
+    temp: false
+    text: Confirm removal
+  pilot_dismiss_deceased_text:
+    noteDev: 
+    temp: false
+    text: This pilot will be removed from the list.
+  pilot_dismiss_living_header:
+    noteDev: 
+    temp: false
+    text: Confirm pilot dismissal
+  pilot_dismiss_living_text:
+    noteDev: 
+    temp: false
+    text: Are you sure you would like to dismiss this pilot? They will leave the base and will not be available for deployment going forward. This order can not be reverted.
+  pilot_edit_button_cancel:
+    noteDev: 
+    temp: false
+    text: Cancel
+  pilot_edit_button_save:
+    noteDev: 
+    temp: false
+    text: Save
+  pilot_edit_hint_callsign:
+    noteDev: 
+    temp: false
+    text: Callsign
+  pilot_edit_hint_name:
+    noteDev: 
+    temp: false
+    text: Name
+  pilot_edit_hint_notes:
+    noteDev: 
+    temp: false
+    text: Notes
+  pilot_edit_label_body:
+    noteDev: 
+    temp: false
+    text: Body
+  pilot_edit_label_build:
+    noteDev: 
+    temp: false
+    text: Build
+  pilot_edit_label_eye_color:
+    noteDev: 
+    temp: false
+    text: Eye color
+  pilot_edit_label_eyebrows:
+    noteDev: 
+    temp: false
+    text: Eyebrows
+  pilot_edit_label_face_preset:
+    noteDev: 
+    temp: false
+    text: Face preset
+  pilot_edit_label_facial_hair:
+    noteDev: 
+    temp: false
+    text: Facial hair
+  pilot_edit_label_facial_hair_color:
+    noteDev: 
+    temp: false
+    text: Facial hair color
+  pilot_edit_label_glasses:
+    noteDev: 
+    temp: false
+    text: Glasses
+  pilot_edit_label_glasses_variant:
+    noteDev: 
+    temp: false
+    text: Glasses variant
+  pilot_edit_label_hair:
+    noteDev: 
+    temp: false
+    text: Hair
+  pilot_edit_label_hair_color:
+    noteDev: 
+    temp: false
+    text: Hair color
+  pilot_edit_label_headgear:
+    noteDev: 
+    temp: false
+    text: Headgear
+  pilot_edit_label_headgear_variant:
+    noteDev: 
+    temp: false
+    text: Headgear variant
+  pilot_edit_label_lip_color:
+    noteDev: 
+    temp: false
+    text: Lip color
+  pilot_edit_label_lower_face:
+    noteDev: 
+    temp: false
+    text: Lower face variant
+  pilot_edit_label_overlay:
+    noteDev:
+      text: Label for a customization field on pilots. Selects a decorative 2D image overlayed on top of the 3D camera feed, such as various fictional UI, graphs, labels, graphics.
+    temp: false
+    text: Overlay
+  pilot_edit_label_overlay_variant:
+    noteDev:
+      text: Label for a customization field on pilots. Available if an overlay is selected. Selects a display style for a given overlay image - which could include tinting it with a different color, altering special effects etc.
+    temp: false
+    text: Overlay variant
+  pilot_edit_label_pronouns:
+    noteDev: 
+    temp: false
+    text: Pronouns
+  pilot_edit_label_skin:
+    noteDev: 
+    temp: false
+    text: Skin type
+  pilot_edit_label_skin_tone:
+    noteDev: 
+    temp: false
+    text: Skin tone
+  pilot_edit_label_upper_face:
+    noteDev: 
+    temp: false
+    text: Upper face variant
+  pilot_edit_pronouns_he:
+    noteDev: 
+    temp: false
+    text: He
+  pilot_edit_pronouns_she:
+    noteDev: 
+    temp: false
+    text: She
+  pilot_edit_pronouns_they:
+    noteDev: 
+    temp: false
+    text: They
+  pilot_edit_reset_callsign_text:
+    noteDev: 
+    temp: false
+    text: Randomize callsign
+  pilot_edit_reset_name_text:
+    noteDev: 
+    temp: false
+    text: Randomize name
+  pilot_edit_tooltip_randomize_header:
+    noteDev: 
+    temp: false
+    text: Randomize
+  pilot_edit_tooltip_randomize_text:
+    noteDev: 
+    temp: false
+    text: Every parameter will be chosen randomly.
+  pilot_edit_value_a:
+    noteDev: 
+    temp: false
+    text: A
+  pilot_edit_value_b:
+    noteDev: 
+    temp: false
+    text: B
+  pilot_events_empty:
+    noteDev: 
+    temp: false
+    text: No events recorded
+  pilot_exp_name:
+    noteDev: 
+    temp: false
+    text: Experience
+  pilot_exp_short:
+    noteDev: 
+    temp: false
+    text: XP
+  pilot_health_descriptor_0:
+    noteDev: 
+    temp: false
+    text: Critically injured
+  pilot_health_descriptor_1:
+    noteDev: 
+    temp: false
+    text: Seriously injured
+  pilot_health_descriptor_2:
+    noteDev: 
+    temp: false
+    text: Moderately injured
+  pilot_health_descriptor_3:
+    noteDev: 
+    temp: false
+    text: Lightly injured
+  pilot_health_descriptor_4:
+    noteDev: 
+    temp: false
+    text: Shaken up
+  pilot_health_descriptor_5:
+    noteDev: 
+    temp: false
+    text: Full health
+  pilot_info_button_edit:
+    noteDev: 
+    temp: false
+    text: Edit
+  pilot_info_death_destruction:
+    noteDev: 
+    temp: false
+    text: Unit destruction
+  pilot_info_death_trauma:
+    noteDev: 
+    temp: false
+    text: Trauma
+  pilot_info_header_selected:
+    noteDev: 
+    temp: false
+    text: Selected
+  pilot_info_header_squad:
+    noteDev: 
+    temp: false
+    text: Assigned
+  pilot_info_level_header:
+    noteDev: 
+    temp: false
+    text: Level
+  pilot_info_level_text:
+    noteDev: 
+    temp: false
+    text: Pilot rank. Increases with experience and unlocks access to new traits.
+  pilot_info_missing:
+    noteDev: 
+    temp: false
+    text: Select a pilot to display info
+  pilot_info_stats_header:
+    noteDev: 
+    temp: false
+    text: Pilot stats
+  pilot_info_stats_home:
+    noteDev:
+      text: >-
+        Text that gets the pilots home appended to it on the same line of text.
+
+        Ex: "Home: City Name"
+    temp: false
+    text: 'Home:'
+  pilot_info_stats_join:
+    noteDev:
+      text: >-
+        A comma in the english version, used to text to separate the pilot's home region from the city, example:
+
+        "Home: Brostland, Hvitsten"
+    temp: false
+    text: ','
+  pilot_info_stats_personality:
+    noteDev:
+      text: >-
+        Text that gets the pilots personality type appended to it on the same line of text.
+
+        Ex: "Personality: Aggressive"
+    temp: false
+    text: 'Personality: '
+  pilot_info_xp:
+    noteDev: 
+    temp: false
+    text: XP
+  pilot_info_xp_header:
+    noteDev: 
+    temp: false
+    text: Experience
+  pilot_info_xp_max:
+    noteDev: 
+    temp: false
+    text: Max XP
+  pilot_info_xp_reset_hint:
+    noteDev: 
+    temp: false
+    text: reset available
+  pilot_info_xp_text:
+    noteDev: 
+    temp: false
+    text: Pilot experience. Increases with deployments and specific actions in combat, such as taking down enemy units. Acquiring sufficient experience allows leveling up and acquiring new traits.
+  pilot_info_xp_to_next_level:
+    noteDev: 
+    temp: false
+    text: to next level
+  pilot_linked_mech:
+    noteDev: 
+    temp: false
+    text: Piloting mech
+  pilot_list_active_empty:
+    noteDev: 
+    temp: false
+    text: No pilots available. Recruit new pilots or resupply.
+  pilot_list_active_header:
+    noteDev: 
+    temp: false
+    text: Active pilots
+  pilot_list_active_text:
+    noteDev: 
+    temp: false
+    text: Currently available roster
+  pilot_list_counter_injured:
+    noteDev: 
+    temp: false
+    text: Injured
+  pilot_list_counter_rested:
+    noteDev: 
+    temp: false
+    text: Rested
+  pilot_list_counter_total:
+    noteDev: 
+    temp: false
+    text: Total
+  pilot_list_counter_trauma:
+    noteDev: 
+    temp: false
+    text: Traumatized
+  pilot_list_empty_desc:
+    noteDev: 
+    temp: false
+    text: "The base has no pilots available, consider \nrecruiting at liberated settlements"
+  pilot_list_empty_header:
+    noteDev: 
+    temp: false
+    text: No pilots available
+  pilot_list_memorial_empty:
+    noteDev: 
+    temp: false
+    text: Records of pilots killed in action will be preserved here.
+  pilot_list_memorial_header:
+    noteDev: 
+    temp: false
+    text: Memorial
+  pilot_list_memorial_text:
+    noteDev: 
+    temp: false
+    text: Records of fallen pilots
+  pilot_no_bio:
+    noteDev:
+      text: Text shown when a pilot does not have biography text.
+    temp: false
+    text: No bio available
+  pilot_prestige_hint:
+    noteDev: 
+    temp: false
+    text: Reset level
+  pilot_prestige_hint_rookie:
+    noteDev: 
+    temp: false
+    text: Reveal specialization
+  pilot_prestige_prefix:
+    noteDev: 
+    temp: false
+    text: Prestige
+  pilot_prestige_prefix_rookie:
+    noteDev: 
+    temp: false
+    text: Promote
+  pilot_prestige_review_start:
+    noteDev: 
+    temp: false
+    text: Are you sure you'd like to reset pilot level? The pilot will acquire a new rank.
+  pilot_prestige_review_trait_remove:
+    noteDev: 
+    temp: false
+    text: The acquired negative trait you have selected will be [b]removed[/b]
+  pilot_prestige_review_trait_save:
+    noteDev: 
+    temp: false
+    text: The trait you have selected will be [b]preserved[/b]
+  pilot_prestige_tooltip_general:
+    noteDev: 
+    temp: false
+    text: >-
+      This pilot reached maximum level and unlocked all available traits.
+
+
+      You can promote the pilot to the next rank. This will permanently preserve one trait you select, reset the experience points and open a new set of traits to unlock.
+  pilot_prestige_tooltip_rookie:
+    noteDev: 
+    temp: false
+    text: This rookie pilot can be promoted to the next rank. This will reveal their specialization and unlockable traits.
+  pilot_prestige_tooltip_trait_select:
+    noteDev: 
+    temp: false
+    text: To proceed, select a trait you'd like to preserve.
+  pilot_recruit_hint:
+    noteDev: 
+    temp: false
+    text: Recruit pilot
+  pilot_report_ejected:
+    noteDev: 
+    temp: false
+    text: Ejected from the mech during the mission.
+  pilot_report_hp_high:
+    noteDev: 
+    temp: false
+    text: A few scratches, survived the mission.
+  pilot_report_hp_low:
+    noteDev: 
+    temp: false
+    text: Critical health, survived the mission.
+  pilot_report_hp_max:
+    noteDev: 
+    temp: false
+    text: Survived the mission unscathed.
+  pilot_report_hp_mid:
+    noteDev: 
+    temp: false
+    text: Wounded, survived the mission.
+  pilot_report_knockout:
+    noteDev: 
+    temp: false
+    text: Lost all health, knocked out.
+  pilot_stat_detail_max:
+    noteDev: 
+    temp: false
+    text: Max.
+  pilot_stat_detail_min:
+    noteDev: 
+    temp: false
+    text: Min.
+  pilot_stat_detail_temp:
+    noteDev: 
+    temp: false
+    text: Temporary modifiers
+  pilot_stat_detail_traits:
+    noteDev: 
+    temp: false
+    text: Traits
+  pilot_status_kia:
+    noteDev: 
+    temp: false
+    text: KIA
+  pilot_tooltip_health_concussion:
+    noteDev: 
+    temp: false
+    text: Concussion point
+  pilot_tooltip_health_description:
+    noteDev: 
+    temp: false
+    text: Each pilot has their own resistance to concussion, which determines how much damage they can sustain before being knocked out. Pilots entering combat with health below concussion resistance risk death.
+  pilot_tooltip_health_header:
+    noteDev: 
+    temp: false
+    text: Pilot health
+  pilot_tooltip_health_low1:
+    noteDev: 
+    temp: false
+    text: At risk of death!
+  pilot_tooltip_health_low2:
+    noteDev: 
+    temp: false
+    text: Health too low
+  pilot_tooltip_health_max:
+    noteDev: 
+    temp: false
+    text: Maximum health
+  pilot_tooltip_health_resistance:
+    noteDev: 
+    temp: false
+    text: Concussion resistance
+  pilot_tooltip_issue_blocked_desc:
+    noteDev: 
+    temp: false
+    text: 'This pilot can not participate in combat due to following critical issues:'
+  pilot_tooltip_issue_blocked_header:
+    noteDev: 
+    temp: false
+    text: ''
+  pilot_tooltip_issue_note_desc:
+    noteDev: 
+    temp: false
+    text: 'This pilot is combat ready. Low-priority notes:'
+  pilot_tooltip_issue_note_header:
+    noteDev: 
+    temp: false
+    text: Notes
+  pilot_tooltip_issue_warning_desc:
+    noteDev: 
+    temp: false
+    text: 'This pilot is combat ready, but there are some warnings to consider:'
+  pilot_tooltip_issue_warning_header:
+    noteDev: 
+    temp: false
+    text: Warnings
+  pilot_trait_fatigue_lowrange:
+    noteDev: 
+    temp: false
+    text: This pilot can only tolerate one fatigue point. They can not acquire a "Well rested" status even if they are at 0 fatigue.
+  pilot_trait_personal:
+    noteDev: 
+    temp: false
+    text: Personal trait
+  pilot_trait_term:
+    noteDev: 
+    temp: false
+    text: Trait
+  pilot_trait_type_acquired:
+    noteDev: 
+    temp: false
+    text: Acquired
+  pilot_trait_type_acquired_desc:
+    noteDev: 
+    temp: false
+    text: This is an acquired trait. The pilot received it as a result of going through a certain event.
+  pilot_trait_type_choice:
+    noteDev: 
+    temp: false
+    text: Choice
+  pilot_trait_type_conditional:
+    noteDev: 
+    temp: false
+    text: Conditional
+  pilot_trait_type_conditional_desc:
+    noteDev: 
+    temp: false
+    text: This is a conditional trait. It will become active once the pilot achieves the requirements.
+  pilot_trait_type_fixed:
+    noteDev: 
+    temp: false
+    text: Fixed
+  pilot_trait_type_prestige_desc:
+    noteDev: 
+    temp: false
+    text: This is a saved prestige trait. It was selected to be retained when the pilot was last promoted.
+  pilot_trait_type_prestige_effect_desc:
+    noteDev: 
+    temp: false
+    text: This experienced pilot has a prestige rank and gains special benefits.
+  pilot_trait_type_starter:
+    noteDev: 
+    temp: false
+    text: Starting
+  pilot_trait_type_starter_desc:
+    noteDev: 
+    temp: false
+    text: This is an intrinsic trait. It is active from the start and doesn't need to be unlocked.
+  pilot_trait_unlock_confirmation:
+    noteDev: 
+    temp: false
+    text: Are you sure you'd like to unlock the following trait?
+  stat_label_total:
+    noteDev: 
+    temp: false
+    text: Total
+  stats_desc:
+    noteDev: 
+    temp: false
+    text: Data about capabilities and performance of the mobile base. Depends on installed equipment.
+  stats_header:
+    noteDev: 
+    temp: false
+    text: Stats
+  unit_info_header_selected:
+    noteDev: 
+    temp: false
+    text: Selected unit
+  unit_info_header_squad:
+    noteDev: 
+    temp: false
+    text: Unit in squad
+  unit_list_button_damaged:
+    noteDev: 
+    temp: false
+    text: Damaged
+  unit_list_button_edit:
+    noteDev: 
+    temp: false
+    text: Edit
+  unit_list_empty_desc:
+    noteDev: 
+    temp: false
+    text: Mobile base in danger, consider manufacturing new units
+  unit_list_empty_header:
+    noteDev: 
+    temp: false
+    text: No units available
+  unit_list_header:
+    noteDev: 
+    temp: false
+    text: Active units
+  unit_list_issues_blocked_header:
+    noteDev: 
+    temp: false
+    text: Blocked
+  unit_list_subtitle:
+    noteDev: 
+    temp: false
+    text: Mechs on board
+  unit_list_tooltip_capacity_header:
+    noteDev: 
+    temp: false
+    text: Unit capacity
+  unit_list_tooltip_capacity_text:
+    noteDev: 
+    temp: false
+    text: Number of units the base can store and service. Visit the upgrade screen to increase the capacity.
+  unit_list_tooltip_damaged_text:
+    noteDev: 
+    temp: false
+    text: This unit cannot be customized due to damage sustained in combat. It will be repaired over time if the base has enough resources in store. Switch to overworld to progress repairs.
+  unit_list_tooltip_edit_text:
+    noteDev: 
+    temp: false
+    text: Enter unit customization screen, where you'll be able to change unit parts, subsystems and livery.
+  unit_list_tooltip_hp_header:
+    noteDev: 
+    temp: false
+    text: Total HP
+  unit_list_tooltip_hp_text:
+    noteDev: 
+    temp: false
+    text: This is a total of all health points of a unit. It includes barrier and integrity from every part installed on the unit.
+  unit_loadout_hint_action_cooldown:
+    noteDev: 
+    temp: false
+    text: Action cooldowns
+  unit_loadout_hint_action_dissipation:
+    noteDev: 
+    temp: false
+    text: Dissipation
+  unit_loadout_hint_barrier:
+    noteDev: 
+    temp: false
+    text: Barrier
+  unit_loadout_hint_dash:
+    noteDev: 
+    temp: false
+    text: Dash
+  unit_loadout_hint_integrity:
+    noteDev: 
+    temp: false
+    text: Integrity
+  unit_loadout_hint_level:
+    noteDev: 
+    temp: false
+    text: Level
+  unit_loadout_hint_mass:
+    noteDev: 
+    temp: false
+    text: Mass
+  unit_loadout_hint_name:
+    noteDev: 
+    temp: false
+    text: Name
+  unit_loadout_hint_power:
+    noteDev: 
+    temp: false
+    text: Power
+  unit_loadout_hint_role:
+    noteDev: 
+    temp: false
+    text: Role
+  unit_loadout_hint_select:
+    noteDev: 
+    temp: false
+    text: Select a slot on the left to customize this unit
+  unit_loadout_hint_select_unit:
+    noteDev: 
+    temp: false
+    text: Select a slot on the left to customize this unit
+  unit_loadout_hint_speed:
+    noteDev: 
+    temp: false
+    text: Speed
+  unit_loadout_hint_thrust:
+    noteDev: 
+    temp: false
+    text: Thrust
+  unit_loadout_hint_weight:
+    noteDev: 
+    temp: false
+    text: Class
+  unit_loadout_socket_empty:
+    noteDev: 
+    temp: false
+    text: 'Empty socket: no installed part.'
+  unit_remove_header:
+    noteDev: 
+    temp: false
+    text: Confirm destruction
+  unit_remove_text:
+    noteDev: 
+    temp: false
+    text: Are you sure you want to destroy this mech? This can not be undone. Every equipped item will be returned to inventory.
+  units_livery_full_body:
+    noteDev: 
+    temp: false
+    text: Full Body
+  upgrades_desc_blocking:
+    noteDev: 
+    temp: false
+    text: Blocking
+  upgrades_desc_buildable:
+    noteDev: 
+    temp: false
+    text: Buildable
+  upgrades_desc_cost:
+    noteDev: 
+    temp: false
+    text: Cost
+  upgrades_desc_effect:
+    noteDev: 
+    temp: false
+    text: Effect
+  upgrades_desc_installed:
+    noteDev: 
+    temp: false
+    text: Installed
+  upgrades_desc_installed_fully:
+    noteDev: 
+    temp: false
+    text: Installed fully
+  upgrades_desc_installed_partially:
+    noteDev: 
+    temp: false
+    text: Installed partially
+  upgrades_desc_locked:
+    noteDev: 
+    temp: false
+    text: Locked
+  upgrades_desc_needed:
+    noteDev: 
+    temp: false
+    text: Needed
+  upgrades_desc_no_cost:
+    noteDev: 
+    temp: false
+    text: No cost to install
+  upgrades_desc_not_buildable:
+    noteDev: 
+    temp: false
+    text: Not buildable
+  upgrades_desc_unlock_requirements:
+    noteDev: 
+    temp: false
+    text: Unlock requirements
+  upgrades_hint_navigation1:
+    noteDev:
+      text: First line in the navigation help text at the bottom of the screen
+    temp: false
+    text: 'To navigate:'
+  upgrades_hint_navigation2:
+    noteDev:
+      text: Second line in the navigation help text at the bottom of the screen
+    temp: false
+    text: '{0}{1}{2}{3} or click and drag'
+  upgrades_top_header:
+    noteDev: 
+    temp: false
+    text: Base upgrades
+  upgrades_top_subtitle:
+    noteDev: 
+    temp: false
+    text: Storage & capabilities
+  workshop_button_build:
+    noteDev: 
+    temp: false
+    text: Build
+  workshop_button_hint_available:
+    noteDev: 
+    temp: false
+    text: The item can be built at the workshop. Required resources will be spent immediately. The item will be finished at the next stop (camp or resupply).
+  workshop_button_hint_blocked:
+    noteDev: 
+    temp: false
+    text: The item can't be built at the moment.
+  workshop_button_hint_blocked_fullqueue:
+    noteDev: 
+    temp: false
+    text: There are too many ongoing projects. Complete existing projects to build more.
+  workshop_button_hint_blocked_fullres:
+    noteDev: 
+    temp: false
+    text: This project generates resources that are already full. Spend some resources to proceed.
+  workshop_button_hint_blocked_fullunits:
+    noteDev: 
+    temp: false
+    text: There is no space to store additional units. Remove one of the existing units or upgrade the storage bay.
+  workshop_button_hint_blocked_resources:
+    noteDev: 
+    temp: false
+    text: You do not have enough resources to build this item. Acquire resources from missions or scrap items in your inventory.
+  workshop_button_hint_blocked_upgrade:
+    noteDev: 
+    temp: false
+    text: This project can not be built without upgrading base capabilities. Review the available upgrades.
+  workshop_cancel_header:
+    noteDev: 
+    temp: false
+    text: Cancel build?
+  workshop_cancel_text:
+    noteDev: 
+    temp: false
+    text: Would you like to cancel this workshop project? The resources committed to it will be refunded.
+  workshop_cost:
+    noteDev: 
+    temp: false
+    text: Cost
+  workshop_cost_charges:
+    noteDev: 
+    temp: false
+    text: Charges
+  workshop_cost_duration:
+    noteDev: 
+    temp: false
+    text: Duration
+  workshop_desc_charges_complete:
+    noteDev: 
+    temp: false
+    text: Sufficient samples collected, project unlocked.
+  workshop_desc_charges_insufficient:
+    noteDev: 
+    temp: false
+    text: Collect additional samples to unlock this project.
+  workshop_desc_requires_slot:
+    noteDev: 
+    temp: false
+    text: This project requires a free unit slot. Slots are taken by stored units and in-progress unit construction. To increase the number of available slots, visit the upgrade screen.
+  workshop_desc_stats_equal:
+    noteDev:
+      text: >-
+        Text used to construct a description of a stat requirement as part of a workshop item description, ex:
+
+        "- Workshop Jobs: equal to 3"
+    temp: false
+    text: equal to
+  workshop_desc_stats_greater:
+    noteDev:
+      text: >-
+        Text used to construct a description of a stat requirement as part of a workshop item description, ex:
+
+        "- Workshop Jobs: greater than 3"
+    temp: false
+    text: greater than
+  workshop_desc_stats_less_than:
+    noteDev:
+      text: >-
+        Text used to construct a description of a stat requirement as part of a workshop item description, ex:
+
+        "- Workshop Jobs: less than 3"
+    temp: false
+    text: less than
+  workshop_desc_stats_not_equal:
+    noteDev:
+      text: >-
+        Text used to construct a description of a stat requirement as part of a workshop item description, ex:
+
+        "- Workshop Jobs: not equal to 3"
+    temp: false
+    text: not equal to
+  workshop_desc_stats_required:
+    noteDev: 
+    temp: false
+    text: Base stats required
+  workshop_desc_upgrades_required:
+    noteDev: 
+    temp: false
+    text: Base upgrades required
+  workshop_empty_desc:
+    noteDev: 
+    temp: false
+    text: The workshop has no available projects at the moment. This is unusual.
+  workshop_empty_desc_parts:
+    noteDev: 
+    temp: false
+    text: The workshop has no record of reverse engineered parts in this category. Scrap parts from your inventory or during salvage to unlock their workshop projects.
+  workshop_empty_desc_projects:
+    noteDev: 
+    temp: false
+    text: The workshop has no projects in this category.
+  workshop_empty_desc_systems:
+    noteDev: 
+    temp: false
+    text: The workshop has no record of reverse engineered subsystems in this category. Scrap subsystems from your inventory or during salvage to unlock their workshop projects.
+  workshop_empty_header:
+    noteDev: 
+    temp: false
+    text: No projects
+  workshop_header:
+    noteDev: 
+    temp: false
+    text: Projects
+  workshop_info_status_absent_header:
+    noteDev: 
+    temp: false
+    text: No data
+  workshop_info_status_absent_text:
+    noteDev: 
+    temp: false
+    text: The workshop has no data about this item. Dismantle the item unlock it in the workshop.
+  workshop_info_status_absent_text_rating:
+    noteDev: 
+    temp: false
+    text: The workshop has no data about this quality tier. Dismantle salvaged parts of the same type and quality to unlock workshop builds.
+  workshop_info_status_incomplete_header:
+    noteDev: 
+    temp: false
+    text: Incomplete
+  workshop_info_status_incomplete_text:
+    noteDev: 
+    temp: false
+    text: Reverse engineering of this part is incomplete. Dismantle additional parts salvaged in the field to unlock this part in the workshop.
+  workshop_info_status_incomplete_text_rating:
+    noteDev: 
+    temp: false
+    text: Reverse engineering of this quality tier is incomplete. Dismantle additional parts of this quality to unlock it in the workshop. A lower quality version of this item is available to build.
+  workshop_info_status_unlocked_header:
+    noteDev: 
+    temp: false
+    text: Unlocked
+  workshop_info_status_unlocked_text:
+    noteDev: 
+    temp: false
+    text: This part has been fully reverse engineered and can be built by the workshop.
+  workshop_label_level:
+    noteDev: 
+    temp: false
+    text: Level
+  workshop_level_prefix_blocked:
+    noteDev: 
+    temp: false
+    text: The workshop can be upgraded to a higher level once you acquire (or scrap) enough parts with a higher level.
+  workshop_level_prefix_upgradeable:
+    noteDev: 
+    temp: false
+    text: The workshop can be upgraded to a higher level. The inventory, the mechs onboard and scrap records have enough higher level parts.
+  workshop_level_scrap_header:
+    noteDev: 
+    temp: false
+    text: Scrap contribution
+  workshop_level_scrap_text:
+    noteDev: 
+    temp: false
+    text: A number of parts with a higher level was scrapped in the past. While you no longer have these parts in the inventory, they still contribute to unlocking a higher workshop level.
+  workshop_tooltip_level_text:
+    noteDev: 
+    temp: false
+    text: The workshop level is determined by the level of parts collected or scrapped. Salvage or scrap parts from higher level opponents to add progress towards the next level.
+  workshop_top_header:
+    noteDev: 
+    temp: false
+    text: Workshop
+  workshop_top_subtitle:
+    noteDev: 
+    temp: false
+    text: Equipment crafting
+  workshop_upgrade_button:
+    noteDev: 
+    temp: false
+    text: Upgrade

@@ -123,7 +123,7 @@ steps:
         filter:
           tutorial_complete_base_introduction:
             check: GreaterEqual
-            value: 1
+            value: 2
       functionsGlobal:
       - !Log
         message: Loaded to world after base intro
@@ -176,6 +176,11 @@ steps:
           key: hp
           normalized: false
           value: -5
+      - !CallMethodStatic
+        typeName: DataHelperLoading
+        methodName: OnAfterCombatSaveUnchecked
+        argument: ''
+        frameDelay: 2
       functionsBase: 
       functionsEventEntity: 
       linkedEffectKeys: 

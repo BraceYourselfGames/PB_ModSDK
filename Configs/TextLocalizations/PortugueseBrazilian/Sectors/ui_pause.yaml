@@ -226,10 +226,26 @@ entries:
     id: 1
     text: Redefinir
     textEng: Reset
+  ent_prefix:
+    id: 2
+    text: DLC
+    textEng: DLC
+  ent_section_header:
+    id: 2
+    text: Conteúdos instalados
+    textEng: Installed content
+  ent_sp_name:
+    id: 2
+    text: Melhoria de apoiador
+    textEng: Supporter Upgrade
   footer_announcement_header:
     id: 2
     text: A atualização 2.0 está disponível!
     textEng: The 2.0 update is here!
+  footer_announcement_header_22:
+    id: 2
+    text: A atualização 2.2 está disponível!
+    textEng: The 2.2 update is here!
   footer_announcement_text:
     id: 2
     text: >-
@@ -254,6 +270,24 @@ entries:
 
 
       A huge number of community driven quality of life updates
+  footer_announcement_text_22:
+    id: 2
+    text: >-
+      Jogue do seu jeito! Suporte total a controles adicionado, além de melhor navegação pelo teclado.
+
+
+      Novos contratos de assistência remota e tiro ao alvo adicionam opções de progressão e construção.
+
+
+      Câmeras de ação, mapas adicionais, melhorias de interface e muito mais! Veja mais informações sobre a atualização e a repaginação 2.0 no link abaixo.
+    textEng: >-
+      Play your way! Full controller support has been added along with extended keyboard navigation.
+
+
+      New remote assistance contracts and shooting range add options for progression and buildcrafting.
+
+
+      Action cameras, additional maps, UI improvements, and more! Learn more details about the update and the 2.0 overhaul at the link below.
   footer_announcement_thanks:
     id: 2
     text: >-
@@ -452,12 +486,12 @@ entries:
     textEng: Numpad
   input_kb_page_down:
     id: 2
-    text: Page Down
-    textEng: Page Down
+    text: PgDn
+    textEng: PgDn
   input_kb_page_up:
     id: 2
-    text: Page Up
-    textEng: Page Up
+    text: PgUp
+    textEng: PgUp
   input_kb_return:
     id: 2
     text: Enter
@@ -498,6 +532,74 @@ entries:
     id: 2
     text: Roda do mouse
     textEng: Mouse Wheel
+  input_scheme_common_header:
+    id: 2
+    text: Controles comuns
+    textEng: Common controls
+  input_scheme_controller_header:
+    id: 2
+    text: Controle ativo
+    textEng: Controller active
+  input_scheme_controller_hint_cam_move:
+    id: 2
+    text: Mover câmera
+    textEng: Move camera
+  input_scheme_controller_hint_cam_rot:
+    id: 2
+    text: Girar câmera
+    textEng: Rotate camera
+  input_scheme_controller_hint_cancel:
+    id: 2
+    text: Cancelar / voltar
+    textEng: Cancel / navigate back
+  input_scheme_controller_hint_confirm:
+    id: 2
+    text: Confirmar / clicar no botão selecionado
+    textEng: Confirm / click selected button
+  input_scheme_controller_hint_nav:
+    id: 2
+    text: Navegar entre os botões
+    textEng: Navigate between buttons
+  input_scheme_controller_hint_pause:
+    id: 2
+    text: Pausar
+    textEng: Pause
+  input_scheme_controller_hint_tabs:
+    id: 2
+    text: Mudar de tela / trocar de unidade
+    textEng: Change screen / switch unit
+  input_scheme_controller_hint_triggers:
+    id: 2
+    text: Ajustar zoom / ajustar o tempo de combate
+    textEng: Adjust zoom / adjust combat time
+  input_scheme_controller_text:
+    id: 2
+    text: >-
+      Fique de olho na moldura de foco para confirmar onde você está e para onde pode navegar em seguida. Verifique as dicas de entrada em diferentes telas para aprender controles contextuais adicionais.
+
+
+      Se você encontrar problemas com o suporte ao controle, não hesite em compartilhar seu feedback através da caixa de diálogo de relatório disponível abaixo.
+    textEng: >-
+      Keep an eye on the focus frame to confirm where you are and where you can navigate next. Check the input hints across different screens to learn additional contextual controls.
+
+
+      If you encounter issues with the controller support, please don't hesitate to share your feedback through the reporter dialog available below.
+  input_scheme_kb_header:
+    id: 2
+    text: Teclado ativo
+    textEng: Keyboard active
+  input_scheme_kb_text:
+    id: 2
+    text: >-
+      Verifique as dicas de entrada em diferentes telas para aprender controles contextuais adicionais.
+
+
+      A maior parte do jogo pode ser navegada com o teclado. Navegue com as teclas de seta e fique de olho na moldura de foco para acompanhar suas seleções.
+    textEng: >-
+      Check the input hints across different screens to learn additional contextual controls.
+
+
+      Most of the game can be navigated with the keyboard. Navigate with the arrow keys and keep an eye on the focus frame to track your selections.
   load_notice_experimental:
     id: 2
     text: Esse arquivo salvo é de uma campanha com recursos experimentais, como salvar durante combates. É possível carregá-lo, mas ele não é oficialmente compatível.
@@ -742,6 +844,14 @@ entries:
     id: 2
     text: Qualquer comando será mantido, exceto
     textEng: Any input will be saved, except for
+  options_reset_header:
+    id: 2
+    text: Redefinir esta categoria?
+    textEng: Reset this category?
+  options_reset_text:
+    id: 2
+    text: Gostaria de redefinir todas as opções nesta categoria para os valores padrão?
+    textEng: Are you sure you'd like to reset all options in this category to their default values?
   options_toggle_label_off:
     id: 1
     text: Não
@@ -840,6 +950,10 @@ entries:
     id: 1
     text: Carregar
     textEng: Load
+  root_button_load_briefing:
+    id: 2
+    text: Carregar briefing
+    textEng: Load briefing
   root_button_mods:
     id: 1
     text: Mods
@@ -888,6 +1002,14 @@ entries:
     id: 1
     text: Carregar arquivo salvo
     textEng: Load Save
+  save_dialog_continue_header:
+    id: 2
+    text: Carregando último jogo salvo
+    textEng: Loading last save
+  save_dialog_continue_text:
+    id: 2
+    text: Gostaria de continuar a partir do arquivo salvo mais recente?
+    textEng: Would you like to continue from the the most recent save file?
   save_dialog_delete_header:
     id: 1
     text: Confirmar remoção

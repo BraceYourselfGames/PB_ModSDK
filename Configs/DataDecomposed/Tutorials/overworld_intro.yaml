@@ -5,6 +5,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: true
+  navigationFocus: true
   backgroundUsed: true
   backgroundBlur: false
   backgroundColor:
@@ -14,8 +15,22 @@ pages:
     a: 0.6980392
   center:
     textImage: 
-    textHeaderReused: 
-    textContentReused: 
+    hue: 
+    textHeaderLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textContentLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions:
       spriteWrap: true
       actions:
@@ -28,6 +43,11 @@ pages:
       - global_camera_vertical_pos
       - global_camera_vertical_neg
       - global_mouse_middle
+      - global_move_horizontal
+      - global_mouse_vertical
+      - global_camera_horizontal
+      - global_camera_vertical
+    textInputHintAppendix: 
   hint: 
   effectsOverworld:
     functions:
@@ -55,6 +75,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -80,12 +101,18 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 282
-    textReused: 
-    icon: 
     worldAnchor: 
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController: 
     textInputActions: 
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !SelectEntity
@@ -112,6 +139,7 @@ pages:
   depthBackground: 0
   skippable: true
   cameraInputPermitted: false
+  navigationFocus: true
   backgroundUsed: false
   backgroundBlur: false
   backgroundColor:
@@ -137,8 +165,6 @@ pages:
     textLocation: RightTop
     buttonLocation: Bottom
     textWidth: 256
-    textReused: 
-    icon: 
     worldAnchor:
       entityName: mountainbase
       stateName: 
@@ -149,11 +175,26 @@ pages:
       entityPrediction: false
     arrowCustom: 
     frameHighlight: 
+    textLink:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
+    textLinkController:
+      mode: LocUnique
+      text: 
+      textSector: 
+      textKey: 
     textInputActions:
       spriteWrap: true
       actions:
       - global_mouse_secondary
       - overworld_selection_reset
+      - global_move_horizontal
+      - global_confirm
+      - global_cancel
+    textInputHintAppendix: 
+    effectsOnInput: 
   effectsOverworld:
     functions:
     - !SelectEntity

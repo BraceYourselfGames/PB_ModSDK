@@ -136,6 +136,8 @@ core:
   textIntroLocation: 
   textIntroThreat: 
   textIntroReady: 
+  cameraStartingYawRotation: 
+standalone: 
 areas: 
 entry: 
 generationInjection: 
@@ -168,9 +170,11 @@ steps:
     - time: 0
       hidden: false
       key: boss_intro_shieldbearer_hq
+      functionsOnExit: 
     - time: 8
       hidden: false
       key: boss_intro
+      functionsOnExit: 
     audioEventsOnStart: 
     audioStatesOnStart: 
     audioSyncsOnStart: 

@@ -1,0 +1,757 @@
+hidden: false
+parents: 
+core:
+  stepOnStart: main
+  timeLocked: true
+  time: 6
+  scalingUsed: false
+  loadImmediately: true
+  externalBranchUsed: false
+  externalLevelUsed: true
+  reinforcementsUsed: false
+  replayUsed: true
+  unitLossUsed: false
+  lootingUsed: false
+  musicDynamic: false
+  introUsed: true
+  musicCustom: 
+  introOverride: 
+  briefingSpawnHighlights: 
+  briefingGroupsInjected: 
+  briefingUnitsInjected: 
+  actionBlocklist:
+  - retreat
+  - eject
+  customExitBehaviour: 
+  weatherOverridePrecipitation:
+    f: 0
+  weatherOverrideTemperature:
+    f: 1
+  introSettings: 
+  textIntroPrimary: 
+  textIntroLocation:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textIntroThreat:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textIntroReady:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  cameraStartingYawRotation: 
+standalone:
+  developerOnly: false
+  standaloneOnly: true
+  squadCustomization: true
+  enemyPreview: false
+  type: sim
+  group: training
+  priority: -2
+  textName:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  textDesc:
+    mode: LocUnique
+    text: 
+    textSector: 
+    textKey: 
+  conditionVisible: 
+  conditionUnlock: 
+  scenarioNext: 
+areas:
+  tagFilterFromSite: true
+  tagFilterUsed: false
+  tagFilter: 
+  keys:
+  - unique_test_range
+entry:
+  squadUsed: true
+  squadSize: 4
+  squadSlotCustom:
+    spawnTagsUsed: true
+    spawnTags:
+      player: true
+    spawnGroupKey: 
+    filterDistancePlayer: 
+    filterDistanceEnemy: 
+    filterDistanceSpawn: 
+    filterDistanceLocation: 
+    filterDistanceVolume: 
+    filterDistanceState: 
+    filterDistanceRetreat: 
+    sorting: 
+    spawnRegistration: 
+generationInjection: 
+tags:
+- listed
+- block_tabs_sentries
+states:
+  enemy_respawn_classes:
+    comment: 
+    evaluated: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    briefingHidden: false
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        group_classes: true
+      name: 
+      faction: 
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions: 
+            functionsTargeted:
+            - !CombatUnitRevive {}
+            - !CombatUnitTeleportToOrigin {}
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  enemy_respawn_range:
+    comment: 
+    evaluated: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    briefingHidden: false
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        group_range: true
+      name: 
+      faction: 
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions: 
+            functionsTargeted:
+            - !CombatUnitRevive {}
+            - !CombatUnitTeleportToOrigin {}
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  enemy_respawn_runner:
+    comment: 
+    evaluated: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    briefingHidden: false
+    ui: 
+    evaluationContext: OnExecutionEnd
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        group_runner: true
+      name: 
+      faction: 
+      state:
+        unitActive: 
+        unitMobile: 
+        unitHidden: 
+        unitWrecked:
+          present: true
+        unitDisabled: 
+        pilotMissing: 
+        pilotDead: 
+        pilotConcussed: 
+        pilotActive: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions: 
+            functionsTargeted:
+            - !CombatUnitRevive {}
+            - !CombatUnitTeleportToOrigin {}
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+  enemy_teleport_runner:
+    comment: 
+    evaluated: true
+    startInScope: true
+    priorityGeneration: 0
+    priority: 0
+    briefingHidden: false
+    ui: 
+    evaluationContext: OnExecutionEnd, OnLocationContact
+    evaluationOnOutcome: 
+    turn: 
+    turnModulus: 
+    unitChecks: 
+    unitCheckLinked:
+      exportCountToMemory: 
+      exportEntitiesToBlackboard: 
+      tags:
+        group_runner: true
+      name: 
+      faction: 
+      state: 
+      actionPlanned: 
+      locationOccupied: 
+      locationOccupiedUnlinked:
+        locationSourceName: enemy_exit1
+        locationSource: Location
+        occupied:
+          present: true
+        distance: 
+      relativeTransform: 
+      blueprints: 
+      classes: 
+      stats: 
+      statsNormalized: 
+      actionsInProgress: 
+      functions: 
+    location:
+      visibleInWorld: false
+      locationProvider: !AreaLocationKey
+        key: enemy_exit1
+      visual: 
+    locationRetreat: 
+    volume: 
+    stateValues: 
+    memoryBase: 
+    functions: 
+    reactions:
+      expectedValue: true
+      scopeRemovalOnLimit: false
+      triggerLimit: 1
+      triggerIncrement: false
+      effectsPerIncrement:
+        0:
+          tags: 
+          executionOnOutcome: 
+          stepTransition: 
+          commsOnStart: 
+          memoryChanges: 
+          stateScopeChanges: 
+          stateValueChanges: 
+          memoryDisplayChanges: 
+          unitTagDisplayChanges: 
+          rewards: 
+          functions: 
+          functionsPerUnit:
+            functions: 
+            functionsTargeted:
+            - !CombatUnitTeleportToOrigin {}
+            - !CombatUnitActionsDiscard
+              locked: true
+              primary: true
+              secondary: true
+            - !CombatUnitRevive {}
+          unitGroups: 
+          unitGeneratorKeys: 
+          outcome: 
+steps:
+  main:
+    comment: 
+    core:
+      color:
+        r: 0
+        g: 0
+        b: 0
+        a: 0
+      textHeader:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_header
+      textDesc:
+        mode: LocReused
+        text: 
+        textSector: scenario_steps_shared
+        textKey: generic_unknown_text
+      threatRatingPercentage: 0
+      allowOutcomeVictory: false
+      allowOutcomeDefeat: false
+      executionAllowed: true
+      visible: true
+    tags:
+    - start
+    - info_hidden
+    unitGroups:
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_sp_generator
+        countMin: 9
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_practice_target
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: true
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions:
+      - !CombatUnitTagSet
+        tags:
+        - flag_unlisted
+        - group_range
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: enemy_group0
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_drone_exp_01
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_practice_target
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: true
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_v2_w2_standard_lr_cannon
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_practice_target
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: true
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_tank_el_standard_mr_cannon
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_practice_target
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: true
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      - keyExternal: true
+        key: vhc_mech_w2
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: 
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_practice_target
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: false
+            uncrewed: true
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions:
+      - !CombatUnitTagSet
+        tags:
+        - flag_unlisted
+        - group_classes
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: enemy_group1
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    - !UnitGroupEmbedded
+      units:
+      - keyExternal: true
+        key: vhc_mech_w1_sr_smg
+        countMin: 1
+        countMax: 1
+        countRandom: false
+        levelOffsetMin: 0
+        levelOffsetMax: 0
+        levelOffsetRandom: false
+        qualityTableKey: 
+        aiBehavior: DumbDestination
+        aiTargeting: 
+        liveryPreset: 
+        custom:
+          name: 
+          id: 
+          idReused: 
+          idPilot: 
+          role: special_practice_target
+          spawn: 
+          landing: 
+          flags:
+            controlByPlayer: false
+            controlledByAI: true
+            uncrewed: true
+          faction: 
+          speed: 
+          uncrewed:
+            portraitKey: 
+          pilotAppearance: 
+          pilotStats: 
+          predictionLimit: 
+          animationOverrides: 
+          statMultipliers: 
+          hitDirectionModifiers: 
+          functions: 
+          combatTags: 
+      check: 
+      combatTags: 
+      spawnGroupOccupied: true
+      spawnCountStrict: true
+      spawnOrderRandom: false
+      factionBranchOverride: false
+      factionBranchKey: 
+      baseGrade: 0
+      maxGrade: 2
+      cloneable: true
+      functions:
+      - !CombatUnitTagSet
+        tags:
+        - flag_unlisted
+        - group_runner
+      - !CombatUnitDestinationChange
+        target:
+          type: Location
+          name: enemy_exit1
+          center: true
+          modifiersDirectional: false
+          modifiers: 
+      spawnTagsUsed: false
+      spawnTags:
+        perimeter_outer: true
+      spawnGroupKey: enemy_group3
+      filterDistancePlayer: 
+      filterDistanceEnemy: 
+      filterDistanceSpawn: 
+      filterDistanceLocation: 
+      filterDistanceVolume: 
+      filterDistanceState: 
+      filterDistanceRetreat: 
+      sorting: 
+      spawnRegistration: 
+    unitGeneratorKeys: 
+    stateScopeChanges: 
+    stateValueChanges: 
+    memoryDisplayChanges: 
+    unitTagDisplayChanges: 
+    unitChanges: 
+    retreat: 
+    actionRestrictions: 
+    cutsceneVideoOnStart: 
+    atmosphereOnStart: 
+    hintsConditional: 
+    unitSelection: 
+    camera: 
+    musicMood: 
+    musicIntensity: 
+    musicReactive: 
+    commsOnStart: 
+    audioEventsOnStart: 
+    audioStatesOnStart: 
+    audioSyncsOnStart: 
+    functions: 
+    outcome: 
+    transitions: 
+unitPresets: 
+unitGenerators: 

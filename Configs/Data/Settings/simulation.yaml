@@ -1,9 +1,11 @@
-passivelyShieldedStabilityBonus: 0
+dashStandardStabilityBonus: 1
+dashBulldozeStabilityBonus: 3
+meleeStabilityBonus: 2
+maxStabilityWhenPinned: false
 activelyShieldedStabilityBonus: 1
-minorUnitStabilityPenalty: 0
 idleUnitStabilityPenalty: 2
 minimumStability: -10
-maxStability: 10
+maxStability: 12
 concussionLevelOffsetScalar: 0.25
 concussionLevelMinScalar: 0.1
 concussionLevelMaxScalar: 2.5
@@ -24,6 +26,17 @@ combatNightLights: true
 combatAccentLights: true
 combatIntro: true
 combatLoadingBugfix: true
+standaloneScenariosAvailable: true
+pinnedUnitsAllowImpaling: true
+impaledUnitsAllowImpaling: true
+impaledTerminalVelocity: 50
+impaledTerminalAcceleration: 50
+impaledEnvCrashImpactDamage: 80
+impaledEnvCrashImpactRadius: 9
+impaledUnitCrashOnBurnout: true
+impaledSpikeLength: 8
+impaledSpikeRadius: 0.5
+impaledSpikeOffset: 0
 noDamageFriendly: false
 noDamageEnemy: false
 noHeatModeFriendly: false
@@ -82,6 +95,7 @@ logOverworldPoints: false
 logEquipmentGeneration: false
 logEquipmentLoading: false
 logScenarioGeneration: false
+logScenarioGeneratorRebuild: false
 logScenarioUpdates: false
 logRewardGeneration: false
 logCombatDamage: false
@@ -137,7 +151,10 @@ dashWindowMin: 0
 dashWindowMaxOffset: 5
 dashDistanceDistributionMin: 0
 dashDistanceDistributionMax: 50
+dashBulldozeRangeMin: 45
 logDashDistanceCalculation: false
+hoverAltitudeMin: 6
+hoverAltitudeMax: 18
 dashDistanceRemap:
   modePostWrap: ClampForever
   modePreWrap: ClampForever
@@ -239,6 +256,7 @@ beamReflectionDamageNegation: 0.2
 beamReflectionDamageAttenuationK: 0.8
 compositeAreaOfEffectDecay: 0.5
 penetrationUnitDistance: 3
+penetrationSlowdownFactor: 0.3
 impactDamageFalloff:
   modePostWrap: ClampForever
   modePreWrap: ClampForever
@@ -284,16 +302,10 @@ damageCoverageApproximation:
       y: 0
     m: {}
 shieldVsHeatDamageMultiplier: 0.25
-shieldVsStaggerDamageMultiplier: 0
 shieldVsConcussionDamageMultiplier: 0
 concussionScalingFromWeightClass: true
 weightClassThresholdMedium: 6
 weightClassThresholdHeavy: 10
-staggerUsed: false
-staggerDebuffDecay: 0.45
-staggerLevelOffsetMultiplier: 0.25
-staggerLevelMinMultiplier: 0.1
-staggerLevelMaxMultiplier: 2
 heatLevelOffsetMultiplier: 0.25
 heatLevelMinMultiplier: 0.1
 heatLevelMaxMultiplier: 2
